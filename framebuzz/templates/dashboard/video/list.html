@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block title %}My Videos{% endblock %}
+
+{% block sub_navigation_items %}
+  <li><a href="{% url 'dashboard-videos-list-add' %}">FrameBuzz a New Video</a></li>
+  <li class="active"><a href="{% url 'dashboard-videos-list' %}">My FrameBuzz Videos</a></li>
+{% endblock %}
+
+{% block dashboard_right %}
+  <div id="dashboard-video-list">
+    <div class="page-header">
+        <h1>My Site's FrameBuzz Videos</h1>
+    </div>
+    <p class="page-description">Here are the videos you've FrameBuzzed for your site:</p>
+    <div class="pagination-page">
+      {% include "dashboard/ajax/video_list_page.html" %}
+    </div>
+  </div>
+{% endblock %}

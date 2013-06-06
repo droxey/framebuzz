@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load i18n account %}
+
+{% block title %}Email Address Confirmed{% endblock %}
+
+{% block sub_navigation_items %}{% endblock %}
+
+{% block dashboard_right %}
+    <div class="page-header">
+        <h1>Email Address Confirmed</h1>
+    </div>
+    {% user_display email_address.user as user_display %}
+    <p class="form-description"></p>
+    <div class="alert alert-success">
+        {% blocktrans with email_address.email as email %}You have confirmed that <a href="mailto:{{email}}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "home.html" %}
+
+{% block page_classes %}marketing{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div id="about" class="span11 box">
+            <div class="page-header">
+                <h1>About FrameBuzz</h1>
+            </div>
+            <p>FrameBuzz is a new social video platform that lets people share comments and conversations around online video content on sites across the web.</p>
+            <p>FrameBuzz creates a new viewing experience for online video, letting people interact socially as if they were viewing together live, even if they’re watching at completely different times. For websites, it provides a powerful new tool to better understand and target their audiences, and grow their brand.</p>
+            <p>FrameBuzz is completely free for users signing up for commenting accounts, and for websites adding basic FrameBuzz functionality to their sites. Adding FrameBuzz is as simple as embedding a video on a web page.</p>
+            <p>FrameBuzz is an Austin-based, privately held company. To learn more, <a href="{% url 'contact' %}">contact us</a> today.</p>
+            <div class="page-header">
+                <h1>News</h1>
+            </div>
+            <p><a href="{{ MEDIA_URL }}press/FrameBuzz_Beta_PR_D6_5-5-13.pdf" title="FrameBuzz Brings Social Commenting to Online Video" target="_blank">FrameBuzz Brings Social Commenting to Online Video</a></p>
+            <p><a href="{{ MEDIA_URL }}press/AFW_Launch_PR_D5_5-10-13.pdf" title="Austin Fashion Week Adds FrameBuzz Streaming Commenting to Online Videos" target="_blank">Austin Fashion Week Adds FrameBuzz Streaming Commenting to Online Videos</a></p>
+            <p>For media inquiries, please email <a href="mailto:media@framebuzz.com">media@framebuzz.com</a>.</p>
+            <div class="page-header">
+                <h1>Press Kit</h1>
+            </div>
+            <p><a href="{{ MEDIA_URL }}press/media_overview.pdf" target="_blank" title="FrameBuzz Company Overview">FrameBuzz Company Overview</a></p>
+            <p><a href="{{ MEDIA_URL }}press/FrameBuzz-Logo-LG.jpg" target="_blank" title="FrameBuzz Logo (Large)">FrameBuzz Logo (Large)</a></p>
+            <p><a href="{{ MEDIA_URL }}press/FrameBuzz-Logo-SM.jpg" target="_blank" title="FrameBuzz Logo (Small)">FrameBuzz Logo (Small)</a></p>
+            <p><a href="{{ MEDIA_URL }}press/FrameBuzz-logos.zip" title="FrameBuzz Logo Package">FrameBuzz Logo Package</a></p>
+            <p><a href="{{ MEDIA_URL }}press/FrameBuzz-product.zip" title="FrameBuzz Player Images">FrameBuzz Player Images</a></p>
+        </div>
+    </div>
+{% endblock %}

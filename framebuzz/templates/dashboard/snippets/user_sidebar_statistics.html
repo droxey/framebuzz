@@ -1,0 +1,12 @@
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+            <td><strong>{{ sidebar.total_comments|length }}</strong> Comment{% if sidebar.total_comments|length == 0 or sidebar.total_comments|length >= 2 %}s{% endif %}</td>
+            <td><strong>{{ sidebar.favorite_comments|length }}</strong> Favorite{% if sidebar.favorite_comments|length == 0 or sidebar.favorite_comments|length >= 2 %}s{% endif %}</td>
+        </tr>
+        <tr>
+            <td><strong>{{ sidebar.followers|length }}</strong> Follower{% if sidebar.followers|length == 0 or sidebar.followers|length >= 2 %}s{% endif %}</td>
+            <td><strong>{{ sidebar.following|length }}</strong> Following</td>
+        </tr>
+    </tbody>
+</table>

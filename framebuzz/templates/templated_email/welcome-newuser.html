@@ -1,0 +1,46 @@
+{% block plain %}{% endblock %}
+
+{% block html %}
+<table cellpadding="0" cellspacing="0" width="100%">
+
+<!--body container-->
+<table cellpadding="0" cellspacing="0" width="600px" align="center">
+
+<!--logo image-->
+<tr><td><a href="http://framebuzz.com"><img src="http://{{ site.domain }}/media/img/email-logo-head.jpg" border="0"/></a></td></tr>
+
+<!--body content-->
+<tr>
+<td>
+<table cellpadding="0" cellspacing="0">
+    <!--news/instructions/etc-->
+    <tr>
+    <td width="530px" style="padding: 20px 0px 20px 0px;">
+    <font face="Gotham, Helvetica Neue, Helvetica, Arial, sans-serif" size="-1">
+    <b>Welcome to FrameBuzz!</b><br/>
+    You’re receiving this email because you registered for FrameBuzz, the best way to share comments and conversations around video.
+    <p>Ready to see what’s buzzing? Click the link below to confirm this email address, and jump in the conversation.</p>
+    <p><a href="{{ activate_url }}" style="color: #0C94C8;">Click here to confirm your email address</a></p>
+    <p>Your user name is: {{ user.username }}</p>
+    <p>You can customize your profile here: <a href="http://{{ site.domain }}{% url 'user-profile' user.username %}" style="color: #0C94C8;">http://{{ site.domain }}{% url 'user-profile' user.username %}</a></p>
+    <p>Feeling social? Link your FrameBuzz account with Facebook and Twitter here: <a href="http://{{ site.domain }}{% url 'account_login' %}" style="color: #0C94C8;">http://{{ site.domain }}{% url 'account_login' %}</a></p>
+    {# <p>To change your notification settings, go here: <a href="http://{{ site.domain }}/{% url 'dashboard-profile-settings' %}" style="color: #0C94C8;">[[DASHBOARD SETTINGS]]</a></p> #}
+    </font>
+    </td>
+    </tr>
+
+    <!--footer-->
+    <tr>
+    <td width="530px" style="padding: 5px 0px 20px 0px; border-top: 1px solid #E0E0E0;">
+    <font face="Gotham, Helvetica Neue, Helvetica, Arial, sans-serif" size="-1">
+    <span style="color: #999;">&copy; 2013</span> <a href="http://framebuzz.com" style="color: #0C94C8;">FrameBuzz. Patent Pending.</a><br/>
+    </font>
+    </td>
+    </tr>
+
+</table>
+</td>
+</tr>
+
+</table>
+{% endblock %}

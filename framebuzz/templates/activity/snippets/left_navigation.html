@@ -1,0 +1,39 @@
+{% load avatar_tags activity_tags %}
+
+<div class="span3">
+  <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="profile-header">
+          <div class="header-wrapper">
+            {% ifequal request.user sidebar.user %}
+              <a class="profile-link" href="{% url 'avatar_change' %}">
+            {% else %}
+              <a class="profile-link" href="{% url 'user-profile' sidebar.user.username %}">
+            {% endifequal %}
+                <img src="{% avatar_url sidebar.user 100 %}" height="100" width="100" />
+            </a>
+            {% ifequal request.user sidebar.user %}
+              <span class="change-avatar">Change Avatar...</span>
+            {% endifequal %}
+            <h2>{{ sidebar.user.username }}</h2>
+            {% ifequal request.user sidebar.user %}{% else %}
+            <a class="btn btn-danger" href="{% url 'actstream_unfollow' content_type_id=sidebar.ctype.pk  object_id=sidebar.user.pk %}" id="unfollow_button" {% if not request.user|is_following:sidebar.user %} style="display:none"{% endif %}>Unfollow</a>
+            <a class="btn btn-success" href="{% url 'actstream_follow' content_type_id=sidebar.ctype.pk  object_id=sidebar.user.pk %}" id="follow_button" {% if request.user|is_following:sidebar.user %} style="display:none"{% endif %}>Follow</a>
+            {% endifequal %}
+          </div>
+        {% if sidebar.user.get_profile and sidebar.user.get_profile.bio %}
+          <em class="bio">{{ sidebar.user.get_profile.bio }}</em>
+        {% endif %}
+        </li>
+        <li class="user-statistics">
+            {% include "dashboard/snippets/user_sidebar_statistics.html" %}
+        </li>
+        <li class="nav-header">Network</li>
+        <li><a href="{% url 'user-followers' sidebar.user.username %}">Followers</a></li>
+        <li><a href="{% url 'user-following' sidebar.user.username %}">Following</a></li>
+        <li class="nav-header">Feeds</li>
+        <li><a href="{% url 'actstream_object_feed' content_type_id=sidebar.ctype.pk  object_id=sidebar.user.pk %}">RSS</a></li>
+        <li><a href="{% url 'actstream_object_feed_atom' content_type_id=sidebar.ctype.pk  object_id=sidebar.user.pk %}">ATOM</a></li>
+      </ul>
+    </div>
+</div>

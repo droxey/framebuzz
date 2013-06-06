@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block title %}Reports{% endblock %}
+
+{% block extra_head %}
+    <style type="text/css">
+        #graph-wrapper {
+            display: none;
+            margin-top: 10px;
+        }
+
+        /* Resets */
+        .graph-container,
+        .graph-container div,
+        .graph-container a,
+        .graph-container span {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Gradinet and Rounded Corners */
+        .graph-container, #tooltip, .graph-info a {
+            background: #ffffff;
+            background: -moz-linear-gradient(top,  #ffffff 0%, #f9f9f9 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f9f9f9));
+            background: -webkit-linear-gradient(top,  #ffffff 0%,#f9f9f9 100%);
+            background: -o-linear-gradient(top,  #ffffff 0%,#f9f9f9 100%);
+            background: -ms-linear-gradient(top,  #ffffff 0%,#f9f9f9 100%);
+            background: linear-gradient(to bottom,  #ffffff 0%,#f9f9f9 100%);
+
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+        /*  Graph Container */
+        .graph-container {
+            position: relative;
+            width: 795px;
+            height: 260px;
+            padding: 40px;
+
+            -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+            -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+            box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+        }
+
+        .graph-container > div {
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            top: 10px;
+            left: 40px;
+        }
+
+        .graph-info {
+            width: 590px;
+            margin-bottom: 10px;
+        }
+
+        /* Text Styles */
+        #tooltip, .graph-info a {
+            height: 20px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 20px;
+            color: #646464;
+        }
+
+        .tickLabel {
+            font-weight: bold;
+            font-size: 12px;
+            color: #666;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        /* Tooltip */
+        #tooltip {
+            position: absolute;
+            display: none;
+            padding: 5px 10px;
+            border: 1px solid #e1e1e1;
+        }
+
+        /* Links */
+        .graph-info a {
+            position: relative;
+            display: inline-block;
+            float: left;
+            padding: 7px 10px 5px 30px;
+            margin-right: 10px;
+            text-decoration: none;
+            cursor: default;
+        }
+
+        /* Color Circle for Links */
+        .graph-info a:before {
+            position: absolute;
+            display: block;
+            content: '';
+            width: 8px;
+            height: 8px;
+            top: 13px;
+            left: 13px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        /* Hide the First and Last Y Label */
+        .yAxis .tickLabel:first-child,
+        .yAxis .tickLabel:nth-child(2),
+        .yAxis .tickLabel:nth-child(4),
+        .yAxis .tickLabel:nth-child(6),
+        .yAxis .tickLabel:nth-child(8),
+        .yAxis .tickLabel:nth-child(10)
+        {
+            display: none;
+        }
+
+        /* Clear Floats */
+        .graph-info:before, .graph-info:after,
+        .graph-container:before, .graph-container:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        div#graph-wrapper div.graph-container div#graph-lines div.yaxisLabel { margin-left: -75px; }
+        div#graph-wrapper div.graph-container div#graph-lines div.xaxisLabel { margin: 22px 0px 0px -95px; }
+    </style>
+{% endblock %}
+
+{% block page_javascript %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/vendor/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/vendor/flot-plugins/jquery.flot.axislabels.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var previousPoint = null;
+
+            function showTooltip(x, y, contents) {
+                $('<div id="tooltip">' + contents + '</div>').css({
+                    top: y - 16,
+                    left: x + 20
+                }).appendTo('body').fadeIn();
+            }
+
+            $('#graph-lines').bind('plothover', function (event, pos, item) {
+                if (item) {
+                    if (previousPoint != item.dataIndex) {
+                        previousPoint = item.dataIndex;
+                        $('#tooltip').remove();
+                        var x = item.datapoint[0],
+                            y = item.datapoint[1]
+                            message = '% of users ' + item.series.label + ' video at ';
+                            showTooltip(item.pageX, item.pageY, y.toFixed(2) + message + x + 's');
+                    }
+                } else {
+                    $('#tooltip').remove();
+                    previousPoint = null;
+                }
+            });
+
+            $('a.report-link').click(function() {
+                // Set active status.
+                $('div.subhead ul li').removeClass('active');
+                $(this).parent().addClass('active');
+
+                $('p.form-description').text('');
+
+                // Update header text.
+                var header = $('div.page-header h1');
+                header.text($(this).text());
+
+                // Build chart.
+                var chartDataUrl = $(this).attr('data-api-url');
+                $.getJSON(chartDataUrl, function(returnData) {
+                    var graphData = [
+                        {
+                            data: returnData.data.exited_series,
+                            color: '#DB7D7D',
+                            fillColor: '#DB7D7D',
+                            label: 'exited'
+                        },
+                        {
+                            data: returnData.data.paused_series,
+                            color: '#7DB1DB',
+                            fillColor: '#7DB1DB',
+                            label: 'paused'
+                        },
+                        {
+                            data: returnData.data.played_series,
+                            color: '#7DDB90',
+                            fillColor: '#7DDB90',
+                            label: 'started playing'
+                        }
+                    ];
+
+                    // Lines
+                    $.plot($('#graph-lines'), graphData, {
+                        legend: {
+                            show: true
+                        },
+                        series: {
+                            points: {
+                                show: false,
+                                radius: 3
+                            },
+                            lines: {
+                                show: true,
+                                fill: true
+                            },
+                            shadowSize: 0
+                        },
+                        grid: {
+                            color: '#646464',
+                            borderColor: 'transparent',
+                            borderWidth: 5,
+                            hoverable: true
+                        },
+                        xaxis: {
+                            tickColor: 'transparent',
+                            min: 0,
+                            tickSize: 20,
+                            axisLabel: 'Video Duration (Seconds)',
+                            max: parseInt(returnData.video.duration)
+                        },
+                        yaxis: {
+                            show: true,
+                            min: 0,
+                            tickSize: 10,
+                            max: 100,
+                            position: 'left',
+                            axisLabel: 'Total Users (%)'
+                        }
+                    });
+
+                     $('#graph-wrapper').fadeIn('fast');
+                });
+
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block sub_navigation_items %}
+    <li><a href="" class="report-link" data-api-url="{% url 'dashboard-analytics-videos-state' video.video_id %}">Video State Report</a></li>
+    {% include "dashboard/snippets/select_report_form.html" %}
+{% endblock %}
+
+{% block dashboard_right %}
+    <div class="page-header">
+    <h1>Reports</h1>
+    </div>
+    <p class="form-description">Select a report to the left.</p>
+    <div id="graph-wrapper">
+        <div class="graph-container">
+            <div id="graph-lines"></div>
+        </div>
+    </div>
+{% endblock %}

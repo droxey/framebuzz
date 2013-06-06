@@ -1,0 +1,32 @@
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Video</th>
+      <th>Posted By</th>
+      <th>Comment</th>
+      <th>Submitted</th>
+      <th>Reason</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for flag in page_obj.object_list %}
+    <tr>
+      <td><a target="_blank" href="{% url 'view-content' 'v' flag.comment.content_object.video_id %}">{{ flag.comment.content_object.title }}</a></td>
+      <td><a target="_blank" href="{% url 'user-profile' flag.comment.user.username %}">{{ flag.comment.user.username }}</a></td>
+      <td>{{ flag.comment.comment }}</td>
+      <td>{{ flag.comment.submit_date|timesince }} ago</td>
+      <td>{{ flag.flag }}</td>
+      <td>
+          <a class="btn btn-small btn-success" href="{% url 'comments-approve' flag.comment.id %}"><b class="icon-ok"></b></a>
+          <a class="btn btn-small btn-danger" href="{% url 'comments-delete' flag.comment.id %}"><b class="icon-remove"></b></a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="6">No comments.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% include "dashboard/snippets/pagination.html" %}

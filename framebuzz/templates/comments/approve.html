@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Approve Comment{% endblock %}
+
+{% block dashboard_right %}
+  <div class="page-header">
+    <h1>Comment Moderation Queue</h1>
+  </div>
+  <p class="form-description">
+      Are you sure you want to approve this comment?
+      <br /><br />
+      <strong>{{ comment.user.username }}</strong> @ {{ comment.submit_date|date:"SHORT_DATE_FORMAT" }}: {{ comment.comment }}</p>
+  </p>
+  <form action="{% url 'comments-approve' comment.id %}" method="post">
+    {% csrf_token %}
+    <div><input type="hidden" name="next" value="{% url 'dashboard-videos-moderate' %}?a=1" id="next" /></div>
+    <p class="submit">
+      <input type="submit" class="btn btn-primary" name="submit" value="{% trans "Approve" %}" />
+      <a class="btn" href="{% url 'dashboard-videos-moderate' %}">Cancel</a>
+    </p>
+  </form>
+{% endblock %}

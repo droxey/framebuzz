@@ -1,0 +1,29 @@
+{% load avatar_tags %}
+
+<div class="span3">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            <li class="nav-header">Title</li>
+            <li class="title">{{ video.title }}</li>
+            {% if video.description %}
+                <li class="nav-header">Description</li>
+                <li class="video-description">{{ video.description|urlize }}</li>
+            {% endif %}
+            {% if video.added_by %}
+                <li class="nav-header">Added By</li>
+                <li class="user-avatar-link">
+                    <a href="{% url 'user-profile' video.added_by.username %}">
+                        <img src="{% avatar_url video.added_by 30 %}" alt="" height="30" width="30" />
+                        <span>{{ video.added_by.username }}</span>
+                    </a>
+                </li>
+                {% if video.added_by.get_profile %}
+                    {% if video.added_by.get_profile.website %}
+                    <li class="nav-header">Website</li>
+                    <li><a href="{{ video.added_by.get_profile.website.url }}">{{ video.added_by.get_profile.website.name }}</a></li>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </ul>
+    </div>
+</div>

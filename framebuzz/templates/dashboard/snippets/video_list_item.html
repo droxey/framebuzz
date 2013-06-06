@@ -1,0 +1,35 @@
+<li data-videoid="{{ video.video_id }}"{% if show_embed_button %} class="selected"{% endif %}>
+    {% if can_delete %}
+        <a class="close delete"
+            href="{% url 'dashboard-videos-delete' video.video_id %}"
+            onclick="javascript: return confirm('Are you sure you want to delete this video?');">×</a>
+    {% endif %}
+    <div class="result-wrapper clearfix">
+        <a class="video-thumb" href="{% if not is_adding_video %}{% url 'view-content' 'v' video.video_id %}{% else %}#{% endif %}" title="{{ video.title }}">
+            <img height="120" width="160" src="{{ video.default_thumbnail }}" />
+        </a>
+        <div class="result">
+            <h3{% if show_embed_button %} class="clearfix embed"{% endif %}>
+                {% if not is_adding_video %}
+                    <a href="{% url 'view-content' 'v' video.video_id %}" title="{{ video.title }}">{{ video.title }}</a>
+                {% else %}
+                    {% if show_embed_button %}<span>{% endif %}{{ video.title }}{% if show_embed_button %}</span>{% endif %}
+                    {% if show_embed_button %}
+                        <a class="btn btn-small embed-button" href=""><b class="icon-plus-sign"></b> Embed</a>
+                    {% endif %}
+                {% endif %}
+            </h3>
+        </div>
+    </div>
+    {% if is_adding_video and show_embed_button %}
+    <div class="embed-code">
+        {% spaceless %}
+        <textarea>
+          {% autoescape on %}
+            <iframe src="http://{{ current_site }}{{ video.get_absolute_url }}?embed=true" class="restricted" scrolling="no" frameBorder="0" height="360" width="675"></iframe>
+          {% endautoescape %}
+        </textarea>
+        {% endspaceless %}
+    </div>
+{% endif %}
+</li>

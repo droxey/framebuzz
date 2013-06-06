@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block dashboard_right %}
+    {% if search_results %}
+      <div class="page-header">
+        <h1>Search Results</h1>
+      </div>
+      <p class="form-description"></p>
+        {% for section_name, section_data in search_results.items %}
+            <ul id="video-list" class="clearfix">
+                {% for object_id, object_data in section_data.items %}
+                    <li>
+                        <div class="result-wrapper clearfix">
+                            <a href="{% url 'view-content' 'v' object_id %}" title="{{ object_data.snippet.title }}">
+                                <img height="120" width="160" src="{{ object_data.snippet.thumbnails.default.url }}" />
+                            </a>
+                            <div class="result">
+                                <h3><a href="{% url 'view-content' 'v' object_id %}" title="{{ object_data.snippet.title }}">{{ object_data.snippet.title }}</a></h3>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

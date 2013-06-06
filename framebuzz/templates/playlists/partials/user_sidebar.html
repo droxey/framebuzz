@@ -1,0 +1,23 @@
+{% load avatar_tags %}
+
+<div id="sidebar-content">
+    <div class="header clearfix">
+        <img src="{% avatar_url user_sidebar.user 30 %}" alt="" height="30" width="30" />
+        <h1>
+            <span>{{ user_sidebar.user.username }}</span>
+            <span class="time">{{ selected_thread.timeInHMS }}</span>
+        </h1>
+    </div>
+    {% with user_sidebar as sidebar %}
+        {% include "dashboard/snippets/user_sidebar_statistics.html" %}
+    {% endwith %}
+    {% if user_sidebar.user.get_profile %}
+    <div class="details">
+        {% if user_sidebar.user.get_profile.website %}<p><strong>Website</strong>: <a href="{{ user_sidebar.user.get_profile.website.url }}" title="{{ user_sidebar.user.get_profile.website.name }}" target="_blank">{{ user_sidebar.user.get_profile.website.name }}</a></p>{% endif %}
+        {% if user_sidebar.user.get_profile.bio %}<p>{{ user_sidebar.user.get_profile.bio }}</p>{% endif %}
+    </div>
+    {% endif %}
+    <div class="return">
+        <button class="btn btn-small return-to-comments" type="button"><i class="icon-chevron-left"></i> Return</button>
+    </div>
+</div>

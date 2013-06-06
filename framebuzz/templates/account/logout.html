@@ -1,0 +1,18 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Signed Out" %}{% endblock %}
+{% block dashboard_left %}{% endblock %}
+{% block left_navigation_menu %}{% endblock %}
+
+{% block dashboard_right %}
+    <div class="page-header">
+        <h1>{% trans "Signed Out" %}</h1>
+    </div>
+    <p class="form-description">
+        {% trans "You have signed out." %}
+        <br />
+        <a href="{% url 'account_login' %}">Sign In</a>
+    </p>
+{% endblock %}
