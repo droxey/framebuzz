@@ -1,5 +1,6 @@
 import datetime, pytz, redis
 
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.utils import timezone
@@ -16,7 +17,7 @@ from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from templated_email import send_templated_mail
 
 from framebuzz.apps.api.models import MPTTComment, Video
-from framebuzz.apps.api.serializers import MPTTCommentSerializer
+from framebuzz.apps.api.serializers import MPTTCommentSerializer, CommentActionSerializer
 from framebuzz.apps.api.utils import get_client_ip
 
 
@@ -25,6 +26,28 @@ def api_root(request, format=None):
     return Response({
         'comments': reverse('mpttcomments-list', request=request, format=format),
     })
+
+
+class CommentActionList(generics.ListCreateAPIView):
+    serializer_class = CommentActionSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        '''
+            Filters the list based on the provided username,
+            or the provided comment id.
+        '''
+        username = self.kwargs.get('username', None)
+        comment_id = self.kwargs.get('comment_id', None)
+
+        if username:
+            user = User.objects.get(username__iexact = username)
+            return Action.objects.filter(actor_object_id = user.id)
+
+        if comment_id:
+            return Action.objects.filter(target_object_id = comment_id)
+
+        return Action.objects.all()
 
 
 class MPTTCommentList(generics.ListCreateAPIView):

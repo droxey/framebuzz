@@ -31,6 +31,7 @@ class VideoSerializer(serializers.ModelSerializer):
     def get_channel(self, obj):
         return 'channels/video/%s' % obj.video_id
 
+
 class UserSerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField('get_avatar_url')
     sidebar_url = serializers.SerializerMethodField('get_sidebar_url')
@@ -59,62 +60,19 @@ class UserSerializer(serializers.ModelSerializer):
         return get_default_avatar_url()
 
     def get_sidebar_url(self, obj):
-        return reverse('user-sidebar', kwargs={'username': obj.username})
+        #return reverse('user-sidebar', kwargs={'username': obj.username})
+        return None
 
     def get_channel(self, obj):
         return 'channels/user/%s' % obj.username
 
 
-class MPTTCommentReplySerializer(serializers.ModelSerializer):
-    user = serializers.Field(source='user.username')
-    parent_id = serializers.SerializerMethodField('get_parent_id')
-    video_url = serializers.SerializerMethodField('get_video_url')
-    video_title = serializers.SerializerMethodField('get_video_title')
-    submit_date = serializers.SerializerMethodField('get_submit_date')
-    comment = serializers.WritableField(source='comment')
-    object_pk = serializers.IntegerField(read_only=True)
-
-    class Meta:
-        model = MPTTComment
-        depth = 2
-        fields = ('id', 'user', 'comment', 'submit_date', 'parent_id',
-            'object_pk', 'video_url', 'video_title',)
-
-    def get_parent_id(self, obj):
-        return obj.parent.id
-
-    def get_video_url(self, obj):
-        return obj.parent.content_object.get_absolute_url()
-
-    def get_video_title(self, obj):
-        return obj.parent.content_object.title
-
-    def get_submit_date(self, obj):
-        local_date = timezone.localtime(obj.submit_date)
-        return dateformat.format(local_date, 'n/j/y h:i A')
-
-
-class MPTTCommentSerializer(serializers.ModelSerializer):
-    user = serializers.Field(source='user.username')
-    content_object = VideoSerializer(read_only=True)
-    replies = MPTTCommentReplySerializer(source='get_children', read_only=True)
-    comment = serializers.WritableField(source='comment')
-    parent = serializers.PrimaryKeyRelatedField(source='parent', required=False)
-    time_hms = serializers.SerializerMethodField('get_time_hms')
+class BaseCommentSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     submit_date = serializers.SerializerMethodField('get_submit_date')
     is_favorite = serializers.SerializerMethodField('get_is_favorite')
     is_flagged = serializers.SerializerMethodField('get_is_flagged')
     is_following = serializers.SerializerMethodField('get_is_following')
-
-    class Meta:
-        model = MPTTComment
-        depth = 4
-        fields = ('id', 'user', 'comment', 'parent', 'submit_date',
-            'content_object', 'replies', 'time_hms', 'time', 'is_favorite',
-            'is_flagged', 'is_following',)
-
-    def get_time_hms(self, obj):
-        return obj.timeInHMS
 
     def get_submit_date(self, obj):
         local_date = timezone.localtime(obj.submit_date)
@@ -148,3 +106,40 @@ class MPTTCommentSerializer(serializers.ModelSerializer):
             return is_following(request.user, obj.user)
 
         return False
+
+
+class MPTTCommentReplySerializer(BaseCommentSerializer):
+    class Meta:
+        model = MPTTComment
+        depth = 2
+        fields = ('id', 'user', 'comment', 'submit_date',
+            'is_favorite', 'is_flagged', 'is_following',)
+
+
+class MPTTCommentSerializer(BaseCommentSerializer):
+    content_object = VideoSerializer(read_only=True)
+    replies = MPTTCommentReplySerializer(source='get_children', read_only=True)
+    comment = serializers.WritableField(source='comment')
+    parent = serializers.PrimaryKeyRelatedField(source='parent', required=False)
+    time_hms = serializers.SerializerMethodField('get_time_hms')
+
+    class Meta:
+        model = MPTTComment
+        depth = 4
+        fields = ('id', 'user', 'comment', 'parent', 'submit_date',
+            'content_object', 'replies', 'time_hms', 'time', 'is_favorite',
+            'is_flagged', 'is_following',)
+
+    def get_time_hms(self, obj):
+        return obj.timeInHMS
+
+
+class CommentActionSerializer(serializers.ModelSerializer):
+    actor = serializers.PrimaryKeyRelatedField(source='action', required=False, 
+        queryset=User.objects.all())
+    target = serializers.PrimaryKeyRelatedField(source='target', required=False, 
+        queryset=MPTTComment.objects.all())
+
+    class Meta:
+        model = Action
+        fields = ('actor', 'target', 'verb', 'public', 'timestamp',)

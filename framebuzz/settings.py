@@ -212,6 +212,8 @@ INSTALLED_APPS = (
     'djcelery',
     'djcelery_email',
     'compressor',
+    'raven.contrib.django.raven_compat',
+    'django_sockjs_tornado',
 
     # FrameBuzz Apps
     'framebuzz.apps.api',
@@ -238,13 +240,9 @@ SUIT_CONFIG = {
     'LIST_PER_PAGE': 15
 }
 
-# Set your DSN value
 RAVEN_CONFIG = {
-    'dsn': 'http://1bb359c0d2514862864a73f91c1b4a51:dda79a9e84a2494eb7a2e10cafc5be76@lab.framebuzz.com:9000/2',
-    'timeout': 20,
+    'dsn': 'http://5e4cbec779b04c95b3205f6761067259:2c47d0821534415e9d7cb83550262298@192.227.139.190/3',
 }
-
-SENTRY_DSN = 'http://1bb359c0d2514862864a73f91c1b4a51:dda79a9e84a2494eb7a2e10cafc5be76@lab.framebuzz.com:9000/2'
 
 ACTSTREAM_SETTINGS = {
     'MODELS': (
@@ -341,52 +339,64 @@ CELERY_EMAIL_TASK_CONFIG = {
     'ignore_result': True,
 }
 
-
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
-    #'root': {
-    #    'level': 'WARNING',
-    #    'handlers': ['sentry'],
-    #},
     'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        'standard': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
         },
     },
     'handlers': {
-        #'sentry': {
-        #    'level': 'ERROR',
-        #    'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        #},
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        }
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'logfile': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': SITE_ROOT + "/logfile",
+            'maxBytes': 50000,
+            'backupCount': 2,
+            'formatter': 'standard',
+        },
+        'console':{
+            'level':'INFO',
+            'class':'logging.StreamHandler',
+            'formatter': 'standard'
+        },
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
     },
     'loggers': {
+        'django': {
+            'handlers':['console', 'sentry'],
+            'propagate': True,
+            'level':'WARN',
+        },
         'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['console'],
+            'handlers': ['console', 'sentry'],
+            'level': 'DEBUG',
             'propagate': False,
         },
         'raven': {
             'level': 'DEBUG',
-            #'handlers': ['console', 'sentry'],
-            'propagate': False,
-         },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
+            'handlers': ['console', 'sentry'],
             'propagate': False,
         },
-    },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'sentry'],
+            'propagate': False,
+        },
+        'core.accounts': {
+            'handlers': ['console', 'logfile', 'sentry'],
+            'level': 'DEBUG',
+        },
+    }
 }
 
 #Django-debug-toolbar
@@ -394,6 +404,12 @@ INTERNAL_IPS = ('127.0.0.1',)
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
 }
+
+SOCKJS_PORT = 4000
+SOCKJS_CHANNEL = 'echo'
+SOCKJS_CLASSES = (
+    'framebuzz.apps.api.sockserver.PlayerConnection',
+)
 
 ###################
 # DEPLOY SETTINGS #
