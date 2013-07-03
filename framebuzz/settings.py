@@ -110,6 +110,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(STATIC_ROOT, 'framebuzz'),
 )
 
 # List of finder classes that know how to find static files in
@@ -176,6 +177,8 @@ AUTHENTICATION_BACKENDS = (
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+SESSION_ENGINE = 'redis_sessions.session'
 
 INSTALLED_APPS = (
     # Django Apps
@@ -262,7 +265,7 @@ ACTSTREAM_SETTINGS = {
 # Django-Compressor Settings:
 COMPRESS_ENABLED = True
 COMPRESS_URL = MEDIA_URL
-COMPRESS_ROOT = MEDIA_ROOT
+COMPRESS_ROOT = STATIC_ROOT
 
 # django.contrib.comments settings:
 COMMENTS_APP = 'framebuzz.apps.api'
@@ -353,14 +356,6 @@ LOGGING = {
             'level':'DEBUG',
             'class':'django.utils.log.NullHandler',
         },
-        'logfile': {
-            'level':'DEBUG',
-            'class':'logging.handlers.RotatingFileHandler',
-            'filename': SITE_ROOT + "/logfile",
-            'maxBytes': 50000,
-            'backupCount': 2,
-            'formatter': 'standard',
-        },
         'console':{
             'level':'INFO',
             'class':'logging.StreamHandler',
@@ -391,10 +386,6 @@ LOGGING = {
             'level': 'DEBUG',
             'handlers': ['console', 'sentry'],
             'propagate': False,
-        },
-        'core.accounts': {
-            'handlers': ['console', 'logfile', 'sentry'],
-            'level': 'DEBUG',
         },
     }
 }

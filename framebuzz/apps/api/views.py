@@ -1,9 +1,13 @@
 import datetime, pytz, redis
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.utils import timezone
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 from rest_framework import generics, permissions, renderers
 from rest_framework.decorators import api_view
@@ -16,6 +20,7 @@ from actstream.actions import follow, unfollow
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from templated_email import send_templated_mail
 
+from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.api.models import MPTTComment, Video
 from framebuzz.apps.api.serializers import MPTTCommentSerializer, CommentActionSerializer
 from framebuzz.apps.api.utils import get_client_ip
@@ -119,5 +124,16 @@ class MPTTCommentList(generics.ListCreateAPIView):
         #response = action_response('reload_video_content', data, channel)
         #r.publish(channel, response)
 
-def view_content(request):
-    pass
+
+@xframe_options_exempt
+def video_embed(request, video_id):
+    video, created = get_or_create_video(video_id)
+
+    return render_to_response('player/video_embed.html',
+    {
+        'close_window': request.GET.get('close', None),
+        'video': video,
+        'socket_port': settings.SOCKJS_PORT,
+        'socket_channel': settings.SOCKJS_CHANNEL
+    },
+    context_instance=RequestContext(request))

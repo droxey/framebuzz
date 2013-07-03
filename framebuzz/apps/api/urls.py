@@ -14,8 +14,6 @@ urlpatterns = format_suffix_patterns(patterns('',
     url(r'^actions/$', views.CommentActionList.as_view(), name='actions-list'),
     url(r'^actions/user/(?P<username>[\w]+)/$', views.CommentActionList.as_view(), name='actions-user-list'),
     url(r'^actions/comment/(?P<comment_id>[\d]+)/$', views.CommentActionList.as_view(), name='actions-comment-list'),
-
-    url(r'^(?P<section_type>[\w]+)/(?P<result_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.view_content', name='view-content'),
 ))
 
 # Login and logout views for the browsable API.

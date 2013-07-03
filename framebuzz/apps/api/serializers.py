@@ -84,7 +84,7 @@ class BaseCommentSerializer(serializers.ModelSerializer):
         if request.user.is_authenticated() and request.user.id != obj.user.id:
             is_favorite = Action.objects.actor(request.user, 
                 verb='added to favorites', 
-                action_object_object_id=commentToToggle.id)
+                action_object_object_id=obj.id)
             return len(is_favorite) > 0
 
         return False
@@ -135,10 +135,8 @@ class MPTTCommentSerializer(BaseCommentSerializer):
 
 
 class CommentActionSerializer(serializers.ModelSerializer):
-    actor = serializers.PrimaryKeyRelatedField(source='action', required=False, 
-        queryset=User.objects.all())
-    target = serializers.PrimaryKeyRelatedField(source='target', required=False, 
-        queryset=MPTTComment.objects.all())
+    actor = UserSerializer()
+    target = MPTTCommentSerializer()
 
     class Meta:
         model = Action
