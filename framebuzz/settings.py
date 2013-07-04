@@ -399,7 +399,7 @@ DEBUG_TOOLBAR_CONFIG = {
 SOCKJS_PORT = 4000
 SOCKJS_CHANNEL = 'echo'
 SOCKJS_CLASSES = (
-    'framebuzz.apps.api.sockserver.PlayerConnection',
+    'framebuzz.apps.api.sockserver.ConnectionHandler',
 )
 
 ###################

@@ -5,7 +5,6 @@ from django.utils.importlib import import_module
 from tornado import web, ioloop
 from sockjs.tornado import SockJSRouter
 
-
 class Command(BaseCommand):
 
     option_list = BaseCommand.option_list + (
@@ -40,6 +39,7 @@ class Command(BaseCommand):
         router = SockJSRouter(cls, channel)
         app_settings = {
             'debug': settings.DEBUG,
+            'auto_reload': True
         }
 
         PORT = int(options['port'])
