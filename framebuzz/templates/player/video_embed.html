@@ -27,7 +27,7 @@
         </style>
       {% endcompress %}
     </head>
-    <body>
+    <body ngapp>
       {% providers_media_js %}
       <div id="content">
           <div id="video-wrapper">
@@ -41,7 +41,8 @@
       var SOCK = {
         host: location.hostname,
         port: {{ socket_port }},
-        channel: '{{ socket_channel }}'
+        channel: '{{ socket_channel }}',
+        video_channel: '/framebuzz/video/' + '{{ video.video_id }}'
       };
     </script>
     <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>

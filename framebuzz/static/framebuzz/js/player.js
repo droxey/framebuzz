@@ -4,7 +4,7 @@ var Chat = (function() {
   function init(socket) {
     _socket = socket;
 
-    _socket.send_json({name: 'yo', message: 'doit'});
+    _socket.send_json({eventType: 'subscribeToChannel', channel: SOCK.video_channel});
   }
 
   return {

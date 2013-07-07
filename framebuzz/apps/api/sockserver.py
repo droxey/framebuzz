@@ -1,4 +1,5 @@
 import django
+import json
 import tornadoredis
 
 from sockjs.tornado import SockJSConnection
@@ -33,8 +34,7 @@ class ConnectionHandler(SockJSConnection):
         if not isinstance(user, django.contrib.auth.models.AnonymousUser):
             user_channel = '/framebuzz/user/%s' % user.username 
             self.client.subscribe(user_channel, self.on_chan_message)
-
-        self.client.subscribe('/test_channel', self.on_chan_message)
+        pass
 
     def on_message(self, msg):
         """
@@ -42,14 +42,21 @@ class ConnectionHandler(SockJSConnection):
         Pass it on to Celery as these requests may generage
         large Django queries and we don't want to block the server.       
         """
-        tasks.execute_player_task.delay(message=msg)
+        json_message = json.loads(msg)
+        eventType = json_message.get('eventType', None)
+
+        if eventType and eventType == 'subscribeToChannel':
+            channel = json_message.get('channel', None)
+            if channel:
+                self.client.subscribe(channel, self.on_chan_message)
+        else:
+            tasks.execute_player_task.delay(message=msg)
  
     def on_chan_message(self, msg):
         """
         This is a message broadcast from Redis.
         Send it to the client.
         """
-        print msg
         self.send(msg)
 
     def get_current_user(self, info):

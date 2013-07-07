@@ -131,7 +131,7 @@ class MPTTComment(MPTTModel, Comment):
     @property
     def formatted_comment(self):
         return mark_safe(
-            urlize(obj.comment, trim_url_limit=None, nofollow=True)
+            urlize(self.comment, trim_url_limit=None, nofollow=True)
                 .replace('<a ', '<a target="_blank" '))
 
     def get_absolute_url(self):
