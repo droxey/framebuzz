@@ -13,9 +13,6 @@ var Chat = (function() {
 
 })();
 
-SockJS.prototype.send_json = function(data) {
-  this.send(JSON.stringify(data));
-};
 
 var initsock = function(callback) {
   sock = new SockJS('http://' + SOCK.host + ':' + SOCK.port + '/' + SOCK.channel);
