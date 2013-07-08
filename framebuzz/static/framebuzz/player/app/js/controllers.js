@@ -2,10 +2,17 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('MyCtrl1', [function() {
+angular.module('framebuzz.controllers', []).
+  controller('VideoPlayerCtrl', function($scope, socket) {
+    socket.onopen(function() {
+        console.log('Socket is connected! :)');
+    });
 
-  }])
-  .controller('MyCtrl2', [function() {
+    socket.onmessage(function() {
+        console.log('Socket received message.');
+    });
 
-  }]);
+    socket.onclose(function() {
+        console.log('Socket is disconnected :(');
+    });
+  });

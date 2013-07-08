@@ -1,12 +1,9 @@
-import iso8601
 from datetime import datetime
 
 from django.core.urlresolvers import reverse
-from django.core.serializers import serialize
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.models import Comment, CommentFlag
-from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
