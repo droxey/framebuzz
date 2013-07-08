@@ -60,6 +60,7 @@ angular.module('framebuzz.services', [])
             },
             send_json: function(data) {
                 socket.send(JSON.stringify(data));
+
                 self.socket_handlers.onsent();
             },
             onsent: function(callback) {

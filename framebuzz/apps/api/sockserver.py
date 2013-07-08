@@ -1,14 +1,14 @@
 import django
 import json
 import tornadoredis
+import tornado.gen
 
-from sockjs.tornado import SockJSConnection
 from framebuzz.apps.api import tasks
-
+from framebuzz.apps.api.event_types import PLAYER_EVENT_TYPES
+from sockjs.tornado import SockJSConnection
 
 CONNECTION_POOL = tornadoredis.ConnectionPool(max_connections=500,
                                               wait_for_available=True)
-
 
 class ConnectionHandler(SockJSConnection):
     """
@@ -17,24 +17,38 @@ class ConnectionHandler(SockJSConnection):
     """
 
     def __init__(self, *args, **kwargs):
+        super(ConnectionHandler, self).__init__(*args, **kwargs)
+        self.user_channel = None
+        self.video_channel = None
+        self.session_channel = None
+ 
+    
+    @tornado.gen.engine
+    def listen(self):
         """
         Create a Redis connection for each client.
         """
-        super(ConnectionHandler, self).__init__(*args, **kwargs)
         self.client = tornadoredis.Client(connection_pool=CONNECTION_POOL)
         self.client.connect()
- 
+
+        if self.session_channel:
+            yield tornado.gen.Task(self.client.subscribe, self.session_channel)
+
+        if self.user_channel:
+            yield tornado.gen.Task(self.client.subscribe, self.user_channel)
+
+        if self.video_channel:
+            yield tornado.gen.Task(self.client.subscribe, self.video_channel)
+
+        self.client.listen(self.on_chan_message)
+
+
     def on_open(self, info):
         """
         Connect the user to the Redis server,
         and subscribe them to all the nessessary channels.
         """
-        user = self.get_current_user(info)
-
-        if not isinstance(user, django.contrib.auth.models.AnonymousUser):
-            user_channel = '/framebuzz/user/%s' % user.username 
-            self.client.subscribe(user_channel, self.on_chan_message)
-        pass
+        self.get_current_user(info)
 
     def on_message(self, msg):
         """
@@ -45,23 +59,31 @@ class ConnectionHandler(SockJSConnection):
         json_message = json.loads(msg)
         eventType = json_message.get('eventType', None)
 
-        if eventType and eventType == 'subscribeToChannel':
-            channel = json_message.get('channel', None)
-            if channel:
-                self.client.subscribe(channel, self.on_chan_message)
+        if eventType and eventType == PLAYER_EVENT_TYPES[0]:
+            self.video_channel = json_message.get('channel', None)
+            if self.video_channel:
+                tasks.construct_outbound_message.delay(event_type=PLAYER_EVENT_TYPES[0], 
+                                                 channel=self.session_channel,
+                                                 context={ 'subscribed': True })
+                self.listen()
         else:
-            tasks.execute_player_task.delay(message=msg)
- 
+            tasks.parse_inbound_message.delay(message=msg)
+        
     def on_chan_message(self, msg):
         """
         This is a message broadcast from Redis.
         Send it to the client.
         """
-        self.send(msg)
+        if msg.kind == 'message':
+            self.send(msg.body)
 
     def get_current_user(self, info):
+        """
+        Grabs the current Django user from the Redis backend.
+        """
         engine = django.utils.importlib.import_module(django.conf.settings.SESSION_ENGINE)
         session_key = str(info.get_cookie(django.conf.settings.SESSION_COOKIE_NAME)).split('=')[1]
+        self.session_channel = '/framebuzz/session/%s' % session_key 
 
         class Dummy(object):
             pass
@@ -69,8 +91,18 @@ class ConnectionHandler(SockJSConnection):
         django_request = Dummy()
         django_request.session = engine.SessionStore(session_key)
         user = django.contrib.auth.get_user(django_request)
+
+        if not isinstance(user, django.contrib.auth.models.AnonymousUser):
+            self.user_channel = '/framebuzz/user/%s' % user.username 
+
         return user
  
     def on_close(self):
-        self.client.unsubscribe('text_stream')
-        self.client.disconnect()
+        """
+        Runs when the user gets disconnected.
+        """
+        if self.client.subscribed:
+            self.client.unsubscribe(self.session_channel)
+            self.client.unsubscribe(self.user_channel)
+            self.client.unsubscribe(self.video_channel)
+            self.client.disconnect()

@@ -5,12 +5,13 @@
 angular.module('framebuzz.controllers', []).
   controller('VideoPlayerCtrl', function($scope, socket) {
     socket.onopen(function() {
-        socket.send_json({eventType: 'subscribeToChannel', channel: SOCK.video_channel});
+        socket.send_json({eventType: 'FB_SUBSCRIBE_TO_CHANNEL', channel: SOCK.video_channel});
         
         console.log('Socket is connected! :)');
     });
 
-    socket.onmessage(function() {
+    socket.onmessage(function(e) {
+        console.log(e.data);
         console.log('Socket received message.');
     });
 
