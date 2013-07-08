@@ -55,20 +55,24 @@
           <div id="video-wrapper">
             <video class="span12" id="ytVideo" preload="none" type="video/x-youtube" src="http://www.youtube.com/watch?v={{ video.video_id }}"></video>
             {% verbatim %}
-              <div id="heatmap" class="span12">
-                <ul class="clearfix">
-                  <li class="{{ block.className }}" ng-repeat="block in heatmap"></li>
-                </ul>
+              <div id="overlays">
+                <div id="panel-wrapper" class="offset6 span6">
+                  <div class="panel"></div>
+                </div>
+                <div id="heatmap" class="span12">
+                  <ul class="clearfix">
+                    <li class="{{ block.className }}" ng-repeat="block in heatmap"></li>
+                  </ul>
+                </div>
               </div>
             {% endverbatim %}
           </div>
-          {% verbatim %}{% endverbatim %}
         </div>
       </div>
       <script src="//cdn.sockjs.org/sockjs-0.3.min.js"></script>
       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
       {% compress js %}
         <script src="{% static 'framebuzz/js/vendor/mediaelement-and-player.js' %}"></script>
         <script src="{% static 'framebuzz/js/vendor/plugins.js' %}"></script>
@@ -77,36 +81,7 @@
         <script src="{% static 'framebuzz/player/app/js/controllers.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/js/filters.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/js/directives.js' %}"></script>
-        <script>
-          $(document).ready(function() {
-            var player = new MediaElementPlayer('#ytVideo', {
-              features: ['youtube','progress'],
-              flashName: '../../swf/flashmediaelement.swf',
-              silverlightName: '../../swf/silverlightmediaelement.xap',
-              alwaysShowControls: true,
-              // There's a bug here where commenting and hitting the spacebar will
-              // cause the space to not be entered, and the video to pause.
-              enableKeyboard: false,
-              timerRate: 900,
-              success: function (media) {
-                videoPlayer = media;
-
-                media.addEventListener('timeupdate', function(e) {
-
-                }, false);
-
-                media.addEventListener('playing', function(e) {
-
-                }, false);
-
-                media.addEventListener('pause', function(e) {
-                  $('.mejs-video').unbind('hover');
-                  $('.mejs-overlay-play').hide().addClass('mejs-overlay-pause').fadeIn(500).show();
-                }, false);
-              }
-            });
-          });
-        </script>
+        <script src="{% static 'framebuzz/player/app/js/ui.js' %}"></script>
       {% endcompress %}
       <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -32,7 +32,7 @@ def parse_inbound_message(message):
 
 
 @celery.task
-def construct_outbound_message(event_type, channel, context={}):
+def construct_outbound_message(context, event_type, channel):
     """
     Constructs a JSON message and sends it to the 
     proper channel via Redis.

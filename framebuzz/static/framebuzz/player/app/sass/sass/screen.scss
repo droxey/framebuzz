@@ -26,41 +26,59 @@ object, embed, video, iframe { max-width: 100%; }
                 top: 0;
                 z-index: 1;
             }
-
-            #heatmap {
-                background: #343434;
-                padding: 8px 8px 8px 8px;
+            
+            #overlays {
                 position: relative;
-                margin-left: 0;
-                left: 0;
-                bottom: 0;
-                width: 100%;
+                top: 0;
                 z-index: 10;
 
-                ul {
+                #heatmap {
+                    background: #343434;
+                    padding: 8px 8px 8px 8px;
+                    position: relative;
+                    margin-left: 0;
+                    left: 0;
+                    bottom: 0;
                     width: 100%;
-                    height: 100%;
+                    z-index: 10;
 
-                    li {
-                        float: left;
-                        width: 22.6px;
-                        margin-right: 1px;
-                        height: 12px;
-                        cursor: pointer;
+                    ul {
+                        width: 100%;
+                        height: 100%;
 
-                        &.rank-8 { background-color: #c7c7c7; }
-                        &.rank-7 { background-color: #c7c7c7; }
-                        &.rank-6 { background-color: #c7c7c7; }
-                        &.rank-5 { background-color: #c7c7c7; }
-                        &.rank-4 { background-color: #9ebbc8; }
-                        &.rank-3 { background-color: #76abc3; }
-                        &.rank-2 { background-color: #3a91b8; }
-                        &.rank-1 { background-color: #1887b9; }
+                        li {
+                            float: left;
+                            width: 22.6px;
+                            margin-right: 1px;
+                            height: 12px;
+                            cursor: pointer;
 
-                        &:last-child { margin-right: 0; }
+                            &.rank-8 { background-color: #c7c7c7; }
+                            &.rank-7 { background-color: #c7c7c7; }
+                            &.rank-6 { background-color: #c7c7c7; }
+                            &.rank-5 { background-color: #c7c7c7; }
+                            &.rank-4 { background-color: #9ebbc8; }
+                            &.rank-3 { background-color: #76abc3; }
+                            &.rank-2 { background-color: #3a91b8; }
+                            &.rank-1 { background-color: #1887b9; }
+
+                            &:last-child { margin-right: 0; }
+                        }
                     }
+                    
                 }
                 
+                #panel-wrapper {
+                    background-color: rgba(31, 31, 31, 0.8);                    
+                    height: 393px;
+                    position: absolute;
+                    z-index: 100;
+
+                    div.panel {
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
             }
         }
     }

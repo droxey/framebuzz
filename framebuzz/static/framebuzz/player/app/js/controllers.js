@@ -4,6 +4,8 @@
 
 angular.module('framebuzz.controllers', []).
   controller('VideoPlayerCtrl', function($scope, socket) {
+    $scope.player = {};
+    
     $scope.video = {};
     $scope.heatmap = {};
     $scope.threads = {};
@@ -16,7 +18,7 @@ angular.module('framebuzz.controllers', []).
 
     socket.onmessage(function(e) {
         var jsonData = JSON.parse(e.data);
-        
+
         if (jsonData.eventType == 'FB_INITIALIZE_VIDEO') {
             $scope.video = jsonData.data.video;
             $scope.heatmap = jsonData.data.heatmap;

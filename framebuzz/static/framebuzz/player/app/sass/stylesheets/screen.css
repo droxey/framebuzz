@@ -95,7 +95,13 @@ object, embed, video, iframe {
   z-index: 1;
 }
 /* line 30, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap {
+#container #content #video-wrapper #overlays {
+  position: relative;
+  top: 0;
+  z-index: 10;
+}
+/* line 35, ../sass/screen.scss */
+#container #content #video-wrapper #overlays #heatmap {
   background: #343434;
   padding: 8px 8px 8px 8px;
   position: relative;
@@ -105,52 +111,64 @@ object, embed, video, iframe {
   width: 100%;
   z-index: 10;
 }
-/* line 40, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul {
+/* line 45, ../sass/screen.scss */
+#container #content #video-wrapper #overlays #heatmap ul {
   width: 100%;
   height: 100%;
 }
-/* line 44, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul li {
+/* line 49, ../sass/screen.scss */
+#container #content #video-wrapper #overlays #heatmap ul li {
   float: left;
   width: 22.6px;
   margin-right: 1px;
   height: 12px;
   cursor: pointer;
 }
-/* line 51, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul li.rank-8 {
-  background-color: #c7c7c7;
-}
-/* line 52, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul li.rank-7 {
-  background-color: #c7c7c7;
-}
-/* line 53, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul li.rank-6 {
-  background-color: #c7c7c7;
-}
-/* line 54, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul li.rank-5 {
-  background-color: #c7c7c7;
-}
-/* line 55, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul li.rank-4 {
-  background-color: #9ebbc8;
-}
 /* line 56, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul li.rank-3 {
-  background-color: #76abc3;
+#container #content #video-wrapper #overlays #heatmap ul li.rank-8 {
+  background-color: #c7c7c7;
 }
 /* line 57, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul li.rank-2 {
-  background-color: #3a91b8;
+#container #content #video-wrapper #overlays #heatmap ul li.rank-7 {
+  background-color: #c7c7c7;
 }
 /* line 58, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul li.rank-1 {
-  background-color: #1887b9;
+#container #content #video-wrapper #overlays #heatmap ul li.rank-6 {
+  background-color: #c7c7c7;
+}
+/* line 59, ../sass/screen.scss */
+#container #content #video-wrapper #overlays #heatmap ul li.rank-5 {
+  background-color: #c7c7c7;
 }
 /* line 60, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap ul li:last-child {
+#container #content #video-wrapper #overlays #heatmap ul li.rank-4 {
+  background-color: #9ebbc8;
+}
+/* line 61, ../sass/screen.scss */
+#container #content #video-wrapper #overlays #heatmap ul li.rank-3 {
+  background-color: #76abc3;
+}
+/* line 62, ../sass/screen.scss */
+#container #content #video-wrapper #overlays #heatmap ul li.rank-2 {
+  background-color: #3a91b8;
+}
+/* line 63, ../sass/screen.scss */
+#container #content #video-wrapper #overlays #heatmap ul li.rank-1 {
+  background-color: #1887b9;
+}
+/* line 65, ../sass/screen.scss */
+#container #content #video-wrapper #overlays #heatmap ul li:last-child {
   margin-right: 0;
+}
+/* line 71, ../sass/screen.scss */
+#container #content #video-wrapper #overlays #panel-wrapper {
+  background-color: rgba(31, 31, 31, 0.8);
+  height: 393px;
+  position: absolute;
+  z-index: 100;
+}
+/* line 77, ../sass/screen.scss */
+#container #content #video-wrapper #overlays #panel-wrapper div.panel {
+  height: 100%;
+  width: 100%;
 }
