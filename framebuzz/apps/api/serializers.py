@@ -9,12 +9,12 @@ from django.utils.hashcompat import md5_constructor
 from django.utils import dateformat
 from django.utils import timezone
 
-from actstream.actions import follow, unfollow, is_following
+from actstream.actions import is_following
 from actstream.models import Action
 
 from avatar.util import get_primary_avatar, get_default_avatar_url
 from avatar.settings import (AVATAR_GRAVATAR_BACKUP, AVATAR_GRAVATAR_DEFAULT,
-                             AVATAR_DEFAULT_SIZE, AVATAR_GRAVATAR_BASE_URL)
+                            AVATAR_GRAVATAR_BASE_URL)
 from rest_framework import serializers
 
 from framebuzz.apps.api.models import MPTTComment, Video
@@ -29,7 +29,7 @@ class VideoSerializer(serializers.ModelSerializer):
             'swf_url', 'uploaded', 'channel',)
 
     def get_channel(self, obj):
-        return 'channels/video/%s' % obj.video_id
+        return '/framebuzz/video/%s' % obj.video_id
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -132,12 +132,3 @@ class MPTTCommentSerializer(BaseCommentSerializer):
 
     def get_time_hms(self, obj):
         return obj.timeInHMS
-
-
-class CommentActionSerializer(serializers.ModelSerializer):
-    actor = UserSerializer()
-    target = MPTTCommentSerializer()
-
-    class Meta:
-        model = Action
-        fields = ('actor', 'target', 'verb', 'public', 'timestamp',)

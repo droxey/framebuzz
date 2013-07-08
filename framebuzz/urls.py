@@ -14,7 +14,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # API
-    url(r'^api/', include('framebuzz.apps.api.urls')),
     url(r'^v/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_embed', name='view-content'),
 
     # Django-AllAuth

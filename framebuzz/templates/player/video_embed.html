@@ -3,43 +3,67 @@
 <html lang="en" itemscope itemtype="http://schema.org/Article" ng-app="framebuzz">
     <head>
       <title>FrameBuzz | {{ video.title }}</title>
-      <meta name="description" content="{{ video.description }}" />
-      <meta property="og:title" content="FrameBuzz: {{ video.title }}" />
-      <meta property="og:type" content="Video" />
-      <meta property="og:url" content="http://{{ current_site }}{{ video.get_absolute_url }}" />
-      <meta property="og:image" content="{{ video.default_thumbnail.url }}" />
-      <meta property="og:description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
-      <meta property="og:site_name" content="FrameBuzz" />
-      <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
-      <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
-      <meta itemprop="image" content="{{ video.default_thumbnail.url }}" />
-      <script type="text/javascript">
-        var closeWindow = '{{ close_window|lower }}' == 'true';
-        if (closeWindow) {
-          window.opener.location.reload();
-          window.close();
-        }
+      <meta name="description" content="{{ video.description }}">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta property="og:title" content="FrameBuzz: {{ video.title }}">
+      <meta property="og:type" content="Video">
+      <meta property="og:url" content="http://{{ current_site }}{{ video.get_absolute_url }}">
+      <meta property="og:image" content="{{ video.default_thumbnail.url }}">
+      <meta property="og:description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!">
+      <meta property="og:site_name" content="FrameBuzz">
+      <meta itemprop="name" content="FrameBuzz: {{ video.title }}">
+      <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!">
+      <meta itemprop="image" content="{{ video.default_thumbnail.url }}">
+      {% compress css %}
+        <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/bootstrap-responsive.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/mediaelementplayer.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/mejs-skins.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <!--[if IE]>
+            <link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <![endif]-->
+      {% endcompress %}
+      <script type="text/javascript" src="//use.typekit.net/jbo8iic.js"></script>
+      <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+      {% compress js %}
+        <script type="text/javascript">
+          var closeWindow = '{{ close_window|lower }}' == 'true';
+          if (closeWindow) {
+            window.opener.location.reload();
+            window.close();
+          }
 
-        // Disable ESC as it breaks SockJS connection.
-        // See https://github.com/sockjs/sockjs-client/issues/18.
-        window.addEventListener('keydown', function(e) { (e.keyCode == 27 && e.preventDefault()) });
+          // Disable ESC as it breaks SockJS connection.
+          // See https://github.com/sockjs/sockjs-client/issues/18.
+          window.addEventListener('keydown', function(e) { (e.keyCode == 27 && e.preventDefault()) });
 
-        // Set up our global SOCK variable.
-        var SOCK = {
-          host: location.hostname,
-          port: {{ socket_port }},
-          channel: '{{ socket_channel }}',
-          video_channel: '/framebuzz/video/' + '{{ video.video_id }}'
-        };
-      </script>
+          // Set up our global SOCK variable.
+          var SOCK = {
+            host: location.hostname,
+            port: {{ socket_port }},
+            channel: '{{ socket_channel }}',
+            video_channel: '/framebuzz/video/' + '{{ video.video_id }}'
+          };
+        </script>
+      {% endcompress %}
     </head>
     <body ng-controller="VideoPlayerCtrl">
       {% providers_media_js %}
-      <div id="content">
-        <div id="video-wrapper">
-          <video width="505" height="284" id="ytVideo" preload="none" type="video/x-youtube" src="http://www.youtube.com/watch?v={{ video.video_id }}"></video>
+      <div id="container" class="row-fluid">
+        <div id="content">
+          <div id="video-wrapper">
+            <video class="span12" id="ytVideo" preload="none" type="video/x-youtube" src="http://www.youtube.com/watch?v={{ video.video_id }}"></video>
+            {% verbatim %}
+              <div id="heatmap" class="span12">
+                <ul class="clearfix">
+                  <li class="{{ block.className }}" ng-repeat="block in heatmap"></li>
+                </ul>
+              </div>
+            {% endverbatim %}
+          </div>
+          {% verbatim %}{% endverbatim %}
         </div>
-        {% verbatim %}{% endverbatim %}
       </div>
       <script src="//cdn.sockjs.org/sockjs-0.3.min.js"></script>
       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
@@ -64,22 +88,22 @@
               // cause the space to not be entered, and the video to pause.
               enableKeyboard: false,
               timerRate: 900,
-                success: function (media) {
-                  videoPlayer = media;
+              success: function (media) {
+                videoPlayer = media;
 
-                  media.addEventListener('timeupdate', function(e) {
+                media.addEventListener('timeupdate', function(e) {
 
-                  }, false);
+                }, false);
 
-                  media.addEventListener('playing', function(e) {
+                media.addEventListener('playing', function(e) {
 
-                  }, false);
+                }, false);
 
-                  media.addEventListener('pause', function(e) {
-                    $('.mejs-video').unbind('hover');
-                    $('.mejs-overlay-play').hide().addClass('mejs-overlay-pause').fadeIn(500).show();
-                  }, false);
-                }
+                media.addEventListener('pause', function(e) {
+                  $('.mejs-video').unbind('hover');
+                  $('.mejs-overlay-play').hide().addClass('mejs-overlay-pause').fadeIn(500).show();
+                }, false);
+              }
             });
           });
         </script>

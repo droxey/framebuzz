@@ -59,13 +59,14 @@ class ConnectionHandler(SockJSConnection):
         json_message = json.loads(msg)
         eventType = json_message.get('eventType', None)
 
-        if eventType and eventType == PLAYER_EVENT_TYPES[0]:
-            self.video_channel = json_message.get('channel', None)
-            if self.video_channel:
-                tasks.construct_outbound_message.delay(event_type=PLAYER_EVENT_TYPES[0], 
-                                                 channel=self.session_channel,
-                                                 context={ 'subscribed': True })
-                self.listen()
+        if eventType:
+            if eventType == PLAYER_EVENT_TYPES[0]:
+                self.video_channel = json_message.get('channel', None)
+                if self.video_channel:
+                    video_id = self.video_channel.lstrip('/framebuzz/video/').rstrip('/')
+                    json_message['video_id'] = video_id
+                    tasks.initialize_video_player.delay(video_id=video_id, channel=self.session_channel)
+                    self.listen()
         else:
             tasks.parse_inbound_message.delay(message=msg)
         
