@@ -55,16 +55,32 @@
           <div id="video-wrapper">
             <video class="span12" id="ytVideo" preload="none" type="video/x-youtube" src="http://www.youtube.com/watch?v={{ video.video_id }}"></video>
             {% verbatim %}
-              <div id="overlays">
-                <div id="panel-wrapper" class="offset6 span6">
-                  <div class="panel"></div>
+                <table id="heatmap" class="span12">
+                  <tr>
+                    <td class="{{ block.className }}" ng-repeat="block in heatmap"></td>
+                  </tr>
+                </table>
+                <form method="post" action="" id="post-comment-form" class="span12">
+            {% endverbatim %}
+                  {% csrf_token %}
+            {% verbatim %}
+                  <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot"></p>
+                  <div class="input-prepend input-append">
+                    <span class="add-on"><em class="current">00:00</em><em> / </em>{{ video.time_hms }}</span>
+                    <!--<input type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment...">-->
+                    <input type="text" id="id_comment" name="comment" placeholder="Please login to post a comment!" disabled>
+                    <button type="submit" id="submit-comment" class="btn"><i class="icon-comment"></i></button>
+                  </div>
+                  <input type="hidden" id="id_time" name="time" value="0.00">
+                  <input type="hidden" id="id_parent" name="parent">
+                  <input type="hidden" id="id_object_pk" name="object_pk" value="{{ video.id }}">
+                  <input type="hidden" id="id_content_type" value="core.video" name="content_type">
+                </form>
+                <div id="overlays">
+                  <div id="panel-wrapper" class="offset6 span6">
+                    <div class="panel"></div>
+                  </div>
                 </div>
-                <div id="heatmap" class="span12">
-                  <ul class="clearfix">
-                    <li class="{{ block.className }}" ng-repeat="block in heatmap"></li>
-                  </ul>
-                </div>
-              </div>
             {% endverbatim %}
           </div>
         </div>

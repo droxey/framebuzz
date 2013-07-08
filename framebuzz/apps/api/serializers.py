@@ -22,14 +22,18 @@ from framebuzz.apps.api.models import MPTTComment, Video
 
 class VideoSerializer(serializers.ModelSerializer):
     channel = serializers.SerializerMethodField('get_channel')
+    time_hms = serializers.SerializerMethodField('get_time_hms')
 
     class Meta:
         model = Video
         fields = ('id', 'video_id', 'title', 'duration', 'youtube_url',
-            'swf_url', 'uploaded', 'channel',)
+            'swf_url', 'uploaded', 'channel', 'time_hms',)
 
     def get_channel(self, obj):
         return '/framebuzz/video/%s' % obj.video_id
+
+    def get_time_hms(self, obj):
+        return obj.timeInHMS
 
 
 class UserSerializer(serializers.ModelSerializer):

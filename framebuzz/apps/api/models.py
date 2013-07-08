@@ -87,6 +87,17 @@ class Video(models.Model):
         except:
             pass
 
+    @property
+    def timeInHMS(self):
+        seconds = int(self.duration)
+        hours = seconds / 3600
+        seconds -= 3600*hours
+        minutes = seconds / 60
+        seconds -= 60*minutes
+        if hours == 0:
+            return "%02d:%02d" % (minutes, seconds)
+        return "%02d:%02d:%02d" % (hours, minutes, seconds)
+
 
 class Thumbnail(models.Model):
     video = models.ForeignKey(Video, null=True)
