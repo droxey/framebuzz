@@ -15,6 +15,9 @@ from timezone_field import TimeZoneField
 from mptt.models import MPTTModel, TreeForeignKey
 
 
+COMMENT_VISIBILITY_TIME_RANGE = 0.5
+
+
 class Website(models.Model):
     url = models.URLField('Website URL')
     name = models.CharField('Website Name', max_length=255)
@@ -125,6 +128,8 @@ class MPTTComment(MPTTModel, Comment):
     # Time is required for parent comments, and optional for sub-comments.
     time = models.FloatField(default=0.000)
 
+    is_visible = models.BooleanField(default=True)
+
     @property
     def timeInHMS(self):
         seconds = int(self.time)
@@ -159,6 +164,36 @@ class MPTTComment(MPTTModel, Comment):
         verbose_name_plural='Video Comments'
 
     def save(self, *args, **kwargs):
+        import math
+
         if not self.submit_date:
             self.submit_date = datetime.now()
+
+        if not self.parent:
+            start = math.floor(self.time)
+            time_fraction = self.time % 1
+
+            if time_fraction > .5:
+                start = start + 1
+                end = start - COMMENT_VISIBILITY_TIME_RANGE
+            else:
+                end = start + COMMENT_VISIBILITY_TIME_RANGE
+
+            comments_in_range = MPTTComment.objects.filter(object_pk=self.object_pk,
+                                                            parent=None, 
+                                                            time__gte=start, 
+                                                            time__lte=end,
+                                                            is_removed=False, 
+                                                            is_visible=True).order_by('time')
+            print comments_in_range
+            if len(comments_in_range) > 0:
+                first_comment = comments_in_range[0]
+                visibility = (first_comment.time > self.time)
+
+                if visibility:
+                    first_comment.is_visible = False
+                    first_comment.save()
+                else:
+                    self.is_visible = False
+
         super(MPTTComment, self).save(*args, **kwargs)

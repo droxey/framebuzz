@@ -7,8 +7,8 @@ class FrameBuzzVideoAdmin(admin.ModelAdmin):
     list_filter = ('added_by', 'added_on',)
 
 class MPTTCommentAdmin(admin.ModelAdmin):
-    list_filter = ('object_pk', 'content_type',)
-    list_display = ('comment', 'object_pk', 'time', 'parent',)
+    list_filter = ('object_pk', 'content_type', 'user', 'is_visible',)
+    list_display = ('comment', 'object_pk', 'time', 'parent', 'user', 'is_visible',)
 
 class SessionAdmin(admin.ModelAdmin):
     list_display = ('session_key', 'expire_date',)
@@ -19,7 +19,6 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 class WebsiteAdmin(admin.ModelAdmin):
     list_display = ('url', 'name', 'moderator_email', 'hide_comment_flag_count', 'youtube_api_key',)
-
 
 admin.site.register(MPTTComment, MPTTCommentAdmin)
 admin.site.register(Video, FrameBuzzVideoAdmin)

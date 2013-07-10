@@ -117,7 +117,7 @@ class MPTTCommentReplySerializer(BaseCommentSerializer):
         model = MPTTComment
         depth = 2
         fields = ('id', 'user', 'comment', 'submit_date',
-            'is_favorite', 'is_flagged', 'is_following',)
+            'is_favorite', 'is_flagged', 'is_following', 'is_visible',)
 
 
 class MPTTCommentSerializer(BaseCommentSerializer):
@@ -132,7 +132,7 @@ class MPTTCommentSerializer(BaseCommentSerializer):
         depth = 4
         fields = ('id', 'user', 'comment', 'parent', 'submit_date',
             'content_object', 'replies', 'time_hms', 'time', 'is_favorite',
-            'is_flagged', 'is_following',)
+            'is_flagged', 'is_following', 'is_visible',)
 
     def get_time_hms(self, obj):
         return obj.timeInHMS

@@ -69,100 +69,109 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* line 10, ../sass/screen.scss */
 body {
+  color: white;
   font: 12px/16px normal "museo-sans", sans-serif;
 }
 
-/* line 14, ../sass/screen.scss */
+/* line 15, ../sass/screen.scss */
 object, embed, video, iframe {
   max-width: 100%;
 }
 
 /* line 17, ../sass/screen.scss */
-#container #content {
-  width: 700px;
-  height: 394px;
-}
-/* line 21, ../sass/screen.scss */
-#container #content #video-wrapper {
-  background: #343434;
+#player-container {
+  height: 448px;
   overflow: hidden;
+  width: 640px;
 }
-/* line 25, ../sass/screen.scss */
-#container #content #video-wrapper #ytVideo, #container #content #video-wrapper .me-plugin, #container #content #video-wrapper .mejs-video {
-  background: #343434;
+/* line 22, ../sass/screen.scss */
+#player-container div.layer {
+  position: absolute;
+  top: 0;
+}
+/* line 27, ../sass/screen.scss */
+#player-container .span12 {
+  margin-left: 0;
+}
+/* line 29, ../sass/screen.scss */
+#player-container #player-layer {
+  background: #202020;
+  z-index: 100;
+}
+/* line 33, ../sass/screen.scss */
+#player-container #player-layer video, #player-container #player-layer .me-plugin {
+  height: 385px;
   position: relative;
   top: 0;
+  width: 640px;
   z-index: 1;
 }
-/* line 32, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap {
-  background: #343434;
+/* line 41, ../sass/screen.scss */
+#player-container #player-layer table#heatmap {
+  background: #323232;
+  min-height: 25px;
   padding: 4px 8px 0px;
-  margin-left: 0;
-  min-height: 26px;
 }
-/* line 39, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap tr td {
+/* line 47, ../sass/screen.scss */
+#player-container #player-layer table#heatmap tr td {
   cursor: pointer;
   display: inline-block;
   height: 10px;
   margin-right: 1px;
-  width: 22.6249px;
+  width: 20.55px;
 }
-/* line 46, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap tr td.rank-8 {
+/* line 54, ../sass/screen.scss */
+#player-container #player-layer table#heatmap tr td.rank-8 {
   background-color: #c7c7c7;
-}
-/* line 47, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap tr td.rank-7 {
-  background-color: #c7c7c7;
-}
-/* line 48, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap tr td.rank-6 {
-  background-color: #c7c7c7;
-}
-/* line 49, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap tr td.rank-5 {
-  background-color: #c7c7c7;
-}
-/* line 50, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap tr td.rank-4 {
-  background-color: #9ebbc8;
-}
-/* line 51, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap tr td.rank-3 {
-  background-color: #76abc3;
-}
-/* line 52, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap tr td.rank-2 {
-  background-color: #3a91b8;
-}
-/* line 53, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap tr td.rank-1 {
-  background-color: #1887b9;
 }
 /* line 55, ../sass/screen.scss */
-#container #content #video-wrapper #heatmap tr td:last-child {
-  margin-right: 0;
+#player-container #player-layer table#heatmap tr td.rank-7 {
+  background-color: #c7c7c7;
+}
+/* line 56, ../sass/screen.scss */
+#player-container #player-layer table#heatmap tr td.rank-6 {
+  background-color: #c7c7c7;
+}
+/* line 57, ../sass/screen.scss */
+#player-container #player-layer table#heatmap tr td.rank-5 {
+  background-color: #c7c7c7;
+}
+/* line 58, ../sass/screen.scss */
+#player-container #player-layer table#heatmap tr td.rank-4 {
+  background-color: #9ebbc8;
+}
+/* line 59, ../sass/screen.scss */
+#player-container #player-layer table#heatmap tr td.rank-3 {
+  background-color: #76abc3;
+}
+/* line 60, ../sass/screen.scss */
+#player-container #player-layer table#heatmap tr td.rank-2 {
+  background-color: #3a91b8;
 }
 /* line 61, ../sass/screen.scss */
-#container #content #video-wrapper #post-comment-form {
-  background: #202020;
-  padding: 4px 8px 0px;
-  margin-left: 0;
-  min-height: 38px;
+#player-container #player-layer table#heatmap tr td.rank-1 {
+  background-color: #1887b9;
 }
-/* line 67, ../sass/screen.scss */
-#container #content #video-wrapper #post-comment-form div.input-prepend {
+/* line 63, ../sass/screen.scss */
+#player-container #player-layer table#heatmap tr td:last-child {
+  margin-right: 0;
+}
+/* line 68, ../sass/screen.scss */
+#player-container #player-layer form#post-comment-form {
+  min-height: 38px;
+  padding: 4px 8px 0px;
+}
+/* line 72, ../sass/screen.scss */
+#player-container #player-layer form#post-comment-form div.input-prepend {
   margin-bottom: 0;
   width: 100%;
 }
-/* line 71, ../sass/screen.scss */
-#container #content #video-wrapper #post-comment-form div.input-prepend span.add-on {
+/* line 76, ../sass/screen.scss */
+#player-container #player-layer form#post-comment-form div.input-prepend span.add-on {
   -webkit-border-radius: 0 0;
   -moz-border-radius: 0 / 0;
   border-radius: 0 / 0;
-  background: none repeat scroll 0 0 #202020;
+  background: #202020;
   border: 0 none;
   color: #BCBCBC;
   font-family: 'museo-sans';
@@ -176,39 +185,32 @@ object, embed, video, iframe {
   padding-right: 0;
   text-align: left;
   text-shadow: none;
-  width: 13%;
+  width: 89px;
 }
-/* line 89, ../sass/screen.scss */
-#container #content #video-wrapper #post-comment-form div.input-prepend span.add-on em {
+/* line 94, ../sass/screen.scss */
+#player-container #player-layer form#post-comment-form div.input-prepend span.add-on em {
   font-size: 14px;
   font-weight: 700;
 }
-/* line 93, ../sass/screen.scss */
-#container #content #video-wrapper #post-comment-form div.input-prepend span.add-on em.current {
+/* line 98, ../sass/screen.scss */
+#player-container #player-layer form#post-comment-form div.input-prepend span.add-on em.current {
   display: inline-block;
   width: 39px;
 }
-/* line 100, ../sass/screen.scss */
-#container #content #video-wrapper #post-comment-form div.input-prepend #id_comment {
+/* line 105, ../sass/screen.scss */
+#player-container #player-layer form#post-comment-form div.input-prepend #id_comment {
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
-  width: 79.3%;
+  width: 77.3%;
 }
-/* line 108, ../sass/screen.scss */
-#container #content #video-wrapper #overlays {
-  position: relative;
-  top: 0;
+/* line 113, ../sass/screen.scss */
+#player-container #buzz-layer {
+  width: 25.32%;
+  z-index: 200;
 }
-/* line 112, ../sass/screen.scss */
-#container #content #video-wrapper #overlays #panel-wrapper {
+/* line 117, ../sass/screen.scss */
+#player-container #buzz-layer div.panel {
   background-color: rgba(31, 31, 31, 0.8);
-  height: 393px;
-  position: absolute;
-  z-index: 100;
-}
-/* line 118, ../sass/screen.scss */
-#container #content #video-wrapper #overlays #panel-wrapper div.panel {
-  height: 100%;
-  width: 100%;
+  height: 385px;
 }

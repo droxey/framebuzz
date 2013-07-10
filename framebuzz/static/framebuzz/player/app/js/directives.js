@@ -11,18 +11,14 @@ angular.module('framebuzz.directives', [])
   })
   .directive('mediaElement', function() {
     return function(scope, element, attrs) {
-        $(element).mediaelementplayer({
+        new MediaElement('video-element', {
             features: ['youtube','progress'],
-            flashName: '../../swf/flashmediaelement.swf',
-            silverlightName: '../../swf/silverlightmediaelement.xap',
-            alwaysShowControls: true,
-            // There's a bug here where commenting and hitting the spacebar will
-            // cause the space to not be entered, and the video to pause.
-            enableKeyboard: false,
-            timerRate: 900,
+            flashName: '../swf/flashmediaelement.swf',
+            silverlightName: '../swf/silverlightmediaelement.xap',
+            timerRate: 500,
+            defaultVideoHeight: '385px',
+            defaultVideoWidth: '640px',
             success: function (media) {
-                videoPlayer = media;
-
                 media.addEventListener('timeupdate', function(e) {
                     var currentTimeHMS = convertSecondsToHMS(media.currentTime);
                     $('span.add-on em.current').text(currentTimeHMS);

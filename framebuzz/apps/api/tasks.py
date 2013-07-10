@@ -97,14 +97,15 @@ def initialize_video_player(video_id, channel):
     logger.info('Running initialize_video_player with the following parameters:')
     logger.info('Video ID: %s | Channel: %s' % (video_id, channel))
 
-    count_per_block = dict()
     rank_per_block = list()
 
     # Get Video.
     video, created = get_or_create_video(video_id)
     seconds_per_block = float(video.duration) / float(TIMELINE_BLOCKS)
     content_type = ContentType.objects.get_for_model(video)
-    comments = MPTTComment.objects.filter(content_type = content_type, object_pk = video.id)
+    comments = MPTTComment.objects.filter(content_type=content_type, 
+                                          object_pk = video.id, 
+                                          is_removed=False)
 
     rank_1 = (float(comments.count()) + SIGNIFICANCE_FACTOR) / 3.0
     rank_2 = rank_1 - (rank_1 / 7.0)
@@ -126,31 +127,27 @@ def initialize_video_player(video_id, channel):
             children = comments.filter(parent__id__in=parent_list)
             finalCount = children.count() + parents.count()
 
-        count_per_block[block] = { 'count': finalCount, 'start': start, 'end': end, }
-
-    for block, comment in count_per_block.items():
-        comment_count = float(comment.get('count'))
-
-        if rank_1 > comment_count >= rank_2:
+        if rank_1 > finalCount >= rank_2:
             class_name = 'rank-1'
-        elif rank_2 > comment_count >= rank_3:
+        elif rank_2 > finalCount >= rank_3:
             class_name = 'rank-2'
-        elif rank_3 > comment_count >= rank_4:
+        elif rank_3 > finalCount >= rank_4:
             class_name = 'rank-3'
-        elif rank_4 > comment_count >= rank_5:
+        elif rank_4 > finalCount >= rank_5:
             class_name = 'rank-4'
-        elif rank_5 > comment_count >= rank_6:
+        elif rank_5 > finalCount >= rank_6:
             class_name = 'rank-5'
-        elif rank_6 > comment_count >= rank_7:
+        elif rank_6 > finalCount >= rank_7:
             class_name = 'rank-6'
-        elif rank_7 > comment_count > 0:
+        elif rank_7 > finalCount > 0:
             class_name = 'rank-7'
         else:
             class_name = 'rank-8'
-        rank_per_block.append({'block': block, 'className': class_name})
+
+        rank_per_block.append({'block': block, 'className': class_name})        
     
-    # Make sure comments are in order.
-    threads = comments.filter(parent = None).order_by('-time')
+    # Get the first parent comment that occurs within .5 seconds.
+    threads = comments.filter(parent=None, is_visible=True).order_by('-time')
     videoSerializer = VideoSerializer(video)
     videoSerialized = JSONRenderer().render(videoSerializer.data)
     threadsSerializer = MPTTCommentSerializer(threads)
