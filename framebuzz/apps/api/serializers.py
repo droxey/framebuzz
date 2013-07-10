@@ -84,30 +84,32 @@ class BaseCommentSerializer(serializers.ModelSerializer):
 
     def get_is_favorite(self, obj):
         request = self.context.get('request')
-
-        if request.user.is_authenticated() and request.user.id != obj.user.id:
-            is_favorite = Action.objects.actor(request.user, 
-                verb='added to favorites', 
-                action_object_object_id=obj.id)
-            return len(is_favorite) > 0
+        if request:
+            if request.user.is_authenticated() and request.user.id != obj.user.id:
+                is_favorite = Action.objects.actor(request.user, 
+                    verb='added to favorites', 
+                    action_object_object_id=obj.id)
+                return len(is_favorite) > 0
 
         return False
 
     def get_is_flagged(self, obj):
         request = self.context.get('request')
 
-        if request.user.is_authenticated() and request.user.id != obj.user.id:
-            flags = CommentFlag.objects.filter(comment = obj, user = request.user, 
-                flag = CommentFlag.SUGGEST_REMOVAL)
-            return len(flags) > 0
+        if request:
+            if request.user.is_authenticated() and request.user.id != obj.user.id:
+                flags = CommentFlag.objects.filter(comment = obj, user = request.user, 
+                    flag = CommentFlag.SUGGEST_REMOVAL)
+                return len(flags) > 0
 
         return False
 
     def get_is_following(self, obj):
         request = self.context.get('request')
 
-        if request.user.is_authenticated() and request.user.id != obj.user.id:
-            return is_following(request.user, obj.user)
+        if request:
+            if request.user.is_authenticated() and request.user.id != obj.user.id:
+                return is_following(request.user, obj.user)
 
         return False
 

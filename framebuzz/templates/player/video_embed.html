@@ -17,6 +17,8 @@
     {% compress css %}
       <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/bootstrap-responsive.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+      <link href="{% static 'framebuzz/player/app/css/mediaelementplayer.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+      <link href="{% static 'framebuzz/player/app/css/mejs-skins.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <!--[if IE]>
           <link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
@@ -52,8 +54,7 @@
       <div class="row-fluid">
         <div id="player-layer" class="layer">
           <div class="row-fluid">
-            <video media-element class="span12" id="video-element" preload="none">
-              <source type="video/youtube" src="{{ video.swf_url }}" />
+            <video media-element class="span12" id="video-element" preload="none" type="video/youtube" src="{{ video.swf_url }}">
             </video>
           </div>
           <div class="row-fluid">
@@ -98,7 +99,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     {% compress js %}
       <script src="{% static 'framebuzz/js/vendor/plugins.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/mediaelement.min.js' %}"></script>
+      <script src="{% static 'framebuzz/player/app/lib/mediaelement-and-player.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/js/app.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/js/services.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/js/controllers.js' %}"></script>
