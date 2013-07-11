@@ -61,7 +61,7 @@
             <table id="heatmap" class="span12" cellpadding="0" cellspacing="0">
               <tr>
                 {% verbatim %}
-                  <td class="{{ block.className }}" ng-repeat="block in heatmap"></td>
+                  <td class="{{ block.className }}" ng-repeat="block in video_instance.heatmap"></td>
                 {% endverbatim %}
               </tr>
             </table>
@@ -72,14 +72,14 @@
               <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot"></p>
               {% verbatim %}
                 <div class="input-prepend input-append">
-                  <span class="add-on"><em class="current">00:00</em><em> / </em>{{ video.time_hms }}</span>
+                  <span class="add-on"><em class="current">00:00</em><em> / </em>{{ video_instance.video.time_hms }}</span>
                   <!--<input type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment...">-->
                   <input type="text" id="id_comment" name="comment" placeholder="Please login to post a comment!" disabled>
                   <button type="submit" id="submit-comment" class="btn"><i class="icon-comment"></i></button>
                 </div>
                 <input type="hidden" id="id_time" name="time" value="0.00">
                 <input type="hidden" id="id_parent" name="parent">
-                <input type="hidden" id="id_object_pk" name="object_pk" value="{{ video.id }}">
+                <input type="hidden" id="id_object_pk" name="object_pk" value="{{ video_instance.video.id }}">
                 <input type="hidden" id="id_content_type" value="core.video" name="content_type">
               {% endverbatim %}
             </form>

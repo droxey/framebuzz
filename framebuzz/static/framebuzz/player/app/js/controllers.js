@@ -5,10 +5,9 @@
 angular.module('framebuzz.controllers', []).
   controller('VideoPlayerCtrl', function($scope, socket) {
     $scope.player = {};
+    $scope.is_initialized = false;
     
-    $scope.video = {};
-    $scope.heatmap = {};
-    $scope.threads = {};
+    $scope.video_instance = {};
 
     socket.onopen(function() {
         socket.send_json({eventType: 'FB_INITIALIZE_VIDEO', channel: SOCK.video_channel});
@@ -20,9 +19,8 @@ angular.module('framebuzz.controllers', []).
         var jsonData = JSON.parse(e.data);
 
         if (jsonData.eventType == 'FB_INITIALIZE_VIDEO') {
-            $scope.video = jsonData.data.video;
-            $scope.heatmap = jsonData.data.heatmap;
-            $scope.threads = jsonData.data.threads;
+            $scope.video_instance = jsonData.data;
+            $scope.is_initialized = true;
         }
         else {
             console.log('Socket received unhandled message.');

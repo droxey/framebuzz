@@ -3,12 +3,15 @@ import json
 import redis
 import datetime
 
+from django.conf import settings
+from django.contrib import auth
 from django.contrib.contenttypes.models import ContentType
+from django.utils import importlib
 from rest_framework.renderers import JSONRenderer
 
 from framebuzz.apps.api.event_types import PLAYER_EVENT_TYPES
 from framebuzz.apps.api.models import MPTTComment, Video, Thumbnail
-from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer
+from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, UserSerializer
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 
 
@@ -66,6 +69,18 @@ def construct_outbound_message(context, event_type, channel):
     r.publish(channel, response)
 
 
+def get_user_by_session_key(session_key):
+    # Get the user from the session_id.
+    engine = importlib.import_module(settings.SESSION_ENGINE)
+
+    class Dummy(object):
+        pass
+
+    django_request = Dummy()
+    django_request.session = engine.SessionStore(session_key)
+    user = auth.get_user(django_request)
+    return user
+
 
 @celery.task(ignore_result=True)
 def initialize_video_player(video_id, channel):
@@ -97,6 +112,8 @@ def initialize_video_player(video_id, channel):
     logger.info('Running initialize_video_player with the following parameters:')
     logger.info('Video ID: %s | Channel: %s' % (video_id, channel))
 
+    session_key = channel.lstrip('/framebuzz/session/').rstrip('/')
+    user = get_user_by_session_key(session_key)
     rank_per_block = list()
 
     # Get Video.
@@ -150,14 +167,22 @@ def initialize_video_player(video_id, channel):
     threads = comments.filter(parent=None, is_visible=True).order_by('-time')
     videoSerializer = VideoSerializer(video)
     videoSerialized = JSONRenderer().render(videoSerializer.data)
-    threadsSerializer = MPTTCommentSerializer(threads)
+    threadsSerializer = MPTTCommentSerializer(threads, context={ 'user': user })
     threadsSerialized = JSONRenderer().render(threadsSerializer.data)
 
     data = { }
     data['video'] = json.loads(videoSerialized)
     data['heatmap'] = rank_per_block
     data['threads'] = json.loads(threadsSerialized)
-    
+    data['is_authenticated'] = isinstance(user, auth.models.AnonymousUser) is False
+
+    if data['is_authenticated']:
+        userSerializer = UserSerializer(user)
+        userSerialized = JSONRenderer().render(userSerializer.data)
+        data['user'] = json.loads(userSerialized)
+    else:
+        data['user'] = {}
+
     outbound_message = dict()
     outbound_message['eventType'] = 'FB_INITIALIZE_VIDEO'
     outbound_message['channel'] = channel
