@@ -138,8 +138,8 @@ class MPTTComment(MPTTModel, Comment):
         minutes = seconds / 60
         seconds -= 60*minutes
         if hours == 0:
-            return "%02d:%02d" % (minutes, seconds)
-        return "%02d:%02d:%02d" % (hours, minutes, seconds)
+            return "%01d:%02d" % (minutes, seconds)
+        return "%01d:%02d:%02d" % (hours, minutes, seconds)
 
     @property
     def formatted_comment(self):

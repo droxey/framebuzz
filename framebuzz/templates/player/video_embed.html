@@ -86,9 +86,23 @@
             </form>
           </div>
         </div>
-        <div id="buzz-layer" class="layer offset2 span4">
+        <div id="buzz-layer" class="layer offset2 span4" ng-cloak>
           <div class="row-fluid">
-            <div id="login-panel" class="panel">
+            <div id="blended-view" class="panel">
+              <ul class="comment-stream">
+                {% verbatim %}
+                  <li ng-repeat="thread in video_instance.threads">                  
+                    <div class="thread">
+                      <div class="header">
+                        <strong class="username">{{ thread.user.username }}</strong>
+                        <strong class="time">{{ thread.time_hms }}</strong>
+                      </div>
+                      <p>{{ thread.comment }}</p>
+                    </div>
+                    <img class="img-circle" src="{{ thread.user.avatar_url }}" alt="" />
+                  </li>
+                {% endverbatim %}
+              </ul>
             </div>
           </div>
         </div>

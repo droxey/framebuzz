@@ -5,6 +5,7 @@
 
 @import "compass/reset";
 @import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
 
 
 body {
@@ -103,20 +104,79 @@ object, embed, video, iframe { max-width: 100%; }
                 }
 
                 #id_comment {
-                    @include border-radius(3px, 3px);
+                    @include border-top-left-radius(3px);
+                    @include border-top-right-radius(0px);
+                    @include border-bottom-left-radius(3px);
+                    @include border-bottom-right-radius(0px);
                     width: 77.3%;
+                }
+
+                #submit-comment {
+                    @include border-top-left-radius(0px);
+                    @include border-top-right-radius(3px);
+                    @include border-bottom-left-radius(0px);
+                    @include border-bottom-right-radius(3px);
+                    background: #616161;
                 }
             }
         }
     }
 
     #buzz-layer {
-        width: 25.32%;
+        margin-left: 399px;
+        width: 237px;
         z-index: 200;
 
         div.panel {
-            background-color: rgba(31, 31, 31, 0.8);
+            background: url('../../img/blended-view-background.png') no-repeat top right;
             height: 385px;
+
+            ul.comment-stream {
+                li {
+                    border-bottom: 1px solid rgba(104, 104, 104, .90);
+                    color: rgba(255, 255, 255, .65);
+                    font-family: 'museo-sans';
+                    font-size: 13px;
+
+                    div.thread {
+                        display: inline-block;
+                        padding: 10px 4px 10px 10px;
+                        width: 168px;
+
+                        div.header {
+                            strong {
+                                display: inline-block;
+                                font-weight: 700;
+                                line-height: 16px;
+                            }
+
+                            strong.username { 
+                                text-align: left; 
+                                width: 135px;
+                            }
+
+                            strong.time { text-align: right; }
+                        }
+
+                        p { 
+                            font-weight: 300;
+                            line-height: 16px;
+                        }
+                    }
+
+                    img {
+                        @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                        display: inline-block;
+                        height: 44px;
+                        opacity: .91;
+                        position: relative;
+                        top: 7px;
+                        width: 44px;
+                    }
+
+                    &:last-child { border-bottom: 0; }
+                }
+            }
         }
     }
 }

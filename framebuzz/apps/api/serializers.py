@@ -47,12 +47,12 @@ class UserSerializer(serializers.ModelSerializer):
             'avatar_url', 'sidebar_url', 'channel',)
 
     def get_avatar_url(self, obj):
-        avatar = get_primary_avatar(obj, size=25)
+        avatar = get_primary_avatar(obj, size=88)
         if avatar:
-            return avatar.avatar_url(25)
+            return avatar.avatar_url(88)
 
         if AVATAR_GRAVATAR_BACKUP:
-            params = {'s': str(25)}
+            params = {'s': str(88)}
 
             if AVATAR_GRAVATAR_DEFAULT and obj:
                 params['d'] = AVATAR_GRAVATAR_DEFAULT
