@@ -61,7 +61,7 @@
             <table id="heatmap" class="span12" cellpadding="0" cellspacing="0">
               <tr>
                 {% verbatim %}
-                  <td class="{{ block.className }}" ng-repeat="block in video_instance.heatmap"></td>
+                  <td class="{{ block.className }}" ng-cloak ng-repeat="block in video_instance.heatmap"></td>
                 {% endverbatim %}
               </tr>
             </table>
@@ -73,8 +73,9 @@
               {% verbatim %}
                 <div class="input-prepend input-append">
                   <span class="add-on"><em class="current">00:00</em><em> / </em>{{ video_instance.video.time_hms }}</span>
-                  <!--<input type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment...">-->
-                  <input type="text" id="id_comment" name="comment" placeholder="Please login to post a comment!" disabled>
+
+                  <input type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." ng-show="video_instance.is_authenticated">
+                  <input type="text" id="id_comment" name="comment" placeholder="Please login to post a comment!" ng-hide="video_instance.is_authenticated" disabled>
                   <button type="submit" id="submit-comment" class="btn"><i class="icon-comment"></i></button>
                 </div>
                 <input type="hidden" id="id_time" name="time" value="0.00">
