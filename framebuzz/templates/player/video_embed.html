@@ -79,7 +79,11 @@
 
                   <input type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." ng-show="videoInstance.is_authenticated">
                   <input type="text" id="id_comment" name="comment" placeholder="Please login to post a comment!" ng-hide="videoInstance.is_authenticated" disabled>
-                  <button type="submit" id="submit-comment" class="btn"><i class="icon-comment"></i></button>
+                  <button type="submit" id="submit-comment" class="btn">
+                {% endverbatim %}
+                    <img src="{% static 'framebuzz/player/app/img/icon-post-comment.png' %}" alt="Post Comment" class="fb-icon-post-comment" />
+                {% verbatim %}
+                  </button>
                 </div>
                 <input type="hidden" id="id_time" name="time" value="0.00">
                 <input type="hidden" id="id_parent" name="parent">
@@ -94,7 +98,7 @@
             <div id="blended-view" class="panel">
               <ul class="comment-stream">
                 {% verbatim %}
-                  <li ng-repeat="thread in videoInstance.threads" ng-hide="thread.time < currentTime">                  
+                  <li ng-repeat="thread in videoInstance.threads" ng-hide="thread.time > currentTime">                  
                     <div class="thread">
                       <div class="header">
                         <strong class="username">{{ thread.user.username }}</strong>
