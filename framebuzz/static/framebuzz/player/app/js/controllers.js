@@ -3,11 +3,35 @@
 /* Controllers */
 
 angular.module('framebuzz.controllers', []).
-  controller('VideoPlayerCtrl', function($scope, socket) {
-    $scope.player = {};
-    $scope.is_initialized = false;
+  controller('VideoPlayerCtrl', function($scope, socket, timeUpdate, safeApply) {
+    // --
+    // MODELS
+    // --
+    $scope.videoInstance = {};
+    $scope.currentTime = 0;
+    $scope.currentTimeHMS = '0:00';
+
+    // --
+    // PUBLIC METHODS
+    // --
     
-    $scope.video_instance = {};
+    $scope.postNewComment = function() {
+
+    };
+
+    $scope.postCommentAction = function() {
+
+    };
+
+    // --
+    // PRIVATE METHODS
+    // --
+
+    $scope.$on('timeUpdate', function() {
+        $scope.currentTime = timeUpdate.message.currentTime;
+        $scope.currentTimeHMS = convertSecondsToHMS($scope.currentTime);
+        safeApply($scope);
+    });
 
     socket.onopen(function() {
         socket.send_json({eventType: 'FB_INITIALIZE_VIDEO', channel: SOCK.video_channel});
@@ -19,8 +43,8 @@ angular.module('framebuzz.controllers', []).
         var jsonData = JSON.parse(e.data);
 
         if (jsonData.eventType == 'FB_INITIALIZE_VIDEO') {
-            $scope.video_instance = jsonData.data;
-            $scope.is_initialized = true;
+            $scope.videoInstance = jsonData.data;
+            safeApply($scope);
         }
         else {
             console.log('Socket received unhandled message.');
@@ -35,4 +59,4 @@ angular.module('framebuzz.controllers', []).
     socket.onclose(function() {
         console.log('Socket is disconnected :(');
     });
-  });
+  }).$inject = ['$scope', 'timeUpdate'];

@@ -13,7 +13,7 @@ angular.module('framebuzz.services', [])
 
             socket.onopen = function() {
                 if (socket.readyState !== SockJS.OPEN) {
-                  throw "Connection NOT open.";
+                  console.log("Connection NOT open.");
                 }
 
                 var args = arguments;
@@ -72,4 +72,35 @@ angular.module('framebuzz.services', [])
         };
 
         return methods;
+    }).service('timeUpdate', function($rootScope) {
+        var broadcaster = {};
+
+        broadcaster.message = '';
+
+        broadcaster.prepForBroadcast = function(msg) {
+            this.message = msg;
+            this.broadcastItem();
+        };
+
+        broadcaster.broadcastItem = function() {
+            $rootScope.$broadcast('timeUpdate');
+        };
+
+        return broadcaster;
+    })
+    .factory('safeApply', function($rootScope) {
+        return function($scope, fn) {
+            var phase = $scope.$root.$$phase;
+            if(phase == '$apply' || phase == '$digest') {
+                if (fn) {
+                    $scope.$eval(fn);
+                }
+            } else {
+                if (fn) {
+                    $scope.$apply(fn);
+                } else {
+                    $scope.$apply();
+                }
+            }
+        }
     });

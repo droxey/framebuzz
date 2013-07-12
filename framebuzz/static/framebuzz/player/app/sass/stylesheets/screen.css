@@ -67,38 +67,44 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 11, ../sass/screen.scss */
+/* line 12, ../sass/screen.scss */
 body {
   color: white;
-  font: 12px/16px normal "museo-sans", sans-serif;
+  font: 12px/16px normal "proxima-nova", sans-serif;
 }
 
-/* line 16, ../sass/screen.scss */
+/* line 17, ../sass/screen.scss */
 object, embed, video, iframe {
   max-width: 100%;
+  outline: 0;
 }
 
-/* line 18, ../sass/screen.scss */
+/* line 22, ../sass/screen.scss */
+.ng-cloak {
+  display: none;
+}
+
+/* line 24, ../sass/screen.scss */
 #player-container {
   height: 448px;
   overflow: hidden;
   width: 640px;
 }
-/* line 23, ../sass/screen.scss */
+/* line 29, ../sass/screen.scss */
 #player-container div.layer {
   position: absolute;
   top: 0;
 }
-/* line 28, ../sass/screen.scss */
+/* line 34, ../sass/screen.scss */
 #player-container .span12 {
   margin-left: 0;
 }
-/* line 30, ../sass/screen.scss */
+/* line 36, ../sass/screen.scss */
 #player-container #player-layer {
   background: #202020;
   z-index: 100;
 }
-/* line 34, ../sass/screen.scss */
+/* line 40, ../sass/screen.scss */
 #player-container #player-layer video, #player-container #player-layer .me-plugin {
   height: 385px;
   position: relative;
@@ -106,13 +112,36 @@ object, embed, video, iframe {
   width: 640px;
   z-index: 1;
 }
-/* line 42, ../sass/screen.scss */
+/* line 50, ../sass/screen.scss */
+#player-container #player-layer div.mejs-video div.mejs-inner div.mejs-controls {
+  background: none;
+  bottom: -26px;
+  height: 23px;
+}
+/* line 55, ../sass/screen.scss */
+#player-container #player-layer div.mejs-video div.mejs-inner div.mejs-controls div.mejs-time-rail {
+  height: 21px;
+  padding-top: 0;
+}
+/* line 59, ../sass/screen.scss */
+#player-container #player-layer div.mejs-video div.mejs-inner div.mejs-controls div.mejs-time-rail span.mejs-time-total {
+  -webkit-border-radius: 1px 1px;
+  -moz-border-radius: 1px / 1px;
+  border-radius: 1px / 1px;
+  height: 11px;
+  margin: 6px 8px 0;
+}
+/* line 64, ../sass/screen.scss */
+#player-container #player-layer div.mejs-video div.mejs-inner div.mejs-controls div.mejs-time-rail span.mejs-time-total .mejs-time-float {
+  display: none !important;
+}
+/* line 71, ../sass/screen.scss */
 #player-container #player-layer table#heatmap {
   background: #323232;
   min-height: 25px;
-  padding: 4px 8px 0px;
+  padding: 6px 8px 0px;
 }
-/* line 48, ../sass/screen.scss */
+/* line 77, ../sass/screen.scss */
 #player-container #player-layer table#heatmap tr td {
   cursor: pointer;
   display: inline-block;
@@ -120,53 +149,68 @@ object, embed, video, iframe {
   margin-right: 1px;
   width: 20.55px;
 }
-/* line 55, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 #player-container #player-layer table#heatmap tr td.rank-8 {
   background-color: #F2F6F8;
 }
-/* line 56, ../sass/screen.scss */
+/* line 85, ../sass/screen.scss */
 #player-container #player-layer table#heatmap tr td.rank-7 {
   background-color: #D8E4E9;
 }
-/* line 57, ../sass/screen.scss */
+/* line 86, ../sass/screen.scss */
 #player-container #player-layer table#heatmap tr td.rank-6 {
   background-color: #BED1DA;
 }
-/* line 58, ../sass/screen.scss */
+/* line 87, ../sass/screen.scss */
 #player-container #player-layer table#heatmap tr td.rank-5 {
   background-color: #9EBBC8;
 }
-/* line 59, ../sass/screen.scss */
+/* line 88, ../sass/screen.scss */
 #player-container #player-layer table#heatmap tr td.rank-4 {
   background-color: #89ADBD;
 }
-/* line 60, ../sass/screen.scss */
+/* line 89, ../sass/screen.scss */
 #player-container #player-layer table#heatmap tr td.rank-3 {
   background-color: #6F9AAE;
 }
-/* line 61, ../sass/screen.scss */
+/* line 90, ../sass/screen.scss */
 #player-container #player-layer table#heatmap tr td.rank-2 {
   background-color: #58879D;
 }
-/* line 62, ../sass/screen.scss */
+/* line 91, ../sass/screen.scss */
 #player-container #player-layer table#heatmap tr td.rank-1 {
   background-color: #497083;
 }
-/* line 64, ../sass/screen.scss */
+/* line 93, ../sass/screen.scss */
+#player-container #player-layer table#heatmap tr td:first-child {
+  -moz-border-radius-topleft: 1px;
+  -webkit-border-top-left-radius: 1px;
+  border-top-left-radius: 1px;
+  -moz-border-radius-bottomleft: 1px;
+  -webkit-border-bottom-left-radius: 1px;
+  border-bottom-left-radius: 1px;
+}
+/* line 98, ../sass/screen.scss */
 #player-container #player-layer table#heatmap tr td:last-child {
+  -moz-border-radius-topright: 1px;
+  -webkit-border-top-right-radius: 1px;
+  border-top-right-radius: 1px;
+  -moz-border-radius-bottomright: 1px;
+  -webkit-border-bottom-right-radius: 1px;
+  border-bottom-right-radius: 1px;
   margin-right: 0;
 }
-/* line 69, ../sass/screen.scss */
+/* line 107, ../sass/screen.scss */
 #player-container #player-layer form#post-comment-form {
   min-height: 38px;
   padding: 4px 8px 0px;
 }
-/* line 73, ../sass/screen.scss */
+/* line 111, ../sass/screen.scss */
 #player-container #player-layer form#post-comment-form div.input-prepend {
   margin-bottom: 0;
   width: 100%;
 }
-/* line 77, ../sass/screen.scss */
+/* line 115, ../sass/screen.scss */
 #player-container #player-layer form#post-comment-form div.input-prepend span.add-on {
   -webkit-border-radius: 0 0;
   -moz-border-radius: 0 / 0;
@@ -174,7 +218,7 @@ object, embed, video, iframe {
   background: #202020;
   border: 0 none;
   color: #BCBCBC;
-  font-family: 'museo-sans';
+  font-family: 'proxima-nova';
   font-size: 12px;
   font-weight: 300;
   letter-spacing: -0.02em;
@@ -187,17 +231,17 @@ object, embed, video, iframe {
   text-shadow: none;
   width: 89px;
 }
-/* line 95, ../sass/screen.scss */
+/* line 133, ../sass/screen.scss */
 #player-container #player-layer form#post-comment-form div.input-prepend span.add-on em {
   font-size: 14px;
   font-weight: 700;
 }
-/* line 99, ../sass/screen.scss */
+/* line 137, ../sass/screen.scss */
 #player-container #player-layer form#post-comment-form div.input-prepend span.add-on em.current {
   display: inline-block;
   width: 39px;
 }
-/* line 106, ../sass/screen.scss */
+/* line 144, ../sass/screen.scss */
 #player-container #player-layer form#post-comment-form div.input-prepend #id_comment {
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -213,7 +257,7 @@ object, embed, video, iframe {
   border-bottom-right-radius: 0px;
   width: 77.3%;
 }
-/* line 114, ../sass/screen.scss */
+/* line 152, ../sass/screen.scss */
 #player-container #player-layer form#post-comment-form div.input-prepend #submit-comment {
   -moz-border-radius-topleft: 0px;
   -webkit-border-top-left-radius: 0px;
@@ -227,53 +271,63 @@ object, embed, video, iframe {
   -moz-border-radius-bottomright: 3px;
   -webkit-border-bottom-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  background: #616161;
+  -webkit-box-shadow: inset 0px 0px 14px 6px rgba(0, 0, 0, 0.13);
+  -moz-box-shadow: inset 0px 0px 14px 6px rgba(0, 0, 0, 0.13);
+  box-shadow: inset 0px 0px 14px 6px rgba(0, 0, 0, 0.13);
+  background: #DEDEDE;
+  border: 0;
+  line-height: 22px;
 }
-/* line 125, ../sass/screen.scss */
+/* line 162, ../sass/screen.scss */
+#player-container #player-layer form#post-comment-form div.input-prepend #submit-comment i.icon-comment {
+  color: #acacac;
+  text-shadow: 1px 3px 0px rgba(0, 0, 0, 0.9);
+}
+/* line 171, ../sass/screen.scss */
 #player-container #buzz-layer {
   margin-left: 399px;
   width: 237px;
   z-index: 200;
 }
-/* line 130, ../sass/screen.scss */
+/* line 176, ../sass/screen.scss */
 #player-container #buzz-layer div.panel {
   background: url("../../img/blended-view-background.png") no-repeat top right;
   height: 385px;
 }
-/* line 135, ../sass/screen.scss */
+/* line 181, ../sass/screen.scss */
 #player-container #buzz-layer div.panel ul.comment-stream li {
   border-bottom: 1px solid rgba(104, 104, 104, 0.9);
   color: rgba(255, 255, 255, 0.65);
-  font-family: 'museo-sans';
+  font-family: 'proxima-nova';
   font-size: 13px;
 }
-/* line 141, ../sass/screen.scss */
+/* line 187, ../sass/screen.scss */
 #player-container #buzz-layer div.panel ul.comment-stream li div.thread {
   display: inline-block;
   padding: 10px 4px 10px 10px;
   width: 168px;
 }
-/* line 147, ../sass/screen.scss */
+/* line 193, ../sass/screen.scss */
 #player-container #buzz-layer div.panel ul.comment-stream li div.thread div.header strong {
   display: inline-block;
   font-weight: 700;
   line-height: 16px;
 }
-/* line 153, ../sass/screen.scss */
+/* line 199, ../sass/screen.scss */
 #player-container #buzz-layer div.panel ul.comment-stream li div.thread div.header strong.username {
   text-align: left;
   width: 135px;
 }
-/* line 158, ../sass/screen.scss */
+/* line 204, ../sass/screen.scss */
 #player-container #buzz-layer div.panel ul.comment-stream li div.thread div.header strong.time {
   text-align: right;
 }
-/* line 161, ../sass/screen.scss */
+/* line 207, ../sass/screen.scss */
 #player-container #buzz-layer div.panel ul.comment-stream li div.thread p {
   font-weight: 300;
   line-height: 16px;
 }
-/* line 167, ../sass/screen.scss */
+/* line 213, ../sass/screen.scss */
 #player-container #buzz-layer div.panel ul.comment-stream li img {
   -webkit-box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset;
   -moz-box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset;
@@ -285,7 +339,7 @@ object, embed, video, iframe {
   top: 7px;
   width: 44px;
 }
-/* line 177, ../sass/screen.scss */
+/* line 223, ../sass/screen.scss */
 #player-container #buzz-layer div.panel ul.comment-stream li:last-child {
   border-bottom: 0;
 }

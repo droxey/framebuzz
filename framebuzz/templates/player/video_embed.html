@@ -2,6 +2,12 @@
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/Article" ng-app="framebuzz">
   <head>
+    {% if close_window %}
+      <script type="text/javascript">
+        window.opener.location.reload();
+        window.close();
+      </script>
+    {% endif %}
     <title>FrameBuzz | {{ video.title }}</title>
     <meta name="description" content="{{ video.description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +26,9 @@
       <link href="{% static 'framebuzz/player/app/css/mediaelementplayer.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/mejs-skins.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+      <!--[if IE 7]>
+        <link href="{% static 'framebuzz/player/app/css/font-awesome-ie7.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+      <![endif]-->
       <!--[if IE]>
           <link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <![endif]-->
@@ -28,12 +37,6 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     {% compress js %}
       <script type="text/javascript">
-        var closeWindow = '{{ close_window|lower }}' == 'true';
-        if (closeWindow) {
-          window.opener.location.reload();
-          window.close();
-        }
-
         // Disable ESC as it breaks SockJS connection.
         // See https://github.com/sockjs/sockjs-client/issues/18.
         window.addEventListener('keydown', function(e) { (e.keyCode == 27 && e.preventDefault()) });
@@ -48,7 +51,7 @@
       </script>
     {% endcompress %}
   </head>
-  <body ng-controller="VideoPlayerCtrl">
+  <body ng-controller="VideoPlayerCtrl" class="ng-cloak">
     {% providers_media_js %}
     <div id="player-container" class="container">
       <div class="row-fluid">
@@ -61,7 +64,7 @@
             <table id="heatmap" class="span12" cellpadding="0" cellspacing="0">
               <tr>
                 {% verbatim %}
-                  <td class="{{ block.className }}" ng-cloak ng-repeat="block in video_instance.heatmap"></td>
+                  <td class="{{ block.className }}" ng-repeat="block in videoInstance.heatmap"></td>
                 {% endverbatim %}
               </tr>
             </table>
@@ -72,26 +75,26 @@
               <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot"></p>
               {% verbatim %}
                 <div class="input-prepend input-append">
-                  <span class="add-on"><em class="current">00:00</em><em> / </em>{{ video_instance.video.time_hms }}</span>
+                  <span class="add-on"><em class="current">{{ currentTimeHMS }}</em><em> / </em>{{ videoInstance.video.time_hms }}</span>
 
-                  <input type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." ng-show="video_instance.is_authenticated">
-                  <input type="text" id="id_comment" name="comment" placeholder="Please login to post a comment!" ng-hide="video_instance.is_authenticated" disabled>
+                  <input type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." ng-show="videoInstance.is_authenticated">
+                  <input type="text" id="id_comment" name="comment" placeholder="Please login to post a comment!" ng-hide="videoInstance.is_authenticated" disabled>
                   <button type="submit" id="submit-comment" class="btn"><i class="icon-comment"></i></button>
                 </div>
                 <input type="hidden" id="id_time" name="time" value="0.00">
                 <input type="hidden" id="id_parent" name="parent">
-                <input type="hidden" id="id_object_pk" name="object_pk" value="{{ video_instance.video.id }}">
+                <input type="hidden" id="id_object_pk" name="object_pk" value="{{ videoInstance.video.id }}">
                 <input type="hidden" id="id_content_type" value="core.video" name="content_type">
               {% endverbatim %}
             </form>
           </div>
         </div>
-        <div id="buzz-layer" class="layer offset2 span4" ng-cloak>
+        <div id="buzz-layer" class="layer offset2 span4">
           <div class="row-fluid">
             <div id="blended-view" class="panel">
               <ul class="comment-stream">
                 {% verbatim %}
-                  <li ng-repeat="thread in video_instance.threads">                  
+                  <li ng-repeat="thread in videoInstance.threads" ng-hide="thread.time < currentTime">                  
                     <div class="thread">
                       <div class="header">
                         <strong class="username">{{ thread.user.username }}</strong>

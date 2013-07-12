@@ -6,14 +6,20 @@
 @import "compass/reset";
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
+@import "compass/css3/images";
 
 
 body {
     color: white;     
-    font: 12px/16px normal "museo-sans", sans-serif;
+    font: 12px/16px normal "proxima-nova", sans-serif;
 }
 
-object, embed, video, iframe { max-width: 100%; }
+object, embed, video, iframe { 
+    max-width: 100%; 
+    outline: 0;
+}
+
+.ng-cloak { display: none; }
 
 #player-container {
     height: 448px;
@@ -39,10 +45,33 @@ object, embed, video, iframe { max-width: 100%; }
             z-index: 1;
         }
 
+        div.mejs-video {
+            div.mejs-inner {
+                div.mejs-controls {
+                    background: none;
+                    bottom: -26px;
+                    height: 23px;
+
+                    div.mejs-time-rail {
+                        height: 21px;
+                        padding-top: 0;
+
+                        span.mejs-time-total {
+                            @include border-radius(1px, 1px);
+                            height: 11px;
+                            margin: 6px 8px 0;
+
+                            .mejs-time-float { display: none !important; }
+                        }
+                    }
+                }
+            }
+        }
+
         table#heatmap {
             background: #323232;
             min-height: 25px;
-            padding: 4px 8px 0px;
+            padding: 6px 8px 0px;
 
             tr {
                 td {
@@ -60,8 +89,17 @@ object, embed, video, iframe { max-width: 100%; }
                     &.rank-3 { background-color: #6F9AAE; }
                     &.rank-2 { background-color: #58879D; }
                     &.rank-1 { background-color: #497083; }
+                    
+                    &:first-child {
+                        @include border-top-left-radius(1px);
+                        @include border-bottom-left-radius(1px);
+                    }
 
-                    &:last-child { margin-right: 0; }
+                    &:last-child { 
+                        @include border-top-right-radius(1px);
+                        @include border-bottom-right-radius(1px);
+                        margin-right: 0; 
+                    }
                 }
             }
         }
@@ -79,7 +117,7 @@ object, embed, video, iframe { max-width: 100%; }
                     background: #202020;
                     border: 0 none;
                     color: #BCBCBC;
-                    font-family: 'museo-sans';
+                    font-family: 'proxima-nova';
                     font-size: 12px;
                     font-weight: 300;
                     letter-spacing: -0.02em;
@@ -116,7 +154,15 @@ object, embed, video, iframe { max-width: 100%; }
                     @include border-top-right-radius(3px);
                     @include border-bottom-left-radius(0px);
                     @include border-bottom-right-radius(3px);
-                    background: #616161;
+                    @include single-box-shadow(rgba(0, 0, 0, .13), 0px, 0px, 14px, 6px, true);
+                    background: #DEDEDE;
+                    border: 0;
+                    line-height: 22px;
+
+                    i.icon-comment {
+                        color: #acacac;
+                        text-shadow: 1px 3px 0px rgba(0, 0, 0, 0.9);
+                    }
                 }
             }
         }
@@ -135,7 +181,7 @@ object, embed, video, iframe { max-width: 100%; }
                 li {
                     border-bottom: 1px solid rgba(104, 104, 104, .90);
                     color: rgba(255, 255, 255, .65);
-                    font-family: 'museo-sans';
+                    font-family: 'proxima-nova';
                     font-size: 13px;
 
                     div.thread {

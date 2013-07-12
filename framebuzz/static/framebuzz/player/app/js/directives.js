@@ -9,7 +9,7 @@ angular.module('framebuzz.directives', [])
       elm.text(version);
     };
   })
-  .directive('mediaElement', function() {
+  .directive('mediaElement', function(timeUpdate) {
     return function(scope, element, attrs) {
         $(element).mediaelementplayer({
             features: ['youtube','progress'],
@@ -19,15 +19,12 @@ angular.module('framebuzz.directives', [])
             // There's a bug here where commenting and hitting the spacebar will
             // cause the space to not be entered, and the video to pause.
             enableKeyboard: false,
-            timerRate: 900,
+            timerRate: 500,
             defaultVideoWidth: '640px',
             defaultVideoHeight: '380px',
             success: function (media) {
-                videoPlayer = media;
- 
                 media.addEventListener('timeupdate', function(e) {
-                    var currentTimeHMS = convertSecondsToHMS(media.currentTime);
-                    $('span.add-on em.current').text(currentTimeHMS);
+                    timeUpdate.prepForBroadcast({ currentTime: media.currentTime });
                 }, false);
  
                 media.addEventListener('playing', function(e) {
@@ -35,8 +32,7 @@ angular.module('framebuzz.directives', [])
                 }, false);
  
                 media.addEventListener('pause', function(e) {
-                    $('.mejs-video').unbind('hover');
-                    $('.mejs-overlay-play').hide().addClass('mejs-overlay-pause').fadeIn(500).show();
+
                 }, false);
             }
         });
