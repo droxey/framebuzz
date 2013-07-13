@@ -1,28 +1,49 @@
 (function($){
   MediaElementPlayer.prototype.buildmuteconvo = function(player, controls, layers, media) {
-    console.log('called!');
-    var button = $('<div class="mejs-button mejs-mute-conversation-button mejs-mute">' +
-                    '<button type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
-                      '<img class="mejs-mute-conversation-icon" src="/static/framebuzz/player/app/img/icon-comment-on.png" alt="Mute Conversation" />' +
-                    '</button>' +
-                  '</div>');
-    button.appendTo(controls);
+    var button =  
+      $('<div class="mejs-button mejs-mute-conversation-button mejs-mute">' +
+          '<button type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
+            '<img class="mejs-mute-conversation-icon" src="/static/framebuzz/player/app/img/icon-comment-on.png" alt="Mute Conversation" />' +
+          '</button>' +
+        '</div>')
+      .appendTo(controls)
+      .click(function() {
+        var buttonImg = button.find('.mejs-mute-conversation-icon');
 
-    console.log(controls);
+        if (button.hasClass('mejs-mute')) {
+          buttonImg.attr('src', '/static/framebuzz/player/app/img/icon-comment-off.png');
+          button.removeClass('mejs-mute').addClass('mejs-unmute');
+        }
+        else {
+          buttonImg.attr('src', '/static/framebuzz/player/app/img/icon-comment-on.png');
+          button.removeClass('mejs-unmute').addClass('mejs-mute');
+        }
+      });
+  };
 
-    var buttonImg = button.find('.mejs-mute-conversation-icon');
+  MediaElementPlayer.prototype.buildshare = function(player, controls, layers, media) {
+    var shareDiv = $('<div class="mejs-share"></div>').appendTo(controls);
 
-    console.log(buttonImg);
+    var button =
+      $('<button class="mejs-share-framebuzz-button" type="button" aria-controls="mep_0" title="Share This FrameBuzz" aria-label="Share This FrameBuzz">' +
+          '<img src="/static/framebuzz/player/app/img/icon-share.png" alt="Share This FrameBuzz" />' +
+        '</button>')
+      .appendTo(shareDiv)
+      .click(function() {
+        alert('Not implemented yet!');
+      });
+  };
 
-    button.click(function() {
-      if (button.hasClass('mejs-mute')) {
-        buttonImg.attr('src', '/static/framebuzz/player/app/img/icon-comment-on.png');
-        buttonImg.parent().parent().removeClass('mejs-mute').addClass('mejs-unmute');
-      }
-      else {
-        buttonImg.attr('src', '/static/framebuzz/player/app/img/icon-comment-off.png');
-        buttonImg.parent().parent().removeClass('mejs-unmute').addClass('mejs-mute');
-      }
-    });
+  MediaElementPlayer.prototype.buildprivateconvo = function(player, controls, layers, media) {
+    var shareDiv = controls.find('div.mejs-share');
+
+    var button =
+      $('<button class="mejs-private-convo-button" type="button" aria-controls="mep_0" title="Start a Private Conversation" aria-label="Start a Private Conversation">' +
+          '<img src="/static/framebuzz/player/app/img/icon-plus.png" alt="Start a Private Conversation" />' +
+        '</button>')
+      .appendTo(shareDiv)
+      .click(function() {
+        alert('Not implemented yet!');
+      });
   };
 })(jQuery);
