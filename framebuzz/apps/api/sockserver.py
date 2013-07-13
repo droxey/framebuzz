@@ -106,4 +106,5 @@ class ConnectionHandler(SockJSConnection):
             self.client.unsubscribe(self.session_channel)
             self.client.unsubscribe(self.user_channel)
             self.client.unsubscribe(self.video_channel)
+
             self.client.disconnect()

@@ -9,7 +9,7 @@ angular.module('framebuzz.controllers', []).
     // --
     $scope.videoInstance = {};
     $scope.currentTime = 0;
-    $scope.currentTimeHMS = '0:00';
+    $scope.currentTimeHMS = '00:00';
 
     // --
     // PUBLIC METHODS
@@ -29,7 +29,7 @@ angular.module('framebuzz.controllers', []).
 
     $scope.$on('timeUpdate', function() {
         $scope.currentTime = timeUpdate.message.currentTime;
-        $scope.currentTimeHMS = convertSecondsToHMS($scope.currentTime);
+        $scope.currentTimeHMS = mejs.Utility.secondsToTimeCode($scope.currentTime);
         safeApply($scope);
     });
 

@@ -12,7 +12,7 @@ angular.module('framebuzz.directives', [])
   .directive('mediaElement', function(timeUpdate) {
     return function(scope, element, attrs) {
         $(element).mediaelementplayer({
-            features: ['youtube','progress'],
+            features: ['youtube', 'progress', 'volume', 'muteconvo'],
             flashName: '../swf/flashmediaelement.swf',
             silverlightName: '../swf/silverlightmediaelement.xap',
             alwaysShowControls: true,
@@ -22,7 +22,7 @@ angular.module('framebuzz.directives', [])
             timerRate: 500,
             defaultVideoWidth: '640px',
             defaultVideoHeight: '380px',
-            success: function (media) {
+            success: function(media) {
                 media.addEventListener('timeupdate', function(e) {
                     timeUpdate.prepForBroadcast({ currentTime: media.currentTime });
                 }, false);

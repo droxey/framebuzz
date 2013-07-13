@@ -49,19 +49,62 @@ object, embed, video, iframe {
             div.mejs-inner {
                 div.mejs-controls {
                     background: none;
-                    bottom: -26px;
-                    height: 23px;
+                    bottom: -25px;
+                    height: 50px;
+                    z-index: 10;
 
                     div.mejs-time-rail {
                         height: 21px;
                         padding-top: 0;
+                        position: relative;
+                        top: 29px;
 
                         span.mejs-time-total {
                             @include border-radius(1px, 1px);
                             height: 11px;
-                            margin: 6px 8px 0;
+                            margin: 5px 8px 0;
 
                             .mejs-time-float { display: none !important; }
+                        }
+                    }
+
+                    div.mejs-button {
+                        position: absolute;
+                        width: 35px;
+
+                        button {
+                            background: none;
+                            background-position: 0 0;
+                            margin: 1px 8px;                    
+
+                            img {
+                                height: 100%;
+                                width: 100%;
+                            }
+                        }
+
+                        div.mejs-volume-slider {
+                            left: 8px;
+                            top: -118px;
+                        }
+
+                        &.mejs-volume-button {
+                            left: 0;
+
+                            button {
+                                height: 20px;
+                                width: 25px;
+                            }
+                        }
+                        
+                        &.mejs-mute-conversation-button {
+                            left: 43px;
+
+                            button {
+                                margin-top: 0;
+                                height: 20px;
+                                width: 23px;
+                            }
                         }
                     }
                 }
@@ -154,7 +197,7 @@ object, embed, video, iframe {
                     @include border-top-right-radius(3px);
                     @include border-bottom-left-radius(0px);
                     @include border-bottom-right-radius(3px);
-                    @include single-box-shadow(rgba(0, 0, 0, .13), 0px, 0px, 14px, 6px, true);
+                    @include single-box-shadow(rgba(0, 0, 0, .13), 0px, 0px, 14px, 6px, inset);
                     background: #686868;
                     border: 0;
                     line-height: 12px;
@@ -176,8 +219,11 @@ object, embed, video, iframe {
         z-index: 200;
 
         div.panel {
-            background: url('../../img/blended-view-background.png') no-repeat top right;
-            height: 385px;
+            @include border-bottom-left-radius(3px);
+            @include border-bottom-right-radius(3px);
+            @include single-box-shadow(rgba(10, 10, 10, 0.8), 0px, 0px, 30px, 0px, inset);
+            background: rgba(41, 41, 41, 0.6);
+            height: 270px;
 
             ul.comment-stream {
                 li {

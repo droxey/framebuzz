@@ -1321,18 +1321,7 @@ mejs.HtmlMediaElementShim = {
 				pluginMediaElement.vimeoid = playback.url.substr(playback.url.lastIndexOf('/')+1);
 				
 				container.innerHTML ='<iframe src="http://player.vimeo.com/video/' + pluginMediaElement.vimeoid + '?portrait=0&byline=0&title=0" width="' + width +'" height="' + height +'" frameborder="0" class="mejs-shim"></iframe>';
-				
-				/*
-				container.innerHTML =
-					'<object width="' + width + '" height="' + height + '" class="mejs-shim">' +
-						'<param name="allowfullscreen" value="true" />' +
-						'<param name="allowscriptaccess" value="always" />' +
-						'<param name="flashvars" value="api=1" />' + 
-						'<param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=' + pluginMediaElement.vimeoid  + '&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" />' +
-						'<embed src="//vimeo.com/moogaloop.swf?api=1&amp;clip_id=' + pluginMediaElement.vimeoid + '&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="' + width + '" height="' + height + '" class="mejs-shim"></embed>' +
-					'</object>';
-					*/
-									
+							
 				break;			
 		}
 		// hide original element
@@ -1353,34 +1342,6 @@ mejs.HtmlMediaElementShim = {
 		for (m in mejs.HtmlMediaElement) {
 			htmlMediaElement[m] = mejs.HtmlMediaElement[m];
 		}
-
-		/*
-		Chrome now supports preload="none"
-		if (mejs.MediaFeatures.isChrome) {
-		
-			// special case to enforce preload attribute (Chrome doesn't respect this)
-			if (preload === 'none' && !autoplay) {
-			
-				// forces the browser to stop loading (note: fails in IE9)
-				htmlMediaElement.src = '';
-				htmlMediaElement.load();
-				htmlMediaElement.canceledPreload = true;
-
-				htmlMediaElement.addEventListener('play',function() {
-					if (htmlMediaElement.canceledPreload) {
-						htmlMediaElement.src = playback.url;
-						htmlMediaElement.load();
-						htmlMediaElement.play();
-						htmlMediaElement.canceledPreload = false;
-					}
-				}, false);
-			// for some reason Chrome forgets how to autoplay sometimes.
-			} else if (autoplay) {
-				htmlMediaElement.load();
-				htmlMediaElement.play();
-			}
-		}
-		*/
 
 		// fire success code
 		options.success(htmlMediaElement, htmlMediaElement);
@@ -1509,15 +1470,6 @@ mejs.YouTubeApi = {
 	createFlash: function(settings) {
 		
 		this.flashPlayers[settings.pluginId] = settings;
-		
-		/*
-		settings.container.innerHTML =
-			'<object type="application/x-shockwave-flash" id="' + settings.pluginId + '" data="//www.youtube.com/apiplayer?enablejsapi=1&amp;playerapiid=' + settings.pluginId  + '&amp;version=3&amp;autoplay=0&amp;controls=0&amp;modestbranding=1&loop=0" ' +
-				'width="' + settings.width + '" height="' + settings.height + '" style="visibility: visible; " class="mejs-shim">' +
-				'<param name="allowScriptAccess" value="always">' +
-				'<param name="wmode" value="transparent">' +
-			'</object>';
-		*/
 
 		var specialIEContainer,
 			youtubeUrl = '//www.youtube.com/apiplayer?enablejsapi=1&amp;playerapiid=' + settings.pluginId  + '&amp;version=3&amp;autoplay=0&amp;controls=0&amp;modestbranding=1&loop=0';
@@ -3423,7 +3375,9 @@ if (typeof jQuery != 'undefined') {
 				
 				// vertical version
 				$('<div class="mejs-button mejs-volume-button mejs-mute">'+
-					'<button type="button" aria-controls="' + t.id + '" title="' + t.options.muteText + '" aria-label="' + t.options.muteText + '"></button>'+
+					'<button type="button" aria-controls="' + t.id + '" title="' + t.options.muteText + '" aria-label="' + t.options.muteText + '">' +
+						'<img class="mejs-volume-icon" src="/static/framebuzz/player/app/img/icon-volume-on.png" alt="Mute Toggle" />' +
+					'</button>'+
 					'<div class="mejs-volume-slider">'+ // outer background
 						'<div class="mejs-volume-total"></div>'+ // line background
 						'<div class="mejs-volume-current"></div>'+ // current volume
@@ -3435,6 +3389,7 @@ if (typeof jQuery != 'undefined') {
 			volumeTotal = t.container.find('.mejs-volume-total, .mejs-horizontal-volume-total'),
 			volumeCurrent = t.container.find('.mejs-volume-current, .mejs-horizontal-volume-current'),
 			volumeHandle = t.container.find('.mejs-volume-handle, .mejs-horizontal-volume-handle'),
+			volumeIcon = t.container.find('.mejs-volume-icon');
 
 			positionVolumeHandle = function(volume, secondTry) {
 
@@ -3452,8 +3407,10 @@ if (typeof jQuery != 'undefined') {
 				// ajust mute button style
 				if (volume == 0) {
 					mute.removeClass('mejs-mute').addClass('mejs-unmute');
+					volumeIcon.attr('src', '/static/framebuzz/player/app/img/icon-volume-off.png');
 				} else {
 					mute.removeClass('mejs-unmute').addClass('mejs-mute');
+					volumeIcon.attr('src', '/static/framebuzz/player/app/img/icon-volume-on.png');
 				}				
 
 				// position slider 
