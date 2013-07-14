@@ -129,6 +129,7 @@ class MPTTComment(MPTTModel, Comment):
     time = models.FloatField(default=0.000)
 
     is_visible = models.BooleanField(default=True)
+    has_hidden_siblings = models.BooleanField(default=False)
 
     @property
     def timeInHMS(self):
@@ -183,17 +184,29 @@ class MPTTComment(MPTTModel, Comment):
                                                             parent=None, 
                                                             time__gte=start, 
                                                             time__lte=end,
-                                                            is_removed=False, 
-                                                            is_visible=True).order_by('time')
+                                                            is_removed=False).order_by('time')
+            if self.pk:
+                comments_in_range = comments_in_range.exclude(id__in=[self.id,])
+
+            visible_comments = comments_in_range.filter(is_visible=True)
+
             print comments_in_range
-            if len(comments_in_range) > 0:
-                first_comment = comments_in_range[0]
+
+            if len(visible_comments) > 0:
+                first_comment = visible_comments[0]
                 visibility = (first_comment.time > self.time)
 
                 if visibility:
+                    self.has_hidden_siblings = True
+                    self.is_visible = True
+
                     first_comment.is_visible = False
                     first_comment.save()
                 else:
                     self.is_visible = False
+                    self.has_hidden_siblings = False
+            else:
+                self.is_visible = True
+                self.has_hidden_siblings = len(comments_in_range) >= 1
 
         super(MPTTComment, self).save(*args, **kwargs)

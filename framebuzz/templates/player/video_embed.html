@@ -113,6 +113,11 @@
                         <strong class="time">{{ thread.time_hms }}</strong>
                       </div>
                       <p>{{ thread.comment }}</p>
+                      {% endverbatim %}
+                        <button type="button" class="show-thread-siblings" data-ng-show="thread.has_hidden_siblings">
+                          <img src="{% static 'framebuzz/player/app/img/icon-dots.png' %}" alt="View More" />
+                        </button>
+                      {% verbatim %}
                     </div>
                     <img class="img-circle" src="{{ thread.user.avatar_url }}" alt="" />
                   </li>

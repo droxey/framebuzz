@@ -7,8 +7,8 @@ class FrameBuzzVideoAdmin(admin.ModelAdmin):
     list_filter = ('added_by', 'added_on',)
 
 class MPTTCommentAdmin(admin.ModelAdmin):
-    list_filter = ('object_pk', 'content_type', 'user', 'is_visible',)
-    list_display = ('comment', 'object_pk', 'time', 'parent', 'user', 'is_visible',)
+    list_filter = ('object_pk', 'content_type', 'user', 'is_visible', 'has_hidden_siblings',)
+    list_display = ('comment', 'object_pk', 'time', 'parent', 'user', 'is_visible', 'has_hidden_siblings',)
 
 class SessionAdmin(admin.ModelAdmin):
     list_display = ('session_key', 'expire_date',)
