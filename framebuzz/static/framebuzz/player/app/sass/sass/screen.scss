@@ -269,7 +269,7 @@ object, embed, video, iframe {
     #buzz-layer {
         margin-left: 399px;
         width: 237px;
-        z-index: 200;
+        z-index: 100;
 
         div.panel {
             @include border-bottom-left-radius(3px);
@@ -277,6 +277,23 @@ object, embed, video, iframe {
             @include single-box-shadow(rgba(0, 0, 0, 0.5), 0px, 0px, 118px, 0px, inset);
             background: rgba(50, 50, 50, 0.7);
             height: 270px;
+
+            a.panel-close {
+                background: rgba(61, 61, 61, 1.0);
+                display: block;
+                height: 22px;
+                left: -12px;
+                position: absolute;
+                top: 3px;
+                width: 22px;
+                z-index: 110;
+
+                img {
+                    height: 11px;
+                    margin: 5px;
+                    width: 12px;
+                }
+            }
 
             ul.comment-stream {
                 li {
@@ -287,7 +304,7 @@ object, embed, video, iframe {
 
                     div.thread {
                         display: inline-block;
-                        padding: 10px 4px 10px 10px;
+                        padding: 10px 4px 10px 12px;
                         width: 168px;
 
                         div.header {
