@@ -420,7 +420,7 @@ object, embed, video, iframe {
   position: absolute;
   top: 3px;
   width: 22px;
-  z-index: 110;
+  z-index: 120;
 }
 /* line 291, ../sass/screen.scss */
 #player-container #buzz-layer div.panel a.panel-close img {
@@ -428,45 +428,66 @@ object, embed, video, iframe {
   margin: 5px;
   width: 12px;
 }
-/* line 299, ../sass/screen.scss */
-#player-container #buzz-layer div.panel ul.comment-stream li {
+/* line 298, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable {
+  height: 270px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 237px;
+  z-index: 110;
+}
+/* line 306, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable div.ps-scrollbar-y {
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  right: 0px !important;
+  width: 6px;
+}
+/* line 312, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream {
+  height: 270px;
+}
+/* line 315, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li {
   border-bottom: 1px solid rgba(104, 104, 104, 0.9);
   color: rgba(255, 255, 255, 0.65);
   font-family: 'proxima-nova';
   font-size: 13px;
+  min-height: 58px;
 }
-/* line 305, ../sass/screen.scss */
-#player-container #buzz-layer div.panel ul.comment-stream li div.thread {
+/* line 322, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread {
   display: inline-block;
-  min-height: 50px;
   padding: 10px 2px 0 14px;
   vertical-align: top;
   width: 168px;
 }
-/* line 313, ../sass/screen.scss */
-#player-container #buzz-layer div.panel ul.comment-stream li div.thread div.header strong {
+/* line 329, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread div.header strong {
   display: inline-block;
   font-weight: 700;
   line-height: 16px;
 }
-/* line 319, ../sass/screen.scss */
-#player-container #buzz-layer div.panel ul.comment-stream li div.thread div.header strong.username {
+/* line 335, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread div.header strong.username {
   text-align: left;
   width: 135px;
 }
-/* line 324, ../sass/screen.scss */
-#player-container #buzz-layer div.panel ul.comment-stream li div.thread div.header strong.time {
+/* line 340, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread div.header strong.time {
   text-align: right;
 }
-/* line 327, ../sass/screen.scss */
-#player-container #buzz-layer div.panel ul.comment-stream li div.thread p {
+/* line 343, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread p {
   display: inline-block;
   font-weight: 300;
   line-height: 16px;
   width: 135px;
 }
-/* line 334, ../sass/screen.scss */
-#player-container #buzz-layer div.panel ul.comment-stream li div.thread button.show-thread-siblings {
+/* line 350, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread button.show-thread-siblings {
   background: none;
   border: 0;
   bottom: 6px;
@@ -478,13 +499,13 @@ object, embed, video, iframe {
   vertical-align: text-bottom;
   width: 19px;
 }
-/* line 346, ../sass/screen.scss */
-#player-container #buzz-layer div.panel ul.comment-stream li div.thread button.show-thread-siblings img {
+/* line 362, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread button.show-thread-siblings img {
   height: 6px;
   width: 19px;
 }
-/* line 353, ../sass/screen.scss */
-#player-container #buzz-layer div.panel ul.comment-stream li img.img-circle {
+/* line 369, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li img.img-circle {
   -webkit-box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset;
   -moz-box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset;
   box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset;
@@ -495,7 +516,7 @@ object, embed, video, iframe {
   top: 7px;
   width: 44px;
 }
-/* line 363, ../sass/screen.scss */
-#player-container #buzz-layer div.panel ul.comment-stream li:last-child {
+/* line 379, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li:last-child {
   border-bottom: 0;
 }

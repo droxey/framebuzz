@@ -26,8 +26,7 @@ class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ('id', 'video_id', 'title', 'duration', 'youtube_url',
-            'swf_url', 'uploaded', 'channel', 'time_hms',)
+        fields = ('id', 'video_id', 'title', 'duration', 'swf_url', 'time_hms',)
 
     def get_channel(self, obj):
         return '/framebuzz/video/%s' % obj.video_id
@@ -38,13 +37,10 @@ class VideoSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField('get_avatar_url')
-    sidebar_url = serializers.SerializerMethodField('get_sidebar_url')
-    channel = serializers.SerializerMethodField('get_channel')
 
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'username', 'email',
-            'avatar_url', 'sidebar_url', 'channel',)
+        fields = ('id', 'username', 'avatar_url',)
 
     def get_avatar_url(self, obj):
         avatar = get_primary_avatar(obj, size=88)
@@ -62,13 +58,6 @@ class UserSerializer(serializers.ModelSerializer):
             return urlparse.urljoin(AVATAR_GRAVATAR_BASE_URL, path)
 
         return get_default_avatar_url()
-
-    def get_sidebar_url(self, obj):
-        #return reverse('user-sidebar', kwargs={'username': obj.username})
-        return None
-
-    def get_channel(self, obj):
-        return 'channels/user/%s' % obj.username
 
 
 class BaseCommentSerializer(serializers.ModelSerializer):
@@ -121,7 +110,6 @@ class MPTTCommentReplySerializer(BaseCommentSerializer):
 
 
 class MPTTCommentSerializer(BaseCommentSerializer):
-    content_object = VideoSerializer(read_only=True)
     replies = MPTTCommentReplySerializer(source='get_children', read_only=True)
     comment = serializers.WritableField(source='comment')
     parent = serializers.PrimaryKeyRelatedField(source='parent', required=False)
@@ -131,8 +119,8 @@ class MPTTCommentSerializer(BaseCommentSerializer):
         model = MPTTComment
         depth = 4
         fields = ('id', 'user', 'comment', 'parent', 'submit_date',
-            'content_object', 'replies', 'time_hms', 'time', 'is_favorite',
-            'is_flagged', 'is_following', 'is_visible', 'has_hidden_siblings',)
+                  'replies', 'time_hms', 'time', 'is_favorite',
+                  'is_flagged', 'is_following', 'is_visible', 'has_hidden_siblings',)
 
     def get_time_hms(self, obj):
         return obj.timeInHMS

@@ -48,7 +48,6 @@ class ConnectionHandler(SockJSConnection):
         Connect the user to the Redis server,
         and subscribe them to all the nessessary channels.
         """
-        print 'on_open'
         self.get_current_user(info)
 
     def on_message(self, msg):

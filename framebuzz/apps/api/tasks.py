@@ -189,15 +189,21 @@ def post_new_thread(context):
     if thread_data:
         video = Video.objects.get(video_id=video_id)
 
-        comment_form = MPTTCommentForm(video, data=context.get('data', None))
+        comment_form = MPTTCommentForm(video, data=thread_data)
         if comment_form.is_valid():
             data = comment_form.get_comment_create_data()
             data['user'] = user
             comment = MPTTComment(**data)
             comment.save()
 
-    outbound_message = dict()
-    outbound_message[EVENT_TYPE_KEY] = 'FB_POST_NEW_THREAD'
-    outbound_message[CHANNEL_KEY] = channel
-    outbound_message[DATA_KEY] = data
-    return outbound_message
+
+    if comment:
+        threadSerializer = MPTTCommentSerializer(comment, context={ 'user': user })
+        threadSerialized = JSONRenderer().render(threadSerializer.data)
+        
+        outbound_message = dict()
+        outbound_message[EVENT_TYPE_KEY] = 'FB_POST_NEW_THREAD'
+        outbound_message[CHANNEL_KEY] = channel
+        outbound_message[DATA_KEY] = { 'thread': json.loads(threadSerialized) }
+        
+        return outbound_message
