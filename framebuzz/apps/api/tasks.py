@@ -1,7 +1,6 @@
 import celery
 import json
 import redis
-import datetime
 
 from django.conf import settings
 from django.contrib import auth
@@ -9,33 +8,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils import importlib
 from rest_framework.renderers import JSONRenderer
 
-from framebuzz.apps.api.event_types import PLAYER_EVENT_TYPES
-from framebuzz.apps.api.models import MPTTComment, Video, Thumbnail
+from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY, TIMELINE_BLOCKS, SIGNIFICANCE_FACTOR
+from framebuzz.apps.api.models import MPTTComment
 from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, UserSerializer
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 
 
-TIMELINE_BLOCKS = 29
-SIGNIFICANCE_FACTOR = 20.0
-
-
-@celery.task
-def parse_inbound_message(message):
-    logger = parse_inbound_message.get_logger()
-    logger.info('Running parse_inbound_message.')
-
-    message_json = json.loads(message)
-    event_type = message_json.get('eventType', None)
-    channel = message_json.get('channel', None)
-
-    if event_type:
-        pass
-    
-    return 0
-
-
-@celery.task
-def construct_outbound_message(context, event_type, channel):
+@celery.task(ignore_result=True)
+def message_outbound(message):
     """
     Constructs a JSON message and sends it to the 
     proper channel via Redis.
@@ -46,30 +26,29 @@ def construct_outbound_message(context, event_type, channel):
         'channel': '/framebuzz/users/droxey',
         'data': {
             'subscribed': true
-        },
-        'timestamp': 2013-07-07T19:20:30.45+01:00
+        }
     }
     """
-
-    logger = construct_outbound_message.get_logger()
-    logger.info('Running construct_outbound_message with the following parameters:')
+    logger = message_outbound.get_logger()
+    
+    event_type = message.get(EVENT_TYPE_KEY, None)
+    channel = message.get(CHANNEL_KEY, None)
+    context = message.get(DATA_KEY, None)
+    
+    logger.info('Running message_outbound with the following parameters:')
     logger.info('EventType: %s | Channel: %s | Context: %s' % (event_type, channel, context))
 
-    outbound_message = dict()
-    outbound_message['eventType'] = event_type
-    outbound_message['channel'] = channel
-    outbound_message['data'] = context
-    outbound_message['timestamp'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S +00:00")
-    
-    response = json.dumps(outbound_message)
-    logger.info('Outbound Message: %s' % response)
-
     r = redis.StrictRedis(host='localhost', port=6379, db=0)
-    response = json.dumps(outbound_message)
+    response = json.dumps(message)
     r.publish(channel, response)
 
 
-def get_user_by_session_key(session_key):
+@celery.task
+def get_user_by_session_key(session_key, extra_context=None):
+    logger = get_user_by_session_key.get_logger()
+    logger.info('Running get_user_by_session_key with the following parameters:')
+    logger.info('Session Key: %s | Extra Context: %s' % (session_key, extra_context))
+    
     # Get the user from the session_id.
     engine = importlib.import_module(settings.SESSION_ENGINE)
 
@@ -79,11 +58,15 @@ def get_user_by_session_key(session_key):
     django_request = Dummy()
     django_request.session = engine.SessionStore(session_key)
     user = auth.get_user(django_request)
+
+    if extra_context:
+        extra_context['user'] = user
+        return extra_context
     return user
 
 
-@celery.task(ignore_result=True)
-def initialize_video_player(video_id, channel):
+@celery.task
+def initialize_video_player(context):
     '''
     The general idea is to show a warmer color for areas of the video with more comment activity while accounting for videos with fewer comments.
 
@@ -107,14 +90,16 @@ def initialize_video_player(video_id, channel):
 
     For each bucket, it's assigned a rank number based upon the values C1, C2, C3 etc. Each rank number maps to a background color for the bucket.
     '''
-
     logger = initialize_video_player.get_logger()
+    rank_per_block = list()
+    video_id = context.get('video_id', None)
+    channel = context.get('outbound_channel', None)
+    user = context.get('user', None)
+    
+    
+
     logger.info('Running initialize_video_player with the following parameters:')
     logger.info('Video ID: %s | Channel: %s' % (video_id, channel))
-
-    session_key = channel.lstrip('/framebuzz/session/').rstrip('/')
-    user = get_user_by_session_key(session_key)
-    rank_per_block = list()
 
     # Get Video.
     video, created = get_or_create_video(video_id)
@@ -184,14 +169,7 @@ def initialize_video_player(video_id, channel):
         data['user'] = {}
 
     outbound_message = dict()
-    outbound_message['eventType'] = 'FB_INITIALIZE_VIDEO'
-    outbound_message['channel'] = channel
-    outbound_message['data'] = data
-    outbound_message['timestamp'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S +00:00")
-    
-    response = json.dumps(outbound_message)
-    logger.info('Outbound Message: %s' % response)
-
-    r = redis.StrictRedis(host='localhost', port=6379, db=0)
-    response = json.dumps(outbound_message)
-    r.publish(channel, response)
+    outbound_message[EVENT_TYPE_KEY] = 'FB_INITIALIZE_VIDEO'
+    outbound_message[CHANNEL_KEY] = channel
+    outbound_message[DATA_KEY] = data
+    return outbound_message

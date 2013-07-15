@@ -3,8 +3,8 @@ import json
 import tornadoredis
 import tornado.gen
 
-from framebuzz.apps.api import tasks
-from framebuzz.apps.api.event_types import PLAYER_EVENT_TYPES
+from celery import chain
+from framebuzz.apps.api import tasks, EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from sockjs.tornado import SockJSConnection
 
 CONNECTION_POOL = tornadoredis.ConnectionPool(max_connections=500,
@@ -53,22 +53,28 @@ class ConnectionHandler(SockJSConnection):
     def on_message(self, msg):
         """
         This is a message broadcast from the client.
-        Pass it on to Celery as these requests may generage
+        Pass it on to Celery as these requests may generate
         large Django queries and we don't want to block the server.       
         """
         json_message = json.loads(msg)
-        eventType = json_message.get('eventType', None)
+        event_type = json_message.get(EVENT_TYPE_KEY, None)
+        channel = json_message.get(CHANNEL_KEY, None)
+        data = json_message.get(DATA_KEY, None)
 
-        if eventType:
-            if eventType == PLAYER_EVENT_TYPES[0]:
-                self.video_channel = json_message.get('channel', None)
-                if self.video_channel:
-                    video_id = self.video_channel.lstrip('/framebuzz/video/').rstrip('/')
-                    json_message['video_id'] = video_id
-                    tasks.initialize_video_player.delay(video_id=video_id, channel=self.session_channel)
-                    self.listen()
-        else:
-            tasks.parse_inbound_message.delay(message=msg)
+        if event_type and channel:
+            if event_type == 'FB_INITIALIZE_VIDEO':
+                self.video_channel = channel
+                self.listen()
+
+                video_id = self.video_channel.lstrip('/framebuzz/video/').rstrip('/')
+                session_key = self.session_channel.lstrip('/framebuzz/session/').rstrip('/')
+                
+                test = tasks.get_user_by_session_key.s(session_key=session_key, extra_context={'video_id': video_id, 'outbound_channel': self.session_channel}) | tasks.initialize_video_player.s() | tasks.message_outbound.s()
+                test.apply_async()
+            elif event_type == 'FB_POST_NEW_THREAD':
+                pass
+            else:
+                pass
         
     def on_chan_message(self, msg):
         """

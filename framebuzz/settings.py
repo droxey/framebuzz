@@ -335,6 +335,7 @@ TEMPLATED_EMAIL_DJANGO_SUBJECTS = {
 # Django-Celery Settings:
 BROKER_URL = 'redis://localhost:6379/0'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
+CELERY_DISABLE_RATE_LIMITS = True
 
 # Django-Celery-Email Settings:
 CELERY_EMAIL_TASK_CONFIG = {
