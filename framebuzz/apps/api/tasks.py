@@ -9,7 +9,8 @@ from django.utils import importlib
 from rest_framework.renderers import JSONRenderer
 
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY, TIMELINE_BLOCKS, SIGNIFICANCE_FACTOR
-from framebuzz.apps.api.models import MPTTComment
+from framebuzz.apps.api.forms import MPTTCommentForm
+from framebuzz.apps.api.models import MPTTComment, Video
 from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, UserSerializer
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 
@@ -95,7 +96,7 @@ def initialize_video_player(context):
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
     user = context.get('user', None)
-    
+
     
 
     logger.info('Running initialize_video_player with the following parameters:')
@@ -170,6 +171,33 @@ def initialize_video_player(context):
 
     outbound_message = dict()
     outbound_message[EVENT_TYPE_KEY] = 'FB_INITIALIZE_VIDEO'
+    outbound_message[CHANNEL_KEY] = channel
+    outbound_message[DATA_KEY] = data
+    return outbound_message
+
+
+@celery.task
+def post_new_thread(context):
+    logger = post_new_thread.get_logger()
+    thread_data = context.get(DATA_KEY, None)
+    comment = None
+
+    video_id = context.get('video_id', None)
+    channel = context.get('outbound_channel', None)
+    user = context.get('user', None)
+
+    if thread_data:
+        video = Video.objects.get(video_id=video_id)
+
+        comment_form = MPTTCommentForm(video, data=context.get('data', None))
+        if comment_form.is_valid():
+            data = comment_form.get_comment_create_data()
+            data['user'] = user
+            comment = MPTTComment(**data)
+            comment.save()
+
+    outbound_message = dict()
+    outbound_message[EVENT_TYPE_KEY] = 'FB_POST_NEW_THREAD'
     outbound_message[CHANNEL_KEY] = channel
     outbound_message[DATA_KEY] = data
     return outbound_message
