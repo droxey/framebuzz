@@ -9,33 +9,27 @@ angular.module('framebuzz', ['ui.state', 'framebuzz.filters', 'framebuzz.service
 
             var templateRootPath = SOCK.root_path + 'partials/';
 
-            var home = {
-                name: 'home',
-                url: '/'
-            };
-
             var player = { 
-                abstract: true,
                 name: 'player',
-                controller: 'VideoPlayerCtrl',
-                url: '/player',
-                template: '<div class="panels" data-ui-view></div>'
+                url: '/',
+                templateUrl: templateRootPath + 'player.html',
+                controller: 'VideoPlayerCtrl'
             };
 
             var playerBlendedView = { 
                 name: 'player.blendedView',
                 parent: player,
                 templateUrl: templateRootPath + 'player.blendedView.html',
-                url: '/blended'
+                url: 'blended'
+                
             };
 
             $stateProvider
-                .state(home)
                 .state(player)
                 .state(playerBlendedView);
         }
     ]).run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
-        $state.transitionTo('home');
+        $state.transitionTo('player');
     }]);

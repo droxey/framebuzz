@@ -5,13 +5,13 @@
 angular.module('framebuzz.controllers', []).
   controller('VideoPlayerCtrl', 
         ['$scope', '$state', 'socket', 'timeUpdate', 'safeApply', 
-            function($scope, $state, socket, timeUpdate, safeApply) {            
+            function($scope, $state, socket, timeUpdate, safeApply) {    
                 $scope.rootPath = SOCK.root_path;
                 $scope.videoInstance = {};
                 $scope.currentTime = 0;
                 $scope.currentTimeHMS = '00:00';
                 $scope.newThread = {};
-
+                
                 // --
                 // PUBLIC METHODS
                 // --
@@ -51,8 +51,8 @@ angular.module('framebuzz.controllers', []).
                     if (jsonData.eventType == 'FB_INITIALIZE_VIDEO') {
                         $scope.videoInstance = jsonData.data;
                         safeApply($scope);
-
-                        $state.transitionTo('player.blendedView');
+                        
+                        $state.transitionTo('player.blendedView'); 
                     }
                     else {
                         console.log('Socket received unhandled message.');

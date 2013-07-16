@@ -67,36 +67,8 @@
             <video data-media-element="" class="span12" id="video-element" preload="none" type="video/youtube" src="{{ video.swf_url }}">
             </video>
           </div>
-          <div class="row-fluid">
-            <table id="heatmap" class="span12" cellpadding="0" cellspacing="0">
-              <tr>
-                {% verbatim %}
-                  <td class="{{ block.className }}" data-ng-repeat="block in videoInstance.heatmap"></td>
-                {% endverbatim %}
-              </tr>
-            </table>
-          </div>
-          <div class="row-fluid">
-            <form method="post" action="" id="post-comment-form" class="span12" data-ng-submit="postNewThread()">
-              {% csrf_token %}
-              {% verbatim %}
-                <input type="hidden" id="id_parent" name="parent" data-ng-model="newThread.parent">
-                <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot" data-ng-model="newThread.honeypot"></p>
-              {% endverbatim %}
-              <div class="input-prepend input-append">
-                {% verbatim %}
-                  <span class="add-on"><em class="current">{{ currentTimeHMS }}</em><em> / </em>{{ videoInstance.video.time_hms }}</span>
-                  <input data-ng-model="newThread.comment" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-ng-show="videoInstance.is_authenticated">
-                  <input type="text" id="id_comment" name="comment" placeholder="Please login to post a comment!" data-ng-hide="videoInstance.is_authenticated" disabled>
-                {% endverbatim %}
-                <button type="submit" id="submit-comment">
-                  <img src="{% static 'framebuzz/player/app/img/icon-post-comment.png' %}" alt="Post Comment" class="fb-icon-post-comment" />
-                </button>
-              </div>
-            </form>
-          </div>
+          <div id="heatmap-and-post" data-ui-view=""></div>
         </div>
-        <div id="buzz-layer" class="layer offset2 span4" data-ui-view></div>
       </div>
     </div>
     <script src="//cdn.sockjs.org/sockjs-0.3.min.js"></script>
