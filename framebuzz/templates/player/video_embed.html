@@ -47,7 +47,8 @@
           host: location.hostname,
           port: {{ socket_port }},
           channel: '{{ socket_channel }}',
-          video_channel: '/framebuzz/video/' + '{{ video.video_id }}'
+          video_channel: '/framebuzz/video/' + '{{ video.video_id }}',
+          root_path: '/static/framebuzz/player/app/'
         };
       </script>
     {% endcompress %}
@@ -88,43 +89,14 @@
                   <input data-ng-model="newThread.comment" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-ng-show="videoInstance.is_authenticated">
                   <input type="text" id="id_comment" name="comment" placeholder="Please login to post a comment!" data-ng-hide="videoInstance.is_authenticated" disabled>
                 {% endverbatim %}
-                <button type="submit" id="submit-comment" class="btn">
+                <button type="submit" id="submit-comment">
                   <img src="{% static 'framebuzz/player/app/img/icon-post-comment.png' %}" alt="Post Comment" class="fb-icon-post-comment" />
                 </button>
               </div>
             </form>
           </div>
         </div>
-        <div id="buzz-layer" class="layer offset2 span4">
-          <div class="row-fluid">
-            <div id="blended-view" class="panel">
-              <a href="#" class="panel-close img-circle">
-                <img src="{% static 'framebuzz/player/app/img/icon-expand-contract.png' %}" alt="Close Panel" />
-              </a>
-              <div class="scrollable" data-scrollbar="">
-                <ul class="comment-stream">
-                  {% verbatim %}
-                    <li data-ng-repeat="thread in videoInstance.threads" data-ng-show="thread.time < currentTime" data-ng-animate="{show: 'animate-comment-show'}">
-                      <div class="thread">
-                        <div class="header">
-                          <strong class="username">{{ thread.user.username }}</strong>
-                          <strong class="time">{{ thread.time_hms }}</strong>
-                        </div>
-                        <p>{{ thread.comment }}</p>
-                        {% endverbatim %}
-                          <button type="button" class="show-thread-siblings" data-ng-show="thread.has_hidden_siblings">
-                            <img src="{% static 'framebuzz/player/app/img/icon-dots.png' %}" alt="View More" />
-                          </button>
-                        {% verbatim %}
-                      </div>
-                      <img class="img-circle" src="{{ thread.user.avatar_url }}" alt="" />
-                    </li>
-                  {% endverbatim %}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div id="buzz-layer" class="layer offset2 span4" data-ui-view></div>
       </div>
     </div>
     <script src="//cdn.sockjs.org/sockjs-0.3.min.js"></script>

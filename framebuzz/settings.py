@@ -264,7 +264,7 @@ ACTSTREAM_SETTINGS = {
 
 # Django-Compressor Settings:
 COMPRESS_ENABLED = True
-COMPRESS_URL = MEDIA_URL
+COMPRESS_URL = STATIC_URL
 COMPRESS_ROOT = STATIC_ROOT
 
 # django.contrib.comments settings:

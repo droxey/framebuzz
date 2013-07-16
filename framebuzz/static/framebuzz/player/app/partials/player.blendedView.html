@@ -1,0 +1,22 @@
+<div id="blended-view" class="panel">
+  <a href="#" class="panel-close img-circle">
+    <img src="{{ rootPath }}img/icon-expand-contract.png" alt="Close Panel" />
+  </a>
+  <div class="scrollable" data-scrollbar="">
+    <ul class="comment-stream">
+      <li data-ng-repeat="thread in videoInstance.threads" data-ng-show="thread.time < currentTime" data-ng-animate="{show: 'animate-comment-show'}">
+        <div class="thread">
+          <div class="header">
+            <strong class="username">{{ thread.user.username }}</strong>
+            <strong class="time">{{ thread.time_hms }}</strong>
+          </div>
+          <p>{{ thread.comment }}</p>
+          <button type="button" class="show-thread-siblings" data-ng-show="thread.has_hidden_siblings">
+            <img src="{{ rootPath }}img/icon-dots.png' %}" alt="View More" />
+          </button>
+        </div>
+        <img class="img-circle" src="{{ thread.user.avatar_url }}" alt="" />
+      </li>
+    </ul>
+  </div>
+</div>

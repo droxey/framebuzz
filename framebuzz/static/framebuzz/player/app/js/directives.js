@@ -13,8 +13,9 @@ angular.module('framebuzz.directives', [])
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
                 features: ['share', 'privateconvo', 'volume', 'muteconvo', 'progress'],
-                flashName: '../swf/flashmediaelement.swf',
-                silverlightName: '../swf/silverlightmediaelement.xap',
+                pluginPath: SOCK.root_path + 'swf/',
+                flashName: 'flashmediaelement.swf',
+                silverlightName: 'silverlightmediaelement.xap',
                 alwaysShowControls: true,
                 // There's a bug here where commenting and hitting the spacebar will
                 // cause the space to not be entered, and the video to pause.
