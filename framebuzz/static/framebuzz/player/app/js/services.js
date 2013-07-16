@@ -59,10 +59,7 @@ angular.module('framebuzz.services', [])
                 self.socket_handlers.onmessage = callback;
             },
             send_json: function(data) {
-                console.log('Sending JSON to Server:');
-                console.log(JSON.stringify(data));
                 socket.send(JSON.stringify(data));
-
                 self.socket_handlers.onsent();
             },
             onsent: function(callback) {
