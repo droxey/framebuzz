@@ -7,6 +7,7 @@
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
 @import "compass/css3/images";
+@import "compass/css3/transition";
 
 
 body {
@@ -72,12 +73,15 @@ object, embed, video, iframe {
                         }
                     }
 
+                    .mejs-fade-in { opacity: 0; }
+
                     div.mejs-share {
                         background: none;
-                        bottom: 337px;
+                        bottom: 338px;
                         height: 38px;
+                        left: 5px;
                         position: absolute;
-                        width: 100px;
+                        width: 85px;
                         z-index: 10;
                         
                         button {
@@ -86,7 +90,6 @@ object, embed, video, iframe {
                             background: rgba(61, 61, 61, 0.7);
                             border: 0;
                             display: inline-block;
-                            margin: 5px;
                             height: 38px;
                             width: 38px;
 
@@ -96,7 +99,7 @@ object, embed, video, iframe {
                             }
 
                             &.mejs-share-framebuzz-button {
-                                margin-right: 0;
+                                margin-right: 5px;
 
                                 img {
                                     height: 27px;
@@ -155,6 +158,28 @@ object, embed, video, iframe {
                                 margin-top: 0;
                                 height: 20px;
                                 width: 23px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.show-controls {
+                div.mejs-inner {
+                    div.mejs-controls {
+                        .mejs-fade-in {
+                            opacity: 1;
+                            @include single-transition(opacity .25s ease-in-out);
+                        }
+                    }
+                }
+
+                &.fade-out-controls {
+                    div.mejs-inner {
+                        div.mejs-controls {
+                            .mejs-fade-in {
+                                opacity: 0;
+                                @include single-transition(opacity .25s ease-in-out);
                             }
                         }
                     }
@@ -311,7 +336,8 @@ object, embed, video, iframe {
                 }
 
                 ul.comment-stream {
-                    height: 270px;
+                    height: 268px;
+                    padding-top: 2px;
 
                     li {
                         border-bottom: 1px solid rgba(104, 104, 104, .90);

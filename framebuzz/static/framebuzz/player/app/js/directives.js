@@ -25,7 +25,22 @@ angular.module('framebuzz.directives', [])
                 defaultVideoHeight: '380px',
                 autosizeProgress: false,
                 success: function(media) {
+                    $('.mejs-volume-button').addClass('mejs-fade-in');
                     $('.mejs-time-total span').not('.mejs-time-current').remove();
+
+                    $('.mejs-video').mouseenter(function() {
+                        $(this).addClass('show-controls');
+                    });
+
+                    $('.mejs-video').mouseleave(function() {
+                        $(this).addClass('fade-out-controls')
+                            .delay(250)
+                            .queue(function(next) {
+                                $('.mejs-video').removeClass('fade-out-controls');
+                                $('.mejs-video').removeClass('show-controls');
+                                next();
+                            });
+                    });
 
                     media.addEventListener('timeupdate', function(e) {
                         timeUpdate.prepForBroadcast({ currentTime: media.currentTime });

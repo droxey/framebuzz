@@ -124,12 +124,6 @@ def initialize_video_player(context):
         comments_in_block = comments.filter(time__gte=start, time__lt=end)
         finalCount = comments_in_block.count()
 
-        if block == 0:
-            parents = comments_in_block.filter(parent=None).values_list('id')
-            parent_list = [x[0] for x in parents]
-            children = comments.filter(parent__id__in=parent_list)
-            finalCount = children.count() + parents.count()
-
         if finalCount == 0:
             class_name = 'rank-8'
         elif finalCount > rank_1:

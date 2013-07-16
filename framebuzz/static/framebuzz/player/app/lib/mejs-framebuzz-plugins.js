@@ -1,7 +1,7 @@
 (function($){
   MediaElementPlayer.prototype.buildmuteconvo = function(player, controls, layers, media) {
     var button =  
-      $('<div class="mejs-button mejs-mute-conversation-button mejs-mute">' +
+      $('<div class="mejs-button mejs-mute-conversation-button mejs-mute mejs-fade-in">' +
           '<button type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
             '<img class="mejs-mute-conversation-icon" src="/static/framebuzz/player/app/img/icon-comment-on.png" alt="Mute Conversation" />' +
           '</button>' +
@@ -22,7 +22,7 @@
   };
 
   MediaElementPlayer.prototype.buildshare = function(player, controls, layers, media) {
-    var shareDiv = $('<div class="mejs-share"></div>').appendTo(controls);
+    var shareDiv = $('<div class="mejs-share mejs-fade-in"></div>').appendTo(controls);
 
     var button =
       $('<button class="mejs-share-framebuzz-button" type="button" aria-controls="mep_0" title="Share This FrameBuzz" aria-label="Share This FrameBuzz">' +
