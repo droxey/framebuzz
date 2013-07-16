@@ -130,22 +130,23 @@ def initialize_video_player(context):
             children = comments.filter(parent__id__in=parent_list)
             finalCount = children.count() + parents.count()
 
-        if rank_1 > finalCount >= rank_2:
-            class_name = 'rank-1'
-        elif rank_2 > finalCount >= rank_3:
-            class_name = 'rank-2'
-        elif rank_3 > finalCount >= rank_4:
-            class_name = 'rank-3'
-        elif rank_4 > finalCount >= rank_5:
-            class_name = 'rank-4'
-        elif rank_5 > finalCount >= rank_6:
-            class_name = 'rank-5'
-        elif rank_6 > finalCount >= rank_7:
-            class_name = 'rank-6'
-        elif rank_7 > finalCount > 0:
-            class_name = 'rank-7'
-        else:
+        if finalCount == 0:
             class_name = 'rank-8'
+        elif finalCount > rank_1:
+            class_name = 'rank-1'
+        else:
+            if rank_2 > finalCount >= rank_3:
+                class_name = 'rank-2'
+            elif rank_3 > finalCount >= rank_4:
+                class_name = 'rank-3'
+            elif rank_4 > finalCount >= rank_5:
+                class_name = 'rank-4'
+            elif rank_5 > finalCount >= rank_6:
+                class_name = 'rank-5'
+            elif rank_6 > finalCount >= rank_7:
+                class_name = 'rank-6'
+            else:
+                class_name = 'rank-7'
 
         rank_per_block.append({'block': block, 'className': class_name})        
     
@@ -178,7 +179,6 @@ def initialize_video_player(context):
 
 @celery.task
 def post_new_thread(context):
-    logger = post_new_thread.get_logger()
     thread_data = context.get(DATA_KEY, None)
     comment = None
 
