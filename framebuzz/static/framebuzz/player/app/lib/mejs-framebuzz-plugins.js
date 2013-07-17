@@ -13,10 +13,14 @@
         if (button.hasClass('mejs-mute')) {
           buttonImg.attr('src', '/static/framebuzz/player/app/img/icon-comment-off.png');
           button.removeClass('mejs-mute').addClass('mejs-unmute');
+
+          media.dispatchEvent('player_muteconvo');
         }
         else {
           buttonImg.attr('src', '/static/framebuzz/player/app/img/icon-comment-on.png');
           button.removeClass('mejs-unmute').addClass('mejs-mute');
+
+          media.dispatchEvent('player_unmuteconvo');
         }
       });
   };
@@ -30,7 +34,7 @@
         '</button>')
       .appendTo(shareDiv)
       .click(function() {
-        alert('Not implemented yet!');
+        media.dispatchEvent('player_share');
       });
   };
 
@@ -43,7 +47,7 @@
         '</button>')
       .appendTo(shareDiv)
       .click(function() {
-        alert('Not implemented yet!');
+        media.dispatchEvent('player_privateconvo');
       });
   };
 })(jQuery);

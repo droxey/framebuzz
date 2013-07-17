@@ -71,9 +71,8 @@ angular.module('framebuzz.services', [])
         };
 
         return methods;
-    }).service('timeUpdate', function($rootScope) {
+    }).service('broadcaster', function($rootScope) {
         var broadcaster = {};
-
         broadcaster.message = '';
 
         broadcaster.prepForBroadcast = function(msg) {
@@ -82,7 +81,7 @@ angular.module('framebuzz.services', [])
         };
 
         broadcaster.broadcastItem = function() {
-            $rootScope.$broadcast('timeUpdate');
+            $rootScope.$broadcast(this.message.broadcastType);
         };
 
         return broadcaster;

@@ -4,8 +4,8 @@
 
 angular.module('framebuzz.controllers', []).
   controller('VideoPlayerCtrl', 
-        ['$scope', '$state', '$filter', 'socket', 'timeUpdate', 'safeApply', 
-            function($scope, $state, $filter, socket, timeUpdate, safeApply) {    
+        ['$scope', '$state', '$filter', 'socket', 'broadcaster', 'safeApply', 
+            function($scope, $state, $filter, socket, broadcaster, safeApply) {    
                 $scope.rootPath = SOCK.root_path;
                 $scope.videoInstance = {};
                 $scope.currentTime = 0;
@@ -68,14 +68,42 @@ angular.module('framebuzz.controllers', []).
                 };
 
                 // --
-                // EVENT HANDLERS
+                // PLAYER DIRECTIVE BROADCASTS
                 // --
 
-                $scope.$on('timeUpdate', function() {
-                    $scope.currentTime = timeUpdate.message.currentTime;
+                $scope.$on('player_timeupdate', function() {
+                    $scope.currentTime = broadcaster.message.currentTime;
                     $scope.currentTimeHMS = mejs.Utility.secondsToTimeCode($scope.currentTime);
                     safeApply($scope);
                 });
+
+                $scope.$on('player_muteconvo', function() {
+                    $state.transitionTo('player.initView');
+                });
+
+                $scope.$on('player_unmuteconvo', function() {
+                    $state.transitionTo('player.blendedView'); 
+                });
+
+                $scope.$on('player_share', function() {
+                    console.log(broadcaster.message);
+                });
+
+                $scope.$on('player_privateconvo', function() {
+                    console.log(broadcaster.message);
+                });
+
+                $scope.$on('player_playing', function() {
+                    console.log(broadcaster.message);
+                });
+
+                $scope.$on('player_paused', function() {
+                    console.log(broadcaster.message);
+                });
+
+                // --
+                // EVENT HANDLERS
+                // --
 
                 socket.onopen(function() {
                     socket.send_json({eventType: eventTypes.initVideo, channel: SOCK.video_channel, data: ''});
@@ -87,8 +115,13 @@ angular.module('framebuzz.controllers', []).
                     if (jsonData.eventType == eventTypes.initVideo) {
                         $scope.videoInstance = jsonData.data;
                         safeApply($scope);
-                        
-                        $state.transitionTo('player.blendedView'); 
+
+                        if ($scope.videoInstance.is_authenticated) {
+                            $state.transitionTo('player.blendedView'); 
+                        }
+                        else {
+                            // TODO: Transition to the login state.
+                        }
                     }
                     else if (jsonData.eventType == eventTypes.postNewThread) {
                         var newThread = jsonData.data.thread;
