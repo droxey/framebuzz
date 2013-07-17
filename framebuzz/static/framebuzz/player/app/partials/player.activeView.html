@@ -1,0 +1,10 @@
+<div class="active-header clearfix">
+    <a class="active-close" href="#/player/panel/blended">
+        <img src="{{ rootPath }}img/icon-close.png" alt="Switch to Blended View" />
+    </a>
+    <ul class="tabs clearfix">
+        <li><a ng-class="{ active: $state.is('player.activeView.comments') }" href="#/player/panel/active/comments" title="Comments">Comments</a></li>
+        <li><a ng-class="{ active: $state.is('player.activeView.activity') }" href="#/player/panel/active/activity" title="Activity">Activity</a></li>
+    </ul>
+    <div class="tab-container" data-scrollable="true" data-ui-view></div>
+</div>

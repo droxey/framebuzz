@@ -21,27 +21,77 @@ angular.module('framebuzz', ['ui.state', 'framebuzz.filters', 'framebuzz.service
                 parent: player,
                 templateUrl: templateRootPath + 'player.html',
                 url: '/player'
-            }
+            };
 
             var playerPanelView = {
                 name: 'player.panelView',
                 parent: playerInitView,
                 templateUrl: templateRootPath + 'player.panelView.html',
-                url: '/panel'
-            }
+                url: '/panel',
+                data: {
+                    panelId: 'panel-view'
+                }
+            };
+
+            var loginView = {
+                name: 'player.login',
+                parent: playerInitView,
+                templateUrl: templateRootPath + 'player.login.html',
+                url: '/login',
+                data: {
+                    panelId: 'login-view'
+                }
+            };
 
             var playerBlendedView = { 
                 name: 'player.blendedView',
                 parent: playerPanelView,
                 templateUrl: templateRootPath + 'player.blendedView.html',
-                url: '/blended'   
+                url: '/blended',
+                data: {
+                    panelId: 'blended-view'
+                }   
+            };
+
+            var playerActiveView = { 
+                name: 'player.activeView',
+                parent: playerPanelView,
+                templateUrl: templateRootPath + 'player.activeView.html',
+                url: '/active',
+                data: {
+                    panelId: 'active-view'
+                }   
+            };
+
+            var playerActiveViewComments = { 
+                name: 'player.activeView.comments',
+                parent: playerActiveView,
+                templateUrl: templateRootPath + 'player.activeView.comments.html',
+                url: '/comments',
+                data: {
+                    panelId: 'active-view'
+                }   
+            };
+
+            var playerActiveViewActivity = { 
+                name: 'player.activeView.activity',
+                parent: playerActiveView,
+                templateUrl: templateRootPath + 'player.activeView.activity.html',
+                url: '/activity',
+                data: {
+                    panelId: 'active-view'
+                }   
             };
 
             $stateProvider
                 .state(player)
                 .state(playerInitView)
                 .state(playerPanelView)
-                .state(playerBlendedView);
+                .state(loginView)
+                .state(playerBlendedView)
+                .state(playerActiveView)
+                .state(playerActiveViewComments)
+                .state(playerActiveViewActivity);
         }
     ]).run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;

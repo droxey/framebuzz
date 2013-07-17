@@ -77,14 +77,6 @@ angular.module('framebuzz.controllers', []).
                     safeApply($scope);
                 });
 
-                $scope.$on('player_muteconvo', function() {
-                    $state.transitionTo('player.initView');
-                });
-
-                $scope.$on('player_unmuteconvo', function() {
-                    $state.transitionTo('player.blendedView'); 
-                });
-
                 $scope.$on('player_share', function() {
                     console.log(broadcaster.message);
                 });
@@ -94,7 +86,7 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_playing', function() {
-                    console.log(broadcaster.message);
+                    $state.transitionTo('player.blendedView'); 
                 });
 
                 $scope.$on('player_paused', function() {
@@ -116,11 +108,9 @@ angular.module('framebuzz.controllers', []).
                         $scope.videoInstance = jsonData.data;
                         safeApply($scope);
 
-                        if ($scope.videoInstance.is_authenticated) {
-                            $state.transitionTo('player.blendedView'); 
-                        }
-                        else {
+                        if (!$scope.videoInstance.is_authenticated) {
                             // TODO: Transition to the login state.
+                            console.log('TODO: Transition to the login state.'); 
                         }
                     }
                     else if (jsonData.eventType == eventTypes.postNewThread) {
@@ -146,7 +136,11 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 socket.onclose(function() {
-                    console.log('Socket is disconnected :(');
+                    $scope.videoInstance = {};
+                    $scope.currentTime = 0;
+                    $scope.currentTimeHMS = '00:00';
+
+                    $state.transitionTo('player.initView');
                 });
             }
         ]    

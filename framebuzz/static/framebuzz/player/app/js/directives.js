@@ -56,7 +56,6 @@ angular.module('framebuzz.directives', [])
 
                     media.addEventListener('player_muteconvo', function(e) {
                         window.location.hash = '#/player';
-                        //broadcaster.prepForBroadcast({ broadcastType: 'player_muteconvo' });
                     }, false);
 
                     media.addEventListener('player_unmuteconvo', function(e) {
@@ -76,10 +75,12 @@ angular.module('framebuzz.directives', [])
     })
     .directive('scrollbar', function(broadcaster) {
         return function(scope, element, attrs) {
-            $(element).perfectScrollbar();
+            if (attrs.scrollbar == 'true') {
+                $(element).perfectScrollbar();
 
-            scope.$on('player_timeupdate', function() {
-                $(element).perfectScrollbar('update');
-            });
+                scope.$on('player_timeupdate', function() {
+                    $(element).perfectScrollbar('update');
+                });
+            }
         };
     });

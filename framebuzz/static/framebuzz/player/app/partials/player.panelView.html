@@ -1,6 +1,6 @@
-<div class="panel">
-    <a href="#/player" class="panel-close img-circle">
-      <img src="{{ rootPath }}img/icon-expand-contract.png" alt="Close Panel" />
+<div id="{{ $state.current.data.panelId }}" class="panel">
+    <a data-ng-show="$state.current.data.panelId == 'blended-view'" href="#/player/panel/active" class="panel-close img-circle {{ $state.current.data.panelId }}">
+      <img src="{{ rootPath }}img/icon-expand-contract.png" alt="Switch to Blended" />
     </a>
-    <div class="scrollable" data-scrollbar="" data-ui-view></div>
+    <div class="scrollable" data-scrollbar="{{ $state.current.data.panelId == 'blended-view' }}" data-ui-view></div>
 </div>
