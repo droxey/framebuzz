@@ -12,6 +12,8 @@ angular.module('framebuzz.controllers', []).
                 $scope.currentTimeHMS = '00:00';
                 $scope.newThread = {};
                 $scope.selectedThread = null;
+                $scope.loginModel = null;
+                $scope.signupModel = null;
                 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -21,6 +23,14 @@ angular.module('framebuzz.controllers', []).
                 // --
                 // PUBLIC METHODS
                 // --
+                
+                $scope.login = function() {
+                    console.log('TODO: Implement Login');
+                };
+
+                $scope.signup = function() {
+                    console.log('TODO: Implement Signup');
+                }
                 
                 $scope.postNewThread = function() {
                     var postData = {

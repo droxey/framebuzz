@@ -43,6 +43,16 @@ angular.module('framebuzz', ['ui.state', 'framebuzz.filters', 'framebuzz.service
                 }
             };
 
+            var signupView = {
+                name: 'player.signupView',
+                parent: playerPanelView,
+                templateUrl: templateRootPath + 'player.signup.html',
+                url: '/signup',
+                data: {
+                    panelId: 'signup-view'
+                }
+            };
+
             var playerBlendedView = { 
                 name: 'player.blendedView',
                 parent: playerPanelView,
@@ -88,6 +98,7 @@ angular.module('framebuzz', ['ui.state', 'framebuzz.filters', 'framebuzz.service
                 .state(playerInitView)
                 .state(playerPanelView)
                 .state(loginView)
+                .state(signupView)
                 .state(playerBlendedView)
                 .state(playerActiveView)
                 .state(playerActiveViewComments)
