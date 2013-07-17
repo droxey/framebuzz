@@ -2,8 +2,9 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('framebuzz', ['ui.state', 'framebuzz.filters', 'framebuzz.services', 'framebuzz.directives', 'framebuzz.animations', 'framebuzz.controllers']).
-    config(['$routeProvider', '$stateProvider', '$urlRouterProvider', 
+angular.module('framebuzz', 
+    ['ui.state', 'ui.bootstrap', 'framebuzz.filters', 'framebuzz.services', 'framebuzz.directives', 'framebuzz.animations', 'framebuzz.controllers'])
+    .config(['$routeProvider', '$stateProvider', '$urlRouterProvider', 
         function($routeProvider, $stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise('/');
 
