@@ -94,7 +94,6 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_playing', function() {
-                    $state.transitionTo('player.activeView');
                     console.log(broadcaster.message);
                 });
 
@@ -117,8 +116,11 @@ angular.module('framebuzz.controllers', []).
                         $scope.videoInstance = jsonData.data;
                         safeApply($scope);
 
-                        if (!$scope.videoInstance.is_authenticated) {
-                            // TODO: Transition to the login state. 
+                        if ($scope.videoInstance.is_authenticated) {
+                            $state.transitionTo('player.blendedView'); 
+                        }
+                        else {
+                            // TODO: Transition to the login state.
                         }
                     }
                     else if (jsonData.eventType == eventTypes.postNewThread) {

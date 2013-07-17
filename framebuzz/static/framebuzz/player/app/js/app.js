@@ -30,18 +30,18 @@ angular.module('framebuzz', ['ui.state', 'framebuzz.filters', 'framebuzz.service
                 url: '/panel'
             }
 
-            var playerActiveView = { 
-                name: 'player.activeView',
+            var playerBlendedView = { 
+                name: 'player.blendedView',
                 parent: playerPanelView,
-                templateUrl: templateRootPath + 'player.activeView.html',
-                url: '/active'   
+                templateUrl: templateRootPath + 'player.blendedView.html',
+                url: '/blended'   
             };
 
             $stateProvider
                 .state(player)
                 .state(playerInitView)
                 .state(playerPanelView)
-                .state(playerActiveView);
+                .state(playerBlendedView);
         }
     ]).run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;
