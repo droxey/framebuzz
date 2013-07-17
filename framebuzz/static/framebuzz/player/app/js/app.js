@@ -34,8 +34,8 @@ angular.module('framebuzz', ['ui.state', 'framebuzz.filters', 'framebuzz.service
             };
 
             var loginView = {
-                name: 'player.login',
-                parent: playerInitView,
+                name: 'player.loginView',
+                parent: playerPanelView,
                 templateUrl: templateRootPath + 'player.login.html',
                 url: '/login',
                 data: {

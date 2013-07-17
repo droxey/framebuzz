@@ -240,15 +240,14 @@ object, embed, video, iframe {
                     background: #202020;
                     border: 0 none;
                     color: #BCBCBC;
+                    float: left;
                     font-family: 'proxima-nova';
                     font-size: 12px;
                     font-weight: 300;
                     letter-spacing: -0.02em;
-                    line-height: 22px;
-                    margin-left: 0;
-                    margin-right: 0;
-                    padding-left: 0;
-                    padding-right: 0;
+                    line-height: 30px;
+                    margin: 0;
+                    padding: 0;
                     text-align: left;
                     text-shadow: none;
                     width: 89px;
@@ -269,8 +268,35 @@ object, embed, video, iframe {
                     @include border-top-right-radius(0px);
                     @include border-bottom-left-radius(3px);
                     @include border-bottom-right-radius(0px);
+                    float: left;
                     font-family: 'proxima-nova';
                     width: 77.3%;
+                }
+
+                #signup-or-login-prompt {
+                    @include border-top-left-radius(3px);
+                    @include border-top-right-radius(0px);
+                    @include border-bottom-left-radius(3px);
+                    @include border-bottom-right-radius(0px);
+                    background: white;
+                    float: left;
+                    font-family: 'proxima-nova';
+                    height: 30px;
+                    width: 79.3%;
+
+                    p {
+                        color: #989898;
+                        font-size: 14px;
+                        font-weight: 500;
+                        font-style: italic;
+                        line-height: 30px;
+                        text-indent: 10px;
+
+                        a {
+                            color: #1887b9;
+                            text-decoration: underline;
+                        }
+                    }
                 }
 
                 #submit-comment {
@@ -281,6 +307,7 @@ object, embed, video, iframe {
                     @include single-box-shadow(rgba(0, 0, 0, .13), 0px, 0px, 14px, 6px, inset);
                     background: #686868;
                     border: 0;
+                    float: left;
                     line-height: 12px;
                     padding: 5px 8px 3px 9px;
 
@@ -295,58 +322,19 @@ object, embed, video, iframe {
     }
 
     #buzz-layer {
-        margin-left: 402px;
-        width: 237px;
+        margin-left: 396px;
+        width: 245px;
         z-index: 100;
 
         div.panel {
             div.scrollable {
                 @include single-box-shadow(rgba(0, 0, 0, 0.5), 0px, 0px, 118px, 0px, inset);
-                background: rgba(61, 61, 61, 0.7);
                 overflow: hidden;
                 position: absolute;
                 top: 0;
-                width: 237px;
                 z-index: 110;
-            }
-        }
-
-        #blended-view {
-            height: 270px;
-
-            a.panel-close {
-                background: rgba(61, 61, 61, 1.0);
-                display: block;
-                height: 22px;
-                left: -12px;
-                position: absolute;
-                top: 3px;
-                width: 22px;
-                z-index: 120;
-
-                img {
-                    height: 11px;
-                    margin: 5px;
-                    width: 12px;
-                }
-            }
-            
-            div.scrollable {
-                @include border-bottom-left-radius(3px);
-                @include border-bottom-right-radius(3px);
-                height: 270px;
-                right: 3px;
-
-                div.ps-scrollbar-y {
-                    @include border-radius(3px, 3px);
-                    right: 0px !important;
-                    width: 6px;
-                }
 
                 ul.comment-stream {
-                    height: 268px;
-                    padding-top: 2px;
-
                     li {
                         border-bottom: 1px solid rgba(104, 104, 104, .90);
                         color: rgba(255, 255, 255, .65);
@@ -386,7 +374,7 @@ object, embed, video, iframe {
                                 width: 135px;
                             }
 
-                            button.show-thread-siblings {
+                            a.show-thread-siblings {
                                 background: none;
                                 border: 0;
                                 bottom: 6px;
@@ -418,18 +406,12 @@ object, embed, video, iframe {
                         &:last-child { border-bottom: 0; }
                     }
                 }
-            }
-        }
-
-        #active-view {
-            height: 385px;
-
-            div.scrollable {
-                height: 385px;
 
                 div.active-header {
                     background: #484848;
-                    height: 44px;
+                    border-left: 1px solid rgba(104, 104, 104, 0.15);
+                    border-bottom: #434343;
+                    height: 43px;
 
                     a.active-close {
                         background: #686868;
@@ -444,7 +426,64 @@ object, embed, video, iframe {
                             width: 12px;
                         }
                     }
+                }
+            }
+        }
 
+        #blended-view {
+            height: 270px;
+            left: 4px;
+            position: relative;
+            width: 237px;
+
+            a.panel-close {
+                background: rgba(61, 61, 61, 1.0);
+                display: block;
+                height: 22px;
+                left: -10px;
+                position: absolute;
+                top: 3px;
+                width: 22px;
+                z-index: 120;
+
+                img {
+                    height: 11px;
+                    margin: 5px;
+                    width: 12px;
+                }
+            }
+            
+            div.scrollable {
+                @include border-bottom-left-radius(3px);
+                @include border-bottom-right-radius(3px);
+                background: rgba(61, 61, 61, 0.7);
+                height: 270px;
+                right: 3px;
+
+                div.ps-scrollbar-y {
+                    @include border-radius(3px, 3px);
+                    right: 0px !important;
+                    width: 6px;
+                }
+
+                ul.comment-stream {
+                    height: 268px;
+                    padding-top: 2px;
+                }
+            }
+        }
+
+        #active-view {
+            height: 385px;
+            width: 245px;
+
+            div.scrollable {
+                background: rgba(53, 53, 53, 0.95);
+                border-left: 1px solid rgba(104, 104, 104, 0.44);
+                height: 385px;
+                width: 100%;
+
+                div.active-header {
                     ul.tabs {
                         float: left;
                         height: 44px;
@@ -478,6 +517,124 @@ object, embed, video, iframe {
                             img {
                                 height: 53px;
                                 width: 246px;
+                            }
+
+                            ul.comment-stream {
+                                li {
+                                    display: block;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #login-view {
+            height: 385px;
+            width: 245px;
+
+            div.scrollable {
+                background: rgba(53, 53, 53, 0.95);
+                height: 385px;
+                width: 100%;
+
+                div.active-header {
+                    a.active-close {
+                        margin-right: 14px;
+                    }
+
+                    a.player-logo {
+                        line-height: 48px;
+
+                        img {
+                            height: 16px;
+                            width: 144px;
+                        }
+                    }
+                }
+
+                div.registration {
+                    border-left: 1px solid rgba(104, 104, 104, 0.15);
+                    padding: 17px;
+
+                    h1 {
+                        color: white;
+                        font-family: 'proxima-nova';
+                        font-size: 15.62px;
+                        font-weight: 700;
+                        line-height: 20px;
+                    }
+
+                    p {
+                        color: white;
+                        font-family: 'proxima-nova';
+                        font-size: 13.39px;
+                        font-weight: 300;
+                        line-height: 18px;
+                        padding-bottom: 12px;
+                        width: 180px;
+
+                        a {
+                            color: white;
+                            font-weight: 700;
+
+                            &:hover { text-decoration: underline; }
+                        }
+                    }
+                    
+                    form {
+                        p {
+                            padding-bottom: 0px;
+                            width: 100%;
+
+                            #id_login, #id_password {
+                                @include border-radius(3px, 3px);
+                                background: rgba(0, 0, 0, .24);
+                                border: 0 none;
+                                color: rgba(176, 176, 176, 0.56);
+                                font-family: 'proxima-nova';
+                                font-size: 14.51px;
+                                font-weight: 300;
+                                height: 27px;
+                                width: 200px;
+                            }
+                            
+                            a {
+                                color: rgba(255, 255, 255, 0.44);
+                                display: block;
+                                float: right;
+                                font-weight: 300;
+                            }
+
+                            button.registration-submit {
+                                background: none;
+                                border: 0 none;
+                                height: 36px;
+                                float: right;
+                                margin-top: 2px;
+                                margin-bottom: 9px;
+                                position: relative;
+                                width: 116px;
+
+                                span {
+                                    color: white;
+                                    display: block;
+                                    height: 100%;
+                                    font-family: 'proxima-nova';
+                                    font-size: 13.39px;
+                                    font-weight: 700;
+                                    line-height: 34px;
+                                    position: absolute;
+                                    text-align: center;
+                                    top: 0;
+                                    width: 100%;
+                                }
+
+                                img {
+                                    height: 36px;
+                                    width: 116px;
+                                }
                             }
                         }
                     }

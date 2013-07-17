@@ -1,0 +1,37 @@
+<div class="active-header clearfix">
+    <a class="active-close" href="#/player/panel/blended">
+        <img src="{{ rootPath }}img/icon-close.png" alt="Switch to Blended View" />
+    </a>
+    <a class="player-logo" href="http://www.framebuzz.com" title="FrameBuzz" target="_blank">
+        <img src="{{ rootPath }}img/player-logo.png" alt="FrameBuzz" />
+    </a>
+</div>
+<div id="login" class="registration">
+    <h1>Login</h1>
+    <p>Please sign in with one of your existing third party accounts.</p>
+    <p>Or, <a href="#/player/panel/signup" title="Sign Up">sign up</a> for a FrameBuzz account and sign in below:</p>
+    <div class="socialaccount_ballot">
+        <ul class="clearfix socialaccount_providers">
+            <li>
+                <a href=""></a>
+            </li>
+            <li>
+                <a href=""></a>
+            </li>  
+            <li>
+                <a href=""></a>
+            </li>
+        </ul>
+    </div>
+    <form id="login-form" method="POST" action="" ng-submit="login()">
+        <p><input id="id_login" maxlength="30" name="login" placeholder="Username" type="text" data-ng-model="login.username"></p>
+        <p><input id="id_password" name="password" placeholder="Password" type="password" data-ng-model="login.password"></p>
+        <p class="clearfix">
+            <button class="registration-submit" type="submit">
+                <span>Sign In</span>
+                <img src="{{ rootPath }}img/btn-rounded.png" alt="Sign In" />
+            </button>
+            <a class="forgot-password secondaryAction" href="">Forgot Password?</a>
+        </p>
+    </form>
+</div>

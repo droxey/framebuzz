@@ -1,3 +1,27 @@
 <div class="comments-view">
     <img ng-src="{{ rootPath }}img/bkg-heads.png" alt="" />
+    <ul class="comment-stream">
+        <li>
+            <div class="thread" data-scrollable="true">
+                <div class="header">
+                    <strong class="username">{{ selectedThread.user.username }}</strong>
+                    <strong class="time">{{ selectedThread.time_hms }}</strong>
+                </div>
+                <p>{{ selectedThread.comment }}</p>
+                <div class="comment-actions">
+                    <a data-ng-click="postCommentAction(thread, 'favorite')" title="Favorite">
+                        <img src="{{ rootPath }}img/img-heart.png" alt="Favorite" />
+                    </a> 
+                </div>
+                <ul class="replies">
+                    <li data-ng-repeat="reply in selectedThread.replies">
+                        <div class="header">
+                            <strong class="username">{{ reply.user.username }}</strong>
+                        </div>
+                        <p>{{ reply.comment }}</p>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
 </div>

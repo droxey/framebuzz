@@ -11,6 +11,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.currentTime = 0;
                 $scope.currentTimeHMS = '00:00';
                 $scope.newThread = {};
+                $scope.selectedThread = null;
                 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -35,8 +36,14 @@ angular.module('framebuzz.controllers', []).
                     safeApply($scope);
                 };
 
-                $scope.postCommentAction = function() {
+                $scope.postCommentAction = function(comment, action) {
 
+                };
+
+                $scope.setSelectedThread = function(thread) {
+                    $scope.selectedThread = thread;
+
+                    // TODO: Fetch siblings!
                 };
 
                 // --
@@ -107,11 +114,6 @@ angular.module('framebuzz.controllers', []).
                     if (jsonData.eventType == eventTypes.initVideo) {
                         $scope.videoInstance = jsonData.data;
                         safeApply($scope);
-
-                        if (!$scope.videoInstance.is_authenticated) {
-                            // TODO: Transition to the login state.
-                            console.log('TODO: Transition to the login state.'); 
-                        }
                     }
                     else if (jsonData.eventType == eventTypes.postNewThread) {
                         var newThread = jsonData.data.thread;

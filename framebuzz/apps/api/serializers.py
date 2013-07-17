@@ -1,17 +1,14 @@
 import urllib
 import urlparse
 
-from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.comments.models import CommentFlag
-from django.core.urlresolvers import reverse
 from django.utils.hashcompat import md5_constructor
 from django.utils import dateformat
 from django.utils import timezone
 
 from actstream.actions import is_following
 from actstream.models import Action
-
 from avatar.util import get_primary_avatar, get_default_avatar_url
 from avatar.settings import (AVATAR_GRAVATAR_BACKUP, AVATAR_GRAVATAR_DEFAULT,
                             AVATAR_GRAVATAR_BASE_URL)
@@ -74,7 +71,7 @@ class BaseCommentSerializer(serializers.ModelSerializer):
     def get_is_favorite(self, obj):
         user = self.context.get('user')
 
-        if user and user.id != obj.user.id:
+        if user and user.id != obj.user.id and not isinstance(user, AnonymousUser):
             is_favorite = Action.objects.actor(user, 
                 verb='added to favorites', 
                 action_object_object_id=obj.id)
@@ -85,7 +82,7 @@ class BaseCommentSerializer(serializers.ModelSerializer):
     def get_is_flagged(self, obj):
         user = self.context.get('user')
 
-        if user and user.id != obj.user.id:
+        if user and user.id != obj.user.id and not isinstance(user, AnonymousUser):
             flags = CommentFlag.objects.filter(comment=obj, user=user, 
                 flag = CommentFlag.SUGGEST_REMOVAL)
             return len(flags) > 0
@@ -95,7 +92,7 @@ class BaseCommentSerializer(serializers.ModelSerializer):
     def get_is_following(self, obj):
         user = self.context.get('user')
 
-        if user and user.id != obj.user.id:
+        if user and user.id != obj.user.id and not isinstance(user, AnonymousUser):
             return is_following(user, obj.user)
 
         return False
