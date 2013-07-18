@@ -6,6 +6,8 @@ from django.conf import settings
 from django.contrib import auth
 from django.contrib.contenttypes.models import ContentType
 from django.utils import importlib
+
+from allauth.account.forms import LoginForm
 from rest_framework.renderers import JSONRenderer
 
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY, TIMELINE_BLOCKS, SIGNIFICANCE_FACTOR
@@ -13,6 +15,7 @@ from framebuzz.apps.api.forms import MPTTCommentForm
 from framebuzz.apps.api.models import MPTTComment, Video
 from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
 from framebuzz.apps.api.backends.youtube import get_or_create_video
+from framebuzz.apps.api.utils import RequestMock
 
 
 @celery.task(ignore_result=True)
@@ -225,5 +228,30 @@ def get_thread_siblings(context):
         outbound_message[EVENT_TYPE_KEY] = 'FB_GET_THREAD_SIBLINGS'
         outbound_message[CHANNEL_KEY] = channel
         outbound_message[DATA_KEY] = { 'siblings': json.loads(threadSerialized) }
+        
+        return outbound_message
+
+@celery.task
+def login_user(session_key, context):
+    json_context = json.loads(context)
+    thread_data = json_context.get(DATA_KEY, None)
+    channel = json_context.get(CHANNEL_KEY, None)
+    login_success = 'false'
+
+    if thread_data:
+        form = LoginForm(data=thread_data)
+        if form.is_valid():
+            request = RequestMock()
+            engine = importlib.import_module(settings.SESSION_ENGINE)
+            request.session = engine.SessionStore(session_key)
+            request.user = form.user
+
+            form.login(request)
+            login_success = 'true'
+
+        outbound_message = dict()
+        outbound_message[EVENT_TYPE_KEY] = 'FB_LOGIN'
+        outbound_message[CHANNEL_KEY] = channel
+        outbound_message[DATA_KEY] = { 'login_success': login_success }
         
         return outbound_message

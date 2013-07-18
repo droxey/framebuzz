@@ -119,10 +119,11 @@ def perform_login(request, user, redirect_url=None):
                                 request=request, 
                                 user=user)
     login(request, user)
-    messages.add_message(request, messages.SUCCESS,
+    
+    if redirect_url:
+        messages.add_message(request, messages.SUCCESS,
                          ugettext("Successfully signed in as %(user)s.") % { "user": user_display(user) } )
-
-    return HttpResponseRedirect(get_login_redirect_url(request, redirect_url))
+        return HttpResponseRedirect(get_login_redirect_url(request, redirect_url))
 
 
 def complete_signup(request, user, success_url, signal_kwargs={}):

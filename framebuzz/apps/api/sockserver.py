@@ -2,6 +2,7 @@ import django
 import json
 import tornadoredis
 import tornado.gen
+import tornado.wsgi
 
 from framebuzz.apps.api import tasks, EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from sockjs.tornado import SockJSConnection
@@ -18,6 +19,8 @@ class ConnectionHandler(SockJSConnection):
         self.user_channel = None
         self.video_channel = None
         self.session_channel = None
+        self.session_key = None
+        self.request = None
  
     
     @tornado.gen.engine
@@ -41,7 +44,6 @@ class ConnectionHandler(SockJSConnection):
         yield subscribe_tasks
 
         self.client.listen(self.on_chan_message)
-
 
     def on_open(self, info):
         """
@@ -69,16 +71,16 @@ class ConnectionHandler(SockJSConnection):
                 self.listen()
 
                 video_id = self.video_channel.lstrip('/framebuzz/video/').rstrip('/')
-                session_key = self.session_channel.lstrip('/framebuzz/session/').rstrip('/')
-                task_chain = tasks.get_user_by_session_key.s(session_key=session_key, extra_context={'video_id': video_id, 'outbound_channel': self.session_channel}) | tasks.initialize_video_player.s() | tasks.message_outbound.s()
+                task_chain = tasks.get_user_by_session_key.s(session_key=self.session_key, extra_context={'video_id': video_id, 'outbound_channel': self.session_channel}) | tasks.initialize_video_player.s() | tasks.message_outbound.s()
             else:
                 video_id = self.video_channel.lstrip('/framebuzz/video/').rstrip('/')
-                session_key = self.session_channel.lstrip('/framebuzz/session/').rstrip('/')
 
                 if event_type == 'FB_POST_NEW_COMMENT':
-                    task_chain = tasks.get_user_by_session_key.s(session_key=session_key, extra_context={'video_id': video_id, 'data': data, 'outbound_channel': self.video_channel}) | tasks.post_new_comment.s() | tasks.message_outbound.s()
+                    task_chain = tasks.get_user_by_session_key.s(session_key=self.session_key, extra_context={'video_id': video_id, 'data': data, 'outbound_channel': self.video_channel}) | tasks.post_new_comment.s() | tasks.message_outbound.s()
                 elif event_type == 'FB_GET_THREAD_SIBLINGS':
-                    task_chain = tasks.get_user_by_session_key.s(session_key=session_key, extra_context={'data': data, 'outbound_channel': self.session_channel}) | tasks.get_thread_siblings.s() | tasks.message_outbound.s()
+                    task_chain = tasks.get_user_by_session_key.s(session_key=self.session_key, extra_context={'data': data, 'outbound_channel': self.session_channel}) | tasks.get_thread_siblings.s() | tasks.message_outbound.s()
+                elif event_type == 'FB_LOGIN':
+                    task_chain = tasks.login_user.s(session_key=self.session_key, context=msg) | tasks.message_outbound.s()
                 else:
                     pass
 
@@ -93,19 +95,24 @@ class ConnectionHandler(SockJSConnection):
         if msg.kind == 'message':
             self.send(msg.body)
 
+    def get_request(self):
+        engine = django.utils.importlib.import_module(django.conf.settings.SESSION_ENGINE)
+
+        class DummyRequest(object):
+            pass
+
+        django_request = DummyRequest()
+        django_request.session = engine.SessionStore(self.session_key)
+        return django_request
+
     def get_current_user(self, info):
         """
         Grabs the current Django user from the Redis backend.
         """
-        engine = django.utils.importlib.import_module(django.conf.settings.SESSION_ENGINE)
-        session_key = str(info.get_cookie(django.conf.settings.SESSION_COOKIE_NAME)).split('=')[1]
-        self.session_channel = '/framebuzz/session/%s' % session_key 
+        self.session_key = str(info.get_cookie(django.conf.settings.SESSION_COOKIE_NAME)).split('=')[1]
+        self.session_channel = '/framebuzz/session/%s' % self.session_key 
 
-        class Dummy(object):
-            pass
-
-        django_request = Dummy()
-        django_request.session = engine.SessionStore(session_key)
+        django_request = self.get_request()
         user = django.contrib.auth.get_user(django_request)
 
         if not isinstance(user, django.contrib.auth.models.AnonymousUser):

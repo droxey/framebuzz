@@ -13,14 +13,16 @@ angular.module('framebuzz.controllers', []).
                 $scope.newThread = {};
                 $scope.newReply = {};
                 $scope.selectedThread = null;
-                $scope.loginModel = null;
-                $scope.signupModel = null;
+                $scope.loginModel = {};
+                $scope.signupModel = {};
                 $scope.selectedThreadSiblings = {};
                 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
                     postNewComment: 'FB_POST_NEW_COMMENT',
-                    getThreadSiblings: 'FB_GET_THREAD_SIBLINGS'
+                    getThreadSiblings: 'FB_GET_THREAD_SIBLINGS',
+                    login: 'FB_LOGIN',
+                    signup: 'FB_SIGNUP'
                 };
 
                 // --
@@ -28,11 +30,24 @@ angular.module('framebuzz.controllers', []).
                 // --
                 
                 $scope.login = function() {
-                    console.log('TODO: Implement Login');
+                    var messageData = {
+                        'login': $scope.loginModel.username,
+                        'password': $scope.loginModel.password
+                    };
+
+                    var message = {eventType: eventTypes.login, channel: SOCK.user_channel, data: messageData };
+                    console.log(message);
+                    socket.send_json(message);
+
+                    $scope.loginModel = {};
+                    safeApply($scope);
                 };
 
                 $scope.signup = function() {
-                    console.log('TODO: Implement Signup');
+                    socket.send_json({eventType: eventTypes.signup, channel: SOCK.user_channel, data: $scope.signupModel });
+
+                    $scope.signupModel = {};
+                    safeApply($scope);
                 }
                 
                 $scope.postNewThread = function() {
@@ -183,8 +198,12 @@ angular.module('framebuzz.controllers', []).
                     else if (jsonData.eventType == eventTypes.getThreadSiblings) {
                         $scope.selectedThreadSiblings = jsonData.data;
                         safeApply($scope);
+                    }
+                    else if (jsonData.eventType == eventTypes.login) {
+                        $scope.videoInstance.is_authenticated = jsonData.data.login_success;
+                        safeApply($scope);
 
-                        console.log($scope.selectedThreadSiblings);
+                        $state.transitionTo('player.initView');
                     }
                     else {
                         console.log('Socket received unhandled message.');
