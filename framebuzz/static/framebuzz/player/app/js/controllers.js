@@ -36,7 +36,6 @@ angular.module('framebuzz.controllers', []).
                     };
 
                     var message = {eventType: eventTypes.login, channel: SOCK.user_channel, data: messageData };
-                    console.log(message);
                     socket.send_json(message);
 
                     $scope.loginModel = {};
@@ -44,7 +43,15 @@ angular.module('framebuzz.controllers', []).
                 };
 
                 $scope.signup = function() {
-                    socket.send_json({eventType: eventTypes.signup, channel: SOCK.user_channel, data: $scope.signupModel });
+                    var messageData = {
+                        'username': $scope.signupModel.username,
+                        'password1': $scope.signupModel.password,
+                        'password2': $scope.signupModel.confirmPassword,
+                        'email': $scope.signupModel.email
+                    };
+
+                    var message = {eventType: eventTypes.signup, channel: SOCK.user_channel, data: messageData };
+                    socket.send_json(message);
 
                     $scope.signupModel = {};
                     safeApply($scope);
@@ -201,9 +208,23 @@ angular.module('framebuzz.controllers', []).
                     }
                     else if (jsonData.eventType == eventTypes.login) {
                         $scope.videoInstance.is_authenticated = jsonData.data.login_success;
+                        $scope.videoInstance.user = jsonData.data.user;
                         safeApply($scope);
 
-                        $state.transitionTo('player.initView');
+                        if ($scope.videoInstance.is_authenticated) {
+                            $state.transitionTo('player.initView');
+                        }
+                    }
+                    else if (jsonData.eventType == eventTypes.signup) {
+                        console.log(jsonData.data);
+
+                        $scope.videoInstance.is_authenticated = jsonData.data.signup_success;
+                        $scope.videoInstance.user = jsonData.data.user;
+                        safeApply($scope);
+
+                        if ($scope.videoInstance.is_authenticated) {
+                            $state.transitionTo('player.initView');
+                        }
                     }
                     else {
                         console.log('Socket received unhandled message.');
@@ -217,10 +238,6 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 socket.onclose(function() {
-                    $scope.videoInstance = {};
-                    $scope.currentTime = 0;
-                    $scope.currentTimeHMS = '00:00';
-
                     $state.transitionTo('player.initView');
                 });
             }
