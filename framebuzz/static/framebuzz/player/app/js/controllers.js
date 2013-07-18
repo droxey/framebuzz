@@ -216,8 +216,6 @@ angular.module('framebuzz.controllers', []).
                         }
                     }
                     else if (jsonData.eventType == eventTypes.signup) {
-                        console.log(jsonData.data);
-
                         $scope.videoInstance.is_authenticated = jsonData.data.signup_success;
                         $scope.videoInstance.user = jsonData.data.user;
                         safeApply($scope);
