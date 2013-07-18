@@ -1,3 +1,4 @@
+import math
 from datetime import datetime
 
 from django.core.urlresolvers import reverse
@@ -155,6 +156,25 @@ class MPTTComment(MPTTModel, Comment):
         return '%s?thread=%s' % (reverse('view-content',
             kwargs={'section_type': 'v', 'result_id': str(video.video_id)}), str(thread_id))
 
+    def get_thread_siblings(self):
+        if not self.parent:
+            start = math.floor(self.time)
+            time_fraction = self.time % 1
+
+            if time_fraction > .5:
+                start = start + 1
+                end = start - COMMENT_VISIBILITY_TIME_RANGE
+            else:
+                end = start + COMMENT_VISIBILITY_TIME_RANGE
+            
+            comments_in_range = MPTTComment.objects.filter(object_pk=self.object_pk,
+                                                parent=None, 
+                                                time__gte=start, 
+                                                time__lte=end,
+                                                is_removed=False).order_by('time')
+            return comments_in_range
+        return None
+
     class MPTTMeta:
         # comments on one level will be ordered by date of creation
         order_insertion_by=['submit_date']
@@ -165,26 +185,12 @@ class MPTTComment(MPTTModel, Comment):
         verbose_name_plural='Video Comments'
 
     def save(self, *args, **kwargs):
-        import math
-
         if not self.submit_date:
             self.submit_date = datetime.now()
 
         if not self.parent:
-            start = math.floor(self.time)
-            time_fraction = self.time % 1
-
-            if time_fraction > .5:
-                start = start + 1
-                end = start - COMMENT_VISIBILITY_TIME_RANGE
-            else:
-                end = start + COMMENT_VISIBILITY_TIME_RANGE
-
-            comments_in_range = MPTTComment.objects.filter(object_pk=self.object_pk,
-                                                            parent=None, 
-                                                            time__gte=start, 
-                                                            time__lte=end,
-                                                            is_removed=False).order_by('time')
+            comments_in_range = self.get_thread_siblings()
+            
             if self.pk:
                 comments_in_range = comments_in_range.exclude(id__in=[self.id,])
 

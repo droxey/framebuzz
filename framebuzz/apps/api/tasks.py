@@ -201,3 +201,24 @@ def post_new_thread(context):
         outbound_message[DATA_KEY] = { 'thread': json.loads(threadSerialized) }
         
         return outbound_message
+
+
+@celery.task
+def get_thread_siblings(context):
+    thread_data = context.get(DATA_KEY, None)
+    channel = context.get('outbound_channel', None)
+    user = context.get('user', None)
+    
+    if thread_data:
+        thread = MPTTComment.objects.get(id=thread_data.get('threadId'))
+        siblings = thread.get_thread_siblings()
+
+        threadSerializer = MPTTCommentSerializer(siblings, context={ 'user': user })
+        threadSerialized = JSONRenderer().render(threadSerializer.data)
+
+        outbound_message = dict()
+        outbound_message[EVENT_TYPE_KEY] = 'FB_GET_THREAD_SIBLINGS'
+        outbound_message[CHANNEL_KEY] = channel
+        outbound_message[DATA_KEY] = { 'siblings': json.loads(threadSerialized) }
+        
+        return outbound_message

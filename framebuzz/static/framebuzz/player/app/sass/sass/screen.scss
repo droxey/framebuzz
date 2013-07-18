@@ -479,7 +479,6 @@ object, embed, video, iframe {
 
             div.scrollable {
                 background: rgba(53, 53, 53, 0.95);
-                border-left: 1px solid rgba(104, 104, 104, 0.44);
                 height: 385px;
                 width: 100%;
 
@@ -521,7 +520,80 @@ object, embed, video, iframe {
 
                             ul.comment-stream {
                                 li {
+                                    border-bottom: none;
                                     display: block;
+
+                                    img.img-circle {
+                                        display: inline-block;
+                                        height: 29px;
+                                        left: 8px;
+                                        top: 11px;
+                                        width: 29px;
+                                    }
+
+                                    div.comment-actions {
+                                        padding: 0px 21px 6px 16px;
+
+                                        a {
+                                            display: inline-block;
+                                            vertical-align: baseline;
+
+                                            &.reply {
+                                                height: 21px;
+                                                margin-right: 6px;
+                                                width: 23px;
+                                            }
+
+                                            &.favorite {
+                                                height: 20px;
+                                                margin: 0 6px;
+                                                width: 24px;
+                                            }
+
+                                            &.flag {
+                                                height: 15px;
+                                                margin-left: 25px;
+                                                width: 15px;
+                                            }
+
+                                            &.dots {
+                                                height: 6px;
+                                                margin-left: 49px;
+                                                width: 19px;
+                                            }
+
+                                            &.follow {
+                                                height: 20px;
+                                                margin-left: 6px;
+                                                width: 14px;
+                                            }
+
+                                            img {
+                                                height: 100%;
+                                                width: 100%;
+                                            }
+                                        }
+                                    }
+
+                                    ul.replies {
+                                        background: rgba(98, 98, 98, 0.34);
+
+                                        li {
+                                            border-bottom: 1px solid rgba(104, 104, 104, .90);
+                                            margin: 0 10px;
+                                            min-height: 32px;
+                                            padding: 6px 12px;
+
+                                            &:last-child { border-bottom: none; }
+
+                                            div.thread {
+                                                
+                                                padding: 0;
+
+                                                p { width: 197px; }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -555,7 +627,6 @@ object, embed, video, iframe {
                 }
 
                 div.registration {
-                    border-left: 1px solid rgba(104, 104, 104, 0.15);
                     padding: 17px;
 
                     h1 {

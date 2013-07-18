@@ -15,6 +15,7 @@ def video_embed(request, video_id):
         'close_window': request.GET.get('close', None),
         'video': video,
         'socket_port': settings.SOCKJS_PORT,
-        'socket_channel': settings.SOCKJS_CHANNEL
+        'socket_channel': settings.SOCKJS_CHANNEL,
+        'user_channel': '/framebuzz/session/%s' % request.session.session_key
     },
     context_instance=RequestContext(request))

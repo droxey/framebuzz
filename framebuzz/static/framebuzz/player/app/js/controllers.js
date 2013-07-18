@@ -14,10 +14,12 @@ angular.module('framebuzz.controllers', []).
                 $scope.selectedThread = null;
                 $scope.loginModel = null;
                 $scope.signupModel = null;
+                $scope.selectedThreadSiblings = {};
                 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
-                    postNewThread: 'FB_POST_NEW_THREAD'
+                    postNewThread: 'FB_POST_NEW_THREAD',
+                    getThreadSiblings: 'FB_GET_THREAD_SIBLINGS'
                 };
 
                 // --
@@ -54,6 +56,7 @@ angular.module('framebuzz.controllers', []).
                     $scope.selectedThread = thread;
 
                     // TODO: Fetch siblings!
+                    socket.send_json({eventType: eventTypes.getThreadSiblings, channel: SOCK.user_channel, data: { threadId: thread.id }});
                 };
 
                 // --
@@ -135,6 +138,12 @@ angular.module('framebuzz.controllers', []).
                             // the has_hidden_sibilings value.
                             console.log('TODO: This comment is not visible.');
                         }
+                    }
+                    else if (jsonData.eventType == eventTypes.getThreadSiblings) {
+                        $scope.selectedThreadSiblings = jsonData.data;
+                        safeApply($scope);
+
+                        console.log($scope.selectedThreadSiblings);
                     }
                     else {
                         console.log('Socket received unhandled message.');

@@ -45,8 +45,10 @@
           port: {{ socket_port }},
           channel: '{{ socket_channel }}',
           video_channel: '/framebuzz/video/' + '{{ video.video_id }}',
-          root_path: '/static/framebuzz/player/app/'
+          root_path: '/static/framebuzz/player/app/',
+          user_channel: '{{ user_channel }}'
         };
+        console.log(SOCK);
       </script>
     {% endcompress %}
     <!--[if lt IE 9]>

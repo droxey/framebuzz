@@ -2,26 +2,41 @@
     <img ng-src="{{ rootPath }}img/bkg-heads.png" alt="" />
     <ul class="comment-stream">
         <li>
-            <div class="thread" data-scrollable="true">
+            <div class="thread">
                 <div class="header">
                     <strong class="username">{{ selectedThread.user.username }}</strong>
                     <strong class="time">{{ selectedThread.time_hms }}</strong>
                 </div>
                 <p>{{ selectedThread.comment }}</p>
-                <div class="comment-actions">
-                    <a data-ng-click="postCommentAction(thread, 'favorite')" title="Favorite">
-                        <img src="{{ rootPath }}img/img-heart.png" alt="Favorite" />
-                    </a> 
-                </div>
-                <ul class="replies">
-                    <li data-ng-repeat="reply in selectedThread.replies">
+            </div>
+            <img class="img-circle" data-ng-src="{{ selectedThread.user.avatar_url }}" alt="" />
+            <div class="comment-actions">
+                <a class="reply" href="#" title="Reply">
+                    <img src="{{ rootPath }}img/icon-post-comment.png" alt="Reply" />
+                </a>
+                <a class="favorite" data-ng-click="postCommentAction(thread, 'favorite')" title="Favorite">
+                    <img src="{{ rootPath }}img/icon-favorite.png" alt="Favorite" />
+                </a>
+                <a class="follow" data-ng-click="postCommentAction(thread, 'follow')" title="Follow">
+                    <img src="{{ rootPath }}img/icon-follow.png" alt="Follow" />
+                </a>
+                <a class="dots" href="">
+                    <img src="{{ rootPath }}img/icon-dots.png" alt="Replies" />
+                </a>
+                <a class="flag" data-ng-click="postCommentAction(thread, 'flag')" title="Flag">
+                    <img src="{{ rootPath }}img/icon-flag.png" alt="Flag" />
+                </a>
+            </div>
+            <ul class="replies" data-scrollable="true">
+                <li data-ng-repeat="reply in selectedThread.replies">
+                    <div class="thread">
                         <div class="header">
                             <strong class="username">{{ reply.user.username }}</strong>
                         </div>
                         <p>{{ reply.comment }}</p>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                </li>
+            </ul>
         </li>
     </ul>
 </div>
