@@ -70,11 +70,10 @@
         </div>
       </div>
     </div>
+    <script src="//cdn.sockjs.org/sockjs-0.3.4.min.js"></script>
     {% compress js %}
       <script src="{% static 'framebuzz/player/app/lib/jquery/jquery-1.9.1.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/angular/angular.min.js' %}"></script>
-      <script src="{% static 'framebuzz/js/vendor/plugins.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/sockjs-0.3.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/angular/angular-ui-router.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/gsap/TweenMax.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/gsap/jquery.gsap.min.js' %}"></script>
@@ -87,8 +86,9 @@
       <script src="{% static 'framebuzz/player/app/js/controllers.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/js/filters.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/js/directives.js' %}"></script>
+      <script src="{% static 'framebuzz/js/vendor/plugins.js' %}"></script>
+      <script src="{% static 'framebuzz/player/app/lib/perfect-scrollbar-0.4.1.with-mousewheel.min.js' %}"></script>
     {% endcompress %}
-    <script src="{% static 'framebuzz/player/app/lib/perfect-scrollbar-0.4.1.with-mousewheel.min.js' %}"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
