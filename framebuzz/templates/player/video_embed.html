@@ -38,6 +38,7 @@
         // Disable ESC as it breaks SockJS connection.
         // See https://github.com/sockjs/sockjs-client/issues/18.
         window.addEventListener('keydown', function(e) { (e.keyCode == 27 && e.preventDefault()) });
+        window.location.hash = '#/player';
 
         // Set up our global SOCK variable.
         var SOCK = {
@@ -48,7 +49,6 @@
           root_path: '/static/framebuzz/player/app/',
           user_channel: '{{ user_channel }}'
         };
-        console.log(SOCK);
       </script>
     {% endcompress %}
     <!--[if lt IE 9]>

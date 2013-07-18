@@ -11,6 +11,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.currentTime = 0;
                 $scope.currentTimeHMS = '00:00';
                 $scope.newThread = {};
+                $scope.newReply = {};
                 $scope.selectedThread = null;
                 $scope.loginModel = null;
                 $scope.signupModel = null;
@@ -18,7 +19,7 @@ angular.module('framebuzz.controllers', []).
                 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
-                    postNewThread: 'FB_POST_NEW_THREAD',
+                    postNewComment: 'FB_POST_NEW_COMMENT',
                     getThreadSiblings: 'FB_GET_THREAD_SIBLINGS'
                 };
 
@@ -42,9 +43,26 @@ angular.module('framebuzz.controllers', []).
                         'comment': $scope.newThread.comment
                     };
 
-                    socket.send_json({eventType: eventTypes.postNewThread, channel: SOCK.video_channel, data: postData});
+                    socket.send_json({eventType: eventTypes.postNewComment, channel: SOCK.video_channel, data: postData});
 
                     $scope.newThread = {};
+                    safeApply($scope);
+                };
+
+                $scope.postNewReply = function() {
+                    var postData = {
+                        'object_pk': $scope.videoInstance.video.id,
+                        'content_type': 'core.video',
+                        'time': $scope.currentTime,
+                        'comment': $scope.newReply.comment,
+                        'parent': $scope.selectedThread.id
+                    };
+
+                    console.log({eventType: eventTypes.postNewComment, channel: SOCK.video_channel, data: postData});
+
+                    socket.send_json({eventType: eventTypes.postNewComment, channel: SOCK.video_channel, data: postData});
+
+                    $scope.newReply = {};
                     safeApply($scope);
                 };
 
@@ -87,6 +105,21 @@ angular.module('framebuzz.controllers', []).
                     }
                 };
 
+                var addNewReply = function(newReply) {
+                    var changed = false;
+                    angular.forEach($scope.videoInstance.threads, function(thread, key) {
+                        if (thread.id == newReply.parent_id) {
+                            thread.replies.push(newReply);
+                            changed = true;
+                        }
+                    });
+
+                    if (changed) {
+                        safeApply($scope);
+                    }
+                };
+
+
                 // --
                 // PLAYER DIRECTIVE BROADCASTS
                 // --
@@ -128,15 +161,23 @@ angular.module('framebuzz.controllers', []).
                         $scope.videoInstance = jsonData.data;
                         safeApply($scope);
                     }
-                    else if (jsonData.eventType == eventTypes.postNewThread) {
-                        var newThread = jsonData.data.thread;
-                        if (newThread.is_visible) {
-                            addNewThread(newThread);
+                    else if (jsonData.eventType == eventTypes.postNewComment) {
+                        if (jsonData.data.thread !== undefined) {
+                            var newThread = jsonData.data.thread;
+
+                            if (newThread.is_visible) {
+                                addNewThread(newThread);
+                            }
+                            else {
+                                // Find the thread for the time, and update
+                                // the has_hidden_sibilings value.
+                                console.log('TODO: This comment is not visible.');
+                            }
                         }
-                        else {
-                            // Find the thread for the time, and update
-                            // the has_hidden_sibilings value.
-                            console.log('TODO: This comment is not visible.');
+                        
+                        if (jsonData.data.reply !== undefined) {
+                            var newReply = jsonData.data.reply;
+                            addNewReply(newReply);
                         }
                     }
                     else if (jsonData.eventType == eventTypes.getThreadSiblings) {

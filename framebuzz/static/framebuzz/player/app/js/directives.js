@@ -73,14 +73,19 @@ angular.module('framebuzz.directives', [])
             });
         };
     })
-    .directive('scrollbar', function(broadcaster) {
+    .directive('scrollbar', ['$rootScope', 'broadcaster', function($rootScope, broadcaster) {
         return function(scope, element, attrs) {
             if (attrs.scrollbar == 'true') {
                 $(element).perfectScrollbar();
 
-                scope.$on('player_timeupdate', function() {
+                scope.$on('$viewContentLoaded', function() {
+                    $(element).perfectScrollbar('destroy');
+                    $(element).perfectScrollbar();
+                });
+
+                scope.$on('player_timeupdate', function() { 
                     $(element).perfectScrollbar('update');
                 });
             }
         };
-    });
+    }]);

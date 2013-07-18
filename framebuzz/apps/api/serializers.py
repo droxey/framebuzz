@@ -99,11 +99,16 @@ class BaseCommentSerializer(serializers.ModelSerializer):
 
 
 class MPTTCommentReplySerializer(BaseCommentSerializer):
+    parent_id = serializers.SerializerMethodField('get_parent_id')
+
     class Meta:
         model = MPTTComment
         depth = 2
         fields = ('id', 'user', 'comment', 'submit_date',
-            'is_favorite', 'is_flagged', 'is_following', 'is_visible',)
+            'is_favorite', 'is_flagged', 'is_following', 'is_visible', 'parent_id',)
+
+    def get_parent_id(self, obj):
+        return obj.parent.id
 
 
 class MPTTCommentSerializer(BaseCommentSerializer):

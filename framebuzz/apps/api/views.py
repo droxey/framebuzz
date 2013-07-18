@@ -10,6 +10,8 @@ from framebuzz.apps.api.backends.youtube import get_or_create_video
 def video_embed(request, video_id):
     video, created = get_or_create_video(video_id)
 
+    print request.user.is_authenticated()
+
     return render_to_response('player/video_embed.html',
     {
         'close_window': request.GET.get('close', None),

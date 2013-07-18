@@ -11,7 +11,7 @@ from rest_framework.renderers import JSONRenderer
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY, TIMELINE_BLOCKS, SIGNIFICANCE_FACTOR
 from framebuzz.apps.api.forms import MPTTCommentForm
 from framebuzz.apps.api.models import MPTTComment, Video
-from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, UserSerializer
+from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 
 
@@ -172,7 +172,7 @@ def initialize_video_player(context):
 
 
 @celery.task
-def post_new_thread(context):
+def post_new_comment(context):
     thread_data = context.get(DATA_KEY, None)
     comment = None
 
@@ -190,15 +190,20 @@ def post_new_thread(context):
             comment = MPTTComment(**data)
             comment.save()
 
-
     if comment:
-        threadSerializer = MPTTCommentSerializer(comment, context={ 'user': user })
-        threadSerialized = JSONRenderer().render(threadSerializer.data)
+        if not comment.parent:
+            threadSerializer = MPTTCommentSerializer(comment, context={ 'user': user })
+            threadSerialized = JSONRenderer().render(threadSerializer.data)
+            return_data = { 'thread': json.loads(threadSerialized) }
+        else:
+            replySerializer = MPTTCommentReplySerializer(comment, context={ 'user': user })
+            replySerialized = JSONRenderer().render(replySerializer.data)
+            return_data = { 'reply': json.loads(replySerialized) }
         
         outbound_message = dict()
-        outbound_message[EVENT_TYPE_KEY] = 'FB_POST_NEW_THREAD'
+        outbound_message[EVENT_TYPE_KEY] = 'FB_POST_NEW_COMMENT'
         outbound_message[CHANNEL_KEY] = channel
-        outbound_message[DATA_KEY] = { 'thread': json.loads(threadSerialized) }
+        outbound_message[DATA_KEY] = return_data
         
         return outbound_message
 
