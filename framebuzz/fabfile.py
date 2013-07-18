@@ -62,22 +62,22 @@ env.host_string = '%s:%s' % (env.hosts[0], '22')
 
 templates = {
     "nginx": {
-        "local_path": "../deploy/nginx.conf",
+        "local_path": "deploy/nginx.conf",
         "remote_path": "/etc/nginx/sites-enabled/%(proj_name)s.conf",
         "reload_command": "service nginx restart",
     },
     "supervisor": {
-        "local_path": "../deploy/supervisor.conf",
+        "local_path": "deploy/supervisor.conf",
         "remote_path": "/etc/supervisor/conf.d/%(proj_name)s.conf",
         "reload_command": "supervisorctl reload",
     },
     "gunicorn": {
-        "local_path": "../deploy/gunicorn.conf.py",
+        "local_path": "deploy/gunicorn.conf.py",
         "remote_path": "%(venv_path)s/run/gunicorn.conf.py",
     },
     "settings": {
-        "local_path": "../deploy/live_settings.py",
-        "remote_path": "%(proj_path)s/popcorn/local_settings.py",
+        "local_path": "deploy/live_settings.py",
+        "remote_path": "%(proj_path)s/framebuzz/local_settings.py",
     },
 }
 
@@ -292,7 +292,7 @@ def python(code, show=True):
     """
     Runs Python code in the project's virtual environment, with Django loaded.
     """
-    setup = "import os; os.environ[\'DJANGO_SETTINGS_MODULE\']=\'popcorn.settings\';"
+    setup = "import os; os.environ[\'DJANGO_SETTINGS_MODULE\']=\'framebuzz.settings\';"
     full_code = 'python -c "%s%s"' % (setup, code.replace("`", "\\\`"))
     with project():
         result = run(full_code, show=False)
@@ -327,13 +327,10 @@ def install():
     """
     Installs the base system and Python requirements for the entire server.
     """
-    locale = "LC_ALL=%s" % env.locale
-    with hide("stdout"):
-        if locale not in sudo("cat /etc/default/locale"):
-            sudo("update-locale %s" % locale)
-            run("exit")
     sudo("apt-get update -y -q")
-    apt("nginx libjpeg-dev python-dev python-setuptools git-core "
+    apt("gcc libc6 zlib1g-dev libexpat1-dev libssl-dev python2.7-dev libc-dev "
+        "libjpeg-turbo8-dev comerr-dev libjpeg8-dev nginx libkrb5-dev "
+        "libjpeg-dev python-dev python-setuptools git-core "
         "postgresql libpq-dev memcached supervisor redis-server "
         "python-software-properties")
     sudo("easy_install pip")
@@ -432,13 +429,15 @@ def restart():
         start_args = (env.proj_name, env.proj_name)
         sudo("supervisorctl start %s:gunicorn_%s" % start_args)
 
-    restart_node_server()
+    restart_celery()
 
 
 @task
 @log_call
-def restart_node_server():
-    sudo('forever restartall')
+def restart_celery():
+    pid_path = '/var/run/celeryd.pid'
+    if exists(pid_path):
+        sudo("kill -HUP `cat %s`" % pid_path)
 
 
 @task
@@ -478,7 +477,7 @@ def deploy():
         manage("collectstatic -v 0 --noinput")
         manage("syncdb --noinput")
         manage("migrate --noinput")
-        manage("loaddata %s/popcorn/fixtures/social_accounts.json" % env.proj_path)
+        manage("loaddata %s/framebuzz/fixtures/social_accounts.json" % env.proj_path)
 
     restart()
     return True
