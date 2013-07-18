@@ -102,8 +102,6 @@ def initialize_video_player(context):
     channel = context.get('outbound_channel', None)
     user = context.get('user', None)
 
-    
-
     logger.info('Running initialize_video_player with the following parameters:')
     logger.info('Video ID: %s | Channel: %s' % (video_id, channel))
 
@@ -183,7 +181,11 @@ def post_new_comment(context):
 
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
-    user = context.get('user', None)
+
+    if thread_data.get('username', None):
+        user = auth.models.User.objects.get(username=thread_data['username'])
+    else:
+        user = context.get('user', None)
 
     if thread_data:
         video = Video.objects.get(video_id=video_id)

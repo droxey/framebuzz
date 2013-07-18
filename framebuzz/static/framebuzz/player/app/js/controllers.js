@@ -62,7 +62,8 @@ angular.module('framebuzz.controllers', []).
                         'object_pk': $scope.videoInstance.video.id,
                         'content_type': 'core.video',
                         'time': $scope.currentTime,
-                        'comment': $scope.newThread.comment
+                        'comment': $scope.newThread.comment,
+                        'username': $scope.videoInstance.user.username
                     };
 
                     socket.send_json({eventType: eventTypes.postNewComment, channel: SOCK.video_channel, data: postData});
@@ -77,10 +78,9 @@ angular.module('framebuzz.controllers', []).
                         'content_type': 'core.video',
                         'time': $scope.currentTime,
                         'comment': $scope.newReply.comment,
-                        'parent': $scope.selectedThread.id
+                        'parent': $scope.selectedThread.id,
+                        'username': $scope.videoInstance.user.username
                     };
-
-                    console.log({eventType: eventTypes.postNewComment, channel: SOCK.video_channel, data: postData});
 
                     socket.send_json({eventType: eventTypes.postNewComment, channel: SOCK.video_channel, data: postData});
 

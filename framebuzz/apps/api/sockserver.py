@@ -76,7 +76,7 @@ class ConnectionHandler(SockJSConnection):
                 video_id = self.video_channel.lstrip('/framebuzz/video/').rstrip('/')
 
                 if event_type == 'FB_POST_NEW_COMMENT':
-                    task_chain = tasks.get_user_by_session_key.s(session_key=self.session_key, extra_context={'video_id': video_id, 'data': data, 'outbound_channel': self.video_channel}) | tasks.post_new_comment.s() | tasks.message_outbound.s()
+                    task_chain = tasks.get_user_by_session_key.s(session_key=self.session_key, extra_context={'video_id': video_id, 'data': data, 'outbound_channel': self.video_channel, 'username': data.get('username', None) }) | tasks.post_new_comment.s() | tasks.message_outbound.s()
                 elif event_type == 'FB_GET_THREAD_SIBLINGS':
                     task_chain = tasks.get_user_by_session_key.s(session_key=self.session_key, extra_context={'data': data, 'outbound_channel': self.session_channel}) | tasks.get_thread_siblings.s() | tasks.message_outbound.s()
                 elif event_type == 'FB_LOGIN':
