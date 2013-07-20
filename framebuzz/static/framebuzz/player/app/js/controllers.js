@@ -4,8 +4,8 @@
 
 angular.module('framebuzz.controllers', []).
   controller('VideoPlayerCtrl', 
-        ['$scope', '$state', '$filter', 'socket', 'broadcaster', 'safeApply', 
-            function($scope, $state, $filter, socket, broadcaster, safeApply) {    
+        ['$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 
+            function($scope, $state, $filter, $http, socket, broadcaster, safeApply) {    
                 $scope.rootPath = SOCK.root_path;
                 $scope.videoInstance = {};
                 $scope.currentTime = 0;
@@ -30,16 +30,28 @@ angular.module('framebuzz.controllers', []).
                 // --
                 
                 $scope.login = function() {
-                    var messageData = {
-                        'login': $scope.loginModel.username,
-                        'password': $scope.loginModel.password
-                    };
+                    $http({
+                        method: 'POST', 
+                        url: SOCK.login_url, 
+                        data: { login: $scope.loginModel.username, password: $scope.loginModel.password },
+                        headers: {
+                            "Content-Type": "application/json; charset=UTF-8"
+                        }
+                    })
+                    .success(function(data, status, headers, config) {
+                        if (data.data.login_success) {
+                            $scope.videoInstance.is_authenticated = data.data.login_success;
+                            $scope.videoInstance.user = data.data.user;
+                            $scope.loginModel = {};
+                            safeApply($scope);
 
-                   //var message = {eventType: eventTypes.login, channel: SOCK.user_channel, data: messageData };
-                   // socket.send_json(message);
-
-                    //$scope.loginModel = {};
-                    //safeApply($scope);
+                            $state.transitionTo('player.initView');
+                        }
+                    })
+                    .error(function(data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    });
                 };
 
                 $scope.signup = function() {
@@ -205,15 +217,6 @@ angular.module('framebuzz.controllers', []).
                     else if (jsonData.eventType == eventTypes.getThreadSiblings) {
                         $scope.selectedThreadSiblings = jsonData.data;
                         safeApply($scope);
-                    }
-                    else if (jsonData.eventType == eventTypes.login) {
-                        $scope.videoInstance.is_authenticated = jsonData.data.login_success;
-                        $scope.videoInstance.user = jsonData.data.user;
-                        safeApply($scope);
-
-                        if ($scope.videoInstance.is_authenticated) {
-                            $state.transitionTo('player.initView');
-                        }
                     }
                     else if (jsonData.eventType == eventTypes.signup) {
                         $scope.videoInstance.is_authenticated = jsonData.data.signup_success;

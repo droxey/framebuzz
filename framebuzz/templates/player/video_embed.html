@@ -47,7 +47,10 @@
           channel: '{{ socket_channel }}',
           video_channel: '/framebuzz/video/' + '{{ video.video_id }}',
           root_path: '/static/framebuzz/player/app/',
-          user_channel: '{{ user_channel }}'
+          user_channel: '{{ user_channel }}',
+          login_url: "{% url 'video-login' video.video_id %}",
+          logout_url: "{% url 'video-logout' video.video_id %}",
+          signup_url: "{% url 'video-signup' video.video_id %}"
         };
       </script>
     {% endcompress %}
@@ -91,7 +94,7 @@
       <script src="{% static 'framebuzz/player/app/js/filters.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/js/directives.js' %}"></script>
       <script src="{% static 'framebuzz/js/vendor/plugins.js' %}"></script>
-      
+
       <script src="{% static 'framebuzz/player/app/lib/perfect-scrollbar-0.4.1.with-mousewheel.min.js' %}"></script>
     {% endcompress %}
     <script>
