@@ -13,8 +13,8 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
-    # API
-    url(r'^v/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_embed', name='view-content'),
+    # Player API
+    url(r'^v/', include('framebuzz.apps.api.urls')),
 
     # Django-AllAuth
     (r'^accounts/', include('allauth.urls')),

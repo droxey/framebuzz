@@ -35,11 +35,11 @@ angular.module('framebuzz.controllers', []).
                         'password': $scope.loginModel.password
                     };
 
-                    var message = {eventType: eventTypes.login, channel: SOCK.user_channel, data: messageData };
-                    socket.send_json(message);
+                   //var message = {eventType: eventTypes.login, channel: SOCK.user_channel, data: messageData };
+                   // socket.send_json(message);
 
-                    $scope.loginModel = {};
-                    safeApply($scope);
+                    //$scope.loginModel = {};
+                    //safeApply($scope);
                 };
 
                 $scope.signup = function() {
@@ -50,11 +50,11 @@ angular.module('framebuzz.controllers', []).
                         'email': $scope.signupModel.email
                     };
 
-                    var message = {eventType: eventTypes.signup, channel: SOCK.user_channel, data: messageData };
-                    socket.send_json(message);
+                    //var message = {eventType: eventTypes.signup, channel: SOCK.user_channel, data: messageData };
+                    //socket.send_json(message);
 
-                    $scope.signupModel = {};
-                    safeApply($scope);
+                    //$scope.signupModel = {};
+                    //safeApply($scope);
                 }
                 
                 $scope.postNewThread = function() {
