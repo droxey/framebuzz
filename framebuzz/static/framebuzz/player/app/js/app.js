@@ -3,7 +3,16 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('framebuzz', 
-    ['ui.state', 'ui.bootstrap', 'framebuzz.filters', 'framebuzz.services', 'framebuzz.directives', 'framebuzz.animations', 'framebuzz.controllers'])
+    [
+        'ngCookies',
+        'ui.state', 
+        'ui.bootstrap', 
+        'framebuzz.filters', 
+        'framebuzz.services', 
+        'framebuzz.directives', 
+        'framebuzz.animations', 
+        'framebuzz.controllers'
+    ])
     .config(['$routeProvider', '$stateProvider', '$urlRouterProvider', 
         function($routeProvider, $stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise('/');
@@ -105,8 +114,20 @@ angular.module('framebuzz',
                 .state(playerActiveViewComments)
                 .state(playerActiveViewActivity);
         }
-    ]).run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-        $state.transitionTo('player.initView');
-    }]);
+    ]).run(
+        [
+            '$rootScope', 
+            '$state', 
+            '$stateParams',
+            '$cookies', 
+            '$http',
+            function($rootScope, $state, $stateParams, $cookies, $http) {
+                // attach django's CSRF token to sent data
+                $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
+                
+                $rootScope.$state = $state;
+                $rootScope.$stateParams = $stateParams;
+                $state.transitionTo('player.initView');
+            }
+        ]
+    );

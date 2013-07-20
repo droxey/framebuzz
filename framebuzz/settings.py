@@ -145,11 +145,8 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     "allauth.socialaccount.context_processors.socialaccount",
 )
 
-CSRF_COOKIE_NAME = "XSRF-TOKEN"
-
 MIDDLEWARE_CLASSES = (
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
-    'framebuzz.libs.middleware.angular.AngularCSRFRename',
 
     #'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -157,7 +154,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    
+
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
