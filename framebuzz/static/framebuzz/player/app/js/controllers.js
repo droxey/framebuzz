@@ -49,8 +49,7 @@ angular.module('framebuzz.controllers', []).
                         }
                     })
                     .error(function(data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                    
                     });
                 };
 
@@ -62,11 +61,27 @@ angular.module('framebuzz.controllers', []).
                         'email': $scope.signupModel.email
                     };
 
-                    //var message = {eventType: eventTypes.signup, channel: SOCK.user_channel, data: messageData };
-                    //socket.send_json(message);
+                    $http({
+                        method: 'POST', 
+                        url: SOCK.signup_url, 
+                        data: messageData,
+                        headers: {
+                            "Content-Type": "application/json; charset=UTF-8"
+                        }
+                    })
+                    .success(function(data, status, headers, config) {
+                        if (data.data.login_success) {
+                            $scope.videoInstance.is_authenticated = data.data.login_success;
+                            $scope.videoInstance.user = data.data.user;
+                            $scope.signupModel = {};
+                            safeApply($scope);
 
-                    //$scope.signupModel = {};
-                    //safeApply($scope);
+                            $state.transitionTo('player.initView');
+                        }
+                    })
+                    .error(function(data, status, headers, config) {
+                    
+                    });
                 }
                 
                 $scope.postNewThread = function() {
