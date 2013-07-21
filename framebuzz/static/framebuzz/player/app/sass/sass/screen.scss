@@ -62,12 +62,15 @@ object, embed, video, iframe {
             div.mejs-inner {
                 div.mejs-controls {
                     background: none;
+                    height: 100%;
+                    width: 100%;
 
                     div.mejs-time-rail {
-                        bottom: -25px;
+                        float: none;
                         height: 21px;
                         padding-top: 0;
                         position: absolute;
+                        top: 392px;
                         width: 640px;
                         z-index: 10;
 
@@ -75,7 +78,7 @@ object, embed, video, iframe {
                             @include background-image(linear-gradient(rgba(30, 30, 30, 0.3), rgba(60, 60, 60, 0.1))); 
                             @include border-radius(2px, 2px);
                             height: 11px;
-                            margin: 4px 8px 0;
+                            margin: 0 8px;
                             width: 624px;
 
                             span.mejs-time-current {
