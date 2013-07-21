@@ -476,7 +476,7 @@ object, embed, video, iframe {
         }
 
         #blended-view {
-            height: 270px;
+            height: auto;
             left: 4px;
             position: relative;
             width: 237px;
@@ -502,11 +502,12 @@ object, embed, video, iframe {
                 @include border-bottom-left-radius(3px);
                 @include border-bottom-right-radius(3px);
                 background: rgba(61, 61, 61, 0.7);
-                height: 270px;
+                height: auto;
+                max-height: 385px;
                 right: 3px;
 
                 ul.comment-stream {
-                    height: 268px;
+                    height: auto;
                     padding-top: 2px;
 
                     li {
