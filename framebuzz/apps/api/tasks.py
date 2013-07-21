@@ -331,3 +331,26 @@ def add_comment_action(context):
 
         outbound_message[DATA_KEY] = { 'action': action_name, 'thread': json.loads(threadSerialized) }
         return outbound_message
+
+@celery.task
+def add_player_action(context):
+    player_data = context.get(DATA_KEY, None)
+    player_action = player_data.get('action', None)
+    video_id = context.get('video_id', None)
+    video = Video.objects.get(video_id=video_id)
+    verb = None
+
+    if player_data.get('username', None):
+        user = auth.models.User.objects.get(username=player_data['username'])
+    else:
+        user = context.get('user', None)
+
+    if player_action == 'player_playing':
+        verb = 'played video'
+    elif player_action == 'player_paused':
+        verb = 'paused video'
+    else:
+        pass
+
+    if verb:
+        action.send(user, verb=verb, action_object=video, target=None, time=float(player_data.get('time')))

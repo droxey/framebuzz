@@ -24,7 +24,8 @@ angular.module('framebuzz.controllers', []).
                     getThreadSiblings: 'FB_GET_THREAD_SIBLINGS',
                     login: 'FB_LOGIN',
                     signup: 'FB_SIGNUP',
-                    commentAction: 'FB_COMMENT_ACTION'
+                    commentAction: 'FB_COMMENT_ACTION',
+                    playerAction: 'FB_PLAYER_ACTION'
                 };
 
                 // --
@@ -233,11 +234,31 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_playing', function() {
-                    $state.transitionTo('player.blendedView'); 
+                    if ($state.is('player.initView')) {
+                        $state.transitionTo('player.blendedView');
+                    }
+                
+                    socket.send_json({
+                        eventType: eventTypes.playerAction, 
+                        channel: SOCK.user_channel, 
+                        data: { 
+                            action: 'player_playing',
+                            username: $scope.videoInstance.user.username,
+                            time: $scope.currentTime
+                        }
+                    }); 
                 });
 
                 $scope.$on('player_paused', function() {
-                    console.log(broadcaster.message);
+                    socket.send_json({
+                        eventType: eventTypes.playerAction, 
+                        channel: SOCK.user_channel, 
+                        data: { 
+                            action: 'player_paused',
+                            username: $scope.videoInstance.user.username,
+                            time: $scope.currentTime
+                        }
+                    });
                 });
 
                 // --
