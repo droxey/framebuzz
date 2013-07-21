@@ -22,7 +22,8 @@ angular.module('framebuzz.controllers', []).
                     postNewComment: 'FB_POST_NEW_COMMENT',
                     getThreadSiblings: 'FB_GET_THREAD_SIBLINGS',
                     login: 'FB_LOGIN',
-                    signup: 'FB_SIGNUP'
+                    signup: 'FB_SIGNUP',
+                    commentAction: 'FB_COMMENT_ACTION'
                 };
 
                 // --
@@ -134,7 +135,8 @@ angular.module('framebuzz.controllers', []).
                 };
 
                 $scope.postCommentAction = function(comment, action) {
-
+                    console.log(comment);
+                    console.log(action);
                 };
 
                 $scope.setSelectedThread = function(thread) {
