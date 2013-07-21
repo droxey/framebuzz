@@ -63,14 +63,10 @@
   <body class="ng-cloak">
     {% providers_media_js %}
     <div id="player-container" class="container">
-      <div class="row-fluid">
-        <div id="player-layer" class="layer">
-          <div class="row-fluid">
-            <video data-media-element="" class="span12" id="video-element" preload="none" type="video/youtube" src="{{ video.swf_url }}">
-            </video>
-          </div>
-          <div id="heatmap-and-post" data-ui-view=""></div>
-        </div>
+      <div id="player-layer" class="layer">
+        <video data-media-element="" class="span12" id="video-element" preload="none" type="video/youtube" src="{{ video.swf_url }}">
+        </video>
+        <div id="heatmap-and-post" data-ui-view=""></div>
       </div>
     </div>
     <script src="//cdn.sockjs.org/sockjs-0.3.4.min.js"></script>
