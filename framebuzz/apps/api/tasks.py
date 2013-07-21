@@ -219,7 +219,23 @@ def get_thread_siblings(context):
     
     if thread_data:
         thread = MPTTComment.objects.get(id=thread_data.get('threadId'))
-        siblings = thread.get_thread_siblings()
+        comments_in_range = MPTTComment.objects.filter(object_pk=thread.object_pk,
+                                            parent=None, 
+                                            is_removed=False).order_by('time')
+        thread_index = list(comments_in_range.values_list('id', flat=True)).index(thread.id)
+
+        # We want 5 total.
+        if thread_index <= 1:
+            start_index = 0
+            total = 3
+        elif thread_index == 2:
+            start_index = thread_index - 2
+            total = 3
+        else:
+            start_index = thread_index - 3
+            total = 5
+        
+        siblings = comments_in_range[start_index:total]
 
         threadSerializer = MPTTCommentSerializer(siblings, context={ 'user': user })
         threadSerialized = JSONRenderer().render(threadSerializer.data)

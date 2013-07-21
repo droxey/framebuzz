@@ -248,10 +248,12 @@ angular.module('framebuzz.controllers', []).
                         }
                     }
                     else if (jsonData.eventType == eventTypes.getThreadSiblings) {
-                        $scope.selectedThreadSiblings = jsonData.data;
+                        $scope.selectedThreadSiblings = jsonData.data.siblings;
                         safeApply($scope);
 
-                         $state.transitionTo('player.activeView.thread', { threadId: $scope.selectedThread.id });
+                        console.log($scope.selectedThreadSiblings);
+
+                        $state.transitionTo('player.activeView.thread', { threadId: $scope.selectedThread.id });
                     }
                     else {
                         console.log('Socket received unhandled message.');

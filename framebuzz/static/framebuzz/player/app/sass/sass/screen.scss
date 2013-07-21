@@ -610,9 +610,50 @@ object, embed, video, iframe {
                             height: 53px;
                             width: 245px;
 
-                            img {
+                            img.siblings-bkg {
+                                position: relative;
                                 height: 53px;
+                                top: 0;
                                 width: 245px;
+                                z-index: 1;
+                            }
+
+                            ul {
+                                bottom: 58px;
+                                margin: 0 auto;
+                                position: relative;
+                                width: 200px;
+                                z-index: 10;
+
+                                li {
+                                    float: left;
+                                    padding: 11px 5px;
+
+                                    a {
+                                        cursor: pointer;
+                                        height: 22px;
+                                        width: 22px;
+
+                                        img {
+                                            height: 22px;
+                                            width: 22px;
+                                        }
+                                    }
+
+                                    &.active {
+                                        padding: 5px;
+
+                                        a {
+                                            height: 33px;
+                                            width: 33px;
+
+                                            img {
+                                                height: 33px;
+                                                width: 33px;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                         

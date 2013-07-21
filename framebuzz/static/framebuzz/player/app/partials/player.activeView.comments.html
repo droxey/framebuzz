@@ -1,6 +1,13 @@
 <div class="comments-view">
     <div class="thread-siblings" data-ng-show="selectedThread.has_hidden_siblings">
-        <img data-ng-src="{{ rootPath }}img/bkg-heads.png" alt="" />
+        <img class="siblings-bkg" data-ng-src="{{ rootPath }}img/bkg-heads.png" alt="" />
+        <ul class="clearfix">            
+            <li data-ng-repeat="siblingThread in selectedThreadSiblings" data-ng-class="{ 'active': siblingThread.id == selectedThread.id }">
+                <a data-ng-click="setSelectedThread(siblingThread)">
+                    <img data-ng-src="{{ siblingThread.user.avatar_url }}" class="img-circle">
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="thread-scroll" data-scrollbar="true">
         <ul class="comment-stream">
