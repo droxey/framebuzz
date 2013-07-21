@@ -775,7 +775,19 @@ object, embed, video, iframe {
                                     }
 
                                     &.active-thread {
-                                        
+                                        border-bottom: 1px solid rgba(104, 104, 104, .90);
+
+                                        img.img-circle {
+                                            @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                                            display: inline-block;
+                                            height: 44px;
+                                            opacity: .91;
+                                            position: relative;
+                                            top: 7px;
+                                            width: 44px;
+                                        }
+
+                                        &:last-child { border-bottom: none; }
                                     }
                                 }
                             }

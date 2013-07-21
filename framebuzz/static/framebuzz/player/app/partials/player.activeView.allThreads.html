@@ -1,8 +1,8 @@
 <li class="active-thread" data-ng-repeat="thread in videoInstance.threads" data-ng-show="thread.time < currentTime" data-ng-animate="{show: 'animate-comment-show'}">
     <div class="thread">
         <div class="header">
-            <strong class="username">{{ selectedThread.user.username }}</strong>
-            <strong class="time">{{ selectedThread.time_hms }}</strong>
+            <strong class="username">{{ thread.user.username }}</strong>
+            <strong class="time">{{ thread.time_hms }}</strong>
         </div>
         <p>{{ thread.comment }}</p>
     </div>
@@ -17,23 +17,16 @@
         <a class="follow" data-ng-click="postCommentAction(thread, 'follow')" title="Follow" data-ng-show="videoInstance.is_authenticated">
             <img src="{{ rootPath }}img/icon-follow.png" alt="Follow" />
         </a>
-        <a class="dots" href="" data-ng-show="thread.has_replies">
-            <img src="{{ rootPath }}img/icon-dots.png" alt="Replies" />
-        </a>
+        <span class="dots" data-ng-show="thread.has_hidden_siblings" class="dots has-hidden-siblings">
+          <img data-ng-src="/static/framebuzz/player/app/img/icon-dots.png" alt="View More"  />
+        </span>
+        <span class="dots" data-ng-show="thread.has_replies && !thread.has_hidden_siblings" class="dots has-replies">
+          <img data-ng-src="/static/framebuzz/player/app/img/icon-dots.png" alt="View More"  />
+        </span>
         <a class="flag" data-ng-click="postCommentAction(thread, 'flag')" title="Flag" data-ng-show="videoInstance.is_authenticated">
             <img src="{{ rootPath }}img/icon-flag.png" alt="Flag" />
         </a>
     </div>
-    <ul class="replies">
-        <li data-ng-repeat="reply in thread.replies">
-            <div class="thread">
-                <div class="header">
-                    <strong class="username">{{ reply.user.username }}</strong>
-                </div>
-                <p>{{ reply.comment }}</p>
-            </div>
-        </li>
-    </ul>
     <div class="post-reply" data-ng-show="videoInstance.is_authenticated">
         <form method="post" action="" id="post-reply-form" class="span12" data-ng-submit="postNewReply()">
             <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot" data-ng-model="newReply.honeypot"></p>
