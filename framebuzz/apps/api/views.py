@@ -2,6 +2,7 @@ import json
 
 from django.conf import settings
 from django.http import HttpResponse
+from django.contrib.auth import logout
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -63,9 +64,9 @@ def video_logout(request, video_id):
     if not request.method == 'POST':
         raise Exception('This view is meant to be called via a POST request.')
 
-    video, created = get_or_create_video(video_id)
+    logout(request)
 
-    pass
+    return HttpResponse(json.dumps({ 'logged_out': True }), content_type="application/json")
 
 @xframe_options_exempt
 def video_signup(request, video_id):

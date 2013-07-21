@@ -511,7 +511,7 @@ object, embed, video, iframe {
 
                     li {
                         cursor: pointer;
-                        
+
                         a {
                             color: rgba(255, 255, 255, .65);
                             text-decoration: none;
@@ -535,7 +535,7 @@ object, embed, video, iframe {
                         float: left;
                         height: 44px;
                         margin-left: 15px;
-                        width: 155px;
+                        width: 145px;
 
                         li {
                             float: left;
@@ -559,141 +559,183 @@ object, embed, video, iframe {
                         }
                     }
 
-                    div.tab-container {
-                        margin-top: 44px;
+                    a.dropdown-toggle {
+                        display: inline-block;
+                        height: 33px;
+                        padding: 4px 0;
+                        width: 33px;
 
-                        div.comments-view {
-                            div.thread-siblings {
+                        img.img-circle {
+                             @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                            height: 33px;
+                            width: 33px;
+                        }
+                    }
+
+                    ul.dropdown-menu {
+                        @include border-radius(0px, 0px);
+                        box-shadow: none;
+                        background: #2b2b2b;
+                        height: 57px;
+                        left: 135px;
+                        min-width: 108px;
+                        padding: 0;
+                        top: 41px;
+
+                        li {
+                            width: 108px;
+
+                            a {
+                                color: white;
+                                cursor: pointer;
+                                display: block;
+                                line-height: 28.5px;
+                                font-family: 'proxima-nova';
+                                font-size: 10.04px;
+                                font-weight: 500;
+                                padding: 0 10px;
+                                text-align: right;
+                                text-decoration: none;
+                                text-transform: uppercase;
+
+                                &:hover { font-weight: 700; }
+                            }
+                        }
+                    }
+                }
+
+                div.tab-container {
+                    div.comments-view {
+                        div.thread-siblings {
+                            height: 53px;
+                            width: 245px;
+
+                            img {
                                 height: 53px;
                                 width: 245px;
-
-                                img {
-                                    height: 53px;
-                                    width: 245px;
-                                }
                             }
-                            
-                            div.thread-scroll {
+                        }
+                        
+                        div.thread-scroll {
+                            height: 287px;
+                            overflow: hidden;
+                            position: absolute;
+
+                            ul.comment-stream {
                                 height: 287px;
-                                overflow: hidden;
-                                position: absolute;
 
-                                ul.comment-stream {
-                                    height: 287px;
+                                li {
+                                    border-bottom: none;
+                                    display: block;
+                                    width: 244px;
 
-                                    li {
-                                        border-bottom: none;
-                                        display: block;
+                                    div.thread {
+                                        padding: 5px 2px 10px 14px;
+
+                                        p { width: 175px; }
+                                    }
+
+                                    img.img-circle {
+                                        display: inline-block;
+                                        height: 29px;
+                                        left: 8px;
+                                        top: 5px;
+                                        width: 29px;
+                                    }
+
+                                    div.comment-actions {
+                                        padding: 0px 21px 6px 16px;
+
+                                        a {
+                                            display: inline-block;
+                                            vertical-align: baseline;
+
+                                            &.reply {
+                                                height: 21px;
+                                                margin-right: 6px;
+                                                width: 23px;
+                                            }
+
+                                            &.favorite {
+                                                height: 20px;
+                                                margin: 0 6px;
+                                                width: 24px;
+                                            }
+
+                                            &.flag {
+                                                height: 15px;
+                                                margin-left: 25px;
+                                                width: 15px;
+                                            }
+
+                                            &.dots {
+                                                height: 6px;
+                                                margin-left: 49px;
+                                                width: 19px;
+                                            }
+
+                                            &.follow {
+                                                height: 20px;
+                                                margin-left: 6px;
+                                                width: 14px;
+                                            }
+
+                                            img {
+                                                height: 100%;
+                                                width: 100%;
+                                            }
+                                        }
+                                    }
+
+                                    ul.replies {
+                                        background: rgba(98, 98, 98, 0.34);
+
+                                        li {
+                                            border-bottom: 1px solid rgba(104, 104, 104, 0.90);
+                                            margin: 0 10px;
+                                            min-height: 32px;
+                                            padding: 6px 12px;
+                                            width: 199px;
+
+                                            div.thread {
+                                                padding: 0;
+
+                                                p { width: 197px; }
+                                            }
+
+                                            &:last-child { border-bottom: 0; }
+                                        }
+                                    }
+
+                                    div.post-reply {
+                                        background: rgba(98, 98, 98, 0.34);
+                                        height: 48px;
                                         width: 244px;
 
-                                        div.thread {
-                                            padding: 5px 2px 10px 14px;
+                                        form {
+                                            border-top: 1px solid rgba(104, 104, 104, 0.90);
+                                            margin: 0 10px;
+                                            padding: 6px 0;
+                                            width: 224px;
 
-                                            p { width: 175px; }
-                                        }
-
-                                        img.img-circle {
-                                            display: inline-block;
-                                            height: 29px;
-                                            left: 8px;
-                                            top: 5px;
-                                            width: 29px;
-                                        }
-
-                                        div.comment-actions {
-                                            padding: 0px 21px 6px 16px;
-
-                                            a {
-                                                display: inline-block;
-                                                vertical-align: baseline;
-
-                                                &.reply {
-                                                    height: 21px;
-                                                    margin-right: 6px;
-                                                    width: 23px;
-                                                }
-
-                                                &.favorite {
-                                                    height: 20px;
-                                                    margin: 0 6px;
-                                                    width: 24px;
-                                                }
-
-                                                &.flag {
-                                                    height: 15px;
-                                                    margin-left: 25px;
-                                                    width: 15px;
-                                                }
-
-                                                &.dots {
-                                                    height: 6px;
-                                                    margin-left: 49px;
-                                                    width: 19px;
-                                                }
-
-                                                &.follow {
-                                                    height: 20px;
-                                                    margin-left: 6px;
-                                                    width: 14px;
-                                                }
-
-                                                img {
-                                                    height: 100%;
-                                                    width: 100%;
-                                                }
-                                            }
-                                        }
-
-                                        ul.replies {
-                                            background: rgba(98, 98, 98, 0.34);
-
-                                            li {
-                                                border-bottom: 1px solid rgba(104, 104, 104, 0.90);
-                                                margin: 0 10px;
-                                                min-height: 32px;
-                                                padding: 6px 12px;
-                                                width: 199px;
-
-                                                div.thread {
-                                                    padding: 0;
-
-                                                    p { width: 197px; }
-                                                }
-
-                                                &:last-child { border-bottom: 0; }
-                                            }
-                                        }
-
-                                        div.post-reply {
-                                            background: rgba(98, 98, 98, 0.34);
-                                            height: 48px;
-                                            width: 244px;
-
-                                            form {
-                                                border-top: 1px solid rgba(104, 104, 104, 0.90);
-                                                margin: 0 10px;
-                                                padding: 6px 0;
-                                                width: 224px;
-
-                                                #id_reply {
-                                                    @include border-radius(0px, 0px);
-                                                    background: rgba(182, 182, 182, 0.6);
-                                                    border: rgba(73, 73, 73, 0.6);
-                                                    color: rgba(0, 0, 0, 0.45);
-                                                    height: 26px;
-                                                    font-size: 12.28px;
-                                                    font-weight: 300;
-                                                    font-style: italic;
-                                                    margin-bottom: 0;
-                                                    width: 212px;
-                                                }
+                                            #id_reply {
+                                                @include border-radius(0px, 0px);
+                                                background: rgba(182, 182, 182, 0.6);
+                                                border: rgba(73, 73, 73, 0.6);
+                                                color: rgba(0, 0, 0, 0.45);
+                                                height: 26px;
+                                                font-size: 12.28px;
+                                                font-weight: 300;
+                                                font-style: italic;
+                                                margin-bottom: 0;
+                                                width: 212px;
                                             }
                                         }
                                     }
                                 }
-
-                                .ps-scrollbar-x { display: none; }
                             }
+
+                            .ps-scrollbar-x { display: none; }
                         }
                     }
                 }

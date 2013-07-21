@@ -6,5 +6,12 @@
         <li><a ng-class="{ active: $state.is('player.activeView.comments') }" href="#/player/panel/active/comments" title="Comments">Comments</a></li>
         <li><a ng-class="{ active: $state.is('player.activeView.activity') }" href="#/player/panel/active/activity" title="Activity">Activity</a></li>
     </ul>
-    <div class="tab-container" data-ui-view></div>
+    <a class="dropdown-toggle" data-ng-show="videoInstance.is_authenticated">
+        <img class="img-circle" data-ng-src="{{ videoInstance.user.avatar_url }}" alt="" />
+    </a>
+    <ul class="dropdown-menu">
+        <li><a>View Profile</a></li>
+        <li><a data-ng-click="logout()">Logout</a></li>
+    </ul>
 </div>
+<div class="tab-container" data-ui-view></div>

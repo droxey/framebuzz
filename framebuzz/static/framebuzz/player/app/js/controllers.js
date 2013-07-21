@@ -49,7 +49,25 @@ angular.module('framebuzz.controllers', []).
                         }
                     })
                     .error(function(data, status, headers, config) {
-                    
+                        
+                    });
+                };
+
+                $scope.logout = function() {
+                    $http({
+                        method: 'POST', 
+                        url: SOCK.logout_url
+                    })
+                    .success(function(data, status, headers, config) {
+                        if (data.logged_out !== undefined) {
+                            $scope.videoInstance.user = {};
+                            $scope.videoInstance.is_authenticated = false;
+                            safeApply($scope);
+
+                            $state.transitionTo('player.initView');
+                        }
+                    })
+                    .error(function(data, status, headers, config) {
                     });
                 };
 
