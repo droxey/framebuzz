@@ -397,7 +397,7 @@ object, embed, video, iframe {
                                 word-wrap: break-word;
                             }
 
-                            a.show-thread-siblings {
+                            span {
                                 background: none;
                                 border: 0;
                                 bottom: 6px;
@@ -425,8 +425,11 @@ object, embed, video, iframe {
                             top: 7px;
                             width: 44px;
                         }
+                        
 
                         &:last-child { border-bottom: 0; }
+
+                        &.animate-comment-show { display: block; }
                     }
                 }
 
@@ -445,11 +448,22 @@ object, embed, video, iframe {
                     height: 43px;
 
                     a.active-close {
-                        background: #686868;
+                        background-color: #686868;
                         display: block;
                         float: left;
                         height: 100%;
                         width: 33px;
+                        @include single-transition(background-color 250ms linear);
+
+                        &:hover {
+                            background-color: #828282;
+                            @include single-transition(background-color 250ms linear);
+                        }
+
+                        &:active {
+                            background-color: #5e5e5e;
+                            @include single-transition(background-color 250ms linear);
+                        }
 
                         img {
                             height: 12px;
@@ -469,7 +483,7 @@ object, embed, video, iframe {
 
             a.panel-close {
                 background: rgba(61, 61, 61, 1.0);
-                display: block;
+                display: none;
                 height: 22px;
                 left: -10px;
                 position: absolute;
@@ -494,6 +508,15 @@ object, embed, video, iframe {
                 ul.comment-stream {
                     height: 268px;
                     padding-top: 2px;
+
+                    li {
+                        cursor: pointer;
+                        
+                        a {
+                            color: rgba(255, 255, 255, .65);
+                            text-decoration: none;
+                        }
+                    }
                 }
             }
         }

@@ -533,7 +533,7 @@ object, embed, video, iframe {
   word-wrap: break-word;
 }
 /* line 400, ../sass/screen.scss */
-#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread a.show-thread-siblings {
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread span {
   background: none;
   border: 0;
   bottom: 6px;
@@ -546,7 +546,7 @@ object, embed, video, iframe {
   width: 19px;
 }
 /* line 412, ../sass/screen.scss */
-#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread a.show-thread-siblings img {
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li div.thread span img {
   height: 6px;
   width: 19px;
 }
@@ -562,11 +562,15 @@ object, embed, video, iframe {
   top: 7px;
   width: 44px;
 }
-/* line 429, ../sass/screen.scss */
+/* line 430, ../sass/screen.scss */
 #player-container #buzz-layer div.panel div.scrollable ul.comment-stream li:last-child {
   border-bottom: 0;
 }
-/* line 433, ../sass/screen.scss */
+/* line 432, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable ul.comment-stream li.animate-comment-show {
+  display: block;
+}
+/* line 436, ../sass/screen.scss */
 #player-container #buzz-layer div.panel div.scrollable div.ps-scrollbar-y {
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
@@ -574,42 +578,62 @@ object, embed, video, iframe {
   right: 0px !important;
   width: 6px;
 }
-/* line 439, ../sass/screen.scss */
+/* line 442, ../sass/screen.scss */
 #player-container #buzz-layer div.panel div.scrollable .ps-scrollbar-x {
   display: none;
 }
-/* line 441, ../sass/screen.scss */
+/* line 444, ../sass/screen.scss */
 #player-container #buzz-layer div.panel div.scrollable div.active-header {
   background: #484848;
   border-left: 1px solid rgba(104, 104, 104, 0.15);
   border-bottom: #434343;
   height: 43px;
 }
-/* line 447, ../sass/screen.scss */
+/* line 450, ../sass/screen.scss */
 #player-container #buzz-layer div.panel div.scrollable div.active-header a.active-close {
-  background: #686868;
+  background-color: #686868;
   display: block;
   float: left;
   height: 100%;
   width: 33px;
+  -webkit-transition: background-color 250ms linear, 1s;
+  -moz-transition: background-color 250ms linear, 1s;
+  -o-transition: background-color 250ms linear, 1s;
+  transition: background-color 250ms linear, 1s;
 }
-/* line 454, ../sass/screen.scss */
+/* line 458, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable div.active-header a.active-close:hover {
+  background-color: #828282;
+  -webkit-transition: background-color 250ms linear, 1s;
+  -moz-transition: background-color 250ms linear, 1s;
+  -o-transition: background-color 250ms linear, 1s;
+  transition: background-color 250ms linear, 1s;
+}
+/* line 463, ../sass/screen.scss */
+#player-container #buzz-layer div.panel div.scrollable div.active-header a.active-close:active {
+  background-color: #5e5e5e;
+  -webkit-transition: background-color 250ms linear, 1s;
+  -moz-transition: background-color 250ms linear, 1s;
+  -o-transition: background-color 250ms linear, 1s;
+  transition: background-color 250ms linear, 1s;
+}
+/* line 468, ../sass/screen.scss */
 #player-container #buzz-layer div.panel div.scrollable div.active-header a.active-close img {
   height: 12px;
   margin: 15px 10px;
   width: 12px;
 }
-/* line 464, ../sass/screen.scss */
+/* line 478, ../sass/screen.scss */
 #player-container #buzz-layer #blended-view {
   height: 270px;
   left: 4px;
   position: relative;
   width: 237px;
 }
-/* line 470, ../sass/screen.scss */
+/* line 484, ../sass/screen.scss */
 #player-container #buzz-layer #blended-view a.panel-close {
   background: #3d3d3d;
-  display: block;
+  display: none;
   height: 22px;
   left: -10px;
   position: absolute;
@@ -617,13 +641,13 @@ object, embed, video, iframe {
   width: 22px;
   z-index: 120;
 }
-/* line 480, ../sass/screen.scss */
+/* line 494, ../sass/screen.scss */
 #player-container #buzz-layer #blended-view a.panel-close img {
   height: 11px;
   margin: 5px;
   width: 12px;
 }
-/* line 487, ../sass/screen.scss */
+/* line 501, ../sass/screen.scss */
 #player-container #buzz-layer #blended-view div.scrollable {
   -moz-border-radius-bottomleft: 3px;
   -webkit-border-bottom-left-radius: 3px;
@@ -635,35 +659,44 @@ object, embed, video, iframe {
   height: 270px;
   right: 3px;
 }
-/* line 494, ../sass/screen.scss */
+/* line 508, ../sass/screen.scss */
 #player-container #buzz-layer #blended-view div.scrollable ul.comment-stream {
   height: 268px;
   padding-top: 2px;
 }
-/* line 501, ../sass/screen.scss */
+/* line 512, ../sass/screen.scss */
+#player-container #buzz-layer #blended-view div.scrollable ul.comment-stream li {
+  cursor: pointer;
+}
+/* line 515, ../sass/screen.scss */
+#player-container #buzz-layer #blended-view div.scrollable ul.comment-stream li a {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+}
+/* line 524, ../sass/screen.scss */
 #player-container #buzz-layer #active-view {
   height: 385px;
   width: 246px;
 }
-/* line 505, ../sass/screen.scss */
+/* line 528, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable {
   background: rgba(53, 53, 53, 0.95);
   height: 385px;
   width: 100%;
 }
-/* line 511, ../sass/screen.scss */
+/* line 534, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header ul.tabs {
   float: left;
   height: 44px;
   margin-left: 15px;
   width: 155px;
 }
-/* line 517, ../sass/screen.scss */
+/* line 540, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header ul.tabs li {
   float: left;
   padding-right: 10px;
 }
-/* line 521, ../sass/screen.scss */
+/* line 544, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header ul.tabs li a {
   color: white;
   display: block;
@@ -675,49 +708,49 @@ object, embed, video, iframe {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 532, ../sass/screen.scss */
+/* line 555, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header ul.tabs li a.active {
   font-weight: 700;
 }
-/* line 539, ../sass/screen.scss */
+/* line 562, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container {
   margin-top: 44px;
 }
-/* line 543, ../sass/screen.scss */
+/* line 566, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-siblings {
   height: 53px;
   width: 245px;
 }
-/* line 547, ../sass/screen.scss */
+/* line 570, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-siblings img {
   height: 53px;
   width: 245px;
 }
-/* line 553, ../sass/screen.scss */
+/* line 576, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll {
   height: 287px;
   overflow: hidden;
   position: absolute;
 }
-/* line 558, ../sass/screen.scss */
+/* line 581, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream {
   height: 287px;
 }
-/* line 561, ../sass/screen.scss */
+/* line 584, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li {
   border-bottom: none;
   display: block;
   width: 244px;
 }
-/* line 566, ../sass/screen.scss */
+/* line 589, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.thread {
   padding: 5px 2px 10px 14px;
 }
-/* line 569, ../sass/screen.scss */
+/* line 592, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.thread p {
   width: 175px;
 }
-/* line 572, ../sass/screen.scss */
+/* line 595, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li img.img-circle {
   display: inline-block;
   height: 29px;
@@ -725,55 +758,55 @@ object, embed, video, iframe {
   top: 5px;
   width: 29px;
 }
-/* line 580, ../sass/screen.scss */
+/* line 603, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.comment-actions {
   padding: 0px 21px 6px 16px;
 }
-/* line 583, ../sass/screen.scss */
+/* line 606, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.comment-actions a {
   display: inline-block;
   vertical-align: baseline;
 }
-/* line 587, ../sass/screen.scss */
+/* line 610, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.comment-actions a.reply {
   height: 21px;
   margin-right: 6px;
   width: 23px;
 }
-/* line 593, ../sass/screen.scss */
+/* line 616, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.comment-actions a.favorite {
   height: 20px;
   margin: 0 6px;
   width: 24px;
 }
-/* line 599, ../sass/screen.scss */
+/* line 622, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.comment-actions a.flag {
   height: 15px;
   margin-left: 25px;
   width: 15px;
 }
-/* line 605, ../sass/screen.scss */
+/* line 628, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.comment-actions a.dots {
   height: 6px;
   margin-left: 49px;
   width: 19px;
 }
-/* line 611, ../sass/screen.scss */
+/* line 634, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.comment-actions a.follow {
   height: 20px;
   margin-left: 6px;
   width: 14px;
 }
-/* line 617, ../sass/screen.scss */
+/* line 640, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.comment-actions a img {
   height: 100%;
   width: 100%;
 }
-/* line 624, ../sass/screen.scss */
+/* line 647, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li ul.replies {
   background: rgba(98, 98, 98, 0.34);
 }
-/* line 627, ../sass/screen.scss */
+/* line 650, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li ul.replies li {
   border-bottom: 1px solid rgba(104, 104, 104, 0.9);
   margin: 0 10px;
@@ -781,32 +814,32 @@ object, embed, video, iframe {
   padding: 6px 12px;
   width: 199px;
 }
-/* line 634, ../sass/screen.scss */
+/* line 657, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li ul.replies li div.thread {
   padding: 0;
 }
-/* line 637, ../sass/screen.scss */
+/* line 660, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li ul.replies li div.thread p {
   width: 197px;
 }
-/* line 640, ../sass/screen.scss */
+/* line 663, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li ul.replies li:last-child {
   border-bottom: 0;
 }
-/* line 644, ../sass/screen.scss */
+/* line 667, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.post-reply {
   background: rgba(98, 98, 98, 0.34);
   height: 48px;
   width: 244px;
 }
-/* line 649, ../sass/screen.scss */
+/* line 672, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.post-reply form {
   border-top: 1px solid rgba(104, 104, 104, 0.9);
   margin: 0 10px;
   padding: 6px 0;
   width: 224px;
 }
-/* line 655, ../sass/screen.scss */
+/* line 678, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll ul.comment-stream li div.post-reply form #id_reply {
   -webkit-border-radius: 0px 0px;
   -moz-border-radius: 0px / 0px;
@@ -821,39 +854,39 @@ object, embed, video, iframe {
   margin-bottom: 0;
   width: 212px;
 }
-/* line 672, ../sass/screen.scss */
+/* line 695, ../sass/screen.scss */
 #player-container #buzz-layer #active-view div.scrollable div.active-header div.tab-container div.comments-view div.thread-scroll .ps-scrollbar-x {
   display: none;
 }
-/* line 680, ../sass/screen.scss */
+/* line 703, ../sass/screen.scss */
 #player-container #buzz-layer #login-view, #player-container #buzz-layer #signup-view {
   height: 385px;
   width: 245px;
 }
-/* line 684, ../sass/screen.scss */
+/* line 707, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable, #player-container #buzz-layer #signup-view div.scrollable {
   background: rgba(53, 53, 53, 0.95);
   height: 385px;
   width: 100%;
 }
-/* line 690, ../sass/screen.scss */
+/* line 713, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.active-header a.active-close, #player-container #buzz-layer #signup-view div.scrollable div.active-header a.active-close {
   margin-right: 14px;
 }
-/* line 694, ../sass/screen.scss */
+/* line 717, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.active-header a.player-logo, #player-container #buzz-layer #signup-view div.scrollable div.active-header a.player-logo {
   line-height: 48px;
 }
-/* line 697, ../sass/screen.scss */
+/* line 720, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.active-header a.player-logo img, #player-container #buzz-layer #signup-view div.scrollable div.active-header a.player-logo img {
   height: 16px;
   width: 144px;
 }
-/* line 704, ../sass/screen.scss */
+/* line 727, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration, #player-container #buzz-layer #signup-view div.scrollable div.registration {
   padding: 17px;
 }
-/* line 707, ../sass/screen.scss */
+/* line 730, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration h1, #player-container #buzz-layer #signup-view div.scrollable div.registration h1 {
   color: white;
   font-family: 'proxima-nova';
@@ -861,7 +894,7 @@ object, embed, video, iframe {
   font-weight: 700;
   line-height: 20px;
 }
-/* line 715, ../sass/screen.scss */
+/* line 738, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration p, #player-container #buzz-layer #signup-view div.scrollable div.registration p {
   color: white;
   font-family: 'proxima-nova';
@@ -872,21 +905,21 @@ object, embed, video, iframe {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   width: 180px;
 }
-/* line 725, ../sass/screen.scss */
+/* line 748, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration p a, #player-container #buzz-layer #signup-view div.scrollable div.registration p a {
   color: white;
   font-weight: 700;
 }
-/* line 729, ../sass/screen.scss */
+/* line 752, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration p a:hover, #player-container #buzz-layer #signup-view div.scrollable div.registration p a:hover {
   text-decoration: underline;
 }
-/* line 734, ../sass/screen.scss */
+/* line 757, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration form p, #player-container #buzz-layer #signup-view div.scrollable div.registration form p {
   padding-bottom: 0px;
   width: 100%;
 }
-/* line 738, ../sass/screen.scss */
+/* line 761, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration form p #id_login, #player-container #buzz-layer #login-view div.scrollable div.registration form p #id_password, #player-container #buzz-layer #login-view div.scrollable div.registration form p #id_password_confirm, #player-container #buzz-layer #login-view div.scrollable div.registration form p #id_email, #player-container #buzz-layer #signup-view div.scrollable div.registration form p #id_login, #player-container #buzz-layer #signup-view div.scrollable div.registration form p #id_password, #player-container #buzz-layer #signup-view div.scrollable div.registration form p #id_password_confirm, #player-container #buzz-layer #signup-view div.scrollable div.registration form p #id_email {
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
@@ -900,14 +933,14 @@ object, embed, video, iframe {
   height: 27px;
   width: 200px;
 }
-/* line 750, ../sass/screen.scss */
+/* line 773, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration form p a, #player-container #buzz-layer #signup-view div.scrollable div.registration form p a {
   color: rgba(255, 255, 255, 0.44);
   display: block;
   float: right;
   font-weight: 300;
 }
-/* line 757, ../sass/screen.scss */
+/* line 780, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration form p button.registration-submit, #player-container #buzz-layer #signup-view div.scrollable div.registration form p button.registration-submit {
   background: none;
   border: 0 none;
@@ -918,7 +951,7 @@ object, embed, video, iframe {
   position: relative;
   width: 116px;
 }
-/* line 767, ../sass/screen.scss */
+/* line 790, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration form p button.registration-submit span, #player-container #buzz-layer #signup-view div.scrollable div.registration form p button.registration-submit span {
   color: white;
   display: block;
@@ -932,17 +965,17 @@ object, embed, video, iframe {
   top: 0;
   width: 100%;
 }
-/* line 781, ../sass/screen.scss */
+/* line 804, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration form p button.registration-submit img, #player-container #buzz-layer #signup-view div.scrollable div.registration form p button.registration-submit img {
   height: 36px;
   width: 116px;
 }
-/* line 787, ../sass/screen.scss */
+/* line 810, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration form p.tos, #player-container #buzz-layer #signup-view div.scrollable div.registration form p.tos {
   font-size: 0.63em;
   line-height: 12px;
 }
-/* line 791, ../sass/screen.scss */
+/* line 814, ../sass/screen.scss */
 #player-container #buzz-layer #login-view div.scrollable div.registration form p.tos a, #player-container #buzz-layer #signup-view div.scrollable div.registration form p.tos a {
   display: inline;
   float: none;

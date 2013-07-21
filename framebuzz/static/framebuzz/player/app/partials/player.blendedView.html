@@ -1,15 +1,20 @@
 <ul class="comment-stream">
-  <li data-ng-repeat="thread in videoInstance.threads" data-ng-show="thread.time < currentTime" data-ng-animate="{show: 'animate-comment-show'}">
-    <div class="thread">
-      <div class="header">
-        <strong class="username">{{ thread.user.username }}</strong>
-        <strong class="time">{{ thread.time_hms }}</strong>
+  <a class="show-thread-siblings" ng-click="setSelectedThread(thread)" >
+    <li data-ng-repeat="thread in videoInstance.threads" data-ng-show="thread.time < currentTime" data-ng-animate="{show: 'animate-comment-show'}">
+      <div class="thread">
+        <div class="header">
+          <strong class="username">{{ thread.user.username }}</strong>
+          <strong class="time">{{ thread.time_hms }}</strong>
+        </div>
+        <p>{{ thread.comment }}</p>
+        <span class="dots" data-ng-show="thread.has_hidden_siblings" class="dots has-hidden-siblings">
+          <img data-ng-src="/static/framebuzz/player/app/img/icon-dots.png" alt="View More"  />
+        </span>
+        <span class="dots" data-ng-show="thread.has_replies && !thread.has_hidden_siblings" class="dots has-replies">
+          <img data-ng-src="/static/framebuzz/player/app/img/icon-dots.png" alt="View More"  />
+        </span>
       </div>
-      <p>{{ thread.comment }}</p>
-      <a href="#/player/panel/active/comments" class="show-thread-siblings" ng-click="setSelectedThread(thread)" data-ng-class="{ 'has-siblings': thread.has_hidden_siblings }">
-        <img data-ng-src="/static/framebuzz/player/app/img/icon-dots.png" alt="View More" />
-      </a>
-    </div>
-    <img class="img-circle" data-ng-src="{{ thread.user.avatar_url }}" alt="" />
+      <img class="img-circle" data-ng-src="{{ thread.user.avatar_url }}" alt="" />
+    </a>
   </li>
 </ul>

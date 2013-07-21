@@ -7,7 +7,9 @@ angular.module('framebuzz.animations', [])
                 
             },
             start: function(element, done, memo) {
-
+                if (!$('a.panel-close').is(':visible')) {
+                    $('a.panel-close').show();
+                }
             }
         };
     });

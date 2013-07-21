@@ -232,15 +232,8 @@ angular.module('framebuzz.controllers', []).
                     else if (jsonData.eventType == eventTypes.getThreadSiblings) {
                         $scope.selectedThreadSiblings = jsonData.data;
                         safeApply($scope);
-                    }
-                    else if (jsonData.eventType == eventTypes.signup) {
-                        $scope.videoInstance.is_authenticated = jsonData.data.signup_success;
-                        $scope.videoInstance.user = jsonData.data.user;
-                        safeApply($scope);
 
-                        if ($scope.videoInstance.is_authenticated) {
-                            $state.transitionTo('player.initView');
-                        }
+                         $state.transitionTo('player.activeView.thread', { threadId: $scope.selectedThread.id });
                     }
                     else {
                         console.log('Socket received unhandled message.');
