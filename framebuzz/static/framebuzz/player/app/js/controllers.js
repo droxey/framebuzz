@@ -251,8 +251,6 @@ angular.module('framebuzz.controllers', []).
                         $scope.selectedThreadSiblings = jsonData.data.siblings;
                         safeApply($scope);
 
-                        console.log($scope.selectedThreadSiblings);
-
                         $state.transitionTo('player.activeView.thread', { threadId: $scope.selectedThread.id });
                     }
                     else {

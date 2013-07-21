@@ -95,8 +95,8 @@ angular.module('framebuzz',
 
             var playerActiveViewThread = { 
                 name: 'player.activeView.thread',
-                parent: playerActiveView,
-                templateUrl: templateRootPath + 'player.activeView.comments.html',
+                parent: playerActiveViewComments,
+                templateUrl: templateRootPath + 'player.activeView.thread.html',
                 url: '/comments/:threadId',
                 data: {
                     panelId: 'active-view'

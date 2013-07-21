@@ -1,5 +1,5 @@
 <div class="comments-view">
-    <div class="thread-siblings" data-ng-show="selectedThread.has_hidden_siblings">
+    <div class="thread-siblings">
         <img class="siblings-bkg" data-ng-src="{{ rootPath }}img/bkg-heads.png" alt="" />
         <ul class="clearfix">            
             <li data-ng-repeat="siblingThread in selectedThreadSiblings" data-ng-class="{ 'active': siblingThread.id == selectedThread.id }">
@@ -10,51 +10,6 @@
         </ul>
     </div>
     <div class="thread-scroll" data-scrollbar="true">
-        <ul class="comment-stream">
-            <li>
-                <div class="thread">
-                    <div class="header">
-                        <strong class="username">{{ selectedThread.user.username }}</strong>
-                        <strong class="time">{{ selectedThread.time_hms }}</strong>
-                    </div>
-                    <p>{{ selectedThread.comment }}</p>
-                </div>
-                <img class="img-circle" data-ng-src="{{ selectedThread.user.avatar_url }}" alt="" />
-                <div class="comment-actions">
-                    <a class="reply" href="#" title="Reply">
-                        <img src="{{ rootPath }}img/icon-post-comment.png" alt="Reply" />
-                    </a>
-                    <a class="favorite" data-ng-click="postCommentAction(thread, 'favorite')" title="Favorite">
-                        <img src="{{ rootPath }}img/icon-favorite.png" alt="Favorite" />
-                    </a>
-                    <a class="follow" data-ng-click="postCommentAction(thread, 'follow')" title="Follow">
-                        <img src="{{ rootPath }}img/icon-follow.png" alt="Follow" />
-                    </a>
-                    <a class="dots" href="">
-                        <img src="{{ rootPath }}img/icon-dots.png" alt="Replies" />
-                    </a>
-                    <a class="flag" data-ng-click="postCommentAction(thread, 'flag')" title="Flag">
-                        <img src="{{ rootPath }}img/icon-flag.png" alt="Flag" />
-                    </a>
-                </div>
-                <ul class="replies">
-                    <li data-ng-repeat="reply in selectedThread.replies">
-                        <div class="thread">
-                            <div class="header">
-                                <strong class="username">{{ reply.user.username }}</strong>
-                            </div>
-                            <p>{{ reply.comment }}</p>
-                        </div>
-                    </li>
-                </ul>
-                <div class="post-reply" data-ng-show="videoInstance.is_authenticated">
-                    <form method="post" action="" id="post-reply-form" class="span12" data-ng-submit="postNewReply()">
-                        <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot" data-ng-model="newReply.honeypot"></p>
-                        <input data-ng-model="newReply.comment" type="text" id="id_reply" name="reply" maxlength="180" placeholder="Reply to this comment..."  />
-                        <input type="submit" data-ng-show="false" />
-                  </form>
-                </div>
-            </li>
-        </ul>
+        <ul class="comment-stream" data-ui-view=""></ul>
     </div>
 </div>
