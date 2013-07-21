@@ -252,13 +252,13 @@ RAVEN_CONFIG = {
 ACTSTREAM_SETTINGS = {
     'MODELS': (
         'auth.user',
-        'core.MPTTComment',
-        'core.Video',
+        'api.MPTTComment',
+        'api.Video',
         'allauth.EmailAddress',
         'allauth.EmailConfirmation',
         'allauth.SocialAccount',
     ),
-    #'MANAGER': 'dashboard.managers.FrameBuzzActionManager',
+    'MANAGER': 'framebuzz.apps.api.managers.FrameBuzzActionManager',
     'FETCH_RELATIONS': True,
     'USE_PREFETCH': True,
     'USE_JSONFIELD': True,

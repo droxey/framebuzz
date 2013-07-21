@@ -50,7 +50,8 @@
           user_channel: '{{ user_channel }}',
           login_url: "{% url 'video-login' video.video_id %}",
           logout_url: "{% url 'video-logout' video.video_id %}",
-          signup_url: "{% url 'video-signup' video.video_id %}"
+          signup_url: "{% url 'video-signup' video.video_id %}",
+          is_authenticated: '{{ is_authenticated }}' === 'true'
         };
       </script>
     {% endcompress %}

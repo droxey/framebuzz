@@ -17,7 +17,7 @@
     <tr>
     <td width="530px" style="padding: 20px 0px 20px 0px;">
     <font face="Gotham, Helvetica Neue, Helvetica, Arial, sans-serif" size="-1">
-    What do you know, you’re a FrameBuzz superstar. <a href="http://{{ site.domain }}{% url 'user-profile' follower.username %}" style="color: #0C94C8;">{{ follower.username }}</a> is now following you on FrameBuzz.
+    What do you know, you’re a FrameBuzz superstar. {{ follower.username }} is now following you on FrameBuzz.
     {% if comment %}
         <p>Don’t disappoint you’re adoring fans! Jump back into the conversation. <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.content_object.title }}</a></p>
     {% endif %}

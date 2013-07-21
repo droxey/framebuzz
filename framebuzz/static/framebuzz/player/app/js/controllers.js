@@ -8,6 +8,7 @@ angular.module('framebuzz.controllers', []).
             function($scope, $state, $filter, $http, socket, broadcaster, safeApply) {    
                 $scope.rootPath = SOCK.root_path;
                 $scope.videoInstance = {};
+                $scope.videoInstance.is_authenticated = SOCK.is_authenticated;
                 $scope.currentTime = 0;
                 $scope.currentTimeHMS = '00:00';
                 $scope.newThread = {};
@@ -16,7 +17,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.loginModel = {};
                 $scope.signupModel = {};
                 $scope.selectedThreadSiblings = {};
-                
+
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
                     postNewComment: 'FB_POST_NEW_COMMENT',
@@ -112,7 +113,11 @@ angular.module('framebuzz.controllers', []).
                         'username': $scope.videoInstance.user.username
                     };
 
-                    socket.send_json({eventType: eventTypes.postNewComment, channel: SOCK.video_channel, data: postData});
+                    socket.send_json({
+                        eventType: eventTypes.postNewComment, 
+                        channel: SOCK.video_channel, 
+                        data: postData
+                    });
 
                     $scope.newThread = {};
                     safeApply($scope);
@@ -128,22 +133,42 @@ angular.module('framebuzz.controllers', []).
                         'username': $scope.videoInstance.user.username
                     };
 
-                    socket.send_json({eventType: eventTypes.postNewComment, channel: SOCK.video_channel, data: postData});
+                    socket.send_json({
+                        eventType: eventTypes.postNewComment, 
+                        channel: SOCK.video_channel, 
+                        data: postData
+                    });
 
                     $scope.newReply = {};
                     safeApply($scope);
                 };
 
                 $scope.postCommentAction = function(comment, action) {
-                    console.log(comment);
-                    console.log(action);
+                    socket.send_json({
+                        eventType: eventTypes.commentAction, 
+                        channel: SOCK.user_channel, 
+                        data: { 
+                            threadId: comment.id, 
+                            action: action,
+                            username: $scope.videoInstance.user.username
+                        }
+                    });
                 };
 
                 $scope.setSelectedThread = function(thread) {
                     $scope.selectedThread = thread;
 
-                    // TODO: Fetch siblings!
-                    socket.send_json({eventType: eventTypes.getThreadSiblings, channel: SOCK.user_channel, data: { threadId: thread.id }});
+                    socket.send_json({
+                        eventType: eventTypes.getThreadSiblings, 
+                        channel: SOCK.user_channel, 
+                        data: { 
+                            threadId: thread.id 
+                        }
+                    });
+                };
+
+                $scope.showReplyFormForThread = function(thread) {
+                    $state.transitionTo('player.activeView.thread.postReply', { threadId: thread.id });
                 };
 
                 // --
@@ -254,6 +279,16 @@ angular.module('framebuzz.controllers', []).
                         safeApply($scope);
 
                         $state.transitionTo('player.activeView.thread', { threadId: $scope.selectedThread.id });
+                    }
+                    else if (jsonData.eventType == eventTypes.commentAction) {
+                        var updatedThread = jsonData.data.thread;
+
+                        angular.forEach($scope.videoInstance.threads, function(thread, key) {
+                            if (thread.id == updatedThread.id) {
+                                thread = updatedThread;
+                                return;
+                            }
+                        });   
                     }
                     else {
                         console.log('Socket received unhandled message.');

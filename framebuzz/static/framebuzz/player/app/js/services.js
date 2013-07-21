@@ -67,6 +67,9 @@ angular.module('framebuzz.services', [])
             },
             onclose: function(callback) {
                 self.socket_handlers.onclose = callback;
+            },
+            close: function() {
+                socket.close();
             }
         };
 

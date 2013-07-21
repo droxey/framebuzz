@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.clickjacking import xframe_options_exempt
 
+from actstream import action
 from allauth.account.forms import SignupForm, LoginForm
 from allauth.account.utils import perform_login
 from rest_framework.renderers import JSONRenderer
@@ -14,12 +15,15 @@ from rest_framework.renderers import JSONRenderer
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.api.serializers import UserSerializer
-from framebuzz.apps.api.tasks import message_outbound
 
 
 @xframe_options_exempt
 def video_embed(request, video_id):
     video, created = get_or_create_video(video_id)
+
+    if request.user.is_authenticated():
+        # Send a signal that the user has viewed this video.
+        action.send(request.user, verb='viewed video', action_object=video)
 
     return render_to_response('player/video_embed.html',
     {
@@ -27,7 +31,8 @@ def video_embed(request, video_id):
         'video': video,
         'socket_port': settings.SOCKJS_PORT,
         'socket_channel': settings.SOCKJS_CHANNEL,
-        'user_channel': '/framebuzz/session/%s' % request.session.session_key
+        'user_channel': '/framebuzz/session/%s' % request.session.session_key,
+        'is_authenticated': request.user.is_authenticated()
     },
     context_instance=RequestContext(request))
 
@@ -46,6 +51,8 @@ def video_login(request, video_id):
         user = form.user
         form.login(request)
         login_success = True
+
+        action.send(user, verb='viewed video', action_object=video)
 
         userSerializer = UserSerializer(user)
         userSerialized = JSONRenderer().render(userSerializer.data)
@@ -83,6 +90,9 @@ def video_signup(request, video_id):
         user = form.save(request)
         perform_login(request, user)
         login_success = True
+
+        action.send(user, verb='registered account', action_object=video)
+        action.send(user, verb='viewed video', action_object=video)
 
         userSerializer = UserSerializer(user)
         userSerialized = JSONRenderer().render(userSerializer.data)

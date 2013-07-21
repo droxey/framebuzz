@@ -123,6 +123,16 @@ angular.module('framebuzz',
                 }   
             };
 
+            var playerActiveViewThreadPostReply = { 
+                name: 'player.activeView.thread.postReply',
+                parent: playerActiveViewThread,
+                templateUrl: templateRootPath + 'player.activeView.thread.postReply.html',
+                url: '/reply',
+                data: {
+                    panelId: 'active-view'
+                }   
+            };
+
             $stateProvider
                 .state(player)
                 .state(playerInitView)
@@ -134,7 +144,8 @@ angular.module('framebuzz',
                 .state(playerActiveViewComments)
                 .state(playerActiveViewThread)
                 .state(playerActiveViewAllThreads)
-                .state(playerActiveViewActivity);
+                .state(playerActiveViewActivity)
+                .state(playerActiveViewThreadPostReply);
         }
     ]).run(
         [

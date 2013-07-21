@@ -17,7 +17,7 @@
     <tr>
     <td width="530px" style="padding: 20px 0px 20px 0px;">
     <font face="Gotham, Helvetica Neue, Helvetica, Arial, sans-serif" size="-1">
-    <a href="http://{{ site.domain }}{% url 'user-profile' comment.user.username %}" style="color: #0C94C8;">{{ comment.user.username }}</a> just favorited your comment on <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment_content_object.title }}</a>. (Not that we’re surprised; we always tell people you’re both witty and good looking.)
+    {{ comment.user.username }} just favorited your comment on <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment_content_object.title }}</a>. (Not that we’re surprised; we always tell people you’re both witty and good looking.)
     <p><a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.comment }}</a></p>
     {# <p>To change your notification settings, go here: <a href="#" style="color: #0C94C8;">[[DASHBOARD SETTINGS]]</a></p> #}
     </font>

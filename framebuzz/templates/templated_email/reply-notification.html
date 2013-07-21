@@ -17,7 +17,7 @@
     <tr>
     <td width="530px" style="padding: 20px 0px 20px 0px;">
     <font face="Gotham, Helvetica Neue, Helvetica, Arial, sans-serif" size="-1">
-     Hey, don’t look now, but <a href="http://{{ site.domain }}{% url 'user-profile' comment.user.username %}" style="color: #0C94C8;">{{ comment.user.username }}</a> replied to a comment you made on <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.content_object.title }}</a>
+     Hey, don’t look now, but {{ comment.user.username }} replied to a comment you made on <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.content_object.title }}</a>
     <p><a href="http://{{ site.domain }}{% url 'view-content' 'v' comment.content_object.video_id %}?thread={{ comment.parent.id }}" style="color: #0C94C8;">{{ comment.comment }}</a></p>
     <p>Got something to say to that? Speak it! <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">Reply Now</a></p>
     {# <p>To change your notification settings, go here: <a href="#" style="color: #0C94C8;">[[DASHBOARD SETTINGS]]</a></p> #}

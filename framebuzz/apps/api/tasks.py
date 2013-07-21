@@ -4,10 +4,16 @@ import redis
 
 from django.conf import settings
 from django.contrib import auth
+from django.contrib.comments.models import CommentFlag
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
 from django.utils import importlib
 
+from actstream import action
+from actstream.models import Action, Follow
+from actstream.actions import follow, unfollow
 from rest_framework.renderers import JSONRenderer
+from templated_email import send_templated_mail
 
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY, TIMELINE_BLOCKS, SIGNIFICANCE_FACTOR
 from framebuzz.apps.api.forms import MPTTCommentForm
@@ -173,10 +179,10 @@ def initialize_video_player(context):
 @celery.task
 def post_new_comment(context):
     thread_data = context.get(DATA_KEY, None)
-    comment = None
-
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
+    comment = None
+    video = Video.objects.get(video_id=video_id)
 
     if thread_data.get('username', None):
         user = auth.models.User.objects.get(username=thread_data['username'])
@@ -184,8 +190,6 @@ def post_new_comment(context):
         user = context.get('user', None)
 
     if thread_data:
-        video = Video.objects.get(video_id=video_id)
-
         comment_form = MPTTCommentForm(video, data=thread_data)
         if comment_form.is_valid():
             data = comment_form.get_comment_create_data()
@@ -195,10 +199,25 @@ def post_new_comment(context):
 
     if comment:
         if not comment.parent:
+            action.send(user, verb='commented on', action_object=video)
+
             threadSerializer = MPTTCommentSerializer(comment, context={ 'user': user })
             threadSerialized = JSONRenderer().render(threadSerializer.data)
             return_data = { 'thread': json.loads(threadSerialized) }
         else:
+            action.send(user, verb='replied to comment', action_object=comment.parent, target=video)
+
+            # Send a notification to the thread's owner that someone has replied to their comment.
+            if comment.parent.user.id != user.id and comment.parent.user.email:
+                send_templated_mail(
+                    template_name='reply-notification',
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[comment.parent.user.email],
+                    context={
+                        'comment': comment,
+                        'site': Site.objects.get_current()
+                    })
+
             replySerializer = MPTTCommentReplySerializer(comment, context={ 'user': user })
             replySerialized = JSONRenderer().render(replySerializer.data)
             return_data = { 'reply': json.loads(replySerialized) }
@@ -229,4 +248,86 @@ def get_thread_siblings(context):
         outbound_message[CHANNEL_KEY] = channel
         outbound_message[DATA_KEY] = { 'siblings': json.loads(threadSerialized) }
         
+        return outbound_message
+
+
+@celery.task
+def add_comment_action(context):
+    thread_data = context.get(DATA_KEY, None)
+    channel = context.get('outbound_channel', None)
+    action_name = None
+
+    if thread_data.get('username', None):
+        user = auth.models.User.objects.get(username=thread_data['username'])
+    else:
+        user = context.get('user', None)
+
+    outbound_message = dict()
+    outbound_message[EVENT_TYPE_KEY] = 'FB_COMMENT_ACTION'
+    outbound_message[CHANNEL_KEY] = channel
+
+    if thread_data:
+        thread = MPTTComment.objects.get(id=thread_data.get('threadId'))
+        thread_action = thread_data.get('action')
+
+        if thread_action == 'follow':
+            check_following = Follow.objects.is_following(thread.user, user)
+
+            if check_following:
+                action_name = 'unfollowed'
+                unfollow(user, thread.user)
+            else:
+                action_name = 'followed'
+                follow(user, thread.user)
+
+                if thread.user.id != user.id and thread.user.email:
+                    send_templated_mail(
+                        template_name='following-notification',
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=[thread.user.email],
+                        context={
+                            'follower': user,
+                            'site': Site.objects.get_current()
+                        })
+        elif thread_action == 'favorite':
+            is_favorite = Action.objects.actor(user, verb='added to favorites', action_object_object_id=thread.id)
+
+            if is_favorite:
+                action_name = 'removed_favorite'
+                action.send(user, verb='removed from favorites', action_object=None, target=None, comment_id=thread.id)
+                is_favorite.delete()
+            else:
+                action_name = 'added_favorite'
+                action.send(user, verb='added to favorites', action_object=thread)
+
+                if thread.user.id != user.id and thread.user.email:
+                    send_templated_mail(
+                        template_name='favorites-notification',
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=[thread.user.email],
+                        context={
+                            'comment': thread,
+                            'site': Site.objects.get_current()
+                        })
+        elif thread_action == 'flag':
+            commentFlag, created = CommentFlag.objects.get_or_create(
+                comment = thread,
+                user = user,
+                flag = CommentFlag.SUGGEST_REMOVAL
+            )
+
+            if created:
+                action_name = 'flagged_comment'
+                action.send(user, verb='flagged comment', action_object=thread)
+            else:
+                action_name = 'unflagged_comment'
+                action.send(user, verb='unflagged comment', action_object=thread)
+                commentFlag.delete()
+        else:
+            pass
+
+        threadSerializer = MPTTCommentSerializer(thread, context={ 'user': user })
+        threadSerialized = JSONRenderer().render(threadSerializer.data)
+
+        outbound_message[DATA_KEY] = { 'action': action_name, 'thread': json.loads(threadSerialized) }
         return outbound_message

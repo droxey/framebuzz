@@ -1,5 +1,5 @@
 <div class="comments-view">
-    <div class="thread-siblings" data-ng-show="$state.current.name == 'player.activeView.thread'">
+    <div class="thread-siblings" data-ng-show="$state.current.name == 'player.activeView.thread' || $state.current.name == 'player.activeView.thread.postReply'">
         <img class="siblings-bkg" data-ng-src="{{ rootPath }}img/bkg-heads.png" alt="" />
         <ul class="clearfix">            
             <li data-ng-repeat="siblingThread in selectedThreadSiblings" data-ng-class="{ 'active': siblingThread.id == selectedThread.id }">
