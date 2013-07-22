@@ -404,8 +404,7 @@ def get_activity_stream(context):
     else:
         user = context.get('user', None)
 
-    valid_verbs = ['started following', 'flagged comment', 'unflagged comment', 
-        'added to favorites', 'removed from favorites', 'stopped following', 'replied to comment']
+    valid_verbs = ['started following', 'added to favorites', 'removed from favorites', 'stopped following', 'replied to comment']
     last_login_minus_day = user.last_login - datetime.timedelta(days=1)
     user_activity_stream = Action.objects.filter(verb__in=valid_verbs, timestamp__gte = last_login_minus_day)
 
@@ -413,9 +412,17 @@ def get_activity_stream(context):
     for activity in user_activity_stream:
         if activity.action_object is not None and activity.actor.id != user.id:
             if activity.action_object_content_type.model == 'mpttcomment' and activity.action_object.user.id == user.id:
+                verb = activity.verb
+                if verb == 'replied to comment':
+                    verb = 'replied to your comment'
+                elif verb == 'added to favorites':
+                    verb = 'added your comment to favorites'
+                elif verb == 'removed from favorites':
+                    verb = 'removed your comment from favorites'
+
                 act = {
                     'actor': activity.actor.username,
-                    'verb': activity.verb,
+                    'verb': verb,
                     'timesince': activity.timesince(),
                     'action_object': activity.action_object.__unicode__(),
                     'target_object': activity.target.__unicode__()
@@ -425,7 +432,7 @@ def get_activity_stream(context):
             if activity.target_object_id == user.id:
                 act = {
                     'actor': activity.actor.username,
-                    'verb': activity.verb,
+                    'verb': '%s you' % activity.verb,
                     'timesince': activity.timesince(),
                     'target_object': activity.target.username
                 }
