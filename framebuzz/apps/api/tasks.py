@@ -266,7 +266,7 @@ def get_thread_siblings(context):
             fake_comment.id = 99999999
 
             if pad_left > 0:
-                for left in range(1, pad_left):
+                for left in range(0, pad_left):
                     siblings.insert(0, fake_comment)
             else:
                 if len(siblings) == 3:
