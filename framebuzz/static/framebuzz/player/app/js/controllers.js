@@ -172,6 +172,10 @@ angular.module('framebuzz.controllers', []).
                     $state.transitionTo('player.activeView.thread.postReply', { threadId: thread.id });
                 };
 
+                $scope.openShareDialog = function() {
+                    console.log('click');
+                };
+
                 // --
                 // PRIVATE METHODS
                 // --
@@ -226,10 +230,10 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_share', function() {
-                    console.log(broadcaster.message);
+                    $state.transitionTo('player.share');
                 });
 
-                $scope.$on('player_privateconvo', function() {
+                $scope.$on('player_addtolibrary', function() {
                     console.log(broadcaster.message);
                 });
 

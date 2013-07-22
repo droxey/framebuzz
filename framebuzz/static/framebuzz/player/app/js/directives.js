@@ -12,7 +12,7 @@ angular.module('framebuzz.directives', [])
     .directive('mediaElement', function(broadcaster) {
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
-                features: ['share', 'privateconvo', 'volume', 'muteconvo', 'progress'],
+                features: ['share', 'addtolibrary', 'volume', 'muteconvo', 'progress'],
                 pluginPath: SOCK.root_path + 'swf/',
                 flashName: 'flashmediaelement.swf',
                 silverlightName: 'silverlightmediaelement.xap',
@@ -30,6 +30,7 @@ angular.module('framebuzz.directives', [])
 
                     $('.mejs-video').mouseenter(function() {
                         $(this).addClass('show-controls');
+                        $(this).parent().addClass('show-title');
                     });
 
                     $('.mejs-video').mouseleave(function() {
@@ -38,6 +39,7 @@ angular.module('framebuzz.directives', [])
                             .queue(function(next) {
                                 $('.mejs-video').removeClass('fade-out-controls');
                                 $('.mejs-video').removeClass('show-controls');
+                                $('#player-layer').removeClass('show-title');
                                 next();
                             });
                     });
@@ -66,8 +68,8 @@ angular.module('framebuzz.directives', [])
                         broadcaster.prepForBroadcast({ broadcastType: 'player_share' });
                     }, false);
 
-                    media.addEventListener('player_privateconvo', function(e) {
-                        broadcaster.prepForBroadcast({ broadcastType: 'player_privateconvo' });
+                    media.addEventListener('player_addtolibrary', function(e) {
+                        broadcaster.prepForBroadcast({ broadcastType: 'player_addtolibrary' });
                     }, false);
                 }
             });

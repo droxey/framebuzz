@@ -122,7 +122,7 @@ object, embed, video, iframe {
                                 }
                             }
 
-                            &.mejs-private-convo-button {
+                            &.mejs-add-library-button {
                                 margin-right: 0;
                                 padding: 6px;
 
@@ -206,6 +206,20 @@ object, embed, video, iframe {
             height: 60px;
             margin-top: 385px;
             width: 640px;
+
+            h1.video-title {
+                color: rgba(255, 255, 255, 0.75);
+                font-family: 'proxima-nova';
+                font-weight: 500;
+                opacity: 0;
+                padding-top: 16px;
+                position: absolute;
+                text-align: center;
+                top: 0;
+                width: 100%;
+                z-index: 10;
+                @include single-transition(opacity .25s ease-in-out);
+            }
 
             table#heatmap {
                 height: 18px;
@@ -338,6 +352,15 @@ object, embed, video, iframe {
                             width: 23px;
                         }
                     }
+                }
+            }
+        }
+
+        &.show-title {
+            #heatmap-and-post {
+                h1.video-title {
+                    opacity: 1;
+                    @include single-transition(opacity .25s ease-in-out);
                 }
             }
         }

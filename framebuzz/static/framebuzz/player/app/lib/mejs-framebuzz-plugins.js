@@ -38,16 +38,16 @@
       });
   };
 
-  MediaElementPlayer.prototype.buildprivateconvo = function(player, controls, layers, media) {
+  MediaElementPlayer.prototype.buildaddtolibrary = function(player, controls, layers, media) {
     var shareDiv = controls.find('div.mejs-share');
 
     var button =
-      $('<button class="mejs-private-convo-button" type="button" aria-controls="mep_0" title="Start a Private Conversation" aria-label="Start a Private Conversation">' +
-          '<img src="/static/framebuzz/player/app/img/icon-plus.png" alt="Start a Private Conversation" />' +
+      $('<button class="mejs-add-library-button" type="button" aria-controls="mep_0" title="Add to My Library" aria-label="Add to My Libary">' +
+          '<img src="/static/framebuzz/player/app/img/icon-plus.png" alt="Add to My Library" />' +
         '</button>')
       .appendTo(shareDiv)
       .click(function() {
-        media.dispatchEvent('player_privateconvo');
+        media.dispatchEvent('player_addtolibrary');
       });
   };
 })(jQuery);

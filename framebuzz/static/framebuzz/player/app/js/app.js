@@ -43,6 +43,16 @@ angular.module('framebuzz',
                 }
             };
 
+            var playerShareView = {
+                name: 'player.share',
+                parent: playerPanelView,
+                templateUrl: templateRootPath + 'player.share.html',
+                url: '/share',
+                data: {
+                    panelId: 'share-view'
+                }
+            };
+
             var loginView = {
                 name: 'player.loginView',
                 parent: playerPanelView,
@@ -137,6 +147,7 @@ angular.module('framebuzz',
                 .state(player)
                 .state(playerInitView)
                 .state(playerPanelView)
+                .state(playerShareView)
                 .state(loginView)
                 .state(signupView)
                 .state(playerBlendedView)
