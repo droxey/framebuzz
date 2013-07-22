@@ -365,7 +365,8 @@ def add_comment_action(context):
         else:
             pass
 
-        threadSerializer = MPTTCommentSerializer(thread, context={ 'user': user })
+        updatedThread = MPTTComment.objects.get(id=thread_data.get('threadId'))
+        threadSerializer = MPTTCommentSerializer(updatedThread, context={ 'user': user })
         threadSerialized = JSONRenderer().render(threadSerializer.data)
 
         outbound_message[DATA_KEY] = { 'action': action_name, 'thread': json.loads(threadSerialized) }

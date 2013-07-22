@@ -335,14 +335,8 @@ angular.module('framebuzz.controllers', []).
                         $state.transitionTo('player.activeView.thread', { threadId: $scope.selectedThread.id });
                     }
                     else if (jsonData.eventType == eventTypes.commentAction) {
-                        var updatedThread = jsonData.data.thread;
-
-                        angular.forEach($scope.videoInstance.threads, function(thread, key) {
-                            if (thread.id == updatedThread.id) {
-                                thread = updatedThread;
-                                return;
-                            }
-                        });   
+                        $scope.selectedThread = jsonData.data.thread;
+                        safeApply($scope); 
                     }
                     else if (jsonData.eventType == eventTypes.getActivityStream) {
                         $scope.activities = jsonData.data.activities;

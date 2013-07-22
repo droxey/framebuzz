@@ -284,7 +284,7 @@ PAGINATION_SETTINGS = {
 }
 
 # Django-AllAuth Settings:
-AUTH_PROFILE_MODULE = 'core.UserProfile'
+AUTH_PROFILE_MODULE = 'api.UserProfile'
 ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = '/index/'
 
