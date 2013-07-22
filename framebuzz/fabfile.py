@@ -422,22 +422,7 @@ def restart():
     """
     Restart gunicorn worker processes for the project.
     """
-    pid_path = "%s/run/gunicorn.pid" % env.venv_path
-    if exists(pid_path):
-        sudo("kill -HUP `cat %s`" % pid_path)
-    else:
-        start_args = (env.proj_name, env.proj_name)
-        sudo("supervisorctl start %s:gunicorn_%s" % start_args)
-
-    restart_celery()
-
-
-@task
-@log_call
-def restart_celery():
-    pid_path = '/var/run/celeryd.pid'
-    if exists(pid_path):
-        sudo("kill -HUP `cat %s`" % pid_path)
+    sudo("supervisorctl restart all")
 
 
 @task

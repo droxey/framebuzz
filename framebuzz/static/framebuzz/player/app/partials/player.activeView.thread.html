@@ -7,7 +7,7 @@
         <p>{{ selectedThread.comment }}</p>
     </div>
     <img class="img-circle" data-ng-src="{{ selectedThread.user.avatar_url }}" alt="" />
-    <div class="comment-actions">
+    <div class="comment-actions clearfix">
         <a class="reply" data-ng-click="showReplyFormForThread(selectedThread)" title="Reply" data-ng-show="videoInstance.is_authenticated">
             <img src="{{ rootPath }}img/icon-post-comment.png" alt="Reply" />
         </a>

@@ -3,8 +3,9 @@
         <img class="siblings-bkg" data-ng-src="{{ rootPath }}img/bkg-heads.png" alt="" />
         <ul class="clearfix">            
             <li data-ng-repeat="siblingThread in selectedThreadSiblings" data-ng-class="{ 'active': siblingThread.id == selectedThread.id }">
-                <a data-ng-click="setSelectedThread(siblingThread)">
-                    <img data-ng-src="{{ siblingThread.user.avatar_url }}" class="img-circle">
+                <a>
+                    <img data-ng-src="{{ siblingThread.user.avatar_url }}" class="img-circle" data-ng-hide="siblingThread.user.avatar_url == NULL" data-ng-click="setSelectedThread(siblingThread)">
+                    <img data-ng-src="{{ rootPath }}img/blank.png" class="img-circle" data-ng-show="siblingThread.user.avatar_url == NULL">
                 </a>
             </li>
         </ul>

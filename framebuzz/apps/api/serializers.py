@@ -65,8 +65,9 @@ class BaseCommentSerializer(serializers.ModelSerializer):
     is_following = serializers.SerializerMethodField('get_is_following')
 
     def get_submit_date(self, obj):
-        local_date = timezone.localtime(obj.submit_date)
-        return dateformat.format(local_date, 'n/j/y h:i A')
+        if obj.submit_date:
+            local_date = timezone.localtime(obj.submit_date)
+            return dateformat.format(local_date, 'n/j/y h:i A')
 
     def get_is_favorite(self, obj):
         user = self.context.get('user')

@@ -296,6 +296,7 @@ angular.module('framebuzz.controllers', []).
                         }
                     }
                     else if (jsonData.eventType == eventTypes.getThreadSiblings) {
+                        console.log(jsonData.data.siblings);
                         $scope.selectedThreadSiblings = jsonData.data.siblings;
                         safeApply($scope);
 
