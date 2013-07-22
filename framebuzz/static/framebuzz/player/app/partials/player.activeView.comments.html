@@ -10,7 +10,7 @@
             </li>
         </ul>
     </div>
-    <div class="thread-scroll" data-scrollbar="true">
+    <div class="thread-scroll" data-scrollbar="true" data-ng-class="{ 'single-thread': $state.current.name == 'player.activeView.thread' }" >
         <ul class="comment-stream" data-ui-view=""></ul>
     </div>
 </div>
