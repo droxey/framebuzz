@@ -3,8 +3,9 @@
         <img src="{{ rootPath }}img/icon-close.png" alt="Switch to Blended View" />
     </a>
     <ul class="tabs clearfix">
-        <li><a ng-class="{ active: $state.is('player.activeView.comments') }" href="#/player/panel/active/comments" title="Comments">Comments</a></li>
-        <li><a ng-class="{ active: $state.is('player.activeView.activity') }" href="#/player/panel/active/activity" title="Activity">Activity</a></li>
+        <li><a ng-class="{ active: $state.is('player.activeView.comments') }" href="#/player/panel/active/comments/threads" title="Comments" ng-model="active" ng-init="active = 'comments'" data-ng-click="active = 'comments'">Comments</a></li>
+        <li><a ng-class="{ active: $state.is('player.activeView.activity') }" href="#/player/panel/active/activity" title="Activity" data-ng-click="active = 'activity'">Activity</a></li>
+        <li class="indicator" data-ng-class="active"><img data-ng-src="{{ rootPath }}img/icon-down.png" alt=""></li>
     </ul>
     <a class="dropdown-toggle" data-ng-show="videoInstance.is_authenticated">
         <img class="img-circle" data-ng-src="{{ videoInstance.user.avatar_url }}" alt="" />

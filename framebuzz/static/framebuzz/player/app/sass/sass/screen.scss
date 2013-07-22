@@ -531,7 +531,15 @@ object, embed, video, iframe {
                     padding-top: 2px;
 
                     li {
+                        background: transparent;
                         cursor: pointer;
+                        @include single-transition(background-color 100ms linear);
+                        
+
+                        &:hover {
+                            background-color: rgba(0, 0, 0, .32);
+                            @include single-transition(background-color 100ms linear);
+                        }
 
                         a {
                             color: rgba(255, 255, 255, .65);
@@ -577,6 +585,31 @@ object, embed, video, iframe {
                                 &.active {
                                     font-weight: 700;
                                 }
+                            }
+                        }
+
+                        li.indicator {
+                            display: block;
+                            height: 6px;
+                            position: absolute;
+                            top: -6px;
+                            left: 72px;
+                            width: 13px;
+                            z-index: 20;
+
+                            img {
+                                height: 6px;
+                                width: 13px;
+                            }
+
+                            &.comments {
+                                left: 72px;
+                                @include single-transition(left 0.25s linear);
+                            }
+
+                            &.activity {
+                                left: 135px;
+                                @include single-transition(left 0.25s linear);
                             }
                         }
                     }
