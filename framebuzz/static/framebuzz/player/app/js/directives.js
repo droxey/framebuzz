@@ -57,7 +57,7 @@ angular.module('framebuzz.directives', [])
                     }, false);
 
                     media.addEventListener('player_muteconvo', function(e) {
-                        window.location.hash = '#/player';
+                        window.location.hash = '#/player/panel';
                     }, false);
 
                     media.addEventListener('player_unmuteconvo', function(e) {
@@ -65,7 +65,7 @@ angular.module('framebuzz.directives', [])
                     }, false);
 
                     media.addEventListener('player_share', function(e) {
-                        broadcaster.prepForBroadcast({ broadcastType: 'player_share' });
+                        window.location.hash = '#/player/panel/share';
                     }, false);
 
                     media.addEventListener('player_addtolibrary', function(e) {

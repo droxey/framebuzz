@@ -211,12 +211,13 @@ object, embed, video, iframe {
                 color: rgba(255, 255, 255, 0.75);
                 font-family: 'proxima-nova';
                 font-weight: 500;
+                left: 132px;
                 opacity: 0;
                 padding-top: 16px;
                 position: absolute;
                 text-align: center;
                 top: 0;
-                width: 100%;
+                width: 385px;
                 z-index: 10;
                 @include single-transition(opacity .25s ease-in-out);
             }
@@ -367,10 +368,6 @@ object, embed, video, iframe {
     }
 
     #buzz-layer {
-        margin-left: 396px;
-        width: 245px;
-        z-index: 100;
-
         div.panel {
             div.scrollable {
                 @include single-box-shadow(rgba(0, 0, 0, 0.5), 0px, 0px, 118px, 0px, inset);
@@ -499,16 +496,15 @@ object, embed, video, iframe {
         }
 
         #blended-view {
+            margin-left: 400px;
             height: auto;
-            left: 4px;
-            position: relative;
             width: 237px;
 
             a.panel-close {
                 background: rgba(61, 61, 61, 1.0);
                 display: none;
                 height: 22px;
-                left: -10px;
+                margin-left: -10px;
                 position: absolute;
                 top: 3px;
                 width: 22px;
@@ -528,6 +524,7 @@ object, embed, video, iframe {
                 height: auto;
                 max-height: 385px;
                 right: 3px;
+                width: 237px;
 
                 ul.comment-stream {
                     height: auto;
@@ -546,13 +543,14 @@ object, embed, video, iframe {
         }
 
         #active-view {
+            margin-left: 396px;
             height: 385px;
             width: 246px;
 
             div.scrollable {
                 background: rgba(53, 53, 53, 0.95);
                 height: 385px;
-                width: 100%;
+                width: 245px;
 
                 div.active-header {
                     ul.tabs {
@@ -839,13 +837,14 @@ object, embed, video, iframe {
         }
 
         #login-view, #signup-view {
+            margin-left: 396px;
             height: 385px;
             width: 245px;
 
             div.scrollable {
                 background: rgba(53, 53, 53, 0.95);
                 height: 385px;
-                width: 100%;
+                width: 245px;
 
                 div.active-header {
                     a.active-close {
@@ -958,6 +957,21 @@ object, embed, video, iframe {
                     }
                 }
             }
-        }   
+        } 
+
+        #share-view {
+            position: absolute;
+            left: 97px;
+            top: 43px;
+            height: 298px;
+            width: 446px;
+
+            div.scrollable {
+                @include border-radius(3px, 3px);
+                background: rgba(0, 0, 0, 0.82);
+                height: 298px;
+                width: 446px;
+            }
+        }  
     }
 }

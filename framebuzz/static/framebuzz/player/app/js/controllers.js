@@ -17,6 +17,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.loginModel = {};
                 $scope.signupModel = {};
                 $scope.selectedThreadSiblings = {};
+                $scope.replyClicked = false;
 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -48,7 +49,7 @@ angular.module('framebuzz.controllers', []).
                             $scope.loginModel = {};
                             safeApply($scope);
 
-                            $state.transitionTo('player.initView');
+                            $state.transitionTo('player.panelView');
                         }
                     })
                     .error(function(data, status, headers, config) {
@@ -67,7 +68,7 @@ angular.module('framebuzz.controllers', []).
                             $scope.videoInstance.is_authenticated = false;
                             safeApply($scope);
 
-                            $state.transitionTo('player.initView');
+                            $state.transitionTo('player.panelView');
                         }
                     })
                     .error(function(data, status, headers, config) {
@@ -97,7 +98,7 @@ angular.module('framebuzz.controllers', []).
                             $scope.signupModel = {};
                             safeApply($scope);
 
-                            $state.transitionTo('player.initView');
+                            $state.transitionTo('player.panelView');
                         }
                     })
                     .error(function(data, status, headers, config) {
@@ -169,11 +170,7 @@ angular.module('framebuzz.controllers', []).
                 };
 
                 $scope.showReplyFormForThread = function(thread) {
-                    $state.transitionTo('player.activeView.thread.postReply', { threadId: thread.id });
-                };
-
-                $scope.openShareDialog = function() {
-                    console.log('click');
+                    
                 };
 
                 // --
@@ -238,7 +235,7 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_playing', function() {
-                    if ($state.is('player.initView')) {
+                    if ($state.is('player.panelView')) {
                         $state.transitionTo('player.blendedView');
                     }
                 
