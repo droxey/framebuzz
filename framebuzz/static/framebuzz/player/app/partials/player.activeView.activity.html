@@ -1,1 +1,8 @@
-<h1>Activity</h1>
+<div id="activity">
+    <ul>
+        <li data-ng-repeat="activity in activities">
+            <p><strong>{{ activity.actor }}</strong> {{ activity.verb }}.</p>
+            <p class="timesince">{{ activity.timesince }} ago</p>
+        </li>
+    </ul>
+</div>

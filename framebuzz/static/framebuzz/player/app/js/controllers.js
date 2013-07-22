@@ -19,6 +19,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.selectedThreadSiblings = {};
                 $scope.replyClicked = false;
                 $scope.userProfile = {};
+                $scope.activities = {};
 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -344,7 +345,9 @@ angular.module('framebuzz.controllers', []).
                         });   
                     }
                     else if (jsonData.eventType == eventTypes.getActivityStream) {
-                        console.log(jsonData);
+                        $scope.activities = jsonData.data.activities;
+                        safeApply($scope);
+                        $state.transitionTo('player.activeView.activity');
                     }
                     else if (jsonData.eventType == eventTypes.getUserProfile) {
                         $scope.userProfile = jsonData.data;

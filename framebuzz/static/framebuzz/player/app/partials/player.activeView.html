@@ -2,12 +2,12 @@
     <a class="active-close" href="#/player/panel/blended">
         <img src="{{ rootPath }}img/icon-close.png" alt="Switch to Blended View" />
     </a>
-    <ul class="tabs clearfix">
-        <li>
-            <a data-ng-class="{ active: $state.is('player.activeView.thread') || $state.is('player.activeView.allThreads') }" href="#/player/panel/active/comments/threads" title="Comments" data-ng-model="active" data-ng-init="active = 'comments'" data-ng-click="active = 'comments'">Comments</a>
+    <ul class="tabs clearfix" data-ng-model="active" data-ng-init="active = 'comments'">
+        <li data-ng-click="active = 'comments'">
+            <a data-ng-class="{ active: $state.is('player.activeView.thread') || $state.is('player.activeView.allThreads') }" href="#/player/panel/active/comments/threads" title="Comments">Comments</a>
         </li>
-        <li>
-            <a data-ng-show="videoInstance.is_authenticated" data-ng-class="{ active: $state.is('player.activeView.activity') }" data-ng-click="getActivityStream()" title="Activity" data-ng-click="active = 'activity'">Activity</a>
+        <li data-ng-click="active = 'activity'">
+            <a data-ng-show="videoInstance.is_authenticated" data-ng-class="{ active: $state.is('player.activeView.activity') }" data-ng-click="getActivityStream()" title="Activity">Activity</a>
         </li>
         <li class="indicator" data-ng-class="active" data-ng-hide="$state.is('player.userProfileView')">
             <img data-ng-src="{{ rootPath }}img/icon-down.png" alt="" height="6" width="13">

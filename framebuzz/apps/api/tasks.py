@@ -1,4 +1,5 @@
 import celery
+import datetime
 import json
 import redis
 
@@ -290,7 +291,10 @@ def get_thread_siblings(context):
 def add_comment_action(context):
     thread_data = context.get(DATA_KEY, None)
     channel = context.get('outbound_channel', None)
+    video_id = context.get('video_id', None)
+    video = Video.objects.get(video_id=video_id)
     action_name = None
+
 
     if thread_data.get('username', None):
         user = auth.models.User.objects.get(username=thread_data['username'])
@@ -329,11 +333,11 @@ def add_comment_action(context):
 
             if is_favorite:
                 action_name = 'removed_favorite'
-                action.send(user, verb='removed from favorites', action_object=None, target=None, comment_id=thread.id)
+                action.send(user, verb='removed from favorites', action_object=thread, target=video)
                 is_favorite.delete()
             else:
                 action_name = 'added_favorite'
-                action.send(user, verb='added to favorites', action_object=thread)
+                action.send(user, verb='added to favorites', action_object=thread, target=video)
 
                 if thread.user.id != user.id and thread.user.email:
                     send_templated_mail(
@@ -353,10 +357,10 @@ def add_comment_action(context):
 
             if created:
                 action_name = 'flagged_comment'
-                action.send(user, verb='flagged comment', action_object=thread)
+                action.send(user, verb='flagged comment', action_object=thread, target=video)
             else:
                 action_name = 'unflagged_comment'
-                action.send(user, verb='unflagged comment', action_object=thread)
+                action.send(user, verb='unflagged comment', action_object=thread, target=video)
                 commentFlag.delete()
         else:
             pass
@@ -400,12 +404,39 @@ def get_activity_stream(context):
     else:
         user = context.get('user', None)
 
+    valid_verbs = ['started following', 'flagged comment', 'unflagged comment', 
+        'added to favorites', 'removed from favorites', 'stopped following', 'replied to comment']
+    last_login_minus_day = user.last_login - datetime.timedelta(days=1)
+    user_activity_stream = Action.objects.filter(verb__in=valid_verbs, timestamp__gte = last_login_minus_day)
+
+    stream_data = list()
+    for activity in user_activity_stream:
+        if activity.action_object is not None and activity.actor.id != user.id:
+            if activity.action_object_content_type.model == 'mpttcomment' and activity.action_object.user.id == user.id:
+                act = {
+                    'actor': activity.actor.username,
+                    'verb': activity.verb,
+                    'timesince': activity.timesince(),
+                    'action_object': activity.action_object.__unicode__(),
+                    'target_object': activity.target.__unicode__()
+                }
+                stream_data.append(act)
+        else:
+            if activity.target_object_id == user.id:
+                act = {
+                    'actor': activity.actor.username,
+                    'verb': activity.verb,
+                    'timesince': activity.timesince(),
+                    'target_object': activity.target.username
+                }
+                stream_data.append(act)
+
     outbound_message = dict()
     outbound_message[EVENT_TYPE_KEY] = 'FB_ACTIVITY_STREAM'
     outbound_message[CHANNEL_KEY] = channel
+    outbound_message[DATA_KEY] = { 'activities': stream_data }
 
-    if context_data:
-        pass
+    return outbound_message
 
 @celery.task
 def get_user_profile(context):

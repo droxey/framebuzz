@@ -83,7 +83,7 @@ class Video(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('view-content', kwargs={'section_type': 'v', 'result_id': str(self.video_id)})
+        return reverse('embed-video', kwargs={'video_id': str(self.video_id)})
 
     def default_thumbnail(self):
         try:
@@ -149,13 +149,6 @@ class MPTTComment(MPTTModel, Comment):
             urlize(self.comment, trim_url_limit=None, nofollow=True)
                 .replace('<a ', '<a target="_blank" '))
 
-    def get_absolute_url(self):
-        video = Video.objects.get(pk=self.object_pk)
-        thread_id = self.id if self.parent == None else self.parent.id
-
-        return '%s?thread=%s' % (reverse('view-content',
-            kwargs={'section_type': 'v', 'result_id': str(video.video_id)}), str(thread_id))
-
     def get_thread_siblings(self):
         if not self.parent:
             start = math.floor(self.time)
@@ -183,6 +176,9 @@ class MPTTComment(MPTTModel, Comment):
         ordering=['tree_id','lft']
         verbose_name='Video Comment'
         verbose_name_plural='Video Comments'
+
+    def __unicode__(self):
+        return "%s at %s" % (self.comment, str(self.time))
 
     def save(self, *args, **kwargs):
         if not self.submit_date:

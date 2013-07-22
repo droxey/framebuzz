@@ -108,7 +108,8 @@ class ConnectionHandler(SockJSConnection):
                             extra_context={
                                 'data': data, 
                                 'outbound_channel': self.session_channel,
-                                'username': data.get('username', None)
+                                'username': data.get('username', None),
+                                'video_id': video_id
                             }) \
                         | tasks.add_comment_action.s() \
                         | tasks.message_outbound.s()
