@@ -93,6 +93,16 @@ angular.module('framebuzz',
                 }   
             };
 
+            var userProfileView = {
+                name: 'player.userProfileView',
+                parent: playerActiveView,
+                templateUrl: templateRootPath + 'player.profile.html',
+                url: '/profile/:username',
+                data: {
+                    panelId: 'profile-view'
+                }
+            };
+
             var playerActiveViewComments = { 
                 name: 'player.activeView.comments',
                 parent: playerActiveView,
@@ -142,6 +152,7 @@ angular.module('framebuzz',
                 .state(signupView)
                 .state(playerBlendedView)
                 .state(playerActiveView)
+                .state(userProfileView)
                 .state(playerActiveViewComments)
                 .state(playerActiveViewThread)
                 .state(playerActiveViewAllThreads)

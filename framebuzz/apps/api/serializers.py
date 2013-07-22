@@ -127,3 +127,6 @@ class MPTTCommentSerializer(BaseCommentSerializer):
 
     def get_time_hms(self, obj):
         return obj.timeInHMS
+
+class ActionSerializer(serializers.ModelSerializer):
+    pass

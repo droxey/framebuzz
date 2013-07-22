@@ -550,7 +550,7 @@ object, embed, video, iframe {
             }
         }
 
-        #active-view {
+        #active-view, #profile-view {
             margin-left: 396px;
             height: 385px;
             width: 246px;
@@ -565,7 +565,7 @@ object, embed, video, iframe {
                         float: left;
                         height: 44px;
                         margin-left: 15px;
-                        width: 145px;
+                        width: 139px;
 
                         li {
                             float: left;
@@ -618,12 +618,21 @@ object, embed, video, iframe {
                         display: inline-block;
                         height: 33px;
                         padding: 4px 0;
-                        width: 33px;
+                        width: 51px;
 
                         img.img-circle {
-                             @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                            @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                            float: left;
                             height: 33px;
+                            margin-right: 5px;
                             width: 33px;
+                        }
+
+                        img.indicator {
+                            float: left;
+                            height: 6px;
+                            margin: 15px 0;
+                            width: 13px;
                         }
                     }
 
@@ -867,6 +876,79 @@ object, embed, video, iframe {
                             }
 
                             .ps-scrollbar-x { display: none; }
+                        }
+                    }
+
+                    #user-profile {
+                        padding: 13px;
+
+                        div.header {
+                            margin-bottom: 17px;
+
+                            img.img-circle {
+                                display: block;
+                                float: left;
+                                margin-right: 10px;
+                            }
+
+                            div.user {
+                                float: left;
+
+                                strong {
+                                    color: white;
+                                    display: block;
+                                    font-family: 'proxima-nova';
+                                    font-size: 14.51px;
+                                    font-weight: 700;
+                                    margin: 3px 0;
+                                }
+
+                                a {
+                                    color: #8c8c8c;
+                                    cursor: pointer;
+                                    display: block;
+                                    font-family: 'proxima-nova';
+                                    font-size: 10.04px;
+                                    font-weight: 700;
+
+                                    &:hover { color: #cbcbcb; }
+                                }
+                            }
+                        }
+
+                        table {
+                            border-top: 1px solid rgba(201, 201, 201, 0.15);
+                            width: 225px;
+
+                            tr {
+                                td {
+                                    background-color: transparent;
+                                    color: #8c8c8c;
+                                    font-family: 'proxima-nova';
+                                    font-size: 12.28px;
+                                    font-weight: 300;
+                                    padding: 12px 10px;
+                                    text-align: center;
+                                    @include single-transition(background-color 100ms linear);
+
+                                    &.border-right {
+                                        border-right: 1px solid rgba(201, 201, 201, 0.15);
+                                    }
+
+                                    &.border-left {
+                                        border-left: 1px solid rgba(201, 201, 201, 0.15);
+                                    }
+
+                                    &.border-bottom {
+                                        border-bottom: 1px solid rgba(201, 201, 201, 0.15);
+                                    }
+
+                                    &:hover {
+                                        background-color: rbga(0, 0, 0, 0.32);
+                                        @include single-transition(background-color 100ms linear);
+                                    }
+                                }
+                            }
                         }
                     }
                 }

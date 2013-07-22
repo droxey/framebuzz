@@ -18,6 +18,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.signupModel = {};
                 $scope.selectedThreadSiblings = {};
                 $scope.replyClicked = false;
+                $scope.userProfile = {};
 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -26,7 +27,9 @@ angular.module('framebuzz.controllers', []).
                     login: 'FB_LOGIN',
                     signup: 'FB_SIGNUP',
                     commentAction: 'FB_COMMENT_ACTION',
-                    playerAction: 'FB_PLAYER_ACTION'
+                    playerAction: 'FB_PLAYER_ACTION',
+                    getActivityStream: 'FB_ACTIVITY_STREAM',
+                    getUserProfile: 'FB_USER_PROFILE'
                 };
 
                 // --
@@ -173,6 +176,34 @@ angular.module('framebuzz.controllers', []).
                     
                 };
 
+                $scope.getActivityStream = function() {
+                    socket.send_json({
+                        eventType: eventTypes.getActivityStream, 
+                        channel: SOCK.user_channel, 
+                        data: { 
+                            username: $scope.videoInstance.user.username 
+                        }
+                    });
+                };
+
+                $scope.getUserProfile = function(username) {
+                    if (username === undefined) {
+                        username = $scope.videoInstance.user.username;
+                    }
+
+                    socket.send_json({
+                        eventType: eventTypes.getUserProfile, 
+                        channel: SOCK.user_channel, 
+                        data: { 
+                            username: username 
+                        }
+                    });
+                }
+
+                $scope.toBeImplemented = function() {
+                    alert('Not implemented yet!');
+                };
+
                 // --
                 // PRIVATE METHODS
                 // --
@@ -297,7 +328,6 @@ angular.module('framebuzz.controllers', []).
                         }
                     }
                     else if (jsonData.eventType == eventTypes.getThreadSiblings) {
-                        console.log(jsonData.data.siblings);
                         $scope.selectedThreadSiblings = jsonData.data.siblings;
                         safeApply($scope);
 
@@ -312,6 +342,15 @@ angular.module('framebuzz.controllers', []).
                                 return;
                             }
                         });   
+                    }
+                    else if (jsonData.eventType == eventTypes.getActivityStream) {
+                        console.log(jsonData);
+                    }
+                    else if (jsonData.eventType == eventTypes.getUserProfile) {
+                        $scope.userProfile = jsonData.data;
+                        safeApply($scope);
+
+                        $state.transitionTo('player.userProfileView', { username: $scope.userProfile.user.username });
                     }
                     else {
                         console.log('Socket received unhandled message.');

@@ -10,7 +10,7 @@ from django.contrib.sites.models import Site
 from django.utils import importlib
 
 from actstream import action
-from actstream.models import Action, Follow
+from actstream.models import Action, Follow, followers, following
 from actstream.actions import follow, unfollow
 from rest_framework.renderers import JSONRenderer
 from templated_email import send_templated_mail
@@ -389,3 +389,51 @@ def add_player_action(context):
 
     if verb:
         action.send(user, verb=verb, action_object=video, target=None, time=float(player_data.get('time')))
+
+@celery.task
+def get_activity_stream(context):
+    context_data = context.get(DATA_KEY, None)
+    channel = context.get('outbound_channel', None)
+
+    if context_data.get('username', None):
+        user = auth.models.User.objects.get(username=context_data['username'])
+    else:
+        user = context.get('user', None)
+
+    outbound_message = dict()
+    outbound_message[EVENT_TYPE_KEY] = 'FB_ACTIVITY_STREAM'
+    outbound_message[CHANNEL_KEY] = channel
+
+    if context_data:
+        pass
+
+@celery.task
+def get_user_profile(context):
+    context_data = context.get(DATA_KEY, None)
+    channel = context.get('outbound_channel', None)
+
+    if context_data.get('username', None):
+        user = auth.models.User.objects.get(username=context_data['username'])
+    else:
+        user = context.get('user', None)
+
+    favorite_comments = Action.objects.favorite_comments_stream(user)
+    total_comments = MPTTComment.objects.filter(user=user)
+    user_followers = followers(user)
+    user_following = following(user)
+
+    userSerializer = UserSerializer(user)
+    userSerialized = JSONRenderer().render(userSerializer.data)
+
+    outbound_message = dict()
+    outbound_message[EVENT_TYPE_KEY] = 'FB_USER_PROFILE'
+    outbound_message[CHANNEL_KEY] = channel
+    outbound_message[DATA_KEY] = {
+        'favorite_comments': len(favorite_comments),
+        'total_comments': len(total_comments),
+        'user_followers': len(user_followers),
+        'user_following': len(user_following),
+        'user': json.loads(userSerialized)
+    }
+
+    return outbound_message

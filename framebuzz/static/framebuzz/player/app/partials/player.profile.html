@@ -1,0 +1,21 @@
+<div id="user-profile">
+    <div class="header clearfix">
+        <img class="img-circle" data-ng-src="{{ userProfile.user.avatar_url }}" height="33" width="33" alt="{{ userProfile.user.username }}" />
+        <div class="user">
+            <strong>{{ userProfile.user.username }}</strong>
+            <a data-ng-click="toBeImplemented()" title="View Dashboard">View Dashboard</a>
+        </div>
+    </div>
+    <table class="profile-table">
+        <tbody>
+            <tr>
+                <td class="border-right border-bottom">{{ userProfile.total_comments }} Comments</td>
+                <td class="border-left border-bottom">{{ userProfile.favorite_comments }} Favorites</td>
+            </tr>
+            <tr>
+                <td class="border-right">{{ userProfile.user_followers }} Followers</td>
+                <td class="border-left">{{ userProfile.user_followers }} Following</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

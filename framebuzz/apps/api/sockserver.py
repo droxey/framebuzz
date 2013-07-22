@@ -122,6 +122,26 @@ class ConnectionHandler(SockJSConnection):
                                 'username': data.get('username', None)
                             }) \
                         | tasks.add_player_action.s() 
+                elif event_type == 'FB_ACTIVITY_STREAM':
+                    task_chain = tasks.get_user_by_session_key.s(
+                            session_key=self.session_key, 
+                            extra_context={
+                                'data': data, 
+                                'outbound_channel': self.session_channel,
+                                'username': data.get('username', None)
+                            }) \
+                        | tasks.get_activity_stream.s() \
+                        | tasks.message_outbound.s()
+                elif event_type == 'FB_USER_PROFILE':
+                    task_chain = tasks.get_user_by_session_key.s(
+                            session_key=self.session_key, 
+                            extra_context={
+                                'data': data, 
+                                'outbound_channel': self.session_channel,
+                                'username': data.get('username', None)
+                            }) \
+                        | tasks.get_user_profile.s() \
+                        | tasks.message_outbound.s()
                 else:
                     pass
 
