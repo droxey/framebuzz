@@ -12,7 +12,7 @@
     <div id="signup-or-login-prompt" data-ng-hide="videoInstance.is_authenticated">
       <p><a data-ng-href="#/player/panel/signup" title="Signup">Sign Up</a> or <a data-ng-href="#/player/panel/login" title="Login">Login</a> to post a comment...</p>
     </div>
-    <input data-ng-model="newThread.comment" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-ng-show="videoInstance.is_authenticated" />
+    <input data-ng-model="newThread.comment" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-ng-show="videoInstance.is_authenticated" data-maxinput="" />
     <button type="submit" id="submit-comment" data-ng-disabled="!videoInstance.is_authenticated">
       <img data-ng-src="/static/framebuzz/player/app/img/icon-post-comment.png" alt="Post Comment" class="fb-icon-post-comment" />
     </button>

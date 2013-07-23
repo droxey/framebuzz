@@ -304,9 +304,15 @@ object, embed, video, iframe {
                         @include border-bottom-left-radius(3px);
                         @include border-bottom-right-radius(0px);
                         background: white;
+                        border: 1px solid white;
+                        height: 20px;
                         float: left;
                         font-family: 'proxima-nova';
                         width: 482px;
+
+                        &.maxlength-full {
+                            border: 1px solid red;
+                        }
                     }
 
                     #signup-or-login-prompt {
@@ -842,7 +848,7 @@ object, embed, video, iframe {
                                             #id_reply {
                                                 @include border-radius(0px, 0px);
                                                 background: rgba(182, 182, 182, 0.6);
-                                                border: rgba(73, 73, 73, 0.6);
+                                                border: 1px solid rgba(73, 73, 73, 0.6);
                                                 color: rgba(0, 0, 0, 0.45);
                                                 height: 26px;
                                                 font-size: 12.28px;
@@ -850,6 +856,10 @@ object, embed, video, iframe {
                                                 font-style: italic;
                                                 margin-bottom: 0;
                                                 width: 212px;
+
+                                                &.maxlength-full {
+                                                    border: 1px solid rgba(255, 0, 0, 0.6);
+                                                }
                                             }
                                         }
                                     }

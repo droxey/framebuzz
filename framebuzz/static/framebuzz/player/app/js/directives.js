@@ -90,4 +90,9 @@ angular.module('framebuzz.directives', [])
                 $(element).perfectScrollbar('update');
             });
         };
-    }]);
+    }])
+    .directive('maxinput', function() {
+        return function(scope, element, attrs) {
+            $(element).maxlength({showFeedback: false, max: 180});
+        }
+    });
