@@ -310,7 +310,7 @@ def add_comment_action(context):
         thread_action = thread_data.get('action')
 
         if thread_action == 'follow':
-            check_following = Follow.objects.is_following(thread.user, user)
+            check_following = Follow.objects.is_following(user, thread.user)
 
             if check_following:
                 action_name = 'unfollowed'
