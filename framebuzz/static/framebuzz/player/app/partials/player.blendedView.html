@@ -4,22 +4,20 @@
 <div id="panel-scroll" class="scrollable" data-scrollbar="true">
   <ul class="comment-stream">
     <li data-ng-repeat="thread in videoInstance.threads" data-ng-show="thread.is_visible && thread.time < currentTime" data-ng-animate="{show: 'animate-comment-show'}">
-      <a class="show-thread-siblings" ng-click="setSelectedThread(thread)">
-        <div class="thread">
-          <div class="header">
-            <strong class="username">{{ thread.user.username }}</strong>
-            <strong class="time">{{ thread.time_hms }}</strong>
-          </div>
-          <p>{{ thread.comment }}</p>
-          <span class="dots" data-ng-show="thread.has_hidden_siblings" class="dots has-hidden-siblings">
-            <img data-ng-src="/static/framebuzz/player/app/img/icon-dots.png" alt="View More"  />
-          </span>
-          <span class="dots" data-ng-show="thread.has_replies && !thread.has_hidden_siblings" class="dots has-replies">
-            <img data-ng-src="/static/framebuzz/player/app/img/icon-dots.png" alt="View More"  />
-          </span>
+      <div class="thread" data-ng-click="setSelectedThread(thread)">
+        <div class="header">
+          <a class="username">{{ thread.user.username }}</a>
+          <strong class="time">{{ thread.time_hms }}</strong>
         </div>
-        <img class="img-circle" data-ng-src="{{ thread.user.avatar_url }}" alt="" />
-      </a>
+        <p>{{ thread.comment }}</p>
+        <span class="dots" data-ng-show="thread.has_hidden_siblings" class="dots has-hidden-siblings">
+          <img data-ng-src="{{ rootPath }}img/icon-dots.png" alt="View More"  />
+        </span>
+        <span class="dots" data-ng-show="thread.has_replies && !thread.has_hidden_siblings" class="dots has-replies">
+          <img data-ng-src="{{ rootPath }}img/icon-dots.png" alt="View More"  />
+        </span>
+      </div>
+      <img class="img-circle" data-ng-src="{{ thread.user.avatar_url }}" alt="{{ thread.user.username }}" data-ng-click="getUserProfile(thread.user.username)" />
     </li>
   </ul>
 </div>

@@ -15,12 +15,12 @@
             <li>
                 <div class="thread">
                     <div class="header">
-                        <strong class="username">{{ selectedThread.user.username }}</strong>
+                        <a class="username" data-ng-href="getUserProfile(selectedThread.user.username)">{{ selectedThread.user.username }}</a>
                         <strong class="time">{{ selectedThread.time_hms }}</strong>
                     </div>
                     <p>{{ selectedThread.comment }}</p>
                 </div>
-                <img class="img-circle" data-ng-src="{{ selectedThread.user.avatar_url }}" alt="" />
+                <img class="img-circle" data-ng-src="{{ selectedThread.user.avatar_url }}" alt="" data-ng-click="getUserProfile(selectedThread.user.username)" />
                 <div class="comment-actions clearfix">
                     <a class="reply" data-ng-model="replyClicked" data-ng-init="replyClicked = false" data-ng-click="replyClicked = !replyClicked" title="Reply" data-ng-show="videoInstance.is_authenticated">
                         <img data-ng-src="{{ rootPath }}img/icon-post-comment.png" alt="Reply" data-ng-hide="replyClicked" />
