@@ -161,7 +161,12 @@ angular.module('framebuzz.controllers', []).
                     });
                 };
 
-                $scope.setSelectedThread = function(thread) {
+                $scope.setSelectedThread = function(thread = null) {
+                    if (thread === null) {
+                        thread = getNextThreadInTimeline();
+                    }
+                    console.log(thread);
+   
                     $scope.selectedThread = thread;
 
                     socket.send_json({
@@ -208,6 +213,32 @@ angular.module('framebuzz.controllers', []).
                 // --
                 // PRIVATE METHODS
                 // --
+                
+                var getThreadById = function(threadId) {
+                    angular.forEach($scope.videoInstance.threads, function(thread, key) {
+                        if (thread.id == threadId) {
+                            return thread;
+                        }
+                    });
+                };
+
+                var getNextThreadInTimeline = function() {
+                    if ($scope.currentTime > 0) {
+                        var time = angular.copy($scope.currentTime);
+                        var timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
+                        var foundThread = null;
+                        
+                        for (var i = 0; i < timeOrderedThreads.length; i++) {
+                            if (timeOrderedThreads[i].time >= time) {
+                                foundThread = timeOrderedThreads[i];
+                            }
+
+                            if (foundThread !== null) { break; }
+                        }
+
+                        return foundThread;
+                    }
+                }
                 
                 var threadInCollection = function(thread) {
                     for (var i = 0; i < $scope.videoInstance.threads.length; i++) {
