@@ -1,4 +1,4 @@
-<li class="active-thread" data-ng-repeat="thread in videoInstance.threads" data-ng-show="thread.time < currentTime" data-ng-animate="{show: 'animate-comment-show'}">
+<li class="active-thread" data-ng-repeat="thread in videoInstance.threads" data-ng-show="thread.time < currentTime && thread.is_visible" data-ng-animate="{show: 'animate-comment-show'}">
     <div class="thread">
         <div class="header">
             <strong class="username">{{ thread.user.username }}</strong>

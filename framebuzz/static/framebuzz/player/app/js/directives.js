@@ -79,15 +79,15 @@ angular.module('framebuzz.directives', [])
         return function(scope, element, attrs) {
             if (attrs.scrollbar == 'true') {
                 $(element).perfectScrollbar();
-
-                scope.$on('$viewContentLoaded', function() {
-                    $(element).perfectScrollbar('destroy');
-                    $(element).perfectScrollbar();
-                });
-
-                scope.$on('player_timeupdate', function() { 
-                    $(element).perfectScrollbar('update');
-                });
             }
+
+            scope.$on('$viewContentLoaded', function() {
+                $(element).perfectScrollbar('destroy');
+                $(element).perfectScrollbar();
+            });
+
+            scope.$on('player_timeupdate', function() { 
+                $(element).perfectScrollbar('update');
+            });
         };
     }]);

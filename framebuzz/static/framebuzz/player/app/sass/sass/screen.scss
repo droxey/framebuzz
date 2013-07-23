@@ -518,23 +518,23 @@ object, embed, video, iframe {
             }
             
             div.scrollable {
-                @include border-bottom-left-radius(3px);
-                @include border-bottom-right-radius(3px);
-                background: rgba(61, 61, 61, 0.7);
-                height: auto;
-                max-height: 385px;
+                height: 385px;
                 right: 3px;
                 width: 237px;
 
                 ul.comment-stream {
-                    height: auto;
+                    height: 385px;
                     padding-top: 2px;
 
                     li {
-                        background: transparent;
+                        background: rgba(61, 61, 61, 0.7);
                         cursor: pointer;
                         @include single-transition(background-color 100ms linear);
-                        
+
+                        &:last-child {
+                            @include border-bottom-left-radius(3px);
+                            @include border-bottom-right-radius(3px);
+                        }
 
                         &:hover {
                             background-color: rgba(0, 0, 0, .32);

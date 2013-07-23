@@ -312,15 +312,7 @@ angular.module('framebuzz.controllers', []).
                     else if (jsonData.eventType == eventTypes.postNewComment) {
                         if (jsonData.data.thread !== undefined) {
                             var newThread = jsonData.data.thread;
-
-                            if (newThread.is_visible) {
-                                addNewThread(newThread);
-                            }
-                            else {
-                                // Find the thread for the time, and update
-                                // the has_hidden_sibilings value.
-                                console.log('TODO: This comment is not visible.');
-                            }
+                            addNewThread(newThread);
                         }
                         
                         if (jsonData.data.reply !== undefined) {
@@ -335,7 +327,6 @@ angular.module('framebuzz.controllers', []).
                         $state.transitionTo('player.activeView.thread', { threadId: $scope.selectedThread.id });
                     }
                     else if (jsonData.eventType == eventTypes.commentAction) {
-                        console.log(jsonData.data.thread);
                         $scope.selectedThread = jsonData.data.thread;
                         safeApply($scope); 
                     }
