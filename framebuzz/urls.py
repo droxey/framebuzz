@@ -3,7 +3,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
 
-
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -16,8 +15,12 @@ urlpatterns = patterns('',
     # API
     url(r'^v/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_embed', name='view-content'),
 
+    # Dashboard
+    url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
+
     # Django-AllAuth
     (r'^accounts/', include('allauth.urls')),
+	
 )
 
 if settings.DEBUG:
