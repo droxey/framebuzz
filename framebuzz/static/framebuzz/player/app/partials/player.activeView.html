@@ -1,25 +1,27 @@
-<div class="active-header clearfix">
-    <a class="active-close" href="#/player/panel/blended">
-        <img src="{{ rootPath }}img/icon-close.png" alt="Switch to Blended View" />
-    </a>
-    <ul class="tabs clearfix" data-ng-model="active" data-ng-init="active = 'comments'">
-        <li data-ng-click="active = 'comments'">
-            <a data-ng-class="{ active: $state.is('player.activeView.thread') || $state.is('player.activeView.allThreads') }" href="#/player/panel/active/comments/threads" title="Comments">Comments</a>
-        </li>
-        <li data-ng-click="active = 'activity'">
-            <a data-ng-show="videoInstance.is_authenticated" data-ng-class="{ active: $state.is('player.activeView.activity') }" data-ng-click="getActivityStream()" title="Activity">Activity</a>
-        </li>
-        <li class="indicator" data-ng-class="active" data-ng-hide="$state.is('player.userProfileView')">
-            <img data-ng-src="{{ rootPath }}img/icon-down.png" alt="" height="6" width="13">
-        </li>
-    </ul>
-    <a class="dropdown-toggle clearfix" data-ng-show="videoInstance.is_authenticated">
-        <img class="img-circle" data-ng-src="{{ videoInstance.user.avatar_url }}" alt="" />
-        <img class="indicator" data-ng-src="{{ rootPath }}img/icon-down.png" alt="" height="6" width="13">
-    </a>
-    <ul class="dropdown-menu">
-        <li><a data-ng-click="getUserProfile(videoInstance.user.username)">View Profile</a></li>
-        <li><a data-ng-click="logout()">Logout</a></li>
-    </ul>
+<div id="panel-scroll" class="scrollable">
+    <div class="active-header clearfix">
+        <a class="active-close" href="#/player/panel/blended">
+            <img src="{{ rootPath }}img/icon-close.png" alt="Switch to Blended View" />
+        </a>
+        <ul class="tabs clearfix" data-ng-model="active" data-ng-init="active = 'comments'">
+            <li data-ng-click="active = 'comments'">
+                <a data-ng-class="{ 'active': $state.is('player.activeView.comments') }" href="#/player/panel/active/comments/threads" title="Comments">Comments</a>
+            </li>
+            <li data-ng-click="active = 'activity'">
+                <a data-ng-show="videoInstance.is_authenticated" data-ng-class="{ 'active': $state.is('player.activeView.activity') }" data-ng-click="getActivityStream()" title="Activity">Activity</a>
+            </li>
+            <li class="indicator" data-ng-class="active" data-ng-hide="$state.is('player.userProfileView')">
+                <img data-ng-src="{{ rootPath }}img/icon-down.png" alt="" height="6" width="13">
+            </li>
+        </ul>
+        <a class="dropdown-toggle clearfix" data-ng-show="videoInstance.is_authenticated">
+            <img class="img-circle" data-ng-src="{{ videoInstance.user.avatar_url }}" alt="" />
+            <img class="indicator" data-ng-src="{{ rootPath }}img/icon-down.png" alt="" height="6" width="13">
+        </a>
+        <ul class="dropdown-menu">
+            <li><a data-ng-click="getUserProfile(videoInstance.user.username)">View Profile</a></li>
+            <li><a data-ng-click="logout()">Logout</a></li>
+        </ul>
+    </div>
+    <div class="tab-container" data-ui-view></div>
 </div>
-<div class="tab-container" data-ui-view></div>

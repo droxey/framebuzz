@@ -107,27 +107,7 @@ angular.module('framebuzz',
                 name: 'player.activeView.comments',
                 parent: playerActiveView,
                 templateUrl: templateRootPath + 'player.activeView.comments.html',
-                url: '/comments',
-                data: {
-                    panelId: 'active-view'
-                }   
-            };
-
-            var playerActiveViewThread = { 
-                name: 'player.activeView.thread',
-                parent: playerActiveViewComments,
-                templateUrl: templateRootPath + 'player.activeView.thread.html',
-                url: '/threads/:threadId',
-                data: {
-                    panelId: 'active-view'
-                }   
-            };
-
-            var playerActiveViewAllThreads = { 
-                name: 'player.activeView.allThreads',
-                parent: playerActiveViewComments,
-                templateUrl: templateRootPath + 'player.activeView.allThreads.html',
-                url: '/threads',
+                url: '/comments/:id',
                 data: {
                     panelId: 'active-view'
                 }   
@@ -154,8 +134,6 @@ angular.module('framebuzz',
                 .state(playerActiveView)
                 .state(userProfileView)
                 .state(playerActiveViewComments)
-                .state(playerActiveViewThread)
-                .state(playerActiveViewAllThreads)
                 .state(playerActiveViewActivity);
         }
     ]).run(

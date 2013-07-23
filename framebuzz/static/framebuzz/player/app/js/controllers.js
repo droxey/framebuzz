@@ -324,7 +324,7 @@ angular.module('framebuzz.controllers', []).
                         $scope.selectedThreadSiblings = jsonData.data.siblings;
                         safeApply($scope);
 
-                        $state.transitionTo('player.activeView.thread', { threadId: $scope.selectedThread.id });
+                        $state.transitionTo('player.activeView.comments', { id: $scope.selectedThread.id });
                     }
                     else if (jsonData.eventType == eventTypes.commentAction) {
                         $scope.selectedThread = jsonData.data.thread;
