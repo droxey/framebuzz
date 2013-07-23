@@ -689,11 +689,14 @@ object, embed, video, iframe {
 
                 div.tab-container {
                     div.comments-view {
-                        div.thread-siblings {
+                        position: absolute;
+                        width: 245px;
+
+                        div.threads-timeline {
                             height: 53px;
                             width: 245px;
 
-                            img.siblings-bkg {
+                            img.bkg {
                                 position: relative;
                                 height: 53px;
                                 top: 0;
@@ -712,28 +715,95 @@ object, embed, video, iframe {
                                     float: left;
                                     padding: 11px 5px;
 
-                                    a {
+                                    img {
                                         cursor: pointer;
                                         height: 22px;
                                         width: 22px;
-
-                                        img {
-                                            cursor: pointer;
-                                            height: 22px;
-                                            width: 22px;
-                                        }
                                     }
 
                                     &.active {
                                         padding: 5px;
 
-                                        a {
+                                        img {
                                             height: 33px;
                                             width: 33px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        div.all-threads {
+                            height: 46px;
+                            width: 245px;
+
+                            img.bkg { height: 46px; }
+
+                            span.bx-prev, span.bx-next {
+                                color: rgba(255, 255, 255, 0.5);
+                                display: block;
+                                height: 15px;
+                                font-size: 0.85em;
+                                position: absolute;
+                                text-indent: -5px;
+                                top: 13px;
+                                width: 15px;
+                                @include single-transition(color 100ms ease-in-out);
+
+                                &:hover {
+                                    color: rgba(255, 255, 255, 0.8);
+                                    text-decoration: none;
+                                    @include single-transition(color 100ms ease-in-out);
+                                }
+
+                                a {
+                                    display: block;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    height: 15px;
+                                    width: 15px;
+                                    z-index: 1000;
+                                }
+                            }
+
+                            span.bx-prev { left: 12px; }
+                            span.bx-next { left: 225px; }
+
+                            div.bx-wrapper {
+                                height: 46px;
+                                float: left;
+                                left: 22px;
+                                position: absolute;
+                                top: 9px;
+                                width: 200px;
+                                z-index: 10;
+
+                                div.bx-viewport {
+                                    height: 22px;
+                                    left: 0;
+                                    width: 200px;
+
+                                    ul {
+                                        bottom: 0;
+                                        margin: 0;
+                                        width: 245px;
+
+                                        li {
+                                            padding: 0 3px;
+                                            height: 22px;
+                                            width: 22px;
 
                                             img {
-                                                height: 33px;
-                                                width: 33px;
+                                                opacity: 0.5;
+                                                @include single-transition(opacity 100ms ease-in-out);
+                                            }
+
+                                            &.seen {
+                                                img {
+                                                    opacity: 1;
+                                                    @include single-transition(opacity 100ms ease-in-out);
+                                                }
                                             }
                                         }
                                     }

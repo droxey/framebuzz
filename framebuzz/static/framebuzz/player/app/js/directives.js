@@ -94,5 +94,37 @@ angular.module('framebuzz.directives', [])
     .directive('maxinput', function() {
         return function(scope, element, attrs) {
             $(element).maxlength({showFeedback: false, max: 180});
-        }
-    });
+        };
+    })
+    .directive('bxslider', ['$rootScope', 'broadcaster', function($rootScope, broadcaster) {
+        return function(scope, element, attrs) {
+            var slider = $(element).bxSlider({
+                mode: 'horizontal',
+                slideSelector: 'li.slide',
+                easing: 'linear',
+                responsive: false,
+                tickerHover: true,
+                infiniteLoop: false,
+                speed: 250,
+                preloadImages: 'all',
+                autoStart: false,
+                slideWidth: 28,
+                minSlides: 1,
+                moveSlide: 1,
+                maxSlides: 7,
+                slideMargin: 10,
+                prevText: '',
+                nextText: '',
+                prevSelector: '.bx-prev',
+                nextSelector: '.bx-next',
+                onSliderLoad: function() {
+                    console.log($(this));
+                    scope.$on('player_timeupdate', function() { 
+                    });
+                }
+            });
+
+            slider.css({ 'width': '215px' });
+            slider.parent().css({ 'width': '215px' });
+        };
+    }]);

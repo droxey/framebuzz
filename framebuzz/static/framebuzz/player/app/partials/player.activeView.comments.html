@@ -1,16 +1,27 @@
 <div class="comments-view">
-    <div class="thread-siblings">
-        <img class="siblings-bkg" data-ng-src="{{ rootPath }}img/bkg-heads.png" alt="" />
+    <div class="threads-timeline all-threads">
+        <img class="bkg" data-ng-src="{{ rootPath }}img/bkg-threads.png" alt="" width="245" height="46" />
+        <div class="clearfix">
+            <span class="bx-prev icon-left-dir"></span>
+            <ul class="bxslider" data-bxslider="">            
+                <li class="slide" data-ng-repeat="thread in timeOrderedThreads" data-ng-show="thread.is_visible" data-ng-class="{ 'seen': thread.time < currentTime }">
+                    <img data-ng-src="{{ thread.user.avatar_url }}" class="img-circle" data-ng-hide="thread.user.avatar_url == NULL" data-ng-click="setSelectedThread(thread)">
+                    <img data-ng-src="{{ rootPath }}img/blank.png" class="img-circle" data-ng-show="thread.user.avatar_url == NULL">
+                </li>
+            </ul>
+            <span class="bx-next icon-right-dir"></span>
+        </div>
+    </div>
+    <div class="threads-timeline sibling-threads" data-ng-hide="selectedThread == null">
+        <img class="bkg" data-ng-src="{{ rootPath }}img/bkg-heads.png" alt="" />
         <ul class="clearfix">            
             <li data-ng-repeat="siblingThread in selectedThreadSiblings" data-ng-class="{ 'active': siblingThread.id == selectedThread.id }">
-                <a>
-                    <img data-ng-src="{{ siblingThread.user.avatar_url }}" class="img-circle" data-ng-hide="siblingThread.user.avatar_url == NULL" data-ng-click="setSelectedThread(siblingThread)">
-                    <img data-ng-src="{{ rootPath }}img/blank.png" class="img-circle" data-ng-show="siblingThread.user.avatar_url == NULL">
-                </a>
+                <img data-ng-src="{{ siblingThread.user.avatar_url }}" class="img-circle" data-ng-hide="siblingThread.user.avatar_url == NULL" data-ng-click="setSelectedThread(siblingThread)">
+                <img data-ng-src="{{ rootPath }}img/blank.png" class="img-circle" data-ng-show="siblingThread.user.avatar_url == NULL">
             </li>
         </ul>
     </div>
-    <div class="thread-scroll single-thread" data-scrollbar="true">
+    <div class="thread-scroll single-thread" data-ng-hide="selectedThread == null" data-scrollbar="true">
         <ul class="comment-stream">
             <li>
                 <div class="thread">

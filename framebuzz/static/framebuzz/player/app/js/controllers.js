@@ -20,6 +20,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.replyClicked = false;
                 $scope.userProfile = {};
                 $scope.activities = {};
+                $scope.timeOrderedThreads = null;
 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -165,7 +166,6 @@ angular.module('framebuzz.controllers', []).
                     if (thread === null) {
                         thread = getNextThreadInTimeline();
                     }
-                    console.log(thread);
    
                     $scope.selectedThread = thread;
 
@@ -225,7 +225,7 @@ angular.module('framebuzz.controllers', []).
                 var getNextThreadInTimeline = function() {
                     if ($scope.currentTime > 0) {
                         var time = angular.copy($scope.currentTime);
-                        var timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
+                        var timeOrderedThreads = angular.copy($scope.timeOrderedThreads);
                         var foundThread = null;
                         
                         for (var i = 0; i < timeOrderedThreads.length; i++) {
@@ -260,6 +260,7 @@ angular.module('framebuzz.controllers', []).
                     });
 
                     if (changed) {
+                        $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         $scope.videoInstance.threads = $filter('orderBy')($scope.videoInstance.threads, 'time', true);
                     }
                 };
@@ -338,6 +339,7 @@ angular.module('framebuzz.controllers', []).
 
                     if (jsonData.eventType == eventTypes.initVideo) {
                         $scope.videoInstance = jsonData.data;
+                        $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         safeApply($scope);
                     }
                     else if (jsonData.eventType == eventTypes.postNewComment) {
