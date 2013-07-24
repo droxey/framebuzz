@@ -1,25 +1,27 @@
-<div class="active-header clearfix">
-    <a class="active-close" href="#/player/panel/blended">
-        <img src="{{ rootPath }}img/icon-close.png" alt="Switch to Blended View" />
-    </a>
-    <a class="player-logo" href="http://www.framebuzz.com" title="FrameBuzz" target="_blank">
-        <img src="{{ rootPath }}img/player-logo.png" alt="FrameBuzz" />
-    </a>
-</div>
-<div id="signup" class="registration">
-    <h1>Sign Up</h1>
-    <p>Already have an account? Please <a href="#/player/panel/login" title="Sign In to FrameBuzz">sign in</a>.</p>
-    <form id="signup-form" method="POST" action="" data-ng-submit="signup()">
-        <p><input id="id_login" maxlength="30" name="login" placeholder="Username" type="text" data-ng-model="signupModel.username"></p>
-        <p><input id="id_password" name="password" placeholder="Password" type="password" data-ng-model="signupModel.password"></p>
-        <p><input id="id_password_confirm" name="password_confirm" placeholder="Confirm Password" type="password" data-ng-model="signupModel.confirmPassword"></p>
-        <p><input id="id_email" maxlength="30" name="email" placeholder="Email Address" type="text" data-ng-model="signupModel.email"></p>
-        <p class="clearfix">
-            <button class="registration-submit" type="submit">
-                <span>Sign Up</span>
-                <img src="{{ rootPath }}img/btn-rounded.png" alt="Sign Up" />
-            </button>
-        </p>
-        <p class="tos">By registering for FrameBuzz, you acknowledge that you agree to our <a href="#/player/dialog/terms" title="FrameBuzz Terms of Service">Terms of Service</a>.</p>
-    </form>
+<div class="scrollable">
+    <div class="active-header clearfix">
+        <a class="active-close" href="#/player/panel/blended">
+            <img src="{{ rootPath }}img/icon-close.png" alt="Switch to Blended View" />
+        </a>
+        <a class="player-logo" href="http://www.framebuzz.com" title="FrameBuzz" target="_blank">
+            <img src="{{ rootPath }}img/player-logo.png" alt="FrameBuzz" />
+        </a>
+    </div>
+    <div id="signup" class="registration">
+        <h1>Sign Up</h1>
+        <p>Already have an account? Please <a href="#/player/panel/login" title="Sign In to FrameBuzz">sign in</a>.</p>
+        <form id="signup-form" method="POST" action="" data-ng-submit="signup()">
+            <p><input id="id_login" maxlength="30" name="login" placeholder="Username" type="text" data-ng-model="signupModel.username"></p>
+            <p><input id="id_password" name="password" placeholder="Password" type="password" data-ng-model="signupModel.password"></p>
+            <p><input id="id_password_confirm" name="password_confirm" placeholder="Confirm Password" type="password" data-ng-model="signupModel.confirmPassword"></p>
+            <p><input id="id_email" maxlength="30" name="email" placeholder="Email Address" type="text" data-ng-model="signupModel.email"></p>
+            <p class="clearfix">
+                <button class="registration-submit" type="submit">
+                    <span>Sign Up</span>
+                    <img src="{{ rootPath }}img/btn-rounded.png" alt="Sign Up" />
+                </button>
+            </p>
+            <p class="tos">By registering for FrameBuzz, you acknowledge that you agree to our <a href="#/player/dialog/terms" title="FrameBuzz Terms of Service">Terms of Service</a>.</p>
+        </form>
+    </div>
 </div>
