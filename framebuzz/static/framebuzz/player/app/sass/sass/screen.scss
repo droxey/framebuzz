@@ -498,26 +498,6 @@ object, embed, video, iframe {
                     border-left: 1px solid rgba(104, 104, 104, 0.15);
                     border-bottom: #434343;
                     height: 43px;
-
-                    a.active-close {
-                        background-color: #686868;
-                        display: block;
-                        float: left;
-                        height: 100%;
-                        width: 33px;
-                        @include single-transition(background-color 250ms top);
-
-                        &:hover {
-                            background-color: #828282;
-                            @include single-transition(background-color 250ms top);
-                        }
-
-                        img {
-                            height: 12px;
-                            margin: 15px 10px;
-                            width: 12px;
-                        }
-                    }
                 }
             }
         }
@@ -526,23 +506,6 @@ object, embed, video, iframe {
             margin-left: 400px;
             height: auto;
             width: 237px;
-
-            a.panel-close {
-                background: rgba(61, 61, 61, 1.0);
-                display: none;
-                height: 22px;
-                margin-left: -14px;
-                position: absolute;
-                top: 3px;
-                width: 22px;
-                z-index: 120;
-
-                img {
-                    height: 11px;
-                    margin: 5px;
-                    width: 12px;
-                }
-            }
             
             div.scrollable {
                 height: 385px;
@@ -550,7 +513,7 @@ object, embed, video, iframe {
                 width: 237px;
 
                 ul.comment-stream {
-                    height: 385px;
+                    
                     padding-top: 2px;
 
                     li {
@@ -588,11 +551,12 @@ object, embed, video, iframe {
                 width: 245px;
 
                 div.active-header {
+                    padding: 0 10px;
+                    height: 44px;
+
                     ul.tabs {
                         float: left;
                         height: 44px;
-                        margin-left: 15px;
-                        width: 139px;
 
                         li {
                             float: left;
@@ -631,12 +595,12 @@ object, embed, video, iframe {
                             }
 
                             &.comments {
-                                left: 72px;
+                                left: 36px;
                                 @include single-transition(left 0.25s linear);
                             }
 
                             &.activity {
-                                left: 135px;
+                                left: 113px;
                                 @include single-transition(left 0.25s linear);
                             }
                         }
@@ -644,6 +608,7 @@ object, embed, video, iframe {
 
                     a.dropdown-toggle {
                         display: inline-block;
+                        float: right;
                         height: 33px;
                         padding: 4px 0;
                         width: 51px;
@@ -1107,7 +1072,24 @@ object, embed, video, iframe {
 
                 div.active-header {
                     a.active-close {
+                        background-color: #686868;
+                        display: block;
+                        float: left;
+                        height: 100%;
                         margin-right: 14px;
+                        width: 33px;
+                        @include single-transition(background-color 250ms top);
+
+                        &:hover {
+                            background-color: #828282;
+                            @include single-transition(background-color 250ms top);
+                        }
+
+                        img {
+                            height: 12px;
+                            margin: 15px 10px;
+                            width: 12px;
+                        }
                     }
 
                     a.player-logo {
