@@ -107,7 +107,7 @@ angular.module('framebuzz',
                 name: 'player.activeView.comments',
                 parent: playerActiveView,
                 templateUrl: templateRootPath + 'player.activeView.comments.html',
-                url: '/comments/:id',
+                url: '/comments/',
                 data: {
                     panelId: 'active-view'
                 }   

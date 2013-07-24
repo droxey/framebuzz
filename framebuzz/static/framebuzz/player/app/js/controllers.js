@@ -20,8 +20,9 @@ angular.module('framebuzz.controllers', []).
                 $scope.replyClicked = false;
                 $scope.userProfile = {};
                 $scope.activities = {};
-                $scope.timeOrderedThreads = null;
                 $scope.postTime = 0;
+                $scope.playing = false;
+                $scope.paused = false;
 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -168,13 +169,9 @@ angular.module('framebuzz.controllers', []).
                 };
 
                 $scope.setPostTime = function() {
-                    console.log('setPostTime called');
-
                     $scope.postTime = angular.copy($scope.currentTime);
                     $scope.postTimeHMS = mejs.Utility.secondsToTimeCode($scope.postTime);
                     safeApply($scope);
-
-                    console.log($scope.postTime);
                 };
 
                 $scope.setSelectedThread = function(thread = null) {
@@ -240,11 +237,11 @@ angular.module('framebuzz.controllers', []).
                 var getNextThreadInTimeline = function() {
                     if ($scope.currentTime > 0) {
                         var time = angular.copy($scope.currentTime);
-                        var timeOrderedThreads = angular.copy($scope.timeOrderedThreads);
+                        var timeOrderedThreads = angular.copy($scope.videoInstance.threads);
                         var foundThread = null;
                         
                         for (var i = 0; i < timeOrderedThreads.length; i++) {
-                            if (timeOrderedThreads[i].time >= time) {
+                            if (timeOrderedThreads[i].time <= time) {
                                 foundThread = timeOrderedThreads[i];
                             }
 
@@ -275,7 +272,6 @@ angular.module('framebuzz.controllers', []).
                     });
 
                     if (changed) {
-                        $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         $scope.videoInstance.threads = $filter('orderBy')($scope.videoInstance.threads, 'time', true);
                     }
                 };
@@ -314,7 +310,11 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_playing', function() {
-                    if ($state.is('player.panelView')) {
+                    $scope.playing = true;
+                    $scope.paused = false;
+                    safeApply($scope);
+
+                    if (!$state.is('player.loginView') && !$state.is('player.signupView')) {
                         $state.transitionTo('player.blendedView');
                     }
                 
@@ -330,6 +330,14 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_paused', function() {
+                    $scope.playing = false;
+                    $scope.paused = true;
+                    safeApply($scope);
+
+                    if ($state.is('player.blendedView')) {
+                        $scope.setSelectedThread();
+                    }
+
                     socket.send_json({
                         eventType: eventTypes.playerAction, 
                         channel: SOCK.user_channel, 
@@ -354,7 +362,6 @@ angular.module('framebuzz.controllers', []).
 
                     if (jsonData.eventType == eventTypes.initVideo) {
                         $scope.videoInstance = jsonData.data;
-                        $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         safeApply($scope);
                     }
                     else if (jsonData.eventType == eventTypes.postNewComment) {
@@ -369,10 +376,11 @@ angular.module('framebuzz.controllers', []).
                         }
                     }
                     else if (jsonData.eventType == eventTypes.getThreadSiblings) {
+                        $scope.selectedThread = jsonData.data.selectedThread;
                         $scope.selectedThreadSiblings = jsonData.data.siblings;
                         safeApply($scope);
 
-                        $state.transitionTo('player.activeView.comments', { id: $scope.selectedThread.id });
+                        $state.transitionTo('player.activeView.comments');
                     }
                     else if (jsonData.eventType == eventTypes.commentAction) {
                         $scope.selectedThread = jsonData.data.thread;

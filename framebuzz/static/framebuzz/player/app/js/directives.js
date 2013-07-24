@@ -104,9 +104,9 @@ angular.module('framebuzz.directives', [])
                         infiniteLoop: false,
                         hideControlOnEnd: true,
                         minSlides: 1,
-                        maxSlides: 7,
-                        moveSlides: 7,
-                        slideWidth: '28px',
+                        maxSlides: 5,
+                        moveSlides: 5,
+                        slideWidth: '26px',
                         pager: false,
                         slideSelector: 'li.slide',
                         responsive: false,
@@ -118,21 +118,12 @@ angular.module('framebuzz.directives', [])
                         nextText: '&nbsp;', 
                         prevSelector: '.icon-left-dir',
                         nextSelector: '.icon-right-dir', 
-                        easing: 'ease-in-out',
-                        onSliderLoad: function() {
-                            //scope.$on('player_timeupdate', function() { 
-                            //});
-                        },
-                        onSlidePrev: function() {
-                            console.log('prev');
-                        },
-                        onSlideNext: function() {
-                            console.log('next');
-                        }
+                        easing: 'ease-in-out'
                     });
 
                     element.parent().css({ 'width': '99999px' });
-                    element.parent().parent().css({ 'width': '200px' });
+                    element.parent().parent().css({ 'width': '140px' });
+                    $('div.bx-loading').remove();
                 });
             }
         }; 
