@@ -239,9 +239,7 @@ def get_thread_siblings(context):
     
     if thread_data:
         thread = MPTTComment.objects.get(id=thread_data.get('threadId'))
-        comments_in_range = MPTTComment.objects.filter(object_pk=thread.object_pk,
-                                            parent=None, 
-                                            is_removed=False).order_by('time')
+        comments_in_range = thread.get_thread_siblings()
         thread_index = list(comments_in_range.values_list('id', flat=True)).index(thread.id)
  
         # We want 5 total.

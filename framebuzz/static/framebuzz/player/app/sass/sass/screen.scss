@@ -687,6 +687,90 @@ object, embed, video, iframe {
                     }
                 }
 
+                div.all-threads {
+                    height: 46px;
+                    width: 245px;
+
+                    img.bkg { height: 46px; }
+
+                    span.icon-left-dir, span.icon-right-dir {
+                        color: rgba(255, 255, 255, 0.5);
+                        display: block;
+                        height: 15px;
+                        font-size: 0.85em;
+                        position: absolute;
+                        text-indent: -5px;
+                        top: 56.7px;
+                        width: 15px;
+                        @include single-transition(color 100ms ease-in-out);
+
+                        &:hover {
+                            color: rgba(255, 255, 255, 0.8);
+                            text-decoration: none;
+                            @include single-transition(color 100ms ease-in-out);
+                        }
+
+                        &.disabled {
+                            opacity: 0;
+                        }
+
+                        a {
+                            display: block;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            height: 15px;
+                            text-decoration: none;
+                            width: 15px;
+                            z-index: 1000;
+                        }
+                    }
+
+                    span.icon-left-dir{ left: 12px; }
+                    span.icon-right-dir { left: 229px; }
+
+                    div.bx-wrapper {
+                        height: 46px;
+                        float: left;
+                        left: 22px;
+                        position: absolute;
+                        top: 54px;
+                        width: 200px;
+                        z-index: 10;
+
+                        div.bx-viewport {
+                            height: 22px;
+                            left: 0;
+                            width: 200px;
+
+                            ul {
+                                bottom: 0;
+                                margin: 0;
+                                width: 99999px;
+
+                                li {
+                                    padding: 0 3px;
+                                    height: 22px;
+                                    width: 22px;
+
+                                    img {
+                                        cursor: pointer;
+                                        opacity: 0.5;
+                                        @include single-transition(opacity 100ms ease-in-out);
+                                    }
+
+                                    &.seen {
+                                        img {
+                                            opacity: 1;
+                                            @include single-transition(opacity 100ms ease-in-out);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 div.tab-container {
                     div.comments-view {
                         position: absolute;
@@ -727,89 +811,6 @@ object, embed, video, iframe {
                                         img {
                                             height: 33px;
                                             width: 33px;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        div.all-threads {
-                            height: 46px;
-                            width: 245px;
-
-                            img.bkg { height: 46px; }
-
-                            span.icon-left-dir, span.icon-right-dir {
-                                color: rgba(255, 255, 255, 0.5);
-                                display: block;
-                                height: 15px;
-                                font-size: 0.85em;
-                                position: absolute;
-                                text-indent: -5px;
-                                top: 13px;
-                                width: 15px;
-                                @include single-transition(color 100ms ease-in-out);
-
-                                &:hover {
-                                    color: rgba(255, 255, 255, 0.8);
-                                    text-decoration: none;
-                                    @include single-transition(color 100ms ease-in-out);
-                                }
-
-                                &.disabled {
-                                    opacity: 0;
-                                }
-
-                                a {
-                                    display: block;
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    height: 15px;
-                                    text-decoration: none;
-                                    width: 15px;
-                                    z-index: 1000;
-                                }
-                            }
-
-                            span.icon-left-dir{ left: 12px; }
-                            span.icon-right-dir { left: 225px; }
-
-                            div.bx-wrapper {
-                                height: 46px;
-                                float: left;
-                                left: 22px;
-                                position: absolute;
-                                top: 9px;
-                                width: 200px;
-                                z-index: 10;
-
-                                div.bx-viewport {
-                                    height: 22px;
-                                    left: 0;
-                                    width: 200px;
-
-                                    ul {
-                                        bottom: 0;
-                                        margin: 0;
-                                        width: 99999px;
-
-                                        li {
-                                            padding: 0 3px;
-                                            height: 22px;
-                                            width: 22px;
-
-                                            img {
-                                                opacity: 0.5;
-                                                @include single-transition(opacity 100ms ease-in-out);
-                                            }
-
-                                            &.seen {
-                                                img {
-                                                    opacity: 1;
-                                                    @include single-transition(opacity 100ms ease-in-out);
-                                                }
-                                            }
                                         }
                                     }
                                 }

@@ -23,5 +23,18 @@
             <li><a data-ng-click="logout()">Logout</a></li>
         </ul>
     </div>
+    <div data-ng-if="$state.is('player.activeView.comments')" class="threads-timeline all-threads">
+        <img class="bkg" data-ng-src="{{ rootPath }}img/bkg-threads.png" alt="" width="245" height="46" />
+        <div class="clearfix">
+            <span class="icon-left-dir"></span>
+            <ul class="bxslider">            
+                <li class="slide" data-bxslider="" data-ng-repeat="thread in timeOrderedThreads" data-ng-show="thread.is_visible" data-ng-class="{ 'seen': thread.time < currentTime }">
+                    <img data-ng-src="{{ thread.user.avatar_url }}" class="img-circle" data-ng-hide="thread.user.avatar_url == NULL" data-ng-click="setSelectedThread(thread)">
+                    <img data-ng-src="{{ rootPath }}img/blank.png" class="img-circle" data-ng-show="thread.user.avatar_url == NULL">
+                </li>
+            </ul>
+            <span class="icon-right-dir"></span>
+        </div>
+    </div>
     <div class="tab-container" data-ui-view></div>
 </div>
