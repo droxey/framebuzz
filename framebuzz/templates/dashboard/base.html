@@ -80,28 +80,28 @@
             {% endblock %}
             {% block sidebar-videos %}
             <li>
-                <a href="{% url 'videos' %}">
+                <a href="{% url 'videos' %}" class="dropdown-toggle">
                     <i class="icon-film"></i>
                     <span>Video</span>
                     <i class="icon-chevron-down"></i>
                 </a>    
                 <ul class="submenu">
                     <li><a href="{% url 'videos' %}">Library</a></li>
-                    <li><a href="{% url 'videos-fbuzz-one' %}">Framebuzz a New Video</a></li>
+                    <li><a href="{% url 'videos-fbuzz-one' %}">Framebuzz a Video</a></li>
                 </ul>
             </li>
             {% endblock %}
             {% block sidebar-moderator %}
             <li>
-                <a href="{% url 'moderator'  %}">
+                <a href="{% url 'moderator'  %}" class="dropdown-toggle">
                     <i class="icon-group"></i>
                     <span>Moderator</span>
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="user-list.html">Comment Queue</a></li>
-                    <li><a href="new-user.html">Basic Controls</a></li>
-                    <li><a href="user-profile.html">Advanced Controls</a></li>
+                    <li><a href="{% url 'moderator'  %}">Comment Queue</a></li>
+                    <li><a href="{% url 'moderator-basic' %}">Basic Controls</a></li>
+                    <li><a href="{% url 'moderator-advanced' %}">Advanced Controls</a></li>
                 </ul>
             </li>
             {% endblock %}
