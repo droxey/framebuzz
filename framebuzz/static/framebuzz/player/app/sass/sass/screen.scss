@@ -739,7 +739,7 @@ object, embed, video, iframe {
 
                             img.bkg { height: 46px; }
 
-                            span.bx-prev, span.bx-next {
+                            span.icon-left-dir, span.icon-right-dir {
                                 color: rgba(255, 255, 255, 0.5);
                                 display: block;
                                 height: 15px;
@@ -756,19 +756,24 @@ object, embed, video, iframe {
                                     @include single-transition(color 100ms ease-in-out);
                                 }
 
+                                &.disabled {
+                                    opacity: 0;
+                                }
+
                                 a {
                                     display: block;
                                     position: absolute;
                                     top: 0;
                                     left: 0;
                                     height: 15px;
+                                    text-decoration: none;
                                     width: 15px;
                                     z-index: 1000;
                                 }
                             }
 
-                            span.bx-prev { left: 12px; }
-                            span.bx-next { left: 225px; }
+                            span.icon-left-dir{ left: 12px; }
+                            span.icon-right-dir { left: 225px; }
 
                             div.bx-wrapper {
                                 height: 46px;
@@ -787,7 +792,7 @@ object, embed, video, iframe {
                                     ul {
                                         bottom: 0;
                                         margin: 0;
-                                        width: 245px;
+                                        width: 99999px;
 
                                         li {
                                             padding: 0 3px;

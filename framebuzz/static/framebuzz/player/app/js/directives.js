@@ -96,35 +96,44 @@ angular.module('framebuzz.directives', [])
             $(element).maxlength({showFeedback: false, max: 180});
         };
     })
-    .directive('bxslider', ['$rootScope', 'broadcaster', function($rootScope, broadcaster) {
-        return function(scope, element, attrs) {
-            var slider = $(element).bxSlider({
-                mode: 'horizontal',
-                slideSelector: 'li.slide',
-                easing: 'linear',
-                responsive: false,
-                tickerHover: true,
-                infiniteLoop: false,
-                speed: 250,
-                preloadImages: 'all',
-                autoStart: false,
-                slideWidth: 28,
-                minSlides: 1,
-                moveSlide: 1,
-                maxSlides: 7,
-                slideMargin: 10,
-                prevText: '',
-                nextText: '',
-                prevSelector: '.bx-prev',
-                nextSelector: '.bx-next',
-                onSliderLoad: function() {
-                    console.log($(this));
-                    scope.$on('player_timeupdate', function() { 
+    .directive('bxslider', function () {
+        return function (scope, element, attrs) {
+            if (scope.$last === true) {
+                element.ready(function () {
+                    element.parent().bxSlider({
+                        infiniteLoop: false,
+                        hideControlOnEnd: true,
+                        minSlides: 1,
+                        maxSlides: 7,
+                        moveSlides: 7,
+                        slideWidth: '28px',
+                        pager: false,
+                        slideSelector: 'li.slide',
+                        responsive: false,
+                        tickerHover: true,
+                        speed: 500,
+                        preloadImages: 'all',
+                        autoStart: false,
+                        prevText: '&nbsp;',
+                        nextText: '&nbsp;', 
+                        prevSelector: '.icon-left-dir',
+                        nextSelector: '.icon-right-dir', 
+                        easing: 'ease-in-out',
+                        onSliderLoad: function() {
+                            //scope.$on('player_timeupdate', function() { 
+                            //});
+                        },
+                        onSlidePrev: function() {
+                            console.log('prev');
+                        },
+                        onSlideNext: function() {
+                            console.log('next');
+                        }
                     });
-                }
-            });
 
-            slider.css({ 'width': '215px' });
-            slider.parent().css({ 'width': '215px' });
-        };
-    }]);
+                    element.parent().css({ 'width': '99999px' });
+                    element.parent().parent().css({ 'width': '200px' });
+                });
+            }
+        }; 
+    });
