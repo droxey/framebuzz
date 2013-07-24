@@ -136,4 +136,26 @@ angular.module('framebuzz.directives', [])
                 });
             }
         }; 
-    });
+    })
+    .directive('onfocus', ['safeApply', function(safeApply) {
+        return {
+            link: function(scope, element, attrs) {
+                element.ready(function() {
+                    $(element).on('focus', function() {
+                        scope.setPostTime();
+
+                        $('#duration').hide();
+                        $('#post-time').show().addClass('active');
+                    });
+
+                    $(element).on('focusout', function() {
+                        scope.postTime = 0;
+                        safeApply(scope);
+
+                        $('#post-time').hide();
+                        $('#duration').show().addClass('active');
+                    });
+                });
+            }
+        };
+    }]);

@@ -21,6 +21,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.userProfile = {};
                 $scope.activities = {};
                 $scope.timeOrderedThreads = null;
+                $scope.postTime = 0;
 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -112,10 +113,14 @@ angular.module('framebuzz.controllers', []).
                 }
                 
                 $scope.postNewThread = function() {
+                    var time = $scope.postTime == null 
+                        ? angular.copy($scope.currentTime) 
+                        : angular.copy($scope.postTime);
+
                     var postData = {
                         'object_pk': $scope.videoInstance.video.id,
                         'content_type': 'core.video',
-                        'time': $scope.currentTime,
+                        'time': time,
                         'comment': $scope.newThread.comment,
                         'username': $scope.videoInstance.user.username
                     };
@@ -160,6 +165,16 @@ angular.module('framebuzz.controllers', []).
                             username: $scope.videoInstance.user.username
                         }
                     });
+                };
+
+                $scope.setPostTime = function() {
+                    console.log('setPostTime called');
+
+                    $scope.postTime = angular.copy($scope.currentTime);
+                    $scope.postTimeHMS = mejs.Utility.secondsToTimeCode($scope.postTime);
+                    safeApply($scope);
+
+                    console.log($scope.postTime);
                 };
 
                 $scope.setSelectedThread = function(thread = null) {

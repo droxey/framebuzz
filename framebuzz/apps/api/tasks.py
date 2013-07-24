@@ -239,48 +239,34 @@ def get_thread_siblings(context):
     
     if thread_data:
         thread = MPTTComment.objects.get(id=thread_data.get('threadId'))
-        comments_in_range = thread.get_thread_siblings()
+        comments_in_range = MPTTComment.objects.filter(object_pk=thread.object_pk,
+                                            parent=None, 
+                                            is_removed=False).order_by('time')
         thread_index = list(comments_in_range.values_list('id', flat=True)).index(thread.id)
- 
-        # We want 5 total.
-        pad_left = 0
-        end_index = 5
-
-        if thread_index == 0:
-            start_index = 0
-            pad_left = 2
-            end_index = 3
-        elif thread_index == 1:
-            start_index = 0
-            pad_left = 1
-            end_index = 4
-        else:
-            start_index = thread_index - 2
-            end_index = thread_index + 3
-        
+        start_index = thread_index + 1
+        end_index = thread_index + 6 # We want to get 7 comments each time we call this task.
         siblings = list(comments_in_range[start_index:end_index])
 
-        if len(siblings) < 5:
+        if len(siblings) < 7:
             fake_comment = MPTTComment()
             fake_comment.id = 99999999
 
-            if pad_left > 0:
-                for left in range(0, pad_left):
-                    siblings.insert(0, fake_comment)
-            else:
-                if len(siblings) == 3:
-                    siblings.append(fake_comment)
-                    siblings.append(fake_comment)
-                else:
-                    siblings.append(fake_comment)
+            for pad_right in range(len(siblings), end_index):
+                siblings.append(fake_comment)
 
-        threadSerializer = MPTTCommentSerializer(siblings, context={ 'user': user })
+        siblingsSerializer = MPTTCommentSerializer(siblings, context={ 'user': user })
+        siblingsSerialized = JSONRenderer().render(siblingsSerializer.data)
+
+        threadSerializer = MPTTCommentSerializer(thread, context={ 'user': user })
         threadSerialized = JSONRenderer().render(threadSerializer.data)
 
         outbound_message = dict()
         outbound_message[EVENT_TYPE_KEY] = 'FB_GET_THREAD_SIBLINGS'
         outbound_message[CHANNEL_KEY] = channel
-        outbound_message[DATA_KEY] = { 'siblings': json.loads(threadSerialized) }
+        outbound_message[DATA_KEY] = { 
+            'selectedThread': json.loads(threadSerialized),
+            'siblings': json.loads(siblingsSerialized) 
+        }
         
         return outbound_message
 
