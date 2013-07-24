@@ -1,4 +1,6 @@
 {% extends "dashboard/base.html" %}
+{% load url from future %}
+{% load socialaccount %}
 
 {% block sidebar-videos %}
     <li class="active">
@@ -6,13 +8,13 @@
             <div class="arrow"></div>
             <div class="arrow_border"></div>
         </div>
-        <a href="{% url 'videos' %}">
+        <a href="{% url 'videos' %}" class="dropdown-toggle">
             <i class="icon-film"></i>
             <span>Video</span>
             <i class="icon-chevron-down"></i>
         </a>
         <ul class="active submenu">
-            <li><a href="{% url 'videos' %}">Library</a></li>
+            <li><a href="{% url 'videos'%}">Library</a></li>
             <li><a href="{% url 'videos-fbuzz-one' %}" class="active">Framebuzz a Video</a></li>
         </ul>
     </li>
