@@ -156,4 +156,14 @@ angular.module('framebuzz.directives', [])
                 });
             }
         };
-    }]);
+    }])
+    .directive('share', function() {
+        return function(scope, element, attrs) {
+            element.share({
+                networks: ['facebook','googleplus','twitter'],
+                theme: 'icon',
+                useIn1: false,
+                urlToShare: SOCK.share_url
+            });
+        };
+    });

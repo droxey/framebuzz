@@ -1,6 +1,6 @@
 <div id="buzz-layer" class="layer" data-ui-view="" data-ng-animate="{ 'onEnter': 'animate-panel-enter', 'onExit': 'animate-panel-exit' }"></div>
 <h1 class="video-title">{{ videoInstance.video.title }}</h1>
-<div id="player-buttons" data-ng-if="playing || paused" data-ng-class="{ 'active': !playing && paused }">
+<div id="player-buttons" data-ng-if="playing || paused" data-ng-class="{ 'active': !playing && paused }" data-ng-hide="$state.is('player.share')">
     <img class="pause" data-ng-src="{{ rootPath }}img/btn-pause.png" alt="Pause" height="94" width="94" data-ng-show="playing">
     <img class="play" data-ng-src="{{ rootPath }}img/btn-play.png" alt="Play" height="94" width="94" data-ng-show="paused">
 </div>

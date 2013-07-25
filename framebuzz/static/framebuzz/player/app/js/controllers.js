@@ -4,8 +4,8 @@
 
 angular.module('framebuzz.controllers', []).
   controller('VideoPlayerCtrl', 
-        ['$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 
-            function($scope, $state, $filter, $http, socket, broadcaster, safeApply) {    
+        ['$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', '$dialog', 
+            function($scope, $state, $filter, $http, socket, broadcaster, safeApply, $dialog) {    
                 $scope.rootPath = SOCK.root_path;
                 $scope.videoInstance = {};
                 $scope.videoInstance.is_authenticated = SOCK.is_authenticated;
@@ -268,6 +268,10 @@ angular.module('framebuzz.controllers', []).
                     var changed = false;
                     angular.forEach($scope.videoInstance.threads, function(thread, key) {
                         if (!threadInCollection(newThread)) {
+                            if (thread.time === newThread.time && !newThread.is_visible) {
+                                thread.has_hidden_siblings = true;
+                            }
+
                             $scope.videoInstance.threads.push(newThread);
                             changed = true;
                         }
@@ -284,6 +288,7 @@ angular.module('framebuzz.controllers', []).
                     angular.forEach($scope.videoInstance.threads, function(thread, key) {
                         if (thread.id == newReply.parent_id) {
                             thread.replies.push(newReply);
+                            thread.has_replies = true;
                             changed = true;
                         }
                     });

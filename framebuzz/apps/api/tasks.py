@@ -406,6 +406,14 @@ def get_user_profile(context):
 
     userSerializer = UserSerializer(user)
     userSerialized = JSONRenderer().render(userSerializer.data)
+    favoritesSerializer = MPTTCommentSerializer(favorite_comments, context={ 'user': user })
+    favoritesSerialized = JSONRenderer().render(favoritesSerializer.data)
+    commentsSerializer = MPTTCommentSerializer(total_comments, context={ 'user': user })
+    commentsSerialized = JSONRenderer().render(commentsSerializer.data)
+    followersSerializer = UserSerializer(user_followers)
+    followersSerialized = JSONRenderer().render(followersSerializer.data)
+    followingSerializer = UserSerializer(user_following)
+    followingSerialized = JSONRenderer().render(followingSerializer.data)
 
     outbound_message = dict()
     outbound_message[EVENT_TYPE_KEY] = 'FB_USER_PROFILE'
@@ -415,6 +423,10 @@ def get_user_profile(context):
         'total_comments': len(total_comments),
         'user_followers': len(user_followers),
         'user_following': len(user_following),
+        'favorites_list': json.loads(favoritesSerialized),
+        'comments_list': json.loads(commentsSerialized),
+        'followers_list': json.loads(followersSerialized),
+        'following_list': json.loads(followingSerialized),
         'user': json.loads(userSerialized)
     }
 

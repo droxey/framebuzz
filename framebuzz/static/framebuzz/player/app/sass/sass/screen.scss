@@ -1215,17 +1215,51 @@ object, embed, video, iframe {
 
         #share-view {
             position: absolute;
-            left: 97px;
-            top: 43px;
-            height: 298px;
-            width: 446px;
+            height: 380px;
+            width: 640px;
+            z-index: 1;
 
-            div.scrollable {
-                @include border-radius(3px, 3px);
-                background: rgba(0, 0, 0, 0.82);
-                height: 298px;
-                padding: 17px;
-                width: 446px;
+            div.modal-background {
+                background-color: rgba(0, 0, 0, 0.50);
+                height: 100%;
+                width: 100%;
+
+                div.content {
+                    @include border-radius(3px, 3px);
+                    background: rgba(0, 0, 0, 0.82);
+                    height: 264px;
+                    padding: 17px;
+                    position: relative;
+                    left: 97px;
+                    top: 43px;
+                    width: 412px;
+
+                    h1 {
+                        border-bottom: 1px solid #323232;
+                        margin-bottom: 5px;
+                        width: 215px;
+
+                        a {
+                            border-bottom: 1px solid #262627;
+                            display: block;
+                            height: 26px;
+                            width: 215px;
+
+                            img {
+                                padding-bottom: 8px;
+                                padding-left: 5px;
+                            }
+                        }
+                    }
+
+                    h2 {
+                        color: white;
+                        font-family: 'proxima-nova';
+                        font-size: 18px;
+                        font-weight: 500;
+                        padding-left: 5px;
+                    }
+                }
             }
         }  
     }
