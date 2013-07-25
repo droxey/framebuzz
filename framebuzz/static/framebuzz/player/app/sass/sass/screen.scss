@@ -535,6 +535,8 @@ object, embed, video, iframe {
             width: 237px;
             
             div.scrollable {
+                background: transparent;
+                box-shadow: none;
                 height: 385px;
                 right: 3px;
                 width: 237px;
@@ -544,6 +546,7 @@ object, embed, video, iframe {
                     padding-top: 2px;
 
                     li {
+                        @include single-box-shadow(rgba(0, 0, 0, 0.5), 0px, 0px, 118px, 0px, inset);
                         background: rgba(61, 61, 61, 0.7);
                         cursor: pointer;
                         @include single-transition(background-color 100ms linear);
@@ -1069,7 +1072,7 @@ object, embed, video, iframe {
 
                                     div.thread {
                                         width: 220px;
-                                        
+
                                         div.header {
                                             margin-bottom: 0;
                                         }
