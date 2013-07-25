@@ -44,6 +44,10 @@ angular.module('framebuzz.directives', [])
                             });
                     });
 
+                    $('#player-controls').on('click', function(e) {
+                        console.log('bound');
+                    });
+
                     media.addEventListener('timeupdate', function(e) {
                         broadcaster.prepForBroadcast({ broadcastType: 'player_timeupdate', currentTime: media.currentTime });
                     }, false);
@@ -99,11 +103,7 @@ angular.module('framebuzz.directives', [])
     .directive('bxslider', function () {
         return function (scope, element, attrs) {
             if (scope.$last === true) {
-                console.log('last');
-
                 element.ready(function () {
-                    console.log('ready');
-
                     var sliderOpts = {
                         infiniteLoop: false,
                         hideControlOnEnd: true,
