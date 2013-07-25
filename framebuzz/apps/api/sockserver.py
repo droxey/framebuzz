@@ -93,15 +93,6 @@ class ConnectionHandler(SockJSConnection):
                             }) \
                         | tasks.post_new_comment.s() \
                         | tasks.message_outbound.s()
-                elif event_type == 'FB_GET_THREAD_SIBLINGS':
-                    task_chain = tasks.get_user_by_session_key.s(
-                            session_key=self.session_key, 
-                            extra_context={
-                                'data': data, 
-                                'outbound_channel': self.session_channel
-                            }) \
-                        | tasks.get_thread_siblings.s() \
-                        | tasks.message_outbound.s()
                 elif event_type == 'FB_COMMENT_ACTION':
                     task_chain = tasks.get_user_by_session_key.s(
                             session_key=self.session_key, 

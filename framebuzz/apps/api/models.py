@@ -192,23 +192,16 @@ class MPTTComment(MPTTModel, Comment):
 
             visible_comments = comments_in_range.filter(is_visible=True)
 
-            print comments_in_range
-
             if len(visible_comments) > 0:
                 first_comment = visible_comments[0]
-                visibility = (first_comment.time > self.time)
+                
+                first_comment.has_hidden_siblings = True
+                first_comment.save()
 
-                if visibility:
-                    self.has_hidden_siblings = True
-                    self.is_visible = True
-
-                    first_comment.is_visible = False
-                    first_comment.save()
-                else:
-                    self.is_visible = False
-                    self.has_hidden_siblings = False
+                self.has_hidden_siblings = False
+                self.is_visible = False
             else:
                 self.is_visible = True
-                self.has_hidden_siblings = len(comments_in_range) >= 1
+                self.has_hidden_siblings = False
 
         super(MPTTComment, self).save(*args, **kwargs)

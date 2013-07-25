@@ -231,28 +231,6 @@ def post_new_comment(context):
 
 
 @celery.task
-def get_thread_siblings(context):
-    thread_data = context.get(DATA_KEY, None)
-    channel = context.get('outbound_channel', None)
-    
-    if thread_data:
-        thread = MPTTComment.objects.get(id=thread_data.get('threadId'))
-        comments_in_range = MPTTComment.objects.filter(object_pk=thread.object_pk,
-                                            parent=None, 
-                                            is_removed=False).order_by('time')
-        thread_index = list(comments_in_range.values_list('id', flat=True)).index(thread.id)
-
-        outbound_message = dict()
-        outbound_message[EVENT_TYPE_KEY] = 'FB_GET_THREAD_SIBLINGS'
-        outbound_message[CHANNEL_KEY] = channel
-        outbound_message[DATA_KEY] = { 
-            'threadIndex': thread_index
-        }
-        
-        return outbound_message
-
-
-@celery.task
 def add_comment_action(context):
     thread_data = context.get(DATA_KEY, None)
     channel = context.get('outbound_channel', None)
