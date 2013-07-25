@@ -1062,7 +1062,20 @@ object, embed, video, iframe {
                                 width: 100%;
                             }
 
-                            ul.comment-stream li { display: block; }
+                            ul.comment-stream {
+                                li {
+                                    display: block;
+                                    min-height: 20px;
+
+                                    div.thread {
+                                        width: 220px;
+                                        
+                                        div.header {
+                                            margin-bottom: 0;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
 
