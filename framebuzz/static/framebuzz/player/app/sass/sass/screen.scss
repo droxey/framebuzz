@@ -1230,7 +1230,7 @@ object, embed, video, iframe {
                     @include border-radius(3px, 3px);
                     background: rgba(0, 0, 0, 0.82);
                     height: 264px;
-                    padding: 17px;
+                    padding: 15px 17px;
                     position: relative;
                     left: 97px;
                     top: 43px;
@@ -1282,33 +1282,141 @@ object, embed, video, iframe {
                     }
 
                     h3, label {
+                        color: white;
                         font-family: 'proxima-nova';
                         font-size: 15px;
                         font-weight: 300;
                     }
 
-                    textarea {
+                    button.rounded {
                         @include border-radius(3px, 3px);
-                        background-color: rgba(255, 255, 255, 0.82);
-                        color: rgba(0, 0, 0, 0.70);
-                        font-family: monospace;
-                        font-size: 0.8em;
-                        height: 28px;
-                        line-height: 14px;
-                        margin-top: 5px;
-                        padding: 3px;
-                        width: 392px;
-                    }
+                        background-color: #2284b2;
+                        border: 0 none;
+                        color: white;
+                        font-family: 'proxima-nova';
+                        font-size: 13px;
+                        font-weight: 500;
+                        height: 26px;
+                        @include single-transition(background-color 100ms linear);
 
-                    div { padding: 5px; }
-
-                    #share-buttons { }
-
-                    #embed {
-                        textarea {
-
+                        &:hover { 
+                            background-color: #015b85; 
+                            @include single-transition(background-color 100ms linear);
                         }
                     }
+
+                    input[type='text'] {
+                        @include border-radius(3px, 3px);
+                        background-color: rgba(255, 255, 255, 0.82);
+                        border: 0;
+                        color: rgba(0, 0, 0, 0.70);
+                        font-family: 'proxima-nova';
+                        font-size: 12px;
+                        height: 26px;
+                        margin-top: 5px;
+                        padding: 0 3px;
+                        @include single-transition(background-color 100ms linear);
+
+                        &:focus {
+                            background-color: rgba(255, 255, 255, 1);
+                            @include single-transition(background-color 100ms linear);
+                        }
+                    }
+
+                    #email {
+                        padding-left: 5px;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+
+                        label {
+                            display: inline-block;
+                            float: left;
+                            line-height: 16px;
+                            margin: 10px 5px 10px 0;
+                        }
+
+                        input[type='text'] {
+                            float: left;
+                            margin-right: 5px;
+                        }
+
+                        button {
+                            float: left;
+                            margin: 5px 0;
+                            width: 50px;
+                        }
+                    }
+
+                    #embed {
+                        padding-left: 5px;
+                        margin-bottom: 5px;
+
+                        #embed-code {
+                            float: left;
+                            margin-right: 5px;
+                            width: 247px;
+
+                            textarea {
+                                @include border-radius(3px, 3px);
+                                background-color: rgba(255, 255, 255, 0.82);
+                                color: rgba(0, 0, 0, 0.70);
+                                font-family: monospace;
+                                font-size: 0.8em;
+                                height: 16px;
+                                line-height: 14px;
+                                margin-top: 5px;
+                                padding: 3px 6px;
+                                width: 231px;
+                                @include single-transition(background-color 100ms linear);
+
+                                &:focus {
+                                    background-color: rgba(255, 255, 255, 1);
+                                    @include single-transition(background-color 100ms linear);
+                                }
+                            }
+                        }
+
+                        #embed-width {
+                            float: left;
+                            margin-right: 5px;
+                            width: 74px; 
+
+                            input[type='text'] { width: 68px; }
+                        }
+
+                        button.rounded { 
+                            float: left;
+                            margin: 20px 0;
+                            width: 50px;
+                        }
+                    }
+
+                    #private {
+                        padding-left: 5px;
+
+                        p {
+                            color: white;
+                            font-family: 'proxima-nova';
+                            font-size: 11.5px;
+                            font-weight: 300;
+                            float: left;
+                            line-height: 13px;
+                            width: 240px;
+
+                            em {
+                                color: #2284b2;
+                                font-weight: 700;
+                                text-transform: uppercase;
+                            }
+                        }
+
+                        button.rounded {
+                            float: left;
+                            width: 159px;
+                        }
+                    }
+
+                    #share-buttons { }
                 }
             }
         }  
