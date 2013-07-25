@@ -181,6 +181,39 @@ object, embed, video, iframe {
                                 width: 23px;
                             }
                         }
+
+                        &.mejs-playpause-button {
+                            bottom: -63px;
+                            left: 6px;
+                            position: absolute;
+                            z-index: 100;
+
+                            button {
+                                height: 20px;
+                                margin: 1px;
+                                width: 20px;
+
+                                i.icon {
+                                    background: none;
+                                    color: white;
+                                    display: inline-block;
+                                    font-size: 20px;
+                                    height: 20px;
+                                    line-height: 20px;
+                                    margin-top: 1px;
+                                    opacity: 0.9;
+                                    text-indent: -5px;
+                                    vertical-align: text-top;
+                                    width: 20px;
+                                    @include single-transition(opacity 0.25s ease-in-out);
+
+                                    &:hover {
+                                        opacity: 1;
+                                        @include single-transition(opacity 0.25s ease-in-out);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -267,28 +300,6 @@ object, embed, video, iframe {
                 }
             }
 
-            #player-buttons {
-                height: 94px;
-                opacity: 0;
-                left: 273px;
-                position: absolute;
-                top: 143px;
-                width: 94px;
-                z-index: 100;
-                @include single-transition(opacity .25s ease-in-out);
-
-                img {
-                    cursor: pointer;
-                    height: 94px;
-                    width: 94px;
-                }
-
-                &.active {
-                    opacity: 1;
-                    @include single-transition(opacity .25s ease-in-out);
-                }
-            }
-
             form#post-comment-form {
                 background: #202020;
                 height: 32px;
@@ -297,6 +308,7 @@ object, embed, video, iframe {
 
                 div.input-prepend {
                     margin-bottom: 0;
+                    padding-left: 25px;
                     width: 100%;
 
                     span.add-on {
@@ -342,16 +354,13 @@ object, embed, video, iframe {
                     }
 
                     #id_comment {
-                        @include border-top-left-radius(3px);
-                        @include border-top-right-radius(0px);
-                        @include border-bottom-left-radius(3px);
-                        @include border-bottom-right-radius(0px);
+                        @include border-radius(3px, 3px);
                         background: white;
                         border: 1px solid white;
                         height: 20px;
                         float: left;
                         font-family: 'proxima-nova';
-                        width: 482px;
+                        width: 495px;
 
                         &.maxlength-full {
                             border: 1px solid red;
@@ -359,15 +368,12 @@ object, embed, video, iframe {
                     }
 
                     #signup-or-login-prompt {
-                        @include border-top-left-radius(3px);
-                        @include border-top-right-radius(0px);
-                        @include border-bottom-left-radius(3px);
-                        @include border-bottom-right-radius(0px);
+                        @include border-radius(3px, 3px);
                         background: white;
                         float: left;
                         font-family: 'proxima-nova';
                         height: 30px;
-                        width: 496px;
+                        width: 510px;
 
                         p {
                             color: #989898;
@@ -381,25 +387,6 @@ object, embed, video, iframe {
                                 color: #1887b9;
                                 text-decoration: underline;
                             }
-                        }
-                    }
-
-                    #submit-comment {
-                        @include border-top-left-radius(0px);
-                        @include border-top-right-radius(3px);
-                        @include border-bottom-left-radius(0px);
-                        @include border-bottom-right-radius(3px);
-                        @include single-box-shadow(rgba(0, 0, 0, .13), 0px, 0px, 14px, 6px, inset);
-                        background: #686868;
-                        border: 0;
-                        float: left;
-                        line-height: 12px;
-                        padding: 5px 8px 3px 9px;
-
-                        img.fb-icon-post-comment {
-                            display: inline-block;
-                            height: 21px;
-                            width: 23px;
                         }
                     }
                 }

@@ -3014,7 +3014,7 @@ if (typeof jQuery != 'undefined') {
 				t = this,
 				play = 
 				$('<div class="mejs-button mejs-playpause-button mejs-play" >' +
-					'<button type="button" aria-controls="' + t.id + '" title="' + t.options.playpauseText + '" aria-label="' + t.options.playpauseText + '"></button>' +
+					'<button type="button" aria-controls="' + t.id + '" title="' + t.options.playpauseText + '" aria-label="' + t.options.playpauseText + '"><i class="icon icon-player-play"></i></button>' +
 				'</div>')
 				.appendTo(controls)
 				.click(function(e) {
@@ -3031,17 +3031,21 @@ if (typeof jQuery != 'undefined') {
 
 			media.addEventListener('play',function() {
 				play.removeClass('mejs-play').addClass('mejs-pause');
+				play.find('i.icon').removeClass('icon-player-play').addClass('icon-player-pause');
 			}, false);
 			media.addEventListener('playing',function() {
 				play.removeClass('mejs-play').addClass('mejs-pause');
+				play.find('i.icon').removeClass('icon-player-play').addClass('icon-player-pause');
 			}, false);
 
 
 			media.addEventListener('pause',function() {
 				play.removeClass('mejs-pause').addClass('mejs-play');
+				play.find('i.icon').removeClass('icon-player-pause').addClass('icon-player-play');
 			}, false);
 			media.addEventListener('paused',function() {
 				play.removeClass('mejs-pause').addClass('mejs-play');
+				play.find('i.icon').removeClass('icon-player-pause').addClass('icon-player-play');
 			}, false);
 		}
 	});

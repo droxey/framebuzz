@@ -1,9 +1,5 @@
 <div id="buzz-layer" class="layer" data-ui-view="" data-ng-animate="{ 'onEnter': 'animate-panel-enter', 'onExit': 'animate-panel-exit' }"></div>
 <h1 class="video-title">{{ videoInstance.video.title }}</h1>
-<div id="player-buttons" data-ng-if="playing || paused" data-ng-class="{ 'active': !playing && paused }" data-ng-hide="$state.is('player.share')">
-    <img class="pause" data-ng-src="{{ rootPath }}img/btn-pause.png" alt="Pause" height="94" width="94" data-ng-show="playing">
-    <img class="play" data-ng-src="{{ rootPath }}img/btn-play.png" alt="Play" height="94" width="94" data-ng-show="paused">
-</div>
 <table id="heatmap" class="span12" cellpadding="0" cellspacing="0">
   <tr>
     <td class="{{ block.className }}" data-ng-repeat="block in videoInstance.heatmap"></td>
@@ -18,8 +14,5 @@
       <p><a data-ng-href="#/player/panel/signup" title="Signup">Sign Up</a> or <a data-ng-href="#/player/panel/login" title="Login">Login</a> to post a comment...</p>
     </div>
     <input data-ng-model="newThread.comment" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-ng-show="videoInstance.is_authenticated" data-maxinput="" data-onfocus="" />
-    <button type="submit" id="submit-comment" data-ng-disabled="!videoInstance.is_authenticated">
-      <img data-ng-src="/static/framebuzz/player/app/img/icon-post-comment.png" alt="Post Comment" class="fb-icon-post-comment" />
-    </button>
   </div>
 </form>
