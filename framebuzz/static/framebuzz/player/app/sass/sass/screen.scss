@@ -427,39 +427,6 @@ object, embed, video, iframe {
                 top: 0;
                 z-index: 110;
 
-                a.active-close {
-                    background-color: #686868;
-                    cursor: pointer;
-                    display: block;
-                    float: left;
-                    height: 43px;
-                    margin-right: 14px;
-                    width: 33px;
-                    @include single-transition(background-color 250ms ease-in);
-
-                    i.icon {
-                        background: none;
-                        color: white;
-                        font-size: 16px;
-                        height: 20px;
-                        margin: 12px 6px;
-                        opacity: 0.8;
-                        text-indent: -1px;
-                        width: 20px;
-                        @include single-transition(opacity 250ms ease-in-out);
-                    }
-
-                    &:hover {
-                        background-color: #828282;
-                        @include single-transition(background-color 250ms ease-in);
-
-                        i.icon {
-                            opacity: 1;
-                            @include single-transition(opacity 250ms ease-in-out);
-                        }
-                    }
-                }
-
                 ul.comment-stream {
                     li {
                         border-bottom: 1px solid rgba(104, 104, 104, .90);
@@ -553,9 +520,41 @@ object, embed, video, iframe {
 
                 div.active-header {
                     background: #484848;
-                    border-left: 1px solid rgba(104, 104, 104, 0.15);
                     border-bottom: #434343;
                     height: 43px;
+
+                    a.active-close {
+                        background-color: #686868;
+                        cursor: pointer;
+                        display: block;
+                        float: left;
+                        height: 43px;
+                        margin-right: 14px;
+                        width: 33px;
+                        @include single-transition(background-color 250ms ease-in);
+
+                        i.icon {
+                            background: none;
+                            color: white;
+                            font-size: 16px;
+                            height: 20px;
+                            margin: 12px 6px;
+                            opacity: 0.8;
+                            text-indent: -1px;
+                            width: 20px;
+                            @include single-transition(opacity 250ms ease-in-out);
+                        }
+
+                        &:hover {
+                            background-color: #828282;
+                            @include single-transition(background-color 250ms ease-in);
+
+                            i.icon {
+                                opacity: 1;
+                                @include single-transition(opacity 250ms ease-in-out);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1153,6 +1152,10 @@ object, embed, video, iframe {
                 width: 245px;
 
                 div.active-header {
+                    a.active-close {
+                        i.icon { margin: 13px 6px 11px 6px; }
+                    }
+                    
                     a.player-logo {
                         line-height: 48px;
 
