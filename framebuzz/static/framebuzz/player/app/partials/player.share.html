@@ -1,7 +1,17 @@
-<div class="modal-background" data-ng-click="$state.transitionTo('player.panelView')">
+<div class="modal-background">
     <div class="content">
+        <a data-ng-click="$state.transitionTo('player.panelView')" class="modal-close">
+            <img data-ng-src="{{ rootPath }}img/icon-close.png" height="11" width="11" alt="Close">
+        </a>
         <h1><a href="http://www.framebuzz.com" target="_blank"><img data-ng-src="{{ rootPath }}img/player-logo.png" alt="FrameBuzz" height="16" width="140"></a></h1>
         <h2>Share this video:</h2>
         <div id="share-buttons" data-share=""></div>
+        <div id="email">
+            <label>Email:</label>
+        </div>
+        <div id="embed">
+            <h3>Embed this FrameBuzz:</h3>
+            <textarea ng-bind-html-unsafe="videoInstance.video.embed_code"></textarea>
+        </div>
     </div>
 </div>

@@ -1222,6 +1222,8 @@ object, embed, video, iframe {
             div.modal-background {
                 background-color: rgba(0, 0, 0, 0.50);
                 height: 100%;
+                position: relative;
+                top: 5px;
                 width: 100%;
 
                 div.content {
@@ -1233,6 +1235,25 @@ object, embed, video, iframe {
                     left: 97px;
                     top: 43px;
                     width: 412px;
+                    z-index: 100;
+
+                    a.modal-close {
+                        cursor: pointer;
+                        display: block;
+                        height: 11px;
+                        opacity: 0.8;
+                        position: absolute;
+                        right: 17px;
+                        top: 17px;
+                        width: 11px;
+                        z-index: 101;
+                        @include single-transition(opacity 0.25s ease-in-out);
+
+                        &:hover {
+                            opacity: 1;
+                            @include single-transition(opacity 0.25s ease-in-out);
+                        }
+                    }
 
                     h1 {
                         border-bottom: 1px solid #323232;
@@ -1258,6 +1279,35 @@ object, embed, video, iframe {
                         font-size: 18px;
                         font-weight: 500;
                         padding-left: 5px;
+                    }
+
+                    h3, label {
+                        font-family: 'proxima-nova';
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+
+                    textarea {
+                        @include border-radius(3px, 3px);
+                        background-color: rgba(255, 255, 255, 0.82);
+                        color: rgba(0, 0, 0, 0.70);
+                        font-family: monospace;
+                        font-size: 0.8em;
+                        height: 28px;
+                        line-height: 14px;
+                        margin-top: 5px;
+                        padding: 3px;
+                        width: 392px;
+                    }
+
+                    div { padding: 5px; }
+
+                    #share-buttons { }
+
+                    #embed {
+                        textarea {
+
+                        }
                     }
                 }
             }

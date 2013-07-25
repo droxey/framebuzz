@@ -10,8 +10,7 @@ from django.utils import timezone
 from actstream.actions import is_following
 from actstream.models import Action
 from avatar.util import get_primary_avatar, get_default_avatar_url
-from avatar.settings import (AVATAR_GRAVATAR_BACKUP, AVATAR_GRAVATAR_DEFAULT,
-                            AVATAR_GRAVATAR_BASE_URL)
+from avatar.settings import AVATAR_GRAVATAR_BACKUP
 from rest_framework import serializers
 
 from framebuzz.apps.api.models import MPTTComment, Video
@@ -20,16 +19,20 @@ from framebuzz.apps.api.models import MPTTComment, Video
 class VideoSerializer(serializers.ModelSerializer):
     channel = serializers.SerializerMethodField('get_channel')
     time_hms = serializers.SerializerMethodField('get_time_hms')
+    embed_code = serializers.SerializerMethodField('get_embed_code')
 
     class Meta:
         model = Video
-        fields = ('id', 'video_id', 'title', 'duration', 'swf_url', 'time_hms',)
+        fields = ('id', 'video_id', 'title', 'duration', 'swf_url', 'time_hms', 'embed_code',)
 
     def get_channel(self, obj):
         return '/framebuzz/video/%s' % obj.video_id
 
     def get_time_hms(self, obj):
         return obj.timeInHMS
+
+    def get_embed_code(self, obj):
+        return obj.embed_code
 
 
 class UserSerializer(serializers.ModelSerializer):

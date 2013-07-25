@@ -83,13 +83,17 @@ class Video(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('embed-video', kwargs={'video_id': str(self.video_id)})
+        return reverse('video-embed', kwargs={'video_id': str(self.video_id)})
 
     def default_thumbnail(self):
         try:
             return self.thumbnail_set.all()[0]
         except:
             pass
+
+    def embed_code(self):
+        full_url = 'http://frame.bz%s' % self.get_absolute_url()
+        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0" height="445" width="680"></iframe>' % full_url)
 
     @property
     def timeInHMS(self):

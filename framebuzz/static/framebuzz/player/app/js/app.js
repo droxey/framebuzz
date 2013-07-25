@@ -5,6 +5,7 @@
 angular.module('framebuzz', 
     [
         'ngCookies',
+        'ngSanitize',
         'ui.state', 
         'ui.bootstrap', 
         'framebuzz.filters', 
