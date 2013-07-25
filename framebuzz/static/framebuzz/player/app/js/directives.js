@@ -99,13 +99,18 @@ angular.module('framebuzz.directives', [])
     .directive('bxslider', function () {
         return function (scope, element, attrs) {
             if (scope.$last === true) {
+                console.log('last');
+
                 element.ready(function () {
-                    element.parent().bxSlider({
+                    console.log('ready');
+
+                    var sliderOpts = {
                         infiniteLoop: false,
                         hideControlOnEnd: true,
                         minSlides: 1,
                         maxSlides: 5,
                         moveSlides: 5,
+                        startSlide: 0,
                         slideWidth: '26px',
                         pager: false,
                         slideSelector: 'li.slide',
@@ -119,10 +124,12 @@ angular.module('framebuzz.directives', [])
                         prevSelector: '.icon-left-dir',
                         nextSelector: '.icon-right-dir', 
                         easing: 'ease-in-out'
-                    });
-
+                    };
+                        
+                    var slider = element.parent().bxSlider(sliderOpts);
                     element.parent().css({ 'width': '99999px' });
-                    element.parent().parent().css({ 'width': '140px' });
+                    element.parent().parent().css({ 'width': '130px' });
+                    
                     $('div.bx-loading').remove();
                 });
             }

@@ -150,8 +150,7 @@ def initialize_video_player(context):
 
         rank_per_block.append({'block': block, 'className': class_name})        
     
-    # Get the first parent comment that occurs within .5 seconds.
-    threads = comments.filter(parent=None, is_visible=True).order_by('-time')
+    threads = comments.filter(parent=None).order_by('-time')
     videoSerializer = VideoSerializer(video)
     videoSerialized = JSONRenderer().render(videoSerializer.data)
     threadsSerializer = MPTTCommentSerializer(threads, context={ 'user': user })
@@ -235,7 +234,6 @@ def post_new_comment(context):
 def get_thread_siblings(context):
     thread_data = context.get(DATA_KEY, None)
     channel = context.get('outbound_channel', None)
-    user = thread_data.get('user', None)
     
     if thread_data:
         thread = MPTTComment.objects.get(id=thread_data.get('threadId'))
@@ -243,29 +241,12 @@ def get_thread_siblings(context):
                                             parent=None, 
                                             is_removed=False).order_by('time')
         thread_index = list(comments_in_range.values_list('id', flat=True)).index(thread.id)
-        start_index = thread_index + 1
-        end_index = thread_index + 6 # We want to get 7 comments each time we call this task.
-        siblings = list(comments_in_range[start_index:end_index])
-
-        if len(siblings) < 7:
-            fake_comment = MPTTComment()
-            fake_comment.id = 99999999
-
-            for pad_right in range(len(siblings), end_index):
-                siblings.append(fake_comment)
-
-        siblingsSerializer = MPTTCommentSerializer(siblings, context={ 'user': user })
-        siblingsSerialized = JSONRenderer().render(siblingsSerializer.data)
-
-        threadSerializer = MPTTCommentSerializer(thread, context={ 'user': user })
-        threadSerialized = JSONRenderer().render(threadSerializer.data)
 
         outbound_message = dict()
         outbound_message[EVENT_TYPE_KEY] = 'FB_GET_THREAD_SIBLINGS'
         outbound_message[CHANNEL_KEY] = channel
         outbound_message[DATA_KEY] = { 
-            'selectedThread': json.loads(threadSerialized),
-            'siblings': json.loads(siblingsSerialized) 
+            'threadIndex': thread_index
         }
         
         return outbound_message
