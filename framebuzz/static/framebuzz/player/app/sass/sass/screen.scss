@@ -484,6 +484,7 @@ object, embed, video, iframe {
 
                         img.img-circle {
                             @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                            background: black;
                             display: inline-block;
                             height: 44px;
                             opacity: .91;
@@ -568,8 +569,41 @@ object, embed, video, iframe {
                 width: 245px;
 
                 div.active-header {
-                    padding: 0 10px;
+                    padding-right: 10px;
                     height: 44px;
+
+                    a.active-close {
+                        background-color: #686868;
+                        cursor: pointer;
+                        display: block;
+                        float: left;
+                        height: 44px;
+                        margin-right: 14px;
+                        width: 33px;
+                        @include single-transition(background-color 250ms ease-in);
+
+                        i.icon {
+                            background: none;
+                            color: white;
+                            font-size: 16px;
+                            height: 20px;
+                            margin: 12px 6px;
+                            opacity: 0.8;
+                            text-indent: -1px;
+                            width: 20px;
+                            @include single-transition(opacity 250ms ease-in-out);
+                        }
+
+                        &:hover {
+                            background-color: #828282;
+                            @include single-transition(background-color 250ms ease-in);
+
+                            i.icon {
+                                opacity: 1;
+                                @include single-transition(opacity 250ms ease-in-out);
+                            }
+                        }
+                    }
 
                     ul.tabs {
                         float: left;
@@ -612,12 +646,12 @@ object, embed, video, iframe {
                             }
 
                             &.comments {
-                                left: 36px;
+                                left: 72px;
                                 @include single-transition(left 0.25s linear);
                             }
 
                             &.activity {
-                                left: 113px;
+                                left: 134px;
                                 @include single-transition(left 0.25s linear);
                             }
                         }
@@ -632,6 +666,7 @@ object, embed, video, iframe {
 
                         img.img-circle {
                             @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                            background: black;
                             float: left;
                             height: 33px;
                             margin-right: 5px;
@@ -781,6 +816,7 @@ object, embed, video, iframe {
 
                                                     img.img-circle {
                                                         @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.56), 0 0 1px 0 rgba(0, 0, 0, 0.53) inset51);
+                                                        background: black;
                                                         height: 20px;
                                                         width: 20px;
                                                     }
@@ -813,6 +849,7 @@ object, embed, video, iframe {
 
                                     img.img-circle {
                                         @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                                        background: black;
                                         display: inline-block;
                                         height: 29px;
                                         left: 8px;
@@ -934,6 +971,7 @@ object, embed, video, iframe {
 
                                         img.img-circle {
                                             @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                                            background: black;
                                             display: inline-block;
                                             height: 44px;
                                             opacity: .91;
@@ -969,6 +1007,7 @@ object, embed, video, iframe {
 
                             img.img-circle {
                                 @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                                background: black;
                                 display: block;
                                 float: left;
                                 margin-right: 10px;
