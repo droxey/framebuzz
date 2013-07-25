@@ -311,7 +311,6 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # Django-Avatar Settings:
-AVATAR_DEFAULT_URL = os.path.join(MEDIA_ROOT, 'img/user-icon-large.jpg')
 AVATAR_ALLOWED_FILE_EXTS = ['.jpg', '.png']
 AUTO_GENERATE_AVATAR_SIZES = (100, 88, 50, 44,)
 

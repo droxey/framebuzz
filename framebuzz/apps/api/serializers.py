@@ -50,7 +50,7 @@ class UserSerializer(serializers.ModelSerializer):
             if AVATAR_GRAVATAR_DEFAULT and obj:
                 params['d'] = AVATAR_GRAVATAR_DEFAULT
 
-            path = "%s/?%s" % (md5_constructor(obj.email).hexdigest(),
+            path = "%s/?%s&d=retro" % (md5_constructor(obj.email).hexdigest(),
                                    urllib.urlencode(params))
             return urlparse.urljoin(AVATAR_GRAVATAR_BASE_URL, path)
 
