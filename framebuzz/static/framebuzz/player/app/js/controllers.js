@@ -178,10 +178,10 @@ angular.module('framebuzz.controllers', []).
                     safeApply($scope);
                 };
 
-                $scope.setSelectedThread = function(thread = null) {
+                $scope.setSelectedThread = function(thread) {
                     var index = -1;
 
-                    if (thread === null) {
+                    if (thread === null || thread === undefined) {
                         thread = getNextThreadInTimeline();
                         index = $scope.timeOrderedThreads.indexOf(thread);
                     }
