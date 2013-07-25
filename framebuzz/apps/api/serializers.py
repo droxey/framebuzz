@@ -45,14 +45,8 @@ class UserSerializer(serializers.ModelSerializer):
             return avatar.avatar_url(88)
 
         if AVATAR_GRAVATAR_BACKUP:
-            params = {'s': str(88)}
-
-            if AVATAR_GRAVATAR_DEFAULT and obj:
-                params['d'] = AVATAR_GRAVATAR_DEFAULT
-
-            path = "%s/?%s&d=retro" % (md5_constructor(obj.email).hexdigest(),
-                                   urllib.urlencode(params))
-            return urlparse.urljoin(AVATAR_GRAVATAR_BASE_URL, path)
+            path = "%s/?size=88x88&set=set3&bgset=bg1" % (md5_constructor(obj.email).hexdigest())
+            return urlparse.urljoin('http://robohash.org', path)
 
         return get_default_avatar_url()
 
