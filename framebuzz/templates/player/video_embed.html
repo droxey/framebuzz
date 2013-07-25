@@ -9,17 +9,16 @@
       </script>
     {% endif %}
     <title>FrameBuzz | {{ video.title }}</title>
-    <meta name="description" content="{{ video.description }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="FrameBuzz: {{ video.title }}">
-    <meta property="og:type" content="Video">
-    <meta property="og:url" content="http://{{ current_site }}{{ video.get_absolute_url }}">
-    <meta property="og:image" content="{{ video.default_thumbnail.url }}">
-    <meta property="og:description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!">
-    <meta property="og:site_name" content="FrameBuzz">
-    <meta itemprop="name" content="FrameBuzz: {{ video.title }}">
-    <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!">
-    <meta itemprop="image" content="{{ video.default_thumbnail.url }}">
+    <meta name="description" content="{{ video.description }}" />
+    <meta property="og:title" content="FrameBuzz: {{ video.title }}" />
+    <meta property="og:type" content="Video" />
+    <meta property="og:url" content="http://frame.bz{% url 'video-embed' video.video_id %}" />
+    <meta property="og:image" content="{{ video.default_thumbnail.url }}" />
+    <meta property="og:description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
+    <meta property="og:site_name" content="FrameBuzz" />
+    <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
+    <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
+    <meta itemprop="image" content="{{ video.default_thumbnail.url }}" />
     {% compress css %}
       <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/bootstrap-responsive.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
