@@ -128,7 +128,7 @@ angular.module('framebuzz.directives', [])
                         
                     var slider = element.parent().bxSlider(sliderOpts);
                     element.parent().css({ 'width': '99999px' });
-                    element.parent().parent().css({ 'width': '130px' });
+                    element.parent().parent().css({ 'width': '130px', 'height': '23px' });
                     
                     $('div.bx-loading').remove();
                 });
