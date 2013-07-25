@@ -1017,6 +1017,7 @@ object, embed, video, iframe {
                                 td {
                                     background-color: transparent;
                                     color: #8c8c8c;
+                                    cursor: pointer;
                                     font-family: 'proxima-nova';
                                     font-size: 12.28px;
                                     font-weight: 300;
@@ -1035,13 +1036,33 @@ object, embed, video, iframe {
                                     &.border-bottom {
                                         border-bottom: 1px solid rgba(201, 201, 201, 0.15);
                                     }
+                                }
 
-                                    &:hover {
-                                        background-color: rbga(0, 0, 0, 0.32);
-                                        @include single-transition(background-color 100ms linear);
-                                    }
+                                td:hover, td.active {
+                                    background-color: rbga(0, 0, 0, 0.32);
+                                    @include single-transition(background-color 100ms linear);
                                 }
                             }
+                        }
+
+                        #profile-sections {
+                            background: transparent;
+                            box-shadow: none;
+                            height: 198px;
+                            left: -13px;
+                            margin-top: 5px;
+                            position: relative;
+
+                            p.none {
+                                color: white;
+                                font-family: 'proxima-nova';
+                                font-size: 13px;
+                                font-weight: 500;
+                                text-align: center;
+                                width: 100%;
+                            }
+
+                            ul.comment-stream li { display: block; }
                         }
                     }
 

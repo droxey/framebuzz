@@ -399,19 +399,23 @@ def get_user_profile(context):
     else:
         user = context.get('user', None)
 
-    favorite_comments = Action.objects.favorite_comments_stream(user)
+    favorite_comments = [action.action_object for action in Action.objects.favorite_comments_stream(user) if action.action_object is not None]
     total_comments = MPTTComment.objects.filter(user=user)
     user_followers = followers(user)
     user_following = following(user)
 
     userSerializer = UserSerializer(user)
     userSerialized = JSONRenderer().render(userSerializer.data)
+
     favoritesSerializer = MPTTCommentSerializer(favorite_comments, context={ 'user': user })
     favoritesSerialized = JSONRenderer().render(favoritesSerializer.data)
+
     commentsSerializer = MPTTCommentSerializer(total_comments, context={ 'user': user })
     commentsSerialized = JSONRenderer().render(commentsSerializer.data)
+
     followersSerializer = UserSerializer(user_followers)
     followersSerialized = JSONRenderer().render(followersSerializer.data)
+
     followingSerializer = UserSerializer(user_following)
     followingSerialized = JSONRenderer().render(followingSerializer.data)
 

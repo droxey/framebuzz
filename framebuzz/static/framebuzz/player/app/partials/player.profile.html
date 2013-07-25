@@ -9,13 +9,14 @@
     <table class="profile-table">
         <tbody>
             <tr>
-                <td class="border-right border-bottom">{{ userProfile.total_comments }} Comments</td>
-                <td class="border-left border-bottom">{{ userProfile.favorite_comments }} Favorites</td>
+                <td class="border-right border-bottom" data-ng-class="{ 'active': $state.is('player.userProfileView.commentsView') }" data-ng-click="$state.transitionTo('player.userProfileView.commentsView', { username: userProfile.user.username })">{{ userProfile.total_comments }} Comments</td>
+                <td class="border-left border-bottom" data-ng-class="{ 'active': $state.is('player.userProfileView.favoritesView') }" data-ng-click="$state.transitionTo('player.userProfileView.favoritesView', { username: userProfile.user.username })">{{ userProfile.favorite_comments }} Favorites</td>
             </tr>
             <tr>
-                <td class="border-right">{{ userProfile.user_followers }} Followers</td>
-                <td class="border-left">{{ userProfile.user_followers }} Following</td>
+                <td class="border-right" data-ng-class="{ 'active': $state.is('player.userProfileView.followersView') }" data-ng-click="$state.transitionTo('player.userProfileView.followersView', { username: userProfile.user.username })">{{ userProfile.user_followers }} Followers</td>
+                <td class="border-left" data-ng-class="{ 'active': $state.is('player.userProfileView.followingView') }" data-ng-click="$state.transitionTo('player.userProfileView.followingView', { username: userProfile.user.username })">{{ userProfile.user_followers }} Following</td>
             </tr>
         </tbody>
     </table>
+    <div id="profile-sections" class="scrollable" data-scrollbar="true" data-ui-view=""></div>
 </div>

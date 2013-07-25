@@ -104,6 +104,46 @@ angular.module('framebuzz',
                 }
             };
 
+            var userCommentsView = {
+                name: 'player.userProfileView.commentsView',
+                parent: userProfileView,
+                templateUrl: templateRootPath + 'player.profile.commentsView.html',
+                url: '/comments',
+                data: {
+                    panelId: 'profile-view'
+                }
+            };
+
+            var userFavoritesView = {
+                name: 'player.userProfileView.favoritesView',
+                parent: userProfileView,
+                templateUrl: templateRootPath + 'player.profile.favoritesView.html',
+                url: '/favorites',
+                data: {
+                    panelId: 'profile-view'
+                }
+            };
+
+            var userFollowingView = {
+                name: 'player.userProfileView.followingView',
+                parent: userProfileView,
+                templateUrl: templateRootPath + 'player.profile.followingView.html',
+                url: '/following',
+                data: {
+                    panelId: 'profile-view'
+                }
+            };
+
+            var userFollowersView = {
+                name: 'player.userProfileView.followersView',
+                parent: userProfileView,
+                templateUrl: templateRootPath + 'player.profile.followersView.html',
+                url: '/followers',
+                data: {
+                    panelId: 'profile-view'
+                }
+            };
+
             var playerActiveViewComments = { 
                 name: 'player.activeView.comments',
                 parent: playerActiveView,
@@ -144,6 +184,10 @@ angular.module('framebuzz',
                 .state(playerBlendedView)
                 .state(playerActiveView)
                 .state(userProfileView)
+                .state(userCommentsView)
+                .state(userFavoritesView)
+                .state(userFollowersView)
+                .state(userFollowingView)
                 .state(playerActiveViewComments)
                 .state(playerActiveViewActivity)
                 .state(playerActiveViewThread);
