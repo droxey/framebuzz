@@ -12,18 +12,19 @@
         <p>Please sign in with one of your existing third party accounts.</p>
         <p>Or, <a href="#/player/panel/signup" title="Sign Up">sign up</a> for a FrameBuzz account and sign in below:</p>
         <div class="socialaccount_ballot">
-            <ul class="clearfix socialaccount_providers">
-                <li>
-                    <a href=""></a>
-                </li>
-                <li>
-                    <a href=""></a>
-                </li>  
-                <li>
-                    <a href=""></a>
-                </li>
-            </ul>
-        </div>
+        <ul class="clearfix socialaccount_providers">
+            <li>
+                <a title="Twitter" target="_top" class="socialaccount_provider twitter" data-ng-href="{{ loginUrls.twitter }}"></a>
+            </li>
+            <li>
+                <a title="Google" target="_top" class="socialaccount_provider google" data-ng-href="{{ loginUrls.google }}"></a>
+            </li>
+            <li>
+                <a title="Facebook" target="_top" class="socialaccount_provider facebook" data-ng-href="{{ loginUrls.facebook }}"></a>
+              
+            </li>
+        </ul>
+      </div>
         <form id="login-form" method="POST" action="" data-ng-submit="login()">
             <p><input id="id_login" maxlength="30" name="login" placeholder="Username" type="text" data-ng-model="loginModel.username"></p>
             <p><input id="id_password" name="password" placeholder="Password" type="password" data-ng-model="loginModel.password"></p>

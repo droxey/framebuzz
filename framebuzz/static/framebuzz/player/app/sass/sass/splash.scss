@@ -1,0 +1,59 @@
+@mixin background-image-retina($file, $type, $width, $height) {
+  background-image: url($file + '.' + $type);
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 144dpi) {
+    & {
+      background-image: url($file + '@2x.' + $type);
+      background-size: $width $height;
+    }
+  }
+}
+
+
+body {
+    @include background-image-retina('../../img/splash/bkg', 'jpg', 1024px, 1024px);
+    background-color: #070707;
+    background-repeat: no-repeat;
+    background-position: center top;
+    font: 16px/20px 'PT Sans Narrow', sans-serif;
+}
+
+#wrapper {
+    margin: 0 auto;
+    width: 480px;
+
+    header {
+        padding-bottom: 35px;
+        padding-top: 180px;
+
+        img {
+            display: block; 
+            margin: 0 auto
+        }
+    }
+
+    #video-content-wrapper {
+        margin-left: -97.5px;
+        width: 680px;
+    }
+
+    footer {
+        p {
+            color: #494949;
+            font-size: 0.9em;
+            font-weight: 400;
+            text-align: center;
+            text-shadow: 0px 1px 1px black;
+        }
+    }
+}
+
+body.video {
+    #wrapper {
+        header { padding-top: 120px; }
+
+        #content { display: none; }
+
+        footer { padding-top: 30px; }
+    }
+}

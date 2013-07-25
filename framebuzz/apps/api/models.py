@@ -93,7 +93,7 @@ class Video(models.Model):
 
     def embed_code(self):
         full_url = 'http://frame.bz%s' % self.get_absolute_url()
-        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0" height="445" width="680"></iframe>' % full_url)
+        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0" height="443" width="640"></iframe>' % full_url)
 
     @property
     def timeInHMS(self):

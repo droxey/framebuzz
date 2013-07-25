@@ -4,8 +4,8 @@
 
 angular.module('framebuzz.controllers', []).
   controller('VideoPlayerCtrl', 
-        ['$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', '$dialog', 
-            function($scope, $state, $filter, $http, socket, broadcaster, safeApply, $dialog) {    
+        ['$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 
+            function($scope, $state, $filter, $http, socket, broadcaster, safeApply) {    
                 $scope.rootPath = SOCK.root_path;
                 $scope.videoInstance = {};
                 $scope.videoInstance.is_authenticated = SOCK.is_authenticated;
@@ -14,8 +14,11 @@ angular.module('framebuzz.controllers', []).
                 $scope.newThread = {};
                 $scope.newReply = {};
                 $scope.selectedThread = null;
+
                 $scope.loginModel = {};
                 $scope.signupModel = {};
+                $scope.loginUrls = SOCK.login_urls;
+
                 $scope.replyClicked = false;
                 $scope.userProfile = {};
                 $scope.activities = {};
@@ -325,15 +328,17 @@ angular.module('framebuzz.controllers', []).
                         $state.transitionTo('player.blendedView');
                     }
                 
-                    socket.send_json({
-                        eventType: eventTypes.playerAction, 
-                        channel: SOCK.user_channel, 
-                        data: { 
-                            action: 'player_playing',
-                            username: $scope.videoInstance.user.username,
-                            time: $scope.currentTime
-                        }
-                    }); 
+                    if ($scope.videoInstance.user.is_authenticated) {
+                        socket.send_json({
+                            eventType: eventTypes.playerAction, 
+                            channel: SOCK.user_channel, 
+                            data: { 
+                                action: 'player_playing',
+                                username: $scope.videoInstance.user.username,
+                                time: $scope.currentTime
+                            }
+                        });
+                    } 
                 });
 
                 $scope.$on('player_paused', function() {
@@ -343,18 +348,23 @@ angular.module('framebuzz.controllers', []).
 
                     if ($state.is('player.blendedView')) {
                         $state.transitionTo('player.activeView.comments');
-                        $scope.setSelectedThread();
+                        
+                        if ($scope.videoInstance.threads.length > 0) {
+                            $scope.setSelectedThread();
+                        }
                     }
 
-                    socket.send_json({
-                        eventType: eventTypes.playerAction, 
-                        channel: SOCK.user_channel, 
-                        data: { 
-                            action: 'player_paused',
-                            username: $scope.videoInstance.user.username,
-                            time: $scope.currentTime
-                        }
-                    });
+                    if ($scope.videoInstance.user.is_authenticated) {
+                        socket.send_json({
+                            eventType: eventTypes.playerAction, 
+                            channel: SOCK.user_channel, 
+                            data: { 
+                                action: 'player_paused',
+                                username: $scope.videoInstance.user.username,
+                                time: $scope.currentTime
+                            }
+                        });
+                    }
                 });
 
                 // --

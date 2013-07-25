@@ -16,6 +16,9 @@ urlpatterns = patterns('',
     # Player API
     url(r'^v/', include('framebuzz.apps.api.urls')),
 
+    # Test Page for Beta:
+    url(r'^test/$', 'framebuzz.apps.api.views.video_test', name='video-test'),
+
     # Django-AllAuth
     (r'^accounts/', include('allauth.urls')),
 )

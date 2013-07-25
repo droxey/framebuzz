@@ -36,6 +36,13 @@ def video_embed(request, video_id):
     },
     context_instance=RequestContext(request))
 
+def video_test(request):
+    return render_to_response('player/video_test.html',
+    {
+
+    },
+    context_instance=RequestContext(request))
+
 @xframe_options_exempt
 def video_login(request, video_id):
     if not request.method == 'POST':
