@@ -34,8 +34,12 @@ angular.module('framebuzz.directives', [])
                     $('.mejs-video').mouseenter(function() {
                         $(this).addClass('show-controls');
                         $(this).parent().addClass('show-title');
-                    });
 
+                        $('#buzz-layer > div.panel > div.scrollable').mouseenter(function() {
+                            $('.mejs-video').trigger('mouseleave');
+                        });
+                    });
+                    
                     $('.mejs-video').mouseleave(function() {
                         $(this).addClass('fade-out-controls')
                             .delay(250)
