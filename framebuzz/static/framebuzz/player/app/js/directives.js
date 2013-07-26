@@ -9,7 +9,7 @@ angular.module('framebuzz.directives', [])
           elm.text(version);
         };
     })
-    .directive('mediaElement', function(broadcaster) {
+    .directive('mediaElement', ['broadcaster', '$rootScope', 'safeApply', function(broadcaster, $rootScope, safeApply) {
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
                 features: ['share', 'addtolibrary', 'volume', 'muteconvo', 'progress', 'playpause' ],
@@ -25,6 +25,9 @@ angular.module('framebuzz.directives', [])
                 defaultVideoHeight: '380px',
                 autosizeProgress: false,
                 success: function(media) {
+                    $rootScope.player = media;
+                    safeApply($rootScope);
+
                     $('.mejs-volume-button').addClass('mejs-fade-in');
                     $('.mejs-time-total span').not('.mejs-time-current').remove();
 
@@ -42,10 +45,6 @@ angular.module('framebuzz.directives', [])
                                 $('#player-layer').removeClass('show-title');
                                 next();
                             });
-                    });
-
-                    $('#player-controls').on('click', function(e) {
-                        console.log('bound');
                     });
 
                     media.addEventListener('timeupdate', function(e) {
@@ -78,7 +77,7 @@ angular.module('framebuzz.directives', [])
                 }
             });
         };
-    })
+    }])
     .directive('scrollbar', ['$rootScope', 'broadcaster', function($rootScope, broadcaster) {
         return function(scope, element, attrs) {
             if (attrs.scrollbar == 'true') {
@@ -105,8 +104,7 @@ angular.module('framebuzz.directives', [])
             if (scope.$last === true) {
                 element.ready(function () {
                     var sliderOpts = {
-                        infiniteLoop: false,
-                        hideControlOnEnd: true,
+                        infiniteLoop: true,
                         minSlides: 1,
                         maxSlides: 5,
                         moveSlides: 5,
@@ -151,7 +149,6 @@ angular.module('framebuzz.directives', [])
                         setPostTime();
 
                         var unregisterFocus = scope.$watch('clearFocus', function(val) {
-                            console.log(val);
                             if (val) {
                                 $(element).trigger('blur');
                                 unregisterFocus();

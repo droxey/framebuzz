@@ -3,7 +3,7 @@
         <div class="thread">
             <div class="header">
                 <a class="username" data-ng-href="getUserProfile(selectedThread.user.username)">{{ selectedThread.user.username }}</a>
-                <strong class="time">{{ selectedThread.time_hms }}</strong>
+                <strong class="time" data-ng-click="setVideoTime(selectedThread.time)" >{{ selectedThread.time_hms }}</strong>
             </div>
             <p>{{ selectedThread.comment }}</p>
         </div>

@@ -4,8 +4,8 @@
 
 angular.module('framebuzz.controllers', []).
   controller('VideoPlayerCtrl', 
-        ['$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 
-            function($scope, $state, $filter, $http, socket, broadcaster, safeApply) {    
+        ['$rootScope', '$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 
+            function($rootScope, $scope, $state, $filter, $http, socket, broadcaster, safeApply) {    
                 $scope.rootPath = SOCK.root_path;
                 $scope.videoInstance = {};
                 $scope.videoInstance.is_authenticated = SOCK.is_authenticated;
@@ -225,6 +225,14 @@ angular.module('framebuzz.controllers', []).
                         }
                     });
                 }
+
+                $scope.setVideoTime = function(time) {
+                    $scope.currentTime = time;
+                    $scope.currentTimeHMS = mejs.Utility.secondsToTimeCode(time);
+                    safeApply($scope);
+
+                    $rootScope.player.setCurrentTime(time);
+                };
 
                 $scope.toBeImplemented = function() {
                     alert('Not implemented yet!');
