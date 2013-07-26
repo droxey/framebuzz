@@ -195,12 +195,11 @@ class MPTTComment(MPTTModel, Comment):
                 comments_in_range = comments_in_range.exclude(id__in=[self.id,])
 
             visible_comments = comments_in_range.filter(is_visible=True)
+            first_comment = None
 
             if len(visible_comments) > 0:
                 first_comment = visible_comments[0]
-                
                 first_comment.has_hidden_siblings = True
-                first_comment.save()
 
                 self.has_hidden_siblings = False
                 self.is_visible = False
@@ -209,3 +208,6 @@ class MPTTComment(MPTTModel, Comment):
                 self.has_hidden_siblings = False
 
         super(MPTTComment, self).save(*args, **kwargs)
+
+        if first_comment:
+            first_comment.save()
