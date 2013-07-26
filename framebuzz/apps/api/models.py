@@ -185,6 +185,8 @@ class MPTTComment(MPTTModel, Comment):
         return "%s at %s" % (self.comment, str(self.time))
 
     def save(self, *args, **kwargs):
+        first_comment = None
+
         if not self.submit_date:
             self.submit_date = datetime.now()
 
@@ -195,8 +197,6 @@ class MPTTComment(MPTTModel, Comment):
                 comments_in_range = comments_in_range.exclude(id__in=[self.id,])
 
             visible_comments = comments_in_range.filter(is_visible=True)
-            first_comment = None
-
             if len(visible_comments) > 0:
                 first_comment = visible_comments[0]
                 first_comment.has_hidden_siblings = True
