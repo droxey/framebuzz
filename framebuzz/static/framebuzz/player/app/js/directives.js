@@ -141,19 +141,33 @@ angular.module('framebuzz.directives', [])
             link: function(scope, element, attrs) {
                 element.ready(function() {
                     $(element).on('focus', function() {
-                        scope.setPostTime();
+                        var setPostTime = function() {
+                            scope.setPostTime();
+                            
+                            $('#duration').hide();
+                            $('#post-time').show().addClass('active');
+                        };
 
-                        $('#duration').hide();
-                        $('#post-time').show().addClass('active');
+                        setPostTime();
+
+                        var unregisterFocus = scope.$watch('clearFocus', function(val) {
+                            console.log(val);
+                            if (val) {
+                                $(element).trigger('blur');
+                                unregisterFocus();
+                            }
+                        }, true);
                     });
 
-                    $(element).on('focusout', function() {
+                    $(element).on('blur', function() {
                         scope.postTime = 0;
                         safeApply(scope);
 
                         $(element).val('');
                         $('#post-time').hide();
                         $('#duration').show().addClass('active');
+
+                        return false;
                     });
                 });
             }

@@ -14,6 +14,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.newThread = {};
                 $scope.newReply = {};
                 $scope.selectedThread = null;
+                $scope.clearFocus = false;
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
@@ -137,6 +138,7 @@ angular.module('framebuzz.controllers', []).
                     });
 
                     $scope.newThread = {};
+                    $scope.clearFocus = true;
                     safeApply($scope);
                 };
 
@@ -387,6 +389,9 @@ angular.module('framebuzz.controllers', []).
                         if (jsonData.data.thread !== undefined) {
                             var newThread = jsonData.data.thread;
                             addNewThread(newThread);
+
+                            $scope.clearFocus = false;
+                            safeApply($scope);
                         }
                         
                         if (jsonData.data.reply !== undefined) {
