@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^v/', include('framebuzz.apps.api.urls')),
 
     # Test Page for Beta:
-    url(r'^test/$', 'framebuzz.apps.api.views.video_test', name='video-test'),
+    url(r'^test/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_test', name='video-test'),
 
     # Django-AllAuth
     (r'^accounts/', include('allauth.urls')),

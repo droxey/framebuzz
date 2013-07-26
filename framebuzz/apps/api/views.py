@@ -36,10 +36,10 @@ def video_embed(request, video_id):
     },
     context_instance=RequestContext(request))
 
-def video_test(request):
+def video_test(request, video_id):
     return render_to_response('player/video_test.html',
     {
-
+        'video_id': video_id,
     },
     context_instance=RequestContext(request))
 
