@@ -12,7 +12,7 @@ angular.module('framebuzz.directives', [])
     .directive('mediaElement', function(broadcaster) {
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
-                features: ['share', 'addtolibrary', 'volume', 'playpause', 'muteconvo', 'progress'],
+                features: ['share', 'addtolibrary', 'volume', 'muteconvo', 'progress', 'playpause' ],
                 pluginPath: SOCK.root_path + 'swf/',
                 flashName: 'flashmediaelement.swf',
                 silverlightName: 'silverlightmediaelement.xap',

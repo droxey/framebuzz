@@ -61,24 +61,27 @@ object, embed, video, iframe {
             z-index: 1;
 
             div.mejs-inner {
+                height: 385px;
+
                 div.mejs-controls {
                     background: none;
                     height: 100%;
                     width: 100%;
 
                     div.mejs-time-rail {
+                        bottom: -27px;
                         float: none;
-                        height: 19px;
                         padding-top: 0;
-                        position: absolute;
-                        top: 388px;
+                        position: relative;
                         width: 640px;
                         z-index: 10;
+                        height: 19px;
+                        position: absolute;
 
                         span.mejs-time-total {
                             @include background-image(linear-gradient(rgba(30, 30, 30, 0.3), rgba(60, 60, 60, 0.1))); 
                             @include border-radius(2px, 2px);
-                            height: 12px;
+                            height: 19px;
                             margin: 0 8px;
                             width: 624px;
 
@@ -741,6 +744,7 @@ object, embed, video, iframe {
                                 padding: 4px 6px 4px 12.5px;
                                 position: absolute;
                                 top: 0;
+                                width: 245px;
                                 z-index: 1;
 
                                 img.active-thread {
