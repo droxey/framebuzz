@@ -6,9 +6,9 @@ import tornado.wsgi
 
 from framebuzz.apps.api import tasks, EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from sockjs.tornado import SockJSConnection
+from raven.contrib.tornado import SentryMixin
 
-
-class ConnectionHandler(SockJSConnection):
+class ConnectionHandler(SentryMixin, SockJSConnection):
     """
     Our sockjs connection class.
     sockjs-tornado will create new a instance for every connected client.

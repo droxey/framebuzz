@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 from django.utils.importlib import import_module
 from tornado import web, ioloop
 from sockjs.tornado import SockJSRouter
+from raven.contrib.tornado import AsyncSentryClient
 
 class Command(BaseCommand):
 
@@ -45,6 +46,7 @@ class Command(BaseCommand):
         PORT = int(options['port'])
         app = web.Application(router.urls, **app_settings)
         app.listen(PORT, no_keep_alive=options['no_keep_alive'])
+        app.sentry_client = AsyncSentryClient('https://b14b841441f348b2bd29aa34c79948fb:8ad5006d4856408fad7cf735e0498315@app.getsentry.com/11190')
         print "Running sock app on port", PORT, "with channel", channel
         try:
             ioloop.IOLoop.instance().start()
