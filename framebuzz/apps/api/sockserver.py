@@ -134,6 +134,15 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                             }) \
                         | tasks.get_user_profile.s() \
                         | tasks.message_outbound.s()
+                elif event_type == 'FB_EMAIL_SHARE':
+                    task_chain = tasks.get_user_by_session_key.s(
+                            session_key=self.session_key, 
+                            extra_context={
+                                'video_id': video_id,
+                                'data': data, 
+                                'outbound_channel': self.session_channel
+                            }) \
+                        | tasks.email_share.s()
                 else:
                     pass
 

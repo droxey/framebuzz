@@ -28,6 +28,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.paused = false;
                 $scope.timeOrderedThreads = null;
                 $scope.selectedThreadIndex = -1;
+                $scope.share = {};
 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -38,7 +39,8 @@ angular.module('framebuzz.controllers', []).
                     commentAction: 'FB_COMMENT_ACTION',
                     playerAction: 'FB_PLAYER_ACTION',
                     getActivityStream: 'FB_ACTIVITY_STREAM',
-                    getUserProfile: 'FB_USER_PROFILE'
+                    getUserProfile: 'FB_USER_PROFILE',
+                    shareViaEmail: 'FB_EMAIL_SHARE'
                 };
 
                 // --
@@ -198,10 +200,6 @@ angular.module('framebuzz.controllers', []).
                     safeApply($scope);
                 };
 
-                $scope.showReplyFormForThread = function(thread) {
-                    
-                };
-
                 $scope.getActivityStream = function() {
                     socket.send_json({
                         eventType: eventTypes.getActivityStream, 
@@ -236,6 +234,23 @@ angular.module('framebuzz.controllers', []).
 
                 $scope.toBeImplemented = function() {
                     alert('Not implemented yet!');
+                };
+
+                $scope.shareViaEmail = function() {
+                    console.log($scope.share.email);
+
+                    var postData = {
+                        'shareWithEmail': $scope.share.email,
+                    };
+
+                    socket.send_json({
+                        eventType: eventTypes.shareViaEmail, 
+                        channel: SOCK.user_channel, 
+                        data: postData
+                    });
+
+                    $scope.share = {};
+                    safeApply($scope);
                 };
 
                 // --

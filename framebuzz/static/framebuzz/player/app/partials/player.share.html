@@ -11,9 +11,11 @@
         <h2>Share this video:</h2>
         <div id="share-buttons" data-share=""></div>
         <div id="email" class="clearfix">
-            <label>Email:</label>
-            <input data-ng-model="shareWithEmail" type="text">
-            <button id="send-email" class="rounded">Send</button>
+            <form id="email-share-form" data-ng-submit="shareViaEmail()" action="" method="POST">
+                <label>Email:</label>
+                <input data-ng-model="share.email" type="text">
+                <button id="send-email" class="rounded">Send</button>
+            </form>
         </div>
         <div id="embed" class="clearfix">
             <div id="embed-code">

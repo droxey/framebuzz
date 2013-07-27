@@ -435,3 +435,28 @@ def get_user_profile(context):
     }
 
     return outbound_message
+
+
+@celery.task
+def email_share(context):
+    context_data = context.get(DATA_KEY, None)
+    video_id = context.get('video_id', None)
+    video = Video.objects.get(video_id=video_id)
+    share_with_email = context_data.get('shareWithEmail', None)
+
+    if context_data.get('username', None):
+        user = auth.models.User.objects.get(username=context_data['username'])
+    else:
+        user = context.get('user', None)
+
+    if share_with_email:
+        send_templated_mail(
+            template_name='share-email',
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[share_with_email],
+            context={
+                'shared_by': user,
+                'video': video,
+                'site': Site.objects.get_current()
+            })
+    pass
