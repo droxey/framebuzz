@@ -29,7 +29,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.timeOrderedThreads = null;
                 $scope.selectedThreadIndex = -1;
                 $scope.share = {};
-
+                
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
                     postNewComment: 'FB_POST_NEW_COMMENT',

@@ -74,7 +74,8 @@ angular.module('framebuzz.services', [])
         };
 
         return methods;
-    }).service('broadcaster', function($rootScope) {
+    })
+    .service('broadcaster', function($rootScope) {
         var broadcaster = {};
         broadcaster.message = '';
 
@@ -104,4 +105,27 @@ angular.module('framebuzz.services', [])
                 }
             }
         }
+    })
+    .factory('notificationFactory', function () { 
+        toastr.options = {
+          "debug": false,
+          "positionClass": "toast-top-full-width",
+          "onclick": null,
+          "fadeIn": 300,
+          "fadeOut": 300,
+          "timeOut": 4100,
+          "extendedTimeOut": 300
+        };
+
+        return {
+            success: function(text) {
+                toastr.success(text);
+            },
+            error: function(text) {
+                toastr.error(text);
+            },
+            info: function(text) {
+                toastr.info(text);
+            }
+        };
     });

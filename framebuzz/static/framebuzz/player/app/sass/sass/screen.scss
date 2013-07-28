@@ -25,6 +25,35 @@ object, embed, video, iframe {
 
 .ng-cloak { display: none; }
 
+#toast-container {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+
+    div.toast {
+        margin: auto;
+        width: 50%;
+
+        div.toast-message {
+            @include border-bottom-left-radius(2px);
+            @include border-bottom-right-radius(2px);
+            background-color: rgba(113, 113, 113, 0.35);
+            color: #ffffff;
+            font-family: 'proxima-nova';
+            font-size: 10.04px;
+            font-weight: 300;
+            margin: 0 auto;
+            padding: 5px;
+            text-align: center;
+            text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.8);
+            word-wrap: break-word;
+            width: inherit;
+        }
+    }
+}
+
 #player-container {
     height: 443px;
     overflow: hidden;
@@ -1471,6 +1500,7 @@ object, embed, video, iframe {
                                 line-height: 14px;
                                 margin-top: 5px;
                                 padding: 3px 6px;
+                                resize: none;
                                 width: 231px;
                                 @include single-transition(background-color 100ms linear);
 
@@ -1489,7 +1519,14 @@ object, embed, video, iframe {
                             input[type='text'] { width: 68px; }
                         }
 
-                        .zclip { cursor: pointer; }
+                        .zclip { 
+                            cursor: pointer;
+
+                            embed {
+                                height: 100%;
+                                width: 100%;
+                            } 
+                        }
 
                         a.rounded {
                             display: block;

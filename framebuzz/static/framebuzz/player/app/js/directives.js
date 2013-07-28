@@ -194,13 +194,13 @@ angular.module('framebuzz.directives', [])
             });
         };
     })
-    .directive('copytoclipboard', function() {
+    .directive('copytoclipboard', ['notificationFactory', function(notificationFactory) {
         return function(scope, element, attrs) {
             $(element).zclip({ 
                 path: '/static/framebuzz/player/app/lib/jquery/ZeroClipboard.swf', 
                 copy: attrs.copytoclipboard,
                 afterCopy: function() {
-                    
+                    notificationFactory.success('Copied to Clipboard!');
                 }
             });
 
@@ -221,4 +221,4 @@ angular.module('framebuzz.directives', [])
                 }
             });
         };
-    });
+    }]);
