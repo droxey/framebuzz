@@ -4,10 +4,11 @@ angular.module('framebuzz.animations', [])
     .animation('animate-comment-show', function($rootScope) {
         return {
             setup: function(element) {
-                element.addClass('slideDown');
+                
             },
             start: function(element, done, memo) {
-                element.removeClass('slideDown');
+                element.addClass('slideDown');
+                window.setTimeout(function() { element.removeClass('slideDown'); }, 750);
             }
         };
     });
