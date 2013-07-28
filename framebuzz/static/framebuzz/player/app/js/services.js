@@ -113,7 +113,7 @@ angular.module('framebuzz.services', [])
           "onclick": null,
           "fadeIn": 300,
           "fadeOut": 300,
-          "timeOut": 999999999,//4100,
+          "timeOut": 4100,
           "extendedTimeOut": 300
         };
 
