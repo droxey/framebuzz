@@ -43,9 +43,6 @@ def message_outbound(message):
     event_type = message.get(EVENT_TYPE_KEY, None)
     channel = message.get(CHANNEL_KEY, None)
     context = message.get(DATA_KEY, None)
-    
-    logger.info('Running message_outbound with the following parameters:')
-    logger.info('EventType: %s | Channel: %s | Context: %s' % (event_type, channel, context))
 
     r = redis.StrictRedis(host='localhost', port=6379, db=0)
     response = json.dumps(message)
@@ -54,10 +51,6 @@ def message_outbound(message):
 
 @celery.task
 def get_user_by_session_key(session_key, extra_context=None):
-    logger = get_user_by_session_key.get_logger()
-    logger.info('Running get_user_by_session_key with the following parameters:')
-    logger.info('Session Key: %s | Extra Context: %s' % (session_key, extra_context))
-    
     # Get the user from the session_id.
     engine = importlib.import_module(settings.SESSION_ENGINE)
 
@@ -99,14 +92,10 @@ def initialize_video_player(context):
 
     For each bucket, it's assigned a rank number based upon the values C1, C2, C3 etc. Each rank number maps to a background color for the bucket.
     '''
-    logger = initialize_video_player.get_logger()
     rank_per_block = list()
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
     user = context.get('user', None)
-
-    logger.info('Running initialize_video_player with the following parameters:')
-    logger.info('Video ID: %s | Channel: %s' % (video_id, channel))
 
     # Get Video.
     video, created = get_or_create_video(video_id)

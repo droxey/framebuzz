@@ -859,7 +859,7 @@ object, embed, video, iframe {
                                                     width: 20px;
 
                                                     img.img-circle {
-                                                        @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.56), 0 0 1px 0 rgba(0, 0, 0, 0.53) inset51);
+                                                        @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.56), 0 0 1px 0 rgba(0, 0, 0, 0.53) inset);
                                                         background: black;
                                                         height: 20px;
                                                         width: 20px;
@@ -1117,11 +1117,12 @@ object, embed, video, iframe {
                                     &.border-bottom {
                                         border-bottom: 1px solid rgba(201, 201, 201, 0.15);
                                     }
-                                }
 
-                                td:hover, td.active {
-                                    background-color: rbga(0, 0, 0, 0.32);
-                                    @include single-transition(background-color 100ms linear);
+                                    &:hover, &.active {
+                                        background-color: rgba(0, 0, 0, 0.32);
+                                        color: white;
+                                        @include single-transition(background-color 100ms linear);
+                                    }
                                 }
                             }
                         }
@@ -1154,6 +1155,52 @@ object, embed, video, iframe {
                                         div.header {
                                             margin-bottom: 0;
                                         }
+                                    }
+                                }
+                            }
+
+                            ul.follow-stream {
+                                li {
+                                    border-bottom: 1px solid rgba(104, 104, 104, .90);
+                                    color: rgba(255, 255, 255, .65);
+                                    font-family: 'proxima-nova';
+                                    font-size: 13px;
+                                    height: 33px;
+                                    padding: 8px 14px;
+
+                                    &:last-child { border-bottom: 0; }
+
+                                    div.thread {
+                                        display: inline-block;
+                                        padding: 10px 0 0;
+                                        vertical-align: top;
+                                        width: 168px;
+
+                                        div.header {
+                                            strong, a {
+                                                color: rgba(255, 255, 255, 0.63);
+                                                display: inline-block;
+                                                font-weight: 700;
+                                                font-size: 12.28px;
+                                                line-height: 12px;
+                                            }
+
+                                            a.username { 
+                                                cursor: pointer;
+                                                text-align: left; 
+                                                width: 95%;
+                                                text-decoration: none;
+                                            }
+                                        }
+                                    }
+
+                                    img.img-circle {
+                                        @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.56), 0 0 1px 0 rgba(0, 0, 0, 0.53) inset);
+                                        float: left;
+                                        display: block;
+                                        height: 33px;
+                                        margin-right: 10px;
+                                        width: 33px;
                                     }
                                 }
                             }

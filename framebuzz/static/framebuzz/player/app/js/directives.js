@@ -41,14 +41,12 @@ angular.module('framebuzz.directives', [])
                     });
                     
                     $('.mejs-video').mouseleave(function() {
-                        $(this).addClass('fade-out-controls')
-                            .delay(250)
-                            .queue(function(next) {
-                                $('.mejs-video').removeClass('fade-out-controls');
-                                $('.mejs-video').removeClass('show-controls');
-                                $('#player-layer').removeClass('show-title');
-                                next();
-                            });
+                        $(this).addClass('fade-out-controls');
+                        window.setTimeout(function() {
+                            $('.mejs-video').removeClass('fade-out-controls');
+                            $('.mejs-video').removeClass('show-controls');
+                            $('#player-layer').removeClass('show-title');
+                        }, 250);
                     });
 
                     media.addEventListener('timeupdate', function(e) {

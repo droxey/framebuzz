@@ -1,1 +1,11 @@
+<ul class="follow-stream" data-ng-if="userProfile.user_followers > 0">
+    <li class="clearfix" data-ng-repeat="follower in userProfile.followers_list">
+        <div class="thread">
+            <div class="header">
+                <a class="username" data-ng-click="getUserProfile(follower.username)">{{ follower.username }}</a>
+            </div>
+        </div>
+        <img class="img-circle" data-ng-src="{{ follower.avatar_url }}" alt="" data-ng-click="getUserProfile(follower.username)" />
+    </li>
+</ul>
 <p class="none" data-ng-if="userProfile.user_followers == 0">No followers yet!</p>
