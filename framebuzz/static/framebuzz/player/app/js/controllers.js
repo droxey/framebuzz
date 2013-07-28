@@ -4,8 +4,8 @@
 
 angular.module('framebuzz.controllers', []).
   controller('VideoPlayerCtrl', 
-        ['$rootScope', '$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 
-            function($rootScope, $scope, $state, $filter, $http, socket, broadcaster, safeApply) {    
+        ['$rootScope', '$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 'notificationFactory', 
+            function($rootScope, $scope, $state, $filter, $http, socket, broadcaster, safeApply, notificationFactory) {    
                 $scope.rootPath = SOCK.root_path;
                 $scope.videoInstance = {};
                 $scope.videoInstance.is_authenticated = SOCK.is_authenticated;
@@ -29,7 +29,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.timeOrderedThreads = null;
                 $scope.selectedThreadIndex = -1;
                 $scope.share = {};
-                
+
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
                     postNewComment: 'FB_POST_NEW_COMMENT',
@@ -237,8 +237,6 @@ angular.module('framebuzz.controllers', []).
                 };
 
                 $scope.shareViaEmail = function() {
-                    console.log($scope.share.email);
-
                     var postData = {
                         'shareWithEmail': $scope.share.email,
                     };
@@ -251,6 +249,9 @@ angular.module('framebuzz.controllers', []).
 
                     $scope.share = {};
                     safeApply($scope);
+
+                    var message = 'An email has been sent to ' + postData.shareWithEmail + '.';
+                    notificationFactory.success(message);
                 };
 
                 // --
