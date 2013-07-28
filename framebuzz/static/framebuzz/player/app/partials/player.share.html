@@ -20,13 +20,13 @@
         <div id="embed" class="clearfix">
             <div id="embed-code">
                 <h3>Embed this FrameBuzz:</h3>
-                <textarea ng-bind-html-unsafe="videoInstance.video.embed_code" rows="1"></textarea>
+                <textarea rows="1">{{ videoInstance.video.embed_code }}</textarea>
             </div>
             <div id="embed-width">
                 <h3>Width (px):</h3>
                 <input type="text" value="680" disabled>
             </div>
-            <button id="copy-embed-code" class="rounded">Copy</button>
+            <a rel="copy" id="copy-embed-code" class="rounded" data-copytoclipboard="{{ videoInstance.video.embed_code }}" >Copy</a>
         </div>
         <div id="private" class="clearfix">
             <p><em>Start a private FrameBuzz</em><br>around this video for just you and your friends!</p>

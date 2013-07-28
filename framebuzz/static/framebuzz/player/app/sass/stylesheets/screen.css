@@ -1590,7 +1590,7 @@ object, embed, video, iframe {
   font-weight: 300;
 }
 /* line 1396, ../sass/screen.scss */
-#player-container #buzz-layer #share-view div.modal-background div.content button.rounded {
+#player-container #buzz-layer #share-view div.modal-background div.content button.rounded, #player-container #buzz-layer #share-view div.modal-background div.content a.rounded {
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
@@ -1607,7 +1607,7 @@ object, embed, video, iframe {
   transition: background-color 100ms linear, 1s;
 }
 /* line 1407, ../sass/screen.scss */
-#player-container #buzz-layer #share-view div.modal-background div.content button.rounded:hover {
+#player-container #buzz-layer #share-view div.modal-background div.content button.rounded:hover, #player-container #buzz-layer #share-view div.modal-background div.content button.rounded.fade-in, #player-container #buzz-layer #share-view div.modal-background div.content a.rounded:hover, #player-container #buzz-layer #share-view div.modal-background div.content a.rounded.fade-in {
   background-color: #015b85;
   -webkit-transition: background-color 100ms linear, 1s;
   -moz-transition: background-color 100ms linear, 1s;
@@ -1713,16 +1713,23 @@ object, embed, video, iframe {
   width: 68px;
 }
 /* line 1492, ../sass/screen.scss */
-#player-container #buzz-layer #share-view div.modal-background div.content #embed button.rounded {
-  float: left;
-  margin: 20px 0;
-  width: 50px;
+#player-container #buzz-layer #share-view div.modal-background div.content #embed .zclip {
+  cursor: pointer;
 }
-/* line 1499, ../sass/screen.scss */
+/* line 1494, ../sass/screen.scss */
+#player-container #buzz-layer #share-view div.modal-background div.content #embed a.rounded {
+  display: block;
+  float: left;
+  height: 14px;
+  margin: 20px 0;
+  padding: 6px 10px;
+  width: 30px;
+}
+/* line 1504, ../sass/screen.scss */
 #player-container #buzz-layer #share-view div.modal-background div.content #private {
   padding-left: 5px;
 }
-/* line 1502, ../sass/screen.scss */
+/* line 1507, ../sass/screen.scss */
 #player-container #buzz-layer #share-view div.modal-background div.content #private p {
   color: white;
   font-family: 'proxima-nova';
@@ -1732,13 +1739,13 @@ object, embed, video, iframe {
   line-height: 13px;
   width: 240px;
 }
-/* line 1511, ../sass/screen.scss */
+/* line 1516, ../sass/screen.scss */
 #player-container #buzz-layer #share-view div.modal-background div.content #private p em {
   color: #2284b2;
   font-weight: 700;
   text-transform: uppercase;
 }
-/* line 1518, ../sass/screen.scss */
+/* line 1523, ../sass/screen.scss */
 #player-container #buzz-layer #share-view div.modal-background div.content #private button.rounded {
   float: left;
   width: 159px;

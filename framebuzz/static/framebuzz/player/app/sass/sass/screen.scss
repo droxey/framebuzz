@@ -1393,7 +1393,7 @@ object, embed, video, iframe {
                         font-weight: 300;
                     }
 
-                    button.rounded {
+                    button.rounded, a.rounded {
                         @include border-radius(3px, 3px);
                         background-color: #2284b2;
                         border: 0 none;
@@ -1404,7 +1404,7 @@ object, embed, video, iframe {
                         height: 26px;
                         @include single-transition(background-color 100ms linear);
 
-                        &:hover { 
+                        &:hover, &.fade-in { 
                             background-color: #015b85; 
                             @include single-transition(background-color 100ms linear);
                         }
@@ -1489,10 +1489,15 @@ object, embed, video, iframe {
                             input[type='text'] { width: 68px; }
                         }
 
-                        button.rounded { 
+                        .zclip { cursor: pointer; }
+
+                        a.rounded {
+                            display: block;
                             float: left;
+                            height: 14px;
                             margin: 20px 0;
-                            width: 50px;
+                            padding: 6px 10px;
+                            width: 30px;
                         }
                     }
 

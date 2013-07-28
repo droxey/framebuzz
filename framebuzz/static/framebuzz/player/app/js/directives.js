@@ -193,4 +193,32 @@ angular.module('framebuzz.directives', [])
                 return false;
             });
         };
+    })
+    .directive('copytoclipboard', function() {
+        return function(scope, element, attrs) {
+            $(element).zclip({ 
+                path: '/static/framebuzz/player/app/lib/jquery/ZeroClipboard.swf', 
+                copy: attrs.copytoclipboard,
+                afterCopy: function() {
+                    
+                }
+            });
+
+            $('.zclip').css({ 
+                'height': '26px', 
+                'left': '352px', 
+                'top': '195px', 
+                'width': '50px', 
+                'z-index': 200 
+            });
+
+            $('.zclip').hoverIntent({
+                over: function() {
+                    $(element).addClass('fade-in');
+                },
+                out: function() {
+                    $(element).removeClass('fade-in');
+                }
+            });
+        };
     });

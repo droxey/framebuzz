@@ -33,7 +33,7 @@ class VideoSerializer(serializers.ModelSerializer):
         return obj.timeInHMS
 
     def get_embed_code(self, obj):
-        return obj.embed_code
+        return str(obj.embed_code())
 
     def get_embed_url(self, obj):
         return '%s?close=true' % obj.get_absolute_url()
