@@ -33,16 +33,18 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
         self.client.connect()
 
         if self.session_channel:
+            print 'session found'
             subscribe_tasks.append(tornado.gen.Task(self.client.subscribe, self.session_channel))
 
         if self.user_channel:
+            print 'user found'
             subscribe_tasks.append(tornado.gen.Task(self.client.subscribe, self.user_channel))
 
         if self.video_channel:
+            print 'video found'
             subscribe_tasks.append(tornado.gen.Task(self.client.subscribe, self.video_channel))
 
         yield subscribe_tasks
-
         self.client.listen(self.on_chan_message)
 
     def on_open(self, info):

@@ -6,7 +6,6 @@ import redis
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.comments.models import CommentFlag
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.utils import importlib
 
@@ -16,11 +15,29 @@ from actstream.actions import follow, unfollow
 from rest_framework.renderers import JSONRenderer
 from templated_email import send_templated_mail
 
-from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY, TIMELINE_BLOCKS, SIGNIFICANCE_FACTOR
+from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.forms import MPTTCommentForm
 from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
 from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
 from framebuzz.apps.api.backends.youtube import get_or_create_video
+
+
+def construct_message(event_type, channel, data):
+    outbound_message = dict()
+    outbound_message[EVENT_TYPE_KEY] = event_type
+    outbound_message[CHANNEL_KEY] = channel
+    outbound_message[DATA_KEY] = data
+    return outbound_message
+
+
+@celery.task(ignore_result=True)
+def _send_to_channel(channel, message):
+    logger = _send_to_channel.get_logger()
+    logger.info('Sending message to channel %s' % channel)
+    
+    r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    response = json.dumps(message)
+    r.publish(channel, response)
 
 
 @celery.task(ignore_result=True)
@@ -38,15 +55,8 @@ def message_outbound(message):
         }
     }
     """
-    logger = message_outbound.get_logger()
-    
-    event_type = message.get(EVENT_TYPE_KEY, None)
     channel = message.get(CHANNEL_KEY, None)
-    context = message.get(DATA_KEY, None)
-
-    r = redis.StrictRedis(host='localhost', port=6379, db=0)
-    response = json.dumps(message)
-    r.publish(channel, response)
+    _send_to_channel.delay(channel = channel, message = message)
 
 
 @celery.task
@@ -92,54 +102,13 @@ def initialize_video_player(context):
 
     For each bucket, it's assigned a rank number based upon the values C1, C2, C3 etc. Each rank number maps to a background color for the bucket.
     '''
-    rank_per_block = list()
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
     user = context.get('user', None)
 
     # Get Video.
-    video, created = get_or_create_video(video_id)
-    seconds_per_block = float(video.duration) / float(TIMELINE_BLOCKS)
-    content_type = ContentType.objects.get_for_model(video)
-    comments = MPTTComment.objects.filter(content_type=content_type, 
-                                          object_pk = video.id, 
-                                          is_removed=False)
-
-    rank_1 = (float(comments.count()) + SIGNIFICANCE_FACTOR) / 3.0
-    rank_2 = rank_1 - (rank_1 / 7.0)
-    rank_3 = rank_2 - (rank_1 / 7.0)
-    rank_4 = rank_3 - (rank_1 / 7.0)
-    rank_5 = rank_4 - (rank_1 / 7.0)
-    rank_6 = rank_5 - (rank_1 / 7.0)
-    rank_7 = rank_6 - (rank_1 / 7.0)
-
-    for block in range(0, TIMELINE_BLOCKS):
-        start = float(block) * seconds_per_block
-        end = start + seconds_per_block
-        comments_in_block = comments.filter(time__gte=start, time__lt=end)
-        finalCount = comments_in_block.count()
-
-        if finalCount == 0:
-            class_name = 'rank-8'
-        elif finalCount > rank_1:
-            class_name = 'rank-1'
-        else:
-            if rank_2 > finalCount >= rank_3:
-                class_name = 'rank-2'
-            elif rank_3 > finalCount >= rank_4:
-                class_name = 'rank-3'
-            elif rank_4 > finalCount >= rank_5:
-                class_name = 'rank-4'
-            elif rank_5 > finalCount >= rank_6:
-                class_name = 'rank-5'
-            elif rank_6 > finalCount >= rank_7:
-                class_name = 'rank-6'
-            else:
-                class_name = 'rank-7'
-
-        rank_per_block.append({'block': block, 'className': class_name})        
-    
-    threads = comments.filter(parent=None).order_by('-time')
+    video, created = get_or_create_video(video_id)     
+    threads = MPTTComment.objects.filter(object_pk=video.id, is_removed=False, parent=None).order_by('-time')
     videoSerializer = VideoSerializer(video)
     videoSerialized = JSONRenderer().render(videoSerializer.data)
     threadsSerializer = MPTTCommentSerializer(threads, context={ 'user': user })
@@ -147,7 +116,7 @@ def initialize_video_player(context):
 
     data = { }
     data['video'] = json.loads(videoSerialized)
-    data['heatmap'] = rank_per_block
+    data['heatmap'] = video.heatmap()
     data['threads'] = json.loads(threadsSerialized)
     data['is_authenticated'] = isinstance(user, auth.models.AnonymousUser) is False
 
@@ -158,12 +127,7 @@ def initialize_video_player(context):
     else:
         data['user'] = {}
 
-    outbound_message = dict()
-    outbound_message[EVENT_TYPE_KEY] = 'FB_INITIALIZE_VIDEO'
-    outbound_message[CHANNEL_KEY] = channel
-    outbound_message[DATA_KEY] = data
-    return outbound_message
-
+    return construct_message('FB_INITIALIZE_VIDEO', channel, data)
 
 @celery.task
 def post_new_comment(context):
@@ -187,17 +151,25 @@ def post_new_comment(context):
             comment.save()
 
     if comment:
+        return_data = dict()
+        return_data['heatmap'] = video.heatmap()
+
         if not comment.parent:
             action.send(user, verb='commented on', action_object=video)
 
             threadSerializer = MPTTCommentSerializer(comment, context={ 'user': user })
             threadSerialized = JSONRenderer().render(threadSerializer.data)
-            return_data = { 'thread': json.loads(threadSerialized) }
+            return_data['thread'] = json.loads(threadSerialized)
         else:
             action.send(user, verb='replied to comment', action_object=comment.parent, target=video)
 
             # Send a notification to the thread's owner that someone has replied to their comment.
             if comment.parent.user.id != user.id and comment.parent.user.email:
+                user_channel = '/framebuzz/user/%s' % comment.parent.user.username
+                notification = { 'message': 'You have 1 new reply!', 'objectType': 'reply', 'objectId': comment.id }
+                message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
+                _send_to_channel.delay(channel = user_channel, message = message)
+
                 send_templated_mail(
                     template_name='reply-notification',
                     from_email=settings.DEFAULT_FROM_EMAIL,
@@ -209,15 +181,9 @@ def post_new_comment(context):
 
             replySerializer = MPTTCommentReplySerializer(comment, context={ 'user': user })
             replySerialized = JSONRenderer().render(replySerializer.data)
-            return_data = { 'reply': json.loads(replySerialized) }
+            return_data['reply'] = json.loads(replySerialized)
         
-        outbound_message = dict()
-        outbound_message[EVENT_TYPE_KEY] = 'FB_POST_NEW_COMMENT'
-        outbound_message[CHANNEL_KEY] = channel
-        outbound_message[DATA_KEY] = return_data
-        
-        return outbound_message
-
+        return construct_message('FB_POST_NEW_COMMENT', channel, return_data)
 
 @celery.task
 def add_comment_action(context):
@@ -227,15 +193,10 @@ def add_comment_action(context):
     video = Video.objects.get(video_id=video_id)
     action_name = None
 
-
     if thread_data.get('username', None):
         user = auth.models.User.objects.get(username=thread_data['username'])
     else:
         user = context.get('user', None)
-
-    outbound_message = dict()
-    outbound_message[EVENT_TYPE_KEY] = 'FB_COMMENT_ACTION'
-    outbound_message[CHANNEL_KEY] = channel
 
     if thread_data:
         thread = MPTTComment.objects.get(id=thread_data.get('threadId'))
@@ -252,6 +213,12 @@ def add_comment_action(context):
                 follow(user, thread.user)
 
                 if thread.user.id != user.id and thread.user.email:
+                    user_channel = '/framebuzz/user/%s' % thread.user.username
+                    message_text = '%s is now following you!' % user.username
+                    notification = { 'message': message_text, 'objectType': 'follow', 'objectId': None }
+                    message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
+                    _send_to_channel.delay(channel = user_channel, message = message)
+
                     send_templated_mail(
                         template_name='following-notification',
                         from_email=settings.DEFAULT_FROM_EMAIL,
@@ -272,6 +239,12 @@ def add_comment_action(context):
                 action.send(user, verb='added to favorites', action_object=thread, target=video)
 
                 if thread.user.id != user.id and thread.user.email:
+                    user_channel = '/framebuzz/user/%s' % thread.user.username
+                    message_text = '%s added your comment to favorites!' % user.username
+                    notification = { 'message': message_text, 'objectType': 'favorite', 'objectId': None }
+                    message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
+                    _send_to_channel.delay(channel = user_channel, message = message)
+
                     send_templated_mail(
                         template_name='favorites-notification',
                         from_email=settings.DEFAULT_FROM_EMAIL,
@@ -299,14 +272,15 @@ def add_comment_action(context):
 
         updatedThread = MPTTComment.objects.get(id=thread_data.get('threadId'))
         returnThread = updatedThread if updatedThread.parent is None else updatedThread.parent
-        
+
         threadSerializer = MPTTCommentSerializer(returnThread, context={ 'user': user })
         threadSerialized = JSONRenderer().render(threadSerializer.data)
 
-        outbound_message[DATA_KEY] = { 'action': action_name, 'thread': json.loads(threadSerialized) }
-        return outbound_message
+        return_data = { 'action': action_name, 'thread': json.loads(threadSerialized) }
+        return construct_message('FB_COMMENT_ACTION', channel, return_data)
 
-@celery.task
+
+@celery.task(ignore_result=True)
 def add_player_action(context):
     player_data = context.get(DATA_KEY, None)
     player_action = player_data.get('action', None)
@@ -328,6 +302,7 @@ def add_player_action(context):
 
     if verb:
         action.send(user, verb=verb, action_object=video, target=None, time=float(player_data.get('time')))
+
 
 @celery.task
 def get_activity_stream(context):
@@ -373,12 +348,9 @@ def get_activity_stream(context):
                 }
                 stream_data.append(act)
 
-    outbound_message = dict()
-    outbound_message[EVENT_TYPE_KEY] = 'FB_ACTIVITY_STREAM'
-    outbound_message[CHANNEL_KEY] = channel
-    outbound_message[DATA_KEY] = { 'activities': stream_data }
+    return_data = { 'activities': stream_data }
+    return construct_message('FB_ACTIVITY_STREAM', channel, return_data)
 
-    return outbound_message
 
 @celery.task
 def get_user_profile(context):
@@ -410,10 +382,7 @@ def get_user_profile(context):
     followingSerializer = UserSerializer(user_following)
     followingSerialized = JSONRenderer().render(followingSerializer.data)
 
-    outbound_message = dict()
-    outbound_message[EVENT_TYPE_KEY] = 'FB_USER_PROFILE'
-    outbound_message[CHANNEL_KEY] = channel
-    outbound_message[DATA_KEY] = {
+    return_data = {
         'favorite_comments': len(favorite_comments),
         'total_comments': len(total_comments),
         'user_followers': len(user_followers),
@@ -425,10 +394,10 @@ def get_user_profile(context):
         'user': json.loads(userSerialized)
     }
 
-    return outbound_message
+    return construct_message('FB_USER_PROFILE', channel, return_data)
 
 
-@celery.task
+@celery.task(ignore_result=True)
 def email_share(context):
     context_data = context.get(DATA_KEY, None)
     video_id = context.get('video_id', None)
@@ -450,7 +419,6 @@ def email_share(context):
                 'video': video,
                 'site': Site.objects.get_current()
             })
-    pass
 
 @celery.task
 def add_to_library(context):
@@ -477,13 +445,8 @@ def add_to_library(context):
 
     userSerializer = UserSerializer(user, context={ 'video': video })
     userSerialized = JSONRenderer().render(userSerializer.data)
-
-    outbound_message = dict()
-    outbound_message[EVENT_TYPE_KEY] = 'FB_ADD_TO_LIBRARY'
-    outbound_message[CHANNEL_KEY] = channel
-    outbound_message[DATA_KEY] = {
+    return_data = {
         'message': message,
         'user': json.loads(userSerialized)
     }
-
-    return outbound_message
+    return construct_message('FB_ADD_TO_LIBRARY', channel, return_data)

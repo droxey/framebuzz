@@ -41,7 +41,8 @@ angular.module('framebuzz.controllers', []).
                     getActivityStream: 'FB_ACTIVITY_STREAM',
                     getUserProfile: 'FB_USER_PROFILE',
                     shareViaEmail: 'FB_EMAIL_SHARE',
-                    addToLibrary: 'FB_ADD_TO_LIBRARY'
+                    addToLibrary: 'FB_ADD_TO_LIBRARY',
+                    notification: 'FB_USER_NOTIFICATION'
                 };
 
                 // --
@@ -475,6 +476,9 @@ angular.module('framebuzz.controllers', []).
 
                         var className = $scope.videoInstance.user.video_in_library ? 'added' : 'removed';
                         broadcaster.prepForBroadcast({ broadcastType: 'library_toggle_complete', className: className });
+                    }
+                    else if (jsonData.eventType == eventTypes.notification) {
+                        notificationFactory.info(jsonData.data.message);
                     }
                     else {
                         console.log('Socket received unhandled message.');

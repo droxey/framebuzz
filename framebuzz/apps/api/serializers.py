@@ -1,4 +1,3 @@
-import urllib
 import urlparse
 
 from django.contrib.auth.models import User, AnonymousUser
