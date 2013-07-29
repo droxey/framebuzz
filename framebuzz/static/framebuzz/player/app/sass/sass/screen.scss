@@ -996,7 +996,6 @@ object, embed, video, iframe {
                                         li {
                                             border-bottom: 1px solid rgba(104, 104, 104, 0.90);
                                             margin: 0 10px;
-                                            min-height: 32px;
                                             padding: 6px 12px;
                                             width: 199px;
 
@@ -1004,6 +1003,33 @@ object, embed, video, iframe {
                                                 padding: 0;
 
                                                 p { width: 197px; }
+                                            }
+
+                                            div.comment-actions {
+                                                height: 19px;
+                                                margin-top: 6px;
+                                                padding: 0;
+
+                                                a {
+                                                    float: left; 
+
+                                                    &.favorite {
+                                                        height: 16px;
+                                                        margin: 0;
+                                                        width: 19px;
+                                                    }
+
+                                                    &.follow {
+                                                        height: 16px;
+                                                        margin-left: 22px;
+                                                        width: 10px;
+                                                    }
+
+                                                    &.flag {
+                                                        float: right;
+                                                        margin-top: 2px;
+                                                    }
+                                                }
                                             }
 
                                             &:last-child { border-bottom: 0; }

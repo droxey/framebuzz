@@ -270,6 +270,14 @@ angular.module('framebuzz.controllers', []).
                     });
                 };
 
+                var getReplyByIdAndThread = function(id, thread) {
+                    angular.forEach(thread.replies, function(reply, key) {
+                        if (reply.id == id) {
+                            return reply;
+                        }
+                    });
+                };
+
                 var getNextThreadInTimeline = function() {
                     if ($scope.currentTime > 0) {
                         var time = angular.copy($scope.currentTime);
