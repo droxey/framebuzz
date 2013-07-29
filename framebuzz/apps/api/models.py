@@ -16,7 +16,7 @@ from timezone_field import TimeZoneField
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-COMMENT_VISIBILITY_TIME_RANGE = 0.5
+COMMENT_VISIBILITY_TIME_RANGE = 1
 
 
 class Website(models.Model):
@@ -169,15 +169,8 @@ class MPTTComment(MPTTModel, Comment):
 
     def get_thread_siblings(self):
         if not self.parent:
-            start = math.floor(self.time)
-            time_fraction = self.time % 1
-
-            if time_fraction > .5:
-                start = start + 1
-                end = start - COMMENT_VISIBILITY_TIME_RANGE
-            else:
-                end = start + COMMENT_VISIBILITY_TIME_RANGE
-            
+            start = int(self.time)
+            end = start + COMMENT_VISIBILITY_TIME_RANGE
             comments_in_range = MPTTComment.objects.filter(object_pk=self.object_pk,
                                                 parent=None, 
                                                 time__gte=start, 
