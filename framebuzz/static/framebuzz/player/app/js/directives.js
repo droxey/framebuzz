@@ -185,8 +185,9 @@ angular.module('framebuzz.directives', [])
     .directive('loginpopup', function() {
         return function(scope, element, attrs) {
             $(element).click(function() {
-                var loginUrl = attrs.loginpopup;
-                var newWindow = window.open(loginUrl,'name','toolbar=0,resizable=1,status=0,width=640,height=528');
+                var nextUrl = location.href.replace(location.hash, "");
+                var loginUrl = attrs.loginpopup + '&nextUrl=' + nextUrl;
+                var newWindow = window.open(loginUrl,'frameBuzzSSOLoginWindow','toolbar=0,resizable=0,status=0,width=640,height=528');
                 if (window.focus) { newWindow.focus(); }
                 return false;
             });

@@ -51,7 +51,10 @@ angular.module('framebuzz.controllers', []).
                     $http({
                         method: 'POST', 
                         url: SOCK.login_url, 
-                        data: { login: $scope.loginModel.username, password: $scope.loginModel.password },
+                        data: { 
+                            login: $scope.loginModel.username, 
+                            password: $scope.loginModel.password
+                        },
                         headers: {
                             "Content-Type": "application/json; charset=UTF-8"
                         }
