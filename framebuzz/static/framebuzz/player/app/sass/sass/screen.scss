@@ -644,6 +644,13 @@ object, embed, video, iframe {
                             color: rgba(255, 255, 255, .65);
                             text-decoration: none;
                         }
+
+                        &.animated {
+                            -webkit-animation-duration: 0.75s;
+                            -moz-animation-duration: 0.75s;
+                            -o-animation-duration: 0.75s;
+                            animation-duration: 0.75s;
+                        }
                     }
                 }
             }
@@ -1422,13 +1429,21 @@ object, embed, video, iframe {
             z-index: 1;
 
             div.modal-background {
-                background-color: rgba(0, 0, 0, 0.50);
+                background-color: rgba(0, 0, 0, .5);
                 height: 100%;
                 width: 100%;
+
+                &.animated {
+                    -webkit-animation-duration: 0.5s;
+                    -moz-animation-duration: 0.5s;
+                    -o-animation-duration: 0.5s;
+                    animation-duration: 0.5s;
+                }
 
                 div.content {
                     @include border-radius(3px, 3px);
                     background: rgba(0, 0, 0, 0.82);
+                    display: none;
                     height: 264px;
                     padding: 15px 17px;
                     position: relative;

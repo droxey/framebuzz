@@ -3,7 +3,6 @@ import json
 from django.conf import settings
 from django.http import HttpResponse
 from django.contrib.auth import logout
-from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -22,9 +21,6 @@ from framebuzz.apps.api.serializers import UserSerializer
 @xframe_options_exempt
 def video_embed(request, video_id):
     video, created = get_or_create_video(video_id)
-
-    site = Site.objects.get_current()
-    protocol = 'https' if request.is_secure() else 'http'
     next_url = '%s?close=true' % reverse('video-embed', args=(video.video_id,))
 
     if request.user.is_authenticated():

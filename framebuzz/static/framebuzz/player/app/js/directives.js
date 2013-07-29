@@ -225,4 +225,15 @@ angular.module('framebuzz.directives', [])
                 }
             });
         };
-    }]);
+    }])
+    .directive('animationclass', function() {
+        return function(scope, element, attrs) {
+            element.ready(function() {
+                window.setTimeout(function() {
+                    element.hide();
+                    element.addClass(attrs.animationclass);
+                    element.show();
+                }, 100);
+            });
+        }
+    });

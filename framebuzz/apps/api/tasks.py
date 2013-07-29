@@ -337,7 +337,7 @@ def get_activity_stream(context):
     else:
         user = context.get('user', None)
 
-    valid_verbs = ['started following', 'added to favorites', 'removed from favorites', 'stopped following', 'replied to comment']
+    valid_verbs = ['started following', 'added to favorites', 'removed from favorites', 'stopped following', 'replied to comment', 'added video to library']
     last_login_minus_day = user.last_login - datetime.timedelta(days=1)
     user_activity_stream = Action.objects.filter(verb__in=valid_verbs, timestamp__gte = last_login_minus_day)
 
@@ -465,9 +465,12 @@ def add_to_library(context):
     user_video, created = UserVideo.objects.get_or_create(video=video, user=user)
     
     if not created:
-        message = 'Video removed from library.'
+        old_action = Action.objects.actor(user, verb='added video to library', action_object_object_id=video.id)
+        old_action.delete()
         user_video.delete()
+        message = 'Video removed from library.'
     else:
+        action.send(user, verb='added video to library', action_object=video, target=user_video)
         message = 'Video added to library.'
 
     userSerializer = UserSerializer(user, context={ 'video': video })
