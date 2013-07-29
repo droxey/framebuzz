@@ -5,6 +5,9 @@ angular.module('framebuzz.animations', [])
         return {
             setup: function(element) {
                 element.addClass('animated fadeInDown');
+            },
+            start: function(element, done, memo) {
+                
             }
         };
     });
