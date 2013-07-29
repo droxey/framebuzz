@@ -18,7 +18,7 @@ from templated_email import send_templated_mail
 
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY, TIMELINE_BLOCKS, SIGNIFICANCE_FACTOR
 from framebuzz.apps.api.forms import MPTTCommentForm
-from framebuzz.apps.api.models import MPTTComment, Video
+from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
 from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 
@@ -449,3 +449,32 @@ def email_share(context):
                 'site': Site.objects.get_current()
             })
     pass
+
+@celery.task
+def add_to_library(context):
+    context_data = context.get(DATA_KEY, None)
+    video_id = context.get('video_id', None)
+    channel = context.get('outbound_channel', None)
+    video = Video.objects.get(video_id=video_id)
+
+    if context_data.get('username', None):
+        user = auth.models.User.objects.get(username=context_data['username'])
+    else:
+        user = context.get('user', None)
+
+    user_video, created = UserVideo.objects.get_or_create(video=video, user=user)
+    
+    if not created:
+        message = 'Video removed from library.'
+        user_video.delete()
+    else:
+        message = 'Video added to library.'
+
+    outbound_message = dict()
+    outbound_message[EVENT_TYPE_KEY] = 'FB_ADD_TO_LIBRARY'
+    outbound_message[CHANNEL_KEY] = channel
+    outbound_message[DATA_KEY] = {
+        'message': message
+    }
+
+    return outbound_message

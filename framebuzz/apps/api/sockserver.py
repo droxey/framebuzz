@@ -143,6 +143,17 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                                 'outbound_channel': self.session_channel
                             }) \
                         | tasks.email_share.s()
+                elif event_type == 'FB_ADD_TO_LIBRARY':
+                    task_chain = tasks.get_user_by_session_key.s(
+                            session_key=self.session_key, 
+                            extra_context={
+                                'video_id': video_id,
+                                'data': data, 
+                                'outbound_channel': self.session_channel,
+                                'username': data.get('username', None)
+                            }) \
+                        | tasks.add_to_library.s() \
+                        | tasks.message_outbound.s()
                 else:
                     pass
 

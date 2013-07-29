@@ -107,6 +107,20 @@ class Video(models.Model):
         return "%02d:%02d:%02d" % (hours, minutes, seconds)
 
 
+class UserVideo(models.Model):
+    video = models.ForeignKey(Video)
+    user = models.ForeignKey(User)
+    added_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'User Video'
+        verbose_name_plural = 'User Videos'
+        ordering = ['-added_on']
+
+    def __unicode__(self):
+        return "'%s' in %s's video library" % (self.video.title, self.user.username)
+
+
 class Thumbnail(models.Model):
     video = models.ForeignKey(Video, null=True)
     url = models.URLField(max_length=255)

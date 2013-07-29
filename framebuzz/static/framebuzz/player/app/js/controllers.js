@@ -40,7 +40,8 @@ angular.module('framebuzz.controllers', []).
                     playerAction: 'FB_PLAYER_ACTION',
                     getActivityStream: 'FB_ACTIVITY_STREAM',
                     getUserProfile: 'FB_USER_PROFILE',
-                    shareViaEmail: 'FB_EMAIL_SHARE'
+                    shareViaEmail: 'FB_EMAIL_SHARE',
+                    addToLibrary: 'FB_ADD_TO_LIBRARY'
                 };
 
                 // --
@@ -345,7 +346,18 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_addtolibrary', function() {
-                    console.log(broadcaster.message);
+                    if ($scope.videoInstance.is_authenticated) {
+                        socket.send_json({
+                            eventType: eventTypes.addToLibrary, 
+                            channel: SOCK.user_channel, 
+                            data: { 
+                                username: $scope.videoInstance.user.username
+                            }
+                        });
+                    }
+                    else {
+                        notificationFactory.error('Please log in first!');
+                    } 
                 });
 
                 $scope.$on('player_playing', function() {
@@ -357,7 +369,7 @@ angular.module('framebuzz.controllers', []).
                         $state.transitionTo('player.blendedView');
                     }
                 
-                    if ($scope.videoInstance.user.is_authenticated) {
+                    if ($scope.videoInstance.is_authenticated) {
                         socket.send_json({
                             eventType: eventTypes.playerAction, 
                             channel: SOCK.user_channel, 
@@ -383,7 +395,7 @@ angular.module('framebuzz.controllers', []).
                         }
                     }
 
-                    if ($scope.videoInstance.user.is_authenticated) {
+                    if ($scope.videoInstance.is_authenticated) {
                         socket.send_json({
                             eventType: eventTypes.playerAction, 
                             channel: SOCK.user_channel, 
@@ -440,6 +452,9 @@ angular.module('framebuzz.controllers', []).
                         safeApply($scope);
 
                         $state.transitionTo('player.userProfileView', { username: $scope.userProfile.user.username });
+                    }
+                    else if (jsonData.eventType == eventTypes.addToLibrary) {
+                        notificationFactory.success(jsonData.data.message);
                     }
                     else {
                         console.log('Socket received unhandled message.');
