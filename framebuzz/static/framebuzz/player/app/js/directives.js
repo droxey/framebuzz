@@ -49,6 +49,11 @@ angular.module('framebuzz.directives', [])
                         }, 250);
                     });
 
+                    scope.$on('library_toggle_complete', function() {
+                        $('.mejs-add-library-button').removeClass('added removed');
+                        $('.mejs-add-library-button').addClass(broadcaster.message.className);
+                    });
+
                     media.addEventListener('timeupdate', function(e) {
                         broadcaster.prepForBroadcast({ broadcastType: 'player_timeupdate', currentTime: media.currentTime });
                     }, false);

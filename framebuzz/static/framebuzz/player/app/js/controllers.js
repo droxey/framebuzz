@@ -423,6 +423,12 @@ angular.module('framebuzz.controllers', []).
                         $scope.videoInstance = jsonData.data;
                         $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         safeApply($scope);
+
+                        if ($scope.videoInstance.is_authenticated) {
+                            console.log($scope.videoInstance.user.video_in_library);
+                            var className = $scope.videoInstance.user.video_in_library ? 'added' : 'removed';
+                            broadcaster.prepForBroadcast({ broadcastType: 'library_toggle_complete', className: className });
+                        }
                     }
                     else if (jsonData.eventType == eventTypes.postNewComment) {
                         if (jsonData.data.thread !== undefined) {
@@ -455,6 +461,12 @@ angular.module('framebuzz.controllers', []).
                     }
                     else if (jsonData.eventType == eventTypes.addToLibrary) {
                         notificationFactory.success(jsonData.data.message);
+
+                        $scope.videoInstance.user = jsonData.data.user;
+                        safeApply($scope);
+
+                        var className = $scope.videoInstance.user.video_in_library ? 'added' : 'removed';
+                        broadcaster.prepForBroadcast({ broadcastType: 'library_toggle_complete', className: className });
                     }
                     else {
                         console.log('Socket received unhandled message.');

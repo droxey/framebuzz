@@ -152,7 +152,7 @@ def initialize_video_player(context):
     data['is_authenticated'] = isinstance(user, auth.models.AnonymousUser) is False
 
     if data['is_authenticated']:
-        userSerializer = UserSerializer(user)
+        userSerializer = UserSerializer(user, context={ 'video': video })
         userSerialized = JSONRenderer().render(userSerializer.data)
         data['user'] = json.loads(userSerialized)
     else:
@@ -470,11 +470,15 @@ def add_to_library(context):
     else:
         message = 'Video added to library.'
 
+    userSerializer = UserSerializer(user, context={ 'video': video })
+    userSerialized = JSONRenderer().render(userSerializer.data)
+
     outbound_message = dict()
     outbound_message[EVENT_TYPE_KEY] = 'FB_ADD_TO_LIBRARY'
     outbound_message[CHANNEL_KEY] = channel
     outbound_message[DATA_KEY] = {
-        'message': message
+        'message': message,
+        'user': json.loads(userSerialized)
     }
 
     return outbound_message

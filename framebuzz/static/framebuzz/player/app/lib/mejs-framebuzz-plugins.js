@@ -47,7 +47,7 @@
         '</button>')
       .appendTo(shareDiv)
       .click(function() {
-        media.dispatchEvent('player_addtolibrary');
+        media.dispatchEvent('player_addtolibrary', 'something else');
       });
   };
 })(jQuery);

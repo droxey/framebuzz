@@ -13,7 +13,7 @@ from avatar.util import get_primary_avatar, get_default_avatar_url
 from avatar.settings import AVATAR_GRAVATAR_BACKUP
 from rest_framework import serializers
 
-from framebuzz.apps.api.models import MPTTComment, Video
+from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
 
 
 class VideoSerializer(serializers.ModelSerializer):
@@ -41,10 +41,11 @@ class VideoSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField('get_avatar_url')
+    video_in_library = serializers.SerializerMethodField('get_video_in_library')
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'avatar_url',)
+        fields = ('id', 'username', 'avatar_url', 'video_in_library',)
 
     def get_avatar_url(self, obj):
         avatar = get_primary_avatar(obj, size=88)
@@ -56,6 +57,13 @@ class UserSerializer(serializers.ModelSerializer):
             return urlparse.urljoin('http://robohash.org', path)
 
         return get_default_avatar_url()
+
+    def get_video_in_library(self, obj):
+        video = self.context.get('video', None)
+        if video:
+            user_video = UserVideo.objects.filter(user=obj, video=video)
+            return len(user_video) == 1
+        return False
 
 
 class BaseCommentSerializer(serializers.ModelSerializer):
