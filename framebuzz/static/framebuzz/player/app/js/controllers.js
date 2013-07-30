@@ -68,7 +68,7 @@ angular.module('framebuzz.controllers', []).
                             $scope.loginModel = {};
                             safeApply($scope);
 
-                            $state.transitionTo('player.panelView');
+                            $state.transitionTo('player.blendedView');
                         }
                     })
                     .error(function(data, status, headers, config) {
@@ -87,7 +87,7 @@ angular.module('framebuzz.controllers', []).
                             $scope.videoInstance.is_authenticated = false;
                             safeApply($scope);
 
-                            $state.transitionTo('player.panelView');
+                            $state.transitionTo('player.blendedView');
                         }
                     })
                     .error(function(data, status, headers, config) {
@@ -117,7 +117,7 @@ angular.module('framebuzz.controllers', []).
                             $scope.signupModel = {};
                             safeApply($scope);
 
-                            $state.transitionTo('player.panelView');
+                            $state.transitionTo('player.blendedView');
                         }
                     })
                     .error(function(data, status, headers, config) {
@@ -442,7 +442,7 @@ angular.module('framebuzz.controllers', []).
                     else if (jsonData.eventType == eventTypes.postNewComment) {
                         $scope.videoInstance.heatmap = jsonData.data.heatmap;
                         safeApply($scope);
-                        
+
                         if (jsonData.data.thread !== undefined) {
                             var newThread = jsonData.data.thread;
                             addNewThread(newThread);
