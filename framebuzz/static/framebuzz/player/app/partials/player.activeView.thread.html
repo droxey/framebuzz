@@ -43,7 +43,7 @@
             <li data-ng-repeat="reply in selectedThread.replies">
                 <div class="thread">
                     <div class="header">
-                        <strong class="username">{{ reply.user.username }}</strong>
+                        <strong class="username" data-ng-click="getUserProfile(reply.user.username)">{{ reply.user.username }}</strong>
                     </div>
                     <p>{{ reply.comment }}</p>
                 </div>
