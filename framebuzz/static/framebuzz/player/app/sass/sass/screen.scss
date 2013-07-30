@@ -129,9 +129,9 @@ object, embed, video, iframe {
                                 background: rgba(0, 0, 0, 0.9);
                                 border: 1px solid #000000;
                                 color: rgba(255, 255, 255, 0.75);
-                                display: block;
+                                display: block !important;
                                 opacity: 0;
-                                top: 19px;
+                                top: -23px;
                                 @include single-transition(opacity 100ms ease-in-out);
 
                                 &.fade-in {
@@ -726,6 +726,7 @@ object, embed, video, iframe {
                                 text-transform: uppercase;
 
                                 &.active {
+                                    cursor: default;
                                     font-weight: 700;
                                 }
                             }
@@ -1010,9 +1011,8 @@ object, embed, video, iframe {
                                             }
 
                                             &.favorite {
-                                                background: url(../../img/divider.png) repeat-y top right;
                                                 height: 20px;
-                                                padding: 0 7px 0 1px;
+                                                padding: 0 1.5px 0 1px;
                                                 width: 24px;
                                             }
 
@@ -1025,8 +1025,9 @@ object, embed, video, iframe {
                                             }
 
                                             &.follow {
+                                                background: url(../../img/divider.png) repeat-y top left;
                                                 height: 20px;
-                                                padding-left: 2px;
+                                                padding-left: 7px;
                                                 width: 14px;
                                             }
 
@@ -1039,6 +1040,7 @@ object, embed, video, iframe {
 
                                     ul.replies {
                                         background: rgba(98, 98, 98, 0.34);
+                                        border-top: 1px solid rgba(104, 104, 104, 0.90);
 
                                         li {
                                             border-bottom: 1px solid rgba(104, 104, 104, 0.90);
@@ -1077,7 +1079,6 @@ object, embed, video, iframe {
                                                     }
 
                                                     &.follow {
-                                                        background: url(../../img/divider.png) repeat-y top left;
                                                         height: 16px;
                                                         margin-left: 5px;
                                                         padding-left: 8px;

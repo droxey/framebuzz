@@ -29,7 +29,7 @@ angular.module('framebuzz.directives', [])
                     safeApply($rootScope);
 
                     $('.mejs-volume-button').addClass('mejs-fade-in');
-                    $('.mejs-time-loaded').remove();
+                    $('.mejs-time-loaded').hide();
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
 
