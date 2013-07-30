@@ -301,14 +301,16 @@ object, embed, video, iframe {
             h1.video-title {
                 color: rgba(255, 255, 255, 0.75);
                 font-family: 'proxima-nova';
+                font-size: 16px;
                 font-weight: 500;
-                left: 132px;
+                left: 91px;
+                line-height: 45px;
                 opacity: 0;
-                padding-top: 16px;
+                padding-top: 0;
                 position: absolute;
-                text-align: center;
+                text-align: left;
                 top: 0;
-                width: 385px;
+                width: 306px;
                 z-index: 10;
                 @include single-transition(opacity .25s ease-in-out);
             }
@@ -548,7 +550,7 @@ object, embed, video, iframe {
                         }
 
                         img.img-circle {
-                            @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                            @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.36), 0px 0px 35px 0px rgba(0, 0, 0, 0.33) inset);
                             background: black;
                             cursor: pointer;
                             display: inline-block;
@@ -738,11 +740,14 @@ object, embed, video, iframe {
                         width: 51px;
 
                         img.img-circle {
-                            @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.56), 0 0 1px 0 rgba(0, 0, 0, 0.53) inset);
+                            @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
                             background: black;
                             float: left;
                             height: 33px;
                             margin-right: 5px;
+                            position: relative;
+                            left: -2px;
+                            top: 1px;
                             width: 33px;
                         }
 
@@ -811,7 +816,7 @@ object, embed, video, iframe {
                                 z-index: 1;
 
                                 img.active-thread {
-                                    @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                                    @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.36), 0px 0px 35px 0px rgba(0, 0, 0, 0.33) inset);
                                     display: block;
                                     float: left;
                                     height: 33px;
@@ -889,7 +894,7 @@ object, embed, video, iframe {
                                                     width: 20px;
 
                                                     img.img-circle {
-                                                        @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.56), 0 0 1px 0 rgba(0, 0, 0, 0.53) inset);
+                                                        @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
                                                         background: black;
                                                         height: 20px;
                                                         width: 20px;
@@ -935,7 +940,7 @@ object, embed, video, iframe {
                                     }
 
                                     img.img-circle {
-                                        @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                                        @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.36), 0px 0px 35px 0px rgba(0, 0, 0, 0.33) inset);
                                         background: black;
                                         cursor: pointer;
                                         display: inline-block;
@@ -1097,7 +1102,7 @@ object, embed, video, iframe {
                                         border-bottom: 1px solid rgba(104, 104, 104, .90);
 
                                         img.img-circle {
-                                            @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                                            @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.36), 0px 0px 35px 0px rgba(0, 0, 0, 0.33) inset);
                                             background: black;
                                             cursor: pointer;
                                             display: inline-block;
@@ -1134,7 +1139,7 @@ object, embed, video, iframe {
                             margin-bottom: 17px;
 
                             img.img-circle {
-                                @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.56), 0px 0px 35px 0px rgba(0, 0, 0, 0.53) inset);
+                                @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.36), 0px 0px 35px 0px rgba(0, 0, 0, 0.33) inset);
                                 background: black;
                                 display: block;
                                 float: left;
@@ -1271,7 +1276,7 @@ object, embed, video, iframe {
                                     }
 
                                     img.img-circle {
-                                        @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.56), 0 0 1px 0 rgba(0, 0, 0, 0.53) inset);
+                                        @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
                                         float: left;
                                         display: block;
                                         height: 33px;
