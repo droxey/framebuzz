@@ -29,7 +29,9 @@ angular.module('framebuzz.directives', [])
                     safeApply($rootScope);
 
                     $('.mejs-volume-button').addClass('mejs-fade-in');
-                    $('.mejs-time-total span').not('.mejs-time-current').remove();
+                    $('.mejs-time-loaded').remove();
+                    $('.mejs-time-handle').remove();
+                    $('.mejs-time-buffering').remove();
 
                     $('.mejs-video').mouseenter(function() {
                         $(this).addClass('show-controls');

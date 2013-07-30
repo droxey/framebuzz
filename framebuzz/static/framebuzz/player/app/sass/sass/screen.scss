@@ -98,19 +98,18 @@ object, embed, video, iframe {
                     width: 100%;
 
                     div.mejs-time-rail {
-                        bottom: -27.5px;
+                        bottom: -17.5px;
                         float: none;
+                        height: 6px;
                         padding-top: 0;
-                        position: relative;
+                        position: absolute;
                         width: 640px;
                         z-index: 10;
-                        height: 19px;
-                        position: absolute;
 
                         span.mejs-time-total {
-                            @include background-image(linear-gradient(rgba(30, 30, 30, 0.3), rgba(60, 60, 60, 0.1))); 
-                            @include border-radius(2px, 2px);
-                            height: 19px;
+                            @include background-image(linear-gradient(rgba(170, 172, 173, 0.3), rgba(170, 172, 173, 0.7))); 
+                            @include border-radius(1px, 1px);
+                            height: 6px;
                             margin: 0 8px;
                             width: 624px;
 
@@ -123,7 +122,7 @@ object, embed, video, iframe {
                                 background: -o-linear-gradient(top, rgba(200, 200, 200, 0.5), rgba(51,51,51,0.7));
                                 background: -ms-linear-gradient(top, rgba(200, 200, 200, 0.5), rgba(51,51,51,0.7));
                                 background: linear-gradient(rgba(200, 200, 200, 0.5), rgba(51,51,51,0.7));
-                                height: 12px;
+                                height: 6px;
                             }                            
                         }
                     }
@@ -319,20 +318,20 @@ object, embed, video, iframe {
                 background: #323232;
                 height: 20px;
                 margin: 0 8px;
-                padding: 4px 0 5px;
+                padding: 7px 0 5px;
                 position: relative;
                 top: 0;
                 width: 624px;
                 z-index: 0;
                 
                 tbody {
-                    line-height: 11px;
+                    line-height: 6px;
                 
                     tr {
                         td {
                             cursor: pointer;
                             display: inline-block;
-                            height: 11px;
+                            height: 6px;
                             margin-right: 1px;
                             width: 20.55px;
                             @include single-transition(background-color .25 ease-in);
@@ -347,13 +346,13 @@ object, embed, video, iframe {
                             &.rank-1 { background-color: #497083; }
                             
                             &:first-child {
-                                @include border-top-left-radius(2px);
-                                @include border-bottom-left-radius(2px);
+                                @include border-top-left-radius(1px);
+                                @include border-bottom-left-radius(1px);
                             }
 
                             &:last-child { 
-                                @include border-top-right-radius(2px);
-                                @include border-bottom-right-radius(2px);
+                                @include border-top-right-radius(1px);
+                                @include border-bottom-right-radius(1px);
                                 margin-right: 0; 
                             }
                         }
