@@ -55,7 +55,7 @@ object, embed, video, iframe {
 }
 
 #player-container {
-    height: 443px;
+    height: 440px;
     overflow: hidden;
     width: 640px; 
 
@@ -251,7 +251,7 @@ object, embed, video, iframe {
                         }
 
                         &.mejs-playpause-button {
-                            bottom: -58px;
+                            bottom: -57px;
                             left: 7px;
                             position: absolute;
                             width: 25px;
@@ -652,7 +652,7 @@ object, embed, video, iframe {
                         background: rgba(61, 61, 61, 0.15);
                         border-bottom: 1px solid rgba(61, 61, 61, 0.35);
                         cursor: pointer;
-                        @include single-transition(background-color 100ms linear);
+                        @include single-transition(background-color 100ms ease-in-out);
 
                         &:last-child {
                             @include border-bottom-left-radius(3px);
@@ -661,7 +661,7 @@ object, embed, video, iframe {
 
                         &:hover {
                             background-color: rgba(0, 0, 0, .32);
-                            @include single-transition(background-color 100ms linear);
+                            @include single-transition(background-color 100ms ease-in-out);
                         }
 
                         span {
