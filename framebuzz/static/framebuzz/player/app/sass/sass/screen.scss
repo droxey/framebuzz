@@ -98,7 +98,7 @@ object, embed, video, iframe {
                     width: 100%;
 
                     div.mejs-time-rail {
-                        bottom: -17.5px;
+                        bottom: -16.5px;
                         float: none;
                         height: 6px;
                         padding-top: 0;
@@ -123,6 +123,25 @@ object, embed, video, iframe {
                                 background: -ms-linear-gradient(top, rgba(200, 200, 200, 0.5), rgba(51,51,51,0.7));
                                 background: linear-gradient(rgba(200, 200, 200, 0.5), rgba(51,51,51,0.7));
                                 height: 7px;
+                            }
+
+                            .mejs-time-float {
+                                background: rgba(0, 0, 0, 0.9);
+                                border: 1px solid #000000;
+                                color: rgba(255, 255, 255, 0.75);
+                                display: block;
+                                opacity: 0;
+
+                                .mejs-time-float-current {
+                                    font-family: 'proxima-nova';
+                                    font-size: 12px;
+                                    font-weight: 300;
+                                    letter-spacing: -0.1px;
+                                }
+
+                                .mejs-time-float-corner { 
+                                    border-color: black transparent transparent;
+                                }
                             }                            
                         }
                     }
@@ -316,9 +335,9 @@ object, embed, video, iframe {
 
             table#heatmap {
                 background: #323232;
-                height: 20px;
+                height: 18px;
                 margin: 0 8px;
-                padding: 7px 0 5px;
+                padding: 5.5px 0;
                 position: relative;
                 top: 0;
                 width: 624px;
