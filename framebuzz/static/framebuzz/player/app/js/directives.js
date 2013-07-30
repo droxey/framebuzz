@@ -90,12 +90,16 @@ angular.module('framebuzz.directives', [])
     .directive('scrollbar', ['$rootScope', 'broadcaster', function($rootScope, broadcaster) {
         return function(scope, element, attrs) {
             if (attrs.scrollbar == 'true') {
-                $(element).perfectScrollbar();
+                $(element).perfectScrollbar({
+                    wheelSpeed: 20
+                });
             }
 
             scope.$on('$viewContentLoaded', function() {
                 $(element).perfectScrollbar('destroy');
-                $(element).perfectScrollbar();
+                $(element).perfectScrollbar({
+                    wheelSpeed: 20
+                });
             });
 
             scope.$on('player_timeupdate', function() { 

@@ -131,6 +131,13 @@ object, embed, video, iframe {
                                 color: rgba(255, 255, 255, 0.75);
                                 display: block;
                                 opacity: 0;
+                                top: 19px;
+                                @include single-transition(opacity 100ms ease-in-out);
+
+                                &.fade-in {
+                                    opacity: 1;
+                                    @include single-transition(opacity 100ms ease-in-out);
+                                }
 
                                 .mejs-time-float-current {
                                     font-family: 'proxima-nova';

@@ -3208,7 +3208,7 @@ if (typeof jQuery != 'undefined') {
 						});
 						t.globalBind('mouseup.dur', function (e) {
 							mouseIsDown = false;
-							timefloat.hide();
+							timefloat.addClass('fade-in');
 							t.globalUnbind('.dur');
 						});
 						return false;
@@ -3220,14 +3220,14 @@ if (typeof jQuery != 'undefined') {
 						handleMouseMove(e);
 					});
 					if (!mejs.MediaFeatures.hasTouch) {
-						timefloat.show();
+						timefloat.removeClass('fade-in');
 					}
 				})
 				.bind('mouseleave',function(e) {
 					mouseIsOver = false;
 					if (!mouseIsDown) {
 						t.globalUnbind('.dur');
-						timefloat.hide();
+						timefloat.removeClass('fade-in');
 					}
 				});
 
