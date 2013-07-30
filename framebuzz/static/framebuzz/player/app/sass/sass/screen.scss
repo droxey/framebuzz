@@ -419,12 +419,18 @@ object, embed, video, iframe {
                         height: 20px;
                         float: left;
                         font-family: 'proxima-nova';
+                        font-style: normal;
                         width: 495px;
 
                         &.maxlength-full {
                             border: 1px solid red;
                         }
                     }
+
+                    #id_comment::-webkit-input-placeholder { font-style: italic; }
+                    #id_comment::-moz-placeholder { font-style: italic; } /* firefox 19+ */
+                    #id_comment:-ms-input-placeholder { font-style: italic; } /* ie */
+                    #id_comment:-moz-placeholder { font-style: italic; }
 
                     #signup-or-login-prompt {
                         @include border-radius(3px, 3px);
@@ -1071,7 +1077,7 @@ object, embed, video, iframe {
                                                 height: 26px;
                                                 font-size: 12.28px;
                                                 font-weight: 300;
-                                                font-style: italic;
+                                                font-style: normal;
                                                 margin-bottom: 0;
                                                 width: 212px;
 
@@ -1079,6 +1085,11 @@ object, embed, video, iframe {
                                                     border: 1px solid rgba(255, 0, 0, 0.6);
                                                 }
                                             }
+
+                                            #id_reply::-webkit-input-placeholder { font-style: italic; }
+                                            #id_reply::-moz-placeholder { font-style: italic; } /* firefox 19+ */
+                                            #id_reply:-ms-input-placeholder { font-style: italic; } /* ie */
+                                            #id_reply:-moz-placeholder { font-style: italic; }
                                         }
                                     }
 
