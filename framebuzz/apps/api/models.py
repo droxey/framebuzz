@@ -96,43 +96,46 @@ class Video(models.Model):
         return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0" height="440" width="640"></iframe>' % full_url)
 
     def heatmap(self):
-        comments = MPTTComment.objects.filter(object_pk=self.id).order_by('time')
-        seconds_per_block = float(self.duration) / float(TIMELINE_BLOCKS)
         rank_per_block = list()
+        
+        if self.id:
+            comments = MPTTComment.objects.filter(object_pk=self.id).order_by('time')
+            seconds_per_block = float(self.duration) / float(TIMELINE_BLOCKS)
+            
 
-        rank_1 = (float(comments.count()) + SIGNIFICANCE_FACTOR) / 3.0
-        rank_2 = rank_1 - (rank_1 / 7.0)
-        rank_3 = rank_2 - (rank_1 / 7.0)
-        rank_4 = rank_3 - (rank_1 / 7.0)
-        rank_5 = rank_4 - (rank_1 / 7.0)
-        rank_6 = rank_5 - (rank_1 / 7.0)
-        rank_7 = rank_6 - (rank_1 / 7.0)
+            rank_1 = (float(comments.count()) + SIGNIFICANCE_FACTOR) / 3.0
+            rank_2 = rank_1 - (rank_1 / 7.0)
+            rank_3 = rank_2 - (rank_1 / 7.0)
+            rank_4 = rank_3 - (rank_1 / 7.0)
+            rank_5 = rank_4 - (rank_1 / 7.0)
+            rank_6 = rank_5 - (rank_1 / 7.0)
+            rank_7 = rank_6 - (rank_1 / 7.0)
 
-        for block in range(0, TIMELINE_BLOCKS):
-            start = float(block) * seconds_per_block
-            end = start + seconds_per_block
-            comments_in_block = comments.filter(time__gte=start, time__lt=end)
-            finalCount = comments_in_block.count()
+            for block in range(0, TIMELINE_BLOCKS):
+                start = float(block) * seconds_per_block
+                end = start + seconds_per_block
+                comments_in_block = comments.filter(time__gte=start, time__lt=end)
+                finalCount = comments_in_block.count()
 
-            if finalCount == 0:
-                class_name = 'rank-8'
-            elif finalCount > rank_1:
-                class_name = 'rank-1'
-            else:
-                if rank_2 > finalCount >= rank_3:
-                    class_name = 'rank-2'
-                elif rank_3 > finalCount >= rank_4:
-                    class_name = 'rank-3'
-                elif rank_4 > finalCount >= rank_5:
-                    class_name = 'rank-4'
-                elif rank_5 > finalCount >= rank_6:
-                    class_name = 'rank-5'
-                elif rank_6 > finalCount >= rank_7:
-                    class_name = 'rank-6'
+                if finalCount == 0:
+                    class_name = 'rank-8'
+                elif finalCount > rank_1:
+                    class_name = 'rank-1'
                 else:
-                    class_name = 'rank-7'
+                    if rank_2 > finalCount >= rank_3:
+                        class_name = 'rank-2'
+                    elif rank_3 > finalCount >= rank_4:
+                        class_name = 'rank-3'
+                    elif rank_4 > finalCount >= rank_5:
+                        class_name = 'rank-4'
+                    elif rank_5 > finalCount >= rank_6:
+                        class_name = 'rank-5'
+                    elif rank_6 > finalCount >= rank_7:
+                        class_name = 'rank-6'
+                    else:
+                        class_name = 'rank-7'
 
-            rank_per_block.append({'block': block, 'className': class_name})
+                rank_per_block.append({'block': block, 'className': class_name})
         return rank_per_block   
 
     @property

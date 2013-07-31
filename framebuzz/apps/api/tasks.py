@@ -102,12 +102,15 @@ def initialize_video_player(context):
 
     For each bucket, it's assigned a rank number based upon the values C1, C2, C3 etc. Each rank number maps to a background color for the bucket.
     '''
+    logger = initialize_video_player.get_logger()
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
     user = context.get('user', None)
 
+    logger.info(video_id)
+
     # Get Video.
-    video, created = get_or_create_video(video_id)     
+    video = Video.objects.get(video_id=video_id) 
     threads = MPTTComment.objects.filter(object_pk=video.id, is_removed=False, parent=None).order_by('-time')
     videoSerializer = VideoSerializer(video)
     videoSerialized = JSONRenderer().render(videoSerializer.data)

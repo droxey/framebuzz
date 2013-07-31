@@ -72,7 +72,7 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                 self.video_channel = channel
                 self.listen()
 
-                video_id = self.video_channel.lstrip('/framebuzz/video/').rstrip('/')
+                video_id = self.video_channel.split('/')[3]
                 task_chain = tasks.get_user_by_session_key.s(
                         session_key=self.session_key, 
                         extra_context={
