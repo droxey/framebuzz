@@ -68,6 +68,8 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
         if event_type and channel:
             task_chain = None
             
+            
+
             if event_type == 'FB_INITIALIZE_VIDEO':
                 self.video_channel = channel
                 self.listen()
@@ -82,7 +84,7 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                     | tasks.initialize_video_player.s() \
                     | tasks.message_outbound.s()
             else:
-                video_id = self.video_channel.lstrip('/framebuzz/video/').rstrip('/')
+                video_id = self.video_channel.split('/')[3]
 
                 if event_type == 'FB_POST_NEW_COMMENT':
                     task_chain = tasks.get_user_by_session_key.s(
