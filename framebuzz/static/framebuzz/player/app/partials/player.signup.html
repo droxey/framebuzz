@@ -10,17 +10,17 @@
     <div id="signup" class="registration">
         <h1>Sign Up</h1>
         <p>Already have an account? Please <a href="#/player/panel/login" title="Sign In to FrameBuzz">sign in</a>.</p>
-        <form id="signup-form" name="signup" method="POST" data-ng-class="{ 'submitted': isSubmitted }" novalidate="" data-ng-submit="signup()">
+        <form id="signup-form" name="signupForm" method="POST" data-ng-class="{ 'submitted': isSubmitted }" novalidate="" data-ng-submit="signup()">
             <p><input id="id_login" data-ng-required="true" maxlength="30" name="login" placeholder="Username" type="text" data-ng-model="signupModel.username"></p>
             <p>
                 <input id="id_password" data-ng-required="true" data-ng-minlength="8" name="password" placeholder="Password" type="password" data-ng-model="signupModel.password">
-                <span class="ui-tooltip" data-ng-show="signup.password.$error.minlength" data-tooltip-html-unsafe="Password must be<br>at least 8 characters." data-tooltip-placement="left">
+                <span class="ui-tooltip" data-ng-show="signupForm.password.$error.minlength" data-tooltip-html-unsafe="Password must be<br>at least 8 characters." data-tooltip-placement="left">
                     <i class="icon icon-exclamation-sign"></i>
                 </span>
             </p>
             <p>
-                <input id="id_password_confirm" data-ng-required="true" data-ng-minlength="8" name="confirmPassword" placeholder="Confirm Password" type="password" data-ng-model="signupModel.confirmPassword" repeat-password="password">
-                <span class="ui-tooltip" data-ng-show="signup.confirmPassword.$error.repeat" data-tooltip="Passwords must match!" data-tooltip-placement="left">
+                <input id="id_password_confirm" data-ng-required="true" data-ng-minlength="8" name="confirmPassword" placeholder="Confirm Password" type="password" data-ng-model="signupModel.confirmPassword" data-repeat-password="password">
+                <span class="ui-tooltip" data-ng-show="signupForm.confirmPassword.$error.repeat" data-tooltip="Passwords must match!" data-tooltip-placement="left">
                     <i class="icon icon-exclamation-sign"></i>
                 </span>
             </p>

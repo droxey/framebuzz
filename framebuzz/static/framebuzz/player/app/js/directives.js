@@ -32,7 +32,7 @@ angular.module('framebuzz.directives', [])
                     $('.mejs-time-loaded').hide();
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
-
+                    
                     $('.mejs-video').mouseenter(function() {
                         $(this).addClass('show-controls');
                         $(this).parent().addClass('show-title');

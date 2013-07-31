@@ -103,6 +103,8 @@ angular.module('framebuzz.controllers', []).
                         'email': $scope.signupModel.email
                     };
 
+                    console.log(messageData);
+
                     $http({
                         method: 'POST', 
                         url: SOCK.signup_url, 

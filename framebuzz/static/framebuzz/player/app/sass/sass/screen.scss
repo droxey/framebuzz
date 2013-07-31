@@ -643,32 +643,6 @@ object, embed, video, iframe {
             margin-left: 387px;
             height: auto;
             width: 237px;
-
-            #toggle-collapse {
-                background-color: #3d3d3d;
-                cursor: pointer;
-                display: block;
-                height: 23px;
-                position: absolute;
-                top: 3px;
-                right: 212px;
-                width: 23px;
-                z-index: 120;
-                
-
-                img {
-                    margin-left: 5px;
-                    margin-top: 6px;
-                }
-
-                &:hover {
-                    background-color: #828282;
-                }
-
-                &.collapsed {
-                    right: -26px;
-                }
-            }
             
             div.scrollable {
                 background: transparent;
@@ -721,18 +695,41 @@ object, embed, video, iframe {
                         background-color: transparent;
                         border-bottom: medium none;
                         box-shadow: none;
-                        @include single-transition(background-color 50ms ease-in-out);
+                        opacity: 0.5;
+                        transition: none;
 
                         img.img-circle {
                             @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
                             float: right;
-                            opacity: 0.75;
                             margin-right: 5px;
+                        }
+
+                        span.collapsed-time {
+                            cursor: pointer;
+                            opacity: 0.5;
                             @include single-transition(opacity 50ms ease-in-out);
 
-                            &:hover {
-                                opacity: 0.95;
+                            em {
+                                color: white;
+                                font-family: 'proxima-nova';
+                                font-weight: 700;
+                                font-size: 12px;
+                                text-shadow: 0px 1px 1px black;
+                                opacity: 0;
+                                padding: 0 7px;
+                                position: relative;
+                                top: -21px;
+                                @include single-transition(opacity 50ms ease-in-out)
+                            }
+
+                            &.hover {
+                                opacity: 0.75;
                                 @include single-transition(opacity 50ms ease-in-out);
+
+                                em {
+                                    @include single-transition(opacity 50ms ease-in-out);
+                                    opacity: 1;
+                                }
                             }
                         }
                     }
