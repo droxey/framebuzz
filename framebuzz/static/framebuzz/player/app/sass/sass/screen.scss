@@ -654,16 +654,19 @@ object, embed, video, iframe {
                 right: 212px;
                 width: 23px;
                 z-index: 120;
-                @include single-transition(right 25ms linear);
+                
 
                 img {
                     margin-left: 5px;
-                    margin-top: 5px;
+                    margin-top: 6px;
+                }
+
+                &:hover {
+                    background-color: #828282;
                 }
 
                 &.collapsed {
                     right: -26px;
-                    @include single-transition(right 25ms linear);
                 }
             }
             
@@ -1510,15 +1513,32 @@ object, embed, video, iframe {
                             #id_login, #id_password, #id_password_confirm, #id_email {
                                 @include border-radius(3px, 3px);
                                 background: rgba(0, 0, 0, .24);
-                                border: 0 none;
+                                border: 1px solid transparent;
                                 color: rgba(176, 176, 176, 0.56);
                                 font-family: 'proxima-nova';
                                 font-size: 14.51px;
                                 font-weight: 300;
                                 height: 27px;
                                 width: 200px;
+
+                                &.ng-pristine { border: 1px solid transparent; }
+                                &.ng-dirty.ng-valid { border: 1px solid green; }
+                                &.ng-dirty.ng-invalid { border: 1px solid red; }
                             }
                             
+                            .ui-tooltip {
+                                cursor: help;
+                                margin-top: -37px;
+                                opacity: 0.5;
+                                position: absolute;
+                                right: 20px;
+                                z-index: 2;
+
+                                i.icon {
+                                    background-image: url(../../img/glyphicons-halflings-white.png);
+                                }
+                            }
+
                             a {
                                 color: rgba(255, 255, 255, 0.44);
                                 display: block;
@@ -1564,6 +1584,16 @@ object, embed, video, iframe {
                                     display: inline;
                                     float: none; 
                                 } 
+                            }
+                        }
+
+                        &.submitted {
+                            p {
+                                #id_login, #id_password, #id_password_confirm, #id_email {
+                                    &.ng-invalid {
+                                        border: 1px solid red;
+                                    }
+                                }
                             }
                         }
                     }

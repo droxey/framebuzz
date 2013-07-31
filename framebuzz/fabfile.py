@@ -51,6 +51,8 @@ env.gunicorn_port = conf.get("GUNICORN_PORT", 8000)
 env.locale = conf.get("LOCALE", "en_US.UTF-8")
 env.host_string = '%s:%s' % (env.hosts[0], '22')
 
+env.static_cache_path = '%s/framebuzz/static/CACHE' % env.proj_path
+
 
 ##################
 # Template setup #
@@ -424,6 +426,11 @@ def restart():
     """
     sudo("supervisorctl restart all")
 
+@task
+@log_call
+def clear_cache():
+    if exists(env.static_cache_path):
+        sudo("rm -rf %s" % env.static_cache_path)
 
 @task
 @log_call
@@ -464,6 +471,7 @@ def deploy():
         manage("migrate --noinput")
         manage("loaddata %s/framebuzz/fixtures/social_accounts.json" % env.proj_path)
 
+    clear_cache()
     restart()
     return True
 
