@@ -1,9 +1,5 @@
-<a id="toggle-collapse" class="img-circle" data-ng-model="isCollapsed" data-ng-init="isCollapsed = false" data-ng-click="isCollapsed = !isCollapsed" data-ng-class="{ 'collapsed': isCollapsed }">
-    <img data-ng-src="{{ rootPath }}img/icon-expand-contract.png" alt="" height="11" width="13" />
-  </a>
 <div id="panel-scroll" class="scrollable" data-scrollbar="true" data-ng-class="{ 'collapsed clearfix': isCollapsed }">
-  </a>
-  <ul class="comment-stream" >
+  <ul class="comment-stream">
     <li data-ng-repeat="thread in videoInstance.threads" data-ng-show="thread.is_visible && thread.time < currentTime" data-ng-animate="{show: 'animate-comment-show'}">
       <div class="thread" data-ng-click="setSelectedThread(thread)" data-ng-hide="isCollapsed">
         <div class="header">

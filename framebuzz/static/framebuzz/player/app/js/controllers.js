@@ -15,6 +15,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.newReply = {};
                 $scope.selectedThread = null;
                 $scope.clearFocus = false;
+                $scope.isCollapsed = false;
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
@@ -367,6 +368,16 @@ angular.module('framebuzz.controllers', []).
                     else {
                         notificationFactory.error('Please log in first!');
                     } 
+                });
+
+                $scope.$on('player_muteconvo', function() {
+                    $scope.isCollapsed = true;
+                    safeApply($scope);
+                });
+
+                $scope.$on('player_unmuteconvo', function() {
+                    $scope.isCollapsed = false;
+                    safeApply($scope);
                 });
 
                 $scope.$on('player_playing', function() {

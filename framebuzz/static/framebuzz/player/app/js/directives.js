@@ -36,10 +36,6 @@ angular.module('framebuzz.directives', [])
                     $('.mejs-video').mouseenter(function() {
                         $(this).addClass('show-controls');
                         $(this).parent().addClass('show-title');
-
-                        $('#buzz-layer > div.panel > div.scrollable').mouseenter(function() {
-                            $('.mejs-video').trigger('mouseleave');
-                        });
                     });
                     
                     $('.mejs-video').mouseleave(function() {
@@ -69,11 +65,11 @@ angular.module('framebuzz.directives', [])
                     }, false);
 
                     media.addEventListener('player_muteconvo', function(e) {
-                        window.location.hash = '#/player/panel';
+                        broadcaster.prepForBroadcast({ broadcastType: 'player_muteconvo' });
                     }, false);
 
                     media.addEventListener('player_unmuteconvo', function(e) {
-                        window.location.hash = '#/player/panel/blended';
+                        broadcaster.prepForBroadcast({ broadcastType: 'player_unmuteconvo' });
                     }, false);
 
                     media.addEventListener('player_share', function(e) {
