@@ -637,13 +637,37 @@ object, embed, video, iframe {
         }
 
         #blended-view {
-            margin-left: 400px;
+            margin-left: 387px;
             height: auto;
             width: 237px;
+
+            #toggle-collapse {
+                background-color: #3d3d3d;
+                cursor: pointer;
+                display: block;
+                height: 23px;
+                position: absolute;
+                top: 3px;
+                right: 212px;
+                width: 23px;
+                z-index: 120;
+                @include single-transition(right 25ms linear);
+
+                img {
+                    margin-left: 5px;
+                    margin-top: 5px;
+                }
+
+                &.collapsed {
+                    right: -26px;
+                    @include single-transition(right 25ms linear);
+                }
+            }
             
             div.scrollable {
                 background: transparent;
                 box-shadow: none;
+                margin-left: 13px;
                 height: 385px;
                 width: 237px;
 
@@ -679,6 +703,31 @@ object, embed, video, iframe {
                             -moz-animation-duration: 0.75s;
                             -o-animation-duration: 0.75s;
                             animation-duration: 0.75s;
+                        }
+                    }
+                }
+
+                &.collapsed {
+                    margin-left: 200px;
+                    width: 50px;
+
+                    ul.comment-stream li {
+                        background-color: transparent;
+                        border-bottom: medium none;
+                        box-shadow: none;
+                        @include single-transition(background-color 50ms ease-in-out);
+
+                        img.img-circle {
+                            @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
+                            float: right;
+                            opacity: 0.75;
+                            margin-right: 5px;
+                            @include single-transition(opacity 50ms ease-in-out);
+
+                            &:hover {
+                                opacity: 0.95;
+                                @include single-transition(opacity 50ms ease-in-out);
+                            }
                         }
                     }
                 }
