@@ -706,7 +706,9 @@ object, embed, video, iframe {
 
                         span.collapsed-time {
                             cursor: pointer;
+                            display: block;
                             opacity: 0.5;
+                            height: 58px;
                             @include single-transition(opacity 50ms ease-in-out);
 
                             em {
@@ -718,11 +720,12 @@ object, embed, video, iframe {
                                 opacity: 0;
                                 padding: 0 7px;
                                 position: relative;
-                                top: -21px;
+                                top: 35px;
+                                z-index: 2;
                                 @include single-transition(opacity 50ms ease-in-out)
                             }
 
-                            &.hover {
+                            &:hover {
                                 opacity: 0.75;
                                 @include single-transition(opacity 50ms ease-in-out);
 
