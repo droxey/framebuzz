@@ -107,22 +107,15 @@ object, embed, video, iframe {
                         z-index: 10;
 
                         span.mejs-time-total {
-                            @include background-image(linear-gradient(rgba(170, 172, 173, 0.3), rgba(170, 172, 173, 0.7))); 
                             @include border-radius(1px, 1px);
+                            background: none;
                             height: 6px;
                             margin: 0 8px;
                             width: 624px;
 
                             span.mejs-time-current {
-                                background: #555;
-                                background: rgba(85,85,85,0.6);
-                                background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(200, 200, 200, 0.5)), to(rgba(51,51,51,0.7)));
-                                background: -webkit-linear-gradient(top, rgba(200, 200, 200, 0.5) rgba(51,51,51,0.7));
-                                background: -moz-linear-gradient(top, rgba(200, 200, 200, 0.5) rgba(51,51,51,0.7));
-                                background: -o-linear-gradient(top, rgba(200, 200, 200, 0.5), rgba(51,51,51,0.7));
-                                background: -ms-linear-gradient(top, rgba(200, 200, 200, 0.5), rgba(51,51,51,0.7));
-                                background: linear-gradient(rgba(200, 200, 200, 0.5), rgba(51,51,51,0.7));
-                                height: 7px;
+                                @include background-image(linear-gradient(rgba(75, 185, 222, 0.85), rgba(50, 104, 151, 0.85))); 
+                                height: 6px;
                             }
 
                             .mejs-time-float {
@@ -355,6 +348,7 @@ object, embed, video, iframe {
                 
                     tr {
                         td {
+                            @include single-box-shadow(rgba(0, 0, 0, 0.3), 0px, -1px, 1px, 0px, inset);
                             cursor: pointer;
                             display: inline-block;
                             height: 6px;
@@ -362,14 +356,14 @@ object, embed, video, iframe {
                             width: 20.55px;
                             @include single-transition(background-color .25 ease-in);
 
-                            &.rank-8 { background-color: #9ee815; }
-                            &.rank-7 { background-color: #a8c915; }
-                            &.rank-6 { background-color: #b3ab15; }
-                            &.rank-5 { background-color: #bd8d15; }
-                            &.rank-4 { background-color: #c86f15; }
-                            &.rank-3 { background-color: #d25115; }
-                            &.rank-2 { background-color: #dd3315; }
-                            &.rank-1 { background-color: #e81515; }
+                            &.rank-8 { background-color: #EBF5FF; }
+                            &.rank-7 { background-color: #C2E0FF; }
+                            &.rank-6 { background-color: #99CCFF; }
+                            &.rank-5 { background-color: #70B8FF; }
+                            &.rank-4 { background-color: #47A3FF; }
+                            &.rank-3 { background-color: #1F8FFF; }
+                            &.rank-2 { background-color: #007AF5; }
+                            &.rank-1 { background-color: #0070E0; }
                             
                             &:first-child {
                                 @include border-top-left-radius(1px);
