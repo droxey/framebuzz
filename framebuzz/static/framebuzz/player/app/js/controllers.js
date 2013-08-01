@@ -207,6 +207,8 @@ angular.module('framebuzz.controllers', []).
                         $scope.selectedThreadIndex = index;
                         $scope.selectedThread = thread;
                         safeApply($scope);
+
+                        $scope.player.pause();
                     }
                 };
 
@@ -414,14 +416,10 @@ angular.module('framebuzz.controllers', []).
 
                 $scope.$on('player_paused', function() {
                     if ($state.is('player.blendedView')) {
-                        console.log('state is blended');
-
                         if ($scope.videoInstance.threads.length > 0) {
                             $scope.setSelectedThread();
                         }
                         else {
-                            console.log('transiton');
-
                             $state.transitionTo('player.activeView.thread',  { threadId: 0 });
                         }
                     }
@@ -431,7 +429,6 @@ angular.module('framebuzz.controllers', []).
                     safeApply($scope);
 
                     if ($scope.videoInstance.is_authenticated) {
-                        console.log('sending data');
                         socket.send_json({
                             eventType: eventTypes.playerAction, 
                             channel: SOCK.user_channel, 
@@ -497,6 +494,7 @@ angular.module('framebuzz.controllers', []).
                         $scope.userProfile = jsonData.data;
                         safeApply($scope);
 
+                        $scope.player.pause();
                         $state.transitionTo('player.userProfileView', { username: $scope.userProfile.user.username });
                     }
                     else if (jsonData.eventType == eventTypes.addToLibrary) {
