@@ -89,6 +89,7 @@ angular.module('framebuzz.controllers', []).
                             safeApply($scope);
 
                             $state.transitionTo('player.blendedView');
+                            broadcaster.prepForBroadcast({ broadcastType: 'reconnect' });
                         }
                     })
                     .error(function(data, status, headers, config) {
@@ -319,14 +320,10 @@ angular.module('framebuzz.controllers', []).
                     var changed = false;
                     
                     if (!threadInCollection(newThread)) {
-                        console.log(newThread.hidden_by_id);
-
-                        if (newThread.hidden_by_id !== undefined) {
+                        if (newThread.hidden_by_id !== undefined && !newThread.is_visible) {
                             angular.forEach($scope.videoInstance.threads, function(thread, key) {    
-                                if (thread.id == newThread.hidden_by_id && !newThread.is_visible) {
-                                    console.log(thread);
+                                if (thread.id == newThread.hidden_by_id) {
                                     thread.has_hidden_siblings = true;
-                                    console.log(thread);
                                 }
                             });
                         }

@@ -4,7 +4,22 @@
 
 angular.module('framebuzz.services', [])
     .value('version', '0.1')
-    .service('socket', function($rootScope) {
+    .service('broadcaster', function($rootScope) {
+        var broadcaster = {};
+        broadcaster.message = '';
+
+        broadcaster.prepForBroadcast = function(msg) {
+            this.message = msg;
+            this.broadcastItem();
+        };
+
+        broadcaster.broadcastItem = function() {
+            $rootScope.$broadcast(this.message.broadcastType);
+        };
+
+        return broadcaster;
+    })
+    .service('socket', ['$rootScope', 'broadcaster', function($rootScope, broadcaster) {
         var createSocket = function () {
             var reconnect = true;
             var socket = new SockJS('http://' + SOCK.host + ':' + SOCK.port + '/' + SOCK.channel, '', {
@@ -50,6 +65,10 @@ angular.module('framebuzz.services', [])
  
         self.socket_handlers = {};
         var socket = createSocket();
+
+        $rootScope.$on('reconnect', function() {
+            socket.close();
+        });
  
         var methods = { 
             onopen: function(callback) {
@@ -74,22 +93,7 @@ angular.module('framebuzz.services', [])
         };
 
         return methods;
-    })
-    .service('broadcaster', function($rootScope) {
-        var broadcaster = {};
-        broadcaster.message = '';
-
-        broadcaster.prepForBroadcast = function(msg) {
-            this.message = msg;
-            this.broadcastItem();
-        };
-
-        broadcaster.broadcastItem = function() {
-            $rootScope.$broadcast(this.message.broadcastType);
-        };
-
-        return broadcaster;
-    })
+    }])
     .service('Facebook', function($q, $rootScope) {
         // resolving or rejecting a promise from a third-party
         // API such as Facebook must be
