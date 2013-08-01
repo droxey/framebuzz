@@ -109,6 +109,8 @@ angular.module('framebuzz.directives', [])
         };
     })
     .directive('bxslider', function () {
+        var slider = null;
+
         return function (scope, element, attrs) {
             if (scope.$last === true) {
                 element.ready(function () {
@@ -133,7 +135,7 @@ angular.module('framebuzz.directives', [])
                         easing: 'ease-in-out'
                     };
                         
-                    var slider = element.parent().bxSlider(sliderOpts);
+                    slider = element.parent().bxSlider(sliderOpts);
                     element.parent().css({ 'width': '99999px' });
                     element.parent().parent().css({ 'width': '130px', 'height': '23px' });
                     element.parent().parent().parent().css({ 'width': '136px', 'max-width': '136px' });

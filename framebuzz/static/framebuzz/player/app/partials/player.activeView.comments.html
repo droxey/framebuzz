@@ -6,8 +6,8 @@
             <div id="carousel" class="clearfix">
                 <span class="icon-left-dir" data-tooltip="00:00" data-tooltip-placement="bottom"></span>
                 <ul class="bxslider">            
-                    <li class="slide" data-ng-repeat="thread in timeOrderedThreads" data-bxslider="" data-time="{{ thread.time }}">
-                        <img data-ng-if="thread.user.avatar_url != NULL" data-ng-click="setSelectedThread(thread)" data-ng-src="{{ thread.user.avatar_url }}" class="img-circle">
+                    <li class="slide" data-ng-repeat="thread in timeOrderedThreads" data-bxslider="" title="{{ thread.time_hms }}">
+                        <img data-ng-if="thread.user.avatar_url != NULL" data-ng-click="setSelectedThreadAndTime(thread)" data-ng-src="{{ thread.user.avatar_url }}" class="img-circle">
                         <img data-ng-src="{{ rootPath }}img/blank.png" class="img-circle" data-ng-if="thread.user.avatar_url == NULL">
                     </li>
                 </ul>

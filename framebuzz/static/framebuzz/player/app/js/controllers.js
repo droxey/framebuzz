@@ -194,14 +194,12 @@ angular.module('framebuzz.controllers', []).
 
                     if (thread === null || thread === undefined) {
                         thread = getNextThreadInTimeline();
-                        index = $scope.timeOrderedThreads.indexOf(thread);
-                    }
-
-                    if (index == -1) {
-                        index = $scope.videoInstance.threads.indexOf(thread);
+                        
                     }
 
                     if (thread != null) {
+                        index = $scope.timeOrderedThreads.indexOf(thread);
+
                         $state.transitionTo('player.activeView.thread', { threadId: thread.id });
                         $scope.selectedThreadIndex = index;
                         $scope.selectedThread = thread;
@@ -210,6 +208,11 @@ angular.module('framebuzz.controllers', []).
                         $scope.player.pause();
                     }
                 };
+
+                $scope.setSelectedThreadAndTime = function(thread) {
+                    $scope.setSelectedThread(thread);
+                    $scope.setVideoTime(thread.time);
+                }
 
                 $scope.getActivityStream = function() {
                     socket.send_json({
