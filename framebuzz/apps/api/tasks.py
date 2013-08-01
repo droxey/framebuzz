@@ -162,6 +162,8 @@ def post_new_comment(context):
 
             threadSerializer = MPTTCommentSerializer(comment, context={ 'user': user })
             threadSerialized = JSONRenderer().render(threadSerializer.data)
+            logger = post_new_comment.get_logger()
+            logger.info(json.loads(threadSerialized))
             return_data['thread'] = json.loads(threadSerialized)
         else:
             action.send(user, verb='replied to comment', action_object=comment.parent, target=video)

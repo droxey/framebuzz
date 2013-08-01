@@ -103,8 +103,6 @@ angular.module('framebuzz.controllers', []).
                         'email': $scope.signupModel.email
                     };
 
-                    console.log(messageData);
-
                     $http({
                         method: 'POST', 
                         url: SOCK.signup_url, 
@@ -319,20 +317,28 @@ angular.module('framebuzz.controllers', []).
 
                 var addNewThread = function(newThread) {
                     var changed = false;
-                    angular.forEach($scope.videoInstance.threads, function(thread, key) {
-                        if (!threadInCollection(newThread)) {
-                            if (thread.time === newThread.time && !newThread.is_visible) {
-                                thread.has_hidden_siblings = true;
-                            }
+                    
+                    if (!threadInCollection(newThread)) {
+                        console.log(newThread.hidden_by_id);
 
-                            $scope.videoInstance.threads.push(newThread);
-                            changed = true;
+                        if (newThread.hidden_by_id !== undefined) {
+                            angular.forEach($scope.videoInstance.threads, function(thread, key) {    
+                                if (thread.id == newThread.hidden_by_id && !newThread.is_visible) {
+                                    console.log(thread);
+                                    thread.has_hidden_siblings = true;
+                                    console.log(thread);
+                                }
+                            });
                         }
-                    });
+                        
+                        $scope.videoInstance.threads.push(newThread);
+                        changed = true;
+                    }
 
                     if (changed) {
                         $scope.videoInstance.threads = $filter('orderBy')($scope.videoInstance.threads, 'time', true);
                         $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
+                        safeApply($scope);
                     }
                 };
 

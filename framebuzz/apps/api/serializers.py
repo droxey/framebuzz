@@ -129,7 +129,7 @@ class MPTTCommentSerializer(BaseCommentSerializer):
     class Meta:
         model = MPTTComment
         depth = 4
-        fields = ('id', 'user', 'comment', 'parent', 'submit_date',
+        fields = ('id', 'user', 'comment', 'parent', 'submit_date', 'hidden_by_id',
                   'replies', 'time_hms', 'time', 'is_favorite',
                   'is_flagged', 'is_following', 'is_visible', 'has_hidden_siblings',)
 

@@ -192,6 +192,7 @@ class MPTTComment(MPTTModel, Comment):
 
     is_visible = models.BooleanField(default=True)
     has_hidden_siblings = models.BooleanField(default=False)
+    hidden_by_id = models.IntegerField(blank=True, null=True)
 
     @property
     def timeInHMS(self):
@@ -253,6 +254,7 @@ class MPTTComment(MPTTModel, Comment):
 
                 self.has_hidden_siblings = False
                 self.is_visible = False
+                self.hidden_by_id = first_comment.id
             else:
                 self.is_visible = True
                 self.has_hidden_siblings = False
