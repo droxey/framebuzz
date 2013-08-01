@@ -202,10 +202,12 @@ angular.module('framebuzz.controllers', []).
                         index = $scope.videoInstance.threads.indexOf(thread);
                     }
 
-                    $state.transitionTo('player.activeView.thread', { threadId: thread.id });
-                    $scope.selectedThreadIndex = index;
-                    $scope.selectedThread = thread;
-                    safeApply($scope);
+                    if (thread != null) {
+                        $state.transitionTo('player.activeView.thread', { threadId: thread.id });
+                        $scope.selectedThreadIndex = index;
+                        $scope.selectedThread = thread;
+                        safeApply($scope);
+                    }
                 };
 
                 $scope.getActivityStream = function() {
@@ -293,6 +295,10 @@ angular.module('framebuzz.controllers', []).
                             }
 
                             if (foundThread !== null) { break; }
+                        }
+
+                        if (foundThread == null) {
+                            foundThread = $scope.videoInstance.threads[0];
                         }
 
                         return foundThread;
@@ -383,13 +389,15 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_playing', function() {
+                    if (!$state.is('player.loginView') && 
+                        !$state.is('player.signupView') && 
+                        !$state.is('player.blendedView')) {
+                        $state.transitionTo('player.blendedView');
+                    }
+
                     $scope.playing = true;
                     $scope.paused = false;
                     safeApply($scope);
-
-                    if (!$state.is('player.loginView') && !$state.is('player.signupView')) {
-                        $state.transitionTo('player.blendedView');
-                    }
                 
                     if ($scope.videoInstance.is_authenticated) {
                         socket.send_json({
@@ -405,19 +413,25 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_paused', function() {
+                    if ($state.is('player.blendedView')) {
+                        console.log('state is blended');
+
+                        if ($scope.videoInstance.threads.length > 0) {
+                            $scope.setSelectedThread();
+                        }
+                        else {
+                            console.log('transiton');
+
+                            $state.transitionTo('player.activeView.thread',  { threadId: 0 });
+                        }
+                    }
+
                     $scope.playing = false;
                     $scope.paused = true;
                     safeApply($scope);
 
-                    if ($state.is('player.blendedView')) {
-                        $state.transitionTo('player.activeView.comments');
-                        
-                        if ($scope.videoInstance.threads.length > 0) {
-                            $scope.setSelectedThread();
-                        }
-                    }
-
                     if ($scope.videoInstance.is_authenticated) {
+                        console.log('sending data');
                         socket.send_json({
                             eventType: eventTypes.playerAction, 
                             channel: SOCK.user_channel, 
@@ -446,8 +460,9 @@ angular.module('framebuzz.controllers', []).
                         $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         safeApply($scope);
 
+                        $state.transitionTo('player.blendedView');
+
                         if ($scope.videoInstance.is_authenticated) {
-                            console.log($scope.videoInstance.user.video_in_library);
                             var className = $scope.videoInstance.user.video_in_library ? 'added' : 'removed';
                             broadcaster.prepForBroadcast({ broadcastType: 'library_toggle_complete', className: className });
                         }

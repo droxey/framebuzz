@@ -210,6 +210,7 @@ angular.module('framebuzz',
                 
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
+
                 $state.transitionTo('player.panelView');
             }
         ]

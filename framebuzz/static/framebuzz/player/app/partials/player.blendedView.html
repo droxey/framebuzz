@@ -16,7 +16,7 @@
       </div>
       <img data-ng-if="!isCollapsed" class="img-circle" data-ng-src="{{ thread.user.avatar_url }}" alt="{{ thread.user.username }}" data-ng-click="getUserProfile(thread.user.username)" />
       <span class="collapsed-time" data-ng-if="isCollapsed" data-ng-click="setSelectedThread(thread)">
-          <em>{{ thread.time_hms }}</em>
+          <em class="img-circle">{{ thread.time_hms }}</em>
           <img class="img-circle" data-ng-src="{{ thread.user.avatar_url }}" alt="{{ thread.user.username }}" />
       </span>
     </li>

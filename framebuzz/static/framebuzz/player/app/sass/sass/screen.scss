@@ -572,15 +572,16 @@ object, embed, video, iframe {
                         }
 
                         img.img-circle {
-                            @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.36), 0px 0px 35px 0px rgba(0, 0, 0, 0.33) inset);
+                            @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
                             background: black;
                             cursor: pointer;
                             display: inline-block;
-                            height: 44px;
+                            height: 33px;
                             opacity: .91;
+                            margin-left: 10px;
                             position: relative;
                             top: 7px;
-                            width: 44px;
+                            width: 33px;
                         }
                         
 
@@ -688,8 +689,8 @@ object, embed, video, iframe {
                 }
 
                 &.collapsed {
-                    margin-left: 200px;
-                    width: 50px;
+                    margin-left: 211px;
+                    width: 38px;
 
                     ul.comment-stream li {
                         background-color: transparent;
@@ -697,36 +698,44 @@ object, embed, video, iframe {
                         box-shadow: none;
                         opacity: 0.5;
                         transition: none;
+                        min-height: 33px;
 
                         img.img-circle {
                             @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
                             float: right;
+                            margin-left: 10px;
                             margin-right: 5px;
+                            opacity: 1;
                         }
 
                         span.collapsed-time {
                             cursor: pointer;
                             display: block;
-                            opacity: 0.5;
-                            height: 58px;
+                            opacity: 0.91;
+                            height: 33px;
                             @include single-transition(opacity 50ms ease-in-out);
 
                             em {
+                                background-color: rgba(0, 0, 0, .3);
                                 color: white;
+                                display: block;
                                 font-family: 'proxima-nova';
+                                font-size: 10px;
                                 font-weight: 700;
-                                font-size: 12px;
-                                text-shadow: 0px 1px 1px black;
+                                height: 23px;
+                                margin-top: 7px;
                                 opacity: 0;
-                                padding: 0 7px;
-                                position: relative;
-                                top: 35px;
+                                padding-top: 11px;
+                                position: absolute;
+                                text-align: center;
+                                text-shadow: 0 1px 1px rgba(0, 0, 0, 1);
                                 z-index: 2;
+                                width: 33px;
                                 @include single-transition(opacity 50ms ease-in-out)
                             }
 
                             &:hover {
-                                opacity: 0.75;
+                                opacity: 1;
                                 @include single-transition(opacity 50ms ease-in-out);
 
                                 em {
