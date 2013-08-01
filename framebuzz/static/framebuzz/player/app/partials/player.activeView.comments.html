@@ -4,14 +4,14 @@
         <div id="thread-carousel" class="clearfix">
             <img data-ng-src="{{ selectedThread.user.avatar_url }}" class="img-circle active-thread" data-ng-click="setSelectedThread(selectedThread)">
             <div id="carousel" class="clearfix">
-                <span class="icon-left-dir"></span>
+                <span class="icon-left-dir" data-tooltip="00:00" data-tooltip-placement="bottom"></span>
                 <ul class="bxslider">            
-                    <li class="slide" data-ng-repeat="thread in timeOrderedThreads" data-bxslider="">
+                    <li class="slide" data-ng-repeat="thread in timeOrderedThreads" data-bxslider="" data-time="{{ thread.time }}">
                         <img data-ng-if="thread.user.avatar_url != NULL" data-ng-click="setSelectedThread(thread)" data-ng-src="{{ thread.user.avatar_url }}" class="img-circle">
                         <img data-ng-src="{{ rootPath }}img/blank.png" class="img-circle" data-ng-if="thread.user.avatar_url == NULL">
                     </li>
                 </ul>
-                <span class="icon-right-dir"></span>
+                <span class="icon-right-dir" data-tooltip="{{ videoInstance.video.time_hms }}" data-tooltip-placement="bottom"></span>
             </div>
         </div>
     </div>
