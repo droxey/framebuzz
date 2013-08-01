@@ -90,7 +90,6 @@ angular.module('framebuzz.controllers', []).
                             safeApply($scope);
 
                             $state.transitionTo('player.blendedView');
-                            broadcaster.prepForBroadcast({ broadcastType: 'reconnect' });
                         }
                     })
                     .error(function(data, status, headers, config) {
@@ -464,6 +463,7 @@ angular.module('framebuzz.controllers', []).
                 // --
 
                 socket.onopen(function() {
+                    console.log('open!');
                     socket.send_json({eventType: eventTypes.initVideo, channel: SOCK.video_channel, data: ''});
                 });
 
@@ -511,8 +511,6 @@ angular.module('framebuzz.controllers', []).
                     else if (jsonData.eventType == eventTypes.getUserProfile) {
                         $scope.userProfile = jsonData.data;
                         safeApply($scope);
-
-                        console.log($scope.userProfile);
 
                         $scope.player.pause();
                         

@@ -317,6 +317,7 @@ def toggle_user_follow(context):
                     })
         new_context = context
         new_context[DATA_KEY]['username'] = user_to_toggle.username
+        new_context['user'] = user
         return new_context
 
 
