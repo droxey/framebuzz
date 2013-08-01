@@ -43,7 +43,8 @@ angular.module('framebuzz.controllers', []).
                     getUserProfile: 'FB_USER_PROFILE',
                     shareViaEmail: 'FB_EMAIL_SHARE',
                     addToLibrary: 'FB_ADD_TO_LIBRARY',
-                    notification: 'FB_USER_NOTIFICATION'
+                    notification: 'FB_USER_NOTIFICATION',
+                    toggleFollow: 'FB_TOGGLE_FOLLOW'
                 };
 
                 // --
@@ -267,6 +268,17 @@ angular.module('framebuzz.controllers', []).
                     var message = 'An email has been sent to ' + postData.shareWithEmail + '.';
                     notificationFactory.success(message);
                 };
+
+                $scope.toggleFollow = function(username) {
+                    socket.send_json({
+                        eventType: eventTypes.toggleFollow, 
+                        channel: SOCK.user_channel, 
+                        data: { 
+                            'user_to_toggle': username,
+                            'username': $scope.videoInstance.user.username,
+                        }
+                    });
+                }
 
                 // --
                 // PRIVATE METHODS
@@ -500,8 +512,13 @@ angular.module('framebuzz.controllers', []).
                         $scope.userProfile = jsonData.data;
                         safeApply($scope);
 
+                        console.log($scope.userProfile);
+
                         $scope.player.pause();
-                        $state.transitionTo('player.userProfileView', { username: $scope.userProfile.user.username });
+                        
+                        if (!$state.is('player.userProfileView')) {
+                            $state.transitionTo('player.userProfileView', { username: $scope.userProfile.user.username });
+                        }
                     }
                     else if (jsonData.eventType == eventTypes.addToLibrary) {
                         notificationFactory.success(jsonData.data.message);

@@ -68,8 +68,6 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
         if event_type and channel:
             task_chain = None
             
-            
-
             if event_type == 'FB_INITIALIZE_VIDEO':
                 self.video_channel = channel
                 self.listen()
@@ -107,6 +105,18 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                                 'video_id': video_id
                             }) \
                         | tasks.add_comment_action.s() \
+                        | tasks.message_outbound.s()
+                elif event_type == 'FB_TOGGLE_FOLLOW':
+                    task_chain = tasks.get_user_by_session_key.s(
+                            session_key=self.session_key, 
+                            extra_context={
+                                'data': data, 
+                                'outbound_channel': self.session_channel,
+                                'username': data.get('username', None),
+                                'video_id': video_id
+                            }) \
+                        | tasks.toggle_user_follow.s() \
+                        | tasks.get_user_profile.s() \
                         | tasks.message_outbound.s()
                 elif event_type == 'FB_PLAYER_ACTION':
                     task_chain = tasks.get_user_by_session_key.s(

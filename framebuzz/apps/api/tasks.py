@@ -286,6 +286,40 @@ def add_comment_action(context):
         return construct_message('FB_COMMENT_ACTION', channel, return_data)
 
 
+@celery.task()
+def toggle_user_follow(context):
+    thread_data = context.get(DATA_KEY, None)
+    user = context.get('user', None)
+
+    if thread_data.get('user_to_toggle', None):
+        user_to_toggle = auth.models.User.objects.get(username=thread_data['user_to_toggle'])
+
+        check_following = Follow.objects.is_following(user, user_to_toggle)
+        if check_following:
+            unfollow(user, user_to_toggle)
+        else:
+            follow(user, user_to_toggle)
+
+            if user_to_toggle.id != user.id and user_to_toggle.email:
+                user_channel = '/framebuzz/user/%s' % user_to_toggle.username
+                message_text = '%s is now following you!' % user.username
+                notification = { 'message': message_text, 'objectType': 'follow', 'objectId': None }
+                message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
+                _send_to_channel.delay(channel = user_channel, message = message)
+
+                send_templated_mail(
+                    template_name='following-notification',
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[user_to_toggle.email],
+                    context={
+                        'follower': user,
+                        'site': Site.objects.get_current()
+                    })
+        new_context = context
+        new_context[DATA_KEY]['username'] = user_to_toggle.username
+        return new_context
+
+
 @celery.task(ignore_result=True)
 def add_player_action(context):
     player_data = context.get(DATA_KEY, None)
@@ -362,11 +396,8 @@ def get_activity_stream(context):
 def get_user_profile(context):
     context_data = context.get(DATA_KEY, None)
     channel = context.get('outbound_channel', None)
-
-    if context_data.get('username', None):
-        user = auth.models.User.objects.get(username=context_data['username'])
-    else:
-        user = context.get('user', None)
+    current_user = context.get('user', None)
+    user = auth.models.User.objects.get(username=context_data['username'])
 
     favorite_comments = [action.action_object for action in Action.objects.favorite_comments_stream(user) if action.action_object is not None]
     total_comments = MPTTComment.objects.filter(user=user)
@@ -388,6 +419,12 @@ def get_user_profile(context):
     followingSerializer = UserSerializer(user_following)
     followingSerialized = JSONRenderer().render(followingSerializer.data)
 
+    logger = get_user_profile.get_logger()
+    if user:
+        check_following = Follow.objects.is_following(current_user, user)
+    else:
+        check_following = False
+
     return_data = {
         'favorite_comments': len(favorite_comments),
         'total_comments': len(total_comments),
@@ -397,8 +434,12 @@ def get_user_profile(context):
         'comments_list': json.loads(commentsSerialized),
         'followers_list': json.loads(followersSerialized),
         'following_list': json.loads(followingSerialized),
-        'user': json.loads(userSerialized)
+        'user': json.loads(userSerialized),
+        'following': check_following
     }
+
+    
+    logger.info(return_data['following'])
 
     return construct_message('FB_USER_PROFILE', channel, return_data)
 
