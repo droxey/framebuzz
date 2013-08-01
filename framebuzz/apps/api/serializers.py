@@ -58,11 +58,12 @@ class UserSerializer(serializers.ModelSerializer):
         return get_default_avatar_url()
 
     def get_video_in_library(self, obj):
-        video = self.context.get('video', None)
-        if video:
-            user_video = UserVideo.objects.filter(user=obj, video=video)
-            return len(user_video) == 1
-        return False
+        if self.context is not None:
+            video = self.context.get('video', None)
+            if video:
+                user_video = UserVideo.objects.filter(user=obj, video=video)
+                return len(user_video) == 1
+            return False
 
 
 class BaseCommentSerializer(serializers.ModelSerializer):

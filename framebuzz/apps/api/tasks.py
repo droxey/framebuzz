@@ -156,6 +156,7 @@ def post_new_comment(context):
     if comment:
         return_data = dict()
         return_data['heatmap'] = video.heatmap()
+        return_data['channel'] = channel
 
         if not comment.parent:
             action.send(user, verb='commented on', action_object=video)

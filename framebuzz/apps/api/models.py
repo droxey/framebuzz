@@ -241,7 +241,7 @@ class MPTTComment(MPTTModel, Comment):
         if not self.submit_date:
             self.submit_date = datetime.now()
 
-        if not self.parent:
+        if not self.parent and self.has_hidden_siblings == False:
             comments_in_range = self.get_thread_siblings()
             
             if self.pk:
