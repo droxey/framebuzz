@@ -317,7 +317,7 @@ def toggle_user_follow(context):
                     })
         new_context = context
         new_context[DATA_KEY]['username'] = user_to_toggle.username
-        new_context['user'] = user
+        new_context['current_user'] = user
         return new_context
 
 
@@ -397,8 +397,11 @@ def get_activity_stream(context):
 def get_user_profile(context):
     context_data = context.get(DATA_KEY, None)
     channel = context.get('outbound_channel', None)
-    current_user = context.get('user', None)
+    current_user = context.get('current_user', None)
     user = auth.models.User.objects.get(username=context_data['username'])
+
+    if not current_user:
+        current_user = context.get('user', None)
 
     favorite_comments = [action.action_object for action in Action.objects.favorite_comments_stream(user) if action.action_object is not None]
     total_comments = MPTTComment.objects.filter(user=user)
@@ -420,8 +423,7 @@ def get_user_profile(context):
     followingSerializer = UserSerializer(user_following)
     followingSerialized = JSONRenderer().render(followingSerializer.data)
 
-    logger = get_user_profile.get_logger()
-    if user:
+    if current_user and not isinstance(current_user, auth.models.AnonymousUser):
         check_following = Follow.objects.is_following(current_user, user)
     else:
         check_following = False
@@ -438,9 +440,6 @@ def get_user_profile(context):
         'user': json.loads(userSerialized),
         'following': check_following
     }
-
-    
-    logger.info(return_data['following'])
 
     return construct_message('FB_USER_PROFILE', channel, return_data)
 

@@ -512,6 +512,8 @@ angular.module('framebuzz.controllers', []).
                         $scope.userProfile = jsonData.data;
                         safeApply($scope);
 
+                        console.log($scope.userProfile);
+
                         $scope.player.pause();
                         
                         if (!$state.is('player.userProfileView')) {
