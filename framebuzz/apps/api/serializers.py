@@ -5,6 +5,7 @@ from django.contrib.comments.models import CommentFlag
 from django.utils.hashcompat import md5_constructor
 from django.utils import dateformat
 from django.utils import timezone
+from django.utils.html import urlize
 
 from actstream.actions import is_following
 from actstream.models import Action
@@ -72,6 +73,7 @@ class BaseCommentSerializer(serializers.ModelSerializer):
     is_favorite = serializers.SerializerMethodField('get_is_favorite')
     is_flagged = serializers.SerializerMethodField('get_is_flagged')
     is_following = serializers.SerializerMethodField('get_is_following')
+    comment = serializers.SerializerMethodField('get_comment')
 
     def get_submit_date(self, obj):
         if obj.submit_date:
@@ -107,6 +109,10 @@ class BaseCommentSerializer(serializers.ModelSerializer):
 
         return False
 
+    def get_comment(self, obj):
+        return urlize(obj.comment, trim_url_limit=None, nofollow=True) \
+            .replace('<a ', '<a target="_blank" ')
+
 
 class MPTTCommentReplySerializer(BaseCommentSerializer):
     parent_id = serializers.SerializerMethodField('get_parent_id')
@@ -123,7 +129,6 @@ class MPTTCommentReplySerializer(BaseCommentSerializer):
 
 class MPTTCommentSerializer(BaseCommentSerializer):
     replies = MPTTCommentReplySerializer(source='get_children', read_only=True)
-    comment = serializers.WritableField(source='comment')
     parent = serializers.PrimaryKeyRelatedField(source='parent', required=False)
     time_hms = serializers.SerializerMethodField('get_time_hms')
 

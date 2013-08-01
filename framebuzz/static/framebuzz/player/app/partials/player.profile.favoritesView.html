@@ -5,7 +5,7 @@
                 <a class="username">{{ thread.user.username }}</a>
                 <strong class="time">{{ thread.time_hms }}</strong>
             </div>
-            <p>{{ thread.comment }}</p>
+            <p ng-bind-html-unsafe="thread.comment"></p>
         </div>
     </li>
 </ul>
