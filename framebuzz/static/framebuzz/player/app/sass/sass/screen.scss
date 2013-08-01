@@ -119,18 +119,14 @@ object, embed, video, iframe {
                             }
 
                             .mejs-time-float {
-                                background: rgba(0, 0, 0, 0.9);
-                                border: 1px solid #000000;
-                                color: rgba(255, 255, 255, 0.75);
-                                display: block !important;
-                                opacity: 0;
-                                top: -23px;
-                                @include single-transition(opacity 100ms ease-in-out);
-
-                                &.fade-in {
-                                    opacity: 1;
-                                    @include single-transition(opacity 100ms ease-in-out);
-                                }
+                                background: rgba(23, 136, 188, 0.95);
+                                border: 1px solid rgba(23, 136, 188, 0.95);
+                                color: rgba(255, 255, 255, 1.0);
+                                display: none;
+                                height: 15px;
+                                top: -24px;
+                                width: 34px;
+                                z-index: 300;
 
                                 .mejs-time-float-current {
                                     font-family: 'proxima-nova';
@@ -140,7 +136,8 @@ object, embed, video, iframe {
                                 }
 
                                 .mejs-time-float-corner { 
-                                    border-color: black transparent transparent;
+                                    border-color: rgba(23, 136, 188, 0.95) transparent transparent;
+                                    top: 15px;
                                 }
                             }                            
                         }
