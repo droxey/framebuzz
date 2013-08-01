@@ -3539,20 +3539,29 @@ if (typeof jQuery != 'undefined') {
 
 
 			// MUTE button
+			var isMuted = false;
 			mute.find('button').click(function() {
-				media.setMuted( !media.muted );
+				//media.setVolume(volume);
+				isMuted = !isMuted;
+
+				if (isMuted) {
+					volumeIcon.attr('src', '/static/framebuzz/player/app/img/icon-volume-off.png');
+				}
+				else {
+					volumeIcon.attr('src', '/static/framebuzz/player/app/img/icon-volume-on.png');
+				}
+
+				media.setMuted(isMuted);
 			});
 
 			// listen for volume change events from other sources
 			media.addEventListener('volumechange', function(e) {
-				if (!mouseIsDown) {
-					if (media.muted) {
-						positionVolumeHandle(0);
-						mute.removeClass('mejs-mute').addClass('mejs-unmute');
-					} else {
-						positionVolumeHandle(media.volume);
-						mute.removeClass('mejs-unmute').addClass('mejs-mute');
-					}
+				if (isMuted) {
+					positionVolumeHandle(0);
+					mute.removeClass('mejs-mute').addClass('mejs-unmute');
+				} else {
+					positionVolumeHandle(media.volume);
+					mute.removeClass('mejs-unmute').addClass('mejs-mute');
 				}
 			}, false);
 
@@ -3561,9 +3570,9 @@ if (typeof jQuery != 'undefined') {
 				positionVolumeHandle(player.options.startVolume);
 
 				// mutes the media and sets the volume icon muted if the initial volume is set to 0
-        if (player.options.startVolume === 0) {
-          media.setMuted(true);
-        }
+		        if (player.options.startVolume === 0) {
+		          media.setMuted(true);
+		        }
 
 				// shim gets the startvolume as a parameter, but we have to set it on the native <video> and <audio> elements
 				if (media.pluginType === 'native') {
