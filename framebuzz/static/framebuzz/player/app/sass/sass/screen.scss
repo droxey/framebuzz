@@ -687,6 +687,7 @@ object, embed, video, iframe {
 
                 &.collapsed {
                     margin-left: 211px;
+                    padding-right: 5px;
                     width: 38px;
 
                     ul.comment-stream li {
@@ -695,6 +696,7 @@ object, embed, video, iframe {
                         box-shadow: none;
                         opacity: 0.5;
                         transition: none;
+                        @include single-transition(background-color 100ms ease-in-out);
 
                         img.img-circle {
                             @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
