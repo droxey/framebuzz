@@ -131,13 +131,17 @@ class MPTTCommentSerializer(BaseCommentSerializer):
     replies = MPTTCommentReplySerializer(source='get_children', read_only=True)
     parent = serializers.PrimaryKeyRelatedField(source='parent', required=False)
     time_hms = serializers.SerializerMethodField('get_time_hms')
+    has_replies = serializers.SerializerMethodField('get_has_replies')
 
     class Meta:
         model = MPTTComment
         depth = 4
         fields = ('id', 'user', 'comment', 'parent', 'submit_date', 'hidden_by_id',
-                  'replies', 'time_hms', 'time', 'is_favorite',
+                  'replies', 'time_hms', 'time', 'is_favorite', 'has_replies',
                   'is_flagged', 'is_following', 'is_visible', 'has_hidden_siblings',)
 
     def get_time_hms(self, obj):
         return obj.timeInHMS
+
+    def get_has_replies(self, obj):
+        return len(obj.get_children()) > 0
