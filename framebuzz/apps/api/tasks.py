@@ -406,7 +406,9 @@ def get_user_profile(context):
     if not current_user:
         current_user = context.get('user', None)
 
-    favorite_comments = [action.action_object for action in Action.objects.favorite_comments_stream(user) if action.action_object is not None]
+    favorite_comment_ids = [action.action_object_object_id for action in Action.objects.favorite_comments_stream(user)]
+    favorite_comments = MPTTComment.objects.filter(id__in=favorite_comment_ids)
+
     total_comments = MPTTComment.objects.filter(user=user)
     user_followers = followers(user)
     user_following = following(user)
