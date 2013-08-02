@@ -279,7 +279,9 @@ angular.module('framebuzz.controllers', []).
                 };
 
                 $scope.openPlayerLink = function(url) {
+                    // This isn't ideal. Move to a directive.
                     window.location.href = url;
+                    $('#player-container').fadeOut('fast');
                 };
 
                 $scope.resumeVideo = function() {
