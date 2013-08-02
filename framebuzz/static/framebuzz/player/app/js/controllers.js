@@ -282,6 +282,11 @@ angular.module('framebuzz.controllers', []).
                     window.location.href = url;
                 };
 
+                $scope.resumeVideo = function() {
+                    $state.transitionTo('player.blendedView');
+                    $scope.player.play();
+                };
+
                 // --
                 // PRIVATE METHODS
                 // --
