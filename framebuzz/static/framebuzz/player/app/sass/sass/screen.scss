@@ -1410,9 +1410,16 @@ object, embed, video, iframe {
                                     font-family: 'proxima-nova';
                                     font-size: 12.28px;
                                     font-weight: 500;
-                                    
+                                    line-height: 15px;
 
-                                    strong { font-weight: 700; }
+                                    strong { 
+                                        cursor: pointer;
+                                        font-weight: 700; 
+
+                                        &:hover { text-decoration: underline; }
+                                    }
+
+                                    a { cursor: pointer; }
                                 }
 
                                 p.timesince {

@@ -235,6 +235,11 @@ class MPTTComment(MPTTModel, Comment):
     def __unicode__(self):
         return "%s at %s" % (self.comment, str(self.time))
 
+    def get_absolute_url(self):
+        video = Video.objects.get(id=self.object_pk)
+        url_id = self.id if self.parent is None else self.parent.id
+        return '%s#/player/panel/active/comments/%s' % (reverse('video-embed', kwargs={'video_id': str(video.video_id)}), str(url_id))
+
     def save(self, *args, **kwargs):
         first_comment = None
 

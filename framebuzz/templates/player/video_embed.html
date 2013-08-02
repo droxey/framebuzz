@@ -42,8 +42,10 @@
         // Disable ESC as it breaks SockJS connection.
         // See https://github.com/sockjs/sockjs-client/issues/18.
         window.addEventListener('keydown', function(e) { (e.keyCode == 27 && e.preventDefault()) });
-        window.location.hash = '#/player/panel';
-
+        if (window.location.hash.indexOf('comments') == -1) {
+            window.location.hash = '#/player/panel';
+        }
+        
         // Set up our global SOCK variable.
         var SOCK = {
           host: location.hostname,

@@ -277,7 +277,11 @@ angular.module('framebuzz.controllers', []).
                             'username': $scope.videoInstance.user.username,
                         }
                     });
-                }
+                };
+
+                $scope.openPlayerLink = function(url) {
+                    window.location.href = url;
+                };
 
                 // --
                 // PRIVATE METHODS
@@ -506,6 +510,7 @@ angular.module('framebuzz.controllers', []).
                     else if (jsonData.eventType == eventTypes.getActivityStream) {
                         $scope.activities = jsonData.data.activities;
                         safeApply($scope);
+                        console.log($scope.activities);
                         $state.transitionTo('player.activeView.activity');
                     }
                     else if (jsonData.eventType == eventTypes.getUserProfile) {

@@ -115,7 +115,7 @@ angular.module('framebuzz.directives', [])
             if (scope.$last === true) {
                 element.ready(function () {
                     var sliderOpts = {
-                        infiniteLoop: true,
+                        infiniteLoop: false,
                         minSlides: 1,
                         maxSlides: 5,
                         moveSlides: 5,

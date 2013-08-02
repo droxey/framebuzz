@@ -356,7 +356,7 @@ def get_activity_stream(context):
     else:
         user = context.get('user', None)
 
-    valid_verbs = ['started following', 'added to favorites', 'removed from favorites', 'stopped following', 'replied to comment', 'added video to library']
+    valid_verbs = ['started following', 'added to favorites', 'replied to comment', 'added video to library']
     last_login_minus_day = user.last_login - datetime.timedelta(days=1)
     user_activity_stream = Action.objects.filter(verb__in=valid_verbs, timestamp__gte = last_login_minus_day)
 
@@ -377,7 +377,9 @@ def get_activity_stream(context):
                     'verb': verb,
                     'timesince': activity.timesince(),
                     'action_object': activity.action_object.__unicode__(),
-                    'target_object': activity.target.__unicode__()
+                    'target_object': activity.target.__unicode__(),
+                    'thread_url': activity.action_object.get_absolute_url(),
+                    'video_url': activity.target.get_absolute_url()
                 }
                 stream_data.append(act)
         else:
