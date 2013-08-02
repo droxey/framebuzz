@@ -194,7 +194,6 @@ angular.module('framebuzz.controllers', []).
 
                     if (thread === null || thread === undefined) {
                         thread = getNextThreadInTimeline();
-                        
                     }
 
                     if (thread != null) {
@@ -288,11 +287,15 @@ angular.module('framebuzz.controllers', []).
                 // --
                 
                 var getThreadById = function(threadId) {
+                    var found = null;
+
                     angular.forEach($scope.videoInstance.threads, function(thread, key) {
                         if (thread.id == threadId) {
-                            return thread;
+                            found = thread;
                         }
                     });
+
+                    return found;
                 };
 
                 var getReplyByIdAndThread = function(id, thread) {
@@ -308,7 +311,7 @@ angular.module('framebuzz.controllers', []).
                         var time = angular.copy($scope.currentTime);
                         var foundThread = null;
                         
-                        for (var i = 0; i < $scope.videoInstance.threads.length; i++) {
+                        for (var i = 0; i <= $scope.videoInstance.threads.length; i++) {
                             if ($scope.videoInstance.threads[i].time <= time) {
                                 foundThread = $scope.videoInstance.threads[i];
                             }
@@ -467,7 +470,6 @@ angular.module('framebuzz.controllers', []).
                 // --
 
                 socket.onopen(function() {
-                    console.log('open!');
                     socket.send_json({eventType: eventTypes.initVideo, channel: SOCK.video_channel, data: ''});
                 });
 
@@ -479,7 +481,15 @@ angular.module('framebuzz.controllers', []).
                         $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         safeApply($scope);
 
-                        $state.transitionTo('player.blendedView');
+                        if ($rootScope.selectedThreadId !== undefined ) {
+                            var thread = getThreadById($rootScope.selectedThreadId);
+                            window.setTimeout(function() {
+                                $scope.setSelectedThreadAndTime(thread);
+                            }, 1500);
+                        }
+                        else {
+                            $state.transitionTo('player.blendedView');
+                        }
 
                         if ($scope.videoInstance.is_authenticated) {
                             var className = $scope.videoInstance.user.video_in_library ? 'added' : 'removed';
@@ -510,14 +520,12 @@ angular.module('framebuzz.controllers', []).
                     else if (jsonData.eventType == eventTypes.getActivityStream) {
                         $scope.activities = jsonData.data.activities;
                         safeApply($scope);
-                        console.log($scope.activities);
+
                         $state.transitionTo('player.activeView.activity');
                     }
                     else if (jsonData.eventType == eventTypes.getUserProfile) {
                         $scope.userProfile = jsonData.data;
                         safeApply($scope);
-
-                        console.log($scope.userProfile);
 
                         $scope.player.pause();
                         

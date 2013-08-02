@@ -207,10 +207,14 @@ angular.module('framebuzz',
             function($rootScope, $state, $stateParams, $cookies, $http) {
                 // attach django's CSRF token to sent data
                 $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
+
+                if (document.location.hash.indexOf('comments') != -1) {
+                    var threadId = document.location.hash.split("/")[5];
+                    $rootScope.selectedThreadId = parseInt(threadId);
+                }
                 
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
-
                 $state.transitionTo('player.panelView');
             }
         ]
