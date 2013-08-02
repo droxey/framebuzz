@@ -16,6 +16,7 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
 
     def __init__(self, *args, **kwargs):
         super(ConnectionHandler, self).__init__(*args, **kwargs)
+        self.username = None
         self.user_channel = None
         self.video_channel = None
         self.session_channel = None
@@ -33,15 +34,15 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
         self.client.connect()
 
         if self.session_channel:
-            print 'session found'
+            print 'user connected to channel: %s' % self.session_channel
             subscribe_tasks.append(tornado.gen.Task(self.client.subscribe, self.session_channel))
 
         if self.user_channel:
-            print 'user found'
+            print 'user connected to channel: %s' % self.user_channel
             subscribe_tasks.append(tornado.gen.Task(self.client.subscribe, self.user_channel))
 
         if self.video_channel:
-            print 'video found'
+            print 'user connected to channel: %s' % self.video_channel
             subscribe_tasks.append(tornado.gen.Task(self.client.subscribe, self.video_channel))
 
         yield subscribe_tasks
@@ -70,9 +71,15 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
             
             if event_type == 'FB_INITIALIZE_VIDEO':
                 self.video_channel = channel
-                self.listen()
-
                 video_id = self.video_channel.split('/')[3]
+
+                self.session_channel = '/framebuzz/%s/session/%s' % (video_id, self.session_key)
+                
+                if self.username:
+                    self.user_channel = '/framebuzz/%s/user/%s' % (video_id, self.username)
+
+                self.listen()
+                
                 task_chain = tasks.get_user_by_session_key.s(
                         session_key=self.session_key, 
                         extra_context={
@@ -197,13 +204,11 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
         Grabs the current Django user from the Redis backend.
         """
         self.session_key = str(info.get_cookie(django.conf.settings.SESSION_COOKIE_NAME)).split('=')[1]
-        self.session_channel = '/framebuzz/session/%s' % self.session_key 
-
         django_request = self.get_request()
         user = django.contrib.auth.get_user(django_request)
 
         if not isinstance(user, django.contrib.auth.models.AnonymousUser):
-            self.user_channel = '/framebuzz/user/%s' % user.username 
+            self.username = user.username 
 
         return user
  

@@ -171,7 +171,7 @@ def post_new_comment(context):
 
             # Send a notification to the thread's owner that someone has replied to their comment.
             if comment.parent.user.id != user.id and comment.parent.user.email:
-                user_channel = '/framebuzz/user/%s' % comment.parent.user.username
+                user_channel = '/framebuzz/%s/user/%s' % (video.video_id, comment.parent.user.username)
                 notification = { 'message': 'You have 1 new reply!', 'objectType': 'reply', 'objectId': comment.id }
                 message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
                 _send_to_channel.delay(channel = user_channel, message = message)
@@ -219,7 +219,7 @@ def add_comment_action(context):
                 follow(user, thread.user)
 
                 if thread.user.id != user.id and thread.user.email:
-                    user_channel = '/framebuzz/user/%s' % thread.user.username
+                    user_channel = '/framebuzz/%s/user/%s' % (video.video_id, thread.user.username)
                     message_text = '%s is now following you!' % user.username
                     notification = { 'message': message_text, 'objectType': 'follow', 'objectId': None }
                     message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
@@ -245,7 +245,7 @@ def add_comment_action(context):
                 action.send(user, verb='added to favorites', action_object=thread, target=video)
 
                 if thread.user.id != user.id and thread.user.email:
-                    user_channel = '/framebuzz/user/%s' % thread.user.username
+                    user_channel = '/framebuzz/%s/user/%s' % (video.video_id, thread.user.username)
                     message_text = '%s added your comment to favorites!' % user.username
                     notification = { 'message': message_text, 'objectType': 'favorite', 'objectId': None }
                     message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
@@ -290,6 +290,7 @@ def add_comment_action(context):
 def toggle_user_follow(context):
     thread_data = context.get(DATA_KEY, None)
     user = context.get('user', None)
+    video_id = context.get('video_id', None)
 
     if thread_data.get('user_to_toggle', None):
         user_to_toggle = auth.models.User.objects.get(username=thread_data['user_to_toggle'])
@@ -301,7 +302,7 @@ def toggle_user_follow(context):
             follow(user, user_to_toggle)
 
             if user_to_toggle.id != user.id and user_to_toggle.email:
-                user_channel = '/framebuzz/user/%s' % user_to_toggle.username
+                user_channel = '/framebuzz/%s/user/%s' % (video_id, user_to_toggle.username)
                 message_text = '%s is now following you!' % user.username
                 notification = { 'message': message_text, 'objectType': 'follow', 'objectId': None }
                 message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
