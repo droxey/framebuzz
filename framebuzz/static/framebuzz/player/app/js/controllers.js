@@ -316,16 +316,19 @@ angular.module('framebuzz.controllers', []).
                         var time = angular.copy($scope.currentTime);
                         var foundThread = null;
                         
-                        for (var i = 0; i <= $scope.videoInstance.threads.length; i++) {
-                            if ($scope.videoInstance.threads[i].time <= time) {
-                                foundThread = $scope.videoInstance.threads[i];
+                        if ($scope.videoInstance.threads.length > 0) {
+                            console.log($scope.videoInstance.threads);
+                            for (var i = 0; i < $scope.videoInstance.threads.length; i++) {
+                                if ($scope.videoInstance.threads[i].time <= time) {
+                                    foundThread = $scope.videoInstance.threads[i];
+                                }
+
+                                if (foundThread !== null) { break; }
                             }
 
-                            if (foundThread !== null) { break; }
-                        }
-
-                        if (foundThread == null) {
-                            foundThread = $scope.videoInstance.threads[0];
+                            if (foundThread == null) {
+                                foundThread = $scope.videoInstance.threads[0];
+                            }
                         }
 
                         return foundThread;
