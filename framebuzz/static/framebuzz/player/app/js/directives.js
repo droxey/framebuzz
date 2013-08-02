@@ -9,7 +9,7 @@ angular.module('framebuzz.directives', [])
           elm.text(version);
         };
     })
-    .directive('mediaElement', ['broadcaster', '$rootScope', 'safeApply', function(broadcaster, $rootScope, safeApply) {
+    .directive('mediaElement', ['broadcaster', '$state', '$rootScope', 'safeApply', function(broadcaster, $state, $rootScope, safeApply) {
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
                 features: ['share', 'addtolibrary', 'volume', 'muteconvo', 'progress', 'playpause' ],
@@ -45,6 +45,26 @@ angular.module('framebuzz.directives', [])
                             $('.mejs-video').removeClass('show-controls');
                             $('#player-layer').removeClass('show-title');
                         }, 250);
+                    });
+
+                    scope.$on('$viewContentLoaded', function() {
+                        if ($state.is('player.activeView.comments') || 
+                            $state.is('player.activeView.thread') || 
+                            $state.is('player.userProfileView') ||
+                            $state.is('player.blendedView')) {
+
+                                $('#buzz-layer > div.panel').hoverIntent({
+                                    over: function() {
+                                        $('.mejs-mediaelement').trigger('mouseleave');
+                                    },
+                                    out: function() {
+
+                                    }
+                                });
+                        }
+                        else {
+
+                        }
                     });
 
                     scope.$on('library_toggle_complete', function() {
