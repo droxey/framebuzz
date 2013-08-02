@@ -33,12 +33,12 @@ angular.module('framebuzz.directives', [])
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
 
-                    $('.mejs-video').mouseenter(function(e) {
+                    $('.mejs-mediaelement').mouseenter(function(e) {
                         $('.mejs-video').addClass('show-controls');
                         $('#player-layer').addClass('show-title');
                     });
                     
-                    $('.mejs-mediaelement').mouseleave(function(e) {
+                    $('.mejs-video').mouseleave(function(e) {
                         $('.mejs-video').addClass('fade-out-controls');
 
                         window.setTimeout(function() {
