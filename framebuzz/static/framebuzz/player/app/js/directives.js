@@ -32,14 +32,14 @@ angular.module('framebuzz.directives', [])
                     $('.mejs-time-loaded').hide();
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
-                    
-                    $('.mejs-video').mouseenter(function() {
-                        $(this).addClass('show-controls');
-                        $(this).parent().addClass('show-title');
+
+                    $('.mejs-mediaelement').mouseenter(function() {
+                        $('.mejs-video').addClass('show-controls');
+                        $('.mejs-video').parent().addClass('show-title');
                     });
                     
-                    $('.mejs-video').mouseleave(function() {
-                        $(this).addClass('fade-out-controls');
+                    $('.mejs-mediaelement').mouseleave(function() {
+                        $('.mejs-video').addClass('fade-out-controls');
                         window.setTimeout(function() {
                             $('.mejs-video').removeClass('fade-out-controls');
                             $('.mejs-video').removeClass('show-controls');
