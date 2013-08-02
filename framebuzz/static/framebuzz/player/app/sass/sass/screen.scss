@@ -687,13 +687,12 @@ object, embed, video, iframe {
                     margin-left: 211px;
                     padding-right: 5px;
                     width: 38px;
+                    opacity: 0.75;
 
                     ul.comment-stream li {
                         background-color: transparent;
                         border-bottom: medium none;
                         box-shadow: none;
-                        opacity: 0.5;
-                        transition: none;
                         @include single-transition(background-color 100ms ease-in-out);
 
                         img.img-circle {
@@ -706,12 +705,11 @@ object, embed, video, iframe {
                         span.collapsed-time {
                             cursor: pointer;
                             display: block;
-                            opacity: 0.91;
+                            opacity: 1;
                             height: 33px;
-                            @include single-transition(opacity 50ms ease-in-out);
 
                             em {
-                                background-color: rgba(0, 0, 0, .3);
+                                background-color: rgba(0, 0, 0, .4);
                                 color: white;
                                 display: block;
                                 font-family: 'proxima-nova';
@@ -730,9 +728,6 @@ object, embed, video, iframe {
                             }
 
                             &:hover {
-                                opacity: 1;
-                                @include single-transition(opacity 50ms ease-in-out);
-
                                 em {
                                     @include single-transition(opacity 50ms ease-in-out);
                                     opacity: 1;
