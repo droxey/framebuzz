@@ -3,7 +3,7 @@
         <div class="thread">
             <div class="header">
                 <a class="username">{{ thread.user.username }}</a>
-                <strong class="time">{{ thread.time_hms }}</strong>
+                <strong class="time" data-ng-click="openPlayerLink(thread.thread_url)">{{ thread.time_hms }}</strong>
             </div>
             <p ng-bind-html-unsafe="thread.comment"></p>
         </div>

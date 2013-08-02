@@ -485,6 +485,7 @@ angular.module('framebuzz.controllers', []).
                             var thread = getThreadById($rootScope.selectedThreadId);
                             window.setTimeout(function() {
                                 $scope.setSelectedThreadAndTime(thread);
+                                $scope.player.pause();
                             }, 1500);
                         }
                         else {
