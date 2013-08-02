@@ -35,7 +35,6 @@ angular.module('framebuzz.directives', [])
 
                     $('.mejs-mediaelement').mouseenter(function(e) {
                         $('.mejs-video').addClass('show-controls');
-                        $('#player-layer').addClass('show-title');
                     });
                     
                     $('.mejs-video').mouseleave(function(e) {
@@ -44,24 +43,15 @@ angular.module('framebuzz.directives', [])
                         window.setTimeout(function() {
                             $('.mejs-video').removeClass('fade-out-controls');
                             $('.mejs-video').removeClass('show-controls');
-                            $('#player-layer').removeClass('show-title');
                         }, 250);
                     });
 
                     scope.$on('$viewContentLoaded', function() {
-                        if ($state.is('player.activeView.comments') || 
-                            $state.is('player.activeView.thread') || 
-                            $state.is('player.userProfileView') ||
-                            $state.is('player.blendedView')) {
-                            $('#buzz-layer > div.panel').hoverIntent({
-                                over: function() {
-                                    $('.mejs-mediaelement').trigger('mouseleave');
-                                },
-                                out: function() {
-
-                                }
-                            });
-                        }
+                        $('#buzz-layer > div.panel').hoverIntent({
+                            over: function() {
+                                $('.mejs-mediaelement').trigger('mouseleave');
+                            }
+                        });
                     });
 
                     scope.$on('library_toggle_complete', function() {
@@ -96,6 +86,12 @@ angular.module('framebuzz.directives', [])
                     media.addEventListener('player_addtolibrary', function(e) {
                         broadcaster.prepForBroadcast({ broadcastType: 'player_addtolibrary' });
                     }, false);
+
+                    window.setTimeout(function() {
+                        var playerTitleHtml = $('<div>').append($('h1.video-title').clone()).html();
+                        $(playerTitleHtml).insertAfter('.mejs-share');
+                        console.log(playerTitleHtml);
+                    }, 1000);
                 }
             });
         };

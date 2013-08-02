@@ -213,6 +213,24 @@ object, embed, video, iframe {
                         }
                     }
 
+                    h1.video-title {
+                        color: rgba(255, 255, 255, 0.75);
+                        font-family: 'proxima-nova';
+                        font-size: 13.33px;
+                        font-weight: 500;
+                        left: 91px;
+                        height: 15px;
+                        line-height: 15px;
+                        margin: 13px 0;
+                        overflow: hidden;
+                        padding-top: 0;
+                        position: absolute;
+                        text-align: left;
+                        top: 0;
+                        width: 306px;
+                        z-index: 10;
+                    }
+
                     div.mejs-button {
                         bottom: 8px;
                         position: absolute;
@@ -320,25 +338,7 @@ object, embed, video, iframe {
             margin-top: 4.5px;
             width: 640px;
 
-            h1.video-title {
-                color: rgba(255, 255, 255, 0.75);
-                font-family: 'proxima-nova';
-                font-size: 13.33px;
-                font-weight: 500;
-                left: 91px;
-                height: 15px;
-                line-height: 15px;
-                margin: 13px 0;
-                opacity: 0;
-                overflow: hidden;
-                padding-top: 0;
-                position: absolute;
-                text-align: left;
-                top: 0;
-                width: 306px;
-                z-index: 10;
-                @include single-transition(opacity .25s ease-in-out);
-            }
+            h1.video-title { display: none; }
 
             table#heatmap {
                 background: #323232;
@@ -482,20 +482,6 @@ object, embed, video, iframe {
                             }
                         }
                     }
-                }
-            }
-        }
-
-        &.show-title {
-            #heatmap-and-post {
-                h1.video-title {
-                    opacity: 1;
-                    @include single-transition(opacity .25s ease-in-out);
-                }
-
-                #player-buttons {
-                    opacity: 1;
-                    @include single-transition(opacity .25s ease-in-out);
                 }
             }
         }
