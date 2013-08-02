@@ -368,7 +368,7 @@ object, embed, video, iframe {
                             display: inline-block;
                             height: 6px;
                             margin-right: 1px;
-                            width: 20.55px;
+                            
                             @include single-transition(background-color .25 ease-in);
 
                             &.rank-8 { background-color: #EBF5FF; }
@@ -379,6 +379,15 @@ object, embed, video, iframe {
                             &.rank-3 { background-color: #1F8FFF; }
                             &.rank-2 { background-color: #007AF5; }
                             &.rank-1 { background-color: #0070E0; }
+
+                            &:nth-child(even) {
+                                width: 20px;
+                            }
+
+                            
+                            &:nth-child(odd) {
+                                width: 21px;
+                            }
                             
                             &:first-child {
                                 @include border-top-left-radius(1px);
