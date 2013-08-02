@@ -33,13 +33,14 @@ angular.module('framebuzz.directives', [])
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
 
-                    $('.mejs-mediaelement').mouseenter(function() {
+                    $('.mejs-video').mouseenter(function(e) {
                         $('.mejs-video').addClass('show-controls');
-                        $('.mejs-video').parent().addClass('show-title');
+                        $('#player-layer').addClass('show-title');
                     });
                     
-                    $('.mejs-mediaelement').mouseleave(function() {
+                    $('.mejs-mediaelement').mouseleave(function(e) {
                         $('.mejs-video').addClass('fade-out-controls');
+
                         window.setTimeout(function() {
                             $('.mejs-video').removeClass('fade-out-controls');
                             $('.mejs-video').removeClass('show-controls');
@@ -52,18 +53,14 @@ angular.module('framebuzz.directives', [])
                             $state.is('player.activeView.thread') || 
                             $state.is('player.userProfileView') ||
                             $state.is('player.blendedView')) {
+                            $('#buzz-layer > div.panel').hoverIntent({
+                                over: function() {
+                                    $('.mejs-mediaelement').trigger('mouseleave');
+                                },
+                                out: function() {
 
-                                $('#buzz-layer > div.panel').hoverIntent({
-                                    over: function() {
-                                        $('.mejs-mediaelement').trigger('mouseleave');
-                                    },
-                                    out: function() {
-
-                                    }
-                                });
-                        }
-                        else {
-
+                                }
+                            });
                         }
                     });
 
