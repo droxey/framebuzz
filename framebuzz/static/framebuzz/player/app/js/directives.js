@@ -22,7 +22,7 @@ angular.module('framebuzz.directives', [])
                 enableKeyboard: false,
                 timerRate: 500,
                 defaultVideoWidth: '640px',
-                defaultVideoHeight: '380px',
+                defaultVideoHeight: '385px',
                 autosizeProgress: false,
                 success: function(media) {
                     $rootScope.player = media;
