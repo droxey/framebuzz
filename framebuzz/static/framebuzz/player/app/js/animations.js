@@ -7,7 +7,9 @@ angular.module('framebuzz.animations', [])
                 element.addClass('animated fadeInDown');
             },
             start: function(element, done, memo) {
-                
+                window.setTimeout(function() {
+                    element.removeClass('animated fadeInDown');
+                }, 1000);
             }
         };
     });
