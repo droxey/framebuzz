@@ -23,8 +23,6 @@ def video_embed(request, video_id):
     video, created = get_or_create_video(video_id)
     next_url = '%s?close=true' % reverse('video-embed', args=(video.video_id,))
 
-    print video.id
-
     if request.user.is_authenticated():
         # Send a signal that the user has viewed this video.
         action.send(request.user, verb='viewed video', action_object=video)
