@@ -51,6 +51,9 @@ angular.module('framebuzz.directives', [])
                             $('#buzz-layer > div.panel').hoverIntent({
                                 over: function() {
                                     $('.mejs-mediaelement').trigger('mouseleave');
+                                },
+                                out: function() {
+
                                 }
                             });
                         }
@@ -93,7 +96,7 @@ angular.module('framebuzz.directives', [])
                         var playerTitleHtml = $('<div>').append($('h1.video-title').clone()).html();
                         $(playerTitleHtml).insertAfter('.mejs-share');
                         console.log(playerTitleHtml);
-                    }, 1000);
+                    }, 1500);
                 }
             });
         };
