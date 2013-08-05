@@ -27,9 +27,9 @@ angular.module('framebuzz.directives', [])
                 success: function(media) {
                     $rootScope.player = media;
                     safeApply($rootScope);
-
+                    
                     $('.mejs-volume-button').addClass('mejs-fade-in');
-                    $('.mejs-time-loaded').hide();
+                    $('.mejs-time-loaded').remove();
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
 

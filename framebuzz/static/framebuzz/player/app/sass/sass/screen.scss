@@ -116,7 +116,8 @@ object, embed, video, iframe {
                     width: 640px;
 
                     div.mejs-time-rail {
-                        bottom: -12px;
+                        top: 390px;
+                        bottom: 0;
                         float: none;
                         height: 6px;
                         padding-top: 0;
@@ -124,16 +125,22 @@ object, embed, video, iframe {
                         width: 640px;
                         z-index: 200;
 
+                        @media only screen and (-webkit-min-device-pixel-ratio:0) {
+                            top: 391px;
+                        }
+
                         span.mejs-time-total {
                             @include border-radius(1px, 1px);
                             background: none;
-                            height: 6px;
+                            height: 7px;
+                            line-height: 7px;
                             margin: 0 8px;
                             width: 624px;
 
                             span.mejs-time-current {
+                                @include border-radius(1px, 1px);
                                 @include background-image(linear-gradient(rgba(75, 185, 222, 0.85), rgba(50, 104, 151, 0.85))); 
-                                height: 6px;
+                                height: 7px;
                             }
 
                             .mejs-time-float {
@@ -149,6 +156,7 @@ object, embed, video, iframe {
                                     font-family: 'proxima-nova';
                                     font-size: 12px;
                                     font-weight: 300;
+                                    line-height: 11px;
                                     letter-spacing: -0.1px;
                                 }
 
