@@ -27,7 +27,11 @@ angular.module('framebuzz.directives', [])
                 success: function(media) {
                     $rootScope.player = media;
                     safeApply($rootScope);
-                    
+
+                    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+                        $('.mejs-time-rail').addClass('safari');
+                    }
+
                     $('.mejs-volume-button').addClass('mejs-fade-in');
                     $('.mejs-time-loaded').remove();
                     $('.mejs-time-handle').remove();
