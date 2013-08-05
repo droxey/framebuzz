@@ -73,6 +73,7 @@ class BaseCommentSerializer(serializers.ModelSerializer):
     is_favorite = serializers.SerializerMethodField('get_is_favorite')
     is_flagged = serializers.SerializerMethodField('get_is_flagged')
     is_following = serializers.SerializerMethodField('get_is_following')
+    is_visible = serializers.SerializerMethodField('get_is_visible')
     comment = serializers.SerializerMethodField('get_comment')
 
     def get_submit_date(self, obj):
@@ -81,7 +82,7 @@ class BaseCommentSerializer(serializers.ModelSerializer):
             return dateformat.format(local_date, 'n/j/y h:i A')
 
     def get_is_favorite(self, obj):
-        user = self.context.get('user')
+        user = self.context.get('user', None)
 
         if user and user.id != obj.user.id and not isinstance(user, AnonymousUser):
             is_favorite = Action.objects.actor(user, 
@@ -92,7 +93,7 @@ class BaseCommentSerializer(serializers.ModelSerializer):
         return False
 
     def get_is_flagged(self, obj):
-        user = self.context.get('user')
+        user = self.context.get('user', None)
 
         if user and user.id != obj.user.id and not isinstance(user, AnonymousUser):
             flags = CommentFlag.objects.filter(comment=obj, user=user, 
@@ -112,6 +113,12 @@ class BaseCommentSerializer(serializers.ModelSerializer):
     def get_comment(self, obj):
         return urlize(obj.comment, trim_url_limit=None, nofollow=True) \
             .replace('<a ', '<a target="_blank" ')
+
+    def get_is_visible(self, obj):
+        user = self.context.get('user', None)
+        if user and user.id == obj.user.id and not isinstance(user, AnonymousUser):
+            return True
+        return obj.is_visible
 
 
 class MPTTCommentReplySerializer(BaseCommentSerializer):
