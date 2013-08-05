@@ -319,7 +319,6 @@ angular.module('framebuzz.controllers', []).
                         var foundThread = null;
                         
                         if ($scope.videoInstance.threads.length > 0) {
-                            console.log($scope.videoInstance.threads);
                             for (var i = 0; i < $scope.videoInstance.threads.length; i++) {
                                 if ($scope.videoInstance.threads[i].time <= time) {
                                     foundThread = $scope.videoInstance.threads[i];

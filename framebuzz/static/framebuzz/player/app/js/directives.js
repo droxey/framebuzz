@@ -47,11 +47,13 @@ angular.module('framebuzz.directives', [])
                     });
 
                     scope.$on('$viewContentLoaded', function() {
-                        $('#buzz-layer > div.panel').hoverIntent({
-                            over: function() {
-                                $('.mejs-mediaelement').trigger('mouseleave');
-                            }
-                        });
+                        if ($('#buzz-layer > div.panel').length > 0) {
+                            $('#buzz-layer > div.panel').hoverIntent({
+                                over: function() {
+                                    $('.mejs-mediaelement').trigger('mouseleave');
+                                }
+                            });
+                        }
                     });
 
                     scope.$on('library_toggle_complete', function() {
@@ -210,7 +212,6 @@ angular.module('framebuzz.directives', [])
                 var nextUrl = location.href.replace(location.hash, "");
                 var loginUrl = attrs.loginpopup + '&nextUrl=' + nextUrl;
                 var newWindow = window.open(loginUrl,'frameBuzzSSOLoginWindow','toolbar=0,resizable=0,status=0,width=640,height=528');
-                console.log(loginUrl);
                 if (window.focus) { newWindow.focus(); }
                 return false;
             });
