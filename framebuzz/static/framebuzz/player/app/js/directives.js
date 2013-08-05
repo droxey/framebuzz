@@ -210,6 +210,7 @@ angular.module('framebuzz.directives', [])
                 var nextUrl = location.href.replace(location.hash, "");
                 var loginUrl = attrs.loginpopup + '&nextUrl=' + nextUrl;
                 var newWindow = window.open(loginUrl,'frameBuzzSSOLoginWindow','toolbar=0,resizable=0,status=0,width=640,height=528');
+                console.log(loginUrl);
                 if (window.focus) { newWindow.focus(); }
                 return false;
             });
