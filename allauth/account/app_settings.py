@@ -107,7 +107,7 @@ class AppSettings(object):
         """
         Enforce uniqueness of e-mail addresses
         """
-        return self._setting("UNIQUE_EMAIL", True)
+        return self._setting("UNIQUE_EMAIL", False)
 
     @property
     def SIGNUP_PASSWORD_VERIFICATION(self):
