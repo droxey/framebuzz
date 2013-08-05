@@ -20,7 +20,7 @@ from .adapter import get_adapter
 class EmailAddress(models.Model):
 
     user = models.ForeignKey(allauth_app_settings.USER_MODEL)
-    email = models.EmailField(unique=app_settings.UNIQUE_EMAIL)
+    email = models.EmailField(unique=False)
     verified = models.BooleanField(default=False)
     primary = models.BooleanField(default=False)
 
@@ -29,8 +29,6 @@ class EmailAddress(models.Model):
     class Meta:
         verbose_name = _("email address")
         verbose_name_plural = _("email addresses")
-        if not app_settings.UNIQUE_EMAIL:
-            unique_together = [("user", "email")]
 
     def __str__(self):
         return u"%s (%s)" % (self.email, self.user)
