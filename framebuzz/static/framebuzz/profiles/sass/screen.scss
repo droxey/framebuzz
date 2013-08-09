@@ -6,6 +6,20 @@
 @import "compass/reset";
 
 /*
+ *      Global
+ */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, 
+acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, 
+form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, 
+canvas, details, embed, figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+
+/*
  *      Mixins
  */
 
@@ -67,10 +81,10 @@ div.navbar {
 
         ul.nav {
             padding-top: 5px;
+            padding-right: 20px;
 
             li {
                 a {
-                    background: transparent url('../img/divider.png') repeat-y top left;
                     border-left: none;
                     color: rgba(255, 255, 255, 0.48);
 
@@ -83,6 +97,28 @@ div.navbar {
 
                 i {
                     color: rgba(255, 255, 255, 0.48);
+                }
+
+                &.user {
+                    background: transparent url('../img/divider.png') repeat-y top left;
+                    padding-left: 15px;
+
+                    a {
+                        display: block;
+                        float: left;
+
+                        &.avatar {
+                            height: 28px;
+                            padding: 7px 0;
+                            width: 28px;
+
+                            img.img-circle {
+                                border: 2px solid white;
+                                height: 28px;
+                                width: 28px;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -131,6 +167,9 @@ div.content {
 
             img.img-circle {
                 border: 6px solid white;
+                -moz-box-shadow: 3px 3px 7px 0 rgba(0, 0, 0, .52);
+                -webkit-box-shadow: 3px 3px 7px 0 rgba(0, 0, 0, .52);
+                box-shadow: 3px 3px 7px 0 rgba(0, 0, 0, .52);
                 display: block;
                 float: left;
                 position: relative;
@@ -220,8 +259,9 @@ div.content {
 
                             &.followers { width: 49px; }
                             &.following { width: 49px; }
-                            &.conversations { width: 77px; }
-                            &.favorites { width: 44px; }
+                            &.conversations { width: 69px; }
+                            &.favorites { width: 46px; }
+                            &.home { display: none; }
 
                             &.website {
                                 background: none;
@@ -312,6 +352,79 @@ div.content {
     }
 
     #profile-container {
-        padding: 0 25px;
+        font-family: 'futura-pt-condensed';
+        padding: 22px 25px;
+
+        #following, #followers {
+            h1 {
+                border-bottom: 1px solid #f7f7f7;
+                color: #333333;
+                display: block;
+                font-family: 'proxima-nova';
+                font-weight: 300;
+                font-size: 26.15px;
+                line-height: 26px;
+                padding-top: 22px;
+                padding-bottom: 20px;
+                width: 100%;
+
+                a {
+                    font-size: 12px;
+                    margin-left: 9px;
+                    vertical-align: baseline;
+                }
+            }
+
+            ul#feed {
+                border-top: 1px solid #ebebeb;
+                padding-top: 9px;
+
+                li {
+                    display: block;
+                    float: left;
+                    padding: 7px;
+                    min-height: 36px;
+                    max-height: 129px;
+                    min-width: 283px;
+
+                    &:nth-child(even) {
+                        background-color: #f8f8f8;
+                    }
+                    
+                    &:nth-child(odd) {
+                        background-color: #e7e6e6;
+                    }
+
+                    img.img-circle {
+                        border: 2px solid white;
+                        display: block;
+                        float: left;
+                        height: 32px;
+                        margin-right: 5px;
+                        width: 32px;
+                    }
+                    
+                    div.feed-header {
+                        margin-top: 3px;
+                        float: left;
+
+                        h2 {
+                            a {
+                                color: rgba(31, 31, 31, 0.83);
+                                font-size: 18px;
+                                font-weight: 500;
+                            }
+                        }
+
+                        h3 {
+                            color: rgba(102, 102, 102, 0.83);
+                            font-family: 'proxima-nova';
+                            font-weight: 500;
+                            font-size: 12px; 
+                        }
+                    }
+                }
+            }
+        }
     }
 }

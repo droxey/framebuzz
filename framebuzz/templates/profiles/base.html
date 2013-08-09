@@ -1,4 +1,4 @@
-{% load staticfiles compress %}
+{% load staticfiles compress avatar_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,18 +42,23 @@
                 <a class="brand" href="http://www.framebuzz.com">
                     <img src="{% static 'framebuzz/profiles/img/logo.png' %}" alt="FrameBuzz" height="48" width="208" />
                 </a>
-                <ul class="nav pull-right">                
-                    <li class="settings hidden-phone">
-                        <a href="#" class="dropdown-toggle hidden-phone">
-                            Library
-                        </a>
-                    </li>
-                    <li class="settings hidden-phone">
-                        <a href="personal-info.html" role="button">
-                            <i class="icon-cog"></i>
-                        </a>
-                    </li>
-                </ul>   
+                {% if request.user.is_authenticated %}
+                    <ul class="nav pull-right">               
+                        <li class="settings">
+                            <a href="#" class="dropdown-toggle hidden-phone">
+                                Library
+                            </a>
+                        </li>
+                        <li class="settings user clearfix">
+                            <a href="{% url 'profiles-home' request.user.username %}" role="button" class="avatar">
+                                <img src="{% avatar_url request.user 58 %}" alt="" height="28" width="28" class="img-circle" />
+                            </a>
+                            <a href="#" role="button">
+                                <i class="icon-cog"></i>
+                            </a>
+                        </li>
+                    </ul>  
+                {% endif %} 
             </div>         
         </div>
     </div>

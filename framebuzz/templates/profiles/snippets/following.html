@@ -1,36 +1,38 @@
 {% load i18n avatar_tags %}
 
-  {% if following %}
-  <div class="page-header">
-      <h1>{% blocktrans %}Users {{ profile_user.username }} Follows{% endblocktrans %}</h1>
-  </div>
-  <p class="form-description"></p>
-  <ul id="feed">
+<h1>
+  Following 
+  <a href="{% url 'profiles-home' profile_user.username %}">
+    Return to
+    {% if profile_user.get_profile %}
+        {{ profile_user.get_profile.normalized_first_name }}'s
+      {% else %}
+        {{ profile_user.username }}'s
+      {% endif %}
+      Profile
+  </a>
+</h1>
+
+{% if following %}
+  <ul id="feed" class="clearfix">
     {% for follower in following %}
       <li class="clearfix">
-        <img src="{% avatar_url follower 50 %}" alt="" height="50" width="50" class="img-circle" />
-        <div class="feed-header clearfix">
-          <div class="details clearfix">
-            <h1>
-              <a href="{% url 'user-profile' follower.username %}">{{ follower }}</a>
-            </h1>
-            {% if follower.get_profile and follower.get_profile.website %}
-              <span class="website">
-                Website: <a class="reply" href="{{ follower.get_profile.website.url }}" target="blank">{{ follower.get_profile.website.name }}</a>
-              </span>
-            {% endif %}
-          </div>
-          {% if follower.get_profile %}
-            {% if follower.get_profile.bio %}
-              <p><strong>Bio</strong>: {{ follower.get_profile.bio }}</p>
-            {% endif %}
-          {% endif %}
+        <img src="{% avatar_url follower 64 %}" alt="" height="32" width="32" class="img-circle" />
+        <div class="feed-header">
+          <h2><a href="{% url 'profiles-home' follower.username %}">{{ follower }}</a></h2>
+          <h3>Austin, TX</h3>
         </div>
       </li>
     {% endfor %}
   </ul>
- {% else %}
+{% else %}
   <div class="alert alert-info">
-    <strong>{{ profile_user.username }}</strong> isn't following anyone yet!
+    <strong>
+      {% if profile_user.get_profile %}
+        {{ profile_user.get_profile.normalized_first_name }}
+      {% else %}
+        {{ profile_user.username }}
+      {% endif %}
+      </strong> isn't following anyone yet!
   </div>
-  {% endif %}
+{% endif %}

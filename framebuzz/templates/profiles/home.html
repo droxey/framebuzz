@@ -20,26 +20,29 @@
                 <nav>
                     <ul class="nav nav-tabs">
                         <li class="location"></li>
+                        <li class="home">
+                            <a data-url="{% url 'profiles-home' profile_user.username %}" href="#home" class="tab-link active"></a>
+                        </li>
                         <li class="followers">
-                            <a href="{% url 'profiles-followers' profile_user.username %}" data-target="#followers" data-toggle="tab">
+                            <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
                                 Followers
                                 <em>{{ profile_followers|length }}</em>
                             </a>
                         </li>
                         <li class="following">
-                            <a href="{% url 'profiles-following' profile_user.username %}" data-target="#following" data-toggle="tab">
+                            <a data-url="{% url 'profiles-following' profile_user.username %}" href="#following" class="tab-link">
                                 Following
                                 <em>{{ profile_following|length }}</em>
                             </a>
                         </li>
                         <li class="conversations">
-                            <a href="{% url 'profiles-conversations' profile_user.username %}" data-target="#conversations" data-toggle="tab">
+                            <a data-url="{% url 'profiles-conversations' profile_user.username %}" href="#conversations" class="tab-link">
                                 Conversations
                                 <em>{{ profile_conversations|length }}</em>
                             </a>
                         </li>
                         <li class="favorites">
-                            <a href="{% url 'profiles-favorites' profile_user.username %}" data-target="#favorites" data-toggle="tab">
+                            <a data-url="{% url 'profiles-favorites' profile_user.username %}" href="#favorites" class="tab-link">
                                 Favorites
                                 <em>{{ profile_favorites|length }}</em>
                             </a>
@@ -47,7 +50,7 @@
                         <li class="website">
                             {% if profile_user.get_profile and profile_user.get_profile.website %}
                               <span class="website">
-                                Website: <a href="{{ profile_user.get_profile.website.url }}" target="blank" rel="nofollow">{{ profile_user.get_profile.website.name }}</a>
+                                Website: <a href="{{ profile_user.get_profile.website.url }}" target="_blank" rel="nofollow">{{ profile_user.get_profile.website.name }}</a>
                               </span>
                             {% endif %}
                         </li>
@@ -63,18 +66,31 @@
         </div>
     </header>
     <div id="profile-container" class="tab-content">
-        <div id="home"></div>
-        <div id="followers"></div>
-        <div id="following"></div>
-        <div id="conversations"></div>
-        <div id="favorites"></div>
+        <div class="tab-pane active" id="home"></div>
+        <div class="tab-pane" id="followers"></div>
+        <div class="tab-pane" id="following"></div>
+        <div class="tab-pane" id="conversations"></div>
+        <div class="tab-pane" id="favorites"></div>
     </div>
 {% endblock %}
 
 {% block page_javascript %}
     <script type="text/javascript">
        $(function() {
-            $('header > nav > ul.tabs').tab();
+            $('.active a').tab('show');
+
+            $('a.tab-link').click(function(e) {
+                    e.preventDefault();
+                  
+                    var url = $(this).attr('data-url');
+                    var href = this.hash;
+                    var pane = $(this);
+                    
+                    $(href).load(url, function(result) {   
+                        console.log(result);   
+                        pane.tab('show');
+                    });
+            });
         });
     </script>
 {% endblock %}
