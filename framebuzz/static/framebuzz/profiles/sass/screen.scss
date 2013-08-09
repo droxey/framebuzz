@@ -1,0 +1,317 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+
+/*
+ *      Mixins
+ */
+
+@mixin background-image-retina($file, $type, $width, $height) {
+  background-image: url($file + '.' + $type);
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 144dpi) {
+    & {
+      background-image: url($file + '@2x.' + $type);
+      background-size: $width $height;
+    }
+  }
+}
+
+/*
+ *      Elements
+ */
+
+body {
+    color: #333333;     
+    font: 12px/16px normal "proxima-nova", sans-serif;
+    margin: 0;
+}
+
+div.wrapper {
+    margin: 0 auto;
+    width: 676px;
+}
+
+/*
+ *      Navigation
+ */
+
+div.navbar {
+    @include background-image-retina('../img/noise', 'png', 57px, 57px);
+    background-color: rgba(39, 39, 39, 1.0);
+    background-repeat: repeat-x;
+    box-shadow: none;
+
+    div.navbar-inner {
+        background: none;
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMzA4KSIvPjxzdG9wIG9mZnNldD0iMC45OCIgc3RvcC1jb2xvcj0icmdiYSgwLCAwLCAwLCAwKSIvPjwvcmFkaWFsR3JhZGllbnQ+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDApIiAvPjxyZWN0IHg9Ii0yMC45MDkxJSIgeT0iLTEwMC40MiUiIHdpZHRoPSIxNTYwcHgiIGhlaWdodD0iMjAwLjg0JSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
+        background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 780, color-stop(0%, rgba(255, 255, 255, 0.308)), color-stop(98%, rgba(0, 0, 0, 0)));
+        background-image: -webkit-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        background-image: -moz-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        background-image: -ms-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        background-image: -o-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        background-image: radial-gradient(780px 100.42% at center 0%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        border-left: 0 none;
+        box-shadow: none;
+        margin: 0 auto;
+        width: 100%;
+
+        a.brand {
+            border: none;
+            padding: 8px 0px 0px 20px;
+            text-shadow: none;
+        }
+
+        ul.nav {
+            padding-top: 5px;
+
+            li {
+                a {
+                    background: transparent url('../img/divider.png') repeat-y top left;
+                    border-left: none;
+                    color: rgba(255, 255, 255, 0.48);
+
+                    &.dropdown-toggle { 
+                        background-image: none; 
+                        font-size: 19.33px;
+                        font-family: 'futura-pt-condensed';
+                    }
+                }
+
+                i {
+                    color: rgba(255, 255, 255, 0.48);
+                }
+            }
+        }
+    }
+}
+
+#sidebar-nav {
+    padding: 20px 0;
+    width: 214px;
+
+    h2 {
+        background: rgba(109, 109, 109, 0.11);
+        color: #7f7f7f;
+        font-family: 'proxima-nova';
+        font-weight: 500;
+        font-size: 17.13px;
+        line-height: 24px;
+        text-align: center;
+    }
+
+    ul {
+        margin: 25px 0;
+
+        li {
+
+        }
+    }
+}
+
+div.content {
+    border-right: 1px solid #DAE3E9;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0 auto;
+    overflow: visible;
+    width: 676px;
+
+    header {
+        font-family: 'futura-pt-condensed';
+        font-weight: 500;
+
+        div.user-info {
+            padding-top: 18px;
+            padding-left: 25px;
+            padding-right: 25px;
+
+            img.img-circle {
+                border: 6px solid white;
+                display: block;
+                float: left;
+                position: relative;
+                margin-right: 10px;
+                top: 8px;
+                z-index: 3;
+            }
+
+            div.user-details {
+                float: left;
+
+                h1 {
+                    color: #333333;
+                    font-size: 44.74px;
+                    line-height: 46px;
+                    padding-top: 20px;
+                    padding-bottom: 8px;
+                }
+            }
+        }
+
+        div.ribbon-wrapper {
+            position: relative;
+
+            div.ribbon-front {
+                background-color: rgba(31, 31, 31, .67);  
+                height: 58px;
+                width: 698px;
+                position: relative;
+                left: 0px;
+                z-index: 2;
+
+                nav {
+                    ul.nav-tabs {
+                        border-bottom: none;
+
+                        li {
+                            background: transparent url('../img/divider.png') repeat-y top right;
+                            border-radius: none;
+                            border: none;
+                            display: block;
+                            float: left;
+                            height: 54px;
+                            padding: 0 11px;
+                            margin: 2px 0;
+
+                            a {
+                                color: white;
+                                font-size: 18.87px;
+                                font-weight: 300;
+                                margin-right: 0;
+                                padding-top: 6px;
+                                padding-left: 0;
+                                padding-right: 0;
+                                padding-bottom: 0;
+                                text-decoration: none;
+
+                                em {
+                                    color: rgba(255, 255, 255, 0.45);
+                                }
+
+                                &:hover {
+                                    background: none;
+                                    border-radius: none;
+                                    border: none;
+                                }
+                            }
+
+                            &:first-child {
+                                padding-left: 0;
+                            }
+
+                            &:last-child {
+                                background: none;
+                                padding-right: 0;
+                            }
+
+                            &.location { 
+                                padding-left: 0;
+                                text-align: center;
+                                width: 193px; 
+
+                                a {
+                                    color: rgba(255, 255, 255, 0.45);
+                                }
+                            }
+
+                            &.followers { width: 49px; }
+                            &.following { width: 49px; }
+                            &.conversations { width: 77px; }
+                            &.favorites { width: 44px; }
+
+                            &.website {
+                                background: none;
+                                padding-right: 0;
+                                text-align: right;
+                                width: 158px; 
+
+                                a {
+                                    color: rgba(255, 255, 255, 0.45);
+                                }
+                            }
+
+                            &.active > a {
+                                background: none;
+                                border-radius: none;
+                                border: none;
+                                outline: none;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .ribbon-edge-topleft, 
+            .ribbon-edge-topright, 
+            .ribbon-edge-bottomleft, 
+            .ribbon-edge-bottomright {
+                position: absolute;
+                z-index: 1;
+                border-style:solid;
+                height:0px;
+                width:0px;
+            }
+
+            .ribbon-edge-bottomleft,
+            .ribbon-edge-bottomright {
+                top: 58px;
+            }
+
+            .ribbon-edge-topleft,
+            .ribbon-edge-bottomleft {
+                left: 0px;
+                border-color: transparent rgba(164, 164, 164, .51) transparent transparent;
+            }
+
+            .ribbon-edge-topleft {
+                top: 0px;
+                border-width: 0px 0px 0 0;
+            }
+
+            .ribbon-edge-bottomleft {
+                border-width: 0 0px 0px 0;
+            }
+
+            .ribbon-edge-topright,
+            .ribbon-edge-bottomright {
+                left: 676px;
+                border-color: transparent transparent transparent rgba(164, 164, 164, .51);
+            }
+
+            .ribbon-edge-topright {
+                top: 0px;
+                border-width: 0px 0 0 23px;
+            }
+
+            .ribbon-edge-bottomright {
+                border-width: 0 0 23px 23px;
+            }
+
+            .ribbon-back-left {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 0px;
+                height: 58px;
+                z-index: 0;
+            }
+
+            .ribbon-back-right {
+                position: absolute;
+                top: 23px;
+                right: 0px;
+                width: 0px;
+                height: 58px;
+                z-index: 0;
+            }
+        }
+    }
+
+    #profile-container {
+        padding: 0 25px;
+    }
+}

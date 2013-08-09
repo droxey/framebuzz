@@ -9,17 +9,20 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Admin
+    # Admin:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
-    # Player API
+    # Player API:
     url(r'^v/', include('framebuzz.apps.api.urls')),
+
+    # FrameBuzz User Profiles:
+    url(r'^profile/', include('framebuzz.apps.profiles.urls')),
 
     # Test Page for Beta:
     url(r'^test/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_test', name='video-test'),
 
-    # Django-AllAuth
+    # Django-AllAuth:
     (r'^accounts/', include('allauth.urls')),
 )
 

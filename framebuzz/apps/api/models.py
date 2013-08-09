@@ -44,8 +44,7 @@ class UserProfile(models.Model):
         unique_together = ['user', 'website']
 
     def get_absolute_url(self):
-        #return reverse('user-profile', args=[str(self.user.username)])
-        return None
+        return reverse('profile-home', args=[str(self.user.username)])
 
     def __unicode__(self):
         return "%s's profile" % self.user

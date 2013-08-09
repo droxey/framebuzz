@@ -1,0 +1,26 @@
+{% load avatar_tags %}
+
+<div class="pagination-page">
+  <ul id="feed">
+    {% for comment in page_obj.object_list %}
+      <li class="clearfix">
+        <img src="{% avatar_url comment.user 50 %}" alt="" height="50" width="50" />
+        <div class="feed-header clearfix">
+          <div class="details clearfix">
+            <h1>{{ comment.user.username }}</h1>
+            {% if comment.parent %}
+              <a class="reply">@{{ comment.parent.user.username }}</a>
+            {% endif %}
+            <span class="posted-on"><a href="{{ comment.get_absolute_url }}">{{ comment.submit_date|timesince}} ago</a></span>
+          </div>
+          <p>{{ comment.comment }}</p>
+        </div>
+      </li>
+    {% empty %}
+      <li class="no-comments">
+        <p>No favorites yet!</p>
+      </li>
+    {% endfor %}
+  </ul>
+  {% include "dashboard/snippets/pagination.html" %}
+</div>
