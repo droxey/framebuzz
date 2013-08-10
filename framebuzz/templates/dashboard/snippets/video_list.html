@@ -1,0 +1,43 @@
+{% load comments %}
+<!-- Video Library list -->
+<div id="video-library-listview" class="row-fluid">
+    <table class="table table-hover" id="list-view-videos">
+        <thead>
+            <tr id="header-row">
+                <th class="span4"><span class="line"></span>Title</th>
+                <th class="span2"><span class="line"></span>Length</th>
+                <th class="span3"><span class="line"></span>Date Added</th>
+                <th class="span2"><span class="line"></span>Added By</th>
+                <th class="span3"><span class="line"></span>Comments</th>
+                <th class="span3 td-hidden"><span class="line"></span>Image</th>
+                <th class="span1">Select<input type="checkbox" id="chk-all"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for video in library %}
+            {% get_comment_count for video as comment_count %}
+            {% if forloop.first %}
+            <tr class="first">
+                <td>{{ video.title }}</td>
+                <td>{{ video.timeInHMS }}</td>
+                <td>{{ video.added_on }}</td>
+                <td class="description">{{ video.added_by }}</td>
+                <td>{{ comment_count }}</td>
+                <td class="td-hidden"><img src="{{video.default_thumbnail}}"/></td>
+                <td><input type="checkbox" data-videoid="{{video.video_id}}"></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>{{ video.title }}</td>
+                <td>{{ video.timeInHMS }}</td>
+                <td>{{ video.added_on }}</td>
+                <td class="description">{{ video.added_by }}</td>
+                <td>{{ comment_count }}</td>
+                <td class="td-hidden"><img src="{{video.default_thumbnail}}"/></td>
+                <td><input type="checkbox" data-videoid="{{video.video_id}}"></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

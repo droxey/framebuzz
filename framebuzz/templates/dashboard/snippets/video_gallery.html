@@ -1,0 +1,22 @@
+{% load comments %}
+<!-- Video Gallery Template -->
+<hr/>
+<div class="gallery gallery-wrapper" id='gallery-wrapper'>
+    <div class="row gallery-row">
+        {% for video in library %}
+            {% get_comment_count for video as comment_count %}
+        <div class="span2 img-container" >
+            <div class="img-box" data-videoid="{{video.video_id}}" comment_count='{{comment_count}}'>
+                <!--<span class="icon trash">
+                    <i class="gallery-trash"></i>
+                </span>-->
+                <div><img src="{{ video.default_thumbnail }}" imgtype="gallery"></div>
+                 <p class="title">{{ video.title }}</p>
+            </div>
+        </div>
+    {% endfor%}
+    </div>
+</div>
+
+<!-- 120 x 90 -->
+

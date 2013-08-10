@@ -8,19 +8,27 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Admin
+    # Admin:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
-    # API
-    url(r'^v/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_embed', name='view-content'),
+    # Player API:
+    url(r'^v/', include('framebuzz.apps.api.urls')),
+
+    # FrameBuzz User Profiles:
+    url(r'^profile/', include('framebuzz.apps.profiles.urls')),
+
+    # Test Page for Beta:
+    url(r'^test/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_test', name='video-test'),
 
     # Dashboard
     url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
 
     # Django-AllAuth
     (r'^accounts/', include('allauth.urls')),
-	
+    
+    # Django-Comments:
+    (r'^comments/', include('django.contrib.comments.urls')),
 )
 
 if settings.DEBUG:

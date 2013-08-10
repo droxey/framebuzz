@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/layout.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/elements.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/icons.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/dashboard-custom.css'%}">
+      
 
     <!-- this page specific styles -->
     <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/compiled/index.css' %}" type="text/css" media="screen" />    
@@ -51,18 +51,18 @@
             <a class="brand" href="index.html">{% block navbar-Title %}Framebuzz<!--<img src="img/logo.png">-->{% endblock %}</a>
 
            {% block navbar-profile %}
-            <ul class="nav pull-right">                    
+           <!-- <ul class="nav pull-right">                    
                  <li class="dropdown">
                     <a href="#" class="dropdown-toggle hidden-phone" data-toggle="dropdown">
                         My Framebuzz Profile
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'profile' %}">Personal info</a></li>
-                        <li><a href="{% url 'settings' %}">Account settings</a></li>
+                        <li><a href="{% url 'dashboard-profile' %}">Personal info</a></li>
+                        <li><a href="{% url 'dashboard-settings' %}">Account settings</a></li>
                     </ul>
                 </li>
-            </ul>            
+            </ul>     -->       
             {% endblock %}
         </div>
     </div>
@@ -73,7 +73,7 @@
         <ul id="dashboard-menu">
             {% block sidebar-publisher %}
             <li>
-                <a href="{% url 'publisher' %}" class="inactive-link">
+                <a href="{% url 'dashboard-publisher' %}" class="inactive-link">
                     <i class="icon-home"></i>
                     <span>Publisher</span>
                 </a>
@@ -81,31 +81,34 @@
             {% endblock %}
             {% block sidebar-videos %}
             <li>
-                <a href="{% url 'videos' %}" class="dropdown-toggle">
+                <a href="{% url 'dashboard-videos' 'list' %}" class="dropdown-toggle">
                     <i class="icon-film"></i>
                     <span>Video</span>
                     <i class="icon-chevron-down"></i>
                 </a>    
                 <ul class="submenu">
-                    <li><a href="{% url 'videos' %}">Library</a></li>
-                    <li><a href="{% url 'videos-fbuzz-one' %}">Framebuzz a Video</a></li>
+                    <li><a href="{% url 'dashboard-videos' 'list' %}">Library</a></li>
+                    <li><a href="{% url 'dashboard-add-videos' %}">FrameBuzz a Video</a></li>
                 </ul>
             </li>
             {% endblock %}
             {% block sidebar-moderator %}
             <li>
-                <a href="{% url 'moderator'  %}" class="dropdown-toggle">
+                <a href="{% url 'dashboard-moderators-queue'  %}" class="dropdown-toggle">
                     <i class="icon-group"></i>
                     <span>Moderator</span>
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="{% url 'moderator'  %}">Comment Queue</a></li>
-                    <li><a href="{% url 'moderator-basic' %}">Basic Controls</a></li>
-                    <li><a href="{% url 'moderator-advanced' %}">Advanced Controls</a></li>
+                    <li><a href="{% url 'dashboard-moderators-queue'  %}">Comment Queue</a></li>
+                    
+                    <!--<li><a href="{% url 'dashboard-moderators-basic' %}">Basic Controls</a></li>
+                    <li><a href="{% url 'dashboard-moderators-advanced' 'rule_set' %}">Advanced Controls</a></li>
+                    -->
                 </ul>
             </li>
             {% endblock %}
+            {% comment %}
             {% block sidebar-analytics %}
             <li>
                 <a href="#" class="inactive-link">
@@ -114,16 +117,17 @@
                 </a>
             </li>
             {% endblock %}
-<!--
+            {% endcomment %}
+
             {% block sidebar-settings %}
             <li>
-                <a href="{% url 'settings' %}">
+                <a href="{% url 'dashboard-settings' %}">
                     <i class="icon-cog"></i>
                     <span>Settings</span>
                 </a>
             </li>
             {% endblock %}
--->	    
+	    
         </ul>
     </div>
     {% endblock %}
@@ -135,7 +139,7 @@
     </div>
     
     <!-- footer -->
-    <div class="navbar navbar-inverse base_footer">
+    <div id="base-footer" class="navbar navbar-inverse base_footer">
         <div class="navbar-inner">
             <a class="" href="#">&copy; FrameBuzz Patent Pending.</a>
             <span class="nav pull-right">                    
@@ -149,7 +153,7 @@
     </div>
     <!-- end footer -->
 
-	<!-- scripts -->
+    <!-- scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="{% static 'framebuzz/dashboard/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/js/jquery-ui-1.10.2.custom.min.js' %}"></script>
@@ -160,15 +164,16 @@
     <script src="{% static 'framebuzz/dashboard/js/jquery.flot.stack.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/js/jquery.flot.resize.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/js/theme.js' %}"></script>
+    
+    {% block page_javascript %}{% endblock %}
 
+    
     <script type="text/javascript">
         $(function () {
 
             // jQuery Knobs
             $(".knob").knob();
-
-
-
+            
             // jQuery UI Sliders
             $(".slider-sample1").slider({
                 value: 100,
@@ -187,8 +192,6 @@
                 max: 500,
                 values: [ 40, 170 ],
             });
-
-            
 
             // jQuery Flot Chart
             var visits = [[1, 50], [2, 40], [3, 45], [4, 23],[5, 55],[6, 65],[7, 61],[8, 70],[9, 65],[10, 75],[11, 57],[12, 59]];
@@ -273,6 +276,6 @@
                 }
             });
         });
-    </script>
+    </script>  
 </body>
 </html>

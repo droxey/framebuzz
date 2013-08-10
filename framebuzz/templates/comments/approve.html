@@ -1,9 +1,9 @@
-{% extends "base.html" %}
+{% extends "dashboard/base.html" %}
 {% load i18n %}
 
 {% block title %}Approve Comment{% endblock %}
 
-{% block dashboard_right %}
+{% block content %}
   <div class="page-header">
     <h1>Comment Moderation Queue</h1>
   </div>
@@ -14,10 +14,10 @@
   </p>
   <form action="{% url 'comments-approve' comment.id %}" method="post">
     {% csrf_token %}
-    <div><input type="hidden" name="next" value="{% url 'dashboard-videos-moderate' %}?a=1" id="next" /></div>
+    <div><input type="hidden" name="next" value="{% url 'dashboard-moderators-queue' %}?a=1" id="next" /></div>
     <p class="submit">
       <input type="submit" class="btn btn-primary" name="submit" value="{% trans "Approve" %}" />
-      <a class="btn" href="{% url 'dashboard-videos-moderate' %}">Cancel</a>
+      <a class="btn" href="{% url 'dashboard-moderators-queue' %}">Cancel</a>
     </p>
   </form>
 {% endblock %}

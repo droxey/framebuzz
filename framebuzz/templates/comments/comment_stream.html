@@ -1,0 +1,46 @@
+{% load comments %}
+<!-- Video Library list -->
+<div id="video-library-listview" class="row-fluid">
+    <table class="table table-hover" id="list-view-videos">
+        <thead>
+            <tr id="header-row">
+                <th class="span4"><span class="line"></span>Username</th>
+                <th class="span2"><span class="line"></span>User email</th>
+                <th class="span2"><span class="line"></span>User URL</th>
+                <th class="span4"><span class="line"></span>Comment</th>
+                <th class="span3"><span class="line"></span>Added On</th>
+                <th class="span1"><span class="line"></span>Flag</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% get_comment_list for video as comments_stream %}
+            {% for com in comments_stream %}
+            {% if forloop.first %}
+            <tr class="first">
+                <td>{{ com.user_name }}</td>
+                <td>{{ com.user_email }}</td>
+                <td>{{ com.user_url }}</td>
+                <td class="description">{{ com.comment }}</td>
+                <td>{{ com.submit_date }}</td>
+                <td>
+                    <a class="btn btn-small btn-danger" href="{% url 'comments-flag' com.id %}"><b class="icon-remove"></b></a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>{{ com.user_name }}</td>
+                <td>{{ com.user_email }}</td>
+                <td>{{ com.user_url }}</td>
+                <td class="description">{{ com.comment }}</td>
+                <td>{{ com.submit_date }}</td>
+                <td>
+                    <a class="btn btn-small btn-danger" href="{% url 'comments-flag' com.id %}"><b class="icon-remove"></b></a>
+                </td>
+            </tr>
+            {% endif %}
+            {% empty %}
+            <tr colspan="6">No Comments.</tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
