@@ -46,20 +46,8 @@ class UserProfile(models.Model):
     def get_absolute_url(self):
         return reverse('profiles-home', args=[str(self.user.username)])
 
-    @property
-    def normalized_full_name(self):
-        if not self.user.first_name and not self.user.last_name:
-            return self.user.username
-        return '%s %s' % (self.user.first_name, self.user.last_name)
-
-    @property
-    def normalized_first_name(self):
-        if not self.user.first_name:
-            return self.user.username
-        return self.user.first_name
-
     def __unicode__(self):
-        return "%s's profile" % self.user
+        return "%s's Profile" % self.user
 
 
 def create_user_profile(sender, instance, created, **kwargs):
@@ -99,6 +87,12 @@ class Video(models.Model):
     def default_thumbnail(self):
         try:
             return self.thumbnail_set.all()[0]
+        except:
+            pass
+
+    def large_thumbnail(self):
+        try:
+            return self.thumbnail_set.all()[1]
         except:
             pass
 

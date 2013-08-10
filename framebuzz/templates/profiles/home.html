@@ -20,8 +20,8 @@
                 <nav>
                     <ul class="nav nav-tabs">
                         <li class="location"></li>
-                        <li class="home">
-                            <a data-url="{% url 'profiles-home' profile_user.username %}" href="#home" class="tab-link active"></a>
+                        <li class="home active">
+                            <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>
                         </li>
                         <li class="followers">
                             <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
@@ -66,7 +66,7 @@
         </div>
     </header>
     <div id="profile-container" class="tab-content">
-        <div class="tab-pane active" id="home"></div>
+        <div class="tab-pane active" id="activity"></div>
         <div class="tab-pane" id="followers"></div>
         <div class="tab-pane" id="following"></div>
         <div class="tab-pane" id="conversations"></div>
@@ -76,20 +76,22 @@
 
 {% block page_javascript %}
     <script type="text/javascript">
-       $(function() {
-            $('.active a').tab('show');
+       $(document).ready(function() {
+            var activeTabUrl = $('ul.nav-tabs li.active a').attr('data-url');
+            $('#activity').load(activeTabUrl, function(result) {
+                $('ul.nav-tabs').tab('show');
+            });
 
-            $('a.tab-link').click(function(e) {
-                    e.preventDefault();
-                  
-                    var url = $(this).attr('data-url');
-                    var href = this.hash;
-                    var pane = $(this);
-                    
-                    $(href).load(url, function(result) {   
-                        console.log(result);   
-                        pane.tab('show');
-                    });
+            $('a.tab-link').on('click', function(e) {
+                e.preventDefault();
+              
+                var url = $(this).attr('data-url');
+                var href = this.hash;
+                var pane = $(this);
+                
+                $(href).load(url, function(result) {   
+                    pane.tab('show');
+                });
             });
         });
     </script>

@@ -33,6 +33,26 @@ def home(request, username):
     context_instance=RequestContext(request))
 
 
+def activity(request, username):
+    user = User.objects.get(username__iexact=username)
+
+    latest_videos = Video.objects.filter(added_by=user)[:3]
+    latest_video_ids = [video.id for video in latest_videos]
+    latest_videos_comments = MPTTComment.objects.filter(user=user, object_pk__in=latest_video_ids)
+
+    latest_comments = MPTTComment.objects.filter(user=user).order_by('-submit_date')[:3]
+    latest_following= following(user)
+
+    return render_to_response('profiles/snippets/activity.html',
+    {
+        'profile_user': user,
+        'latest_videos': latest_videos_comments,
+        'latest_comments': latest_comments,
+        'latest_following': latest_following,
+    },
+    context_instance=RequestContext(request))
+
+
 def profile_followers(request, username):
     user = User.objects.get(username__iexact=username)
 

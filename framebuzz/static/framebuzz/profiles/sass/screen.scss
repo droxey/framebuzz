@@ -4,6 +4,8 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
 
 /*
  *      Global
@@ -71,8 +73,9 @@ div.navbar {
         border-left: 0 none;
         box-shadow: none;
         margin: 0 auto;
-        width: 100%;
-
+        overflow: hidden;
+        width: 97%;
+        
         a.brand {
             border: none;
             padding: 8px 0px 0px 20px;
@@ -352,36 +355,68 @@ div.content {
     }
 
     #profile-container {
-        font-family: 'futura-pt-condensed';
+        overflow: visible;
         padding: 22px 25px;
+        position: relative;
+        z-index: 1;
 
-        #following, #followers {
-            h1 {
-                border-bottom: 1px solid #f7f7f7;
+        h1 {
+            border-bottom: 1px solid #f7f7f7;
+            color: #333333;
+            display: block;
+            font-family: 'proxima-nova';
+            font-weight: 300;
+            font-size: 26.15px;
+            padding-bottom: 20px;
+            width: 100%;
+
+            a {
+                font-size: 12px;
+                margin-left: 9px;
+                vertical-align: baseline;
+            }
+        }
+
+        h2 {
+            background: rgba(109, 109, 109, 0.11);
+            border: none;
+            color: #7f7f7f;
+            font-family: 'proxima-nova';
+            font-weight: 500;
+            font-size: 17.13px;
+            line-height: 24px;
+            margin-bottom: 12px;
+            text-align: center;
+
+            &.featured {
+                background: none;
                 color: #333333;
                 display: block;
-                font-family: 'proxima-nova';
                 font-weight: 300;
-                font-size: 26.15px;
-                line-height: 26px;
-                padding-top: 22px;
-                padding-bottom: 20px;
-                width: 100%;
+                margin-bottom: 15px;
+                text-align: left;
+                width: 295px;
 
                 a {
                     font-size: 12px;
+                    float: right;
                     margin-left: 9px;
                     vertical-align: baseline;
                 }
             }
+        }
 
+        ul {
+            border-top: 1px solid #ebebeb;
+            padding-top: 9px;
+        }
+
+        #following, #followers, #activity {
             ul#feed {
-                border-top: 1px solid #ebebeb;
-                padding-top: 9px;
-
                 li {
                     display: block;
                     float: left;
+                    font-family: 'futura-pt-condensed';
                     padding: 7px;
                     min-height: 36px;
                     max-height: 129px;
@@ -421,6 +456,133 @@ div.content {
                             font-family: 'proxima-nova';
                             font-weight: 500;
                             font-size: 12px; 
+                        }
+                    }
+                }
+            }
+        }
+
+        #activity {
+            #activity-container {
+                #activity-videos {
+                    float: left;
+                    margin-right: 33px;
+                    width: 295px;
+
+                    ul {
+                        border: none;
+
+                        li {
+                            margin-bottom: 27px;
+                            position: relative;
+
+                            img {
+                                border: 5px solid rgba(0, 0, 0, .60);
+                                margin: -5px;
+                                position: relative;
+                                z-index: 10;
+                            }
+
+                            &:before {
+                                @include background-image-retina('../img/timeline-indicator', 'png', 292px, 19px);
+                                content: " ";
+                                position: absolute;
+                                left: -34px;
+                                top: 139px;
+                                height: 19px;
+                                width: 292px;
+                                z-index: 1;
+                            }
+                        }
+                    }
+                }
+
+                #activity-social {
+                    float: left;
+
+                    #activity-conversations {
+                        margin-bottom: 9px;
+
+                        ul {
+                            border: none;
+                            padding-top: 19px;
+
+                            li {
+                                color: #7f7f7f;
+                                font-family: 'proxima-nova';
+                                font-size: 13px;
+                                margin-bottom: 19px;
+                                position: relative;
+
+                                img.thumbnail {
+                                    @include border-radius(1px, 1px);
+                                    border: 3px solid rgba(190, 190, 190, .68);
+                                    float: left;
+                                    margin-right: 9px;
+                                    height: 60px;
+                                    width: 90px;
+                                    padding: 0;
+                                    position: relative;
+                                    z-index: 1;
+                                }
+
+                                img.img-circle {
+                                    border: 2px solid white;
+                                    display: block;
+                                    float: left;
+                                    height: 32px;
+                                    margin-right: 5px;
+                                    position: absolute;
+                                    left: -16px;
+                                    top: -16px;
+                                    width: 32px;
+                                    z-index: 2;
+                                }
+
+                                div.comment {
+                                    float: left;
+                                    
+                                    p, span {
+                                        line-height: 21px;
+                                        width: 182px;
+                                    }
+
+                                    strong {
+                                        font-weight: 700;
+                                    }
+
+                                    span {
+                                        color: rgba(127, 127, 127, 0.4);
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    #activity-follows {
+                        ul {
+                            border: none;
+
+                            li {
+                                background: none;
+
+                                h2 {
+                                    background: none;
+                                    color: rgba(31, 31, 31, 0.83);
+                                    font-size: 18px;
+                                    font-family: 'futura-pt-condensed';
+                                    font-weight: 500;
+                                    line-height: 18px;
+                                    margin-bottom: 0;
+                                    text-align: left;
+                                    width: auto;
+                                }
+
+                                &:nth-child(even), &:nth-child(odd) {
+                                    background: none;
+                                }
+                            }
                         }
                     }
                 }

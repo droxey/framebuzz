@@ -1,0 +1,50 @@
+{% load avatar_tags %}
+
+<div id="activity-container" class="clearfix">
+    <div id="activity-videos">
+        <h2 class="featured clearfix">
+          Featured Videos 
+          <a href="{% url 'profiles-home' profile_user.username %}">
+            View all of {{ profile_user.username }}'s videos
+          </a>
+        </h2>
+        <ul>
+            {% for comment in latest_videos %}
+                <li>
+                    <img height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="activity-social">
+        <div id="activity-conversations">
+            <h2>Recent Conversations</h2>
+            <ul>
+                {% for comment in latest_comments %}
+                    <li class="clearfix">
+                        <img class="thumbnail" height="60" width="90" src="{{ comment.content_object.default_thumbnail }}" />
+                        <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
+                        <div class="comment">
+                            <p>{{ profile_user.username }} commented on <strong>{{ comment.content_object.title }}</strong>.</p>
+                            <span>{{ comment.submit_date|timesince }} ago</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="activity-follows">
+            <h2>Recent Follows</h2>
+            <ul id="feed">
+                {% for follower in latest_following %}
+                  <li class="clearfix">
+                    <img src="{% avatar_url follower 64 %}" alt="" height="32" width="32" class="img-circle" />
+                    <div class="feed-header">
+                      <h2><a href="{% url 'profiles-home' follower.username %}">{{ follower }}</a></h2>
+                      <h3>Austin, TX</h3>
+                    </div>
+                  </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

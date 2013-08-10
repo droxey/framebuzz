@@ -3,13 +3,7 @@
 <h1>
   Following 
   <a href="{% url 'profiles-home' profile_user.username %}">
-    Return to
-    {% if profile_user.get_profile %}
-        {{ profile_user.get_profile.normalized_first_name }}'s
-      {% else %}
-        {{ profile_user.username }}'s
-      {% endif %}
-      Profile
+    Return to {{ profile_user.username }}'s Profile
   </a>
 </h1>
 
@@ -27,12 +21,6 @@
   </ul>
 {% else %}
   <div class="alert alert-info">
-    <strong>
-      {% if profile_user.get_profile %}
-        {{ profile_user.get_profile.normalized_first_name }}
-      {% else %}
-        {{ profile_user.username }}
-      {% endif %}
-      </strong> isn't following anyone yet!
+    <strong>{{ profile_user.username }}</strong> isn't following anyone yet!
   </div>
 {% endif %}
