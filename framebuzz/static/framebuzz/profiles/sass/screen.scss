@@ -6,6 +6,7 @@
 @import "compass/reset";
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
+@import "compass/css3/transition";
 
 /*
  *      Global
@@ -153,11 +154,17 @@ div.navbar {
 }
 
 .wf-loading {
-    div.content { visibility: hidden; }
+    div.content {
+        opacity: 0;
+        @include single-transition(opacity 0.25s ease-in-out);
+    }
 }
 
 .wf-active {
-    div.content { visibility: visible; }
+    div.content { 
+        opacity: 1;
+        @include single-transition(opacity 0.25s ease-in-out);
+    }
 }
 
 div.content {
@@ -493,8 +500,7 @@ div.content {
                     font-family: 'futura-pt-condensed';
                     padding: 7px;
                     min-height: 36px;
-                    max-height: 129px;
-                    min-width: 283px;
+                    width: 283px;
 
                     &:nth-child(even) {
                         background-color: #f8f8f8;
@@ -530,6 +536,58 @@ div.content {
                             font-family: 'proxima-nova';
                             font-weight: 500;
                             font-size: 12px; 
+                        }
+                    }
+                    
+                    div.comments {
+                        ul {
+                            border: none;
+
+                            li {
+                                background-color: transparent;
+                                float: left;
+                                padding: 0;
+                                position: relative;
+                                height: 90px;
+                                padding: 0 10px;
+                                width: 120px;
+                                z-index: 1;
+
+                                &:nth-child(even), &:nth-child(odd) {
+                                    background-color: transparent;
+                                }
+                        
+                                p.bubble {
+                                    @include border-radius(3px, 3px);
+                                    background-color: rgba(44, 133, 202, 0.8);
+                                    color: white;
+                                    font-family: 'proxima-nova';
+                                    font-size: 11px;
+                                    font-weight: 500;
+                                    left: 15px;
+                                    line-height: 18px;
+                                    padding: 5px;
+                                    position: absolute;
+                                    top: 50px;
+                                    width: 110px;
+                                    z-index: 20;
+
+                                    span.corner {
+                                        position: absolute;
+                                        display: block;
+                                        width: 0;
+                                        height: 0;
+                                        line-height: 0;
+                                        border: solid 8px rgba(44, 133, 202, 0.8);
+                                        border-color: rgba(44, 133, 202, 0.8) transparent transparent transparent;
+                                        -webkit-border-radius: 0;
+                                        -moz-border-radius: 0;
+                                        border-radius: 0;
+                                        top: 28px;
+                                        left: 13px;
+                                    }
+                                }
+                            }
                         }
                     }
                 }

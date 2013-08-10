@@ -9,13 +9,30 @@
 
 {% if following %}
   <ul id="feed" class="clearfix">
-    {% for follower in following %}
-      <li class="clearfix">
-        <img src="{% avatar_url follower 64 %}" alt="" height="32" width="32" class="img-circle" />
-        <div class="feed-header">
-          <h2><a href="{% url 'profiles-home' follower.username %}">{{ follower }}</a></h2>
-          <h3>Austin, TX</h3>
+    {% for username, follower_comments in following.items %}
+      <li class="clearfix"> 
+        <div class="clearfix"> 
+          <img src="{% avatar_url follower_comments.user 64 %}" alt="" height="32" width="32" class="img-circle" />
+          <div class="feed-header">
+            <h2><a href="{% url 'profiles-home' username %}">{{ username }}</a></h2>
+            <h3>Austin, TX</h3>
+          </div>
         </div>
+        {% if follower_comments.comments %}
+        <div class="comments">
+          <ul class="clearfix">
+            {% for comment in follower_comments.comments %}
+            <li>
+              <img class="video-thumbnail" height="90" width="120" src="{{ comment.content_object.default_thumbnail }}" />
+              <p class="bubble">
+                &ldquo;{{ comment.comment }}&rdquo;
+                <span class="corner"></span>
+              </p>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
       </li>
     {% endfor %}
   </ul>

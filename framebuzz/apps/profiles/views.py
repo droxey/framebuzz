@@ -63,22 +63,40 @@ def activity(request, username):
 
 def profile_followers(request, username):
     user = User.objects.get(username__iexact=username)
+    user_followers = followers(user)
+    profile_followers = dict()
+
+    for followed_user in user_followers:
+        latest_comments = MPTTComment.objects.filter(user=followed_user).order_by('-submit_date')[:2]
+        profile_followers[followed_user.username] = {
+            'user': followed_user,
+            'comments': latest_comments,
+        }
 
     return render_to_response('profiles/snippets/followers.html',
     {
         'profile_user': user,
-        'followers': followers(user),
+        'followers': profile_followers,
     },
     context_instance=RequestContext(request))
 
 
 def profile_following(request, username):
     user = User.objects.get(username__iexact=username)
+    user_following = following(user)
+    profile_following = dict()
+
+    for following_user in user_following:
+        latest_comments = MPTTComment.objects.filter(user=following_user).order_by('-submit_date')[:2]
+        profile_following[following_user.username] = {
+            'user': following_user,
+            'comments': latest_comments,
+        }
 
     return render_to_response('profiles/snippets/following.html',
     {
         'profile_user': user,
-        'following': following(user),
+        'following': profile_following,
     },
     context_instance=RequestContext(request))
 
