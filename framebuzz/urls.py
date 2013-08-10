@@ -3,27 +3,24 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
 
-
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Admin:
+    # Admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
-    # Player API:
-    url(r'^v/', include('framebuzz.apps.api.urls')),
+    # API
+    url(r'^v/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_embed', name='view-content'),
 
-    # FrameBuzz User Profiles:
-    url(r'^profile/', include('framebuzz.apps.profiles.urls')),
+    # Dashboard
+    url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
 
-    # Test Page for Beta:
-    url(r'^test/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_test', name='video-test'),
-
-    # Django-AllAuth:
+    # Django-AllAuth
     (r'^accounts/', include('allauth.urls')),
+	
 )
 
 if settings.DEBUG:
