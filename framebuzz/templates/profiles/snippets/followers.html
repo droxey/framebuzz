@@ -21,12 +21,6 @@
   </ul>
 {% else %}
   <div class="alert alert-info">
-    <strong>
-      {% if profile_user.get_profile %}
-        {{ profile_user.get_profile.normalized_first_name }}
-      {% else %}
-        {{ profile_user.username }}
-      {% endif %}
-      </strong> has no followers yet!
+    <strong>{{ profile_user.username }}</strong> has no followers yet!
   </div>
 {% endif %}

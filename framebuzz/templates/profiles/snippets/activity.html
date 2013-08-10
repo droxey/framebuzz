@@ -8,19 +8,25 @@
             View all of {{ profile_user.username }}'s videos
           </a>
         </h2>
-        <ul>
-            {% for comment in latest_videos %}
-                <li>
-                    <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
-                    {% if comment.comment %}
-                        <div class="comment">
-                             <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
-                             <p>{{ comment.comment }}</p>
-                        </div>
-                    {% endif %}
-                    <div class="video-details">
-                        <h3><a href="">{{ comment.content_object.title }}</a></h3>
+        <ul class="profile-conversations">
+        {% for comment in latest_videos %}
+            <li>
+                <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
+                {% if comment.comment %}
+                    <div class="comment">
+                         <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
+                         <p>{{ comment.comment }}</p>
                     </div>
+                {% endif %}
+                <div class="video-details">
+                    <h3><a href="">{{ comment.content_object.title }}</a></h3>
+                </div>
+            </li>
+            {% empty %}
+                <li>
+                  <div class="alert alert-info">
+                    <strong>{{ profile_user.username }}</strong> hasn't featured any videos yet!
+                  </div>
                 </li>
             {% endfor %}
         </ul>
@@ -38,6 +44,12 @@
                             <span>{{ comment.submit_date|timesince }} ago</span>
                         </div>
                     </li>
+                {% empty %}
+                    <li>
+                      <div class="alert alert-info">
+                        <strong>{{ profile_user.username }}</strong> hasn't participated in any conversations recently!
+                      </div>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
@@ -48,10 +60,16 @@
                   <li class="clearfix">
                     <img src="{% avatar_url follower.target 64 %}" alt="" height="32" width="32" class="img-circle" />
                     <div class="feed-header">
-                      <h2><a href="{% url 'profiles-home' follower.target.username %}">{{ follower.target.username }}</a></h2>
+                      <h2>{{ profile_user.username }} started following <a href="{% url 'profiles-home' follower.target.username %}">{{ follower.target.username }}</a>.</h2>
                       <h3>{{ follower.timestamp|timesince }} ago</h3>
                     </div>
                   </li>
+                {% empty %}
+                    <li>
+                      <div class="alert alert-info">
+                        <strong>{{ profile_user.username }}</strong> hasn't followed anyone in a while.
+                      </div>
+                    </li>
                 {% endfor %}
             </ul>
         </div>

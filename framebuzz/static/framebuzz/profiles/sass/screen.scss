@@ -281,6 +281,11 @@ div.content {
                                 }
                             }
 
+                            &.active {
+                                border-bottom: 5px solid white;
+                                margin-bottom: -5px;
+                            }
+
                             &.active > a {
                                 background: none;
                                 border-radius: none;
@@ -386,6 +391,91 @@ div.content {
             padding-top: 9px;
         }
 
+        ul.profile-conversations {
+            border: none;
+
+            li {
+                margin-bottom: 27px;
+                position: relative;
+
+                img.video-thumbnail {
+                    border: 5px solid rgba(0, 0, 0, .60);
+                    margin: -5px;
+                    position: relative;
+                    z-index: 10;
+                }
+
+                div.comment {
+                    background-color: #2C85CA;
+                    border: 1px solid rgba(44, 133, 202, 0.5);
+                    font-family: 'proxima-nova';
+                    font-size: 11px;
+                    font-weight: 500;
+                    left: -8px;
+                    line-height: 18px;
+                    padding: 6px 10px;
+                    position: absolute;
+                    top: 122px;
+                    width: 281px;
+                    z-index: 20;
+
+                    p {
+                        color: white;
+                    }
+
+                    img.img-circle {
+                        border: 2px solid white;
+                        display: block;
+                        float: left;
+                        height: 32px;
+                        margin-right: 7px;
+                        z-index: 2;
+                    }
+                }
+
+                div.video-details {
+                    font-family: 'proxima-nova';
+                    font-size: 13px;
+                    font-weight: 500;
+
+                    h3 {
+                        padding-top: 7px;
+
+                        a {
+                            color: #2a5c8a;
+                            font-weight: 700;
+                        }
+                    }
+                }
+
+                &:before {
+                    @include background-image-retina('../img/timeline-indicator', 'png', 292px, 19px);
+                    content: " ";
+                    position: absolute;
+                    left: -34px;
+                    top: 139px;
+                    height: 19px;
+                    width: 292px;
+                    z-index: 1;
+                }
+            }
+        }
+
+        div.pagination-page {
+            ul.profile-conversations {
+                width: 100%;
+
+                li {
+                    float: left;
+                    width: 313px;
+                }
+
+                li:nth-child(even):before {
+                    background: none;
+                }
+            }
+        }
+
         #following, #followers, #activity {
             ul#feed {
                 li {
@@ -472,76 +562,6 @@ div.content {
                     float: left;
                     margin-right: 33px;
                     width: 295px;
-
-                    ul {
-                        border: none;
-
-                        li {
-                            margin-bottom: 27px;
-                            position: relative;
-
-                            img.video-thumbnail {
-                                border: 5px solid rgba(0, 0, 0, .60);
-                                margin: -5px;
-                                position: relative;
-                                z-index: 10;
-                            }
-
-                            div.comment {
-                                background-color: #2C85CA;
-                                border: 1px solid rgba(44, 133, 202, 0.5);
-                                font-family: 'proxima-nova';
-                                font-size: 11px;
-                                font-weight: 500;
-                                left: -8px;
-                                line-height: 18px;
-                                padding: 6px 10px;
-                                position: absolute;
-                                top: 122px;
-                                width: 281px;
-                                z-index: 20;
-
-                                p {
-                                    color: white;
-                                }
-
-                                img.img-circle {
-                                    border: 2px solid white;
-                                    display: block;
-                                    float: left;
-                                    height: 32px;
-                                    margin-right: 7px;
-                                    z-index: 2;
-                                }
-                            }
-
-                            div.video-details {
-                                font-family: 'proxima-nova';
-                                font-size: 13px;
-                                font-weight: 500;
-
-                                h3 {
-                                    padding-top: 7px;
-
-                                    a {
-                                        color: #2a5c8a;
-                                        font-weight: 700;
-                                    }
-                                }
-                            }
-
-                            &:before {
-                                @include background-image-retina('../img/timeline-indicator', 'png', 292px, 19px);
-                                content: " ";
-                                position: absolute;
-                                left: -34px;
-                                top: 139px;
-                                height: 19px;
-                                width: 292px;
-                                z-index: 1;
-                            }
-                        }
-                    }
                 }
 
                 #activity-social {
@@ -619,13 +639,18 @@ div.content {
                                 h2 {
                                     background: none;
                                     color: rgba(31, 31, 31, 0.83);
-                                    font-size: 18px;
-                                    font-family: 'futura-pt-condensed';
+                                    font-size: 13px;
+                                    font-family: 'proxima-nova';
                                     font-weight: 500;
                                     line-height: 18px;
                                     margin-bottom: 0;
                                     text-align: left;
                                     width: auto;
+
+                                    a {
+                                        font-weight: 700;
+                                        font-size: 13px;
+                                    }
                                 }
 
                                 &:nth-child(even), &:nth-child(odd) {

@@ -1,26 +1,34 @@
 {% load avatar_tags %}
 
+<h1>
+  Favorites 
+  <a href="{% url 'profiles-home' profile_user.username %}">
+    Return to {{ profile_user.username }}'s Profile
+  </a>
+</h1>
+
 <div class="pagination-page">
-  <ul id="feed">
+  <ul class="profile-conversations clearfix">
     {% for comment in page_obj.object_list %}
-      <li class="clearfix">
-        <img src="{% avatar_url comment.user 50 %}" alt="" height="50" width="50" />
-        <div class="feed-header clearfix">
-          <div class="details clearfix">
-            <h1>{{ comment.user.username }}</h1>
-            {% if comment.parent %}
-              <a class="reply">@{{ comment.parent.user.username }}</a>
-            {% endif %}
-            <span class="posted-on"><a href="{{ comment.get_absolute_url }}">{{ comment.submit_date|timesince}} ago</a></span>
+      <li>
+          <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
+          {% if comment.comment %}
+              <div class="comment">
+                   <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
+                   <p>{{ comment.comment }}</p>
+              </div>
+          {% endif %}
+          <div class="video-details">
+              <h3><a href="">{{ comment.content_object.title }}</a></h3>
           </div>
-          <p>{{ comment.comment }}</p>
-        </div>
       </li>
-    {% empty %}
-      <li class="no-comments">
-        <p>No favorites yet!</p>
-      </li>
-    {% endfor %}
+      {% empty %}
+          <li>
+            <div class="alert alert-info">
+              <strong>{{ profile_user.username }}</strong> hasn't featured any videos yet!
+            </div>
+          </li>
+      {% endfor %}
   </ul>
   {% include "dashboard/snippets/pagination.html" %}
 </div>
