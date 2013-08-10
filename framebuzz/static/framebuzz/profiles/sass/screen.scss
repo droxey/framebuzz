@@ -84,12 +84,13 @@ div.navbar {
 
         ul.nav {
             padding-top: 5px;
-            padding-right: 20px;
 
             li {
                 a {
                     border-left: none;
                     color: rgba(255, 255, 255, 0.48);
+
+                    &:hover { background: transparent; }
 
                     &.dropdown-toggle { 
                         background-image: none; 
@@ -149,6 +150,14 @@ div.navbar {
 
         }
     }
+}
+
+.wf-loading {
+    div.content { visibility: hidden; }
+}
+
+.wf-active {
+    div.content { visibility: visible; }
 }
 
 div.content {
