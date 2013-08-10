@@ -37,11 +37,16 @@ class UserProfile(models.Model):
     bio = models.CharField(max_length=255, blank=True, null=True)
     time_zone = TimeZoneField(blank=True, null=True)
     youtube_username = models.CharField(max_length=255, blank=True, null=True, editable=False)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+    location = models.CharField(max_length=255, null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)    
+    profession = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         verbose_name = 'User Profile'
         verbose_name_plural = 'User Profiles'
-        unique_together = ['user', 'website']
+        #unique_together = ['user', 'website']
 
     def get_absolute_url(self):
         return reverse('profiles-home', args=[str(self.user.username)])
@@ -273,3 +278,15 @@ class MPTTComment(MPTTModel, Comment):
 
         if first_comment:
             first_comment.save()
+
+class UserWebsite(models.Model):
+    website = models.ForeignKey(Website)
+    user = models.ForeignKey(User)
+    
+    class Meta:
+        verbose_name = 'User Website'
+        verbose_name_plural = 'User Websites'
+        
+    def __unicode__(self):
+        return "%s (%s)" % (self.website.name, self.website.url)
+    

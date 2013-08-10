@@ -410,6 +410,9 @@ SOCKJS_CLASSES = (
     'framebuzz.apps.api.sockserver.ConnectionHandler',
 )
 
+## Dashboard
+LOGIN_URL = '/dashboard/register/'
+
 ###################
 # DEPLOY SETTINGS #
 ###################

@@ -1,0 +1,33 @@
+{% extends "dashboard/base.html" %}
+{% load socialaccount staticfiles %}
+
+{% block content %}
+    
+    <h3>Add Another Website</h3>
+    <hr/>
+    <div id='add-website-wrapper'>
+         <p>
+            {% if submitted %}
+                {% if success %}
+                <div class="alert alert-success">
+                    <strong>Success</strong>: Profile updated successfully!
+                </div>
+            {% else %}
+            <div class="alert alert-error">
+                <strong>Error</strong>: {{ form.errors }}
+            </div>
+            {% endif %}
+        {% endif %}
+            
+        <form id='website-form' method="POST">
+            <p>
+                {% csrf_token %}
+            </p>
+            <p>
+                {{ form.as_p }}
+            </p>
+            <p><button class="btn btn-primary" type="submit">Add Website</button></p>
+        </form>
+         </p>
+    </div>
+{% endblock %}

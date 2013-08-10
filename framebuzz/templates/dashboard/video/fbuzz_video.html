@@ -1,0 +1,58 @@
+{% extends "dashboard/base.html" %}
+{% load url from future %}
+{% load socialaccount %}
+
+{% block sidebar-videos %}
+    <li class="active">
+        <div class="pointer">
+            <div class="arrow"></div>
+            <div class="arrow_border"></div>
+        </div>
+        <a href="{% url 'videos' %}" class="dropdown-toggle">
+            <i class="icon-film"></i>
+            <span>Video</span>
+            <i class="icon-chevron-down"></i>
+        </a>
+        <ul class="active submenu">
+            <li><a href="{% url 'videos'%}">Library</a></li>
+            <li><a href="{% url 'videos-fbuzz-one' %}" class="active">Framebuzz a Video</a></li>
+        </ul>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <p><h1>Framebuzz a new Video</h1></p>
+    <hr/>
+    <p><h3>Add framebuzz commenting to any public video.</h3></p>
+    <p>
+        <div id="first-option" class="table-like">
+        <div id="option-steps" class="row-like">
+            <div class="cell-like">Step 1. Enter video URL</div>
+            <div class="cell-like">Step 2. Generate embeded code.</div>
+            <div class="cell-like">Step 3. Copy embeded code to your site</div>
+        </div>
+        <div id="option-inputs" class="row-like">
+            <div class="cell-like"><input type="text" placeholder="Video URL..." /></div>
+            <div class="cell-like"><input type="submit" value="FrameBuzz It!" /></div>
+            <div class="cell-like">(That's It!)</div>
+        </div>
+    </div>
+    </p>
+    <p><div class="mid-text">Once you've Framebuzzed a video, view it in your Video Library to add a Description and Metadata.</div></p>
+    <p><hr/></p>
+    <p>
+        <div>Or, link with your YouTube or Vimeo account to FrameBuzz your videos.</div>
+    </p>
+    <p>
+        <div id="second-option" class="table-like">
+            <div class="row-like">
+                <div class="cell-like">
+                    <a href="/accounts/google/login">Sign in with YouTube</a>
+                </div>
+                <div class="cell-like">
+                    Sign in with Vimeo
+                </div>
+            </div>
+        </div>
+    </p>
+{% endblock %}

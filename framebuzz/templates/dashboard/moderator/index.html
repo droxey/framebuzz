@@ -1,0 +1,25 @@
+{% extends "dashboard/base.html" %}
+
+{% block sidebar-moderator %}
+        <li class="active">
+            <div class="pointer">
+                <div class="arrow"></div>
+                <div class="arrow_border"></div>
+            </div>
+            <a href="{% url 'dashboard-moderators-queue' %}">
+                <i class="icon-group"></i>
+                <span>Moderator</span>
+                <i class="icon-chevron-down"></i>
+            </a>
+            <ul class="active submenu">
+                <li><a href="{% url 'dashboard-moderators-queue' %}" class="active">Comment Queue</a></li>
+                <!--<li><a href="{% url 'dashboard-moderators-basic' %}">Basic Controls</a></li>
+                <li><a href="{% url 'dashboard-moderators-advanced' %}">Advanced Controls</a></li>
+            -->
+            </ul>
+        </li>
+{% endblock %}
+
+{% block content %}
+    <h1><br/>Comment Moderator Queue</h1>
+{% endblock %}

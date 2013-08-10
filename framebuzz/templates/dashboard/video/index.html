@@ -1,0 +1,187 @@
+{% extends "dashboard/base.html" %}
+{% load socialaccount staticfiles %}
+{% load comments %}
+
+{% block page_javascript %}
+<script type="text/javascript">
+    $(function(){
+        // FrameBuzz
+        var url = '{% url 'dashboard-videos' 'view_type' %}';
+        var del_url =  '{% url 'dashboard-delete-videos' %}';
+        var com_url = '{% url 'dashboard-comment-stream' %}';
+        var csrf_token = '{{ csrf_token }}';      
+        
+        // Custom Libraries
+        var videos = new FramebuzzVideos();
+        
+        $("tr").not("#header-row").click(function(){
+            videos.bind_video_info($(this), 1);
+        });
+        
+        $("#video-view-type").change(function() {
+                var view_type = $(this).val();
+                
+                if (view_type!='0') {
+                        switch (view_type) {
+                        case 'list': url = '{% url 'videos' 'list' %}'
+                            break;
+                        
+                        case 'gallery': url = '{% url 'videos' 'gallery' %}'
+                            break;
+                    }
+                    videos.change_view_type(url, csrf_token, view_type);    
+                }
+            }
+        );
+        
+        $(".comments").click(function(){
+            var video_id = $("#vcard-id").val();
+            videos.show_comment_stream(com_url, csrf_token, video_id);
+        });
+        
+        $(":checkbox").not('#chk-all').change(function(){
+            $(this).attr("checked", true);
+            $(":checkbox").not($(this)).attr("checked", false);
+            $("#vcard-id").val($(this).attr("data-videoid"));
+        });
+        
+        $("#btn-del-video").click(function(){
+            var video_id = $("#vcard-id").val();
+            videos.delete_video(del_url, csrf_token, video_id);
+        });
+        
+        //$('.gallery-trash').not($(".img-box")).click(function(){
+        //    var id = $(this).parent().parent().attr("data-videoid");
+        //    //videos.delete_video(del_url, csrf_token, id);
+        //    console.log(id);
+        //});
+        
+        $("#vcard-description").click(function(){
+            var id = $("#vcard-id").val();
+            url = '{% url 'dashboard-detail-videos' %}';
+            videos.show_detail(url, csrf_token, id);    
+        });
+        
+        // Switch slide buttons
+        $('.slider-button').click(function() {
+            if ($(this).hasClass("on")) {
+                $(this).removeClass('on').html($(this).data("off-text"));   
+            } else {
+                $(this).addClass('on').html($(this).data("on-text"));
+            }
+        });
+        
+        $('#select-wrapper').css('height', '40px' );
+        
+    });
+</script>    
+{% endblock%}
+
+{% block sidebar-videos %}
+    <li class="active">
+        <div class="pointer">
+            <div class="arrow"></div>
+            <div class="arrow_border"></div>
+        </div>
+        <a href="{% url 'dashboard-videos' 'list' %}" class="dropdown-toggle">
+            <i class="icon-film"></i>
+            <span>Video</span>
+            <i class="icon-chevron-down"></i>
+        </a>
+        <ul class="active submenu">
+            <li><a href="{% url 'dashboard-videos' 'list' %}" class="active">Library</a></li>
+            <li><a href="{% url 'dashboard-add-videos' %}">FrameBuzz a Video</a></li>
+        </ul>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <!-- Custom Layout for this page -->
+    <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/dashboard-custom.css'%}">
+    
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/compiled/gallery.css' %}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/compiled/ui-elements.css' %}" />
+
+
+    <!-- Custom JS for this page -->
+    <script type="text/javascript" src="{% static 'framebuzz/dashboard/js/fbuzz.videos.js' %}"></script>
+    
+    <div><h2>Video Library</h2></div>
+    <hr/>
+    <!-- video wrapper -->
+    <div id="video-container" class="table-like">
+        <div class="row-like">
+            <div class="cell-like" id="left">
+                <!-- LEFT PANEL -->
+                <div class="video-left-panel">
+                    <input type="hidden" name="videoId" id='vcard-id' value="" />
+                    <div id="vcard-thumbnail"><img src="{% static 'framebuzz/dashboard/img/no-img-gallery.png' %}" width="93" height="92" /></div>
+                    <div class="description"><strong><label class='name' id='vcard-description'></label></strong></div>
+                    <hr/>
+                    <div class="comments"><label id='vcard-comment-count'></label> Comments</div>
+                    <hr/>
+                    {% comment %}
+                    <div class="moderator-report-container">
+                        <div class="ui-select moderator-report">
+                            <select name="reports">
+                                <option value="0" selected="1">View Report</option>
+                                <option value="1">Video State Report</option>
+                                <option value="2">Video Sharing Report</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="moderator-rule-set-container">
+                        <div class="ui-select moderator-rule-set">
+                            <select name="slct-moderator-rules">
+                                <option value="0" selected="1">No Moderator Rule Set</option>
+                                <!-- FOR LIST IN MODERATOR RULES
+                            </select>
+                        </div>
+                    </div>-->
+                    
+                    <div name="label" class="commentlabel">Open/Close Comments</div>
+                    <div class="openclose-comments">
+                        <div class="slider-frame primary">
+                            <span name="openclosecomments" class="slider-button" data-off-text="OFF" data-on-text="ON">OFF</span>
+                        </div>
+                    </div>
+                    {% endcomment %}
+                    <div class="delete">
+                        <div class="btn-flat icon" id="btn-del-video">
+                            <i class="icon-remove-sign"></i>Delete Video
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell-like" id="right">
+                <!-- RIGHT PANEL -->  
+                <div class="video-right-panel">
+                       <!-- MENU: VIEW TYPES -->
+                        <div class="row-fluid filter-block" id='select-wrapper'>
+                            <div class="pull-right video-choices">
+                                <div class="ui-select">
+                                    <select id="video-view-type">
+                                        <option value='0' selected='selected'>Select View Type</option>
+                                        <option value='list'>List View</option>
+                                        <option value='gallery'>Thumbnail View</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="library-wrapper">
+                            {% csrf_token %}
+                            {% if view_type == 'list' %}
+                                {% include "dashboard/snippets/video_list.html" %}
+                            {% elif  view_type == 'gallery' %}
+                                {% include 'dashboard/snippets/video_gallery.html' %}
+                            {% else %}
+                                {% include 'dashboard/snippets/video_detail.html' %}
+                            {% endif %}
+                        </div>
+                </div> 
+            </div>
+        </div>         
+    </div>
+{% endblock %}

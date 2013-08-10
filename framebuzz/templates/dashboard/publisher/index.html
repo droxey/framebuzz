@@ -1,0 +1,18 @@
+{% extends "dashboard/base.html" %}
+
+            {% block sidebar-publisher %}
+            <li class="active">
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <a href="{% url 'publisher' %}" class="inactive-link">
+                    <i class="icon-home"></i>
+                    <span>Publisher</span>
+                </a>
+            </li>            
+            {% endblock %}
+
+{% block content %}
+    <h1><br/>Publisher Dashboard</h1>
+{% endblock %}
