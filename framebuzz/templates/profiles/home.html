@@ -8,9 +8,13 @@
 {% block page_content %}
     <header>
         <div class="user-info clearfix">
-            <img src="{% avatar_url profile_user 314 %}" alt="" height="157" width="157" class="img-circle" />
+            <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">
+                <img src="{% avatar_url profile_user 314 %}" alt="" height="157" width="157" class="img-circle" />
+            </a>
             <div class="user-details">
-                <h1>{{ profile_user.username }}</h1>
+                <h1>
+                    <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">{{ profile_user.username }}</a>
+                </h1>
                 <span class="tagline"></span>
             </div>
         </div>

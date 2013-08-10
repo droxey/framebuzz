@@ -37,11 +37,19 @@ def activity(request, username):
     user = User.objects.get(username__iexact=username)
 
     latest_videos = Video.objects.filter(added_by=user)[:3]
-    latest_video_ids = [video.id for video in latest_videos]
-    latest_videos_comments = MPTTComment.objects.filter(user=user, object_pk__in=latest_video_ids)
+    latest_videos_comments = list()
+
+    for video in latest_videos:
+        comments = MPTTComment.objects.filter(user=user, object_pk=video.id)
+        if len(comments) > 0:
+            latest_videos_comments.append(comments[0])
+        else:
+            fake_comment = MPTTComment()
+            fake_comment.content_object = video
+            latest_videos_comments.append(fake_comment)
 
     latest_comments = MPTTComment.objects.filter(user=user).order_by('-submit_date')[:3]
-    latest_following= following(user)
+    latest_following= Action.objects.filter(actor_object_id=user.id, verb='started following').order_by('-timestamp')[:3]
 
     return render_to_response('profiles/snippets/activity.html',
     {

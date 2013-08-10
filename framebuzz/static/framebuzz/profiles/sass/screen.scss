@@ -75,7 +75,7 @@ div.navbar {
         margin: 0 auto;
         overflow: hidden;
         width: 97%;
-        
+
         a.brand {
             border: none;
             padding: 8px 0px 0px 20px;
@@ -185,11 +185,15 @@ div.content {
                 float: left;
 
                 h1 {
-                    color: #333333;
-                    font-size: 44.74px;
-                    line-height: 46px;
                     padding-top: 20px;
                     padding-bottom: 8px;
+
+                    a {
+                        color: #333333;
+                        font-size: 44.74px;
+                        line-height: 46px;
+                        text-decoration: none;
+                    }
                 }
             }
         }
@@ -377,35 +381,6 @@ div.content {
             }
         }
 
-        h2 {
-            background: rgba(109, 109, 109, 0.11);
-            border: none;
-            color: #7f7f7f;
-            font-family: 'proxima-nova';
-            font-weight: 500;
-            font-size: 17.13px;
-            line-height: 24px;
-            margin-bottom: 12px;
-            text-align: center;
-
-            &.featured {
-                background: none;
-                color: #333333;
-                display: block;
-                font-weight: 300;
-                margin-bottom: 15px;
-                text-align: left;
-                width: 295px;
-
-                a {
-                    font-size: 12px;
-                    float: right;
-                    margin-left: 9px;
-                    vertical-align: baseline;
-                }
-            }
-        }
-
         ul {
             border-top: 1px solid #ebebeb;
             padding-top: 9px;
@@ -464,6 +439,35 @@ div.content {
 
         #activity {
             #activity-container {
+                h2 {
+                    background: rgba(109, 109, 109, 0.11);
+                    border: none;
+                    color: #7f7f7f;
+                    font-family: 'proxima-nova';
+                    font-weight: 500;
+                    font-size: 17.13px;
+                    line-height: 24px;
+                    margin-bottom: 12px;
+                    text-align: center;
+
+                    &.featured {
+                        background: none;
+                        color: #333333;
+                        display: block;
+                        font-weight: 300;
+                        margin-bottom: 15px;
+                        text-align: left;
+                        width: 295px;
+
+                        a {
+                            font-size: 12px;
+                            float: right;
+                            margin-left: 9px;
+                            vertical-align: baseline;
+                        }
+                    }
+                }
+
                 #activity-videos {
                     float: left;
                     margin-right: 33px;
@@ -476,11 +480,54 @@ div.content {
                             margin-bottom: 27px;
                             position: relative;
 
-                            img {
+                            img.video-thumbnail {
                                 border: 5px solid rgba(0, 0, 0, .60);
                                 margin: -5px;
                                 position: relative;
                                 z-index: 10;
+                            }
+
+                            div.comment {
+                                background-color: #2C85CA;
+                                border: 1px solid rgba(44, 133, 202, 0.5);
+                                font-family: 'proxima-nova';
+                                font-size: 11px;
+                                font-weight: 500;
+                                left: -8px;
+                                line-height: 18px;
+                                padding: 6px 10px;
+                                position: absolute;
+                                top: 122px;
+                                width: 281px;
+                                z-index: 20;
+
+                                p {
+                                    color: white;
+                                }
+
+                                img.img-circle {
+                                    border: 2px solid white;
+                                    display: block;
+                                    float: left;
+                                    height: 32px;
+                                    margin-right: 7px;
+                                    z-index: 2;
+                                }
+                            }
+
+                            div.video-details {
+                                font-family: 'proxima-nova';
+                                font-size: 13px;
+                                font-weight: 500;
+
+                                h3 {
+                                    padding-top: 7px;
+
+                                    a {
+                                        color: #2a5c8a;
+                                        font-weight: 700;
+                                    }
+                                }
                             }
 
                             &:before {
@@ -566,6 +613,8 @@ div.content {
 
                             li {
                                 background: none;
+                                float: none;
+                                width: 100%;
 
                                 h2 {
                                     background: none;
