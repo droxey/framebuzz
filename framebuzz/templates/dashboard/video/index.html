@@ -23,10 +23,10 @@
                 
                 if (view_type!='0') {
                         switch (view_type) {
-                        case 'list': url = '{% url 'videos' 'list' %}'
+                        case 'list': url = '{% url 'dashboard-videos' 'list' %}'
                             break;
                         
-                        case 'gallery': url = '{% url 'videos' 'gallery' %}'
+                        case 'gallery': url = '{% url 'dashboard-videos' 'gallery' %}'
                             break;
                     }
                     videos.change_view_type(url, csrf_token, view_type);    
