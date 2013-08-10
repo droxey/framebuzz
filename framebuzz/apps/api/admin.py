@@ -14,7 +14,7 @@ class SessionAdmin(admin.ModelAdmin):
     list_display = ('session_key', 'expire_date',)
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'website', 'premium', 'bio', 'time_zone',)
+    list_display = ('user', 'premium', 'bio', 'time_zone',)
     list_filter = ('premium', 'time_zone',)
 
 class WebsiteAdmin(admin.ModelAdmin):
