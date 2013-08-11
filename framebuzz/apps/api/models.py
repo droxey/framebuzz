@@ -197,11 +197,12 @@ class UserVideo(models.Model):
     video = models.ForeignKey(Video)
     user = models.ForeignKey(User)
     added_on = models.DateTimeField(auto_now=True)
+    is_featured = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'User Video'
         verbose_name_plural = 'User Videos'
-        ordering = ['-added_on']
+        ordering = ['-is_featured', '-added_on']
 
     def __unicode__(self):
         return "'%s' in %s's video library" % (self.video.title, self.user.username)

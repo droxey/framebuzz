@@ -496,6 +496,49 @@ div.content {
                 margin-bottom: 27px;
                 position: relative;
 
+                div.user-controls {
+                    background: rgba(0, 0, 0, .9);
+                    display: none;
+                    height: 12px;
+                    padding: 5px;
+                    position: absolute;
+                    left: 224px;
+                    top: 0;
+                    opacity: 0;
+                    z-index: 999;
+                    @include single-transition(opacity 0.55s ease-in-out);
+
+                    ul {
+                        border-top: none;
+                        padding-top: 0;
+
+                        li {
+                            float: left;
+                            margin-bottom: 0;
+                            padding-right: 5px;
+                            min-width: 13px;
+                            max-width: 15px;
+
+                            a {
+                                img {
+                                    opacity: 0.9;
+                                }
+                            }
+
+                            &:last-child {
+                                padding-right: 0;
+                            }
+
+                            &:before {
+                                background: none;
+                                display: none;
+                                height: 0;
+                                width: 0;
+                            }
+                        }
+                    }
+                }
+
                 img.video-thumbnail {
                     background: rgba(102, 102, 102, .90);
                     border: 5px solid rgba(0, 0, 0, .60);
@@ -564,6 +607,21 @@ div.content {
                     height: 19px;
                     width: 292px;
                     z-index: 1;
+                }
+
+                &:hover {
+                    div.user-controls {
+                        opacity: 1;
+                        @include single-transition(opacity 0.55s ease-in-out);
+
+                        ul {
+                            li {
+                                a {
+                                    img { opacity: 1; }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

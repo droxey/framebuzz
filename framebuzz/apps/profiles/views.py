@@ -58,6 +58,7 @@ def activity(request, username):
         'latest_videos': latest_videos_comments,
         'latest_comments': latest_comments,
         'latest_following': latest_following,
+        'can_delete': request.user.is_authenticated() and request.user.id == user.id,
     },
     context_instance=RequestContext(request))
 
@@ -116,6 +117,7 @@ def conversations(request, username):
     {
         'profile_user': user,
         'page_obj': p.page(page),
+        'can_delete': request.user.is_authenticated() and request.user.id == user.id,
     },
     context_instance=RequestContext(request))
 
@@ -135,6 +137,7 @@ def favorites(request, username):
     {
         'profile_user': user,
         'page_obj': p.page(page),
+        'can_delete': request.user.is_authenticated() and request.user.id == user.id,
     },
     context_instance=RequestContext(request))
 
