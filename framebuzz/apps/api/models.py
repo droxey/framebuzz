@@ -46,10 +46,15 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name = 'User Profile'
         verbose_name_plural = 'User Profiles'
-        #unique_together = ['user', 'website']
 
     def get_absolute_url(self):
         return reverse('profiles-home', args=[str(self.user.username)])
+
+    def get_default_website(self):
+        try:
+            return self.websites.all()[0]
+        except:
+            return None
 
     def age(self):
         if self.birthday:
