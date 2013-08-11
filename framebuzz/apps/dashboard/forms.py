@@ -66,12 +66,12 @@ class UserProfileForm(forms.ModelForm):
         latitude = self.cleaned_data.get('latitude', None)        
         longitude = self.cleaned_data.get('longitude', None)
         
-        if latitude:
+        if latitude and latitude is not None and latitude != '':
             profile.latitude = float(latitude)
         else:
             profile.latitude = 0
             
-        if longitude:
+        if longitude and longitude is not None and longitude != '':
             profile.longitude = float(longitude)
         else:
             profile.longitude = 0
