@@ -1,13 +1,12 @@
 {% load avatar_tags %}
 
-<h1>
-  Conversations 
-  <a href="{% url 'profiles-home' profile_user.username %}">
-    Return to {{ profile_user.username }}'s Profile
-  </a>
-</h1>
-
 <div class="pagination-page">
+  <h1>
+    Conversations 
+    <a href="{% url 'profiles-home' profile_user.username %}">
+      Return to {{ profile_user.username }}'s Profile
+    </a>
+  </h1>
   <ul class="profile-conversations clearfix">
     {% for comment in page_obj.object_list %}
       <li>

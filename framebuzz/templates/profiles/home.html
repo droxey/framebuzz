@@ -81,19 +81,36 @@
 {% block page_javascript %}
     <script type="text/javascript">
        $(document).ready(function() {
+            var currentPageUrl = null;
+
             var activeTabUrl = $('ul.nav-tabs li.active a').attr('data-url');
             $('#activity').load(activeTabUrl, function(result) {
                 $('ul.nav-tabs').tab('show');
             });
 
-            $('a.tab-link').on('click', function(e) {
+              // Pagination.
+              $('#profile-container div.tab-pane').on('click', 'a.page-link', function() {
+                var pageContainer = $('div.pagination-page');
+                var pageUrl = $(this).attr('href');
+
+                $.get(currentPageUrl + pageUrl, function(pageHtml) {
+                  pageContainer.fadeOut('slow', function() {
+                    pageContainer.html(pageHtml);
+                    pageContainer.fadeIn('slow');
+                  });
+                });
+
+                 return false;
+              });
+
+            $('ul.nav-tabs li').on('click', 'a.tab-link', function(e) {
                 e.preventDefault();
               
-                var url = $(this).attr('data-url');
+                currentPageUrl = $(this).attr('data-url');
                 var href = this.hash;
                 var pane = $(this);
                 
-                $(href).load(url, function(result) {   
+                $(href).load(currentPageUrl, function(result) {   
                     pane.tab('show');
                 });
             });

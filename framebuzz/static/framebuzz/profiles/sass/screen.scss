@@ -167,6 +167,18 @@ div.navbar {
     }
 }
 
+div.alert {
+    font-family: 'proxima-nova';
+    font-weight: 500;
+    font-size: 14px;
+}
+
+div.form-actions {
+    padding: 0;
+    margin: 0;
+    background: none;
+}
+
 div.content {
     border-right: 1px solid #DAE3E9;
     border-radius: 0;
@@ -477,6 +489,22 @@ div.content {
             }
         }
 
+        div.pagination-centered { 
+            margin: 0; 
+
+            ul {
+                border-top: none;
+
+                li {
+                    span, a {
+                        font-family: 'proxima-nova';
+                        font-weight: 500;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
         div.pagination-page {
             ul.profile-conversations {
                 width: 100%;
@@ -565,6 +593,7 @@ div.content {
                                     font-size: 11px;
                                     font-weight: 500;
                                     left: 15px;
+                                    height: 23px;
                                     line-height: 18px;
                                     padding: 5px;
                                     position: absolute;
@@ -629,6 +658,16 @@ div.content {
                     float: left;
                     margin-right: 33px;
                     width: 295px;
+
+                    ul.profile-conversations {
+                        li {
+                            &.empty {
+                                &:before {
+                                    background: none;
+                                }
+                            }
+                        }
+                    }
                 }
 
                 #activity-social {
@@ -689,6 +728,10 @@ div.content {
                                         color: rgba(127, 127, 127, 0.4);
                                         display: block;
                                     }
+                                }
+
+                                &.empty {
+                                    background: none;
                                 }
                             }
                         }
