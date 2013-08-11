@@ -46,10 +46,16 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name = 'User Profile'
         verbose_name_plural = 'User Profiles'
-        #unique_together = ['user', 'website']
 
     def get_absolute_url(self):
         return reverse('profiles-home', args=[str(self.user.username)])
+
+    def get_default_website(self):
+        try:
+            user_website = self.websites.all()[0]
+            return user_website.website
+        except:
+            return None
 
     def age(self):
         if self.birthday:
@@ -309,10 +315,12 @@ class MPTTComment(MPTTModel, Comment):
 class UserWebsite(models.Model):
     website = models.ForeignKey(Website)
     user = models.ForeignKey(User)
+    added_on = models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name = 'User Website'
         verbose_name_plural = 'User Websites'
+        ordering = ['-added_on']
         
     def __unicode__(self):
         return "%s (%s)" % (self.website.name, self.website.url)

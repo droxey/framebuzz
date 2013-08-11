@@ -63,9 +63,11 @@
                             </a>
                         </li>
                         <li class="website">
-                            {% if profile_user.get_profile and profile_user.get_profile.website %}
+                            {% if profile_user.get_profile and profile_user.get_profile.get_default_website %}
                               <span class="website">
-                                Website: <a href="{{ profile_user.get_profile.website.url }}" target="_blank" rel="nofollow">{{ profile_user.get_profile.website.name }}</a>
+                                    <a href="{{ profile_user.get_profile.get_default_website.url }}" target="_blank" rel="nofollow">
+                                        {{ profile_user.get_profile.get_default_website.url }}
+                                    </a>
                               </span>
                             {% endif %}
                         </li>
