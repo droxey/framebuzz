@@ -435,14 +435,15 @@ def restart():
 @task
 @log_call
 def notify_team():
-    last_commit = run('git rev-parse HEAD')
+    with project():
+        commit_info = run('git log -1 --pretty=short')
 
-    hipster = hipchat.HipChat(token='77e2890abb18c924c2bfa6d7e1a783')
-    hipster.method('rooms/message', method='POST', parameters={
-        'room_id': 257772, 
-        'from': 'Fabric', 
-        'message': 'DEPLOYMENT: %s has been updated to commit %s' % (env.live_host, last_commit)
-    })
+        hipster = hipchat.HipChat(token='77e2890abb18c924c2bfa6d7e1a783')
+        hipster.method('rooms/message', method='POST', parameters={
+            'room_id': 257772, 
+            'from': 'Fabric', 
+            'message': 'DEPLOYMENT: %s has been updated to the following commit:' % (env.live_host, commit_info)
+        })
 
 @task
 @log_call
