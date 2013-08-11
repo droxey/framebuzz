@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+import hipchat
 from functools import wraps
 from getpass import getpass, getuser
 from glob import glob
@@ -433,6 +434,18 @@ def restart():
 
 @task
 @log_call
+def notify_team():
+    last_commit = run('git rev-parse HEAD')
+
+    hipster = hipchat.HipChat(token='77e2890abb18c924c2bfa6d7e1a783')
+    hipster.method('rooms/message', method='POST', parameters={
+        'room_id': 257772, 
+        'from': 'Fabric', 
+        'message': 'DEPLOYMENT: %s has been updated to commit %s' % (env.live_host, last_commit)
+    })
+
+@task
+@log_call
 def clear_cache():
     if exists(env.static_cache_path):
         sudo("rm -rf %s" % env.static_cache_path)
@@ -478,6 +491,8 @@ def deploy():
 
     clear_cache()
     restart()
+    notify_team()
+
     return True
 
 
