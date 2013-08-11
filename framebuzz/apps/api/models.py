@@ -43,7 +43,6 @@ class UserProfile(models.Model):
     birthday = models.DateField(null=True, blank=True)    
     profession = models.CharField(max_length=255, null=True, blank=True)
     
-
     class Meta:
         verbose_name = 'User Profile'
         verbose_name_plural = 'User Profiles'
