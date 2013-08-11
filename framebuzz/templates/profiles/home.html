@@ -1,5 +1,5 @@
 {% extends "profiles/base.html" %}
-{% load avatar_tags %}
+{% load staticfiles avatar_tags %}
 
 {% block title %}{{ profile_user.username }}'s Profile{% endblock %}
 
@@ -27,7 +27,17 @@
             <div class="ribbon-front">
                 <nav>
                     <ul class="nav nav-tabs">
-                        <li class="location"></li>
+                        <li class="location">
+                            {% if profile_user.get_profile and profile_user.get_profile.location %}
+                                <span>
+                                    <img src="{% static 'framebuzz/profiles/img/pin.png' %}" height="29" width="17" />
+                                    {{ profile_user.get_profile.location }}
+                                </span>
+                            {% endif %}
+                        </li>
+                        <li class="videos">
+                            <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link"></a>
+                        </li>
                         <li class="home active">
                             <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>
                         </li>
@@ -79,6 +89,7 @@
         <div class="tab-pane" id="following"></div>
         <div class="tab-pane" id="conversations"></div>
         <div class="tab-pane" id="favorites"></div>
+        <div class="tab-pane" id="videos"></div>
     </div>
 {% endblock %}
 

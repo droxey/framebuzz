@@ -12,17 +12,17 @@
         {% for comment in latest_videos %}
             <li>
               <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
-                  <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
-                  {% if comment.comment %}
-                      <div class="comment">
-                           <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
-                           <p>{{ comment.comment }}</p>
-                      </div>
-                  {% endif %}
-                </a>
-                  <div class="video-details">
-                      <h3><a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a></h3>
-                  </div>
+                <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
+                {% if comment.comment %}
+                    <div class="comment">
+                         <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
+                         <p>{{ comment.comment }}</p>
+                    </div>
+                {% endif %}
+              </a>
+              <div class="video-details">
+                  <h3><a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a></h3>
+              </div>
             </li>
             {% empty %}
                 <li class="empty">

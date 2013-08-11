@@ -327,8 +327,21 @@ div.content {
                                 text-align: center;
                                 width: 193px; 
 
-                                a {
+                                span {
                                     color: rgba(255, 255, 255, 0.45);
+                                    display: inline-block;
+                                    height: 100%;
+                                    font-size: 23px;
+                                    text-align: left;
+                                    text-indent: -6px;
+
+                                    img {
+                                        margin-top: 6px;
+                                        margin-left: 6px;
+                                        margin-right: 6px;
+                                        position: relative;
+                                        top: 5px;
+                                    }
                                 }
                             }
 
@@ -336,7 +349,7 @@ div.content {
                             &.following { width: 49px; }
                             &.conversations { width: 69px; }
                             &.favorites { width: 46px; }
-                            &.home { display: none; }
+                            &.home, &.videos { display: none; }
 
                             &.website {
                                 background: none;
