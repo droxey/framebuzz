@@ -5,6 +5,8 @@ from django.template import RequestContext
 from django.contrib.auth import logout
 from forms import DashboardSignupForm, LoginForm, UserProfileForm, WebsiteForm #, DashboardLoginForm
 from django.shortcuts import redirect
+from actstream import action
+from actstream.models import Action
 from allauth.account.views import login as accountlogin
 from allauth.socialaccount.models import SocialAccount, SocialToken
 from django.contrib.auth.decorators import login_required
@@ -98,7 +100,6 @@ def add_videos(request):
         pass
     
     if social_token:
-        print  "Social Token: %s" % social_token
         all_videos = get_uploaded_videos(social_token.token)
             
     return render_to_response(template, RequestContext(request, {
@@ -111,7 +112,6 @@ def add_videos(request):
 def framebuzz_videos(request):
     if request.is_ajax():
         video_id = request.POST.get('video_id')
-        print video_id
         if video_id:
             video, created = get_or_create_video(video_id)
             video.added_by = request.user
@@ -159,10 +159,7 @@ def moderators_queue(request):
 
     # CHECK THIS LINE
     comment_flags = CommentFlag.objects.filter(comment__object_pk__in=all_videos_id_list, flag=CommentFlag.SUGGEST_REMOVAL)
-    
-    print comment_flags
-    
-
+        
     if moderated_comment_id and moderated_flag:
         moderated_comment = MPTTComment.objects.get(id=moderated_comment_id)
         print "moderated comment"
@@ -291,19 +288,21 @@ def settings(request):
 def settings_edit(request):
     submited = request.method == 'POST'
     profile = request.user.get_profile()
-    form = UserProfileForm(data=request.POST, request=request, initial={'time_zone': django_settings.TIME_ZONE})
     
     if request.method == 'POST':
-        form = UserProfileForm(data=request.POST, request=request,initial={'time_zone': django_settings.TIME_ZONE})
+        form = UserProfileForm(instance=profile, data=request.POST, request=request)
         success = form.is_valid()
         
         if success:
             profile = form.save()
-            form = UserProfileForm(data=request.POST, request=request,initial={'time_zone': django_settings.TIME_ZONE})
-        
+            del request.session['user_timezone']
+
+            action.send(request.user, verb='updated profile', action_object=request.user)
+
+            form = UserProfileForm(instance=profile, request=request)
     else:
         success = False
-        form = UserProfileForm(data=request.POST, request=request, initial={'time_zone': django_settings.TIME_ZONE})
+        form = UserProfileForm(instance=profile, request=request)
 
     template = 'dashboard/profile/settings_edit.html'
     
@@ -317,6 +316,7 @@ def settings_edit(request):
 def logout_dashboard(request):
     logout(request)  
     return redirect('/dashboard/register/?next=/dashboard/')
+
 
 def login(request):
     ret = accountlogin(request=request)

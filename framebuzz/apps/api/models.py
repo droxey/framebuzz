@@ -32,7 +32,7 @@ class Website(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    website = models.ForeignKey(Website, blank=True, null=True)
+    websites = models.ManyToManyField('UserWebsite', blank=True, null=True)
     premium = models.BooleanField(default=False)
     bio = models.CharField(max_length=255, blank=True, null=True)
     time_zone = TimeZoneField(blank=True, null=True)
@@ -42,7 +42,7 @@ class UserProfile(models.Model):
     location = models.CharField(max_length=255, null=True, blank=True)
     birthday = models.DateField(null=True, blank=True)    
     profession = models.CharField(max_length=255, null=True, blank=True)
-    websites = models.ManyToManyField('UserWebsite', blank=True, null=True)
+    
 
     class Meta:
         verbose_name = 'User Profile'

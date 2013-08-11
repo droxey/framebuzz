@@ -20,22 +20,22 @@ class DashboardSignupForm(SignupForm):
         super(DashboardSignupForm, self).__init__(*args, **kwargs)
         
     def save(self, commit=True):
-        user = self.request.user
         new_user = super(DashboardSignupForm, self).save(request=self.request)
+        
         new_website = Website()
         new_website.url = self.cleaned_data['website_url']
         new_website.name = self.cleaned_data['website_name']
         new_website.user = new_user
         new_website.moderator_email = new_user.email
         new_website.save()
-                
+        
         new_user_website = UserWebsite()
         new_user_website.user = new_user
         new_user_website.website = new_website
         new_user_website.save()
         
-         # Save Userprofile-Website
-        profile = user.get_profile()
+        # Save Userprofile-Website
+        profile = new_user.get_profile()
         profile.websites.add(new_user_website)
         profile.save()
         
@@ -63,21 +63,25 @@ class UserProfileForm(forms.ModelForm):
         profile = user.get_profile()
         profile.bio = self.cleaned_data.get('bio', None)
         profile.time_zone = self.cleaned_data.get('time_zone', None)
-        latitude = self.cleaned_data.get('latitude', None)
+        
+        latitude = self.cleaned_data.get('latitude', None)        
+        longitude = self.cleaned_data.get('longitude', None)
         
         if latitude:
             profile.latitude = float(latitude)
-        
-        longitude = self.cleaned_data.get('longitude', None)
-        
+        else:
+            profile.latitude = 0
+            
         if longitude:
-            porfile.longitude = float(longitude)
-        
+            profile.longitude = float(longitude)
+        else:
+            profile.longitude = 0
         
         profile.location = self.cleaned_data.get('location', None)
         profile.birthday = self.cleaned_data.get('birthday', None)
         profile.profession = self.cleaned_data.get('profession', None)
         profile.user = user
+        print profile
         profile.save()
     
 

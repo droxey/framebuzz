@@ -1,13 +1,12 @@
-{% extends "account/base.html" %}
+{% extends "dashboard/base.html" %}
 
 {% load url from future %}
 {% load i18n %}
 
 {% block title %}{% trans "Signup" %}{% endblock %}
-{% block dashboard_left %}{% endblock %}
-{% block left_navigation_menu %}{% endblock %}
 
-{% block dashboard_right %}
+
+{% block content %}
 <div id="signup" class="span6">
     <div class="well">
        <h1>{% trans "Sign Up" %}</h1>
@@ -19,7 +18,7 @@
           {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
-            <p class="terms">By registering for FrameBuzz, you acknowledge that you agree to our <a href="{% url 'terms' %}" target="_blank">Terms of Service</a>.</p>
+            <p class="terms">By registering for FrameBuzz, you acknowledge that you agree to our {%comment %}<a href="{% url 'terms' %}" target="_blank">Terms of Service</a>{%endcomment%} Termos of service.</p>
           <div class="form-actions">
             <a class="button secondaryAction" href="{% url 'account_login' %}">Back to Login</a>
             <button class="btn btn-primary primaryAction" type="submit">{% trans "Sign Up" %}</button>

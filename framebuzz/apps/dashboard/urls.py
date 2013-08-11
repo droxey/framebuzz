@@ -34,9 +34,9 @@ urlpatterns = patterns('',
     # New User
     url(r'^register/$', 'framebuzz.apps.dashboard.views.register_user', name='dashboard-register'),
     # Log Out
-    url(r'^logout/$', 'framebuzz.apps.dashboard.views.logout_dashboard', name='db_logout'),
+    url(r'^logout_dashboard/$', 'framebuzz.apps.dashboard.views.logout_dashboard', name='dashboard-logout'),
     # Log In
-    url(r'^login/$', 'framebuzz.apps.dashboard.views.login', name='db_login'),
+    url(r'^login/$', 'framebuzz.apps.dashboard.views.login', name='dashboard-login'),
     
     # Dahsboard default landing page (HAS TO BE AT THE BOTTOM)
     url(r'^$', 'framebuzz.apps.dashboard.views.publisher', name='dashboard-publisher'),
