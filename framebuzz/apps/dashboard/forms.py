@@ -63,23 +63,26 @@ class UserProfileForm(forms.ModelForm):
         profile = user.get_profile()
         profile.bio = self.cleaned_data.get('bio', None)
         profile.time_zone = self.cleaned_data.get('time_zone', None)
-        latitude = self.cleaned_data.get('latitude', None)
+        
+        latitude = self.cleaned_data.get('latitude', None)        
         longitude = self.cleaned_data.get('longitude', None)
-       
-        if latitude is not None and isinstance(latitude, basestring) and len(latitude) > 0:
+        
+        if latitude:
             profile.latitude = float(latitude)
-        
-        
-        if longitude is not None and isinstance(longitude, basestring) and len(longitude) > 0:
+        else:
+            profile.latitude = 0
+            
+        if longitude:
             profile.longitude = float(longitude)
-        
+        else:
+            profile.longitude = 0
         
         profile.location = self.cleaned_data.get('location', None)
         profile.birthday = self.cleaned_data.get('birthday', None)
         profile.profession = self.cleaned_data.get('profession', None)
         profile.user = user
         print profile
-        #profile.save()
+        profile.save()
     
 
 

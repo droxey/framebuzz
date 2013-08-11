@@ -299,7 +299,7 @@ def settings_edit(request):
 
             action.send(request.user, verb='updated profile', action_object=request.user)
 
-            form = UserProfileForm(instance=profile)
+            form = UserProfileForm(instance=profile, request=request)
     else:
         success = False
         form = UserProfileForm(instance=profile, request=request)
