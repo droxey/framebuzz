@@ -1,5 +1,5 @@
 from django.contrib import admin
-from framebuzz.apps.api.models import MPTTComment, Video, UserProfile, Website
+from framebuzz.apps.api.models import MPTTComment, Video, UserProfile, Website, UserWebsite, UserVideo
 from django.contrib.sessions.models import Session
 
 class FrameBuzzVideoAdmin(admin.ModelAdmin):
@@ -17,11 +17,20 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'premium', 'bio', 'time_zone',)
     list_filter = ('premium', 'time_zone',)
 
+class UserWebsiteAdmin(admin.ModelAdmin):
+    list_display = ('user', 'website', 'added_on',)
+
 class WebsiteAdmin(admin.ModelAdmin):
     list_display = ('url', 'name', 'moderator_email', 'hide_comment_flag_count', 'youtube_api_key',)
+
+class UserVideoAdmin(admin.ModelAdmin):
+    list_display = ('user', 'video', 'added_on',)
+
 
 admin.site.register(MPTTComment, MPTTCommentAdmin)
 admin.site.register(Video, FrameBuzzVideoAdmin)
 admin.site.register(Session, SessionAdmin)
 admin.site.register(Website, WebsiteAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(UserWebsite, UserWebsiteAdmin)
+admin.site.register(UserVideo, UserVideoAdmin)

@@ -52,7 +52,8 @@ class UserProfile(models.Model):
 
     def get_default_website(self):
         try:
-            return self.websites.all()[0]
+            user_website = self.websites.all()[0]
+            return user_website.website
         except:
             return None
 
@@ -314,10 +315,12 @@ class MPTTComment(MPTTModel, Comment):
 class UserWebsite(models.Model):
     website = models.ForeignKey(Website)
     user = models.ForeignKey(User)
+    added_on = models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name = 'User Website'
         verbose_name_plural = 'User Websites'
+        ordering = ['-added_on']
         
     def __unicode__(self):
         return "%s (%s)" % (self.website.name, self.website.url)
