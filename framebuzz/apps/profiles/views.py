@@ -10,7 +10,7 @@ from actstream.actions import follow, unfollow
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from framebuzz.apps.api.backends.youtube import get_or_create_video
-from framebuzz.apps.api.models import MPTTComment, Video
+from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
 
 
 def home(request, username):
@@ -36,7 +36,8 @@ def home(request, username):
 def activity(request, username):
     user = User.objects.get(username__iexact=username)
 
-    latest_videos = Video.objects.filter(added_by=user)[:3]
+    user_videos = UserVideo.objects.filter(user=user)[:3]
+    latest_videos = [uv.video for uv in user_videos]
     latest_videos_comments = list()
 
     for video in latest_videos:
@@ -48,8 +49,8 @@ def activity(request, username):
             fake_comment.content_object = video
             latest_videos_comments.append(fake_comment)
 
+    latest_following = Follow.objects.filter(user=user).order_by('-started')[:3]
     latest_comments = MPTTComment.objects.filter(user=user).order_by('-submit_date')[:3]
-    latest_following= Action.objects.filter(actor_object_id=user.id, verb='started following').order_by('-timestamp')[:3]
 
     return render_to_response('profiles/snippets/activity.html',
     {
@@ -145,14 +146,26 @@ def videos(request, username):
         page = 1
 
     user = User.objects.get(username__iexact=username)
-    all_videos = Video.objects.filter(added_by = user)
-    p = Paginator(all_videos, 12, request=request)
+    user_videos = UserVideo.objects.filter(user=user)
+    all_videos = [uv.video for uv in user_videos]
+    video_comments = list()
+
+    for video in all_videos:
+        comments = MPTTComment.objects.filter(user=user, object_pk=video.id)
+        if len(comments) > 0:
+            video_comments.append(comments[0])
+        else:
+            fake_comment = MPTTComment()
+            fake_comment.content_object = video
+            video_comments.append(fake_comment)
+
+    p = Paginator(video_comments, 12, request=request)
 
     return render_to_response('profiles/snippets/videos.html',
     {
         'profile_user': user,
         'page_obj': p.page(page),
-        'can_delete': True,
+        'can_delete': request.user.is_authenticated() and request.user.id == user.id,
         'is_adding_video': False,
         'show_embed_button': False
     },

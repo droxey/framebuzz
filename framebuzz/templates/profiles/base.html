@@ -45,7 +45,7 @@
                 {% if request.user.is_authenticated %}
                     <ul class="nav pull-right">               
                         <li class="settings">
-                            <a href="#" class="dropdown-toggle hidden-phone">
+                            <a href="#videos" data-url="{% url 'profiles-videos' profile_user.username %}" class="tab-link dropdown-toggle hidden-phone">
                                 Library
                             </a>
                         </li>

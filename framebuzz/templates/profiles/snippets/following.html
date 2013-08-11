@@ -10,34 +10,7 @@
 {% if following %}
   <ul id="feed" class="clearfix">
     {% for username, follower_comments in following.items %}
-      <li class="clearfix"> 
-        <div class="clearfix"> 
-          <img src="{% avatar_url follower_comments.user 64 %}" alt="" height="32" width="32" class="img-circle" />
-          <div class="feed-header">
-            <h2><a href="{% url 'profiles-home' username %}">{{ username }}</a></h2>
-            {% if follower_comments.user.get_profile and follower_comments.user.get_profile.location %}
-              <h3>{{ follower_comments.user.get_profile.location %}</h3>
-            {% endif %}
-          </div>
-        </div>
-        {% if follower_comments.comments %}
-        <div class="comments">
-          <ul class="clearfix">
-            {% for comment in follower_comments.comments %}
-            <li>
-              <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
-                <img class="video-thumbnail" height="90" width="120" src="{{ comment.content_object.default_thumbnail }}" />
-                <p class="bubble">
-                  &ldquo;{{ comment.comment }}&rdquo;
-                  <span class="corner"></span>
-                </p>
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endif %}
-      </li>
+      {% include "profiles/snippets/user.html" %}
     {% endfor %}
   </ul>
 {% else %}
