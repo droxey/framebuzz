@@ -63,7 +63,6 @@ class UserProfileForm(forms.ModelForm):
         profile = user.get_profile()
         profile.bio = self.cleaned_data.get('bio', None)
         profile.time_zone = self.cleaned_data.get('time_zone', None)
-        
         latitude = self.cleaned_data.get('latitude', None)        
         longitude = self.cleaned_data.get('longitude', None)
         
