@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Permission
@@ -51,6 +51,33 @@ class UserProfile(models.Model):
 
     def get_absolute_url(self):
         return reverse('profiles-home', args=[str(self.user.username)])
+
+    def age(self):
+        if self.birthday:
+            today = date.today()
+            try: 
+                bday = self.birthday.replace(year=today.year)
+            except ValueError: # raised when birth date is February 29 and the current year is not a leap year
+                bday = self.birthday.replace(year=today.year, day=self.birthday.day-1)
+            if bday > today:
+                return today.year - self.birthday.year - 1
+            else:
+                return today.year - self.birthday.year
+        return None
+
+    def profile_details(self):
+        _age = self.age()
+
+        if len(self.profession) is not None:
+            if _age is not None:
+                return '%s, %s' % (str(_age), self.profession)
+            else:
+                return self.profession
+        else:
+            if _age is not None:
+                return str(_age)
+
+        return ''    
 
     def __unicode__(self):
         return "%s's Profile" % self.user

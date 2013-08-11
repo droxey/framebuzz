@@ -179,6 +179,10 @@ div.form-actions {
     background: none;
 }
 
+img.img-circle {
+    @include single-box-shadow(rgba(0, 0, 0, 0.52), 1px, 1px, 3px);
+}
+
 div.content {
     border-right: 1px solid #DAE3E9;
     border-radius: 0;
@@ -204,23 +208,59 @@ div.content {
                 display: block;
                 float: left;
                 position: relative;
-                margin-right: 10px;
                 top: 8px;
                 z-index: 3;
             }
 
             div.user-details {
                 float: left;
+                min-width: 315px;
+                max-width: 445px;
 
                 h1 {
+                    margin-left: 21px;
                     padding-top: 20px;
                     padding-bottom: 8px;
 
                     a {
                         color: #333333;
+                        display: inline-block;
                         font-size: 44.74px;
                         line-height: 46px;
+                        margin-right: 14px;
                         text-decoration: none;
+                    }
+
+                    span {
+                        color: #9b9b9b;
+                        display: inline-block;
+                        font-size: 23px;
+                        font-weight: 500;
+                    }
+                }
+
+                p.bio {
+                    @include border-radius(3px, 3px);
+                    background-color: #e8e8e8;
+                    color: rgba(61, 61, 61, 0.45);
+                    font-size: 18px;
+                    padding: 10px 12px;
+                    position: relative;
+                    margin-left: 20px;
+
+                    span.corner {
+                        position: absolute;
+                        display: block;
+                        width: 0;
+                        height: 0;
+                        line-height: 0;
+                        border: solid 7px #e8e8e8;
+                        border-color: transparent #e8e8e8 transparent transparent;
+                        -webkit-border-radius: 0;
+                        -moz-border-radius: 0;
+                        border-radius: 0;
+                        top: 25%;
+                        left: -14px;
                     }
                 }
             }
@@ -410,8 +450,14 @@ div.content {
             a {
                 font-size: 12px;
                 margin-left: 9px;
-                vertical-align: baseline;
+                position: relative;
+                top: 1px;
             }
+        }
+
+        a.modal-button {
+            cursor: pointer;
+            display: block;
         }
 
         ul {
@@ -520,6 +566,16 @@ div.content {
             }
         }
 
+        div.tab-pane {
+            opacity: 0;
+            @include single-transition(opacity 0.55s ease-in-out);
+        }
+
+        div.tab-pane.active {
+            opacity: 1;
+            @include single-transition(opacity 0.55s ease-in-out);
+        }
+
         #following, #followers, #activity {
             ul#feed {
                 li {
@@ -543,7 +599,7 @@ div.content {
                         display: block;
                         float: left;
                         height: 32px;
-                        margin-right: 5px;
+                        margin-right: 7px;
                         width: 32px;
                     }
                     
@@ -572,14 +628,18 @@ div.content {
                             border: none;
 
                             li {
-                                background-color: transparent;
+                                background-color: black;
                                 float: left;
                                 padding: 0;
                                 position: relative;
                                 height: 90px;
-                                padding: 0 10px;
-                                width: 120px;
+                                padding: 0 5px 0 6px;
+                                width: 130px;
                                 z-index: 1;
+
+                                img {
+                                    padding: 0 5px;
+                                }
 
                                 &:nth-child(even), &:nth-child(odd) {
                                     background-color: transparent;
@@ -588,16 +648,16 @@ div.content {
                                 p.bubble {
                                     @include border-radius(3px, 3px);
                                     background-color: rgba(44, 133, 202, 0.8);
+                                    bottom: 13%;
                                     color: white;
                                     font-family: 'proxima-nova';
-                                    font-size: 11px;
+                                    font-size: 10px;
                                     font-weight: 500;
                                     left: 15px;
-                                    height: 23px;
-                                    line-height: 18px;
+                                    line-height: 10px;
+                                    min-height: 23px;
                                     padding: 5px;
                                     position: absolute;
-                                    top: 50px;
                                     width: 110px;
                                     z-index: 20;
 
@@ -612,7 +672,7 @@ div.content {
                                         -webkit-border-radius: 0;
                                         -moz-border-radius: 0;
                                         border-radius: 0;
-                                        top: 28px;
+                                        bottom: -16px;
                                         left: 13px;
                                     }
                                 }
@@ -650,6 +710,13 @@ div.content {
                             float: right;
                             margin-left: 9px;
                             vertical-align: baseline;
+
+                            &:after {
+                                color: #484848;
+                                content: '\25B6';
+                                font-size: 8px;
+                                text-indent: 5px;
+                            }
                         }
                     }
                 }
@@ -673,8 +740,20 @@ div.content {
                 #activity-social {
                     float: left;
 
+                    div.add-video-button {
+                        width: 100%;
+
+                        a {
+                            display: block;
+                            float: right;
+                            height: 28px;
+                            width: 144px;
+                        }
+                    }
+
                     #activity-conversations {
                         margin-bottom: 9px;
+                        margin-top: 14px;
 
                         ul {
                             border: none;
@@ -686,17 +765,20 @@ div.content {
                                 font-size: 13px;
                                 margin-bottom: 19px;
                                 position: relative;
+                                
+                                a.modal-button {
+                                     float: left;
 
-                                img.thumbnail {
-                                    @include border-radius(1px, 1px);
-                                    border: 3px solid rgba(190, 190, 190, .68);
-                                    float: left;
-                                    margin-right: 9px;
-                                    height: 60px;
-                                    width: 90px;
-                                    padding: 0;
-                                    position: relative;
-                                    z-index: 1;
+                                    img.thumbnail {
+                                        @include border-radius(1px, 1px);
+                                        border: 3px solid rgba(190, 190, 190, .68);
+                                        margin-right: 9px;
+                                        height: 60px;
+                                        width: 90px;
+                                        padding: 0;
+                                        position: relative;
+                                        z-index: 1;
+                                    }
                                 }
 
                                 img.img-circle {
@@ -704,7 +786,7 @@ div.content {
                                     display: block;
                                     float: left;
                                     height: 32px;
-                                    margin-right: 5px;
+                                    margin-right: 7px;
                                     position: absolute;
                                     left: -16px;
                                     top: -16px;
@@ -738,6 +820,8 @@ div.content {
                     }
 
                     #activity-follows {
+                        margin-bottom: 228px;
+
                         ul {
                             border: none;
 
@@ -773,4 +857,36 @@ div.content {
             }
         }
     }
+}
+
+#video-embed-modal {
+    background: rgba(32, 32, 32, 1.0);
+    height: 440px;
+    margin-left: -320px;
+    width: 640px;
+
+    div.modal-body {
+        max-height: 480px;
+        overflow: visible;
+        padding: 0;
+        position: relative;
+
+        button.close {
+            background-color: rgba(0, 0, 0, 1.0);
+            color: rgba(255, 255, 255, 1.0);
+            display: block;
+            height: 25px;
+            width: 25px;
+            position: absolute;
+            right: -25px;
+            top: 25%;
+            z-index: 99999;
+        }
+    }
+}
+
+footer {
+    background-color: rgba(31, 31, 31, 0.65);
+    height: 27px;
+    width: 100%;
 }

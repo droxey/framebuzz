@@ -237,6 +237,13 @@ div.form-actions {
 }
 
 /* line 182, ../sass/screen.scss */
+img.img-circle {
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.52);
+  -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.52);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.52);
+}
+
+/* line 186, ../sass/screen.scss */
 div.content {
   border-right: 1px solid #DAE3E9;
   border-radius: 0;
@@ -245,18 +252,18 @@ div.content {
   overflow: visible;
   width: 676px;
 }
-/* line 190, ../sass/screen.scss */
+/* line 194, ../sass/screen.scss */
 div.content header {
   font-family: 'futura-pt-condensed';
   font-weight: 500;
 }
-/* line 194, ../sass/screen.scss */
+/* line 198, ../sass/screen.scss */
 div.content header div.user-info {
   padding-top: 18px;
   padding-left: 25px;
   padding-right: 25px;
 }
-/* line 199, ../sass/screen.scss */
+/* line 203, ../sass/screen.scss */
 div.content header div.user-info img.img-circle {
   border: 6px solid white;
   -moz-box-shadow: 3px 3px 7px 0 rgba(0, 0, 0, 0.52);
@@ -265,31 +272,69 @@ div.content header div.user-info img.img-circle {
   display: block;
   float: left;
   position: relative;
-  margin-right: 10px;
   top: 8px;
   z-index: 3;
 }
-/* line 212, ../sass/screen.scss */
+/* line 215, ../sass/screen.scss */
 div.content header div.user-info div.user-details {
   float: left;
+  min-width: 315px;
+  max-width: 445px;
 }
-/* line 215, ../sass/screen.scss */
+/* line 220, ../sass/screen.scss */
 div.content header div.user-info div.user-details h1 {
+  margin-left: 21px;
   padding-top: 20px;
   padding-bottom: 8px;
 }
-/* line 219, ../sass/screen.scss */
+/* line 225, ../sass/screen.scss */
 div.content header div.user-info div.user-details h1 a {
   color: #333333;
+  display: inline-block;
   font-size: 44.74px;
   line-height: 46px;
+  margin-right: 14px;
   text-decoration: none;
 }
-/* line 229, ../sass/screen.scss */
+/* line 234, ../sass/screen.scss */
+div.content header div.user-info div.user-details h1 span {
+  color: #9b9b9b;
+  display: inline-block;
+  font-size: 23px;
+  font-weight: 500;
+}
+/* line 242, ../sass/screen.scss */
+div.content header div.user-info div.user-details p.bio {
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  background-color: #e8e8e8;
+  color: rgba(61, 61, 61, 0.45);
+  font-size: 18px;
+  padding: 10px 12px;
+  position: relative;
+  margin-left: 20px;
+}
+/* line 251, ../sass/screen.scss */
+div.content header div.user-info div.user-details p.bio span.corner {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border: solid 7px #e8e8e8;
+  border-color: transparent #e8e8e8 transparent transparent;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  top: 25%;
+  left: -14px;
+}
+/* line 269, ../sass/screen.scss */
 div.content header div.ribbon-wrapper {
   position: relative;
 }
-/* line 232, ../sass/screen.scss */
+/* line 272, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front {
   background-color: rgba(31, 31, 31, 0.67);
   height: 58px;
@@ -298,11 +343,11 @@ div.content header div.ribbon-wrapper div.ribbon-front {
   left: 0px;
   z-index: 2;
 }
-/* line 241, ../sass/screen.scss */
+/* line 281, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs {
   border-bottom: none;
 }
-/* line 244, ../sass/screen.scss */
+/* line 284, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li {
   background: transparent url("../img/divider.png") repeat-y top right;
   border-radius: none;
@@ -313,7 +358,7 @@ div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li {
   padding: 0 11px;
   margin: 2px 0;
 }
-/* line 254, ../sass/screen.scss */
+/* line 294, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a {
   color: white;
   font-size: 18.87px;
@@ -325,79 +370,79 @@ div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a {
   padding-bottom: 0;
   text-decoration: none;
 }
-/* line 265, ../sass/screen.scss */
+/* line 305, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a em {
   color: rgba(255, 255, 255, 0.45);
 }
-/* line 269, ../sass/screen.scss */
+/* line 309, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a:hover {
   background: none;
   border-radius: none;
   border: none;
 }
-/* line 276, ../sass/screen.scss */
+/* line 316, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li:first-child {
   padding-left: 0;
 }
-/* line 280, ../sass/screen.scss */
+/* line 320, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li:last-child {
   background: none;
   padding-right: 0;
 }
-/* line 285, ../sass/screen.scss */
+/* line 325, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.location {
   padding-left: 0;
   text-align: center;
   width: 193px;
 }
-/* line 290, ../sass/screen.scss */
+/* line 330, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.location a {
   color: rgba(255, 255, 255, 0.45);
 }
-/* line 295, ../sass/screen.scss */
+/* line 335, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.followers {
   width: 49px;
 }
-/* line 296, ../sass/screen.scss */
+/* line 336, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.following {
   width: 49px;
 }
-/* line 297, ../sass/screen.scss */
+/* line 337, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.conversations {
   width: 69px;
 }
-/* line 298, ../sass/screen.scss */
+/* line 338, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.favorites {
   width: 46px;
 }
-/* line 299, ../sass/screen.scss */
+/* line 339, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.home {
   display: none;
 }
-/* line 301, ../sass/screen.scss */
+/* line 341, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.website {
   background: none;
   padding-right: 0;
   text-align: right;
   width: 158px;
 }
-/* line 307, ../sass/screen.scss */
+/* line 347, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.website a {
   color: rgba(255, 255, 255, 0.45);
 }
-/* line 312, ../sass/screen.scss */
+/* line 352, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.active {
   border-bottom: 5px solid white;
   margin-bottom: -5px;
 }
-/* line 317, ../sass/screen.scss */
+/* line 357, ../sass/screen.scss */
 div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.active > a {
   background: none;
   border-radius: none;
   border: none;
   outline: none;
 }
-/* line 331, ../sass/screen.scss */
+/* line 371, ../sass/screen.scss */
 div.content header div.ribbon-wrapper .ribbon-edge-topleft,
 div.content header div.ribbon-wrapper .ribbon-edge-topright,
 div.content header div.ribbon-wrapper .ribbon-edge-bottomleft,
@@ -408,42 +453,42 @@ div.content header div.ribbon-wrapper .ribbon-edge-bottomright {
   height: 0px;
   width: 0px;
 }
-/* line 340, ../sass/screen.scss */
+/* line 380, ../sass/screen.scss */
 div.content header div.ribbon-wrapper .ribbon-edge-bottomleft,
 div.content header div.ribbon-wrapper .ribbon-edge-bottomright {
   top: 58px;
 }
-/* line 345, ../sass/screen.scss */
+/* line 385, ../sass/screen.scss */
 div.content header div.ribbon-wrapper .ribbon-edge-topleft,
 div.content header div.ribbon-wrapper .ribbon-edge-bottomleft {
   left: 0px;
   border-color: transparent rgba(164, 164, 164, 0.51) transparent transparent;
 }
-/* line 350, ../sass/screen.scss */
+/* line 390, ../sass/screen.scss */
 div.content header div.ribbon-wrapper .ribbon-edge-topleft {
   top: 0px;
   border-width: 0px 0px 0 0;
 }
-/* line 355, ../sass/screen.scss */
+/* line 395, ../sass/screen.scss */
 div.content header div.ribbon-wrapper .ribbon-edge-bottomleft {
   border-width: 0 0px 0px 0;
 }
-/* line 360, ../sass/screen.scss */
+/* line 400, ../sass/screen.scss */
 div.content header div.ribbon-wrapper .ribbon-edge-topright,
 div.content header div.ribbon-wrapper .ribbon-edge-bottomright {
   left: 676px;
   border-color: transparent transparent transparent rgba(164, 164, 164, 0.51);
 }
-/* line 365, ../sass/screen.scss */
+/* line 405, ../sass/screen.scss */
 div.content header div.ribbon-wrapper .ribbon-edge-topright {
   top: 0px;
   border-width: 0px 0 0 23px;
 }
-/* line 370, ../sass/screen.scss */
+/* line 410, ../sass/screen.scss */
 div.content header div.ribbon-wrapper .ribbon-edge-bottomright {
   border-width: 0 0 23px 23px;
 }
-/* line 374, ../sass/screen.scss */
+/* line 414, ../sass/screen.scss */
 div.content header div.ribbon-wrapper .ribbon-back-left {
   position: absolute;
   top: 0px;
@@ -452,7 +497,7 @@ div.content header div.ribbon-wrapper .ribbon-back-left {
   height: 58px;
   z-index: 0;
 }
-/* line 383, ../sass/screen.scss */
+/* line 423, ../sass/screen.scss */
 div.content header div.ribbon-wrapper .ribbon-back-right {
   position: absolute;
   top: 23px;
@@ -461,14 +506,14 @@ div.content header div.ribbon-wrapper .ribbon-back-right {
   height: 58px;
   z-index: 0;
 }
-/* line 394, ../sass/screen.scss */
+/* line 434, ../sass/screen.scss */
 div.content #profile-container {
   overflow: visible;
   padding: 22px 25px;
   position: relative;
   z-index: 1;
 }
-/* line 400, ../sass/screen.scss */
+/* line 440, ../sass/screen.scss */
 div.content #profile-container h1 {
   border-bottom: 1px solid #f7f7f7;
   color: #333333;
@@ -479,34 +524,40 @@ div.content #profile-container h1 {
   padding-bottom: 20px;
   width: 100%;
 }
-/* line 410, ../sass/screen.scss */
+/* line 450, ../sass/screen.scss */
 div.content #profile-container h1 a {
   font-size: 12px;
   margin-left: 9px;
-  vertical-align: baseline;
+  position: relative;
+  top: 1px;
 }
-/* line 417, ../sass/screen.scss */
+/* line 458, ../sass/screen.scss */
+div.content #profile-container a.modal-button {
+  cursor: pointer;
+  display: block;
+}
+/* line 463, ../sass/screen.scss */
 div.content #profile-container ul {
   border-top: 1px solid #ebebeb;
   padding-top: 9px;
 }
-/* line 422, ../sass/screen.scss */
+/* line 468, ../sass/screen.scss */
 div.content #profile-container ul.profile-conversations {
   border: none;
 }
-/* line 425, ../sass/screen.scss */
+/* line 471, ../sass/screen.scss */
 div.content #profile-container ul.profile-conversations li {
   margin-bottom: 27px;
   position: relative;
 }
-/* line 429, ../sass/screen.scss */
+/* line 475, ../sass/screen.scss */
 div.content #profile-container ul.profile-conversations li img.video-thumbnail {
   border: 5px solid rgba(0, 0, 0, 0.6);
   margin: -5px;
   position: relative;
   z-index: 10;
 }
-/* line 436, ../sass/screen.scss */
+/* line 482, ../sass/screen.scss */
 div.content #profile-container ul.profile-conversations li div.comment {
   background-color: #2C85CA;
   border: 1px solid rgba(44, 133, 202, 0.5);
@@ -521,11 +572,11 @@ div.content #profile-container ul.profile-conversations li div.comment {
   width: 281px;
   z-index: 20;
 }
-/* line 450, ../sass/screen.scss */
+/* line 496, ../sass/screen.scss */
 div.content #profile-container ul.profile-conversations li div.comment p {
   color: white;
 }
-/* line 454, ../sass/screen.scss */
+/* line 500, ../sass/screen.scss */
 div.content #profile-container ul.profile-conversations li div.comment img.img-circle {
   border: 2px solid white;
   display: block;
@@ -534,22 +585,22 @@ div.content #profile-container ul.profile-conversations li div.comment img.img-c
   margin-right: 7px;
   z-index: 2;
 }
-/* line 464, ../sass/screen.scss */
+/* line 510, ../sass/screen.scss */
 div.content #profile-container ul.profile-conversations li div.video-details {
   font-family: 'proxima-nova';
   font-size: 13px;
   font-weight: 500;
 }
-/* line 469, ../sass/screen.scss */
+/* line 515, ../sass/screen.scss */
 div.content #profile-container ul.profile-conversations li div.video-details h3 {
   padding-top: 7px;
 }
-/* line 472, ../sass/screen.scss */
+/* line 518, ../sass/screen.scss */
 div.content #profile-container ul.profile-conversations li div.video-details h3 a {
   color: #2a5c8a;
   font-weight: 700;
 }
-/* line 479, ../sass/screen.scss */
+/* line 525, ../sass/screen.scss */
 div.content #profile-container ul.profile-conversations li:before {
   background-image: url("../img/timeline-indicator.png");
   content: " ";
@@ -567,34 +618,50 @@ div.content #profile-container ul.profile-conversations li:before {
     background-size: 292px 19px;
   }
 }
-/* line 492, ../sass/screen.scss */
+/* line 538, ../sass/screen.scss */
 div.content #profile-container div.pagination-centered {
   margin: 0;
 }
-/* line 495, ../sass/screen.scss */
+/* line 541, ../sass/screen.scss */
 div.content #profile-container div.pagination-centered ul {
   border-top: none;
 }
-/* line 499, ../sass/screen.scss */
+/* line 545, ../sass/screen.scss */
 div.content #profile-container div.pagination-centered ul li span, div.content #profile-container div.pagination-centered ul li a {
   font-family: 'proxima-nova';
   font-weight: 500;
   font-size: 14px;
 }
-/* line 509, ../sass/screen.scss */
+/* line 555, ../sass/screen.scss */
 div.content #profile-container div.pagination-page ul.profile-conversations {
   width: 100%;
 }
-/* line 512, ../sass/screen.scss */
+/* line 558, ../sass/screen.scss */
 div.content #profile-container div.pagination-page ul.profile-conversations li {
   float: left;
   width: 313px;
 }
-/* line 517, ../sass/screen.scss */
+/* line 563, ../sass/screen.scss */
 div.content #profile-container div.pagination-page ul.profile-conversations li:nth-child(even):before {
   background: none;
 }
-/* line 525, ../sass/screen.scss */
+/* line 569, ../sass/screen.scss */
+div.content #profile-container div.tab-pane {
+  opacity: 0;
+  -webkit-transition: opacity 0.55s ease-in-out, 1s;
+  -moz-transition: opacity 0.55s ease-in-out, 1s;
+  -o-transition: opacity 0.55s ease-in-out, 1s;
+  transition: opacity 0.55s ease-in-out, 1s;
+}
+/* line 574, ../sass/screen.scss */
+div.content #profile-container div.tab-pane.active {
+  opacity: 1;
+  -webkit-transition: opacity 0.55s ease-in-out, 1s;
+  -moz-transition: opacity 0.55s ease-in-out, 1s;
+  -o-transition: opacity 0.55s ease-in-out, 1s;
+  transition: opacity 0.55s ease-in-out, 1s;
+}
+/* line 581, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li, div.content #profile-container #followers ul#feed li, div.content #profile-container #activity ul#feed li {
   display: block;
   float: left;
@@ -603,80 +670,84 @@ div.content #profile-container #following ul#feed li, div.content #profile-conta
   min-height: 36px;
   width: 283px;
 }
-/* line 533, ../sass/screen.scss */
+/* line 589, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li:nth-child(even), div.content #profile-container #followers ul#feed li:nth-child(even), div.content #profile-container #activity ul#feed li:nth-child(even) {
   background-color: #f8f8f8;
 }
-/* line 537, ../sass/screen.scss */
+/* line 593, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li:nth-child(odd), div.content #profile-container #followers ul#feed li:nth-child(odd), div.content #profile-container #activity ul#feed li:nth-child(odd) {
   background-color: #e7e6e6;
 }
-/* line 541, ../sass/screen.scss */
+/* line 597, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li img.img-circle, div.content #profile-container #followers ul#feed li img.img-circle, div.content #profile-container #activity ul#feed li img.img-circle {
   border: 2px solid white;
   display: block;
   float: left;
   height: 32px;
-  margin-right: 5px;
+  margin-right: 7px;
   width: 32px;
 }
-/* line 550, ../sass/screen.scss */
+/* line 606, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li div.feed-header, div.content #profile-container #followers ul#feed li div.feed-header, div.content #profile-container #activity ul#feed li div.feed-header {
   margin-top: 3px;
   float: left;
 }
-/* line 555, ../sass/screen.scss */
+/* line 611, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li div.feed-header h2 a, div.content #profile-container #followers ul#feed li div.feed-header h2 a, div.content #profile-container #activity ul#feed li div.feed-header h2 a {
   color: rgba(31, 31, 31, 0.83);
   font-size: 18px;
   font-weight: 500;
 }
-/* line 562, ../sass/screen.scss */
+/* line 618, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li div.feed-header h3, div.content #profile-container #followers ul#feed li div.feed-header h3, div.content #profile-container #activity ul#feed li div.feed-header h3 {
   color: rgba(102, 102, 102, 0.83);
   font-family: 'proxima-nova';
   font-weight: 500;
   font-size: 12px;
 }
-/* line 571, ../sass/screen.scss */
+/* line 627, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li div.comments ul, div.content #profile-container #followers ul#feed li div.comments ul, div.content #profile-container #activity ul#feed li div.comments ul {
   border: none;
 }
-/* line 574, ../sass/screen.scss */
+/* line 630, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li div.comments ul li, div.content #profile-container #followers ul#feed li div.comments ul li, div.content #profile-container #activity ul#feed li div.comments ul li {
-  background-color: transparent;
+  background-color: black;
   float: left;
   padding: 0;
   position: relative;
   height: 90px;
-  padding: 0 10px;
-  width: 120px;
+  padding: 0 5px 0 6px;
+  width: 130px;
   z-index: 1;
 }
-/* line 584, ../sass/screen.scss */
+/* line 640, ../sass/screen.scss */
+div.content #profile-container #following ul#feed li div.comments ul li img, div.content #profile-container #followers ul#feed li div.comments ul li img, div.content #profile-container #activity ul#feed li div.comments ul li img {
+  padding: 0 5px;
+}
+/* line 644, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li div.comments ul li:nth-child(even), div.content #profile-container #following ul#feed li div.comments ul li:nth-child(odd), div.content #profile-container #followers ul#feed li div.comments ul li:nth-child(even), div.content #profile-container #followers ul#feed li div.comments ul li:nth-child(odd), div.content #profile-container #activity ul#feed li div.comments ul li:nth-child(even), div.content #profile-container #activity ul#feed li div.comments ul li:nth-child(odd) {
   background-color: transparent;
 }
-/* line 588, ../sass/screen.scss */
+/* line 648, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li div.comments ul li p.bubble, div.content #profile-container #followers ul#feed li div.comments ul li p.bubble, div.content #profile-container #activity ul#feed li div.comments ul li p.bubble {
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
   background-color: rgba(44, 133, 202, 0.8);
+  bottom: 13%;
   color: white;
   font-family: 'proxima-nova';
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
   left: 15px;
-  height: 23px;
-  line-height: 18px;
+  line-height: 10px;
+  min-height: 23px;
   padding: 5px;
   position: absolute;
-  top: 50px;
   width: 110px;
   z-index: 20;
 }
-/* line 604, ../sass/screen.scss */
+/* line 664, ../sass/screen.scss */
 div.content #profile-container #following ul#feed li div.comments ul li p.bubble span.corner, div.content #profile-container #followers ul#feed li div.comments ul li p.bubble span.corner, div.content #profile-container #activity ul#feed li div.comments ul li p.bubble span.corner {
   position: absolute;
   display: block;
@@ -688,10 +759,10 @@ div.content #profile-container #following ul#feed li div.comments ul li p.bubble
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  top: 28px;
+  bottom: -16px;
   left: 13px;
 }
-/* line 628, ../sass/screen.scss */
+/* line 688, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container h2 {
   background: rgba(109, 109, 109, 0.11);
   border: none;
@@ -703,7 +774,7 @@ div.content #profile-container #activity #activity-container h2 {
   margin-bottom: 12px;
   text-align: center;
 }
-/* line 639, ../sass/screen.scss */
+/* line 699, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container h2.featured {
   background: none;
   color: #333333;
@@ -713,37 +784,56 @@ div.content #profile-container #activity #activity-container h2.featured {
   text-align: left;
   width: 295px;
 }
-/* line 648, ../sass/screen.scss */
+/* line 708, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container h2.featured a {
   font-size: 12px;
   float: right;
   margin-left: 9px;
   vertical-align: baseline;
 }
-/* line 657, ../sass/screen.scss */
+/* line 714, ../sass/screen.scss */
+div.content #profile-container #activity #activity-container h2.featured a:after {
+  color: #484848;
+  content: '\25B6';
+  font-size: 8px;
+  text-indent: 5px;
+}
+/* line 724, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-videos {
   float: left;
   margin-right: 33px;
   width: 295px;
 }
-/* line 665, ../sass/screen.scss */
+/* line 732, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-videos ul.profile-conversations li.empty:before {
   background: none;
 }
-/* line 673, ../sass/screen.scss */
+/* line 740, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social {
   float: left;
 }
-/* line 676, ../sass/screen.scss */
+/* line 743, ../sass/screen.scss */
+div.content #profile-container #activity #activity-container #activity-social div.add-video-button {
+  width: 100%;
+}
+/* line 746, ../sass/screen.scss */
+div.content #profile-container #activity #activity-container #activity-social div.add-video-button a {
+  display: block;
+  float: right;
+  height: 28px;
+  width: 144px;
+}
+/* line 754, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-conversations {
   margin-bottom: 9px;
+  margin-top: 14px;
 }
-/* line 679, ../sass/screen.scss */
+/* line 758, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul {
   border: none;
   padding-top: 19px;
 }
-/* line 683, ../sass/screen.scss */
+/* line 762, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li {
   color: #7f7f7f;
   font-family: 'proxima-nova';
@@ -751,13 +841,16 @@ div.content #profile-container #activity #activity-container #activity-social #a
   margin-bottom: 19px;
   position: relative;
 }
-/* line 690, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li img.thumbnail {
+/* line 769, ../sass/screen.scss */
+div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li a.modal-button {
+  float: left;
+}
+/* line 772, ../sass/screen.scss */
+div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li a.modal-button img.thumbnail {
   -webkit-border-radius: 1px 1px;
   -moz-border-radius: 1px / 1px;
   border-radius: 1px / 1px;
   border: 3px solid rgba(190, 190, 190, 0.68);
-  float: left;
   margin-right: 9px;
   height: 60px;
   width: 90px;
@@ -765,52 +858,56 @@ div.content #profile-container #activity #activity-container #activity-social #a
   position: relative;
   z-index: 1;
 }
-/* line 702, ../sass/screen.scss */
+/* line 784, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li img.img-circle {
   border: 2px solid white;
   display: block;
   float: left;
   height: 32px;
-  margin-right: 5px;
+  margin-right: 7px;
   position: absolute;
   left: -16px;
   top: -16px;
   width: 32px;
   z-index: 2;
 }
-/* line 715, ../sass/screen.scss */
+/* line 797, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment {
   float: left;
 }
-/* line 718, ../sass/screen.scss */
+/* line 800, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment p, div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment span {
   line-height: 21px;
   width: 182px;
 }
-/* line 723, ../sass/screen.scss */
+/* line 805, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment strong {
   font-weight: 700;
 }
-/* line 727, ../sass/screen.scss */
+/* line 809, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment span {
   color: rgba(127, 127, 127, 0.4);
   display: block;
 }
-/* line 733, ../sass/screen.scss */
+/* line 815, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li.empty {
   background: none;
 }
-/* line 741, ../sass/screen.scss */
+/* line 822, ../sass/screen.scss */
+div.content #profile-container #activity #activity-container #activity-social #activity-follows {
+  margin-bottom: 228px;
+}
+/* line 825, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-follows ul {
   border: none;
 }
-/* line 744, ../sass/screen.scss */
+/* line 828, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-follows ul li {
   background: none;
   float: none;
   width: 100%;
 }
-/* line 749, ../sass/screen.scss */
+/* line 833, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-follows ul li h2 {
   background: none;
   color: rgba(31, 31, 31, 0.83);
@@ -822,12 +919,46 @@ div.content #profile-container #activity #activity-container #activity-social #a
   text-align: left;
   width: auto;
 }
-/* line 760, ../sass/screen.scss */
+/* line 844, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-follows ul li h2 a {
   font-weight: 700;
   font-size: 13px;
 }
-/* line 766, ../sass/screen.scss */
+/* line 850, ../sass/screen.scss */
 div.content #profile-container #activity #activity-container #activity-social #activity-follows ul li:nth-child(even), div.content #profile-container #activity #activity-container #activity-social #activity-follows ul li:nth-child(odd) {
   background: none;
+}
+
+/* line 862, ../sass/screen.scss */
+#video-embed-modal {
+  background: #202020;
+  height: 440px;
+  margin-left: -320px;
+  width: 640px;
+}
+/* line 868, ../sass/screen.scss */
+#video-embed-modal div.modal-body {
+  max-height: 480px;
+  overflow: visible;
+  padding: 0;
+  position: relative;
+}
+/* line 874, ../sass/screen.scss */
+#video-embed-modal div.modal-body button.close {
+  background-color: black;
+  color: white;
+  display: block;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  right: -25px;
+  top: 25%;
+  z-index: 99999;
+}
+
+/* line 888, ../sass/screen.scss */
+footer {
+  background-color: rgba(31, 31, 31, 0.65);
+  height: 27px;
+  width: 100%;
 }

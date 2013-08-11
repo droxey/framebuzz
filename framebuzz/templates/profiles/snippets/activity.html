@@ -1,4 +1,4 @@
-{% load avatar_tags %}
+{% load staticfiles avatar_tags %}
 
 <div id="activity-container" class="clearfix">
     <div id="activity-videos">
@@ -11,16 +11,18 @@
         <ul class="profile-conversations">
         {% for comment in latest_videos %}
             <li>
-                <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
-                {% if comment.comment %}
-                    <div class="comment">
-                         <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
-                         <p>{{ comment.comment }}</p>
-                    </div>
-                {% endif %}
-                <div class="video-details">
-                    <h3><a href="">{{ comment.content_object.title }}</a></h3>
-                </div>
+              <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
+                  <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
+                  {% if comment.comment %}
+                      <div class="comment">
+                           <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
+                           <p>{{ comment.comment }}</p>
+                      </div>
+                  {% endif %}
+                </a>
+                  <div class="video-details">
+                      <h3><a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a></h3>
+                  </div>
             </li>
             {% empty %}
                 <li class="empty">
@@ -32,46 +34,58 @@
         </ul>
     </div>
     <div id="activity-social">
-        <div id="activity-conversations">
-            <h2>Recent Conversations</h2>
-            <ul>
-                {% for comment in latest_comments %}
-                    <li class="clearfix">
-                        <img class="thumbnail" height="60" width="90" src="{{ comment.content_object.default_thumbnail }}" />
-                        <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
-                        <div class="comment">
-                            <p>{{ profile_user.username }} commented on <strong>{{ comment.content_object.title }}</strong>.</p>
-                            <span>{{ comment.submit_date|timesince }} ago</span>
-                        </div>
-                    </li>
-                {% empty %}
-                    <li class="empty">
-                      <div class="alert alert-info">
-                        <strong>{{ profile_user.username }}</strong> hasn't participated in any conversations recently!
-                      </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div id="activity-follows">
-            <h2>Recent Follows</h2>
-            <ul id="feed">
-                {% for follower in latest_following %}
+      <div class="add-video-button clearfix">
+        <a href="{% url 'dashboard-add-videos' %}" class="add-video" title="Add FrameBuzz Video">
+          <img src="{% static 'framebuzz/profiles/img/framebuzz-video-button.png' %}" height="28" width="144" />
+        </a>
+      </div>
+      <div id="activity-conversations">
+          <h2>Recent Conversations</h2>
+          <ul>
+              {% for comment in latest_comments %}
                   <li class="clearfix">
-                    <img src="{% avatar_url follower.target 64 %}" alt="" height="32" width="32" class="img-circle" />
-                    <div class="feed-header">
-                      <h2>{{ profile_user.username }} started following <a href="{% url 'profiles-home' follower.target.username %}">{{ follower.target.username }}</a>.</h2>
-                      <h3>{{ follower.timestamp|timesince }} ago</h3>
+                    <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
+                      <img class="thumbnail" height="60" width="90" src="{{ comment.content_object.default_thumbnail }}" />
+                    </a>
+                      <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
+                      <div class="comment">
+                          <p>{{ profile_user.username }} commented on <strong><a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a></strong>.</p>
+                          <span>{{ comment.submit_date|timesince }} ago</span>
+                      </div>
+                  </li>
+              {% empty %}
+                  <li class="empty">
+                    <div class="alert alert-info">
+                      <strong>{{ profile_user.username }}</strong> hasn't participated in any conversations recently!
                     </div>
                   </li>
-                {% empty %}
-                    <li class="empty">
-                      <div class="alert alert-info">
-                        <strong>{{ profile_user.username }}</strong> hasn't followed anyone in a while.
-                      </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+              {% endfor %}
+          </ul>
+      </div>
+      <div id="activity-follows">
+          <h2>Recent Follows</h2>
+          <ul id="feed">
+              {% for follower in latest_following %}
+                <li class="clearfix">
+                  <img src="{% avatar_url follower.target 64 %}" alt="" height="32" width="32" class="img-circle" />
+                  <div class="feed-header">
+                    <h2>{{ profile_user.username }} started following <a href="{% url 'profiles-home' follower.target.username %}">{{ follower.target.username }}</a>.</h2>
+                    <h3>{{ follower.timestamp|timesince }} ago</h3>
+                  </div>
+                </li>
+              {% empty %}
+                  <li class="empty">
+                    <div class="alert alert-info">
+                      <strong>{{ profile_user.username }}</strong> hasn't followed anyone in a while.
+                    </div>
+                  </li>
+              {% endfor %}
+          </ul>
+      </div>
+      <div class="add-video-button clearfix">
+        <a href="{% url 'dashboard-add-videos' %}" class="add-video" title="Add FrameBuzz Video">
+          <img src="{% static 'framebuzz/profiles/img/framebuzz-video-button.png' %}" height="28" width="144" />
+        </a>
+      </div>
     </div>
 </div>
