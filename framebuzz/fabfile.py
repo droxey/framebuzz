@@ -420,6 +420,11 @@ def remove():
 
 @task
 @log_call
+def regenerate_avatars():
+    manage('rebuild_avatars')
+
+@task
+@log_call
 def restart():
     """
     Restart gunicorn worker processes for the project.
