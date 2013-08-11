@@ -1,41 +1,10 @@
-{% block plain %}{% endblock %}
+{% extends "templated_email/base.html" %}
 
-{% block html %}
-<table cellpadding="0" cellspacing="0" width="100%">
+{% block email_recipient %}
 
-<!--body container-->
-<table cellpadding="0" cellspacing="0" width="600px" align="center">
+{% endblock %}
 
-<!--logo image-->
-<tr><td><a href="http://framebuzz.com"><img src="http://{{ site.domain }}/media/img/email-logo-head.jpg" border="0"/></a></td></tr>
-
-<!--body content-->
-<tr>
-<td>
-<table cellpadding="0" cellspacing="0">
-    <!--news/instructions/etc-->
-    <tr>
-    <td width="530px" style="padding: 20px 0px 20px 0px;">
-    <font face="Gotham, Helvetica Neue, Helvetica, Arial, sans-serif" size="-1">
+{% block email_message %}
     {{ comment.comment.user.username }} just favorited your comment on <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.comment.comment_content_object.title }}</a>. (Not that we’re surprised; we always tell people you’re both witty and good looking.)
-    <p><a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.comment.comment }}</a></p>
-    {# <p>To change your notification settings, go here: <a href="#" style="color: #0C94C8;">[[DASHBOARD SETTINGS]]</a></p> #}
-    </font>
-    </td>
-    </tr>
-
-    <!--footer-->
-    <tr>
-    <td width="530px" style="padding: 5px 0px 20px 0px; border-top: 1px solid #E0E0E0;">
-    <font face="Gotham, Helvetica Neue, Helvetica, Arial, sans-serif" size="-1">
-    <span style="color: #999;">&copy; 2013</span> <a href="http://framebuzz.com" style="color: #0C94C8;">FrameBuzz. Patent Pending.</a><br/>
-    </font>
-    </td>
-    </tr>
-
-</table>
-</td>
-</tr>
-
-</table>
+        <p><a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.comment.comment }}</a></p>
 {% endblock %}

@@ -486,9 +486,12 @@ div.content {
                 position: relative;
 
                 img.video-thumbnail {
+                    background: rgba(102, 102, 102, .90);
                     border: 5px solid rgba(0, 0, 0, .60);
+                    height: 182px;
                     margin: -5px;
                     position: relative;
+                    width: 287px;
                     z-index: 10;
                 }
 
@@ -780,7 +783,7 @@ div.content {
                                 position: relative;
                                 
                                 a.modal-button {
-                                     float: left;
+                                    float: left;
 
                                     img.thumbnail {
                                         @include border-radius(1px, 1px);
@@ -792,19 +795,18 @@ div.content {
                                         position: relative;
                                         z-index: 1;
                                     }
-                                }
 
-                                img.img-circle {
-                                    border: 2px solid white;
-                                    display: block;
-                                    float: left;
-                                    height: 32px;
-                                    margin-right: 7px;
-                                    position: absolute;
-                                    left: -16px;
-                                    top: -16px;
-                                    width: 32px;
-                                    z-index: 2;
+                                    img.img-circle {
+                                        border: 2px solid white;
+                                        display: block;
+                                        height: 32px;
+                                        margin-right: 7px;
+                                        position: absolute;
+                                        left: -16px;
+                                        top: -16px;
+                                        width: 32px;
+                                        z-index: 2;
+                                    }
                                 }
 
                                 div.comment {
@@ -813,10 +815,13 @@ div.content {
                                     p, span {
                                         line-height: 21px;
                                         width: 182px;
+
                                     }
 
-                                    strong {
+                                    a.inline-link {
+                                        display: inline;
                                         font-weight: 700;
+                                        float: none;
                                     }
 
                                     span {

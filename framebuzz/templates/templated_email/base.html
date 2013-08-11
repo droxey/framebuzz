@@ -1,0 +1,92 @@
+{% block plain %}
+{% endblock %}
+
+{% block html %}
+<!doctype html>
+<html>
+    <head></head>
+    <body>
+    <table width="100%">
+        <tr>
+            <td> <!--email body-->
+                <table cellpadding="0" cellspacing="0" width="600px" align="center">
+                    <tr> <!--header-->
+                        <td height="96px" background="http://{{ site.domain }}/static/framebuzz/email/header.jpg">&nbsp;</td> 
+                    </tr>
+                    <tr> <!--body content top-->
+                        <td valign="top" width="600px" style="border-left: 1px solid #BED9E7; border-right: 1px solid #BED9E7;">
+                        <table cellpadding="0" cellspacing="0" width="100%" background="http://{{ site.domain }}/static/framebuzz/email/bodybackground.jpg">
+                            
+                            <tr> <!--news/instructions/etc-->
+                                <td height="315px" align="center" valign="middle" style="padding-top: 20px;">
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td width="480" height="115px" align="left" valign="middle">
+                                                <p>
+                                                    <font face="Gotham, Helvetica Neue, Helvetica, Arial, sans-serif" color="#212121">
+                                                        <b>DEAR {% block email_recipient %}{% endblock %},</b>
+                                                    </font>
+                                                </p>
+                                                <p>
+                                                <font face="Gotham" color="#3c3c3c">
+                                                <i>
+                                                    {% block email_message %}{% endblock %}
+                                                </i>
+                                                </font>
+                                                </p>
+                                                <p><font face="Gotham" color="#bfbfbf"><i>The FrameBuzz Team</i></font></p>
+                                            </td>        
+                                        </tr>
+                                </table>
+                            </td>
+                        </tr>         
+                    </table>
+                </td>
+            </tr>
+            <tr> <!--body content bottom-->
+                <td valign="top" width="600px" style="border-left: 1px solid #C6DDDB; border-right: 1px solid #C6DDDB; border-bottom: 1px solid #C6DDDB;">
+                    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#F9F9F9">
+                        <tr> <!--news/instructions/etc-->
+                            <td width="100%" height="200px" align="left" valign="top">
+                                <table cellpadding="0" cellspacing="0" style="padding: 14px 0px 0px 40px;">
+                                    <tr> <!--button-->
+                                        <td>
+                                            <table cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td height="30" width="130" align="center" valign="middle" bgcolor="#A10087" style="color: #fff; font-weight: bold; font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; -moz-border-radius: 2px; border-radius: 2px; padding: 0px 0px 0px 0px;"><a href="#" style="text-decoration: none; color:#fff; font-size: 14px;">Button</a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr> <!--copy-->
+                                        <td colspan="2" width="500px" style="padding-top: 4px; color: #3c3c3c; font-family: Gotham; font-size: 14px; font-style: italic;">
+                                        <!--
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin pulvinar elit, luctus semper ligula hendrerit et.</p>
+                                        <p>Nulla sem augue, eleifend quis libero rutrum, consequat pellentesque tellus. Aliquam convallis condimentum vestibulum.</p>
+                                        -->
+                                        </td>
+                                    </tr>  
+                                </table>
+                            </td>
+                        </tr>      
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" width="600px" align="center"> <!--footer-->
+                        <tr>
+                            <td align="center" style="padding-top: 6px; color: #3c3c3c; font-family: Gotham; font-size: 11px; font-style: italic;">
+                            &copy; 2013 FrameBuzz. All rights reserved.
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+{% endblock %}

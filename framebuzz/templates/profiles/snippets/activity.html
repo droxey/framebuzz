@@ -44,12 +44,13 @@
           <ul>
               {% for comment in latest_comments %}
                   <li class="clearfix">
-                    <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
+                    <a data-target="#video-embed-modal" role="button" class="modal-button clearfix" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
                       <img class="thumbnail" height="60" width="90" src="{{ comment.content_object.default_thumbnail }}" />
-                    </a>
                       <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
+                    </a>
+                      
                       <div class="comment">
-                          <p>{{ profile_user.username }} commented on <strong><a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a></strong>.</p>
+                          <p class="clearfix">{{ profile_user.username }} commented on <a data-target="#video-embed-modal" role="button" class="modal-button inline-link" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a>.</p>
                           <span>{{ comment.submit_date|timesince }} ago</span>
                       </div>
                   </li>
