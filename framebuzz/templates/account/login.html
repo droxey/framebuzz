@@ -1,15 +1,13 @@
-{% extends "account/base.html" %}
+{% extends "dashboard/base.html" %}
 {% load i18n account socialaccount %}
 {% load url from future %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
-{% block dashboard_left %}{% endblock %}
-{% block left_navigation_menu %}{% endblock %}
 
-{% block dashboard_right %}
+{% block content %}
 <div id="login" class="span6">
   <div class="well">
-    <h1>{% trans "Login" %}</h1>
+    <h3>{% trans "Login" %}</h4>
 
       {% if socialaccount.providers  %}
       <p>{% blocktrans with site.name as site_name %}Please sign in with one
@@ -47,17 +45,23 @@
 
       {% endif %}
 
-      <form id="login-form" method="POST" action="{% url 'account_login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <div class="form-actions">
-          <a class="button forgot-password secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-          <button class="btn primaryAction btn-primary" type="submit">{% trans "Sign In" %}</button>
-        </div>
-      </form>
+      <form class="login" method="POST" action="{% url 'dashboard-login' %}">
+                {% csrf_token %}
+                {% if request.GET.errorlogin %}
+
+                <ul class="errorlist"><li>Invalid Credentials</li></ul>
+
+                {% endif %}
+                {{ form.as_p }}
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <input type="hidden" name="next" value="{{ next }}" /> <!-- {{ request.GET.next }} -->
+                <div class="form-actions">
+                    <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+                    <a class="btn" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                </div>
+            </form>
     </div>
 </div>
 {% endblock %}

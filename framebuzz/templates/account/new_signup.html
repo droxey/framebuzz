@@ -34,12 +34,18 @@
             <!-- RIGHT PANEL -->
             <div class='spaced-title'><h4>Already Have an Account?</h4></div>
             <div class='spaced-title'>You can add FrameBuzz Publisher features to your commenting account for free.</div>
-            <form class="login" method="POST" action="{% url 'account_login' %}">
+            <form class="login" method="POST" action="{% url 'dashboard-login' %}">
                 {% csrf_token %}
+                {% if request.GET.errorlogin %}
+
+                <ul class="errorlist"><li>Invalid Credentials</li></ul>
+
+                {% endif %}
                 {{ form.as_p }}
                 {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
+                <input type="hidden" name="next" value="{{ next }}" /> <!-- {{ request.GET.next }} -->
                 <div class="form-actions">
                     <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
                     <a class="btn" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
