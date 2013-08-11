@@ -11,7 +11,7 @@
     {% for comment in page_obj.object_list %}
       {% include "profiles/snippets/video.html" %}
       {% empty %}
-          <li>
+          <li class="empty">
             <div class="alert alert-info">
               <strong>{{ profile_user.username }}</strong> hasn't participated in any conversations yet!
             </div>

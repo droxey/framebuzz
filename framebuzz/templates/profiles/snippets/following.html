@@ -7,14 +7,14 @@
   </a>
 </h1>
 
-{% if following %}
-  <ul id="feed" class="clearfix">
-    {% for username, follower_comments in following.items %}
-      {% include "profiles/snippets/user.html" %}
-    {% endfor %}
-  </ul>
-{% else %}
-  <div class="alert alert-info">
-    <strong>{{ profile_user.username }}</strong> isn't following anyone yet!
-  </div>
-{% endif %}
+<ul id="feed" class="clearfix">
+  {% for username, follower_comments in following.items %}
+    {% include "profiles/snippets/user.html" %}
+  {% empty %}
+    <li class="empty">
+      <div class="alert alert-info">
+        <strong>{{ profile_user.username }}</strong> has no followers yet!
+      </div>
+    </li>
+  {% endfor %}
+</ul>
