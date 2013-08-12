@@ -436,15 +436,17 @@ def restart():
 @log_call
 def notify_team():
     with project():
-        commit_info = run('git log -1 --pretty="%h - %an - %ar: %s"')
-        message = '%s has been updated! Current revision: %s' % (env.live_host, commit_info)
+        commit_info = run('git log -1 --pretty="[%h] %an (%ar): %s"')
+        message = '%s has been updated! Current revision: %s' % (env.live_host, str(commit_info))
+        print str(commit_info)
+        print len(str(message))
 
-        hipster = hipchat.HipChat(token='77e2890abb18c924c2bfa6d7e1a783')
-        hipster.method('rooms/message', method='POST', parameters={
-            'room_id': 257772, 
-            'from': 'Deploy', 
-            'message': message,
-        })
+        # hipster = hipchat.HipChat(token='77e2890abb18c924c2bfa6d7e1a783')
+        # hipster.method('rooms/message', method='POST', parameters={
+        #     'room_id': 257772, 
+        #     'from': 'Deploy', 
+        #     'message': message,
+        # })
 
 @task
 @log_call
