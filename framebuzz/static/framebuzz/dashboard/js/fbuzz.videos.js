@@ -19,9 +19,11 @@ FramebuzzVideos.prototype.youtube_parser = function(url_post, csrf_token) {
             url: url_post,
             data: data
         }).success(function(){
-            console.log(data);
+            $("#div-success-fbuzz-video").show();
+            /*setTimeout(function(){
+                $("#div-success-fbuzz-video").hide();
+            }, 5000);*/
         });
-        
     }
     else {
         alert("This doesn't seem to be a valid YouTube URL! Please try again.");
@@ -40,6 +42,12 @@ FramebuzzVideos.prototype.save_selected_videos = function(url, csrf_token) {
                     csrfmiddlewaretoken: csrf_token,
                     youtube_ids: selected_videos
             }
+    }).success(function(){
+        $("#div-success-yt-video").show();
+        $("#txbUrl").val('');
+        //setTimeout(function(){
+        //    $("#div-success-yt-video").hide();
+        //}, 5000);
     });   
 }
 

@@ -1,4 +1,5 @@
 {% extends "dashboard/base.html" %}
+{% load account %}
 {% load socialaccount staticfiles %}
 {% load url from future %}
 
@@ -54,6 +55,15 @@
     <hr/>
     <p><h3>Add FrameBuzz commenting to any public video.</h3></p>
     <p>
+        <div id='div-success-fbuzz-video'>
+            <div class="alert alert-success">
+                <i class="icon-film"></i>
+                    You've successfully FrameBuzzed this video!
+                    <br/>You can see it in <strong><a href="{% url 'dashboard-videos' 'list' %}">FrameBuzz Library</a></strong>.
+            </div>
+        </div>
+    </p>
+    <p>
         <div id="first-option" class="table-like">
         <div id="option-steps" class="row-like">
             <div class="cell-like">Step 1. Enter video URL</div>
@@ -73,86 +83,117 @@
         <div>Or, link with your YouTube to FrameBuzz your videos.</div>
     </p>
     <p>
-        <div id="second-option" class="table-like">
-            <div class="row-like">
-                <div class="cell-like">
-                    <a title="Connect with YouTube" class="socialaccount_provider btn google btn-danger" href="{% provider_login_url "google" next="/dashboard/videos/add#video-list-wrapper" %}">Connect With YouTube</a>
-                </div>
-                
+        {% if connected and video_count > 0 %}
+            {% user_display user as user_display %}
+            <div class="alert alert-success">
+                <i class="icon-film"></i>
+                You're currently connected to YouTube as <strong><u>{% user_display user %}</u></strong>
             </div>
-        </div>
-    </p>
-    <p>
-        <div id='video-list-wrapper' class="row-fluid">
-            {% csrf_token %}
-            {% if video_list %}
-            <hr/>
-            <h3>Your List</h3>
+            <!-- SHOW VIDEOS -->
             <p>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th class="span1">
-                            <input type="checkbox" id='chk-all'>
-                        </th>
-                        <th class="span2">
-                            <span class="line"></span>Video
-                        </th>
-                         <th class="span3">
-                            <span class="line"></span>Title
-                        </th>
-                        <th class="span3">
-                            <span class="line"></span>Description
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for video in video_list %}
-                        {% if forloop.first %}
-                            <tr class="first">
-                                <td>
-                                    <input type="checkbox" data-videoid="{{video.video_id}}">
-                                </td>
-                                <td>
-                                    <div class="img">
-                                        <img height="60" width="80" src="{{video.default_thumbnail}}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href="#" class="name"> {{video.title}} </a>
-                                </td>
-                                <td class="description">
-                                    <div>{{ video.description }}</div>
-                                </td>
-                            </tr>
-                        {% else %}
-                             <tr>
-                                <td>
-                                    <input type="checkbox" data-videoid="{{video.video_id}}">
-                                </td>
-                                <td>
-                                    <div class="img">
-                                        <img height="60" width="80" src="{{video.default_thumbnail}}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href="#" class="name"> {{video.title}} </a>
-                                </td>
-                                <td class="description">
-                                    <div>{{ video.description }}</div>
-                                </td>
-                            </tr>
-                        {% endif%}
-                    {% endfor %}
-                </tbody>
-            </table>
-            <p>
-                <button id="btn-add-video" class="btn-flat primary">
-                    FrameBuzz!
-                </button>
+                <div id='div-success-yt-video'>
+                    <div class="alert alert-success">
+                        <i class="icon-film"></i>
+                        You've successfully added the selected videos to your <strong><a href="{% url 'dashboard-videos' 'list' %}">FrameBuzz Library</a></strong>.
+                    </div>
+                </div>
             </p>
+            <p>
+                <div id='video-list-wrapper' class="row-fluid">
+                    {% csrf_token %}
+                    {% if video_list %}
+                    <hr/>
+                    <h3>Your List</h3>
+                    <p>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="span1">
+                                    <input type="checkbox" id='chk-all'>
+                                </th>
+                                <th class="span2">
+                                    <span class="line"></span>Video
+                                </th>
+                                 <th class="span3">
+                                    <span class="line"></span>Title
+                                </th>
+                                <th class="span3">
+                                    <span class="line"></span>Description
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for video in video_list %}
+                                {% if forloop.first %}
+                                    <tr class="first">
+                                        <td>
+                                            <input type="checkbox" data-videoid="{{video.video_id}}">
+                                        </td>
+                                        <td>
+                                            <div class="img">
+                                                <img height="60" width="80" src="{{video.default_thumbnail}}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="name"> {{video.title}} </a>
+                                        </td>
+                                        <td class="description">
+                                            <div>{{ video.description }}</div>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                     <tr>
+                                        <td>
+                                            <input type="checkbox" data-videoid="{{video.video_id}}">
+                                        </td>
+                                        <td>
+                                            <div class="img">
+                                                <img height="60" width="80" src="{{video.default_thumbnail}}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="name"> {{video.title}} </a>
+                                        </td>
+                                        <td class="description">
+                                            <div>{{ video.description }}</div>
+                                        </td>
+                                    </tr>
+                                {% endif%}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <p>
+                        <button id="btn-add-video" class="btn-flat primary">
+                            FrameBuzz!
+                        </button>
+                    </p>
+                {% endif %}
+                    </p>
+                </div>
+            </p>
+        {% elif connected %}
+            <div class="alert alert-info">
+                <i class="icon-film"></i>
+                You're currently connected to YouTube as <strong><u>{% user_display user %}</u></strong>
+                <br>But you have FrameBuzzed all your videos or have no videos in your YouTube library to FrameBuzz.
+                <br>Try Again?
+                <br>
+            </div>
+            <div id="second-option" class="table-like">
+                <div class="row-like">
+                    <div class="cell-like">
+                        <a title="Connect with YouTube" id='btn-ytube' class="socialaccount_provider btn google btn-danger" href="{% provider_login_url "google" next="/dashboard/videos/add#video-list-wrapper" %}">Connect With YouTube</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div id="second-option" class="table-like">
+                <div class="row-like">
+                    <div class="cell-like">
+                        <a title="Connect with YouTube" id='btn-ytube' class="socialaccount_provider btn google btn-danger" href="{% provider_login_url "google" next="/dashboard/videos/add#video-list-wrapper" %}">Connect With YouTube</a>
+                    </div>
+                </div>
+            </div>
         {% endif %}
-            </p>
-        </div>
     </p>
 {% endblock %}

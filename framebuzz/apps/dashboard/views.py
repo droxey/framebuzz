@@ -76,8 +76,9 @@ def add_videos(request):
     all_videos = list()
     selected_videos = list()
     social_token = None
+    connected = None
+    video_count = 0
     template = 'dashboard/video/add_videos.html'
-
     
     if request.method == 'POST':
         # Request all ids
@@ -100,11 +101,20 @@ def add_videos(request):
         pass
     
     if social_token:
-        all_videos = get_uploaded_videos(social_token.token)
-            
+        all_videos = get_uploaded_videos(social_token.token)	
+	if all_videos:
+	    if len(all_videos) > 0:
+		connected = True
+		video_count = len(all_videos)
+	else:
+	    connected = True
+	    video_count = 0
+        
     return render_to_response(template, RequestContext(request, {
             'video_list': all_videos,
-            'is_connected': social_token is not None
+            'is_connected': social_token is not None,
+	    'connected': connected,
+	    'video_count': video_count
      }))
 
 
