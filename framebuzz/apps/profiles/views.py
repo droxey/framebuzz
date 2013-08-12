@@ -9,7 +9,6 @@ from actstream.models import Action, Follow, followers, following
 from actstream.actions import follow, unfollow
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
-from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
 
 

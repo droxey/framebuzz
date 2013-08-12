@@ -219,11 +219,13 @@ INSTALLED_APPS = (
     'compressor',
     'raven.contrib.django.raven_compat',
     'django_sockjs_tornado',
+    'addendum',
 
     # FrameBuzz Apps
     'framebuzz.apps.api',
     'framebuzz.apps.dashboard',
     'framebuzz.apps.profiles',
+    'framebuzz.apps.marketing',
 )
 
 SUIT_CONFIG = {

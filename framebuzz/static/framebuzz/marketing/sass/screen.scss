@@ -1,0 +1,179 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/transition";
+
+/*
+ *      Global
+ */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, 
+acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, 
+form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, 
+canvas, details, embed, figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+body {
+    background-color: #2289ba;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgb(134, 191, 218)), color-stop(100%, #2289ba));
+    background-image: -webkit-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, #2289ba 100%);
+    background-image: -moz-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, #2289ba 100%);
+    background-image: -ms-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, #2289ba 100%);
+    background-image: -o-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, #2289ba 100%);
+    background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.5) -120%, #2289ba 100%)
+}
+
+
+/*
+ *      Mixins
+ */
+
+@mixin background-image-retina($file, $type, $width, $height) {
+  background-image: url($file + '.' + $type);
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 144dpi) {
+    & {
+      background-image: url($file + '@2x.' + $type);
+      background-size: $width $height;
+    }
+  }
+}
+
+/*
+ *      Common Elements
+ */
+
+.wf-loading {
+    div.content {
+        opacity: 0;
+        @include single-transition(opacity 0.25s ease-in-out);
+    }
+}
+
+.wf-active {
+    div.content { 
+        opacity: 1;
+        @include single-transition(opacity 0.25s ease-in-out);
+    }
+}
+
+div.wrapper {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+div.navbar {
+    background-color: rgba(39, 39, 39, 1.0);
+    box-shadow: none;
+
+    div.navbar-inner {
+        background: none;
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMzA4KSIvPjxzdG9wIG9mZnNldD0iMC45OCIgc3RvcC1jb2xvcj0icmdiYSgwLCAwLCAwLCAwKSIvPjwvcmFkaWFsR3JhZGllbnQ+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDApIiAvPjxyZWN0IHg9Ii0yMC45MDkxJSIgeT0iLTEwMC40MiUiIHdpZHRoPSIxNTYwcHgiIGhlaWdodD0iMjAwLjg0JSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
+        background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 780, color-stop(0%, rgba(255, 255, 255, 0.308)), color-stop(98%, rgba(0, 0, 0, 0)));
+        background-image: -webkit-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        background-image: -moz-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        background-image: -ms-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        background-image: -o-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        background-image: radial-gradient(780px 100.42% at center 0%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        border-left: 0 none;
+        box-shadow: none;
+        margin: 0 auto;
+        overflow: hidden;
+        width: 97%;
+
+        a.brand {
+            border: none;
+            padding: 8px 0px 0px 35px;
+            text-shadow: none;
+        }
+
+        ul.nav {
+            padding: 19px 0;
+            margin-right: -5px;
+
+            li.link {
+                a {
+                    border-left: none;
+                    font-family: 'futura-pt-condensed';
+                    font-weight: 300;
+                    font-size: 17px;
+                    text-transform: uppercase;
+                }
+            }
+
+            li.social {
+                float: left;
+                height: 42px;
+                margin: 0 2px;
+                width: 42px;
+
+                a.socialaccount_provider {
+                    background-repeat: no-repeat;
+                    background-image:url('../img/social-icons.png');
+                    border-left: none;
+                    cursor: pointer;
+                    height: 40px;
+                    width: 40px;
+                    padding: 0;
+                    display: inline-block;
+                    text-indent: -99999px;
+                    opacity: .9;
+                    filter:Alpha(Opacity=9);
+
+                    &:hover {
+                        opacity: 1;
+                        filter:Alpha(Opacity=10);
+                    }
+                }
+
+                a.twitter {
+                    background-position: -174px 0;
+                }
+
+                a.facebook {
+                    background-position: -131px 0;
+                }
+
+                a.google {
+                    background-position: -218px 0;
+                }
+
+                &.active {
+                    background: none;
+                }
+            }
+        }
+    }
+}
+
+div.marketing-content {
+    margin-bottom: 100px;
+    min-height: 620px;
+    overflow: hidden;
+    padding-bottom: 50px;
+    position: relative;
+    width: 1200px;
+}
+
+div.footer {
+    background-color: black;
+    padding: 33px 0;
+
+    span {
+        color: white;
+        display: block;
+        font-family: 'futura-pt-condensed';
+        font-weight: 300;
+        font-size: 17px;
+        text-align: center;
+    }
+}

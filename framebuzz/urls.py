@@ -29,6 +29,9 @@ urlpatterns = patterns('',
     
     # Django-Comments:
     (r'^comments/', include('django.contrib.comments.urls')),
+
+    # Marketing:
+    url(r'^', include('framebuzz.apps.marketing.urls')),
 )
 
 if settings.DEBUG:
