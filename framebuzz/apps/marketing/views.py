@@ -1,3 +1,8 @@
+import urllib2
+import lxml.html as lh
+import json
+
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -41,3 +46,12 @@ def press(request):
     {
     },
     context_instance=RequestContext(request))
+
+
+def google_plus_count(request):
+    doc = lh.parse(urllib2.urlopen('https://plusone.google.com/_/+1/fastbutton?url=http://framebuzz.com&count=true'))
+    count = doc.xpath("//div[@id='aggregateCount']/text()")
+    print str(count)
+
+    response = { 'count': str(count).lstrip("['").rstrip("']") }
+    return HttpResponse(json.dumps(response), content_type='application/json')

@@ -76,7 +76,7 @@ div.navbar {
         }
 
         ul.nav {
-            padding: 19px 0;
+            padding: 16px 0;
             margin-right: -5px;
 
             li.link {
@@ -87,48 +87,14 @@ div.navbar {
                     font-size: 17px;
                     text-transform: uppercase;
                 }
+
+                a.active, a:hover { background: none !important; }
             }
 
             li.social {
                 float: left;
-                height: 42px;
-                margin: 0 2px;
-                width: 42px;
-
-                a.socialaccount_provider {
-                    background-repeat: no-repeat;
-                    background-image:url('../img/social-icons.png');
-                    border-left: none;
-                    cursor: pointer;
-                    height: 40px;
-                    width: 40px;
-                    padding: 0;
-                    display: inline-block;
-                    text-indent: -99999px;
-                    opacity: .9;
-                    filter:Alpha(Opacity=9);
-
-                    &:hover {
-                        opacity: 1;
-                        filter:Alpha(Opacity=10);
-                    }
-                }
-
-                a.twitter {
-                    background-position: -174px 0;
-                }
-
-                a.facebook {
-                    background-position: -131px 0;
-                }
-
-                a.google {
-                    background-position: -218px 0;
-                }
-
-                &.active {
-                    background: none;
-                }
+                margin-left: 13px;
+                margin-top: -9px;
             }
         }
     }
@@ -167,7 +133,7 @@ div.marketing-content {
 
             #watch-container {
                 padding-bottom: 37px;
-                
+
                 #video-container {
                     @include border-radius(5px, 5px);
                     background-color: white;

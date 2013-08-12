@@ -1,5 +1,5 @@
 {% extends "profiles/base.html" %}
-{% load staticfiles avatar_tags %}
+{% load staticfiles avatar_tags compress %}
 
 {% block title %}{{ profile_user.username }}'s Profile{% endblock %}
 
@@ -93,6 +93,7 @@
 {% endblock %}
 
 {% block page_javascript %}
+    {% compress js %}
     <script type="text/javascript">
        $(document).ready(function() {
             var currentPageUrl = null;
@@ -146,4 +147,5 @@
             });
         });
     </script>
+    {% endcompress %}
 {% endblock %}
