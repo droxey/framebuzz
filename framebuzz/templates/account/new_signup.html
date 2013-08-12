@@ -36,10 +36,10 @@
             <div class='spaced-title'>You can add FrameBuzz Publisher features to your commenting account for free.</div>
             <form class="login" method="POST" action="{% url 'dashboard-login' %}">
                 {% csrf_token %}
-                {% if request.GET.errorlogin %}
-
-                <ul class="errorlist"><li>Invalid Credentials</li></ul>
-
+                  {% if request.GET.errorlogin %}
+                <div class="alert alert-error">
+                  <ul class="errorlist"><li>Invalid Credentials</li></ul>
+                </div>
                 {% endif %}
                 {{ form.as_p }}
                 {% if redirect_field_value %}
