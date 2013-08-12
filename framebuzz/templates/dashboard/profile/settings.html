@@ -97,9 +97,11 @@ $(function(){
                             <div class='cell-like'>
                                 <select id='slct-websites'>
                                     <option value='0'>Select a Website</option>
-                                    {% for web in websites.all %}
-                                    <option value="{{web.website.id}}">{{web}}</option>
+                                    {% comment %}
+                                    {% for web in websites %}
+                                    <option value="">{{web}}</option>
                                     {% endfor %}
+                                    {% endcomment %}
                                 </select>    
                             </div>
                         </div>

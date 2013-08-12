@@ -162,8 +162,6 @@ def moderators_queue(request):
         
     if moderated_comment_id and moderated_flag:
         moderated_comment = MPTTComment.objects.get(id=moderated_comment_id)
-        print "moderated comment"
-        print moderated_comment
         
         comment_flag = CommentFlag.objects.get(comment__id = moderated_comment_id, comment__object_pk__in=all_videos_id_list, flag=CommentFlag.SUGGEST_REMOVAL)
         
@@ -286,7 +284,7 @@ def settings(request):
 
 @login_required
 def settings_edit(request):
-    submited = request.method == 'POST'
+    submitted = request.method == 'POST'
     profile = request.user.get_profile()
     
     if request.method == 'POST':
@@ -309,7 +307,7 @@ def settings_edit(request):
     return render_to_response(template, RequestContext(request, {
             'form': form,
             "success": success,
-            "submited": submited
+            "submitted": submitted
     }))
 
 
@@ -332,15 +330,18 @@ def login(request):
         return ret
 
 def register_user(request):
+    submited = request.method == 'POST'
     if request.method == 'POST': # If the form has been submitted...
         userForm = DashboardSignupForm(data=request.POST, request=request) # A form bound to the POST data
+        success = userForm.is_valid()
         redirect_path = request.POST.get('next', None)
         if userForm.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
             userForm.save()
     else:
+        success = False
         userForm = DashboardSignupForm(request=request) # An unbound form
         redirect_path = request.GET.get('next', None)
     if not redirect_path:
         redirect_path = '/dashboard/'
-    return render_to_response('account/new_signup.html', RequestContext(request, {'reg_user_form' : userForm, 'form': LoginForm, 'next' : redirect_path}))
+    return render_to_response('account/new_signup.html', RequestContext(request, {'reg_user_form' : userForm, 'form': LoginForm, 'next' : redirect_path, "success": success, "submitted": submited}))
