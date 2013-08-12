@@ -64,14 +64,11 @@ class LoginView(RedirectAuthenticatedUserMixin, FormView):
         ret = (get_next_redirect_url(self.request,
                                      self.redirect_field_name)
                or self.success_url)
-        print 'get_success_url'
-        print ret
         return ret
 
     def get_context_data(self, **kwargs):
         ret = super(LoginView, self).get_context_data(**kwargs)
         nextUrl = self.request.GET.get('nextUrl', None)
-        print nextUrl
         site = Site.objects.get_current()
         ret.update({
                 "signup_url": passthrough_next_redirect_url(self.request,
@@ -83,8 +80,6 @@ class LoginView(RedirectAuthenticatedUserMixin, FormView):
                 "is_ajax_request": self.request.is_ajax(),
                 "next_url": None if nextUrl is None else nextUrl.replace(site.domain, '').replace('http://', '').replace('www.', '')
                 })
-        print 'get_context_data'
-        print ret
         return ret
 
 login = LoginView.as_view()
