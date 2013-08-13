@@ -1,0 +1,279 @@
+{% load url from future %}
+{% load socialaccount %}
+{% load staticfiles %}
+{% load account %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login to FrameBuzz</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <!-- bootstrap -->
+    <link href="{% static 'framebuzz/dashboard/css/bootstrap/bootstrap.css' %}" rel="stylesheet" />    
+    <link href="{% static 'framebuzz/dashboard/css/bootstrap/bootstrap-responsive.css' %}" rel="stylesheet" />
+    <link href="{% static 'framebuzz/dashboard/css/bootstrap/bootstrap-overrides.css' %}" type="text/css" rel="stylesheet" />
+
+    <!-- libraries -->
+    <link href="{% static 'framebuzz/dashboard/css/lib/jquery-ui-1.10.2.custom.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'framebuzz/dashboard/css/lib/font-awesome.css' %}" type="text/css" rel="stylesheet" />
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/layout.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/elements.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/icons.css' %}">
+      
+<!--*************************************************************************************************************************************-->
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/compiled/gallery.css' %}" type="text/css" media="screen" />    
+    <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/compiled/ui-elements.css' %}" type="text/css" media="screen" />
+    
+    <link media="screen" type="text/css" href="{%  static 'framebuzz/dashboard/css/compiled/signup.css' %}" rel="stylesheet">
+
+ <style>
+body {
+    background-color: #3C89AF;
+}
+
+@font-face {
+    font-family: "ProximaNova";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../fonts/proximanova-reg.eot?#iefix") format("embedded-opentype"), url("../../fonts/proximanova-reg.woff") format("woff"), url("../../fonts/proximanova-reg.ttf") format("truetype"), url("../../fonts/proximanova-reg.svg#ProximaNovaRgRegular") format("svg");
+}
+@font-face {
+    font-family: "ProximaNovaBold";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../fonts/proximanova-bold.eot?#iefix") format("embedded-opentype"), url("../../fonts/proximanova-bold.woff") format("woff"), url("../../fonts/proximanova-bold.ttf") format("truetype"), url("../../fonts/proximanova-bold.svg#ProximaNovaRgBold") format("svg");
+}
+@font-face {
+    font-family: "ProximaNovaLight";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../fonts/proximanova-light.eot?#iefix") format("embedded-opentype"), url("../../fonts/proximanova-light.woff") format("woff"), url("../../fonts/proximanova-light.ttf") format("truetype"), url("../../fonts/proximanova-light.svg#ProximaNovaLtLight") format("svg");
+}
+.login-wrapper .box {
+    margin-top: 40px;
+    width:440px !important;
+}
+.login-wrapper .box .action {
+    margin: 0 -32px !important;
+}
+.login-wrapper .box h6 {
+    text-transform: none;
+}
+.connect-options {
+    margin-bottom: 30px;
+}
+.connect-options:before, .connect-options:after {
+    content: "";
+    display: table;
+}
+.connect-options:after {
+    clear: both;
+}
+.connect-options button {
+    -moz-box-sizing: border-box;
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #525355;
+    float: left;
+    font-family: "ProximaNova","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 0;
+    text-align: center;
+    width: 33.33%;
+}
+.connect-options button .auth-container {
+    border-radius: 64px 64px 64px 64px;
+    display: inline-block;
+    padding: 24px;
+    transform: scale(1);
+    transition: all 0.2s ease 0s;
+}
+.connect-options button .auth-container img {
+    display: block;
+    height: 64px;
+    margin: 0 auto;
+    width: 64px;
+}
+.connect-options button .auth-container:hover {
+    transform: scale(1.05);
+}
+.facebook-auth .auth-container {
+    background-color: #3B5998;
+}
+.twitter-auth .auth-container {
+    background-color: #4099FF;
+}
+.google-auth .auth-container {
+    background-color: #D34836;
+}
+
+.login-wrapper .box .content-wrap {
+    width: 85%;
+}
+.or-label{
+    margin-bottom: 30px;
+    text-shadow: 3px 0 0 #FFFFFF, -3px 0 0 #FFFFFF, 5px 0 0 #FFFFFF, -5px 0 0 #FFFFFF, 8px 0 0 #FFFFFF, -8px 0 0 #FFFFFF;
+    text-align: center;
+    color: #000000;
+    font-family: "Gotham Rounded A","Gotham Rounded B","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.1em;        
+}
+
+h1.or-label span, h1.or-label span {
+    border-bottom: 1px solid #E6E6E6;
+    display: block;
+    margin-top: -0.4em;
+    width: 100%;
+}
+.login-wrapper .already {
+    margin: 20px auto;
+}
+
+.login-wrapper .already p {
+    color: #FFFFFF;
+}
+
+
+.login .password-container, .signup .password-container {
+    position: relative;
+}
+.login .password-container span, .signup .password-container span {
+    position: absolute;
+    right: 10px;
+    top: 9px;
+}
+
+.content-wrap form {
+    margin: 0;
+}
+
+.login {  
+    border:0px;
+    padding-top: 0px;
+}
+</style>
+ 
+ 
+ 
+    <!-- open sans font -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.frame.bz" class="brand">
+                    <img width="310" height="71" alt="FrameBuzz" src="{% static 'framebuzz/dashboard/img/social_icons/logo.png' %}">
+            </a>
+        </div>
+    </div>
+    <!-- end navbar -->
+
+
+
+    <!-- main container -->
+    <div class="login">
+    <div class="row-fluid login-wrapper">
+        <div class="box">
+            <div class="content-wrap">
+                <h6>Sign-in using </h6>
+                <div class="connect-options">
+                <button class="facebook-auth" type="button">
+                    <span class="auth-container">
+			<a href="{% provider_login_url "facebook" method="js_sdk" next="/dashboard/" %}" >
+			    <img alt="Facebook" src="{% static 'framebuzz/dashboard/img/social_icons/facebook.svg' %}">
+			    <!--[if lte IE 7]>
+			        <img src="{% static 'framebuzz/dashboard/img/social_icons/facebook.png' %}" alt="Facebook">
+			    <![endif]-->
+			</a>
+                    </span>
+                    Facebook
+                </button>
+                <button class="twitter-auth" type="button">
+                    <span class="auth-container">
+			<a href="{% provider_login_url "twitter" next="/dashboard/" %}" >
+			    <img alt="Twitter" src="{% static 'framebuzz/dashboard/img/social_icons/twitter.svg' %}">
+				 <!--[if lte IE 7]>
+				    <img src="{% static 'framebuzz/dashboard/img/social_icons/twitter.png' %}" alt="Twitter">
+				<![endif]-->
+			</a>
+                    </span>
+                        Twitter
+                </button>
+                <button class="google-auth" type="button">
+                    <span class="auth-container">
+			<a href="{% provider_login_url "google" next="/dashboard/" %}">
+			    <img alt="Google" src="{% static 'framebuzz/dashboard/img/social_icons/google.svg' %}">
+			    <!--[if lte IE 7]>
+			        <img src="{% static 'framebuzz/dashboard/img/social_icons/google.png' %}" alt="Google">
+			    <![endif]-->
+			</a>
+                    </span>
+                    Google
+                </button>
+                </div>                
+                <h1 class="or-label">or<span></span></h1>
+		<form action ="{% url 'account_login' %}" method='POST'>
+		    {% csrf_token %}
+		    <div class='fieldWrapper'>
+			{{ form.login.errors }}
+			{{ form.login }}
+		    </div>
+		    
+		    <div class='fieldWrapper'>
+			{{ form.password.erros }}
+			{{ form.password }}
+		    </div>
+		    <input type="hidden" name="next" value="{{ next }}" />
+		    <div class="action">
+                    <input type='submit' values='Sign In' class='btn-glow primary signup'/>
+                </div>
+		</form>             
+            </div>
+        </div>
+
+        <div class="span6 already">
+            <p>Don't have an account? <a href="#">Sign up</a> &nbsp; or <a href="{% url 'dashboard-register' %}">FrameBuzz your website</a></p>
+            
+        </div>
+    </div>	
+
+    </div>
+    <!-- end main container -->
+
+
+	<!-- scripts -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+
+    <!-- call all plugins -->
+
+    <!-- initialize this page scripts -->
+    <script type="text/javascript">
+        $(function () {
+	    $("#id_login, #id_password").addClass('span12');
+
+        });
+    </script>
+</body>
+</html>

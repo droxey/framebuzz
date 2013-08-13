@@ -1,6 +1,7 @@
 {% load url from future %}
 {% load socialaccount %}
-{% load staticfiles %}
+{% load staticfiles avatar_tags %}
+
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/elements.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/icons.css' %}">
       
-
     <!-- this page specific styles -->
     <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/compiled/index.css' %}" type="text/css" media="screen" />    
 
@@ -42,27 +42,33 @@
     <!-- navbar -->
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
-            <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            
-            <a class="brand" href="index.html">{% block navbar-Title %}Framebuzz<!--<img src="img/logo.png">-->{% endblock %}</a>
-           {% block navbar-profile %}
-           <!-- <ul class="nav pull-right">                    
-                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle hidden-phone" data-toggle="dropdown">
-                        My Framebuzz Profile
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'dashboard-profile' %}">Personal info</a></li>
-                        <li><a href="{% url 'dashboard-settings' %}">Account settings</a></li>
-                    </ul>
-                </li>
-            </ul>     -->       
-            {% endblock %}
+            <div class="wrapper">
+                <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="http://www.framebuzz.com">
+                    <img src="{% static 'framebuzz/profiles/img/logo.png' %}" alt="FrameBuzz" height="48" width="208" />
+                </a>
+                {% if request.user.is_authenticated %}
+                    <ul class="nav pull-right">               
+                        <li class="settings">
+                            <a href="{% url 'profiles-home' request.user.username %}" class="tab-link dropdown-toggle hidden-phone">
+                                Profile
+                            </a>
+                        </li>
+                        <li class="settings user clearfix">
+                            <a href="{% url 'profiles-home' request.user.username %}" role="button" class="avatar">
+                                <img src="{% avatar_url request.user 58 %}" alt="" height="28" width="28" class="img-circle" />
+                            </a>
+                            <a href="{% url 'dashboard-settings' %}" role="button">
+                                <i class="icon-cog"></i>
+                            </a>
+                        </li>
+                    </ul>  
+                {% endif %} 
+            </div>         
         </div>
     </div>
     <!-- end navbar -->
@@ -86,8 +92,8 @@
                     <i class="icon-chevron-down"></i>
                 </a>    
                 <ul class="submenu">
-                    <li><a href="{% url 'dashboard-videos' 'list' %}">Library</a></li>
                     <li><a href="{% url 'dashboard-add-videos' %}">FrameBuzz a Video</a></li>
+                    <li><a href="{% url 'dashboard-videos' 'list' %}">Library</a></li>
                 </ul>
             </li>
             {% endblock %}
@@ -116,8 +122,6 @@
                 </a>
             </li>
             {% endblock %}
-            {% endcomment %}
-
             {% block sidebar-settings %}
             <li>
                 <a href="{% url 'dashboard-settings' %}">
@@ -126,6 +130,8 @@
                 </a>
             </li>
             {% endblock %}
+            {% endcomment %}
+
 	    
         </ul>
     </div>
@@ -138,6 +144,8 @@
     </div>
     
     <!-- footer -->
+    <footer></footer>
+    {% comment %}
     <div id="base-footer" class="navbar navbar-inverse base_footer">
         <div class="navbar-inner">
             <a class="" href="#">&copy; FrameBuzz Patent Pending.</a>
@@ -150,6 +158,7 @@
             </span>            
         </div>
     </div>
+    {% endcomment %}
     <!-- end footer -->
 
     <!-- scripts -->

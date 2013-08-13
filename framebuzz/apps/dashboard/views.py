@@ -335,7 +335,7 @@ def login(request):
     if not redirect_path:
         redirect_path = '/dashboard/'
     if not request.user.is_authenticated():
-        return redirect('/dashboard/register/?errorlogin=y', RequestContext(request, {'next' : redirect_path}))
+        return render_to_response('account/new_login.html', RequestContext(request, {'next' : redirect_path, 'form': LoginForm}))
     else:
         return ret
 
@@ -354,4 +354,4 @@ def register_user(request):
         redirect_path = request.GET.get('next', None)
     if not redirect_path:
         redirect_path = '/dashboard/'
-    return render_to_response('account/new_signup.html', RequestContext(request, {'reg_user_form' : userForm, 'form': LoginForm, 'next' : redirect_path, "success": success, "submitted": submited}))
+    return render_to_response('account/new_business_signup.html', RequestContext(request, {'reg_user_form' : userForm, 'form': LoginForm, 'next' : redirect_path, "success": success, "submitted": submited}))

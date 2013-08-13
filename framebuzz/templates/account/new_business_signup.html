@@ -1,0 +1,210 @@
+{% load url from future %}
+{% load socialaccount %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup for a FrameBuzz account</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <!-- bootstrap -->
+    <link href="{% static 'framebuzz/dashboard/css/bootstrap/bootstrap.css' %}" rel="stylesheet" />    
+    <link href="{% static 'framebuzz/dashboard/css/bootstrap/bootstrap-responsive.css' %}" rel="stylesheet" />
+    <link href="{% static 'framebuzz/dashboard/css/bootstrap/bootstrap-overrides.css' %}" type="text/css" rel="stylesheet" />
+
+    <!-- libraries -->
+    <link href="{% static 'framebuzz/dashboard/css/lib/jquery-ui-1.10.2.custom.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'framebuzz/dashboard/css/lib/font-awesome.css' %}" type="text/css" rel="stylesheet" />
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/layout.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/elements.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/icons.css' %}">
+      
+<!--*************************************************************************************************************************************-->
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/compiled/gallery.css' %}" type="text/css" media="screen" />    
+    <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/compiled/ui-elements.css' %}" type="text/css" media="screen" />
+    
+    <link media="screen" type="text/css" href="{%  static 'framebuzz/dashboard/css/compiled/signup.css' %}" rel="stylesheet">
+
+ <style>
+body {
+    background-color: #3C89AF;
+}
+
+@font-face {
+    font-family: "ProximaNova";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../fonts/proximanova-reg.eot?#iefix") format("embedded-opentype"), url("../../fonts/proximanova-reg.woff") format("woff"), url("../../fonts/proximanova-reg.ttf") format("truetype"), url("../../fonts/proximanova-reg.svg#ProximaNovaRgRegular") format("svg");
+}
+@font-face {
+    font-family: "ProximaNovaBold";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../fonts/proximanova-bold.eot?#iefix") format("embedded-opentype"), url("../../fonts/proximanova-bold.woff") format("woff"), url("../../fonts/proximanova-bold.ttf") format("truetype"), url("../../fonts/proximanova-bold.svg#ProximaNovaRgBold") format("svg");
+}
+@font-face {
+    font-family: "ProximaNovaLight";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../fonts/proximanova-light.eot?#iefix") format("embedded-opentype"), url("../../fonts/proximanova-light.woff") format("woff"), url("../../fonts/proximanova-light.ttf") format("truetype"), url("../../fonts/proximanova-light.svg#ProximaNovaLtLight") format("svg");
+}
+.login-wrapper .box {
+    margin-top: 40px;
+    width:820px !important;
+    display: table;
+}
+.login-wrapper .box .action {
+    margin: 0 -32px !important;
+}
+.login-wrapper .box h6 {
+    text-transform: none;
+}
+.login-wrapper .already {
+    margin: 20px auto;
+}
+
+.login-wrapper .already p {
+    color: #FFFFFF;
+}
+.login-wrapper .box .content-wrap {
+    margin: 0 auto;
+    width: 95%;
+}
+.content-wrap .leftpart {
+    border-right: 1px dotted #A3ACB8;
+    display: inline;
+    float: left;
+    padding-right: 4.6875%;
+    width: 350px;
+}
+
+.content-wrap .rightpart {
+    display: inline;
+    float: left;
+    padding-left: 4.6875%;
+    width: 350px;
+}
+
+.input-append, .input-prepend {
+    margin-left: -52px;
+    width: 294px;
+}
+
+.input-prepend .add-on:first-child, .input-prepend .btn:first-child {
+    height: 24px;
+    padding-top: 10px;
+    border-radius: 4px 0 0 4px;
+}
+
+.registerweb{
+  clear:both;
+  padding-top:20px;
+  padding-right:25px;
+}
+</style>
+<!--*************************************************************************************************************************************-->
+
+    <!-- open sans font -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.frame.bz" class="brand">
+                    <img width="310" height="71" alt="FrameBuzz" src="{% static 'framebuzz/dashboard/img/social_icons/logo.png' %}">
+            </a>
+        </div>
+    </div>
+    <!-- end navbar -->
+
+
+
+	<!-- main container -->
+    <div class="xcontent">
+    <div class="row-fluid login-wrapper">
+        <div class="box">
+            <form action='/dashboard/register/' method='post' id='register-form'>
+                {% csrf_token %}
+                <div class="content-wrap">
+                    <h6>Register to FrameBuzz videos for your website for free</h6>
+                    {{ reg_user_form.non_field_errors }}
+                    <div class="leftpart">
+                        <div class='fieldWrapper'>
+                            {{ reg_user_form.username.errors }}
+                            {{ reg_user_form.username }}
+                        </div>
+                        
+                         <div class='fieldWrapper'>
+                            {{ reg_user_form.password1.errors }}
+                            {{ reg_user_form.password1 }}
+                        </div>
+                         
+                          <div class='fieldWrapper'>
+                            {{ reg_user_form.password2.errors }}
+                            {{ reg_user_form.password2 }}
+                        </div>
+                    </div>
+                    <div class="rightpart">
+                    <div class='fieldWrapper'>
+                            {{ reg_user_form.email.errors }}
+                            {{ reg_user_form.email }}
+                        </div>
+                        
+                         <div class='fieldWrapper'>
+                            {{ reg_user_form.website_name.errors }}
+                            {{ reg_user_form.website_name }}
+                        </div>
+                         
+                          <div class='fieldWrapper input-prepend'>
+                            {{ reg_user_form.website_url.errors }}
+                            <span class='add-on'>http://</span>
+                            {{ reg_user_form.website_url }}
+                        </div>
+                    </div>  
+                 </div>          
+                <div class="registerweb">
+                    <input type='submit' values='submit' class='btn-glow primary signup pull-right'/>
+                </div>
+            </form>
+        </div>
+
+        <div class="span7 already">
+            <p>Aready registered your website? <a href="{% url 'dashboard-login' %}">Sign in</a> &nbsp; &nbsp; Don't have a website?  <a href="#">Create a commenter account</a></p>
+            
+        </div>
+    </div>	
+
+    </div>
+    <!-- end main container -->
+
+
+	<!-- scripts -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <!-- call all plugins -->
+    <script type="text/javascript">
+        $(function(){
+            $(".leftpart :input:not(:button)").addClass('span12');
+            $(".rightpart :input:not(:button)").addClass('span12');  
+        });
+    </script>
+
+</body>
+</html>
