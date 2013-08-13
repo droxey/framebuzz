@@ -91,8 +91,7 @@ div.navbar {
                 a {
                     border-left: none;
                     color: rgba(255, 255, 255, 0.48);
-
-                    &:hover { background: transparent; }
+                    @include single-transition(opacity .1s ease-in-out);
 
                     &.dropdown-toggle { 
                         background-image: none; 
@@ -127,8 +126,10 @@ div.navbar {
                     }
                 }
 
-                &.active {
+                a.active, a:hover {
                     background: none;
+                    color: rgba(255, 255, 255, 0.88);
+                    @include single-transition(opacity .1s ease-in-out);
                 }
             }
         }
@@ -194,6 +195,7 @@ div.content {
     border-radius: 0;
     box-shadow: none;
     margin: 0 auto;
+    min-height: 964px;
     overflow: visible;
     width: 676px;
 
@@ -277,7 +279,8 @@ div.content {
 
             div.ribbon-front {
                 background-color: rgba(31, 31, 31, .67);  
-                height: 58px;
+                border-bottom: 1px solid rgba(197, 197, 197, 0.67);
+                height: 60px;
                 width: 698px;
                 position: relative;
                 left: 0px;
@@ -293,16 +296,16 @@ div.content {
                             border: none;
                             display: block;
                             float: left;
-                            height: 54px;
+                            height: 46px;
+                            margin: 7px 0;
                             padding: 0 11px;
-                            margin: 2px 0;
 
                             a {
                                 color: white;
                                 font-size: 18.87px;
                                 font-weight: 300;
                                 margin-right: 0;
-                                padding-top: 6px;
+                                padding-top: 3px;
                                 padding-left: 0;
                                 padding-right: 0;
                                 padding-bottom: 0;
@@ -340,6 +343,8 @@ div.content {
                                     font-size: 23px;
                                     text-align: left;
                                     text-indent: -6px;
+                                    position: relative;
+                                    top: -3px;
 
                                     img {
                                         margin-top: 6px;
@@ -357,6 +362,8 @@ div.content {
                             &.favorites { width: 46px; }
                             &.home, &.videos { display: none; }
 
+
+
                             &.website {
                                 background: none;
                                 padding-right: 0;
@@ -365,7 +372,7 @@ div.content {
 
                                 span {
                                     display: block;
-                                    margin-top: 8px;
+                                    margin-top: 5px;
 
                                     a {
                                         color: rgba(255, 255, 255, 0.45);
@@ -373,13 +380,15 @@ div.content {
                                     }
                                 }
                             }
-
-                            &.active {
-                                border-bottom: 5px solid white;
-                                margin-bottom: -5px;
+                            
+                            &.followers, &.following, &.conversations, &.favorites {
+                                &.active, &:hover {
+                                    border-bottom: 7px solid rgba(255, 255, 255, 0.9);
+                                    margin-bottom: -7px;
+                                }
                             }
 
-                            &.active > a {
+                            &.active > a, &:hover > a {
                                 background: none;
                                 border-radius: none;
                                 border: none;
@@ -403,7 +412,7 @@ div.content {
 
             .ribbon-edge-bottomleft,
             .ribbon-edge-bottomright {
-                top: 58px;
+                top: 60px;
             }
 
             .ribbon-edge-topleft,
@@ -629,7 +638,9 @@ div.content {
         }
 
         div.pagination-centered { 
-            margin: 0; 
+            margin: 0;
+            position: relative;
+            top: 30px;
 
             ul {
                 border-top: none;
@@ -672,20 +683,17 @@ div.content {
         #following, #followers, #activity {
             ul#feed {
                 li {
+                    background-color: #f8f8f8;
                     display: block;
                     float: left;
                     font-family: 'futura-pt-condensed';
                     padding: 7px;
-                    min-height: 36px;
-                    width: 283px;
+                    height: 136px;
+                    width: 287px;
+                    margin-bottom: 5px;
+                    margin-right: 5px;
 
-                    &:nth-child(even) {
-                        background-color: #f8f8f8;
-                    }
-                    
-                    &:nth-child(odd) {
-                        background-color: #e7e6e6;
-                    }
+                    &:nth-child(even) { margin-right: 0; }
 
                     img.img-circle {
                         border: 2px solid white;
@@ -733,10 +741,6 @@ div.content {
                                 img {
                                     padding: 0 5px;
                                 }
-
-                                &:nth-child(even), &:nth-child(odd) {
-                                    background-color: transparent;
-                                }
                         
                                 p.bubble {
                                     @include border-radius(3px, 3px);
@@ -776,7 +780,7 @@ div.content {
             }
         }
 
-        #following, #followers, #conversations, #favorites {
+        #following, #followers, #conversations, #favorites, #videos {
             ul {
                 li {
                     &.empty {
@@ -810,7 +814,8 @@ div.content {
                     font-size: 17.13px;
                     line-height: 24px;
                     margin-bottom: 12px;
-                    text-align: center;
+                    text-align: left;
+                    text-indent: 10px;
 
                     &.featured {
                         background: none;
@@ -876,6 +881,7 @@ div.content {
                         ul {
                             border: none;
                             padding-top: 19px;
+                            padding-left: 13px;
 
                             li {
                                 color: #7f7f7f;
@@ -916,7 +922,7 @@ div.content {
                                     
                                     p, span {
                                         line-height: 21px;
-                                        width: 182px;
+                                        width: 180px;
 
                                     }
 
@@ -959,16 +965,13 @@ div.content {
                                     line-height: 18px;
                                     margin-bottom: 0;
                                     text-align: left;
+                                    text-indent: 0;
                                     width: auto;
 
                                     a {
                                         font-weight: 700;
                                         font-size: 13px;
                                     }
-                                }
-
-                                &:nth-child(even), &:nth-child(odd) {
-                                    background: none;
                                 }
                             }
                         }

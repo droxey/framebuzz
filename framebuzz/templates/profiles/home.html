@@ -1,5 +1,5 @@
 {% extends "profiles/base.html" %}
-{% load staticfiles avatar_tags %}
+{% load staticfiles avatar_tags compress %}
 
 {% block title %}{{ profile_user.username }}'s Profile{% endblock %}
 
@@ -93,6 +93,7 @@
 {% endblock %}
 
 {% block page_javascript %}
+    {% compress js %}
     <script type="text/javascript">
        $(document).ready(function() {
             var currentPageUrl = null;
@@ -128,6 +129,10 @@
                 $('iframe', '#video-embed-modal').attr('src', currentVideoUrl);
             });
 
+            $('body').on('hide', function () {
+                $('iframe', '#video-embed-modal').attr('src', '');
+            });
+
             // Tabs.
             $('body').on('click', 'a.tab-link', function(e) {
                 e.preventDefault();
@@ -142,4 +147,5 @@
             });
         });
     </script>
+    {% endcompress %}
 {% endblock %}

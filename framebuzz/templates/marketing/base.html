@@ -7,6 +7,7 @@
   <head>
     <meta charset="utf-8">
     <title>{% block title %}FrameBuzz{% endblock %}</title>
+    <meta name="description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% compress css %}
@@ -23,6 +24,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/layout.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/elements.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/icons.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/marketing/stylesheets/sharrre.css' %}">
         <link rel="stylesheet" href="{% static 'framebuzz/marketing/stylesheets/screen.css' %}" type="text/css" media="screen" />
     {% endcompress %}
     {% block page_css %}{% endblock %}
@@ -47,14 +49,10 @@
                     <li class="link">
                         <a href="{% url 'about' %}">About</a
                     </li>             
-                    <li class="social">
-                        <a class="socialaccount_provider twitter" href="{% provider_login_url "twitter" next="/" %}"></a>
-                    </li>
-                    <li class="social">
-                        <a class="socialaccount_provider google" href="{% provider_login_url "google" next="/" %}"></a>
-                    </li>
-                    <li class="social">
-                        <a class="socialaccount_provider facebook" href="{% provider_login_url "facebook" next="/" %}"></a>
+                    <li class="social clearfix">
+                        <div id="twitter" data-url="http://framebuzz.com/" data-text="Watch whenever, talk together."></div>
+                        <div id="facebook" data-url="http://framebuzz.com/" data-text="Watch whenever, talk together."></div>
+                        <div id="googleplus" data-url="http://framebuzz.com/" data-text="Watch whenever, talk together."></div>
                     </li>
                 </ul>  
             </div>         
@@ -71,6 +69,51 @@
     {% compress js %}
         <script src="{% static 'framebuzz/dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'framebuzz/dashboard/bootstrap/js/jquery-ui-1.10.2.custom.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'framebuzz/marketing/js/jquery.sharrre-1.3.4.min.js' %}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#twitter').sharrre({
+                      share: {
+                        twitter: true
+                      },
+                      template: '<a class="box" href="#"><div class="count" href="#">{total}</div><div class="share"><span></span>Tweet</div></a>',
+                      enableHover: false,
+                      enableTracking: true,
+                      buttons: { twitter: {via: 'framebuzz'}},
+                      click: function(api, options){
+                        api.simulateClick();
+                        api.openPopup('twitter');
+                      }
+                });
+
+                $('#facebook').sharrre({
+                      share: {
+                        facebook: true
+                      },
+                      template: '<a class="box" href="#"><div class="count" href="#">{total}</div><div class="share"><span></span>Like</div></a>',
+                      enableHover: false,
+                      enableTracking: true,
+                      click: function(api, options){
+                        api.simulateClick();
+                        api.openPopup('facebook');
+                      }
+                });
+
+                $('#googleplus').sharrre({
+                      share: {
+                        googlePlus: true
+                      },
+                      template: '<a class="box" href="#"><div class="count" href="#">{total}</div><div class="share"><span></span>+1</div></a>',
+                      enableHover: false,
+                      enableTracking: true,
+                      urlCurl: "{% url 'google-plus-count' %}",
+                      click: function(api, options){
+                        api.simulateClick();
+                        api.openPopup('googlePlus');
+                      }
+                });
+            });
+        </script>
     {% endcompress %}
     {% block page_javascript %}{% endblock %}
     <script>
