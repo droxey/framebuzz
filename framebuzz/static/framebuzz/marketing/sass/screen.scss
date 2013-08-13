@@ -106,7 +106,19 @@ div.marketing-content {
     position: relative;
     width: 100%;
 
+    #fb {
+        height: 100%;
+        width: 100%;
+
+        div.anystretch img {
+            left: 0 !important;
+        }
+    }
+
     #home {
+        min-height: 1400px;
+        width: 100%;
+        position: relative;
 
         h1 {
             color: white;
@@ -123,23 +135,18 @@ div.marketing-content {
         }
 
         #watch {
-            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
-            background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgb(134, 191, 218)), color-stop(100%, #3c89af));
-            background-image: -webkit-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, #3c89af 100%);
-            background-image: -moz-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, #3c89af 100%);
-            background-image: -ms-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, #3c89af 100%);
-            background-image: -o-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, #3c89af 100%);
-            background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.5) -120%, #3c89af 100%);
+            height: 772px;
 
             #watch-container {
                 padding-bottom: 37px;
 
                 #video-container {
                     @include border-radius(5px, 5px);
+                    @include single-box-shadow(rgba(0, 0, 0, 0.35), 1px, 5px, 16px);
                     background-color: white;
                     height: 440px;
                     margin: 0 auto;
-                    padding: 9px;
+                    padding: 17px;
                     width: 640px;
                 }
             }
@@ -182,25 +189,29 @@ div.marketing-content {
             content: " ";
             height: 24px;
             position: absolute;
-            top: 0;
+            top: -1px;
             width: 85px;
             z-index: 100;
         }
 
         #community {
-            background: white;
 
             #community-container {
-                background: url('../img/community.jpg') no-repeat bottom right;
                 padding-left: 93px;
-                padding-bottom: 86px;
                 position: relative;
+                z-index: 1;
+                top: -55px;
+                padding-top: 55px;
+                padding-bottom: 86px;
 
-                span.arrow { left: 594px; }
+                span.arrow { 
+                    top: 55px;
+                    left: 594px; 
+                }
 
                 h3 {
                     color: #202020;
-                    font-family: 'futura-pt-condensed';
+                    font-family: 'proxima-nova';
                     font-size: 34px;
                     font-weight: 300;
                     padding-top: 73px;
@@ -221,18 +232,19 @@ div.marketing-content {
 
         #framebuzz {
             background: #000000;
+            height: 500px;
+            width: 100%;
 
-            #framebuzz-container {
-                background: url('../img/section-bkg.jpg') no-repeat top center;
-                position: relative;
+            #highlights {
+                background: rgba(0, 0, 0, .74);
 
-                span.arrow { left: 553px; }
+                #framebuzz-container {
+                    position: relative;
 
-                #highlights {
-                    background: rgba(0, 0, 0, .74);
+                    span.arrow { left: 553px; }
 
                     ul {
-                        padding-bottom: 47px;
+                        padding-bottom: 35px;
 
                         li {
                             float: left;
@@ -272,16 +284,16 @@ div.marketing-content {
                         }
                     }
                 }
+            }
 
-                h3 {
-                    color: white;
-                    font-family: 'proxima-nova';
-                    font-size: 28px;
-                    font-weight: 500;
-                    padding: 12px 0;
-                    text-align: center;
-                    text-shadow: 0 1px 1px rgba(0, 0, 0, .56);
-                }
+            h3 {
+                color: white;
+                font-family: 'proxima-nova';
+                font-size: 28px;
+                font-weight: 500;
+                padding: 12px 0;
+                text-align: center;
+                text-shadow: 0 1px 1px rgba(0, 0, 0, .56);
             }
         }
 
@@ -297,7 +309,7 @@ div.marketing-content {
 
                 h3 {
                     color: #454848;
-                    font-family: 'futura-pt-condensed';
+                    font-family: 'proxima-nova';
                     font-size: 30px;
                     font-weight: 300;
                     margin-bottom: 13px;
