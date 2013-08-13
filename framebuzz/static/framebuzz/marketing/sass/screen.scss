@@ -45,7 +45,7 @@ body {
  *      Common Elements
  */
 
-div.wrapper {
+.wrapper {
     margin: 0 auto;
     width: 1200px;
 }
@@ -356,6 +356,101 @@ div.marketing-content {
                         a.signup {
                             margin-top: 24px;
                             float: right;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #press {
+        background: white;
+        min-height: 800px;
+
+        div.header {
+            background: #2289ba;
+
+            span {
+                color: white;
+                display: block;
+                padding: 30px 0;
+                font-family: 'proxima-nova';
+                font-weight: 300;
+                font-size: 24px;
+                line-height: 24px;
+            }
+        }
+
+        div.alert {
+            font-family: 'proxima-nova';
+            font-weight: 300;
+            margin: 0 auto;
+            width: 600px;
+        }
+
+        #releases {
+            height: 235px;
+        }
+
+        #media {
+            height: 235px;
+
+            div.header {
+                margin-bottom: 0;
+            }
+
+            div.wrapper {
+                h2 {
+                    color: #383835;
+                    font-family: 'proxima-nova';
+                    font-weight: 300;
+                    font-size: 24px;
+                    padding: 36px 0;
+                }
+
+                table {
+                    width: 100%;
+
+                    tr {
+                        td {
+                            padding: 10px 0;
+                            width: 33%;
+
+                            a {
+                                &:hover { text-decoration: none; }
+
+                                img {
+                                    float: left;
+                                    margin-right: 20px;
+                                }
+
+                                div.file {
+                                    float: left;
+
+                                    span.title {
+                                        color: #2289ba;
+                                        display: block;
+                                        font-family: 'proxima-nova';
+                                        font-weight: 300;
+                                        font-size: 18px;
+                                        margin-bottom: 10px;
+                                    }
+
+                                    span.type {
+                                        color: #7a7a7a;
+                                        display: block;
+                                        font-family: 'proxima-nova';
+                                        font-weight: 300;
+                                        font-size: 18px;   
+                                    }
+                                }
+                            }
+
+                            a:hover {
+                                div.file {
+                                    span.title { text-decoration: underline; }
+                                }
+                            }
                         }
                     }
                 }

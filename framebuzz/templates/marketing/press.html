@@ -1,0 +1,73 @@
+{% extends "marketing/base.html" %}
+{% load staticfiles addendum_tags %}
+
+{% block content %}
+    <div id="press">
+        <div id="releases">
+            <div class="header"><span class="wrapper">Press Releases</span></div>
+            <div class="alert alert-info wrapper">
+                No Press Releases available. Check back soon!
+            </div>
+        </div>
+        <div id="media">
+            <div class="header"><span class="wrapper">Media Kits</span></div>
+            <div class="wrapper">
+                <h2>ASSETS</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="{% static 'framebuzz/marketing/press/media_overview.pdf' %}" target="_blank" title="FrameBuzz Company Overview" class="clearfix">
+                                    <img src="{% static 'framebuzz/marketing/img/doc-text.png' %}" height="63" width="50" alt="FrameBuzz Company Overview" />
+                                    <div class="file">
+                                        <span class="title">FrameBuzz Company Overview</span>
+                                        <span class="type">PDF File</span>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% static 'framebuzz/marketing/press/FrameBuzz-logos.zip' %}" title="FrameBuzz Logo Package" class="clearfix">
+                                    <img src="{% static 'framebuzz/marketing/img/doc-zip.png' %}" height="63" width="50" alt="FrameBuzz Logo Package" />
+                                    <div class="file">
+                                        <span class="title">FrameBuzz Logo Package</span>
+                                        <span class="type">ZIP File</span>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% static 'framebuzz/marketing/press/FrameBuzz-product.zip' %}" title="FrameBuzz Player Images" class="clearfix">
+                                    <img src="{% static 'framebuzz/marketing/img/doc-zip.png' %}" height="63" width="50" alt="FrameBuzz Player Images"  />
+                                    <div class="file">
+                                        <span class="title">FrameBuzz Player Images</span>
+                                        <span class="type">ZIP File</span>
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="{% static 'framebuzz/marketing/press/FrameBuzz-Logo-LG.jpg' %}" target="_blank" title="FrameBuzz Logo (Large)" class="clearfix">
+                                    <img src="{% static 'framebuzz/marketing/img/doc-picture.png' %}" height="63" width="50" alt="FrameBuzz Logo (Large)" />
+                                    <div class="file">
+                                        <span class="title">FrameBuzz Logo (Large)</span>
+                                        <span class="type">JPG File</span>
+                                    </div>                                
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% static 'framebuzz/marketing/press/FrameBuzz-Logo-SM.jpg' %}" target="_blank" title="FrameBuzz Logo (Small)" class="clearfix">
+                                    <img src="{% static 'framebuzz/marketing/img/doc-picture.png' %}" height="63" width="50" alt="FrameBuzz Logo (Small)" />
+                                    <div class="file">
+                                        <span class="title">FrameBuzz Logo (Small)</span>
+                                        <span class="type">JPG File</span>
+                                    </div> 
+                                </a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
