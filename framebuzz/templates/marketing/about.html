@@ -67,5 +67,26 @@
                 </li>
             </ul>
         </div>
+        <div id="contact">
+            <div class="wrapper">
+                <h1>GET IN TOUCH</h1>
+                <form id="contact-form" name="contact" action="" method="post" class="clearfix">
+                    {% csrf_token %}
+                    <div class="user">
+                        <label for="name">{{ form.name.label }}:</label>
+                        <p>{{ form.name }}</p>
+                        <label for="email">{{ form.email.label }}:</label>
+                        <p>{{ form.email }}</p>
+                    </div>
+                    <div class="message">
+                        <label for="description">{{ form.description.label }}:</label>
+                        <p>{{ form.description }}</p>
+                    </div>
+                    <p class="submit clearfix">
+                        <button type="submit">Submit</button>
+                    </p>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+from framebuzz.apps.marketing.forms import ContactRequestForm
+
 
 def home(request):
     return render_to_response('marketing/home.html',
@@ -14,8 +16,16 @@ def home(request):
     context_instance=RequestContext(request))
 
 def about(request):
+    if request.method == 'POST':
+        form = ContactRequestForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ContactRequestForm()
+
     return render_to_response('marketing/about.html',
     {
+        'form': form,
     },
     context_instance=RequestContext(request))
 
