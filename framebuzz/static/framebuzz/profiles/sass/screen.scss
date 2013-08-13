@@ -279,7 +279,8 @@ div.content {
 
             div.ribbon-front {
                 background-color: rgba(31, 31, 31, .67);  
-                height: 58px;
+                border-bottom: 1px solid rgba(197, 197, 197, 0.67);
+                height: 60px;
                 width: 698px;
                 position: relative;
                 left: 0px;
@@ -295,16 +296,16 @@ div.content {
                             border: none;
                             display: block;
                             float: left;
-                            height: 54px;
+                            height: 46px;
+                            margin: 7px 0;
                             padding: 0 11px;
-                            margin: 2px 0;
 
                             a {
                                 color: white;
                                 font-size: 18.87px;
                                 font-weight: 300;
                                 margin-right: 0;
-                                padding-top: 6px;
+                                padding-top: 3px;
                                 padding-left: 0;
                                 padding-right: 0;
                                 padding-bottom: 0;
@@ -342,6 +343,8 @@ div.content {
                                     font-size: 23px;
                                     text-align: left;
                                     text-indent: -6px;
+                                    position: relative;
+                                    top: -3px;
 
                                     img {
                                         margin-top: 6px;
@@ -359,6 +362,8 @@ div.content {
                             &.favorites { width: 46px; }
                             &.home, &.videos { display: none; }
 
+
+
                             &.website {
                                 background: none;
                                 padding-right: 0;
@@ -367,7 +372,7 @@ div.content {
 
                                 span {
                                     display: block;
-                                    margin-top: 8px;
+                                    margin-top: 5px;
 
                                     a {
                                         color: rgba(255, 255, 255, 0.45);
@@ -375,10 +380,12 @@ div.content {
                                     }
                                 }
                             }
-
-                            &.active, &:hover {
-                                border-bottom: 7px solid white;
-                                margin-bottom: -7px;
+                            
+                            &.followers, &.following, &.conversations, &.favorites {
+                                &.active, &:hover {
+                                    border-bottom: 7px solid rgba(255, 255, 255, 0.9);
+                                    margin-bottom: -7px;
+                                }
                             }
 
                             &.active > a, &:hover > a {
@@ -405,7 +412,7 @@ div.content {
 
             .ribbon-edge-bottomleft,
             .ribbon-edge-bottomright {
-                top: 58px;
+                top: 60px;
             }
 
             .ribbon-edge-topleft,
