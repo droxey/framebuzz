@@ -676,20 +676,17 @@ div.content {
         #following, #followers, #activity {
             ul#feed {
                 li {
+                    background-color: #f8f8f8;
                     display: block;
                     float: left;
                     font-family: 'futura-pt-condensed';
                     padding: 7px;
-                    min-height: 36px;
-                    width: 283px;
+                    height: 136px;
+                    width: 287px;
+                    margin-bottom: 5px;
+                    margin-right: 5px;
 
-                    &:nth-child(even) {
-                        background-color: #f8f8f8;
-                    }
-                    
-                    &:nth-child(odd) {
-                        background-color: #e7e6e6;
-                    }
+                    &:nth-child(even) { margin-right: 0; }
 
                     img.img-circle {
                         border: 2px solid white;
@@ -736,10 +733,6 @@ div.content {
 
                                 img {
                                     padding: 0 5px;
-                                }
-
-                                &:nth-child(even), &:nth-child(odd) {
-                                    background-color: transparent;
                                 }
                         
                                 p.bubble {
@@ -972,10 +965,6 @@ div.content {
                                         font-weight: 700;
                                         font-size: 13px;
                                     }
-                                }
-
-                                &:nth-child(even), &:nth-child(odd) {
-                                    background: none;
                                 }
                             }
                         }

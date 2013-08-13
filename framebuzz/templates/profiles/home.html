@@ -143,6 +143,12 @@
                 
                 $(href).load(currentPageUrl, function(result) {   
                     pane.tab('show');
+
+                    if (href == '#following' || href == '#followers') {
+                        $.each($('ul#feed > li'), function(k, v) {
+                            console.log($(v));
+                        });
+                    }
                 });
             });
         });
