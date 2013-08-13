@@ -2,29 +2,70 @@
 {% load staticfiles addendum_tags %}
 
 {% block content %}
-    <div class="content-wrapper">
-        <div id="about" class="span11 box">
-            <div class="page-header">
-                <h1>About FrameBuzz</h1>
-            </div>
-            <p>FrameBuzz is a new social video platform that lets people share comments and conversations around online video content on sites across the web.</p>
-            <p>FrameBuzz creates a new viewing experience for online video, letting people interact socially as if they were viewing together live, even if they’re watching at completely different times. For websites, it provides a powerful new tool to better understand and target their audiences, and grow their brand.</p>
-            <p>FrameBuzz is completely free for users signing up for commenting accounts, and for websites adding basic FrameBuzz functionality to their sites. Adding FrameBuzz is as simple as embedding a video on a web page.</p>
-            <p>FrameBuzz is an Austin-based, privately held company. To learn more, <a href="{% url 'contact' %}">contact us</a> today.</p>
-            <div class="page-header">
-                <h1>News</h1>
-            </div>
-            <p><a href="{{ MEDIA_URL }}press/FrameBuzz_Beta_PR_D6_5-5-13.pdf" title="FrameBuzz Brings Social Commenting to Online Video" target="_blank">FrameBuzz Brings Social Commenting to Online Video</a></p>
-            <p><a href="{{ MEDIA_URL }}press/AFW_Launch_PR_D5_5-10-13.pdf" title="Austin Fashion Week Adds FrameBuzz Streaming Commenting to Online Videos" target="_blank">Austin Fashion Week Adds FrameBuzz Streaming Commenting to Online Videos</a></p>
-            <p>For media inquiries, please email <a href="mailto:media@framebuzz.com">media@framebuzz.com</a>.</p>
-            <div class="page-header">
-                <h1>Press Kit</h1>
-            </div>
-            <p><a href="{{ MEDIA_URL }}press/media_overview.pdf" target="_blank" title="FrameBuzz Company Overview">FrameBuzz Company Overview</a></p>
-            <p><a href="{{ MEDIA_URL }}press/FrameBuzz-Logo-LG.jpg" target="_blank" title="FrameBuzz Logo (Large)">FrameBuzz Logo (Large)</a></p>
-            <p><a href="{{ MEDIA_URL }}press/FrameBuzz-Logo-SM.jpg" target="_blank" title="FrameBuzz Logo (Small)">FrameBuzz Logo (Small)</a></p>
-            <p><a href="{{ MEDIA_URL }}press/FrameBuzz-logos.zip" title="FrameBuzz Logo Package">FrameBuzz Logo Package</a></p>
-            <p><a href="{{ MEDIA_URL }}press/FrameBuzz-product.zip" title="FrameBuzz Player Images">FrameBuzz Player Images</a></p>
+    <div id="about">
+        <div id="manifesto">
+            <h1>MANIFESTO</h1>
+            <p>FrameBuzz is a free, online video conversation platform that enables moment-by-moment discussions within a video. As the facilitator of interesting conversations between content creators, experts, and consumers, FrameBuzz brings more to a conversation than just words – it brings meaningful connections and unique perspectives that help shape the way a video is perceived, shared, and discovered.</p>
+        </div>
+        <div id="who">
+            <h1>FrameBuzz brings comments into the moment.</h1>
+            <h2>We facilitate meaningful, relevant conversations around video.</h2>
+            <ul class="wrapper clearfix">
+                <li>
+                    <h3>Who We Are</h3>
+                    <p>We’re social. We’re engaged. We’re right there with you. We’re FrameBuzz. Born out of co-founders Aaron Lindsey and Jason Kohn’s never-ending excitement for great content and passionate debate, we’re helping you curate that online conversation, frame by frame. </p>
+                </li>
+                <li>
+                    <h3>What We Believe</h3>
+                    <p>At FrameBuzz we believe that video viewers are more than just people – they’re influencers. They have valuable opinions that deserve to be shared, and through their individual comments, praise, questions, and curated conversations, those viewers have the ability to transform a video from content to something so much more.</p>
+                </li>
+                <li>
+                    <h3>Why We’re Different</h3>
+                    <p>For us, it’s more than just leaving a comment that’s never to be seen again. It’s about crafting meaningful dialogue in the most intuitive way that has a chance to change a video’s perspective and shape its direction.  We’re helping to create a community of passionate words, dynamic videos and conversations that matter.</p>
+                </li>
+            </ul>
+        </div>
+        <div id="team">
+            <h1 class="wrapper">MEET THE TEAM</h1>
+            <ul class="wrapper clearfix">
+                <li>
+                    <img src="" alt="" height="" width="" />
+                    <h2>Aaron Lindsey</h2>
+                    <h3>Co-Founder and CEO</h3>
+                    <p>Before founding FrameBuzz, Aaron was a senior executive at a highly ranked, Austin-based custom software development company. His technology experience spans more that 13 years in multiple industries with a successful track record of conceptualizing, managing, and delivering exceptional and innovative software products.</p>
+                </li>
+                <li>
+                    <img src="" alt="" height="208" width="208" class="img-circle" />
+                    <h2>Jason Kohn</h2>
+                    <h3>Co-Founder and CPO</h3>
+                    <p>Co-Founder and CPO
+                    Jason is a technology communications consultant with 15 years experience working with some of the largest and most successful companies in the industry. He specializes in digital video and TV, working with companies developing new ways for service providers and TV networks to deliver video content, and new ways for viewers to engage with it.</p>
+                </li>
+                <li class="last">
+                    <img src="" alt="" height="208" width="208" class="img-circle" />
+                    <h2>Lisa Blair</h2>
+                    <h3>CFO</h3>
+                    <p>Lisa has a diverse background in financial operations and controls. Her 15-year career has spanned multiple industries and business areas giving Lisa a rich background to see all perspectives of an organization’s strategy and operations, and their financial implications. </p>
+                </li>
+                <li>
+                    <img src="" alt="" height="208" width="208" class="img-circle" />
+                    <h2>Dani Roxberry</h2>
+                    <h3>Lead Developer</h3>
+                    <p>Dani is a highly experienced software architect that expertly pairs real-time, data-driven architectures with stunning user experiences. During her career, she has led over thirty successful project launches in the social networking, telecom, marketing, and enterprise domains. With a deep drive to create and innovate, Dani’s mission is to produce digital products that make the web a more beautiful and interactive place.</p>
+                </li>
+                <li>
+                    <img src="" alt="" height="208" width="208" class="img-circle" />
+                    <h2>Oliver Meek</h2>
+                    <h3>Sales and Operations</h3>
+                    <p>Oliver has more than ten years experience in B2B sales across North America, Europe and Asia. He has previously run sales and business development for two startups as well as founded and managed the European division for SNL Financial, LLC.</p>
+                </li>
+                <li lass="last">
+                    <img src="" alt="" height="208" width="208" class="img-circle" />
+                    <h2>Ross Abel</h2>
+                    <h3>Creative Director</h3>
+                    <p>Ross is a UX expert with a deep understanding of mobile and web deployments. He has developed experiences that helped companies like Visa and PayPal form strategic partnerships with high-profile businesses in a variety of industries.</p>
+                </li>
+            </ul>
         </div>
     </div>
 {% endblock %}
