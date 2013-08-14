@@ -111,7 +111,8 @@ class CloseableSignupMixin(object):
         return self.response_class(**response_kwargs)
 
 
-class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView):
+class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin,
+                 FormView):
     template_name = "account/signup.html"
     form_class = SignupForm
     redirect_field_name = "next"
@@ -126,9 +127,14 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView)
 
     def form_valid(self, form):
         user = form.save(self.request)
-        return complete_signup(self.request, user, self.get_success_url())
+        return complete_signup(self.request, user,
+                               app_settings.EMAIL_VERIFICATION,
+                               self.get_success_url())
 
     def get_context_data(self, **kwargs):
+        form = kwargs['form']
+        form.fields["email"].initial = self.request.session \
+            .get('account_verified_email', None)
         ret = super(SignupView, self).get_context_data(**kwargs)
         login_url = passthrough_next_redirect_url(self.request,
                                                   reverse("account_login"),
@@ -137,7 +143,7 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView)
         redirect_field_value = self.request.REQUEST.get(redirect_field_name)
         ret.update({"login_url": login_url,
                     "redirect_field_name": redirect_field_name,
-                    "redirect_field_value": redirect_field_value })
+                    "redirect_field_value": redirect_field_value})
         return ret
 
 
