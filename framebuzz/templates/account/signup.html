@@ -1,12 +1,12 @@
 {% extends "marketing/base.html" %}
 {% load i18n staticfiles %}
 
-{% block title %}{% trans "Sign Up" %}{% endblock %}
+{% block title %}{% trans "FrameBuzz - Sign up" %}{% endblock %}
 
 {% block content %}
 <div id="signup-page">
   <div class="wrapper">
-    <h1>{% trans "Sign Up" %}</h1>
+    <h1>{% trans "Sign up" %}</h1>
     <p class="description">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}" class="login-link">sign in</a>.{% endblocktrans %}</p>
       <form class="signup form-vertical" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
