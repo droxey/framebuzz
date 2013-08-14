@@ -47,9 +47,37 @@
         
         $("#btn-del-video").click(function(){
             var video_id = $("#vcard-id").val();
-            videos.delete_video(del_url, csrf_token, video_id);
+            if (!video_id) {
+                alert("Please Select a Video");
+            }
+            else {
+                videos.delete_video(del_url, csrf_token, video_id);   
+            }
         });
         
+        $("#btn-copy").click(function(){
+            var code = $("#vcard-fbuzz-code").val();
+            if (!code) {
+                alert("Please Select a Video");
+            }
+            else {
+                $("#fbuzz-code").val('');
+                $("#fbuzz-code").val(code);
+                $("#popup").show();
+                $("div.pointer").hide();
+                $("#fbuzz-code").css({
+                    "height": '125px',
+                    "width": '300px'
+                });
+            }
+        });
+        
+        $("#close-popup").click(function(){
+            $("#popup").hide();
+            $("div.pointer").show();
+        });
+        
+        //
         //$('.gallery-trash').not($(".img-box")).click(function(){
         //    var id = $(this).parent().parent().attr("data-videoid");
         //    //videos.delete_video(del_url, csrf_token, id);
@@ -57,7 +85,7 @@
         //});
         
         $("#vcard-description").click(function(){
-            var id = $("#vcard-id").val();
+            var id = $("#vcard-id").val
             url = '{% url 'dashboard-detail-videos' %}';
             videos.show_detail(url, csrf_token, id);    
         });
@@ -102,12 +130,17 @@
     <!-- this page specific styles -->
     <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/compiled/gallery.css' %}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/compiled/ui-elements.css' %}" />
-
+    <link rel="stylesheet" href="{% static 'framebuzz/dashboard/css/popupx.css' %}" />
 
     <!-- Custom JS for this page -->
     <script type="text/javascript" src="{% static 'framebuzz/dashboard/js/fbuzz.videos.js' %}"></script>
     
-    <div><h2>Video Library</h2></div>
+    <div><h3>Video Library</h3></div>
+    <div id='div-messages'>
+        <div class="alert alert-success">
+            <i class="icon-ok-sign"></i> You've successfully deleted the selected video.
+        </div>
+    </div>
     <hr/>
     <!-- video wrapper -->
     <div id="video-container" class="table-like">
@@ -116,6 +149,7 @@
                 <!-- LEFT PANEL -->
                 <div class="video-left-panel">
                     <input type="hidden" name="videoId" id='vcard-id' value="" />
+                    <input type="hidden" id='vcard-fbuzz-code' value=""/>
                     <div id="vcard-thumbnail"><img src="{% static 'framebuzz/dashboard/img/no-img-gallery.png' %}" width="93" height="92" /></div>
                     <div class="description"><strong><label class='name' id='vcard-description'></label></strong></div>
                     <hr/>
@@ -153,6 +187,11 @@
                             <i class="icon-remove-sign"></i>Delete Video
                         </div>
                     </div>
+                    <div class="delete">
+                        <div class="btn-glow" id="btn-copy">
+                             Generate Embeded Code
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="cell-like" id="right">
@@ -184,4 +223,22 @@
             </div>
         </div>         
     </div>
+    
+    
+    <div id="popup" style="display:none;">
+        <div class='popupback'></div>
+        <div class="popupbox" style="width:350px;height:280px;margin-left:-100px;margin-top:-200px;">
+            <p id='popupx-header'>
+                <a class="popupx" id='close-popup'>&nbsp;  &nbsp; X &nbsp; &nbsp;</a>
+                <h4>Copy Embeded Code To Your Site</h4>
+            </p>
+            <hr/>
+            <textarea id='fbuzz-code'></textarea>
+            <hr/>
+            <div>
+                <strong>That's it!</strong>
+            </div>
+        </div>
+    </div>
+    
 {% endblock %}

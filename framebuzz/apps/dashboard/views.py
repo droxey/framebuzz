@@ -136,6 +136,8 @@ def framebuzz_videos(request):
 @login_required
 def delete_videos(request):
     social_token = None
+    deleted = None
+    template = 'dashboard/snippets/video_list.html'
     
     try:
         page = request.GET.get('page', 1)
@@ -144,13 +146,26 @@ def delete_videos(request):
     
     if request.is_ajax():
         video_id = request.POST.get('video_id')
+	view_type = request.POST.get('view_type', 'list')
         
         if video_id:
             video = Video.objects.get(video_id=video_id)
             video.added_by = None
             video.save()
+	    deleted = True
+	    
+	    library = Video.objects.filter(added_by = request.user)
+	    if view_type == 'list': # View Video as List
+		template = 'dashboard/snippets/video_list.html'
+            
+	    elif view_type == 'gallery': # View video as Gallery
+		template = 'dashboard/snippets/video_gallery.html'
     
-    return HttpResponseRedirect((reverse('framebuzz.apps.dashboard.views.videos')))
+    return render_to_response(template, RequestContext(request, {
+            'library': library ,
+            'view_type': view_type,
+	    'deleted' : deleted
+    }))
 
 @login_required
 def moderators_queue(request):
