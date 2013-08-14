@@ -139,23 +139,45 @@ div.marketing-content {
             height: 770px;
 
             #watch-container {
+                margin-left: 500px;
                 padding-bottom: 37px;
 
                 #video-container {
                     background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
                     border-radius: 2px 2px 2px 2px;
                     box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.10);
+                    float: left;
                     overflow: hidden;
                     padding: 17px 17px 20px 17px;
                     background-color: white;
                     height: 440px;
-                    margin: 0 auto;
+                    margin: 0 35px 0 auto;
                     width: 640px;
 
                     iframe {
                         background: #202020;
                         border-bottom: 3px solid #202020;
                     }
+                }
+
+                #callout {
+                    @include border-radius(2px, 2px);
+                    background: rgba(255, 255, 255, 0.5);
+                    height: 450px;
+                    margin-top: -3px;
+                    float: left;
+                    padding: 17px;
+                    width: 237px;
+
+                    p {
+                        font-family: 'proxima-nova';
+                        font-weight: 300;
+                        font-size: 16px;
+                        line-height: 25px;
+                        margin-bottom: 25px;
+                    }
+
+                    a.signup { float: right; }
                 }
             }
         }
