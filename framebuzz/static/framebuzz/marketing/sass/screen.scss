@@ -692,7 +692,7 @@ div.marketing-content {
         }
     }
 
-    #signup-page {
+    #signup-page, #login-page {
         color: #383835;
         min-height: 900px;
         padding: 45px 0;
@@ -719,6 +719,37 @@ div.marketing-content {
             p.description {
                 text-align: center;
                 padding-bottom: 25px;
+            }
+
+            ul.socialaccount_providers {
+                margin: 0 auto;
+                padding: 25px 0;
+                width: 245px;
+
+                li {
+                    float: left;
+                    height: 64px;
+                    margin-right: 25px;
+                    width: 64px;
+
+                    &:last-child { margin-right: 0; }
+
+                    a {
+                        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+                        display: block;
+                        height: 64px;
+                        width: 64px;
+
+                        &.facebook { background-color: #3B5998; }
+                        &.twitter { background-color: #4099FF; }
+                        &.google { background-color: #D34836; }
+
+                        img {
+                            padding: 16px;
+                        }
+
+                    }
+                }
             }
 
             form {
@@ -771,6 +802,29 @@ div.marketing-content {
                             top: -1px;
                             vertical-align: middle;
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    #login-page {
+        div.wrapper {
+            form {
+                p {
+                    label {
+                        display: table-cell;
+                        padding-bottom: 5px;
+                        margin-bottom: 0;
+                        width: 50%; 
+                    }
+
+                    input[type='checkbox'] {
+                        display: block;
+                        left: 112px;
+                        position: relative;
+                        top: -24px;
+                        width: 15px;
                     }
                 }
             }

@@ -1,67 +1,70 @@
-{% extends "dashboard/base.html" %}
-{% load i18n account socialaccount %}
-{% load url from future %}
+{% extends "marketing/base.html" %}
+{% load i18n staticfiles socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block title %}{% trans "FrameBuzz - Sign in" %}{% endblock %}
 
 {% block content %}
-<div id="login" class="span6">
-  <div class="well">
-    <h3>{% trans "Login" %}</h4>
+  <div id="login-page">
+    <div class="wrapper">
+      <h1>{% trans "Sign in" %}</h1>
 
-      {% if socialaccount.providers  %}
-      <p>{% blocktrans with site.name as site_name %}Please sign in with one
-      of your existing third party accounts. Or, <a href="{{ signup_url }}" class="signup-link">sign up</a>
-      for a {{site_name}} account and sign in below:{% endblocktrans %}</p>
+        {% if socialaccount.providers  %}
+          <p>{% blocktrans with site.name as site_name %}Please sign in with one
+          of your existing third party accounts. Or, <a href="{{ signup_url }}" class="signup-link">sign up</a>
+          for a {{site_name}} account and sign in below:{% endblocktrans %}</p>
 
-      <div class="socialaccount_ballot">
-        <ul class="clearfix socialaccount_providers">
+          <div class="socialaccount_ballot">
+            <ul class="clearfix socialaccount_providers">
 
-          {% for provider in socialaccount.providers %}
-            {% if provider.id == "openid" %}
-              {% for brand in provider.get_brands %}
+              {% for provider in socialaccount.providers %}
+                {% if provider.id == "openid" %}
+                  {% for brand in provider.get_brands %}
+                    <li>
+                      <a title="{{brand.name}}"
+                         class="socialaccount_provider {{provider.id}} {{brand.id}} btn"
+                         href="{% provider_login_url provider.id openid=brand.openid_url %}">
+                          <img src="{% static 'framebuzz/dashboard/img/social_icons/{{ brand.name }}.png' %}" alt="{{ brand.name }}">
+                       </a>
+                    </li>
+                  {% endfor %}
+                {% endif %}
                 <li>
-                  <a title="{{brand.name}}"
-                     class="socialaccount_provider {{provider.id}} {{brand.id}} btn"
-                     href="{% provider_login_url provider.id openid=brand.openid_url %}"
-                     >{{brand.name}}</a>
+                    <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} img-circle"
+                     href="{% provider_login_url provider.id %}">
+                      {% if provider.id == 'facebook' %}
+                        <img src="{% static 'framebuzz/dashboard/img/social_icons/facebook.png' %}" height="32" width="32" alt="{{ provider.id }}">
+                      {% elif provider.id == 'twitter' %}
+                        <img src="{% static 'framebuzz/dashboard/img/social_icons/twitter.png' %}" height="32" width="32" alt="{{ provider.id }}">
+                      {% else %}
+                        <img src="{% static 'framebuzz/dashboard/img/social_icons/google.png' %}" height="32" width="32" alt="{{ provider.id }}">
+                      {% endif %}
+                   </a>
                 </li>
               {% endfor %}
-            {% endif %}
-            <li>
-              {% if is_ajax_request %}
-                <a title="{{provider.name}}" target="_top" class="socialaccount_provider {{provider.id}}"
-                 href="{% provider_login_url provider.id next=next_url method='oauth2' display='popup' %}"></a>
-              {% else %}
-                <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}"
-                 href="{% provider_login_url provider.id %}"></a>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+            </ul>
+          </div>
+          {% include "socialaccount/snippets/login_extra.html" %}
+        {% endif %}
 
-      {% include "socialaccount/snippets/login_extra.html" %}
-
-      {% endif %}
-
-      <form class="login" method="POST" action="{% url 'dashboard-login' %}">
-                {% csrf_token %}
-                {% if request.GET.errorlogin %}
-
-                <ul class="errorlist"><li>Invalid Credentials</li></ul>
-
-                {% endif %}
-                {{ form.as_p }}
-                {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
-                <input type="hidden" name="next" value="{{ next }}" /> <!-- {{ request.GET.next }} -->
-                <div class="form-actions">
-                    <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
-                    <a class="btn" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-                </div>
-            </form>
+        <form id="login-form" method="POST" action="{% url 'account_login' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <div class="actions clearfix">
+            <button class="signup" href="">SIGN IN <em>&#9654;</em></button>
+          </div>
+      </form>
     </div>
-</div>
+  </div>
+{% endblock %}
+
+{% block page_javascript %}
+    <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('div.marketing-content').anystretch("{% static 'framebuzz/marketing/img/home@2x.jpg' %}", {speed: 150, positionY: 0});
+        });
+    </script>
 {% endblock %}
