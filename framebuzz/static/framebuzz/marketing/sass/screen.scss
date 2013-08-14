@@ -692,7 +692,7 @@ div.marketing-content {
         }
     }
 
-    #signup-page, #login-page, #reset-password {
+    #signup-page, #login-page, #reset-password, #reset-password-done {
         color: #383835;
         height: 807px;
         padding: 45px 0;
@@ -752,6 +752,31 @@ div.marketing-content {
                 }
             }
 
+            button.signup {
+                @include border-radius(2px, 2px);
+                background: #9e0f84;
+                border: 0;
+                display: block;
+                color: white;
+                float: right;
+                font-family: 'futura-pt-condensed';
+                font-size: 20px;
+                font-weight: 700;
+                padding: 8px 0;
+                text-align: center;
+                min-width: 130px;
+
+                &:hover { text-decoration: none; }
+
+                em {
+                    font-size: 10px;
+                    padding-left: 2px;
+                    position: relative;
+                    top: -1px;
+                    vertical-align: middle;
+                }
+            }
+
             form {
                 p {
                     padding-bottom: 10px;
@@ -777,31 +802,6 @@ div.marketing-content {
                         display: block;
                         float: left;
                         line-height: 38px;
-                    }
-
-                    button.signup {
-                        @include border-radius(2px, 2px);
-                        background: #9e0f84;
-                        border: 0;
-                        display: block;
-                        color: white;
-                        float: right;
-                        font-family: 'futura-pt-condensed';
-                        font-size: 20px;
-                        font-weight: 700;
-                        padding: 8px 0;
-                        text-align: center;
-                        min-width: 130px;
-
-                        &:hover { text-decoration: none; }
-
-                        em {
-                            font-size: 10px;
-                            padding-left: 2px;
-                            position: relative;
-                            top: -1px;
-                            vertical-align: middle;
-                        }
                     }
                 }
             }
@@ -835,9 +835,9 @@ div.marketing-content {
         div.wrapper {
             p.description {
                 margin: 0 auto;
-                width: 80%;
+                width: 91%;
             }
-            
+
             form {
                 margin-bottom: 25px;
 
