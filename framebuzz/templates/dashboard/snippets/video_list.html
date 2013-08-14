@@ -8,9 +8,10 @@
                 <th class="span2"><span class="line"></span>Length</th>
                 <th class="span3"><span class="line"></span>Date Added</th>
                 <th class="span2"><span class="line"></span>Added By</th>
-                <th class="span3"><span class="line"></span>Comments</th>
+                <th class="span2"><span class="line"></span>Comments</th>
                 <th class="span3 td-hidden"><span class="line"></span>Image</th>
-                <th class="span1">Select<input type="checkbox" id="chk-all"></th>
+                <th class="span1 td-hidden">Select<input type="checkbox" id="chk-all"></th>
+                <th class="span3 td-hidden"><span class="line"></span>YouTube URL</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +25,8 @@
                 <td class="description">{{ video.added_by }}</td>
                 <td>{{ comment_count }}</td>
                 <td class="td-hidden"><img src="{{video.default_thumbnail}}"/></td>
-                <td><input type="checkbox" data-videoid="{{video.video_id}}"></td>
+                <td class="td-hidden"><input type="checkbox" data-videoid="{{video.video_id}}"></td>
+                <td class="td-hidden">{{video.youtube_url}}</td>
             </tr>
             {% else %}
             <tr>
@@ -34,7 +36,8 @@
                 <td class="description">{{ video.added_by }}</td>
                 <td>{{ comment_count }}</td>
                 <td class="td-hidden"><img src="{{video.default_thumbnail}}"/></td>
-                <td><input type="checkbox" data-videoid="{{video.video_id}}"></td>
+                <td class="td-hidden"><input type="checkbox" data-videoid="{{video.video_id}}"></td>
+                <td class="td-hidden">{{video.youtube_url}}</td>
             </tr>
             {% endif %}
             {% endfor %}

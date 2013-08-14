@@ -37,8 +37,8 @@
             <i class="icon-chevron-down"></i>
         </a>
         <ul class="active submenu">
-            <li><a href="{% url 'dashboard-videos' 'list' %}">Library</a></li>
             <li><a href="{% url 'dashboard-add-videos' %}" class="active">FrameBuzz a Video</a></li>
+            <li><a href="{% url 'dashboard-videos' 'list' %}">Library</a></li>
         </ul>
     </li>
 {% endblock %}
@@ -51,7 +51,7 @@
     <!-- Custom JS for this page -->
     <script type="text/javascript" src="{% static 'framebuzz/dashboard/js/fbuzz.videos.js' %}"></script>
 
-    <p><h1>FrameBuzz a new Video</h1></p>
+    <p><h1 class="add-video-title">FrameBuzz a new Video</h1></p>
     <hr/>
     <p><h3>Add FrameBuzz commenting to any public video.</h3></p>
     <p>
@@ -64,23 +64,21 @@
         </div>
     </p>
     <p>
-        <div id="first-option" class="table-like">
-        <div id="option-steps" class="row-like">
-            <div class="cell-like">Step 1. Enter video URL</div>
-            <div class="cell-like">Step 2. Generate embeded code.</div>
-            <div class="cell-like">Step 3. Copy embeded code to your site</div>
-        </div>
-        <div id="option-inputs" class="row-like">
-            <div class="cell-like"><input type="text" placeholder="Video URL..." id="txbUrl"/></div>
-            <div class="cell-like"><button id="btn-framebuzz">FrameBuzz It!</button></div>
-            <div class="cell-like"><textarea id="txaCode"></textarea><p>(That's It!)</p></div>
+    <div id="first-option"><br/>
+        <div id="option-steps" class="">
+            <p><strong>Step 1. </strong>Enter video URL</p>
+            <div class="add-video-fbzu"><input type="text" placeholder="Video URL..." id="txbUrl" class="span6"/></div>
+            <p><strong>Step 2. </strong>Generate embeded code.</p>
+            <div class="add-video-fbzu"><button class="btn-glow primary" id="btn-framebuzz"> &nbsp; FrameBuzz It! &nbsp; </button></div>
+            <p><strong>Step 3. </strong>Copy embeded code to your site</p>
+            <div class=""><textarea id="txaCode" class="span6"></textarea><p>(That's It!)</p></div>
         </div>
     </div>
     </p>
     <p><div class="mid-text">Once you've FrameBuzzed a video, view it in your Video Library to add a Description and Metadata.</div></p>
     <p><hr/></p>
     <p>
-        <div>Or, link with your YouTube to FrameBuzz your videos.</div>
+        <div><strong>Or,</strong> link with your YouTube to FrameBuzz your videos.</div>
     </p>
     <p>
         {% if connected and video_count > 0 %}

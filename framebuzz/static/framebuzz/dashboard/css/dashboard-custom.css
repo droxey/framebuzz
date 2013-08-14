@@ -83,10 +83,13 @@ video-library-listview{
 
 #video-container {
     min-height: 100%;
-    padding: 30px;
+/*    padding: 30px; */
 }
 
 #left {
+    background-color: #F5F5F5;
+    border-radius: 2px;
+/*
     position:absolute;
     top: 70px;
     left: 5px;
@@ -94,8 +97,7 @@ video-library-listview{
     min-width: 20%;
     min-height: 100%;
     padding: 10px;
-    background-color: #F5F5F5;
-    border-radius: 2px;
+*/    
 }
 
 #moderator-left {
@@ -110,12 +112,15 @@ video-library-listview{
 }
 
 #right {
+    width: 70%;
+/*
     position: absolute;
     top: 50px;
-    left: 260px;
-    width: 70%;
+    left: 220px;
+    min-width: 70%;
     min-height: 100%;
     padding: 10px;
+*/    
 }
 
 #signup {
@@ -166,6 +171,8 @@ select:first-child {
 
 #video-container {
     width: 95%;
+    height: 90%;
+    min-height: 90%;    
 }
 
 #vcard-description, #ucard-name {
@@ -175,9 +182,7 @@ select:first-child {
 }
 
 #vcard-thumbnail {
-    padding: 2px;
-    border: thick 2px #FFFFFF;
-    box-shadow: 0px 5px 2px #888888;
+    padding: 30px;
 }
 
 .row-fluid .filter-block {
@@ -189,7 +194,7 @@ select:first-child {
 }
 
 .gallery {
-    position: absolute;
+/*    position: absolute; */
     left: 10px;
     width: 100%;
 }
@@ -248,17 +253,29 @@ select:first-child {
 
 #content {
     padding: 12px 36px 12px 12px !important;
+    height: 95%;
+    min-height: 500px;
 }
 
 .list-view-videos-table {
+/*
     overflow-y: scroll !important;
     height: 520px;
+*/    
 }
 
 #div-success-fbuzz-video, #div-success-yt-video {
     display: none;
 }
-
+#left{
+    height: 95%;
+    min-height: 80%;
+    vertical-align: top;
+}
+.video-left-panel{
+    height: 100%;
+    min-height: 100%;
+}
 div.navbar div.navbar-inner ul.nav li.user {
     background: url("../img/divider.png") repeat-y scroll left top transparent;
     padding-left: 15px;
@@ -314,4 +331,35 @@ footer {
 #dashboard-menu > li > a {
     padding: 19px 14px 15px 15px;
     width: 98%;
+}
+.brand img{
+  height: 48px;
+  width: 208px;
+}
+.img-circle{
+  height: 28px;
+  width: 28px;
+}
+.add-video-fbzu { 
+  padding-bottom: 20px;
+}
+.add-video-title {
+  text-align: left;
+  padding-bottom: 10px;
+}
+#gallery-wrapper [class*="span"] {
+    padding-left: 15px;
+}
+#vcard-comment-count{
+  display: inline;
+}
+#div-messages {
+    display: none;
+}
+.ui-select select {
+    padding: 1px 23px 0 7px;
+}
+
+.delete {
+ padding-bottom: 20px;
 }

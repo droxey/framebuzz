@@ -1,4 +1,5 @@
 {% extends "dashboard/base.html" %}
+{% load socialaccount staticfiles %}
 
             {% block sidebar-publisher %}
             <li class="active">
@@ -14,5 +15,6 @@
             {% endblock %}
 
 {% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/css/dashboard-custom.css'%}">
     <h1><br/>Publisher Dashboard</h1>
 {% endblock %}
