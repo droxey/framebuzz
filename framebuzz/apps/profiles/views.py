@@ -11,7 +11,6 @@ from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
 
-
 def home(request, username):
     user = User.objects.get(username__iexact=username)
 

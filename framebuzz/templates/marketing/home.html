@@ -18,7 +18,7 @@
                     <span class="arrow"></span>
                     <h3>Watch whenever, talk together.</h3>
                     <p>FrameBuzz gives people a way to converse moment-by-moment within an online video without having to watch it at the same time. We provide the glue between video creators, vloggers, experts and viewers whose interactions will shape the way video content is produced, shared and discovered.</p>
-                    <a class="signup" href="">SIGN UP <em>&#9654;</em></a>
+                    <a class="signup" href="{% url 'account_signup' %}">SIGN UP <em>&#9654;</em></a>
                 </div>
             </div>
         </div>
@@ -63,12 +63,12 @@
                     <li class="clearfix first">
                         <h5>Have a business?</h5>
                         <p>FrameBuzz is a conversation platform for your existing video player that drives traffic, keeps viewers engaged on your screen, and encourages return traffic to continue conversations around your content. Through a FrameBuzz Publisher Account, you will be able to manage videos, moderate and promote comments, and view valuable analytics to help you strengthen your content and fine-tune your video strategy.</p>
-                        <a class="signup" href="">SIGN UP <em>&#9654;</em></a>
+                        <span>Coming soon!</span>
                     </li>
                     <li class="clearfix">
                         <h5>Love watching video?</h5>
                         <p>Sign up for free in seconds and immediately view and comment in top FrameBuzzed videos from around the web. FrameBuzz your favorite videos and invite friends to join in the conversation with you. We believe you have interesting and important things to say about video content, so what are you waiting for? Start FrameBuzzing now.</p>
-                        <a class="signup" href="">SIGN UP <em>&#9654;</em></a>
+                        <a class="signup" href="{% url 'account_signup' %}">SIGN UP <em>&#9654;</em></a>
                     </li>
                 </ul>
             </div>
@@ -80,7 +80,7 @@
     <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#fb').anystretch("{% static 'framebuzz/marketing/img/home@2x.jpg' %}", {speed: 150});
+            $('#fb').anystretch("{% static 'framebuzz/marketing/img/home@2x.jpg' %}", {speed: 150 });
             $('#framebuzz').anystretch("{% static 'framebuzz/marketing/img/section-bkg.jpg' %}", {speed: 150});
 
             $(window).resize(function() {

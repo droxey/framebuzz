@@ -107,11 +107,12 @@ div.marketing-content {
     width: 100%;
 
     #fb {
-        height: 100%;
+        height: 1495px;
         width: 100%;
 
         div.anystretch img {
             left: 0 !important;
+            top: -143px !important;
         }
     }
 
@@ -135,7 +136,7 @@ div.marketing-content {
         }
 
         #watch {
-            height: 772px;
+            height: 770px;
 
             #watch-container {
                 padding-bottom: 37px;
@@ -180,6 +181,9 @@ div.marketing-content {
 
             em {
                 font-size: 10px;
+                padding-left: 2px;
+                position: relative;
+                top: -1px;
                 vertical-align: middle;
             }
         }
@@ -195,17 +199,16 @@ div.marketing-content {
         }
 
         #community {
+            height: 580px;
 
             #community-container {
                 padding-left: 93px;
-                position: relative;
-                z-index: 1;
-                top: -55px;
-                padding-top: 55px;
+                padding-top: 30px;
                 padding-bottom: 86px;
+                position: relative;
 
                 span.arrow { 
-                    top: 55px;
+                    top: 0;
                     left: 594px; 
                 }
 
@@ -351,6 +354,17 @@ div.marketing-content {
                             height: 214px;
                             line-height: 20px;
                             text-align: right;
+                        }
+
+                        span {
+                            margin-top: 34px;
+                            display: block;
+                            font-family: 'proxima-nova';
+                            font-size: 24px;
+                            font-weight: 500;
+                            margin-bottom: 19px;
+                            text-align: right;
+                            float: right;
                         }
 
                         a.signup {
@@ -665,6 +679,87 @@ div.marketing-content {
                         width: 199px;
                         text-align: center;
                         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                    }
+                }
+            }
+        }
+    }
+
+    #signup-page {
+        color: #383835;
+        min-height: 900px;
+        padding: 45px 0;
+        font-family: 'proxima-nova';
+        font-weight: 300;
+
+        div.wrapper {
+            background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+            border-radius: 2px 2px 2px 2px;
+            box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.15);
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 25px;
+            width: 400px;
+
+            h1 {
+                font-family: 'proxima-nova';
+                font-weight: 300;
+                font-size: 24px;
+                text-align: center;
+                padding-bottom: 25px;
+            }
+
+            p.description {
+                text-align: center;
+                padding-bottom: 25px;
+            }
+
+            form {
+                p {
+                    padding-bottom: 10px;
+
+                    label { margin-bottom: 5px; } 
+                    input { 
+                        font-family: 'proxima-nova' !important;
+                        width: 385px; 
+                    }
+                }
+
+                p.terms {
+                    padding: 0px 0 15px 0;
+                    line-height: 20px;
+                }
+
+                div.actions {
+                    a.secondaryAction {
+                        display: block;
+                        float: left;
+                        line-height: 38px;
+                    }
+
+                    button.signup {
+                        @include border-radius(2px, 2px);
+                        background: #9e0f84;
+                        border: 0;
+                        display: block;
+                        color: white;
+                        float: right;
+                        font-family: 'futura-pt-condensed';
+                        font-size: 20px;
+                        font-weight: 700;
+                        padding: 8px 0;
+                        text-align: center;
+                        width: 130px;
+
+                        &:hover { text-decoration: none; }
+
+                        em {
+                            font-size: 10px;
+                            padding-left: 2px;
+                            position: relative;
+                            top: -1px;
+                            vertical-align: middle;
+                        }
                     }
                 }
             }
