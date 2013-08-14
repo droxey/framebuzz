@@ -18,6 +18,7 @@ from django.contrib.comments.models import Comment, CommentFlag
 from django.core.urlresolvers import reverse
 import datetime
 
+
 @login_required
 def index(request):
 #    if not request.user.is_authenticated():
@@ -350,7 +351,7 @@ def login(request):
     if not redirect_path:
         redirect_path = '/dashboard/'
     if not request.user.is_authenticated():
-        return render_to_response('account/new_login.html', RequestContext(request, {'next' : redirect_path, 'form': LoginForm}))
+        return render_to_response('account/login.html', context=RequestContext(request, {'next' : redirect_path, 'form': LoginForm}))
     else:
         return ret
 

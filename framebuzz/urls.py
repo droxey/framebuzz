@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     # Player API:
     url(r'^v/', include('framebuzz.apps.api.urls')),
 
+    # Login Redirect:
+    url(r'^accounts/logged-in/$', 'framebuzz.apps.profiles.views.logged_in', name='logged-in'),
+
     # FrameBuzz User Profiles:
     url(r'^profile/', include('framebuzz.apps.profiles.urls')),
 

@@ -290,7 +290,7 @@ PAGINATION_SETTINGS = {
 # Django-AllAuth Settings:
 AUTH_PROFILE_MODULE = 'api.UserProfile'
 ACCOUNT_ACTIVATION_DAYS = 7
-LOGIN_REDIRECT_URL = '/dashboard/register/'
+LOGIN_REDIRECT_URL = '/accounts/logged-in/'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = False

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -10,6 +11,12 @@ from actstream.actions import follow, unfollow
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
+
+
+def logged_in(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
+
 
 def home(request, username):
     user = User.objects.get(username__iexact=username)
