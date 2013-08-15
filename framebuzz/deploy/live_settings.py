@@ -29,3 +29,11 @@ DATABASES = {
 #}
 
 #SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'framebuzz'
+EMAIL_HOST_PASSWORD = 'TG2-aJq-2bV-VYa'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

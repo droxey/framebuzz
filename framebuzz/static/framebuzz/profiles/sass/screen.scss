@@ -1015,8 +1015,8 @@ div.content {
             padding: 17px;
             width: 237px;
 
-            p, ol li, h1, h2 {
-                margin-bottom: 25px;
+            p, ol li, h2 {
+                margin-bottom: 20px;
                 text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
             }
 
@@ -1024,10 +1024,11 @@ div.content {
                 font-size: 20px;
                 font-weight: 700;
                 text-align: center;
+                margin-bottom: 5px;
             }
 
             h2 {
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: 700;
                 text-align: center;
             }
@@ -1046,8 +1047,8 @@ div.content {
                 li {
                     span:before {
                         @include border-radius(20px, 20px);
-                        background: #ffa64d;
-                        border-radius: 20px 20px 20px 20px;
+                        background: rgba(255, 166, 77, 0.75);
+                        box-shadow: 0 1px 0 rgba(255, 255, 255, .3);
                         color: white;
                         content: counter(li, decimal);
                         counter-increment: li;
