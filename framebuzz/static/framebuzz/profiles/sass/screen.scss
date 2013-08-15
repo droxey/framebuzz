@@ -1135,7 +1135,8 @@ div.content {
 
 #add-framebuzz-modal {
     background: white;
-    height: 270px;
+    min-height: 270px;
+    max-height: 340px;
     margin-left: -210px;
     width: 420px;
 
@@ -1144,7 +1145,8 @@ div.content {
         font-weight: 300;
         font-size: 14px;
         line-height: 25px;
-        max-height: 270px;
+        min-height: 270px;
+        max-height: 340px;
         overflow: visible;
         padding: 15px;
         position: relative;
@@ -1161,6 +1163,15 @@ div.content {
             font-weight: 300;
             text-align: center;
             margin-bottom: 15px;
+        }
+
+        ul.errorlist {
+            margin-bottom: 5px;
+
+            li {
+                color: red;
+                text-align: center;
+            }
         }
 
         form {

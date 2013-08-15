@@ -1,7 +1,9 @@
+import json
+
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -218,7 +220,7 @@ def add_video_to_library(request, username):
         success = form.is_valid()
         
         if success:
-            form.save()
+            return HttpResponse()
     else:
         form = AddVideoForm(request=request)
 

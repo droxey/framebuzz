@@ -159,15 +159,19 @@
                 $('iframe', '#video-embed-modal').attr('src', currentVideoUrl);
             });
 
-            $('body').on('hide', function () {
+            $('body').on('hide', '#video-embed-modal', function () {
                 $('iframe', '#video-embed-modal').attr('src', '');
+            });
+
+            $('body').on('hide', '#add-framebuzz-modal', function () {
+                $(this).removeData('modal');
             });
 
             // Load 'add video' in modal.
             $('body').on('shown', '#add-framebuzz-modal', function(e) {
                 var video_id = null;
 
-                $('#id_video_id').blur(function() {
+                $('#add-framebuzz-modal').on('blur', '#id_video_id', function() {
                     var url = $(this).val();
 
                     if (url.length > 0) {
@@ -175,18 +179,34 @@
                     }
                 });
 
-                $('form').submit(function(e) {
+                $('#add-framebuzz-modal').on('submit', 'form', function(e) {
                     e.preventDefault();
 
                     var postUrl = $(this).attr('action');
                     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
 
+
                     $.post(postUrl, {
                         'video_id': video_id, 
                         'is_featured': $('#id_is_featured').val(),
                         'csrfmiddlewaretoken': csrfToken
-                    }, function() {
-                        window.location.reload();
+                    }, function(data, textStatus, jqXHR) {
+                        if (data.length == 0) {
+                            $('#videos').load("{% url 'profiles-videos' profile_user %}", function(result) {
+                                $('ul.nav-tabs').tab('show');
+                                $('div.tab-pane').removeClass('active');
+                                $('#videos').addClass('active');
+
+                                $('#add-framebuzz-modal').modal('hide');
+                            });
+                        }
+                        else {
+                            var container = $('#add-framebuzz-modal div.modal-body');
+                            container.fadeOut('fast', function() {
+                                $('#add-framebuzz-modal div.modal-body').html(data);
+                                container.fadeIn('fast');
+                            });
+                        }
                     });
                 });
             });

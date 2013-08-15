@@ -1,4 +1,5 @@
 from django import forms
+from django.db import IntegrityError
 from timezone_field import TimeZoneFormField
 
 from framebuzz.apps.api.models import UserProfile, UserWebsite, UserVideo
@@ -60,13 +61,18 @@ class AddVideoForm(forms.ModelForm):
         super(AddVideoForm, self).__init__(*args, **kwargs)
         self.fields['is_featured'].label = 'Feature this video on your profile?'
 
-    def save(self, commit=True):
+    def clean(self):
         video_id = self.cleaned_data.get('video_id', None)
         
-        if video_id and self.request:
-            video, created = get_or_create_video(video_id)
-            user_video = UserVideo()
-            user_video.user = self.request.user
-            user_video.video = video
-            user_video.is_featured = self.cleaned_data.get('is_featured', False)
-            user_video.save()
+        try:
+            if video_id and self.request:
+                video, created = get_or_create_video(video_id)
+                user_video = UserVideo()
+                user_video.user = self.request.user
+                user_video.video = video
+                user_video.is_featured = self.cleaned_data.get('is_featured', False)
+                user_video.save()
+        except IntegrityError:
+            raise forms.ValidationError('This video is already in your library!')
+            
+        return self.cleaned_data
