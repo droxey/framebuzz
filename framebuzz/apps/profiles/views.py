@@ -43,17 +43,17 @@ def home(request, username):
 def activity(request, username):
     user = User.objects.get(username__iexact=username)
 
-    user_videos = UserVideo.objects.filter(user=user)[:3]
-    latest_videos = [uv.video for uv in user_videos]
+    user_videos = UserVideo.objects.filter(user=user).order_by('-is_featured')[:3]
     latest_videos_comments = list()
 
-    for video in latest_videos:
-        comments = MPTTComment.objects.filter(user=user, object_pk=video.id)
+    for uv in user_videos:
+        comments = MPTTComment.objects.filter(user=user, object_pk=uv.id)
         if len(comments) > 0:
-            latest_videos_comments.append(comments[0])
+            comment = comments[0]
+            latest_videos_comments.append(comment)
         else:
             fake_comment = MPTTComment()
-            fake_comment.content_object = video
+            fake_comment.content_object = uv.video
             latest_videos_comments.append(fake_comment)
 
     latest_following = Follow.objects.filter(user=user).order_by('-started')[:3]
@@ -66,6 +66,7 @@ def activity(request, username):
         'latest_comments': latest_comments,
         'latest_following': latest_following,
         'can_delete': request.user.is_authenticated() and request.user.id == user.id,
+        'video_library_ids': [uv.video.id for uv in user_videos],
     },
     context_instance=RequestContext(request))
 
@@ -125,6 +126,7 @@ def conversations(request, username):
         'profile_user': user,
         'page_obj': p.page(page),
         'can_delete': request.user.is_authenticated() and request.user.id == user.id,
+        'video_library_ids': [uv.video.id for uv in UserVideo.objects.filter(user=user)],
     },
     context_instance=RequestContext(request))
 
@@ -145,6 +147,7 @@ def favorites(request, username):
         'profile_user': user,
         'page_obj': p.page(page),
         'can_delete': request.user.is_authenticated() and request.user.id == user.id,
+        'video_library_ids': [uv.video.id for uv in UserVideo.objects.filter(user=user)],
     },
     context_instance=RequestContext(request))
 
@@ -177,7 +180,8 @@ def videos(request, username):
         'page_obj': p.page(page),
         'can_delete': request.user.is_authenticated() and request.user.id == user.id,
         'is_adding_video': False,
-        'show_embed_button': False
+        'show_embed_button': False,
+        'video_library_ids': [uv.video.id for uv in UserVideo.objects.filter(user=user)],
     },
     context_instance=RequestContext(request))
 

@@ -133,29 +133,6 @@ div.navbar {
     }
 }
 
-#sidebar-nav {
-    padding: 20px 0;
-    width: 214px;
-
-    h2 {
-        background: rgba(109, 109, 109, 0.11);
-        color: #7f7f7f;
-        font-family: 'proxima-nova';
-        font-weight: 500;
-        font-size: 17.13px;
-        line-height: 24px;
-        text-align: center;
-    }
-
-    ul {
-        margin: 25px 0;
-
-        li {
-
-        }
-    }
-}
-
 .wf-loading {
     div.content {
         opacity: 0;
@@ -211,7 +188,7 @@ div.content {
     min-height: 964px;
     min-width: 1000px;
     padding-bottom: 0;
-    overflow: hidden;
+    overflow: visible;
 
     div.wrapper {
         width: 1200px;
@@ -224,7 +201,6 @@ div.content {
             margin-right: 49px;
             margin-left: 262px;
             width: 676px;
-            height: 100%;
             float: left;
 
             &.show-callout {
@@ -498,10 +474,11 @@ div.content {
             }
 
             #profile-container {
+                min-height: 964px;
+                max-height: 1600px;
                 overflow: visible;
                 padding: 22px 25px;
                 position: relative;
-                min-height: 672px;
                 z-index: 1;
 
                 h1 {
@@ -538,6 +515,13 @@ div.content {
                     li {
                         margin-bottom: 27px;
                         position: relative;
+
+                        img.featured {
+                            left: -6px;
+                            position: absolute;
+                            top: -6px;
+                            z-index: 20;
+                        }
 
                         div.user-controls {
                             background: rgba(0, 0, 0, .9);
@@ -673,7 +657,7 @@ div.content {
                 div.pagination-centered { 
                     margin: 0;
                     position: relative;
-                    top: 30px;
+                    top: 10px;
 
                     ul {
                         border-top: none;
