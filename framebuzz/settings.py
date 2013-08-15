@@ -320,6 +320,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # Django-Avatar Settings:
 AVATAR_ALLOWED_FILE_EXTS = ['.jpg', '.png']
 AUTO_GENERATE_AVATAR_SIZES = (314, 66, 58, 40,)
+AVATAR_GRAVATAR_BASE_URL = 'http://robohash.org'
 
 # Email Settings:
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'

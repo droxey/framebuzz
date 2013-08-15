@@ -1,0 +1,22 @@
+<div id="edit-profile">
+    <h1>Edit Profile</h1>
+    <p>Make changes to your public profile below.</p>
+    {% if submitted %}
+        {% if success %}
+            <div class="alert alert-success">
+                <strong>Success</strong>: Profile updated successfully!
+            </div>
+        {% else %}
+            <div class="alert alert-error">
+                <strong>Error</strong>: {{ form.errors }}
+            </div>
+        {% endif %}
+    {% endif %}
+    <form id="edit-user-profile-form" class="form-vertical" method="POST" action="{% url 'dashboard-settings-edit' %}">
+        {% csrf_token %}
+            {{ form.as_p }}
+            <p>
+               <button class="btn btn-primary" type="submit">Edit Profile</button>
+            </p>
+    </form>
+</div>

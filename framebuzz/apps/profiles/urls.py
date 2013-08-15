@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'^(?P<username>[\w.@+-]+)/favorites/$', 'framebuzz.apps.profiles.views.favorites', name='profiles-favorites'),
     url(r'^(?P<username>[\w.@+-]+)/conversations/$', 'framebuzz.apps.profiles.views.conversations', name='profiles-conversations'),
     url(r'^(?P<username>[\w.@+-]+)/videos/$', 'framebuzz.apps.profiles.views.videos', name='profiles-videos'),
+    url(r'^(?P<username>[\w.@+-]+)/edit/$', 'framebuzz.apps.profiles.views.edit_profile', name='profiles-edit'),
 )

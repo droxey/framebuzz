@@ -93,21 +93,17 @@ body {
   margin: 0;
 }
 
-/* line 50, ../sass/screen.scss */
-div.wrapper {
-  margin: 0 auto;
-  width: 676px;
-}
-
 /*
  *      Navigation
  */
-/* line 59, ../sass/screen.scss */
+/* line 54, ../sass/screen.scss */
 div.navbar {
   background-image: url("../img/noise.png");
   background-color: #272727;
   background-repeat: repeat-x;
   box-shadow: none;
+  position: relative;
+  z-index: 10;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 144dpi) {
   /* line 33, ../sass/screen.scss */
@@ -116,7 +112,7 @@ div.navbar {
     background-size: 57px 57px;
   }
 }
-/* line 65, ../sass/screen.scss */
+/* line 62, ../sass/screen.scss */
 div.navbar div.navbar-inner {
   background: none;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMzA4KSIvPjxzdG9wIG9mZnNldD0iMC45OCIgc3RvcC1jb2xvcj0icmdiYSgwLCAwLCAwLCAwKSIvPjwvcmFkaWFsR3JhZGllbnQ+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDApIiAvPjxyZWN0IHg9Ii0yMC45MDkxJSIgeT0iLTEwMC40MiUiIHdpZHRoPSIxNTYwcHgiIGhlaWdodD0iMjAwLjg0JSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
@@ -132,18 +128,18 @@ div.navbar div.navbar-inner {
   overflow: hidden;
   width: 97%;
 }
-/* line 80, ../sass/screen.scss */
+/* line 77, ../sass/screen.scss */
 div.navbar div.navbar-inner a.brand {
   border: none;
   padding: 8px 0px 0px 35px;
   text-shadow: none;
 }
-/* line 86, ../sass/screen.scss */
+/* line 83, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav {
   padding-top: 5px;
   margin-right: -5px;
 }
-/* line 91, ../sass/screen.scss */
+/* line 88, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li a {
   border-left: none;
   color: rgba(255, 255, 255, 0.48);
@@ -152,39 +148,39 @@ div.navbar div.navbar-inner ul.nav li a {
   -o-transition: opacity 0.1s ease-in-out, 1s;
   transition: opacity 0.1s ease-in-out, 1s;
 }
-/* line 96, ../sass/screen.scss */
+/* line 93, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li a.dropdown-toggle {
   background-image: none;
   font-size: 19.33px;
   font-family: 'futura-pt-condensed';
 }
-/* line 103, ../sass/screen.scss */
+/* line 100, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li i {
   color: rgba(255, 255, 255, 0.48);
 }
-/* line 107, ../sass/screen.scss */
+/* line 104, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.user {
   background: transparent url("../img/divider.png") repeat-y top left;
   padding-left: 15px;
 }
-/* line 111, ../sass/screen.scss */
+/* line 108, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.user a {
   display: block;
   float: left;
 }
-/* line 115, ../sass/screen.scss */
+/* line 112, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.user a.avatar {
   height: 28px;
   padding: 7px 0;
   width: 28px;
 }
-/* line 120, ../sass/screen.scss */
+/* line 117, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.user a.avatar img.img-circle {
   border: 2px solid white;
   height: 28px;
   width: 28px;
 }
-/* line 129, ../sass/screen.scss */
+/* line 126, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li a.active, div.navbar div.navbar-inner ul.nav li a:hover {
   background: none;
   color: rgba(255, 255, 255, 0.88);
@@ -194,12 +190,12 @@ div.navbar div.navbar-inner ul.nav li a.active, div.navbar div.navbar-inner ul.n
   transition: opacity 0.1s ease-in-out, 1s;
 }
 
-/* line 139, ../sass/screen.scss */
+/* line 136, ../sass/screen.scss */
 #sidebar-nav {
   padding: 20px 0;
   width: 214px;
 }
-/* line 143, ../sass/screen.scss */
+/* line 140, ../sass/screen.scss */
 #sidebar-nav h2 {
   background: rgba(109, 109, 109, 0.11);
   color: #7f7f7f;
@@ -209,12 +205,12 @@ div.navbar div.navbar-inner ul.nav li a.active, div.navbar div.navbar-inner ul.n
   line-height: 24px;
   text-align: center;
 }
-/* line 153, ../sass/screen.scss */
+/* line 150, ../sass/screen.scss */
 #sidebar-nav ul {
   margin: 25px 0;
 }
 
-/* line 163, ../sass/screen.scss */
+/* line 160, ../sass/screen.scss */
 .wf-loading div.content {
   opacity: 0;
   -webkit-transition: opacity 0.25s ease-in-out, 1s;
@@ -223,7 +219,7 @@ div.navbar div.navbar-inner ul.nav li a.active, div.navbar div.navbar-inner ul.n
   transition: opacity 0.25s ease-in-out, 1s;
 }
 
-/* line 170, ../sass/screen.scss */
+/* line 167, ../sass/screen.scss */
 .wf-active div.content {
   opacity: 1;
   -webkit-transition: opacity 0.25s ease-in-out, 1s;
@@ -232,7 +228,7 @@ div.navbar div.navbar-inner ul.nav li a.active, div.navbar div.navbar-inner ul.n
   transition: opacity 0.25s ease-in-out, 1s;
 }
 
-/* line 176, ../sass/screen.scss */
+/* line 173, ../sass/screen.scss */
 div.alert {
   font-family: 'proxima-nova';
   font-weight: 500;
@@ -240,59 +236,77 @@ div.alert {
   width: 233px;
 }
 
-/* line 183, ../sass/screen.scss */
+/* line 180, ../sass/screen.scss */
 div.form-actions {
   padding: 0;
   margin: 0;
   background: none;
 }
 
-/* line 189, ../sass/screen.scss */
+/* line 186, ../sass/screen.scss */
 img.img-circle {
   -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.52);
   -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.52);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.52);
 }
 
-/* line 193, ../sass/screen.scss */
+/* line 190, ../sass/screen.scss */
 #fb {
   min-height: 964px;
   width: 100%;
 }
-/* line 197, ../sass/screen.scss */
+/* line 194, ../sass/screen.scss */
 #fb div.anystretch {
   background-color: #188bbe;
 }
-/* line 200, ../sass/screen.scss */
+/* line 197, ../sass/screen.scss */
 #fb div.anystretch img {
   left: 0px !important;
   top: auto !important;
   bottom: -5px !important;
 }
 
-/* line 208, ../sass/screen.scss */
+/* line 205, ../sass/screen.scss */
 div.content {
-  border-right: 1px solid #DAE3E9;
+  background: none;
+  border: 0;
   border-radius: 0;
   box-shadow: none;
-  margin: 0 auto;
+  margin: 0;
   min-height: 964px;
-  overflow: visible;
-  width: 676px;
+  min-width: 1000px;
+  padding-bottom: 0;
+  overflow: hidden;
 }
-/* line 217, ../sass/screen.scss */
-div.content header {
+/* line 216, ../sass/screen.scss */
+div.content div.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+/* line 220, ../sass/screen.scss */
+div.content div.wrapper div.background {
+  background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
+  background-color: white;
+  box-shadow: 0 -5px 0 5px rgba(0, 0, 0, 0.1);
+  margin-right: 49px;
+  margin-left: 200px;
+  width: 676px;
+  height: 100%;
+  float: left;
+}
+/* line 230, ../sass/screen.scss */
+div.content div.wrapper div.background header {
   font-family: 'futura-pt-condensed';
   font-weight: 500;
 }
-/* line 221, ../sass/screen.scss */
-div.content header div.user-info {
+/* line 234, ../sass/screen.scss */
+div.content div.wrapper div.background header div.user-info {
   padding-top: 18px;
   padding-left: 25px;
   padding-right: 25px;
 }
-/* line 226, ../sass/screen.scss */
-div.content header div.user-info img.img-circle {
+/* line 239, ../sass/screen.scss */
+div.content div.wrapper div.background header div.user-info img.img-circle {
   border: 6px solid white;
   -moz-box-shadow: 3px 3px 7px 0 rgba(0, 0, 0, 0.52);
   -webkit-box-shadow: 3px 3px 7px 0 rgba(0, 0, 0, 0.52);
@@ -303,20 +317,20 @@ div.content header div.user-info img.img-circle {
   top: 8px;
   z-index: 3;
 }
-/* line 238, ../sass/screen.scss */
-div.content header div.user-info div.user-details {
+/* line 251, ../sass/screen.scss */
+div.content div.wrapper div.background header div.user-info div.user-details {
   float: left;
   min-width: 315px;
   max-width: 445px;
 }
-/* line 243, ../sass/screen.scss */
-div.content header div.user-info div.user-details h1 {
+/* line 256, ../sass/screen.scss */
+div.content div.wrapper div.background header div.user-info div.user-details h1 {
   margin-left: 21px;
   padding-top: 20px;
   padding-bottom: 8px;
 }
-/* line 248, ../sass/screen.scss */
-div.content header div.user-info div.user-details h1 a {
+/* line 261, ../sass/screen.scss */
+div.content div.wrapper div.background header div.user-info div.user-details h1 a {
   color: #333333;
   display: inline-block;
   font-size: 44.74px;
@@ -324,15 +338,15 @@ div.content header div.user-info div.user-details h1 a {
   margin-right: 14px;
   text-decoration: none;
 }
-/* line 257, ../sass/screen.scss */
-div.content header div.user-info div.user-details h1 span {
+/* line 270, ../sass/screen.scss */
+div.content div.wrapper div.background header div.user-info div.user-details h1 span {
   color: #9b9b9b;
   display: inline-block;
   font-size: 23px;
   font-weight: 500;
 }
-/* line 265, ../sass/screen.scss */
-div.content header div.user-info div.user-details p.bio {
+/* line 278, ../sass/screen.scss */
+div.content div.wrapper div.background header div.user-info div.user-details p.bio {
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
@@ -343,8 +357,8 @@ div.content header div.user-info div.user-details p.bio {
   position: relative;
   margin-left: 20px;
 }
-/* line 274, ../sass/screen.scss */
-div.content header div.user-info div.user-details p.bio span.corner {
+/* line 287, ../sass/screen.scss */
+div.content div.wrapper div.background header div.user-info div.user-details p.bio span.corner {
   position: absolute;
   display: block;
   width: 0;
@@ -358,12 +372,12 @@ div.content header div.user-info div.user-details p.bio span.corner {
   top: 25%;
   left: -14px;
 }
-/* line 292, ../sass/screen.scss */
-div.content header div.ribbon-wrapper {
+/* line 305, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper {
   position: relative;
 }
-/* line 295, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front {
+/* line 308, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front {
   background-color: rgba(31, 31, 31, 0.67);
   border-bottom: 1px solid rgba(197, 197, 197, 0.67);
   height: 60px;
@@ -372,12 +386,12 @@ div.content header div.ribbon-wrapper div.ribbon-front {
   left: 0px;
   z-index: 2;
 }
-/* line 305, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs {
+/* line 318, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs {
   border-bottom: none;
 }
-/* line 308, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li {
+/* line 321, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li {
   background: transparent url("../img/divider.png") repeat-y top right;
   border-radius: none;
   border: none;
@@ -387,8 +401,8 @@ div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li {
   margin: 7px 0;
   padding: 0 11px;
 }
-/* line 318, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a {
+/* line 331, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a {
   color: white;
   font-size: 18.87px;
   font-weight: 300;
@@ -399,33 +413,33 @@ div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a {
   padding-bottom: 0;
   text-decoration: none;
 }
-/* line 329, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a em {
+/* line 342, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a em {
   color: rgba(255, 255, 255, 0.45);
 }
-/* line 333, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a:hover {
+/* line 346, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li a:hover {
   background: none;
   border-radius: none;
   border: none;
 }
-/* line 340, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li:first-child {
+/* line 353, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li:first-child {
   padding-left: 0;
 }
-/* line 344, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li:last-child {
+/* line 357, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li:last-child {
   background: none;
   padding-right: 0;
 }
-/* line 349, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.location {
+/* line 362, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.location {
   padding-left: 0;
   text-align: center;
   width: 193px;
 }
-/* line 354, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.location span {
+/* line 367, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.location span {
   color: rgba(255, 255, 255, 0.45);
   display: inline-block;
   height: 100%;
@@ -435,111 +449,111 @@ div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.locati
   position: relative;
   top: -3px;
 }
-/* line 364, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.location span img {
+/* line 377, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.location span img {
   margin-top: 6px;
   margin-left: 6px;
   margin-right: 6px;
   position: relative;
   top: 5px;
 }
-/* line 374, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.followers {
+/* line 387, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.followers {
   width: 49px;
 }
-/* line 375, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.following {
+/* line 388, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.following {
   width: 49px;
 }
-/* line 376, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.conversations {
+/* line 389, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.conversations {
   width: 69px;
 }
-/* line 377, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.favorites {
+/* line 390, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.favorites {
   width: 46px;
 }
-/* line 378, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.home, div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.videos {
+/* line 391, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.home, div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.videos {
   display: none;
 }
-/* line 382, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.website {
+/* line 395, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.website {
   background: none;
   padding-right: 0;
   text-align: left;
   width: 158px;
 }
-/* line 388, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.website span {
+/* line 401, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.website span {
   display: block;
   margin-top: 5px;
 }
-/* line 392, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.website span a {
+/* line 405, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.website span a {
   color: rgba(255, 255, 255, 0.45);
   font-size: 19px;
 }
-/* line 400, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.followers.active, div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.followers:hover, div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.following.active, div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.following:hover, div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.conversations.active, div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.conversations:hover, div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.favorites.active, div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.favorites:hover {
+/* line 413, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.followers.active, div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.followers:hover, div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.following.active, div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.following:hover, div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.conversations.active, div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.conversations:hover, div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.favorites.active, div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.favorites:hover {
   border-bottom: 7px solid rgba(255, 255, 255, 0.9);
   margin-bottom: -7px;
 }
-/* line 406, ../sass/screen.scss */
-div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.active > a, div.content header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li:hover > a {
+/* line 419, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li.active > a, div.content div.wrapper div.background header div.ribbon-wrapper div.ribbon-front nav ul.nav-tabs li:hover > a {
   background: none;
   border-radius: none;
   border: none;
   outline: none;
 }
-/* line 420, ../sass/screen.scss */
-div.content header div.ribbon-wrapper .ribbon-edge-topleft,
-div.content header div.ribbon-wrapper .ribbon-edge-topright,
-div.content header div.ribbon-wrapper .ribbon-edge-bottomleft,
-div.content header div.ribbon-wrapper .ribbon-edge-bottomright {
+/* line 433, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-topleft,
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-topright,
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-bottomleft,
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-bottomright {
   position: absolute;
   z-index: 1;
   border-style: solid;
   height: 0px;
   width: 0px;
 }
-/* line 429, ../sass/screen.scss */
-div.content header div.ribbon-wrapper .ribbon-edge-bottomleft,
-div.content header div.ribbon-wrapper .ribbon-edge-bottomright {
+/* line 442, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-bottomleft,
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-bottomright {
   top: 60px;
 }
-/* line 434, ../sass/screen.scss */
-div.content header div.ribbon-wrapper .ribbon-edge-topleft,
-div.content header div.ribbon-wrapper .ribbon-edge-bottomleft {
+/* line 447, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-topleft,
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-bottomleft {
   left: 0px;
   border-color: transparent rgba(164, 164, 164, 0.51) transparent transparent;
 }
-/* line 439, ../sass/screen.scss */
-div.content header div.ribbon-wrapper .ribbon-edge-topleft {
+/* line 452, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-topleft {
   top: 0px;
   border-width: 0px 0px 0 0;
 }
-/* line 444, ../sass/screen.scss */
-div.content header div.ribbon-wrapper .ribbon-edge-bottomleft {
+/* line 457, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-bottomleft {
   border-width: 0 0px 0px 0;
 }
-/* line 449, ../sass/screen.scss */
-div.content header div.ribbon-wrapper .ribbon-edge-topright,
-div.content header div.ribbon-wrapper .ribbon-edge-bottomright {
+/* line 462, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-topright,
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-bottomright {
   left: 676px;
   border-color: transparent transparent transparent rgba(164, 164, 164, 0.51);
 }
-/* line 454, ../sass/screen.scss */
-div.content header div.ribbon-wrapper .ribbon-edge-topright {
+/* line 467, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-topright {
   top: 0px;
   border-width: 0px 0 0 23px;
 }
-/* line 459, ../sass/screen.scss */
-div.content header div.ribbon-wrapper .ribbon-edge-bottomright {
+/* line 472, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-edge-bottomright {
   border-width: 0 0 23px 23px;
 }
-/* line 463, ../sass/screen.scss */
-div.content header div.ribbon-wrapper .ribbon-back-left {
+/* line 476, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-back-left {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -547,8 +561,8 @@ div.content header div.ribbon-wrapper .ribbon-back-left {
   height: 58px;
   z-index: 0;
 }
-/* line 472, ../sass/screen.scss */
-div.content header div.ribbon-wrapper .ribbon-back-right {
+/* line 485, ../sass/screen.scss */
+div.content div.wrapper div.background header div.ribbon-wrapper .ribbon-back-right {
   position: absolute;
   top: 23px;
   right: 0px;
@@ -556,15 +570,15 @@ div.content header div.ribbon-wrapper .ribbon-back-right {
   height: 58px;
   z-index: 0;
 }
-/* line 483, ../sass/screen.scss */
-div.content #profile-container {
+/* line 496, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container {
   overflow: visible;
   padding: 22px 25px;
   position: relative;
   z-index: 1;
 }
-/* line 489, ../sass/screen.scss */
-div.content #profile-container h1 {
+/* line 502, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container h1 {
   border-bottom: 1px solid #f7f7f7;
   color: #333333;
   display: block;
@@ -574,34 +588,34 @@ div.content #profile-container h1 {
   padding-bottom: 20px;
   width: 100%;
 }
-/* line 499, ../sass/screen.scss */
-div.content #profile-container h1 a {
+/* line 512, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container h1 a {
   font-size: 12px;
   margin-left: 9px;
   position: relative;
   top: 1px;
 }
-/* line 507, ../sass/screen.scss */
-div.content #profile-container a.modal-button {
+/* line 520, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container a.modal-button {
   cursor: pointer;
   display: block;
 }
-/* line 512, ../sass/screen.scss */
-div.content #profile-container ul {
+/* line 525, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul {
   border-top: 1px solid #ebebeb;
   padding-top: 9px;
 }
-/* line 517, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations {
+/* line 530, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations {
   border: none;
 }
-/* line 520, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li {
+/* line 533, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li {
   margin-bottom: 27px;
   position: relative;
 }
-/* line 524, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.user-controls {
+/* line 537, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.user-controls {
   background: rgba(0, 0, 0, 0.9);
   display: none;
   height: 12px;
@@ -616,36 +630,36 @@ div.content #profile-container ul.profile-conversations li div.user-controls {
   -o-transition: opacity 0.55s ease-in-out, 1s;
   transition: opacity 0.55s ease-in-out, 1s;
 }
-/* line 536, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.user-controls ul {
+/* line 549, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.user-controls ul {
   border-top: none;
   padding-top: 0;
 }
-/* line 540, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.user-controls ul li {
+/* line 553, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.user-controls ul li {
   float: left;
   margin-bottom: 0;
   padding-right: 5px;
   min-width: 13px;
   max-width: 15px;
 }
-/* line 548, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.user-controls ul li a img {
+/* line 561, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.user-controls ul li a img {
   opacity: 0.9;
 }
-/* line 553, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.user-controls ul li:last-child {
+/* line 566, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.user-controls ul li:last-child {
   padding-right: 0;
 }
-/* line 557, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.user-controls ul li:before {
+/* line 570, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.user-controls ul li:before {
   background: none;
   display: none;
   height: 0;
   width: 0;
 }
-/* line 567, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li img.video-thumbnail {
+/* line 580, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li img.video-thumbnail {
   background: rgba(102, 102, 102, 0.9);
   border: 5px solid rgba(0, 0, 0, 0.6);
   height: 182px;
@@ -654,8 +668,8 @@ div.content #profile-container ul.profile-conversations li img.video-thumbnail {
   width: 287px;
   z-index: 10;
 }
-/* line 577, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.comment {
+/* line 590, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.comment {
   background-color: #2C85CA;
   border: 1px solid rgba(44, 133, 202, 0.5);
   font-family: 'proxima-nova';
@@ -669,12 +683,12 @@ div.content #profile-container ul.profile-conversations li div.comment {
   width: 281px;
   z-index: 20;
 }
-/* line 591, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.comment p {
+/* line 604, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.comment p {
   color: white;
 }
-/* line 595, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.comment img.img-circle {
+/* line 608, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.comment img.img-circle {
   border: 2px solid white;
   display: block;
   float: left;
@@ -683,29 +697,29 @@ div.content #profile-container ul.profile-conversations li div.comment img.img-c
   width: 32px;
   z-index: 2;
 }
-/* line 606, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.video-details {
+/* line 619, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.video-details {
   font-family: 'proxima-nova';
   font-size: 13px;
   font-weight: 500;
 }
-/* line 611, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.video-details h3 {
+/* line 624, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.video-details h3 {
   padding-top: 7px;
 }
-/* line 615, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.video-details a {
+/* line 628, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.video-details a {
   color: #2a5c8a;
   font-weight: 700;
 }
-/* line 620, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li div.video-details span {
+/* line 633, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li div.video-details span {
   color: rgba(73, 73, 73, 0.83);
   display: block;
   font-size: 11px;
 }
-/* line 627, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li:before {
+/* line 640, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li:before {
   background-image: url("../img/timeline-indicator.png");
   content: " ";
   position: absolute;
@@ -717,70 +731,70 @@ div.content #profile-container ul.profile-conversations li:before {
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 144dpi) {
   /* line 33, ../sass/screen.scss */
-  div.content #profile-container ul.profile-conversations li:before {
+  div.content div.wrapper div.background #profile-container ul.profile-conversations li:before {
     background-image: url("../img/timeline-indicator@2x.png");
     background-size: 292px 19px;
   }
 }
-/* line 639, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li:hover div.user-controls {
+/* line 652, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li:hover div.user-controls {
   opacity: 1;
   -webkit-transition: opacity 0.55s ease-in-out, 1s;
   -moz-transition: opacity 0.55s ease-in-out, 1s;
   -o-transition: opacity 0.55s ease-in-out, 1s;
   transition: opacity 0.55s ease-in-out, 1s;
 }
-/* line 646, ../sass/screen.scss */
-div.content #profile-container ul.profile-conversations li:hover div.user-controls ul li a img {
+/* line 659, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container ul.profile-conversations li:hover div.user-controls ul li a img {
   opacity: 1;
 }
-/* line 655, ../sass/screen.scss */
-div.content #profile-container div.pagination-centered {
+/* line 668, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container div.pagination-centered {
   margin: 0;
   position: relative;
   top: 30px;
 }
-/* line 660, ../sass/screen.scss */
-div.content #profile-container div.pagination-centered ul {
+/* line 673, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container div.pagination-centered ul {
   border-top: none;
 }
-/* line 664, ../sass/screen.scss */
-div.content #profile-container div.pagination-centered ul li span, div.content #profile-container div.pagination-centered ul li a {
+/* line 677, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container div.pagination-centered ul li span, div.content div.wrapper div.background #profile-container div.pagination-centered ul li a {
   font-family: 'proxima-nova';
   font-weight: 500;
   font-size: 14px;
 }
-/* line 674, ../sass/screen.scss */
-div.content #profile-container div.pagination-page ul.profile-conversations {
+/* line 687, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container div.pagination-page ul.profile-conversations {
   width: 100%;
 }
-/* line 677, ../sass/screen.scss */
-div.content #profile-container div.pagination-page ul.profile-conversations li {
+/* line 690, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container div.pagination-page ul.profile-conversations li {
   float: left;
   width: 313px;
 }
-/* line 682, ../sass/screen.scss */
-div.content #profile-container div.pagination-page ul.profile-conversations li:nth-child(even):before {
+/* line 695, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container div.pagination-page ul.profile-conversations li:nth-child(even):before {
   background: none;
 }
-/* line 688, ../sass/screen.scss */
-div.content #profile-container div.tab-pane {
+/* line 701, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container div.tab-pane {
   opacity: 0;
   -webkit-transition: opacity 0.55s ease-in-out, 1s;
   -moz-transition: opacity 0.55s ease-in-out, 1s;
   -o-transition: opacity 0.55s ease-in-out, 1s;
   transition: opacity 0.55s ease-in-out, 1s;
 }
-/* line 693, ../sass/screen.scss */
-div.content #profile-container div.tab-pane.active {
+/* line 706, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container div.tab-pane.active {
   opacity: 1;
   -webkit-transition: opacity 0.55s ease-in-out, 1s;
   -moz-transition: opacity 0.55s ease-in-out, 1s;
   -o-transition: opacity 0.55s ease-in-out, 1s;
   transition: opacity 0.55s ease-in-out, 1s;
 }
-/* line 700, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li, div.content #profile-container #followers ul#feed li, div.content #profile-container #activity ul#feed li {
+/* line 713, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li, div.content div.wrapper div.background #profile-container #followers ul#feed li, div.content div.wrapper div.background #profile-container #activity ul#feed li {
   background-color: #f8f8f8;
   display: block;
   float: left;
@@ -791,12 +805,12 @@ div.content #profile-container #following ul#feed li, div.content #profile-conta
   margin-bottom: 5px;
   margin-right: 5px;
 }
-/* line 711, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li:nth-child(even), div.content #profile-container #followers ul#feed li:nth-child(even), div.content #profile-container #activity ul#feed li:nth-child(even) {
+/* line 724, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li:nth-child(even), div.content div.wrapper div.background #profile-container #followers ul#feed li:nth-child(even), div.content div.wrapper div.background #profile-container #activity ul#feed li:nth-child(even) {
   margin-right: 0;
 }
-/* line 713, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li img.img-circle, div.content #profile-container #followers ul#feed li img.img-circle, div.content #profile-container #activity ul#feed li img.img-circle {
+/* line 726, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li img.img-circle, div.content div.wrapper div.background #profile-container #followers ul#feed li img.img-circle, div.content div.wrapper div.background #profile-container #activity ul#feed li img.img-circle {
   border: 2px solid white;
   display: block;
   float: left;
@@ -804,30 +818,30 @@ div.content #profile-container #following ul#feed li img.img-circle, div.content
   margin-right: 7px;
   width: 32px;
 }
-/* line 722, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li div.feed-header, div.content #profile-container #followers ul#feed li div.feed-header, div.content #profile-container #activity ul#feed li div.feed-header {
+/* line 735, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li div.feed-header, div.content div.wrapper div.background #profile-container #followers ul#feed li div.feed-header, div.content div.wrapper div.background #profile-container #activity ul#feed li div.feed-header {
   margin-top: 3px;
   float: left;
 }
-/* line 727, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li div.feed-header h2 a, div.content #profile-container #followers ul#feed li div.feed-header h2 a, div.content #profile-container #activity ul#feed li div.feed-header h2 a {
+/* line 740, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li div.feed-header h2 a, div.content div.wrapper div.background #profile-container #followers ul#feed li div.feed-header h2 a, div.content div.wrapper div.background #profile-container #activity ul#feed li div.feed-header h2 a {
   color: rgba(31, 31, 31, 0.83);
   font-size: 18px;
   font-weight: 500;
 }
-/* line 734, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li div.feed-header h3, div.content #profile-container #followers ul#feed li div.feed-header h3, div.content #profile-container #activity ul#feed li div.feed-header h3 {
+/* line 747, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li div.feed-header h3, div.content div.wrapper div.background #profile-container #followers ul#feed li div.feed-header h3, div.content div.wrapper div.background #profile-container #activity ul#feed li div.feed-header h3 {
   color: rgba(102, 102, 102, 0.83);
   font-family: 'proxima-nova';
   font-weight: 500;
   font-size: 12px;
 }
-/* line 743, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li div.comments ul, div.content #profile-container #followers ul#feed li div.comments ul, div.content #profile-container #activity ul#feed li div.comments ul {
+/* line 756, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li div.comments ul, div.content div.wrapper div.background #profile-container #followers ul#feed li div.comments ul, div.content div.wrapper div.background #profile-container #activity ul#feed li div.comments ul {
   border: none;
 }
-/* line 746, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li div.comments ul li, div.content #profile-container #followers ul#feed li div.comments ul li, div.content #profile-container #activity ul#feed li div.comments ul li {
+/* line 759, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li div.comments ul li, div.content div.wrapper div.background #profile-container #followers ul#feed li div.comments ul li, div.content div.wrapper div.background #profile-container #activity ul#feed li div.comments ul li {
   background-color: black;
   float: left;
   padding: 0;
@@ -837,12 +851,12 @@ div.content #profile-container #following ul#feed li div.comments ul li, div.con
   width: 130px;
   z-index: 1;
 }
-/* line 756, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li div.comments ul li img, div.content #profile-container #followers ul#feed li div.comments ul li img, div.content #profile-container #activity ul#feed li div.comments ul li img {
+/* line 769, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li div.comments ul li img, div.content div.wrapper div.background #profile-container #followers ul#feed li div.comments ul li img, div.content div.wrapper div.background #profile-container #activity ul#feed li div.comments ul li img {
   padding: 0 5px;
 }
-/* line 760, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li div.comments ul li p.bubble, div.content #profile-container #followers ul#feed li div.comments ul li p.bubble, div.content #profile-container #activity ul#feed li div.comments ul li p.bubble {
+/* line 773, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li div.comments ul li p.bubble, div.content div.wrapper div.background #profile-container #followers ul#feed li div.comments ul li p.bubble, div.content div.wrapper div.background #profile-container #activity ul#feed li div.comments ul li p.bubble {
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
@@ -860,8 +874,8 @@ div.content #profile-container #following ul#feed li div.comments ul li p.bubble
   width: 110px;
   z-index: 20;
 }
-/* line 776, ../sass/screen.scss */
-div.content #profile-container #following ul#feed li div.comments ul li p.bubble span.corner, div.content #profile-container #followers ul#feed li div.comments ul li p.bubble span.corner, div.content #profile-container #activity ul#feed li div.comments ul li p.bubble span.corner {
+/* line 789, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul#feed li div.comments ul li p.bubble span.corner, div.content div.wrapper div.background #profile-container #followers ul#feed li div.comments ul li p.bubble span.corner, div.content div.wrapper div.background #profile-container #activity ul#feed li div.comments ul li p.bubble span.corner {
   position: absolute;
   display: block;
   width: 0;
@@ -875,25 +889,25 @@ div.content #profile-container #following ul#feed li div.comments ul li p.bubble
   bottom: -16px;
   left: 13px;
 }
-/* line 801, ../sass/screen.scss */
-div.content #profile-container #following ul li.empty, div.content #profile-container #followers ul li.empty, div.content #profile-container #conversations ul li.empty, div.content #profile-container #favorites ul li.empty, div.content #profile-container #videos ul li.empty {
+/* line 814, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul li.empty, div.content div.wrapper div.background #profile-container #followers ul li.empty, div.content div.wrapper div.background #profile-container #conversations ul li.empty, div.content div.wrapper div.background #profile-container #favorites ul li.empty, div.content div.wrapper div.background #profile-container #videos ul li.empty {
   background: none !important;
   float: none;
   width: 92%;
 }
-/* line 806, ../sass/screen.scss */
-div.content #profile-container #following ul li.empty div.alert, div.content #profile-container #followers ul li.empty div.alert, div.content #profile-container #conversations ul li.empty div.alert, div.content #profile-container #favorites ul li.empty div.alert, div.content #profile-container #videos ul li.empty div.alert {
+/* line 819, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul li.empty div.alert, div.content div.wrapper div.background #profile-container #followers ul li.empty div.alert, div.content div.wrapper div.background #profile-container #conversations ul li.empty div.alert, div.content div.wrapper div.background #profile-container #favorites ul li.empty div.alert, div.content div.wrapper div.background #profile-container #videos ul li.empty div.alert {
   margin-top: 10px;
   width: 560px;
 }
-/* line 811, ../sass/screen.scss */
-div.content #profile-container #following ul li.empty:before, div.content #profile-container #followers ul li.empty:before, div.content #profile-container #conversations ul li.empty:before, div.content #profile-container #favorites ul li.empty:before, div.content #profile-container #videos ul li.empty:before {
+/* line 824, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #following ul li.empty:before, div.content div.wrapper div.background #profile-container #followers ul li.empty:before, div.content div.wrapper div.background #profile-container #conversations ul li.empty:before, div.content div.wrapper div.background #profile-container #favorites ul li.empty:before, div.content div.wrapper div.background #profile-container #videos ul li.empty:before {
   background: none;
   height: 0;
   width: 0;
 }
-/* line 823, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container h2 {
+/* line 836, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container h2 {
   background: rgba(109, 109, 109, 0.11);
   border: none;
   color: #7f7f7f;
@@ -905,8 +919,8 @@ div.content #profile-container #activity #activity-container h2 {
   text-align: left;
   text-indent: 10px;
 }
-/* line 835, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container h2.featured {
+/* line 848, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container h2.featured {
   background: none;
   color: #333333;
   display: block;
@@ -915,74 +929,74 @@ div.content #profile-container #activity #activity-container h2.featured {
   text-align: left;
   width: 295px;
 }
-/* line 844, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container h2.featured a {
+/* line 857, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container h2.featured a {
   font-size: 12px;
   float: right;
   margin-left: 9px;
   vertical-align: baseline;
 }
-/* line 850, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container h2.featured a:after {
+/* line 863, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container h2.featured a:after {
   color: #484848;
   content: '\25B6';
   font-size: 8px;
   text-indent: 5px;
 }
-/* line 860, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-videos {
+/* line 873, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-videos {
   float: left;
   margin-right: 33px;
   width: 290px;
 }
-/* line 867, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-videos ul.profile-conversations li.empty {
+/* line 880, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-videos ul.profile-conversations li.empty {
   margin-top: -7px;
 }
-/* line 870, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-videos ul.profile-conversations li.empty:before {
+/* line 883, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-videos ul.profile-conversations li.empty:before {
   background: none;
 }
-/* line 878, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social {
+/* line 891, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social {
   float: left;
 }
-/* line 881, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social div.add-video-button {
+/* line 894, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social div.add-video-button {
   width: 100%;
 }
-/* line 884, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social div.add-video-button a {
+/* line 897, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social div.add-video-button a {
   display: block;
   float: right;
   height: 28px;
   width: 144px;
 }
-/* line 892, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations {
+/* line 905, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations {
   margin-bottom: 9px;
   margin-top: 14px;
 }
-/* line 896, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul {
+/* line 909, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul {
   border: none;
   padding-top: 19px;
   padding-left: 13px;
 }
-/* line 901, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li {
+/* line 914, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul li {
   color: #7f7f7f;
   font-family: 'proxima-nova';
   font-size: 13px;
   margin-bottom: 19px;
   position: relative;
 }
-/* line 908, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li a.modal-button {
+/* line 921, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul li a.modal-button {
   float: left;
 }
-/* line 911, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li a.modal-button img.thumbnail {
+/* line 924, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul li a.modal-button img.thumbnail {
   -webkit-border-radius: 1px 1px;
   -moz-border-radius: 1px / 1px;
   border-radius: 1px / 1px;
@@ -994,8 +1008,8 @@ div.content #profile-container #activity #activity-container #activity-social #a
   position: relative;
   z-index: 1;
 }
-/* line 922, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li a.modal-button img.img-circle {
+/* line 935, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul li a.modal-button img.img-circle {
   border: 2px solid white;
   display: block;
   height: 32px;
@@ -1006,46 +1020,47 @@ div.content #profile-container #activity #activity-container #activity-social #a
   width: 32px;
   z-index: 2;
 }
-/* line 935, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment {
+/* line 948, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment {
   float: left;
 }
-/* line 938, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment p, div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment span {
+/* line 951, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment p, div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment span {
   line-height: 21px;
   width: 180px;
 }
-/* line 944, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment a.inline-link {
+/* line 957, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment a.inline-link {
   display: inline;
   font-weight: 700;
   float: none;
 }
-/* line 950, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment span {
+/* line 963, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul li div.comment span {
   color: rgba(127, 127, 127, 0.4);
   display: block;
 }
-/* line 956, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-conversations ul li.empty {
+/* line 969, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-conversations ul li.empty {
   background: none;
 }
-/* line 963, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-follows {
+/* line 976, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-follows {
   margin-bottom: 228px;
 }
-/* line 966, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-follows ul {
+/* line 979, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-follows ul {
   border: none;
 }
-/* line 969, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-follows ul li {
+/* line 982, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-follows ul li {
   background: none;
   float: none;
+  height: 45px;
   width: 100%;
 }
-/* line 974, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-follows ul li h2 {
+/* line 988, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-follows ul li h2 {
   background: none;
   color: rgba(31, 31, 31, 0.83);
   font-size: 13px;
@@ -1057,27 +1072,122 @@ div.content #profile-container #activity #activity-container #activity-social #a
   text-indent: 0;
   width: auto;
 }
-/* line 986, ../sass/screen.scss */
-div.content #profile-container #activity #activity-container #activity-social #activity-follows ul li h2 a {
+/* line 1000, ../sass/screen.scss */
+div.content div.wrapper div.background #profile-container #activity #activity-container #activity-social #activity-follows ul li h2 a {
   font-weight: 700;
   font-size: 13px;
 }
+/* line 1014, ../sass/screen.scss */
+div.content div.wrapper #callout {
+  -webkit-border-radius: 2px 2px;
+  -moz-border-radius: 2px / 2px;
+  border-radius: 2px / 2px;
+  background: rgba(255, 255, 255, 0.5);
+  font-family: 'proxima-nova';
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 25px;
+  margin-top: 50px;
+  float: left;
+  padding: 17px;
+  width: 237px;
+}
+/* line 1026, ../sass/screen.scss */
+div.content div.wrapper #callout p, div.content div.wrapper #callout ol li, div.content div.wrapper #callout h1, div.content div.wrapper #callout h2 {
+  margin-bottom: 25px;
+}
+/* line 1030, ../sass/screen.scss */
+div.content div.wrapper #callout h1 {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+/* line 1036, ../sass/screen.scss */
+div.content div.wrapper #callout h2 {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+/* line 1042, ../sass/screen.scss */
+div.content div.wrapper #callout p {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+/* line 1048, ../sass/screen.scss */
+div.content div.wrapper #callout ol {
+  counter-reset: li;
+  /* Initiate a counter */
+  list-style: none;
+  /* Remove default numbering */
+  *list-style: decimal;
+  /* Keep using default numbering for IE6/7 */
+}
+/* line 1054, ../sass/screen.scss */
+div.content div.wrapper #callout ol li span:before {
+  -webkit-border-radius: 20px 20px;
+  -moz-border-radius: 20px / 20px;
+  border-radius: 20px / 20px;
+  background: #ffa64d;
+  border-radius: 20px 20px 20px 20px;
+  color: white;
+  content: counter(li,decimal);
+  counter-increment: li;
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 10px;
+  padding: 0 3px;
+  text-align: center;
+  width: 20px;
+}
+/* line 1071, ../sass/screen.scss */
+div.content div.wrapper #callout p.clearfix {
+  margin-bottom: 0;
+}
+/* line 1075, ../sass/screen.scss */
+div.content div.wrapper #callout a.add-video {
+  -webkit-border-radius: 2px 2px;
+  -moz-border-radius: 2px / 2px;
+  border-radius: 2px / 2px;
+  background: #9e0f84;
+  display: block;
+  color: white;
+  font-family: 'futura-pt-condensed';
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  padding: 8px 0;
+  text-align: center;
+  width: 100%;
+}
+/* line 1088, ../sass/screen.scss */
+div.content div.wrapper #callout a.add-video:hover {
+  text-decoration: none;
+}
+/* line 1090, ../sass/screen.scss */
+div.content div.wrapper #callout a.add-video em {
+  font-size: 10px;
+  padding-left: 2px;
+  position: relative;
+  top: -1px;
+  vertical-align: middle;
+}
 
-/* line 1000, ../sass/screen.scss */
+/* line 1102, ../sass/screen.scss */
 #video-embed-modal {
   background: #202020;
   height: 440px;
   margin-left: -320px;
   width: 640px;
 }
-/* line 1006, ../sass/screen.scss */
+/* line 1108, ../sass/screen.scss */
 #video-embed-modal div.modal-body {
   max-height: 480px;
   overflow: visible;
   padding: 0;
   position: relative;
 }
-/* line 1012, ../sass/screen.scss */
+/* line 1114, ../sass/screen.scss */
 #video-embed-modal div.modal-body button.close {
   background-color: black;
   color: white;
@@ -1090,7 +1200,7 @@ div.content #profile-container #activity #activity-container #activity-social #a
   z-index: 99999;
 }
 
-/* line 1026, ../sass/screen.scss */
+/* line 1128, ../sass/screen.scss */
 footer {
   background-color: rgba(31, 31, 31, 0.65);
   height: 27px;

@@ -25,11 +25,19 @@ def avatar_url(user, size=AVATAR_DEFAULT_SIZE):
         return avatar.avatar_url(size)
 
     if AVATAR_GRAVATAR_BACKUP and user:
-        params = {'s': str(size)}
-        if AVATAR_GRAVATAR_DEFAULT:
-            params['d'] = AVATAR_GRAVATAR_DEFAULT
-        path = "%s/?%s" % (hashlib.md5(user.email).hexdigest(),
-                           urllib.urlencode(params))
+        params = {
+            'size': '%sx%s' % (str(size), str(size)),
+            'set': 'set3',
+            'bgset': 'bg1',
+            'gravatar': 'hashed'
+        }
+
+        if user.email:
+            img_hash = hashlib.md5(user.email).hexdigest()
+        else:
+            img_hash = hashlib.md5(user.username).hexdigest()
+
+        path = "%s/?%s" % (img_hash, urllib.urlencode(params))
         return urlparse.urljoin(AVATAR_GRAVATAR_BASE_URL, path)
 
     return get_default_avatar_url()

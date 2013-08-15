@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -7,10 +7,10 @@ from django.template import RequestContext
 
 from actstream import action
 from actstream.models import Action, Follow, followers, following
-from actstream.actions import follow, unfollow
-from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
+from pure_pagination import Paginator, PageNotAnInteger
 
-from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
+from framebuzz.apps.api.models import MPTTComment, UserVideo
+from framebuzz.apps.profiles.forms import UserProfileForm
 
 
 def logged_in(request):
@@ -178,3 +178,31 @@ def videos(request, username):
         'show_embed_button': False
     },
     context_instance=RequestContext(request))
+
+@login_required
+def edit_profile(request):
+    submitted = request.method == 'POST'
+    success = False
+    profile = request.user.get_profile()
+    
+    if submitted:
+        form = UserProfileForm(instance=profile, data=request.POST, request=request)
+        success = form.is_valid()
+        
+        if success:
+            profile = form.save()
+            del request.session['user_timezone']
+
+            action.send(request.user, verb='updated profile', action_object=request.user)
+
+            form = UserProfileForm(instance=profile, request=request)
+    else:
+        form = UserProfileForm(instance=profile, request=request)
+
+    template = 'dashboard/profile/settings_edit.html'
+    
+    return render_to_response(template, RequestContext(request, {
+            'form': form,
+            "success": success,
+            "submitted": submitted
+    }))
