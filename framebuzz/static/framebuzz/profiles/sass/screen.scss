@@ -1013,6 +1013,7 @@ div.content {
 
             p, ol li, h1, h2 {
                 margin-bottom: 25px;
+                text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
             }
 
             h1 {
@@ -1062,7 +1063,7 @@ div.content {
 
             a.add-video {
                 @include border-radius(2px, 2px);
-                background: #9e0f84;
+                background-color: #9e0f84;
                 display: block;
                 color: white;
                 font-family: 'futura-pt-condensed';
@@ -1071,9 +1072,15 @@ div.content {
                 float: right;
                 padding: 8px 0;
                 text-align: center;
+                text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
                 width: 100%;
+                @include single-transition(background-color .1s ease-in-out);
 
-                &:hover { text-decoration: none; }
+                &:hover { 
+                    text-decoration: none;
+                    background-color: #7A0066;
+                    @include single-transition(background-color .1s ease-in-out);
+                }
 
                 em {
                     font-size: 10px;

@@ -175,6 +175,7 @@ div.marketing-content {
                         font-size: 16px;
                         line-height: 25px;
                         margin-bottom: 48px;
+                        text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
                     }
 
                     a.signup { float: right; }
@@ -196,7 +197,7 @@ div.marketing-content {
 
         a.signup {
             @include border-radius(2px, 2px);
-            background: #9e0f84;
+            background-color: #9e0f84;
             display: block;
             color: white;
             font-family: 'futura-pt-condensed';
@@ -204,9 +205,15 @@ div.marketing-content {
             font-weight: 700;
             padding: 8px 0;
             text-align: center;
+            text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
             width: 130px;
+            @include single-transition(background-color .1s ease-in-out);
 
-            &:hover { text-decoration: none; }
+            &:hover { 
+                text-decoration: none;
+                background-color: #7A0066;
+                @include single-transition(background-color .1s ease-in-out);
+            }
 
             em {
                 font-size: 10px;
@@ -421,6 +428,7 @@ div.marketing-content {
                 font-weight: 300;
                 font-size: 24px;
                 line-height: 24px;
+                text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
             }
         }
 
@@ -777,7 +785,7 @@ div.marketing-content {
 
             button.signup {
                 @include border-radius(2px, 2px);
-                background: #9e0f84;
+                background-color: #9e0f84;
                 border: 0;
                 display: block;
                 color: white;
@@ -787,9 +795,15 @@ div.marketing-content {
                 font-weight: 700;
                 padding: 8px 0;
                 text-align: center;
+                text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
                 min-width: 130px;
+                @include single-transition(background-color .1s ease-in-out);
 
-                &:hover { text-decoration: none; }
+                &:hover { 
+                    text-decoration: none;
+                    background-color: #7A0066;
+                    @include single-transition(background-color .1s ease-in-out);
+                }
 
                 em {
                     font-size: 10px;
