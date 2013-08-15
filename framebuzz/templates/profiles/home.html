@@ -7,7 +7,7 @@
 
 {% block page_content %}
     <div class="wrapper clearfix">
-        <div class="background">
+        <div class="background {% if request.user.is_authenticated and request.user.id == profile_user.id %}show-callout{% endif %}">
             <header>
                 <div class="user-info clearfix">
                     <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">
@@ -93,18 +93,21 @@
                 <div class="tab-pane" id="videos"></div>
             </div>
         </div>
-        <div id="callout">
-            <h1>Welcome to Your FrameBuzz Profile</h1>
-            <h2>Ready to get started?</h2>
-            <ol>
-                <li><span>Choose a YouTube video to FrameBuzz.</span></li>
-                <li><span>Click the "FrameBuzz a Video" button. You can post your new FrameBuzz here or embed it on your website.</span></li>
-                <li><span>Start the conversation, and invite your friends and viewers to jump in.</span></li>
-            </ol>
-            <p>Try it now!</p>
-            <p class="clearfix">
-                <a href="{% url 'dashboard-add-videos' %}" class="add-video" title="Add FrameBuzz Video">FRAMEBUZZ A VIDEO <em>&#9654;</em></a>
-            </p>
+            {% if request.user.is_authenticated and request.user.id == profile_user.id %}
+                <div id="callout">
+                    <h1>Welcome to Your FrameBuzz Profile</h1>
+                    <h2>Ready to get started?</h2>
+                    <ol>
+                        <li><span>Choose a YouTube video to FrameBuzz.</span></li>
+                        <li><span>Click the "FrameBuzz a Video" button. You can post your new FrameBuzz here or embed it on your website.</span></li>
+                        <li><span>Start the conversation, and invite your friends and viewers to jump in.</span></li>
+                    </ol>
+                    <p>Try it now!</p>
+                    <p class="clearfix">
+                        <a href="{% url 'dashboard-add-videos' %}" class="add-video" title="Add FrameBuzz Video">FRAMEBUZZ A VIDEO <em>&#9654;</em></a>
+                    </p>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
