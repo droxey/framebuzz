@@ -10,18 +10,17 @@
       <div class="user-controls">
         <ul class="clearfix">
           <li>
-            <a href="">
+            <a class="video-toggle-button featured {% if comment.object_pk in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' profile_user.username comment.content_object.video_id %}">
               <img src="{% static 'framebuzz/profiles/img/star.png' %}" height="14" width="15" />
             </a>
           </li>
           <li>
-            <a href="">
-              <img src="{% static 'framebuzz/profiles/img/edit.png' %}" height="14" width="15" />
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img src="{% static 'framebuzz/profiles/img/trash.png' %}" height="13" width="13" />
+          <a class="video-toggle-button library" href="{% url 'profiles-toggle-library' profile_user.username comment.content_object.video_id %}">
+              {% if comment.object_pk in video_library_ids %}
+                <img src="{% static 'framebuzz/profiles/img/trash.png' %}" height="13" width="13" />
+              {% else %}
+                <img src="{% static 'framebuzz/player/app/img/icon-plus.png' %}" height="13" width="13" />
+              {% endif %}
             </a>
           </li>
         </ul>

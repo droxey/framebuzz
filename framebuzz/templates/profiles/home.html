@@ -39,6 +39,7 @@
                                 </li>
                                 <li class="home active">
                                     <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>
+                                    <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link"></a>
                                 </li>
                                 <li class="followers">
                                     <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
@@ -128,6 +129,7 @@
        $(document).ready(function() {
             var currentPageUrl = null;
             var currentVideoUrl = null;
+            var currentTab = '#activity';
 
             // Load the activity tab content on page load.
             var activeTabUrl = $('ul.nav-tabs li.active a').attr('data-url');
@@ -211,15 +213,27 @@
                 });
             });
 
+            // Toggle 'featured' / 'library' status.
+            $('body').on('click', 'a.video-toggle-button', function(e) {
+                e.preventDefault();
+
+                var url = $(this).attr('href');
+                $.get(url, function(data) {
+                    $('ul.nav-tabs a[href="' + currentTab + '"]').trigger('click');
+                });
+
+                return false;
+            });
+
             // Tabs.
             $('body').on('click', 'a.tab-link', function(e) {
                 e.preventDefault();
               
                 currentPageUrl = $(this).attr('data-url');
-                var href = this.hash;
+                currentTab = this.hash;
                 var pane = $(this);
                 
-                $(href).load(currentPageUrl, function(result) {   
+                $(currentTab).load(currentPageUrl, function(result) {   
                     pane.tab('show');
                 });
             });

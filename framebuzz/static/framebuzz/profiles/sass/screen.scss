@@ -525,12 +525,11 @@ div.content {
 
                         div.user-controls {
                             background: rgba(0, 0, 0, .9);
-                            display: none;
                             height: 12px;
                             padding: 5px;
                             position: absolute;
-                            left: 224px;
                             top: 0;
+                            right: 25px;
                             opacity: 0;
                             z-index: 999;
                             @include single-transition(opacity 0.55s ease-in-out);
@@ -547,9 +546,11 @@ div.content {
                                     max-width: 15px;
 
                                     a {
-                                        img {
-                                            opacity: 0.9;
-                                        }
+                                        cursor: pointer;
+                                        opacity: 0.5;
+
+                                        &.active { opacity: 0.8; }
+                                        &:hover { opacity: 1; }
                                     }
 
                                     &:last-child {
@@ -866,6 +867,8 @@ div.content {
 
                             ul.profile-conversations {
                                 li {
+                                    div.user-controls { right: 5px; }
+                                    
                                     &.empty {
                                         margin-top: -7px;
 

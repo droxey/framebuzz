@@ -11,7 +11,7 @@ from actstream import action
 from actstream.models import Action, Follow, followers, following
 from pure_pagination import Paginator, PageNotAnInteger
 
-from framebuzz.apps.api.models import MPTTComment, UserVideo
+from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
@@ -67,6 +67,7 @@ def activity(request, username):
         'latest_following': latest_following,
         'can_delete': request.user.is_authenticated() and request.user.id == user.id,
         'video_library_ids': [uv.video.id for uv in user_videos],
+        'featured_video_ids': [uv.video.id for uv in user_videos if uv.is_featured]
     },
     context_instance=RequestContext(request))
 
@@ -118,15 +119,18 @@ def conversations(request, username):
         page = 1
 
     user = User.objects.get(username__iexact=username)
+    user_videos = UserVideo.objects.filter(user=user)
     conversations = MPTTComment.objects.filter(user=user, parent=None)
     p = Paginator(conversations, 12, request=request)
+
 
     return render_to_response('profiles/snippets/conversations.html',
     {
         'profile_user': user,
         'page_obj': p.page(page),
         'can_delete': request.user.is_authenticated() and request.user.id == user.id,
-        'video_library_ids': [uv.video.id for uv in UserVideo.objects.filter(user=user)],
+        'video_library_ids': [uv.video.id for uv in user_videos],
+        'featured_video_ids': [uv.video.id for uv in user_videos if uv.is_featured]
     },
     context_instance=RequestContext(request))
 
@@ -138,6 +142,7 @@ def favorites(request, username):
         page = 1
 
     user = User.objects.get(username__iexact=username)
+    user_videos = UserVideo.objects.filter(user=user)
     favorite_comment_ids = [favorite.action_object_object_id for favorite in Action.objects.favorite_comments_stream(user)]
     profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
     p = Paginator(profile_favorites, 12, request=request)
@@ -147,7 +152,8 @@ def favorites(request, username):
         'profile_user': user,
         'page_obj': p.page(page),
         'can_delete': request.user.is_authenticated() and request.user.id == user.id,
-        'video_library_ids': [uv.video.id for uv in UserVideo.objects.filter(user=user)],
+        'video_library_ids': [uv.video.id for uv in user_videos],
+        'featured_video_ids': [uv.video.id for uv in user_videos if uv.is_featured]
     },
     context_instance=RequestContext(request))
 
@@ -181,7 +187,8 @@ def videos(request, username):
         'can_delete': request.user.is_authenticated() and request.user.id == user.id,
         'is_adding_video': False,
         'show_embed_button': False,
-        'video_library_ids': [uv.video.id for uv in UserVideo.objects.filter(user=user)],
+        'video_library_ids': [uv.video.id for uv in user_videos],
+        'featured_video_ids': [uv.video.id for uv in user_videos if uv.is_featured]
     },
     context_instance=RequestContext(request))
 
@@ -235,3 +242,45 @@ def add_video_to_library(request, username):
         'submitted': submitted
     },
     context_instance=RequestContext(request))
+
+@login_required
+def toggle_video_featured(request, username, video_id):
+    user = User.objects.get(username=username)
+    video = Video.objects.get(video_id=video_id)
+
+    user_videos = UserVideo.objects.filter(user = user, video = video)
+    if len(user_videos) > 0:
+        user_video = user_videos[0]
+        if user_video.is_featured:
+            user_video.is_featured = False
+        else:
+            user_video.is_featured = True  
+        user_video.save()
+
+    if len(user_videos) == 0:
+        user_video = UserVideo()
+        user_video.video = video
+        user_video.user = user
+        user_video.is_featured = True
+        user_video.save()
+
+    return HttpResponse()
+
+
+@login_required
+def toggle_video_library(request, username, video_id):
+    user = User.objects.get(username=username)
+    video = Video.objects.get(video_id=video_id)
+
+    try:
+        user_videos = UserVideo.objects.filter(user = user, video = video)
+        if len(user_videos) > 0:
+            user_video = user_videos[0]
+            user_video.delete()
+    except UserVideo.DoesNotExist:
+        user_video = UserVideo()
+        user_video.video = video
+        user_video.user = user
+        user_video.save()
+
+    return HttpResponse()
