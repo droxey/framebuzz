@@ -203,6 +203,7 @@ class UserVideo(models.Model):
         verbose_name = 'User Video'
         verbose_name_plural = 'User Videos'
         ordering = ['-is_featured', '-added_on']
+        unique_together = ['video', 'user']
 
     def __unicode__(self):
         return "'%s' in %s's video library" % (self.video.title, self.user.username)

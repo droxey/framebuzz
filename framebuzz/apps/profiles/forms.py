@@ -58,7 +58,6 @@ class AddVideoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs ):
         self.request = kwargs.pop('request', None)
         super(AddVideoForm, self).__init__(*args, **kwargs)
-
         self.fields['is_featured'].label = 'Feature this video on your profile?'
 
     def save(self, commit=True):

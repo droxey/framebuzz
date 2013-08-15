@@ -219,7 +219,6 @@ def add_video_to_library(request, username):
         
         if success:
             form.save()
-            return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
     else:
         form = AddVideoForm(request=request)
 
