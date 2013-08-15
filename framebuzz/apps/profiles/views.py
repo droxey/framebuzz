@@ -10,7 +10,7 @@ from actstream.models import Action, Follow, followers, following
 from pure_pagination import Paginator, PageNotAnInteger
 
 from framebuzz.apps.api.models import MPTTComment, UserVideo
-from framebuzz.apps.profiles.forms import UserProfileForm
+from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
 def logged_in(request):
@@ -180,7 +180,7 @@ def videos(request, username):
     context_instance=RequestContext(request))
 
 @login_required
-def edit_profile(request):
+def edit_profile(request, username):
     submitted = request.method == 'POST'
     success = False
     profile = request.user.get_profile()
@@ -199,10 +199,34 @@ def edit_profile(request):
     else:
         form = UserProfileForm(instance=profile, request=request)
 
-    template = 'dashboard/profile/settings_edit.html'
+    return render_to_response('profiles/edit.html',
+    {
+        'form': form,
+        'success': success,
+        'submitted': submitted
+    },
+    context_instance=RequestContext(request))
+
+
+@login_required
+def add_video_to_library(request, username):
+    submitted = request.method == 'POST'
+    success = False
     
-    return render_to_response(template, RequestContext(request, {
-            'form': form,
-            "success": success,
-            "submitted": submitted
-    }))
+    if submitted:
+        form = AddVideoForm(data=request.POST, request=request)
+        success = form.is_valid()
+        
+        if success:
+            form.save()
+            return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
+    else:
+        form = AddVideoForm(request=request)
+
+    return render_to_response('profiles/snippets/add_video.html',
+    {
+        'form': form,
+        'success': success,
+        'submitted': submitted
+    },
+    context_instance=RequestContext(request))

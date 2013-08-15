@@ -197,7 +197,7 @@ class UserVideo(models.Model):
     video = models.ForeignKey(Video)
     user = models.ForeignKey(User)
     added_on = models.DateTimeField(auto_now=True)
-    is_featured = models.BooleanField(default=False)
+    is_featured = models.BooleanField('Featured?', default=False)
 
     class Meta:
         verbose_name = 'User Video'

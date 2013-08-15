@@ -1,0 +1,7 @@
+<h1>Add Video to Library</h1>
+<p>Paste the YouTube URL of the video below, and it will be added to your library!</p>
+<form action="{% url 'profiles-add-video' request.user %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="add-video">ADD TO LIBRARY <em>&#9654;</em></button>
+</form>

@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     url(r'^(?P<username>[\w.@+-]+)/conversations/$', 'framebuzz.apps.profiles.views.conversations', name='profiles-conversations'),
     url(r'^(?P<username>[\w.@+-]+)/videos/$', 'framebuzz.apps.profiles.views.videos', name='profiles-videos'),
     url(r'^(?P<username>[\w.@+-]+)/edit/$', 'framebuzz.apps.profiles.views.edit_profile', name='profiles-edit'),
+    url(r'^(?P<username>[\w.@+-]+)/add-video/$', 'framebuzz.apps.profiles.views.add_video_to_library', name='profiles-add-video'),
 )

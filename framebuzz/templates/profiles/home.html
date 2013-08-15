@@ -104,7 +104,7 @@
                     </ol>
                     <p>Try it now!</p>
                     <p class="clearfix">
-                        <a href="{% url 'dashboard-add-videos' %}" class="add-video" title="Add FrameBuzz Video">FRAMEBUZZ A VIDEO <em>&#9654;</em></a>
+                        <a data-target="#add-framebuzz-modal" role="button" class="modal-button add-video" data-toggle="modal" class="add-video" title="Add FrameBuzz Video" href="{% url 'profiles-add-video' profile_user %}">FRAMEBUZZ A VIDEO <em>&#9654;</em></a>
                     </p>
                 </div>
             {% endif %}
@@ -115,6 +115,16 @@
 {% block page_javascript %}
     {% compress js %}
     <script type="text/javascript">
+        function youtube_parser(url){
+            var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+            var match = url.match(regExp);
+            if (match&&match[7].length==11){
+                return match[7];
+            } else{
+                alert("This doesn't seem to be a YouTube URL! Please try again.");
+            }
+        }
+
        $(document).ready(function() {
             var currentPageUrl = null;
             var currentVideoUrl = null;
@@ -145,12 +155,40 @@
             });
 
             // Load video in modal dialog.
-            $('body').on('shown', '.modal', function(e) {
+            $('body').on('shown', '#video-embed-modal', function(e) {
                 $('iframe', '#video-embed-modal').attr('src', currentVideoUrl);
             });
 
             $('body').on('hide', function () {
                 $('iframe', '#video-embed-modal').attr('src', '');
+            });
+
+            // Load 'add video' in modal.
+            $('body').on('shown', '#add-framebuzz-modal', function(e) {
+                var video_id = null;
+
+                $('#id_video_id').blur(function() {
+                    var url = $(this).val();
+
+                    if (url.length > 0) {
+                        video_id = youtube_parser(url);
+                    }
+                });
+
+                $('form').submit(function(e) {
+                    e.preventDefault();
+
+                    var postUrl = $(this).attr('action');
+                    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+                    $.post(postUrl, {
+                        'video_id': video_id, 
+                        'is_featured': $('#id_is_featured').val(),
+                        'csrfmiddlewaretoken': csrfToken
+                    }, function() {
+                        window.location.reload();
+                    });
+                });
             });
 
             // Tabs.

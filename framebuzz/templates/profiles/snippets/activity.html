@@ -29,13 +29,12 @@
                     <a data-target="#video-embed-modal" role="button" class="modal-button clearfix" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
                       <img class="thumbnail" height="60" width="90" src="{{ comment.content_object.default_thumbnail }}" />
                       <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
-                    </a>
-                      
-                      <div class="comment">
-                          <p class="clearfix">{{ profile_user.username }} commented on <a data-target="#video-embed-modal" role="button" class="modal-button inline-link" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a>.</p>
-                          <span>{{ comment.submit_date|timesince }} ago</span>
-                      </div>
-                  </li>
+                    </a>              
+                    <div class="comment">
+                        <p class="clearfix">{{ profile_user.username }} commented on <a data-target="#video-embed-modal" role="button" class="modal-button inline-link" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a>.</p>
+                        <span>{{ comment.submit_date|timesince }} ago</span>
+                    </div>
+                </li>
               {% empty %}
                   <li class="empty">
                     <div class="alert alert-info">
