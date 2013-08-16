@@ -9,10 +9,8 @@
       <h1>{% trans "Sign in" %}</h1>
 
         {% if socialaccount.providers  %}
-          <p>{% blocktrans with site.name as site_name %}Please sign in with one
-          of your existing third party accounts. Or, <a href="{{ signup_url }}" class="signup-link">sign up</a>
-          for a {{site_name}} account and sign in below:{% endblocktrans %}</p>
-
+          <p>Sign in with a social network or your FrameBuzz username. You
+              can <a href="{{ signup_url }}" class="signup-link">sign up</a> for a new FrameBuzz account here.
           <div class="socialaccount_ballot">
             <ul class="clearfix socialaccount_providers">
 

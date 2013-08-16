@@ -1,5 +1,5 @@
 {% extends "marketing/base.html" %}
-{% load i18n staticfiles %}
+{% load i18n staticfiles addendum_tags %}
 
 {% block title %}{% trans "FrameBuzz - Sign up" %}{% endblock %}
 
@@ -7,7 +7,7 @@
 <div id="signup-page">
   <div class="wrapper">
     <h1>{% trans "Sign up" %}</h1>
-    <p class="description">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}" class="login-link">sign in</a>.{% endblocktrans %}</p>
+    <p class="description">{% blocktrans %}{% snippet 'signup:signup_header' %}Already a user? Or want to log in with your social network?{% endsnippet %} <a href="{{ login_url }}" class="login-link">Click here</a>.{% endblocktrans %}</p>
       <form class="signup form-vertical" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
         {{ form.as_p }}

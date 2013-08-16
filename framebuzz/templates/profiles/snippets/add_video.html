@@ -1,6 +1,6 @@
-<p>Adding videos to FrameBuzz is easy. Paste the YouTube URL of the video below, and it will be added to your library!</p>
+<p>FrameBuzzing a video is easy. Enter a YouTube URL below to add that video to your library. Then, add comments and share.</p>
 <form action="{% url 'profiles-add-video' request.user %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="add-video">ADD TO LIBRARY <em>&#9654;</em></button>
+    <button type="submit" class="add-video">FRAMEBUZZ IT <em>&#9654;</em></button>
 </form>
