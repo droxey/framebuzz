@@ -65,7 +65,11 @@
         {% block content %}{% endblock %}
     </div>
     <div class="footer">
+      <div class="wrapper clearfix">
         <span class="copyright">&copy; 2013 FrameBuzz. All rights reserved. Patent-pending.</span>
+        <a href="{% url 'terms' %}" title="Terms of Service">Terms of Service</a>
+        <a href="{% url 'privacy' %}" title="Privacy Policy">Privacy Policy</a>
+      </div>
     </div>
   </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>

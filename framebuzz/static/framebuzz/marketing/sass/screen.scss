@@ -968,6 +968,26 @@ div.footer {
     background-color: black;
     padding: 33px 0;
 
+    a {
+        color: white;
+        border-left: none;
+        font-family: 'futura-pt-condensed';
+        font-weight: 300;
+        font-size: 17px;
+        text-transform: uppercase;
+        float: right;
+        display: inline-block;
+        margin-left: 13px;
+        opacity: 0.8;
+        text-decoration: none;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    a.active, a:hover { background: none !important; }
+
     span {
         color: white;
         display: block;
@@ -975,5 +995,8 @@ div.footer {
         font-weight: 300;
         font-size: 17px;
         text-align: center;
+        text-transform: uppercase;
+        float: left;
+        display: inline-block;
     }
 }
