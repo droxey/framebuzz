@@ -2,7 +2,8 @@ import urllib2
 import lxml.html as lh
 import json
 
-from django.http import HttpResponse
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -15,26 +16,29 @@ def home(request):
     },
     context_instance=RequestContext(request))
 
+
 def about(request):
+    success = False
+
     if request.method == 'POST':
         form = ContactRequestForm(data=request.POST)
         if form.is_valid():
             form.save()
+            success = True
+            form = ContactRequestForm()
     else:
         form = ContactRequestForm()
 
     return render_to_response('marketing/about.html',
     {
         'form': form,
+        'success': success,
     },
     context_instance=RequestContext(request))
 
 
 def contact(request):
-    return render_to_response('marketing/contact.html',
-    {
-    },
-    context_instance=RequestContext(request))
+    return HttpResponseRedirect('%s#contact' % reverse('about'))
 
 
 def terms(request):

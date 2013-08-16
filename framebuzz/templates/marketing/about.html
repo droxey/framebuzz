@@ -20,7 +20,7 @@
                     <p>{% snippet 'about:what_we_believe' %}At FrameBuzz we believe that video viewers are more than just people – they’re influencers. They have valuable opinions that deserve to be shared, and through their individual comments, praise, questions, and curated conversations, those viewers have the ability to transform a video from content to something so much more.{% endsnippet %}</p>
                 </li>
                 <li>
-                    <h3>{% snippet 'about:why_different_title %}Why We’re Different{% endsnippet %}</h3>
+                    <h3>{% snippet 'about:why_different_title' %}Why We’re Different{% endsnippet %}</h3>
                     <p>{% snippet 'about:why_different' %}For us, it’s more than just leaving a comment that’s never to be seen again. It’s about crafting meaningful dialogue in the most intuitive way that has a chance to change a video’s perspective and shape its direction.  We’re helping to create a community of passionate words, dynamic videos and conversations that matter.{% endsnippet %}</p>
                 </li>
             </ul>
@@ -69,6 +69,11 @@
         <div id="contact">
             <div class="wrapper">
                 <h1>{% snippet 'about:contact_header' %}GET IN TOUCH{% endsnippet %}</h1>
+                {% if success %}
+                    <div class="alert alert-success">
+                        {% snippet 'about:contact_success' %}Thanks! We'll be in touch soon.{% endsnippet %}
+                    </div>
+                {% endif %}
                 <form id="contact-form" name="contact" action="" method="post" class="clearfix">
                     {% csrf_token %}
                     <div class="user">
