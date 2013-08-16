@@ -23,8 +23,12 @@ angular.module('framebuzz.directives', [])
                 timerRate: 500,
                 defaultVideoWidth: '640px',
                 defaultVideoHeight: '385px',
+                videoHeight: '385px',
+                videoWidth: '640px',
                 autosizeProgress: false,
                 success: function(media) {
+                    $('.mejs-video').css({ height: '385px', width: '640px' });
+
                     $rootScope.player = media;
                     safeApply($rootScope);
 
@@ -73,6 +77,7 @@ angular.module('framebuzz.directives', [])
                     }, false);
 
                     media.addEventListener('playing', function(e) {
+                        $('.mejs-video').css({ height: '385px', width: '640px' });
                         broadcaster.prepForBroadcast({ broadcastType: 'player_playing' });
                     }, false);
 
