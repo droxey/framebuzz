@@ -245,10 +245,6 @@ angular.module('framebuzz.controllers', []).
                     $rootScope.player.setCurrentTime(time);
                 };
 
-                $scope.toBeImplemented = function() {
-                    alert('Not implemented yet!');
-                };
-
                 $scope.shareViaEmail = function() {
                     var postData = {
                         'shareWithEmail': $scope.share.email,
@@ -284,6 +280,12 @@ angular.module('framebuzz.controllers', []).
                     window.onbeforeunload = function() {
                         $('#player-container').fadeIn('fast');
                     };
+                };
+
+
+                $scope.openExternalLink = function(url) {
+                    console.log(window.location);
+                    console.log(url);
                 };
 
                 $scope.resumeVideo = function() {

@@ -2,6 +2,7 @@ import urlparse
 
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.comments.models import CommentFlag
+from django.contrib.sites.models import Site
 from django.utils.hashcompat import md5_constructor
 from django.utils import dateformat
 from django.utils import timezone
@@ -49,7 +50,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'avatar_url', 'video_in_library', 'profile_url',)
 
     def get_profile_url(self, obj):
-        return obj.get_absolute_url()
+        return obj.get_profile().get_absolute_url()
 
     def get_avatar_url(self, obj):
         #avatar = get_primary_avatar(obj, size=88)
