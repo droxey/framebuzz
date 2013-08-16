@@ -4,28 +4,28 @@
 {% block content %}
     <div id="home">
             <div id="watch">
-                <h1>Watch whenever, <em>talk together</em>.</h1>
+                <h1>{% snippet 'home:tagline' safe=True %}Watch whenever, <em>talk together</em>.{% endsnippet %}</h1>
                 <div id="watch-container" class="wrapper clearfix">
                     <div id="video-container">
                         <iframe src="{% url 'video-embed' 'H2GMQShkJYM' %}" scrolling="no" frameBorder="0" height="440" width="640"></iframe>
                     </div>
                     <div id="callout" class="clearfix">
                         <h2></h2>
-                        <p>Give your viewers a way to have meaningful, relevant conversations around every moment of your video content. Register for a free account to add FrameBuzz to your site now.</p>
+                        <p>{% snippet 'home:video_intro' %}Give your viewers a way to have meaningful, relevant conversations around every moment of your video content. Register for a free account to add FrameBuzz to your site now.{% endsnippet %}</p>
                         <a class="signup" href="{% url 'account_signup' %}">SIGN UP <em>&#9654;</em></a>
                     </div>
                 </div>
             </div>
             <div id="community">
-                <h2 class="header">Building Community</h2>
+                <h2 class="header">{% snippet 'home:community_header' %}Building Community{% endsnippet %}</h2>
                 <div id="community-container" class="wrapper">
                         <span class="arrow"></span>
-                        <h3>Watch whenever, talk together.</h3>
-                        <p>FrameBuzz lets you have fun and interesting conversations around every moment of a video. FrameBuzz your favorite videos right now, and invite your friends to jump in the conversation.</p>
+                        <h3>{% snippet 'home:community_tagline' %}Watch whenever, talk together.{% endsnippet %}</h3>
+                        <p>{% snippet 'home:community_description' %}FrameBuzz lets you have fun and interesting conversations around every moment of a video. FrameBuzz your favorite videos right now, and invite your friends to jump in the conversation.{% endsnippet %}</p>
                         <a class="signup" href="{% url 'account_signup' %}">SIGN UP <em>&#9654;</em></a>
                 </div>
             </div>
-        <h2 class="header">Using FrameBuzz</h2>
+        <h2 class="header">{% snippet 'home:framebuzz_header' %}Using FrameBuzz{% endsnippet %}</h2>
         <div id="framebuzz">
             <div id="highlights">
                 <div id="framebuzz-container" class="wrapper">
@@ -33,44 +33,44 @@
                     <ul class="clearfix">
                         <li>
                             <img src="{% static 'framebuzz/marketing/img/heads.png' %}" height="150" width="150" />
-                            <h4>Interact</h4>
-                            <p>FrameBuzz acts like a chat room in an online video, creating an opportunity for 1:1 communication between the video creator and viewers. It’s as if you were watching together, moderating, asking and answering questions, and gaining insight about what’s most interesting in the video, but without having to watch at the same time.</p>
+                            <h4>{% snippet 'home:framebuzz_interact_header' %}Interact{% endsnippet %}</h4>
+                            <p>{% snippet 'home:framebuzz_interact' %}FrameBuzz acts like a chat room in an online video, creating an opportunity for 1:1 communication between the video creator and viewers. It’s as if you were watching together, moderating, asking and answering questions, and gaining insight about what’s most interesting in the video, but without having to watch at the same time.{% endsnippet %}</p>
                         </li>
                         <li>
                             <img src="{% static 'framebuzz/marketing/img/bulb.png' %}" height="150" width="150" class="discover" />
-                            <h4>Discover</h4>
-                            <p>View and comment in top FrameBuzzed videos from around the web. Follow interesting people who will lead you to new, relevant video content.  Never again go wading through the fire hose of social media to find relevant comments because now they’re right there in the video player, attached to that specific moment in the video. And our heat map at the bottom of each video helps you jump ahead to the juicy parts.</p>
+                            <h4>{% snippet 'home:framebuzz_discover_header' %}Discover{% endsnippet %}</h4>
+                            <p>{% snippet 'home:framebuzz_discover' %}View and comment in top FrameBuzzed videos from around the web. Follow interesting people who will lead you to new, relevant video content.  Never again go wading through the fire hose of social media to find relevant comments because now they’re right there in the video player, attached to that specific moment in the video. And our heat map at the bottom of each video helps you jump ahead to the juicy parts.{% endsnippet %}</p>
                         </li>
                         <li>
                             <img src="{% static 'framebuzz/marketing/img/educate.png' %}" height="150" width="150" />
-                            <h4>Influence</h4>
-                            <p>FrameBuzz gives people a way to not just comment but question, debate, protest, praise and ultimately shape video content for the better. For websites with video, FrameBuzz provides a view into what’s happening on the site with valuable feedback to help strengthen content and engage with viewers.</p>
+                            <h4>{% snippet 'home:framebuzz_influence_header' %}Influence{% endsnippet %}</h4>
+                            <p>{% snippet 'home:framebuzz_influence' %}FrameBuzz gives people a way to not just comment but question, debate, protest, praise and ultimately shape video content for the better. For websites with video, FrameBuzz provides a view into what’s happening on the site with valuable feedback to help strengthen content and engage with viewers.{% endsnippet %}</p>
                         </li>
                         <li>
                             <img src="{% static 'framebuzz/marketing/img/smile.png' %}" height="150" width="150" />
-                            <h4>Enjoy</h4>
-                            <p>FrameBuzz your favorite videos on your site or ours, and invite friends to join in the conversation with you. It’s the electronic version of a watch party with your smartest friends, with the added bonus that the director might join in the debate.</p>
+                            <h4>{% snippet 'home:framebuzz_enjoy_header' %}Enjoy{% endsnippet %}</h4>
+                            <p>{% snippet 'home:framebuzz_enjoy' %}FrameBuzz your favorite videos on your site or ours, and invite friends to join in the conversation with you. It’s the electronic version of a watch party with your smartest friends, with the added bonus that the director might join in the debate.{% endsnippet %}</p>
                         </li>
                     </ul>
                 </div>
             </div>
-            <h3>Have something to say about video? We want to hear your voice.</h3>
+            <h3>{% snippet 'home:framebuzz_callout' %}Have something to say about video? We want to hear your voice.{% endsnippet %}</h3>
         </div>
         <h2 class="header">Sign Up</h2>
         <div id="signup">
             <div id="signup-container" class="wrapper">
                 <span class="arrow"></span>
-                <h3>FrameBuzz is free and easy.</h3>
-                <h4>Sign up in seconds. Add a FrameBuzzed video to your site just like that.</h4>
+                <h3>{% snippet 'home:framebuzz_signup_header' %}FrameBuzz is free and easy.{% endsnippet %}</h3>
+                <h4>{% snippet 'home:framebuzz_signup_subheader' %}Sign up in seconds. Add a FrameBuzzed video to your site just like that.{% endsnippet %}</h4>
                 <ul class="clearfix">
                     <li class="clearfix first">
-                        <h5>Have a business?</h5>
-                        <p>FrameBuzz is a conversation platform for your existing video player that drives traffic, keeps viewers engaged on your screen, and encourages return traffic to continue conversations around your content. Through a FrameBuzz Publisher Account, you will be able to manage videos, moderate and promote comments, and view valuable analytics to help you strengthen your content and fine-tune your video strategy.</p>
+                        <h5>{% snippet 'home:framebuzz_signup_business_header' %}Have a business?{% endsnippet %}</h5>
+                        <p>{% snippet 'home:framebuzz_signup_business' %}FrameBuzz is a conversation platform for your existing video player that drives traffic, keeps viewers engaged on your screen, and encourages return traffic to continue conversations around your content. Through a FrameBuzz Publisher Account, you will be able to manage videos, moderate and promote comments, and view valuable analytics to help you strengthen your content and fine-tune your video strategy.{% endsnippet %}</p>
                         <span>Coming soon!</span>
                     </li>
                     <li class="clearfix">
-                        <h5>Love watching video?</h5>
-                        <p>Sign up for free in seconds and immediately view and comment in top FrameBuzzed videos from around the web. FrameBuzz your favorite videos and invite friends to join in the conversation with you. We believe you have interesting and important things to say about video content, so what are you waiting for? Start FrameBuzzing now.</p>
+                        <h5>{% snippet 'home:framebuzz_signup_user_header' %}Love watching video?{% endsnippet %}</h5>
+                        <p>{% snippet 'home:framebuzz_signup_user' %}Sign up for free in seconds and immediately view and comment in top FrameBuzzed videos from around the web. FrameBuzz your favorite videos and invite friends to join in the conversation with you. We believe you have interesting and important things to say about video content, so what are you waiting for? Start FrameBuzzing now.{% endsnippet %}</p>
                         <a class="signup" href="{% url 'account_signup' %}">SIGN UP <em>&#9654;</em></a>
                     </li>
                 </ul>
