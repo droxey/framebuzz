@@ -1021,6 +1021,84 @@ div.content {
                         }
                     }
                 }
+
+                #edit {
+                    font-family: 'proxima-nova';
+
+                    p {
+                        font-size: 14px;
+                        font-weight: 300;
+                        text-align: left;
+                        margin-bottom: 15px;
+                    }
+
+                    ul.errorlist {
+                        margin-bottom: 5px;
+
+                        li {
+                            color: #990000;
+                            text-align: center;
+                        }
+                    }
+
+                    form {
+                        p {
+                            text-align: left;
+
+                            label {
+                                font-weight: 500;
+                                font-size: 14px;
+                                display: block;
+                                margin-bottom: 10px;
+                                vertical-align: text-bottom;
+                            }
+
+                            input[type='checkbox'] {
+                                position: relative;
+                                top: -7px;
+                            }
+
+                            input[type='text'], textarea, select {
+                                width: 283px;
+                            }
+
+                            select {
+                                padding: 2px;
+                            }
+                        }
+
+                        button.add-video {
+                            @include border-radius(2px, 2px);
+                            background-color: #9e0f84;
+                            display: block;
+                            color: white;
+                            border: none;
+                            font-family: 'futura-pt-condensed';
+                            font-size: 20px;
+                            font-weight: 700;
+                            float: right;
+                            padding: 8px 0;
+                            text-align: center;
+                            text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
+                            width: 120px;
+                            @include single-transition(background-color .1s ease-in-out);
+
+                            &:hover { 
+                                text-decoration: none;
+                                background-color: #7A0066;
+                                @include single-transition(background-color .1s ease-in-out);
+                            }
+
+                            em {
+                                font-size: 10px;
+                                padding-left: 2px;
+                                position: relative;
+                                top: -1px;
+                                vertical-align: middle;
+                            }
+                        }
+                    }
+                }
             }
         }
 

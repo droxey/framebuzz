@@ -1,0 +1,13 @@
+{% extends "profiles/home.html" %}
+
+{% block page_javascript %}
+    {{ super }}
+{% endblock %}
+
+{% block edit_content %}
+    <form action="{% url 'profiles-edit' profile_user.username %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="add-video">EDIT PROFILE <em>&#9654;</em></button>
+    </form>
+{% endblock %}

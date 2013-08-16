@@ -92,6 +92,9 @@
                 <div class="tab-pane" id="conversations"></div>
                 <div class="tab-pane" id="favorites"></div>
                 <div class="tab-pane" id="videos"></div>
+                <div class="tab-pane{% if is_edit %} active{% endif %}" id="edit">
+                    {% block edit_content %}{% endblock %}
+                </div>
             </div>
         </div>
             {% if request.user.is_authenticated and request.user.id == profile_user.id %}

@@ -15,29 +15,32 @@ from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
+def get_profile_header(username):
+    user = User.objects.get(username__iexact=username)
+    favorite_comment_ids = [favorite.action_object_object_id for favorite in Action.objects.favorite_comments_stream(user)]
+    profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
+    profile_conversations = MPTTComment.objects.filter(user=user, parent=None)
+    profile_followers = followers(user)
+    profile_following = following(user)
+
+    return {
+        'profile_favorites': profile_favorites,
+        'profile_conversations': profile_conversations,
+        'profile_followers': profile_followers,
+        'profile_following': profile_following,
+        'profile_user': user
+    }
+
+
 def logged_in(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
 
 
 def home(request, username):
-    user = User.objects.get(username__iexact=username)
-
-    favorite_comment_ids = [favorite.action_object_object_id for favorite in Action.objects.favorite_comments_stream(user)]
-    profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
-    profile_conversations = MPTTComment.objects.filter(user=user, parent=None)
-    profile_followers = followers(user)
-    profile_following = following(user)
-    
-    return render_to_response('profiles/home.html',
-    {
-        'profile_favorites': profile_favorites,
-        'profile_conversations': profile_conversations,
-        'profile_followers': profile_followers,
-        'profile_following': profile_following,
-        'profile_user': user,
-    },
-    context_instance=RequestContext(request))
+    profile_header = get_profile_header(username)
+    profile_header['is_edit'] = False
+    return render_to_response('profiles/home.html', profile_header, context_instance=RequestContext(request))
 
 
 def activity(request, username):
@@ -194,9 +197,10 @@ def videos(request, username):
 
 @login_required
 def edit_profile(request, username):
+    user = User.objects.get(username=username)
     submitted = request.method == 'POST'
     success = False
-    profile = request.user.get_profile()
+    profile = user.get_profile()
     
     if submitted:
         form = UserProfileForm(instance=profile, data=request.POST, request=request)
@@ -207,18 +211,28 @@ def edit_profile(request, username):
             del request.session['user_timezone']
 
             action.send(request.user, verb='updated profile', action_object=request.user)
-
-            form = UserProfileForm(instance=profile, request=request)
+            return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
     else:
-        form = UserProfileForm(instance=profile, request=request)
+        website = profile.get_default_website()
+        initial_dict = {
+            'bio': profile.bio,
+            'birthday': profile.birthday,
+            'time_zone': profile.time_zone,
+            'profession': profile.profession,
+            'location': profile.location,
+        }
 
-    return render_to_response('profiles/edit.html',
-    {
-        'form': form,
-        'success': success,
-        'submitted': submitted
-    },
-    context_instance=RequestContext(request))
+        if website:
+            initial_dict['website'] = website.url
+
+        form = UserProfileForm(initial=initial_dict, request=request)
+
+    profile_header = get_profile_header(username)
+    profile_header['form'] = form
+    profile_header['success'] = success
+    profile_header['submitted'] = submitted
+    profile_header['is_edit'] = True
+    return render_to_response('profiles/edit.html', profile_header, context_instance=RequestContext(request))
 
 
 @login_required
@@ -242,6 +256,7 @@ def add_video_to_library(request, username):
         'submitted': submitted
     },
     context_instance=RequestContext(request))
+
 
 @login_required
 def toggle_video_featured(request, username, video_id):

@@ -21,6 +21,8 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs ):
         self.request = kwargs.pop('request')
         super(UserProfileForm, self).__init__(*args, **kwargs)
+        if self.request.user.get_profile().get_default_website():
+            self.fields['website'].initial = self.request.user.get_profile().get_default_website().url
  
     def save(self, commit=True):
         user = self.request.user
