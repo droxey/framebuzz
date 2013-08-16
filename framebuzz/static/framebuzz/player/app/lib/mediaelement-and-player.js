@@ -1281,7 +1281,7 @@ mejs.HtmlMediaElementShim = {
 'bgcolor="#000000" ' +
 'wmode="transparent" ' +
 'allowScriptAccess="always" ' +
-'allowFullScreen="true" ' +
+'allowFullScreen="false" ' +
 'type="application/x-shockwave-flash" pluginspage="//www.macromedia.com/go/getflashplayer" ' +
 'src="' + options.pluginPath + options.flashName + '" ' +
 'flashvars="' + initVars.join('&') + '" ' +
