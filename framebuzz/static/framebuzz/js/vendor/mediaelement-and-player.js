@@ -1268,7 +1268,7 @@ mejs.HtmlMediaElementShim = {
 '<param name="bgcolor" value="#000000" />' +
 '<param name="wmode" value="transparent" />' +
 '<param name="allowScriptAccess" value="always" />' +
-'<param name="allowFullScreen" value="true" />' +
+'<param name="allowFullScreen" value="false" />' +
 '</object>';
 
 				} else {
@@ -1281,7 +1281,7 @@ mejs.HtmlMediaElementShim = {
 'bgcolor="#000000" ' +
 'wmode="transparent" ' +
 'allowScriptAccess="always" ' +
-'allowFullScreen="true" ' +
+'allowFullScreen="false" ' +
 'type="application/x-shockwave-flash" pluginspage="//www.macromedia.com/go/getflashplayer" ' +
 'src="' + options.pluginPath + options.flashName + '" ' +
 'flashvars="' + initVars.join('&') + '" ' +
@@ -1531,7 +1531,7 @@ mejs.YouTubeApi = {
 	'<param name="movie" value="' + youtubeUrl + '" />' +
 	'<param name="wmode" value="transparent" />' +
 	'<param name="allowScriptAccess" value="always" />' +
-	'<param name="allowFullScreen" value="true" />' +
+	'<param name="allowFullScreen" value="false" />' +
 '</object>';
 		} else {
 		settings.container.innerHTML =
