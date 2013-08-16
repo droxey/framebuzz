@@ -16,11 +16,11 @@
                     <h2>{% trans "Current Avatar: " %}</h2>
                     {% avatar user %}
                 </div>
-                <ul class="span10">
+                <ul class="span4">
                     {{ primary_avatar_form.as_ul }}
                 </ul>
             </div>
-            <div class="form-actions">
+            <div class="actions">
                 {% csrf_token %}
                 <button type="submit" class="add-video">CHOOSE NEW DEFAULT <em>&#9654;</em></button>
             </div>
@@ -32,7 +32,7 @@
     <p>Upload a new avatar using the form below.</p>
     <form id="upload-avatar-form" enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}" class="clearfix">
         {{ upload_avatar_form.as_p }}
-        <div class="form-actions">
+        <div class="actions">
             {% csrf_token %}
             <button type="submit" class="add-video">UPLOAD NEW IMAGE <em>&#9654;</em></button>
         </div>

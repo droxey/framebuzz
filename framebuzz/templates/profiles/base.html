@@ -368,16 +368,17 @@
                 // Tabs.
                 $('body').on('click', 'a.tab-link', function(e) {
                     e.preventDefault();
-
-                    $('div.tab-pane').removeClass('active');
-                    $('ul.dropdown-menu li').removeClass('active');
                   
                     currentPageUrl = $(this).attr('data-url');
                     currentTab = this.hash;
                     var pane = $(this);
                     
-                    $(currentTab).load(currentPageUrl, function(result) {   
+                    $(currentTab).load(currentPageUrl, function(result) {  
+                    $('div.tab-pane').removeClass('active');
+                    $('ul.dropdown-menu li').removeClass('active'); 
                         pane.tab('show');
+
+                        $(currentTab).addClass('active');
                     });
                 });
             });
