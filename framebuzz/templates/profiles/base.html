@@ -53,9 +53,13 @@
                             <a href="{% url 'profiles-home' request.user.username %}" role="button" class="avatar">
                                 <img src="{% avatar_url request.user 58 %}" alt="" height="28" width="28" class="img-circle" />
                             </a>
-                            <a href="{% url 'dashboard-settings' %}" role="button">
-                                <i class="icon-cog"></i>
+                            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-cog"></i> <b class="caret"></b>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'profiles-edit' profile_user.username %}">Profile Settings</a></li>
+                                <li><a href="{% url 'account_logout' %}">Log out</a></li>
+                            </ul>
                         </li>
                     </ul>  
                 {% endif %} 

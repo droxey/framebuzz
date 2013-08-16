@@ -51,6 +51,11 @@ body {
  *      Navigation
  */
 
+.navbar .nav .dropdown-toggle .caret { 
+    border-bottom-color: rgba(255, 255, 255, 0.48);
+    border-top-color: rgba(255, 255, 255, 0.48);
+}
+
 div.navbar {
     @include background-image-retina('../img/noise', 'png', 57px, 57px);
     background-color: rgba(39, 39, 39, 1.0);
@@ -71,8 +76,8 @@ div.navbar {
         border-left: 0 none;
         box-shadow: none;
         margin: 0 auto;
-        overflow: hidden;
         width: 1200px;
+        overflow: visible;
 
         a.brand {
             border: none;
@@ -94,11 +99,11 @@ div.navbar {
                         background-image: none; 
                         font-size: 19.33px;
                         font-family: 'futura-pt-condensed';
-                    }
-                }
 
-                i {
-                    color: rgba(255, 255, 255, 0.48);
+                        i, b.carat {
+                            color: rgba(255, 255, 255, 0.48);
+                        }
+                    }
                 }
 
                 &.user {
@@ -106,8 +111,13 @@ div.navbar {
                     padding-left: 15px;
 
                     a {
+                        color: rgba(33, 33, 33, 1.0);
                         display: block;
                         float: left;
+
+                        &:hover {
+
+                        }
 
                         &.avatar {
                             height: 28px;
@@ -118,6 +128,23 @@ div.navbar {
                                 border: 2px solid white;
                                 height: 28px;
                                 width: 28px;
+                            }
+                        }
+                    }
+
+                    ul.dropdown-menu {
+                        li {
+                            a {
+                                display: inline-block;
+                                font-family: 'proxima-nova';
+                                font-size: 14px;
+                                font-weight: 300;
+                                width: 120px;
+
+                                &:hover {
+                                    text-decoration: none;
+                                    font-weight: 500;
+                                }
                             }
                         }
                     }
@@ -868,7 +895,7 @@ div.content {
                             ul.profile-conversations {
                                 li {
                                     div.user-controls { right: 5px; }
-                                    
+
                                     &.empty {
                                         margin-top: -7px;
 
@@ -1156,7 +1183,7 @@ div.content {
             margin-bottom: 5px;
 
             li {
-                color: red;
+                color: #990000;
                 text-align: center;
             }
         }
