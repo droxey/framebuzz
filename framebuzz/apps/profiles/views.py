@@ -40,7 +40,7 @@ def logged_in(request):
 def home(request, username):
     profile_header = get_profile_header(username)
     profile_header['is_edit'] = False
-    return render_to_response('profiles/home.html', profile_header, context_instance=RequestContext(request))
+    return render_to_response('profiles/base.html', profile_header, context_instance=RequestContext(request))
 
 
 def activity(request, username):
@@ -211,7 +211,7 @@ def edit_profile(request, username):
             del request.session['user_timezone']
 
             action.send(request.user, verb='updated profile', action_object=request.user)
-            return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
+            return HttpResponse()
     else:
         website = profile.get_default_website()
         initial_dict = {

@@ -1,11 +1,8 @@
-{% extends "avatar/base.html" %}
 {% load i18n avatar_tags %}
 
-{% block avatar_content %}
-    <div class="page-header">
-        <h1>Change Avatar</h1>
-    </div>
-    <p class="form-description">Add or change your current avatar using the form below.</p>
+<div class="avatar-section">
+    <h1>Change Avatar</h1>
+    <p>Add or change your current avatar using the form below.</p>
 
     {% if not avatars %}
         <div class="alert">
@@ -25,20 +22,19 @@
             </div>
             <div class="form-actions">
                 {% csrf_token %}
-                <input type="submit" class="btn btn-inverse" value="{% trans "Choose new Default" %}" />
+                <button type="submit" class="add-video">CHOOSE NEW DEFAULT <em>&#9654;</em></button>
             </div>
         </form>
     {% endif %}
-
-    <div class="page-header">
-        <h1>Upload Avatar</h1>
-    </div>
-    <p class="form-description">Upload a new avatar using the form below.</p>
+</div>
+<div class="avatar-section">
+    <h1>Upload Avatar</h1>
+    <p>Upload a new avatar using the form below.</p>
     <form id="upload-avatar-form" enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}" class="clearfix">
         {{ upload_avatar_form.as_p }}
         <div class="form-actions">
             {% csrf_token %}
-            <input type="submit" class="btn btn-primary" value="{% trans "Upload New Image" %}" />
+            <button type="submit" class="add-video">UPLOAD NEW IMAGE <em>&#9654;</em></button>
         </div>
     </form>
-{% endblock %}
+</div>

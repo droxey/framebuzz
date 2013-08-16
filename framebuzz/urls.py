@@ -21,13 +21,16 @@ urlpatterns = patterns('',
     # FrameBuzz User Profiles:
     url(r'^profile/', include('framebuzz.apps.profiles.urls')),
 
+    # Django-Avatar:
+    url(r'^avatar/', include('avatar.urls')),
+
     # Test Page for Beta:
     url(r'^test/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_test', name='video-test'),
 
-    # Dashboard
+    # Dashboard:
     url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
 
-    # Django-AllAuth
+    # Django-AllAuth:
     (r'^accounts/', include('allauth.urls')),
     
     # Django-Comments:

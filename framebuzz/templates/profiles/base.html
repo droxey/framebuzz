@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FrameBuzz - {% block title %}{% endblock %}</title>
+    <title>FrameBuzz - {{ profile_user.username }}'s Profile</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% compress css %}
@@ -57,8 +57,9 @@
                                 <i class="icon-cog"></i> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{% url 'profiles-edit' profile_user.username %}">Profile Settings</a></li>
-                                <li><a href="{% url 'account_logout' %}">Log out</a></li>
+                                <li><a href="#edit" class="tab-link" data-url="{% url 'profiles-edit' profile_user.username %}">Profile Settings</a></li>
+                                <li><a href="#avatar" class="tab-link" data-url="{% url 'avatar_change' %}">Change Avatar</a></li>
+                                <li><a href="{% url 'account_logout' %}">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>  
@@ -68,7 +69,113 @@
     </div>
     <div id="fb">
         <div class="content">
-            {% block page_content %}{% endblock %}
+            <div class="wrapper clearfix">
+                <div class="background {% if request.user.is_authenticated and request.user.id == profile_user.id %}show-callout{% endif %}">
+                    <header>
+                        <div class="user-info clearfix">
+                            <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">
+                                <img src="{% avatar_url profile_user 314 %}" alt="" height="157" width="157" class="img-circle" />
+                            </a>
+                            <div class="user-details">
+                                <h1>
+                                    <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">{{ profile_user.username }}</a>
+                                    {% if profile_user.get_profile %}
+                                        <span>{{ profile_user.get_profile.profile_details }}</span>
+                                    {% endif %}
+                                </h1>
+                                {% if profile_user.get_profile and profile_user.get_profile.bio %}
+                                    <p class="bio"><span class="corner"></span>&ldquo;{{ profile_user.get_profile.bio }}&rdquo;</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon-front">
+                                <nav>
+                                    <ul class="nav nav-tabs">
+                                        <li class="location">
+                                            {% if profile_user.get_profile and profile_user.get_profile.location %}
+                                                <span>
+                                                    <img src="{% static 'framebuzz/profiles/img/pin.png' %}" height="29" width="17" />
+                                                    {{ profile_user.get_profile.location }}
+                                                </span>
+                                            {% endif %}
+                                        </li>
+                                        <li class="home active">
+                                            <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>
+                                            <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link"></a>
+                                        </li>
+                                        <li class="followers">
+                                            <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
+                                                Followers
+                                                <em>{{ profile_followers|length }}</em>
+                                            </a>
+                                        </li>
+                                        <li class="following">
+                                            <a data-url="{% url 'profiles-following' profile_user.username %}" href="#following" class="tab-link">
+                                                Following
+                                                <em>{{ profile_following|length }}</em>
+                                            </a>
+                                        </li>
+                                        <li class="conversations">
+                                            <a data-url="{% url 'profiles-conversations' profile_user.username %}" href="#conversations" class="tab-link">
+                                                Conversations
+                                                <em>{{ profile_conversations|length }}</em>
+                                            </a>
+                                        </li>
+                                        <li class="favorites">
+                                            <a data-url="{% url 'profiles-favorites' profile_user.username %}" href="#favorites" class="tab-link">
+                                                Favorites
+                                                <em>{{ profile_favorites|length }}</em>
+                                            </a>
+                                        </li>
+                                        <li class="website">
+                                            {% if profile_user.get_profile and profile_user.get_profile.get_default_website %}
+                                              <span class="website">
+                                                    <a href="{{ profile_user.get_profile.get_default_website.url }}" target="_blank" rel="nofollow">
+                                                        {{ profile_user.get_profile.get_default_website.url }}
+                                                    </a>
+                                              </span>
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="ribbon-edge-topleft"></div>
+                            <div class="ribbon-edge-topright"></div>
+                            <div class="ribbon-edge-bottomleft"></div>
+                            <div class="ribbon-edge-bottomright"></div>
+                            <div class="ribbon-back-left"></div>
+                            <div class="ribbon-back-right"></div>
+                        </div>
+                    </header>
+                    <div id="profile-container" class="tab-content">
+                        <div class="tab-pane active" id="activity"></div>
+                        <div class="tab-pane" id="followers"></div>
+                        <div class="tab-pane" id="following"></div>
+                        <div class="tab-pane" id="conversations"></div>
+                        <div class="tab-pane" id="favorites"></div>
+                        <div class="tab-pane" id="videos"></div>
+                        <div class="tab-pane" id="edit"></div>
+                        <div class="tab-pane" id="avatar"></div>
+                    </div>
+                </div>
+                    {% if request.user.is_authenticated and request.user.id == profile_user.id %}
+                        <div id="callout">
+                            <h1>Your FrameBuzz Profile</h1>
+                            <h2>Ready to get started?</h2>
+                            <ol>
+                                <li><span>Choose a YouTube video to FrameBuzz.</span></li>
+                                <li><span>Click the "FrameBuzz a Video" button. You can post your new FrameBuzz here or embed it on your website.</span></li>
+                                <li><span>Start the conversation, and invite your friends and viewers to jump in.</span></li>
+                            </ol>
+                            <p>Try it now!</p>
+                            <p class="clearfix">
+                                <a data-target="#add-framebuzz-modal" role="button" class="modal-button add-video" data-toggle="modal" class="add-video" title="Add FrameBuzz Video" href="{% url 'profiles-add-video' profile_user %}">FRAMEBUZZ A VIDEO <em>&#9654;</em></a>
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
         <footer></footer>
     </div>
@@ -91,11 +198,187 @@
         <script src="{% static 'framebuzz/dashboard/bootstrap/js/jquery-ui-1.10.2.custom.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
         <script type="text/javascript">
-            $(document).ready(function() {
+            function youtube_parser(url){
+                var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+                var match = url.match(regExp);
+                if (match&&match[7].length==11){
+                    return match[7];
+                } else{
+                    alert("This doesn't seem to be a YouTube URL! Please try again.");
+                }
+            }
+
+            $(document).ready(function() {                       
+                var currentPageUrl = null;
+                var currentVideoUrl = null;
+                var currentTab = '#activity';
+
                 $('#fb').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150, positionY: 'bottom' });
 
-                $(window).resize(function() {
-                    $('#fb img').css({'left': '0px !important'});
+                // Load the activity tab content on page load.
+                var activeTabUrl = $('ul.nav-tabs li.active a').attr('data-url');
+                $('#activity').load(activeTabUrl, function(result) {
+                    $('ul.nav-tabs').tab('show');
+                });
+
+                // Pagination.
+                $('#profile-container div.tab-pane').on('click', 'a.page-link', function() {
+                    var pageContainer = $('div.pagination-page');
+                    var pageUrl = $(this).attr('href');
+
+                    $.get(currentPageUrl + pageUrl, function(pageHtml) {
+                      pageContainer.fadeOut('slow', function() {
+                        pageContainer.html(pageHtml);
+                        pageContainer.fadeIn('slow');
+                      });
+                    });
+
+                    return false;
+                });
+
+                $('body').on('click', 'a.modal-button', function() {
+                    currentVideoUrl = $(this).attr('data-url');
+                });
+
+                // Load video in modal dialog.
+                $('body').on('shown', '#video-embed-modal', function(e) {
+                    $('iframe', '#video-embed-modal').attr('src', currentVideoUrl);
+                });
+
+                $('body').on('hide', '#video-embed-modal', function () {
+                    $('iframe', '#video-embed-modal').attr('src', '');
+                });
+
+                $('body').on('hide', '#add-framebuzz-modal', function () {
+                    $(this).removeData('modal');
+                });
+
+                // Load 'add video' in modal.
+                $('body').on('shown', '#add-framebuzz-modal', function(e) {
+                    var video_id = null;
+
+                    $('#add-framebuzz-modal').on('blur', '#id_video_id', function() {
+                        var url = $(this).val();
+
+                        if (url.length > 0) {
+                            video_id = youtube_parser(url);
+                        }
+                    });
+
+                    $('#add-framebuzz-modal').on('submit', 'form', function(e) {
+                        e.preventDefault();
+
+                        var postUrl = $(this).attr('action');
+                        var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+
+                        $.post(postUrl, {
+                            'video_id': video_id, 
+                            'is_featured': $('#id_is_featured').val(),
+                            'csrfmiddlewaretoken': csrfToken
+                        }, function(data, textStatus, jqXHR) {
+                            if (data.length == 0) {
+                                $('#videos').load("{% url 'profiles-videos' profile_user %}", function(result) {
+                                    $('ul.nav-tabs').tab('show');
+                                    $('div.tab-pane').removeClass('active');
+                                    $('#videos').addClass('active');
+
+                                    $('#add-framebuzz-modal').modal('hide');
+                                });
+                            }
+                            else {
+                                var container = $('#add-framebuzz-modal div.modal-body');
+                                container.fadeOut('fast', function() {
+                                    $('#add-framebuzz-modal div.modal-body').html(data);
+                                    container.fadeIn('fast');
+                                });
+                            }
+                        });
+                    });
+                });
+
+                // Toggle 'featured' / 'library' status.
+                $('body').on('click', 'a.video-toggle-button', function(e) {
+                    e.preventDefault();
+
+                    var url = $(this).attr('href');
+                    $.get(url, function(data) {
+                        $('ul.nav-tabs a[href="' + currentTab + '"]').trigger('click');
+                    });
+
+                    return false;
+                });
+
+                $('#avatar').on('submit', 'form', function(e) {
+                    e.preventDefault();
+
+                    var postUrl = $(this).attr('action');
+                    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+                    var formData = new FormData($('form')[0]);
+
+                    $.ajax({
+                        url: postUrl,
+                        type: 'POST',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            if (data.length == 0) {
+                                window.location.reload();
+                            }
+                            else {
+                                var container = $('#avatar');
+                                container.fadeOut('fast', function() {
+                                    container.html(data);
+                                    container.fadeIn('fast');
+                                });
+                            }
+                        },
+                        error: function(data) {
+                        }
+                    });
+
+                    return false;
+                });
+
+                $('#edit').on('submit', 'form', function(e) {
+                    e.preventDefault();
+
+                    var postUrl = $(this).attr('action');
+                    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+                    var formData = $(this).serialize();
+
+                    $.post(postUrl, formData, function(data, textStatus, jqXHR) {
+                        if (data.length == 0) {
+                            window.location.reload();
+                        }
+                        else {
+                            var container = $('#edit');
+                            container.fadeOut('fast', function() {
+                                container.html(data);
+                                container.fadeIn('fast');
+                            });
+                        }
+                    });
+
+                    return false;
+                });
+
+                // Tabs.
+                $('body').on('click', 'a.tab-link', function(e) {
+                    e.preventDefault();
+
+                    $('div.tab-pane').removeClass('active');
+                    $('ul.dropdown-menu li').removeClass('active');
+                  
+                    currentPageUrl = $(this).attr('data-url');
+                    currentTab = this.hash;
+                    var pane = $(this);
+                    
+                    $(currentTab).load(currentPageUrl, function(result) {   
+                        pane.tab('show');
+                    });
                 });
             });
         </script>

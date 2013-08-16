@@ -1022,7 +1022,7 @@ div.content {
                     }
                 }
 
-                #edit {
+                #edit, #avatar {
                     font-family: 'proxima-nova';
 
                     p {
@@ -1042,6 +1042,8 @@ div.content {
                     }
 
                     form {
+                        margin-top: 15px;
+
                         p {
                             text-align: left;
 
@@ -1067,7 +1069,7 @@ div.content {
                             }
                         }
 
-                        button.add-video {
+                        button {
                             @include border-radius(2px, 2px);
                             background-color: #9e0f84;
                             display: block;
@@ -1096,6 +1098,39 @@ div.content {
                                 top: -1px;
                                 vertical-align: middle;
                             }
+                        }
+                    }
+                }
+
+                #avatar {
+                    div.avatar-section {
+                        margin-bottom: 50px;
+                        
+                        p { text-indent: 10px; }
+
+                        div.alert {
+                            height: 30px;
+                            width: 92%;
+
+                            p { text-indent: 0; }
+
+                            strong {
+                                font-weight: 700;
+                                padding-bottom: 15px;
+                            }
+                        }
+
+                        #id_avatar { margin-left: 10px; }
+
+                        h1 { margin-bottom: 15px; }
+
+                        button { 
+                            margin-top: 15px;
+                            width: 200px; 
+                        }
+
+                        div.form-actions {
+                            border-top: 1px solid #F7F7F7;
                         }
                     }
                 }

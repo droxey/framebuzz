@@ -15,6 +15,8 @@ from avatar.settings import AVATAR_MAX_AVATARS_PER_USER, AVATAR_DEFAULT_SIZE
 from avatar.signals import avatar_updated
 from avatar.util import get_primary_avatar, get_default_avatar_url
 
+from framebuzz.apps.profiles.views import get_profile_header
+
 
 def _get_next(request):
     """
@@ -86,7 +88,7 @@ def add(request, extra_context=None, next_override=None,
             avatar.save()
             messages.success(request, _("Successfully uploaded a new avatar."))
             avatar_updated.send(sender=Avatar, user=request.user, avatar=avatar)
-            return HttpResponseRedirect(next_override or _get_next(request))
+            return HttpResponse()
     return render_to_response(
             'avatar/add.html',
             extra_context,
@@ -124,7 +126,8 @@ def change(request, extra_context=None, next_override=None,
             messages.success(request, _("Successfully updated your avatar."))
         if updated:
             avatar_updated.send(sender=Avatar, user=request.user, avatar=avatar)
-        return HttpResponseRedirect(next_override or _get_next(request))
+        return HttpResponse()
+
     return render_to_response(
         'avatar/change.html',
         extra_context,
