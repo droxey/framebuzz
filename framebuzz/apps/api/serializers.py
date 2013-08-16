@@ -41,11 +41,15 @@ class VideoSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField('get_avatar_url')
+    profile_url = serializers.SerializerMethodField('get_profile_url')
     video_in_library = serializers.SerializerMethodField('get_video_in_library')
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'avatar_url', 'video_in_library',)
+        fields = ('id', 'username', 'avatar_url', 'video_in_library', 'profile_url',)
+
+    def get_profile_url(self, obj):
+        return obj.get_absolute_url()
 
     def get_avatar_url(self, obj):
         #avatar = get_primary_avatar(obj, size=88)
