@@ -1,5 +1,4 @@
-<h1>Add Video to Library</h1>
-<p>Paste the YouTube URL of the video below, and it will be added to your library!</p>
+<p>Adding videos to FrameBuzz is easy. Paste the YouTube URL of the video below, and it will be added to your library!</p>
 <form action="{% url 'profiles-add-video' request.user %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
