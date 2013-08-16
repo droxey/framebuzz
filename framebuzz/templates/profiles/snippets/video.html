@@ -2,7 +2,7 @@
 
 <li>
     {% if video_library_ids %}
-      {% if comment.object_pk in video_library_ids %}
+      {% if comment.object_pk in featured_video_ids %}
         <img src="{% static 'framebuzz/profiles/img/featured-banner.png' %}" alt="Featured" height="50" width="96" class="featured" />
       {% endif %}
     {% endif %}
