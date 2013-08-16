@@ -26,6 +26,7 @@ angular.module('framebuzz.directives', [])
                 videoHeight: '385px',
                 videoWidth: '640px',
                 autosizeProgress: false,
+                mode: 'shim',
                 success: function(media) {
                     $('.mejs-video').css({ height: '385px', width: '640px' });
 
