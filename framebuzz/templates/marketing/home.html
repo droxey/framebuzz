@@ -3,7 +3,6 @@
 
 {% block content %}
     <div id="home">
-        <div id="fb" style="height: 1365;">
             <div id="watch">
                 <h1>Watch whenever, <em>talk together</em>.</h1>
                 <div id="watch-container" class="wrapper clearfix">
@@ -20,13 +19,12 @@
             <div id="community">
                 <h2 class="header">Building Community</h2>
                 <div id="community-container" class="wrapper">
-                    <span class="arrow"></span>
-                    <h3>Watch whenever, talk together.</h3>
-                    <p>FrameBuzz gives people a way to converse moment-by-moment within an online video without having to watch it at the same time. We provide the glue between video creators, vloggers, experts and viewers whose interactions will shape the way video content is produced, shared and discovered.</p>
-                    <a class="signup" href="{% url 'account_signup' %}">SIGN UP <em>&#9654;</em></a>
+                        <span class="arrow"></span>
+                        <h3>Watch whenever, talk together.</h3>
+                        <p>FrameBuzz gives people a way to converse moment-by-moment within an online video without having to watch it at the same time. We provide the glue between video creators, vloggers, experts and viewers whose interactions will shape the way video content is produced, shared and discovered.</p>
+                        <a class="signup" href="{% url 'account_signup' %}">SIGN UP <em>&#9654;</em></a>
                 </div>
             </div>
-        </div>
         <h2 class="header">Using FrameBuzz</h2>
         <div id="framebuzz">
             <div id="highlights">
@@ -85,12 +83,9 @@
     <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#fb').anystretch("{% static 'framebuzz/marketing/img/home@2x.jpg' %}", {speed: 150 });
+            $('#watch').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150 });
+            $('#community').anystretch("{% static 'framebuzz/marketing/img/community@2x.jpg' %}", {speed: 150 });
             $('#framebuzz').anystretch("{% static 'framebuzz/marketing/img/section-bkg.jpg' %}", {speed: 150});
-
-            $(window).resize(function() {
-                $('#fb img').css({'left': '0px !important'});
-            });
         });
     </script>
 {% endblock %}
