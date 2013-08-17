@@ -309,7 +309,33 @@
                     return false;
                 });
 
-                $('#avatar').on('submit', 'form', function(e) {
+                $('#avatar').on('submit', '#change-avatar-form', function(e) {
+                    e.preventDefault();
+
+                    var postUrl = $(this).attr('action');
+                    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+                    var formData = $(this).serialize();
+
+                    $.ajax({
+                        url: postUrl,
+                        type: 'POST',
+                        data: formData,
+                        success: function(data) {
+                            if (data.length == 0) {
+                                window.location.reload();
+                            }
+                            else {
+                                var container = $('#avatar');
+                                container.fadeOut('fast', function() {
+                                    container.html(data);
+                                    container.fadeIn('fast');
+                                });
+                            }
+                        }
+                    });
+                });
+
+                $('#avatar').on('submit', '#upload-avatar-form', function(e) {
                     e.preventDefault();
 
                     var postUrl = $(this).attr('action');
@@ -372,10 +398,15 @@
                     currentPageUrl = $(this).attr('data-url');
                     currentTab = this.hash;
                     var pane = $(this);
+
+                    if (currentTab == '#avatar') {
+                        $('div.tab-pane').removeClass('active');
+                        $('ul.dropdown-menu li').removeClass('active'); 
+                    }
                     
                     $(currentTab).load(currentPageUrl, function(result) {  
-                    $('div.tab-pane').removeClass('active');
-                    $('ul.dropdown-menu li').removeClass('active'); 
+                        $('div.tab-pane').removeClass('active');
+                        $('ul.dropdown-menu li').removeClass('active'); 
                         pane.tab('show');
 
                         $(currentTab).addClass('active');
