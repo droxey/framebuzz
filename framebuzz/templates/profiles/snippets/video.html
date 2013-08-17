@@ -30,7 +30,11 @@
         </ul>
       </div>
     {% endif %}
-    <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
+    {% if comment.comment %}
+      <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
+    {% else %}
+      <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">
+    {% endif %}
       <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
       {% if comment.comment %}
           <div class="comment">
