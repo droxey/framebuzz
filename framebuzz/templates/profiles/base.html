@@ -197,6 +197,7 @@
         <script src="{% static 'framebuzz/dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'framebuzz/dashboard/bootstrap/js/jquery-ui-1.10.2.custom.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/js/jquery.fileupload.js' %}"></script>
         <script type="text/javascript">
             function youtube_parser(url){
                 var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
@@ -309,61 +310,36 @@
                     return false;
                 });
 
-                $('#avatar').on('submit', '#change-avatar-form', function(e) {
+                $('#avatar').on('submit', 'form', function(e) {
                     e.preventDefault();
 
                     var postUrl = $(this).attr('action');
                     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
-                    var formData = $(this).serialize();
 
-                    $.ajax({
-                        url: postUrl,
-                        type: 'POST',
-                        data: formData,
-                        success: function(data) {
-                            if (data.length == 0) {
-                                window.location.reload();
-                            }
-                            else {
-                                var container = $('#avatar');
-                                container.fadeOut('fast', function() {
-                                    container.html(data);
-                                    container.fadeIn('fast');
-                                });
-                            }
-                        }
-                    });
-                });
+                    if ($(this).attr('id') == '#upload-avatar-form') {
 
-                $('#avatar').on('submit', '#upload-avatar-form', function(e) {
-                    e.preventDefault();
+                    }
+                    else {
+                        var formData = $(this).serialize();
 
-                    var postUrl = $(this).attr('action');
-                    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
-                    var formData = new FormData($('form')[0]);
-
-                    $.ajax({
-                        url: postUrl,
-                        type: 'POST',
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function(data) {
-                            if (data.length == 0) {
-                                window.location.reload();
+                        $.ajax({
+                            url: postUrl,
+                            type: 'POST',
+                            data: formData,
+                            success: function(data) {
+                                if (data.length == 0) {
+                                    window.location.reload();
+                                }
+                                else {
+                                    var container = $('#avatar');
+                                    container.fadeOut('fast', function() {
+                                        container.html(data);
+                                        container.fadeIn('fast');
+                                    });
+                                }
                             }
-                            else {
-                                var container = $('#avatar');
-                                container.fadeOut('fast', function() {
-                                    container.html(data);
-                                    container.fadeIn('fast');
-                                });
-                            }
-                        },
-                        error: function(data) {
-                        }
-                    });
+                        });
+                    }
 
                     return false;
                 });
@@ -410,6 +386,14 @@
                         pane.tab('show');
 
                         $(currentTab).addClass('active');
+
+                        if (currentTab == '#avatar') {
+                            $('#id_avatar').fileupload({
+                                done: function (e, data) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
                     });
                 });
             });
