@@ -45,7 +45,7 @@
                 {% if request.user.is_authenticated %}
                     <ul class="nav pull-right">               
                         <li class="settings">
-                            <a href="#videos" data-url="{% url 'profiles-videos' profile_user.username %}" class="tab-link dropdown-toggle hidden-phone">
+                            <a href="#videos" data-url="{% url 'profiles-videos' request.user.username %}" class="tab-link dropdown-toggle hidden-phone">
                                 Library
                             </a>
                         </li>
@@ -57,7 +57,7 @@
                                 <i class="icon-cog"></i> <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#edit" class="tab-link" data-url="{% url 'profiles-edit' profile_user.username %}">Profile Settings</a></li>
+                                <li><a href="#edit" class="tab-link" data-url="{% url 'profiles-edit' request.user.username %}">Profile Settings</a></li>
                                 <li><a href="#avatar" class="tab-link" data-url="{% url 'avatar_change' %}">Change Avatar</a></li>
                                 <li><a href="{% url 'account_logout' %}">Log Out</a></li>
                             </ul>
