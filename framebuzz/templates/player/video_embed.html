@@ -58,7 +58,7 @@
           logout_url: "{% url 'video-logout' video.video_id %}",
           signup_url: "{% url 'video-signup' video.video_id %}",
           is_authenticated: '{{ is_authenticated }}' === 'true',
-          share_url: "http://frame.bz/" + "{% url 'video-embed' video.video_id %}",
+          share_url: "http://frame.bz/" + "{% url 'video-share' video.video_id %}",
           login_urls: {
             twitter: "{% provider_login_url 'twitter' next=next_url method='oauth2' display='popup' %}",
             facebook: "{% provider_login_url 'facebook' next=next_url method='oauth2' display='popup' %}",

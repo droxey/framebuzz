@@ -27,6 +27,8 @@ urlpatterns = patterns('',
     # Test Page for Beta:
     url(r'^test/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_test', name='video-test'),
 
+    url(r'^share/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_share', name='video-share'),
+
     # Dashboard:
     url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
 

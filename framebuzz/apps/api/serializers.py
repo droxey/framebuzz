@@ -22,10 +22,12 @@ class VideoSerializer(serializers.ModelSerializer):
     time_hms = serializers.SerializerMethodField('get_time_hms')
     embed_code = serializers.SerializerMethodField('get_embed_code')
     embed_url = serializers.SerializerMethodField('get_embed_url')
+    share_url = serializers.SerializerMethodField('get_share_url')
 
     class Meta:
         model = Video
-        fields = ('id', 'video_id', 'title', 'duration', 'swf_url', 'time_hms', 'embed_code', 'embed_url',)
+        fields = ('id', 'video_id', 'title', 'duration', 'swf_url', 
+            'time_hms', 'embed_code', 'embed_url', 'share_url',)
 
     def get_channel(self, obj):
         return '/framebuzz/video/%s' % obj.video_id
@@ -38,6 +40,9 @@ class VideoSerializer(serializers.ModelSerializer):
 
     def get_embed_url(self, obj):
         return '%s?close=true' % obj.get_absolute_url()
+
+    def get_share_url(self, obj):
+        return obj.get_share_url()
 
 
 class UserSerializer(serializers.ModelSerializer):

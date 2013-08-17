@@ -18,6 +18,15 @@ from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.api.serializers import UserSerializer
 
 
+def video_share(request, video_id):
+    video, created = get_or_create_video(video_id)
+
+    return render_to_response('profiles/share.html',
+    {
+        'video': video,
+    },
+    context_instance=RequestContext(request))
+
 @xframe_options_exempt
 def video_embed(request, video_id):
     video, created = get_or_create_video(video_id)

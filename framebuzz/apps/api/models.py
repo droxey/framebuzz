@@ -122,6 +122,9 @@ class Video(models.Model):
     def get_absolute_url(self):
         return reverse('video-embed', kwargs={'video_id': str(self.video_id)})
 
+    def get_share_url(self):
+        return reverse('video-share', kwargs={'video_id': str(self.video_id)})
+
     def default_thumbnail(self):
         try:
             return self.thumbnail_set.all()[0]

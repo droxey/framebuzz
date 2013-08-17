@@ -1,0 +1,94 @@
+{% load staticfiles compress avatar_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FrameBuzz</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% compress css %}
+        <!-- bootstrap -->
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap.css' %}" rel="stylesheet" />
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap-responsive.css' %}" rel="stylesheet" />
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap-overrides.css' %}" type="text/css" rel="stylesheet" />
+
+        <!-- libraries -->
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/jquery-ui-1.10.2.custom.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/font-awesome.css' %}" type="text/css" rel="stylesheet" />
+
+        <!-- global styles -->
+        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/layout.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/elements.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/icons.css' %}">
+
+        <!-- profiles styles -->
+        <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" type="text/css" media="screen" />
+    {% endcompress %}
+    {% block page_css %}{% endblock %}
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="//use.typekit.net/jbo8iic.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <div class="wrapper">
+                <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="http://www.framebuzz.com">
+                    <img src="{% static 'framebuzz/profiles/img/logo.png' %}" alt="FrameBuzz" height="48" width="208" />
+                </a>
+                {% if request.user.is_authenticated %}
+                    <ul class="nav pull-right">               
+                        <li class="settings">
+                            <a href="#videos" data-url="{% url 'profiles-videos' profile_user.username %}" class="tab-link dropdown-toggle hidden-phone">
+                                Library
+                            </a>
+                        </li>
+                        <li class="settings user clearfix">
+                            <a href="{% url 'profiles-home' request.user.username %}" role="button" class="avatar">
+                                <img src="{% avatar_url request.user 58 %}" alt="" height="28" width="28" class="img-circle" />
+                            </a>
+                            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-cog"></i> <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#edit" class="tab-link" data-url="{% url 'profiles-edit' profile_user.username %}">Profile Settings</a></li>
+                                <li><a href="#avatar" class="tab-link" data-url="{% url 'avatar_change' %}">Change Avatar</a></li>
+                                <li><a href="{% url 'account_logout' %}">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>  
+                {% endif %} 
+            </div>         
+        </div>
+    </div>
+    <div id="watch">
+        <div id="watch-container" class="wrapper clearfix">
+            <div id="video-container">
+                <iframe src="{% url 'video-embed' video.video_id %}" scrolling="no" frameBorder="0" height="440" width="640"></iframe>
+            </div>
+            <div id="callout">
+                <p>Create a FrameBuzz account to jump into this conversation, and start your own conversations around your favorite videos.</p>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    {% compress js %}
+        <script src="{% static 'framebuzz/dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'framebuzz/dashboard/bootstrap/js/jquery-ui-1.10.2.custom.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {                       
+                $('#watch').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150, positionY: 'bottom' });
+            });
+        </script>
+    {% endcompress %}
+    {% block page_javascript %}{% endblock %}
+</body>
+</html>
