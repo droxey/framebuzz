@@ -25,8 +25,8 @@
                     <a class="signup" href="{% url 'account_signup' %}">SIGN UP <em>&#9654;</em></a>
                 </div>
             </div>
-        <h2 class="header">{% snippet 'home:framebuzz_header' %}Using FrameBuzz{% endsnippet %}</h2>
         <div id="framebuzz">
+            <h2 class="header">{% snippet 'home:framebuzz_header' %}Using FrameBuzz{% endsnippet %}</h2>
             <div id="highlights">
                 <div id="framebuzz-container" class="wrapper">
                     <span class="arrow"></span>
@@ -84,7 +84,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#watch').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150 });
-            $('#community').anystretch("{% static 'framebuzz/marketing/img/community@2x.jpg' %}", {speed: 150 });
+            $('#community').anystretch("{% static 'framebuzz/marketing/img/community@2x.jpg' %}", {speed: 150, positionY: 0});
             $('#framebuzz').anystretch("{% static 'framebuzz/marketing/img/section-bkg.jpg' %}", {speed: 150});
         });
     </script>
