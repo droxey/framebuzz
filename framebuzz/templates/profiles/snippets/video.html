@@ -11,7 +11,11 @@
         <ul class="clearfix">
           <li>
             <a class="video-toggle-button featured {% if comment.object_pk in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' profile_user.username comment.content_object.video_id %}">
-              <img src="{% static 'framebuzz/profiles/img/star.png' %}" height="14" width="15" />
+              {% if comment.object_pk in featured_video_ids %}
+                <img src="{% static 'framebuzz/profiles/img/star-on.png' %}" height="14" width="15" />
+              {% else %}
+                <img src="{% static 'framebuzz/profiles/img/star.png' %}" height="14" width="15" />
+              {% endif %}
             </a>
           </li>
           <li>
