@@ -282,12 +282,6 @@ angular.module('framebuzz.controllers', []).
                     };
                 };
 
-
-                $scope.openExternalLink = function(url) {
-                    console.log(window.location);
-                    console.log(url);
-                };
-
                 $scope.resumeVideo = function() {
                     $state.transitionTo('player.blendedView');
                     $scope.player.play();

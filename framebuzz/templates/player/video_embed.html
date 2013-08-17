@@ -77,7 +77,8 @@
     {% providers_media_js %}
     <div id="player-container" class="container">
       <div id="player-layer" class="layer">
-        <video data-media-element="" class="span12" id="video-element" preload="none" type="video/mp4" poster="https://i1.ytimg.com/vi/{{ video.video_id }}/maxresdefault.jpg" src="http://www.ytapi.com/api/{{ video.video_id }}/direct/18/" height="385" width="640">
+        <video data-media-element="" class="span12" id="video-element" preload="true" height="385" width="640" poster="https://i1.ytimg.com/vi/{{ video.video_id }}/maxresdefault.jpg">
+          <source src="http://www.ytapi.com/api/{{ video.video_id }}/direct/18/" type="video/mp4" height="385" width="640">
         </video>
         <div id="heatmap-and-post" data-ui-view=""></div>
       </div>

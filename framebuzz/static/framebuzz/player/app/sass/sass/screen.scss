@@ -82,14 +82,14 @@ object, embed, video, iframe {
 
         video, .me-plugin {
             background: black;
-            height: 385px;
+            height: 385px !important;
             position: relative;
             top: 0;
-            width: 640px;
+            width: 640px !important;
             z-index: 1;
         }
 
-        embed, video {
+        embed, video, object {
             height: 385px !important;
             width: 640px !important;
         }
@@ -102,12 +102,12 @@ object, embed, video, iframe {
             width: 640px !important;
 
             div.mejs-inner {
-                width: 640px;
-                height: 385px;
+                width: 640px !important;
+                height: 385px !important;
 
                 div.mejs-mediaelement {
-                    width: 640px;
-                    height: 385px;
+                    width: 640px !important;
+                    height: 385px !important;
                 }
 
                 div.mejs-controls {
@@ -262,6 +262,8 @@ object, embed, video, iframe {
                         z-index: 10;
 
                         button {
+                            border: none;
+                            outline: none;
                             cursor: pointer;
                             background: none;
                             background-position: 0 0;
@@ -274,6 +276,7 @@ object, embed, video, iframe {
                         }
 
                         div.mejs-volume-slider {
+                            outline: 0 none;
                             cursor: pointer;
                             left: 4px;
                             top: -118px;
@@ -283,6 +286,8 @@ object, embed, video, iframe {
                             left: 5px;
 
                             button {
+                                border: none;
+                                outline: 0 none;
                                 height: 20px;
                                 width: 25px;
                             }
@@ -293,6 +298,8 @@ object, embed, video, iframe {
                             left: 48px;
 
                             button {
+                                outline: 0 none;
+                                border: none;
                                 margin-top: 0;
                                 height: 20px;
                                 width: 23px;
@@ -308,6 +315,7 @@ object, embed, video, iframe {
                             z-index: 100;
 
                             button {
+                                outline: 0 none;
                                 height: 20px;
                                 margin: 1px;
                                 width: 20px;
@@ -1265,6 +1273,8 @@ object, embed, video, iframe {
                                 display: block;
                                 float: left;
                                 margin-right: 10px;
+                                height: 33px;
+                                width: 33px;
                             }
 
                             div.user {
