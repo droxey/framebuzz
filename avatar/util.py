@@ -2,10 +2,25 @@ import hashlib
 
 from django.conf import settings
 from django.core.cache import cache
-from django.utils.encoding import smart_str
+from django.utils import six
 from django.template.defaultfilters import slugify
 
-from django.contrib.auth.models import User
+try:
+    from django.utils.encoding import force_bytes
+except ImportError:
+    force_bytes = str
+
+try:
+    from django.contrib.auth import get_user_model
+except ImportError:
+    from django.contrib.auth.models import User
+
+    def get_user_model():
+        return User
+
+    custom_user_model = False
+else:
+    custom_user_model = True
 
 from avatar.settings import (AVATAR_DEFAULT_URL, AVATAR_CACHE_TIMEOUT,
                              AUTO_GENERATE_AVATAR_SIZES, AVATAR_DEFAULT_SIZE)
@@ -13,15 +28,31 @@ from avatar.settings import (AVATAR_DEFAULT_URL, AVATAR_CACHE_TIMEOUT,
 cached_funcs = set()
 
 
+def get_username(user):
+    """ Return username of a User instance """
+    if hasattr(user, 'get_username'):
+        return user.get_username()
+    else:
+        return user.username
+
+
+def get_user(username):
+    """ Return user from a username/ish identifier """
+    if custom_user_model:
+        return get_user_model().objects.get_by_natural_key(username)
+    else:
+        return get_user_model().objects.get(username=username)
+
+
 def get_cache_key(user_or_username, size, prefix):
     """
     Returns a cache key consisten of a username and image size.
     """
-    if isinstance(user_or_username, User):
-        user_or_username = user_or_username.username
-    key = u'%s_%s_%s' % (prefix, user_or_username, size)
-    return u'%s_%s' % (slugify(key)[:100],
-                       hashlib.md5(smart_str(key)).hexdigest())
+    if isinstance(user_or_username, get_user_model()):
+        user_or_username = get_username(user_or_username)
+    key = six.u('%s_%s_%s') % (prefix, user_or_username, size)
+    return six.u('%s_%s') % (slugify(key)[:100],
+                             hashlib.md5(force_bytes(key)).hexdigest())
 
 
 def cache_result(func):
@@ -40,6 +71,7 @@ def cache_result(func):
         return cache.get(key) or cache_set(key, func(user, size))
     return cached_func
 
+
 def invalidate_cache(user, size=None):
     """
     Function to be called when saving or changing an user's avatars.
@@ -50,6 +82,7 @@ def invalidate_cache(user, size=None):
     for prefix in cached_funcs:
         for size in sizes:
             cache.delete(get_cache_key(user, size, prefix))
+
 
 def get_default_avatar_url():
     base_url = getattr(settings, 'STATIC_URL', None)
@@ -67,10 +100,12 @@ def get_default_avatar_url():
         return '%s/%s' % (base_url, AVATAR_DEFAULT_URL)
     return '%s%s' % (base_url, AVATAR_DEFAULT_URL)
 
+
 def get_primary_avatar(user, size=AVATAR_DEFAULT_SIZE):
+    User = get_user_model()
     if not isinstance(user, User):
         try:
-            user = User.objects.get(username=user)
+            user = get_user(user)
         except User.DoesNotExist:
             return None
     try:

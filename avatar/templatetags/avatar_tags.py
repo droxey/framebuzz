@@ -1,17 +1,28 @@
+import hashlib
 import urllib
 import urlparse
-import hashlib
+
+try:
+    from urllib.parse import urljoin, urlencode
+except ImportError:
+    from urlparse import urljoin
+    from urllib import urlencode
 
 from django import template
-from django.template.loader import render_to_string
-from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
+from django.utils import six
+from django.utils.translation import ugettext as _
 
-from django.contrib.auth.models import User
+try:
+    from django.utils.encoding import force_bytes
+except ImportError:
+    force_bytes = str
 
 from avatar.settings import (AVATAR_GRAVATAR_BACKUP, AVATAR_GRAVATAR_DEFAULT,
                              AVATAR_DEFAULT_SIZE, AVATAR_GRAVATAR_BASE_URL)
-from avatar.util import get_primary_avatar, get_default_avatar_url, cache_result
+from avatar.util import (get_primary_avatar, get_default_avatar_url,
+                         cache_result, get_user_model, get_user)
 from avatar.models import Avatar
 
 register = template.Library()
@@ -46,16 +57,16 @@ def avatar_url(user, size=AVATAR_DEFAULT_SIZE):
 @cache_result
 @register.simple_tag
 def avatar(user, size=AVATAR_DEFAULT_SIZE, **kwargs):
-    if not isinstance(user, User):
+    if not isinstance(user, get_user_model()):
         try:
-            user = User.objects.get(username=user)
-            alt = unicode(user)
+            user = get_user(user)
+            alt = six.text_type(user)
             url = avatar_url(user, size)
-        except User.DoesNotExist:
+        except get_user_model().DoesNotExist:
             url = get_default_avatar_url()
             alt = _("Default Avatar")
     else:
-        alt = unicode(user)
+        alt = six.text_type(user)
         url = avatar_url(user, size)
     context = dict(kwargs, **{
         'user': user,
@@ -68,7 +79,7 @@ def avatar(user, size=AVATAR_DEFAULT_SIZE, **kwargs):
 
 @register.filter
 def has_avatar(user):
-    if not isinstance(user, User):
+    if not isinstance(user, get_user_model()):
         return False
     return Avatar.objects.filter(user=user, primary=True).exists()
 
@@ -82,7 +93,7 @@ def primary_avatar(user, size=AVATAR_DEFAULT_SIZE):
     work for us. If that special view is then cached by a CDN for instance,
     we will avoid many db calls.
     """
-    alt = unicode(user)
+    alt = six.text_type(user)
     url = reverse('avatar_render_primary', kwargs={'user': user, 'size': size})
     return """<img src="%s" alt="%s" width="%s" height="%s" />""" % (url, alt,
         size, size)
@@ -97,6 +108,7 @@ def render_avatar(avatar, size=AVATAR_DEFAULT_SIZE):
         avatar.avatar_url(size), str(avatar), size, size)
 
 
+@register.tag
 def primary_avatar_object(parser, token):
     split = token.split_contents()
     if len(split) == 4:
@@ -118,6 +130,4 @@ class UsersAvatarObjectNode(template.Node):
             context[key] = avatar[0]
         else:
             context[key] = None
-        return u""
-
-register.tag('primary_avatar_object', primary_avatar_object)
+        return six.text_type()

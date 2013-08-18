@@ -57,13 +57,14 @@ div.navbar {
     div.navbar-inner {
         background: none;
         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMzA4KSIvPjxzdG9wIG9mZnNldD0iMC45OCIgc3RvcC1jb2xvcj0icmdiYSgwLCAwLCAwLCAwKSIvPjwvcmFkaWFsR3JhZGllbnQ+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDApIiAvPjxyZWN0IHg9Ii0yMC45MDkxJSIgeT0iLTEwMC40MiUiIHdpZHRoPSIxNTYwcHgiIGhlaWdodD0iMjAwLjg0JSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
-        background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 780, color-stop(0%, rgba(255, 255, 255, 0.308)), color-stop(98%, rgba(0, 0, 0, 0)));
-        background-image: -webkit-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
-        background-image: -moz-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
-        background-image: -ms-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
-        background-image: -o-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
-        background-image: radial-gradient(780px 100.42% at center 0%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
+        background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 780, color-stop(0%, rgba(255, 255, 255, 0.308)), color-stop(100%, rgba(0, 0, 0, 0)));
+        background-image: -webkit-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+        background-image: -moz-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+        background-image: -ms-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+        background-image: -o-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+        background-image: radial-gradient(780px 100.42% at center 0%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
         border-left: 0 none;
+        border-right: none;
         box-shadow: none;
         margin: 0 auto;
         overflow: hidden;
@@ -73,6 +74,7 @@ div.navbar {
             border: none;
             padding: 8px 0px 0px 35px;
             text-shadow: none;
+            outline: none;
             height: 71px;
             width: 310px;
         }
@@ -1031,5 +1033,56 @@ div.footer {
         text-transform: uppercase;
         float: left;
         display: inline-block;
+    }
+}
+
+
+/*
+ *      iPad Compatibility
+ */
+
+@media screen and (device-aspect-ratio: 3/4) {
+    .wrapper {
+        width: 768px;
+    }
+
+    div.navbar {
+        width: 768px;
+
+        div.navbar-inner {
+            width: 100%;
+
+            a.brand {
+                padding: 20px 0px 0px 0px;
+                height: 45px;
+                width: 207px;
+            }
+        }
+    }
+
+    div.marketing-content {
+        #home {
+            #watch {
+                div.anystretch {
+                    min-width: 768px;
+                }
+
+                #watch-container {
+                    #video-container {
+                        margin-left: 25px;
+                    }
+
+                    #callout {
+                        height: 108px;
+                        margin: 25px 10px;
+                        width: 648px;
+                    }
+                }
+            }
+        }
+
+        #community {
+            div.anystretch { display: none; }
+        }
     }
 }

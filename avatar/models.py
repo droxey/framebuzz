@@ -1,25 +1,22 @@
 import datetime
 import os
 import hashlib
+from PIL import Image
 
+from django.conf import settings
 from django.db import models
 from django.core.files.base import ContentFile
 from django.core.files.storage import get_storage_class
 from django.utils.translation import ugettext as _
-from django.utils.encoding import smart_str
+from django.utils import six
 from django.db.models import signals
 
-from django.contrib.auth.models import User
-
 try:
-    from cStringIO import StringIO
+    from django.utils.encoding import force_bytes
 except ImportError:
-    from StringIO import StringIO
+    force_bytes = str
 
-try:
-    from PIL import Image
-except ImportError:
-    import Image
+from avatar.util import get_username
 
 try:
     from django.utils.timezone import now
@@ -40,10 +37,10 @@ avatar_storage = get_storage_class(AVATAR_STORAGE)()
 def avatar_file_path(instance=None, filename=None, size=None, ext=None):
     tmppath = [AVATAR_STORAGE_DIR]
     if AVATAR_HASH_USERDIRNAMES:
-        tmp = hashlib.md5(instance.user.username).hexdigest()
-        tmppath.extend([tmp[0], tmp[1], instance.user.username])
+        tmp = hashlib.md5(get_username(instance.user)).hexdigest()
+        tmppath.extend([tmp[0], tmp[1], get_username(instance.user)])
     else:
-        tmppath.append(instance.user.username)
+        tmppath.append(get_username(instance.user))
     if not filename:
         # Filename already stored in database
         filename = instance.avatar.name
@@ -58,7 +55,7 @@ def avatar_file_path(instance=None, filename=None, size=None, ext=None):
         # File doesn't exist yet
         if AVATAR_HASH_FILENAMES:
             (root, ext) = os.path.splitext(filename)
-            filename = hashlib.md5(smart_str(filename)).hexdigest()
+            filename = hashlib.md5(force_bytes(filename)).hexdigest()
             filename = filename + ext
     if size:
         tmppath.extend(['resized', str(size)])
@@ -76,7 +73,7 @@ def find_extension(format):
 
 
 class Avatar(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(getattr(settings, 'AUTH_USER_MODEL', 'auth.User'))
     primary = models.BooleanField(default=False)
     avatar = models.ImageField(max_length=1024,
                                upload_to=avatar_file_path,
@@ -85,7 +82,7 @@ class Avatar(models.Model):
     date_uploaded = models.DateTimeField(default=now)
 
     def __unicode__(self):
-        return _(u'Avatar for %s') % self.user
+        return _(six.u('Avatar for %s')) % self.user
 
     def save(self, *args, **kwargs):
         avatars = Avatar.objects.filter(user=self.user)
@@ -106,21 +103,21 @@ class Avatar(models.Model):
         # invalidate the cache of the thumbnail with the given size first
         invalidate_cache(self.user, size)
         try:
-            orig = self.avatar.storage.open(self.avatar.name, 'rb').read()
-            image = Image.open(StringIO(orig))
+            orig = self.avatar.storage.open(self.avatar.name, 'rb')
+            image = Image.open(orig)
             quality = quality or AVATAR_THUMB_QUALITY
-            (w, h) = image.size
+            w, h = image.size
             if w != size or h != size:
                 if w > h:
-                    diff = (w - h) / 2
+                    diff = int((w - h) / 2)
                     image = image.crop((diff, 0, w - diff, h))
                 else:
-                    diff = (h - w) / 2
+                    diff = int((h - w) / 2)
                     image = image.crop((0, diff, w, h - diff))
                 if image.mode != "RGB":
                     image = image.convert("RGB")
                 image = image.resize((size, size), AVATAR_RESIZE_METHOD)
-                thumb = StringIO()
+                thumb = six.BytesIO()
                 image.save(thumb, AVATAR_THUMB_FORMAT, quality=quality)
                 thumb_file = ContentFile(thumb.getvalue())
             else:
