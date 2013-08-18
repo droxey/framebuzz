@@ -33,6 +33,9 @@ from avatar.settings import (AVATAR_STORAGE_DIR, AVATAR_RESIZE_METHOD,
 
 avatar_storage = get_storage_class(AVATAR_STORAGE)()
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 def avatar_file_path(instance=None, filename=None, size=None, ext=None):
     tmppath = [AVATAR_STORAGE_DIR]
@@ -123,7 +126,9 @@ class Avatar(models.Model):
             else:
                 thumb_file = ContentFile(orig)
             thumb = self.avatar.storage.save(self.avatar_name(size), thumb_file)
-        except IOError:
+        except:
+            logger.error('Avatar create_thumbnail failed!', exc_info=True)
+
             return  # What should we do here?  Render a "sorry, didn't work" img?
 
     def avatar_url(self, size):
