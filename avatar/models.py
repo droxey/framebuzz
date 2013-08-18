@@ -102,29 +102,29 @@ class Avatar(models.Model):
     def create_thumbnail(self, size, quality=None):
         # invalidate the cache of the thumbnail with the given size first
         invalidate_cache(self.user, size)
-        #try:
-        orig = self.avatar.storage.open(self.avatar.name, 'rb')
-        image = Image.open(orig)
-        quality = quality or AVATAR_THUMB_QUALITY
-        w, h = image.size
-        if w != size or h != size:
-            if w > h:
-                diff = int((w - h) / 2)
-                image = image.crop((diff, 0, w - diff, h))
+        try:
+            orig = self.avatar.storage.open(self.avatar.name, 'rb')
+            image = Image.open(orig)
+            quality = quality or AVATAR_THUMB_QUALITY
+            w, h = image.size
+            if w != size or h != size:
+                if w > h:
+                    diff = int((w - h) / 2)
+                    image = image.crop((diff, 0, w - diff, h))
+                else:
+                    diff = int((h - w) / 2)
+                    image = image.crop((0, diff, w, h - diff))
+                if image.mode != "RGB":
+                    image = image.convert("RGB")
+                image = image.resize((size, size), AVATAR_RESIZE_METHOD)
+                thumb = six.BytesIO()
+                image.save(thumb, AVATAR_THUMB_FORMAT, quality=quality)
+                thumb_file = ContentFile(thumb.getvalue())
             else:
-                diff = int((h - w) / 2)
-                image = image.crop((0, diff, w, h - diff))
-            if image.mode != "RGB":
-                image = image.convert("RGB")
-            image = image.resize((size, size), AVATAR_RESIZE_METHOD)
-            thumb = six.BytesIO()
-            image.save(thumb, AVATAR_THUMB_FORMAT, quality=quality)
-            thumb_file = ContentFile(thumb.getvalue())
-        else:
-            thumb_file = ContentFile(orig)
-        thumb = self.avatar.storage.save(self.avatar_name(size), thumb_file)
-        #except IOError:
-        #    return  # What should we do here?  Render a "sorry, didn't work" img?
+                thumb_file = ContentFile(orig)
+            thumb = self.avatar.storage.save(self.avatar_name(size), thumb_file)
+        except IOError:
+            return  # What should we do here?  Render a "sorry, didn't work" img?
 
     def avatar_url(self, size):
         return self.avatar.storage.url(self.avatar_name(size))
