@@ -132,13 +132,16 @@ angular.module('framebuzz.controllers', []).
                         ? angular.copy($scope.currentTime) 
                         : angular.copy($scope.postTime);
 
+                    var timeTruncated = parseFloat(time.toString().substring(0, 9));
                     var postData = {
                         'object_pk': $scope.videoInstance.video.id,
                         'content_type': 'core.video',
-                        'time': time,
+                        'time': timeTruncated,
                         'comment': $scope.newThread.comment,
                         'username': $scope.videoInstance.user.username
                     };
+
+                    console.log(postData);
 
                     socket.send_json({
                         eventType: eventTypes.postNewComment, 
