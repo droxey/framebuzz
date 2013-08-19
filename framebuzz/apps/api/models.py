@@ -1,5 +1,6 @@
 from datetime import datetime, date
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
@@ -91,13 +92,18 @@ class UserProfile(models.Model):
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-       profile, created = UserProfile.objects.get_or_create(user=instance)
-       comment_flag_ct = ContentType.objects.get_for_model(CommentFlag)
-       comment_flag_permissions = Permission.objects.filter(content_type=comment_flag_ct)
+        profile, created = UserProfile.objects.get_or_create(user=instance)
+        comment_flag_ct = ContentType.objects.get_for_model(CommentFlag)
+        comment_flag_permissions = Permission.objects.filter(content_type=comment_flag_ct)
 
-       for perm in comment_flag_permissions:
-           profile.user.user_permissions.add(perm.id)
-           #send_templated_mail(template_name='welcome-newuser', from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=[instance.email], context={ 'user': instance })
+        for perm in comment_flag_permissions:
+            profile.user.user_permissions.add(perm.id)
+
+        if instance.email:
+            send_templated_mail(template_name='welcome-newuser', 
+                from_email=settings.DEFAULT_FROM_EMAIL, 
+                recipient_list=[instance.email], 
+                context={ 'user': instance })
 
 post_save.connect(create_user_profile, sender=User)
 
