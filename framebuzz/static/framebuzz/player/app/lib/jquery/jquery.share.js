@@ -115,7 +115,7 @@
             networkDefs: {
                 facebook:{url:'http://www.facebook.com/share.php?u=|u|'},
                 //http://twitter.com/home?status=jQuery%20Share%20Social%20Media%20Plugin%20-%20Share%20to%20multiple%20social%20networks%20from%20a%20single%20form%20http://plugins.in1.com/share/demo
-                twitter:{url:'https://twitter.com/share?text=|140|'},
+                twitter:{url:'https://twitter.com/share?text=|140|&url=|u|'},
                 linkedin:{url:'http://www.linkedin.com/shareArticle?mini=true&url=|u|&title=|t|&summary=|d|&source=framebuzz.com'},
                 in1:{url:'http://www.in1.com/cast?u=|u|',w:'490',h:'529'},
                 tumblr:{url:'http://www.tumblr.com/share?v=3&u=|u|'},
