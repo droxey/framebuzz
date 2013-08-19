@@ -5,5 +5,5 @@
 {% endblock %}
 
 {% block email_message %}
-    {% if shared_by %}{{ shared_by.username }}{% else %}Someone{% endif %} just shared <a href="http://{{ site.domain }}{{ video.get_absolute_url }}" style="color: #0C94C8;">{{ video.title }}</a> with you on <a href="http://framebuzz.com" style="color: #0C94C8;">FrameBuzz</a>. Join the conversation!
+    {% if shared_by %}{{ shared_by.username }}{% else %}Someone{% endif %} just shared <a href="http://{{ site.domain }}{{ video.get_share_url }}" style="color: #0C94C8;">{{ video.title }}</a> with you on <a href="http://framebuzz.com" style="color: #0C94C8;">FrameBuzz</a>. Join the conversation!
 {% endblock %}
