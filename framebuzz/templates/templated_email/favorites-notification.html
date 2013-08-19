@@ -5,6 +5,6 @@
 {% endblock %}
 
 {% block email_message %}
-    {{ comment.comment.user.username }} just favorited your comment on <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.comment.comment_content_object.title }}</a>. (Not that we’re surprised; we always tell people you’re both witty and good looking.)
-        <p><a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.comment.comment }}</a></p>
+    {{ comment.user.username }} just favorited your comment on <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.comment_content_object.title }}</a>. (Not that we’re surprised; we always tell people you’re both witty and good looking.)
+        <p><a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.comment }}</a></p>
 {% endblock %}

@@ -1,64 +1,64 @@
 {% block plain %}
 {% endblock %}
 
+
 {% block html %}
 <!doctype html>
 <html>
-    <head></head>
-    <body>
-    <table width="100%">
-        <tr>
-            <td> <!--email body-->
-                <table cellpadding="0" cellspacing="0" width="600px" align="center">
-                    <tr> <!--header-->
-                        <td height="96px" background="http://{{ site.domain }}/static/framebuzz/email/header.jpg">&nbsp;</td> 
-                    </tr>
-                    <tr> <!--body content top-->
-                        <td valign="top" width="600px" style="border-left: 1px solid #BED9E7; border-right: 1px solid #BED9E7;">
-                        <table cellpadding="0" cellspacing="0" width="100%" background="http://{{ site.domain }}/static/framebuzz/email/bodybackground.jpg">
-                            
-                            <tr> <!--news/instructions/etc-->
-                                <td height="315px" align="center" valign="middle" style="padding-top: 20px;">
-                                    <table cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="480" height="115px" align="left" valign="middle">
-                                                <!--
-                                                <p>
-                                                    <font face="Gotham, Helvetica Neue, Helvetica, Arial, sans-serif" color="#212121">
-                                                        <b>DEAR,</b>
-                                                    </font>
-                                                </p>
-                                                -->
-                                                <p>
-                                                <font face="Gotham" size="16px" color="#3c3c3c">
-                                                <i>
-                                                    {% block email_message %}{% endblock %}
-                                                </i>
-                                                </font>
-                                                </p>
-                                                <p><font face="Gotham" color="#bfbfbf"><i>The FrameBuzz Team</i></font></p>
-                                            </td>        
-                                        </tr>
-                                </table>
-                            </td>
-                        </tr>         
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table cellpadding="0" cellspacing="0" width="600px" align="center"> <!--footer-->
-                        <tr>
-                            <td align="center" style="padding-top: 6px; color: #3c3c3c; font-family: Gotham; font-size: 11px; font-style: italic;">
-                            &copy; 2013 FrameBuzz. All rights reserved.
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </td>
+<head>
+<title>email template</title>
+</head>
+<body>
+
+
+<table width="100%">
+<tr>
+<td>
+
+<!--email layout-->
+<table cellpadding="0" cellspacing="0" width="601px" align="center">
+
+<!--header-->
+<tr>
+    <td height="96px" background="Images/header.jpg">&nbsp;</td> 
+</tr>
+    
+<!--body content-->
+<tr>
+<td valign="top" width="600px" style="border-left: 1px solid #BED9E7; border-right: 1px solid #BED9E7; border-bottom: 1px solid #BED9E7;">
+    
+    <table cellpadding="0" cellspacing="0">
+    <tr>
+    <td valign="top" style="padding: 0px 25px 10px 25px;">
+    <p><font face="Helvetica Neue, Helvetica, Arial, sans-serif" color="#212121"><b>DEAR [NAME],</b></font></p>
+    <p>
+    <font face="Helvetica, Arial, sans-serif" color="#3c3c3c">
+        {% block email_message %}{% endblock %}
+    </font>
+    </p>
+    <p><font face="Helvetica, Arial, sans-serif" color="#bfbfbf"><i>The FrameBuzz Team</i></font></p>
+    </td>
     </tr>
+    </table>        
+</td>
+</tr>
+
+<!--footer-->
+<tr>
+<td>
+<table cellpadding="0" cellspacing="0" width="600px" align="center">
+<tr>
+    <td align="center" style="padding-top: 10px;">
+    <font face="Helvetica, Arial, sans-serif" color="#3c3c3c" size="-2"><i>&copy; 2013 FrameBuzz. All rights reserved.</i></font>
+    </td>
+</tr>
 </table>
+</td>
+</tr>
+
+
+</table>
+
 </body>
 </html>
 {% endblock %}
