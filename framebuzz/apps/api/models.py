@@ -297,6 +297,11 @@ class MPTTComment(MPTTModel, Comment):
         url_id = self.id if self.parent is None else self.parent.id
         return '%s#/player/panel/active/comments/%s' % (reverse('video-embed', kwargs={'video_id': str(video.video_id)}), str(url_id))
 
+    def get_share_url(self):
+        video = Video.objects.get(id=self.object_pk)
+        url_id = self.id if self.parent is None else self.parent.id
+        return '%s#/player/panel/active/comments/%s' % (reverse('video-share', kwargs={'video_id': str(video.video_id)}), str(url_id))
+
     def save(self, *args, **kwargs):
         first_comment = None
 

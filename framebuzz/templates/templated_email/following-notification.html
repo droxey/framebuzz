@@ -1,12 +1,9 @@
 {% extends "templated_email/base.html" %}
 
 {% block email_recipient %}
-
+    DEAR {{ recipient.username }},
 {% endblock %}
 
 {% block email_message %}
-    What do you know, you’re a FrameBuzz superstar. {{ follower.username }} is now following you on FrameBuzz.
-    {% if comment %}
-        <p>Don’t disappoint you’re adoring fans! Jump back into the conversation. <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.content_object.title }}</a></p>
-    {% endif %}
+    Hey, we thought you'd like to know, <a href="http://framebuzz.com{{ follower.get_profile.get_absolute_url }}" style="color: #0C94C8;">{{ follower.username }}</a> is now following you on <a style="color: #0C94C8;" href="http://framebuzz.com">FrameBuzz</a>.
 {% endblock %}

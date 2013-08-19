@@ -231,7 +231,8 @@ def add_comment_action(context):
                         recipient_list=[thread.user.email],
                         context={
                             'follower': user,
-                            'site': Site.objects.get_current()
+                            'site': Site.objects.get_current(),
+                            'recipient': thread.user,
                         })
         elif thread_action == 'favorite':
             is_favorite = Action.objects.actor(user, verb='added to favorites', action_object_object_id=thread.id)
@@ -257,7 +258,8 @@ def add_comment_action(context):
                         recipient_list=[thread.user.email],
                         context={
                             'comment': thread,
-                            'site': Site.objects.get_current()
+                            'site': Site.objects.get_current(),
+                            'recipient': thread.user,
                         })
         elif thread_action == 'flag':
             commentFlag, created = CommentFlag.objects.get_or_create(
@@ -314,7 +316,8 @@ def toggle_user_follow(context):
                     recipient_list=[user_to_toggle.email],
                     context={
                         'follower': user,
-                        'site': Site.objects.get_current()
+                        'site': Site.objects.get_current(),
+                        'recipient': user_to_toggle,
                     })
         new_context = context
         new_context[DATA_KEY]['username'] = user_to_toggle.username

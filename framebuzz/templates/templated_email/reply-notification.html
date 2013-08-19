@@ -1,11 +1,11 @@
 {% extends "templated_email/base.html" %}
 
 {% block email_recipient %}
-    {{ comment.parent.user.username|upper }}
+    DEAR {{ comment.parent.user.username|upper }},
 {% endblock %}
 
 {% block email_message %}
-     Hey, don’t look now, but {{ comment.user.username }} replied to a comment you made on <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">{{ comment.content_object.title }}</a>
-    <p>{{ comment.comment }}</p>
-    <p>Got something to say to that? Speak it! <a href="http://{{ site.domain }}{{ comment.get_absolute_url }}" style="color: #0C94C8;">Reply Now</a></p>
+     Hey, don’t look now, but {{ comment.user.username }} replied to a comment you made on <a href="http://{{ site.domain }}{{ comment.content_object.get_share_url }}" style="color: #0C94C8;">{{ comment.content_object.title }}</a>.
+     <br><br>
+    <a style="color: #0C94C8;" href="http://{{ site.domain }}{{ comment.get_share_url }}">{{ comment.comment }}</a>
 {% endblock %}
