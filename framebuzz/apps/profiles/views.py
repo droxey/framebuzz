@@ -46,7 +46,7 @@ def home(request, username):
 def activity(request, username):
     user = User.objects.get(username__iexact=username)
 
-    user_videos = UserVideo.objects.filter(user=user).order_by('-is_featured')[:3]
+    user_videos = UserVideo.objects.filter(user=user, is_featured=True)[:3]
     latest_videos_comments = list()
 
     for uv in user_videos:
