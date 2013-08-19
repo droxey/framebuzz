@@ -104,24 +104,19 @@ class EmailConfirmation(models.Model):
             return email_address
 
     def send(self, request, **kwargs):
-        current_site = kwargs["site"] if "site" in kwargs else Site.objects.get_current()
-        activate_url = reverse("account_confirm_email", args=[self.key])
-        activate_url = request.build_absolute_uri(activate_url)
-        ctx = {
-            "user": self.email_address.user,
-            "activate_url": activate_url,
-            "site": current_site,
-            "key": self.key,
-            "subject": 'Welcome to FrameBuzz!'
-        }
-        get_adapter().send_mail('welcome-newuser',
-                                self.email_address.email,
-                                ctx)
-        self.sent = timezone.now()
-        self.save()
-        signals.email_confirmation_sent.send(sender=self.__class__, confirmation=self)
-
-
-
-
-
+        # current_site = kwargs["site"] if "site" in kwargs else Site.objects.get_current()
+        # activate_url = reverse("account_confirm_email", args=[self.key])
+        # activate_url = request.build_absolute_uri(activate_url)
+        # ctx = {
+        #     "user": self.email_address.user,
+        #     "activate_url": activate_url,
+        #     "site": current_site,
+        #     "key": self.key,
+        #     "subject": 'Welcome to FrameBuzz!'
+        # }
+        # get_adapter().send_mail('welcome-newuser',
+        #                         self.email_address.email,
+        #                         ctx)
+        # self.sent = timezone.now()
+        # self.save()
+        # signals.email_confirmation_sent.send(sender=self.__class__, confirmation=self)

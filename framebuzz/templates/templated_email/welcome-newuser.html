@@ -1,14 +1,19 @@
 {% extends "templated_email/base.html" %}
 
-{% block email_recipient %}
-
-{% endblock %}
+{% block email_recipient %}Welcome to FrameBuzz!{% endblock %}
 
 {% block email_message %}
-    <b>Welcome to FrameBuzz!</b><br/>
-    You’re receiving this email because you registered for FrameBuzz, the best way to share comments and conversations around video.
-    <p>Ready to see what’s buzzing? Click the link below to confirm this email address, and jump in the conversation.</p>
-    <p><a href="{{ activate_url }}" style="color: #0C94C8;">Click here to confirm your email address</a></p>
-    <p>Your user name is: {{ user.username }}</p>
-    <p>Feeling social? Link your FrameBuzz account with Facebook and Twitter here: <a href="http://{{ site.domain }}{% url 'account_login' %}" style="color: #0C94C8;">http://{{ site.domain }}{% url 'account_login' %}</a></p>
+    Hi, this is Aaron, CEO of FrameBuzz, and I want to personally thank you for signing up.
+    <br><br>
+    Check out FrameBuzz and discover the cool things you can do with it. If you have any questions, experience anything weird or have any ideas to make FrameBuzz better, we want to hear them. Email us at <a href="mailto:hello@framebuzz.com">hello@framebuzz.com</a> or tweet us <a href="http://www.twitter.com/framebuzz">@framebuzz</a> anytime. We're pretty much always around, and someone will get back to you within a few hours.
+    <br><br>
+    In the meantime, kick the tires on your new account. Your user name is <b>{{ user.username }}</b>.
+    <br><br>
+    Get into it and customize your Profile <a href="http://framebuzz.com{{ user.get_profile.get_absolute_url }}">here</a>.
+    <br><br>
+    If you want to create your own FrameBuzz and start a conversation with your friends (which is really one of the most fun things you can do with it), click the "FrameBuzz a Video" button on your <a href="http://framebuzz.com{{ user.get_profile.get_absolute_url }}">profile</a>.
+    <br><br>
+    Thanks again, and feel free to drop us a line anytime, for any reason.
+    <br><br>
+    <b>Aaron Lindsey</b>
 {% endblock %}

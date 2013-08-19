@@ -338,7 +338,7 @@ TEMPLATED_EMAIL_DJANGO_SUBJECTS = {
     'following-notification':'FrameBuzz: New Follower!',
     'passwordchange-notification':'FrameBuzz: Password Reset Requested',
     'reply-notification':'FrameBuzz: New Comment Reply!',
-    'welcome-newuser':'FrameBuzz: Welcome!',
+    'welcome-newuser':'Thanks for joining FrameBuzz.',
     'share-email': 'FrameBuzz: Check out this video!'
 }
 

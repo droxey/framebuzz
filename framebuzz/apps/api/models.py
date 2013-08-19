@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 from django.utils.html import urlize
 from django.utils.safestring import mark_safe
 
+from templated_email import send_templated_mail
 from timezone_field import TimeZoneField
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -96,6 +97,14 @@ def create_user_profile(sender, instance, created, **kwargs):
 
        for perm in comment_flag_permissions:
            profile.user.user_permissions.add(perm.id)
+
+        send_templated_mail(
+            template_name='welcome-newuser',
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[thread.user.email],
+            context={
+                'user': instance,
+            })
 
 post_save.connect(create_user_profile, sender=User)
 
