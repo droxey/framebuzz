@@ -145,7 +145,7 @@ angular.module('framebuzz.directives', [])
             $(element).maxlength({showFeedback: false, max: 180});
         };
     })
-    .directive('bxslider', function () {
+    .directive('bxslider', ['safeApply', function (safeApply) {
         var slider = null;
 
         return function (scope, element, attrs) {
@@ -178,10 +178,19 @@ angular.module('framebuzz.directives', [])
                     element.parent().parent().parent().css({ 'width': '131px', 'max-width': '131px' });
                     
                     $('div.bx-loading').remove();
+
+                    scope.$watch('updateSlider', function(val) {
+                        if (val) {
+                            slider.reloadSlider();
+
+                            scope.updateSlider = false;
+                            safeApply(scope);
+                        }
+                    }, true);
                 });
             }
         }; 
-    })
+    }])
     .directive('onfocus', ['safeApply', function(safeApply) {
         return {
             link: function(scope, element, attrs) {

@@ -16,6 +16,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.selectedThread = null;
                 $scope.clearFocus = false;
                 $scope.isCollapsed = false;
+                $scope.updateSlider = false;
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
@@ -140,8 +141,6 @@ angular.module('framebuzz.controllers', []).
                         'comment': $scope.newThread.comment,
                         'username': $scope.videoInstance.user.username
                     };
-
-                    console.log(postData);
 
                     socket.send_json({
                         eventType: eventTypes.postNewComment, 
@@ -516,6 +515,7 @@ angular.module('framebuzz.controllers', []).
                             addNewThread(newThread);
 
                             $scope.clearFocus = false;
+                            $scope.updateSlider = true;
                             safeApply($scope);
                         }
                         
