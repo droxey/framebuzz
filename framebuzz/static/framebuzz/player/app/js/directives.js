@@ -25,6 +25,7 @@ angular.module('framebuzz.directives', [])
                 defaultVideoHeight: 385,
                 videoHeight: 385,
                 videoWidth: 640,
+                enablePluginSmoothing: true,
                 autosizeProgress: false,
                 success: function(media) {
                     $('.mejs-video').css({ height: '385px', width: '640px' });
@@ -38,7 +39,6 @@ angular.module('framebuzz.directives', [])
                     }
 
                     $('.mejs-volume-button').addClass('mejs-fade-in');
-                    $('.mejs-time-loaded').remove();
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
 
