@@ -111,6 +111,8 @@ def get_or_create_video(video_id):
       if 'M' in duration:
         minutes, seconds = duration.split('M')
         minutes = minutes.rstrip('M')
+        if len(seconds) == 0:
+          seconds = 0
       else:
         seconds = duration
         minutes = 0
