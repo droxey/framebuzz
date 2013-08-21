@@ -197,6 +197,9 @@ def videos(request, username):
 
 @login_required
 def edit_profile(request, username):
+    if username != request.user.username:
+        return HttpResponseRedirect(reverse('profiles-edit', args=[request.user.username,]))
+
     user = User.objects.get(username=username)
     submitted = request.method == 'POST'
     success = False

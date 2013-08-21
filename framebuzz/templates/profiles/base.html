@@ -43,24 +43,28 @@
                     <img src="{% static 'framebuzz/profiles/img/logo.png' %}" alt="FrameBuzz" height="48" width="208" />
                 </a>
                 {% if request.user.is_authenticated %}
-                    <ul class="nav pull-right">               
-                        <li class="settings">
-                            <a href="#videos" data-url="{% url 'profiles-videos' profile_user.username %}" class="tab-link dropdown-toggle hidden-phone">
-                                Library
-                            </a>
-                        </li>
+                    <ul class="nav pull-right">
+                        {% if request.user.id == profile_user.id %}       
+                            <li class="settings">
+                                <a href="#videos" data-url="{% url 'profiles-videos' profile_user.username %}" class="tab-link dropdown-toggle hidden-phone">
+                                    Library
+                                </a>
+                            </li>
+                        {% endif %}
                         <li class="settings user clearfix">
                             <a href="{% url 'profiles-home' request.user.username %}" role="button" class="avatar">
                                 <img src="{% avatar_url request.user 58 %}" alt="" height="28" width="28" class="img-circle" />
                             </a>
-                            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-cog"></i> <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#edit" class="tab-link" data-url="{% url 'profiles-edit' profile_user.username %}">Profile Settings</a></li>
-                                <li><a href="#avatar" class="tab-link" data-url="{% url 'avatar_change' %}">Change Avatar</a></li>
-                                <li><a href="{% url 'account_logout' %}">Log Out</a></li>
-                            </ul>
+                            {% if request.user.id == profile_user.id %} 
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-cog"></i> <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#edit" class="tab-link" data-url="{% url 'profiles-edit' profile_user.username %}">Profile Settings</a></li>
+                                    <li><a href="#avatar" class="tab-link" data-url="{% url 'avatar_change' %}">Change Avatar</a></li>
+                                    <li><a href="{% url 'account_logout' %}">Log Out</a></li>
+                                </ul>
+                            {% endif %}
                         </li>
                     </ul>  
                 {% endif %} 
