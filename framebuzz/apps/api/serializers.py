@@ -58,9 +58,9 @@ class UserSerializer(serializers.ModelSerializer):
         return obj.get_profile().get_absolute_url()
 
     def get_avatar_url(self, obj):
-        #avatar = get_primary_avatar(obj, size=88)
-        #if avatar:
-        #    return avatar.avatar_url(88)
+        avatar = get_primary_avatar(obj, size=66)
+        if avatar:
+            return avatar.avatar_url(66)
 
         if AVATAR_GRAVATAR_BACKUP:
             if obj.email:
