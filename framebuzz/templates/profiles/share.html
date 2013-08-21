@@ -5,6 +5,16 @@
     <title>FrameBuzz</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ video.description }}" />
+    <meta property="og:title" content="FrameBuzz: {{ video.title }}" />
+    <meta property="og:type" content="Video" />
+    <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.video_id %}" />
+    <meta property="og:image" content="{{ video.poster_image }}" />
+    <meta property="og:description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
+    <meta property="og:site_name" content="FrameBuzz" />
+    <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
+    <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
+    <meta itemprop="image" content="{{ video.poster_image }}" />
     {% compress css %}
         <!-- bootstrap -->
         <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap.css' %}" rel="stylesheet" />
