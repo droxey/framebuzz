@@ -22,6 +22,8 @@ form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, a
 canvas, details, embed, figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary, time, mark, audio, video {
     -webkit-font-smoothing: subpixel-antialiased;
+    text-stroke: 0px;
+    font-weight: normal;
 }
 
 a, a:link, a:visited, a:active, a:hover, button, img { outline: 0; }
@@ -129,8 +131,6 @@ object, embed, video, iframe {
                             top: 391px;
                         }
 
-                        &.safari { top: 392px; }
-
                         span.mejs-time-total {
                             @include border-radius(1px, 1px);
                             background: none;
@@ -173,6 +173,22 @@ object, embed, video, iframe {
                                     top: 15px;
                                 }
                             }                            
+                        }
+
+                        &.safari { top: 392px; }
+
+                        &.winff {
+                            top: 391px;
+                            height: 7px;
+
+                            span.mejs-time-total {
+                                height: 7px;
+                                line-height: 7px;
+
+                                span.mejs-time-loaded, span.mejs-time-current {
+                                    height: 7px;
+                                }
+                            }
                         }
                     }
 
