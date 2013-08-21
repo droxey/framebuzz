@@ -38,6 +38,9 @@ urlpatterns = patterns('',
     # Django-Comments:
     (r'^comments/', include('django.contrib.comments.urls')),
 
+    # Django-Activity-Stream:
+    (r'^activity/', include('actstream.urls')),
+
     # Marketing:
     url(r'^', include('framebuzz.apps.marketing.urls')),
 )

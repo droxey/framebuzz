@@ -1,4 +1,4 @@
-{% load staticfiles compress avatar_tags %}
+{% load staticfiles compress avatar_tags activity_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,6 +80,10 @@
                             <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">
                                 <img src="{% avatar_url profile_user 314 %}" alt="" height="157" width="157" class="img-circle" />
                             </a>
+                            {% ifequal request.user profile_user %}{% else %}
+                                <a class="btn btn-danger" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" id="unfollow_button" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>Unfollow</a>
+                                <a class="btn btn-success" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" id="follow_button" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>Follow</a>
+                            {% endifequal %}
                             <div class="user-details">
                                 <h1>
                                     <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">{{ profile_user.username }}</a>
@@ -311,6 +315,12 @@
                         $('ul.nav-tabs a[href="' + currentTab + '"]').trigger('click');
                     });
 
+                    return false;
+                });
+
+                $('body').on('click', '#follow_button, #unfollow_button', function () {
+                    $.post($(this).attr("href"), {});
+                    $(this).parent().find("#follow_button, #unfollow_button").toggle();
                     return false;
                 });
 

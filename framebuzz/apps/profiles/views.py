@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
@@ -22,13 +23,15 @@ def get_profile_header(username):
     profile_conversations = MPTTComment.objects.filter(user=user, parent=None)
     profile_followers = followers(user)
     profile_following = following(user)
+    ct = ContentType.objects.get(model='user') 
 
     return {
         'profile_favorites': profile_favorites,
         'profile_conversations': profile_conversations,
         'profile_followers': profile_followers,
         'profile_following': profile_following,
-        'profile_user': user
+        'profile_user': user,
+        'user_content_type': ct
     }
 
 
