@@ -13,12 +13,12 @@
     <meta property="og:title" content="FrameBuzz: {{ video.title }}" />
     <meta property="og:type" content="Video" />
     <meta property="og:url" content="http://frame.bz{% url 'video-embed' video.video_id %}" />
-    <meta property="og:image" content="{{ video.default_thumbnail.url }}" />
+    <meta property="og:image" content="{{ video.poster_image }}" />
     <meta property="og:description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
     <meta property="og:site_name" content="FrameBuzz" />
     <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
     <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
-    <meta itemprop="image" content="{{ video.default_thumbnail.url }}" />
+    <meta itemprop="image" content="{{ video.poster_image }}" />
     {% compress css %}
       <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/bootstrap-responsive.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
@@ -87,7 +87,7 @@
               <param name="movie" value="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}" />
               <param name="flashvars" value="controls=true&file=http://www.ytapi.com/api/{{ video.video_id }}/direct/35/" />
               <!-- Image as a last resort -->
-              <img src="{{ video.poster_image.url }}" height="385" width="640" title="No video playback capabilities" />
+              <img src="{{ video.poster_image }}" height="385" width="640" title="No video playback capabilities" />
           </object>
         </video>
         <div id="heatmap-and-post" data-ui-view=""></div>

@@ -1,15 +1,18 @@
-{% load staticfiles addendum_tags %}
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress %}
 
-{% load account socialaccount avatar_tags compress %}
-{% load url from future %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <title>{% block title %}FrameBuzz{% endblock %}</title>
-    <meta name="description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
+    <meta property="image" content="http://framebuzz.com{% static 'framebuzz/marketing/img/share_logo.jpg' %}" />
+    <meta property="og:image" content="http://framebuzz.com{% static 'framebuzz/marketing/img/share_logo.jpg' %}">
+    <meta property="og:url" content="http://framebuzz.com">
+    <meta property="og:description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
+    <meta property="og:title" content="FrameBuzz: Watch Whenever, Talk Together.">
     <script type="text/javascript" src="//use.typekit.net/jbo8iic.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     {% compress css %}
