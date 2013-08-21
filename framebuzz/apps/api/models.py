@@ -145,6 +145,18 @@ class Video(models.Model):
         except:
             pass
 
+    def poster_image(self):
+        poster_thumbnail = self.thumbnail_set.filter(url__endswith='maxresdefault.jpg')
+        if len(poster_thumbnail) == 0:
+            poster_thumbnail = self.thumbnail_set.filter(url__endswith='hqdefault.jpg')
+
+        try:
+            poster = poster_thumbnail[0]
+        except:
+            poster = self.default_thumbnail()
+        finally:
+            return poster.url
+
     def embed_code(self):
         full_url = 'http://frame.bz%s' % self.get_absolute_url()
         return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0" height="440" width="640"></iframe>' % full_url)
