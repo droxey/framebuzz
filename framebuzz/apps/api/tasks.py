@@ -260,6 +260,7 @@ def add_comment_action(context):
                             'comment': thread,
                             'site': Site.objects.get_current(),
                             'recipient': thread.user,
+                            'user': user,
                         })
         elif thread_action == 'flag':
             commentFlag, created = CommentFlag.objects.get_or_create(
