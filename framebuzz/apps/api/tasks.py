@@ -45,31 +45,9 @@ def update_video_urls(video_id=None):
             logger.info('%s: Unknown mp4 url.', video.video_id)
             mp4_url = None
 
-        try:
-            get_webm = 'youtube-dl -f 44 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
-            webm_url = subprocess.check_output(get_webm, shell=True)
-        except:
-            logger.info('%s: Unknown webm url.', video.video_id)
-            webm_url = None
-
-        try:
-            get_flv = 'youtube-dl -f 34 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
-            flv_url = subprocess.check_output(get_flv, shell=True)
-        except:
-            logger.info('%s: Unknown flv url.', video.video_id)
-            flv_url = None
-
         if mp4_url and mp4_url.startswith('http'):
             logger.info('%s: Setting mp4 url.', video.video_id)
             video.mp4_url = mp4_url
-
-        if webm_url and webm_url.startswith('http'):
-            logger.info('%s: Setting webm url.', video.video_id)
-            video.webm_url = webm_url
-        
-        if flv_url and flv_url.startswith('http'):
-            logger.info('%s: Setting flv url.', video.video_id)
-            video.flv_url = flv_url
         
         logger.info('%s: Saving video.', video.video_id)
         video.save()
