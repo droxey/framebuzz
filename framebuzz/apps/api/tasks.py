@@ -27,6 +27,8 @@ from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerialize
 
 @periodic_task(run_every=crontab(minute=0, hour=[0,6,12,18]))
 def update_video_urls(video_id=None):
+    logger = update_video_urls.get_logger()
+
     if video_id:
         videos = list()
         video = Video.objects.get(video_id=video_id)
@@ -35,33 +37,41 @@ def update_video_urls(video_id=None):
         videos = Video.objects.all()
 
     for video in videos:
+        logger.info('%s: Updating video urls.', video.video_id)
         try:
             get_mp4 = 'youtube-dl -f 18 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
             mp4_url = subprocess.check_output(get_mp4, shell=True)
         except:
-            mp4_url = ''
+            logger.info('%s: Unknown mp4 url.', video.video_id)
+            mp4_url = None
 
         try:
             get_webm = 'youtube-dl -f 43 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
             webm_url = subprocess.check_output(get_webm, shell=True)
         except:
-            webm_url = ''
+            logger.info('%s: Unknown webm url.', video.video_id)
+            webm_url = None
 
         try:
             get_flv = 'youtube-dl -f 34 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
             flv_url = subprocess.check_output(get_flv, shell=True)
         except:
-            flv_url = ''
+            logger.info('%s: Unknown flv url.', video.video_id)
+            flv_url = None
 
-        if mp4_url.startswith('http'):
+        if mp4_url and mp4_url.startswith('http'):
+            logger.info('%s: Setting mp4 url.', video.video_id)
             video.mp4_url = mp4_url
 
-        if webm_url.startswith('http'):
+        if webm_url and webm_url.startswith('http'):
+            logger.info('%s: Setting webm url.', video.video_id)
             video.webm_url = webm_url
         
-        if flv_url.startswith('http'):
+        if flv_url and flv_url.startswith('http'):
+            logger.info('%s: Setting flv url.', video.video_id)
             video.flv_url = flv_url
         
+        logger.info('%s: Saving video.', video.video_id)
         video.save()
 
 
