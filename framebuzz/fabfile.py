@@ -427,7 +427,8 @@ def regenerate_avatars():
 @task
 @log_call
 def update_video_urls():
-    manage('update_video_urls')
+    with project():
+        manage('update_video_urls')
 
 @task
 @log_call
@@ -492,7 +493,7 @@ def deploy():
             pass
 
         # Keep youtube-dl updated always.
-        pip('install -U youtube-dl')
+        pip('-U youtube-dl')
 
         manage("collectstatic -v 0 --noinput")
         manage("syncdb --noinput")

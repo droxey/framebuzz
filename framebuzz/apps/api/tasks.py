@@ -35,14 +35,23 @@ def update_video_urls(video_id=None):
         videos = Video.objects.all()
 
     for video in videos:
-        get_mp4 = 'youtube-dl -f 18 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
-        mp4_url = subprocess.check_output(get_mp4, shell=True)
+        try:
+            get_mp4 = 'youtube-dl -f 18 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
+            mp4_url = subprocess.check_output(get_mp4, shell=True)
+        except:
+            mp4_url = ''
 
-        get_webm = 'youtube-dl -f 43 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
-        webm_url = subprocess.check_output(get_webm, shell=True)
+        try:
+            get_webm = 'youtube-dl -f 43 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
+            webm_url = subprocess.check_output(get_webm, shell=True)
+        except:
+            webm_url = ''
 
-        get_flv = 'youtube-dl -f 34 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
-        flv_url = subprocess.check_output(get_flv, shell=True)
+        try:
+            get_flv = 'youtube-dl -f 34 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
+            flv_url = subprocess.check_output(get_flv, shell=True)
+        except:
+            flv_url = ''
 
         if mp4_url.startswith('http'):
             video.mp4_url = mp4_url

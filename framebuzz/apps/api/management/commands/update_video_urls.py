@@ -6,4 +6,4 @@ class Command(NoArgsCommand):
     help = ("Regenerates the direct YouTube urls.")
 
     def handle_noargs(self, **options):
-        update_video_urls()
+        update_video_urls.delay()
