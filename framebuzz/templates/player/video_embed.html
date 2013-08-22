@@ -78,8 +78,17 @@
     <div id="player-container" class="container">
       <div id="player-layer" class="layer">
         <video data-media-element="" class="span12" id="video-element" preload="true" height="385" width="640" poster="{{ video.poster_image }}">
-            <source type="video/mp4" src="{{ mp4_url }}" />
-            <source type="video/webm" src="{{ webm_url }}" />
+<!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+          <source type="video/mp4" src="http://www.ytapi.com/api/{{ video.video_id }}/direct/18/" />
+          <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+          <source type="video/webm" src="http://www.ytapi.com/api/{{ video.video_id }}/direct/44/" />
+          <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
+          <object height="385" width="640" type="application/x-shockwave-flash" data="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
+              <param name="movie" value="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}" />
+              <param name="flashvars" value="controls=true&file=http://www.ytapi.com/api/{{ video.video_id }}/direct/35/" />
+              <!-- Image as a last resort -->
+              <img src="{{ video.poster_image }}" height="385" width="640" title="No video playback capabilities" />
+          </object>
         </video>
         <div id="heatmap-and-post" data-ui-view=""></div>
       </div>
