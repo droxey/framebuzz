@@ -46,7 +46,7 @@ def update_video_urls(video_id=None):
             mp4_url = None
 
         try:
-            get_webm = 'youtube-dl -f 43 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
+            get_webm = 'youtube-dl -f 44 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
             webm_url = subprocess.check_output(get_webm, shell=True)
         except:
             logger.info('%s: Unknown webm url.', video.video_id)
