@@ -161,7 +161,6 @@ def initialize_video_player(context):
     user = context.get('user', None)
 
     logger.info(video_id)
-    update_video_urls.delay(video_id=video_id)
 
     # Get Video.
     video = Video.objects.get(video_id=video_id) 
