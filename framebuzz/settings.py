@@ -416,6 +416,7 @@ SOCKJS_CLASSES = (
 ## Dashboard
 LOGIN_URL = '/dashboard/register/'
 
+
 ###################
 # DEPLOY SETTINGS #
 ###################

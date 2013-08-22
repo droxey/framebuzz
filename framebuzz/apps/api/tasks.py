@@ -2,6 +2,10 @@ import celery
 import datetime
 import json
 import redis
+import subprocess
+
+from celery.task.schedules import crontab
+from celery.decorators import periodic_task
 
 from django.conf import settings
 from django.contrib import auth
@@ -19,7 +23,37 @@ from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.forms import MPTTCommentForm
 from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
 from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
-from framebuzz.apps.api.backends.youtube import get_or_create_video
+
+
+@periodic_task(run_every=crontab(minute=0, hour=[0,6,12,18]))
+def update_video_urls(video_id=None):
+    if video_id:
+        videos = list()
+        video = Video.objects.get(video_id=video_id)
+        videos.append(video)
+    else:
+        videos = Video.objects.all()
+
+    for video in videos:
+        get_mp4 = 'youtube-dl -f 18 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
+        mp4_url = subprocess.check_output(get_mp4, shell=True)
+
+        get_webm = 'youtube-dl -f 43 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
+        webm_url = subprocess.check_output(get_webm, shell=True)
+
+        get_flv = 'youtube-dl -f 34 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
+        flv_url = subprocess.check_output(get_flv, shell=True)
+
+        if mp4_url.startswith('http'):
+            video.mp4_url = mp4_url
+
+        if webm_url.startswith('http'):
+            video.webm_url = webm_url
+        
+        if flv_url.startswith('http'):
+            video.flv_url = flv_url
+        
+        video.save()
 
 
 def construct_message(event_type, channel, data):

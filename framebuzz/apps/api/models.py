@@ -1,4 +1,5 @@
 from datetime import datetime, date
+from subprocess import call
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -118,6 +119,9 @@ class Video(models.Model):
     duration = models.BigIntegerField()
     added_by = models.ForeignKey(User, blank=True, null=True)
     added_on = models.DateTimeField(auto_now=True)
+    mp4_url = models.URLField(max_length=1000, blank=True, null=True)
+    webm_url = models.URLField(max_length=1000, blank=True, null=True)
+    flv_url = models.URLField(max_length=1000, blank=True, null=True)
 
     class Meta:
         verbose_name = 'FrameBuzz Video'

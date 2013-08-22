@@ -426,6 +426,11 @@ def regenerate_avatars():
 
 @task
 @log_call
+def update_video_urls():
+    manage('update_video_urls')
+
+@task
+@log_call
 def restart():
     """
     Restart gunicorn worker processes for the project.
@@ -485,6 +490,9 @@ def deploy():
         run("%s > last.commit" % last_commit)
         with update_changed_requirements():
             pass
+
+        # Keep youtube-dl updated always.
+        pip('install -U youtube-dl')
 
         manage("collectstatic -v 0 --noinput")
         manage("syncdb --noinput")
