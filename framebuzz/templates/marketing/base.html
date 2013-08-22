@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}FrameBuzz{% endblock %}</title>
+    {% block marketing_title %}<title>FrameBuzz</title>{% endblock %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta itemprop="description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
@@ -14,6 +14,7 @@
     <meta property="og:description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
     <meta property="og:title" content="FrameBuzz: Watch Whenever, Talk Together.">
     <meta property="og:site_name" content="FrameBuzz">
+    {% block marketing_meta %}{% endblock %}
     <script type="text/javascript" src="//use.typekit.net/jbo8iic.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     {% compress css %}
@@ -66,7 +67,7 @@
         </div>
     </div>
     <div class="marketing-content">
-        {% block content %}{% endblock %}
+        {% block marketing_content %}{% endblock %}
     </div>
     <div class="footer">
       <div class="wrapper clearfix">

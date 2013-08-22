@@ -934,6 +934,7 @@ div.marketing-content {
     div.content-wrapper {
         background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
         background-color: white;
+        box-shadow: 0 -5px 0 5px rgba(0, 0, 0, 0.10);
         margin: 0 auto;
         width: 1200px;
 
@@ -959,6 +960,7 @@ div.marketing-content {
     }
 }
 
+
 body.background-bottom {
     &.terms {
         div.marketing-content {
@@ -974,7 +976,7 @@ body.background-bottom {
         }
     }
 
-    &.accounts {
+    &.accounts, &.zinnia {
         div.marketing-content {
             min-height: 840px;
             width: 100%;
@@ -990,6 +992,26 @@ body.background-bottom {
                 top: auto !important;
                 bottom: -5px !important;
                 height: 1178px !important;
+            }
+        }
+    }
+}
+
+/*
+ *      FrameBuzz Blog
+ */
+
+body.zinnia {
+    font: 14px/18px normal 'proxima-nova';
+
+    div.marketing-content {
+        div.wrapper {
+            #zinnia-content {
+                background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+                background-color: white;
+                box-shadow: 0 -5px 0 5px rgba(0, 0, 0, 0.10);
+                padding-top: 20px;
+                min-height: 840px;
             }
         }
     }

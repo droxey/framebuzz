@@ -1,0 +1,85 @@
+{% extends "marketing/base.html" %}
+{% load i18n staticfiles compress %}
+{% load url from future %}
+
+{% block marketing_title %}{% endblock %}
+
+{% block marketing_meta %}
+    <title>FrameBuzz Blog - {% block title %}{% endblock %}</title>
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{% block meta-description %}FrameBuzz Blog.{% endblock %}" />
+    <meta name="keywords" content="{% block meta-keywords %}framebuzz, blog{% endblock %}" />
+    <meta name="author" content="FrameBuzz" />
+    {% block meta %}{% endblock %}
+    <link rel="pingback" href="/xmlrpc/" />
+    <link rel="home" href="{% url 'zinnia_entry_archive_index' %}" />
+    {% compress css %}
+    <link href="{{ STATIC_URL }}zinnia_bootstrap/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}zinnia_bootstrap/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    {% endcompress %}
+{% endblock %}
+
+{% block page_css %}
+    {% block link %}{% endblock %}
+    {% block script %}{% endblock %}
+{% endblock %}
+
+{% block page_classes %}zinnia background-bottom {% block body-class %}{% endblock %}{% endblock %}
+
+{% block marketing_content %}
+<div class="wrapper">
+    <div id="zinnia-content">
+        <div class="container">
+          {% block breadcrumbs %}{% endblock %}
+        </div>
+        {% block slider %}{% endblock %}
+        <div class="container">
+          <div class="row">
+            <div id="content" class="hfeed span8">
+              {% block content %}
+              <div class="links">
+                <h3>{% trans "Useful links" %}</h3>
+                <ul>
+                  <li>
+                    <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Blog index" %}">
+                      {% trans "Blog index" %}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}">
+                      {% trans "Sitemap" %}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="search">
+                <h3>{% trans "Search" %}</h3>
+                {% include "zinnia/tags/search_form.html" %}
+              </div>
+              {% endblock %}
+            </div>
+            <div id="sidebar" class="span4">
+              <div id="widget-welcome" class="widget well">
+                <h3>Welcome!</h3>
+                <p>
+                  This simple skin is a base theme implementing Twitter's Bootstrap CSS toolkit.
+                </p>
+              </div>
+              {% block sidebar %}
+              {% endblock %}
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block page_javascript %}
+    <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('div.marketing-content').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150, positionY: 'bottom' });
+        });
+    </script>
+{% endblock %}

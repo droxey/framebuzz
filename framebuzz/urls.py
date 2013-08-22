@@ -41,6 +41,9 @@ urlpatterns = patterns('',
     # Django-Activity-Stream:
     (r'^activity/', include('actstream.urls')),
 
+    # Zinnia:
+    url(r'^blog/', include('zinnia.urls')),
+
     # Marketing:
     url(r'^', include('framebuzz.apps.marketing.urls')),
 )

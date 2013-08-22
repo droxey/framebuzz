@@ -137,9 +137,12 @@ TEMPLATE_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    "django.core.context_processors.request",
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.request',
+    'django.core.context_processors.media',
 
-    #"core.context_processors.view_playlist_processor",
+    'zinnia.context_processors.version',
 
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
@@ -220,6 +223,12 @@ INSTALLED_APPS = (
     'raven.contrib.django.raven_compat',
     'django_sockjs_tornado',
     'addendum',
+
+    # Required by Zinnia
+    'tagging',
+    'mptt',
+    'zinnia_bootstrap',
+    'zinnia',
 
     # FrameBuzz Apps
     'framebuzz.apps.api',
