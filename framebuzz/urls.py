@@ -42,6 +42,7 @@ urlpatterns = patterns('',
     (r'^activity/', include('actstream.urls')),
 
     # Zinnia:
+    (r'^tinymce/', include('tinymce.urls')),
     url(r'^blog/', include('zinnia.urls')),
 
     # Marketing:

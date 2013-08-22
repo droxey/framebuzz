@@ -225,6 +225,7 @@ INSTALLED_APPS = (
     'addendum',
 
     # Required by Zinnia
+    'tinymce',
     'tagging',
     'mptt',
     'zinnia_bootstrap',

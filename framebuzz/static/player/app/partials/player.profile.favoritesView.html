@@ -1,0 +1,12 @@
+<ul class="comment-stream" data-ng-if="userProfile.favorite_comments > 0">
+    <li data-ng-repeat="thread in userProfile.favorites_list">
+        <div class="thread">
+            <div class="header">
+                <a class="username">{{ thread.user.username }}</a>
+                <strong class="time" data-ng-click="openPlayerLink(thread.thread_url)">{{ thread.time_hms }}</strong>
+            </div>
+            <p ng-bind-html-unsafe="thread.comment"></p>
+        </div>
+    </li>
+</ul>
+<p class="none" data-ng-if="userProfile.favorite_comments == 0">No favorites yet!</p>

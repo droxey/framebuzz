@@ -17,13 +17,15 @@
     {% endif %}
     {% endfor %}
     {% if user.is_authenticated %}
-    <p class="auth">
-      {% trans "Comment as" %} <strong>{% firstof user.get_full_name user.username %}</strong>. <a href="{% url 'admin:logout' %}">{% trans "Log out" %}</a>.
-    </p>
-    {% endif %}
-    <p class="submit">
-      <input type="submit" name="preview" class="submit-preview btn" value="{% trans "Preview" %}" />
-      <input type="submit" name="submit" class="submit-post btn btn-primary" value="{% trans "Post" %}" />
-    </p>
+    <div class="clearfix">
+      <p class="auth">
+        {% trans "Comment as" %} <strong>{% firstof user.get_full_name user.username %}</strong>. <a href="{% url 'account_logout' %}">{% trans "Log out" %}</a>.
+      </p>
+      {% endif %}
+      <p class="submit clearfix">
+        <input type="submit" name="submit" class="submit-post btn btn-primary" value="{% trans "Post" %}" />
+        <input type="submit" name="preview" class="submit-preview btn" value="{% trans "Preview" %}" />
+      </p>
+    </div>
   </fieldset>
 </form>

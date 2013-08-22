@@ -1,0 +1,18 @@
+<div id="activity" data-scrollbar="true" class="scrollable">
+    <ul>
+        <li data-ng-repeat="activity in activities">
+            <p data-ng-if="activity.verb == 'replied to your comment'">
+                <strong data-ng-click="getUserProfile(activity.actor)">{{ activity.actor }}</strong> 
+                    replied to your comment &ldquo;<a data-ng-click="openPlayerLink(activity.thread_url)">{{ activity.action_object }}</a>.&rdquo;
+            </p>
+            <p data-ng-if="activity.verb == 'added your comment to favorites'">
+                <strong data-ng-click="getUserProfile(activity.actor)">{{ activity.actor }}</strong> 
+                    added your comment &ldquo;<a data-ng-click="openPlayerLink(activity.thread_url)">{{ activity.action_object }}</a>&rdquo; to favorites.
+            </p>
+            <p data-ng-if="activity.verb != 'replied to your comment' && activity.verb != 'added your comment to favorites'">
+                <strong data-ng-click="getUserProfile(activity.actor)">{{ activity.actor }}</strong> {{ activity.verb }}
+            </p>
+            <p class="timesince">{{ activity.timesince }} ago</p>
+        </li>
+    </ul>
+</div>

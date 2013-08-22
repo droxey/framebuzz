@@ -42,8 +42,8 @@
 <aside class="entry-widgets" role="complementary">
   {% with entry_related=object.related_published %}
   {% if entry_related %}
-  <div class="entry-related well">
-    <h3>{% trans "Related entries" %}</h3>
+  <div class="entry-related">
+    <h3>{% trans "Related Entries" %}</h3>
     <ul>
       {% for entry in entry_related %}
       <li>
@@ -54,10 +54,6 @@
   </div>
   {% endif %}
   {% endwith %}
-  <div class="entry-similar well">
-    <h3>{% trans "Similar entries" %}</h3>
-    {% get_similar_entries %}
-  </div>
   <div class="entry-prev-next">
     <ul class="pager">
       {% with next_entry=object.next_entry %}
@@ -79,6 +75,10 @@
       {% endif %}
       {% endwith %}
     </ul>
+  </div>
+  <div class="entry-similar">
+    <h3>{% trans "Similar Entries" %}</h3>
+    {% get_similar_entries %}
   </div>
 </aside>
 {% endblock %}
