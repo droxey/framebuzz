@@ -1,4 +1,4 @@
-{% load staticfiles addendum_tags account socialaccount avatar_tags compress %}
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress feedback_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,6 @@
     <![endif]-->
   </head>
   <body class="{% block page_classes %}{% endblock %}">
-    {% providers_media_js %}
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <div class="wrapper">

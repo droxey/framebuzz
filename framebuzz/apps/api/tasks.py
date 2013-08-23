@@ -2,10 +2,6 @@ import celery
 import datetime
 import json
 import redis
-import subprocess
-
-from celery.task.schedules import crontab
-from celery.decorators import periodic_task
 
 from django.conf import settings
 from django.contrib import auth
@@ -23,34 +19,6 @@ from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.forms import MPTTCommentForm
 from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
 from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
-
-
-@periodic_task(run_every=crontab(minute=0, hour=[0,6,12,18]))
-def update_video_urls(video_id=None):
-    logger = update_video_urls.get_logger()
-
-    if video_id:
-        videos = list()
-        video = Video.objects.get(video_id=video_id)
-        videos.append(video)
-    else:
-        videos = Video.objects.all()
-
-    for video in videos:
-        logger.info('%s: Updating video urls.', video.video_id)
-        try:
-            get_mp4 = 'youtube-dl -f 18 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
-            mp4_url = subprocess.check_output(get_mp4, shell=True)
-        except:
-            logger.info('%s: Unknown mp4 url.', video.video_id)
-            mp4_url = None
-
-        if mp4_url and mp4_url.startswith('http'):
-            logger.info('%s: Setting mp4 url.', video.video_id)
-            video.mp4_url = mp4_url
-        
-        logger.info('%s: Saving video.', video.video_id)
-        video.save()
 
 
 def construct_message(event_type, channel, data):

@@ -10,6 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Admin:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
     # Player API:
@@ -40,6 +41,9 @@ urlpatterns = patterns('',
 
     # Django-Activity-Stream:
     (r'^activity/', include('actstream.urls')),
+
+    # Feedback:
+    (r'^feedback/', include('feedback.urls')),
 
     # Zinnia:
     (r'^tinymce/', include('tinymce.urls')),

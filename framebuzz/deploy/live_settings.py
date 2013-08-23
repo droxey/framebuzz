@@ -30,7 +30,9 @@ DATABASES = {
 
 #SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
-
+RAVEN_CONFIG = {
+    'dsn': 'https://b14b841441f348b2bd29aa34c79948fb:8ad5006d4856408fad7cf735e0498315@app.getsentry.com/11190',
+}
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'framebuzz'

@@ -72,6 +72,11 @@ DATABASE_POOL_ARGS = {
     'recycle': 300
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
 
 
 #########
@@ -158,6 +163,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 
+    'tracking.middleware.VisitorTrackingMiddleware',
+    'tracking.middleware.VisitorCleanUpMiddleware',
+    'tracking.middleware.BannedIPMiddleware',
+
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
@@ -197,7 +206,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
 
     # Admin Apps
-    'suit',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.admindocs',
 
@@ -223,6 +232,9 @@ INSTALLED_APPS = (
     'raven.contrib.django.raven_compat',
     'django_sockjs_tornado',
     'addendum',
+    'feedback',
+    'tracking',
+    'watson',
 
     # Required by Zinnia
     'tinymce',
@@ -238,29 +250,8 @@ INSTALLED_APPS = (
     'framebuzz.apps.marketing',
 )
 
-SUIT_CONFIG = {
-    'ADMIN_NAME': 'FrameBuzz Administration',
-    'HEADER_DATE_FORMAT': 'l, j. F Y',
-    'HEADER_TIME_FORMAT': 'H:i',
-    'SEARCH_URL': '/admin/auth/user/',
-    'MENU_ICONS': {
-       'sites': 'icon-leaf',
-       'auth': 'icon-lock',
-    },
-    'MENU_OPEN_FIRST_CHILD': True, # Default True
-    'MENU_EXCLUDE': ('auth.group',),
-    'MENU': (
-        'sites',
-        {'app': 'auth', 'icon':'icon-lock', 'models': ('user', 'group')},
-        {'label': 'Settings', 'icon':'icon-cog', 'models': ('auth.user', 'auth.group')},
-        {'label': 'Support', 'icon':'icon-question-sign', 'url': '/support/'},
-    ),
-    'LIST_PER_PAGE': 15
-}
-
-RAVEN_CONFIG = {
-    'dsn': 'https://b14b841441f348b2bd29aa34c79948fb:8ad5006d4856408fad7cf735e0498315@app.getsentry.com/11190',
-}
+# Django-Grappelli:
+GRAPPELLI_ADMIN_TITLE = 'FrameBuzz'
 
 ACTSTREAM_SETTINGS = {
     'MODELS': (
@@ -326,6 +317,9 @@ SOCIALACCOUNT_PROVIDERS = {
         ]
     }
 }
+
+# Django-Tracking:
+NO_TRACKING_PREFIXES = ['/admin/',]
 
 # Django-Avatar Settings:
 AVATAR_ALLOWED_FILE_EXTS = ['.jpg', '.png']

@@ -1,5 +1,6 @@
 import json
 import subprocess
+import urllib
 
 from django.conf import settings
 from django.http import HttpResponse
@@ -33,17 +34,17 @@ def video_embed(request, video_id):
     video, created = get_or_create_video(video_id)
     next_url = '%s?close=true' % reverse('video-embed', args=(video.video_id,))
 
-    # try:
-    #     get_mp4 = 'youtube-dl -f 18 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
-    #     mp4_url = subprocess.check_output(get_mp4, shell=True)
-    # except:
-    #     mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
+    try:
+        get_mp4 = 'youtube-dl -f 18 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
+        mp4_url = subprocess.check_output(get_mp4, shell=True)
+    except:
+        mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
 
-    # try:
-    #     get_webm = 'youtube-dl -f 43 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
-    #     webm_url = subprocess.check_output(get_webm, shell=True)
-    # except:
-    #     webm_url = 'http://www.ytapi.com/api/%s/direct/44/' % video_id
+    try:
+        get_webm = 'youtube-dl -f 43 http://www.youtube.com/watch?v=%s --get-url' % video.video_id
+        webm_url = subprocess.check_output(get_webm, shell=True)
+    except:
+        webm_url = 'http://www.ytapi.com/api/%s/direct/44/' % video_id
 
     if request.user.is_authenticated():
         # Send a signal that the user has viewed this video.
@@ -58,8 +59,8 @@ def video_embed(request, video_id):
         'user_channel': '/framebuzz/session/%s' % request.session.session_key,
         'is_authenticated': request.user.is_authenticated(),
         'next_url': next_url,
-        # 'mp4_url': mp4_url,
-        # 'webm_url': webm_url,
+        'mp4_url': mp4_url,
+        'webm_url': webm_url,
     },
     context_instance=RequestContext(request))
 

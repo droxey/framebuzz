@@ -5,7 +5,6 @@ import requests
 
 from django.conf import settings
 from framebuzz.apps.api.models import Video, Thumbnail
-from framebuzz.apps.api.tasks import update_video_urls
 
 
 def get_uploaded_videos(auth_token):
@@ -119,7 +118,6 @@ def get_or_create_video(video_id):
 
       video.duration = (int(hours) * 1400) + (int(minutes) * 60) + int(seconds)
       video.save()
-      update_video_urls.delay(video_id=video.video_id)
       created = True
 
       # show thumbnails
