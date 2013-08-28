@@ -9,6 +9,8 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
+handler500 = "framebuzz.apps.marketing.views.server_error"
+
 urlpatterns = patterns('',
     # Admin:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
