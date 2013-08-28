@@ -234,7 +234,7 @@ INSTALLED_APPS = (
     'django_sockjs_tornado',
     'addendum',
     'feedback',
-    'tracking',
+    #'tracking',
     'watson',
 
     # Required by Zinnia
