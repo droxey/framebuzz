@@ -62,6 +62,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="#edit" class="tab-link" data-url="{% url 'profiles-edit' profile_user.username %}">Profile Settings</a></li>
                                     <li><a href="#avatar" class="tab-link" data-url="{% url 'avatar_change' %}">Change Avatar</a></li>
+                                    <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
                                     <li><a href="{% url 'account_logout' %}">Log Out</a></li>
                                 </ul>
                             {% endif %}
