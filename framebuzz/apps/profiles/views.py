@@ -38,6 +38,8 @@ def get_profile_header(username):
 def logged_in(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
+    else:
+        return HttpResponseRedirect(reverse('account_login'))
 
 
 def home(request, username):
