@@ -44,22 +44,19 @@
                     // append HTML for each network button
                     $.each(networks, function(index, item) {
                         // CUSTOM: update t for each network.
-                        if (item == 'facebook') {
-                            newText = "I&rsquo;m watching &ldquo;" + t + ".&rdquo; Come talk about it with me on FrameBuzz! ";
-                        } else if (item == 'googleplus') {
-                            newText = "I&rsquo;m watching &ldquo;" + t + ".&rdquo; Come talk about it with me on FrameBuzz! ";
-                        } else if (item == 'twitter') {
+                        if (item == 'twitter') {
                             newText = "I&rsquo;m watching &ldquo;";
 
-                            if (t.length > 62) {
-                                newText += t.substring(0, 59) + '...';
+                            if (t.length >= 65) {
+                                newText += t.substring(0, 62) + '...';
                             }
                             else {
                                 newText += t + '.';
                             }
                              newText += "&rdquo; Come talk about it with me on FrameBuzz! ";
                         } else {
-                            newText = t;
+                            newText = "I&rsquo;m watching &ldquo;" + t + ".&rdquo; Come talk about it with me on FrameBuzz! ";
+                            d = "I&rsquo;m watching &ldquo;" + t + ".&rdquo; Come talk about it with me on FrameBuzz! ";
                         }
 
                         href = helpers.networkDefs[item].url;
@@ -120,7 +117,7 @@
                 in1:{url:'http://www.in1.com/cast?u=|u|',w:'490',h:'529'},
                 tumblr:{url:'http://www.tumblr.com/share?v=3&u=|u|'},
                 digg:{url:'http://digg.com/submit?url=|u|&title=|t|'},
-                googleplus:{url:'https://plusone.google.com/_/+1/confirm?hl=en&url=|u|'},
+                googleplus:{url:'https://plusone.google.com/_/+1/confirm?hl=en&url=|u|&compose=|t|'},
                 reddit:{url:'http://reddit.com/submit?url=|u|'},
                 pinterest:{url:'http://pinterest.com/pin/create/button/?url=|u|&media=&description=|d|'},
                 posterous:{url:'http://posterous.com/share?linkto=|u|&title=|t|'},
