@@ -47,8 +47,8 @@
                         if (item == 'twitter') {
                             newText = "I\'m watching \"";
 
-                            if (t.length >= 65) {
-                                newText += t.substring(0, 62) + '...';
+                            if (t.length >= 60) {
+                                newText += t.substring(0, 57) + '...';
                             }
                             else {
                                 newText += t + '.';
