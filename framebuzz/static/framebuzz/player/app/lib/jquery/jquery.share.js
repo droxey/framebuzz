@@ -45,7 +45,7 @@
                     $.each(networks, function(index, item) {
                         // CUSTOM: update t for each network.
                         if (item == 'twitter') {
-                            newText = "I&rsquo;m watching &ldquo;";
+                            newText = "I\'m watching \"";
 
                             if (t.length >= 65) {
                                 newText += t.substring(0, 62) + '...';
@@ -53,14 +53,15 @@
                             else {
                                 newText += t + '.';
                             }
-                             newText += "&rdquo; Come talk about it with me on FrameBuzz! ";
+                            
+                            newText += "\" Come talk about it with me on FrameBuzz! ";
                         } else {
-                            newText = "I&rsquo;m watching &ldquo;" + t + ".&rdquo; Come talk about it with me on FrameBuzz! ";
-                            d = "I&rsquo;m watching &ldquo;" + t + ".&rdquo; Come talk about it with me on FrameBuzz! ";
+                            newText = "I\'m watching \"" + t + ".\" Come talk about it with me on FrameBuzz! ";
+                            d = "I\'m watching \"" + t + ".\" Come talk about it with me on FrameBuzz! ";
                         }
 
                         href = helpers.networkDefs[item].url;
-                        href = href.replace('|u|',u).replace('|t|',newText).replace('|d|',d).replace('|140|',newText.substring(0,130));
+                        href = href.replace('|u|',u).replace('|t|', escape(newText)).replace('|d|',escape(d)).replace('|140|',escape(newText.substring(0,140)));
                         $("<a href='"+href+"' title='Share this page on "+item+"' class='pop share-"+theme+" share-"+theme+"-"+item+"'></a>").appendTo($element);
                     });
 
