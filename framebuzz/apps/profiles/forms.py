@@ -9,14 +9,14 @@ from framebuzz.apps.api.backends.youtube import get_or_create_video
 class UserProfileForm(forms.ModelForm):
     latitude = forms.CharField(widget=forms.HiddenInput(), required=False)
     longitude = forms.CharField(widget=forms.HiddenInput(), required=False)
-    bio = forms.CharField(widget=forms.Textarea, required=False)
-    birthday = forms.DateField(widget=forms.DateInput(format = '%m/%d/%Y'), input_formats=('%m/%d/%Y',))
+    bio = forms.CharField(label='About Me', widget=forms.Textarea, required=False)
+    #birthday = forms.DateField(widget=forms.DateInput(format = '%m/%d/%Y'), input_formats=('%m/%d/%Y',))
     time_zone = TimeZoneFormField(required=False, label='Time Zone')
-    website = forms.URLField(required=False, label='Website')
+    #website = forms.URLField(required=False, label='Website')
     
     class Meta:
         model = UserProfile
-        exclude = ('premium', 'websites', 'user', 'youtube_username', )
+        exclude = ('premium', 'websites', 'user', 'youtube_username', 'birthday', 'profession',)
     
     def __init__(self, *args, **kwargs ):
         self.request = kwargs.pop('request')
