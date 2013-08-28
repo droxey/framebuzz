@@ -1,3 +1,5 @@
+import re
+
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
@@ -53,7 +55,18 @@ urlpatterns = patterns('',
     url(r'^', include('framebuzz.apps.marketing.urls')),
 )
 
+def static_always(prefix, document_root, name):
+    """
+    Always serve static files.
+
+    Normally Django doesn't serve static files if DEBUG is off. If we don't
+    want Django to serve static files it's as simple as setting the web proxy (nginx)
+    to not forward those requests.
+    """
+    return patterns('',
+        url(r'^%s(?P<path>.*)$' % re.escape(prefix.lstrip('/')), 'django.views.static.serve', kwargs=dict(document_root=document_root), name=name),
+    )
+
 if settings.DEBUG:
-    urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL,
-        document_root=settings.MEDIA_ROOT)
+    urlpatterns += static_always(settings.STATIC_URL, settings.STATIC_ROOT, name='static')
+    urlpatterns += static_always(settings.MEDIA_URL, settings.MEDIA_ROOT, name='media')

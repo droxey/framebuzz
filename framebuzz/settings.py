@@ -12,6 +12,8 @@ ADMINS = (
     ('Dani Roxberry', 'dani@framebuzz.com'),
 )
 
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', 'framebuzz.com', 'frame.bz',]
+
 MANAGERS = ADMINS
 
 # Local time zone for this installation. Choices can be found here:
@@ -116,7 +118,6 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(STATIC_ROOT, 'framebuzz'),
 )
 
 # List of finder classes that know how to find static files in
