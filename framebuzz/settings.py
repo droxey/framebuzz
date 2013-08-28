@@ -164,9 +164,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 
-    'tracking.middleware.VisitorTrackingMiddleware',
-    'tracking.middleware.VisitorCleanUpMiddleware',
-    'tracking.middleware.BannedIPMiddleware',
+    #'tracking.middleware.VisitorTrackingMiddleware',
+    #'tracking.middleware.VisitorCleanUpMiddleware',
+    #'tracking.middleware.BannedIPMiddleware',
 
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
