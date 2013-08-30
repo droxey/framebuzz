@@ -157,7 +157,7 @@ angular.module('framebuzz.controllers', []).
                     var postData = {
                         'object_pk': $scope.videoInstance.video.id,
                         'content_type': 'core.video',
-                        'time': $scope.currentTime,
+                        'time': 0.000,
                         'comment': $scope.newReply.comment,
                         'parent': $scope.selectedThread.id,
                         'username': $scope.videoInstance.user.username

@@ -75,7 +75,6 @@ def get_user_by_session_key(session_key, extra_context=None):
         return extra_context
     return user
 
-
 @celery.task
 def initialize_video_player(context):
     '''
@@ -151,6 +150,9 @@ def post_new_comment(context):
             data['user'] = user
             comment = MPTTComment(**data)
             comment.save()
+        else:
+            logger = post_new_comment.get_logger()
+            logger.info(comment_form._errors)
 
     if comment:
         return_data = dict()
@@ -162,27 +164,26 @@ def post_new_comment(context):
 
             threadSerializer = MPTTCommentSerializer(comment, context={ 'user': user })
             threadSerialized = JSONRenderer().render(threadSerializer.data)
-            logger = post_new_comment.get_logger()
-            logger.info(json.loads(threadSerialized))
             return_data['thread'] = json.loads(threadSerialized)
         else:
             action.send(user, verb='replied to comment', action_object=comment.parent, target=video)
 
             # Send a notification to the thread's owner that someone has replied to their comment.
-            if comment.parent.user.id != user.id and comment.parent.user.email:
+            if comment.parent.user.id != user.id:
                 user_channel = '/framebuzz/%s/user/%s' % (video.video_id, comment.parent.user.username)
                 notification = { 'message': 'You have 1 new reply!', 'objectType': 'reply', 'objectId': comment.id }
                 message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
                 _send_to_channel.delay(channel = user_channel, message = message)
 
-                send_templated_mail(
-                    template_name='reply-notification',
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[comment.parent.user.email],
-                    context={
-                        'comment': comment,
-                        'site': Site.objects.get_current()
-                    })
+                if comment.parent.user.email:
+                    send_templated_mail(
+                        template_name='reply-notification',
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=[comment.parent.user.email],
+                        context={
+                            'comment': comment,
+                            'site': Site.objects.get_current()
+                        })
 
             replySerializer = MPTTCommentReplySerializer(comment, context={ 'user': user })
             replySerialized = JSONRenderer().render(replySerializer.data)
