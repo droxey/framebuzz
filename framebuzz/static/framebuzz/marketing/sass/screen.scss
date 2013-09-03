@@ -75,14 +75,26 @@ div.navbar {
             padding: 8px 0px 0px 35px;
             text-shadow: none;
             outline: none;
-            height: 71px;
-            width: 310px;
+            height: auto;
+            width: 250px;
             position: relative;
             top: 5px;
         }
 
+        form {
+             margin: 15px 0;
+
+             .search-query {
+                font-family: 'proxima-nova';
+                margin-left: 185px;
+                position: relative;
+                top: 1px;
+                width: 260px;
+             }
+        }
+
         ul.nav {
-            padding: 16px 0;
+            padding: 11px 0;
             margin-right: -5px;
 
             li.link {
@@ -99,8 +111,29 @@ div.navbar {
 
             li.social {
                 float: left;
-                margin-left: 13px;
-                margin-top: -9px;
+
+                a {
+                    display: block;
+                    width: auto;
+
+                    &.facebook { background-color: #3B5998; }
+                    &.twitter { background-color: #4099FF; }
+                    &.google { background-color: #D34836; }
+
+                    img {
+                        padding: 3px 0px;
+                        height: 16px;
+                        width: 16px;
+                    }
+
+                    .share {
+                        float: left;
+                    }
+
+                    .count {
+                        float: right;
+                    }
+                }
             }
         }
     }
@@ -808,7 +841,6 @@ div.marketing-content {
                             height: 32px;
                             width: 32px;
                         }
-
                     }
                 }
             }

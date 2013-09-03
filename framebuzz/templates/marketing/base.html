@@ -46,6 +46,9 @@
                 <a class="brand" href="http://www.framebuzz.com">
                     <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="71" width="310" />
                 </a>
+                <form action="GET" class="navbar-search">
+                  <input type="text" placeholder="Search" class="search-query span2">
+                </form>
                 <ul class="nav pull-right">
                     <li class="link">
                         <a href="{% url 'account_login' %}">{% if request.user.is_authenticated %}My Profile{% else %}Sign In{% endif %}</a>
@@ -54,7 +57,7 @@
                         <a href="{% url 'press' %}">Press</a>
                     </li>
                     <li class="link">
-                        <a href="{% url 'about' %}">About</a
+                        <a href="{% url 'about' %}">About</a>
                     </li>             
                     <li class="social clearfix hidden-tablet">
                         <div id="twitter" data-url="http://framebuzz.com/" data-text="Watch whenever, talk together."></div>
@@ -87,7 +90,7 @@
                       share: {
                         twitter: true
                       },
-                      template: '<a class="box" href="#"><div class="count" href="#">{total}</div><div class="share"><span></span>Tweet</div></a>',
+                      template: '<a class="box clearfix" href="#"><div class="count" href="#">{total}</div><div class="share"><img src="{% static "framebuzz/dashboard/img/social_icons/twitter.png" %}" height="16" width="16" alt="Tweet This"></div></a>',
                       enableHover: false,
                       enableTracking: true,
                       buttons: { twitter: {via: 'framebuzz'}},
@@ -101,7 +104,7 @@
                       share: {
                         facebook: true
                       },
-                      template: '<a class="box" href="#"><div class="count" href="#">{total}</div><div class="share"><span></span>Like</div></a>',
+                      template: '<a class="box clearfix" href="#"><div class="count" href="#">{total}</div><div class="share"><img src="{% static "framebuzz/dashboard/img/social_icons/facebook.png" %}" height="16" width="16" alt="Share on Facebook"></div></a>',
                       enableHover: false,
                       enableTracking: true,
                       click: function(api, options){
@@ -114,7 +117,7 @@
                       share: {
                         googlePlus: true
                       },
-                      template: '<a class="box" href="#"><div class="count" href="#">{total}</div><div class="share"><span></span>+1</div></a>',
+                      template: '<a class="box clearfix" href="#"><div class="count" href="#">{total}</div><div class="share"><img src="{% static "framebuzz/dashboard/img/social_icons/google.png" %}" height="16" width="16" alt="+1 on Google"></div></a>',
                       enableHover: false,
                       enableTracking: true,
                       urlCurl: "{% url 'google-plus-count' %}",

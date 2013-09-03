@@ -26,7 +26,6 @@ def home(request):
     },
     context_instance=RequestContext(request))
 
-
 def about(request):
     success = False
 

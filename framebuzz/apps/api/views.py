@@ -29,6 +29,7 @@ def video_share(request, video_id):
     },
     context_instance=RequestContext(request))
 
+
 @xframe_options_exempt
 def video_embed(request, video_id):
     video, created = get_or_create_video(video_id)
@@ -43,8 +44,6 @@ def video_embed(request, video_id):
     if request.user.is_authenticated():
         # Send a signal that the user has viewed this video.
         action.send(request.user, verb='viewed video', action_object=video)
-
-    print mp4_url
 
     return render_to_response('player/video_embed.html',
     {

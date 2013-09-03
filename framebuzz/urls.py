@@ -34,7 +34,10 @@ urlpatterns = patterns('',
     url(r'^share/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_share', name='video-share'),
 
     # Dashboard:
-    url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
+    #url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
+
+    # Search:
+    url(r'^search/', include('framebuzz.apps.search.urls')),
 
     # Django-AllAuth:
     (r'^accounts/', include('allauth.urls')),

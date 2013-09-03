@@ -358,8 +358,6 @@ class UserWebsite(models.Model):
         return "%s (%s)" % (self.website.name, self.website.url)
 
 
-watson.register(User)
-watson.register(Website)
-watson.register(Video)
-watson.register(MPTTComment)
-    
+watson.register(UserProfile, fields=("bio", "user__username", "location", "profession",))
+watson.register(Video, fields=("title", "description",))
+watson.register(MPTTComment, fields=("comment",))
