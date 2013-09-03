@@ -10,6 +10,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 handler500 = "framebuzz.apps.marketing.views.server_error"
+handler404 = "framebuzz.apps.marketing.views.server_404"
 
 urlpatterns = patterns('',
     # Admin:
@@ -29,9 +30,7 @@ urlpatterns = patterns('',
     # Django-Avatar:
     url(r'^avatar/', include('avatar.urls')),
 
-    # Test Page for Beta:
-    url(r'^test/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_test', name='video-test'),
-
+    # Share Page:
     url(r'^share/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_share', name='video-share'),
 
     # Dashboard:
