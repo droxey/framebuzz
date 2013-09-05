@@ -22,7 +22,7 @@ menu, nav, output, ruby, section, summary, time, mark, audio, video {
 }
 
 body {
-    background-color: white;
+    background-color: #078ac1;
 }
 
 
@@ -91,6 +91,8 @@ div.navbar {
                 top: 1px;
                 width: 260px;
              }
+
+             button { display: none; }
         }
 
         ul.nav {
@@ -139,10 +141,247 @@ div.navbar {
     }
 }
 
+div.search-results {
+    background: #343434;
+    color: white;
+    font-family: 'proxima-nova';
+    font-size: 14px;
+    position: relative;
+    top: 0;
+    display: none;
+    padding: 11px 0;
+    min-height: 615px;
+    width: 100%;
+
+    div.wrapper {
+        h1, h2, h3 {
+            font: normal 26px/36px 'futura-pt-condensed';
+            text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+        }
+
+        h1 {
+            color: #636363;
+            font-style: italic;
+            margin-bottom: 11px;
+            text-align: center;
+
+            strong { font-weight: 500; }
+        }
+
+        #results-list {
+            div.row {
+                margin-left: 90px;
+                margin-top: 20px;
+
+                div.span4 {
+                    margin-left: 0;
+
+                    h2 {
+                        color: white;
+                        margin-bottom: 4px;
+                        text-indent: 20px;
+                    }
+
+                    ul.videos {
+                        border-right: 1px solid #383838;
+
+                        li {
+                            &:nth-child(odd) { margin: 0 20px; }
+                            float: left;
+                            margin-bottom: 20px;
+                            width: 155px;
+
+                            &.empty {
+                                margin: 0;
+                                padding: 12px 20px;
+                            }
+
+                            h3 {
+                                a {
+                                    color: #d6d6d6;
+                                    display: block;
+                                    font: normal 12px/14px 'proxima-nova';
+                                    font-weight: 300;
+                                    height: 28px;
+                                    overflow: hidden;
+                                    word-wrap: break-word;
+                                    width: 100%;
+                                }
+                            }
+
+                            img {
+                                border: 2px solid white;
+                                height: 113px;
+                                margin-bottom: 6px;
+                                width: 150px;
+                            }
+                        }
+                    }
+
+                    ul.conversations {
+                        border-left: 1px solid #474747;
+                        border-right: 1px solid #474747;
+
+                        li {
+                            padding: 12px 20px;
+
+                            div.comment {
+                                @include border-radius(12px, 12px);
+                                background: #575757;
+                                min-height: 36px; 
+                                padding: 10px 7px;
+                                position: relative;
+
+                                img.img-circle {
+                                    border: 2px solid white;
+                                    float: left;
+                                    height: 32px;
+                                    width: 32px;
+                                }
+
+                                p {
+                                    color: #FFFFFF;
+                                    float: right;
+                                    font: 300 19px/18px 'futura-pt-condensed';
+                                    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                                    vertical-align: middle;
+                                    width: 272px;
+
+                                    span {
+                                        display: inline-block;
+                                        vertical-align: -8px;
+
+                                        span.highlight {
+                                            vertical-align: 0;
+                                            margin: 0 2px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            p.description {
+                                color: #5f5f5f;
+                                font: italic 12px/14px 'proxima-nova';
+                                font-weight: 300;
+                                position: relative;
+                                text-indent: 8px;
+                                top: 3px;
+
+                                a {
+                                    color: #d6d6d6;   
+                                }
+                            }
+
+                            span.corner {
+                                bottom: -32px;
+                                position: absolute;
+                                display: block;
+                                width: 0;
+                                height: 0;
+                                line-height: 0;
+                                border: solid 18px #575757;
+                                border-color: #575757 transparent transparent transparent;
+                                @include border-radius(0px, 0px);
+                                left: 260px;
+                            }
+                        }
+                    }
+
+                    ul.users {
+                        border-left: 1px solid #383838;
+
+                        li {
+                            padding: 12px 20px;
+
+                            img.img-circle {
+                                border: 2px solid white;
+                                float: left;
+                                height: 42px;
+                                width: 42px;
+                            }
+
+                            div.user {
+                                display: inline-block;
+                                float: left;
+                                min-height: 46px; 
+                                position: relative;
+                                margin-left: 5px;
+                                width: 270px;
+
+                                strong, span {
+                                    color: #FFFFFF;
+                                    display: inline-block;
+                                    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+
+                                    a {
+                                        color: #d6d6d6;   
+                                    }
+                                }
+
+                                strong {
+                                    font: normal 19px/26px 'futura-pt-condensed';
+                                }
+
+                                span.bio {
+                                    font: 300 12px/13px 'proxima-nova';
+                                }
+
+                                &.bio {
+                                    strong, span.bio {
+                                        position: relative;
+                                        top: -6px;
+                                    }
+
+                                    span.bio {
+                                        span.highlight { margin: 0 1px; }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    ul {
+                        min-height: 520px;
+
+                        li {
+                            color: white;
+
+                            h3 {
+                                color: white;
+                                font: normal 14px/18px 'proxima-nova';
+                            }
+
+                            span.highlight {
+                                @include border-radius(2px, 2px);
+                                background: rgba(23, 136, 188, 0.9);
+                                padding: 0 2px;
+                                color: white;
+                                vertical-align: 0;
+                            }
+
+                            &.empty {
+                                width: auto;
+
+                                h3.empty {
+                                    color: white;
+                                    font: normal 14px/18px 'proxima-nova'; 
+                                    opacity: 0.75;
+                                    height: auto;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 div.marketing-content {
     min-height: 620px;
     overflow: hidden;
     position: relative;
+    top: 0;
     width: 100%;
 
     div.anystretch img {

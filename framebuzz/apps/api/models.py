@@ -1,5 +1,4 @@
 import watson
-
 from datetime import datetime, date
 
 from django.conf import settings
@@ -17,6 +16,7 @@ from templated_email import send_templated_mail
 from timezone_field import TimeZoneField
 from mptt.models import MPTTModel, TreeForeignKey
 
+from framebuzz.apps.search.adapters import VideoSearchAdapter, CommentSearchAdapter, UserProfileSearchAdapter
 
 COMMENT_VISIBILITY_TIME_RANGE = 1
 TIMELINE_BLOCKS = 29
@@ -38,7 +38,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     websites = models.ManyToManyField('UserWebsite', blank=True, null=True)
     premium = models.BooleanField(default=False)
-    bio = models.CharField(max_length=255, blank=True, null=True)
+    bio = models.CharField(max_length=180, blank=True, null=True)
     time_zone = TimeZoneField(blank=True, null=True)
     youtube_username = models.CharField(max_length=255, blank=True, null=True, editable=False)
     latitude = models.FloatField(null=True, blank=True)
@@ -344,6 +344,7 @@ class MPTTComment(MPTTModel, Comment):
         if first_comment:
             first_comment.save()
 
+
 class UserWebsite(models.Model):
     website = models.ForeignKey(Website)
     user = models.ForeignKey(User)
@@ -358,6 +359,20 @@ class UserWebsite(models.Model):
         return "%s (%s)" % (self.website.name, self.website.url)
 
 
-watson.register(UserProfile, fields=("bio", "user__username", "location", "profession",))
-watson.register(Video, fields=("title", "description",))
-watson.register(MPTTComment, fields=("comment",))
+'''
+    Register models with Watson.
+'''
+watson.register(UserProfile, 
+    UserProfileSearchAdapter,
+    fields=("bio", "user__username", "location", "profession",), 
+    store=("bio", "user__username", "location", "profession",))
+
+watson.register(Video, 
+    VideoSearchAdapter,
+    fields=("title", "description",),
+    store=("title", "description", "video_id",))
+
+watson.register(MPTTComment.objects.filter(parent=None),
+    CommentSearchAdapter,
+    fields=("comment",),
+    store=("comment", "user__username",))

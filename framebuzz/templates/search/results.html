@@ -1,0 +1,63 @@
+{% load watson avatar_tags %}
+
+<div id="results-list" data-results="{% if search_results %}true{% else %}false{% endif %}" data-token="{{ token }}">
+	{% if query %}<h1>Searching for &lsquo;<strong>{{ query }}</strong>&hellip;&rsquo;</h1>{% endif %}
+	<div class="row">
+		{% for key, results in search_results.items %}
+			<div class="span4">
+				<h2>{{ key|upper }}</h2>
+				<div class="pagination-page">
+					<ul class="{{ key|lower }}{% if key == 'videos' %} clearfix{% endif %}">
+					    {% for result in results.object_list %}
+					    	{% if key == 'videos' %}
+							    <li>
+							    	<img src="{{ result.object.large_thumbnail }}" alt="{{ result.title }}" height="113" width="150" />
+							    	<h3><a href="{{ result.object.get_share_url }}">{{ result.title|title|truncatechars:55 }}</a></h3>
+							    </li>
+							{% elif key == 'conversations' %}
+								<li>
+									<div class="comment clearfix">
+										<a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
+									   		<img src="{% avatar_url result.object.user 72 %}" alt="" height="36" width="36" class="img-circle" />
+									   	</a>
+									   	<p><span>&ldquo;{{ result.object.comment }}&rdquo;</span></p>
+									   	<span class="corner"></span>
+									</div>
+									<p class="description">on <a href="{{ result.object.get_share_url }}">{{ result.object.content_object.title|title|truncatechars:50 }}</a></p>
+								</li>
+							{% else %}
+								<li class="clearfix">
+									<a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
+										<img src="{% avatar_url result.object.user 92 %}" alt="" height="46" width="46" class="img-circle" />
+									</a>
+									<div class="user{% if result.object.bio %} bio{% endif %}">
+						               <strong>
+						               	<a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">{{ result.object.user.username }}</a>
+						               </strong>
+						               {% if result.object.bio %}
+						               		<span class="bio">{{ result.object.bio|truncatechars:110 }}</span>
+						               {% endif %}
+						            </div>
+								</li>
+							{% endif %}
+						{% empty %}
+							<li class="empty">
+								<h3 class="empty">No {{ key }} found.</h3>
+							</li>
+						{% endfor %}
+				  	</ul>
+				  {% if results.object_list|length > 6 %}
+				  	{% include "search/snippets/pagination.html" %}
+				  {% endif %}
+				</div>
+			</div>
+		{% empty %}
+			{% if query %}
+		        <p><em>There are no results to display.</em></p>
+		        <p><em>Try entering a less specific search term.</em></p>
+		    {% else %}
+		        <p><em>Please enter a query in the search form.</em></p>
+		    {% endif %}
+		{% endfor %}
+	</div>
+</div>

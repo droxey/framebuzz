@@ -50,25 +50,34 @@ def get_uploaded_videos(auth_token):
   return uploaded_videos
 
 
-def find_video_by_keyword(q):
-  response = requests.get('https://www.googleapis.com/youtube/v3/search',
-            params={
-                     'alt': 'json',
-                     'part': 'id,snippet',
-                     'q': q,
-                     'type': 'video',
-                     'videoEmbeddable': 'true',
-                     'maxResults': 50,
-                     'key': settings.YOUTUBE_API_KEY_SERVER})
+def find_video_by_keyword(q, results=12, nextPageToken=None):
+  videos = list()
+  params = {
+     'alt': 'json',
+     'part': 'id,snippet',
+     'q': q,
+     'type': 'video',
+     'videoEmbeddable': 'true',
+     'maxResults': results,
+     'key': settings.YOUTUBE_API_KEY_SERVER
+  }
+
+  if nextPageToken is not None:
+    params['pageToken'] = nextPageToken
+
+  response = requests.get('https://www.googleapis.com/youtube/v3/search', params=params)
   query_response = response.json()
-  videos = dict()
+  nextPageToken = query_response.get("tokenPagination", {}).get("nextPageToken")
 
   for search_result in query_response.get("items", []):
       video_id = search_result["id"]["videoId"]
-      videos[video_id] = search_result
+      video, created = get_or_create_video(video_id)
+      if created:
+        videos.append(video)
+
+  return videos, nextPageToken
 
 
-  return { 'videos': videos, }
 
 def get_or_create_video(video_id):
   try:

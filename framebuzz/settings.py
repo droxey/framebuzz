@@ -174,6 +174,7 @@ MIDDLEWARE_CLASSES = (
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
 
+    'watson.middleware.SearchContextMiddleware',
     'framebuzz.libs.middleware.timezone.TimezoneMiddleware',
 )
 

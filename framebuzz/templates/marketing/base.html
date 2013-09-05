@@ -26,6 +26,7 @@
         <!-- libraries -->
         <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/jquery-ui-1.10.2.custom.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/font-awesome.css' %}" type="text/css" rel="stylesheet" />
+        <link href="{% static 'framebuzz/player/app/css/animations.css' %}" type="text/css" rel="stylesheet" />
 
         <!-- global styles -->
         <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/layout.css' %}">
@@ -46,8 +47,9 @@
                 <a class="brand" href="http://www.framebuzz.com">
                     <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="71" width="310" />
                 </a>
-                <form action="GET" class="navbar-search">
-                  <input type="text" placeholder="Search" class="search-query span2">
+                <form id="search-form" action="{% url 'fbz-search' %}" method="GET" class="navbar-search">
+                  <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search" class="search-query span2">
+                  <button type="submit"></button>
                 </form>
                 <ul class="nav pull-right">
                     <li class="link">
@@ -68,6 +70,10 @@
             </div>         
         </div>        
     </div>
+    <div class="search-results">
+      <div class="wrapper">
+      </div>
+    </div>
     <div class="marketing-content">
         {% block marketing_content %}{% endblock %}
     </div>
@@ -80,54 +86,14 @@
     </div>
   </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     {% compress js %}
         <script src="{% static 'framebuzz/dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'framebuzz/dashboard/bootstrap/js/jquery-ui-1.10.2.custom.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'framebuzz/marketing/js/jquery.sharrre-1.3.4.min.js' %}"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#twitter').sharrre({
-                      share: {
-                        twitter: true
-                      },
-                      template: '<a class="box clearfix" href="#"><div class="count" href="#">{total}</div><div class="share"><img src="{% static "framebuzz/dashboard/img/social_icons/twitter.png" %}" height="16" width="16" alt="Tweet This"></div></a>',
-                      enableHover: false,
-                      enableTracking: true,
-                      buttons: { twitter: {via: 'framebuzz'}},
-                      click: function(api, options){
-                        api.simulateClick();
-                        api.openPopup('twitter');
-                      }
-                });
-
-                $('#facebook').sharrre({
-                      share: {
-                        facebook: true
-                      },
-                      template: '<a class="box clearfix" href="#"><div class="count" href="#">{total}</div><div class="share"><img src="{% static "framebuzz/dashboard/img/social_icons/facebook.png" %}" height="16" width="16" alt="Share on Facebook"></div></a>',
-                      enableHover: false,
-                      enableTracking: true,
-                      click: function(api, options){
-                        api.simulateClick();
-                        api.openPopup('facebook');
-                      }
-                });
-
-                $('#googleplus').sharrre({
-                      share: {
-                        googlePlus: true
-                      },
-                      template: '<a class="box clearfix" href="#"><div class="count" href="#">{total}</div><div class="share"><img src="{% static "framebuzz/dashboard/img/social_icons/google.png" %}" height="16" width="16" alt="+1 on Google"></div></a>',
-                      enableHover: false,
-                      enableTracking: true,
-                      urlCurl: "{% url 'google-plus-count' %}",
-                      click: function(api, options){
-                        api.simulateClick();
-                        api.openPopup('googlePlus');
-                      }
-                });
-            });
-        </script>
+        <script src="{% static 'framebuzz/marketing/js/jquery.sharrre-1.3.4.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/spin.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/jquery.highlight.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/framebuzz.share.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/framebuzz.search.js' %}"></script>
     {% endcompress %}
     {% block page_javascript %}{% endblock %}
     <script>
@@ -138,7 +104,6 @@
 
       ga('create', 'UA-43394419-1', 'framebuzz.com');
       ga('send', 'pageview');
-
     </script>
   </body>
 </html>
