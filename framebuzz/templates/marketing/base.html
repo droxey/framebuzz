@@ -43,7 +43,7 @@
   <body class="{% block page_classes %}{% endblock %}">
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
-            <div class="wrapper">
+            <div class="wrapper clearfix">
                 <a class="brand" href="http://www.framebuzz.com">
                     <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="71" width="310" />
                 </a>
@@ -51,16 +51,25 @@
                   <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search" class="search-query span2">
                   <button type="submit"></button>
                 </form>
-                <ul class="nav pull-right">
-                    <li class="link">
-                        <a href="{% url 'account_login' %}">{% if request.user.is_authenticated %}My Profile{% else %}Sign In{% endif %}</a>
-                    </li>  
-                    <li class="link">
-                        <a href="{% url 'press' %}">Press</a>
+                <ul class="nav pull-right clearfix">
+                    <li class="link{% if request.user.is_authenticated %} logged-in{% endif %}">
+                      {% if request.user.is_authenticated %}
+                        <a href="{% url 'profiles-home' request.user.username %}" role="button" class="avatar">
+                            <img src="{% avatar_url request.user 58 %}" alt="" height="28" width="28" class="img-circle" />
+                        </a>
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-cog"></i> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'profiles-home' request.user.username %}">{{ request.user.username|lower }}'s Profile</a></li>
+                            <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
+                            <li><a href="{% url 'account_logout' %}">Log Out</a></li>
+                        </ul>
+                      {% else %}
+                        <a href="{% url 'account_login' %}" title="Sign In">Sign In</a>  
+                      {% endif %} 
                     </li>
-                    <li class="link">
-                        <a href="{% url 'about' %}">About</a>
-                    </li>             
+                    <li class="divider-vertical"></li>           
                     <li class="social clearfix hidden-tablet">
                         <div id="twitter" data-url="http://framebuzz.com/" data-text="Watch whenever, talk together."></div>
                         <div id="facebook" data-url="http://framebuzz.com/" data-text="Watch whenever, talk together."></div>
@@ -82,6 +91,9 @@
         <span class="copyright">&copy; 2013 FrameBuzz. All rights reserved. Patent-pending.</span>
         <a href="{% url 'terms' %}" title="Terms of Service">Terms of Service</a>
         <a href="{% url 'privacy' %}" title="Privacy Policy">Privacy Policy</a>
+        <i>&bull;</i>
+        <a href="{% url 'press' %}" title="Press">Press</a>
+        <a href="{% url 'about' %}" title="About FrameBuzz">About</a>
       </div>
     </div>
   </div>

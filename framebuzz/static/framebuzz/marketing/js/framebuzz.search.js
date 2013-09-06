@@ -5,15 +5,16 @@ $(document).ready(function() {
   var activeQuery = null;
 
   var ajaxSearch = function(query) {
-    if (activeQuery !== null) { activeQuery.abort(); }
+    var resultsList = $('#results-list');
+    var resultsContainer = $('div.search-results > div.wrapper');
+    var searchContentContainer = resultsList.length > 0 ? resultsList : resultsContainer;
 
-    var searchContentContainer = $('#results-list').length > 0
-      ? $('#results-list')
-      : $('div.search-results > div.wrapper');
+    // Update the 'Searching for...' header.
+    $('h1 > strong', resultsList).text(query);
 
     activeQuery = $.get(searchUrl, {'query': query}, function(html) {
       searchContentContainer.html(html);
-      searchContentContainer.highlight(query, { wordsOnly: true });
+      searchContentContainer.highlight(query);
     });
   };
 
@@ -29,6 +30,10 @@ $(document).ready(function() {
       searchContainer.hide('slide', { direction: 'up', easing: 'easeOutQuint', duration: 800, queue: false });
     }
     else {
+      if (activeQuery !== null) { 
+        activeQuery.abort(); 
+      }
+
       if (!searchContainer.is(':visible')) {
         searchContainer.show('slide', { 
           direction: 'up', 

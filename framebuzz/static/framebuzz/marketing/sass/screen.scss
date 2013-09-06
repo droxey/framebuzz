@@ -67,7 +67,6 @@ div.navbar {
         border-right: none;
         box-shadow: none;
         margin: 0 auto;
-        overflow: hidden;
         width: 97%;
 
         a.brand {
@@ -86,10 +85,10 @@ div.navbar {
 
              .search-query {
                 font-family: 'proxima-nova';
-                margin-left: 185px;
+                margin-left: 160px;
                 position: relative;
                 top: 1px;
-                width: 260px;
+                width: 315px;
              }
 
              button { display: none; }
@@ -97,22 +96,99 @@ div.navbar {
 
         ul.nav {
             padding: 11px 0;
-            margin-right: -5px;
+            margin-left: 12px;
+            width: 418px;
 
             li.link {
+                float: right;
+
+                &.logged-in {
+                    width: 90px;
+                }
+
                 a {
                     border-left: none;
+                    float: left;
                     font-family: 'futura-pt-condensed';
                     font-weight: 300;
-                    font-size: 17px;
+                    font-size: 18px;
+                    padding-right: 0;
                     text-transform: uppercase;
+
+                    &.dropdown-toggle { 
+                        background-image: none; 
+                        font-size: 19.33px;
+                        font-family: 'futura-pt-condensed';
+
+                        i {
+                            border-color: rgba(255, 255, 255, 0.48);
+                        }
+
+                        b.caret {
+                            border-bottom-color: rgba(255, 255, 255, 0.48);
+                            border-top-color: rgba(255, 255, 255, 0.48);
+                        }
+                    }
+
+                    &.avatar {
+                        height: 28px;
+                        padding: 7px 0 7px 12px;
+                        width: 28px;
+
+                        img.img-circle {
+                            border: 2px solid white;
+                            height: 28px;
+                            width: 28px;
+                        }
+                    }
                 }
 
                 a.active, a:hover { background: none !important; }
+
+                ul.dropdown-menu {
+                    margin-top: 1px;
+                    right: -10px;
+
+                    li {
+                        font: normal 14px/18px 'proxima-nova';
+
+                        a {
+                            border-left: none;
+                            color: rgba(33, 33, 33, 0.9);
+                            display: inline-block;
+                            font: 300 14px/18px 'proxima-nova';
+                            text-transform: none;
+                            width: 150px;
+                            @include single-transition(color .1s ease-in-out);
+
+                            &:hover {
+                                text-decoration: none;
+                                font-weight: 500;
+                            }
+                        }
+
+                        a.active, a:hover {
+                            background: none;
+                            color: rgba(33, 33, 33, 1.0);
+                            @include single-transition(color .1s ease-in-out);
+                        }
+
+                        strong {
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+
+            li.divider-vertical { 
+                float: right;
+                position: relative;
+                top: 2px;
             }
 
             li.social {
-                float: left;
+                float: right;
+                padding-right: 15px;
 
                 a {
                     display: block;
@@ -150,7 +226,7 @@ div.search-results {
     top: 0;
     display: none;
     padding: 11px 0;
-    min-height: 615px;
+    min-height: 588px;
     width: 100%;
 
     div.wrapper {
@@ -170,8 +246,8 @@ div.search-results {
 
         #results-list {
             div.row {
-                margin-left: 90px;
-                margin-top: 20px;
+                margin: 0 auto 20px;
+                width: 1120px;
 
                 div.span4 {
                     margin-left: 0;
@@ -211,9 +287,9 @@ div.search-results {
 
                             img {
                                 border: 2px solid white;
-                                height: 113px;
+                                height: 100px;
                                 margin-bottom: 6px;
-                                width: 150px;
+                                width: 155px;
                             }
                         }
                     }
@@ -341,7 +417,7 @@ div.search-results {
                     }
 
                     ul {
-                        min-height: 520px;
+                        min-height: 470px;
 
                         li {
                             color: white;
@@ -1434,7 +1510,7 @@ div.footer {
     background-color: black;
     padding: 33px 0;
 
-    a {
+    a, i {
         color: white;
         border-left: none;
         font-family: 'futura-pt-condensed';
@@ -1450,6 +1526,13 @@ div.footer {
         &:hover {
             opacity: 1;
         }
+    }
+
+    i {
+        font-size: 16px;
+        margin-left: 13px;
+        margin-right: 0;
+        padding-top: 1px;
     }
 
     a.active, a:hover { background: none !important; }

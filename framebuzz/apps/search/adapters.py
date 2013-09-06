@@ -25,10 +25,7 @@ class VideoSearchAdapter(watson.SearchAdapter):
 
 class CommentSearchAdapter(watson.SearchAdapter):
     '''
-        Weight search results by comment text, then username.
+        Weight search results by comment text only.
     '''
     def get_title(self, obj):
         return obj.comment
-        
-    def get_description(self, obj):
-        return obj.user.username

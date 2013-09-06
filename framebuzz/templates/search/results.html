@@ -11,7 +11,7 @@
 					    {% for result in results.object_list %}
 					    	{% if key == 'videos' %}
 							    <li>
-							    	<img src="{{ result.object.large_thumbnail }}" alt="{{ result.title }}" height="113" width="150" />
+							    	<img src="{{ result.object.large_thumbnail }}" alt="{{ result.title }}" height="100" width="155" />
 							    	<h3><a href="{{ result.object.get_share_url }}">{{ result.title|title|truncatechars:55 }}</a></h3>
 							    </li>
 							{% elif key == 'conversations' %}
@@ -35,7 +35,7 @@
 						               	<a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">{{ result.object.user.username }}</a>
 						               </strong>
 						               {% if result.object.bio %}
-						               		<span class="bio">{{ result.object.bio|truncatechars:110 }}</span>
+						               		<span class="bio">{{ result.object.bio|truncatechars:108 }}</span>
 						               {% endif %}
 						            </div>
 								</li>
