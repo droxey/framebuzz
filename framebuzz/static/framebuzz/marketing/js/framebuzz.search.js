@@ -162,7 +162,7 @@ $(document).ready(function() {
         });
       }
       else {
-        startSearch();
+        startSearch(query);
       }
     }
 
