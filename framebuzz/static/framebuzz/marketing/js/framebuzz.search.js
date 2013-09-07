@@ -36,10 +36,12 @@ $(document).ready(function() {
     return $(selector);
   };
 
+
   var stopSpinner = function(listName) {
     var element = getList(listName);
     element.spin(false);
   };
+
 
   var abortSearch = function() {
       if (videosQuery !== null) { videosQuery.abort(); }
@@ -47,26 +49,39 @@ $(document).ready(function() {
       if (usersQuery !== null) { usersQuery.abort(); }
   };
 
+
   var initSearch = function(query) {
     var resultsContainer = $('div.search-results > div.wrapper');
 
     $.get(searchUrl, function(html) {
         resultsContainer.html(html);
+        bindClose();
         startSpinner();
         startSearch(query);
     });
   };
 
-  var bindPagination = function(listName, url) {
+
+  var closeSearch = function() {
+    searchContainer.hide('slide', { direction: 'up', easing: 'easeOutQuint', duration: 800, queue: false }, function() {
+      $('#results-list').remove();
+      $('input.search-query').val('');
+    });
+  };
+  
+
+  var bindPagination = function(listName, url, query) {
     var pageContainer = getList(listName);
 
-    $('#results-list').on('click', 'a.page-link', function() {
+    pageContainer.on('click', 'a.page-link', function() {
       var pageUrl = $(this).attr('href');
-      
+
       $.get(url + pageUrl, function(pageHtml) {
         pageContainer.fadeOut('slow', function() {
           pageContainer.html(pageHtml);
-          pageContainer.fadeIn('slow');
+          pageContainer.fadeIn('slow', function() {
+            pageContainer.highlight(query);
+          });
         });
       });
 
@@ -74,57 +89,60 @@ $(document).ready(function() {
     });
   };
 
+
+  var bindClose = function() {
+    $('#results-list').on('click', 'button.close', function() {
+      closeSearch();
+    });
+  };
+
+
   var startSearch = function(query) {
-    var searchContentContainer = $('#results-list');
+    abortSearch();
 
     // Update the 'Searching for...' header.
-    $('h1 > strong', searchContentContainer).text(query);
+    $('#results-list h1 > strong').text(query);
 
     videoQuery = $.get(searchVideosUrl, {'query': query}, function(results) {
       stopSpinner('videos');
 
-      var container = $('div.videos-results', searchContentContainer);
+      var container = getList('videos');
       container.html(results);
       container.highlight(query);
 
-      bindPagination('videos', searchVideosUrl);
+      bindPagination('videos', searchVideosUrl, query);
     });
 
     conversationsQuery = $.get(searchConversationsUrl, {'query': query}, function(results) {
       stopSpinner('conversations');
 
-      var container = $('div.conversations-results', searchContentContainer);
+      var container = getList('conversations');
       container.html(results);
       container.highlight(query);
 
-      bindPagination('conversations', searchConversationsUrl);
+      bindPagination('conversations', searchConversationsUrl, query);
     });
 
     usersQuery = $.get(searchUsersUrl, {'query': query}, function(results) {
       stopSpinner('users');
 
-      var container = $('div.users-results', searchContentContainer);
+      var container = getList('users');
       container.html(results);
       container.highlight(query);
 
-      bindPagination('users', searchUsersUrl);
+      bindPagination('users', searchUsersUrl, query);
     });
   };
 
 
   searchForm.submit(function(e) {
     e.preventDefault();
-  });
 
-
-  $('input.search-query').keyup(function(e) {
-    abortSearch();
-
-    var query = $.trim($(this).val());
+    var query = $.trim($('input.search-query').val());
     $(this).val(query);
     
     if (query.length == 0) {
-      searchContainer.hide('slide', { direction: 'up', easing: 'easeOutQuint', duration: 800, queue: false });
+      closeSearch();
     }
     else {
       if (!searchContainer.is(':visible')) {
@@ -141,5 +159,7 @@ $(document).ready(function() {
         startSearch(query);
       }
     }
+
+    return false;
   });
 });

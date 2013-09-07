@@ -1,6 +1,7 @@
 {% load watson avatar_tags %}
 
 <div id="results-list" data-results="{% if search_results %}true{% else %}false{% endif %}" data-token="{{ token }}">
+	<button class="close">&times;</button>
 	{% if query %}<h1>Searching for &lsquo;<strong>{{ query }}</strong>&hellip;&rsquo;</h1>{% endif %}
 	<div class="row">
 		{% for name in search_criteria %}

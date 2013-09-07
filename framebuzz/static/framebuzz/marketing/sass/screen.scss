@@ -463,22 +463,38 @@ div.search-results {
                                     padding: 0 5px;
 
                                     a {
-                                        color: white;
+                                        color: rgba(255, 255, 255, 0.9);
                                         display: block;
                                         font: normal 16px/20px 'futura-pt-condensed';
+                                        text-decoration: none;
+                                        text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+                                        @include single-transition(color .1s ease-in-out);
+
+                                        &.hover {
+                                            color: rgba(255, 255, 255, 1);
+                                            @include single-transition(color .1s ease-in-out);
+                                        }
                                     }
 
                                     a.next, a.prev {
-                                        display: inline-block;
-                                        font: 10px/20px 'futura-pt-condensed';
+                                        color: rgba(123, 123, 123, 0.9);
+                                        display: inline;
+                                        font: normal 10px/20px 'futura-pt-condensed';
                                         vertical-align: baseline;
+                                        
+                                        &.hover {
+                                            color: rgba(123, 123, 123, 1.0);
+                                        }
                                     }
 
-                                    a.active {
-                                        @include border-radius(2px, 2px);
-                                        background: #767676;
-                                        font-weight: 500;
-                                        padding: 3px;
+                                    &.active {
+                                        a {
+                                            @include border-radius(2px, 2px);
+                                            background: #767676;
+                                            color: rgba(255, 255, 255, 1);
+                                            font-weight: 500;
+                                            padding: 0 7px;
+                                        }
                                     }
                                 }
                             }
