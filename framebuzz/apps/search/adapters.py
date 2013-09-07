@@ -7,7 +7,7 @@ class UserProfileSearchAdapter(watson.SearchAdapter):
     '''
     def get_title(self, obj):
         return obj.user.username
-        
+
     def get_description(self, obj):
         return obj.bio
 
@@ -18,7 +18,7 @@ class VideoSearchAdapter(watson.SearchAdapter):
     '''
     def get_title(self, obj):
         return obj.title
-        
+
     def get_description(self, obj):
         return obj.description
 
@@ -29,3 +29,6 @@ class CommentSearchAdapter(watson.SearchAdapter):
     '''
     def get_title(self, obj):
         return obj.comment
+
+    def get_description(self, obj):
+        return ''
