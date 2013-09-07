@@ -1,0 +1,21 @@
+{% load avatar_tags staticfiles %}
+
+<ul class="conversations">
+    {% for result in search_results.object_list %}
+        <li>
+            <div class="comment clearfix">
+                <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
+                    <img src="{% avatar_url result.object.user 72 %}" alt="" height="36" width="36" class="img-circle" />
+                </a>
+                <p><span>&ldquo;{{ result.object.comment }}&rdquo;</span></p>
+                <span class="corner"></span>
+            </div>
+            <p class="description">on <a href="{{ result.object.get_share_url }}">{{ result.object.content_object.title|title|truncatechars:50 }}</a></p>
+        </li>
+    {% empty %}
+        <li class="empty">
+            <h3 class="empty">No conversations found.</h3>
+        </li>
+    {% endfor %}
+</ul>
+{% include "search/snippets/pagination.html" %}

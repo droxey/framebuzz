@@ -1,0 +1,17 @@
+{% load avatar_tags staticfiles %}
+
+<ul class="videos clearfix">
+    {% for result in search_results.object_list %}
+        <li>
+            <a href="{{ result.object.get_share_url }}" title="{{ result.title|title }}">
+                <img src="{{ result.object.large_thumbnail }}" alt="{{ result.title }}" height="100" width="155" />
+            </a>
+            <h3><a href="{{ result.object.get_share_url }}">{{ result.title|title|truncatechars:55 }}</a></h3>
+        </li>
+    {% empty %}
+        <li class="empty">
+            <h3 class="empty">No videos found.</h3>
+        </li>
+    {% endfor %}
+</ul>
+{% include "search/snippets/pagination.html" %}

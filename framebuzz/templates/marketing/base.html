@@ -47,7 +47,7 @@
                 <a class="brand" href="http://www.framebuzz.com">
                     <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="71" width="310" />
                 </a>
-                <form id="search-form" action="{% url 'fbz-search' %}" method="GET" class="navbar-search">
+                <form id="search-form" data-users-url="{% url 'search-users' %}" data-conversations-url="{% url 'search-conversations' %}" data-videos-url="{% url 'search-videos' %}" method="GET" action="{% url 'fbz-search' %}" class="navbar-search">
                   <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search" class="search-query span2">
                   <button type="submit"></button>
                 </form>
@@ -103,6 +103,7 @@
         <script src="{% static 'framebuzz/dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/jquery.sharrre-1.3.4.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/spin.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/jquery.spin.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/jquery.highlight.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.share.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.search.js' %}"></script>

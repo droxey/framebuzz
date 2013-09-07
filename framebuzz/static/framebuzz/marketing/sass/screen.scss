@@ -83,7 +83,7 @@ div.navbar {
         form {
              margin: 15px 0;
 
-             .search-query {
+             input.search-query {
                 font-family: 'proxima-nova';
                 margin-left: 160px;
                 position: relative;
@@ -258,191 +258,228 @@ div.search-results {
                         text-indent: 20px;
                     }
 
-                    ul.videos {
-                        border-right: 1px solid #383838;
+                    div.pagination-page {
+                        margin-top: 16px;
+                        min-height: 520px;
 
-                        li {
-                            &:nth-child(odd) { margin: 0 20px; }
-                            float: left;
-                            margin-bottom: 20px;
-                            width: 155px;
+                        &.videos-results {
+                            border-right: 1px solid #383838;
+                        }
 
-                            &.empty {
-                                margin: 0;
-                                padding: 12px 20px;
-                            }
+                        &.conversations-results {
+                            border-left: 1px solid #474747;
+                            border-right: 1px solid #474747;
+                        }
 
-                            h3 {
-                                a {
-                                    color: #d6d6d6;
-                                    display: block;
-                                    font: normal 12px/14px 'proxima-nova';
-                                    font-weight: 300;
-                                    height: 28px;
-                                    overflow: hidden;
-                                    word-wrap: break-word;
-                                    width: 100%;
-                                }
-                            }
+                        &.users-results {
+                            border-left: 1px solid #383838;
+                        }
 
-                            img {
-                                border: 2px solid white;
-                                height: 100px;
-                                margin-bottom: 6px;
+                        ul.videos {
+                            li {
+                                &:nth-child(odd) { margin: 0 20px; }
+                                float: left;
+                                margin-bottom: 20px;
                                 width: 155px;
+
+                                &.empty {
+                                    margin: 0;
+                                    padding: 12px 20px;
+                                }
+
+                                h3 {
+                                    a {
+                                        color: #d6d6d6;
+                                        display: block;
+                                        font: normal 12px/14px 'proxima-nova';
+                                        font-weight: 300;
+                                        height: 28px;
+                                        overflow: hidden;
+                                        word-wrap: break-word;
+                                        width: 100%;
+                                    }
+                                }
+
+                                img {
+                                    border: 2px solid white;
+                                    height: 100px;
+                                    margin-bottom: 6px;
+                                    width: 155px;
+                                }
                             }
                         }
-                    }
 
-                    ul.conversations {
-                        border-left: 1px solid #474747;
-                        border-right: 1px solid #474747;
+                        ul.conversations {
+                            li {
+                                padding: 12px 20px;
 
-                        li {
-                            padding: 12px 20px;
+                                div.comment {
+                                    @include border-radius(12px, 12px);
+                                    background: #575757;
+                                    min-height: 36px; 
+                                    padding: 10px 7px;
+                                    position: relative;
 
-                            div.comment {
-                                @include border-radius(12px, 12px);
-                                background: #575757;
-                                min-height: 36px; 
-                                padding: 10px 7px;
-                                position: relative;
+                                    img.img-circle {
+                                        border: 2px solid white;
+                                        float: left;
+                                        height: 32px;
+                                        width: 32px;
+                                    }
 
-                                img.img-circle {
-                                    border: 2px solid white;
-                                    float: left;
-                                    height: 32px;
-                                    width: 32px;
-                                }
+                                    p {
+                                        color: #FFFFFF;
+                                        float: right;
+                                        font: 300 19px/18px 'futura-pt-condensed';
+                                        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                                        vertical-align: middle;
+                                        width: 272px;
 
-                                p {
-                                    color: #FFFFFF;
-                                    float: right;
-                                    font: 300 19px/18px 'futura-pt-condensed';
-                                    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-                                    vertical-align: middle;
-                                    width: 272px;
+                                        span {
+                                            display: inline-block;
+                                            vertical-align: -8px;
 
-                                    span {
-                                        display: inline-block;
-                                        vertical-align: -8px;
-
-                                        span.highlight {
-                                            vertical-align: 0;
-                                            margin: 0 2px;
+                                            span.highlight {
+                                                vertical-align: 0;
+                                                margin: 0 2px;
+                                            }
                                         }
                                     }
                                 }
-                            }
 
-                            p.description {
-                                color: #5f5f5f;
-                                font: italic 12px/14px 'proxima-nova';
-                                font-weight: 300;
-                                position: relative;
-                                text-indent: 8px;
-                                top: 3px;
-
-                                a {
-                                    color: #d6d6d6;   
-                                }
-                            }
-
-                            span.corner {
-                                bottom: -32px;
-                                position: absolute;
-                                display: block;
-                                width: 0;
-                                height: 0;
-                                line-height: 0;
-                                border: solid 18px #575757;
-                                border-color: #575757 transparent transparent transparent;
-                                @include border-radius(0px, 0px);
-                                left: 260px;
-                            }
-                        }
-                    }
-
-                    ul.users {
-                        border-left: 1px solid #383838;
-
-                        li {
-                            padding: 12px 20px;
-
-                            img.img-circle {
-                                border: 2px solid white;
-                                float: left;
-                                height: 42px;
-                                width: 42px;
-                            }
-
-                            div.user {
-                                display: inline-block;
-                                float: left;
-                                min-height: 46px; 
-                                position: relative;
-                                margin-left: 5px;
-                                width: 270px;
-
-                                strong, span {
-                                    color: #FFFFFF;
-                                    display: inline-block;
-                                    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                                p.description {
+                                    color: #5f5f5f;
+                                    font: italic 12px/14px 'proxima-nova';
+                                    font-weight: 300;
+                                    position: relative;
+                                    text-indent: 8px;
+                                    top: 3px;
 
                                     a {
                                         color: #d6d6d6;   
                                     }
                                 }
 
-                                strong {
-                                    font: normal 19px/26px 'futura-pt-condensed';
+                                span.corner {
+                                    bottom: -32px;
+                                    position: absolute;
+                                    display: block;
+                                    width: 0;
+                                    height: 0;
+                                    line-height: 0;
+                                    border: solid 18px #575757;
+                                    border-color: #575757 transparent transparent transparent;
+                                    @include border-radius(0px, 0px);
+                                    left: 260px;
+                                }
+                            }
+                        }
+
+                        ul.users {
+                            li {
+                                padding: 12px 20px;
+
+                                img.img-circle {
+                                    border: 2px solid white;
+                                    float: left;
+                                    height: 42px;
+                                    width: 42px;
                                 }
 
-                                span.bio {
-                                    font: 300 12px/13px 'proxima-nova';
-                                }
+                                div.user {
+                                    display: inline-block;
+                                    float: left;
+                                    min-height: 46px; 
+                                    position: relative;
+                                    margin-left: 5px;
+                                    width: 270px;
 
-                                &.bio {
-                                    strong, span.bio {
-                                        position: relative;
-                                        top: -6px;
+                                    strong, span {
+                                        color: #FFFFFF;
+                                        display: inline-block;
+                                        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+
+                                        a {
+                                            color: #d6d6d6;   
+                                        }
+                                    }
+
+                                    strong {
+                                        font: normal 19px/26px 'futura-pt-condensed';
                                     }
 
                                     span.bio {
-                                        span.highlight { margin: 0 1px; }
+                                        font: 300 12px/13px 'proxima-nova';
+                                    }
+
+                                    &.bio {
+                                        strong, span.bio {
+                                            position: relative;
+                                            top: -6px;
+                                        }
+
+                                        span.bio {
+                                            span.highlight { margin: 0 1px; }
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    ul {
-                        min-height: 470px;
-
-                        li {
-                            color: white;
-
-                            h3 {
+                        ul {
+                            li {
                                 color: white;
-                                font: normal 14px/18px 'proxima-nova';
-                            }
 
-                            span.highlight {
-                                @include border-radius(2px, 2px);
-                                background: rgba(23, 136, 188, 0.9);
-                                padding: 0 2px;
-                                color: white;
-                                vertical-align: 0;
-                            }
-
-                            &.empty {
-                                width: auto;
-
-                                h3.empty {
+                                h3 {
                                     color: white;
-                                    font: normal 14px/18px 'proxima-nova'; 
-                                    opacity: 0.75;
-                                    height: auto;
+                                    font: normal 14px/18px 'proxima-nova';
+                                }
+
+                                span.highlight {
+                                    @include border-radius(2px, 2px);
+                                    background: rgba(23, 136, 188, 0.9);
+                                    padding: 0 2px;
+                                    color: white;
+                                    vertical-align: 0;
+                                }
+
+                                &.empty {
+                                    width: auto;
+
+                                    h3.empty {
+                                        color: white;
+                                        font: normal 14px/18px 'proxima-nova'; 
+                                        opacity: 0.75;
+                                        height: auto;
+                                    }
+                                }
+                            }
+                        }
+
+                        div.fbz-pagination {
+                            ul {
+                                li {
+                                    display: inline-block;
+                                    padding: 0 5px;
+
+                                    a {
+                                        color: white;
+                                        display: block;
+                                        font: normal 16px/20px 'futura-pt-condensed';
+                                    }
+
+                                    a.next, a.prev {
+                                        display: inline-block;
+                                        font: 10px/20px 'futura-pt-condensed';
+                                        vertical-align: baseline;
+                                    }
+
+                                    a.active {
+                                        @include border-radius(2px, 2px);
+                                        background: #767676;
+                                        font-weight: 500;
+                                        padding: 3px;
+                                    }
                                 }
                             }
                         }
@@ -480,7 +517,7 @@ div.marketing-content {
             text-shadow: 0 1px 1px rgba(0, 0, 0, .56);
 
             em {
-                font-weight: 700;
+                font-weight: 500;
             }
         }
 

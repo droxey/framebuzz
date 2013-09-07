@@ -1,0 +1,24 @@
+{% load avatar_tags staticfiles %}
+
+<ul class="users">
+    {% for result in search_results.object_list %}
+        <li class="clearfix">
+            <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
+                <img src="{% avatar_url result.object.user 92 %}" alt="" height="46" width="46" class="img-circle" />
+            </a>
+            <div class="user{% if result.object.bio %} bio{% endif %}">
+               <strong>
+                <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">{{ result.object.user.username }}</a>
+               </strong>
+               {% if result.object.bio %}
+                    <span class="bio">{{ result.object.bio|truncatechars:108 }}</span>
+               {% endif %}
+            </div>
+        </li>
+    {% empty %}
+        <li class="empty">
+            <h3 class="empty">No users found.</h3>
+        </li>
+    {% endfor %}
+</ul>
+{% include "search/snippets/pagination.html" %}
