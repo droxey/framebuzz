@@ -53,7 +53,7 @@ def search_videos(request):
                 videos = watson.search(query, models=(Video,))
 
             # Paginate results.
-            video_paginator = Paginator(videos, 6, request=request)
+            video_paginator = Paginator(videos, RESULTS_PER_PAGE, request=request)
             search_results = video_paginator.page(page)
 
     return render_to_response('search/videos.html', {
@@ -77,7 +77,8 @@ def search_conversations(request):
 
         if query:
             conversations = watson.search(query, models=(MPTTComment,))
-            convo_paginator = Paginator(conversations, 6, request=request)
+            total = RESULTS_PER_PAGE - 1
+            convo_paginator = Paginator(conversations, total, request=request)
             search_results = convo_paginator.page(page)
 
     return render_to_response('search/conversations.html', {
