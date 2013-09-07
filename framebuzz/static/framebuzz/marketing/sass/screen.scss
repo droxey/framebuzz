@@ -245,6 +245,11 @@ div.search-results {
         }
 
         #results-list {
+            button.close {
+                font-size: 32px;
+                margin-right: 17px;
+            }
+                
             div.row {
                 margin: 0 auto 20px;
                 width: 1120px;
@@ -425,7 +430,7 @@ div.search-results {
                                 }
                             }
                         }
-
+                        
                         ul {
                             li {
                                 color: white;
@@ -458,9 +463,11 @@ div.search-results {
 
                         div.fbz-pagination {
                             ul {
+                                padding-left: 10px;
+
                                 li {
                                     display: inline-block;
-                                    padding: 0 5px;
+                                    padding-right: 5px;
 
                                     a {
                                         color: rgba(255, 255, 255, 0.9);
@@ -479,8 +486,10 @@ div.search-results {
                                     a.next, a.prev {
                                         color: rgba(123, 123, 123, 0.9);
                                         display: inline;
-                                        font: normal 10px/20px 'futura-pt-condensed';
                                         vertical-align: baseline;
+                                        height: auto;
+
+                                        i { font-size: 14px; }
                                         
                                         &.hover {
                                             color: rgba(123, 123, 123, 1.0);

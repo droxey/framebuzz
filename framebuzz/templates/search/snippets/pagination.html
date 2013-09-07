@@ -1,14 +1,17 @@
 {% load i18n %}
 
+
 <div class="fbz-pagination pagination-left">
     <ul class="clearfix">
         <li>
             {% if search_results.has_previous %}
-                <a href="?{{ search_results.previous_page_number.querystring }}" class="prev page-link">&#9664;</a>
+                <a href="?{{ search_results.previous_page_number.querystring }}" class="prev page-link">
+                    <i class="icon-caret-left"></i>
+                </a>
             {% endif %}
         </li>
         {% for page in search_results.pages %}
-            {% if page %}
+            {% if page and search_results.pages|length > 1 %}
                 <li{% ifequal page search_results.number %} class="active"{% endifequal %}>
                     <a href="?{{ page.querystring }}" class="page-link">{{ page }}</a>
                 </li>
@@ -16,7 +19,9 @@
         {% endfor %}
         <li>
             {% if search_results.has_next %}
-                <a href="?{{ search_results.next_page_number.querystring }}" class="next page-link">&#9654;</a>
+                <a href="?{{ search_results.next_page_number.querystring }}" class="next page-link">
+                    <i class="icon-caret-right"></i>
+                </a>
             {% endif %}
         </li>
     </ul>
