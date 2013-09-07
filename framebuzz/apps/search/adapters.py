@@ -9,7 +9,7 @@ class UserProfileSearchAdapter(watson.SearchAdapter):
         return obj.user.username
 
     def get_description(self, obj):
-        return obj.bio
+        return obj.bio or obj.user.username
 
 
 class VideoSearchAdapter(watson.SearchAdapter):
