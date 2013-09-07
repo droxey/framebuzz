@@ -31,4 +31,4 @@ class CommentSearchAdapter(watson.SearchAdapter):
         return obj.comment
 
     def get_description(self, obj):
-        return ''
+        return obj.comment
