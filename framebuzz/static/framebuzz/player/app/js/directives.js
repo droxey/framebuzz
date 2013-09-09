@@ -28,6 +28,9 @@ angular.module('framebuzz.directives', [])
                 enablePluginSmoothing: true,
                 autosizeProgress: false,
                 success: function(media) {
+                    var loadingIndicator = $('.mejs-overlay-loading');
+                    console.log(loadingIndicator);
+
                     var isOpera = !!window.opera || navigator.userAgent.indexOf('Opera') >= 0;
                     // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
                     var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
@@ -39,6 +42,27 @@ angular.module('framebuzz.directives', [])
 
                     $('.mejs-video').css({ height: '385px', width: '640px' });
                     $('video').css({ height: '385px', width: '640px' });
+
+                    //if (loadingIndicator.length > 0 && loadingIndicator.is(':visible')) {
+                        loadingIndicator.spin({
+                          lines: 10, // The number of lines to draw
+                          length: 12, // The length of each line
+                          width: 10, // The line thickness
+                          radius: 17, // The radius of the inner circle
+                          corners: 0.75, // Corner roundness (0..1)
+                          rotate: 0, // The rotation offset
+                          direction: 1, // 1: clockwise, -1: counterclockwise
+                          color: '#000', // #rgb or #rrggbb or array of colors
+                          speed: 0.7, // Rounds per second
+                          trail: 37, // Afterglow percentage
+                          shadow: true, // Whether to render a shadow
+                          hwaccel: true, // Whether to use hardware acceleration
+                          className: 'spinner', // The CSS class to assign to the spinner
+                          zIndex: 2e9, // The z-index (defaults to 2000000000)
+                          top: '1', // Top position relative to parent in px
+                          left: '1' // Left position relative to parent in px
+                        });
+                    //}
 
                     $rootScope.player = media;
                     safeApply($rootScope);

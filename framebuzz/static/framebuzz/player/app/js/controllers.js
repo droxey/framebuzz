@@ -73,6 +73,10 @@ angular.module('framebuzz.controllers', []).
 
                             $state.transitionTo('player.blendedView');
                         }
+                        else {
+                            console.log('=== Login Error ===');
+                            console.log(data.data.errors);
+                        }
                     })
                     .error(function(data, status, headers, config) {
                         
@@ -121,6 +125,10 @@ angular.module('framebuzz.controllers', []).
                             safeApply($scope);
 
                             $state.transitionTo('player.blendedView');
+                        }
+                        else {
+                            console.log('=== Signup Error ===');
+                            console.log(data.data.errors);
                         }
                     })
                     .error(function(data, status, headers, config) {

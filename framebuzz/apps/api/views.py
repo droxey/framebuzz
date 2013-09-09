@@ -1,6 +1,4 @@
 import json
-import subprocess
-import urllib
 
 from django.conf import settings
 from django.http import HttpResponse
@@ -18,16 +16,15 @@ from rest_framework.renderers import JSONRenderer
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.api.serializers import UserSerializer
+from framebuzz.apps.api.utils import errors_to_json
 
 
 def video_share(request, video_id):
     video, created = get_or_create_video(video_id)
 
-    return render_to_response('profiles/share.html',
-    {
+    return render_to_response('profiles/share.html', {
         'video': video,
-    },
-    context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))
 
 
 @xframe_options_exempt
@@ -37,16 +34,11 @@ def video_embed(request, video_id):
     mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
     webm_url = 'http://www.ytapi.com/api/%s/direct/44/' % video_id
 
-    # For later reference (D.R. 09-03-2013):
-    # get_mp4 = 'youtube-dl http://www.youtube.com/watch?v=%s --get-url --cookies=cookies.txt' % video.video_id
-    # get_webm = 'youtube-dl -f 43 http://www.youtube.com/watch?v=%s --get-url --cookies=cookies.txt' % video.video_id
-
     if request.user.is_authenticated():
         # Send a signal that the user has viewed this video.
         action.send(request.user, verb='viewed video', action_object=video)
 
-    return render_to_response('player/video_embed.html',
-    {
+    return render_to_response('player/video_embed.html', {
         'close_window': request.GET.get('close', None),
         'video': video,
         'socket_port': settings.SOCKJS_PORT,
@@ -56,8 +48,7 @@ def video_embed(request, video_id):
         'next_url': next_url,
         'mp4_url': mp4_url,
         'webm_url': webm_url,
-    },
-    context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))
 
 
 @xframe_options_exempt
@@ -82,13 +73,16 @@ def video_login(request, video_id):
         userSerialized = JSONRenderer().render(userSerializer.data)
         outbound_message[DATA_KEY]['user'] = json.loads(userSerialized)
     else:
-        outbound_message[DATA_KEY]['errors'] = form.errors
-    
+        outbound_message[DATA_KEY]['errors'] = errors_to_json(form.errors)
+
     outbound_message[EVENT_TYPE_KEY] = 'FB_LOGIN'
-    outbound_message[CHANNEL_KEY] = '/framebuzz/session/%s' % request.session.session_key
+    outbound_message[CHANNEL_KEY] = \
+        '/framebuzz/session/%s' % request.session.session_key
     outbound_message[DATA_KEY]['login_success'] = login_success
 
-    return HttpResponse(json.dumps(outbound_message), content_type="application/json")
+    return HttpResponse(json.dumps(outbound_message),
+                        content_type="application/json")
+
 
 @xframe_options_exempt
 def video_logout(request, video_id):
@@ -97,7 +91,9 @@ def video_logout(request, video_id):
 
     logout(request)
 
-    return HttpResponse(json.dumps({ 'logged_out': True }), content_type="application/json")
+    return HttpResponse(json.dumps({'logged_out': True}),
+                        content_type="application/json")
+
 
 @xframe_options_exempt
 def video_signup(request, video_id):
@@ -122,10 +118,12 @@ def video_signup(request, video_id):
         userSerialized = JSONRenderer().render(userSerializer.data)
         outbound_message[DATA_KEY]['user'] = json.loads(userSerialized)
     else:
-        outbound_message[DATA_KEY]['errors'] = form.errors
-    
+        outbound_message[DATA_KEY]['errors'] = errors_to_json(form.errors)
+
     outbound_message[EVENT_TYPE_KEY] = 'FB_SIGNUP'
-    outbound_message[CHANNEL_KEY] = '/framebuzz/session/%s' % request.session.session_key
+    outbound_message[CHANNEL_KEY] = \
+        '/framebuzz/session/%s' % request.session.session_key
     outbound_message[DATA_KEY]['login_success'] = login_success
 
-    return HttpResponse(json.dumps(outbound_message), content_type="application/json")
+    return HttpResponse(json.dumps(outbound_message),
+                        content_type="application/json")

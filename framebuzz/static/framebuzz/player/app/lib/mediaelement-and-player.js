@@ -2715,7 +2715,7 @@ if (typeof jQuery != 'undefined') {
 			var 
 			loading = 
 				$('<div class="mejs-overlay mejs-layer">'+
-					'<div class="mejs-overlay-loading"><span></span></div>'+
+					'<div class="mejs-overlay-loading"></div>'+
 				'</div>')
 				.hide() // start out hidden
 				.appendTo(layers),
