@@ -1004,6 +1004,69 @@ div.marketing-content {
                 }
             }
         }
+
+        #releases {
+            article {
+                font: 300 12px/20px 'proxima-nova';
+                border-bottom: 1px solid #ccc;
+                margin-bottom: 20px;
+                padding-bottom: 20px;
+                position: relative;
+
+                &:last-child {
+                    border-bottom: none;
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                }
+
+                button.close {
+                    display: none;
+                    position: absolute;
+                    right: 0;
+                }
+
+                title {
+                    color: #2289ba;
+                    display: block;
+                    font-family: 'proxima-nova';
+                    font-weight: 500;
+                    font-size: 17px;
+                    margin-bottom: 9px;
+                }
+
+                div.teaser, div.full {
+                    p, ul li {
+                        color: #383835;
+                        line-height: 20px;
+                        font-size: 15px;
+
+                        a {
+                            color: #2289ba;
+                        }
+                    }
+                }
+
+                div.full {
+                    display: none;
+
+                    br { margin: 5px 0; }
+
+                    strong { font-weight: 700; }
+                    
+                    ul, ol {
+                        margin: 10px 0;
+                        list-style: decimal inside none;
+                    }
+
+                    p, ul li, ol li { 
+                        margin-bottom: 10px;
+                        font-size: 15px;
+
+                        &:last-child { margin-bottom: 0; }
+                    }
+                }
+            }
+        }
     }
 
     #about {
