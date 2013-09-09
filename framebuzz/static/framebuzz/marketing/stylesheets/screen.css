@@ -145,13 +145,15 @@ div.navbar div.navbar-inner form input.search-query {
   box-shadow: inset 1px 3px 7px #888;
   margin-left: 160px;
   padding: 5px 14px;
-  position: relative;
-  top: 1px;
   vertical-align: middle;
   line-height: 16px;
   width: 320px;
+  -webkit-transition: background-color 0.1s ease-in-out;
+  -moz-transition: background-color 0.1s ease-in-out;
+  -o-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
 }
-/* line 101, ../sass/screen.scss */
+/* line 100, ../sass/screen.scss */
 div.navbar div.navbar-inner form input.search-query:focus {
   -webkit-border-radius: 5px 5px;
   -moz-border-radius: 5px / 5px;
@@ -165,41 +167,46 @@ div.navbar div.navbar-inner form input.search-query:focus {
   padding: 5px 14px;
   position: relative;
   top: 1px;
+  left: 1px;
   vertical-align: middle;
   line-height: 16px;
   width: 320px;
+  -webkit-transition: background-color 0.1s ease-in-out;
+  -moz-transition: background-color 0.1s ease-in-out;
+  -o-transition: background-color 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
 }
-/* line 118, ../sass/screen.scss */
+/* line 119, ../sass/screen.scss */
 div.navbar div.navbar-inner form input.search-query:-moz-placeholder {
   color: #999;
 }
-/* line 121, ../sass/screen.scss */
+/* line 122, ../sass/screen.scss */
 div.navbar div.navbar-inner form input.search-query:-ms-input-placeholder {
   color: #999;
 }
-/* line 124, ../sass/screen.scss */
+/* line 125, ../sass/screen.scss */
 div.navbar div.navbar-inner form input.search-query::-webkit-input-placeholder {
   color: #999;
 }
-/* line 128, ../sass/screen.scss */
+/* line 129, ../sass/screen.scss */
 div.navbar div.navbar-inner form button {
   display: none;
 }
-/* line 131, ../sass/screen.scss */
+/* line 132, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav {
   padding: 11px 0;
   margin-left: 12px;
   width: 413px;
 }
-/* line 136, ../sass/screen.scss */
+/* line 137, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link {
   float: right;
 }
-/* line 139, ../sass/screen.scss */
+/* line 140, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link.logged-in {
   width: 90px;
 }
-/* line 143, ../sass/screen.scss */
+/* line 144, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a {
   border-left: none;
   float: left;
@@ -209,47 +216,47 @@ div.navbar div.navbar-inner ul.nav li.link a {
   padding-right: 0;
   text-transform: uppercase;
 }
-/* line 152, ../sass/screen.scss */
+/* line 153, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.dropdown-toggle {
   background-image: none;
   font-size: 19.33px;
   font-family: 'futura-pt-condensed';
 }
-/* line 157, ../sass/screen.scss */
+/* line 158, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.dropdown-toggle i {
   border-color: rgba(255, 255, 255, 0.48);
 }
-/* line 161, ../sass/screen.scss */
+/* line 162, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.dropdown-toggle b.caret {
   border-bottom-color: rgba(255, 255, 255, 0.48);
   border-top-color: rgba(255, 255, 255, 0.48);
 }
-/* line 167, ../sass/screen.scss */
+/* line 168, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.avatar {
   height: 28px;
   padding: 7px 0 7px 12px;
   width: 28px;
 }
-/* line 172, ../sass/screen.scss */
+/* line 173, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.avatar img.img-circle {
   border: 2px solid white;
   height: 28px;
   width: 28px;
 }
-/* line 180, ../sass/screen.scss */
+/* line 181, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.active, div.navbar div.navbar-inner ul.nav li.link a:hover {
   background: none !important;
 }
-/* line 182, ../sass/screen.scss */
+/* line 183, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu {
   margin-top: 1px;
   right: -10px;
 }
-/* line 186, ../sass/screen.scss */
+/* line 187, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li {
   font: normal 14px/18px 'proxima-nova';
 }
-/* line 189, ../sass/screen.scss */
+/* line 190, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a {
   border-left: none;
   color: rgba(33, 33, 33, 0.9);
@@ -262,12 +269,12 @@ div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a {
   -o-transition: color 0.1s ease-in-out, 1s;
   transition: color 0.1s ease-in-out, 1s;
 }
-/* line 198, ../sass/screen.scss */
+/* line 199, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a:hover {
   text-decoration: none;
   font-weight: 500;
 }
-/* line 204, ../sass/screen.scss */
+/* line 205, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a.active, div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a:hover {
   background: none;
   color: #212121;
@@ -276,54 +283,54 @@ div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a.active, div.nav
   -o-transition: color 0.1s ease-in-out, 1s;
   transition: color 0.1s ease-in-out, 1s;
 }
-/* line 210, ../sass/screen.scss */
+/* line 211, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li strong {
   font-weight: 500;
 }
-/* line 217, ../sass/screen.scss */
+/* line 218, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.divider-vertical {
   float: right;
   position: relative;
   top: 2px;
 }
-/* line 223, ../sass/screen.scss */
+/* line 224, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social {
   float: right;
   padding-right: 15px;
 }
-/* line 227, ../sass/screen.scss */
+/* line 228, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a {
   display: block;
   width: auto;
 }
-/* line 231, ../sass/screen.scss */
+/* line 232, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a.facebook {
   background-color: #3B5998;
 }
-/* line 232, ../sass/screen.scss */
+/* line 233, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a.twitter {
   background-color: #4099FF;
 }
-/* line 233, ../sass/screen.scss */
+/* line 234, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a.google {
   background-color: #D34836;
 }
-/* line 235, ../sass/screen.scss */
+/* line 236, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a img {
   padding: 3px 0px;
   height: 16px;
   width: 16px;
 }
-/* line 241, ../sass/screen.scss */
+/* line 242, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a .share {
   float: left;
 }
-/* line 245, ../sass/screen.scss */
+/* line 246, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a .count {
   float: right;
 }
 
-/* line 254, ../sass/screen.scss */
+/* line 255, ../sass/screen.scss */
 div.search-results {
   background: #343434;
   color: white;
@@ -336,77 +343,77 @@ div.search-results {
   min-height: 588px;
   width: 100%;
 }
-/* line 267, ../sass/screen.scss */
+/* line 268, ../sass/screen.scss */
 div.search-results div.wrapper h1, div.search-results div.wrapper h2, div.search-results div.wrapper h3 {
   font: normal 26px/36px 'futura-pt-condensed';
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 272, ../sass/screen.scss */
+/* line 273, ../sass/screen.scss */
 div.search-results div.wrapper h1 {
   color: #636363;
   font-style: italic;
   margin-bottom: 11px;
   text-align: center;
 }
-/* line 278, ../sass/screen.scss */
+/* line 279, ../sass/screen.scss */
 div.search-results div.wrapper h1 strong {
   font-weight: 500;
 }
-/* line 282, ../sass/screen.scss */
+/* line 283, ../sass/screen.scss */
 div.search-results div.wrapper #results-list button.close {
   font-size: 32px;
   margin-right: 17px;
 }
-/* line 287, ../sass/screen.scss */
+/* line 288, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row {
   margin: 0 auto;
   width: 1120px;
 }
-/* line 291, ../sass/screen.scss */
+/* line 292, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 {
   margin-left: 0;
 }
-/* line 294, ../sass/screen.scss */
+/* line 295, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 h2 {
   color: white;
   margin-bottom: 4px;
   text-indent: 20px;
 }
-/* line 300, ../sass/screen.scss */
+/* line 301, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page {
   position: relative;
   margin-top: 16px;
   min-height: 540px;
 }
-/* line 305, ../sass/screen.scss */
+/* line 306, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page.videos-results {
   border-right: 1px solid #383838;
 }
-/* line 309, ../sass/screen.scss */
+/* line 310, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page.conversations-results {
   border-left: 1px solid #474747;
   border-right: 1px solid #474747;
 }
-/* line 314, ../sass/screen.scss */
+/* line 315, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page.users-results {
   border-left: 1px solid #383838;
 }
-/* line 319, ../sass/screen.scss */
+/* line 320, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.videos li {
   float: left;
   margin-bottom: 20px;
   width: 155px;
 }
-/* line 320, ../sass/screen.scss */
+/* line 321, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.videos li:nth-child(odd) {
   margin: 0 20px;
 }
-/* line 325, ../sass/screen.scss */
+/* line 326, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.videos li.empty {
   margin: 0;
   padding: 12px 20px;
 }
-/* line 331, ../sass/screen.scss */
+/* line 332, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.videos li h3 a {
   color: #d6d6d6;
   display: block;
@@ -417,18 +424,18 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   word-wrap: break-word;
   width: 100%;
 }
-/* line 343, ../sass/screen.scss */
+/* line 344, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.videos li img {
   border: 2px solid white;
   height: 100px;
   margin-bottom: 6px;
   width: 155px;
 }
-/* line 353, ../sass/screen.scss */
+/* line 354, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li {
   padding: 12px 20px;
 }
-/* line 356, ../sass/screen.scss */
+/* line 357, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li div.comment {
   -webkit-border-radius: 12px 12px;
   -moz-border-radius: 12px / 12px;
@@ -438,14 +445,14 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   padding: 10px 7px;
   position: relative;
 }
-/* line 363, ../sass/screen.scss */
+/* line 364, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li div.comment img.img-circle {
   border: 2px solid white;
   float: left;
   height: 32px;
   width: 32px;
 }
-/* line 370, ../sass/screen.scss */
+/* line 371, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li div.comment p {
   color: #FFFFFF;
   float: right;
@@ -454,17 +461,17 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   vertical-align: middle;
   width: 272px;
 }
-/* line 378, ../sass/screen.scss */
+/* line 379, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li div.comment p span {
   display: inline-block;
   vertical-align: -8px;
 }
-/* line 382, ../sass/screen.scss */
+/* line 383, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li div.comment p span span.highlight {
   vertical-align: 0;
   margin: 0 2px;
 }
-/* line 390, ../sass/screen.scss */
+/* line 391, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li p.description {
   color: #5f5f5f;
   font: italic 12px/14px 'proxima-nova';
@@ -473,11 +480,11 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   text-indent: 8px;
   top: 3px;
 }
-/* line 398, ../sass/screen.scss */
+/* line 399, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li p.description a {
   color: #d6d6d6;
 }
-/* line 403, ../sass/screen.scss */
+/* line 404, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li span.corner {
   bottom: -32px;
   position: absolute;
@@ -492,18 +499,18 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   border-radius: 0px / 0px;
   left: 260px;
 }
-/* line 419, ../sass/screen.scss */
+/* line 420, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li {
   padding: 12px 20px;
 }
-/* line 422, ../sass/screen.scss */
+/* line 423, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li img.img-circle {
   border: 2px solid white;
   float: left;
   height: 42px;
   width: 42px;
 }
-/* line 429, ../sass/screen.scss */
+/* line 430, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user {
   display: inline-block;
   float: left;
@@ -512,47 +519,47 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   margin-left: 5px;
   width: 270px;
 }
-/* line 437, ../sass/screen.scss */
+/* line 438, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user strong, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user span {
   color: #FFFFFF;
   display: inline-block;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 442, ../sass/screen.scss */
+/* line 443, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user strong a, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user span a {
   color: #d6d6d6;
 }
-/* line 447, ../sass/screen.scss */
+/* line 448, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user strong {
   font: normal 19px/26px 'futura-pt-condensed';
 }
-/* line 451, ../sass/screen.scss */
+/* line 452, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user span.bio {
   font: 300 12px/13px 'proxima-nova';
 }
-/* line 456, ../sass/screen.scss */
+/* line 457, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user.bio strong, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user.bio span.bio {
   position: relative;
   top: -6px;
 }
-/* line 462, ../sass/screen.scss */
+/* line 463, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user.bio span.bio span.highlight {
   margin: 0 1px;
 }
-/* line 469, ../sass/screen.scss */
+/* line 470, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul {
   margin-bottom: 20px;
 }
-/* line 472, ../sass/screen.scss */
+/* line 473, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul li {
   color: white;
 }
-/* line 475, ../sass/screen.scss */
+/* line 476, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul li h3 {
   color: white;
   font: normal 14px/18px 'proxima-nova';
 }
-/* line 480, ../sass/screen.scss */
+/* line 481, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul li span.highlight {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -562,32 +569,32 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   color: white;
   vertical-align: 0;
 }
-/* line 488, ../sass/screen.scss */
+/* line 489, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul li.empty {
   width: auto;
 }
-/* line 491, ../sass/screen.scss */
+/* line 492, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul li.empty h3.empty {
   color: white;
   font: normal 14px/18px 'proxima-nova';
   opacity: 0.75;
   height: auto;
 }
-/* line 501, ../sass/screen.scss */
+/* line 502, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination {
   position: absolute;
   bottom: 0;
 }
-/* line 505, ../sass/screen.scss */
+/* line 506, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul {
   padding-left: 10px;
 }
-/* line 508, ../sass/screen.scss */
+/* line 509, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li {
   display: inline-block;
   padding-right: 5px;
 }
-/* line 512, ../sass/screen.scss */
+/* line 513, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a {
   color: rgba(255, 255, 255, 0.9);
   display: block;
@@ -599,7 +606,7 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   -o-transition: color 0.1s ease-in-out, 1s;
   transition: color 0.1s ease-in-out, 1s;
 }
-/* line 520, ../sass/screen.scss */
+/* line 521, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.hover {
   color: white;
   -webkit-transition: color 0.1s ease-in-out, 1s;
@@ -607,22 +614,22 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   -o-transition: color 0.1s ease-in-out, 1s;
   transition: color 0.1s ease-in-out, 1s;
 }
-/* line 526, ../sass/screen.scss */
+/* line 527, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.next, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.prev {
   color: rgba(123, 123, 123, 0.9);
   display: inline;
   vertical-align: baseline;
   height: auto;
 }
-/* line 532, ../sass/screen.scss */
+/* line 533, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.next i, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.prev i {
   font-size: 14px;
 }
-/* line 534, ../sass/screen.scss */
+/* line 535, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.next.hover, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.prev.hover {
   color: #7b7b7b;
 }
-/* line 540, ../sass/screen.scss */
+/* line 541, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li.active a {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -633,7 +640,7 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   padding: 0 7px;
 }
 
-/* line 558, ../sass/screen.scss */
+/* line 559, ../sass/screen.scss */
 div.marketing-content {
   min-height: 620px;
   overflow: hidden;
@@ -641,18 +648,18 @@ div.marketing-content {
   top: 0;
   width: 100%;
 }
-/* line 565, ../sass/screen.scss */
+/* line 566, ../sass/screen.scss */
 div.marketing-content div.anystretch img {
   left: 0 !important;
   top: -143px !important;
 }
-/* line 570, ../sass/screen.scss */
+/* line 571, ../sass/screen.scss */
 div.marketing-content #home {
   min-height: 1300px;
   width: 100%;
   position: relative;
 }
-/* line 575, ../sass/screen.scss */
+/* line 576, ../sass/screen.scss */
 div.marketing-content #home h1 {
   color: white;
   font-family: 'futura-pt-condensed';
@@ -662,25 +669,25 @@ div.marketing-content #home h1 {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.56);
 }
-/* line 584, ../sass/screen.scss */
+/* line 585, ../sass/screen.scss */
 div.marketing-content #home h1 em {
   font-weight: 500;
 }
-/* line 589, ../sass/screen.scss */
+/* line 590, ../sass/screen.scss */
 div.marketing-content #home #watch {
   height: 670px;
 }
-/* line 593, ../sass/screen.scss */
+/* line 594, ../sass/screen.scss */
 div.marketing-content #home #watch div.anystretch img {
   bottom: 0px !important;
   height: 820px !important;
   min-width: 1600px;
 }
-/* line 600, ../sass/screen.scss */
+/* line 601, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container {
   padding-bottom: 37px;
 }
-/* line 603, ../sass/screen.scss */
+/* line 604, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container #video-container {
   padding-left: 500px;
   background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
@@ -694,14 +701,14 @@ div.marketing-content #home #watch #watch-container #video-container {
   margin: 0 38px 0 262px;
   width: 640px;
 }
-/* line 616, ../sass/screen.scss */
+/* line 617, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container #video-container iframe {
   background: #202020;
   border-bottom: 3px solid #202020;
   border-radius: 3px 3px 3px 3px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-/* line 624, ../sass/screen.scss */
+/* line 625, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container #callout {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -713,7 +720,7 @@ div.marketing-content #home #watch #watch-container #callout {
   padding: 17px;
   width: 192px;
 }
-/* line 633, ../sass/screen.scss */
+/* line 634, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container #callout p {
   font-family: 'proxima-nova';
   font-weight: 300;
@@ -722,11 +729,11 @@ div.marketing-content #home #watch #watch-container #callout p {
   margin-bottom: 22px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
 }
-/* line 642, ../sass/screen.scss */
+/* line 643, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container #callout a.signup {
   float: right;
 }
-/* line 647, ../sass/screen.scss */
+/* line 648, ../sass/screen.scss */
 div.marketing-content #home h2.header {
   background: #3c89af;
   color: white;
@@ -738,7 +745,7 @@ div.marketing-content #home h2.header {
   text-align: center;
   text-transform: uppercase;
 }
-/* line 659, ../sass/screen.scss */
+/* line 660, ../sass/screen.scss */
 div.marketing-content #home a.signup {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -758,7 +765,7 @@ div.marketing-content #home a.signup {
   -o-transition: background-color 0.1s ease-in-out, 1s;
   transition: background-color 0.1s ease-in-out, 1s;
 }
-/* line 673, ../sass/screen.scss */
+/* line 674, ../sass/screen.scss */
 div.marketing-content #home a.signup:hover {
   text-decoration: none;
   background-color: #7A0066;
@@ -767,7 +774,7 @@ div.marketing-content #home a.signup:hover {
   -o-transition: background-color 0.1s ease-in-out, 1s;
   transition: background-color 0.1s ease-in-out, 1s;
 }
-/* line 679, ../sass/screen.scss */
+/* line 680, ../sass/screen.scss */
 div.marketing-content #home a.signup em {
   font-size: 10px;
   padding-left: 2px;
@@ -775,7 +782,7 @@ div.marketing-content #home a.signup em {
   top: -1px;
   vertical-align: middle;
 }
-/* line 688, ../sass/screen.scss */
+/* line 689, ../sass/screen.scss */
 div.marketing-content #home span.arrow {
   background: url("../img/arrow.png") no-repeat center bottom;
   content: " ";
@@ -785,29 +792,29 @@ div.marketing-content #home span.arrow {
   width: 85px;
   z-index: 100;
 }
-/* line 698, ../sass/screen.scss */
+/* line 699, ../sass/screen.scss */
 div.marketing-content #home #community {
   height: 442px;
 }
-/* line 702, ../sass/screen.scss */
+/* line 703, ../sass/screen.scss */
 div.marketing-content #home #community div.anystretch img {
   bottom: 0px !important;
   height: 585px !important;
   min-width: 1600px;
 }
-/* line 709, ../sass/screen.scss */
+/* line 710, ../sass/screen.scss */
 div.marketing-content #home #community #community-container {
   padding-left: 93px;
   padding-top: 30px;
   padding-bottom: 86px;
   position: relative;
 }
-/* line 715, ../sass/screen.scss */
+/* line 716, ../sass/screen.scss */
 div.marketing-content #home #community #community-container span.arrow {
   top: 0;
   left: 594px;
 }
-/* line 720, ../sass/screen.scss */
+/* line 721, ../sass/screen.scss */
 div.marketing-content #home #community #community-container h3 {
   color: #202020;
   font-family: 'proxima-nova';
@@ -816,7 +823,7 @@ div.marketing-content #home #community #community-container h3 {
   padding-top: 63px;
   padding-bottom: 23px;
 }
-/* line 729, ../sass/screen.scss */
+/* line 730, ../sass/screen.scss */
 div.marketing-content #home #community #community-container p {
   color: #202020;
   font-family: Georgia, serif;
@@ -826,40 +833,40 @@ div.marketing-content #home #community #community-container p {
   margin-bottom: 29px;
   width: 320px;
 }
-/* line 741, ../sass/screen.scss */
+/* line 742, ../sass/screen.scss */
 div.marketing-content #home #framebuzz {
   background: #000000;
   height: 615px;
   width: 100%;
 }
-/* line 747, ../sass/screen.scss */
+/* line 748, ../sass/screen.scss */
 div.marketing-content #home #framebuzz div.anystretch img {
   top: 80px !important;
 }
-/* line 752, ../sass/screen.scss */
+/* line 753, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights {
   background: rgba(0, 0, 0, 0.74);
 }
-/* line 755, ../sass/screen.scss */
+/* line 756, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container {
   position: relative;
 }
-/* line 758, ../sass/screen.scss */
+/* line 759, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container span.arrow {
   left: 553px;
 }
-/* line 760, ../sass/screen.scss */
+/* line 761, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul {
   padding-bottom: 35px;
 }
-/* line 763, ../sass/screen.scss */
+/* line 764, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li {
   float: left;
   padding: 0 19px;
   width: 262px;
   margin-top: -10px;
 }
-/* line 769, ../sass/screen.scss */
+/* line 770, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li h4 {
   color: white;
   font-family: 'futura-pt-condensed';
@@ -868,19 +875,19 @@ div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li h4
   margin-bottom: 20px;
   text-align: center;
 }
-/* line 778, ../sass/screen.scss */
+/* line 779, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li img {
   height: 150px;
   margin: 0 53px;
   width: 150px;
 }
-/* line 783, ../sass/screen.scss */
+/* line 784, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li img.discover {
   margin: 0 55px;
   position: relative;
   top: 5px;
 }
-/* line 790, ../sass/screen.scss */
+/* line 791, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li p {
   color: #d9d9d9;
   font-family: Georgia, serif;
@@ -889,7 +896,7 @@ div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li p 
   line-height: 20px;
   text-align: center;
 }
-/* line 803, ../sass/screen.scss */
+/* line 804, ../sass/screen.scss */
 div.marketing-content #home #framebuzz h3 {
   color: white;
   font-family: 'proxima-nova';
@@ -899,21 +906,21 @@ div.marketing-content #home #framebuzz h3 {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.56);
 }
-/* line 814, ../sass/screen.scss */
+/* line 815, ../sass/screen.scss */
 div.marketing-content #home #signup {
   background: white;
 }
-/* line 817, ../sass/screen.scss */
+/* line 818, ../sass/screen.scss */
 div.marketing-content #home #signup span.arrow {
   left: 557px;
 }
-/* line 819, ../sass/screen.scss */
+/* line 820, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container {
   padding-top: 70px;
   padding-bottom: 75px;
   position: relative;
 }
-/* line 824, ../sass/screen.scss */
+/* line 825, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container h3 {
   color: #454848;
   font-family: 'proxima-nova';
@@ -922,7 +929,7 @@ div.marketing-content #home #signup #signup-container h3 {
   margin-bottom: 13px;
   text-align: center;
 }
-/* line 833, ../sass/screen.scss */
+/* line 834, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container h4 {
   color: #454848;
   font-family: Georgia, serif;
@@ -931,22 +938,22 @@ div.marketing-content #home #signup #signup-container h4 {
   margin-bottom: 68px;
   text-align: center;
 }
-/* line 842, ../sass/screen.scss */
+/* line 843, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul {
   margin: 0 auto;
   width: 650px;
 }
-/* line 846, ../sass/screen.scss */
+/* line 847, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li {
   color: #454848;
   float: left;
   width: 260px;
 }
-/* line 851, ../sass/screen.scss */
+/* line 852, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li.first {
   margin-right: 75px;
 }
-/* line 853, ../sass/screen.scss */
+/* line 854, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li h5 {
   font-family: 'proxima-nova';
   font-size: 24px;
@@ -954,7 +961,7 @@ div.marketing-content #home #signup #signup-container ul li h5 {
   margin-bottom: 19px;
   text-align: right;
 }
-/* line 861, ../sass/screen.scss */
+/* line 862, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li p {
   font-family: Georgia, serif;
   font-style: italic;
@@ -963,7 +970,7 @@ div.marketing-content #home #signup #signup-container ul li p {
   line-height: 20px;
   text-align: right;
 }
-/* line 870, ../sass/screen.scss */
+/* line 871, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li span {
   margin-top: 34px;
   display: block;
@@ -974,21 +981,21 @@ div.marketing-content #home #signup #signup-container ul li span {
   text-align: right;
   float: right;
 }
-/* line 881, ../sass/screen.scss */
+/* line 882, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li a.signup {
   margin-top: 24px;
   float: right;
 }
-/* line 891, ../sass/screen.scss */
+/* line 892, ../sass/screen.scss */
 div.marketing-content #press {
   background: white;
   min-height: 800px;
 }
-/* line 895, ../sass/screen.scss */
+/* line 896, ../sass/screen.scss */
 div.marketing-content #press div.header {
   background: #2289ba;
 }
-/* line 898, ../sass/screen.scss */
+/* line 899, ../sass/screen.scss */
 div.marketing-content #press div.header span {
   color: white;
   display: block;
@@ -999,22 +1006,22 @@ div.marketing-content #press div.header span {
   line-height: 24px;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
 }
-/* line 910, ../sass/screen.scss */
+/* line 911, ../sass/screen.scss */
 div.marketing-content #press div.alert {
   font-family: 'proxima-nova';
   font-weight: 300;
   margin: 0 auto;
   width: 600px;
 }
-/* line 917, ../sass/screen.scss */
+/* line 918, ../sass/screen.scss */
 div.marketing-content #press #media, div.marketing-content #press #releases {
   padding-bottom: 45px;
 }
-/* line 920, ../sass/screen.scss */
+/* line 921, ../sass/screen.scss */
 div.marketing-content #press #media div.header, div.marketing-content #press #releases div.header {
   margin-bottom: 0;
 }
-/* line 925, ../sass/screen.scss */
+/* line 926, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper h2, div.marketing-content #press #releases div.wrapper h2 {
   color: #383835;
   font-family: 'proxima-nova';
@@ -1022,30 +1029,30 @@ div.marketing-content #press #media div.wrapper h2, div.marketing-content #press
   font-size: 24px;
   padding: 36px 0;
 }
-/* line 933, ../sass/screen.scss */
+/* line 934, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table, div.marketing-content #press #releases div.wrapper table {
   width: 100%;
   padding-bottom: 45px;
 }
-/* line 938, ../sass/screen.scss */
+/* line 939, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td, div.marketing-content #press #releases div.wrapper table tr td {
   padding-bottom: 45px;
   width: 33%;
 }
-/* line 943, ../sass/screen.scss */
+/* line 944, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a:hover, div.marketing-content #press #releases div.wrapper table tr td a:hover {
   text-decoration: none;
 }
-/* line 945, ../sass/screen.scss */
+/* line 946, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a img, div.marketing-content #press #releases div.wrapper table tr td a img {
   float: left;
   margin-right: 20px;
 }
-/* line 950, ../sass/screen.scss */
+/* line 951, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a div.file, div.marketing-content #press #releases div.wrapper table tr td a div.file {
   float: left;
 }
-/* line 953, ../sass/screen.scss */
+/* line 954, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a div.file span.title, div.marketing-content #press #releases div.wrapper table tr td a div.file span.title {
   color: #2289ba;
   display: block;
@@ -1054,7 +1061,7 @@ div.marketing-content #press #media div.wrapper table tr td a div.file span.titl
   font-size: 17px;
   margin-bottom: 9px;
 }
-/* line 962, ../sass/screen.scss */
+/* line 963, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a div.file span.type, div.marketing-content #press #releases div.wrapper table tr td a div.file span.type {
   color: #7a7a7a;
   display: block;
@@ -1063,11 +1070,11 @@ div.marketing-content #press #media div.wrapper table tr td a div.file span.type
   font-size: 17px;
   line-height: 19px;
 }
-/* line 975, ../sass/screen.scss */
+/* line 976, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a:hover div.file span.title, div.marketing-content #press #releases div.wrapper table tr td a:hover div.file span.title {
   text-decoration: underline;
 }
-/* line 982, ../sass/screen.scss */
+/* line 983, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper p, div.marketing-content #press #releases div.wrapper p {
   color: #383835;
   line-height: 25px;
@@ -1075,28 +1082,28 @@ div.marketing-content #press #media div.wrapper p, div.marketing-content #press 
   font-weight: 300;
   font-size: 18px;
 }
-/* line 989, ../sass/screen.scss */
+/* line 990, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper p a, div.marketing-content #press #releases div.wrapper p a {
   color: #2289ba;
 }
-/* line 997, ../sass/screen.scss */
+/* line 998, ../sass/screen.scss */
 div.marketing-content #about {
   font-family: 'proxima-nova';
   font-weight: 300;
 }
-/* line 1001, ../sass/screen.scss */
+/* line 1002, ../sass/screen.scss */
 div.marketing-content #about #manifesto {
   background: #fafafa;
   padding: 52px 0;
 }
-/* line 1005, ../sass/screen.scss */
+/* line 1006, ../sass/screen.scss */
 div.marketing-content #about #manifesto h1 {
   color: #393a36;
   font-size: 24px;
   margin-bottom: 32px;
   text-align: center;
 }
-/* line 1012, ../sass/screen.scss */
+/* line 1013, ../sass/screen.scss */
 div.marketing-content #about #manifesto p {
   font-family: Georgia, serif;
   font-style: italic;
@@ -1106,7 +1113,7 @@ div.marketing-content #about #manifesto p {
   margin: 0 auto;
   width: 825px;
 }
-/* line 1023, ../sass/screen.scss */
+/* line 1024, ../sass/screen.scss */
 div.marketing-content #about #who {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.6)), color-stop(100%, #1788bc));
@@ -1117,7 +1124,7 @@ div.marketing-content #about #who {
   background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.5) -120%, #1788bc 100%);
   padding: 52px 0;
 }
-/* line 1033, ../sass/screen.scss */
+/* line 1034, ../sass/screen.scss */
 div.marketing-content #about #who h1 {
   color: white;
   font-size: 30px;
@@ -1125,7 +1132,7 @@ div.marketing-content #about #who h1 {
   margin-bottom: 10px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1041, ../sass/screen.scss */
+/* line 1042, ../sass/screen.scss */
 div.marketing-content #about #who h2 {
   color: white;
   font-family: Georgia, serif;
@@ -1135,7 +1142,7 @@ div.marketing-content #about #who h2 {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1052, ../sass/screen.scss */
+/* line 1053, ../sass/screen.scss */
 div.marketing-content #about #who ul li {
   display: block;
   float: left;
@@ -1143,11 +1150,11 @@ div.marketing-content #about #who ul li {
   width: 338px;
   margin-right: 93px;
 }
-/* line 1059, ../sass/screen.scss */
+/* line 1060, ../sass/screen.scss */
 div.marketing-content #about #who ul li:last-child {
   margin-right: 0;
 }
-/* line 1061, ../sass/screen.scss */
+/* line 1062, ../sass/screen.scss */
 div.marketing-content #about #who ul li h3 {
   color: white;
   font-weight: bold;
@@ -1156,7 +1163,7 @@ div.marketing-content #about #who ul li h3 {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1070, ../sass/screen.scss */
+/* line 1071, ../sass/screen.scss */
 div.marketing-content #about #who ul li p {
   color: white;
   font-family: Georgia, serif;
@@ -1166,19 +1173,19 @@ div.marketing-content #about #who ul li p {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1083, ../sass/screen.scss */
+/* line 1084, ../sass/screen.scss */
 div.marketing-content #about #team {
   background: #fafafa;
   padding: 52px 0;
 }
-/* line 1087, ../sass/screen.scss */
+/* line 1088, ../sass/screen.scss */
 div.marketing-content #about #team h1 {
   color: #393a36;
   font-size: 24px;
   text-align: center;
   margin-bottom: 32px;
 }
-/* line 1095, ../sass/screen.scss */
+/* line 1096, ../sass/screen.scss */
 div.marketing-content #about #team ul li {
   display: block;
   float: left;
@@ -1187,15 +1194,15 @@ div.marketing-content #about #team ul li {
   margin-right: 93px;
   min-height: 300px;
 }
-/* line 1103, ../sass/screen.scss */
+/* line 1104, ../sass/screen.scss */
 div.marketing-content #about #team ul li.last {
   margin-right: 0;
 }
-/* line 1105, ../sass/screen.scss */
+/* line 1106, ../sass/screen.scss */
 div.marketing-content #about #team ul li img {
   margin-bottom: 48px;
 }
-/* line 1109, ../sass/screen.scss */
+/* line 1110, ../sass/screen.scss */
 div.marketing-content #about #team ul li h2 {
   color: #1788bc;
   font-weight: 500;
@@ -1203,12 +1210,12 @@ div.marketing-content #about #team ul li h2 {
   margin-bottom: 5px;
   font-size: 24px;
 }
-/* line 1117, ../sass/screen.scss */
+/* line 1118, ../sass/screen.scss */
 div.marketing-content #about #team ul li h3 {
   margin-bottom: 32px;
   text-align: center;
 }
-/* line 1122, ../sass/screen.scss */
+/* line 1123, ../sass/screen.scss */
 div.marketing-content #about #team ul li p {
   color: #3f3f3f;
   font-family: Georgia, serif;
@@ -1217,7 +1224,7 @@ div.marketing-content #about #team ul li p {
   line-height: 25px;
   text-align: center;
 }
-/* line 1134, ../sass/screen.scss */
+/* line 1135, ../sass/screen.scss */
 div.marketing-content #about #contact {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.6)), color-stop(100%, #1788bc));
@@ -1228,48 +1235,48 @@ div.marketing-content #about #contact {
   background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.5) -120%, #1788bc 100%);
   padding: 52px 0;
 }
-/* line 1145, ../sass/screen.scss */
+/* line 1146, ../sass/screen.scss */
 div.marketing-content #about #contact h1 {
   color: white;
   font-size: 30px;
   margin-bottom: 32px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1152, ../sass/screen.scss */
+/* line 1153, ../sass/screen.scss */
 div.marketing-content #about #contact div.alert-success {
   margin: 30px auto 50px;
   width: 500px;
 }
-/* line 1157, ../sass/screen.scss */
+/* line 1158, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form {
   width: 1063px;
 }
-/* line 1160, ../sass/screen.scss */
+/* line 1161, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form label {
   color: white;
   padding-bottom: 8px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1166, ../sass/screen.scss */
+/* line 1167, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form input[type='text'] {
   margin-bottom: 35px;
   width: 440px;
 }
-/* line 1171, ../sass/screen.scss */
+/* line 1172, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form textarea {
   height: 215px;
   width: 565px;
 }
-/* line 1176, ../sass/screen.scss */
+/* line 1177, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form div.user {
   float: left;
   margin-right: 28px;
 }
-/* line 1181, ../sass/screen.scss */
+/* line 1182, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form div.message {
   float: left;
 }
-/* line 1186, ../sass/screen.scss */
+/* line 1187, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form p.submit button {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -1284,7 +1291,7 @@ div.marketing-content #about #contact #contact-form p.submit button {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1203, ../sass/screen.scss */
+/* line 1204, ../sass/screen.scss */
 div.marketing-content #signup-page, div.marketing-content #login-page, div.marketing-content #reset-password, div.marketing-content #reset-password-done, div.marketing-content #change-password {
   color: #383835;
   height: 840px;
@@ -1292,7 +1299,7 @@ div.marketing-content #signup-page, div.marketing-content #login-page, div.marke
   font-family: 'proxima-nova';
   font-weight: 300;
 }
-/* line 1210, ../sass/screen.scss */
+/* line 1211, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper, div.marketing-content #login-page div.wrapper, div.marketing-content #reset-password div.wrapper, div.marketing-content #reset-password-done div.wrapper, div.marketing-content #change-password div.wrapper {
   background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
   background-color: white;
@@ -1303,7 +1310,7 @@ div.marketing-content #signup-page div.wrapper, div.marketing-content #login-pag
   padding: 25px;
   width: 400px;
 }
-/* line 1220, ../sass/screen.scss */
+/* line 1221, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper h1, div.marketing-content #login-page div.wrapper h1, div.marketing-content #reset-password div.wrapper h1, div.marketing-content #reset-password-done div.wrapper h1, div.marketing-content #change-password div.wrapper h1 {
   font-family: 'proxima-nova';
   font-weight: 700;
@@ -1311,54 +1318,54 @@ div.marketing-content #signup-page div.wrapper h1, div.marketing-content #login-
   text-align: center;
   padding-bottom: 25px;
 }
-/* line 1228, ../sass/screen.scss */
+/* line 1229, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper p.description, div.marketing-content #login-page div.wrapper p.description, div.marketing-content #reset-password div.wrapper p.description, div.marketing-content #reset-password-done div.wrapper p.description, div.marketing-content #change-password div.wrapper p.description {
   text-align: center;
   padding-bottom: 25px;
 }
-/* line 1233, ../sass/screen.scss */
+/* line 1234, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers, div.marketing-content #login-page div.wrapper ul.socialaccount_providers, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers, div.marketing-content #change-password div.wrapper ul.socialaccount_providers {
   margin: 0 auto;
   padding: 25px 0;
   width: 245px;
 }
-/* line 1238, ../sass/screen.scss */
+/* line 1239, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li {
   float: left;
   height: 64px;
   margin-right: 25px;
   width: 64px;
 }
-/* line 1244, ../sass/screen.scss */
+/* line 1245, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li:last-child, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li:last-child, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li:last-child, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li:last-child, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li:last-child {
   margin-right: 0;
 }
-/* line 1246, ../sass/screen.scss */
+/* line 1247, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li a, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li a, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li a, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li a, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li a {
   box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
   display: block;
   height: 64px;
   width: 64px;
 }
-/* line 1252, ../sass/screen.scss */
+/* line 1253, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li a.facebook, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li a.facebook, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li a.facebook, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li a.facebook, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li a.facebook {
   background-color: #3B5998;
 }
-/* line 1253, ../sass/screen.scss */
+/* line 1254, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li a.twitter, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li a.twitter, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li a.twitter, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li a.twitter, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li a.twitter {
   background-color: #4099FF;
 }
-/* line 1254, ../sass/screen.scss */
+/* line 1255, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li a.google, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li a.google, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li a.google, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li a.google, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li a.google {
   background-color: #D34836;
 }
-/* line 1256, ../sass/screen.scss */
+/* line 1257, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li a img, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li a img, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li a img, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li a img, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li a img {
   padding: 16px;
   height: 32px;
   width: 32px;
 }
-/* line 1265, ../sass/screen.scss */
+/* line 1266, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper button.signup, div.marketing-content #login-page div.wrapper button.signup, div.marketing-content #reset-password div.wrapper button.signup, div.marketing-content #reset-password-done div.wrapper button.signup, div.marketing-content #change-password div.wrapper button.signup {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -1380,7 +1387,7 @@ div.marketing-content #signup-page div.wrapper button.signup, div.marketing-cont
   -o-transition: background-color 0.1s ease-in-out, 1s;
   transition: background-color 0.1s ease-in-out, 1s;
 }
-/* line 1281, ../sass/screen.scss */
+/* line 1282, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper button.signup:hover, div.marketing-content #login-page div.wrapper button.signup:hover, div.marketing-content #reset-password div.wrapper button.signup:hover, div.marketing-content #reset-password-done div.wrapper button.signup:hover, div.marketing-content #change-password div.wrapper button.signup:hover {
   text-decoration: none;
   background-color: #7A0066;
@@ -1389,7 +1396,7 @@ div.marketing-content #signup-page div.wrapper button.signup:hover, div.marketin
   -o-transition: background-color 0.1s ease-in-out, 1s;
   transition: background-color 0.1s ease-in-out, 1s;
 }
-/* line 1287, ../sass/screen.scss */
+/* line 1288, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper button.signup em, div.marketing-content #login-page div.wrapper button.signup em, div.marketing-content #reset-password div.wrapper button.signup em, div.marketing-content #reset-password-done div.wrapper button.signup em, div.marketing-content #change-password div.wrapper button.signup em {
   font-size: 10px;
   padding-left: 2px;
@@ -1397,50 +1404,50 @@ div.marketing-content #signup-page div.wrapper button.signup em, div.marketing-c
   top: -1px;
   vertical-align: middle;
 }
-/* line 1296, ../sass/screen.scss */
+/* line 1297, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.errorlist, div.marketing-content #login-page div.wrapper ul.errorlist, div.marketing-content #reset-password div.wrapper ul.errorlist, div.marketing-content #reset-password-done div.wrapper ul.errorlist, div.marketing-content #change-password div.wrapper ul.errorlist {
   margin: 0 auto;
   margin-bottom: 5px;
   width: 300px;
 }
-/* line 1301, ../sass/screen.scss */
+/* line 1302, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.errorlist li, div.marketing-content #login-page div.wrapper ul.errorlist li, div.marketing-content #reset-password div.wrapper ul.errorlist li, div.marketing-content #reset-password-done div.wrapper ul.errorlist li, div.marketing-content #change-password div.wrapper ul.errorlist li {
   color: #990000;
   text-align: center;
 }
-/* line 1308, ../sass/screen.scss */
+/* line 1309, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper form p, div.marketing-content #login-page div.wrapper form p, div.marketing-content #reset-password div.wrapper form p, div.marketing-content #reset-password-done div.wrapper form p, div.marketing-content #change-password div.wrapper form p {
   padding-bottom: 10px;
 }
-/* line 1311, ../sass/screen.scss */
+/* line 1312, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper form p label, div.marketing-content #login-page div.wrapper form p label, div.marketing-content #reset-password div.wrapper form p label, div.marketing-content #reset-password-done div.wrapper form p label, div.marketing-content #change-password div.wrapper form p label {
   margin-bottom: 5px;
   font-weight: 500;
 }
-/* line 1316, ../sass/screen.scss */
+/* line 1317, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper form p input, div.marketing-content #login-page div.wrapper form p input, div.marketing-content #reset-password div.wrapper form p input, div.marketing-content #reset-password-done div.wrapper form p input, div.marketing-content #change-password div.wrapper form p input {
   font-family: 'proxima-nova' !important;
   width: 385px;
 }
-/* line 1322, ../sass/screen.scss */
+/* line 1323, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper form p.terms, div.marketing-content #login-page div.wrapper form p.terms, div.marketing-content #reset-password div.wrapper form p.terms, div.marketing-content #reset-password-done div.wrapper form p.terms, div.marketing-content #change-password div.wrapper form p.terms {
   padding: 0px 0 15px 0;
   line-height: 20px;
 }
-/* line 1328, ../sass/screen.scss */
+/* line 1329, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper form div.actions a.secondaryAction, div.marketing-content #login-page div.wrapper form div.actions a.secondaryAction, div.marketing-content #reset-password div.wrapper form div.actions a.secondaryAction, div.marketing-content #reset-password-done div.wrapper form div.actions a.secondaryAction, div.marketing-content #change-password div.wrapper form div.actions a.secondaryAction {
   display: block;
   float: left;
   line-height: 38px;
 }
-/* line 1342, ../sass/screen.scss */
+/* line 1343, ../sass/screen.scss */
 div.marketing-content #login-page div.wrapper form p label {
   display: table-cell;
   padding-bottom: 5px;
   margin-bottom: 0;
   width: 50%;
 }
-/* line 1349, ../sass/screen.scss */
+/* line 1350, ../sass/screen.scss */
 div.marketing-content #login-page div.wrapper form p input[type='checkbox'] {
   display: block;
   left: 112px;
@@ -1448,28 +1455,28 @@ div.marketing-content #login-page div.wrapper form p input[type='checkbox'] {
   top: -24px;
   width: 15px;
 }
-/* line 1363, ../sass/screen.scss */
+/* line 1364, ../sass/screen.scss */
 div.marketing-content #reset-password div.wrapper p.description {
   text-align: left;
 }
-/* line 1367, ../sass/screen.scss */
+/* line 1368, ../sass/screen.scss */
 div.marketing-content #reset-password div.wrapper form {
   margin-bottom: 25px;
 }
-/* line 1371, ../sass/screen.scss */
+/* line 1372, ../sass/screen.scss */
 div.marketing-content #reset-password div.wrapper form div.actions button.signup {
   min-width: 160px;
 }
-/* line 1377, ../sass/screen.scss */
+/* line 1378, ../sass/screen.scss */
 div.marketing-content #reset-password div.wrapper p.help {
   padding-bottom: 0;
 }
-/* line 1387, ../sass/screen.scss */
+/* line 1388, ../sass/screen.scss */
 div.marketing-content #change-password div.wrapper form div.actions button.signup {
   min-width: 200px;
 }
 
-/* line 1397, ../sass/screen.scss */
+/* line 1398, ../sass/screen.scss */
 #privacy div.content-wrapper, #terms div.content-wrapper {
   background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
   background-color: white;
@@ -1477,48 +1484,48 @@ div.marketing-content #change-password div.wrapper form div.actions button.signu
   margin: 0 auto;
   width: 1200px;
 }
-/* line 1404, ../sass/screen.scss */
+/* line 1405, ../sass/screen.scss */
 #privacy div.content-wrapper div.page-content, #terms div.content-wrapper div.page-content {
   font-family: 'proxima-nova';
   font-weight: 300;
   padding: 25px;
 }
-/* line 1410, ../sass/screen.scss */
+/* line 1411, ../sass/screen.scss */
 #privacy div.content-wrapper div.page-content h1, #terms div.content-wrapper div.page-content h1 {
   font-weight: 700;
   font-size: 24px;
 }
-/* line 1415, ../sass/screen.scss */
+/* line 1416, ../sass/screen.scss */
 #privacy div.content-wrapper div.page-content ul, #terms div.content-wrapper div.page-content ul {
   list-style-type: circle inside none;
 }
-/* line 1417, ../sass/screen.scss */
+/* line 1418, ../sass/screen.scss */
 #privacy div.content-wrapper div.page-content p, #privacy div.content-wrapper div.page-content ul li, #privacy div.content-wrapper div.page-content ol li, #terms div.content-wrapper div.page-content p, #terms div.content-wrapper div.page-content ul li, #terms div.content-wrapper div.page-content ol li {
   font-size: 14px;
   margin-bottom: 15px;
   line-height: 20px;
 }
 
-/* line 1429, ../sass/screen.scss */
+/* line 1430, ../sass/screen.scss */
 body.background-bottom.terms div.marketing-content {
   min-height: 4693px;
   width: 100%;
 }
-/* line 1436, ../sass/screen.scss */
+/* line 1437, ../sass/screen.scss */
 body.background-bottom.privacy div.marketing-content {
   min-height: 3405px;
   width: 100%;
 }
-/* line 1443, ../sass/screen.scss */
+/* line 1444, ../sass/screen.scss */
 body.background-bottom.accounts div.marketing-content, body.background-bottom.zinnia div.marketing-content {
   min-height: 840px;
   width: 100%;
 }
-/* line 1450, ../sass/screen.scss */
+/* line 1451, ../sass/screen.scss */
 body.background-bottom div.marketing-content div.anystretch {
   background-color: #188bbe;
 }
-/* line 1453, ../sass/screen.scss */
+/* line 1454, ../sass/screen.scss */
 body.background-bottom div.marketing-content div.anystretch img {
   left: 0px !important;
   top: auto !important;
@@ -1529,11 +1536,11 @@ body.background-bottom div.marketing-content div.anystretch img {
 /*
  *      FrameBuzz Blog
  */
-/* line 1467, ../sass/screen.scss */
+/* line 1468, ../sass/screen.scss */
 body.zinnia {
   font: 14px/18px normal 'proxima-nova';
 }
-/* line 1472, ../sass/screen.scss */
+/* line 1473, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content {
   background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
   background-color: white;
@@ -1541,7 +1548,7 @@ body.zinnia div.marketing-content div.wrapper #zinnia-content {
   padding-top: 20px;
   min-height: 840px;
 }
-/* line 1479, ../sass/screen.scss */
+/* line 1480, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content h1 {
   color: #323232;
   font: 30px/36px normal 'futura-pt-condensed';
@@ -1549,109 +1556,109 @@ body.zinnia div.marketing-content div.wrapper #zinnia-content h1 {
   text-transform: uppercase;
   padding-bottom: 25px;
 }
-/* line 1487, ../sass/screen.scss */
+/* line 1488, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content h2 {
   color: #323232;
   font: 30px/36px normal 'futura-pt-condensed';
   font-weight: 300;
   text-transform: uppercase;
 }
-/* line 1494, ../sass/screen.scss */
+/* line 1495, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content h3, body.zinnia div.marketing-content div.wrapper #zinnia-content legend {
   color: #323232;
   font: 24px/30px normal 'futura-pt-condensed';
   font-weight: 300;
   text-transform: uppercase;
 }
-/* line 1502, ../sass/screen.scss */
+/* line 1503, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form legend {
   padding-bottom: 20px;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
 }
-/* line 1507, ../sass/screen.scss */
+/* line 1508, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form label {
   font-weight: 700;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
 }
-/* line 1512, ../sass/screen.scss */
+/* line 1513, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form textarea {
   height: 70px;
   margin: 5px 0 20px 0;
   width: 720px;
 }
-/* line 1518, ../sass/screen.scss */
+/* line 1519, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form p.auth, body.zinnia div.marketing-content div.wrapper #zinnia-content form p.submit {
   float: left;
   width: 50%;
 }
-/* line 1523, ../sass/screen.scss */
+/* line 1524, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form p.auth {
   position: relative;
   top: 10px;
 }
-/* line 1528, ../sass/screen.scss */
+/* line 1529, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form p.submit {
   float: right;
 }
-/* line 1531, ../sass/screen.scss */
+/* line 1532, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form p.submit .btn {
   float: right;
   margin-left: 10px;
 }
-/* line 1540, ../sass/screen.scss */
+/* line 1541, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article header h2 {
   color: #323232;
   font: 30px/24px normal 'futura-pt-condensed';
   font-weight: 500;
   text-transform: uppercase;
 }
-/* line 1548, ../sass/screen.scss */
+/* line 1549, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article div.entry-content {
   line-height: 20px;
   padding: 25px 0;
 }
-/* line 1552, ../sass/screen.scss */
+/* line 1553, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article div.entry-content.continue {
   padding: 25px 0 10px 0;
 }
-/* line 1557, ../sass/screen.scss */
+/* line 1558, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article footer {
   border-bottom: 1px dotted #ccc;
   margin-bottom: 25px;
   padding: 25px 0 10px 0;
 }
-/* line 1562, ../sass/screen.scss */
+/* line 1563, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article footer p {
   float: left;
   width: 50%;
 }
-/* line 1567, ../sass/screen.scss */
+/* line 1568, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article footer p.entry-tags {
   float: right;
   text-align: right;
 }
-/* line 1574, ../sass/screen.scss */
+/* line 1575, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content div.entry-similar {
   border-bottom: 1px dotted #ccc;
   margin-bottom: 25px;
   padding-bottom: 25px;
 }
-/* line 1580, ../sass/screen.scss */
+/* line 1581, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content div.entry-prev-next {
   border-bottom: 1px dotted #ccc;
   margin-bottom: 15px;
 }
-/* line 1584, ../sass/screen.scss */
+/* line 1585, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content div.entry-prev-next ul.pager {
   margin: 23px 0;
 }
-/* line 1589, ../sass/screen.scss */
+/* line 1590, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content section {
   border-bottom: 1px dotted #ccc;
   margin-bottom: 25px;
   padding-bottom: 25px;
 }
-/* line 1597, ../sass/screen.scss */
+/* line 1598, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content #sidebar aside h3 {
   color: #323232;
   font: 26px/32px normal 'futura-pt-condensed';
@@ -1660,12 +1667,12 @@ body.zinnia div.marketing-content div.wrapper #zinnia-content #sidebar aside h3 
   text-transform: uppercase;
 }
 
-/* line 1611, ../sass/screen.scss */
+/* line 1612, ../sass/screen.scss */
 div.footer {
   background-color: black;
   padding: 33px 0;
 }
-/* line 1615, ../sass/screen.scss */
+/* line 1616, ../sass/screen.scss */
 div.footer a, div.footer i {
   color: white;
   border-left: none;
@@ -1679,22 +1686,22 @@ div.footer a, div.footer i {
   opacity: 0.8;
   text-decoration: none;
 }
-/* line 1628, ../sass/screen.scss */
+/* line 1629, ../sass/screen.scss */
 div.footer a:hover, div.footer i:hover {
   opacity: 1;
 }
-/* line 1633, ../sass/screen.scss */
+/* line 1634, ../sass/screen.scss */
 div.footer i {
   font-size: 16px;
   margin-left: 13px;
   margin-right: 0;
   padding-top: 1px;
 }
-/* line 1640, ../sass/screen.scss */
+/* line 1641, ../sass/screen.scss */
 div.footer a.active, div.footer a:hover {
   background: none !important;
 }
-/* line 1642, ../sass/screen.scss */
+/* line 1643, ../sass/screen.scss */
 div.footer span {
   color: white;
   display: block;
@@ -1711,41 +1718,41 @@ div.footer span {
  *      iPad Compatibility
  */
 @media screen and (device-aspect-ratio: 3 / 4) {
-  /* line 1661, ../sass/screen.scss */
+  /* line 1662, ../sass/screen.scss */
   .wrapper {
     width: 768px;
   }
 
-  /* line 1665, ../sass/screen.scss */
+  /* line 1666, ../sass/screen.scss */
   div.navbar {
     width: 768px;
   }
-  /* line 1668, ../sass/screen.scss */
+  /* line 1669, ../sass/screen.scss */
   div.navbar div.navbar-inner {
     width: 100%;
   }
-  /* line 1671, ../sass/screen.scss */
+  /* line 1672, ../sass/screen.scss */
   div.navbar div.navbar-inner a.brand {
     padding: 20px 0px 0px 0px;
     height: 45px;
     width: 207px;
   }
 
-  /* line 1682, ../sass/screen.scss */
+  /* line 1683, ../sass/screen.scss */
   div.marketing-content #home #watch div.anystretch {
     min-width: 768px;
   }
-  /* line 1687, ../sass/screen.scss */
+  /* line 1688, ../sass/screen.scss */
   div.marketing-content #home #watch #watch-container #video-container {
     margin-left: 25px;
   }
-  /* line 1691, ../sass/screen.scss */
+  /* line 1692, ../sass/screen.scss */
   div.marketing-content #home #watch #watch-container #callout {
     height: 108px;
     margin: 25px 10px;
     width: 648px;
   }
-  /* line 1701, ../sass/screen.scss */
+  /* line 1702, ../sass/screen.scss */
   div.marketing-content #community div.anystretch {
     display: none;
   }
