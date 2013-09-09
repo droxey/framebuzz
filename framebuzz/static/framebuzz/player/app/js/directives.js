@@ -28,44 +28,20 @@ angular.module('framebuzz.directives', [])
                 enablePluginSmoothing: true,
                 autosizeProgress: false,
                 success: function(media) {
-                    var loadingIndicator = $('.mejs-overlay-loading');
-                    console.log(loadingIndicator);
-
-                    var isOpera = !!window.opera || navigator.userAgent.indexOf('Opera') >= 0;
-                    // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
-                    var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
-                    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-                    // At least Safari 3+: "[object HTMLElementConstructor]"
-                    var isChrome = !!window.chrome;                          // Chrome 1+
-                    var isIE = /*@cc_on!@*/false;                            // At least IE6
-
-
-                    $('.mejs-video').css({ height: '385px', width: '640px' });
-                    $('video').css({ height: '385px', width: '640px' });
-
-                    //if (loadingIndicator.length > 0 && loadingIndicator.is(':visible')) {
-                        loadingIndicator.spin({
-                          lines: 10, // The number of lines to draw
-                          length: 12, // The length of each line
-                          width: 10, // The line thickness
-                          radius: 17, // The radius of the inner circle
-                          corners: 0.75, // Corner roundness (0..1)
-                          rotate: 0, // The rotation offset
-                          direction: 1, // 1: clockwise, -1: counterclockwise
-                          color: '#000', // #rgb or #rrggbb or array of colors
-                          speed: 0.7, // Rounds per second
-                          trail: 37, // Afterglow percentage
-                          shadow: true, // Whether to render a shadow
-                          hwaccel: true, // Whether to use hardware acceleration
-                          className: 'spinner', // The CSS class to assign to the spinner
-                          zIndex: 2e9, // The z-index (defaults to 2000000000)
-                          top: '1', // Top position relative to parent in px
-                          left: '1' // Left position relative to parent in px
-                        });
-                    //}
-
+                    //  =====
+                    //  Angular.js Globals
+                    //  =====
                     $rootScope.player = media;
                     safeApply($rootScope);
+
+                    //  =====
+                    //  Browser-Specific Hacks
+                    //  =====
+                    var isOpera = !!window.opera || navigator.userAgent.indexOf('Opera') >= 0;
+                    var isFirefox = typeof InstallTrigger !== 'undefined';
+                    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+                    var isChrome = !!window.chrome;
+                    var isIE = /*@cc_on!@*/false;
 
                     if (isSafari && !isChrome) {
                         $('.mejs-time-rail').addClass('safari');
@@ -77,10 +53,41 @@ angular.module('framebuzz.directives', [])
                         }
                     }
 
+                    //  =====
+                    //  CSS Changes
+                    //  =====
+                    $('.mejs-video').css({ height: '385px', width: '640px' });
+                    $('video').css({ height: '385px', width: '640px' });
                     $('.mejs-volume-button').addClass('mejs-fade-in');
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
 
+                    //  =====
+                    //  Loading Indicator
+                    //  =====
+                    $('.mejs-overlay-loading').spin({
+                      lines: 10, // The number of lines to draw
+                      length: 12, // The length of each line
+                      width: 10, // The line thickness
+                      radius: 17, // The radius of the inner circle
+                      corners: 0.75, // Corner roundness (0..1)
+                      rotate: 0, // The rotation offset
+                      direction: 1, // 1: clockwise, -1: counterclockwise
+                      color: '#000', // #rgb or #rrggbb or array of colors
+                      speed: 0.7, // Rounds per second
+                      trail: 37, // Afterglow percentage
+                      shadow: true, // Whether to render a shadow
+                      hwaccel: true, // Whether to use hardware acceleration
+                      className: 'spinner', // The CSS class to assign to the spinner
+                      zIndex: 2e9, // The z-index (defaults to 2000000000)
+                      top: '1', // Top position relative to parent in px
+                      left: '1' // Left position relative to parent in px
+                    });
+
+
+                    //  =====
+                    //  jQuery Event Listeners
+                    //  =====
                     $('.mejs-mediaelement').mouseenter(function(e) {
                         $('.mejs-video').addClass('show-controls');
                     });
@@ -93,37 +100,6 @@ angular.module('framebuzz.directives', [])
                             $('.mejs-video').removeClass('show-controls');
                         }, 250);
                     });
-
-                    scope.$on('$viewContentLoaded', function() {
-                        if ($('#buzz-layer > div.panel').length > 0) {
-                            $('#buzz-layer > div.panel').hoverIntent({
-                                over: function() {
-                                    $('.mejs-mediaelement').trigger('mouseleave');
-                                },
-                                out: function() {
-
-                                }
-                            });
-                        }
-                    });
-
-                    scope.$on('library_toggle_complete', function() {
-                        $('.mejs-add-library-button').removeClass('added removed');
-                        $('.mejs-add-library-button').addClass(broadcaster.message.className);
-                    });
-
-                    media.addEventListener('timeupdate', function(e) {
-                        broadcaster.prepForBroadcast({ broadcastType: 'player_timeupdate', currentTime: media.currentTime });
-                    }, false);
-
-                    media.addEventListener('playing', function(e) {
-                        $('.mejs-video').css({ height: '385px', width: '640px' });
-                        broadcaster.prepForBroadcast({ broadcastType: 'player_playing' });
-                    }, false);
-
-                    media.addEventListener('pause', function(e) {
-                        broadcaster.prepForBroadcast({ broadcastType: 'player_paused' });
-                    }, false);
 
                     $('.mejs-mute-conversation-button button').click(function() {
                         var button = $(this);
@@ -150,6 +126,43 @@ angular.module('framebuzz.directives', [])
                     $('.mejs-add-library-button').click(function() {
                         broadcaster.prepForBroadcast({ broadcastType: 'player_addtolibrary' });
                     });
+
+                    //  =====
+                    //  Scope Event Listeners
+                    //  =====
+                    scope.$on('$viewContentLoaded', function() {
+                        if ($('#buzz-layer > div.panel').length > 0) {
+                            $('#buzz-layer > div.panel').hoverIntent({
+                                over: function() {
+                                    $('.mejs-mediaelement').trigger('mouseleave');
+                                },
+                                out: function() {
+
+                                }
+                            });
+                        }
+                    });
+
+                    scope.$on('library_toggle_complete', function() {
+                        $('.mejs-add-library-button').removeClass('added removed');
+                        $('.mejs-add-library-button').addClass(broadcaster.message.className);
+                    });
+
+                    //  =====
+                    //  Video Player Event Listeners
+                    //  =====
+                    media.addEventListener('timeupdate', function(e) {
+                        broadcaster.prepForBroadcast({ broadcastType: 'player_timeupdate', currentTime: media.currentTime });
+                    }, false);
+
+                    media.addEventListener('playing', function(e) {
+                        $('.mejs-video').css({ height: '385px', width: '640px' });
+                        broadcaster.prepForBroadcast({ broadcastType: 'player_playing' });
+                    }, false);
+
+                    media.addEventListener('pause', function(e) {
+                        broadcaster.prepForBroadcast({ broadcastType: 'player_paused' });
+                    }, false);
 
                     window.setTimeout(function() {
                         var playerTitleHtml = $('<div>').append($('h1.video-title').clone()).html();

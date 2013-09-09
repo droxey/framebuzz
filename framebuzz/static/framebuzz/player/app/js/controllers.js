@@ -20,6 +20,7 @@ angular.module('framebuzz.controllers', []).
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
+                $scope.formErrors = '';
                 $scope.loginUrls = SOCK.login_urls;
 
                 $scope.replyClicked = false;
@@ -69,13 +70,16 @@ angular.module('framebuzz.controllers', []).
                             $scope.videoInstance.is_authenticated = data.data.login_success;
                             $scope.videoInstance.user = data.data.user;
                             $scope.loginModel = {};
+                            $scope.formErrors = '';
                             safeApply($scope);
 
                             $state.transitionTo('player.blendedView');
                         }
                         else {
-                            console.log('=== Login Error ===');
-                            console.log(data.data.errors);
+                            if (data.data.errors['__all__'] !== undefined) {
+                                $scope.formErrors = data.data.errors;
+                                safeApply($scope);
+                            }
                         }
                     })
                     .error(function(data, status, headers, config) {
@@ -122,13 +126,16 @@ angular.module('framebuzz.controllers', []).
                             $scope.videoInstance.is_authenticated = data.data.login_success;
                             $scope.videoInstance.user = data.data.user;
                             $scope.signupModel = {};
+                            $scope.formErrors = '';
                             safeApply($scope);
 
                             $state.transitionTo('player.blendedView');
                         }
                         else {
-                            console.log('=== Signup Error ===');
-                            console.log(data.data.errors);
+                            if (data.data.errors['__all__'] !== undefined) {
+                                $scope.formErrors = data.data.errors;
+                                safeApply($scope);
+                            }
                         }
                     })
                     .error(function(data, status, headers, config) {

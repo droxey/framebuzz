@@ -24,6 +24,7 @@ menu, nav, output, ruby, section, summary, time, mark, audio, video {
     -webkit-font-smoothing: subpixel-antialiased;
     text-stroke: 0px;
     font-weight: normal;
+    outline: 0 none;
 }
 
 a, a:link, a:visited, a:active, a:hover, button, img { outline: 0; }
@@ -1556,7 +1557,7 @@ object, embed, video, iframe {
                     }
 
                     ul.socialaccount_providers {
-                        margin: 17px auto;
+                        margin: 5px auto 35px;
                         width: 190px;
 
                         li {
@@ -1597,6 +1598,18 @@ object, embed, video, iframe {
                     }
                     
                     form {
+                        ul.errors {
+                            position: absolute;
+                            top: 190px;
+                            width: 200px;
+
+                            li {
+                                color: red;
+                                font: 300 11px/13px 'proxima-nova';
+                                text-align: center;
+                            }
+                        }
+
                         p {
                             padding-bottom: 0px;
                             width: 100%;

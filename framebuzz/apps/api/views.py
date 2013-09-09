@@ -73,7 +73,8 @@ def video_login(request, video_id):
         userSerialized = JSONRenderer().render(userSerializer.data)
         outbound_message[DATA_KEY]['user'] = json.loads(userSerialized)
     else:
-        outbound_message[DATA_KEY]['errors'] = errors_to_json(form.errors)
+        outbound_message[DATA_KEY]['errors'] = \
+            json.loads(errors_to_json(form.errors))
 
     outbound_message[EVENT_TYPE_KEY] = 'FB_LOGIN'
     outbound_message[CHANNEL_KEY] = \
@@ -118,7 +119,8 @@ def video_signup(request, video_id):
         userSerialized = JSONRenderer().render(userSerializer.data)
         outbound_message[DATA_KEY]['user'] = json.loads(userSerialized)
     else:
-        outbound_message[DATA_KEY]['errors'] = errors_to_json(form.errors)
+        outbound_message[DATA_KEY]['errors'] = \
+            json.loads(errors_to_json(form.errors))
 
     outbound_message[EVENT_TYPE_KEY] = 'FB_SIGNUP'
     outbound_message[CHANNEL_KEY] = \
