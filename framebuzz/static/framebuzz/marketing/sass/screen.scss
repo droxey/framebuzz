@@ -84,7 +84,12 @@ div.navbar {
              margin: 15px 0;
 
              input.search-query {
+                @include border-radius(5px, 5px);
+                background-color: #ececec;
+                color: #999;
+                border-color: #444;
                 font-family: 'proxima-nova';
+                box-shadow: inset 1px 3px 7px #888;
                 margin-left: 160px;
                 padding: 5px 14px;
                 position: relative;
@@ -92,7 +97,33 @@ div.navbar {
                 vertical-align: middle;
                 line-height: 16px;
                 width: 320px;
+
+                &:focus {
+                    @include border-radius(5px, 5px);
+                    background-color: #fff;
+                    color: #666;
+                    border-color: #444;
+                    font-family: 'proxima-nova';
+                    box-shadow: inset 1px 3px 7px #888;
+                    margin-left: 160px;
+                    padding: 5px 14px;
+                    position: relative;
+                    top: 1px;
+                    vertical-align: middle;
+                    line-height: 16px;
+                    width: 320px;
+                }
              }
+
+            input.search-query:-moz-placeholder{
+                color: #999;
+            }
+            input.search-query:-ms-input-placeholder{
+                color: #999;
+            }
+            input.search-query::-webkit-input-placeholder{
+                color: #999;
+            }
 
              button { display: none; }
         }
