@@ -1,77 +1,16 @@
+{% extends "marketing/base.html" %}
 {% load staticfiles compress avatar_tags activity_tags %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>FrameBuzz - {{ profile_user.username }}'s Profile</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% block title %}{{ profile_user.username }}'s Profile{% endblock %}
+
+{% block page_css %}
     {% compress css %}
-        <!-- bootstrap -->
-        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap.css' %}" rel="stylesheet" />
-        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap-responsive.css' %}" rel="stylesheet" />
-        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap-overrides.css' %}" type="text/css" rel="stylesheet" />
-
-        <!-- libraries -->
-        <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/jquery-ui-1.10.2.custom.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/font-awesome.css' %}" type="text/css" rel="stylesheet" />
-
-        <!-- global styles -->
-        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/layout.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/elements.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/icons.css' %}">
-
-        <!-- profiles styles -->
         <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" type="text/css" media="screen" />
     {% endcompress %}
-    {% block page_css %}{% endblock %}
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="//use.typekit.net/jbo8iic.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-</head>
-<body>
-    <div class="navbar navbar-inverse">
-        <div class="navbar-inner">
-            <div class="wrapper">
-                <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="brand" href="http://www.framebuzz.com">
-                    <img src="{% static 'framebuzz/profiles/img/logo.png' %}" alt="FrameBuzz" height="48" width="208" />
-                </a>
-                {% if request.user.is_authenticated %}
-                    <ul class="nav pull-right">
-                        {% if request.user.id == profile_user.id %}       
-                            <li class="settings">
-                                <a href="#videos" data-url="{% url 'profiles-videos' profile_user.username %}" class="tab-link dropdown-toggle hidden-phone">
-                                    Library
-                                </a>
-                            </li>
-                        {% endif %}
-                        <li class="settings user clearfix">
-                            <a href="{% url 'profiles-home' request.user.username %}" role="button" class="avatar">
-                                <img src="{% avatar_url request.user 58 %}" alt="" height="28" width="28" class="img-circle" />
-                            </a>
-                            {% if request.user.id == profile_user.id %} 
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-cog"></i> <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#edit" class="tab-link" data-url="{% url 'profiles-edit' profile_user.username %}">Profile Settings</a></li>
-                                    <li><a href="#avatar" class="tab-link" data-url="{% url 'avatar_change' %}">Change Avatar</a></li>
-                                    <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
-                                    <li><a href="{% url 'account_logout' %}">Log Out</a></li>
-                                </ul>
-                            {% endif %}
-                        </li>
-                    </ul>  
-                {% endif %} 
-            </div>         
-        </div>
-    </div>
+    {% block extra_css %}{% endblock %}
+{% endblock %}
+
+{% block marketing_content %}
     <div id="fb">
         <div class="content">
             <div class="wrapper clearfix">
@@ -186,7 +125,6 @@
                 </div>
             </div>
         </div>
-        <footer></footer>
     </div>
     <div id="video-embed-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-body">
@@ -201,11 +139,10 @@
         </div>
         <div class="modal-body"></div>
     </div>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+{% endblock %}
+
+{% block page_javascript %}
     {% compress js %}
-        <script src="{% static 'framebuzz/dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'framebuzz/dashboard/bootstrap/js/jquery-ui-1.10.2.custom.min.js' %}"></script>
-        <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/jquery.fileupload.js' %}"></script>
         <script type="text/javascript">
             function youtube_parser(url){
@@ -222,8 +159,6 @@
                 var currentPageUrl = null;
                 var currentVideoUrl = null;
                 var currentTab = '#activity';
-
-                $('#fb').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150, positionY: 'bottom' });
 
                 // Load the activity tab content on page load.
                 var activeTabUrl = $('ul.nav-tabs li.active a').attr('data-url');
@@ -414,16 +349,5 @@
             });
         </script>
     {% endcompress %}
-    {% block page_javascript %}{% endblock %}
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-43394419-1', 'framebuzz.com');
-      ga('send', 'pageview');
-
-    </script>
-</body>
-</html>
+    {% block extra_javascript %}{% endblock %}
+{% endblock %}
