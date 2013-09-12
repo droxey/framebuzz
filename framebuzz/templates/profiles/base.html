@@ -14,7 +14,7 @@
     <div id="fb">
         <div class="content">
             <div class="wrapper clearfix">
-                <div class="background {% if request.user.is_authenticated and request.user.id == profile_user.id %}show-callout{% endif %}">
+                <div class="background">
                     <header>
                         <div class="user-info clearfix">
                             <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">
@@ -36,65 +36,55 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="ribbon-wrapper">
-                            <div class="ribbon-front">
-                                <nav>
-                                    <ul class="nav nav-tabs">
-                                        <li class="location">
-                                            {% if profile_user.get_profile and profile_user.get_profile.location %}
-                                                <span>
-                                                    <img src="{% static 'framebuzz/profiles/img/pin.png' %}" height="29" width="17" />
-                                                    {{ profile_user.get_profile.location }}
-                                                </span>
-                                            {% endif %}
-                                        </li>
-                                        <li class="home active">
-                                            <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>
-                                            <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link"></a>
-                                        </li>
-                                        <li class="followers">
-                                            <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
-                                                Followers
-                                                <em>{{ profile_followers|length }}</em>
+                        <nav>
+                            <ul class="nav nav-tabs">
+                                <li class="location">
+                                    {% if profile_user.get_profile and profile_user.get_profile.location %}
+                                        <span>
+                                            <img src="{% static 'framebuzz/profiles/img/pin.png' %}" height="29" width="17" />
+                                            {{ profile_user.get_profile.location }}
+                                        </span>
+                                    {% endif %}
+                                </li>
+                                <li class="home active">
+                                    <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>
+                                    <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link"></a>
+                                </li>
+                                <li class="followers">
+                                    <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
+                                        Followers
+                                        <em>({{ profile_followers|length }})</em>
+                                    </a>
+                                </li>
+                                <li class="following">
+                                    <a data-url="{% url 'profiles-following' profile_user.username %}" href="#following" class="tab-link">
+                                        Following
+                                        <em>({{ profile_following|length }})</em>
+                                    </a>
+                                </li>
+                                <li class="conversations">
+                                    <a data-url="{% url 'profiles-conversations' profile_user.username %}" href="#conversations" class="tab-link">
+                                        Conversations
+                                        <em>({{ profile_conversations|length }})</em>
+                                    </a>
+                                </li>
+                                <li class="favorites">
+                                    <a data-url="{% url 'profiles-favorites' profile_user.username %}" href="#favorites" class="tab-link">
+                                        Favorites
+                                        <em>({{ profile_favorites|length }})</em>
+                                    </a>
+                                </li>
+                                <li class="website">
+                                    {% if profile_user.get_profile and profile_user.get_profile.get_default_website %}
+                                      <span class="website">
+                                            <a href="{{ profile_user.get_profile.get_default_website.url }}" target="_blank" rel="nofollow">
+                                                {{ profile_user.get_profile.get_default_website.url }}
                                             </a>
-                                        </li>
-                                        <li class="following">
-                                            <a data-url="{% url 'profiles-following' profile_user.username %}" href="#following" class="tab-link">
-                                                Following
-                                                <em>{{ profile_following|length }}</em>
-                                            </a>
-                                        </li>
-                                        <li class="conversations">
-                                            <a data-url="{% url 'profiles-conversations' profile_user.username %}" href="#conversations" class="tab-link">
-                                                Conversations
-                                                <em>{{ profile_conversations|length }}</em>
-                                            </a>
-                                        </li>
-                                        <li class="favorites">
-                                            <a data-url="{% url 'profiles-favorites' profile_user.username %}" href="#favorites" class="tab-link">
-                                                Favorites
-                                                <em>{{ profile_favorites|length }}</em>
-                                            </a>
-                                        </li>
-                                        <li class="website">
-                                            {% if profile_user.get_profile and profile_user.get_profile.get_default_website %}
-                                              <span class="website">
-                                                    <a href="{{ profile_user.get_profile.get_default_website.url }}" target="_blank" rel="nofollow">
-                                                        {{ profile_user.get_profile.get_default_website.url }}
-                                                    </a>
-                                              </span>
-                                            {% endif %}
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <div class="ribbon-edge-topleft"></div>
-                            <div class="ribbon-edge-topright"></div>
-                            <div class="ribbon-edge-bottomleft"></div>
-                            <div class="ribbon-edge-bottomright"></div>
-                            <div class="ribbon-back-left"></div>
-                            <div class="ribbon-back-right"></div>
-                        </div>
+                                      </span>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </nav>
                     </header>
                     <div id="profile-container" class="tab-content">
                         <div class="tab-pane active" id="activity"></div>
@@ -106,22 +96,6 @@
                         <div class="tab-pane" id="edit"></div>
                         <div class="tab-pane" id="avatar"></div>
                     </div>
-                </div>
-                    {% if request.user.is_authenticated and request.user.id == profile_user.id %}
-                        <div id="callout">
-                            <h1>Your FrameBuzz Profile</h1>
-                            <h2>Ready to get started?</h2>
-                            <ol>
-                                <li><span>Choose a YouTube video to FrameBuzz.</span></li>
-                                <li><span>Click the “FrameBuzz a Video” button to add it to your library.</span></li>
-                                <li><span>Start the conversation! Invite friends to comment on your FrameBuzz here, or embed it on your website.</span></li>
-                            </ol>
-                            <p>Try it now!</p>
-                            <p class="clearfix">
-                                <a data-target="#add-framebuzz-modal" role="button" class="modal-button add-video" data-toggle="modal" class="add-video" title="Add FrameBuzz Video" href="{% url 'profiles-add-video' profile_user %}">FRAMEBUZZ A VIDEO <em>&#9654;</em></a>
-                            </p>
-                        </div>
-                    {% endif %}
                 </div>
             </div>
         </div>

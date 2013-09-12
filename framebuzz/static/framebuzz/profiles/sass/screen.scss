@@ -9,20 +9,6 @@
 @import "compass/css3/transition";
 
 /*
- *      Global
- */
-
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, 
-acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
-strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, 
-form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, 
-canvas, details, embed, figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-
-
-/*
  *      Mixins
  */
 
@@ -35,152 +21,6 @@ menu, nav, output, ruby, section, summary, time, mark, audio, video {
       background-size: $width $height;
     }
   }
-}
-
-/*
- *      Elements
- */
-
-body {
-    color: #333333;     
-    font: 12px/16px normal "proxima-nova", sans-serif;
-    margin: 0;
-}
-
-/*
- *      Navigation
- */
-
-.navbar .nav .dropdown-toggle .caret { 
-    border-bottom-color: rgba(255, 255, 255, 0.48);
-    border-top-color: rgba(255, 255, 255, 0.48);
-}
-
-div.navbar {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMzA4KSIvPjxzdG9wIG9mZnNldD0iMC45OCIgc3RvcC1jb2xvcj0icmdiYSgwLCAwLCAwLCAwKSIvPjwvcmFkaWFsR3JhZGllbnQ+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDApIiAvPjxyZWN0IHg9Ii0yMC45MDkxJSIgeT0iLTEwMC40MiUiIHdpZHRoPSIxNTYwcHgiIGhlaWdodD0iMjAwLjg0JSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
-    background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 780, color-stop(0%, rgba(255, 255, 255, 0.308)), color-stop(98%, rgba(0, 0, 0, 0)));
-    background-image: -webkit-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
-    background-image: -moz-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
-    background-image: -ms-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
-    background-image: -o-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
-    background-image: radial-gradient(780px 100.42% at center 0%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 98%);
-    background-color: rgba(39, 39, 39, 1.0);
-    background-repeat: repeat-x;
-    box-shadow: none;
-    position: relative;
-    z-index: 10;
-
-    div.navbar-inner {
-        background: none;
-        border-left: 0 none;
-        box-shadow: none;
-        margin: 0 auto;
-        width: 1200px;
-        overflow: visible;
-
-        a.brand {
-            border: none;
-            padding: 8px 0px 0px 35px;
-            text-shadow: none;
-
-            img {
-                width: 208px;
-                height: 48px;
-            }
-        }
-
-        ul.nav {
-            padding-top: 5px;
-            margin-right: -5px;
-
-            li {
-                a {
-                    border-left: none;
-                    color: rgba(255, 255, 255, 0.48);
-                    @include single-transition(opacity .1s ease-in-out);
-
-                    &.dropdown-toggle { 
-                        background-image: none; 
-                        font-size: 19.33px;
-                        font-family: 'futura-pt-condensed';
-
-                        i, b.carat {
-                            color: rgba(255, 255, 255, 0.48);
-                        }
-                    }
-                }
-
-                &.settings {
-                    background: transparent url('../img/divider.png') repeat-y top right;
-                    padding-right: 15px;
-                }
-
-                &.user {
-                    background: none;
-                    padding-left: 15px;
-
-                    a {
-                        color: rgba(33, 33, 33, 1.0);
-                        display: block;
-                        float: left;
-
-                        &:hover {
-
-                        }
-
-                        &.avatar {
-                            height: 28px;
-                            padding: 7px 0;
-                            width: 28px;
-
-                            img.img-circle {
-                                border: 2px solid white;
-                                height: 28px;
-                                width: 28px;
-                            }
-                        }
-                    }
-
-                    ul.dropdown-menu {
-                        li {
-                            a {
-                                display: inline-block;
-                                font-family: 'proxima-nova';
-                                font-size: 14px;
-                                font-weight: 300;
-                                width: 120px;
-
-                                &:hover {
-                                    text-decoration: none;
-                                    font-weight: 500;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                a.active, a:hover {
-                    background: none;
-                    color: rgba(255, 255, 255, 0.88);
-                    @include single-transition(opacity .1s ease-in-out);
-                }
-            }
-        }
-    }
-}
-
-.wf-loading {
-    div.content {
-        opacity: 0;
-        @include single-transition(opacity 0.25s ease-in-out);
-    }
-}
-
-.wf-active {
-    div.content { 
-        opacity: 1;
-        @include single-transition(opacity 0.25s ease-in-out);
-    }
 }
 
 div.alert {
@@ -230,30 +70,22 @@ div.content {
     overflow: visible;
 
     div.wrapper {
-        width: 1200px;
+        width: 1180px;
         margin: 0 auto;
 
         div.background {
             background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
             background-color: white;
             box-shadow: 0 -5px 0 5px rgba(0, 0, 0, 0.10);
-            margin-right: 49px;
-            margin-left: 262px;
-            width: 676px;
-            float: left;
-
-            &.show-callout {
-                margin-left: 200px;
-            }
+            width: 100%;
 
             header {
+                background: url('../img/default-cover.png') repeat;
                 font-family: 'futura-pt-condensed';
                 font-weight: 500;
 
                 div.user-info {
-                    padding-top: 18px;
-                    padding-left: 25px;
-                    padding-right: 25px;
+                    padding: 100px 65px 65px;
                     position: relative;
 
                     img.img-circle {
@@ -264,7 +96,7 @@ div.content {
                         display: block;
                         float: left;
                         position: relative;
-                        top: 8px;
+                        top: 98px;
                         z-index: 3;
                         height: 157px;
                         width: 157px;
@@ -279,6 +111,8 @@ div.content {
                         float: left;
                         min-width: 315px;
                         max-width: 445px;
+                        position: relative;
+                        top: 81px;
 
                         h1 {
                             margin-left: 21px;
@@ -286,12 +120,13 @@ div.content {
                             padding-bottom: 8px;
 
                             a {
-                                color: #333333;
+                                color: #E8E8E8;
                                 display: inline-block;
                                 font-size: 44.74px;
                                 line-height: 46px;
                                 margin-right: 14px;
                                 text-decoration: none;
+                                text-shadow: 0 1px 0 rgba(0, 0, 0, 0.54);
                             }
 
                             span {
@@ -305,6 +140,7 @@ div.content {
                         p.bio {
                             @include border-radius(3px, 3px);
                             background-color: #e8e8e8;
+                            box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.3);
                             color: rgba(61, 61, 61, 0.45);
                             font-size: 18px;
                             padding: 10px 12px;
@@ -329,194 +165,36 @@ div.content {
                     }
                 }
 
-                div.ribbon-wrapper {
-                    position: relative;
+                nav {
+                    background: #272727;
 
-                    div.ribbon-front {
-                        background-color: rgba(31, 31, 31, .67);  
-                        border-bottom: 1px solid rgba(197, 197, 197, 0.67);
-                        height: 60px;
-                        width: 698px;
-                        position: relative;
-                        left: 0px;
-                        z-index: 2;
+                    ul {
+                        border-bottom: none;
+                        margin: 0 auto;
+                        padding: 8px 0;
+                        width: 600px;
 
-                        nav {
-                            ul.nav-tabs {
-                                border-bottom: none;
+                        li {
+                            width: 145px;
 
-                                li {
-                                    background: transparent url('../img/divider.png') repeat-y top right;
-                                    border-radius: none;
-                                    border: none;
-                                    display: block;
-                                    float: left;
-                                    height: 46px;
-                                    margin: 7px 0;
-                                    padding: 0 11px;
+                            &.home, &.location { display: none; }
 
-                                    a {
-                                        border: none;
-                                        color: white;
-                                        font-size: 18.87px;
-                                        font-weight: 300;
-                                        margin-right: 0;
-                                        padding-top: 3px;
-                                        padding-left: 0;
-                                        padding-right: 0;
-                                        padding-bottom: 0;
-                                        text-decoration: none;
+                            a {
+                                background-color: transparent !important;
+                                border-color: transparent !important;
+                                color: white;
+                                font: 300 20px/20px 'futura-pt-condensed';
+                                display: inline-block;
+                                text-align: center;
+                                width: 145px;
 
-                                        em {
-                                            color: rgba(255, 255, 255, 0.45);
-                                        }
-
-                                        &:hover {
-                                            background: none;
-                                            border-radius: none;
-                                            border: none;
-                                        }
-                                    }
-
-                                    &:first-child {
-                                        padding-left: 0;
-                                    }
-
-                                    &:last-child {
-                                        background: none;
-                                        padding-right: 0;
-                                    }
-
-                                    &.location { 
-                                        padding-left: 0;
-                                        text-align: center;
-                                        width: 193px; 
-
-                                        span {
-                                            color: rgba(255, 255, 255, 0.45);
-                                            display: inline-block;
-                                            height: 100%;
-                                            font-size: 23px;
-                                            text-align: left;
-                                            text-indent: -6px;
-                                            position: relative;
-                                            top: -3px;
-
-                                            img {
-                                                margin-top: 6px;
-                                                margin-left: 6px;
-                                                margin-right: 6px;
-                                                position: relative;
-                                                top: 5px;
-                                            }
-                                        }
-                                    }
-
-                                    &.followers { width: 49px; }
-                                    &.following { width: 49px; }
-                                    &.conversations { width: 69px; }
-                                    &.favorites { width: 46px; }
-                                    &.home, &.videos { display: none; }
-
-
-
-                                    &.website {
-                                        background: none;
-                                        padding-right: 0;
-                                        text-align: left;
-                                        width: 158px;
-
-                                        span {
-                                            display: block;
-                                            margin-top: 5px;
-
-                                            a {
-                                                color: rgba(255, 255, 255, 0.45);
-                                                font-size: 19px;
-                                            }
-                                        }
-                                    }
-                                    
-                                    &.followers, &.following, &.conversations, &.favorites {
-                                        &.active, &:hover {
-                                            border-bottom: 7px solid rgba(255, 255, 255, 0.9);
-                                            margin-bottom: -7px;
-                                        }
-                                    }
-
-                                    &.active > a, &:hover > a {
-                                        background: none;
-                                        border-radius: none;
-                                        border: none;
-                                        outline: none;
-                                    }
+                                em { 
+                                    font-weight: 500;
+                                    letter-spacing: 0.05em;
+                                    padding-left: 2px; 
                                 }
                             }
                         }
-                    }
-
-                    .ribbon-edge-topleft, 
-                    .ribbon-edge-topright, 
-                    .ribbon-edge-bottomleft, 
-                    .ribbon-edge-bottomright {
-                        position: absolute;
-                        z-index: 1;
-                        border-style:solid;
-                        height:0px;
-                        width:0px;
-                    }
-
-                    .ribbon-edge-bottomleft,
-                    .ribbon-edge-bottomright {
-                        top: 60px;
-                    }
-
-                    .ribbon-edge-topleft,
-                    .ribbon-edge-bottomleft {
-                        left: 0px;
-                        border-color: transparent rgba(164, 164, 164, 1.0) transparent transparent;
-                    }
-
-                    .ribbon-edge-topleft {
-                        top: 0px;
-                        border-width: 0px 0px 0 0;
-                    }
-
-                    .ribbon-edge-bottomleft {
-                        border-width: 0 0px 0px 0;
-                    }
-
-                    .ribbon-edge-topright,
-                    .ribbon-edge-bottomright {
-                        left: 676px;
-                        border-color: transparent transparent transparent rgba(164, 164, 164, 1.0);
-                    }
-
-                    .ribbon-edge-topright {
-                        top: 0px;
-                        border-width: 0px 0 0 23px;
-                    }
-
-                    .ribbon-edge-bottomright {
-                        border-width: 0 0 23px 23px;
-                    }
-
-                    .ribbon-back-left {
-                        position: absolute;
-                        top: 0px;
-                        left: 0px;
-                        width: 0px;
-                        height: 58px;
-                        z-index: 0;
-                    }
-
-                    .ribbon-back-right {
-                        position: absolute;
-                        top: 23px;
-                        right: 0px;
-                        width: 0px;
-                        height: 58px;
-                        z-index: 0;
                     }
                 }
             }
