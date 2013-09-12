@@ -3114,6 +3114,7 @@ if (typeof jQuery != 'undefined') {
 				handle  = controls.find('.mejs-time-handle'),
 				timefloat  = controls.find('.mejs-time-float'),
 				timefloatcurrent  = controls.find('.mejs-time-float-current'),
+				rail = controls.find('.mejs-time-rail'),
 				handleMouseMove = function (e) {
 					// mouse position relative to the object
 					var x = e.pageX,
@@ -3153,6 +3154,7 @@ if (typeof jQuery != 'undefined') {
 
 			// handle clicks
 			//controls.find('.mejs-time-rail').delegate('span', 'click', handleMouseMove);
+
 			total
 				.bind('mousedown', function (e) {
 					// only handle left clicks
@@ -3174,6 +3176,7 @@ if (typeof jQuery != 'undefined') {
 					mouseIsOver = true;
 
 					t.globalBind('mousemove.dur', function(e) {
+						$('#heatmap tr td').trigger('mouseenter', e);
 						handleMouseMove(e);
 					});
 					if (!mejs.MediaFeatures.hasTouch) {
@@ -3181,9 +3184,9 @@ if (typeof jQuery != 'undefined') {
 					}
 				})
 				.bind('mouseleave',function(e) {
-					$('#heatmap').removeClass('hover');
 					mouseIsOver = false;
 					if (!mouseIsDown) {
+						$('#heatmap tr td').removeClass('active');
 						t.globalUnbind('.dur');
 						timefloat.hide();
 					}

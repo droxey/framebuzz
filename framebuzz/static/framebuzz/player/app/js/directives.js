@@ -88,19 +88,6 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     //  jQuery Event Listeners
                     //  =====
-                    $('.mejs-time-rail').mouseenter(function(e) {
-                        $('#heatmap tr td').mouseenter(e);
-                    });
-
-                    $('.mejs-time-rail').mouseleave(function(e) {
-                        $('#heatmap tr td').removeClass('active');
-                    });
-
-                    $('#player-layer').on('mouseenter', '#heatmap tr td', function(e) {
-                        $('#heatmap tr td').removeClass('active');
-                        $(this).addClass('active');
-                    });
-
                     $('.mejs-mediaelement').mouseenter(function(e) {
                         $('.mejs-video').addClass('show-controls');
                     });
@@ -368,6 +355,18 @@ angular.module('framebuzz.directives', [])
                     var valid = (value === ctrl.$viewValue);
                     ctrl.$setValidity("repeat", valid);
                     return value;
+                });
+            }
+        };
+    })
+    .directive('heatmaphover', function() {
+        return function(scope, element, attrs) {
+            if (scope.$last === true) {
+                element.ready(function() {
+                    $('#heatmap tr td').mouseenter(function(e) {
+                        $(this).addClass('active');
+                        e.stopPropagation();
+                    });
                 });
             }
         };
