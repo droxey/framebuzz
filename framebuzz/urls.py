@@ -1,8 +1,6 @@
 import re
 
 from django.conf.urls import patterns, include, url
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.conf.urls.static import static
 from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
@@ -22,7 +20,8 @@ urlpatterns = patterns('',
     url(r'^v/', include('framebuzz.apps.api.urls')),
 
     # Login Redirect:
-    url(r'^accounts/logged-in/$', 'framebuzz.apps.profiles.views.logged_in', name='logged-in'),
+    url(r'^accounts/logged-in/$',
+        'framebuzz.apps.profiles.views.logged_in', name='logged-in'),
 
     # FrameBuzz User Profiles:
     url(r'^profile/', include('framebuzz.apps.profiles.urls')),
@@ -31,7 +30,10 @@ urlpatterns = patterns('',
     url(r'^avatar/', include('avatar.urls')),
 
     # Share Page:
-    url(r'^share/(?P<video_id>[\w.@+-]+)/$', 'framebuzz.apps.api.views.video_share', name='video-share'),
+    url(r'^share/(?P<video_id>[\w.@+-]+)/$',
+        'framebuzz.apps.api.views.video_share', name='video-share'),
+    url(r'^test/(?P<video_id>[\w.@+-]+)/$',
+        'framebuzz.apps.api.views.video_test', name='video-test'),
 
     # Dashboard:
     #url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
@@ -41,7 +43,7 @@ urlpatterns = patterns('',
 
     # Django-AllAuth:
     (r'^accounts/', include('allauth.urls')),
-    
+
     # Django-Comments:
     (r'^comments/', include('django.contrib.comments.urls')),
 
@@ -59,6 +61,7 @@ urlpatterns = patterns('',
     url(r'^', include('framebuzz.apps.marketing.urls')),
 )
 
+
 def static_always(prefix, document_root, name):
     """
     Always serve static files.
@@ -68,9 +71,12 @@ def static_always(prefix, document_root, name):
     to not forward those requests.
     """
     return patterns('',
-        url(r'^%s(?P<path>.*)$' % re.escape(prefix.lstrip('/')), 'django.views.static.serve', kwargs=dict(document_root=document_root), name=name),
-    )
+                    url(r'^%s(?P<path>.*)$' % re.escape(prefix.lstrip('/')),
+                    'django.views.static.serve',
+                    kwargs=dict(document_root=document_root), name=name),)
 
 if settings.DEBUG:
-    urlpatterns += static_always(settings.STATIC_URL, settings.STATIC_ROOT, name='static')
-    urlpatterns += static_always(settings.MEDIA_URL, settings.MEDIA_ROOT, name='media')
+    urlpatterns += static_always(settings.STATIC_URL,
+                                 settings.STATIC_ROOT, name='static')
+    urlpatterns += static_always(settings.MEDIA_URL,
+                                 settings.MEDIA_ROOT, name='media')

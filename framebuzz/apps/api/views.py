@@ -27,6 +27,14 @@ def video_share(request, video_id):
     }, context_instance=RequestContext(request))
 
 
+def video_test(request, video_id):
+    video, created = get_or_create_video(video_id)
+
+    return render_to_response('player/test.html', {
+        'video': video,
+    }, context_instance=RequestContext(request))
+
+
 @xframe_options_exempt
 def video_embed(request, video_id):
     video, created = get_or_create_video(video_id)

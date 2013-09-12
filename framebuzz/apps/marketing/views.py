@@ -15,16 +15,17 @@ def server_error(request):
     response.status_code = 500
     return response
 
+
 def server_404(request):
     response = render(request, "404.html")
     response.status_code = 404
     return response
 
+
 def home(request):
-    return render_to_response('marketing/home.html',
-    {
-    },
-    context_instance=RequestContext(request))
+    return render_to_response('marketing/home.html', {
+    }, context_instance=RequestContext(request))
+
 
 def about(request):
     success = False
@@ -38,12 +39,10 @@ def about(request):
     else:
         form = ContactRequestForm()
 
-    return render_to_response('marketing/about.html',
-    {
+    return render_to_response('marketing/about.html', {
         'form': form,
         'success': success,
-    },
-    context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))
 
 
 def contact(request):
@@ -51,30 +50,26 @@ def contact(request):
 
 
 def terms(request):
-    return render_to_response('marketing/terms.html',
-    {
-    },
-    context_instance=RequestContext(request))
+    return render_to_response('marketing/terms.html', {
+    }, context_instance=RequestContext(request))
 
 
 def privacy(request):
-    return render_to_response('marketing/privacy.html',
-    {
-    },
-    context_instance=RequestContext(request))
+    return render_to_response('marketing/privacy.html', {
+    }, context_instance=RequestContext(request))
 
 
 def press(request):
-    return render_to_response('marketing/press.html',
-    {
-    },
-    context_instance=RequestContext(request))
+    return render_to_response('marketing/press.html', {
+    }, context_instance=RequestContext(request))
 
 
 def google_plus_count(request):
-    doc = lh.parse(urllib2.urlopen('https://plusone.google.com/_/+1/fastbutton?url=http://framebuzz.com&count=true'))
+    url = 'https://plusone.google.com/_/+1/fastbutton?url=http://framebuzz.com&count=true'
+    doc = lh.parse(urllib2.urlopen(url))
     count = doc.xpath("//div[@id='aggregateCount']/text()")
     print str(count)
 
-    response = { 'count': str(count).lstrip("['").rstrip("']") }
-    return HttpResponse(json.dumps(response), content_type='application/json')
+    response = {'count': str(count).lstrip("['").rstrip("']")}
+    return HttpResponse(json.dumps(response),
+                        content_type='application/json')

@@ -3172,6 +3172,7 @@ if (typeof jQuery != 'undefined') {
 				})
 				.bind('mouseenter', function(e) {
 					mouseIsOver = true;
+
 					t.globalBind('mousemove.dur', function(e) {
 						handleMouseMove(e);
 					});
@@ -3180,6 +3181,7 @@ if (typeof jQuery != 'undefined') {
 					}
 				})
 				.bind('mouseleave',function(e) {
+					$('#heatmap').removeClass('hover');
 					mouseIsOver = false;
 					if (!mouseIsDown) {
 						t.globalUnbind('.dur');

@@ -10,6 +10,7 @@
 @import "compass/css3/transition";
 
 body {
+    background: transparent !important;
     color: white;     
     font: 12px/16px normal "proxima-nova", sans-serif;
     margin: 0;
@@ -66,9 +67,14 @@ object, embed, video, iframe {
 }
 
 #player-container {
-    height: 440px;
+    height: 405px;
     overflow: hidden;
-    width: 640px; 
+    width: 640px;
+
+    @media screen and (max-width: 580px) {
+        height: 360px;
+        width: 580px;
+    }
 
     div.layer {
         position: absolute;
@@ -78,79 +84,115 @@ object, embed, video, iframe {
     .span12 { margin-left: 0; }
 
     #player-layer {
-        background: #202020;
-        height: 443px;
+        height: 405px;
         width: 640px;
         z-index: 100;
 
+        @media screen and (max-width: 580px) {
+            height: 360px;
+            width: 580px;
+        }
+
         video, .me-plugin {
-            background: black;
-            height: 385px !important;
+            background: #202020;
+            height: 360px !important;
             position: relative;
             top: 0;
             width: 640px !important;
             z-index: 1;
+
+            @media screen and (max-width: 580px) {
+                height: 325px !important;
+                width: 580px !important;
+            }
         }
 
         embed, video, object {
-            height: 385px !important;
+            background: #202020;
+            height: 360px !important;
             width: 640px !important;
+
+            @media screen and (max-width: 580px) {
+                height: 325px !important;
+                width: 580px !important;
+            }
         }
 
         div.mejs-video {
-            background: black;
-            height: 385px !important;
+            background: #202020;
+            height: 360px !important;
             position: relative;
             top: 0;
             width: 640px !important;
 
+            @media screen and (max-width: 580px) {
+                height: 325px !important;
+                width: 580px !important;
+            }
+
             div.mejs-inner {
                 width: 640px !important;
-                height: 385px !important;
+                height: 360px !important;
+
+                @media screen and (max-width: 580px) {
+                    height: 325px !important;
+                    width: 580px !important;
+                }
 
                 div.mejs-mediaelement {
                     width: 640px !important;
-                    height: 385px !important;
+                    height: 360px !important;
+
+                    @media screen and (max-width: 580px) {
+                        height: 325px !important;
+                        width: 580px !important;
+                    }
                 }
 
                 div.mejs-controls {
                     background: none;
-                    height: 385px;
+                    height: 360px;
                     width: 640px;
 
+                    @media screen and (max-width: 580px) {
+                        height: 325px !important;
+                        width: 580px !important;
+                    }
+
                     div.mejs-time-rail {
-                        top: 390.5px;
-                        bottom: 0;
+                        bottom: -3px;
                         float: none;
-                        height: 6px;
+                        height: 11px;
                         padding-top: 0;
                         position: absolute;
                         width: 640px;
                         z-index: 200;
 
+                        @media screen and (max-width: 580px) {
+                            width: 580px;
+                        }
+
                         @media only screen and (-webkit-min-device-pixel-ratio:0) {
-                            top: 391px;
+                            top: 367px;
                         }
 
                         span.mejs-time-total {
-                            @include border-radius(1px, 1px);
+                            @include border-radius(0px, 0px);
                             background: none;
-                            height: 6px;
-                            line-height: 6px;
-                            margin: 0 8px;
-                            width: 624px;
+                            height: 21px;
+                            line-height: 3px;
+                            margin: 0;
+                            position: relative;
+                            top: 5px;
 
-                            span.mejs-time-current {
-                                @include border-radius(1px, 1px);
-                                @include background-image(linear-gradient(rgba(75, 185, 222, 0.85), rgba(50, 104, 151, 0.85))); 
-                                height: 6px;
-                            }
-
+                            span.mejs-time-current,
                             span.mejs-time-loaded {
-                                @include border-radius(1px, 1px);
-                                @include background-image(linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1))); 
-                                height: 6px;
+                                @include border-radius(0px, 0px);
+                                height: 3px;
                             }
+
+                            span.mejs-time-current { background: rgba(65, 185, 222, 1.0); }
+                            span.mejs-time-loaded { background: #3d3d3d; }
 
                             .mejs-time-float {
                                 background: rgba(23, 136, 188, 0.95);
@@ -176,10 +218,10 @@ object, embed, video, iframe {
                             }                            
                         }
 
-                        &.safari { top: 392px; }
+                        &.safari { top: 368px; }
 
                         &.winff {
-                            top: 391px;
+                            top: 367px;
                             height: 7px;
 
                             span.mejs-time-total {
@@ -197,10 +239,10 @@ object, embed, video, iframe {
 
                     div.mejs-share {
                         background: none;
-                        bottom: 338px;
                         height: 38px;
                         left: 5px;
                         position: absolute;
+                        top: 5px;
                         width: 85px;
                         z-index: 10;
                         
@@ -279,7 +321,7 @@ object, embed, video, iframe {
 
                     div.mejs-button {
                         cursor: pointer;
-                        bottom: 8px;
+                        bottom: 12px;
                         position: absolute;
                         width: 35px;
                         z-index: 10;
@@ -306,8 +348,6 @@ object, embed, video, iframe {
                         }
 
                         &.mejs-volume-button {
-                            left: 5px;
-
                             button {
                                 border: none;
                                 outline: 0 none;
@@ -318,7 +358,7 @@ object, embed, video, iframe {
                         
                         &.mejs-mute-conversation-button {
                             cursor: pointer;
-                            left: 48px;
+                            left: 43px;
 
                             button {
                                 outline: 0 none;
@@ -331,8 +371,8 @@ object, embed, video, iframe {
 
                         &.mejs-playpause-button {
                             cursor: pointer;
-                            bottom: -51px;
-                            left: 7px;
+                            bottom: -34px;
+                            left: 2px;
                             position: absolute;
                             width: 25px;
                             z-index: 100;
@@ -392,62 +432,64 @@ object, embed, video, iframe {
         }
 
         #heatmap-and-post {
-            background: #323232;
             height: 60px;
             width: 640px;
+
+            @media screen and (max-width: 580px) {
+                height: 38px;
+            }
 
             h1.video-title { display: none; }
 
             table#heatmap {
-                background: #323232;
-                height: 18px;
-                margin: 0 8px;
-                padding: 5px 0;
-                position: relative;
-                top: 0;
-                width: 624px;
-                z-index: 0;
+                background: none;
+                height: 9px;
+                overflow: hidden;
+                position: absolute;
+                top: 351px;
+                width: 640px;
+                z-index: 1;
+
+                @media screen and (max-width: 580px) {
+                    top: 316px;
+                    width: 580px;
+                }
                 
                 tbody {
-                    line-height: 6px;
+                    line-height: 9px;
+                    width: 640px;
+
+                    @media screen and (max-width: 580px) {
+                        width: 580px;
+                    }
                 
                     tr {
                         td {
-                            @include single-box-shadow(rgba(0, 0, 0, 0.3), 0px, -1px, 1px, 0px, inset);
                             cursor: pointer;
                             display: inline-block;
-                            height: 6px;
-                            margin-right: 1px;
-                            
-                            @include single-transition(background-color .25 ease-in);
+                            height: 9px;
+                            opacity: 0.4;
+                            width: 20px;
+                            @include single-transition(opacity 100ms ease-in);
 
-                            &.rank-8 { background-color: #EBF5FF; }
-                            &.rank-7 { background-color: #C2E0FF; }
-                            &.rank-6 { background-color: #99CCFF; }
-                            &.rank-5 { background-color: #70B8FF; }
-                            &.rank-4 { background-color: #47A3FF; }
-                            &.rank-3 { background-color: #1F8FFF; }
-                            &.rank-2 { background-color: #007AF5; }
-                            &.rank-1 { background-color: #0070E0; }
+                            @media screen and (max-width: 580px) {
+                                width: 18px;
 
-                            &:nth-child(even) {
-                                width: 20px;
+                                &:first-child, &.last-child { width: 20px; }
                             }
 
-                            
-                            &:nth-child(odd) {
-                                width: 21px;
-                            }
-                            
-                            &:first-child {
-                                @include border-top-left-radius(1px);
-                                @include border-bottom-left-radius(1px);
-                            }
+                            &.rank-8 { background-color: #596066; }
+                            &.rank-7 { background-color: #d9d9d6; }
+                            &.rank-6 { background-color: #0092bc; }
+                            &.rank-5 { background-color: #78be20; }
+                            &.rank-4 { background-color: #f3d03e; }
+                            &.rank-3 { background-color: #ed8b00; }
+                            &.rank-2 { background-color: #d14124; }
+                            &.rank-1 { background-color: #F52900; }
 
-                            &:last-child { 
-                                @include border-top-right-radius(1px);
-                                @include border-bottom-right-radius(1px);
-                                margin-right: 0; 
+                            &.active {
+                                opacity: 0.75;
+                                @include single-transition(opacity 100ms ease-in);
                             }
                         }
                     }
@@ -460,14 +502,19 @@ object, embed, video, iframe {
                 padding: 4px;
                 width: 640px;
 
+                @media screen and (max-width: 580px) {
+                    width: 580px;
+                }
+
                 div.input-prepend {
+                    background: #202020;
                     margin-bottom: 0;
-                    padding-left: 25px;
+                    padding-left: 20px;
                     width: 100%;
 
                     span.add-on {
                         @include border-radius(0, 0);
-                        background: #202020;
+                        background: none;
                         border: 0 none;
                         color: #BCBCBC;
                         float: left;
@@ -476,10 +523,11 @@ object, embed, video, iframe {
                         font-weight: 300;
                         letter-spacing: -0.02em;
                         line-height: 30px;
-                        margin: 0 0 0 4px;
+                        margin-top: 1px;
                         padding: 0;
                         text-align: left;
                         text-shadow: none;
+                        text-indent: -1px;
                         width: 89px;
 
                         em {
@@ -515,7 +563,11 @@ object, embed, video, iframe {
                         float: left;
                         font-family: 'proxima-nova';
                         font-style: normal;
-                        width: 495px;
+                        width: 511px;
+
+                        @media screen and (max-width: 580px) {
+                            width: 451px;
+                        }
 
                         &.maxlength-full {
                             border: 1px solid red;
@@ -533,7 +585,11 @@ object, embed, video, iframe {
                         float: left;
                         font-family: 'proxima-nova';
                         height: 30px;
-                        width: 510px;
+                        width: 525px;
+
+                        @media screen and (max-width: 580px) {
+                            width: 465px;
+                        }
 
                         p {
                             color: #989898;
@@ -701,13 +757,21 @@ object, embed, video, iframe {
             margin-left: 387px;
             height: auto;
             width: 237px;
+
+            @media screen and (max-width: 580px) {
+                margin-left: 335px;
+            }
             
             div.scrollable {
                 background: transparent;
                 box-shadow: none;
                 margin-left: 13px;
-                height: 385px;
+                height: 360px;
                 width: 237px;
+
+                @media screen and (max-width: 580px) {
+                    height: 322px;
+                }
 
                 ul.comment-stream {
                     li {
@@ -802,14 +866,24 @@ object, embed, video, iframe {
         }
 
         #active-view, #profile-view {
-            margin-left: 396px;
-            height: 385px;
+            height: 360px;
+            margin-left: 395px;
             width: 246px;
+
+            @media screen and (max-width: 580px) {
+                height: 322px;
+                margin-left: 335px;
+                width: 246px;
+            }
 
             div.scrollable {
                 background: rgba(53, 53, 53, 0.95);
-                height: 385px;
+                height: 360px;
                 width: 245px;
+
+                @media screen and (max-width: 580px) {
+                    height: 322px;
+                }
 
                 div.active-header {
                     padding-right: 10px;
@@ -841,6 +915,8 @@ object, embed, video, iframe {
                                 }
                             }
                         }
+
+
 
                         li.indicator {
                             display: block;
@@ -1503,26 +1579,60 @@ object, embed, video, iframe {
         }
 
         #login-view, #signup-view {
-            margin-left: 396px;
-            height: 385px;
-            width: 245px;
+            height: 360px;
+            margin-left: 395px;
+            width: 246px;
+
+            @media screen and (max-width: 580px) {
+                height: 322px;
+                margin-left: 334px;
+            }
 
             div.scrollable {
                 background: rgba(53, 53, 53, 0.95);
-                height: 385px;
+                height: 360px;
                 width: 245px;
 
+                @media screen and (max-width: 580px) {
+                    height: 322px;
+                }
+
                 div.active-header {
+                    @media screen and (max-width: 580px) {
+                        height: 30px;
+                    }
+
                     a.active-close {
-                        i.icon { margin: 13px 6px 11px 6px; }
+                        @media screen and (max-width: 580px) {
+                            height: 30px;
+                            width: 30px;
+                            margin-right: 10px;
+                        }
+
+                        i.icon { 
+                            margin: 13px 6px 11px 6px;
+
+                            @media screen and (max-width: 580px) {
+                                margin: 7px 6px 4px;
+                            }
+                        }
                     }
                     
                     a.player-logo {
                         line-height: 48px;
 
+                        @media screen and (max-width: 580px) {
+                            line-height: 33px;
+                        }
+
                         img {
                             height: 16px;
                             width: 144px;
+
+                            @media screen and (max-width: 580px) {
+                                height: 10px;
+                                width: 90px;
+                            }
                         }
                     }
                 }
@@ -1530,21 +1640,30 @@ object, embed, video, iframe {
                 div.registration {
                     padding: 8px 17px;
 
+                    @media screen and (max-width: 580px) {
+                        padding: 4px 17px;
+                    }
+
                     h1 {
                         color: white;
                         font-family: 'proxima-nova';
                         font-size: 15.62px;
                         font-weight: 700;
                         line-height: 25px;
+
+                        @media screen and (max-width: 580px) {
+                            font-size: 14px;
+                            line-height: 20px;
+                        }
                     }
 
                     p {
                         color: white;
                         font-family: 'proxima-nova';
-                        font-size: 13.39px;
+                        font-size: 0.8em;
                         font-weight: 300;
-                        line-height: 18px;
-                        padding-bottom: 8px;
+                        line-height: 15px;
+                        padding-bottom: 2px;
                         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
                         width: 212px;
 
@@ -1598,6 +1717,10 @@ object, embed, video, iframe {
                     }
                     
                     form {
+                        @media screen and (max-width: 580px) {
+                            margin-top: 2px;
+                        }
+
                         ul.errors {
                             position: absolute;
                             top: 190px;
@@ -1625,6 +1748,10 @@ object, embed, video, iframe {
                                 height: 27px;
                                 width: 200px;
 
+                                @media screen and (max-width: 580px) {
+                                    margin-bottom: 8px;
+                                }
+
                                 &.ng-pristine { border: 1px solid transparent; }
                                 &.ng-dirty.ng-valid { border: 1px solid green; }
                                 &.ng-dirty.ng-invalid { border: 1px solid red; }
@@ -1650,6 +1777,16 @@ object, embed, video, iframe {
                                 font-weight: 300;
                             }
 
+                            a.forgot-password {
+                                color: rgba(255, 255, 255, 0.44);
+                                display: block;
+                                float: right;
+                                font-size: 11px;
+                                font-weight: 300;
+                                text-align: right;
+                                width: 228px;
+                            }
+
                             button.registration-submit {
                                 background: none;
                                 border: 0 none;
@@ -1657,9 +1794,15 @@ object, embed, video, iframe {
                                 float: right;
                                 padding: 0;
                                 margin-top: 2px;
-                                margin-bottom: 5px;
+                                margin-bottom: 3px;
                                 position: relative;
                                 width: 116px;
+
+                                @media screen and (max-width: 580px) {
+                                    margin-top: 0;
+                                    height: 20px;
+                                    width: 64px;
+                                }
 
                                 span {
                                     color: white;
@@ -1673,11 +1816,23 @@ object, embed, video, iframe {
                                     text-align: center;
                                     top: 0;
                                     width: 116px;
+
+                                    @media screen and (max-width: 580px) {
+                                        font-size: 12px;
+                                        height: 20px;
+                                        line-height: 18px;
+                                        width: 64px;
+                                    }
                                 }
 
                                 img {
                                     height: 36px;
                                     width: 116px;
+
+                                    @media screen and (max-width: 580px) {
+                                        height: 20px;
+                                        width: 64px;
+                                    }
                                 }
                             }
 
@@ -1708,9 +1863,14 @@ object, embed, video, iframe {
 
         #share-view {
             position: absolute;
-            height: 380px;
+            height: 360px;
             width: 640px;
             z-index: 1;
+
+            @media screen and (max-width: 580px) {
+                width: 580px;
+                height: 322px;
+            }
 
             div.modal-background {
                 background-color: rgba(0, 0, 0, .5);
@@ -1734,7 +1894,12 @@ object, embed, video, iframe {
                     left: 97px;
                     top: 43px;
                     width: 412px;
-                    z-index: 100;
+                    z-index: 200;
+
+                    @media screen and (max-width: 580px) {
+                        top: 13px;
+                        left: 67px;
+                    }
 
                     a.modal-close {
                         cursor: pointer;
@@ -1889,8 +2054,8 @@ object, embed, video, iframe {
                             cursor: pointer;
 
                             embed {
-                                height: 100%;
-                                width: 100%;
+                                height: 0 !important;
+                                width: 0 !important;
                             } 
                         }
 

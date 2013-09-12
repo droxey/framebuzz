@@ -21,10 +21,10 @@ angular.module('framebuzz.directives', [])
                 // cause the space to not be entered, and the video to pause.
                 enableKeyboard: false,
                 timerRate: 500,
-                defaultVideoWidth: 640,
-                defaultVideoHeight: 385,
-                videoHeight: 385,
-                videoWidth: 640,
+                //defaultVideoWidth: 640,
+                //defaultVideoHeight: 385,
+                //videoHeight: 385,
+                //videoWidth: 640,
                 enablePluginSmoothing: true,
                 autosizeProgress: false,
                 success: function(media) {
@@ -88,6 +88,18 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     //  jQuery Event Listeners
                     //  =====
+                    $('.mejs-time-rail').mouseenter(function(e) {
+                        $('#heatmap tr td').mouseenter(e);
+                    });
+
+                    $('.mejs-time-rail').mouseleave(function(e) {
+                        $('#heatmap tr td').removeClass('active');
+                    });
+
+                    $('#player-layer').on('mouseenter', '#heatmap tr td', function(e) {
+                        $(this).addClass('active');
+                    });
+
                     $('.mejs-mediaelement').mouseenter(function(e) {
                         $('.mejs-video').addClass('show-controls');
                     });

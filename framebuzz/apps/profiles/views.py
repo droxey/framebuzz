@@ -23,7 +23,7 @@ def get_profile_header(username):
     profile_conversations = MPTTComment.objects.filter(user=user, parent=None)
     profile_followers = followers(user)
     profile_following = following(user)
-    ct = ContentType.objects.get(model='user') 
+    ct = ContentType.objects.get(model='user')
 
     return {
         'profile_favorites': profile_favorites,
@@ -92,12 +92,10 @@ def profile_followers(request, username):
             'comments': latest_comments,
         }
 
-    return render_to_response('profiles/snippets/followers.html',
-    {
+    return render_to_response('profiles/snippets/followers.html', {
         'profile_user': user,
         'followers': profile_followers,
-    },
-    context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))
 
 
 def profile_following(request, username):
@@ -112,12 +110,10 @@ def profile_following(request, username):
             'comments': latest_comments,
         }
 
-    return render_to_response('profiles/snippets/following.html',
-    {
+    return render_to_response('profiles/snippets/following.html', {
         'profile_user': user,
         'following': profile_following,
-    },
-    context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))
 
 
 def conversations(request, username):
@@ -132,15 +128,13 @@ def conversations(request, username):
     p = Paginator(conversations, 12, request=request)
 
 
-    return render_to_response('profiles/snippets/conversations.html',
-    {
+    return render_to_response('profiles/snippets/conversations.html', {
         'profile_user': user,
         'page_obj': p.page(page),
         'can_delete': request.user.is_authenticated() and request.user.id == user.id,
         'video_library_ids': [uv.video.id for uv in user_videos],
         'featured_video_ids': [uv.video.id for uv in user_videos if uv.is_featured]
-    },
-    context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))
 
 
 def favorites(request, username):
@@ -154,16 +148,16 @@ def favorites(request, username):
     favorite_comment_ids = [favorite.action_object_object_id for favorite in Action.objects.favorite_comments_stream(user)]
     profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
     p = Paginator(profile_favorites, 12, request=request)
+    can_delete = request.user.is_authenticated() and request.user.id == user.id
+    featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
 
-    return render_to_response('profiles/snippets/favorites.html',
-    {
+    return render_to_response('profiles/snippets/favorites.html', {
         'profile_user': user,
         'page_obj': p.page(page),
-        'can_delete': request.user.is_authenticated() and request.user.id == user.id,
+        'can_delete': can_delete,
         'video_library_ids': [uv.video.id for uv in user_videos],
-        'featured_video_ids': [uv.video.id for uv in user_videos if uv.is_featured]
-    },
-    context_instance=RequestContext(request))
+        'featured_video_ids': featured_video_ids,
+    }, context_instance=RequestContext(request))
 
 
 def videos(request, username):
@@ -187,33 +181,36 @@ def videos(request, username):
             video_comments.append(fake_comment)
 
     p = Paginator(video_comments, 12, request=request)
+    can_delete = request.user.is_authenticated() and request.user.id == user.id
+    featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
 
-    return render_to_response('profiles/snippets/videos.html',
-    {
+    return render_to_response('profiles/snippets/videos.html', {
         'profile_user': user,
         'page_obj': p.page(page),
-        'can_delete': request.user.is_authenticated() and request.user.id == user.id,
+        'can_delete': can_delete,
         'is_adding_video': False,
         'show_embed_button': False,
         'video_library_ids': [uv.video.id for uv in user_videos],
-        'featured_video_ids': [uv.video.id for uv in user_videos if uv.is_featured]
-    },
-    context_instance=RequestContext(request))
+        'featured_video_ids': featured_video_ids,
+    }, context_instance=RequestContext(request))
+
 
 @login_required
 def edit_profile(request, username):
     if username != request.user.username:
-        return HttpResponseRedirect(reverse('profiles-edit', args=[request.user.username,]))
+        return HttpResponseRedirect(
+            reverse('profiles-edit', args=[request.user.username, ]))
 
     user = User.objects.get(username=username)
     submitted = request.method == 'POST'
     success = False
     profile = user.get_profile()
-    
+
     if submitted:
-        form = UserProfileForm(instance=profile, data=request.POST, request=request)
+        form = UserProfileForm(instance=profile,
+                               data=request.POST, request=request)
         success = form.is_valid()
-        
+
         if success:
             profile = form.save()
             del request.session['user_timezone']
@@ -240,30 +237,30 @@ def edit_profile(request, username):
     profile_header['success'] = success
     profile_header['submitted'] = submitted
     profile_header['is_edit'] = True
-    return render_to_response('profiles/edit.html', profile_header, context_instance=RequestContext(request))
+    return render_to_response('profiles/edit.html',
+                              profile_header,
+                              context_instance=RequestContext(request))
 
 
 @login_required
 def add_video_to_library(request, username):
     submitted = request.method == 'POST'
     success = False
-    
+
     if submitted:
         form = AddVideoForm(data=request.POST, request=request)
         success = form.is_valid()
-        
+
         if success:
             return HttpResponse()
     else:
         form = AddVideoForm(request=request)
 
-    return render_to_response('profiles/snippets/add_video.html',
-    {
+    return render_to_response('profiles/snippets/add_video.html', {
         'form': form,
         'success': success,
         'submitted': submitted
-    },
-    context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))
 
 
 @login_required
