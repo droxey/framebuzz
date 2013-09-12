@@ -171,7 +171,7 @@ class Video(models.Model):
 
     def embed_code(self):
         full_url = 'http://frame.bz%s' % self.get_absolute_url()
-        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0" height="405" width="640"></iframe>' % full_url)
+        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0" height="398" width="640"></iframe>' % full_url)
 
     def heatmap(self):
         rank_per_block = list()

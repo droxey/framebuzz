@@ -218,7 +218,13 @@ object, embed, video, iframe {
                             }                            
                         }
 
-                        &.safari { top: 368px; }
+                        &.safari { 
+                            top: 355px;
+                            
+                            @media screen and (max-width: 580px) {
+                                top: 320px;
+                            }
+                        }
 
                         &.winff {
                             top: 367px;
@@ -1746,10 +1752,11 @@ object, embed, video, iframe {
                                 font-size: 14.51px;
                                 font-weight: 300;
                                 height: 27px;
+                                margin-bottom: 8px;
                                 width: 200px;
 
                                 @media screen and (max-width: 580px) {
-                                    margin-bottom: 8px;
+                                    
                                 }
 
                                 &.ng-pristine { border: 1px solid transparent; }

@@ -97,6 +97,7 @@ angular.module('framebuzz.directives', [])
                     });
 
                     $('#player-layer').on('mouseenter', '#heatmap tr td', function(e) {
+                        $('#heatmap tr td').removeClass('active');
                         $(this).addClass('active');
                     });
 
