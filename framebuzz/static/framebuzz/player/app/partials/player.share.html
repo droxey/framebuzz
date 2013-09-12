@@ -20,11 +20,21 @@
         <div id="embed" class="clearfix">
             <div id="embed-code">
                 <h3>Embed this FrameBuzz:</h3>
-                <textarea rows="1">{{ videoInstance.video.embed_code }}</textarea>
+                <textarea rows="1" data-ng-hide="isHD"><iframe src="http://frame.bz/v/{{ videoInstance.video.video_id }}/" scrolling="no" frameBorder="0" height="360" width="580"></iframe></textarea>
+                <textarea rows="1" data-ng-show="isHD"><iframe src="http://frame.bz/v/{{ videoInstance.video.video_id }}/" scrolling="no" frameBorder="0" height="398" width="640"></iframe></textarea>
             </div>
             <div id="embed-width">
-                <h3>Width (px):</h3>
-                <input type="text" value="640" disabled>
+                <h3>Size:</h3>
+                <form name="widthForm" data-ng-model="isHD" data-ng-init="isHD = false">
+                    <p class="clearfix">
+                        <input type="radio" name="size" id="normal" value="1" data-ng-click="isHD = false">
+                        <label for="normal">Normal</label>
+                    </p>
+                    <p class="clearfix">
+                        <input type="radio" name="size" id="hd" value="2" data-ng-click="isHD = true">
+                        <label for="hd">HD</label>
+                    </p>
+                </form>
             </div>
             <a rel="copy" id="copy-embed-code" class="rounded" data-copytoclipboard="{{ videoInstance.video.embed_code }}" >Copy</a>
         </div>
