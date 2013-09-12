@@ -32,8 +32,6 @@ urlpatterns = patterns('',
     # Share Page:
     url(r'^share/(?P<video_id>[\w.@+-]+)/$',
         'framebuzz.apps.api.views.video_share', name='video-share'),
-    url(r'^test/(?P<video_id>[\w.@+-]+)/$',
-        'framebuzz.apps.api.views.video_test', name='video-test'),
 
     # Dashboard:
     #url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
@@ -76,6 +74,10 @@ def static_always(prefix, document_root, name):
                     kwargs=dict(document_root=document_root), name=name),)
 
 if settings.DEBUG:
+    urlpatterns += patterns('',
+                            url(r'^test/(?P<video_id>[\w.@+-]+)/$',
+                                'framebuzz.apps.api.views.video_test',
+                                name='video-test'))
     urlpatterns += static_always(settings.STATIC_URL,
                                  settings.STATIC_ROOT, name='static')
     urlpatterns += static_always(settings.MEDIA_URL,

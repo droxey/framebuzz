@@ -160,38 +160,45 @@ object, embed, video, iframe {
                     }
 
                     div.mejs-time-rail {
-                        bottom: -3px;
+                        bottom: 3px;
                         float: none;
                         height: 11px;
                         padding-top: 0;
                         position: absolute;
                         width: 640px;
-                        z-index: 200;
+                        z-index: 201;
 
                         @media screen and (max-width: 580px) {
                             width: 580px;
                         }
 
                         @media only screen and (-webkit-min-device-pixel-ratio:0) {
-                            top: 367px;
+                            top: 347px;
+
+                            @media screen and (max-width: 580px) {
+                                top: 311px;
+                            }
                         }
 
                         span.mejs-time-total {
                             @include border-radius(0px, 0px);
                             background: none;
-                            height: 21px;
-                            line-height: 3px;
                             margin: 0;
-                            position: relative;
-                            top: 5px;
 
                             span.mejs-time-current,
                             span.mejs-time-loaded {
                                 @include border-radius(0px, 0px);
                                 height: 3px;
+                                line-height: 3px;
+                                position: relative;
+                                top: 11px;
                             }
 
-                            span.mejs-time-current { background: rgba(65, 185, 222, 1.0); }
+                            span.mejs-time-current { 
+                                background: rgba(65, 185, 222, 1.0);
+                                top: 8px;
+                            }
+
                             span.mejs-time-loaded { background: #3d3d3d; }
 
                             .mejs-time-float {
@@ -200,7 +207,7 @@ object, embed, video, iframe {
                                 color: rgba(255, 255, 255, 1.0);
                                 display: none;
                                 height: 15px;
-                                top: -24px;
+                                top: -18px;
                                 width: 34px;
 
                                 .mejs-time-float-current {
@@ -219,16 +226,20 @@ object, embed, video, iframe {
                         }
 
                         &.safari { 
-                            top: 355px;
+                            top: 349px;
                             
                             @media screen and (max-width: 580px) {
-                                top: 320px;
+                                top: 313px;
                             }
                         }
 
                         &.winff {
-                            top: 367px;
+                            top: 349px;
                             height: 7px;
+
+                            @media screen and (max-width: 580px) {
+                                top: 313px;
+                            }
 
                             span.mejs-time-total {
                                 height: 7px;
@@ -454,7 +465,7 @@ object, embed, video, iframe {
                 position: absolute;
                 top: 351px;
                 width: 640px;
-                z-index: 1;
+                z-index: 200;
 
                 @media screen and (max-width: 580px) {
                     top: 316px;
