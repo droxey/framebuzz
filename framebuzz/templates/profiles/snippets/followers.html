@@ -1,12 +1,6 @@
 {% load i18n avatar_tags %}
 
-<h1>
-  Followers 
-  <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">
-    Return to {{ profile_user.username }}'s Profile
-  </a>
-</h1>
-
+<h1>Followers</h1>
 <ul id="feed" class="clearfix">
   {% for username, follower_comments in followers.items %}
     {% include "profiles/snippets/user.html" %}

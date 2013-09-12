@@ -326,7 +326,7 @@ NO_TRACKING_PREFIXES = ['/admin/',]
 
 # Django-Avatar Settings:
 AVATAR_ALLOWED_FILE_EXTS = ['.jpg', '.png']
-AUTO_GENERATE_AVATAR_SIZES = (314, 66, 58, 40,)
+AUTO_GENERATE_AVATAR_SIZES = (354, 110, 66, 58, 40,)
 AVATAR_GRAVATAR_BASE_URL = 'http://robohash.org'
 
 # Email Settings:

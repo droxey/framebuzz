@@ -18,7 +18,7 @@
                     <header>
                         <div class="user-info clearfix">
                             <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">
-                                <img src="{% avatar_url profile_user 314 %}" alt="" height="157" width="157" class="img-circle" />
+                                <img src="{% avatar_url profile_user 354 %}" alt="" height="177" width="177" class="img-circle" />
                             </a>
                             {% ifequal request.user profile_user %}{% else %}
                                 <a class="btn btn-danger" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" id="unfollow_button" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>Unfollow</a>
@@ -36,7 +36,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <nav>
+                        <nav class="clearfix">
                             <ul class="nav nav-tabs">
                                 <li class="location">
                                     {% if profile_user.get_profile and profile_user.get_profile.location %}
@@ -62,6 +62,12 @@
                                         <em>({{ profile_following|length }})</em>
                                     </a>
                                 </li>
+                                <li class="videos">
+                                    <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link">
+                                        Library
+                                        <em>({{ profile_library|length }})</em>
+                                    </a>
+                                </li>
                                 <li class="conversations">
                                     <a data-url="{% url 'profiles-conversations' profile_user.username %}" href="#conversations" class="tab-link">
                                         Conversations
@@ -84,6 +90,9 @@
                                     {% endif %}
                                 </li>
                             </ul>
+                            {% ifequal request.user profile_user %}
+                                <a data-target="#add-framebuzz-modal" role="button" class="modal-button add-video" data-toggle="modal" class="add-video" title="Add FrameBuzz Video" href="{% url 'profiles-add-video' profile_user %}"><i class="icon-plus"></i></a>
+                            {% endifequal %}
                         </nav>
                     </header>
                     <div id="profile-container" class="tab-content">
@@ -190,7 +199,6 @@
                         var postUrl = $(this).attr('action');
                         var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
 
-
                         $.post(postUrl, {
                             'video_id': video_id, 
                             'is_featured': $('#id_is_featured').val(),
@@ -294,12 +302,13 @@
                 // Tabs.
                 $('body').on('click', 'a.tab-link', function(e) {
                     e.preventDefault();
+                    if (currentTab == this.hash) { return; }
                   
                     currentPageUrl = $(this).attr('data-url');
                     currentTab = this.hash;
                     var pane = $(this);
 
-                    if (currentTab == '#avatar') {
+                    if (currentTab == '#avatar' || currentTab == '#activity') {
                         $('div.tab-pane').removeClass('active');
                         $('ul.dropdown-menu li').removeClass('active'); 
                     }
@@ -318,6 +327,26 @@
                                 }
                             });
                         }
+
+                        if (currentTab == '#activity') {
+                            $('ul.nav-tabs', '#activity').tab('show');
+                        }
+                    });
+                });
+
+                $('body').on('click', 'a.activity-tab-link', function(e) {
+                    e.preventDefault();
+
+                    var pageUrl = $(this).attr('data-url');
+                    var tab = this.hash;
+                    var pane = $(this);
+                    
+                    $(tab).load(pageUrl, function(result) {  
+                        $('div.tab-pane', '#activity').removeClass('active');
+                        $('ul.dropdown-menu li', '#activity').removeClass('active'); 
+                        pane.tab('show');
+
+                        $(tab).addClass('active');
                     });
                 });
             });

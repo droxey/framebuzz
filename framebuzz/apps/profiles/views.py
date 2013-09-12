@@ -18,11 +18,13 @@ from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 def get_profile_header(username):
     user = User.objects.get(username__iexact=username)
-    favorite_comment_ids = [favorite.action_object_object_id for favorite in Action.objects.favorite_comments_stream(user)]
+    actions = Action.objects.favorite_comments_stream(user)
+    favorite_comment_ids = [a.action_object_object_id for a in actions]
     profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
     profile_conversations = MPTTComment.objects.filter(user=user, parent=None)
     profile_followers = followers(user)
     profile_following = following(user)
+    profile_library = UserVideo.objects.filter(user=user)
     ct = ContentType.objects.get(model='user')
 
     return {
@@ -31,6 +33,7 @@ def get_profile_header(username):
         'profile_followers': profile_followers,
         'profile_following': profile_following,
         'profile_user': user,
+        'profile_library': profile_library,
         'user_content_type': ct
     }
 
@@ -86,7 +89,7 @@ def profile_followers(request, username):
     profile_followers = dict()
 
     for followed_user in user_followers:
-        latest_comments = MPTTComment.objects.filter(user=followed_user).order_by('-submit_date')[:2]
+        latest_comments = MPTTComment.objects.filter(user=followed_user).order_by('-submit_date')[:1]
         profile_followers[followed_user.username] = {
             'user': followed_user,
             'comments': latest_comments,
@@ -104,7 +107,7 @@ def profile_following(request, username):
     profile_following = dict()
 
     for following_user in user_following:
-        latest_comments = MPTTComment.objects.filter(user=following_user).order_by('-submit_date')[:2]
+        latest_comments = MPTTComment.objects.filter(user=following_user).order_by('-submit_date')[:1]
         profile_following[following_user.username] = {
             'user': following_user,
             'comments': latest_comments,
@@ -113,6 +116,23 @@ def profile_following(request, username):
     return render_to_response('profiles/snippets/following.html', {
         'profile_user': user,
         'following': profile_following,
+    }, context_instance=RequestContext(request))
+
+
+def feed(request, username):
+    user = User.objects.get(username__iexact=username)
+    user_following = following(user)
+
+    return render_to_response('profiles/snippets/feed.html', {
+        'profile_user': user,
+    }, context_instance=RequestContext(request))
+
+
+def my_activity(request, username):
+    user = User.objects.get(username__iexact=username)
+
+    return render_to_response('profiles/snippets/my_activity.html', {
+        'profile_user': user,
     }, context_instance=RequestContext(request))
 
 

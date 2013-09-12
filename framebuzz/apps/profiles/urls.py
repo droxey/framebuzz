@@ -3,6 +3,8 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns('',
     url(r'^(?P<username>[\w.@+-]+)/$', 'framebuzz.apps.profiles.views.home', name='profiles-home'),
     url(r'^(?P<username>[\w.@+-]+)/activity/$', 'framebuzz.apps.profiles.views.activity', name='profiles-activity'),
+    url(r'^(?P<username>[\w.@+-]+)/activity/all/$', 'framebuzz.apps.profiles.views.my_activity', name='profiles-activity-mine'),
+    url(r'^(?P<username>[\w.@+-]+)/activity/feed/$', 'framebuzz.apps.profiles.views.feed', name='profiles-feed'),
     url(r'^(?P<username>[\w.@+-]+)/followers/$', 'framebuzz.apps.profiles.views.profile_followers', name='profiles-followers'),
     url(r'^(?P<username>[\w.@+-]+)/following/$', 'framebuzz.apps.profiles.views.profile_following', name='profiles-following'),
     url(r'^(?P<username>[\w.@+-]+)/favorites/$', 'framebuzz.apps.profiles.views.favorites', name='profiles-favorites'),

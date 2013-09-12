@@ -1,68 +1,16 @@
 {% load staticfiles avatar_tags %}
 
 <div id="activity-container" class="clearfix">
-    <div id="activity-videos">
-        <h2 class="featured clearfix">
-          Featured Videos 
-          <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link">
-            View all
-          </a>
-        </h2>
-        <ul class="profile-conversations">
-        {% for comment in latest_videos %}
-            {% include "profiles/snippets/video.html" %}
-            {% empty %}
-                <li class="empty">
-                  <div class="alert alert-info">
-                    <strong>{{ profile_user.username }}</strong> hasn't featured any videos yet!
-                  </div>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div id="activity-social">
-      <div id="activity-conversations">
-          <h2>Recent Conversations</h2>
-          <ul>
-              {% for comment in latest_comments %}
-                  <li class="clearfix">
-                    <a data-target="#video-embed-modal" role="button" class="modal-button clearfix" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
-                      <img class="thumbnail" height="60" width="90" src="{{ comment.content_object.default_thumbnail }}" />
-                      <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
-                    </a>              
-                    <div class="comment">
-                        <p class="clearfix">{{ profile_user.username }} commented on <a data-target="#video-embed-modal" role="button" class="modal-button inline-link" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a>.</p>
-                        <span>{{ comment.submit_date|timesince }} ago</span>
-                    </div>
-                </li>
-              {% empty %}
-                  <li class="empty">
-                    <div class="alert alert-info">
-                      <strong>{{ profile_user.username }}</strong> hasn't participated in any conversations recently!
-                    </div>
-                  </li>
-              {% endfor %}
-          </ul>
-      </div>
-      <div id="activity-follows">
-          <h2>Recent Follows</h2>
-          <ul id="feed">
-              {% for follower in latest_following %}
-                <li class="clearfix">
-                  <img src="{% avatar_url follower.follow_object 64 %}" alt="" height="32" width="32" class="img-circle" />
-                  <div class="feed-header">
-                    <h2>{{ profile_user.username }} started following <a href="{% url 'profiles-home' follower.follow_object.username %}">{{ follower.follow_object.username }}</a>.</h2>
-                    <h3>{{ follower.started|timesince }} ago</h3>
-                  </div>
-                </li>
-              {% empty %}
-                  <li class="empty">
-                    <div class="alert alert-info">
-                      <strong>{{ profile_user.username }}</strong> hasn't followed anyone in a while.
-                    </div>
-                  </li>
-              {% endfor %}
-          </ul>
-      </div>
+    <nav>
+      <ul class="nav nav-tabs">
+        <li><a class="activity-tab-link" href="#myfeed" data-url="{% url 'profiles-feed' profile_user.username %}"><i class="icon-globe"></i> News Feed</a></li>
+        <li><a class="activity-tab-link" href="#myactivity" data-url="{% url 'profiles-activity-mine' profile_user.username %}"><i class="icon-user"></i> My Activity</a></li>
+        <li><a class="activity-tab-link" href="#mysettings"><i class="icon-cog"></i> Profile Settings</a></li>
+      </ul>
+    </nav>
+    <div id="activity-tab-container" class="tab-content">
+      <div class="tab-pane active" id="myfeed"></div>
+      <div class="tab-pane" id="myactivity"></div>
+      <div class="tab-pane" id="mysettings"></div>
     </div>
 </div>
