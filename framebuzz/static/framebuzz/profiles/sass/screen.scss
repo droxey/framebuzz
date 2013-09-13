@@ -85,7 +85,7 @@ div.content {
                 font-weight: 500;
 
                 div.user-info {
-                    padding: 100px 29px 65px;
+                    padding: 100px 13px 65px;
                     position: relative;
 
                     img.img-circle {
@@ -104,7 +104,7 @@ div.content {
 
                     a.btn {
                         font: 300 14px/16px 'proxima-nova';
-                        left: 79px;
+                        left: 67px;
                         padding: 8px 12px;
                         position: absolute;
                         top: 358px;
@@ -115,7 +115,7 @@ div.content {
                     div.user-details {
                         float: left;
                         min-width: 315px;
-                        max-width: 445px;
+                        max-width: 455px;
                         position: relative;
                         top: 96px;
 
@@ -290,6 +290,72 @@ div.content {
                 position: relative;
                 z-index: 1;
 
+                nav {
+                    background: #E8E8E8;
+                    float: left;
+                    height: 100%;
+                    left: 0;
+                    margin-right: 12px;
+                    padding: 20px 24px;
+                    position: absolute;
+                    top: 0;
+                    width: 172px;
+
+                    ul {
+                        border-bottom: none;
+
+                        li {
+                            height: 50px;
+                            margin-bottom: 15px;
+                            width: 100%;
+
+                            a {
+                                background: #E8E8E8;
+                                border: 1px solid #E8E8E8;
+                                border-radius: 0 0 0 0;
+                                color: rgba(61, 61, 61, 1);
+                                font: 400 20px/20px 'futura-pt-condensed';
+                                height: 40px;
+                                opacity: 0.75;
+                                outline: 0 none;
+                                text-align: left;
+                                text-decoration: none;
+                                text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+                                @include single-transition(opacity 50ms ease-in);
+                                
+                                i {
+                                    color: #636364;
+                                    padding-right: 5px;
+                                    position: relative;
+                                    top: 1px;
+                                }
+
+                                &:hover, &:active, &:focus {
+                                    background: none;
+                                    border: 1px solid #E8E8E8;
+                                    outline: 0 none;
+                                    opacity: 1;
+                                    @include single-transition(opacity 50ms ease-in);
+                                }
+                            }
+
+                            &.active {
+                                a {
+                                    background: none;
+                                    border: 1px solid #E8E8E8;
+                                    opacity: 1;
+                                    @include single-transition(opacity 50ms ease-in);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                div.tab-content {
+                    float: right;
+                    width: 900px;
+                }
+
                 h1 {
                     border-bottom: 1px solid #f7f7f7;
                     color: #333333;
@@ -431,17 +497,6 @@ div.content {
                             }
                         }
 
-                        &:before {
-                            @include background-image-retina('../img/timeline-indicator', 'png', 292px, 19px);
-                            content: " ";
-                            position: absolute;
-                            left: -34px;
-                            top: 139px;
-                            height: 19px;
-                            width: 292px;
-                            z-index: 1;
-                        }
-
                         &:hover {
                             div.user-controls {
                                 opacity: 1;
@@ -502,16 +557,20 @@ div.content {
                     @include single-transition(opacity 0.55s ease-in-out);
                 }
 
-                #following, #followers {
+                #following, #followers, #activity {
                     ul#feed {
                         li {
                             @include border-radius(5px, 5px);
                             background-color: #dddddd;
                             display: block;
                             font-family: 'futura-pt-condensed';
+                            margin-bottom: 18px;
                             padding: 5px;
-                            width: 100%;
-                            margin-bottom: 10px;
+                            width: 890px;
+
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
 
                             div.user-wrapper {
                                 @include border-radius(3px, 3px);
@@ -645,17 +704,13 @@ div.content {
                             &.empty {
                                 background: none !important;
                                 float: none;
+                                padding: 0;
                                 width: 92%;
 
                                 div.alert {
-                                    margin-top: 10px;
-                                    width: 560px;
-                                }
-
-                                &:before {
-                                    background: none;
-                                    height: 0;
-                                    width: 0;
+                                    margin-top: 18px;
+                                    padding: 18px;
+                                    width: 857px;
                                 }
                             }
                         }
@@ -666,71 +721,7 @@ div.content {
                     width: 100%;
 
                     #activity-container {
-                        nav {
-                            background: #E8E8E8;
-                            float: left;
-                            height: 100%;
-                            left: 0;
-                            margin-right: 12px;
-                            padding: 20px 29px;
-                            position: absolute;
-                            top: 0;
-                            width: 172px;
 
-                            ul {
-                                border-bottom: none;
-
-                                li {
-                                    height: 50px;
-                                    margin-bottom: 15px;
-                                    width: 100%;
-
-                                    a {
-                                        background: #E8E8E8;
-                                        border: 1px solid #E8E8E8;
-                                        border-radius: 0 0 0 0;
-                                        color: rgba(61, 61, 61, 1);
-                                        font: 400 20px/20px 'futura-pt-condensed';
-                                        height: 40px;
-                                        opacity: 0.75;
-                                        outline: 0 none;
-                                        text-align: left;
-                                        text-decoration: none;
-                                        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
-                                        @include single-transition(opacity 50ms ease-in);
-                                        
-                                        i {
-                                            color: #636364;
-                                            padding-right: 5px;
-                                            position: relative;
-                                            top: 1px;
-                                        }
-
-                                        &:hover, &:active, &:focus {
-                                            background: none;
-                                            border: 1px solid #E8E8E8;
-                                            outline: 0 none;
-                                            opacity: 1;
-                                            @include single-transition(opacity 50ms ease-in);
-                                        }
-                                    }
-
-                                    &.active {
-                                        a {
-                                            background: none;
-                                            border: 1px solid #E8E8E8;
-                                            opacity: 1;
-                                            @include single-transition(opacity 50ms ease-in);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        div.tab-content {
-                            float: right;
-                            width: 900px;
-                        }
                     }
                 }
 

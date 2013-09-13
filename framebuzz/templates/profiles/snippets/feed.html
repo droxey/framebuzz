@@ -1,1 +1,40 @@
+{% load i18n avatar_tags %}
+
 <h1>News Feed</h1>
+{% if page_obj.object_list %}
+  <ul id="feed">
+    {% for action in page_obj.object_list %}
+      <li class="clearfix">
+        <div class="user-wrapper clearfix">
+          <a href="{% url 'profiles-home' username %}"> 
+            <img src="{% avatar_url follower_comments.user 64 %}" alt="" height="32" width="32" class="img-circle" />
+          </a>
+          <div class="feed-header">
+            <h2><a href="{% url 'profiles-home' username %}">{{ username }}</a></h2>
+            <span class="posted-on">{{ action.timestamp|timesince }} {% trans "ago" %}</span>
+            {% if follower_comments.user.get_profile and follower_comments.user.get_profile.location %}
+              <h3>{{ follower_comments.user.get_profile.location }}</h3>
+            {% endif %}
+          </div>
+          <p class="action">
+              {{ action.verb }}
+              {% if action.action_object %}
+                  {% if action.action_object.get_absolute_url %}<a href="{{ action.action_object.get_absolute_url }}">{{ action.action_object }}</a>
+                  {% else %}<a href="{{ action.target_url }}">{{ action.action_object }}</a>{% endif %}
+              {% endif %}
+              {% if action.action_object and action.target %}to{% endif %}
+              {% if action.target %}
+                  {% if action.target.get_absolute_url %}<a href="{{ action.target.get_absolute_url }}">{{ action.target }}</a>
+                  {% else %}<a href="{{ action.target_url }}">{{ action.target }}</a>{% endif %}
+              {% endif %}
+          </p>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+  {% include "dashboard/snippets/pagination.html" %}
+{% else %}
+  <div class="alert alert-info">
+    <strong>{{ user }}</strong> has no activity yet!
+  </div>
+{% endif %}

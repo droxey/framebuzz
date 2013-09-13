@@ -95,15 +95,31 @@
                             {% endifequal %}
                         </nav>
                     </header>
-                    <div id="profile-container" class="tab-content">
-                        <div class="tab-pane active" id="activity"></div>
-                        <div class="tab-pane" id="followers"></div>
-                        <div class="tab-pane" id="following"></div>
-                        <div class="tab-pane" id="conversations"></div>
-                        <div class="tab-pane" id="favorites"></div>
-                        <div class="tab-pane" id="videos"></div>
-                        <div class="tab-pane" id="edit"></div>
-                        <div class="tab-pane" id="avatar"></div>
+                    <div id="profile-container">                        
+                        <nav>
+                          <ul class="nav nav-tabs">
+                            {% ifequal request.user profile_user %}
+                                <li><a class="activity-tab-link active" href="#myfeed" data-url="{% url 'profiles-feed' profile_user.username %}"><i class="icon-globe"></i> News Feed</a></li>
+                                <li><a class="activity-tab-link" href="#myactivity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a></li>
+                                <li><a class="activity-tab-link" href="#mysettings"><i class="icon-cog"></i> Profile Settings</a></li>
+                            {% else %}
+                                <li><a class="activity-tab-link" href="#myactivity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a></li>
+                            {% endifequal %}
+                          </ul>
+                        </nav>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="activity"></div>
+                            <div class="tab-pane" id="myfeed"></div>
+                            <div class="tab-pane" id="myactivity"></div>
+                            <div class="tab-pane" id="mysettings"></div>
+                            <div class="tab-pane" id="followers"></div>
+                            <div class="tab-pane" id="following"></div>
+                            <div class="tab-pane" id="conversations"></div>
+                            <div class="tab-pane" id="favorites"></div>
+                            <div class="tab-pane" id="videos"></div>
+                            <div class="tab-pane" id="edit"></div>
+                            <div class="tab-pane" id="avatar"></div>
+                        </div>
                     </div>
                 </div>
             </div>

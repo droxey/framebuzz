@@ -1,5 +1,3 @@
-import json
-
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
@@ -9,11 +7,14 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from actstream import action
-from actstream.models import Action, Follow, followers, following
+from actstream.models import Action, followers, following
 from pure_pagination import Paginator, PageNotAnInteger
 
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
+
+VALID_FEED_VERBS = ['commented on', 'started following', 'added to favorites',
+                    'replied to comment', 'added video to library']
 
 
 def get_profile_header(username):
@@ -40,7 +41,8 @@ def get_profile_header(username):
 
 def logged_in(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
+        return HttpResponseRedirect(
+            reverse('profiles-home', args=[request.user.username, ]))
     else:
         return HttpResponseRedirect(reverse('account_login'))
 
@@ -48,39 +50,26 @@ def logged_in(request):
 def home(request, username):
     profile_header = get_profile_header(username)
     profile_header['is_edit'] = False
-    return render_to_response('profiles/base.html', profile_header, context_instance=RequestContext(request))
+    return render_to_response('profiles/base.html',
+                              profile_header,
+                              context_instance=RequestContext(request))
 
 
 def activity(request, username):
+    try:
+        page = request.GET.get('page', 1)
+    except PageNotAnInteger:
+        page = 1
+
     user = User.objects.get(username__iexact=username)
+    actions = Action.objects.filter(verb__in=VALID_FEED_VERBS,
+                                    action_object_object_id=user.id).order_by('-timestamp')
+    p = Paginator(actions, 12, request=request)
 
-    user_videos = UserVideo.objects.filter(user=user, is_featured=True)[:3]
-    latest_videos_comments = list()
-
-    for uv in user_videos:
-        comments = MPTTComment.objects.filter(user=user, object_pk=uv.id)
-        if len(comments) > 0:
-            comment = comments[0]
-            latest_videos_comments.append(comment)
-        else:
-            fake_comment = MPTTComment()
-            fake_comment.content_object = uv.video
-            latest_videos_comments.append(fake_comment)
-
-    latest_following = Follow.objects.filter(user=user).order_by('-started')[:3]
-    latest_comments = MPTTComment.objects.filter(user=user).order_by('-submit_date')[:3]
-
-    return render_to_response('profiles/snippets/activity.html',
-    {
-        'profile_user': user,
-        'latest_videos': latest_videos_comments,
-        'latest_comments': latest_comments,
-        'latest_following': latest_following,
-        'can_delete': request.user.is_authenticated() and request.user.id == user.id,
-        'video_library_ids': [uv.video.id for uv in user_videos],
-        'featured_video_ids': [uv.video.id for uv in user_videos if uv.is_featured]
-    },
-    context_instance=RequestContext(request))
+    return render_to_response('profiles/snippets/activity.html', {
+                              'profile_user': user,
+                              'page_obj': p.page(page),
+                              }, context_instance=RequestContext(request))
 
 
 def profile_followers(request, username):
@@ -89,7 +78,8 @@ def profile_followers(request, username):
     profile_followers = dict()
 
     for followed_user in user_followers:
-        latest_comments = MPTTComment.objects.filter(user=followed_user).order_by('-submit_date')[:1]
+        latest_comments = MPTTComment.objects.filter(
+            user=followed_user).order_by('-submit_date')[:1]
         profile_followers[followed_user.username] = {
             'user': followed_user,
             'comments': latest_comments,
@@ -107,7 +97,8 @@ def profile_following(request, username):
     profile_following = dict()
 
     for following_user in user_following:
-        latest_comments = MPTTComment.objects.filter(user=following_user).order_by('-submit_date')[:1]
+        latest_comments = MPTTComment.objects.filter(
+            user=following_user).order_by('-submit_date')[:1]
         profile_following[following_user.username] = {
             'user': following_user,
             'comments': latest_comments,
@@ -120,19 +111,24 @@ def profile_following(request, username):
 
 
 def feed(request, username):
+    try:
+        page = request.GET.get('page', 1)
+    except PageNotAnInteger:
+        page = 1
+
     user = User.objects.get(username__iexact=username)
     user_following = following(user)
+    following_ids = [f.id for f in user_following]
+    following_ids.append(user.id)
+
+    feed = Action.objects.filter(verb__in=VALID_FEED_VERBS,
+                                 action_object_object_id__in=following_ids
+                                 ).order_by('-timestamp')
+    p = Paginator(feed, 12, request=request)
 
     return render_to_response('profiles/snippets/feed.html', {
         'profile_user': user,
-    }, context_instance=RequestContext(request))
-
-
-def my_activity(request, username):
-    user = User.objects.get(username__iexact=username)
-
-    return render_to_response('profiles/snippets/my_activity.html', {
-        'profile_user': user,
+        'page_obj': p.page(page),
     }, context_instance=RequestContext(request))
 
 
@@ -146,7 +142,6 @@ def conversations(request, username):
     user_videos = UserVideo.objects.filter(user=user)
     conversations = MPTTComment.objects.filter(user=user, parent=None)
     p = Paginator(conversations, 12, request=request)
-
 
     return render_to_response('profiles/snippets/conversations.html', {
         'profile_user': user,
@@ -165,7 +160,8 @@ def favorites(request, username):
 
     user = User.objects.get(username__iexact=username)
     user_videos = UserVideo.objects.filter(user=user)
-    favorite_comment_ids = [favorite.action_object_object_id for favorite in Action.objects.favorite_comments_stream(user)]
+    favorite_comment_ids = [
+        favorite.action_object_object_id for favorite in Action.objects.favorite_comments_stream(user)]
     profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
     p = Paginator(profile_favorites, 12, request=request)
     can_delete = request.user.is_authenticated() and request.user.id == user.id
@@ -235,7 +231,9 @@ def edit_profile(request, username):
             profile = form.save()
             del request.session['user_timezone']
 
-            action.send(request.user, verb='updated profile', action_object=request.user)
+            action.send(
+                request.user, verb='updated profile',
+                action_object=request.user)
             return HttpResponse()
     else:
         website = profile.get_default_website()
@@ -288,13 +286,13 @@ def toggle_video_featured(request, username, video_id):
     user = User.objects.get(username=username)
     video = Video.objects.get(video_id=video_id)
 
-    user_videos = UserVideo.objects.filter(user = user, video = video)
+    user_videos = UserVideo.objects.filter(user=user, video=video)
     if len(user_videos) > 0:
         user_video = user_videos[0]
         if user_video.is_featured:
             user_video.is_featured = False
         else:
-            user_video.is_featured = True  
+            user_video.is_featured = True
         user_video.save()
 
     if len(user_videos) == 0:
@@ -313,7 +311,7 @@ def toggle_video_library(request, username, video_id):
     video = Video.objects.get(video_id=video_id)
 
     try:
-        user_videos = UserVideo.objects.filter(user = user, video = video)
+        user_videos = UserVideo.objects.filter(user=user, video=video)
         if len(user_videos) > 0:
             user_video = user_videos[0]
             user_video.delete()
