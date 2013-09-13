@@ -46,7 +46,7 @@
                                         </span>
                                     {% endif %}
                                 </li>
-                                <li class="home active">
+                                <li class="home">
                                     <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>
                                     <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link"></a>
                                 </li>
@@ -99,18 +99,25 @@
                         <nav>
                           <ul class="nav nav-tabs">
                             {% ifequal request.user profile_user %}
-                                <li><a class="activity-tab-link active" href="#myfeed" data-url="{% url 'profiles-feed' profile_user.username %}"><i class="icon-globe"></i> News Feed</a></li>
-                                <li><a class="activity-tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a></li>
-                                <li><a class="activity-tab-link" href="#mysettings"><i class="icon-cog"></i> Profile Settings</a></li>
+                                <li>
+                                    <a class="tab-link" href="#myfeed" data-url="{% url 'profiles-feed' profile_user.username %}"><i class="icon-globe"></i> News Feed</a>
+                                </li>
+                                <li class="start active">
+                                    <a class="tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a>
+                                </li>
+                                <li>
+                                    <a class="tab-link" href="#mysettings"><i class="icon-cog"></i> Profile Settings</a>
+                                </li>
                             {% else %}
-                                <li><a class="activity-tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a></li>
+                                <li class="active">
+                                    <a class="tab-link active" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a>
+                                </li>
                             {% endifequal %}
                           </ul>
                         </nav>
                         <div class="tab-content">
                             <div class="tab-pane active" id="activity"></div>
                             <div class="tab-pane" id="myfeed"></div>
-                            <div class="tab-pane" id="myactivity"></div>
                             <div class="tab-pane" id="mysettings"></div>
                             <div class="tab-pane" id="followers"></div>
                             <div class="tab-pane" id="following"></div>
@@ -163,6 +170,7 @@
                 var activeTabUrl = $('ul.nav-tabs li.active a').attr('data-url');
                 $('#activity').load(activeTabUrl, function(result) {
                     $('ul.nav-tabs').tab('show');
+                    $('#profile-container ul.nav-tabs li.start').addClass('active');
                 });
 
                 // Pagination.
@@ -324,12 +332,13 @@
                     currentTab = this.hash;
                     var pane = $(this);
 
-                    if (currentTab == '#avatar' || currentTab == '#activity') {
+                    if (currentTab == '#avatar') {
                         $('div.tab-pane').removeClass('active');
                         $('ul.dropdown-menu li').removeClass('active'); 
                     }
                     
-                    $(currentTab).load(currentPageUrl, function(result) {  
+                    $('ul.nav-tabs li').removeClass('active'); 
+                    $(currentTab).load(currentPageUrl, function(result) { 
                         $('div.tab-pane').removeClass('active');
                         $('ul.dropdown-menu li').removeClass('active'); 
                         pane.tab('show');
@@ -343,26 +352,6 @@
                                 }
                             });
                         }
-
-                        if (currentTab == '#activity') {
-                            $('ul.nav-tabs', '#activity').tab('show');
-                        }
-                    });
-                });
-
-                $('body').on('click', 'a.activity-tab-link', function(e) {
-                    e.preventDefault();
-
-                    var pageUrl = $(this).attr('data-url');
-                    var tab = this.hash;
-                    var pane = $(this);
-                    
-                    $(tab).load(pageUrl, function(result) {  
-                        $('div.tab-pane', '#activity').removeClass('active');
-                        $('ul.dropdown-menu li', '#activity').removeClass('active'); 
-                        pane.tab('show');
-
-                        $(tab).addClass('active');
                     });
                 });
             });
