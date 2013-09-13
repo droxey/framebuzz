@@ -32,11 +32,11 @@ div.alert {
 
 div.form-actions {
     bottom: 30px;
+    left: 220px;
     margin: 0;
     padding: 0;
     position: absolute;
-    right: 0;
-    width: 100%;
+    width: 695px;
 }
 
 img.img-circle {
@@ -147,7 +147,7 @@ div.content {
                             background-color: #e8e8e8;
                             box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.3);
                             color: rgba(61, 61, 61, 0.45);
-                            font-size: 18px;
+                            font: 500 15px/19px 'proxima-nova';
                             padding: 10px 12px;
                             position: relative;
                             margin-left: 20px;
@@ -283,9 +283,6 @@ div.content {
             }
 
             #profile-container {
-                min-height: 882px;
-                max-height: 1600px;
-                overflow: visible;
                 padding: 22px 25px 82px;
                 position: relative;
                 z-index: 1;
@@ -353,6 +350,7 @@ div.content {
 
                 div.tab-content {
                     float: right;
+                    min-height: 455px;
                     width: 900px;
                 }
 
@@ -363,7 +361,8 @@ div.content {
                     font-family: 'proxima-nova';
                     font-weight: 300;
                     font-size: 26.15px;
-                    padding-bottom: 20px;
+                    margin-bottom: 18px;
+                    padding-bottom: 9px;
                     width: 100%;
                 }
 
@@ -372,140 +371,172 @@ div.content {
                     display: block;
                 }
 
+                ul.profile-conversations > li {
+                    @include border-radius(5px, 5px);
+                    float: left;
+                    margin-right: 18px;
+                    width: 303px;
+                    background-color: #dddddd;
+                    margin-bottom: 18px;
+                    padding: 5px;
+                    position: relative;
+                }
+
                 ul.profile-conversations {
                     border: none;
 
                     li {
-                        margin-bottom: 27px;
-                        position: relative;
+                        div.video-wrapper {
+                            @include border-radius(3px, 3px);
+                            background-color: white;
+                            padding: 9px;
 
-                        img.featured {
-                            left: -6px;
-                            position: absolute;
-                            top: -6px;
-                            z-index: 20;
-                            height: 50px;
-                            width: 96px;
-                        }
+                            img.featured {
+                                left: -6px;
+                                position: absolute;
+                                top: -6px;
+                                z-index: 20;
+                                height: 50px;
+                                width: 96px;
+                            }
 
-                        div.user-controls {
-                            background: rgba(0, 0, 0, .9);
-                            height: 12px;
-                            padding: 5px;
-                            position: absolute;
-                            top: 0;
-                            right: 25px;
-                            opacity: 0;
-                            z-index: 999;
-                            @include single-transition(opacity 0.55s ease-in-out);
+                            img.video-thumbnail {
+                                @include border-radius(3px, 3px);
+                                background: rgba(102, 102, 102, .90);
+                                height: 165px;
+                                position: relative;
+                                width: 295px;
+                                z-index: 10;
+                            }
 
-                            ul {
-                                border-top: none;
-                                padding-top: 0;
+                            div.comment {
+                                border-radius: 0px 0px 3px 3px;
+                                background-color: #2C85CA;
+                                border: 1px solid rgba(44, 133, 202, 0.5);
+                                font-family: 'proxima-nova';
+                                font-size: 11px;
+                                font-weight: 500;
+                                left: 14px;
+                                line-height: 18px;
+                                padding: 3px 6px 4px 6px;
+                                position: absolute;
+                                top: 112px;
+                                width: 271px;
+                                z-index: 20;
 
-                                li {
+                                span.corner {
+                                    position: absolute;
+                                    display: block;
+                                    width: 0;
+                                    height: 0;
+                                    line-height: 0;
+                                    border: solid 9px rgba(44, 133, 202, 1.0);
+                                    border-color: transparent transparent rgba(44, 133, 202, 1);
+                                    bottom: 66px;
+                                    display: block;
+                                    height: 0;
+                                    left: 140.5px;
+                                    line-height: 0;
+                                    position: absolute;
+                                    width: 0;
+                                }
+
+                                p {
+                                    font: 500 13px/15px 'proxima-nova';
+                                    color: white;
+                                    padding: 6px 0;
+                                }
+
+                                img.img-circle {
+                                    border: 2px solid white;
+                                    display: block;
                                     float: left;
-                                    margin-bottom: 0;
-                                    padding-right: 5px;
-                                    min-width: 13px;
-                                    max-width: 15px;
-
-                                    a {
-                                        cursor: pointer;
-                                        opacity: 0.5;
-
-                                        &.active { opacity: 0.8; }
-                                        &:hover { opacity: 1; }
-
-                                        img {
-                                            width: 15px;
-                                            height: 14px;
-                                        }
-                                    }
-
-                                    &:last-child {
-                                        padding-right: 0;
-                                    }
-
-                                    &:before {
-                                        background: none;
-                                        display: none;
-                                        height: 0;
-                                        width: 0;
-                                    }
+                                    height: 55px;
+                                    margin-right: 9px;
+                                    width: 55px;
+                                    z-index: 2;
                                 }
                             }
-                        }
 
-                        img.video-thumbnail {
-                            background: rgba(102, 102, 102, .90);
-                            border: 5px solid rgba(0, 0, 0, .60);
-                            height: 182px;
-                            margin: -5px;
-                            position: relative;
-                            width: 287px;
-                            z-index: 10;
-                        }
+                            div.video-details {
+                                font: 500 13px/13px 'proxima-nova';
 
-                        div.comment {
-                            background-color: #2C85CA;
-                            border: 1px solid rgba(44, 133, 202, 0.5);
-                            font-family: 'proxima-nova';
-                            font-size: 11px;
-                            font-weight: 500;
-                            left: -8px;
-                            line-height: 18px;
-                            padding: 6px 10px;
-                            position: absolute;
-                            top: 122px;
-                            width: 281px;
-                            z-index: 20;
+                                a {
+                                    color: #272727;
+                                    font: 500 18px/18px 'futura-pt-condensed';
+                                    padding-bottom: 3px;
+                                }
 
-                            p {
-                                color: white;
+                                h4 { color: #969696; }
+
+                                div.shared {
+                                    @include border-radius(3px, 3px);
+                                    border: 1px solid #dddddd;
+                                    padding: 6px 6px 3px;
+                                    margin-top: 6px;
+
+                                    h5 { color: #dddddd; }
+
+                                    ul {
+                                        padding-top: 1px;
+
+                                        li {
+                                            float: left;
+                                            height: 34px;
+                                            width: 34px;
+                                            
+                                            a {
+                                                display: block;
+                                                height: 22px;
+                                                padding: 4px 0;
+                                                width: 22px;
+
+                                                img.img-circle {
+                                                    border: 2px solid white;
+                                                    height: 22px;
+                                                    width: 22px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                span {
+                                    color: rgba(73, 73, 73, 0.83);
+                                    display: block;
+                                    font-size: 11px;
+                                }
                             }
 
-                            img.img-circle {
-                                border: 2px solid white;
-                                display: block;
-                                float: left;
-                                height: 32px;
-                                margin-right: 7px;
-                                width: 32px;
-                                z-index: 2;
-                            }
-                        }
-
-                        div.video-details {
-                            font-family: 'proxima-nova';
-                            font-size: 13px;
-                            font-weight: 500;
-
-                            h3 {
-                                padding-top: 7px;
-                            }
-
-                            a {
-                                color: #2a5c8a;
-                                font-weight: 700;
-                            }
-
-                            span {
-                                color: rgba(73, 73, 73, 0.83);
-                                display: block;
-                                font-size: 11px;
-                            }
-                        }
-
-                        &:hover {
-                            div.user-controls {
-                                opacity: 1;
-                                @include single-transition(opacity 0.55s ease-in-out);
-
+                            div.video-actions {
                                 ul {
                                     li {
+                                        float: right;
+                                        width: 29px;
+
                                         a {
-                                            img { opacity: 1; }
+                                            color: #cecece;
+                                            display: block;
+                                            font: 300 20px/29px 'proxima-nova';
+                                            height: 19px;
+                                            outline: 0;
+                                            padding-top: 6px;
+                                            text-align: right;
+                                            text-decoration: none;
+                                            width: 29px;
+
+                                            i {
+                                                position: relative;
+                                                bottom: 3px;
+                                            }
+
+                                            &.active, &:hover {
+                                                color: #67a3cb;
+                                            }
+
+                                            &:hover, &:focus, &:active {
+                                                text-decoration: none;
+                                            }
                                         }
                                     }
                                 }
@@ -532,33 +563,21 @@ div.content {
                     }
                 }
 
-                div.pagination-page {
-                    ul.profile-conversations {
-                        width: 100%;
+                div.tab-pane {
+                    width: 662px;
+                    opacity: 0;
+                    @include single-transition(opacity 0.55s ease-in-out);
 
-                        li {
-                            float: left;
-                            width: 313px;
-                        }
-
-                        li:nth-child(even):before {
-                            background: none;
-                        }
+                    &.active {
+                        opacity: 1;
+                        @include single-transition(opacity 0.55s ease-in-out);                        
                     }
                 }
 
-                div.tab-pane {
-                    opacity: 0;
-                    @include single-transition(opacity 0.55s ease-in-out);
-                }
-
-                div.tab-pane.active {
-                    opacity: 1;
-                    @include single-transition(opacity 0.55s ease-in-out);
-                }
-
-                #following, #followers, #activity {
+                #following, #followers, #activity, #myfeed {
                     ul#feed {
+                        width: 650px;
+
                         li {
                             @include border-radius(5px, 5px);
                             background-color: #dddddd;
@@ -566,7 +585,7 @@ div.content {
                             font-family: 'futura-pt-condensed';
                             margin-bottom: 18px;
                             padding: 5px;
-                            width: 890px;
+                            width: 650px;
 
                             &:last-child {
                                 margin-bottom: 0;
@@ -575,21 +594,24 @@ div.content {
                             div.user-wrapper {
                                 @include border-radius(3px, 3px);
                                 background-color: white;
-                                padding: 18px;
+                                padding: 9px;
 
                                 img.img-circle {
                                     border: 2px solid white;
                                     display: block;
                                     float: left;
                                     height: 55px;
-                                    margin-right: 7px;
+                                    margin-right: 9px;
+                                    margin-top: -1px;
                                     width: 55px;
                                 }
                                 
                                 div.feed-header {
-                                    padding: 0 9px;
+                                    padding: 0 5px;
                                     margin-top: 3px;
-                                    float: left;
+
+                                    h2 { float: left; }
+                                    h3 { float: right; }
 
                                     h2 {
                                         a {
@@ -698,6 +720,41 @@ div.content {
                     }
                 }
 
+                #activity, #myfeed {
+                    ul#feed {
+                        li {
+                            div.user-wrapper {
+                                position: relative;
+                                height: 58px;
+
+                                a.avatar {
+                                    float: left;
+                                }
+                                
+                                div.feed-header {
+                                    float: left;
+                                    position: relative;
+                                    width: 554px;
+                                    height: 100%;
+
+                                    span.action {
+                                        font: 300 14px/10px 'proxima-nova';
+                                        vertical-align: text-bottom;
+
+                                        strong { font-weight: 700; }
+                                    }
+
+                                    h3 {
+                                        position: absolute;
+                                        bottom: 0;
+                                        right: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 #following, #followers, #conversations, #favorites, #videos {
                     ul {
                         li {
@@ -708,20 +765,11 @@ div.content {
                                 width: 92%;
 
                                 div.alert {
-                                    margin-top: 18px;
                                     padding: 18px;
-                                    width: 857px;
+                                    width: 620px;
                                 }
                             }
                         }
-                    }
-                }
-
-                #activity {
-                    width: 100%;
-
-                    #activity-container {
-
                     }
                 }
 

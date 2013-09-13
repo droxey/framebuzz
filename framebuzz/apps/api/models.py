@@ -318,7 +318,7 @@ class MPTTComment(MPTTModel, Comment):
         verbose_name_plural = 'Video Comments'
 
     def __unicode__(self):
-        return "%s at %s" % (self.comment, self.timeInHMS)
+        return "%s (%s)" % (self.comment, self.timeInHMS)
 
     def get_absolute_url(self):
         video = Video.objects.get(id=self.object_pk)

@@ -95,15 +95,15 @@
                             {% endifequal %}
                         </nav>
                     </header>
-                    <div id="profile-container">                        
+                    <div id="profile-container" class="clearfix">                        
                         <nav>
                           <ul class="nav nav-tabs">
                             {% ifequal request.user profile_user %}
                                 <li><a class="activity-tab-link active" href="#myfeed" data-url="{% url 'profiles-feed' profile_user.username %}"><i class="icon-globe"></i> News Feed</a></li>
-                                <li><a class="activity-tab-link" href="#myactivity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a></li>
+                                <li><a class="activity-tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a></li>
                                 <li><a class="activity-tab-link" href="#mysettings"><i class="icon-cog"></i> Profile Settings</a></li>
                             {% else %}
-                                <li><a class="activity-tab-link" href="#myactivity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a></li>
+                                <li><a class="activity-tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a></li>
                             {% endifequal %}
                           </ul>
                         </nav>

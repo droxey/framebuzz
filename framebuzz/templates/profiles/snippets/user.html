@@ -3,13 +3,11 @@
 <li class="clearfix">
   <div class="user-wrapper clearfix">
     <a href="{% url 'profiles-home' username %}"> 
-      <img src="{% avatar_url follower_comments.user 64 %}" alt="" height="32" width="32" class="img-circle" />
+      <img src="{% avatar_url follower_comments.user 110 %}" alt="" height="55" width="55" class="img-circle" />
     </a>
-    <div class="feed-header">
+    <div class="feed-header clearfix">
       <h2><a href="{% url 'profiles-home' username %}">{{ username }}</a></h2>
-      {% if follower_comments.user.get_profile and follower_comments.user.get_profile.location %}
-        <h3>{{ follower_comments.user.get_profile.location }}</h3>
-      {% endif %}
+      <h3>Member Since: {{ follower_comments.user.date_joined|date:"N Y" }}</h3>
     </div>
     {% if follower_comments.comments %}
     <div class="comments">
@@ -25,7 +23,7 @@
             <img class="video-thumbnail" height="90" width="120" src="{{ comment.content_object.default_thumbnail }}" />
           </a>
           <p class="bubble">
-            &ldquo;{{ comment.comment }}&rdquo;
+            &ldquo;{{ comment.formatted_comment }}&rdquo;
             <span class="corner"></span>
           </p>
         </li>

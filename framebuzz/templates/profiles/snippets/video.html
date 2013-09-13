@@ -1,13 +1,14 @@
 {% load staticfiles avatar_tags %}
 
 <li>
+  <div class="video-wrapper">
     {% if video_library_ids %}
       {% if comment.object_pk in featured_video_ids %}
         <img src="{% static 'framebuzz/profiles/img/featured-banner.png' %}" alt="Featured" height="50" width="96" class="featured" />
       {% endif %}
     {% endif %}
     {% if can_delete %}
-      <div class="user-controls">
+      <div class="user-controls hidden">
         <ul class="clearfix">
           <li>
             <a class="video-toggle-button featured {% if comment.object_pk in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' profile_user.username comment.content_object.video_id %}">
@@ -38,20 +39,66 @@
       <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
       {% if comment.comment %}
           <div class="comment">
-               <img src="{% avatar_url profile_user 64 %}" alt="" height="32" width="32" class="img-circle" />
-               <p>&ldquo;{{ comment.comment }}&rdquo;</p>
+               <span class="corner"></span>
+               <img src="{% avatar_url comment.user 110 %}" alt="" height="55" width="55" class="img-circle" />
+               <p>&ldquo;{{ comment.formatted_comment }}&rdquo;</p>
           </div>
       {% endif %}
     </a>
     <div class="video-details">
-        <h3><a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a></h3>
-        {% if comment.content_object.added_by %}
-          <span>
-            {% spaceless %}
-            {% if comment.content_object.added_by.id == profile_user.id %}by{% else %}via{% endif %}
-            <a href="{% url 'profiles-home' comment.content_object.added_by.username %}">{{ comment.content_object.added_by.username }}</a>
-            {% endspaceless %}
-          </span>
+        <h3>
+          <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a>
+        </h3>
+        <h4>{% if comment.comment %}Posted on {{ comment.submit_date|date:"N d, Y" }}{% else %}&nbsp;{% endif %}</h4>
+        {% if comment.content_object.uservideo_set.all|length > 0 %}
+          <div class="shared">
+            <h5>Appears in the Following Libraries:</h5>
+            <ul class="clearfix">
+              {% for uv in comment.content_object.uservideo_set.all %}
+              <li>
+                <a href="{% url 'profiles-home' uv.user.username %}">
+                  <img src="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle" />
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
         {% endif %}
     </div>
+    <div class="video-actions">
+      <ul class="clearfix">
+      {% if request.user.id == profile_user.id %}
+          <li>
+            <a class="video-toggle-button library{% if comment.object_pk in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}">
+                {% if comment.object_pk in video_library_ids %}
+                  <i class="icon-minus-sign-alt"></i>
+                {% else %}
+                  <i class="icon-plus-sign-alt"></i>
+                {% endif %}
+              </a>
+          </li>
+          <li>
+              <a class="video-toggle-button featured{% if comment.object_pk in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username comment.content_object.video_id %}">
+                {% if comment.object_pk in featured_video_ids %}
+                  <i class="icon-star"></i>
+                {% else %}
+                  <i class="icon-star-empty"></i>
+                {% endif %}
+              </a>
+          </li>
+        {% endif %}
+        {% if show_favorite_button %}
+          <li>
+              <a class="video-toggle-button favorite{% if comment.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username comment.id %}">
+                {% if comment.object_pk in favorite_comment_ids %}
+                  <i class="icon-heart"></i>
+                {% else %}
+                  <i class="icon-heart-empty"></i>
+                {% endif %}
+              </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
 </li>

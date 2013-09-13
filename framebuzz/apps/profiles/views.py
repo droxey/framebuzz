@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
@@ -9,6 +11,7 @@ from django.template import RequestContext
 from actstream import action
 from actstream.models import Action, followers, following
 from pure_pagination import Paginator, PageNotAnInteger
+from templated_email import send_templated_mail
 
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
@@ -37,7 +40,6 @@ def get_profile_header(username):
         'profile_library': profile_library,
         'user_content_type': ct
     }
-
 
 def logged_in(request):
     if request.user.is_authenticated():
@@ -141,14 +143,20 @@ def conversations(request, username):
     user = User.objects.get(username__iexact=username)
     user_videos = UserVideo.objects.filter(user=user)
     conversations = MPTTComment.objects.filter(user=user, parent=None)
+
+    favorites = Action.objects.favorite_comments_stream(user)
+    favorite_comment_ids = [f.action_object_object_id for f in favorites]
+
     p = Paginator(conversations, 12, request=request)
+    featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
 
     return render_to_response('profiles/snippets/conversations.html', {
         'profile_user': user,
         'page_obj': p.page(page),
-        'can_delete': request.user.is_authenticated() and request.user.id == user.id,
         'video_library_ids': [uv.video.id for uv in user_videos],
-        'featured_video_ids': [uv.video.id for uv in user_videos if uv.is_featured]
+        'featured_video_ids': featured_video_ids,
+        'favorite_comment_ids': favorite_comment_ids,
+        'show_favorite_button': True,
     }, context_instance=RequestContext(request))
 
 
@@ -160,19 +168,21 @@ def favorites(request, username):
 
     user = User.objects.get(username__iexact=username)
     user_videos = UserVideo.objects.filter(user=user)
-    favorite_comment_ids = [
-        favorite.action_object_object_id for favorite in Action.objects.favorite_comments_stream(user)]
+
+    favorites = Action.objects.favorite_comments_stream(user)
+    favorite_comment_ids = [f.action_object_object_id for f in favorites]
+
     profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
     p = Paginator(profile_favorites, 12, request=request)
-    can_delete = request.user.is_authenticated() and request.user.id == user.id
     featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
 
     return render_to_response('profiles/snippets/favorites.html', {
         'profile_user': user,
         'page_obj': p.page(page),
-        'can_delete': can_delete,
         'video_library_ids': [uv.video.id for uv in user_videos],
         'featured_video_ids': featured_video_ids,
+        'favorite_comment_ids': favorite_comment_ids,
+        'show_favorite_button': True,
     }, context_instance=RequestContext(request))
 
 
@@ -187,6 +197,9 @@ def videos(request, username):
     all_videos = [uv.video for uv in user_videos]
     video_comments = list()
 
+    favorites = Action.objects.favorite_comments_stream(user)
+    favorite_comment_ids = [f.action_object_object_id for f in favorites]
+
     for video in all_videos:
         comments = MPTTComment.objects.filter(user=user, object_pk=video.id)
         if len(comments) > 0:
@@ -197,17 +210,17 @@ def videos(request, username):
             video_comments.append(fake_comment)
 
     p = Paginator(video_comments, 12, request=request)
-    can_delete = request.user.is_authenticated() and request.user.id == user.id
     featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
 
     return render_to_response('profiles/snippets/videos.html', {
         'profile_user': user,
         'page_obj': p.page(page),
-        'can_delete': can_delete,
         'is_adding_video': False,
         'show_embed_button': False,
         'video_library_ids': [uv.video.id for uv in user_videos],
         'featured_video_ids': featured_video_ids,
+        'favorite_comment_ids': favorite_comment_ids,
+        'show_favorite_button': False,
     }, context_instance=RequestContext(request))
 
 
@@ -321,4 +334,38 @@ def toggle_video_library(request, username, video_id):
         user_video.user = user
         user_video.save()
 
+    return HttpResponse()
+
+
+@login_required
+def toggle_comment_favorite(request, username, comment_id):
+    thread = MPTTComment.objects.get(pk=comment_id)
+    video = thread.content_object
+    user = request.user
+
+    is_favorite = Action.objects.actor(user,
+                                       verb='added to favorites',
+                                       action_object_object_id=comment_id)
+
+    if is_favorite:
+        action_name = 'removed from favorites'
+        is_favorite.delete()
+    else:
+        action_name = 'added to favorites'
+
+    action.send(user,
+                verb=action_name,
+                action_object=thread, target=video)
+
+    if thread.user.id != user.id and thread.user.email:
+        send_templated_mail(
+            template_name='favorites-notification',
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[thread.user.email],
+            context={
+                'comment': thread,
+                'site': Site.objects.get_current(),
+                'recipient': thread.user,
+                'user': user,
+            })
     return HttpResponse()

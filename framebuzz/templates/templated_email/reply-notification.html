@@ -7,5 +7,5 @@
 {% block email_message %}
      Hey, don’t look now, but {{ comment.user.username }} replied to a comment you made on <a href="http://{{ site.domain }}{{ comment.content_object.get_share_url }}" style="color: #0C94C8;">{{ comment.content_object.title }}</a>.
      <br><br>
-    <a style="color: #0C94C8;" href="http://{{ site.domain }}{{ comment.get_share_url }}">{{ comment.comment }}</a>
+    <a style="color: #0C94C8;" href="http://{{ site.domain }}{{ comment.get_share_url }}">{{ comment.formatted_comment }}</a>
 {% endblock %}
