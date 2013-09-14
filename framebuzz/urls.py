@@ -29,9 +29,13 @@ urlpatterns = patterns('',
     # Django-Avatar:
     url(r'^avatar/', include('avatar.urls')),
 
-    # Share Page:
+    # Share Page (Shared by unauthenticated user):
     url(r'^share/(?P<video_id>[\w.@+-]+)/$',
-        'framebuzz.apps.api.views.video_share', name='video-share'),
+        'framebuzz.apps.profiles.views.video_share', name='video-share'),
+
+    # Share Page (Shared by authenticated user):
+    url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<video_id>[\w.@+-]+)/$',
+        'framebuzz.apps.profiles.views.video_share', name='profiles-share'),
 
     # Dashboard:
     #url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),

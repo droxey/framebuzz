@@ -271,7 +271,7 @@ class MPTTComment(MPTTModel, Comment):
     parent = TreeForeignKey('self', null=True, blank=True,
                             related_name='children')
 
-    # Time is required for parent comments, and optional for sub-comments.
+    # Time is required for parent comments, and optional for replies.
     time = models.FloatField(default=0.000)
 
     is_visible = models.BooleanField(default=True)
@@ -318,7 +318,7 @@ class MPTTComment(MPTTModel, Comment):
         verbose_name_plural = 'Video Comments'
 
     def __unicode__(self):
-        return "%s (%s)" % (self.comment, self.timeInHMS)
+        return "[%s] %s" % (self.timeInHMS, self.comment)
 
     def get_absolute_url(self):
         video = Video.objects.get(id=self.object_pk)
@@ -329,6 +329,10 @@ class MPTTComment(MPTTModel, Comment):
         video = Video.objects.get(id=self.object_pk)
         url_id = self.id if self.parent is None else self.parent.id
         return '%s#/player/panel/active/comments/%s' % (reverse('video-share', kwargs={'video_id': str(video.video_id)}), str(url_id))
+
+    def get_player_url(self):
+        url_id = self.id if self.parent is None else self.parent.id
+        return '#/player/panel/active/comments/%s' % str(url_id)
 
     def save(self, *args, **kwargs):
         first_comment = None

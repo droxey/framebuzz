@@ -46,9 +46,13 @@
                                         </span>
                                     {% endif %}
                                 </li>
+                                {% if is_share %}
+                                    <li class="share active">
+                                        <a href="#share"></a>
+                                    </li>
+                                {% endif %}
                                 <li class="home">
                                     <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>
-                                    <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link"></a>
                                 </li>
                                 <li class="followers">
                                     <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
@@ -70,7 +74,7 @@
                                 </li>
                                 <li class="conversations">
                                     <a data-url="{% url 'profiles-conversations' profile_user.username %}" href="#conversations" class="tab-link">
-                                        Conversations
+                                        Comments
                                         <em>({{ profile_conversations|length }})</em>
                                     </a>
                                 </li>
@@ -116,7 +120,7 @@
                           </ul>
                         </nav>
                         <div class="tab-content">
-                            <div class="tab-pane active" id="activity"></div>
+                            <div class="tab-pane {% if not is_share %}active{% endif %}" id="activity"></div>
                             <div class="tab-pane" id="myfeed"></div>
                             <div class="tab-pane" id="mysettings"></div>
                             <div class="tab-pane" id="followers"></div>
@@ -126,6 +130,7 @@
                             <div class="tab-pane" id="videos"></div>
                             <div class="tab-pane" id="edit"></div>
                             <div class="tab-pane" id="avatar"></div>
+                            {% block share_content %}{% endblock %}
                         </div>
                     </div>
                 </div>

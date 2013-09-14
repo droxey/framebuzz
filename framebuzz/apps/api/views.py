@@ -19,14 +19,6 @@ from framebuzz.apps.api.serializers import UserSerializer
 from framebuzz.apps.api.utils import errors_to_json
 
 
-def video_share(request, video_id):
-    video, created = get_or_create_video(video_id)
-
-    return render_to_response('profiles/share.html', {
-        'video': video,
-    }, context_instance=RequestContext(request))
-
-
 def video_test(request, video_id):
     video, created = get_or_create_video(video_id)
 

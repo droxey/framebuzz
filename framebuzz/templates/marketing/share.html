@@ -1,4 +1,4 @@
-{% extends "profiles/base.html" %}
+{% extends "marketing/base.html" %}
 {% load staticfiles compress avatar_tags %}
 
 {% block marketing_meta %}
@@ -13,6 +13,21 @@
     <meta itemprop="image" content="{{ video.poster_image }}" />
 {% endblock %}
 
-{% block share_content %}
-    {% include "player/snippets/share.html" %}
+{% block page_css %}
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" type="text/css" media="screen" />
+    {% endcompress %}
+    {% block extra_css %}{% endblock %}
+{% endblock %}
+
+{% block marketing_content %}
+    <div id="fb">
+        <div class="content">
+            <div class="wrapper clearfix">
+                <div class="background">
+                    {% include "player/snippets/share.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

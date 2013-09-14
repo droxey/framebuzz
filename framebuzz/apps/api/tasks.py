@@ -160,7 +160,7 @@ def post_new_comment(context):
         return_data['channel'] = channel
 
         if not comment.parent:
-            action.send(user, verb='commented on', action_object=video)
+            action.send(user, verb='commented on', action_object=comment, target=video)
 
             threadSerializer = MPTTCommentSerializer(comment, context={ 'user': user })
             threadSerialized = JSONRenderer().render(threadSerializer.data)

@@ -7,30 +7,6 @@
         <img src="{% static 'framebuzz/profiles/img/featured-banner.png' %}" alt="Featured" height="50" width="96" class="featured" />
       {% endif %}
     {% endif %}
-    {% if can_delete %}
-      <div class="user-controls hidden">
-        <ul class="clearfix">
-          <li>
-            <a class="video-toggle-button featured {% if comment.object_pk in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' profile_user.username comment.content_object.video_id %}">
-              {% if comment.object_pk in featured_video_ids %}
-                <img src="{% static 'framebuzz/profiles/img/star-on.png' %}" height="14" width="15" />
-              {% else %}
-                <img src="{% static 'framebuzz/profiles/img/star.png' %}" height="14" width="15" />
-              {% endif %}
-            </a>
-          </li>
-          <li>
-          <a class="video-toggle-button library" href="{% url 'profiles-toggle-library' profile_user.username comment.content_object.video_id %}">
-              {% if comment.object_pk in video_library_ids %}
-                <img src="{% static 'framebuzz/profiles/img/trash.png' %}" height="13" width="13" />
-              {% else %}
-                <img src="{% static 'framebuzz/player/app/img/icon-plus.png' %}" height="13" width="13" />
-              {% endif %}
-            </a>
-          </li>
-        </ul>
-      </div>
-    {% endif %}
     {% if comment.comment %}
       <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
     {% else %}
@@ -69,8 +45,8 @@
       <ul class="clearfix">
       {% if request.user.id == profile_user.id %}
           <li>
-            <a class="video-toggle-button library{% if comment.object_pk in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}">
-                {% if comment.object_pk in video_library_ids %}
+            <a class="video-toggle-button library{% if comment.content_object.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}">
+                {% if comment.content_object.id in video_library_ids %}
                   <i class="icon-minus-sign-alt"></i>
                 {% else %}
                   <i class="icon-plus-sign-alt"></i>
@@ -78,8 +54,8 @@
               </a>
           </li>
           <li>
-              <a class="video-toggle-button featured{% if comment.object_pk in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username comment.content_object.video_id %}">
-                {% if comment.object_pk in featured_video_ids %}
+              <a class="video-toggle-button featured{% if comment.content_object.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username comment.content_object.video_id %}">
+                {% if comment.content_object.id in featured_video_ids %}
                   <i class="icon-star"></i>
                 {% else %}
                   <i class="icon-star-empty"></i>
@@ -87,10 +63,10 @@
               </a>
           </li>
         {% endif %}
-        {% if show_favorite_button %}
+        {% if show_favorite_button and request.user.is_authenticated %}
           <li>
               <a class="video-toggle-button favorite{% if comment.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username comment.id %}">
-                {% if comment.object_pk in favorite_comment_ids %}
+                {% if comment.id in favorite_comment_ids %}
                   <i class="icon-heart"></i>
                 {% else %}
                   <i class="icon-heart-empty"></i>

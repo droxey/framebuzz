@@ -14,7 +14,9 @@ from pure_pagination import Paginator, PageNotAnInteger
 from templated_email import send_templated_mail
 
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
+from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
+
 
 VALID_FEED_VERBS = ['commented on', 'started following', 'added to favorites',
                     'replied to comment', 'added video to library']
@@ -40,6 +42,32 @@ def get_profile_header(username):
         'profile_library': profile_library,
         'user_content_type': ct
     }
+
+
+def video_share(request, username=None, video_id=None):
+    video, created = get_or_create_video(video_id)
+    header = dict()
+
+    valid_verbs = ['commented on', 'replied to comment']
+    actions = Action.objects.filter(verb__in=valid_verbs,
+                                    target_object_id=video.id)
+    commenters = [a.actor for a in actions]
+    found_by = UserVideo.objects.filter(video=video).order_by('added_on')[:1]
+
+    if username is None:
+        template = 'marketing/share.html'
+    else:
+        header = get_profile_header(username)
+        template = 'profiles/share.html'
+
+    header['video'] = video
+    header['is_share'] = True
+    header['commenters'] = commenters
+    header['found_by'] = found_by
+    return render_to_response(template,
+                              header,
+                              context_instance=RequestContext(request))
+
 
 def logged_in(request):
     if request.user.is_authenticated():
@@ -145,7 +173,7 @@ def conversations(request, username):
     conversations = MPTTComment.objects.filter(user=user, parent=None)
 
     favorites = Action.objects.favorite_comments_stream(user)
-    favorite_comment_ids = [f.action_object_object_id for f in favorites]
+    favorite_comment_ids = [int(f.action_object_object_id)for f in favorites]
 
     p = Paginator(conversations, 12, request=request)
     featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
@@ -170,7 +198,7 @@ def favorites(request, username):
     user_videos = UserVideo.objects.filter(user=user)
 
     favorites = Action.objects.favorite_comments_stream(user)
-    favorite_comment_ids = [f.action_object_object_id for f in favorites]
+    favorite_comment_ids = [int(f.action_object_object_id) for f in favorites]
 
     profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
     p = Paginator(profile_favorites, 12, request=request)
@@ -198,7 +226,7 @@ def videos(request, username):
     video_comments = list()
 
     favorites = Action.objects.favorite_comments_stream(user)
-    favorite_comment_ids = [f.action_object_object_id for f in favorites]
+    favorite_comment_ids = [int(f.action_object_object_id) for f in favorites]
 
     for video in all_videos:
         comments = MPTTComment.objects.filter(user=user, object_pk=video.id)
