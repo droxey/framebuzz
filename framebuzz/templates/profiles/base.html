@@ -46,12 +46,7 @@
                                         </span>
                                     {% endif %}
                                 </li>
-                                {% if is_share %}
-                                    <li class="share active">
-                                        <a href="#share"></a>
-                                    </li>
-                                {% endif %}
-                                <li class="home">
+                                <li class="home{% if not is_share %} active{% endif %}">
                                     <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>
                                 </li>
                                 <li class="followers">
@@ -103,17 +98,23 @@
                         <nav>
                           <ul class="nav nav-tabs">
                             {% ifequal request.user profile_user %}
+                                <li{% if is_share %} class="active"{% endif %}>
+                                    <a href="#share"><i class="icon-film"></i> Now Playing</a>
+                                </li>
                                 <li>
                                     <a class="tab-link" href="#myfeed" data-url="{% url 'profiles-feed' profile_user.username %}"><i class="icon-globe"></i> News Feed</a>
                                 </li>
-                                <li class="start active">
+                                <li class="start {% if not is_share %} active{% endif %}">
                                     <a class="tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a>
                                 </li>
                                 <li>
                                     <a class="tab-link" href="#mysettings"><i class="icon-cog"></i> Profile Settings</a>
                                 </li>
                             {% else %}
-                                <li class="active">
+                                <li{% if is_share %} class="active"{% endif %}>
+                                    <a href="#share"><i class="icon-film"></i> Now Playing</a>
+                                </li>
+                                <li{% if not is_share %} class="active"{% endif %}>
                                     <a class="tab-link active" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a>
                                 </li>
                             {% endifequal %}
