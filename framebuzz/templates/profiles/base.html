@@ -94,7 +94,7 @@
                             {% endifequal %}
                         </nav>
                     </header>
-                    <div id="profile-container" class="clearfix">                        
+                    <div id="profile-container" class="clearfix{% if is_share %} video{% endif %}">                        
                         <nav>
                           <ul class="nav nav-tabs">
                             {% ifequal request.user profile_user %}

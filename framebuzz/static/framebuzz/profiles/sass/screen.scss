@@ -341,141 +341,8 @@ div.marketing-content {
                         width: 912px;
                     }
 
-                    #share {
-                        padding: 0;
-                        width: 912px;
-
-                        #share-container {
-                            #stats-container {
-                                float: right;
-                                margin-right: 0;
-                                width: 222px;
-                            }
-
-                            #video-container {
-                                @include border-radius(5px, 5px);
-                                background: #dddddd;
-                                float: left;
-                                padding: 5px;
-                                margin-right: 18px;
-                                width: 650px;
-
-                                div.frame {
-                                    @include border-radius(3px, 3px);
-                                    background: white;
-                                    padding: 5px;
-
-                                    iframe {
-                                         @include border-radius(3px, 3px);
-                                    }
-
-                                    div.details {
-                                        padding-top: 9px;
-
-                                        h1 {
-                                            border-bottom: none;
-                                            color: #272727;
-                                            font: 300 30px/30px 'futura-pt-condensed';
-                                            margin-bottom: 9px; 
-                                        }
-
-                                        div.social {
-                                            color: #272727;
-                                            font: 300 13px/13px 'proxima-nova';
-
-                                            ul {
-                                                li {
-                                                    @include border-radius(3px, 3px);
-                                                    border: 1px solid #F7F7F7;
-                                                    color: #aaaaaa;
-                                                    float: left;
-                                                    min-height: 93px;
-                                                    margin-right: 9px;
-                                                    padding: 9px;
-
-                                                    h2 {
-                                                        color: #aaaaaa;
-                                                        font: 300 20px/20px 'futura-pt-condensed';
-                                                        margin-bottom: 9px;
-                                                    }
-
-                                                    &.user {
-                                                        width: 75px;
-
-                                                        h2 {
-                                                            text-align: center;
-                                                        }
-
-                                                        img.img-circle, a {
-                                                            display: block;
-                                                            height: 55px;
-                                                            text-align: center;
-                                                        }
-
-                                                        a {
-                                                            color: #cecece;
-                                                            width: 75px;
-                                                
-                                                            &:hover {
-                                                                color: #67a3cb;
-                                                                text-decoration: none;
-                                                            }
-
-                                                            i {
-                                                                font-size: 55px;
-                                                                line-height: 55px;
-                                                            }
-                                                        }
-
-                                                        img.img-circle {
-                                                            border: 2px solid white;
-                                                            width: 55px;
-                                                        }
-                                                    }
-
-                                                    &.description {
-                                                        width: 220px;
-                                                    }
-
-                                                    &.commenters {
-                                                        margin-right: 0;
-                                                        width: 267px;
-
-                                                        h2 { margin-bottom: 5px; }
-
-                                                        ul {
-                                                            li {
-                                                                border: none;
-                                                                float: left;
-                                                                min-height: 42px;
-                                                                padding: 0;
-                                                                height: 42px;
-                                                                width: 42px;
-                                                                
-                                                                a {
-                                                                    display: block;
-                                                                    height: 30px;
-                                                                    padding: 4px 0;
-                                                                    width: 30px;
-
-                                                                    img.img-circle {
-                                                                        border: 2px solid white;
-                                                                        height: 30px;
-                                                                        width: 30px;
-                                                                    }
-                                                                }
-
-                                                                &.empty { width: 100%; }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    &.video {
+                        padding: 22px 25px;
                     }
 
                     h1 {
@@ -1033,6 +900,146 @@ div.marketing-content {
 
                             div.form-actions {
                                 border-top: 1px solid #F7F7F7;
+                            }
+                        }
+                    }
+                }
+
+                #share {
+                    padding: 0;
+
+                    &.tab-pane.active {
+                        width: 912px;
+                    }
+
+                    #share-container {
+                        #stats-container {
+                            float: right;
+                            margin-right: 0;
+                            width: 222px;
+                        }
+
+                        #video-container {
+                            @include border-radius(5px, 5px);
+                            background: #dddddd;
+                            float: left;
+                            padding: 5px;
+                            margin-right: 18px;
+                            width: 650px;
+
+                            div.frame {
+                                @include border-radius(3px, 3px);
+                                background: white;
+                                padding: 5px;
+
+                                iframe {
+                                     @include border-radius(3px, 3px);
+                                }
+
+                                div.details {
+                                    padding-top: 9px;
+
+                                    h1 {
+                                        border-bottom: none;
+                                        color: #272727;
+                                        font: 300 30px/30px 'futura-pt-condensed';
+                                        margin-bottom: 9px; 
+                                    }
+
+                                    div.social {
+                                        color: #272727;
+                                        font: 300 13px/13px 'proxima-nova';
+
+                                        ul {
+                                            li {
+                                                @include border-radius(3px, 3px);
+                                                border: 1px solid #F7F7F7;
+                                                color: #aaaaaa;
+                                                float: left;
+                                                min-height: 93px;
+                                                margin-right: 9px;
+                                                padding: 9px;
+
+                                                h2 {
+                                                    color: #aaaaaa;
+                                                    font: 300 20px/20px 'futura-pt-condensed';
+                                                    margin-bottom: 9px;
+                                                }
+
+                                                &.user {
+                                                    width: 75px;
+
+                                                    h2 {
+                                                        text-align: center;
+                                                    }
+
+                                                    img.img-circle, a {
+                                                        display: block;
+                                                        height: 55px;
+                                                        text-align: center;
+                                                    }
+
+                                                    a {
+                                                        color: #cecece;
+                                                        width: 75px;
+                                            
+                                                        &:hover {
+                                                            color: #67a3cb;
+                                                            text-decoration: none;
+                                                        }
+
+                                                        i {
+                                                            font-size: 55px;
+                                                            line-height: 55px;
+                                                        }
+                                                    }
+
+                                                    img.img-circle {
+                                                        border: 2px solid white;
+                                                        width: 55px;
+                                                    }
+                                                }
+
+                                                &.description {
+                                                    width: 220px;
+                                                }
+
+                                                &.commenters {
+                                                    margin-right: 0;
+                                                    width: 267px;
+
+                                                    h2 { margin-bottom: 5px; }
+
+                                                    ul {
+                                                        li {
+                                                            border: none;
+                                                            float: left;
+                                                            min-height: 42px;
+                                                            padding: 0;
+                                                            height: 42px;
+                                                            width: 42px;
+                                                            
+                                                            a {
+                                                                display: block;
+                                                                height: 30px;
+                                                                padding: 4px 0;
+                                                                width: 30px;
+
+                                                                img.img-circle {
+                                                                    border: 2px solid white;
+                                                                    height: 30px;
+                                                                    width: 30px;
+                                                                }
+                                                            }
+
+                                                            &.empty { width: 100%; }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
