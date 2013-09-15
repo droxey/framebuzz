@@ -1,39 +1,3 @@
-// (function( global ) {
-//   var FrameBuzzProfiles = (function() {
-
-//     var data = "secret";
-
-//     return {
-//       // This is some boolean property
-//       bool: true,
-//       // Some string value
-//       string: "a string",
-//       // An array property
-//       array: [ 1, 2, 3, 4 ],
-//       // An object property
-//       object: {
-//         lang: "en-Us"
-//       },
-//       getData: function() {
-//         // get the current value of `data`
-//         return data;
-//       },
-//       setData: function( value ) {
-//         // set the value of `data` and return it
-//         return ( data = value );
-//       }
-//     };
-//   })();
-
-//   // Other things might happen here
-
-//   // expose our module to the global object
-//   global.Module = Module;
-
-// })( this );
-
-
-
 var FrameBuzzProfile = (function($) {
     var currentPageUrl,
         currentVideoUrl,
@@ -67,7 +31,7 @@ var FrameBuzzProfile = (function($) {
                 $('ul.dropdown-menu li').removeClass('active'); 
                 pane.tab('show');
 
-                $(currentTab).addClass('active');
+                $('a[href="' + currentTab + '"]').parent().addClass('active');
 
                 if (currentTab == '#avatar') {
                     $('#id_avatar').fileupload({
