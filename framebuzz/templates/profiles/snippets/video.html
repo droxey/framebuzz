@@ -2,15 +2,15 @@
 
 <li>
   <div class="video-wrapper">
-    {% if video_library_ids %}
-      {% if comment.object_pk in featured_video_ids %}
+    {% if featured_video_ids %}
+      {% if comment.content_object.id in featured_video_ids %}
         <img src="{% static 'framebuzz/profiles/img/featured-banner.png' %}" alt="Featured" height="50" width="96" class="featured" />
       {% endif %}
     {% endif %}
     {% if comment.comment %}
-      <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.get_absolute_url }}">
+      <a href="{% url 'profiles-video-share' profile_user.username comment.content_object.video_id %}{{ comment.get_player_url }}">
     {% else %}
-      <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">
+      <a href="{% url 'profiles-video-share' profile_user.username comment.content_object.video_id %}">
     {% endif %}
       <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
       {% if comment.comment %}
@@ -23,7 +23,7 @@
     </a>
     <div class="video-details">
         <h3>
-          <a data-target="#video-embed-modal" role="button" class="modal-button" data-toggle="modal" data-url="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object.title }}</a>
+          <a href="{% url 'profiles-video-share' profile_user.username comment.content_object.video_id %}">{{ comment.content_object.title }}</a>
         </h3>
         <h4>{% if comment.comment %}Posted on {{ comment.submit_date|date:"N d, Y" }}{% else %}&nbsp;{% endif %}</h4>
         {% if comment.content_object.uservideo_set.all|length > 0 %}

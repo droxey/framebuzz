@@ -343,11 +343,18 @@ def add_player_action(context):
         verb = 'played video'
     elif player_action == 'player_paused':
         verb = 'paused video'
+    elif player_action == 'player_share':
+        verb = 'shared'
     else:
         pass
 
-    if verb:
-        action.send(user, verb=verb, action_object=video, target=None, time=float(player_data.get('time')))
+    if 'video' in verb:
+        action.send(user,
+                    verb=verb,
+                    action_object=video,
+                    target=None, time=float(player_data.get('time')))
+    else:
+        action.send(user, verb=verb, action_object=video)
 
 
 @celery.task
@@ -464,6 +471,8 @@ def email_share(context):
         user = auth.models.User.objects.get(username=context_data['username'])
     else:
         user = context.get('user', None)
+
+    action.send(user, verb='shared', action_object=video)
 
     if share_with_email:
         send_templated_mail(

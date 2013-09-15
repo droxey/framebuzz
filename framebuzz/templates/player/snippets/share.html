@@ -1,10 +1,16 @@
 {% load avatar_tags comments %}
 
-<div class="tab-pane active" id="share">
+{% regroup commenters by actor as commenter_list %}
+<div class="tab-pane active{% if not profile_user %} standalone{% endif %}" id="share">
     <div id="share-container" class="clearfix">
         <div id="stats-container">
             {% get_comment_count for video as comment_count %}
-            <p>{{ comment_count }}</p>
+            <p>{{ comment_count }} Comment{{ comment_count|pluralize }}</p> 
+            {% for commenter in commenter_list %}
+                <p>{{ commenter.list|length }} Commenter{{ commenter.list|length|pluralize }}</p>
+            {% empty %}
+                <p>0 Commenters</p>
+            {% endfor %}
         </div>
         <div id="video-container">
             <div class="frame">
@@ -31,7 +37,6 @@
                             <li class="commenters">
                                 <h2>Commenters</h2>
                                 <ul>
-                                    {% regroup commenters by actor as commenter_list %}
                                     {% for commenter in commenter_list %}
                                         {% for item in commenter.list %}
                                             <li>

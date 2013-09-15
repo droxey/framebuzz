@@ -18,6 +18,15 @@
     <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
     <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
     <meta itemprop="image" content="{{ video.poster_image }}" />
+    <script type="text/javascript">
+      (function() {
+        var config = {
+          kitId: 'jbo8iic',
+          scriptTimeout: 3000
+        };
+        var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+      })();
+    </script>
     {% compress css %}
       <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/bootstrap-responsive.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
@@ -34,8 +43,6 @@
           <link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <![endif]-->
     {% endcompress %}
-    <script type="text/javascript" src="//use.typekit.net/jbo8iic.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     {% compress js %}
       <script type="text/javascript">
         // Disable ESC as it breaks SockJS connection.
