@@ -16,15 +16,6 @@
         <meta property="og:title" content="FrameBuzz: Watch Whenever, Talk Together.">
         <meta property="og:site_name" content="FrameBuzz">
     {% endblock %}
-    <script type="text/javascript">
-      (function() {
-        var config = {
-          kitId: 'jbo8iic',
-          scriptTimeout: 3000
-        };
-        var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
-      })();
-    </script>
     {% compress css %}
         <!-- bootstrap -->
         <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap.css' %}" rel="stylesheet" />
@@ -44,9 +35,21 @@
         <link rel="stylesheet" href="{% static 'framebuzz/marketing/stylesheets/screen.css' %}" type="text/css" media="screen" />
     {% endcompress %}
     {% block page_css %}{% endblock %}
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    {% compress js %}
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            kitId: 'jbo8iic',
+            scriptTimeout: 3000
+          };
+          var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+        })();
+      </script>
+      <script src="{% static 'framebuzz/marketing/js/modernizr-2.6.2.js' %}"></script>
+      <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+    {% endcompress %}
   </head>
   <body class="{% block page_classes %}{% endblock %}">
     <div class="navbar navbar-inverse">

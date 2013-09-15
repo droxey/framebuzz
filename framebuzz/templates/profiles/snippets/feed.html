@@ -1,35 +1,11 @@
 {% load i18n avatar_tags %}
 
-<h1>News Feed</h1>
 {% if page_obj.object_list %}
-  <ul id="feed">
+  <ul id="feed" class="grid">
     {% for action in page_obj.object_list %}
-      <li class="clearfix">
-        <div class="user-wrapper clearfix">
-          <a class="avatar" href="{% url 'profiles-home' action.actor.username %}"> 
-            <img src="{% avatar_url action.actor 64 %}" alt="" height="32" width="32" class="img-circle" />
-          </a>
-          <div class="feed-header clearfix">
-            <span class="action">
-              <a href="{% url 'profiles-home' action.actor.username %}"><strong>{{ action.actor.username }}</strong></a>
-              {{ action.verb }}
-              {% if action.action_object %}
-                  {% if action.action_object.get_share_url %}<a href="{{ action.action_object.get_share_url }}">{{ action.action_object }}</a>
-                  {% else %}<a href="{{ action.target_url }}">{{ action.action_object }}</a>{% endif %}
-              {% endif %}
-              {% if action.action_object and action.target %}on{% endif %}
-              {% if action.target %}
-                  {% if action.target.get_share_url %}<a href="{{ action.target.get_share_url }}">{{ action.target }}</a>
-                  {% else %}<a href="{{ action.target_url }}">{{ action.target }}</a>{% endif %}
-              {% endif %}
-            </span>
-            <h3>{{ action.timestamp|timesince }} {% trans "ago" %}</h3>
-          </div>
-        </div>
-      </li>
+      {% include "profiles/snippets/item.html" %}
     {% endfor %}
   </ul>
-  {% include "dashboard/snippets/pagination.html" %}
 {% else %}
   <div class="alert alert-info">
     Your News Feed is empty!

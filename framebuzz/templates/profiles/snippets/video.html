@@ -8,22 +8,22 @@
       {% endif %}
     {% endif %}
     {% if comment.comment %}
-      <a href="{% url 'profiles-video-share' profile_user.username comment.content_object.video_id %}{{ comment.get_player_url }}">
+      <a class="thumbnail-link" href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{{ comment.get_player_url }}">
     {% else %}
-      <a href="{% url 'profiles-video-share' profile_user.username comment.content_object.video_id %}">
+      <a class="thumbnail-link" href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}">
     {% endif %}
-      <img class="video-thumbnail" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
+      <img class="video-thumbnail lazy" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
       {% if comment.comment %}
           <div class="comment">
                <span class="corner"></span>
-               <img src="{% avatar_url comment.user 110 %}" alt="" height="55" width="55" class="img-circle" />
+               <img src="{% avatar_url comment.user 110 %}" alt="" height="55" width="55" class="img-circle lazy" />
                <p>&ldquo;{{ comment.formatted_comment }}&rdquo;</p>
           </div>
       {% endif %}
     </a>
     <div class="video-details">
         <h3>
-          <a href="{% url 'profiles-video-share' profile_user.username comment.content_object.video_id %}">{{ comment.content_object.title }}</a>
+          <a href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}">{{ comment.content_object.title }}</a>
         </h3>
         <h4>{% if comment.comment %}Posted on {{ comment.submit_date|date:"N d, Y" }}{% else %}&nbsp;{% endif %}</h4>
         {% if comment.content_object.uservideo_set.all|length > 0 %}
@@ -33,7 +33,7 @@
               {% for uv in comment.content_object.uservideo_set.all %}
               <li>
                 <a href="{% url 'profiles-home' uv.user.username %}">
-                  <img src="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle" />
+                  <img src="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
                 </a>
               </li>
               {% endfor %}
