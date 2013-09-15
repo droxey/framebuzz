@@ -30,10 +30,9 @@
                                         <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">{{ profile_user.username }}</a>
                                     </h1>
                                     {% if profile_user.get_profile %}
-                                        <h2>
-                                            {{ profile_user.get_profile.profile_details }}
-                                            {% if profile_user.get_profile.location %}<i>&bull;</i>{{ profile_user.get_profile.location }}{% endif %}
-                                        </h2>
+                                        {% spaceless %}
+                                        <h2>{{ profile_user.get_profile.profile_details }}{% if profile_user.get_profile.location %}<i>&bull;</i>{{ profile_user.get_profile.location }}{% endif %}</h2>
+                                        {% endspaceless %}
                                         <ul class="nav nav-tabs clearfix">
                                             <li class="home{% if not is_share %} active{% endif %}">
                                                 <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>

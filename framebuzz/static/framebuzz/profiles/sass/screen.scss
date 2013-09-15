@@ -45,7 +45,6 @@ img.img-circle {
 }
 
 #fb {
-    min-height: 964px;
     width: 100%;
 
     div.anystretch {
@@ -71,8 +70,7 @@ div.marketing-content {
         border-radius: 0;
         box-shadow: none;
         margin: 0;
-        min-height: 964px;
-        min-width: 1000px;
+        height: 100%;
         padding-bottom: 0;
         overflow: visible;
         
@@ -81,7 +79,7 @@ div.marketing-content {
             margin: 0 auto;
 
             div.background {
-                min-height: 964px;
+                height: 100%;
                 width: 100%;
 
                 #profile-container {
@@ -92,7 +90,6 @@ div.marketing-content {
                         background: rgba(0, 0, 0, 0.05);
                         box-shadow: -2px 0px 0px 3px rgba(0, 0, 0, 0.1);
                         float: left;
-                        min-height: 964px;
                         height: 100%;
                         margin-left: 8px;
                         padding: 27px 18px;
@@ -195,6 +192,11 @@ div.marketing-content {
                                 h2 {
                                     font: 300 23px/23px 'futura-pt-condensed';
                                     padding-bottom: 18px;
+
+                                    i {
+                                        position: relative;
+                                        top: 2px;
+                                    }
                                 } 
                             }
                         }
@@ -287,7 +289,7 @@ div.marketing-content {
                             li {
                                 @include border-radius(5px, 5px);
                                 box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
-                                background: #ddd;
+                                background: #f5f5f5;
                                 display: block;
                                 font-family: 'futura-pt-condensed';
                                 margin-bottom: 18px;
