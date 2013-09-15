@@ -88,10 +88,11 @@ div.marketing-content {
                     position: relative;
                     z-index: 1;
 
-                    nav {
+                    #profile-sections {
                         background: rgba(0, 0, 0, 0.05);
                         box-shadow: -2px 0px 0px 3px rgba(0, 0, 0, 0.1);
                         float: left;
+                        min-height: 964px;
                         height: 100%;
                         margin-left: 8px;
                         padding: 27px 18px;
@@ -103,24 +104,26 @@ div.marketing-content {
 
                             li {
                                 float: left;
-                                margin-left: 8px;
-                                padding: 9px 6px;
+                                padding: 9px 0 10px 0;
                                 width: auto;
 
                                 &.home, &.website { display: none; }
 
                                 a {
+                                    border: 1px solid transparent;
+                                    border-right: 1px solid rgba(255, 255, 255, 0.2);
                                     color: white;
                                     font: 300 14px/16px 'proxima-nova';
-                                    padding: 0;
+                                    padding: 0 11px;
+                                    text-align: center;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
                                     text-decoration: none;
+
 
                                     em { font-weight: 500; }
 
                                     &:hover, &:active, &:focus {
                                         background: none;
-                                        border: none;
                                         outline: 0 none;
                                         opacity: 1;
                                         @include single-transition(opacity 50ms ease-in);
@@ -130,9 +133,21 @@ div.marketing-content {
                                 &.active {
                                     a {
                                         background: none;
-                                        border: none;
                                         opacity: 1;
                                         @include single-transition(opacity 50ms ease-in);
+                                    }
+                                }
+
+                                &:first-child {
+                                    a {
+                                        padding-left: 0;
+                                    }
+                                }
+
+                                &:last-child {
+                                    a {
+                                        border-right: none;
+                                        padding-right: 0;
                                     }
                                 }
                             }
@@ -188,14 +203,56 @@ div.marketing-content {
                     div.tab-content {
                         float: left;
                         margin-left: 18px;
-                        margin-top: 18px;
+                        margin-top: 0px;
                         min-height: 455px;
-                        width: 748px;
+                        overflow: hidden;
+                        width: 670px;
+                        
+                        nav {
+                            ul.nav-pills {
+                                border-bottom: none;
+                                padding: 18px 5px;
+                                margin-bottom: 0;
 
+                                li {
+                                    margin-right: 18px;
+
+                                    a {
+                                        border-color: transparent !important;
+                                        color: rgba(255, 255, 255, 0.9);
+                                        font: 300 22px/30px 'futura-pt-condensed';
+                                        text-align: left;
+                                        text-decoration: none;
+                                        text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+
+                                        &:hover, &:focus, &:active {
+                                            
+                                        }
+                                    }
+                                }
+                            }
+
+                            .nav-pills > li > a {
+                                padding: 3px 9px;
+                            }
+
+                            .nav-pills > .active > a, 
+                            .nav-pills > .active > a:hover, 
+                            .nav-pills > .active > a:focus,
+                            .nav-pills > li > a:hover {
+                                background-color: rgba(0, 0, 0, 0.1);
+                                color: rgba(255, 255, 255, 1);
+                            }
+                        }
                     }
 
                     &.video {
-                        padding: 22px 25px;
+                        div.tab-content {
+                            padding: 18px 0;
+                            width: 748px;
+
+                            nav { display: none; }
+                        }
                     }
 
                     h1 {
@@ -228,10 +285,14 @@ div.marketing-content {
                     #following, #followers, #activity, #myfeed {
                         ul#feed {
                             li {
+                                @include border-radius(5px, 5px);
+                                box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
+                                background: #ddd;
                                 display: block;
                                 font-family: 'futura-pt-condensed';
                                 margin-bottom: 18px;
                                 padding: 5px;
+                                width: 96%;
 
                                 &:last-child {
                                     margin-bottom: 0;
@@ -370,6 +431,7 @@ div.marketing-content {
                         ul#feed {
                             li {
                                 div.user-wrapper {
+                                    padding: 9px;
                                     position: relative;
                                     height: 58px;
 
@@ -380,7 +442,7 @@ div.marketing-content {
                                     div.feed-header {
                                         float: left;
                                         position: relative;
-                                        width: 100%;
+                                        width: 87%;
                                         height: 100%;
 
                                         span.action {
@@ -798,6 +860,8 @@ div.marketing-content {
                     }
 
                     #share-container {
+                        padding: 0 5px;
+
                         #stats-container {
                             float: right;
                             margin-right: 0;
@@ -807,6 +871,7 @@ div.marketing-content {
                         #video-container {
                             @include border-radius(5px, 5px);
                             background: #dddddd;
+                            box-shadow: 0 0px 0 5px rgba(0, 0, 0, 0.1);
                             float: left;
                             padding: 5px;
                             margin-right: 18px;
@@ -814,7 +879,9 @@ div.marketing-content {
 
                             div.frame {
                                 @include border-radius(3px, 3px);
-                                background: white;
+                                background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+                                background-color: white;
+                       
                                 padding: 5px;
 
                                 iframe {

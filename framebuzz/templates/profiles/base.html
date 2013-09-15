@@ -16,33 +16,6 @@
             <div class="wrapper clearfix">
                 <div class="background">
                     <div id="profile-container" class="clearfix{% if is_share %} video{% endif %}">                        
-                        <nav class="hidden">
-                          <ul class="nav nav-tabs">
-                            {% ifequal request.user profile_user %}
-                                {% if is_share %}
-                                    <li class="active">
-                                        <a href="#share"><i class="icon-film"></i> Now Playing</a>
-                                    </li>
-                                {% endif %}
-                                <li>
-                                    <a class="tab-link" href="#myfeed" data-url="{% url 'profiles-feed' profile_user.username %}"><i class="icon-globe"></i> News Feed</a>
-                                </li>
-                                <li class="start {% if not is_share %} active{% endif %}">
-                                    <a class="tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a>
-                                </li>
-                                <li>
-                                    <a class="tab-link" href="#mysettings"><i class="icon-cog"></i> Profile Settings</a>
-                                </li>
-                            {% else %}
-                                <li{% if is_share %} class="active"{% endif %}>
-                                    <a href="#share"><i class="icon-film"></i> Now Playing</a>
-                                </li>
-                                <li{% if not is_share %} class="active"{% endif %}>
-                                    <a class="tab-link active" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}"><i class="icon-user"></i> Activity</a>
-                                </li>
-                            {% endifequal %}
-                          </ul>
-                        </nav>
                         <nav id="profile-sections" class="span4">
                             <div class="user-info clearfix">
                                 <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link avatar">
@@ -59,7 +32,7 @@
                                     {% if profile_user.get_profile %}
                                         <h2>
                                             {{ profile_user.get_profile.profile_details }}
-                                            {% if profile_user.get_profile.location %} &bull; {{ profile_user.get_profile.location }}{% endif %}
+                                            {% if profile_user.get_profile.location %}<i>&bull;</i>{{ profile_user.get_profile.location }}{% endif %}
                                         </h2>
                                         <ul class="nav nav-tabs clearfix">
                                             <li class="home{% if not is_share %} active{% endif %}">
@@ -83,7 +56,7 @@
                                                 <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link">
                                                     <em>{{ profile_videos|length }}</em>
                                                     <br>
-                                                    Library
+                                                    Video{{ profile_videos|length|pluralize }}
                                                 </a>
                                             </li>
                                             <li class="conversations">
@@ -112,6 +85,38 @@
                             {% endifequal %}
                         </nav>
                         <div class="tab-content span7">
+                            <nav>
+                                <ul class="nav nav-tabs nav-pills clearfix">
+                                    <li class="start {% if not is_share %} active{% endif %}">
+                                        <a class="tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}">Activity</a>
+                                    </li>
+                                    <li class="followers">
+                                        <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
+                                            Fans
+                                        </a>
+                                    </li>
+                                    <li class="following">
+                                        <a data-url="{% url 'profiles-following' profile_user.username %}" href="#following" class="tab-link">
+                                            Aficionados
+                                        </a>
+                                    </li>
+                                    <li class="videos">
+                                        <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link">
+                                            Videos
+                                        </a>
+                                    </li>
+                                    <li class="conversations">
+                                        <a data-url="{% url 'profiles-conversations' profile_user.username %}" href="#conversations" class="tab-link">
+                                            Comments
+                                        </a>
+                                    </li>
+                                    <li class="favorites">
+                                        <a data-url="{% url 'profiles-favorites' profile_user.username %}" href="#favorites" class="tab-link">
+                                            Favorites
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
                             <div class="tab-pane{% if not is_share %} active{% endif %}" id="activity"></div>
                             <div class="tab-pane" id="myfeed"></div>
                             <div class="tab-pane" id="mysettings"></div>

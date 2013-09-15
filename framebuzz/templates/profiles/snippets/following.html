@@ -1,6 +1,6 @@
 {% load i18n avatar_tags %}
 
-<ul id="feed" class="clearfix">
+<ul id="feed" class="grid clearfix">
   {% for username, follower_comments in following.items %}
     {% include "profiles/snippets/user.html" %}
   {% empty %}

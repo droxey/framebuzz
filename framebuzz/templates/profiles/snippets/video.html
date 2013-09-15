@@ -1,6 +1,6 @@
 {% load staticfiles avatar_tags %}
 
-<li>
+<li{% if page_obj and page_obj.object_list|length < 4 %} class="shown"{% endif %}>
   <div class="video-wrapper">
     {% if featured_video_ids %}
       {% if comment.content_object.id in featured_video_ids %}
