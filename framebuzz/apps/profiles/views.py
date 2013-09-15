@@ -63,7 +63,9 @@ def video_share(request, username=None, video_id=None):
     header['video'] = video
     header['is_share'] = True
     header['commenters'] = commenters
-    header['found_by'] = found_by
+    if len(found_by) > 0:
+        header['found_by'] = found_by[0].user
+
     return render_to_response(template,
                               header,
                               context_instance=RequestContext(request))

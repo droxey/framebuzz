@@ -211,10 +211,14 @@ div.marketing-content {
                         width: 670px;
                         
                         nav {
+                            width: 100%;
+
                             ul.nav-pills {
                                 border-bottom: none;
+                                float: left;
                                 padding: 18px 5px;
                                 margin-bottom: 0;
+                                width: 94%;
 
                                 li {
                                     margin-right: 18px;
@@ -231,6 +235,22 @@ div.marketing-content {
                                             
                                         }
                                     }
+                                }
+                            }
+
+                            a.add-video {
+                                color: rgba(255, 255, 255, 0.9);
+                                display: block;
+                                float: right;
+                                font-size: 25px;
+                                outline: 0;
+                                position: relative;
+                                right: 10px;
+                                top: 27px;
+                                width: 30px;
+
+                                &:hover, &:focus, &:active {
+                                    text-decoration: none;
                                 }
                             }
 
@@ -553,11 +573,12 @@ div.marketing-content {
 
                                 img.featured {
                                     left: -6px;
-                                    position: absolute;
-                                    top: -6px;
-                                    z-index: 20;
                                     height: 50px;
+                                    left: -1px;
+                                    position: absolute;
+                                    top: 0;
                                     width: 96px;
+                                    z-index: 20;
                                 }
 
                                 a.thumbnail-link {
@@ -930,6 +951,7 @@ div.marketing-content {
                                                     img.img-circle, a {
                                                         display: block;
                                                         height: 55px;
+                                                        margin: 0 auto;
                                                         text-align: center;
                                                     }
 

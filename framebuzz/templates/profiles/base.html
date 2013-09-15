@@ -53,9 +53,9 @@
                                             </li>
                                             <li class="videos">
                                                 <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link">
-                                                    <em>{{ profile_videos|length }}</em>
+                                                    <em>{{ profile_library|length }}</em>
                                                     <br>
-                                                    Video{{ profile_videos|length|pluralize }}
+                                                    Video{{ profile_library|length|pluralize }}
                                                 </a>
                                             </li>
                                             <li class="conversations">
@@ -79,12 +79,9 @@
                                     {% endif %}
                                 </div>
                             </div>
-                            {% ifequal request.user profile_user %}
-                                <a data-target="#add-framebuzz-modal" role="button" class="modal-button add-video" data-toggle="modal" class="add-video" title="Add FrameBuzz Video" href="{% url 'profiles-add-video' profile_user %}"><i class="icon-plus"></i></a>
-                            {% endifequal %}
                         </nav>
                         <div class="tab-content span7">
-                            <nav>
+                            <nav class="clearfix">
                                 <ul class="nav nav-tabs nav-pills clearfix">
                                     <li class="start {% if not is_share %} active{% endif %}">
                                         <a class="tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}">Activity</a>
@@ -115,6 +112,9 @@
                                         </a>
                                     </li>
                                 </ul>
+                            {% ifequal request.user profile_user %}
+                                <a data-target="#add-framebuzz-modal" role="button" class="modal-button add-video" data-toggle="modal" class="add-video" title="Add FrameBuzz Video" href="{% url 'profiles-add-video' profile_user %}"><i class="icon-plus-sign-alt"></i></a>
+                            {% endifequal %}
                             </nav>
                             <div class="tab-pane{% if not is_share %} active{% endif %}" id="activity"></div>
                             <div class="tab-pane" id="myfeed"></div>

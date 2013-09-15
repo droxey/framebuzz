@@ -22,7 +22,9 @@
                             <li class="user">
                                 {% if found_by %}
                                     <h2>Found By</h2>
-                                    <img src="{% avatar_url found_by 110 %}" alt="" height="55" width="55" class="img-circle" />
+                                    <a href="{% url 'profiles-home' found_by.username %}">
+                                        <img src="{% avatar_url found_by 110 %}" alt="" height="55" width="55" class="img-circle" />
+                                    </a>
                                 {% else %}
                                     <h2>Add to Library</h2>
                                     <a href="">
