@@ -1,53 +1,39 @@
 from django import forms
 from django.db import IntegrityError
-from timezone_field import TimeZoneFormField
 
-from framebuzz.apps.api.models import UserProfile, UserWebsite, UserVideo
+from framebuzz.apps.api.models import UserProfile, UserVideo
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 
 
 class UserProfileForm(forms.ModelForm):
-    latitude = forms.CharField(widget=forms.HiddenInput(), required=False)
-    longitude = forms.CharField(widget=forms.HiddenInput(), required=False)
-    bio = forms.CharField(label='About Me', widget=forms.Textarea, required=False)
-    #birthday = forms.DateField(widget=forms.DateInput(format = '%m/%d/%Y'), input_formats=('%m/%d/%Y',))
-    time_zone = TimeZoneFormField(required=False, label='Time Zone')
-    #website = forms.URLField(required=False, label='Website')
-    
+    pk = forms.IntegerField(required=True)
+    name = forms.CharField(max_length=15, required=True)
+    value = forms.CharField(max_length=500, required=True)
+
     class Meta:
         model = UserProfile
-        exclude = ('premium', 'websites', 'user', 'youtube_username', 'birthday', 'profession',)
-    
-    def __init__(self, *args, **kwargs ):
-        self.request = kwargs.pop('request')
-        super(UserProfileForm, self).__init__(*args, **kwargs)
-        if self.request.user.get_profile().get_default_website():
-            self.fields['website'].initial = self.request.user.get_profile().get_default_website().url
- 
+        fields = ('value', 'name', 'pk',)
+
     def save(self, commit=True):
-        user = self.request.user
-        
-        profile = user.get_profile()
-        profile.bio = self.cleaned_data.get('bio', None)
-        profile.time_zone = self.cleaned_data.get('time_zone', None)
-        latitude = self.cleaned_data.get('latitude', None)        
-        longitude = self.cleaned_data.get('longitude', None)
-        
-        if latitude and latitude is not None and latitude != '':
-            profile.latitude = float(latitude)
-        else:
-            profile.latitude = 0
-            
-        if longitude and longitude is not None and longitude != '':
-            profile.longitude = float(longitude)
-        else:
-            profile.longitude = 0
-        
-        profile.location = self.cleaned_data.get('location', None)
-        profile.birthday = self.cleaned_data.get('birthday', None)
-        profile.profession = self.cleaned_data.get('profession', None)
-        profile.user = user
+        pk = self.cleaned_data['pk']
+        name = self.cleaned_data['name']
+        value = self.cleaned_data['value']
+        profile = UserProfile.objects.get(pk=pk)
+
+        if name == 'bio':
+            profile.bio = value
+
+        if name == 'tagline':
+            profile.tagline = value
+
+        if name == 'display_name':
+            profile.display_name = value
+
+        if name == 'location':
+            profile.location = value
+
         profile.save()
+        return profile
 
 
 class AddVideoForm(forms.ModelForm):
@@ -58,23 +44,26 @@ class AddVideoForm(forms.ModelForm):
         fields = ('video_id', 'is_featured',)
         exclude = ('user', 'video',)
 
-    def __init__(self, *args, **kwargs ):
+    def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(AddVideoForm, self).__init__(*args, **kwargs)
-        self.fields['is_featured'].label = 'Feature this video on your profile?'
+        self.fields[
+            'is_featured'].label = 'Feature this video on your profile?'
 
     def clean(self):
         video_id = self.cleaned_data.get('video_id', None)
-        
+
         try:
             if video_id and self.request:
                 video, created = get_or_create_video(video_id)
                 user_video = UserVideo()
                 user_video.user = self.request.user
                 user_video.video = video
-                user_video.is_featured = self.cleaned_data.get('is_featured', False)
+                user_video.is_featured = self.cleaned_data.get(
+                    'is_featured', False)
                 user_video.save()
         except IntegrityError:
-            raise forms.ValidationError('This video is already in your library!')
-            
+            raise forms.ValidationError(
+                'This video is already in your library!')
+
         return self.cleaned_data

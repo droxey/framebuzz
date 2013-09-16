@@ -1,3 +1,5 @@
+import json
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -7,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.views.decorators.csrf import csrf_exempt
 
 from actstream import action
 from actstream.models import Action, followers, following
@@ -15,6 +18,7 @@ from templated_email import send_templated_mail
 
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
 from framebuzz.apps.api.backends.youtube import get_or_create_video
+from framebuzz.apps.api.utils import errors_to_json
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
@@ -255,6 +259,7 @@ def videos(request, username):
 
 
 @login_required
+@csrf_exempt
 def edit_profile(request, username):
     if username != request.user.username:
         return HttpResponseRedirect(
@@ -267,40 +272,29 @@ def edit_profile(request, username):
 
     if submitted:
         form = UserProfileForm(instance=profile,
-                               data=request.POST, request=request)
+                               data=request.POST)
         success = form.is_valid()
 
         if success:
             profile = form.save()
-            del request.session['user_timezone']
-
             action.send(
                 request.user, verb='updated profile',
                 action_object=request.user)
-            return HttpResponse()
-    else:
-        website = profile.get_default_website()
-        initial_dict = {
-            'bio': profile.bio,
-            'birthday': profile.birthday,
-            'time_zone': profile.time_zone,
-            'profession': profile.profession,
-            'location': profile.location,
-        }
-
-        if website:
-            initial_dict['website'] = website.url
-
-        form = UserProfileForm(initial=initial_dict, request=request)
-
-    profile_header = get_profile_header(username)
-    profile_header['form'] = form
-    profile_header['success'] = success
-    profile_header['submitted'] = submitted
-    profile_header['is_edit'] = True
-    return render_to_response('profiles/edit.html',
-                              profile_header,
-                              context_instance=RequestContext(request))
+            outbound_message = {
+                'msg': 'success',
+                'status': 'success',
+            }
+            return HttpResponse(json.dumps(outbound_message),
+                                content_type="application/json")
+        else:
+            errors = json.loads(errors_to_json(form.errors))
+            outbound_message = {
+                'msg': errors,
+                'status': 'error',
+            }
+            return HttpResponse(json.dumps(outbound_message),
+                                content_type="application/json")
+    return HttpResponse()
 
 
 @login_required

@@ -346,8 +346,8 @@ class UserWebsite(models.Model):
 '''
 watson.register(UserProfile,
                 UserProfileSearchAdapter,
-                fields=("bio", "user__username", "location", "profession",),
-                store=("bio", "user__username", "location", "profession",))
+                fields=("bio", "user__username", "location", "display_name", "tagline",),
+                store=("bio", "user__username", "location", "display_name", "tagline",))
 
 watson.register(Video,
                 VideoSearchAdapter,

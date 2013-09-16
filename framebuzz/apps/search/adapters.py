@@ -6,10 +6,10 @@ class UserProfileSearchAdapter(watson.SearchAdapter):
         then location/profession.
     '''
     def get_title(self, obj):
-        return obj.user.username
+        return obj.display_name or obj.user.username
 
     def get_description(self, obj):
-        return obj.bio or obj.user.username
+        return obj.bio or obj.tagline or ''
 
 
 class VideoSearchAdapter(watson.SearchAdapter):
