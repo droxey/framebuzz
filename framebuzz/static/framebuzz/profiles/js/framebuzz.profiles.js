@@ -113,11 +113,31 @@ var FrameBuzzProfile = (function($) {
         }
     }
 
+    function initToggleButtons() {
+        $('body').on('click', 'a.video-toggle-button', function(e) {
+            e.preventDefault();
+
+            var url = $(this).attr('href');
+            $.get(url, function(data) {
+                $('ul.nav-tabs a[href="' + currentTab + '"]').trigger('click');
+            });
+
+            return false;
+        });
+
+        $('body').on('click', '#follow_button, #unfollow_button', function () {
+            $.post($(this).attr("href"), {});
+            $(this).parent().find("#follow_button, #unfollow_button").toggle();
+            return false;
+        });
+    }
+
     return {
       init: function() {
         bindAddVideoModal();
         initTooltips();
         initEditables();
+        initToggleButtons();
 
         var activeTabUrl = $('ul.nav-tabs li.active a').attr('data-url');
         $('#activity').load(activeTabUrl, function(result) {
@@ -131,24 +151,6 @@ var FrameBuzzProfile = (function($) {
     };
 }(jQuery));
 
-
-//     // Toggle 'featured' / 'library' status.
-//     $('body').on('click', 'a.video-toggle-button', function(e) {
-//         e.preventDefault();
-
-//         var url = $(this).attr('href');
-//         $.get(url, function(data) {
-//             $('ul.nav-tabs a[href="' + currentTab + '"]').trigger('click');
-//         });
-
-//         return false;
-//     });
-
-//     $('body').on('click', '#follow_button, #unfollow_button', function () {
-//         $.post($(this).attr("href"), {});
-//         $(this).parent().find("#follow_button, #unfollow_button").toggle();
-//         return false;
-//     });
 
 //     $('#avatar').on('submit', 'form', function(e) {
 //         e.preventDefault();
@@ -180,29 +182,6 @@ var FrameBuzzProfile = (function($) {
 //                 }
 //             });
 //         }
-
-//         return false;
-//     });
-
-//     $('#edit').on('submit', 'form', function(e) {
-//         e.preventDefault();
-
-//         var postUrl = $(this).attr('action');
-//         var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
-//         var formData = $(this).serialize();
-
-//         $.post(postUrl, formData, function(data, textStatus, jqXHR) {
-//             if (data.length == 0) {
-//                 window.location.reload();
-//             }
-//             else {
-//                 var container = $('#edit');
-//                 container.fadeOut('fast', function() {
-//                     container.html(data);
-//                     container.fadeIn('fast');
-//                 });
-//             }
-//         });
 
 //         return false;
 //     });

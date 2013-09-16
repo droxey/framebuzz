@@ -93,19 +93,10 @@ div.marketing-content {
                         height: 100%;
                         margin-left: 8px;
                         min-height: 575px;
-                        padding: 27px 18px;
+                        padding: 27px 6px;
                         position: relative;
+                        width: 330px;
                         @include single-transition(background-color 10ms ease-out);
-
-                        &.edit:hover {
-                            background: rgba(0, 0, 0, 0.15);
-                            @include single-transition(background-color 10ms ease-in);
-
-                            a.edit-profile {
-                                opacity: 1;
-                                @include single-transition(opacity 15ms ease-in);
-                            }
-                        }
 
                         ul {
                             border-top: 1px solid rgba(255, 255, 255, 0.5);
@@ -124,7 +115,7 @@ div.marketing-content {
                                     border-right: 1px solid rgba(255, 255, 255, 0.2);
                                     color: white;
                                     font: 500 14px/16px 'proxima-nova';
-                                    padding: 0 10px;
+                                    padding: 0 6px;
                                     text-align: center;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
                                     text-decoration: none;
@@ -182,17 +173,18 @@ div.marketing-content {
                                     color: white;
                                     font: 500 30px/30px 'futura-pt-condensed';
                                     margin-bottom: 0;
-                                    padding-bottom: 3px;
+                                    padding: 0 6px 3px;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 
                                     a {
-                                        color: white;
+                                        span {
+                                            color: white;
+                                        }
                                     }
                                 }
 
                                 h2 a.editable,
                                 p.bio a.editable {
-                                    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
                                     color: white;
                                     outline: none;
 
@@ -202,44 +194,18 @@ div.marketing-content {
                                 }
 
                                 h1 {
-                                    text-align: center;
+                                    padding: 0 6px 10px;
+                                    position: relative;
+                                    width: 96%;
 
-                                    a {
-                                        border-bottom: none;
-                                        display: inline-block;
-                                        outline: none;
-                                        width: 44%;
+                                    span.username-field { float: left; }
 
-                                        &:hover, &:active, &:focus {
-                                            text-decoration: none;
-                                        }
-
-                                        &.location > span.editable-click {
-                                            float: left;
-                                            text-align: left;
-                                            border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-                                        }
-
-                                        &.display-name > span.editable-click { 
-                                            float: right;
-                                            text-align: right;
-                                            border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-                                        }
-                                    }
-
-                                    h1 > a {
-                                        border-bottom: none;
-                                    }
-
-                                    h1 > a > span.editable-click,
-                                    h2 > a > span.editable-click {
-                                        border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-                                    }
-
-                                    i {
-                                        padding: 0 6px;
-                                        position: relative;
-                                        top: -2px;
+                                    span.location-field { 
+                                        float: right;
+                                        font: 300 13px/13px 'proxima-nova';
+                                        position: absolute;
+                                        right: 4px;
+                                        top: 4px;
                                     }
                                 }   
 
@@ -259,13 +225,22 @@ div.marketing-content {
                                 h2 {
                                     font: italic 300 16px/16px 'proxima-nova';
                                     padding-bottom: 20px;
-                                    text-align: center;
+                                    
 
                                     i {
                                         position: relative;
                                         top: 2px;
                                     }
-                                } 
+                                }
+                            }
+                        }
+
+                        &.edit:hover {
+                            background: rgba(0, 0, 0, 0.15);
+                            @include single-transition(background-color 10ms ease-in);
+
+                            .editable {
+                                border-bottom: 1px dashed rgba(255, 255, 255, 0.5) !important;
                             }
                         }
                     }
@@ -339,7 +314,7 @@ div.marketing-content {
                     &.video {
                         div.tab-content {
                             padding: 18px 0;
-                            width: 748px;
+                            width: 810px;
 
                             nav { display: none; }
                         }
