@@ -1,4 +1,4 @@
-{% load avatar_tags comments %}
+{% load avatar_tags profile_tags comments %}
 
 {% regroup commenters by actor as commenter_list %}
 <div class="tab-pane active{% if not profile_user %} standalone{% endif %}" id="share">
@@ -42,7 +42,7 @@
                                     {% for commenter in commenter_list %}
                                         {% for item in commenter.list %}
                                             <li>
-                                                <a href="{% url 'profiles-home' item.username %}">
+                                                <a class="tooltip" data-placement="bottom" title="{{ item|display_name }}" href="{% url 'profiles-home' item.username %}">
                                                     <img src="{% avatar_url item 60 %}" alt="" height="30" width="30" class="img-circle" />
                                                 </a>
                                             </li>

@@ -1,5 +1,5 @@
 {% extends "marketing/base.html" %}
-{% load staticfiles compress avatar_tags activity_tags %}
+{% load staticfiles compress avatar_tags activity_tags profile_tags %}
 
 {% block title %}{{ profile_user.username }}'s Profile{% endblock %}
 
@@ -32,27 +32,19 @@
                                         <span class="username-field">
                                             {% if request.user.is_authenticated and profile_user.id == request.user.id %}
                                                 <a href="#" class="display-name clearfix">
-                                                    <span class="editable" data-name="name" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Display Name">
-                                                        {% if profile_user.get_profile.display_name %}
-                                                            {{ profile_user.display_name }}
-                                                        {% else %}
-                                                            {{ profile_user.username }}
-                                                        {% endif %}
+                                                    <span class="editable" data-placement="right" data-name="name" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Display Name">
+                                                        {{ profile_user|display_name }}
                                                     </span>
                                                 </a>
                                             {% else %}
-                                                {% if profile_user.get_profile.display_name %}
-                                                    {{ profile_user.display_name }}
-                                                {% else %}
-                                                    {{ profile_user.username }}
-                                                {% endif %}
+                                                {{ profile_user|display_name }}
                                             {% endif %}
                                         </span>
                                         <span class="location-field clearfix">
                                             <i class="icon-map-marker"></i>
                                             {% if request.user.is_authenticated and profile_user.id == request.user.id %}
                                                 <a href="#" class="location clearfix">
-                                                    <span class="editable" data-name="location" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Location">
+                                                    <span class="editable" data-placement="right" data-name="location" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Location">
                                                         {% if profile_user.get_profile.location %}
                                                             {{ profile_user.get_profile.location }}
                                                         {% else %}
@@ -72,7 +64,7 @@
                                         {% spaceless %}
                                         <h2>
                                             {% if request.user.is_authenticated and profile_user.id == request.user.id %}
-                                                &ldquo;<a href="#" data-name="tagline" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Tagline">{% if profile_user.get_profile.tagline %}{{ profile_user.get_profile.tagline }}{% else %}Add Tagline{% endif %}</a>&rdquo;
+                                                &ldquo;<a href="#" data-name="tagline" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-placement="right" data-title="Edit Tagline">{% if profile_user.get_profile.tagline %}{{ profile_user.get_profile.tagline }}{% else %}Add Tagline{% endif %}</a>&rdquo;
                                             {% else %}
                                                 {{ profile_user.get_profile.profile_details }}{% if profile_user.get_profile.location %}<i>&bull;</i>{{ profile_user.get_profile.location }}{% endif %}
                                             {% endif %}
@@ -179,14 +171,11 @@
                             </nav>
                             <div class="tab-pane{% if not is_share %} active{% endif %}" id="activity"></div>
                             <div class="tab-pane" id="myfeed"></div>
-                            <div class="tab-pane" id="mysettings"></div>
                             <div class="tab-pane" id="followers"></div>
                             <div class="tab-pane" id="following"></div>
                             <div class="tab-pane" id="conversations"></div>
                             <div class="tab-pane" id="favorites"></div>
                             <div class="tab-pane" id="videos"></div>
-                            <div class="tab-pane" id="edit"></div>
-                            <div class="tab-pane" id="avatar"></div>
                             {% block share_content %}{% endblock %}
                         </div>
                     </div>
