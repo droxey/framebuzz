@@ -5,6 +5,7 @@
 
 {% block page_css %}
     {% compress css %}
+        <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/bootstrap-editable.css' %}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" type="text/css" media="screen" />
     {% endcompress %}
     {% block extra_css %}{% endblock %}
@@ -16,7 +17,7 @@
             <div class="wrapper clearfix">
                 <div class="background">
                     <div id="profile-container" class="clearfix{% if is_share %} video{% endif %}">                        
-                        <nav id="profile-sections" class="span4">
+                        <nav id="profile-sections" class="span4{% if request.user.is_authenticated and profile_user.id == request.user.id %} edit{% endif %}">
                             <div class="user-info clearfix">
                                 <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link avatar">
                                     <img src="{% avatar_url profile_user 354 %}" alt="" height="177" width="177" class="img-circle" />
@@ -31,7 +32,21 @@
                                     </h1>
                                     {% if profile_user.get_profile %}
                                         {% spaceless %}
-                                        <h2>{{ profile_user.get_profile.profile_details }}{% if profile_user.get_profile.location %}<i>&bull;</i>{{ profile_user.get_profile.location }}{% endif %}</h2>
+                                        <h2>
+                                            {% if request.user.is_authenticated and profile_user.id == request.user.id %}
+                                                <a href="#" name="" class="editable" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="/post" data-title="Edit Age and Title">{{ profile_user.get_profile.profile_details }}</a>
+                                                <i>&bull;</i>
+                                                <a href="#" class="editable" name="location" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="/post" data-title="Edit Location">
+                                                    {% if profile_user.get_profile.location %}
+                                                        {{ profile_user.get_profile.location }}
+                                                    {% else %}
+                                                        Add Location
+                                                    {% endif %}
+                                                </a>
+                                            {% else %}
+                                                {{ profile_user.get_profile.profile_details }}{% if profile_user.get_profile.location %}<i>&bull;</i>{{ profile_user.get_profile.location }}{% endif %}
+                                            {% endif %}
+                                        </h2>
                                         {% endspaceless %}
                                         <ul class="nav nav-tabs clearfix">
                                             <li class="home{% if not is_share %} active{% endif %}">
@@ -72,9 +87,13 @@
                                                     Favorite{{ profile_favorites|length|pluralize }}
                                                 </a>
                                             </li>
-                                        </ul>
-                                        {% if profile_user.get_profile.bio %}
-                                            <p class="bio"><span class="corner"></span>&ldquo;{{ profile_user.get_profile.bio }}&rdquo;</p>
+                                        </ul>   
+                                        {% if request.user.is_authenticated and profile_user.id == request.user.id %}                                            
+                                            <p class="bio">&ldquo;<a href="#" name="bio" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="/post" data-title="Edit Bio">{% if profile_user.get_profile.bio %}{{ profile_user.get_profile.bio }}{% else %}Enter Bio{% endif %}</a>&rdquo;</p>
+                                        {% else %}
+                                            {% if profile_user.get_profile.bio %}
+                                                <p class="bio">&ldquo;{{ profile_user.get_profile.bio }}&rdquo;</p>
+                                            {% endif %}
                                         {% endif %}
                                     {% endif %}
                                 </div>
@@ -156,6 +175,7 @@
         <script src="{% static 'framebuzz/profiles/js/classie.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/AnimOnScroll.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/jquery.lazyload.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/js/bootstrap-editable.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/blur.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/framebuzz.profiles.js' %}"></script>

@@ -92,7 +92,20 @@ div.marketing-content {
                         float: left;
                         height: 100%;
                         margin-left: 8px;
+                        min-height: 575px;
                         padding: 27px 18px;
+                        position: relative;
+                        @include single-transition(background-color 10ms ease-out);
+
+                        &.edit:hover {
+                            background: rgba(0, 0, 0, 0.15);
+                            @include single-transition(background-color 10ms ease-in);
+
+                            a.edit-profile {
+                                opacity: 1;
+                                @include single-transition(opacity 15ms ease-in);
+                            }
+                        }
 
                         ul {
                             border-top: 1px solid rgba(255, 255, 255, 0.5);
@@ -115,7 +128,6 @@ div.marketing-content {
                                     text-align: center;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
                                     text-decoration: none;
-
 
                                     em { font-weight: 500; }
 
@@ -164,6 +176,11 @@ div.marketing-content {
 
                             div.user-details {
                                 padding: 9px 0 9px 0;
+
+                                a.editable {
+                                    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+                                    color: white;
+                                }
 
                                 h1, h2 {
                                     border-bottom: none;
@@ -893,7 +910,7 @@ div.marketing-content {
 
                         #video-container {
                             @include border-radius(5px, 5px);
-                            background: #dddddd;
+                            background: #f5f5f5;
                             box-shadow: 0 0px 0 5px rgba(0, 0, 0, 0.1);
                             float: left;
                             padding: 5px;

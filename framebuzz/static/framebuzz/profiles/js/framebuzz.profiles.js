@@ -95,6 +95,14 @@ var FrameBuzzProfile = (function($) {
         });
     }
 
+    function initTooltips() {
+        $('.tooltip').tooltip();
+    }
+
+    function initEditables() {
+        $('.editable').editable();
+    }
+
     function youtube_parser(url){
         var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
         var match = url.match(regExp);
@@ -108,6 +116,8 @@ var FrameBuzzProfile = (function($) {
     return {
       init: function() {
         bindAddVideoModal();
+        initTooltips();
+        initEditables();
 
         var activeTabUrl = $('ul.nav-tabs li.active a').attr('data-url');
         $('#activity').load(activeTabUrl, function(result) {

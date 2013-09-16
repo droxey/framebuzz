@@ -92,7 +92,7 @@ class UserProfile(models.Model):
             if _age is not None:
                 return str(_age)
 
-        return ''
+        return 'Add Your Age and Title'
 
     def __unicode__(self):
         return "%s's Profile" % self.user
