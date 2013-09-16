@@ -12,6 +12,8 @@ var FrameBuzzProfile = (function($) {
     }
 
     function bindTabs() {
+        bindScroll();
+
         $('body').on('click', 'a.tab-link', function(e) {
             e.preventDefault();
             if (currentTab == this.hash) { return; }
@@ -41,6 +43,7 @@ var FrameBuzzProfile = (function($) {
                     });
                 }
 
+                bindScroll();
                 triggerMasonry();
             });
         });
@@ -101,6 +104,28 @@ var FrameBuzzProfile = (function($) {
 
     function initEditables() {
         $('.editable').editable();
+    }
+
+    function bindScroll() {
+        if ($('ul.endless').length > 0) {
+            var grid = $('ul.endless'),
+                pages = parseInt(grid.attr('data-total-pages'));
+
+            $(window).paged_scroll({
+                handleScroll:function (page,container,doneCallback) {
+                    var nextPageUrl = grid.attr('data-next-url') + '?page=' + page;
+
+                    $.get(nextPageUrl, function(pageHtml) {
+                        grid.append(pageHtml);
+                        triggerMasonry();
+                    });
+                },
+                triggerFromBottom: '15%',
+                targetElement: grid,
+                loader:'<div class="loader">Loading next page ...</div>',
+                pagesToScroll: pages
+            });
+        }
     }
 
     function youtube_parser(url){

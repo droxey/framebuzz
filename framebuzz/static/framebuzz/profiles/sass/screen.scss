@@ -44,20 +44,6 @@ img.img-circle {
     @include single-box-shadow(rgba(0, 0, 0, 0.52), 1px, 1px, 3px);
 }
 
-#fb {
-    width: 100%;
-
-    div.anystretch {
-        background-color: #188bbe;
-
-        img {
-            left: 0px !important;
-            top: auto !important;
-            bottom: -5px !important;
-        }
-    }
-}
-
 div.marketing-content {
     background-color: rgb(169,228,247); // Old browsers
     @include filter-gradient(#a9e4f7, #2289ba, horizontal); // IE6-9 fallback on horizontal gradient
@@ -90,12 +76,9 @@ div.marketing-content {
                         background: rgba(0, 0, 0, 0.05);
                         box-shadow: -2px 0px 0px 3px rgba(0, 0, 0, 0.1);
                         float: left;
-                        height: 100%;
                         margin-left: 8px;
-                        min-height: 575px;
                         padding: 27px 6px;
-                        position: relative;
-                        width: 330px;
+                        width: 28%;
                         @include single-transition(background-color 10ms ease-out);
 
                         ul {
@@ -204,8 +187,20 @@ div.marketing-content {
                                         float: right;
                                         font: 300 13px/13px 'proxima-nova';
                                         position: absolute;
+                                        top: 2px;
                                         right: 4px;
-                                        top: 4px;
+
+                                        i.icon-map-marker {
+                                            font-size: 26px;
+                                            line-height: 30px;
+                                            padding-right: 3px;
+                                        }
+
+                                        a { 
+                                            float: right;
+                                            line-height: 30px;
+                                            font-weight: 500;
+                                        }
                                     }
                                 }   
 
@@ -246,10 +241,9 @@ div.marketing-content {
                     }
 
                     div.tab-content {
-                        float: left;
                         margin-left: 18px;
                         margin-top: 0px;
-                        min-height: 455px;
+                        float: left;
                         overflow: hidden;
                         width: 670px;
                         

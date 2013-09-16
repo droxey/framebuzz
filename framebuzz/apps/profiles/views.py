@@ -102,7 +102,12 @@ def activity(request, username):
                                     action_object_object_id=user.id).order_by('-timestamp')
     p = Paginator(actions, 12, request=request)
 
-    return render_to_response('profiles/snippets/activity.html', {
+    if request.is_ajax() and page > 1:
+        template = 'profiles/snippets/item.html'
+    else:
+        template = 'profiles/snippets/activity.html'
+
+    return render_to_response(template, {
                               'profile_user': user,
                               'page_obj': p.page(page),
                               }, context_instance=RequestContext(request))
@@ -162,7 +167,12 @@ def feed(request, username):
                                  ).order_by('-timestamp')
     p = Paginator(feed, 12, request=request)
 
-    return render_to_response('profiles/snippets/feed.html', {
+    if request.is_ajax() and page > 1:
+        template = 'profiles/snippets/item.html'
+    else:
+        template = 'profiles/snippets/feed.html'
+
+    return render_to_response(template, {
         'profile_user': user,
         'page_obj': p.page(page),
     }, context_instance=RequestContext(request))
@@ -184,7 +194,12 @@ def conversations(request, username):
     p = Paginator(conversations, 12, request=request)
     featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
 
-    return render_to_response('profiles/snippets/conversations.html', {
+    if request.is_ajax() and page > 1:
+        template = 'profiles/snippets/video.html'
+    else:
+        template = 'profiles/snippets/conversations.html'
+
+    return render_to_response(template, {
         'profile_user': user,
         'page_obj': p.page(page),
         'video_library_ids': [uv.video.id for uv in user_videos],
@@ -210,7 +225,12 @@ def favorites(request, username):
     p = Paginator(profile_favorites, 12, request=request)
     featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
 
-    return render_to_response('profiles/snippets/favorites.html', {
+    if request.is_ajax() and page > 1:
+        template = 'profiles/snippets/video.html'
+    else:
+        template = 'profiles/snippets/favorites.html'
+
+    return render_to_response(template, {
         'profile_user': user,
         'page_obj': p.page(page),
         'video_library_ids': [uv.video.id for uv in user_videos],
@@ -246,7 +266,12 @@ def videos(request, username):
     p = Paginator(video_comments, 12, request=request)
     featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
 
-    return render_to_response('profiles/snippets/videos.html', {
+    if request.is_ajax() and page > 1:
+        template = 'profiles/snippets/video.html'
+    else:
+        template = 'profiles/snippets/videos.html'
+
+    return render_to_response(template, {
         'profile_user': user,
         'page_obj': p.page(page),
         'is_adding_video': False,
