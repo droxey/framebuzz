@@ -27,22 +27,46 @@
                                     <a class="btn btn-success" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" id="follow_button" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>Follow</a>
                                 {% endifequal %}
                                 <div class="user-details">
+                                    {% spaceless %}
                                     <h1>
-                                        <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link">{{ profile_user.username }}</a>
-                                    </h1>
-                                    {% if profile_user.get_profile %}
-                                        {% spaceless %}
-                                        <h2>
-                                            {% if request.user.is_authenticated and profile_user.id == request.user.id %}
-                                                <a href="#" name="" class="editable" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="/post" data-title="Edit Age and Title">{{ profile_user.get_profile.profile_details }}</a>
-                                                <i>&bull;</i>
-                                                <a href="#" class="editable" name="location" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="/post" data-title="Edit Location">
+                                        {% if request.user.is_authenticated and profile_user.id == request.user.id %}
+                                            <a href="#" class="display-name clearfix">
+                                                <span class="editable" name="name" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="/post" data-title="Edit Display Name">
+                                                    {% if profile_user.get_profile.display_name %}
+                                                        {{ profile_user.display_name }}
+                                                    {% else %}
+                                                        {{ profile_user.username }}
+                                                    {% endif %}
+                                                </span>
+                                            </a>
+                                            <i>&bull;</i>
+                                            <a href="#" class="location clearfix">
+                                                <span class="editable" name="location" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="/post" data-title="Edit Location">
                                                     {% if profile_user.get_profile.location %}
                                                         {{ profile_user.get_profile.location }}
                                                     {% else %}
                                                         Add Location
                                                     {% endif %}
-                                                </a>
+                                                </span>
+                                            </a>
+                                        {% else %}
+                                            {% if profile_user.get_profile.display_name %}
+                                                {{ profile_user.display_name }}
+                                            {% else %}
+                                                {{ profile_user.username }}
+                                            {% endif %}
+                                            {% if profile_user.get_profile.bio %}
+                                                <i>&bull;</i>
+                                                {{ profile_user.get_profile.bio }}
+                                            {% endif %}
+                                        {% endif %}
+                                    </h1>
+                                    {% endspaceless %}
+                                    {% if profile_user.get_profile %}
+                                        {% spaceless %}
+                                        <h2>
+                                            {% if request.user.is_authenticated and profile_user.id == request.user.id %}
+                                                <a href="#" name="" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="/post" data-title="Edit Tagline">{% if profile_user.get_profile.tagline %}{{ profile_user.get_profile.tagline }}{% else %}Add Tagline{% endif %}</a>
                                             {% else %}
                                                 {{ profile_user.get_profile.profile_details }}{% if profile_user.get_profile.location %}<i>&bull;</i>{{ profile_user.get_profile.location }}{% endif %}
                                             {% endif %}
@@ -89,7 +113,7 @@
                                             </li>
                                         </ul>   
                                         {% if request.user.is_authenticated and profile_user.id == request.user.id %}                                            
-                                            <p class="bio">&ldquo;<a href="#" name="bio" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="/post" data-title="Edit Bio">{% if profile_user.get_profile.bio %}{{ profile_user.get_profile.bio }}{% else %}Enter Bio{% endif %}</a>&rdquo;</p>
+                                            <p class="bio">&ldquo;<a href="#" name="bio" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="/post" data-title="Edit Bio" data-placement="bottom">{% if profile_user.get_profile.bio %}{{ profile_user.get_profile.bio }}{% else %}Enter Bio{% endif %}</a>&rdquo;</p>
                                         {% else %}
                                             {% if profile_user.get_profile.bio %}
                                                 <p class="bio">&ldquo;{{ profile_user.get_profile.bio }}&rdquo;</p>

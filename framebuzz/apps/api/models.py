@@ -1,5 +1,5 @@
 import watson
-from datetime import datetime, date
+from datetime import datetime
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -16,7 +16,9 @@ from templated_email import send_templated_mail
 from timezone_field import TimeZoneField
 from mptt.models import MPTTModel, TreeForeignKey
 
-from framebuzz.apps.search.adapters import VideoSearchAdapter, CommentSearchAdapter, UserProfileSearchAdapter
+from framebuzz.apps.search.adapters import VideoSearchAdapter, \
+    CommentSearchAdapter, UserProfileSearchAdapter
+
 
 COMMENT_VISIBILITY_TIME_RANGE = 1
 TIMELINE_BLOCKS = 32
@@ -38,17 +40,14 @@ class Website(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    websites = models.ManyToManyField('UserWebsite', blank=True, null=True)
-    premium = models.BooleanField(default=False)
-    bio = models.CharField(max_length=180, blank=True, null=True)
+    bio = models.CharField(max_length=500, blank=True, null=True)
     time_zone = TimeZoneField(blank=True, null=True)
-    youtube_username = models.CharField(
-        max_length=255, blank=True, null=True, editable=False)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     location = models.CharField(max_length=255, null=True, blank=True)
     birthday = models.DateField(null=True, blank=True)
-    profession = models.CharField(max_length=255, null=True, blank=True)
+    tagline = models.CharField(max_length=180, null=True, blank=True)
+    display_name = models.CharField(max_length=120, null=True, blank=True)
 
     class Meta:
         verbose_name = 'User Profile'
@@ -56,43 +55,6 @@ class UserProfile(models.Model):
 
     def get_absolute_url(self):
         return reverse('profiles-home', args=[str(self.user.username)])
-
-    def get_default_website(self):
-        try:
-            user_website = self.websites.all()[0]
-            return user_website.website
-        except:
-            return None
-
-    def age(self):
-        if self.birthday:
-            today = date.today()
-            try:
-                bday = self.birthday.replace(year=today.year)
-            # raised when birth date is February 29 and the current year is not
-            # a leap year
-            except ValueError:
-                bday = self.birthday.replace(
-                    year=today.year, day=self.birthday.day - 1)
-            if bday > today:
-                return today.year - self.birthday.year - 1
-            else:
-                return today.year - self.birthday.year
-        return None
-
-    def profile_details(self):
-        _age = self.age()
-
-        if len(self.profession) is not None:
-            if _age is not None:
-                return '%s, %s' % (str(_age), self.profession)
-            else:
-                return self.profession
-        else:
-            if _age is not None:
-                return str(_age)
-
-        return 'Add Your Age and Title'
 
     def __unicode__(self):
         return "%s's Profile" % self.user

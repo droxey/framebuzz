@@ -177,22 +177,60 @@ div.marketing-content {
                             div.user-details {
                                 padding: 9px 0 9px 0;
 
-                                a.editable {
-                                    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-                                    color: white;
-                                }
-
                                 h1, h2 {
                                     border-bottom: none;
                                     color: white;
                                     font: 500 30px/30px 'futura-pt-condensed';
                                     margin-bottom: 0;
                                     padding-bottom: 3px;
-                                    text-align: center;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 
                                     a {
                                         color: white;
+                                    }
+                                }
+
+                                h2 a.editable,
+                                p.bio a.editable {
+                                    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+                                    color: white;
+                                    outline: none;
+
+                                    &:hover, &:active, &:focus {
+                                        text-decoration: none;
+                                    }
+                                }
+
+                                h1 {
+                                    text-align: center;
+
+                                    a {
+                                        border-bottom: none;
+                                        display: inline-block;
+                                        outline: none;
+                                        width: 44%;
+
+                                        &:hover, &:active, &:focus {
+                                            text-decoration: none;
+                                        }
+
+                                        &.location {
+                                            span { float: left; }
+                                        }
+
+                                        &.display-name {
+                                            span { float: right; }
+                                        }
+
+                                        span {
+                                            border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+                                        }
+                                    }
+
+                                    i {
+                                        padding: 0 6px;
+                                        position: relative;
+                                        top: -2px;
                                     }
                                 }   
 
@@ -204,11 +242,16 @@ div.marketing-content {
                                     padding: 9px 0 9px 0;
                                     text-align: center;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+
+                                    a.editable {
+                                        line-height: 22px;
+                                    }
                                 }
 
                                 h2 {
                                     font: 300 23px/23px 'futura-pt-condensed';
                                     padding-bottom: 18px;
+                                    text-align: center;
 
                                     i {
                                         position: relative;
