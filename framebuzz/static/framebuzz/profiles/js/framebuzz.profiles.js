@@ -114,6 +114,7 @@ var FrameBuzzProfile = (function($) {
 
             $(window).paged_scroll({
                 handleScroll:function (page,container,doneCallback) {
+                    page = page + 1;
                     var nextPageUrl = currentPageUrl + '?page=' + page;
 
                     $.get(nextPageUrl, function(pageHtml) {
