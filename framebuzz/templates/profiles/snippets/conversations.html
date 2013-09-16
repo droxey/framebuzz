@@ -2,14 +2,6 @@
 
 <div class="pagination-page">
   <ul id="feed" class="endless grid profile-conversations clearfix" data-next-url="{% url 'profiles-conversations' profile_user.username %}" data-total-pages="{{ page_obj.pages|length }}">
-    {% for comment in page_obj.object_list %}
-      {% include "profiles/snippets/video.html" %}
-      {% empty %}
-          <li class="empty">
-            <div class="alert alert-info">
-              <strong>{{ profile_user.username }}</strong> hasn't participated in any conversations yet!
-            </div>
-          </li>
-      {% endfor %}
+  {% include "profiles/snippets/video.html" %}
   </ul>
 </div>

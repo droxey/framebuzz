@@ -1,13 +1,5 @@
 {% load avatar_tags %}
 
 <ul class="grid profile-conversations endless clearfix" data-next-url="{% url 'profiles-videos' profile_user.username %}" data-total-pages="{{ page_obj.pages|length }}">
-  {% for comment in page_obj.object_list %}
     {% include "profiles/snippets/video.html" %}
-    {% empty %}
-        <li class="empty">
-          <div class="alert alert-info">
-            <strong>{{ profile_user.username }}</strong> hasn't added any videos to their library yet!
-          </div>
-        </li>
-    {% endfor %}
 </ul>

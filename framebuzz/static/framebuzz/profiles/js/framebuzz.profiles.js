@@ -107,22 +107,23 @@ var FrameBuzzProfile = (function($) {
     }
 
     function bindScroll() {
-        if ($('ul.endless').length > 0) {
-            var grid = $('ul.endless'),
+        var targetElement = $('#profile-container div.tab-content div.tab-pane.active');
+        if ($('ul.endless', targetElement).length > 0) {
+            var grid = $('ul.endless', targetElement),
                 pages = parseInt(grid.attr('data-total-pages'));
 
             $(window).paged_scroll({
                 handleScroll:function (page,container,doneCallback) {
-                    var nextPageUrl = grid.attr('data-next-url') + '?page=' + page;
+                    var nextPageUrl = currentPageUrl + '?page=' + page;
 
                     $.get(nextPageUrl, function(pageHtml) {
                         grid.append(pageHtml);
                         triggerMasonry();
                     });
                 },
-                triggerFromBottom: '15%',
-                targetElement: grid,
-                loader:'<div class="loader">Loading next page ...</div>',
+                triggerFromBottom: '10%',
+                targetElement: targetElement,
+                loader:'<div class="loader">Loading next page&hellip;</div>',
                 pagesToScroll: pages
             });
         }
@@ -164,8 +165,8 @@ var FrameBuzzProfile = (function($) {
         initEditables();
         initToggleButtons();
 
-        var activeTabUrl = $('ul.nav-tabs li.active a').attr('data-url');
-        $('#activity').load(activeTabUrl, function(result) {
+        currentPageUrl = $('ul.nav-tabs li.active a').attr('data-url');
+        $('#activity').load(currentPageUrl, function(result) {
             $('ul.nav-tabs').tab('show');
             $('#profile-container ul.nav-tabs li.start').addClass('active');
 
