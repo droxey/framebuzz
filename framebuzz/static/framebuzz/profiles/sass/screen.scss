@@ -123,13 +123,13 @@ div.marketing-content {
                                     border: 1px solid transparent;
                                     border-right: 1px solid rgba(255, 255, 255, 0.2);
                                     color: white;
-                                    font: 300 14px/16px 'proxima-nova';
-                                    padding: 0 11px;
+                                    font: 500 14px/16px 'proxima-nova';
+                                    padding: 0 10px;
                                     text-align: center;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
                                     text-decoration: none;
 
-                                    em { font-weight: 500; }
+                                    em { font-weight: 700; }
 
                                     &:hover, &:active, &:focus {
                                         background: none;
@@ -214,17 +214,26 @@ div.marketing-content {
                                             text-decoration: none;
                                         }
 
-                                        &.location {
-                                            span { float: left; }
-                                        }
-
-                                        &.display-name {
-                                            span { float: right; }
-                                        }
-
-                                        span {
+                                        &.location > span.editable-click {
+                                            float: left;
+                                            text-align: left;
                                             border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
                                         }
+
+                                        &.display-name > span.editable-click { 
+                                            float: right;
+                                            text-align: right;
+                                            border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+                                        }
+                                    }
+
+                                    h1 > a {
+                                        border-bottom: none;
+                                    }
+
+                                    h1 > a > span.editable-click,
+                                    h2 > a > span.editable-click {
+                                        border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
                                     }
 
                                     i {
@@ -236,7 +245,6 @@ div.marketing-content {
 
                                 p.bio {
                                     border-top: 1px solid rgba(255, 255, 255, 0.5);
-                                    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
                                     color: white;
                                     font: 300 14px/17px 'proxima-nova';
                                     padding: 9px 0 9px 0;
@@ -249,8 +257,8 @@ div.marketing-content {
                                 }
 
                                 h2 {
-                                    font: 300 23px/23px 'futura-pt-condensed';
-                                    padding-bottom: 18px;
+                                    font: italic 300 16px/16px 'proxima-nova';
+                                    padding-bottom: 20px;
                                     text-align: center;
 
                                     i {
