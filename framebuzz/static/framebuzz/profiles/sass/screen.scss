@@ -235,6 +235,43 @@ div.marketing-content {
                             }
                         }
 
+                        div.feeds {
+                            margin-top: 18px;
+
+                            p {
+                                margin-bottom: 9px;
+
+
+                                    i.icon-rss-sign {
+                                        color: white;
+                                        font-size: 20px;
+                                        line-height: 20px;
+                                        padding-right: 3px;
+                                        text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+                                        position: relative;
+                                        top: 2px;
+                                    }
+
+                                a {
+                                    border: 1px solid transparent;
+                                    color: white;
+                                    font: 500 14px/20px 'proxima-nova';
+                                    text-align: center;
+                                    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+                                    text-decoration: none;
+
+                                    &:hover, &:active, &:focus {
+                                        border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+                                        background: none;
+                                        outline: 0 none;
+                                        opacity: 1;
+                                        text-decoration: none;
+                                        @include single-transition(opacity 50ms ease-in);
+                                    }
+                                }
+                            }
+                        }
+
                         &.edit:hover {
                             background: rgba(0, 0, 0, 0.15);
                             @include single-transition(background-color 10ms ease-in);

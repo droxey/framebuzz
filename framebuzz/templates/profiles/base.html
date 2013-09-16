@@ -128,6 +128,18 @@
                                     {% endif %}
                                 </div>
                             </div>
+                            {% ifequal request.user profile_user %}
+                                <div class="feeds">
+                                    <p>
+                                        <i class="icon-rss-sign"></i> 
+                                        <a href="{% url 'actstream_object_feed' content_type_id=user_content_type.pk  object_id=profile_user.pk %}" target="_blank">Activity Feed (RSS)</a>
+                                    </p>
+                                    <p>
+                                        <i class="icon-rss-sign"></i> 
+                                        <a href="{% url 'actstream_object_feed_atom' content_type_id=user_content_type.pk object_id=profile_user.pk %}" target="_blank">Activity Feed (ATOM)</a>
+                                    </p>
+                                </div>
+                            {% endifequal %}
                         </nav>
                         <div class="tab-content span7">
                             <nav class="clearfix">
