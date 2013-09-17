@@ -1,7 +1,7 @@
 {% extends "marketing/base.html" %}
 {% load staticfiles compress avatar_tags activity_tags profile_tags %}
 
-{% block title %}{{ profile_user.username }}'s Profile{% endblock %}
+{% block title %}{{ profile_user|display_name }}'s Profile{% endblock %}
 
 {% block page_css %}
     {% compress css %}

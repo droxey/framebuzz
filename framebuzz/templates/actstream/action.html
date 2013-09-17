@@ -1,4 +1,4 @@
-{% load i18n profile_tags %}
+{% load i18n profile_tags avatar_tags %}
 
 {% spaceless %}
     <a href="{{ action.actor.get_profile.get_absolute_url }}">{{ action.actor|display_name }}</a>
@@ -13,6 +13,16 @@
     {% elif action.verb == 'added video to library' %}
         added <a href="{% url 'profiles-video' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a> to library
     {% else %}
-        added <a href="{{ action.target.get_profile.get_absolute_url }}">{{ action.target|display_name }}</a> to aficionados.
+        added <a href="{{ action.target.get_profile.get_absolute_url }}">{{ action.target|display_name }}</a> to aficionados:
+        <p class="follow clearfix">
+            <span class="icon-stack">
+                <i class="icon-user icon-2x pull-left icon-muted"></i>
+                <i class="icon-plus icon-2x pull-left icon-muted"></i>
+            </span>
+            <a href="{{ action.target.get_profile.get_absolute_url }}">
+                <img src="{% avatar_url action.target 110 %}" alt="" height="30" width="30" class="img-circle" />
+                <span>{{ action.target|display_name }}</span>
+            </a>
+        </p>
     {% endif %}
 {% endspaceless %}

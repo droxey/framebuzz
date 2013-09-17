@@ -79,10 +79,10 @@
       </div>
     </div>
   </li>
-  {% empty %}
-      <li class="shown empty">
-        <div class="alert alert-info">
-          <strong>{{ profile_user|display_name }}</strong> {{ error }}
-        </div>
-      </li>
-  {% endfor %}
+{% empty %}
+    <li class="shown empty">
+      <div class="alert alert-info">
+        <strong>{{ profile_user|display_name }}</strong> {{ error }}
+      </div>
+    </li>
+{% endfor %}
