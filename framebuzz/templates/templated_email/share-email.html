@@ -1,3 +1,4 @@
+{% load profile_tags %}
 {% extends "templated_email/base.html" %}
 
 {% block email_recipient %}
@@ -5,5 +6,12 @@
 {% endblock %}
 
 {% block email_message %}
-    Hey, I’m watching <b>{{ video.title }}</b> and talking about it with <a href="http://{{ site.domain }}" style="color: #0C94C8;">FrameBuzz</a>. Come watch it with me at <a href="http://{{ site.domain }}{{ video.get_share_url }}" style="color: #0C94C8;">{{ video.title }}</a>.
+    {% if shared_by %}
+        <b>{{ shared_by|display_name }}</b> shared a video with you on FrameBuzz!<br><br>
+        Hey, I’m watching <b>{{ video.title }}</b> and talking about it with <a href="http://{{ site.domain }}{% url 'profiles-share' shared_by.username video.video_id %}" style="color: #0C94C8;">FrameBuzz</a>. Come watch it with me at <a href="http://{{ site.domain }}{{ video.get_share_url }}" style="color: #0C94C8;">{{ video.title }}</a>.
+        }
+    {% else %}
+        Hey, I’m watching <b>{{ video.title }}</b> and talking about it with <a href="http://{{ site.domain }}" style="color: #0C94C8;">FrameBuzz</a>. Come watch it with me at <a href="http://{{ site.domain }}{{ video.get_share_url }}" style="color: #0C94C8;">{{ video.title }}</a>.
+        }
+    {% endif %}
 {% endblock %}

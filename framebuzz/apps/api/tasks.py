@@ -33,7 +33,7 @@ def construct_message(event_type, channel, data):
 def _send_to_channel(channel, message):
     logger = _send_to_channel.get_logger()
     logger.info('Sending message to channel %s' % channel)
-    
+
     r = redis.StrictRedis(host='localhost', port=6379, db=0)
     response = json.dumps(message)
     r.publish(channel, response)
@@ -55,7 +55,7 @@ def message_outbound(message):
     }
     """
     channel = message.get(CHANNEL_KEY, None)
-    _send_to_channel.delay(channel = channel, message = message)
+    _send_to_channel.delay(channel=channel, message=message)
 
 
 @celery.task
@@ -74,6 +74,7 @@ def get_user_by_session_key(session_key, extra_context=None):
         extra_context['user'] = user
         return extra_context
     return user
+
 
 @celery.task
 def initialize_video_player(context):
@@ -108,14 +109,16 @@ def initialize_video_player(context):
     logger.info(video_id)
 
     # Get Video.
-    video = Video.objects.get(video_id=video_id) 
-    threads = MPTTComment.objects.filter(object_pk=video.id, is_removed=False, parent=None).order_by('-time')
+    video = Video.objects.get(video_id=video_id)
+    threads = MPTTComment.objects.filter(object_pk=video.id,
+                                         is_removed=False,
+                                         parent=None).order_by('-time')
     videoSerializer = VideoSerializer(video)
     videoSerialized = JSONRenderer().render(videoSerializer.data)
-    threadsSerializer = MPTTCommentSerializer(threads, context={ 'user': user })
+    threadsSerializer = MPTTCommentSerializer(threads, context={'user': user})
     threadsSerialized = JSONRenderer().render(threadsSerializer.data)
 
-    data = { }
+    data = {}
     data['video'] = json.loads(videoSerialized)
     data['heatmap'] = video.heatmap()
     data['threads'] = json.loads(threadsSerialized)
@@ -129,6 +132,7 @@ def initialize_video_player(context):
         data['user'] = {}
 
     return construct_message('FB_INITIALIZE_VIDEO', channel, data)
+
 
 @celery.task
 def post_new_comment(context):
@@ -466,13 +470,16 @@ def email_share(context):
     video_id = context.get('video_id', None)
     video = Video.objects.get(video_id=video_id)
     share_with_email = context_data.get('shareWithEmail', None)
+    shared_by = None
 
     if context_data.get('username', None):
         user = auth.models.User.objects.get(username=context_data['username'])
     else:
         user = context.get('user', None)
 
-    action.send(user, verb='shared', action_object=video)
+    if user and not isinstance(user, auth.models.AnonymousUser):
+        action.send(user, verb='shared', action_object=video)
+        shared_by = user
 
     if share_with_email:
         send_templated_mail(
@@ -482,8 +489,10 @@ def email_share(context):
             context={
                 'shared_by': user,
                 'video': video,
-                'site': Site.objects.get_current()
+                'site': Site.objects.get_current(),
+                'shared_by': shared_by,
             })
+
 
 @celery.task
 def add_to_library(context):
