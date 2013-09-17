@@ -170,7 +170,7 @@ def post_new_comment(context):
             threadSerialized = JSONRenderer().render(threadSerializer.data)
             return_data['thread'] = json.loads(threadSerialized)
         else:
-            action.send(user, verb='replied to comment', action_object=comment.parent, target=video)
+            action.send(user, verb='replied to comment', action_object=comment, target=video)
 
             # Send a notification to the thread's owner that someone has replied to their comment.
             if comment.parent.user.id != user.id:

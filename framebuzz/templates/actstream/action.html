@@ -1,0 +1,30 @@
+{% load i18n profile_tags %}
+
+{% spaceless %}
+    <a href="{{ action.actor.get_profile.get_absolute_url }}">{{ action.actor|display_name }}</a>
+    {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
+        {{ action.verb }}
+        <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a>:
+        <p><i class="icon-quote-left icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
+    {% elif action.verb == 'added to favorites' %}
+        added <a href="{{ action.action_object.get_profile.get_absolute_url }}">{{ action.action_object.user|display_name }}</a>'s comment on
+        <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a> to favorites:
+        <p><i class="icon-heart icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
+    {% elif action.verb == 'added video to library' %}
+        added <a href="{% url 'profiles-video' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a> to library
+    {% endif %}
+    {% comment %}
+    {% if action.action_object %}
+        {% if action.action_object.video_id %}
+        <a href="{% url 'profiles-share' action.actor.username action.action_object.video_id %}">
+            {{ action.action_object.title|title }}
+        </a>
+        {% else %}<a href="{{ action.target_url }}">{{ action.action_object }}</a>{% endif %}
+    {% endif %}
+    {% if action.action_object and action.target %}to{% endif %}
+    {% if action.target %}
+        {% if action.target.get_absolute_url %}<a href="{{ action.target.get_absolute_url }}">{{ action.target }}</a>
+        {% else %}<a href="{{ action.target_url }}">{{ action.target }}</a>{% endif %}
+    {% endif %}
+    {% endcomment %}
+{% endspaceless %}

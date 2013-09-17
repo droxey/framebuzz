@@ -1,4 +1,4 @@
-{% load i18n avatar_tags %}
+{% load i18n avatar_tags activity_tags %}
 
 {% if page_obj.object_list %}
   {% for action in page_obj.object_list %}
@@ -8,33 +8,9 @@
             <img src="{% avatar_url action.actor 64 %}" alt="" height="32" width="32" class="img-circle lazy" />
           </a>
           <div class="feed-header clearfix">
-            <span class="action">
-              <a href="{% url 'profiles-home' action.actor.username %}"><strong>{{ action.actor.username }}</strong></a>
-              {{ action.verb }}
-              {% if action.action_object %}
-                {% spaceless %}
-                  {% if action.action_object.get_share_url %}
-                    {% if action.action_object.video_id %}
-                      <a href="{% url 'profiles-share' action.actor.username action.action_object.video_id %}{% if action.action_object.get_player_url %}{{ action.action_object.get_player_url }}{% endif %}">{{ action.action_object }}</a>
-                    {% else %}
-                      <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}{% if action.action_object.get_player_url %}{{ action.action_object.get_player_url }}{% endif %}">{{ action.action_object }}</a>
-                    {% endif %}
-                  {% else %}
-                    <a href="{{ action.target_url }}">{{ action.action_object }}</a>
-                  {% endif %}
-                {% endspaceless %}
-              {% endif %}
-              {% if action.action_object and action.target %}on{% endif %}
-              {% if action.target %}
-                {% spaceless %}
-                  {% if action.target.get_share_url %}
-                    <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}{% if action.target.get_player_url %}{{ action.target.get_player_url }}{% endif %}">{{ action.target }}</a>
-                  {% else %}
-                    <a href="{{ action.target_url }}">{{ action.target }}</a>
-                  {% endif %}
-                {% endspaceless %}
-              {% endif %}
-            </span>
+            <div class="action">
+              {% display_action action %}
+            </div>
             <h3>{{ action.timestamp|timesince }} {% trans "ago" %}</h3>
           </div>
         </div>

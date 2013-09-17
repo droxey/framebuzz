@@ -29,7 +29,7 @@
                                         <span class="username-field">
                                             {% if request.user.is_authenticated and profile_user.id == request.user.id %}
                                                 <a href="#" class="display-name clearfix">
-                                                    <span class="editable" data-placement="right" data-name="name" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Display Name">
+                                                    <span class="editable" data-placement="right" data-name="display_name" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Display Name">
                                                         {{ profile_user|display_name }}
                                                     </span>
                                                 </a>

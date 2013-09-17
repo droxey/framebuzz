@@ -108,7 +108,7 @@ def activity(request, username):
 
     user = User.objects.get(username__iexact=username)
     actions = Action.objects.filter(verb__in=VALID_FEED_VERBS,
-                                    action_object_object_id=user.id).order_by('-timestamp')
+                                    actor_object_id=user.id).order_by('-timestamp')
     p = Paginator(actions, 12, request=request)
 
     if request.is_ajax() and page > 1:
