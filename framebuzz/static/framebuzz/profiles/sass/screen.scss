@@ -13,6 +13,12 @@
  *      Mixins
  */
 
+ body {
+    background-color: rgb(169,228,247); // Old browsers
+    @include filter-gradient(#a9e4f7, #2289ba, horizontal); // IE6-9 fallback on horizontal gradient
+    @include background-image(radial-gradient(center, ellipse cover, rgba(169,228,247,1) 0%,rgba(34,137,186,1) 100%));
+ }
+
 @mixin background-image-retina($file, $type, $width, $height) {
   background-image: url($file + '.' + $type);
 
@@ -55,8 +61,7 @@ div.marketing-content {
     background-color: rgb(169,228,247); // Old browsers
     @include filter-gradient(#a9e4f7, #2289ba, horizontal); // IE6-9 fallback on horizontal gradient
     @include background-image(radial-gradient(center, ellipse cover, rgba(169,228,247,1) 0%,rgba(34,137,186,1) 100%));
-
-
+    
     div.content {
         background: none;
         border: 0;
