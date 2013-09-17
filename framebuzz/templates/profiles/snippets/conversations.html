@@ -1,7 +1,5 @@
 {% load avatar_tags %}
 
-<div class="pagination-page">
   <ul id="feed" class="endless grid profile-conversations clearfix" data-next-url="{% url 'profiles-conversations' profile_user.username %}" data-total-pages="{{ page_obj.pages|length }}">
   {% include "profiles/snippets/video.html" %}
   </ul>
-</div>

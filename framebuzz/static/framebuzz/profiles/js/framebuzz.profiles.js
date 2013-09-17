@@ -140,10 +140,12 @@ var FrameBuzzProfile = (function($) {
 
             $(window).paged_scroll({
                 handleScroll:function (page,container,doneCallback) {
+                    console.log(page);
+                    
                     page = page + 1;
                     var nextPageUrl = currentPageUrl + '?page=' + page;
 
-                    if (page < pages) {
+                    if (page <= pages) {
                         $.get(nextPageUrl, function(pageHtml) {
                             grid.append(pageHtml);
                             triggerMasonry();
@@ -205,6 +207,7 @@ var FrameBuzzProfile = (function($) {
         initTooltips();
         initEditables();
         initToggleButtons();
+        bindTabs();
 
         isShare = $('#share').length > 0;
         if (isShare && currentTab == '#videos') {
@@ -227,7 +230,6 @@ var FrameBuzzProfile = (function($) {
                 $('#share').addClass('fadein');      
             }
 
-            bindTabs();
             triggerMasonry();
         });
       }
