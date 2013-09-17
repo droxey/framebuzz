@@ -348,6 +348,7 @@ def add_video_to_library(request, username):
         success = form.is_valid()
 
         if success:
+            request.session['show_new_video'] = True
             return HttpResponse()
     else:
         form = AddVideoForm(request=request)

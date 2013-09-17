@@ -10,6 +10,10 @@ var FrameBuzzProfile = (function($) {
             maxDuration : 0.7,
             viewportFactor : 0.2
         } );
+
+        setTimeout( function() {
+            $( window ).trigger( 'scroll' );
+        }, 50 );
     }
 
     function bindTabs() {
@@ -46,7 +50,6 @@ var FrameBuzzProfile = (function($) {
                 }
 
                 pane.tab('show');
-
                 $('a[href="' + currentTab + '"]').parent().addClass('active');
 
                 if (currentTab == '#avatar') {
@@ -99,6 +102,8 @@ var FrameBuzzProfile = (function($) {
                             $('div.tab-pane').removeClass('active');
                             $('#videos').addClass('active');
 
+                            $('#share').addClass('fadein');
+
                             $('#add-framebuzz-modal').modal('hide');
                         });
                     }
@@ -143,10 +148,6 @@ var FrameBuzzProfile = (function($) {
                 loader:'<div class="loader">Loading next page&hellip;</div>',
                 pagesToScroll: pages
             });
-
-            setTimeout( function() {
-                $( window ).trigger( 'scroll' );
-            }, 200 );
         }
     }
 
