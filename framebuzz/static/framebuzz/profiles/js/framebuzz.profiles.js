@@ -140,8 +140,6 @@ var FrameBuzzProfile = (function($) {
 
             $(window).paged_scroll({
                 handleScroll:function (page,container,doneCallback) {
-                    console.log(page);
-                    
                     page = page + 1;
                     var nextPageUrl = currentPageUrl + '?page=' + page;
 
