@@ -771,6 +771,12 @@ div.marketing-content {
                         margin-top: 36px;
 
                         a.add-video { right: 3px; }
+
+                        ul#feed {
+                            li {
+                                position: static !important;
+                            }
+                        }
                     }
 
                     ul.grid > li {
@@ -826,7 +832,7 @@ div.marketing-content {
                         box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
                         float: left;
                         margin-right: 18px;
-                        width: 303px;
+                        width: 47%;
                         margin-bottom: 18px;
                         padding: 5px;
                         position: relative;
@@ -837,8 +843,16 @@ div.marketing-content {
                             min-height: 290px;
 
                             div.video-wrapper { min-height: 290px; }
-                            div.video-wrapper div.video-details div.shared ul li { min-height: 34px !important; }
-                            div.video-wrapper div.video-actions ul li { min-height: 25px !important; }
+
+                            div.video-wrapper div.video-details div.shared ul li { 
+                                position: static !important; 
+                                min-height: 34px !important;
+                            }
+
+                            div.video-wrapper div.video-actions ul li {
+                                position: static !important;
+                                min-height: 25px !important;
+                            }
                         }
                     }
 
