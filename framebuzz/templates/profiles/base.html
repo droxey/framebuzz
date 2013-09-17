@@ -162,14 +162,14 @@
                                     <a data-target="#add-framebuzz-modal" role="button" class="modal-button add-video tooltip" data-toggle="modal" class="add-video" title="Add FrameBuzz Video" data-placement="right" href="{% url 'profiles-add-video' profile_user %}"><i class="icon-plus-sign-alt"></i></a>
                                 {% else %}
                                     {% if request.user.is_authenticated %}
-                                        <a class="toggle-follow unfollow-button tooltip" title="Become an Aficionado" data-placement="right" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>
+                                        <a class="toggle-follow unfollow-button tooltip" title="Remove from Fans" data-placement="right" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>
                                           <span class="icon-stack">
                                             <i class="icon-sign-blank icon-stack-base"></i>
                                             <i class="icon-user icon-light"></i>
                                             <i class="icon-minus icon-light"></i>
                                           </span>            
                                         </a>
-                                        <a class="toggle-follow follow-button tooltip" title="Remove from Aficionados" data-placement="right" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>
+                                        <a class="toggle-follow follow-button tooltip" title="Add to Fans" data-placement="right" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>
                                           <span class="icon-stack">
                                             <i class="icon-sign-blank icon-stack-base"></i>
                                             <i class="icon-user icon-light"></i>
