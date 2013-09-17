@@ -1,11 +1,14 @@
 {% load staticfiles i18n avatar_tags %}
 
-{% if page_obj.object_list %}
-  <ul id="feed" class="grid endless" data-next-url="{% url 'profiles-activity' profile_user.username %}" data-total-pages="{{ page_obj.pages|length }}">
-      {% include "profiles/snippets/item.html" %}
-  </ul>
-{% else %}
-  <div class="alert alert-info">
-    <strong>{{ profile_user.username }}</strong> has no activity yet!
-  </div>
-{% endif %}
+
+<ul id="feed" class="grid endless" data-next-url="{% url 'profiles-activity' profile_user.username %}" data-total-pages="{{ page_obj.pages|length }}">
+  {% if page_obj.object_list|length > 0 %}
+    {% include "profiles/snippets/item.html" %}
+  {% else %}
+    <li class="shown empty">
+      <div class="alert alert-info">
+        <strong>{{ profile_user.username }}</strong> has no activity yet!
+      </div>
+    </li>
+  {% endif %}
+</ul>

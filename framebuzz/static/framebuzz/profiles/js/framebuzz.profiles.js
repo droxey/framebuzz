@@ -167,9 +167,9 @@ var FrameBuzzProfile = (function($) {
             return false;
         });
 
-        $('body').on('click', '#follow_button, #unfollow_button', function () {
+        $('body').on('click', 'a.follow-button, a.unfollow-button', function () {
             $.post($(this).attr("href"), {});
-            $(this).parent().find("#follow_button, #unfollow_button").toggle();
+            $(this).parent().find("a.follow-button, a.unfollow-button").toggle();
             return false;
         });
     }

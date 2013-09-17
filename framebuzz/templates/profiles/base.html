@@ -25,8 +25,8 @@
                                 </a>
                                 {% ifequal request.user profile_user %}{% else %}
                                     {% if request.user.is_authenticated %}
-                                        <a class="btn btn-danger" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" id="unfollow_button" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>Unfollow</a>
-                                        <a class="btn btn-success" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" id="follow_button" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>Follow</a>
+                                        <a class="btn btn-danger unfollow-button" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>Unfollow</a>
+                                        <a class="btn btn-success follow-button" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>Follow</a>
                                     {% endif %}
                                 {% endifequal %}
                                 <div class="user-details">
@@ -44,8 +44,8 @@
                                             {% endif %}
                                         </span>
                                         <span class="location-field clearfix">
-                                            <i class="icon-map-marker"></i>
                                             {% if request.user.is_authenticated and profile_user.id == request.user.id %}
+                                                <i class="icon-map-marker"></i>
                                                 <a href="#" class="location clearfix">
                                                     <span class="editable" data-placement="right" data-name="location" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Location">
                                                         {% if profile_user.get_profile.location %}
@@ -57,6 +57,7 @@
                                                 </a>
                                             {% else %}
                                                 {% if profile_user.get_profile.location %}
+                                                    <i class="icon-map-marker"></i>
                                                     {{ profile_user.get_profile.location }}
                                                 {% endif %}
                                             {% endif %}
@@ -116,9 +117,11 @@
                                         {% if request.user.is_authenticated and profile_user.id == request.user.id %}                                            
                                             <p class="bio">&ldquo;<a href="#" data-name="bio" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Bio" data-placement="bottom">{% if profile_user.get_profile.bio %}{{ profile_user.get_profile.bio }}{% else %}Enter Bio{% endif %}</a>&rdquo;</p>
                                         {% else %}
-                                            {% if profile_user.get_profile.bio %}
-                                                <p class="bio">&ldquo;{{ profile_user.get_profile.bio }}&rdquo;</p>
-                                            {% endif %}
+                                            <p class="bio">
+                                                {% if profile_user.get_profile.bio %}
+                                                    &ldquo;{{ profile_user.get_profile.bio }}&rdquo;
+                                                {% endif %}
+                                            </p>
                                         {% endif %}
                                     {% endif %}
                                 </div>

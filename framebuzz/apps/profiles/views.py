@@ -135,9 +135,11 @@ def profile_followers(request, username):
             'comments': latest_comments,
         }
 
+    ct = ContentType.objects.get(model='user')
     return render_to_response('profiles/snippets/followers.html', {
         'profile_user': user,
         'followers': profile_followers,
+        'user_content_type': ct,
     }, context_instance=RequestContext(request))
 
 
@@ -154,9 +156,11 @@ def profile_following(request, username):
             'comments': latest_comments,
         }
 
+    ct = ContentType.objects.get(model='user')
     return render_to_response('profiles/snippets/following.html', {
         'profile_user': user,
         'following': profile_following,
+        'user_content_type': ct,
     }, context_instance=RequestContext(request))
 
 

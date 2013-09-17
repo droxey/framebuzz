@@ -1,4 +1,4 @@
-{% load i18n avatar_tags %}
+{% load i18n avatar_tags profile_tags %}
 
 <ul id="feed" class="grid clearfix">
   {% for username, follower_comments in followers.items %}
@@ -6,7 +6,7 @@
   {% empty %}
     <li class="empty">
       <div class="alert alert-info">
-        <strong>{{ profile_user.username }}</strong> has no followers yet!
+        <strong>{{ profile_user|display_name }}</strong> has no fans yet!
       </div>
     </li>
   {% endfor %}
