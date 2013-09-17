@@ -53,9 +53,6 @@
         }
 
         var is_authenticated = '{{ is_authenticated|lower }}' === 'true';
-        var share_url = is_authenticated 
-          ? "{% url 'profiles-share' request.user.username video.video_id %}" 
-          : "{% url 'video-share' video.video_id %}";
         
         // Set up our global SOCK variable.
         var SOCK = {
@@ -69,7 +66,7 @@
           logout_url: "{% url 'video-logout' video.video_id %}",
           signup_url: "{% url 'video-signup' video.video_id %}",
           is_authenticated: is_authenticated,
-          share_url: "http://frame.bz" + share_url,
+          share_url: "http://frame.bz" + '{{ share_url }}',
           login_urls: {
             twitter: "{% provider_login_url 'twitter' next=next_url method='oauth2' display='popup' %}",
             facebook: "{% provider_login_url 'facebook' next=next_url method='oauth2' display='popup' %}",

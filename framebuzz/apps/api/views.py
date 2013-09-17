@@ -35,8 +35,12 @@ def video_embed(request, video_id):
     webm_url = 'http://www.ytapi.com/api/%s/direct/44/' % video_id
 
     if request.user.is_authenticated():
+        share_url = reverse('profiles-share',
+                            args=[request.user.username, video_id, ])
         # Send a signal that the user has viewed this video.
         action.send(request.user, verb='viewed video', action_object=video)
+    else:
+        share_url = reverse('video-share', args=[video_id, ])
 
     return render_to_response('player/video_embed.html', {
         'close_window': request.GET.get('close', None),
@@ -48,6 +52,7 @@ def video_embed(request, video_id):
         'next_url': next_url,
         'mp4_url': mp4_url,
         'webm_url': webm_url,
+        'share_url': share_url,
     }, context_instance=RequestContext(request))
 
 
