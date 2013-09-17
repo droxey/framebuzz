@@ -109,7 +109,7 @@ var FrameBuzzProfile = (function($) {
                             bindScroll();
                             triggerMasonry();
                             initTooltips();
-                            initToggleButtons();
+                            //initToggleButtons();
                         });
                     }
                     else {
@@ -178,7 +178,7 @@ var FrameBuzzProfile = (function($) {
             $.get(url, function(data) {
                 $(currentTab).load(currentPageUrl, function(result) {
                     $('ul.nav-tabs').tab('show');
-                    $('div.tab-pane').removeClass('active');
+                    //$('div.tab-pane').removeClass('active');
 
                     $('ul.nav-tabs li a[href="' + currentTab + '"]').addClass('active');
                     $(currentTab).addClass('active');

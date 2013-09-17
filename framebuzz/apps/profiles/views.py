@@ -389,16 +389,20 @@ def toggle_video_library(request, username, video_id):
     user = User.objects.get(username=username)
     video = Video.objects.get(video_id=video_id)
 
-    try:
-        user_videos = UserVideo.objects.filter(user=user, video=video)
-        if len(user_videos) > 0:
-            user_video = user_videos[0]
-            user_video.delete()
-    except UserVideo.DoesNotExist:
+    user_videos = UserVideo.objects.filter(user=user, video=video)
+
+    if len(user_videos) > 0:
+        user_video = user_videos[0]
+        user_video.delete()
+        print 'deleted'
+
+    if len(user_videos) == 0:
         user_video = UserVideo()
         user_video.video = video
         user_video.user = user
+        user_video.is_featured = False
         user_video.save()
+        print 'saved'
 
     return HttpResponse()
 
