@@ -689,8 +689,11 @@ div.marketing-content {
                                             strong { font-weight: 700; }
 
                                             p { 
+                                                bottom: -4px;
                                                 padding-top: 6px;
                                                 line-height: 25px;
+                                                position: absolute;
+                                                width: 80%;
                                             }
                                         }
 
@@ -770,17 +773,24 @@ div.marketing-content {
                         position: relative;
                     }
 
+                    #videos ul.profile-conversations {
+                        li {
+                            min-height: 290px;
+
+                            div.video-wrapper { min-height: 290px; }
+                            div.video-wrapper div.video-details div.shared ul li { min-height: 34px !important; }
+                            div.video-wrapper div.video-actions ul li { min-height: 25px !important; }
+                        }
+                    }
+
                     ul.profile-conversations {
                         border: none;
 
                         li {
-                            min-height: 328px;
-
                             div.video-wrapper {
                                 @include border-radius(3px, 3px);
                                 background-color: white;
                                 padding: 9px;
-                                min-height: 310px;
 
                                 img.featured {
                                     left: -6px;
@@ -860,7 +870,7 @@ div.marketing-content {
 
                                     a {
                                         color: #272727;
-                                        font: 500 18px/18px 'futura-pt-condensed';
+                                        font: 300 18px/18px 'futura-pt-condensed';
                                         padding-bottom: 3px;
                                     }
 

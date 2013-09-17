@@ -92,7 +92,7 @@ var FrameBuzzProfile = (function($) {
 
                 $.post(postUrl, {
                     'video_id': video_id, 
-                    'is_featured': $('#id_is_featured').val(),
+                    'is_featured': $('#id_is_featured').is(':checked'),
                     'csrfmiddlewaretoken': csrfToken
                 }, function(data, textStatus, jqXHR) {
                     if (data.length == 0) {
@@ -105,6 +105,11 @@ var FrameBuzzProfile = (function($) {
                             $('#share').addClass('fadein');
 
                             $('#add-framebuzz-modal').modal('hide');
+
+                            bindScroll();
+                            triggerMasonry();
+                            initTooltips();
+                            initToggleButtons();
                         });
                     }
                     else {
@@ -138,10 +143,12 @@ var FrameBuzzProfile = (function($) {
                     page = page + 1;
                     var nextPageUrl = currentPageUrl + '?page=' + page;
 
-                    $.get(nextPageUrl, function(pageHtml) {
-                        grid.append(pageHtml);
-                        triggerMasonry();
-                    });
+                    if (page < pages) {
+                        $.get(nextPageUrl, function(pageHtml) {
+                            grid.append(pageHtml);
+                            triggerMasonry();
+                        });
+                    }
                 },
                 triggerFromBottom: '10%',
                 targetElement: targetElement,
