@@ -1,5 +1,3 @@
-import urllib2
-import lxml.html as lh
 import json
 
 from django.core.urlresolvers import reverse
@@ -8,6 +6,7 @@ from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 
 from framebuzz.apps.marketing.forms import ContactRequestForm
+from framebuzz.apps.api.utils import get_share_count
 
 
 def server_error(request):
@@ -65,11 +64,8 @@ def press(request):
 
 
 def google_plus_count(request):
-    url = 'https://plusone.google.com/_/+1/fastbutton?url=http://framebuzz.com&count=true'
-    doc = lh.parse(urllib2.urlopen(url))
-    count = doc.xpath("//div[@id='aggregateCount']/text()")
-    print str(count)
+    count = get_share_count('google', url='http://framebuzz.com')
 
-    response = {'count': str(count).lstrip("['").rstrip("']")}
+    response = {'count': count}
     return HttpResponse(json.dumps(response),
                         content_type='application/json')

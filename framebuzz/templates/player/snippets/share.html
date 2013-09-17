@@ -4,13 +4,37 @@
 <div class="tab-pane active{% if not profile_user %} standalone{% endif %}" id="share">
     <div id="share-container" class="clearfix">
         <div id="stats-container">
-            {% get_comment_count for video as comment_count %}
-            <p>{{ comment_count }} Comment{{ comment_count|pluralize }}</p> 
             {% for commenter in commenter_list %}
-                <p>{{ commenter.list|length }} Commenter{{ commenter.list|length|pluralize }}</p>
+                <div class="stat commenters">
+                    <p>
+                        <i class="icon-4x icon-group"></i>
+                        <span>{{ commenter.list|length }}</span>
+                    </p>
+                    <h4>Commenter{{ commenter.list|length|pluralize }}</h4>
+                </div> 
             {% empty %}
-                <p>0 Commenters</p>
+                <div class="stat commenters">
+                    <p>
+                        <i class="icon-4x icon-group"></i>
+                        <span>0 Commenters</span>
+                    </p>
+                </div>
             {% endfor %}
+            {% get_comment_count for video as comment_count %}
+            <div class="stat comments">
+                <p>
+                    <i class="icon-4x icon-comment"></i>
+                    <span>{{ comment_count }}</span>
+                </p>
+                <h4>Comment{{ comment_count|pluralize }}</h4>
+            </div> 
+            <div class="stat shares">
+                <p>
+                    <i class="icon-4x icon-fbshare"></i>
+                    <span>{{ shares }}</span>
+                </p>
+                <h4>Share{{ shares|pluralize }}</h4>
+            </div>
         </div>
         <div id="video-container">
             <div class="frame">

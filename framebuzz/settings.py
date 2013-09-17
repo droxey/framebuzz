@@ -423,6 +423,13 @@ SOCKJS_CLASSES = (
 ## Dashboard
 LOGIN_URL = '/accounts/login/'
 
+SHARE_COUNT_URLS = {
+#    'facebook': 'https://graph.facebook.com/fql?q=SELECT%20url,%20normalized_url,%20share_count,%20like_count,%20comment_count,%20total_count,commentsbox_count,%20comments_fbid,%20click_count%20FROM%20link_stat%20WHERE%20url=%27%s%27&callback=?',
+    'facebook': 'http://api.ak.facebook.com/restserver.php?v=1.0&method=links.getStats&urls=%s&format=json',
+    'google': 'https://plusone.google.com/_/+1/fastbutton?url=%s&count=true',
+    'twitter': 'http://cdn.api.twitter.com/1/urls/count.json?url=%s&callback=?',
+}
+
 
 ###################
 # DEPLOY SETTINGS #

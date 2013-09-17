@@ -18,7 +18,7 @@ from templated_email import send_templated_mail
 
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
 from framebuzz.apps.api.backends.youtube import get_or_create_video
-from framebuzz.apps.api.utils import errors_to_json
+from framebuzz.apps.api.utils import errors_to_json, get_total_shares
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
@@ -67,6 +67,8 @@ def video_share(request, username=None, video_id=None):
     header['video'] = video
     header['is_share'] = True
     header['commenters'] = commenters
+    header['shares'] = get_total_shares(request.path)
+
     if len(found_by) > 0:
         header['found_by'] = found_by[0].user
 
