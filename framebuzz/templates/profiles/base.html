@@ -139,6 +139,11 @@
                                     <li class="start {% if not is_share %} active{% endif %}">
                                         <a class="tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}">Activity</a>
                                     </li>
+                                    {% if request.user.is_authenticated and request.user.id == profile_user.id %}
+                                        <li class="feed">
+                                            <a class="tab-link" href="#myfeed" data-url="{% url 'profiles-feed' profile_user.username %}">News Feed</a>
+                                        </li>
+                                    {% endif %}
                                     <li class="followers">
                                         <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
                                             Fans

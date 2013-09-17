@@ -93,7 +93,8 @@ var FrameBuzzProfile = (function($) {
                     'csrfmiddlewaretoken': csrfToken
                 }, function(data, textStatus, jqXHR) {
                     if (data.length == 0) {
-                        $('#videos').load("{% url 'profiles-videos' profile_user %}", function(result) {
+                        var videosUrl = $('ul.nav-tabs a[href="#videos"]').attr('data-url');
+                        $('#videos').load(videosUrl, function(result) {
                             $('ul.nav-tabs').tab('show');
                             $('div.tab-pane').removeClass('active');
                             $('#videos').addClass('active');
@@ -159,9 +160,21 @@ var FrameBuzzProfile = (function($) {
         $('body').on('click', 'a.video-toggle-button', function(e) {
             e.preventDefault();
 
-            var url = $(this).attr('href');
+            var link = $(this);
+            var url = link.attr('href');
+
             $.get(url, function(data) {
-                $('ul.nav-tabs a[href="' + currentTab + '"]').trigger('click');
+                $(currentTab).load(currentPageUrl, function(result) {
+                    $('ul.nav-tabs').tab('show');
+                    $('div.tab-pane').removeClass('active');
+
+                    $('ul.nav-tabs li a[href="' + currentTab + '"]').addClass('active');
+                    $(currentTab).addClass('active');
+
+                    bindScroll();
+                    triggerMasonry();
+                    initTooltips();
+                });
             });
 
             return false;

@@ -1,7 +1,7 @@
 {% load staticfiles avatar_tags profile_tags %}
 
 {% for comment in page_obj.object_list %}
-  <li{% if page_obj and page_obj.object_list|length < 4 %} class="shown"{% endif %}>
+  <li{% if page_obj and forloop.counter <= 6 %} class="shown"{% endif %}>
     <div class="video-wrapper">
       {% if featured_video_ids %}
         {% if comment.content_object.id in featured_video_ids %}
