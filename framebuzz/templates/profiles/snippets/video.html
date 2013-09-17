@@ -10,14 +10,14 @@
       {% endif %}
       <a class="thumbnail-link" href="{% if comment.comment %}{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{{ comment.get_player_url }}{% else %}{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{% endif %}">
         <img class="video-thumbnail lazy" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
-        {% if comment.comment %}
-            <div class="comment">
-                 <span class="corner"></span>
-                 <img src="{% avatar_url comment.user 110 %}" alt="" height="55" width="55" class="img-circle lazy" />
-                 <p>&ldquo;{{ comment.formatted_comment }}&rdquo;</p>
-            </div>
-        {% endif %}
       </a>
+      {% if comment.comment %}
+          <div class="comment">
+               <span class="corner"></span>
+               <img src="{% avatar_url comment.user 110 %}" alt="" height="55" width="55" class="img-circle lazy" />
+               <p>&ldquo;{{ comment.formatted_comment }}&rdquo;</p>
+          </div>
+      {% endif %}
       <div class="video-details">
           <h3>
             <a href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}">{{ comment.content_object.title|title|truncatechars:"53" }}</a>
