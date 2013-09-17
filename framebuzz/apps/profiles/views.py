@@ -262,7 +262,7 @@ def videos(request, username):
         page = 1
 
     user = User.objects.get(username__iexact=username)
-    user_videos = UserVideo.objects.filter(user=user)
+    user_videos = UserVideo.objects.filter(user=user).order_by('-added_on')
     all_videos = [uv.video for uv in user_videos]
     video_comments = list()
 
