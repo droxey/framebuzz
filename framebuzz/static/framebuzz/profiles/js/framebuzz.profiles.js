@@ -143,6 +143,10 @@ var FrameBuzzProfile = (function($) {
                 loader:'<div class="loader">Loading next page&hellip;</div>',
                 pagesToScroll: pages
             });
+
+            setTimeout( function() {
+                $( window ).trigger( 'scroll' );
+            }, 200 );
         }
     }
 

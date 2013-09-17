@@ -1,7 +1,7 @@
 {% load staticfiles avatar_tags profile_tags %}
 
 {% for comment in page_obj.object_list %}
-  <li{% if page_obj and forloop.counter <= 6 %} class="shown"{% endif %}>
+  <li>
     <div class="video-wrapper">
       {% if featured_video_ids %}
         {% if comment.content_object.id in featured_video_ids %}
@@ -32,7 +32,7 @@
               <h5>Also playing in these libraries:</h5>
               <ul class="clearfix">
                 {% for uv in comment.content_object.uservideo_set.all %}
-                <li>
+                <li class="shown">
                   <a class="tooltip" data-placement="bottom" title="{{ uv.user|display_name }}" href="{% url 'profiles-home' uv.user.username %}">
                     <img src="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
                   </a>
@@ -45,7 +45,7 @@
       <div class="video-actions">
         <ul class="clearfix">
         {% if request.user.id == profile_user.id %}
-            <li>
+            <li class="shown">
               <a class="video-toggle-button library{% if comment.content_object.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}">
                   {% if comment.content_object.id in video_library_ids %}
                     <i class="icon-minus-sign-alt"></i>
@@ -54,7 +54,7 @@
                   {% endif %}
                 </a>
             </li>
-            <li>
+            <li class="shown">
                 <a class="video-toggle-button featured{% if comment.content_object.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username comment.content_object.video_id %}">
                   {% if comment.content_object.id in featured_video_ids %}
                     <i class="icon-star"></i>
@@ -65,7 +65,7 @@
             </li>
           {% endif %}
           {% if show_favorite_button and request.user.is_authenticated %}
-            <li>
+            <li class="shown">
                 <a class="video-toggle-button favorite{% if comment.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username comment.id %}">
                   {% if comment.id in favorite_comment_ids %}
                     <i class="icon-heart"></i>
@@ -82,7 +82,7 @@
   {% empty %}
       <li class="shown empty">
         <div class="alert alert-info">
-          <strong>{{ profile_user|display_name }}</strong> hasn't participated in any conversations yet!
+          <strong>{{ profile_user|display_name }}</strong> {{ error }}
         </div>
       </li>
   {% endfor %}

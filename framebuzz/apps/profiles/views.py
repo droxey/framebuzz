@@ -219,6 +219,7 @@ def conversations(request, username):
         'featured_video_ids': featured_video_ids,
         'favorite_comment_ids': favorite_comment_ids,
         'show_favorite_button': True,
+        'error': "hasn't posted any comments yet!",
     }, context_instance=RequestContext(request))
 
 
@@ -250,6 +251,7 @@ def favorites(request, username):
         'featured_video_ids': featured_video_ids,
         'favorite_comment_ids': favorite_comment_ids,
         'show_favorite_button': True,
+        'error': "hasn't added any favorites yet!",
     }, context_instance=RequestContext(request))
 
 
@@ -293,6 +295,7 @@ def videos(request, username):
         'featured_video_ids': featured_video_ids,
         'favorite_comment_ids': favorite_comment_ids,
         'show_favorite_button': False,
+        'error': "hasn't added any videos to their library yet!",
     }, context_instance=RequestContext(request))
 
 
