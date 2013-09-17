@@ -99,6 +99,12 @@ class Video(models.Model):
     def __unicode__(self):
         return self.title
 
+    @property
+    def formatted_description(self):
+        return mark_safe(
+            urlize(self.description, trim_url_limit=None, nofollow=True)
+            .replace('<a ', '<a target="_blank" '))
+
     def get_absolute_url(self):
         return reverse('video-embed', kwargs={'video_id': str(self.video_id)})
 

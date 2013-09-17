@@ -58,20 +58,20 @@
                             </li>
                             <li class="description">
                                 <h2>Description</h2>
-                                <p>{{ video.description|urlize }}</p>
+                                <p>{{ video.formatted_description }}</p>
                             </li>
                             <li class="commenters">
                                 <h2>Commenters</h2>
                                 <ul>
                                     {% for commenter in commenter_list %}
                                         {% for item in commenter.list %}
-                                            <li>
+                                            <li class="shown">
                                                 <a class="tooltip" data-placement="bottom" title="{{ item|display_name }}" href="{% url 'profiles-home' item.username %}">
                                                     <img src="{% avatar_url item 60 %}" alt="" height="30" width="30" class="img-circle" />
                                                 </a>
                                             </li>
                                         {% empty %}
-                                            <li class="empty">No commenters yet!</li>
+                                            <li class="empty shown">No commenters yet!</li>
                                         {% endfor %}
                                     {% endfor %}
                                 </ul>
