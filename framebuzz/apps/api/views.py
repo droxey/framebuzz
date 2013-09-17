@@ -72,6 +72,9 @@ def video_login(request, video_id):
         userSerializer = UserSerializer(user)
         userSerialized = JSONRenderer().render(userSerializer.data)
         outbound_message[DATA_KEY]['user'] = json.loads(userSerialized)
+        outbound_message[DATA_KEY]['share_url'] = reverse('profiles-share',
+                                                          args=[user.username,
+                                                                video_id, ])
     else:
         outbound_message[DATA_KEY]['errors'] = \
             json.loads(errors_to_json(form.errors))
@@ -91,8 +94,10 @@ def video_logout(request, video_id):
         raise Exception('This view is meant to be called via a POST request.')
 
     logout(request)
+    share_url = reverse('video-share', args=[video_id, ])
+    context = {'logged_out': True, 'share_url': share_url}
 
-    return HttpResponse(json.dumps({'logged_out': True}),
+    return HttpResponse(json.dumps(context),
                         content_type="application/json")
 
 
@@ -118,6 +123,9 @@ def video_signup(request, video_id):
         userSerializer = UserSerializer(user)
         userSerialized = JSONRenderer().render(userSerializer.data)
         outbound_message[DATA_KEY]['user'] = json.loads(userSerialized)
+        outbound_message[DATA_KEY]['share_url'] = reverse('profiles-share',
+                                                          args=[user.username,
+                                                                video_id, ])
     else:
         outbound_message[DATA_KEY]['errors'] = \
             json.loads(errors_to_json(form.errors))
