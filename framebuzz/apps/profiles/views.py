@@ -93,7 +93,7 @@ def home(request, username):
     if share_context:
         share_context['shares'] = get_total_shares(share_context['path'])
         context.update(share_context)
-        del request.session['shares']
+        del request.session['share']
 
     return render_to_response('profiles/base.html',
                               context,
