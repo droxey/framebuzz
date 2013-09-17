@@ -1,7 +1,7 @@
 {% load i18n profile_tags avatar_tags %}
 
 {% spaceless %}
-    <a href="{{ action.actor.get_profile.get_absolute_url }}">{{ action.actor|display_name }}</a>
+    <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a>
     {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
         {{ action.verb }}
         <i class="icon-comment icon-2x pull-right icon-muted"></i>
