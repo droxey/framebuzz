@@ -80,9 +80,9 @@
     </div>
   </li>
   {% empty %}
-      <li class="empty">
+      <li class="shown empty">
         <div class="alert alert-info">
-          <strong>{{ profile_user.username }}</strong> hasn't participated in any conversations yet!
+          <strong>{{ profile_user|display_name }}</strong> hasn't participated in any conversations yet!
         </div>
       </li>
   {% endfor %}

@@ -40,6 +40,13 @@ div.form-actions {
     width: 695px;
 }
 
+div.tooltip {
+    color: white;
+    font: 500 12px/12px 'proxima-nova';
+    opacity: 1;
+    padding: 3px 0;
+}
+
 img.img-circle {
     @include single-box-shadow(rgba(0, 0, 0, 0.52), 1px, 1px, 3px);
 }
@@ -320,8 +327,9 @@ div.marketing-content {
                                 }
                             }
 
-                            a.add-video {
-                                color: rgba(255, 255, 255, 0.9);
+                            a.add-video,
+                            a.toggle-follow {
+                                color: rgba(0, 0, 0, 0.15);
                                 display: block;
                                 float: right;
                                 font-size: 25px;
@@ -330,10 +338,46 @@ div.marketing-content {
                                 right: 10px;
                                 top: 27px;
                                 width: 30px;
+                                opacity: 1;
+                                @include single-transition(color 5ms ease-out);
 
                                 &:hover, &:focus, &:active {
+                                    color: rgba(0, 0, 0, 0.25);
                                     text-decoration: none;
+                                    @include single-transition(color 5ms ease-in);
                                 }
+                            }
+
+                            div.tooltip {
+                                margin-top: -2px;
+                            }
+
+                            a.toggle-follow {
+                                opacity: 1;
+                                top: 15px;
+
+                                span.icon-stack {
+                                    display: block;
+                                    position: relative;
+                                    width: 32px;
+
+                                    i.icon-stack-base {
+                                        font-size: 32px;
+                                    }
+
+                                    i.icon-user {
+                                        font-size: 16px;
+                                        position: absolute;
+                                        left: -4px;
+                                    }
+
+                                    i.icon-minus,
+                                    i.icon-plus {
+                                        font-size: 8px;
+                                        position: absolute;
+                                        right: -7px;
+                                    }
+                                }                                
                             }
 
                             .nav-pills > li > a {
@@ -451,6 +495,16 @@ div.marketing-content {
                                         margin-top: 3px;
                                         position: relative;
 
+                                        p.bio {
+                                            color: rgba(102, 102, 102, 0.83);
+                                            float: left;
+                                            font: italic 300 14px/14px 'proxima-nova';
+                                            left: 65px;
+                                            position: absolute;
+                                            top: 29px;
+                                            width: 80%;
+                                        }
+
                                         h2 { float: left; }
                                         h3 { float: right; }
 
@@ -470,6 +524,7 @@ div.marketing-content {
                                         }
 
                                         a.toggle-follow {
+                                            opacity: 1;
                                             outline: 0;
                                             position: absolute;
                                             right: 0;
@@ -536,12 +591,6 @@ div.marketing-content {
                                                         height: 90px;
                                                         width: 120px;
                                                     }
-                                                }
-
-                                                p.bio {
-                                                    font: italic 300 14px/14px 'proxima-nova'; 
-                                                    float: left;
-                                                    width: 60%;
                                                 }
                                         
                                                 p.counter {
@@ -1233,12 +1282,6 @@ div.marketing-content {
                                                                     width: 30px;
                                                                 }
                                                             }
-
-                                                            div.tooltip {
-                                                                font: 500 12px/12px 'proxima-nova';
-                                                                opacity: 1;
-                                                                padding: 3px 0;
-                                                            }
                                                             
                                                             &.empty { width: 100%; }
                                                         }
@@ -1363,10 +1406,11 @@ div.marketing-content {
                 color: white;
                 border: none;
                 font-family: 'futura-pt-condensed';
-                font-size: 20px;
+                font-size: 30px;
                 font-weight: 700;
                 float: right;
                 padding: 8px 0;
+                opacity: 1;
                 text-align: center;
                 text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
                 width: 380px;
