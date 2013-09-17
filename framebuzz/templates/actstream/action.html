@@ -4,21 +4,23 @@
     <a href="{{ action.actor.get_profile.get_absolute_url }}">{{ action.actor|display_name }}</a>
     {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
         {{ action.verb }}
+        <i class="icon-comment icon-2x pull-right icon-muted"></i>
         <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a>:
         <p><i class="icon-quote-left icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
     {% elif action.verb == 'added to favorites' %}
+        <i class="icon-heart icon-2x pull-right icon-muted"></i>
         added <a href="{{ action.action_object.get_profile.get_absolute_url }}">{{ action.action_object.user|display_name }}</a>'s comment on
         <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a> to favorites:
-        <p><i class="icon-heart icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
+        <p><i class="icon-quote-left icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
     {% elif action.verb == 'added video to library' %}
         added <a href="{% url 'profiles-video' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a> to library
     {% else %}
+        <span class="icon-stack">
+            <i class="icon-user icon-2x pull-left icon-muted"></i>
+            <i class="icon-plus icon-2x pull-left icon-muted"></i>
+        </span>
         added <a href="{{ action.target.get_profile.get_absolute_url }}">{{ action.target|display_name }}</a> to aficionados:
-        <p class="follow clearfix">
-            <span class="icon-stack">
-                <i class="icon-user icon-2x pull-left icon-muted"></i>
-                <i class="icon-plus icon-2x pull-left icon-muted"></i>
-            </span>
+        <p class="follow">
             <a href="{{ action.target.get_profile.get_absolute_url }}">
                 <img src="{% avatar_url action.target 110 %}" alt="" height="30" width="30" class="img-circle" />
                 <span>{{ action.target|display_name }}</span>

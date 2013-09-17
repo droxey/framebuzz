@@ -195,7 +195,11 @@ div.marketing-content {
                                     position: relative;
                                     width: 96%;
 
-                                    span.username-field { float: left; }
+                                    span.username-field { 
+                                        float: left;
+                                        display: inline-block;
+                                        width: 100%;
+                                    }
 
                                     span.location-field { 
                                         float: right;
@@ -684,39 +688,52 @@ div.marketing-content {
 
                                         div.action {
                                             font: 300 14px/14px 'proxima-nova';
-                                            vertical-align: text-bottom;
+                                            display: inline-block;
+                                            vertical-align: bottom;
+                                            position: relative;
+                                            padding-right: 25px;
+                                            width: 95%;
+
+                                            i.pull-right,
+                                            span.icon-stack {
+                                                display: inline-block;
+                                                position: absolute;
+                                                right: -11px;
+                                                top: 1px;
+                                            }
+
+                                            i.pull-right.icon-heart {
+                                                right: -8px;
+                                            }
+
+                                            span.icon-stack {
+                                                width: 32px;
+
+                                                i.icon-user {
+                                                    font-size: 2em;
+                                                    position: absolute;
+                                                    left: -4px;
+                                                }
+
+                                                i.icon-minus,
+                                                i.icon-plus {
+                                                    font-size: 8px;
+                                                    position: absolute;
+                                                    right: -12px;
+                                                }
+                                            }
 
                                             strong { font-weight: 700; }
 
                                             p { 
-                                                bottom: -4px;
-                                                padding-top: 6px;
                                                 line-height: 25px;
+                                                padding-top: 6px;
                                                 position: absolute;
                                                 width: 80%;
                                             }
 
                                             p.follow {
-                                                span.icon-stack {
-                                                    display: inline-block;
-                                                    float: left;
-                                                    position: relative;
-                                                    width: 32px;
-                                                    margin-right: 6px;
-
-                                                    i.icon-user {
-                                                        font-size: 2em;
-                                                        position: absolute;
-                                                        left: -4px;
-                                                    }
-
-                                                    i.icon-minus,
-                                                    i.icon-plus {
-                                                        font-size: 8px;
-                                                        position: absolute;
-                                                        right: -12px;
-                                                    }
-                                                }
+                                                padding-top: 9px;
 
                                                 img.img-circle {
                                                     width: 30px;
