@@ -19,6 +19,8 @@ class ContactRequest(models.Model):
 
 def send_admin_email(sender, instance, created, **kwargs):
     subject = 'FrameBuzz: Contact Request from %s' % instance.name
-    send_mail(subject, instance.description, instance.email, ['info@framebuzz.com'], fail_silently=False)
+    send_mail(subject, instance.description, instance.email,
+              ['info@framebuzz.com'], fail_silently=False)
 
-post_save.connect(send_admin_email, sender=ContactRequest, dispatch_uid="contact_send_admin_email")
+post_save.connect(send_admin_email, sender=ContactRequest,
+                  dispatch_uid="contact_send_admin_email")

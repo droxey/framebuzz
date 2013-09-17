@@ -589,6 +589,12 @@ div.marketing-content {
                         }
                     }
 
+                    #videos.share {
+                        margin-top: 36px;
+
+                        a.add-video { right: 3px; }
+                    }
+
                     ul.grid > li {
                         background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
                         background-color: white;
@@ -758,17 +764,20 @@ div.marketing-content {
                                                 float: left;
                                                 height: 34px;
                                                 width: 34px;
+                                                opacity: 1;
                                                 
                                                 a {
                                                     display: block;
                                                     height: 22px;
                                                     padding: 4px 0;
                                                     width: 22px;
+                                                    opacity: 1;
 
                                                     img.img-circle {
                                                         border: 2px solid white;
                                                         height: 22px;
                                                         width: 22px;
+                                                        margin: -2px;
                                                     }
                                                 }
                                             }
@@ -962,37 +971,45 @@ div.marketing-content {
                 }
 
                 #share {
+                    opacity: 0;
                     padding: 0;
+                    width: 905px;
+                    @include single-transition(opacity 10ms ease-out);
 
-                    &.tab-pane.active {
-                        width: 912px;
+                    &.fadein {
+                        opacity: 1;
+                        @include single-transition(opacity 10ms ease-in);
+                    }
+
+                    &.standalone {
+                        margin: 0 auto;
                     }
 
                     #share-container {
-                        padding: 0 5px;
+                        padding-left: 11px;
 
                         #stats-container {
                             float: right;
                             margin-right: 0;
-                            padding: 5px 0;
+                            padding: 19px 0;
                             width: 222px;
 
                             div.stat {
                                 color: white;
                                 font: 500 14px/14px 'proxima-nova';
                                 min-height: 100px;
-                                margin-bottom: 57px;
+                                margin-bottom: 18px;
                                 width: 39%;
 
                                 p {
-                                    height: 40px;
+                                    height: 44px;
                                     position: relative;
 
                                     i {
                                         color: rgba(0, 0, 0, 0.15);
-                                        font-size: 5em;
-                                        position: absolute;
-                                        top: 0;
+                                        display: block;
+                                        font-size: 3em;
+                                        text-align: center;
                                         z-index: 5;
                                     }
 
@@ -1000,6 +1017,7 @@ div.marketing-content {
                                         display: block;
                                         font: 700 20px/20px 'proxima-nova';
                                         position: relative;
+                                        top: 3px;
                                         text-align: center;
                                         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
                                         width: 4.3em;
@@ -1013,45 +1031,30 @@ div.marketing-content {
                                     text-align: center;
                                     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
                                     position: relative;
+                                    top: 20px;
                                     z-index: 10;
                                 }
 
                                 &.comments {
-                                    i { font-size: 6em; }
-
-                                    p span { 
-                                        top: 58%;
-                                        width: 4.3em;
-                                    }
-
-                                    h4 {
-                                        text-indent: -3px;
-                                        top: 1px;
-                                    }
                                 }
 
                                 &.commenters {
-                                    i { padding-left: 7px; }
-
-                                    p {
-                                        span { top: 46px; }
-                                    }
-
-                                    h4 { margin-top: 31px; }
                                 }
 
                                 &.shares {
+                                    margin-top: -6px;
+                                    margin-bottom: 0;
+
                                     p {
                                         i {
-                                            font-size: 6.5em;
-                                            padding-left: 4px;
-                                            top: -3px;
+                                            position: relative;
+                                            top: 6px;
                                         }
 
-                                        span { top: 39px; }
+                                        span { }
                                     }
 
-                                    h4 { margin-top: 24px; }
+                                    h4 { }
                                 }
                             }
                         }

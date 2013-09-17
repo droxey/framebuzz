@@ -50,7 +50,7 @@ def get_profile_header(username):
 
 def video_share(request, username=None, video_id=None):
     video, created = get_or_create_video(video_id)
-    header = dict()
+    context = dict()
 
     valid_verbs = ['commented on', 'replied to comment']
     actions = Action.objects.filter(verb__in=valid_verbs,
@@ -58,23 +58,24 @@ def video_share(request, username=None, video_id=None):
     commenters = [a.actor for a in actions]
     found_by = UserVideo.objects.filter(video=video).order_by('added_on')[:1]
 
-    if username is None:
-        template = 'marketing/share.html'
-    else:
-        header = get_profile_header(username)
-        template = 'profiles/share.html'
-
-    header['video'] = video
-    header['is_share'] = True
-    header['commenters'] = commenters
-    header['shares'] = get_total_shares(request.path)
+    context['video'] = video
+    context['is_share'] = True
+    context['commenters'] = commenters
+    context['path'] = request.path
 
     if len(found_by) > 0:
-        header['found_by'] = found_by[0].user
+        context['found_by'] = found_by[0].user
 
-    return render_to_response(template,
-                              header,
-                              context_instance=RequestContext(request))
+    if username is not None:
+        request.session['share'] = context
+        return HttpResponseRedirect(
+            reverse('profiles-home', args=[username, ]))
+    else:
+        template = 'marketing/share.html'
+        context['shares'] = get_total_shares(request.path)
+        return render_to_response(template,
+                                  context,
+                                  context_instance=RequestContext(request))
 
 
 def logged_in(request):
@@ -86,10 +87,16 @@ def logged_in(request):
 
 
 def home(request, username):
-    profile_header = get_profile_header(username)
-    profile_header['is_edit'] = False
+    context = get_profile_header(username)
+
+    share_context = request.session.get('share', None)
+    if share_context:
+        share_context['shares'] = get_total_shares(share_context['path'])
+        context.update(share_context)
+        del request.session['share']
+
     return render_to_response('profiles/base.html',
-                              profile_header,
+                              context,
                               context_instance=RequestContext(request))
 
 

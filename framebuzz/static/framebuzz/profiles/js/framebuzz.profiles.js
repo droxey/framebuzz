@@ -1,5 +1,6 @@
 var FrameBuzzProfile = (function($) {
-    var currentPageUrl,
+    var isShare = false,
+        currentPageUrl,
         currentVideoUrl,
         currentTab = '#activity';
 
@@ -17,6 +18,13 @@ var FrameBuzzProfile = (function($) {
         $('body').on('click', 'a.tab-link', function(e) {
             e.preventDefault();
             if (currentTab == this.hash) { return; }
+            isShare = $('#share').length > 0;
+
+            var shareHidden = false;
+            if (isShare && currentTab == '#videos') {
+                $('#share').removeClass('fadein');
+                shareHidden = true;
+            }
           
             currentPageUrl = $(this).attr('data-url');
             currentTab = this.hash;
@@ -30,7 +38,13 @@ var FrameBuzzProfile = (function($) {
             $('ul.nav-tabs li').removeClass('active'); 
             $(currentTab).load(currentPageUrl, function(result) { 
                 $('div.tab-pane').removeClass('active');
-                $('ul.dropdown-menu li').removeClass('active'); 
+                $('ul.dropdown-menu li').removeClass('active');
+
+                if (shareHidden) { 
+                    $('#share').addClass('hidden');
+                    $('#videos').removeClass('share');
+                }
+
                 pane.tab('show');
 
                 $('a[href="' + currentTab + '"]').parent().addClass('active');
@@ -45,6 +59,7 @@ var FrameBuzzProfile = (function($) {
 
                 bindScroll();
                 triggerMasonry();
+                initTooltips();
             });
         });
     }
@@ -166,10 +181,26 @@ var FrameBuzzProfile = (function($) {
         initEditables();
         initToggleButtons();
 
-        currentPageUrl = $('ul.nav-tabs li.active a').attr('data-url');
-        $('#activity').load(currentPageUrl, function(result) {
+        isShare = $('#share').length > 0;
+        if (isShare && currentTab == '#videos') {
+            $('#share').removeClass('fadein');
+        }
+
+        var activeTab = $('ul.nav-tabs li.active a');
+        currentPageUrl = activeTab.attr('data-url');
+        currentTab = activeTab.attr('href');
+
+        $(currentTab).load(currentPageUrl, function(result) {
             $('ul.nav-tabs').tab('show');
-            $('#profile-container ul.nav-tabs li.start').addClass('active');
+
+            if (currentTab == '#activity') {
+                $('#profile-container ul.nav-tabs li.start').addClass('active');
+            }
+            
+            if (isShare && currentTab == '#videos') {
+                $('#profile-container ul.nav-tabs li.videos').addClass('active');
+                $('#share').addClass('fadein');      
+            }
 
             bindTabs();
             triggerMasonry();

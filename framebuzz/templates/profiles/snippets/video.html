@@ -1,4 +1,4 @@
-{% load staticfiles avatar_tags %}
+{% load staticfiles avatar_tags profile_tags %}
 
 {% for comment in page_obj.object_list %}
   <li{% if page_obj and page_obj.object_list|length < 4 %} class="shown"{% endif %}>
@@ -33,7 +33,7 @@
               <ul class="clearfix">
                 {% for uv in comment.content_object.uservideo_set.all %}
                 <li>
-                  <a href="{% url 'profiles-home' uv.user.username %}">
+                  <a class="tooltip" data-placement="bottom" title="{{ uv.user|display_name }}" href="{% url 'profiles-home' uv.user.username %}">
                     <img src="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
                   </a>
                 </li>
