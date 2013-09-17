@@ -8,11 +8,7 @@
           <img src="{% static 'framebuzz/profiles/img/featured-banner.png' %}" alt="Featured" height="50" width="96" class="featured" />
         {% endif %}
       {% endif %}
-      {% if comment.comment %}
-        <a class="thumbnail-link" href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{{ comment.get_player_url }}">
-      {% else %}
-        <a class="thumbnail-link" href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}">
-      {% endif %}
+      <a class="thumbnail-link" href="{% if comment.comment %}{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{{ comment.get_player_url }}{% else %}{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{% endif %}">
         <img class="video-thumbnail lazy" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
         {% if comment.comment %}
             <div class="comment">
