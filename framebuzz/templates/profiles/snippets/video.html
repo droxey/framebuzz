@@ -42,7 +42,7 @@
         <ul class="clearfix">
         {% if request.user.id == profile_user.id %}
             <li class="shown">
-              <a class="video-toggle-button library{% if comment.content_object.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}">
+              <a class="video-toggle-button tooltip library{% if comment.content_object.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in video_library_ids %}Add to Library{% else %}Added to Library{% endif %}" data-placement="bottom">
                   {% if comment.content_object.id in video_library_ids %}
                     <i class="icon-minus-sign-alt"></i>
                   {% else %}
@@ -51,7 +51,7 @@
                 </a>
             </li>
             <li class="shown">
-                <a class="video-toggle-button featured{% if comment.content_object.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username comment.content_object.video_id %}">
+                <a class="video-toggle-button tooltip featured{% if comment.content_object.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in featured_video_ids %}Feature this Video{% else %}Featured Video{% endif %}" data-placement="bottom">
                   {% if comment.content_object.id in featured_video_ids %}
                     <i class="icon-star"></i>
                   {% else %}
@@ -62,7 +62,7 @@
           {% endif %}
           {% if show_favorite_button and request.user.is_authenticated %}
             <li class="shown">
-                <a class="video-toggle-button favorite{% if comment.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username comment.id %}">
+                <a class="video-toggle-button tooltip favorite{% if comment.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username comment.id %}" title="{% if comment.id in favorite_comment_ids %}Favorite this Comment{% else %}Added to Favorites{% endif %}" data-placement="bottom">
                   {% if comment.id in favorite_comment_ids %}
                     <i class="icon-heart"></i>
                   {% else %}

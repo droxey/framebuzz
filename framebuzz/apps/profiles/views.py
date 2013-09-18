@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.db.models import Count
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -36,6 +37,10 @@ def get_profile_header(username):
     profile_following = following(user)
     profile_library = UserVideo.objects.filter(user=user)
     ct = ContentType.objects.get(model='user')
+
+    top_video_actions = Action.objects.filter(verb='viewed video').annotate(views=Count('verb')).order_by('-views')[:5]
+    top_videos = [a.action_object for a in top_video_actions]
+    print top_videos[:5]
 
     return {
         'profile_favorites': profile_favorites,
@@ -199,7 +204,7 @@ def conversations(request, username):
 
     user = User.objects.get(username__iexact=username)
     user_videos = UserVideo.objects.filter(user=user)
-    conversations = MPTTComment.objects.filter(user=user, parent=None)
+    conversations = MPTTComment.objects.filter(user=user, parent=None).order_by('-submit_date')
 
     favorites = Action.objects.favorite_comments_stream(user)
     favorite_comment_ids = [int(f.action_object_object_id)for f in favorites]

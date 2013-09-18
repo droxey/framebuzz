@@ -9,7 +9,7 @@
         <p><i class="icon-quote-left icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
     {% elif action.verb == 'added to favorites' %}
         <i class="icon-heart icon-2x pull-right icon-muted"></i>
-        added <a href="{{ action.action_object.get_profile.get_absolute_url }}">{{ action.action_object.user|display_name }}</a>'s comment on
+        added <a href="{% url 'profiles-home' action.action_object.user.username %}">{{ action.action_object.user|display_name }}</a>'s comment on
         <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a> to favorites:
         <p><i class="icon-quote-left icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
     {% elif action.verb == 'added video to library' %}
@@ -19,9 +19,9 @@
             <i class="icon-user icon-2x pull-left icon-muted"></i>
             <i class="icon-plus icon-2x pull-left icon-muted"></i>
         </span>
-        added <a href="{{ action.target.get_profile.get_absolute_url }}">{{ action.target|display_name }}</a> to aficionados:
+        is now a fan of <a href="{% url 'profiles-home' action.target.username %}">{{ action.target|display_name }}</a>:
         <p class="follow">
-            <a href="{{ action.target.get_profile.get_absolute_url }}">
+            <a href="{% url 'profiles-home' action.target.username %}">
                 <img src="{% avatar_url action.target 110 %}" alt="" height="30" width="30" class="img-circle" />
                 <span>{{ action.target|display_name }}</span>
             </a>
