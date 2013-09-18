@@ -342,7 +342,7 @@ DEFAULT_FROM_EMAIL = 'info@framebuzz.com'
 
 TEMPLATED_EMAIL_DJANGO_SUBJECTS = {
     'favorites-notification':'FrameBuzz: New Favorite!',
-    'following-notification':'FrameBuzz: New Follower!',
+    'following-notification':'You have a new fan on FrameBuzz.',
     'passwordchange-notification':'FrameBuzz: Password Reset Requested',
     'reply-notification':'FrameBuzz: New Comment Reply!',
     'welcome-newuser':'Thanks for joining FrameBuzz.',
