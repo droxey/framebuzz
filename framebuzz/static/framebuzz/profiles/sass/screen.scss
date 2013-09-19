@@ -32,6 +32,8 @@
 
 a, a:focus, a:hover, a:active {
     outline: 0 !important;
+
+    &.tooltip { opacity: 1 !important; }
 }
 
 div.alert {
@@ -55,6 +57,7 @@ div.tooltip {
     font: 500 12px/12px 'proxima-nova';
     opacity: 1;
     padding: 3px 0;
+    z-index: 99999;
 }
 
 img.img-circle {
@@ -118,7 +121,7 @@ div.marketing-content {
                                     border-right: 1px solid rgba(255, 255, 255, 0.2);
                                     color: white;
                                     font: 500 14px/16px 'proxima-nova';
-                                    padding: 0 5px 0 4px;
+                                    padding: 0 9px 0 8px;
                                     text-align: center;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
                                     text-decoration: none;
@@ -662,7 +665,7 @@ div.marketing-content {
                                                         -webkit-border-radius: 0;
                                                         -moz-border-radius: 0;
                                                         border-radius: 0;
-                                                        left: -16px;
+                                                        left: -17px;
                                                         top: 34%;
                                                     }
                                                 }
@@ -835,6 +838,7 @@ div.marketing-content {
                         width: 47%;
                         margin-bottom: 18px;
                         padding: 5px;
+                        min-height: 290px;
                         position: relative;
                     }
 
@@ -898,7 +902,7 @@ div.marketing-content {
                                     font-weight: 500;
                                     left: 14px;
                                     line-height: 18px;
-                                    padding: 3px 6px 4px 6px;
+                                    padding: 3px 7px 5px;
                                     position: absolute;
                                     top: 112px;
                                     width: 273px;
@@ -969,6 +973,8 @@ div.marketing-content {
                                         h5 { color: #dddddd; }
 
                                         ul {
+                                            height: 35px;
+                                            overflow: auto;
                                             padding-top: 1px;
 
                                             li {
@@ -980,7 +986,7 @@ div.marketing-content {
                                                 a {
                                                     display: block;
                                                     height: 22px;
-                                                    padding: 4px 0;
+                                                    padding: 7px 0;
                                                     width: 22px;
                                                     opacity: 1;
 
@@ -1380,6 +1386,8 @@ div.marketing-content {
                                                                 opacity: 1;
                                                                 padding: 4px 0;
                                                                 width: 30px;
+                                                                position: relative;
+                                                                z-index: 1;
 
                                                                 img.img-circle {
                                                                     border: 2px solid white;

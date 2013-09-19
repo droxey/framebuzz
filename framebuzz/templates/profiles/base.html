@@ -3,6 +3,20 @@
 
 {% block title %}{{ profile_user|display_name }}'s Profile{% endblock %}
 
+{% block marketing_meta %}
+    {% if is_share %}
+        <meta property="og:title" content="FrameBuzz: {{ video.title }}" />
+        <meta property="og:type" content="Video" />
+        <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.video_id %}" />
+        <meta property="og:image" content="{{ video.poster_image }}" />
+        <meta property="og:description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
+        <meta property="og:site_name" content="FrameBuzz" />
+        <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
+        <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
+        <meta itemprop="image" content="{{ video.poster_image }}" />
+    {% endif %}
+{% endblock %}
+
 {% block page_css %}
     {% compress css %}
         <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/iconic.css' %}" type="text/css" media="screen" />
@@ -83,7 +97,7 @@
                                                 <a data-url="{% url 'profiles-following' profile_user.username %}" href="#following" class="tab-link">
                                                     <em>{{ profile_following|length }}</em>
                                                     <br>
-                                                    Fan Of
+                                                    Fan of
                                                 </a>
                                             </li>
                                             <li class="videos">
@@ -139,7 +153,7 @@
                                     </li>
                                     <li class="following">
                                         <a data-url="{% url 'profiles-following' profile_user.username %}" href="#following" class="tab-link">
-                                            Fan Of
+                                            Fan of
                                         </a>
                                     </li>
                                     <li class="videos{% if is_share %} active{% endif %}">
@@ -223,7 +237,6 @@
         <script src="{% static 'framebuzz/profiles/js/framebuzz.profiles.js' %}"></script>
         <script type="text/javascript">
             $(function(){
-                //$('div.marketing-content').anystretch("{% static 'framebuzz/profiles/img/elixir.jpg' %}", {speed: 150, positionY: 0});
                 FrameBuzzProfile.init();
             });
             </script>

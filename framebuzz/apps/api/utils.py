@@ -2,7 +2,10 @@ import json
 import urllib2
 import lxml.html as lh
 
+from actstream.models import Action
 from django.conf import settings
+
+from framebuzz.apps.api.models import Video
 
 
 def get_client_ip(request):
@@ -45,11 +48,13 @@ def get_share_count(service, url):
             buf = response.read()
             response_json = json.loads(buf)
             if len(response_json) > 0:
-                count = response_json[0].get('share_count', 0)
+                count_response = response_json[0].get('share_count', 0)
+                count = int(count_response)
         elif service == 'twitter':
             buf = response.read()
             response_json = json.loads(buf)
-            count = response_json.get('count', 0)
+            count_response = response_json.get('count', 0)
+            count = int(count_response)
         else:
             pass
     except:
@@ -66,4 +71,12 @@ def get_total_shares(path):
             full_url = '%s%s' % (domain, path)
             count = get_share_count(service, full_url)
             final = final + int(count)
+
+    path_split = [str(s) for s in path.split('/')]
+    if len(path_split) > 3:
+        video_id = path_split[-2]
+        video = Video.objects.get(video_id=video_id)
+        email_shares = Action.objects.filter(verb='shared',
+                                             action_object_object_id=video.id)
+        final = final + len(email_shares)
     return final
