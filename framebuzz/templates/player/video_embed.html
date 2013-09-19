@@ -7,6 +7,13 @@
         window.opener.location.reload();
         window.close();
       </script>
+    {% else %}
+      <script type="text/javascript">
+        // Detect if the page is not loaded in an iFrame.
+        if (window == window.top) {
+            document.location.href = "{% url 'video-share' video.video_id %}";
+        }
+      </script>
     {% endif %}
     <title>FrameBuzz | {{ video.title }}</title>
     {% revcanonical video %}
