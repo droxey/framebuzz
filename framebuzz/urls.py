@@ -59,6 +59,9 @@ urlpatterns = patterns('',
     (r'^tinymce/', include('tinymce.urls')),
     url(r'^blog/', include('zinnia.urls')),
 
+    # Django-Shorturls:
+    ('^s/', include('shorturls.urls')),
+
     # Marketing:
     url(r'^', include('framebuzz.apps.marketing.urls')),
 )

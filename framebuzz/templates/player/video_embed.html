@@ -1,4 +1,4 @@
-{% load staticfiles socialaccount compress %}
+{% load staticfiles socialaccount compress shorturl %}
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/Article" ng-app="framebuzz">
   <head itemscope itemtype="http://schema.org/Product">
@@ -9,6 +9,7 @@
       </script>
     {% endif %}
     <title>FrameBuzz | {{ video.title }}</title>
+    {% revcanonical video %}
     <meta property="og:title" content="FrameBuzz: {{ video.title }}" />
     <meta property="og:type" content="Video" />
     <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.video_id %}" />
@@ -66,7 +67,7 @@
           logout_url: "{% url 'video-logout' video.video_id %}",
           signup_url: "{% url 'video-signup' video.video_id %}",
           is_authenticated: is_authenticated,
-          share_url: "http://frame.bz" + '{{ share_url }}',
+          share_url: "{% shorturl video %}",
           login_urls: {
             twitter: "{% provider_login_url 'twitter' next=next_url method='oauth2' display='popup' %}",
             facebook: "{% provider_login_url 'facebook' next=next_url method='oauth2' display='popup' %}",

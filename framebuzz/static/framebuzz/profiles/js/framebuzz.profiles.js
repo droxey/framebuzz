@@ -109,7 +109,6 @@ var FrameBuzzProfile = (function($) {
                             bindScroll();
                             triggerMasonry();
                             initTooltips();
-                            //initToggleButtons();
                         });
                     }
                     else {
@@ -225,7 +224,8 @@ var FrameBuzzProfile = (function($) {
             
             if (isShare && currentTab == '#videos') {
                 $('#profile-container ul.nav-tabs li.videos').addClass('active');
-                $('#share').addClass('fadein');      
+                $('#share').addClass('fadein');
+                initTooltips();      
             }
 
             triggerMasonry();

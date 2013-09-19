@@ -235,6 +235,7 @@ INSTALLED_APPS = (
     'django_sockjs_tornado',
     'addendum',
     'feedback',
+    'shorturls',
     #'tracking',
     'watson',
 
@@ -359,6 +360,15 @@ CELERY_EMAIL_TASK_CONFIG = {
     'name': 'djcelery_email_send',
     'ignore_result': True,
 }
+
+# Django-Shorturls:
+SHORTEN_MODELS = {
+    'v': 'api.Video',
+}
+
+SHORT_BASE_URL = 'http://localhost:9999/s/'
+SHORTEN_FULL_BASE_URL = 'http://localhost:9999/s/'
+#SHORTURLS_DEFAULT_CONVERTER = 'shorturls.baseconv.base32'
 
 LOGGING = {
     'version': 1,

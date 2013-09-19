@@ -31,6 +31,9 @@ DATABASES = {
 
 #SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
+SHORT_BASE_URL = 'http://frame.bz'
+SHORTEN_FULL_BASE_URL = 'http://framebuzz.com'
+
 RAVEN_CONFIG = {
     'dsn': 'https://b14b841441f348b2bd29aa34c79948fb:8ad5006d4856408fad7cf735e0498315@app.getsentry.com/11190',
 }

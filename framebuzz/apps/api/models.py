@@ -3,7 +3,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import User, Permission, AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.models import Comment, CommentFlag
 from django.db import models
@@ -104,6 +104,14 @@ class Video(models.Model):
         return mark_safe(
             urlize(self.description, trim_url_limit=None, nofollow=True)
             .replace('<a ', '<a target="_blank" '))
+
+    @classmethod
+    def share_url(cls, video, user):
+        if not isinstance(user, AnonymousUser):
+            return reverse('profiles-share', kwargs={
+                           'username': user.username,
+                           'video_id': str(video.video_id)})
+        return video.get_share_url()
 
     def get_absolute_url(self):
         return reverse('video-embed', kwargs={'video_id': str(self.video_id)})
