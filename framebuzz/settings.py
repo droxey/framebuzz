@@ -131,6 +131,7 @@ STATICFILES_FINDERS = (
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
+    'django_mobile.loader.Loader',
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 )
@@ -149,6 +150,8 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.media',
 
     'zinnia.context_processors.version',
+
+    'django_mobile.context_processors.flavour',
 
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
@@ -173,6 +176,9 @@ MIDDLEWARE_CLASSES = (
 
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
+
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware',
 
     'watson.middleware.SearchContextMiddleware',
     'framebuzz.libs.middleware.timezone.TimezoneMiddleware',
@@ -238,6 +244,7 @@ INSTALLED_APPS = (
     'shorturls',
     #'tracking',
     'watson',
+    'django_mobile',
 
     # Required by Zinnia
     'tinymce',
