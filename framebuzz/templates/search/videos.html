@@ -5,13 +5,13 @@
         <li>
             <a href="{% spaceless %}{% if request.user.is_authenticated %}
                         {% if video.found_by %}
-                            {% url 'profiles-share' found_by.username video.video_id %}
+                            {% url 'profiles-share' video.found_by.username video.video_id %}
                         {% else %}
                             {% url 'profiles-share' request.user.username video.video_id %}
                         {% endif %}
                     {% else %}
                         {% if video.found_by %}
-                            {% url 'profiles-share' found_by.username video.video_id %}
+                            {% url 'profiles-share' video.found_by.username video.video_id %}
                         {% else %}
                         {{ video.get_share_url }}
                         {% endif %}
