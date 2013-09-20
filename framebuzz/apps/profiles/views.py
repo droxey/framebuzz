@@ -83,7 +83,7 @@ def video_share(request, username=None, video_id=None):
     context['is_share'] = True
     context['commenters'] = commenters
     context['path'] = request.path
-    context['found_by'] = video.found_by()
+    context['found_by'] = video.found_by
 
     if username is not None:
         request.session['share'] = context
