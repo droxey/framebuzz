@@ -375,7 +375,10 @@ SHORTEN_MODELS = {
 
 SHORT_BASE_URL = 'http://localhost:9999/s/'
 SHORTEN_FULL_BASE_URL = 'http://localhost:9999/s/'
-#SHORTURLS_DEFAULT_CONVERTER = 'shorturls.baseconv.base32'
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/profile/%s/" % u.username,
+}
 
 LOGGING = {
     'version': 1,
