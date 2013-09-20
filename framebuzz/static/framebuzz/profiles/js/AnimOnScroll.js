@@ -91,8 +91,6 @@
 			this.itemsRenderedCount = 0;
 			this.didScroll = false;
 
-			console.log(this.items);
-
 			var self = this;
 
 			imagesLoaded( this.el, function() {
