@@ -3,7 +3,19 @@
 <ul class="videos clearfix">
     {% for result in search_results.object_list %}
         <li>
-            <a href="{{ result.object.get_share_url }}" title="{{ result.title|title }}">
+            <a href="{% spaceless %}{% if request.user.is_authenticated %}
+                        {% if video.found_by %}
+                            {% url 'profiles-share' found_by.username video.video_id %}
+                        {% else %}
+                            {% url 'profiles-share' request.user.username video.video_id %}
+                        {% endif %}
+                    {% else %}
+                        {% if video.found_by %}
+                            {% url 'profiles-share' found_by.username video.video_id %}
+                        {% else %}
+                        {{ video.get_share_url }}
+                        {% endif %}
+                    {% endif %}{% endspaceless %}" title="{{ result.title|title }}">
                 <img src="{{ result.object.large_thumbnail }}" alt="{{ result.title }}" height="100" width="155" />
             </a>
             <h3><a href="{{ result.object.get_share_url }}">{{ result.title|title|truncatechars:55 }}</a></h3>

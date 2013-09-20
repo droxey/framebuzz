@@ -10,7 +10,19 @@
                 <p><span>&ldquo;{{ result.object.comment }}&rdquo;</span></p>
                 <span class="corner"></span>
             </div>
-            <p class="description">on <a href="{{ result.object.get_share_url }}">{{ result.object.content_object.title|title|truncatechars:38 }}</a></p>
+            <p class="description">on <a href="{% spaceless %}{% if request.user.is_authenticated %}
+                        {% if result.object.content_object.found_by %}
+                            {% url 'profiles-share' result.object.content_object.found_by.username result.object.content_object.video_id %}
+                        {% else %}
+                            {% url 'profiles-share' request.user.username result.object.content_object.video_id %}
+                        {% endif %}
+                    {% else %}
+                        {% if result.object.content_object.found_by %}
+                            {% url 'profiles-share' result.object.content_object.found_by.username result.object.content_object.video_id %}
+                        {% else %}
+                            {{ result.object.content_object.get_share_url }}
+                        {% endif %}
+                    {% endif %}{% endspaceless %}">{{ result.object.content_object.title|title|truncatechars:38 }}</a></p>
         </li>
     {% empty %}
         <li class="empty">

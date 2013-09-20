@@ -77,15 +77,13 @@ def video_share(request, username=None, video_id=None):
     actions = Action.objects.filter(verb__in=valid_verbs,
                                     target_object_id=video.id)
     commenters = [a.actor for a in actions]
-    found_by = UserVideo.objects.filter(video=video).order_by('added_on')[:1]
+    
 
     context['video'] = video
     context['is_share'] = True
     context['commenters'] = commenters
     context['path'] = request.path
-
-    if len(found_by) > 0:
-        context['found_by'] = found_by[0].user
+    context['found_by'] = video.found_by()
 
     if username is not None:
         request.session['share'] = context

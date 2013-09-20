@@ -119,6 +119,13 @@ class Video(models.Model):
     def get_share_url(self):
         return reverse('video-share', kwargs={'video_id': str(self.video_id)})
 
+    @property
+    def found_by(self):
+        found_by = UserVideo.objects.filter(video=self).order_by('added_on')[:1]
+        if len(found_by) > 0:
+            return found_by[0].user
+        return None
+
     def default_thumbnail(self):
         try:
             return self.thumbnail_set.all()[0]
