@@ -41,7 +41,7 @@ def get_profile_header(username):
     top_video_actions = Action.objects.filter(verb='viewed video') \
         .values('action_object_object_id') \
         .annotate(views=Count('id')) \
-        .order_by('-views')[:5]
+        .order_by('-views')[:3]
     top_video_ids = [v.get('action_object_object_id')
                      for v in top_video_actions]
     top_videos = Video.objects.filter(id__in=top_video_ids)
@@ -50,7 +50,7 @@ def get_profile_header(username):
         ['commented on', 'replied to comment']) \
         .values('actor_object_id') \
         .annotate(comments=Count('id')) \
-        .order_by('-comments')[:10]
+        .order_by('-comments')[:12]
     top_user_ids = [u.get('actor_object_id') for u in top_user_actions]
     top_users = User.objects.filter(id__in=top_user_ids)
 

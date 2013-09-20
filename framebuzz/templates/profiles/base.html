@@ -151,7 +151,7 @@
                                             <ul>
                                                 {% for video in top_videos %}
                                                     <li class="shown">
-                                                      <a class="thumbnail-link tooltip" data-placement="right" title="{{ video.title|title }}" href="{% url 'profiles-share' profile_user.username video.video_id %}">
+                                                      <a class="thumbnail-link tooltip" data-placement="bottom" title="{{ video.title|title }}" href="{% url 'profiles-share' profile_user.username video.video_id %}">
                                                             <img class="video-thumbnail lazy" height="107" width="190" src="{{ video.large_thumbnail }}" />
                                                             <i class="icon-play"></i>
                                                         </a>
