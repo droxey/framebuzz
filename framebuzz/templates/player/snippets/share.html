@@ -1,6 +1,6 @@
 {% load avatar_tags profile_tags comments %}
 
-{% regroup commenters by actor as commenter_list %}
+{% regroup commenters by actor.username as commenter_list %}
 <div id="share"{% if not profile_user %} class="standalone"{% endif %}>
     <div id="share-container" class="clearfix">
         <div id="stats-container">
@@ -47,19 +47,19 @@
                             <li class="user">
                                 {% if found_by %}
                                     <h2>Found By</h2>
-                                    <a href="{% url 'profiles-home' found_by.username %}">
+                                    <a class="tooltip" data-placement="bottom" title="{{ found_by|display_name }}" href="{% url 'profiles-home' found_by.username %}">
                                         <img src="{% avatar_url found_by 110 %}" alt="" height="55" width="55" class="img-circle" />
                                     </a>
                                 {% else %}
                                     <h2>Add to Library</h2>
-                                    <a href="">
+                                    <a class="add-to-library video-toggle-button" href="{% url 'profiles-toggle-library' request.user.username video.video_id %}">
                                         <i class="icon-plus-sign-alt"></i>
                                     </a>
                                 {% endif %}
                             </li>
                             <li class="description">
                                 <h2>Description</h2>
-                                <p>{{ video.formatted_description }}</p>
+                                <p>{{ video.formatted_description|linebreaks }}</p>
                             </li>
                             <li class="commenters">
                                 <h2>Commenters</h2>

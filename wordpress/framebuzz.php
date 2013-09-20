@@ -43,7 +43,7 @@ add_action('admin_menu', 'framebuzz_plugin_settings');
 
 //action to add a custom button to the content editor
 function add_framebuzz_button($context) {
-    $default  = '[framebuzz src=http://frame.bz/v/_-uH4_kDfow width=640 height=440]';
+    $default  = '[framebuzz src=http://frame.bz/v/_-uH4_kDfow width=580 height=360]';
     $href     = 'href="javascript:send_to_editor(\''.$default.'\');"';
     $href     = 'href="#TB_inline&width=750&inlineId=framebuzz_container"';
     $href     = 'href="#TB_inline?xx=xx&inlineId=framebuzz_container&width=750"';
@@ -90,7 +90,7 @@ if ( ! function_exists( 'framebuzz_embed_shortcode' ) ) :
 			}
 		}
 
-        $html  = "\n".'<!-- framebuzz plugin v.1.0 wordpress.org/plugins/framebuzz/ -->'."\n";
+        $html  = "\n".'<!-- framebuzz plugin v.1.1 wordpress.org/plugins/framebuzz/ -->'."\n";
 		$html .= '<iframe ';
         foreach( $atts as $attr => $value ) {
     		if( $value != '' ) { // adding all attributes
