@@ -133,6 +133,34 @@
                                         {% endif %}
                                     {% endif %}
                                 </div>
+                                {% if request.user.is_authenticated and profile_user.id == request.user.id %}
+                                    <div class="recommendations clearfix">
+                                        <h2>Recommendations</h2>
+                                        <div class="users">
+                                            <ul class="clearfix">
+                                                {% for user in top_users %}
+                                                    <li class="shown">
+                                                        <a class="tooltip" data-placement="bottom" title="{{ user|display_name }}" href="{% url 'profiles-home' user.username %}">
+                                                            <img src="{% avatar_url user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="videos">
+                                            <ul>
+                                                {% for video in top_videos %}
+                                                    <li class="shown">
+                                                      <a class="thumbnail-link tooltip" data-placement="right" title="{{ video.title|title }}" href="{% url 'profiles-share' profile_user.username video.video_id %}">
+                                                            <img class="video-thumbnail lazy" height="107" width="190" src="{{ video.large_thumbnail }}" />
+                                                            <i class="icon-play"></i>
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </div>
                         </nav>
                         <div class="tab-content span7">

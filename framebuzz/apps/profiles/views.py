@@ -38,9 +38,23 @@ def get_profile_header(username):
     profile_library = UserVideo.objects.filter(user=user)
     ct = ContentType.objects.get(model='user')
 
-    top_video_actions = Action.objects.filter(verb='viewed video').annotate(views=Count('verb')).order_by('-views')[:5]
-    top_videos = [a.action_object for a in top_video_actions]
-    print top_videos[:5]
+    top_video_actions = Action.objects.filter(verb='viewed video') \
+        .values('action_object_object_id') \
+        .annotate(views=Count('id')) \
+        .order_by('-views')[:5]
+    top_video_ids = [v.get('action_object_object_id')
+                     for v in top_video_actions]
+    top_videos = Video.objects.filter(id__in=top_video_ids)
+
+    top_user_actions = Action.objects.filter(verb__in=
+        ['commented on', 'replied to comment']) \
+        .values('actor_object_id') \
+        .annotate(comments=Count('id')) \
+        .order_by('-comments')[:10]
+    top_user_ids = [u.get('actor_object_id') for u in top_user_actions]
+    top_users = User.objects.filter(id__in=top_user_ids)
+
+    print top_users
 
     return {
         'profile_favorites': profile_favorites,
@@ -49,7 +63,9 @@ def get_profile_header(username):
         'profile_following': profile_following,
         'profile_user': user,
         'profile_library': profile_library,
-        'user_content_type': ct
+        'user_content_type': ct,
+        'top_videos': top_videos,
+        'top_users': top_users,
     }
 
 

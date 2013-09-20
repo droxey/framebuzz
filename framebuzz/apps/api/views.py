@@ -34,6 +34,9 @@ def video_embed(request, video_id):
     mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
     webm_url = 'http://www.ytapi.com/api/%s/direct/44/' % video_id
 
+    if request.user.is_authenticated():
+        action.send(request.user, verb='viewed video', action_object=video)
+
     return render_to_response('player/video_embed.html', {
         'close_window': request.GET.get('close', None),
         'video': video,
