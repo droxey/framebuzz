@@ -79,7 +79,7 @@ div.marketing-content {
         height: 100%;
         padding-bottom: 0;
         overflow: visible;
-        min-height: 900px;
+        /* min-height: 900px; */
 
         div.wrapper {
             width: 1180px;
@@ -90,6 +90,7 @@ div.marketing-content {
                 width: 100%;
 
                 #profile-container {
+                    margin-bottom: 37px;
                     position: relative;
                     z-index: 1;
 
@@ -98,12 +99,18 @@ div.marketing-content {
                         box-shadow: -2px 0px 0px 3px rgba(0, 0, 0, 0.1);
                         float: left;
                         height: 100%;
-                        min-height: 850px;
+                        /* min-height: 850px; */
                         margin-left: 8px;
+
                         padding: 27px 6px;
                         position: absolute;
                         width: 28%;
                         @include single-transition(background-color 10ms ease-out);
+
+                        a.fileupload { 
+                            opacity: 0; 
+                            @include single-transition(opacity 11ms ease-out);
+                        }
 
                         ul {
                             border-top: 1px solid rgba(255, 255, 255, 0.5);
@@ -411,6 +418,11 @@ div.marketing-content {
                             &:hover {
                                 background: rgba(0, 0, 0, 0.15);
                                 @include single-transition(background-color 10ms ease-in);
+
+                                a.fileupload { 
+                                    opacity: 1; 
+                                    @include single-transition(opacity 9ms ease-in);
+                                }
                                 
                                 .editable {
                                     border-bottom: 1px dashed rgba(255, 255, 255, 0.5) !important;
