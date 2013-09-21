@@ -12,7 +12,8 @@ ADMINS = (
     ('Dani Roxberry', 'dani@framebuzz.com'),
 )
 
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', 'framebuzz.com', 'frame.bz',]
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0',
+                 'localhost', 'framebuzz.com', 'frame.bz', ]
 
 MANAGERS = ADMINS
 
@@ -43,9 +44,9 @@ USE_L10N = True
 USE_TZ = True
 
 
-#############
+#
 # DATABASES #
-#############
+#
 
 DATABASES = {
     "default": {
@@ -81,9 +82,9 @@ CACHES = {
 }
 
 
-#########
+#
 # PATHS #
-#########
+#
 
 import os
 
@@ -126,7 +127,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # List of callables that know how to import templates from various sources.
@@ -330,7 +331,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # Django-Tracking:
-NO_TRACKING_PREFIXES = ['/admin/',]
+NO_TRACKING_PREFIXES = ['/admin/', ]
 
 # Django-Avatar Settings:
 AVATAR_ALLOWED_FILE_EXTS = ['.jpg', '.png']
@@ -349,11 +350,11 @@ EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = 'info@framebuzz.com'
 
 TEMPLATED_EMAIL_DJANGO_SUBJECTS = {
-    'favorites-notification':'FrameBuzz: New Favorite!',
-    'following-notification':'You have a new fan on FrameBuzz.',
-    'passwordchange-notification':'FrameBuzz: Password Reset Requested',
-    'reply-notification':'FrameBuzz: New Comment Reply!',
-    'welcome-newuser':'Thanks for joining FrameBuzz.',
+    'favorites-notification': 'FrameBuzz: New Favorite!',
+    'following-notification': 'You have a new fan on FrameBuzz.',
+    'passwordchange-notification': 'FrameBuzz: Password Reset Requested',
+    'reply-notification': 'FrameBuzz: New Comment Reply!',
+    'welcome-newuser': 'Thanks for joining FrameBuzz.',
     'share-email': 'FrameBuzz: Check out this video!'
 }
 
@@ -385,18 +386,18 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'standard': {
-            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt' : "%d/%b/%Y %H:%M:%S"
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
         },
     },
     'handlers': {
         'null': {
-            'level':'DEBUG',
-            'class':'django.utils.log.NullHandler',
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
         },
-        'console':{
-            'level':'INFO',
-            'class':'logging.StreamHandler',
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
             'formatter': 'standard'
         },
         'sentry': {
@@ -406,9 +407,9 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers':['console', 'sentry'],
+            'handlers': ['console', 'sentry'],
             'propagate': True,
-            'level':'WARN',
+            'level': 'WARN',
         },
         'django.db.backends': {
             'handlers': ['console', 'sentry'],
@@ -428,7 +429,7 @@ LOGGING = {
     }
 }
 
-#Django-debug-toolbar
+# Django-debug-toolbar
 INTERNAL_IPS = ('127.0.0.1',)
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
@@ -440,44 +441,44 @@ SOCKJS_CLASSES = (
     'framebuzz.apps.api.sockserver.ConnectionHandler',
 )
 
-## Dashboard
+# Dashboard
 LOGIN_URL = '/accounts/login/'
 
 SHARE_COUNT_URLS = {
-#    'facebook': 'https://graph.facebook.com/fql?q=SELECT%20url,%20normalized_url,%20share_count,%20like_count,%20comment_count,%20total_count,commentsbox_count,%20comments_fbid,%20click_count%20FROM%20link_stat%20WHERE%20url=%27%s%27&callback=?',
+    #    'facebook': 'https://graph.facebook.com/fql?q=SELECT%20url,%20normalized_url,%20share_count,%20like_count,%20comment_count,%20total_count,commentsbox_count,%20comments_fbid,%20click_count%20FROM%20link_stat%20WHERE%20url=%27%s%27&callback=?',
     'facebook': 'http://api.ak.facebook.com/restserver.php?v=1.0&method=links.getStats&urls=%s&format=json',
     'google': 'https://plusone.google.com/_/+1/fastbutton?url=%s&count=true',
     'twitter': 'http://cdn.api.twitter.com/1/urls/count.json?url=%s&callback=?',
 }
 
 
-###################
+#
 # DEPLOY SETTINGS #
-###################
+#
 
 # These settings are used by the default fabfile.py provided.
 # Check fabfile.py for defaults.
 
 # FABRIC = {
-#     "SSH_USER": "", # SSH username
-#     "SSH_PASS":  "", # SSH password (consider key-based authentication)
-#     "SSH_KEY_PATH":  "", # Local path to SSH key file, for key-based auth
-#     "HOSTS": [], # List of hosts to deploy to
-#     "VIRTUALENV_HOME":  "", # Absolute remote path for virtualenvs
-#     "PROJECT_NAME": "", # Unique identifier for project
-#     "REQUIREMENTS_PATH": "", # Path to pip requirements, relative to project
-#     "GUNICORN_PORT": 8000, # Port gunicorn will listen on
-#     "LOCALE": "en_US.UTF-8", # Should end with ".UTF-8"
-#     "LIVE_HOSTNAME": "www.example.com", # Host for public site.
-#     "REPO_URL": "", # Git or Mercurial remote repo URL for the project
-#     "DB_PASS": "", # Live database password
-#     "ADMIN_PASS": "", # Live admin user password
+# "SSH_USER": "", # SSH username
+# "SSH_PASS":  "", # SSH password (consider key-based authentication)
+# "SSH_KEY_PATH":  "", # Local path to SSH key file, for key-based auth
+# "HOSTS": [], # List of hosts to deploy to
+# "VIRTUALENV_HOME":  "", # Absolute remote path for virtualenvs
+# "PROJECT_NAME": "", # Unique identifier for project
+# "REQUIREMENTS_PATH": "", # Path to pip requirements, relative to project
+# "GUNICORN_PORT": 8000, # Port gunicorn will listen on
+# "LOCALE": "en_US.UTF-8", # Should end with ".UTF-8"
+# "LIVE_HOSTNAME": "www.example.com", # Host for public site.
+# "REPO_URL": "", # Git or Mercurial remote repo URL for the project
+# "DB_PASS": "", # Live database password
+# "ADMIN_PASS": "", # Live admin user password
 # }
 
 
-##################
+#
 # LOCAL SETTINGS #
-##################
+#
 
 # Allow any settings to be defined in local_settings.py which should be
 # ignored in your version control system allowing for settings to be

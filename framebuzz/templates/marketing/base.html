@@ -37,6 +37,9 @@
     {% block page_css %}{% endblock %}
     {% compress js %}
       <script type="text/javascript">
+          var isMobile = '{{ is_mobile|lower }}' === 'true';
+          console.log(isMobile);
+
         (function() {
           var config = {
             kitId: 'jbo8iic',
@@ -109,14 +112,14 @@
       </div>
     </div>
   </div>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="{% static 'framebuzz/marketing/js/spin.min.js' %}"></script>
-    <script src="{% static 'framebuzz/marketing/js/jquery.spin.js' %}"></script>
     {% compress js %}
+        <script src="{% static 'framebuzz/marketing/js/jquery-latest.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/jquery-ui.js' %}"></script>
         <script src="{% static 'framebuzz/dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/jquery.sharrre-1.3.4.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/jquery.highlight.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/spin.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/jquery.spin.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.share.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.search.js' %}"></script>
     {% endcompress %}
