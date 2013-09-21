@@ -21,6 +21,11 @@ def server_404(request):
     return response
 
 
+def mobile(request):
+    return render_to_response('marketing/mobile.html', {
+    }, context_instance=RequestContext(request))
+
+
 def home(request):
     return render_to_response('marketing/home.html', {
     }, context_instance=RequestContext(request))

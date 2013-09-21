@@ -1,0 +1,74 @@
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress feedback_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>FrameBuzz</title>
+    {% compress js %}
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            kitId: 'jbo8iic',
+            scriptTimeout: 3000
+          };
+          var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+        })();
+      </script>
+    {% endcompress %}
+    {% compress css %}
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/font-awesome.css' %}" type="text/css" rel="stylesheet" />
+        <style type="text/css">
+            body { background: #0d0d0d; color: #666; font: 500 21px/24px 'futura-pt-condensed', Helvetica, Arial, sans-serif; }
+            .wf-loading div.wrapper { visibility: hidden; }
+            .wrapper { margin: 0 auto; width: 320px; }
+            #logo { margin: 20px auto; width: 280px; }
+            #logo img { height: 50px; width: 280px; }
+            #message { background: white; border: 3px solid #2289ba; border-radius: 24px; -webkit-box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.6); -moz-box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.6); box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.6);padding: 12px; }
+            #message p { text-align: center; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); }
+            #links table { margin-top: 24px; }
+            #links table tr td { line-height: 32px; padding: 0 6px; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
+            #links table tr td a { border-radius: 50%; box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1); display: block; height: 32px; width: 32px; }
+            #links table tr td a.facebook { background-color: #3B5998; }
+            #links table tr td a.google { background-color: #D34836; }
+            #links table tr td a.twitter { background-color: #4099FF; }
+            #links table tr td a img { height: 16px; padding: 0 8px; width: 16px; }
+        </style>
+    {% endcompress %}
+  </head>
+  <body>
+    <div class="wrapper">
+        <div id="logo">
+            <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="50" width="280" />
+        </div>
+        <div id="message">
+            <p>Hey there! Sorry we're in beta, but check us out on your computer!</p>
+        </div>
+        <div id="links">
+            <table cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>Visit us on:</td>
+                        <td>
+                            <a title="Facebook" class="socialaccount_provider facebook img-circle" href="javascript:FB_login('')">
+                                <img src="/static/framebuzz/dashboard/img/social_icons/facebook.png" height="16" width="16" alt="facebook">
+                           </a>
+                        </td>
+                        <td>
+                            <a title="Twitter" class="socialaccount_provider twitter img-circle" href="/accounts/twitter/login/">
+                                <img src="/static/framebuzz/dashboard/img/social_icons/twitter.png" height="16" width="16" alt="twitter">
+                      
+                            </a>
+                        </td>
+                        <td>
+                            <a title="Google" class="socialaccount_provider google img-circle" href="/accounts/google/login/">
+                                <img src="/static/framebuzz/dashboard/img/social_icons/google.png" height="16" width="16" alt="google">
+                      
+                           </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </body>
