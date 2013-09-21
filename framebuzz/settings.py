@@ -178,7 +178,7 @@ MIDDLEWARE_CLASSES = (
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
 
-    'django_mobile.middleware.MobileDetectionMiddleware',
+    'framebuzz.apps.marketing.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
 
     'watson.middleware.SearchContextMiddleware',

@@ -4,6 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=false;">
     <title>FrameBuzz</title>
     {% compress js %}
       <script type="text/javascript">
@@ -21,12 +22,12 @@
         <style type="text/css">
             body { background: #0d0d0d; color: #666; font: 500 21px/24px 'futura-pt-condensed', Helvetica, Arial, sans-serif; }
             .wf-loading div.wrapper { visibility: hidden; }
-            .wrapper { margin: 0 auto; width: 320px; }
-            #logo { margin: 20px auto; width: 280px; }
-            #logo img { height: 50px; width: 280px; }
-            #message { background: white; border: 3px solid #2289ba; border-radius: 24px; -webkit-box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.6); -moz-box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.6); box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.6);padding: 12px; }
+            .wrapper { margin: 0 auto; width: 290px; }
+            #logo { margin: 20px 0; }
+            #logo img { height: 44px; padding: 0 20px; width: 250px; }
+            #message { background: white; border: 3px solid #2289ba; border-radius: 24px; -webkit-box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.6); -moz-box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.6); box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.6); margin: 0 10px; padding: 12px; width: 246px; }
             #message p { text-align: center; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); }
-            #links table { margin-top: 24px; }
+            #links table { margin: 24px auto 0; width: 215px; }
             #links table tr td { line-height: 32px; padding: 0 6px; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
             #links table tr td a { border-radius: 50%; box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1); display: block; height: 32px; width: 32px; }
             #links table tr td a.facebook { background-color: #3B5998; }
@@ -39,7 +40,7 @@
   <body>
     <div class="wrapper">
         <div id="logo">
-            <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="50" width="280" />
+            <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="88" width="500" />
         </div>
         <div id="message">
             <p>Hey there! Sorry we're in beta, but check us out on your computer!</p>
@@ -50,20 +51,18 @@
                     <tr>
                         <td>Visit us on:</td>
                         <td>
-                            <a title="Facebook" class="socialaccount_provider facebook img-circle" href="javascript:FB_login('')">
-                                <img src="/static/framebuzz/dashboard/img/social_icons/facebook.png" height="16" width="16" alt="facebook">
+                            <a title="Facebook" class="socialaccount_provider facebook img-circle" href="http://facebook.com/framebuzz">
+                                <img src="/static/framebuzz/dashboard/img/social_icons/facebook.png" height="32" width="32" alt="facebook">
                            </a>
                         </td>
                         <td>
-                            <a title="Twitter" class="socialaccount_provider twitter img-circle" href="/accounts/twitter/login/">
-                                <img src="/static/framebuzz/dashboard/img/social_icons/twitter.png" height="16" width="16" alt="twitter">
-                      
+                            <a title="Twitter" class="socialaccount_provider twitter img-circle" href="http://twitter.com/framebuzz">
+                                <img src="/static/framebuzz/dashboard/img/social_icons/twitter.png" height="32" width="32" alt="twitter">
                             </a>
                         </td>
                         <td>
-                            <a title="Google" class="socialaccount_provider google img-circle" href="/accounts/google/login/">
-                                <img src="/static/framebuzz/dashboard/img/social_icons/google.png" height="16" width="16" alt="google">
-                      
+                            <a title="Google" class="socialaccount_provider google img-circle" href="https://plus.google.com/110572112311049789354">
+                                <img src="/static/framebuzz/dashboard/img/social_icons/google.png" height="32" width="32" alt="google">
                            </a>
                         </td>
                     </tr>

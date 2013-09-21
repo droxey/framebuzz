@@ -19,12 +19,6 @@
     {% compress js %}
       <script type="text/javascript">
         (function() {
-          var isMobile = '{{ is_mobile|lower }}' === 'true';
-          if (isMobile) {
-            window.location.href = "{% url 'mobile' %}";
-          }
-        })(); 
-        (function() {
           var config = {
             kitId: 'jbo8iic',
             scriptTimeout: 3000
