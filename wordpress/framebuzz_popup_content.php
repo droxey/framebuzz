@@ -8,7 +8,7 @@
     if (i >= 0){
       video = video.substring(i+3, 100);
     }
-    var link  = '[framebuzz src=http://frame.bz/v/'+video+' width=640 height=440]';
+    var link  = '[framebuzz src=http://frame.bz/v/'+video+' width=580 height=360]';
     send_to_editor(link);
     tb_remove();
   }
