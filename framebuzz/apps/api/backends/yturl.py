@@ -56,12 +56,10 @@ def get_url(url, itag, request):
     ip = get_client_ip(request)
     ua = request.META.get('HTTP_USER_AGENT')
 
-    print ip
-
-    ydl = SimpleYDL('75.13.90.154', {'outtmpl': '%(title)s',
-                                     'referer': ip,
-                                     'user-agent': str(ua),
-                                     'format': str(itag)})
+    ydl = SimpleYDL(ip, {'outtmpl': '%(title)s',
+                         'referer': ip,
+                         'user-agent': str(ua),
+                         'format': str(itag)})
     res = ydl.extract_info(url, download=False)
 
     #Do not return yet playlists
