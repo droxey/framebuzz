@@ -44,7 +44,6 @@ class SimpleYDL(youtube_dl.YoutubeDL):
     def __init__(self, ip, *args, **kargs):
         handler = BoundHTTPHandler(source_address=(ip, 0))
         opener = urllib2.build_opener(handler, youtube_dl.YoutubeDLHandler())
-        opener.addheaders = ['X-GData-Device']
         urllib2.install_opener(opener)
 
         logger.info('IP ADDRESS: %s', str(ip))
