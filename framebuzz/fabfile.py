@@ -492,9 +492,6 @@ def deploy():
         with update_changed_requirements():
             pass
 
-        # Keep youtube-dl updated always.
-        pip('-U youtube-dl')
-
         manage("collectstatic -v 0 --noinput")
         manage("syncdb --noinput")
         manage("migrate --noinput")
