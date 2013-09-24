@@ -1,24 +1,37 @@
 import youtube_dl
-import functools
-import httplib
-import urllib2
-import subprocess
 import logging
-
+import socket
 from framebuzz.apps.api.utils import get_client_ip
 
 logger = logging.getLogger('console')
 
+import urllib2, httplib, socket
 
-class BoundHTTPHandler(urllib2.HTTPHandler):
 
-    def __init__(self, source_address=None, debuglevel=0):
-        urllib2.HTTPHandler.__init__(self, debuglevel)
-        self.http_class = functools.partial(httplib.HTTPConnection,
-                                            source_address=source_address)
+class BindableHTTPConnection(httplib.HTTPConnection):
+    def connect(self):
+        """Connect to the host and port specified in __init__."""
+        self.sock = socket.socket()
+        self.sock.bind((self.source_ip, 0))
+        if isinstance(self.timeout, float):
+            self.sock.settimeout(self.timeout)
+        self.sock.connect((self.host, self.port))
+
+
+def BindableHTTPConnectionFactory(source_ip):
+    def _get(host, port=None, strict=None, timeout=0):
+        bhc = BindableHTTPConnection(host, port=port, strict=strict, timeout=timeout)
+        bhc.source_ip = source_ip
+        return bhc
+    return _get
+
+
+class BindableHTTPHandler(youtube_dl.utils.compat_urllib_request.HTTPHandler):
+    def __init__(self, ip):
+        self.ip = ip
 
     def http_open(self, req):
-        return self.do_open(self.http_class, req)
+        return self.do_open(BindableHTTPConnectionFactory(self.ip), req)
 
 
 class NoneFile(object):
@@ -44,10 +57,10 @@ class SimpleYDL(youtube_dl.YoutubeDL):
     def __init__(self, ip, params):
         super(SimpleYDL, self).__init__(params)
 
-        handler = BoundHTTPHandler(source_address=(ip, 0))
-        opener = urllib2.build_opener(handler, youtube_dl.YoutubeDLHandler())
-        urllib2.install_opener(opener)
-        youtube_dl.utils.compat_urllib_request.install_opener(opener)
+        if params.get('bindip', None):
+            ip = params['bindip']
+            opener = urllib2.build_opener(BindableHTTPHandler(ip))
+            youtube_dl.utils.compat_urllib_request.install_opener(opener)
 
         self._screen_file = ScreenFile()
         self._ies = youtube_dl.gen_extractors()
@@ -64,7 +77,8 @@ def get_url(url, itag, request):
     ydl = SimpleYDL(ip, {'outtmpl': '%(title)s',
                          'referer': ip,
                          'user-agent': str(ua),
-                         'format': str(itag)})
+                         'format': str(itag),
+                         'bindip': ip})
     res = ydl.extract_info(url, download=False)
 
     #Do not return yet playlists
