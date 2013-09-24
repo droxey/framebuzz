@@ -7,7 +7,7 @@ import logging
 
 from framebuzz.apps.api.utils import get_client_ip
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('console')
 
 
 class BoundHTTPHandler(urllib2.HTTPHandler):

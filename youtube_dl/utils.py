@@ -665,6 +665,7 @@ class YoutubeDLHandler(compat_urllib_request.HTTPHandler):
             if 'User-agent' in req.headers:
                 del req.headers['User-agent']
             req.headers['User-agent'] = req.headers['Youtubedl-user-agent']
+            req.headers['X-GData-Device'] = ''
             del req.headers['Youtubedl-user-agent']
         return req
 
