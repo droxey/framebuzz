@@ -3,8 +3,11 @@ import functools
 import httplib
 import urllib2
 import subprocess
+import logging
 
 from framebuzz.apps.api.utils import get_client_ip
+
+logger = logging.getLogger(__name__)
 
 
 class BoundHTTPHandler(urllib2.HTTPHandler):
@@ -40,11 +43,14 @@ class ScreenFile(NoneFile):
 class SimpleYDL(youtube_dl.YoutubeDL):
     def __init__(self, ip, *args, **kargs):
         handler = BoundHTTPHandler(source_address=(ip, 0))
-        opener = urllib2.build_opener(handler)
+        opener = urllib2.build_opener(handler, youtube_dl.YoutubeDLHandler())
+        opener.addheaders = ['X-GData-Device']
         urllib2.install_opener(opener)
-        youtube_dl.utils.compat_urllib_request.install_opener(opener)
+
+        logger.info('IP ADDRESS: %s', str(ip))
 
         super(SimpleYDL, self).__init__(*args, **kargs)
+        youtube_dl.utils.compat_urllib_request.install_opener(opener)
 
         self._screen_file = ScreenFile()
         self._ies = youtube_dl.gen_extractors()
