@@ -32,13 +32,12 @@ def video_test(request, video_id):
 def video_embed(request, video_id):
     video, created = get_or_create_video(video_id)
     next_url = '%s?close=true' % reverse('video-embed', args=(video.video_id,))
-    ip = get_client_ip(request)
 
     mp4 = 'http://www.youtube.com/watch?v=%s' % video_id
     webm = 'http://www.youtube.com/watch?v=%s' % video_id
 
-    mp4_url = get_url(mp4, 18, ip)
-    webm_url = get_url(webm, 44, ip)
+    mp4_url = get_url(mp4, 18, request)
+    webm_url = get_url(webm, 44, request)
 
     if request.user.is_authenticated():
         action.send(request.user, verb='viewed video', action_object=video)

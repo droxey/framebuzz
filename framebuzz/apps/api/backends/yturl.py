@@ -1,20 +1,20 @@
-import json
+import subprocess
+from youtube_dl import parseOpts, YoutubeDL
+from framebuzz.apps.api.utils import get_client_ip
 
-from youtube_dl.extractor.youtube import YoutubeIE
-from youtube_dl import YoutubeDL
+def get_url(url, itag, request):
+    ip = get_client_ip(request)
+    ua = request.META.get('HTTP_USER_AGENT')
 
+    argv = 'youtube-dl -f %s --referer %s --user-agent "%s" %s --get-url --verbose'\
+        % (str(itag), str(ip), str(ua), url)
 
-def get_url(url, itag, referrer_ip):
-    youtube_dl = YoutubeDL(params={'simulate': True,
-                                   'skip_download': True,
-                                   'outtmpl': '%(title)s',
-                                   'format': str(itag),
-                                   'referrer': referrer_ip})
-    yt_extractor = YoutubeIE()
+    output = subprocess.check_output(argv, shell=True)
+    return output
+    #ydl = YoutubeDL(params=opts)
+    #ydl.add_default_info_extractors()
+    #info = ydl.extract_info(url)
 
-    youtube_dl.add_info_extractor(yt_extractor)
-    info = youtube_dl.extract_info(url)
-
-    if info.get('entries', None):
-        first_entry = info['entries'][0]
-        return first_entry.get('url')
+    #if info.get('entries', None):
+    #    first_entry = info['entries'][0]
+    #    return first_entry.get('url')
