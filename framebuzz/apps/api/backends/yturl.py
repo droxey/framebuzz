@@ -138,10 +138,6 @@ class SimpleYDL(youtube_dl.YoutubeDL):
 
         if params.get('bindip', None):
             ip = params['bindip']
-            handler = UserIPYoutubeDLHandler(source_address=ip)
-            opener = urllib2.build_opener(handler)
-            youtube_dl.utils.compat_urllib_request.install_opener(opener)
-
             self.fd = UserIPYoutubeDLHandler(source_address=ip)
             self.fd.params = params
 
@@ -149,7 +145,7 @@ class SimpleYDL(youtube_dl.YoutubeDL):
         self._ies = youtube_dl.gen_extractors()
 
         for ie in self._ies:
-            ie.set_downloader(self.fd)
+            ie.set_downloader(self)
 
 
 def get_url(url, itag, request):
