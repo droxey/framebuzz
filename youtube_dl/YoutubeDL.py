@@ -107,18 +107,6 @@ class YoutubeDL(object):
         self._num_downloads = 0
         self._screen_file = [sys.stdout, sys.stderr][params.get('logtostderr', False)]
 
-        # if params.get('bindip', None):
-        #     ip = params['bindip']
-        #     print 'FOUND IP: %s' % ip
-        #     true_socket = socket.socket
-
-        #     def bound_socket(*a, **k):
-        #         sock = true_socket(*a, **k)
-        #         sock.bind((ip, 0))
-        #         return sock
-
-        #     socket.socket = bound_socket
-
         if (sys.version_info >= (3,) and sys.platform != 'win32' and
                 sys.getfilesystemencoding() in ['ascii', 'ANSI_X3.4-1968']
                 and not params['restrictfilenames']):

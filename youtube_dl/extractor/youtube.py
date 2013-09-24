@@ -1507,6 +1507,7 @@ class YoutubeIE(YoutubeBaseInfoExtractor, SubtitlesInfoExtractor):
             })
         return results
 
+
 class YoutubePlaylistIE(InfoExtractor):
     IE_DESC = u'YouTube.com playlists'
     _VALID_URL = r"""(?:
