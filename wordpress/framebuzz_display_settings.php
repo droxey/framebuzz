@@ -1,5 +1,5 @@
     <div class="login-wrapper">
-    <img alt="FrameBuzz" src="http://frame.bz/static/marketing/img/framebuzz_for_wordpress.png" class="fbimg2">
+    <img alt="FrameBuzz" src="http://frame.bz/static/framebuzz/marketing/img/framebuzz_for_wordpress.png" class="fbimg2">
     <div class="box">
         <div class="fieldWrapper">
            <h6>Register your YouTube ID</h6>
