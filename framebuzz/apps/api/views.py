@@ -33,11 +33,11 @@ def video_embed(request, video_id):
     video, created = get_or_create_video(video_id)
     next_url = '%s?close=true' % reverse('video-embed', args=(video.video_id,))
 
-    mp4 = 'http://www.youtube.com/watch?v=%s' % video_id
-    webm = 'http://www.youtube.com/watch?v=%s' % video_id
+    mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
+    webm_url = 'http://www.ytapi.com/api/%s/direct/44/' % video_id
 
-    mp4_url = get_url(mp4, 18, request)
-    webm_url = get_url(webm, 44, request)
+    #mp4_url = get_url(mp4, 18, request)
+    #webm_url = get_url(webm, 44, request)
 
     if request.user.is_authenticated():
         action.send(request.user, verb='viewed video', action_object=video)
