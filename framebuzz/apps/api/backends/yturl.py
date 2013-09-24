@@ -6,7 +6,7 @@ def get_url(url, itag, request):
     ip = get_client_ip(request)
     ua = request.META.get('HTTP_USER_AGENT')
 
-    argv = 'youtube-dl -f %s --referer %s --user-agent "%s" %s --get-url --verbose'\
+    argv = 'youtube-dl -f %s --referer %s --user-agent "%s" %s --cookies=cookies.txt --skip-download --get-url --verbose'\
         % (str(itag), str(ip), str(ua), url)
 
     output = subprocess.check_output(argv, shell=True)
