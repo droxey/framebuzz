@@ -41,14 +41,12 @@ class ScreenFile(NoneFile):
 
 
 class SimpleYDL(youtube_dl.YoutubeDL):
-    def __init__(self, ip, *args, **kargs):
+    def __init__(self, ip, params):
+        super(SimpleYDL, self).__init__(params)
+
         handler = BoundHTTPHandler(source_address=(ip, 0))
         opener = urllib2.build_opener(handler, youtube_dl.YoutubeDLHandler())
         urllib2.install_opener(opener)
-
-        logger.info('IP ADDRESS: %s', str(ip))
-
-        super(SimpleYDL, self).__init__(*args, **kargs)
         youtube_dl.utils.compat_urllib_request.install_opener(opener)
 
         self._screen_file = ScreenFile()
@@ -60,6 +58,8 @@ class SimpleYDL(youtube_dl.YoutubeDL):
 def get_url(url, itag, request):
     ip = get_client_ip(request)
     ua = request.META.get('HTTP_USER_AGENT')
+    print 'IP ADDRESS: %s' % str(ip)
+    logger.info('IP ADDRESS: %s', str(ip))
 
     ydl = SimpleYDL(ip, {'outtmpl': '%(title)s',
                          'referer': ip,
