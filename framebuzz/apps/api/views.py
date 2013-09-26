@@ -15,9 +15,9 @@ from rest_framework.renderers import JSONRenderer
 
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.backends.youtube import get_or_create_video
-from framebuzz.apps.api.backends.yturl import get_url
+#from framebuzz.apps.api.backends.yturl import get_url
 from framebuzz.apps.api.serializers import UserSerializer
-from framebuzz.apps.api.utils import errors_to_json,  get_client_ip
+from framebuzz.apps.api.utils import errors_to_json
 
 
 def video_test(request, video_id):

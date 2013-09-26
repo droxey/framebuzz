@@ -21,10 +21,6 @@ angular.module('framebuzz.directives', [])
                 // cause the space to not be entered, and the video to pause.
                 enableKeyboard: false,
                 timerRate: 500,
-                //defaultVideoWidth: 640,
-                //defaultVideoHeight: 385,
-                //videoHeight: 385,
-                //videoWidth: 640,
                 enablePluginSmoothing: true,
                 autosizeProgress: false,
                 success: function(media) {

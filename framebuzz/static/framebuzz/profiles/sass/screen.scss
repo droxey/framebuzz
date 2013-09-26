@@ -14,9 +14,13 @@
  */
 
  body {
-    background-color: #2289ba; // Old browsers
-    @include filter-gradient(#a9e4f7, #2289ba, horizontal); // IE6-9 fallback on horizontal gradient
-    @include background-image(radial-gradient(center, ellipse cover, rgba(169,228,247,1) 0%,rgba(34,137,186,1) 100%));
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.6)), color-stop(100%, rgba(23, 136, 188, 1.0)));
+    background-image: -webkit-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: -moz-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: -ms-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: -o-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.5) -120%, rgba(23, 136, 188, 1.0) 100%);
  }
 
 @mixin background-image-retina($file, $type, $width, $height) {
@@ -584,7 +588,7 @@ div.marketing-content {
                                     background: #f5f5f5 !important;
                                     float: none;
                                     padding: 0;
-                                    width: 96%;
+                                    width: 97.5%;
                                     min-height: 50px !important;
 
                                     div.alert {
@@ -615,7 +619,7 @@ div.marketing-content {
                                 font-family: 'futura-pt-condensed', Helvetica, Arial, sans-serif;
                                 margin-bottom: 18px;
                                 padding: 5px;
-                                width: 96%;
+                                width: 97.5%;
 
                                 div.user-wrapper {
                                     @include border-radius(3px, 3px);
@@ -914,9 +918,9 @@ div.marketing-content {
                     }
 
                     ul.grid {
-                        max-width: 650px;
-                        list-style: none;
-                        margin: 18px auto;
+                        list-style: none outside none;
+                        margin: 18px 0 18px 9px;
+                        max-width: 652px;
                         padding: 0;
 
                         li {
