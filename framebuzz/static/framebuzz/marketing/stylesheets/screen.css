@@ -85,29 +85,36 @@ body {
   background-color: #078ac1;
 }
 
+/* line 29, ../sass/screen.scss */
+.wf-loading div.marketing-content, .wf-loading div.navbar-inner {
+  visibility: hidden;
+}
+
 /*
  *      Mixins
  */
 /*
  *      Common Elements
  */
-/* line 48, ../sass/screen.scss */
+/* line 51, ../sass/screen.scss */
 .wrapper {
   margin: 0 auto;
   width: 1200px;
 }
 
-/* line 53, ../sass/screen.scss */
+/* line 56, ../sass/screen.scss */
 .wf-loading {
   font: normal 12px/16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-/* line 57, ../sass/screen.scss */
+/* line 60, ../sass/screen.scss */
 div.navbar {
   background-color: #272727;
   box-shadow: none;
+  height: 68px;
+  overflow: hidden;
 }
-/* line 61, ../sass/screen.scss */
+/* line 66, ../sass/screen.scss */
 div.navbar div.navbar-inner {
   background: none;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMzA4KSIvPjxzdG9wIG9mZnNldD0iMC45OCIgc3RvcC1jb2xvcj0icmdiYSgwLCAwLCAwLCAwKSIvPjwvcmFkaWFsR3JhZGllbnQ+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDApIiAvPjxyZWN0IHg9Ii0yMC45MDkxJSIgeT0iLTEwMC40MiUiIHdpZHRoPSIxNTYwcHgiIGhlaWdodD0iMjAwLjg0JSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
@@ -123,7 +130,7 @@ div.navbar div.navbar-inner {
   margin: 0 auto;
   width: 97%;
 }
-/* line 76, ../sass/screen.scss */
+/* line 81, ../sass/screen.scss */
 div.navbar div.navbar-inner a.brand {
   border: none;
   padding: 8px 0px 0px 35px;
@@ -134,11 +141,11 @@ div.navbar div.navbar-inner a.brand {
   position: relative;
   top: 5px;
 }
-/* line 87, ../sass/screen.scss */
+/* line 92, ../sass/screen.scss */
 div.navbar div.navbar-inner form {
   margin: 15px 0;
 }
-/* line 90, ../sass/screen.scss */
+/* line 95, ../sass/screen.scss */
 div.navbar div.navbar-inner form i.icon-search {
   color: #AAAAAA;
   font-size: 12px;
@@ -147,7 +154,7 @@ div.navbar div.navbar-inner form i.icon-search {
   top: 9px;
   z-index: 1;
 }
-/* line 99, ../sass/screen.scss */
+/* line 104, ../sass/screen.scss */
 div.navbar div.navbar-inner form input.search-query {
   -webkit-border-radius: 5px 5px;
   -moz-border-radius: 5px / 5px;
@@ -168,7 +175,7 @@ div.navbar div.navbar-inner form input.search-query {
   -o-transition: background-color 0.1s ease-in-out;
   transition: background-color 0.1s ease-in-out;
 }
-/* line 114, ../sass/screen.scss */
+/* line 119, ../sass/screen.scss */
 div.navbar div.navbar-inner form input.search-query:focus {
   -webkit-border-radius: 5px 5px;
   -moz-border-radius: 5px / 5px;
@@ -192,37 +199,37 @@ div.navbar div.navbar-inner form input.search-query:focus {
   -o-transition: background-color 0.1s ease-in-out;
   transition: background-color 0.1s ease-in-out;
 }
-/* line 134, ../sass/screen.scss */
+/* line 139, ../sass/screen.scss */
 div.navbar div.navbar-inner form input.search-query:-moz-placeholder {
   color: #999;
 }
-/* line 137, ../sass/screen.scss */
+/* line 142, ../sass/screen.scss */
 div.navbar div.navbar-inner form input.search-query:-ms-input-placeholder {
   color: #999;
 }
-/* line 140, ../sass/screen.scss */
+/* line 145, ../sass/screen.scss */
 div.navbar div.navbar-inner form input.search-query::-webkit-input-placeholder {
   color: #999;
 }
-/* line 144, ../sass/screen.scss */
+/* line 149, ../sass/screen.scss */
 div.navbar div.navbar-inner form button {
   display: none;
 }
-/* line 147, ../sass/screen.scss */
+/* line 152, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav {
   padding: 11px 0;
   margin-left: 12px;
   width: 413px;
 }
-/* line 152, ../sass/screen.scss */
+/* line 157, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link {
   float: right;
 }
-/* line 155, ../sass/screen.scss */
+/* line 160, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link.logged-in {
   width: 90px;
 }
-/* line 159, ../sass/screen.scss */
+/* line 164, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a {
   border-left: none;
   float: left;
@@ -232,47 +239,47 @@ div.navbar div.navbar-inner ul.nav li.link a {
   padding-right: 0;
   text-transform: uppercase;
 }
-/* line 168, ../sass/screen.scss */
+/* line 173, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.dropdown-toggle {
   background-image: none;
   font-size: 19.33px;
   font-family: 'futura-pt-condensed';
 }
-/* line 173, ../sass/screen.scss */
+/* line 178, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.dropdown-toggle i {
   border-color: rgba(255, 255, 255, 0.48);
 }
-/* line 177, ../sass/screen.scss */
+/* line 182, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.dropdown-toggle b.caret {
   border-bottom-color: rgba(255, 255, 255, 0.48);
   border-top-color: rgba(255, 255, 255, 0.48);
 }
-/* line 183, ../sass/screen.scss */
+/* line 188, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.avatar {
   height: 28px;
   padding: 7px 0 7px 12px;
   width: 28px;
 }
-/* line 188, ../sass/screen.scss */
+/* line 193, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.avatar img.img-circle {
   border: 2px solid white;
   height: 28px;
   width: 28px;
 }
-/* line 196, ../sass/screen.scss */
+/* line 201, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link a.active, div.navbar div.navbar-inner ul.nav li.link a:hover {
   background: none !important;
 }
-/* line 198, ../sass/screen.scss */
+/* line 203, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu {
   margin-top: 1px;
   right: -10px;
 }
-/* line 202, ../sass/screen.scss */
+/* line 207, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li {
   font: normal 14px/18px 'proxima-nova';
 }
-/* line 205, ../sass/screen.scss */
+/* line 210, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a {
   border-left: none;
   color: rgba(33, 33, 33, 0.9);
@@ -285,12 +292,12 @@ div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a {
   -o-transition: color 0.1s ease-in-out, 1s;
   transition: color 0.1s ease-in-out, 1s;
 }
-/* line 214, ../sass/screen.scss */
+/* line 219, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a:hover {
   text-decoration: none;
   font-weight: 500;
 }
-/* line 220, ../sass/screen.scss */
+/* line 225, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a.active, div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a:hover {
   background: none;
   color: #212121;
@@ -299,54 +306,54 @@ div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li a.active, div.nav
   -o-transition: color 0.1s ease-in-out, 1s;
   transition: color 0.1s ease-in-out, 1s;
 }
-/* line 226, ../sass/screen.scss */
+/* line 231, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.link ul.dropdown-menu li strong {
   font-weight: 500;
 }
-/* line 233, ../sass/screen.scss */
+/* line 238, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.divider-vertical {
   float: right;
   position: relative;
   top: 2px;
 }
-/* line 239, ../sass/screen.scss */
+/* line 244, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social {
   float: right;
   padding-right: 15px;
 }
-/* line 243, ../sass/screen.scss */
+/* line 248, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a {
   display: block;
   width: auto;
 }
-/* line 247, ../sass/screen.scss */
+/* line 252, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a.facebook {
   background-color: #3B5998;
 }
-/* line 248, ../sass/screen.scss */
+/* line 253, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a.twitter {
   background-color: #4099FF;
 }
-/* line 249, ../sass/screen.scss */
+/* line 254, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a.google {
   background-color: #D34836;
 }
-/* line 251, ../sass/screen.scss */
+/* line 256, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a img {
   padding: 3px 0px;
   height: 16px;
   width: 16px;
 }
-/* line 257, ../sass/screen.scss */
+/* line 262, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a .share {
   float: left;
 }
-/* line 261, ../sass/screen.scss */
+/* line 266, ../sass/screen.scss */
 div.navbar div.navbar-inner ul.nav li.social a .count {
   float: right;
 }
 
-/* line 270, ../sass/screen.scss */
+/* line 275, ../sass/screen.scss */
 div.search-results {
   background: #343434;
   color: white;
@@ -360,78 +367,78 @@ div.search-results {
   width: 100%;
   z-index: 999;
 }
-/* line 284, ../sass/screen.scss */
+/* line 289, ../sass/screen.scss */
 div.search-results div.wrapper h1, div.search-results div.wrapper h2, div.search-results div.wrapper h3 {
   font: normal 26px/36px 'futura-pt-condensed';
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 289, ../sass/screen.scss */
+/* line 294, ../sass/screen.scss */
 div.search-results div.wrapper h1 {
   color: #636363;
   font-style: italic;
   margin-bottom: 11px;
   text-align: center;
 }
-/* line 295, ../sass/screen.scss */
+/* line 300, ../sass/screen.scss */
 div.search-results div.wrapper h1 strong {
   font-weight: 500;
 }
-/* line 299, ../sass/screen.scss */
+/* line 304, ../sass/screen.scss */
 div.search-results div.wrapper #results-list button.close {
   font-size: 32px;
   margin-right: 17px;
 }
-/* line 304, ../sass/screen.scss */
+/* line 309, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row {
   margin: 0 auto;
   width: 1120px;
 }
-/* line 308, ../sass/screen.scss */
+/* line 313, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 {
   margin-left: 0;
   width: 370px !important;
 }
-/* line 312, ../sass/screen.scss */
+/* line 317, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 h2 {
   color: white;
   margin-bottom: 4px;
   text-indent: 20px;
 }
-/* line 318, ../sass/screen.scss */
+/* line 323, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page {
   position: relative;
   margin-top: 16px;
   min-height: 540px;
 }
-/* line 323, ../sass/screen.scss */
+/* line 328, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page.videos-results {
   border-right: 1px solid #383838;
 }
-/* line 327, ../sass/screen.scss */
+/* line 332, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page.conversations-results {
   border-left: 1px solid #474747;
   border-right: 1px solid #474747;
 }
-/* line 332, ../sass/screen.scss */
+/* line 337, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page.users-results {
   border-left: 1px solid #383838;
 }
-/* line 337, ../sass/screen.scss */
+/* line 342, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.videos li {
   float: left;
   margin-bottom: 20px;
   width: 155px;
 }
-/* line 338, ../sass/screen.scss */
+/* line 343, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.videos li:nth-child(odd) {
   margin: 0 20px;
 }
-/* line 343, ../sass/screen.scss */
+/* line 348, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.videos li.empty {
   margin: 0;
   padding: 12px 20px;
 }
-/* line 349, ../sass/screen.scss */
+/* line 354, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.videos li h3 a {
   color: #d6d6d6;
   display: block;
@@ -442,18 +449,18 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   word-wrap: break-word;
   width: 100%;
 }
-/* line 361, ../sass/screen.scss */
+/* line 366, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.videos li img {
   border: 2px solid white;
   height: 100px;
   margin-bottom: 6px;
   width: 155px;
 }
-/* line 371, ../sass/screen.scss */
+/* line 376, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li {
   padding: 12px 20px;
 }
-/* line 374, ../sass/screen.scss */
+/* line 379, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li div.comment {
   -webkit-border-radius: 12px 12px;
   -moz-border-radius: 12px / 12px;
@@ -463,14 +470,14 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   padding: 10px 7px;
   position: relative;
 }
-/* line 381, ../sass/screen.scss */
+/* line 386, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li div.comment img.img-circle {
   border: 2px solid white;
   float: left;
   height: 32px;
   width: 32px;
 }
-/* line 388, ../sass/screen.scss */
+/* line 393, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li div.comment p {
   color: #FFFFFF;
   float: right;
@@ -479,17 +486,17 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   vertical-align: middle;
   width: 272px;
 }
-/* line 396, ../sass/screen.scss */
+/* line 401, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li div.comment p span {
   display: inline-block;
   vertical-align: -8px;
 }
-/* line 400, ../sass/screen.scss */
+/* line 405, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li div.comment p span span.highlight {
   vertical-align: 0;
   margin: 0 2px;
 }
-/* line 408, ../sass/screen.scss */
+/* line 413, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li p.description {
   color: #5f5f5f;
   font: italic 12px/14px 'proxima-nova';
@@ -498,11 +505,11 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   text-indent: 8px;
   top: 3px;
 }
-/* line 416, ../sass/screen.scss */
+/* line 421, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li p.description a {
   color: #d6d6d6;
 }
-/* line 421, ../sass/screen.scss */
+/* line 426, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.conversations li span.corner {
   bottom: -32px;
   position: absolute;
@@ -517,18 +524,18 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   border-radius: 0px / 0px;
   left: 260px;
 }
-/* line 437, ../sass/screen.scss */
+/* line 442, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li {
   padding: 12px 20px;
 }
-/* line 440, ../sass/screen.scss */
+/* line 445, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li img.img-circle {
   border: 2px solid white;
   float: left;
   height: 42px;
   width: 42px;
 }
-/* line 447, ../sass/screen.scss */
+/* line 452, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user {
   display: inline-block;
   float: left;
@@ -537,47 +544,47 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   margin-left: 5px;
   width: 270px;
 }
-/* line 455, ../sass/screen.scss */
+/* line 460, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user strong, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user span {
   color: #FFFFFF;
   display: inline-block;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 460, ../sass/screen.scss */
+/* line 465, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user strong a, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user span a {
   color: #d6d6d6;
 }
-/* line 465, ../sass/screen.scss */
+/* line 470, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user strong {
   font: normal 19px/26px 'futura-pt-condensed';
 }
-/* line 469, ../sass/screen.scss */
+/* line 474, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user span.bio {
   font: 300 12px/13px 'proxima-nova';
 }
-/* line 474, ../sass/screen.scss */
+/* line 479, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user.bio strong, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user.bio span.bio {
   position: relative;
   top: -6px;
 }
-/* line 480, ../sass/screen.scss */
+/* line 485, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul.users li div.user.bio span.bio span.highlight {
   margin: 0 1px;
 }
-/* line 487, ../sass/screen.scss */
+/* line 492, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul {
   margin-bottom: 20px;
 }
-/* line 490, ../sass/screen.scss */
+/* line 495, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul li {
   color: white;
 }
-/* line 493, ../sass/screen.scss */
+/* line 498, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul li h3 {
   color: white;
   font: normal 14px/18px 'proxima-nova';
 }
-/* line 498, ../sass/screen.scss */
+/* line 503, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul li span.highlight {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -587,32 +594,32 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   color: white;
   vertical-align: 0;
 }
-/* line 506, ../sass/screen.scss */
+/* line 511, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul li.empty {
   width: auto;
 }
-/* line 509, ../sass/screen.scss */
+/* line 514, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page ul li.empty h3.empty {
   color: white;
   font: normal 14px/18px 'proxima-nova';
   opacity: 0.75;
   height: auto;
 }
-/* line 519, ../sass/screen.scss */
+/* line 524, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination {
   position: absolute;
   bottom: 0;
 }
-/* line 523, ../sass/screen.scss */
+/* line 528, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul {
   padding-left: 10px;
 }
-/* line 526, ../sass/screen.scss */
+/* line 531, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li {
   display: inline-block;
   padding-right: 5px;
 }
-/* line 530, ../sass/screen.scss */
+/* line 535, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a {
   color: rgba(255, 255, 255, 0.9);
   display: block;
@@ -624,7 +631,7 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   -o-transition: color 0.1s ease-in-out, 1s;
   transition: color 0.1s ease-in-out, 1s;
 }
-/* line 538, ../sass/screen.scss */
+/* line 543, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.hover {
   color: white;
   -webkit-transition: color 0.1s ease-in-out, 1s;
@@ -632,22 +639,22 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   -o-transition: color 0.1s ease-in-out, 1s;
   transition: color 0.1s ease-in-out, 1s;
 }
-/* line 544, ../sass/screen.scss */
+/* line 549, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.next, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.prev {
   color: rgba(123, 123, 123, 0.9);
   display: inline;
   vertical-align: baseline;
   height: auto;
 }
-/* line 550, ../sass/screen.scss */
+/* line 555, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.next i, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.prev i {
   font-size: 14px;
 }
-/* line 552, ../sass/screen.scss */
+/* line 557, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.next.hover, div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li a.prev.hover {
   color: #7b7b7b;
 }
-/* line 558, ../sass/screen.scss */
+/* line 563, ../sass/screen.scss */
 div.search-results div.wrapper #results-list div.row div.span4 div.pagination-page div.fbz-pagination ul li.active a {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -658,7 +665,7 @@ div.search-results div.wrapper #results-list div.row div.span4 div.pagination-pa
   padding: 0 7px;
 }
 
-/* line 576, ../sass/screen.scss */
+/* line 581, ../sass/screen.scss */
 div.marketing-content {
   min-height: 620px;
   overflow: hidden;
@@ -666,18 +673,18 @@ div.marketing-content {
   top: 0;
   width: 100%;
 }
-/* line 583, ../sass/screen.scss */
+/* line 588, ../sass/screen.scss */
 div.marketing-content div.anystretch img {
   left: 0 !important;
   top: -143px !important;
 }
-/* line 588, ../sass/screen.scss */
+/* line 593, ../sass/screen.scss */
 div.marketing-content #home {
   min-height: 1300px;
   width: 100%;
   position: relative;
 }
-/* line 593, ../sass/screen.scss */
+/* line 598, ../sass/screen.scss */
 div.marketing-content #home h1 {
   color: white;
   font-family: 'futura-pt-condensed';
@@ -687,25 +694,25 @@ div.marketing-content #home h1 {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.56);
 }
-/* line 602, ../sass/screen.scss */
+/* line 607, ../sass/screen.scss */
 div.marketing-content #home h1 em {
   font-weight: 500;
 }
-/* line 607, ../sass/screen.scss */
+/* line 612, ../sass/screen.scss */
 div.marketing-content #home #watch {
   height: 670px;
 }
-/* line 611, ../sass/screen.scss */
+/* line 616, ../sass/screen.scss */
 div.marketing-content #home #watch div.anystretch img {
   bottom: 0px !important;
   height: 820px !important;
   min-width: 1600px;
 }
-/* line 618, ../sass/screen.scss */
+/* line 623, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container {
   padding-bottom: 37px;
 }
-/* line 621, ../sass/screen.scss */
+/* line 626, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container #video-container {
   padding-left: 500px;
   background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
@@ -719,13 +726,13 @@ div.marketing-content #home #watch #watch-container #video-container {
   margin: 0 38px 0 262px;
   width: 640px;
 }
-/* line 634, ../sass/screen.scss */
+/* line 639, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container #video-container iframe {
   background: #202020;
   border-radius: 3px 3px 3px 3px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-/* line 641, ../sass/screen.scss */
+/* line 646, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container #callout {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -737,7 +744,7 @@ div.marketing-content #home #watch #watch-container #callout {
   padding: 17px;
   width: 192px;
 }
-/* line 650, ../sass/screen.scss */
+/* line 655, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container #callout p {
   font-family: 'proxima-nova';
   font-weight: 300;
@@ -746,11 +753,11 @@ div.marketing-content #home #watch #watch-container #callout p {
   margin-bottom: 22px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
 }
-/* line 659, ../sass/screen.scss */
+/* line 664, ../sass/screen.scss */
 div.marketing-content #home #watch #watch-container #callout a.signup {
   float: right;
 }
-/* line 664, ../sass/screen.scss */
+/* line 669, ../sass/screen.scss */
 div.marketing-content #home h2.header {
   background: #3c89af;
   color: white;
@@ -762,7 +769,7 @@ div.marketing-content #home h2.header {
   text-align: center;
   text-transform: uppercase;
 }
-/* line 676, ../sass/screen.scss */
+/* line 681, ../sass/screen.scss */
 div.marketing-content #home a.signup {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -782,7 +789,7 @@ div.marketing-content #home a.signup {
   -o-transition: background-color 0.1s ease-in-out, 1s;
   transition: background-color 0.1s ease-in-out, 1s;
 }
-/* line 690, ../sass/screen.scss */
+/* line 695, ../sass/screen.scss */
 div.marketing-content #home a.signup:hover {
   text-decoration: none;
   background-color: #7A0066;
@@ -791,7 +798,7 @@ div.marketing-content #home a.signup:hover {
   -o-transition: background-color 0.1s ease-in-out, 1s;
   transition: background-color 0.1s ease-in-out, 1s;
 }
-/* line 696, ../sass/screen.scss */
+/* line 701, ../sass/screen.scss */
 div.marketing-content #home a.signup em {
   font-size: 10px;
   padding-left: 2px;
@@ -799,7 +806,7 @@ div.marketing-content #home a.signup em {
   top: -1px;
   vertical-align: middle;
 }
-/* line 705, ../sass/screen.scss */
+/* line 710, ../sass/screen.scss */
 div.marketing-content #home span.arrow {
   background: url("../img/arrow.png") no-repeat center bottom;
   content: " ";
@@ -809,29 +816,29 @@ div.marketing-content #home span.arrow {
   width: 85px;
   z-index: 100;
 }
-/* line 715, ../sass/screen.scss */
+/* line 720, ../sass/screen.scss */
 div.marketing-content #home #community {
   height: 442px;
 }
-/* line 719, ../sass/screen.scss */
+/* line 724, ../sass/screen.scss */
 div.marketing-content #home #community div.anystretch img {
   bottom: 0px !important;
   height: 585px !important;
   min-width: 1600px;
 }
-/* line 726, ../sass/screen.scss */
+/* line 731, ../sass/screen.scss */
 div.marketing-content #home #community #community-container {
   padding-left: 93px;
   padding-top: 30px;
   padding-bottom: 86px;
   position: relative;
 }
-/* line 732, ../sass/screen.scss */
+/* line 737, ../sass/screen.scss */
 div.marketing-content #home #community #community-container span.arrow {
   top: 0;
   left: 594px;
 }
-/* line 737, ../sass/screen.scss */
+/* line 742, ../sass/screen.scss */
 div.marketing-content #home #community #community-container h3 {
   color: #202020;
   font-family: 'proxima-nova';
@@ -840,7 +847,7 @@ div.marketing-content #home #community #community-container h3 {
   padding-top: 63px;
   padding-bottom: 23px;
 }
-/* line 746, ../sass/screen.scss */
+/* line 751, ../sass/screen.scss */
 div.marketing-content #home #community #community-container p {
   color: #202020;
   font-family: Georgia, serif;
@@ -850,40 +857,40 @@ div.marketing-content #home #community #community-container p {
   margin-bottom: 29px;
   width: 320px;
 }
-/* line 758, ../sass/screen.scss */
+/* line 763, ../sass/screen.scss */
 div.marketing-content #home #framebuzz {
   background: #000000;
   height: 615px;
   width: 100%;
 }
-/* line 764, ../sass/screen.scss */
+/* line 769, ../sass/screen.scss */
 div.marketing-content #home #framebuzz div.anystretch img {
   top: 80px !important;
 }
-/* line 769, ../sass/screen.scss */
+/* line 774, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights {
   background: rgba(0, 0, 0, 0.74);
 }
-/* line 772, ../sass/screen.scss */
+/* line 777, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container {
   position: relative;
 }
-/* line 775, ../sass/screen.scss */
+/* line 780, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container span.arrow {
   left: 553px;
 }
-/* line 777, ../sass/screen.scss */
+/* line 782, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul {
   padding-bottom: 35px;
 }
-/* line 780, ../sass/screen.scss */
+/* line 785, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li {
   float: left;
   padding: 0 19px;
   width: 262px;
   margin-top: -10px;
 }
-/* line 786, ../sass/screen.scss */
+/* line 791, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li h4 {
   color: white;
   font-family: 'futura-pt-condensed';
@@ -892,19 +899,19 @@ div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li h4
   margin-bottom: 20px;
   text-align: center;
 }
-/* line 795, ../sass/screen.scss */
+/* line 800, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li img {
   height: 150px;
   margin: 0 53px;
   width: 150px;
 }
-/* line 800, ../sass/screen.scss */
+/* line 805, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li img.discover {
   margin: 0 55px;
   position: relative;
   top: 5px;
 }
-/* line 807, ../sass/screen.scss */
+/* line 812, ../sass/screen.scss */
 div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li p {
   color: #d9d9d9;
   font-family: Georgia, serif;
@@ -913,7 +920,7 @@ div.marketing-content #home #framebuzz #highlights #framebuzz-container ul li p 
   line-height: 20px;
   text-align: center;
 }
-/* line 820, ../sass/screen.scss */
+/* line 825, ../sass/screen.scss */
 div.marketing-content #home #framebuzz h3 {
   color: white;
   font-family: 'proxima-nova';
@@ -923,21 +930,21 @@ div.marketing-content #home #framebuzz h3 {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.56);
 }
-/* line 831, ../sass/screen.scss */
+/* line 836, ../sass/screen.scss */
 div.marketing-content #home #signup {
   background: white;
 }
-/* line 834, ../sass/screen.scss */
+/* line 839, ../sass/screen.scss */
 div.marketing-content #home #signup span.arrow {
   left: 557px;
 }
-/* line 836, ../sass/screen.scss */
+/* line 841, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container {
   padding-top: 70px;
   padding-bottom: 75px;
   position: relative;
 }
-/* line 841, ../sass/screen.scss */
+/* line 846, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container h3 {
   color: #454848;
   font-family: 'proxima-nova';
@@ -946,7 +953,7 @@ div.marketing-content #home #signup #signup-container h3 {
   margin-bottom: 13px;
   text-align: center;
 }
-/* line 850, ../sass/screen.scss */
+/* line 855, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container h4 {
   color: #454848;
   font-family: Georgia, serif;
@@ -955,22 +962,22 @@ div.marketing-content #home #signup #signup-container h4 {
   margin-bottom: 68px;
   text-align: center;
 }
-/* line 859, ../sass/screen.scss */
+/* line 864, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul {
   margin: 0 auto;
   width: 650px;
 }
-/* line 863, ../sass/screen.scss */
+/* line 868, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li {
   color: #454848;
   float: left;
   width: 260px;
 }
-/* line 868, ../sass/screen.scss */
+/* line 873, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li.first {
   margin-right: 75px;
 }
-/* line 870, ../sass/screen.scss */
+/* line 875, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li h5 {
   font-family: 'proxima-nova';
   font-size: 24px;
@@ -978,7 +985,7 @@ div.marketing-content #home #signup #signup-container ul li h5 {
   margin-bottom: 19px;
   text-align: right;
 }
-/* line 878, ../sass/screen.scss */
+/* line 883, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li p {
   font-family: Georgia, serif;
   font-style: italic;
@@ -987,7 +994,7 @@ div.marketing-content #home #signup #signup-container ul li p {
   line-height: 20px;
   text-align: right;
 }
-/* line 887, ../sass/screen.scss */
+/* line 892, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li span {
   margin-top: 34px;
   display: block;
@@ -998,21 +1005,21 @@ div.marketing-content #home #signup #signup-container ul li span {
   text-align: right;
   float: right;
 }
-/* line 898, ../sass/screen.scss */
+/* line 903, ../sass/screen.scss */
 div.marketing-content #home #signup #signup-container ul li a.signup {
   margin-top: 24px;
   float: right;
 }
-/* line 908, ../sass/screen.scss */
+/* line 913, ../sass/screen.scss */
 div.marketing-content #press {
   background: white;
   min-height: 800px;
 }
-/* line 912, ../sass/screen.scss */
+/* line 917, ../sass/screen.scss */
 div.marketing-content #press div.header {
   background: #2289ba;
 }
-/* line 915, ../sass/screen.scss */
+/* line 920, ../sass/screen.scss */
 div.marketing-content #press div.header span {
   color: white;
   display: block;
@@ -1023,22 +1030,22 @@ div.marketing-content #press div.header span {
   line-height: 24px;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
 }
-/* line 927, ../sass/screen.scss */
+/* line 932, ../sass/screen.scss */
 div.marketing-content #press div.alert {
   font-family: 'proxima-nova';
   font-weight: 300;
   margin: 0 auto;
   width: 600px;
 }
-/* line 934, ../sass/screen.scss */
+/* line 939, ../sass/screen.scss */
 div.marketing-content #press #media, div.marketing-content #press #releases {
   padding-bottom: 45px;
 }
-/* line 937, ../sass/screen.scss */
+/* line 942, ../sass/screen.scss */
 div.marketing-content #press #media div.header, div.marketing-content #press #releases div.header {
   margin-bottom: 0;
 }
-/* line 942, ../sass/screen.scss */
+/* line 947, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper h2, div.marketing-content #press #releases div.wrapper h2 {
   color: #383835;
   font-family: 'proxima-nova';
@@ -1046,30 +1053,30 @@ div.marketing-content #press #media div.wrapper h2, div.marketing-content #press
   font-size: 24px;
   padding: 36px 0;
 }
-/* line 950, ../sass/screen.scss */
+/* line 955, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table, div.marketing-content #press #releases div.wrapper table {
   width: 100%;
   padding-bottom: 45px;
 }
-/* line 955, ../sass/screen.scss */
+/* line 960, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td, div.marketing-content #press #releases div.wrapper table tr td {
   padding-bottom: 45px;
   width: 33%;
 }
-/* line 960, ../sass/screen.scss */
+/* line 965, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a:hover, div.marketing-content #press #releases div.wrapper table tr td a:hover {
   text-decoration: none;
 }
-/* line 962, ../sass/screen.scss */
+/* line 967, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a img, div.marketing-content #press #releases div.wrapper table tr td a img {
   float: left;
   margin-right: 20px;
 }
-/* line 967, ../sass/screen.scss */
+/* line 972, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a div.file, div.marketing-content #press #releases div.wrapper table tr td a div.file {
   float: left;
 }
-/* line 970, ../sass/screen.scss */
+/* line 975, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a div.file span.title, div.marketing-content #press #releases div.wrapper table tr td a div.file span.title {
   color: #2289ba;
   display: block;
@@ -1078,7 +1085,7 @@ div.marketing-content #press #media div.wrapper table tr td a div.file span.titl
   font-size: 17px;
   margin-bottom: 9px;
 }
-/* line 979, ../sass/screen.scss */
+/* line 984, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a div.file span.type, div.marketing-content #press #releases div.wrapper table tr td a div.file span.type {
   color: #7a7a7a;
   display: block;
@@ -1087,11 +1094,11 @@ div.marketing-content #press #media div.wrapper table tr td a div.file span.type
   font-size: 17px;
   line-height: 19px;
 }
-/* line 992, ../sass/screen.scss */
+/* line 997, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper table tr td a:hover div.file span.title, div.marketing-content #press #releases div.wrapper table tr td a:hover div.file span.title {
   text-decoration: underline;
 }
-/* line 999, ../sass/screen.scss */
+/* line 1004, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper p, div.marketing-content #press #releases div.wrapper p {
   color: #383835;
   line-height: 25px;
@@ -1099,11 +1106,11 @@ div.marketing-content #press #media div.wrapper p, div.marketing-content #press 
   font-weight: 300;
   font-size: 18px;
 }
-/* line 1006, ../sass/screen.scss */
+/* line 1011, ../sass/screen.scss */
 div.marketing-content #press #media div.wrapper p a, div.marketing-content #press #releases div.wrapper p a {
   color: #2289ba;
 }
-/* line 1014, ../sass/screen.scss */
+/* line 1019, ../sass/screen.scss */
 div.marketing-content #press #releases article {
   font: 300 12px/20px 'proxima-nova';
   border-bottom: 1px solid #ccc;
@@ -1111,19 +1118,19 @@ div.marketing-content #press #releases article {
   padding-bottom: 20px;
   position: relative;
 }
-/* line 1021, ../sass/screen.scss */
+/* line 1026, ../sass/screen.scss */
 div.marketing-content #press #releases article:last-child {
   border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
 }
-/* line 1027, ../sass/screen.scss */
+/* line 1032, ../sass/screen.scss */
 div.marketing-content #press #releases article button.close {
   display: none;
   position: absolute;
   right: 0;
 }
-/* line 1033, ../sass/screen.scss */
+/* line 1038, ../sass/screen.scss */
 div.marketing-content #press #releases article title {
   color: #2289ba;
   display: block;
@@ -1132,60 +1139,60 @@ div.marketing-content #press #releases article title {
   font-size: 17px;
   margin-bottom: 20px;
 }
-/* line 1043, ../sass/screen.scss */
+/* line 1048, ../sass/screen.scss */
 div.marketing-content #press #releases article div.teaser p, div.marketing-content #press #releases article div.teaser ul li, div.marketing-content #press #releases article div.full p, div.marketing-content #press #releases article div.full ul li {
   color: #383835;
   line-height: 20px;
   font-size: 15px;
 }
-/* line 1048, ../sass/screen.scss */
+/* line 1053, ../sass/screen.scss */
 div.marketing-content #press #releases article div.teaser p a, div.marketing-content #press #releases article div.teaser ul li a, div.marketing-content #press #releases article div.full p a, div.marketing-content #press #releases article div.full ul li a {
   color: #2289ba;
 }
-/* line 1054, ../sass/screen.scss */
+/* line 1059, ../sass/screen.scss */
 div.marketing-content #press #releases article div.full {
   display: none;
 }
-/* line 1057, ../sass/screen.scss */
+/* line 1062, ../sass/screen.scss */
 div.marketing-content #press #releases article div.full br {
   margin: 5px 0;
 }
-/* line 1059, ../sass/screen.scss */
+/* line 1064, ../sass/screen.scss */
 div.marketing-content #press #releases article div.full strong {
   font-weight: 700;
 }
-/* line 1061, ../sass/screen.scss */
+/* line 1066, ../sass/screen.scss */
 div.marketing-content #press #releases article div.full ul, div.marketing-content #press #releases article div.full ol {
   margin: 10px 0;
   list-style: decimal inside none;
 }
-/* line 1066, ../sass/screen.scss */
+/* line 1071, ../sass/screen.scss */
 div.marketing-content #press #releases article div.full p, div.marketing-content #press #releases article div.full ul li, div.marketing-content #press #releases article div.full ol li {
   margin-bottom: 10px;
   font-size: 15px;
 }
-/* line 1070, ../sass/screen.scss */
+/* line 1075, ../sass/screen.scss */
 div.marketing-content #press #releases article div.full p:last-child, div.marketing-content #press #releases article div.full ul li:last-child, div.marketing-content #press #releases article div.full ol li:last-child {
   margin-bottom: 0;
 }
-/* line 1077, ../sass/screen.scss */
+/* line 1082, ../sass/screen.scss */
 div.marketing-content #about {
   font-family: 'proxima-nova';
   font-weight: 300;
 }
-/* line 1081, ../sass/screen.scss */
+/* line 1086, ../sass/screen.scss */
 div.marketing-content #about #manifesto {
   background: #fafafa;
   padding: 52px 0;
 }
-/* line 1085, ../sass/screen.scss */
+/* line 1090, ../sass/screen.scss */
 div.marketing-content #about #manifesto h1 {
   color: #393a36;
   font-size: 24px;
   margin-bottom: 32px;
   text-align: center;
 }
-/* line 1092, ../sass/screen.scss */
+/* line 1097, ../sass/screen.scss */
 div.marketing-content #about #manifesto p {
   font-family: Georgia, serif;
   font-style: italic;
@@ -1195,7 +1202,7 @@ div.marketing-content #about #manifesto p {
   margin: 0 auto;
   width: 825px;
 }
-/* line 1103, ../sass/screen.scss */
+/* line 1108, ../sass/screen.scss */
 div.marketing-content #about #who {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.6)), color-stop(100%, #1788bc));
@@ -1206,7 +1213,7 @@ div.marketing-content #about #who {
   background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.5) -120%, #1788bc 100%);
   padding: 52px 0;
 }
-/* line 1113, ../sass/screen.scss */
+/* line 1118, ../sass/screen.scss */
 div.marketing-content #about #who h1 {
   color: white;
   font-size: 30px;
@@ -1214,7 +1221,7 @@ div.marketing-content #about #who h1 {
   margin-bottom: 10px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1121, ../sass/screen.scss */
+/* line 1126, ../sass/screen.scss */
 div.marketing-content #about #who h2 {
   color: white;
   font-family: Georgia, serif;
@@ -1224,7 +1231,7 @@ div.marketing-content #about #who h2 {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1132, ../sass/screen.scss */
+/* line 1137, ../sass/screen.scss */
 div.marketing-content #about #who ul li {
   display: block;
   float: left;
@@ -1232,11 +1239,11 @@ div.marketing-content #about #who ul li {
   width: 338px;
   margin-right: 93px;
 }
-/* line 1139, ../sass/screen.scss */
+/* line 1144, ../sass/screen.scss */
 div.marketing-content #about #who ul li:last-child {
   margin-right: 0;
 }
-/* line 1141, ../sass/screen.scss */
+/* line 1146, ../sass/screen.scss */
 div.marketing-content #about #who ul li h3 {
   color: white;
   font-weight: bold;
@@ -1245,7 +1252,7 @@ div.marketing-content #about #who ul li h3 {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1150, ../sass/screen.scss */
+/* line 1155, ../sass/screen.scss */
 div.marketing-content #about #who ul li p {
   color: white;
   font-family: Georgia, serif;
@@ -1255,19 +1262,19 @@ div.marketing-content #about #who ul li p {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1163, ../sass/screen.scss */
+/* line 1168, ../sass/screen.scss */
 div.marketing-content #about #team {
   background: #fafafa;
   padding: 52px 0;
 }
-/* line 1167, ../sass/screen.scss */
+/* line 1172, ../sass/screen.scss */
 div.marketing-content #about #team h1 {
   color: #393a36;
   font-size: 24px;
   text-align: center;
   margin-bottom: 32px;
 }
-/* line 1175, ../sass/screen.scss */
+/* line 1180, ../sass/screen.scss */
 div.marketing-content #about #team ul li {
   display: block;
   float: left;
@@ -1276,15 +1283,15 @@ div.marketing-content #about #team ul li {
   margin-right: 93px;
   min-height: 300px;
 }
-/* line 1183, ../sass/screen.scss */
+/* line 1188, ../sass/screen.scss */
 div.marketing-content #about #team ul li.last {
   margin-right: 0;
 }
-/* line 1185, ../sass/screen.scss */
+/* line 1190, ../sass/screen.scss */
 div.marketing-content #about #team ul li img {
   margin-bottom: 48px;
 }
-/* line 1189, ../sass/screen.scss */
+/* line 1194, ../sass/screen.scss */
 div.marketing-content #about #team ul li h2 {
   color: #1788bc;
   font-weight: 500;
@@ -1292,12 +1299,12 @@ div.marketing-content #about #team ul li h2 {
   margin-bottom: 5px;
   font-size: 24px;
 }
-/* line 1197, ../sass/screen.scss */
+/* line 1202, ../sass/screen.scss */
 div.marketing-content #about #team ul li h3 {
   margin-bottom: 32px;
   text-align: center;
 }
-/* line 1202, ../sass/screen.scss */
+/* line 1207, ../sass/screen.scss */
 div.marketing-content #about #team ul li p {
   color: #3f3f3f;
   font-family: Georgia, serif;
@@ -1306,7 +1313,7 @@ div.marketing-content #about #team ul li p {
   line-height: 25px;
   text-align: center;
 }
-/* line 1214, ../sass/screen.scss */
+/* line 1219, ../sass/screen.scss */
 div.marketing-content #about #contact {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.6)), color-stop(100%, #1788bc));
@@ -1317,48 +1324,48 @@ div.marketing-content #about #contact {
   background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.5) -120%, #1788bc 100%);
   padding: 52px 0;
 }
-/* line 1225, ../sass/screen.scss */
+/* line 1230, ../sass/screen.scss */
 div.marketing-content #about #contact h1 {
   color: white;
   font-size: 30px;
   margin-bottom: 32px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1232, ../sass/screen.scss */
+/* line 1237, ../sass/screen.scss */
 div.marketing-content #about #contact div.alert-success {
   margin: 30px auto 50px;
   width: 500px;
 }
-/* line 1237, ../sass/screen.scss */
+/* line 1242, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form {
   width: 1063px;
 }
-/* line 1240, ../sass/screen.scss */
+/* line 1245, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form label {
   color: white;
   padding-bottom: 8px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1246, ../sass/screen.scss */
+/* line 1251, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form input[type='text'] {
   margin-bottom: 35px;
   width: 440px;
 }
-/* line 1251, ../sass/screen.scss */
+/* line 1256, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form textarea {
   height: 215px;
   width: 565px;
 }
-/* line 1256, ../sass/screen.scss */
+/* line 1261, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form div.user {
   float: left;
   margin-right: 28px;
 }
-/* line 1261, ../sass/screen.scss */
+/* line 1266, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form div.message {
   float: left;
 }
-/* line 1266, ../sass/screen.scss */
+/* line 1271, ../sass/screen.scss */
 div.marketing-content #about #contact #contact-form p.submit button {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -1373,7 +1380,7 @@ div.marketing-content #about #contact #contact-form p.submit button {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1283, ../sass/screen.scss */
+/* line 1288, ../sass/screen.scss */
 div.marketing-content #signup-page, div.marketing-content #login-page, div.marketing-content #reset-password, div.marketing-content #reset-password-done, div.marketing-content #change-password {
   color: #383835;
   height: 840px;
@@ -1381,7 +1388,7 @@ div.marketing-content #signup-page, div.marketing-content #login-page, div.marke
   font-family: 'proxima-nova';
   font-weight: 300;
 }
-/* line 1290, ../sass/screen.scss */
+/* line 1295, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper, div.marketing-content #login-page div.wrapper, div.marketing-content #reset-password div.wrapper, div.marketing-content #reset-password-done div.wrapper, div.marketing-content #change-password div.wrapper {
   background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
   background-color: white;
@@ -1392,7 +1399,7 @@ div.marketing-content #signup-page div.wrapper, div.marketing-content #login-pag
   padding: 25px;
   width: 400px;
 }
-/* line 1300, ../sass/screen.scss */
+/* line 1305, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper h1, div.marketing-content #login-page div.wrapper h1, div.marketing-content #reset-password div.wrapper h1, div.marketing-content #reset-password-done div.wrapper h1, div.marketing-content #change-password div.wrapper h1 {
   font-family: 'proxima-nova';
   font-weight: 700;
@@ -1400,54 +1407,54 @@ div.marketing-content #signup-page div.wrapper h1, div.marketing-content #login-
   text-align: center;
   padding-bottom: 25px;
 }
-/* line 1308, ../sass/screen.scss */
+/* line 1313, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper p.description, div.marketing-content #login-page div.wrapper p.description, div.marketing-content #reset-password div.wrapper p.description, div.marketing-content #reset-password-done div.wrapper p.description, div.marketing-content #change-password div.wrapper p.description {
   text-align: center;
   padding-bottom: 25px;
 }
-/* line 1313, ../sass/screen.scss */
+/* line 1318, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers, div.marketing-content #login-page div.wrapper ul.socialaccount_providers, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers, div.marketing-content #change-password div.wrapper ul.socialaccount_providers {
   margin: 0 auto;
   padding: 25px 0;
   width: 245px;
 }
-/* line 1318, ../sass/screen.scss */
+/* line 1323, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li {
   float: left;
   height: 64px;
   margin-right: 25px;
   width: 64px;
 }
-/* line 1324, ../sass/screen.scss */
+/* line 1329, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li:last-child, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li:last-child, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li:last-child, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li:last-child, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li:last-child {
   margin-right: 0;
 }
-/* line 1326, ../sass/screen.scss */
+/* line 1331, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li a, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li a, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li a, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li a, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li a {
   box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
   display: block;
   height: 64px;
   width: 64px;
 }
-/* line 1332, ../sass/screen.scss */
+/* line 1337, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li a.facebook, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li a.facebook, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li a.facebook, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li a.facebook, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li a.facebook {
   background-color: #3B5998;
 }
-/* line 1333, ../sass/screen.scss */
+/* line 1338, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li a.twitter, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li a.twitter, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li a.twitter, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li a.twitter, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li a.twitter {
   background-color: #4099FF;
 }
-/* line 1334, ../sass/screen.scss */
+/* line 1339, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li a.google, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li a.google, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li a.google, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li a.google, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li a.google {
   background-color: #D34836;
 }
-/* line 1336, ../sass/screen.scss */
+/* line 1341, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.socialaccount_providers li a img, div.marketing-content #login-page div.wrapper ul.socialaccount_providers li a img, div.marketing-content #reset-password div.wrapper ul.socialaccount_providers li a img, div.marketing-content #reset-password-done div.wrapper ul.socialaccount_providers li a img, div.marketing-content #change-password div.wrapper ul.socialaccount_providers li a img {
   padding: 16px;
   height: 32px;
   width: 32px;
 }
-/* line 1345, ../sass/screen.scss */
+/* line 1350, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper button.signup, div.marketing-content #login-page div.wrapper button.signup, div.marketing-content #reset-password div.wrapper button.signup, div.marketing-content #reset-password-done div.wrapper button.signup, div.marketing-content #change-password div.wrapper button.signup {
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
@@ -1469,7 +1476,7 @@ div.marketing-content #signup-page div.wrapper button.signup, div.marketing-cont
   -o-transition: background-color 0.1s ease-in-out, 1s;
   transition: background-color 0.1s ease-in-out, 1s;
 }
-/* line 1361, ../sass/screen.scss */
+/* line 1366, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper button.signup:hover, div.marketing-content #login-page div.wrapper button.signup:hover, div.marketing-content #reset-password div.wrapper button.signup:hover, div.marketing-content #reset-password-done div.wrapper button.signup:hover, div.marketing-content #change-password div.wrapper button.signup:hover {
   text-decoration: none;
   background-color: #7A0066;
@@ -1478,7 +1485,7 @@ div.marketing-content #signup-page div.wrapper button.signup:hover, div.marketin
   -o-transition: background-color 0.1s ease-in-out, 1s;
   transition: background-color 0.1s ease-in-out, 1s;
 }
-/* line 1367, ../sass/screen.scss */
+/* line 1372, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper button.signup em, div.marketing-content #login-page div.wrapper button.signup em, div.marketing-content #reset-password div.wrapper button.signup em, div.marketing-content #reset-password-done div.wrapper button.signup em, div.marketing-content #change-password div.wrapper button.signup em {
   font-size: 10px;
   padding-left: 2px;
@@ -1486,50 +1493,50 @@ div.marketing-content #signup-page div.wrapper button.signup em, div.marketing-c
   top: -1px;
   vertical-align: middle;
 }
-/* line 1376, ../sass/screen.scss */
+/* line 1381, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.errorlist, div.marketing-content #login-page div.wrapper ul.errorlist, div.marketing-content #reset-password div.wrapper ul.errorlist, div.marketing-content #reset-password-done div.wrapper ul.errorlist, div.marketing-content #change-password div.wrapper ul.errorlist {
   margin: 0 auto;
   margin-bottom: 5px;
   width: 300px;
 }
-/* line 1381, ../sass/screen.scss */
+/* line 1386, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper ul.errorlist li, div.marketing-content #login-page div.wrapper ul.errorlist li, div.marketing-content #reset-password div.wrapper ul.errorlist li, div.marketing-content #reset-password-done div.wrapper ul.errorlist li, div.marketing-content #change-password div.wrapper ul.errorlist li {
   color: #990000;
   text-align: center;
 }
-/* line 1388, ../sass/screen.scss */
+/* line 1393, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper form p, div.marketing-content #login-page div.wrapper form p, div.marketing-content #reset-password div.wrapper form p, div.marketing-content #reset-password-done div.wrapper form p, div.marketing-content #change-password div.wrapper form p {
   padding-bottom: 10px;
 }
-/* line 1391, ../sass/screen.scss */
+/* line 1396, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper form p label, div.marketing-content #login-page div.wrapper form p label, div.marketing-content #reset-password div.wrapper form p label, div.marketing-content #reset-password-done div.wrapper form p label, div.marketing-content #change-password div.wrapper form p label {
   margin-bottom: 5px;
   font-weight: 500;
 }
-/* line 1396, ../sass/screen.scss */
+/* line 1401, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper form p input, div.marketing-content #login-page div.wrapper form p input, div.marketing-content #reset-password div.wrapper form p input, div.marketing-content #reset-password-done div.wrapper form p input, div.marketing-content #change-password div.wrapper form p input {
   font-family: 'proxima-nova' !important;
   width: 385px;
 }
-/* line 1402, ../sass/screen.scss */
+/* line 1407, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper form p.terms, div.marketing-content #login-page div.wrapper form p.terms, div.marketing-content #reset-password div.wrapper form p.terms, div.marketing-content #reset-password-done div.wrapper form p.terms, div.marketing-content #change-password div.wrapper form p.terms {
   padding: 0px 0 15px 0;
   line-height: 20px;
 }
-/* line 1408, ../sass/screen.scss */
+/* line 1413, ../sass/screen.scss */
 div.marketing-content #signup-page div.wrapper form div.actions a.secondaryAction, div.marketing-content #login-page div.wrapper form div.actions a.secondaryAction, div.marketing-content #reset-password div.wrapper form div.actions a.secondaryAction, div.marketing-content #reset-password-done div.wrapper form div.actions a.secondaryAction, div.marketing-content #change-password div.wrapper form div.actions a.secondaryAction {
   display: block;
   float: left;
   line-height: 38px;
 }
-/* line 1422, ../sass/screen.scss */
+/* line 1427, ../sass/screen.scss */
 div.marketing-content #login-page div.wrapper form p label {
   display: table-cell;
   padding-bottom: 5px;
   margin-bottom: 0;
   width: 50%;
 }
-/* line 1429, ../sass/screen.scss */
+/* line 1434, ../sass/screen.scss */
 div.marketing-content #login-page div.wrapper form p input[type='checkbox'] {
   display: block;
   left: 112px;
@@ -1537,42 +1544,42 @@ div.marketing-content #login-page div.wrapper form p input[type='checkbox'] {
   top: -24px;
   width: 15px;
 }
-/* line 1443, ../sass/screen.scss */
+/* line 1448, ../sass/screen.scss */
 div.marketing-content #reset-password div.wrapper p.description {
   text-align: left;
 }
-/* line 1447, ../sass/screen.scss */
+/* line 1452, ../sass/screen.scss */
 div.marketing-content #reset-password div.wrapper form {
   margin-bottom: 25px;
 }
-/* line 1451, ../sass/screen.scss */
+/* line 1456, ../sass/screen.scss */
 div.marketing-content #reset-password div.wrapper form div.actions button.signup {
   min-width: 160px;
 }
-/* line 1457, ../sass/screen.scss */
+/* line 1462, ../sass/screen.scss */
 div.marketing-content #reset-password div.wrapper p.help {
   padding-bottom: 0;
 }
-/* line 1467, ../sass/screen.scss */
+/* line 1472, ../sass/screen.scss */
 div.marketing-content #change-password div.wrapper form div.actions button.signup {
   min-width: 200px;
 }
 
-/* line 1478, ../sass/screen.scss */
+/* line 1483, ../sass/screen.scss */
 body.share div.marketing-content div.content div.wrapper {
   width: 685px;
 }
-/* line 1481, ../sass/screen.scss */
+/* line 1486, ../sass/screen.scss */
 body.share div.marketing-content div.content div.wrapper div.background {
   padding: 40px 0;
 }
-/* line 1484, ../sass/screen.scss */
+/* line 1489, ../sass/screen.scss */
 body.share div.marketing-content div.content div.wrapper div.background #share.standalone {
   margin-bottom: 40px;
   opacity: 1;
 }
 
-/* line 1504, ../sass/screen.scss */
+/* line 1509, ../sass/screen.scss */
 #privacy div.content-wrapper, #terms div.content-wrapper {
   background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
   background-color: white;
@@ -1580,48 +1587,48 @@ body.share div.marketing-content div.content div.wrapper div.background #share.s
   margin: 0 auto;
   width: 1200px;
 }
-/* line 1511, ../sass/screen.scss */
+/* line 1516, ../sass/screen.scss */
 #privacy div.content-wrapper div.page-content, #terms div.content-wrapper div.page-content {
   font-family: 'proxima-nova';
   font-weight: 300;
   padding: 25px;
 }
-/* line 1517, ../sass/screen.scss */
+/* line 1522, ../sass/screen.scss */
 #privacy div.content-wrapper div.page-content h1, #terms div.content-wrapper div.page-content h1 {
   font-weight: 700;
   font-size: 24px;
 }
-/* line 1522, ../sass/screen.scss */
+/* line 1527, ../sass/screen.scss */
 #privacy div.content-wrapper div.page-content ul, #terms div.content-wrapper div.page-content ul {
   list-style-type: circle inside none;
 }
-/* line 1524, ../sass/screen.scss */
+/* line 1529, ../sass/screen.scss */
 #privacy div.content-wrapper div.page-content p, #privacy div.content-wrapper div.page-content ul li, #privacy div.content-wrapper div.page-content ol li, #terms div.content-wrapper div.page-content p, #terms div.content-wrapper div.page-content ul li, #terms div.content-wrapper div.page-content ol li {
   font-size: 14px;
   margin-bottom: 15px;
   line-height: 20px;
 }
 
-/* line 1536, ../sass/screen.scss */
+/* line 1541, ../sass/screen.scss */
 body.background-bottom.terms div.marketing-content {
   min-height: 4693px;
   width: 100%;
 }
-/* line 1543, ../sass/screen.scss */
+/* line 1548, ../sass/screen.scss */
 body.background-bottom.privacy div.marketing-content {
   min-height: 3405px;
   width: 100%;
 }
-/* line 1550, ../sass/screen.scss */
+/* line 1555, ../sass/screen.scss */
 body.background-bottom.accounts div.marketing-content, body.background-bottom.zinnia div.marketing-content {
   min-height: 840px;
   width: 100%;
 }
-/* line 1557, ../sass/screen.scss */
+/* line 1562, ../sass/screen.scss */
 body.background-bottom div.marketing-content div.anystretch {
   background-color: #188bbe;
 }
-/* line 1560, ../sass/screen.scss */
+/* line 1565, ../sass/screen.scss */
 body.background-bottom div.marketing-content div.anystretch img {
   left: 0px !important;
   top: auto !important;
@@ -1632,11 +1639,11 @@ body.background-bottom div.marketing-content div.anystretch img {
 /*
  *      FrameBuzz Blog
  */
-/* line 1574, ../sass/screen.scss */
+/* line 1579, ../sass/screen.scss */
 body.zinnia {
   font: 14px/18px normal 'proxima-nova';
 }
-/* line 1579, ../sass/screen.scss */
+/* line 1584, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content {
   background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
   background-color: white;
@@ -1644,7 +1651,7 @@ body.zinnia div.marketing-content div.wrapper #zinnia-content {
   padding-top: 20px;
   min-height: 840px;
 }
-/* line 1586, ../sass/screen.scss */
+/* line 1591, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content h1 {
   color: #323232;
   font: 30px/36px normal 'futura-pt-condensed';
@@ -1652,109 +1659,109 @@ body.zinnia div.marketing-content div.wrapper #zinnia-content h1 {
   text-transform: uppercase;
   padding-bottom: 25px;
 }
-/* line 1594, ../sass/screen.scss */
+/* line 1599, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content h2 {
   color: #323232;
   font: 30px/36px normal 'futura-pt-condensed';
   font-weight: 300;
   text-transform: uppercase;
 }
-/* line 1601, ../sass/screen.scss */
+/* line 1606, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content h3, body.zinnia div.marketing-content div.wrapper #zinnia-content legend {
   color: #323232;
   font: 24px/30px normal 'futura-pt-condensed';
   font-weight: 300;
   text-transform: uppercase;
 }
-/* line 1609, ../sass/screen.scss */
+/* line 1614, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form legend {
   padding-bottom: 20px;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
 }
-/* line 1614, ../sass/screen.scss */
+/* line 1619, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form label {
   font-weight: 700;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
 }
-/* line 1619, ../sass/screen.scss */
+/* line 1624, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form textarea {
   height: 70px;
   margin: 5px 0 20px 0;
   width: 720px;
 }
-/* line 1625, ../sass/screen.scss */
+/* line 1630, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form p.auth, body.zinnia div.marketing-content div.wrapper #zinnia-content form p.submit {
   float: left;
   width: 50%;
 }
-/* line 1630, ../sass/screen.scss */
+/* line 1635, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form p.auth {
   position: relative;
   top: 10px;
 }
-/* line 1635, ../sass/screen.scss */
+/* line 1640, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form p.submit {
   float: right;
 }
-/* line 1638, ../sass/screen.scss */
+/* line 1643, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content form p.submit .btn {
   float: right;
   margin-left: 10px;
 }
-/* line 1647, ../sass/screen.scss */
+/* line 1652, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article header h2 {
   color: #323232;
   font: 30px/24px normal 'futura-pt-condensed';
   font-weight: 500;
   text-transform: uppercase;
 }
-/* line 1655, ../sass/screen.scss */
+/* line 1660, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article div.entry-content {
   line-height: 20px;
   padding: 25px 0;
 }
-/* line 1659, ../sass/screen.scss */
+/* line 1664, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article div.entry-content.continue {
   padding: 25px 0 10px 0;
 }
-/* line 1664, ../sass/screen.scss */
+/* line 1669, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article footer {
   border-bottom: 1px dotted #ccc;
   margin-bottom: 25px;
   padding: 25px 0 10px 0;
 }
-/* line 1669, ../sass/screen.scss */
+/* line 1674, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article footer p {
   float: left;
   width: 50%;
 }
-/* line 1674, ../sass/screen.scss */
+/* line 1679, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content article footer p.entry-tags {
   float: right;
   text-align: right;
 }
-/* line 1681, ../sass/screen.scss */
+/* line 1686, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content div.entry-similar {
   border-bottom: 1px dotted #ccc;
   margin-bottom: 25px;
   padding-bottom: 25px;
 }
-/* line 1687, ../sass/screen.scss */
+/* line 1692, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content div.entry-prev-next {
   border-bottom: 1px dotted #ccc;
   margin-bottom: 15px;
 }
-/* line 1691, ../sass/screen.scss */
+/* line 1696, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content div.entry-prev-next ul.pager {
   margin: 23px 0;
 }
-/* line 1696, ../sass/screen.scss */
+/* line 1701, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content section {
   border-bottom: 1px dotted #ccc;
   margin-bottom: 25px;
   padding-bottom: 25px;
 }
-/* line 1704, ../sass/screen.scss */
+/* line 1709, ../sass/screen.scss */
 body.zinnia div.marketing-content div.wrapper #zinnia-content #sidebar aside h3 {
   color: #323232;
   font: 26px/32px normal 'futura-pt-condensed';
@@ -1763,12 +1770,12 @@ body.zinnia div.marketing-content div.wrapper #zinnia-content #sidebar aside h3 
   text-transform: uppercase;
 }
 
-/* line 1718, ../sass/screen.scss */
+/* line 1723, ../sass/screen.scss */
 div.footer {
   background-color: black;
   padding: 33px 0;
 }
-/* line 1722, ../sass/screen.scss */
+/* line 1727, ../sass/screen.scss */
 div.footer a, div.footer i {
   color: white;
   border-left: none;
@@ -1782,22 +1789,22 @@ div.footer a, div.footer i {
   opacity: 0.8;
   text-decoration: none;
 }
-/* line 1735, ../sass/screen.scss */
+/* line 1740, ../sass/screen.scss */
 div.footer a:hover, div.footer i:hover {
   opacity: 1;
 }
-/* line 1740, ../sass/screen.scss */
+/* line 1745, ../sass/screen.scss */
 div.footer i {
   font-size: 16px;
   margin-left: 13px;
   margin-right: 0;
   padding-top: 1px;
 }
-/* line 1747, ../sass/screen.scss */
+/* line 1752, ../sass/screen.scss */
 div.footer a.active, div.footer a:hover {
   background: none !important;
 }
-/* line 1749, ../sass/screen.scss */
+/* line 1754, ../sass/screen.scss */
 div.footer span {
   color: white;
   display: block;
@@ -1814,46 +1821,42 @@ div.footer span {
  *      iPad Compatibility
  */
 @media screen and (device-aspect-ratio: 3 / 4) {
-  /* line 1768, ../sass/screen.scss */
+  /* line 1773, ../sass/screen.scss */
   .wrapper {
     width: 768px;
   }
 
-  /* line 1772, ../sass/screen.scss */
+  /* line 1777, ../sass/screen.scss */
   div.navbar {
     width: 768px;
   }
-  /* line 1775, ../sass/screen.scss */
+  /* line 1780, ../sass/screen.scss */
   div.navbar div.navbar-inner {
     width: 100%;
   }
-  /* line 1778, ../sass/screen.scss */
+  /* line 1783, ../sass/screen.scss */
   div.navbar div.navbar-inner a.brand {
     padding: 20px 0px 0px 0px;
     height: 45px;
     width: 207px;
   }
 
-  /* line 1789, ../sass/screen.scss */
+  /* line 1794, ../sass/screen.scss */
   div.marketing-content #home #watch div.anystretch {
     min-width: 768px;
   }
-  /* line 1794, ../sass/screen.scss */
+  /* line 1799, ../sass/screen.scss */
   div.marketing-content #home #watch #watch-container #video-container {
     margin-left: 25px;
   }
-  /* line 1798, ../sass/screen.scss */
+  /* line 1803, ../sass/screen.scss */
   div.marketing-content #home #watch #watch-container #callout {
     height: 108px;
     margin: 25px 10px;
     width: 648px;
   }
-  /* line 1808, ../sass/screen.scss */
+  /* line 1813, ../sass/screen.scss */
   div.marketing-content #community div.anystretch {
     display: none;
   }
-}
-/* line 1814, ../sass/screen.scss */
-.wf-loading div.marketing-content {
-  visibility: hidden;
 }
