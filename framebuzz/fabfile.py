@@ -545,6 +545,15 @@ def all():
         manage("createsuperuser");
 
 
+@task
+@log_call
+def remove_old_activities():
+    with project():
+        python("from actstream.models import Action;"
+               "comments_with_no_video_target = Action.objects.filter(verb='commented on', target=None);"
+               "comments_with_no_video_target.delete();")
+
+
 def sshagent_run(cmd):
     """
     Helper function.
