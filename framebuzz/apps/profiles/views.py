@@ -73,10 +73,10 @@ def video_share(request, username=None, video_id=None):
 
     valid_verbs = ['commented on', 'replied to comment']
     actions = Action.objects.filter(verb__in=valid_verbs,
-                                    target_object_id=video.id)
-    commenters = [a.actor for a in actions]
+                                    target_object_id=video.id) \
+                            .values('actor_object_id')
+    commenters = User.objects.filter(actor_object_id__in=actions)
     
-
     context['video'] = video
     context['is_share'] = True
     context['commenters'] = commenters

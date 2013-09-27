@@ -19,11 +19,23 @@
             <i class="icon-user icon-2x pull-left icon-muted"></i>
             <i class="icon-plus icon-2x pull-left icon-muted"></i>
         </span>
-        is now a fan of <a href="{% url 'profiles-home' action.target.username %}">{{ action.target|display_name }}</a>:
+        became a fan of <a href="{% url 'profiles-home' action.target.username %}">{{ action.target|display_name }}</a>:
         <p class="follow">
             <a href="{% url 'profiles-home' action.target.username %}">
                 <img src="{% avatar_url action.target 110 %}" alt="" height="30" width="30" class="img-circle" />
-                <span>{{ action.target|display_name }}</span>
+                <span>
+                    {{ action.target|display_name }}
+                    {% if action.target.get_profile.bio or action.target.get_profile.tagline %}
+                        <br>
+                        <em>
+                            {% if action.target.get_profile.tagline %}
+                                &ldquo;{{ action.target.get_profile.tagline }}&rdquo;
+                            {% else %}
+                                &ldquo;{{ action.target.get_profile.bio }}&rdquo;
+                            {% endif %}
+                        </em>
+                    {% endif %} 
+                </span>
             </a>
         </p>
     {% endif %}

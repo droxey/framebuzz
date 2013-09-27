@@ -881,15 +881,38 @@ div.marketing-content {
                                             }
 
                                             p.follow {
-                                                padding-top: 9px;
+                                                padding-top: 12px;
 
-                                                img.img-circle {
-                                                    width: 30px;
-                                                    height: 30px;
-                                                    margin-right: 6px;
-                                                    position: relative;
-                                                    bottom: 4px;
-                                                } 
+                                                a {
+                                                    img.img-circle {
+                                                        width: 25px;
+                                                        height: 25px;
+                                                        margin-right: 9px;
+                                                        margin-top: 1px;
+                                                    }
+            
+                                                    span {
+                                                        line-height: 12px;
+                                                        position: relative;
+                                                        vertical-align: top;
+
+                                                        em {
+                                                            color: #222;
+                                                            display: block;
+                                                            font: italic 11px/11px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                            text-decoration: none;
+                                                            left: 0;
+                                                            position: absolute;
+                                                            text-decoration: none;
+                                                            top: 18px;
+                                                            width: 410px;
+                                                        }
+                                                    } 
+
+                                                    &:hover, &:focus, &:active {
+                                                        em { text-decoration: none; }
+                                                    }
+                                                }
                                             }
                                         }
 
@@ -970,15 +993,13 @@ div.marketing-content {
                         width: 47%;
                         margin-bottom: 18px;
                         padding: 5px;
-                        min-height: 290px;
+                        height: 240px;
                         position: relative;
                     }
 
                     #videos ul.profile-conversations {
                         li {
-                            min-height: 290px;
-
-                            div.video-wrapper { min-height: 290px; }
+                            height: 316px;
 
                             div.video-wrapper div.video-details div.shared ul li { 
                                 position: static !important; 
@@ -998,8 +1019,10 @@ div.marketing-content {
                         li {
                             div.video-wrapper {
                                 @include border-radius(3px, 3px);
-                                background-color: white;
-                                padding: 9px;
+                                background-color: #FFFFFF;
+                                height: 96.8%;
+                                padding: 9px 9px 0;
+                                position: relative;
 
                                 img.featured {
                                     left: -6px;
@@ -1032,12 +1055,11 @@ div.marketing-content {
                                     font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
                                     font-size: 11px;
                                     font-weight: 500;
-                                    left: 14px;
                                     line-height: 18px;
-                                    padding: 3px 7px 5px;
+                                    padding: 9px 9px 7px;
                                     position: absolute;
-                                    top: 112px;
-                                    width: 273px;
+                                    top: 123px;
+                                    width: 270px;
                                     z-index: 20;
 
                                     span.corner {
@@ -1048,12 +1070,12 @@ div.marketing-content {
                                         line-height: 0;
                                         border: solid 9px rgba(0, 0, 0, 0.5);
                                         border-color: transparent transparent rgba(0, 0, 0, 0.5);
-                                        bottom: 67px;
                                         display: block;
                                         height: 0;
                                         left: 140.5px;
                                         line-height: 0;
                                         position: absolute;
+                                        top: -18px;
                                         width: 0;
                                     }
 
@@ -1064,7 +1086,7 @@ div.marketing-content {
                                         word-wrap: break-word;
                                         width: 74%;
                                         position: absolute;
-                                        left: 70px;
+                                        left: 53px;
 
                                         a {
                                             color: white;
@@ -1078,9 +1100,9 @@ div.marketing-content {
                                         box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* CSS3 */
                                         display: block;
                                         float: left;
-                                        height: 55px;
+                                        height: 35px;
                                         margin-right: 9px;
-                                        width: 55px;
+                                        width: 35px;
                                         z-index: 2;
                                     }
                                 }
@@ -1144,7 +1166,14 @@ div.marketing-content {
                                 }
 
                                 div.video-actions {
+                                    height: 25px;
+                                    position: absolute;
+                                    bottom: 9px;
+                                    right: 9px;
+
                                     ul {
+                                        height: 25px;
+
                                         li {
                                             opacity: 1;
                                             float: right;
@@ -1178,146 +1207,6 @@ div.marketing-content {
                                         }
                                     }
                                 }
-                            }
-                        }
-                    }
-
-                    #edit, #avatar {
-                        font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
-
-                        p {
-                            font-size: 14px;
-                            font-weight: 300;
-                            text-align: left;
-                            margin-bottom: 15px;
-                        }
-
-                        ul.errorlist {
-                            margin-bottom: 5px;
-
-                            li {
-                                color: #990000;
-                                text-align: center;
-                            }
-                        }
-
-                        form {
-                            margin-top: 15px;
-
-                            p {
-                                text-align: left;
-
-                                label {
-                                    font-weight: 500;
-                                    font-size: 14px;
-                                    display: block;
-                                    margin-bottom: 10px;
-                                    vertical-align: text-bottom;
-                                }
-
-                                input[type='checkbox'] {
-                                    position: relative;
-                                    top: -7px;
-                                }
-
-                                input[type='text'], textarea, select {
-                                    width: 283px;
-                                }
-
-                                select {
-                                    padding: 2px;
-                                }
-                            }
-
-                            button {
-                                @include border-radius(2px, 2px);
-                                background-color: #9e0f84;
-                                display: block;
-                                color: white;
-                                border: none;
-                                font-family: 'futura-pt-condensed', Helvetica, Arial, sans-serif;
-                                font-size: 20px;
-                                font-weight: 700;
-                                float: right;
-                                padding: 8px 0;
-                                text-align: center;
-                                text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
-                                width: 120px;
-                                @include single-transition(background-color .1s ease-in-out);
-
-                                &:hover { 
-                                    text-decoration: none;
-                                    background-color: #7A0066;
-                                    @include single-transition(background-color .1s ease-in-out);
-                                }
-
-                                em {
-                                    font-size: 10px;
-                                    padding-left: 2px;
-                                    position: relative;
-                                    top: -1px;
-                                    vertical-align: middle;
-                                }
-                            }
-                        }
-                    }
-
-                    #avatar {
-                        div.avatar-section {
-                            margin-bottom: 50px;
-                            
-                            p { text-indent: 10px; }
-
-                            div.alert {
-                                height: 30px;
-                                width: 92%;
-
-                                p { text-indent: 0; }
-
-                                strong {
-                                    font-weight: 700;
-                                    padding-bottom: 15px;
-                                }
-                            }
-
-                            #change-avatar-form {
-                                h2 {
-                                    font-size: 16px;
-                                    font-weight: 500;
-                                    margin-bottom: 15px;
-                                }
-
-                                ul { 
-                                    border-top: none; 
-                                    padding-top: 0;
-
-                                    li {
-                                        position: relative;
-
-                                        label {
-                                            margin-bottom: 15px;
-                                        }
-
-                                        input[type='radio'] {
-                                            left: -18px;
-                                            position: absolute;
-                                            top: 40%;
-                                        }
-                                    }
-                                }
-                            }
-
-                            #id_avatar { margin-left: 10px; }
-
-                            h1 { margin-bottom: 15px; }
-
-                            button { 
-                                margin-top: 15px;
-                                width: 200px; 
-                            }
-
-                            div.form-actions {
-                                border-top: 1px solid #F7F7F7;
                             }
                         }
                     }

@@ -20,7 +20,7 @@
       {% endif %}
       <div class="video-details">
           <h3>
-            <a href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}">{{ comment.content_object.title|title|truncatechars:"53" }}</a>
+            <a href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}">{{ comment.content_object.title|title|truncatechars:"54" }}</a>
           </h3>
           <h4>{% if comment.comment %}Posted on {{ comment.submit_date|date:"N d, Y" }}{% else %}&nbsp;{% endif %}</h4>
           {% if comment.content_object.uservideo_set.all|length > 0 %}
