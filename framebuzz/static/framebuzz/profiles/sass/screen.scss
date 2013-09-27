@@ -205,6 +205,7 @@ div.marketing-content {
 
                                 h2 a.editable,
                                 p.bio a.editable {
+                                    font: 300 16px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
                                     color: white;
                                     outline: none;
 
@@ -600,7 +601,7 @@ div.marketing-content {
                                         padding: 18px;
                                         text-align: center;
                                         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-                                        width: 586px;
+                                        width: 598px;
 
                                         strong { font-weight: 700; }
                                     }
@@ -646,7 +647,7 @@ div.marketing-content {
                                         p.bio {
                                             color: rgba(102, 102, 102, 0.83);
                                             float: left;
-                                            font: italic 300 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                            font: italic 300 14px/17px 'proxima-nova', Helvetica, Arial, sans-serif;
                                             left: 65px;
                                             position: absolute;
                                             top: 29px;
@@ -1552,7 +1553,8 @@ div.marketing-content {
 
 .modal-backdrop, .modal-backdrop.fade.in { opacity: 0.6; }
 
-#add-framebuzz-modal {
+#add-framebuzz-modal,
+#upload-modal {
     @include border-radius(2px, 2px);
     background: none;
     background-color: white;
@@ -1676,6 +1678,10 @@ div.marketing-content {
             }
         }
     }
+}
+
+#upload-modal {
+    width: 600px;
 }
 
 #watch {

@@ -192,9 +192,9 @@ def feed(request, username):
     following_ids = [f.id for f in user_following]
     following_ids.append(user.id)
 
-    feed = Action.objects.filter(verb__in=VALID_FEED_VERBS,
-                                 action_object_object_id__in=following_ids
-                                 ).order_by('-timestamp')
+    feed = Action.objects.filter(Q(action_object_object_id__in=following_ids) | \
+                                 Q(target_object_id__in=following_ids), verb__in=VALID_FEED_VERBS) \
+                                .order_by('-timestamp')
     p = Paginator(feed, 12, request=request)
 
     if request.is_ajax() and page > 1:
