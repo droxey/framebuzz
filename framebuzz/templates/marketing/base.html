@@ -66,6 +66,7 @@
                 <ul class="nav pull-right clearfix">
                     <li class="link{% if request.user.is_authenticated %} logged-in{% endif %}">
                       {% if request.user.is_authenticated %}
+                        {% get_social_accounts request.user as accounts %}
                         <a href="{% url 'profiles-home' request.user.username %}" role="button" class="avatar">
                             <img src="{% avatar_url request.user 58 %}" alt="" height="28" width="28" class="img-circle" />
                         </a>
@@ -74,7 +75,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="{% url 'profiles-home' request.user.username %}">{{ request.user.username|lower }}'s Profile</a></li>
-                            <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
+                            {% if accounts|length == 0 %}<li><a href="{% url 'account_change_password' %}">Change Password</a></li>{% endif %}
                             <li><a href="{% url 'account_logout' %}">Log Out</a></li>
                         </ul>
                       {% else %}
