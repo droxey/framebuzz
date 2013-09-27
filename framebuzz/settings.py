@@ -175,7 +175,6 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
 
     'framebuzz.apps.marketing.middleware.MobileDetectionMiddleware',
@@ -429,12 +428,6 @@ LOGGING = {
     }
 }
 
-# Django-debug-toolbar
-INTERNAL_IPS = ('127.0.0.1',)
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-}
-
 SOCKJS_PORT = 4000
 SOCKJS_CHANNEL = 'echo'
 SOCKJS_CLASSES = (
@@ -484,6 +477,9 @@ SHARE_COUNT_URLS = {
 # ignored in your version control system allowing for settings to be
 # defined per machine.
 try:
-    from local_settings import *
-except ImportError:
-    pass
+    LOCAL_SETTINGS
+except NameError:
+    try:
+        from local_settings import *
+    except ImportError:
+        pass

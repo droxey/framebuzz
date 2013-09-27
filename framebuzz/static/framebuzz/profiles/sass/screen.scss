@@ -1550,46 +1550,37 @@ div.marketing-content {
     }
 }
 
+.modal-backdrop, .modal-backdrop.fade.in { opacity: 0.6; }
+
 #add-framebuzz-modal {
-    background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+    @include border-radius(2px, 2px);
+    background: none;
     background-color: white;
-    min-height: 232px;
+    box-shadow: none;
+    border: 5px solid rgba(47, 46, 46, 1.0);
+    margin-left: -260px;
     max-height: 340px;
-    margin-left: -210px;
-    width: 420px;
+    min-height: 232px;
+    width: 470px;
 
     div.modal-header {
-        background-color: #FFFFFF;
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#E9E9E9)); /* Saf4+, Chrome */
-        background-image: -webkit-linear-gradient(top, #FFFFFF, #E9E9E9); /* Chrome 10+, Saf5.1+, iOS 5+ */
-        background-image:    -moz-linear-gradient(top, #FFFFFF, #E9E9E9); /* FF3.6 */
-        background-image:     -ms-linear-gradient(top, #FFFFFF, #E9E9E9); /* IE10 */
-        background-image:      -o-linear-gradient(top, #FFFFFF, #E9E9E9); /* Opera 11.10+ */
-        background-image:         linear-gradient(top, #FFFFFF, #E9E9E9);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#FFFFFF', EndColorStr='#E9E9E9'); /* IE6-IE9 */
-        border-bottom: 1px solid #FFFFFF;
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
-        color: #434343;
         cursor: default;
-        font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
-        font-size: 17px;
-        font-weight: 700;
-        height: 20px;
-        padding-top: 12px;
-        text-align: center;
-        text-shadow: 1px 1px 1px #FFFFFF;
-        width: 390px;
+        font: 700 20px/20px 'proxima-nova',Helvetica,Arial,sans-serif;
+        height: auto;
+        padding: 15px 0;
+        width: 100%;
 
         button.close {
-            color: rgba(0, 0, 0, 0.7);
+            color: rgba(0, 0, 0, 0.95);
             z-index: 10;
             position: relative;
             top: -3px;
+            right: 9px;
         }
     }
 
     div.modal-body {
+        border-top: 0 none;
         font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
         font-weight: 300;
         line-height: 25px;
@@ -1604,36 +1595,42 @@ div.marketing-content {
         padding-right:20px;
         padding-top:18px;
         color:#555555;
-        font-size:13px; 
+        font-size:13px;
         text-align:center;
         line-height:24px;
-        border-top:1px solid #B9B9B9;
         cursor:default;
         top: -1px;
 
         p {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 300;
-            text-align: left;
+            line-height: 20px;
             margin-bottom: 15px;
+            text-align: left;
         }
 
         ul.errorlist {
             margin-bottom: 5px;
 
             li {
-                color: #990000;
-                text-align: center;
+                color: #C0392B;
+                font: 500 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+                text-align: left;
+                text-indent: 95px;
             }
         }
 
         form {
+            position: relative;
+            height: 180px;
+
             p {
                 text-align: left;
+                margin-bottom: 9px;
 
                 label {
-                    font-weight: 500;
-                    font-size: 14px;
+                    font-weight: 700;
+                    font-size: 16px;
                     display: inline-block;
                     margin-right: 10px;
                     vertical-align: text-bottom;
@@ -1641,45 +1638,40 @@ div.marketing-content {
 
                 input[type='checkbox'] {
                     position: relative;
-                    top: -7px;
+                    top: -5px;
                 }
 
                 input[type='text'] {
-                    width: 283px;
+                    width: 320px;
                 }
             }
-
-            button.add-video {
-                @include border-radius(2px, 2px);
-                background-color: #9e0f84;
-                display: block;
-                color: white;
-                border: none;
-                font-family: 'futura-pt-condensed', Helvetica, Arial, sans-serif;
-                font-size: 30px;
-                font-weight: 700;
-                float: right;
-                padding: 8px 0;
-                opacity: 1;
-                text-align: center;
-                text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
-                width: 380px;
+            
+            div.submit {
+                bottom: 0;
+                height: 44px;
+                margin-bottom: 5px;
                 position: absolute;
-                bottom: 20px;
-                @include single-transition(background-color .1s ease-in-out);
+                width: 100%;
 
-                &:hover { 
-                    text-decoration: none;
-                    background-color: #7A0066;
-                    @include single-transition(background-color .1s ease-in-out);
+                .flat-button {
+                    @include border-radius(2px, 2px);
+                    font: 700 20px/50px 'proxima-nova', Helvetica, Arial, sans-serif;
+                    height: auto;
+                    width: 180px;
                 }
 
-                em {
-                    font-size: 10px;
-                    padding-left: 2px;
-                    position: relative;
-                    top: -1px;
-                    vertical-align: middle;
+                a {
+                    float: left;
+                    opacity: 1;
+
+                    &:hover, &:focus, &:active {
+                        color: #fff;
+                        text-decoration: none;
+                    }
+                }
+
+                button {
+                    float: right;
                 }
             }
         }

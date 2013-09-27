@@ -2,5 +2,8 @@
 <form action="{% url 'profiles-add-video' request.user %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="add-video">FRAMEBUZZ IT <em>&#9654;</em></button>
+    <div class="submit clearfix">
+        <a href="#" class="close pomegranate-flat-button flat-button" data-dismiss="modal"><i class="icon-remove"></i> Cancel</a>
+        <button type="submit" class="add-video nephritis-flat-button flat-button"><i class="icon-play-sign"></i> FrameBuzz It!</button>
+    </div>
 </form>
