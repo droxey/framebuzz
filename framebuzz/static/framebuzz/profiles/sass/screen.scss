@@ -650,7 +650,7 @@ div.marketing-content {
                                             color: rgba(102, 102, 102, 0.83);
                                             float: left;
                                             font: italic 300 14px/17px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                            left: 65px;
+                                            left: 63px;
                                             position: absolute;
                                             top: 29px;
                                             width: 80%;
@@ -712,22 +712,21 @@ div.marketing-content {
                                     
                                     div.comments {
                                         clear: left;
-                                        padding: 18px 0;
+                                        padding: 9px 0;
 
                                         ul {
                                             border: none;
 
                                             li {
                                                 background-color: white;
-                                                border: 1px solid #F7F7F7;
-                                                border-radius: 3px 3px 3px 3px;
                                                 box-shadow: none;
                                                 float: left;
-                                                position: relative;
-                                                height: 90px;
-                                                padding: 3px;
-                                                width: 100%;
+                                                height: 83px;
                                                 opacity: 1;
+                                                margin-bottom: 0;
+                                                padding: 3px;
+                                                position: relative;
+                                                width: 100%;
                                                 z-index: 1;
 
                                                 a.modal-button {
@@ -739,6 +738,7 @@ div.marketing-content {
                                                     width: 120px;
 
                                                     img {
+                                                        @include border-radius(3px, 3px);
                                                         height: 90px;
                                                         width: 120px;
                                                     }
@@ -746,7 +746,7 @@ div.marketing-content {
                                         
                                                 p.counter {
                                                     @include border-radius(3px, 3px);
-                                                    background-color: rgba(44, 133, 202, 1.0);
+                                                    background-color: rgba(0, 0, 0, 0.75);
                                                     bottom: 13%;
                                                     color: white;
                                                     font-family: 'futura-pt-condensed', Helvetica, Arial, sans-serif;
@@ -767,8 +767,8 @@ div.marketing-content {
                                                         width: 0;
                                                         height: 0;
                                                         line-height: 0;
-                                                        border: solid 8px rgba(44, 133, 202, 1.0);
-                                                        border-color: rgba(44, 133, 202, 1) transparent transparent transparent;
+                                                        border: solid 8px rgba(0, 0, 0, 0.75);
+                                                        border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
                                                         -webkit-border-radius: 0;
                                                         -moz-border-radius: 0;
                                                         border-radius: 0;
@@ -779,14 +779,14 @@ div.marketing-content {
 
                                                 p.bubble {
                                                     @include border-radius(3px, 3px);
-                                                    background-color: rgba(44, 133, 202, 1.0);
-                                                    color: white;
+                                                    background-color: #2C85CA;
+                                                    color: #FFFFFF;
                                                     float: left;
-                                                    margin-left: 9px;
-                                                    padding: 14px 32px;
-                                                    margin: 2% 0 2% 16px;
+                                                    font: 300 13px/13px 'proxima-nova',Helvetica,Arial,sans-serif;
+                                                    margin: 4% 0 2% 16px;
+                                                    padding: 12px;
                                                     position: relative;
-                                                    width: 66%;
+                                                    width: auto;
 
                                                     span.corner {
                                                         position: absolute;
@@ -800,7 +800,7 @@ div.marketing-content {
                                                         -moz-border-radius: 0;
                                                         border-radius: 0;
                                                         left: -19px;
-                                                        top: 27%;
+                                                        top: 24%;
                                                     }
                                                 }
                                             }
