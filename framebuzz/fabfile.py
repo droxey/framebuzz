@@ -497,6 +497,7 @@ def deploy():
         manage("migrate --noinput")
         manage("loaddata %s/framebuzz/fixtures/social_accounts.json" % env.proj_path)
 
+    remove_old_activities()
     clear_cache()
     restart()
     notify_team()
@@ -550,7 +551,7 @@ def all():
 def remove_old_activities():
     with project():
         python("from actstream.models import Action;"
-               "comments_with_no_video_target = Action.objects.filter(verb='commented on', target=None);"
+               "comments_with_no_video_target = Action.objects.filter(verb='commented on', target_object_id=None);"
                "comments_with_no_video_target.delete();")
 
 
