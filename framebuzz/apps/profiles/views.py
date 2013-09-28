@@ -75,7 +75,8 @@ def video_share(request, username=None, video_id=None):
     actions = Action.objects.filter(verb__in=valid_verbs,
                                     target_object_id=video.id) \
                             .values('actor_object_id')
-    commenters = User.objects.filter(id__in=actions)
+    action_ids = [int(a['actor_object_id']) for a in actions]
+    commenters = User.objects.filter(id__in=action_ids)
     
     context['video'] = video
     context['is_share'] = True

@@ -497,7 +497,7 @@ def deploy():
         manage("migrate --noinput")
         manage("loaddata %s/framebuzz/fixtures/social_accounts.json" % env.proj_path)
 
-    remove_old_activities()
+    #remove_old_activities()
     clear_cache()
     restart()
     notify_team()
