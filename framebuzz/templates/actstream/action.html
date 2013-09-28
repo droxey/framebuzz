@@ -15,7 +15,7 @@
         <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a> to favorites:
         <p><i class="icon-quote-left icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
     {% elif action.verb == 'added video to library' %}
-        added <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a> to library
+        added <a href="{% url 'profiles-share' action.actor.username action.action_object.video_id %}">{{ action.action_object.title|title }}</a> to library.
     {% else %}
         <span class="icon-stack">
             <i class="icon-user icon-2x pull-left icon-muted"></i>
