@@ -163,6 +163,12 @@ def post_new_comment(context):
         return_data['heatmap'] = video.heatmap()
         return_data['channel'] = channel
 
+        if user.get_profile() is not None:
+            profile = user.get_profile()
+            if profile.has_commented == False:
+                profile.has_commented = True
+                profile.save()
+
         if not comment.parent:
             action.send(user, verb='commented on', action_object=comment, target=video)
 

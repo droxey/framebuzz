@@ -34,13 +34,20 @@
                 <div class="background">
                     <div id="profile-container" class="clearfix">                        
                         <nav id="profile-sections" class="span4{% if request.user.is_authenticated and profile_user.id == request.user.id %} edit{% endif %}">
+                            {% comment %}
+                            {% if request.user.is_authenticated and profile_user.id == request.user.id %}
+                                <a data-target="#upload-modal" data-placement="right" title="Personalize My Profile" data-role="button" class="fileupload tooltip" data-toggle="modal" href="{% url 'avatar_change' %}">
+                                  <span class="icon-stack">
+                                    <i class="icon-user"></i>
+                                    <i class="icon-magic"></i>
+                                  </span>   
+                                </a>
+                            {% endif %}
+                            {% endcomment %}
                             <div class="user-info clearfix">
                                 <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link avatar">
                                     <img src="{% avatar_url profile_user 354 %}" alt="" height="177" width="177" class="img-circle" />
                                 </a>
-                                {% if request.user.is_authenticated and profile_user.id == request.user.id %}
-                                    <a data-target="#upload-modal" role="button" class="fileupload" data-toggle="modal" title="Change Avatar" href="{% url 'avatar_change' %}"><i class="icon-edit"></i> Change Avatar</a>
-                                {% endif %}
                                 <div class="user-details">
                                     {% spaceless %}
                                     <h1 class="clearfix">
@@ -127,7 +134,7 @@
                                             </li>
                                         </ul>   
                                         {% if request.user.is_authenticated and profile_user.id == request.user.id %}                                            
-                                            <p class="bio">&ldquo;<a href="#" data-name="bio" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Bio" data-placement="bottom">{% if profile_user.get_profile.bio %}{{ profile_user.get_profile.bio }}{% else %}Add a description of who you are and the things you love.{% endif %}</a>&rdquo;</p>
+                                            <p class="bio">&ldquo;<a href="#" data-name="bio" class="editable" data-type="textarea" data-pk="{{ profile_user.get_profile.id }}" data-url="{% url 'profiles-edit' profile_user.username %}" data-title="Edit Bio" data-placement="bottom">{% if profile_user.get_profile.bio and profile_user.get_profile.bio|length > 0 %}{{ profile_user.get_profile.bio }}{% else %}Add a description of who you are and the things you love.{% endif %}</a>&rdquo;</p>
                                         {% else %}
                                             <p class="bio">
                                                 {% if profile_user.get_profile.bio %}
@@ -262,7 +269,7 @@
     </div>
     <div id="add-framebuzz-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-header graphite-flat-button">
-            Create Your Own FrameBuzz
+            Add a Video to Your Library
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         </div>
         <div class="modal-body"></div>

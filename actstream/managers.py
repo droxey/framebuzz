@@ -125,7 +125,7 @@ class FollowManager(GFKManager):
         return [follow.user for follow in self.filter(
             content_type=ContentType.objects.get_for_model(actor),
             object_id=actor.pk
-        ).order_by('-timestamp').select_related('user')]
+        ).order_by('-started').select_related('user')]
 
     def following(self, user, *models):
         """
@@ -138,4 +138,4 @@ class FollowManager(GFKManager):
             qs = qs.filter(content_type__in=(
                 ContentType.objects.get_for_model(model) for model in models)
             )
-        return [follow.follow_object for follow in qs.fetch_generic_relations().order_by('-timestamp')]
+        return [follow.follow_object for follow in qs.fetch_generic_relations().order_by('-started')]

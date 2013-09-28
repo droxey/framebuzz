@@ -104,15 +104,10 @@ div.marketing-content {
                         float: left;
                         height: 100%;
                         margin-left: 8px;
-                        padding: 27px 6px;
+                        padding: 30px 6px;
                         position: absolute;
                         width: 330px;
                         @include single-transition(background-color 10ms ease-out);
-
-                        a.fileupload { 
-                            opacity: 0; 
-                            @include single-transition(opacity 11ms ease-out);
-                        }
 
                         ul {
                             border-top: 1px solid rgba(255, 255, 255, 0.5);
@@ -215,9 +210,9 @@ div.marketing-content {
                                 }
 
                                 h1 {
-                                    padding: 0 6px 10px;
+                                    padding: 0 0 9px 0;
                                     position: relative;
-                                    width: 96%;
+                                    width: 100%;
 
                                     span.username-field { 
                                         float: left;
@@ -230,7 +225,7 @@ div.marketing-content {
                                         font: 300 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
                                         position: absolute;
                                         top: 2px;
-                                        right: 4px;
+                                        right: 0;
 
                                         i.icon-map-marker {
                                             font-size: 26px;
@@ -250,8 +245,8 @@ div.marketing-content {
                                     border-top: 1px solid rgba(255, 255, 255, 0.5);
                                     color: white;
                                     font: 300 14px/17px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                    padding: 9px 0 9px 0;
-                                    text-align: center;
+                                    padding: 18px 0;
+                                    text-align: justify;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 
                                     a.editable {
@@ -261,6 +256,8 @@ div.marketing-content {
 
                                 h2 {
                                     font: italic 300 16px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                    padding-left: 0;
+                                    padding-right: 0;
                                     padding-bottom: 20px;
 
                                     i {
@@ -405,12 +402,14 @@ div.marketing-content {
                                     border: 1px solid transparent;
                                     color: white;
                                     font: 500 14px/20px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                    position: absolute;
+                                    top: 0;
+                                    right: 0;
                                     text-align: center;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
                                     text-decoration: none;
 
                                     &:hover, &:active, &:focus {
-                                        border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
                                         background: none;
                                         outline: 0 none;
                                         opacity: 1;
@@ -421,16 +420,59 @@ div.marketing-content {
                             }
                         }
 
+                        a.fileupload {
+                            display: block;
+                            font: 500 26px/26px 'proxima-nova',Helvetica,Arial,sans-serif;
+                            left: 9px;
+                            opacity: 1;
+                            position: absolute;
+                            text-align: center;
+                            text-decoration: none;
+                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                            top: 9px; 
+
+                            span.icon-stack {
+                                color: rgba(255, 255, 255, 0.95);
+                                display: block;
+                                height: 37px;
+                                position: relative;
+                                width: 37px;
+
+                                i {
+                                    height: 100%;
+                                    position: absolute;
+                                }
+
+                                i.icon-user {
+                                    bottom: 7px;
+                                    left: 0;
+                                    width: 50%;
+                                }
+                                
+                                i.icon-magic {
+                                    bottom: 8px;
+                                    font-size: 12px;
+                                    right: 2px;
+                                    width: 45%;
+                                }
+                            }
+
+                            &:hover, &:active, &:focus {
+                                background: none;
+                                outline: 0 none;
+                                text-decoration: none;
+                            }
+                        }
+
+                        .tooltip.right .tooltip-arrow {
+                            margin-top: -8px;
+                        }
+                                
                         &.edit {
                             &:hover {
                                 background: rgba(0, 0, 0, 0.15);
                                 @include single-transition(background-color 10ms ease-in);
 
-                                a.fileupload { 
-                                    opacity: 1; 
-                                    @include single-transition(opacity 9ms ease-in);
-                                }
-                                
                                 .editable {
                                     border-bottom: 1px dashed rgba(255, 255, 255, 0.5) !important;
                                 }
@@ -453,7 +495,7 @@ div.marketing-content {
                             ul.nav-pills {
                                 border-bottom: none;
                                 float: left;
-                                padding: 18px 5px;
+                                padding-top: 12px;
                                 margin-bottom: 0;
                                 width: 94%;
 
@@ -497,7 +539,8 @@ div.marketing-content {
                             }
 
                             a.add-video {
-                                top: 24px;
+                                top: 20px;
+                                right: 6px;
                             }
 
                             div.tooltip {
@@ -897,7 +940,7 @@ div.marketing-content {
                                                         vertical-align: top;
 
                                                         em {
-                                                            color: #222;
+                                                            color: rgba(102, 102, 102, 0.83);
                                                             display: block;
                                                             font: italic 11px/11px 'proxima-nova', Helvetica, Arial, sans-serif;
                                                             text-decoration: none;
@@ -945,7 +988,7 @@ div.marketing-content {
 
                     ul.grid {
                         list-style: none outside none;
-                        margin: 18px 0 18px 9px;
+                        margin: 18px 3px;
                         max-width: 652px;
                         padding: 0;
 
@@ -1531,7 +1574,8 @@ div.marketing-content {
 
                 input[type='checkbox'] {
                     position: relative;
-                    top: -5px;
+                    left: -5px;
+                    top: -3px;
                 }
 
                 input[type='text'] {

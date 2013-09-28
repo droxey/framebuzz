@@ -1,15 +1,9 @@
 {% load i18n avatar_tags %}
 
-<div class="avatar-section">
-    <h1>Change Avatar</h1>
-    <p>Add or change your current avatar using the form below.</p>
-
-    {% if not avatars %}
-        <div class="alert">
-            <strong>Notice</strong>:
-            <p>{% trans "You haven't uploaded an avatar yet. Please upload one now." %}<p>
-        </div>
-    {% else %}
+{% if avatars %}
+    <div class="avatar-section">
+        <h1>Change Avatar</h1>
+        <p>Add or change your current avatar using the form below.</p>
         <form id="change-avatar-form" method="POST" action="{% url 'avatar_change' %}" class="clearfix">
             <div class="clearfix">
                 <div id="current-avatar" class="span2">
@@ -25,8 +19,9 @@
                 <button type="submit" class="add-video">CHOOSE NEW DEFAULT <em>&#9654;</em></button>
             </div>
         </form>
-    {% endif %}
-</div>
+    </div>
+{% endif %}
+
 <div class="avatar-section">
     <h1>Upload Avatar</h1>
     <p>Upload a new avatar using the form below.</p>

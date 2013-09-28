@@ -8,6 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.models import Comment, CommentFlag
 from django.db import models
 from django.db.models.signals import post_save
+from django.utils.hashcompat import md5_constructor
 from django.utils.translation import ugettext as _
 from django.utils.html import urlize
 from django.utils.safestring import mark_safe
@@ -25,19 +26,6 @@ TIMELINE_BLOCKS = 32
 SIGNIFICANCE_FACTOR = 20.0
 
 
-class Website(models.Model):
-    url = models.URLField('Website URL')
-    name = models.CharField('Website Name', max_length=255)
-    moderator_email = models.EmailField('Moderator Email Address')
-    hide_comment_flag_count = models.IntegerField(
-        'Hide Comment When Total Flag Count', default=5)
-    youtube_api_key = models.CharField(
-        'YouTube API Key', max_length=40, blank=True, null=True)
-
-    def __unicode__(self):
-        return "%s (%s)" % (self.name, self.url)
-
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     bio = models.CharField(max_length=500, blank=True, null=True)
@@ -48,10 +36,19 @@ class UserProfile(models.Model):
     birthday = models.DateField(null=True, blank=True)
     tagline = models.CharField(max_length=180, null=True, blank=True)
     display_name = models.CharField(max_length=120, null=True, blank=True)
+    has_commented = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'User Profile'
         verbose_name_plural = 'User Profiles'
+
+    def get_color_code(self):
+        uhash = md5_constructor(self.user.username).hexdigest()
+        tohex = "".join([uhash[0:2], uhash[2:4], uhash[4:6]])
+        return tohex
+
+    def generate_default_avatar(self):
+        return None
 
     def get_absolute_url(self):
         return reverse('profiles-home', args=[str(self.user.username)])
@@ -346,20 +343,6 @@ class MPTTComment(MPTTModel, Comment):
 
         if first_comment:
             first_comment.save()
-
-
-class UserWebsite(models.Model):
-    website = models.ForeignKey(Website)
-    user = models.ForeignKey(User)
-    added_on = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = 'User Website'
-        verbose_name_plural = 'User Websites'
-        ordering = ['-added_on']
-
-    def __unicode__(self):
-        return "%s (%s)" % (self.website.name, self.website.url)
 
 
 '''
