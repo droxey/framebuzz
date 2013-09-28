@@ -3,10 +3,12 @@
 {% spaceless %}
     <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a>
     {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
-        {{ action.verb }}
-        <i class="icon-comment icon-2x pull-right icon-muted"></i>
-        <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a>:
-        <p><i class="icon-quote-left icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
+        {% if action.target %}
+            {{ action.verb }}
+            <i class="icon-comment icon-2x pull-right icon-muted"></i>
+            <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a>:
+            <p><i class="icon-quote-left icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
+        {% endif %}
     {% elif action.verb == 'added to favorites' %}
         <i class="icon-heart icon-2x pull-right icon-muted"></i>
         added <a href="{% url 'profiles-home' action.action_object.user.username %}">{{ action.action_object.user|display_name }}</a>'s comment on
