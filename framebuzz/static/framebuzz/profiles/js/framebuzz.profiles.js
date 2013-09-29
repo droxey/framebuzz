@@ -198,6 +198,113 @@ var FrameBuzzProfile = (function($) {
         });
     }
 
+    function initUploaders() {
+        $('body').on('hide', '#upload-modal', function () {
+            $(this).removeData('modal');
+        });
+
+        // Load uploaders in modal.
+        $('body').on('shown', '#upload-modal', function(e) {
+            var url = window.location.hostname === 'blueimp.github.io' ?
+            '//jquery-file-upload.appspot.com/' : 'server/php/';
+
+            var uploadButton = $('<button/>')
+                .addClass('btn btn-primary')
+                .prop('disabled', true)
+                .text('Processing...')
+                .on('click', function () {
+                    var $this = $(this),
+                        data = $this.data();
+                    $this
+                        .off('click')
+                        .text('Cancel')
+                        .on('click', function () {
+                            $this.remove();
+                            data.abort();
+                        });
+                    data.submit().always(function () {
+                        $this.remove();
+                    });
+                });
+
+            $('#id_avatar').fileupload({
+                url: url,
+                dataType: 'json',
+                autoUpload: false,
+                acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
+                maxFileSize: 5000000, // 5 MB
+                // Enable image resizing, except for Android and Opera,
+                // which actually support image resizing, but fail to
+                // send Blob objects via XHR requests:
+                disableImageResize: /Android(?!.*Chrome)|Opera/
+                    .test(window.navigator.userAgent),
+                previewMaxWidth: 300,
+                previewMaxHeight: 300,
+                previewCrop: true
+            }).on('fileuploadadd', function (e, data) {
+                data.context = $('<div/>').appendTo('#files');
+                $.each(data.files, function (index, file) {
+                    var node = $('<p/>')
+                            .append($('<span/>').text(file.name));
+                    if (!index) {
+                        node
+                            .append('<br>')
+                            .append(uploadButton.clone(true).data(data));
+                    }
+                    node.appendTo(data.context);
+                });
+            }).on('fileuploadprocessalways', function (e, data) {
+                var index = data.index,
+                    file = data.files[index],
+                    node = $(data.context.children()[index]);
+                if (file.preview) {
+                    node
+                        .prepend('<br>')
+                        .prepend(file.preview);
+                }
+                if (file.error) {
+                    node
+                        .append('<br>')
+                        .append($('<span class="text-danger"/>').text(file.error));
+                }
+                if (index + 1 === data.files.length) {
+                    data.context.find('button')
+                        .text('Upload')
+                        .prop('disabled', !!data.files.error);
+                }
+            }).on('fileuploadprogressall', function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
+                );
+            }).on('fileuploaddone', function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    if (file.url) {
+                        var link = $('<a>')
+                            .attr('target', '_blank')
+                            .prop('href', file.url);
+                        $(data.context.children()[index])
+                            .wrap(link);
+                    } else if (file.error) {
+                        var error = $('<span class="text-danger"/>').text(file.error);
+                        $(data.context.children()[index])
+                            .append('<br>')
+                            .append(error);
+                    }
+                });
+            }).on('fileuploadfail', function (e, data) {
+                $.each(data.files, function (index, file) {
+                    var error = $('<span class="text-danger"/>').text('File upload failed.');
+                    $(data.context.children()[index])
+                        .append('<br>')
+                        .append(error);
+                });
+            }).prop('disabled', !$.support.fileInput)
+                .parent().addClass($.support.fileInput ? undefined : 'disabled');
+            });
+    }
+
     return {
       init: function() {
         bindAddVideoModal();
@@ -205,10 +312,15 @@ var FrameBuzzProfile = (function($) {
         initEditables();
         initToggleButtons();
         bindTabs();
-
+        
         isShare = $('#share').length > 0;
         if (isShare && currentTab == '#videos') {
             $('#share').removeClass('fadein');
+        }
+
+        var canUpload = $('a.fileupload').length > 0;
+        if (canUpload) {
+            initUploaders();
         }
 
         var activeTab = $('ul.nav-tabs li.active a');

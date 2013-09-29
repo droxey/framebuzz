@@ -3,7 +3,7 @@
 {% if avatars %}
     <div class="avatar-section">
         <h1>Change Avatar</h1>
-        <p>Add or change your current avatar using the form below.</p>
+        <p>Drag and drop an image in the space below, or click the button below to add an image from your computer.</p>
         <form id="change-avatar-form" method="POST" action="{% url 'avatar_change' %}" class="clearfix">
             <div class="clearfix">
                 <div id="current-avatar" class="span2">
@@ -16,7 +16,7 @@
             </div>
             <div class="actions">
                 {% csrf_token %}
-                <button type="submit" class="add-video">CHOOSE NEW DEFAULT <em>&#9654;</em></button>
+                {% comment %}<button type="submit" class="nephritis-flat-button flat-button add-video">CHOOSE NEW DEFAULT <em>&#9654;</em></button>{% endcomment %}
             </div>
         </form>
     </div>
@@ -24,12 +24,16 @@
 
 <div class="avatar-section">
     <h1>Upload Avatar</h1>
-    <p>Upload a new avatar using the form below.</p>
+    <p>Drag and drop an image in the space below, or click the button below to add an image from your computer. Picture files ending in .png, .jpg, and .jpeg are supported.</p>
     <form id="upload-avatar-form" enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}" class="clearfix">
         {{ upload_avatar_form.as_p }}
         <div class="actions">
             {% csrf_token %}
-            <button type="submit" class="add-video">UPLOAD NEW IMAGE <em>&#9654;</em></button>
+            {% comment %}<button type="submit" class="nephritis-flat-button flat-button add-video">UPLOAD NEW IMAGE <em>&#9654;</em></button>{% endcomment %}
         </div>
     </form>
 </div>
+<div id="progress" class="progress">
+    <div class="progress-bar progress-bar-success"></div>
+</div>
+<div id="files" class="files"></div>
