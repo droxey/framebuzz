@@ -61,15 +61,6 @@ class UserSerializer(serializers.ModelSerializer):
         avatar = get_primary_avatar(obj, size=66)
         if avatar:
             return avatar.avatar_url(66)
-
-        if AVATAR_GRAVATAR_BACKUP:
-            if obj.email:
-                img_hash = md5_constructor(obj.email).hexdigest()
-            else:
-                img_hash = md5_constructor(obj.username).hexdigest()
-            path = "%s/?size=88x88&set=set3&bgset=bg1&gravatar=hashed" % img_hash
-            return urlparse.urljoin('http://robohash.org', path)
-
         return get_default_avatar_url()
 
     def get_video_in_library(self, obj):

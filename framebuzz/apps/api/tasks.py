@@ -168,6 +168,7 @@ def post_new_comment(context):
             if profile.has_commented == False:
                 profile.has_commented = True
                 profile.save()
+                profile.generate_default_avatar()
 
         if not comment.parent:
             action.send(user, verb='commented on', action_object=comment, target=video)

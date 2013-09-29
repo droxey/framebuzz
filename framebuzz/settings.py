@@ -337,6 +337,11 @@ AVATAR_ALLOWED_FILE_EXTS = ['.jpg', '.png']
 AUTO_GENERATE_AVATAR_SIZES = (354, 110, 66, 58, 40,)
 AVATAR_GRAVATAR_BASE_URL = 'http://robohash.org'
 
+SIMPLEAVATAR_SIZE = (354, 354)
+SIMPLEAVATAR_BASE_AVATAR_IMAGE = os.path.join(STATIC_ROOT, 'framebuzz/profiles/img/default-avatar.png')
+SIMPLEAVATAR_AVATAR_BADGE = os.path.join(STATIC_ROOT, 'framebuzz/profiles/img/default-avatar-active.png')
+SIMPLEAVATAR_STORAGE_DIR = os.path.join(MEDIA_ROOT, 'avatars/default/')
+
 # Email Settings:
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'

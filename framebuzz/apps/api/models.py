@@ -42,13 +42,50 @@ class UserProfile(models.Model):
         verbose_name = 'User Profile'
         verbose_name_plural = 'User Profiles'
 
+    def get_uhash(self):
+        return md5_constructor(self.user.username).hexdigest()
+
     def get_color_code(self):
-        uhash = md5_constructor(self.user.username).hexdigest()
-        tohex = "".join([uhash[0:2], uhash[2:4], uhash[4:6]])
-        return tohex
+        uhash = self.get_uhash()
+        r = '0x%s' % str(uhash[0:2])
+        g = '0x%s' % str(uhash[2:4])
+        b = '0x%s' % str(uhash[4:6])
+        rgb = (int(r, 16), int(g, 16), int(b, 16))
+        return rgb
 
     def generate_default_avatar(self):
-        return None
+        from cStringIO import StringIO
+        from django.core.files.uploadedfile import SimpleUploadedFile
+        from PIL import Image
+        from avatar.models import Avatar
+
+        tmpname = '%s.png' % self.get_uhash()
+        code = self.get_color_code()
+        mode = "RGB"
+        base = Image.new(mode, settings.SIMPLEAVATAR_SIZE, code)
+
+        if self.has_commented:
+            overlay = Image.open(settings.SIMPLEAVATAR_AVATAR_BADGE).convert('RGBA')
+        else:
+            overlay = Image.open(settings.SIMPLEAVATAR_BASE_AVATAR_IMAGE).convert('RGBA')
+
+        obands = list(overlay.split())
+        if len(obands) == 4:
+            # Assuming alpha is the last band
+            obands[3] = obands[3].point(lambda x: x*0.25)
+        
+        overlay = Image.merge(overlay.mode, obands)
+        base.paste(overlay, (0, 0), overlay)
+
+        # Write new avatar to memory.
+        tmphandle = StringIO()
+        base.save(tmphandle, 'png')
+        tmphandle.seek(0)
+
+        suf = SimpleUploadedFile(tmpname, tmphandle.read(), content_type='image/png')
+        av = Avatar(user=self.user, primary=True)
+        av.avatar.save(tmpname, suf, save=False)
+        av.save()
 
     def get_absolute_url(self):
         return reverse('profiles-home', args=[str(self.user.username)])
@@ -60,6 +97,8 @@ class UserProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         profile, created = UserProfile.objects.get_or_create(user=instance)
+        profile.generate_default_avatar()
+
         comment_flag_ct = ContentType.objects.get_for_model(CommentFlag)
         comment_flag_permissions = Permission.objects.filter(
             content_type=comment_flag_ct)
