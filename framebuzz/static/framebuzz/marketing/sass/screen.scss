@@ -9,27 +9,6 @@
 @import "compass/css3/transition";
 
 /*
- *      Global
- */
-
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, 
-acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
-strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, 
-form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, 
-canvas, details, embed, figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-
-body {
-    background-color: #078ac1;
-}
-
-.wf-loading {
-    div.marketing-content, div.navbar-inner { visibility: hidden; }
-}
-
-/*
  *      Mixins
  */
 
@@ -45,16 +24,33 @@ body {
 }
 
 /*
+ *      Global
+ */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, 
+acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, 
+form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, 
+canvas, details, embed, figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/*
  *      Common Elements
  */
+
+body {
+    background-color: #078ac1;
+}
+
+.wf-loading {
+    div.marketing-content, div.navbar-inner { visibility: hidden; }
+}
 
 .wrapper {
     margin: 0 auto;
     width: 1200px;
-}
-
-.wf-loading {
-    font: normal 12px/16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 div.navbar {
@@ -321,6 +317,20 @@ div.search-results {
                         position: relative;
                         margin-top: 16px;
                         min-height: 540px;
+
+                        div.spin {
+                            height: 100%;
+                            left: 44%;
+                            position: absolute;
+                            top: 25%;
+
+                            i {
+                                color: white;
+                                font-size: 26px;
+                                line-height: 26px;
+                                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                            }
+                        }
 
                         &.videos-results {
                             border-right: 1px solid #383838;

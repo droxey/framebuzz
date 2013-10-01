@@ -10,36 +10,9 @@ $(document).ready(function() {
   var usersQuery = null;
 
 
-  var startSpinner = function() {
-    $('#results-list div.span4 div.pagination-page').spin({
-      lines: 10, // The number of lines to draw
-      length: 13, // The length of each line
-      width: 11, // The line thickness
-      radius: 20, // The radius of the inner circle
-      corners: 0.75, // Corner roundness (0..1)
-      rotate: 0, // The rotation offset
-      direction: 1, // 1: clockwise, -1: counterclockwise
-      color: '#000', // #rgb or #rrggbb or array of colors
-      speed: 0.7, // Rounds per second
-      trail: 37, // Afterglow percentage
-      shadow: true, // Whether to render a shadow
-      hwaccel: true, // Whether to use hardware acceleration
-      className: 'spinner', // The CSS class to assign to the spinner
-      zIndex: 2e9, // The z-index (defaults to 2000000000)
-      top: '170', // Top position relative to parent in px
-      left: '140' // Left position relative to parent in px
-    });
-  };
-
   var getList = function(listName) {
     var selector = '#results-list div.span4 div.pagination-page.' + listName + '-results';
     return $(selector);
-  };
-
-
-  var stopSpinner = function(listName) {
-    var element = getList(listName);
-    element.spin(false);
   };
 
 
@@ -87,7 +60,6 @@ $(document).ready(function() {
     $.get(searchUrl, function(html) {
         resultsContainer.html(html);
         bindClose();
-        startSpinner();
         startSearch(query);
     });
   };
@@ -110,8 +82,6 @@ $(document).ready(function() {
     $('#results-list h1 > strong').text(query);
 
     videoQuery = $.get(searchVideosUrl, {'query': query}, function(results) {
-      stopSpinner('videos');
-
       var container = getList('videos');
       container.html(results);
       container.highlight(query);
@@ -120,8 +90,6 @@ $(document).ready(function() {
     });
 
     conversationsQuery = $.get(searchConversationsUrl, {'query': query}, function(results) {
-      stopSpinner('conversations');
-
       var container = getList('conversations');
       container.html(results);
       container.highlight(query);
@@ -130,8 +98,6 @@ $(document).ready(function() {
     });
 
     usersQuery = $.get(searchUsersUrl, {'query': query}, function(results) {
-      stopSpinner('users');
-
       var container = getList('users');
       container.html(results);
       container.highlight(query);

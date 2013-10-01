@@ -12,7 +12,7 @@ angular.module('framebuzz.directives', [])
     .directive('mediaElement', ['broadcaster', '$state', '$rootScope', 'safeApply', function(broadcaster, $state, $rootScope, safeApply) {
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
-                features: ['share', 'addtolibrary', 'volume', 'muteconvo', 'progress', 'playpause' ],
+                features: ['share', 'addtolibrary', 'muteconvo', 'progress', 'playpause' ],
                 pluginPath: SOCK.root_path + 'swf/',
                 flashName: 'flashmediaelement.swf',
                 silverlightName: 'silverlightmediaelement.xap',
@@ -54,32 +54,9 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     $('.mejs-video').css({ height: '385px', width: '640px' });
                     $('video').css({ height: '385px', width: '640px' });
-                    $('.mejs-volume-button').addClass('mejs-fade-in');
+                    $('.mejs-overlay-loading').remove();
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
-
-                    //  =====
-                    //  Loading Indicator
-                    //  =====
-                    $('.mejs-overlay-loading').spin({
-                      lines: 10, // The number of lines to draw
-                      length: 12, // The length of each line
-                      width: 10, // The line thickness
-                      radius: 17, // The radius of the inner circle
-                      corners: 0.75, // Corner roundness (0..1)
-                      rotate: 0, // The rotation offset
-                      direction: 1, // 1: clockwise, -1: counterclockwise
-                      color: '#000', // #rgb or #rrggbb or array of colors
-                      speed: 0.7, // Rounds per second
-                      trail: 37, // Afterglow percentage
-                      shadow: true, // Whether to render a shadow
-                      hwaccel: true, // Whether to use hardware acceleration
-                      className: 'spinner', // The CSS class to assign to the spinner
-                      zIndex: 2e9, // The z-index (defaults to 2000000000)
-                      top: '1', // Top position relative to parent in px
-                      left: '1' // Left position relative to parent in px
-                    });
-
 
                     //  =====
                     //  jQuery Event Listeners

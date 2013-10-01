@@ -31,6 +31,7 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <![endif]-->
     {% endcompress %}
+    {% block head_javascript %}{% endblock %}
     {% compress css %}
         <!-- bootstrap -->
         <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap.css' %}" rel="stylesheet" />
@@ -51,7 +52,7 @@
     {% endcompress %}
     {% block page_css %}{% endblock %}
   </head>
-  <body class="{% block page_classes %}{% endblock %}">
+  <body class="{% block page_classes %}{% endblock %}"{% block body_attributes %}{% endblock %}>
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <div class="wrapper clearfix">
@@ -117,8 +118,6 @@
         <script src="{% static 'framebuzz/dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/jquery.sharrre-1.3.4.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/jquery.highlight.js' %}"></script>
-        <script src="{% static 'framebuzz/marketing/js/spin.min.js' %}"></script>
-        <script src="{% static 'framebuzz/marketing/js/jquery.spin.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.share.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.search.js' %}"></script>
     {% endcompress %}
