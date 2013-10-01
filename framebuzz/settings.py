@@ -238,7 +238,6 @@ INSTALLED_APPS = (
     'djcelery_email',
     'compressor',
     'raven.contrib.django.raven_compat',
-    'django_sockjs_tornado',
     'addendum',
     'feedback',
     'shorturls',
