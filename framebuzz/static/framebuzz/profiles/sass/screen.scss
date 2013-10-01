@@ -98,6 +98,18 @@ div.marketing-content {
                     height: 100%;
                     z-index: 1;
 
+                    div.spin {
+                        margin: 0 auto;
+                        position: relative;
+                        text-align: center;
+                        width: 40px;
+                        
+                        i {
+                            color: white;
+                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                        }
+                    }
+
                     #profile-sections {
                         background: rgba(0, 0, 0, 0.05);
                         box-shadow: -2px 0px 0px 3px rgba(0, 0, 0, 0.1);
@@ -119,14 +131,13 @@ div.marketing-content {
                                 padding: 9px 0 10px 0;
                                 width: auto;
 
-                                &.home, &.website { display: none; }
-
                                 a {
+                                    @include border-radius(0px, 0px);
                                     border: 1px solid transparent;
                                     border-right: 1px solid rgba(255, 255, 255, 0.2);
                                     color: white;
                                     font: 500 14px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                    padding: 0 9px 0 8px;
+                                    padding: 0 7px 0 2px;
                                     text-align: center;
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
                                     text-decoration: none;
@@ -151,6 +162,7 @@ div.marketing-content {
 
                                 &:first-child {
                                     a {
+                                        border-left: none;
                                         padding-left: 0;
                                     }
                                 }
@@ -384,45 +396,6 @@ div.marketing-content {
                             }
                         }
 
-                        div.feeds {
-                            margin-top: 54px;
-                            padding-left: 6px;
-
-                            p {
-                                margin-bottom: 9px;
-
-                                i.icon-rss-sign {
-                                    color: white;
-                                    font-size: 20px;
-                                    line-height: 20px;
-                                    padding-right: 3px;
-                                    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
-                                    position: relative;
-                                    top: 2px;
-                                }
-
-                                a {
-                                    border: 1px solid transparent;
-                                    color: white;
-                                    font: 500 14px/20px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    text-align: center;
-                                    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
-                                    text-decoration: none;
-
-                                    &:hover, &:active, &:focus {
-                                        background: none;
-                                        outline: 0 none;
-                                        opacity: 1;
-                                        text-decoration: none;
-                                        @include single-transition(opacity 50ms ease-in);
-                                    }
-                                }
-                            }
-                        }
-
                         a.fileupload {
                             display: block;
                             font: 500 26px/26px 'proxima-nova',Helvetica,Arial,sans-serif;
@@ -487,6 +460,7 @@ div.marketing-content {
                         margin-left: 34px;
                         margin-top: 0px;
                         float: left;
+                        height: 100%;
                         overflow: visible;
                         position: relative;
                         left: 28%;
@@ -590,6 +564,384 @@ div.marketing-content {
                                 color: rgba(255, 255, 255, 1);
                             }
                         }
+
+                        #feed {
+                            width: 100%;
+
+                            div.spin { top: 170px; }
+
+                            ul.grid {
+                                border: none;
+
+                                li {
+                                    @include border-radius(5px, 5px);
+                                    background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+                                    background-color: white;
+                                    box-shadow: 0 -5px 0 5px rgba(0, 0, 0, 0.10);
+                                    display: block;
+                                    float: left;
+                                    height: auto;
+                                    opacity: 0;
+                                    list-style: none outside none;
+                                    margin-right: 18px;
+                                    margin-bottom: 18px;
+                                    max-width: 652px;
+                                    padding: 5px;
+                                    position: relative;
+                                    width: 47%;
+                            
+                                    div.video-wrapper {
+                                        @include border-radius(3px, 3px);
+                                        background-color: #FFFFFF;
+                                        height: 316px;
+                                        padding: 9px 9px 0;
+                                        position: relative;
+
+                                        img.featured {
+                                            left: -6px;
+                                            height: 50px;
+                                            left: -1px;
+                                            position: absolute;
+                                            top: 0;
+                                            width: 96px;
+                                            z-index: 20;
+                                        }
+
+                                        a.thumbnail-link {
+                                            display: block;
+                                            height: 165px;
+                                            width: 100%;
+
+                                            img.video-thumbnail {
+                                                @include border-radius(3px, 3px);
+                                                background: rgba(102, 102, 102, .90);
+                                                height: 165px;
+                                                position: relative;
+                                                width: 100%;
+                                                z-index: 10;
+                                            }
+                                        }
+
+                                        div.comment {
+                                            border-radius: 0px 0px 3px 3px;
+                                            background-color: rgba(0, 0, 0, 0.5);
+                                            font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+                                            font-size: 11px;
+                                            font-weight: 500;
+                                            line-height: 18px;
+                                            padding: 9px 9px 7px;
+                                            position: absolute;
+                                            top: 123px;
+                                            width: 270px;
+                                            z-index: 20;
+
+                                            span.corner {
+                                                position: absolute;
+                                                display: block;
+                                                width: 0;
+                                                height: 0;
+                                                line-height: 0;
+                                                border: solid 9px rgba(0, 0, 0, 0.5);
+                                                border-color: transparent transparent rgba(0, 0, 0, 0.5);
+                                                display: block;
+                                                height: 0;
+                                                left: 140.5px;
+                                                line-height: 0;
+                                                position: absolute;
+                                                top: -18px;
+                                                width: 0;
+                                            }
+
+                                            p {
+                                                font: 500 13px/15px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                color: white;
+                                                padding: 6px 0;
+                                                word-wrap: break-word;
+                                                width: 74%;
+                                                position: absolute;
+                                                left: 53px;
+
+                                                a {
+                                                    color: white;
+                                                    height: auto !important;
+                                                }
+                                            }
+
+                                            img.img-circle {
+                                                -moz-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                -webkit-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                display: block;
+                                                float: left;
+                                                height: 35px;
+                                                margin-right: 9px;
+                                                width: 35px;
+                                                z-index: 2;
+                                            }
+                                        }
+
+                                        div.video-details {
+                                            font: 500 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+
+                                            a {
+                                                color: #272727;
+                                                font: 300 18px/18px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+                                                padding-bottom: 3px;
+                                            }
+
+                                            h3 { padding: 3px 0; }
+
+                                            h4 { color: #969696; }
+
+                                            div.shared {
+                                                @include border-radius(3px, 3px);
+                                                border: 1px solid #dddddd;
+                                                padding: 6px 6px 3px;
+                                                margin-top: 6px;
+
+                                                h5 { color: #dddddd; }
+
+                                                ul {
+                                                    height: 35px;
+                                                    overflow: auto;
+                                                    padding-top: 1px;
+
+                                                    li {
+                                                        float: left;
+                                                        min-height: 34px;
+                                                        width: 34px;
+                                                        opacity: 1;
+                                                        
+                                                        a {
+                                                            display: block;
+                                                            height: 22px;
+                                                            padding: 7px 0;
+                                                            width: 22px;
+                                                            opacity: 1;
+
+                                                            img.img-circle {
+                                                                -moz-box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                                -webkit-box-shadow: 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                                box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                                height: 22px;
+                                                                width: 22px;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                            span {
+                                                color: rgba(73, 73, 73, 0.83);
+                                                display: block;
+                                                font-size: 11px;
+                                            }
+                                        }
+
+                                        div.video-actions {
+                                            height: 25px;
+                                            position: absolute;
+                                            bottom: 9px;
+                                            right: 9px;
+
+                                            ul {
+                                                height: 25px;
+
+                                                li {
+                                                    opacity: 1;
+                                                    float: right;
+                                                    width: 29px;
+                                                    min-height: 25px;
+
+                                                    a {
+                                                        color: #cecece;
+                                                        display: block;
+                                                        font: 300 20px/29px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                        height: 19px;
+                                                        outline: 0;
+                                                        padding-top: 6px;
+                                                        text-align: right;
+                                                        text-decoration: none;
+                                                        width: 29px;
+
+                                                        i {
+                                                            position: relative;
+                                                            bottom: 3px;
+                                                        }
+
+                                                        &.active, &:hover {
+                                                            color: #67a3cb;
+                                                        }
+
+                                                        &:hover, &:focus, &:active {
+                                                            text-decoration: none;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    div.user-wrapper {
+                                        padding: 9px;
+                                        position: relative;
+                                        height: 240px;
+     
+                                        a.avatar {
+                                            float: left;
+                                        }
+                                         
+                                        div.feed-header {
+                                            margin-top: 0;
+                                            float: left;
+                                            position: relative;
+                                            width: 87%;
+                                            height: 100%;
+     
+                                            div.action {
+                                                font: 300 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                display: inline-block;
+                                                vertical-align: bottom;
+                                                position: relative;
+                                                padding-right: 25px;
+                                                width: 95%;
+     
+                                                i.pull-right,
+                                                span.icon-stack {
+                                                    display: inline-block;
+                                                    position: absolute;
+                                                    right: -11px;
+                                                    top: 35%;
+                                                }
+     
+                                                i.pull-right.icon-heart {
+                                                    right: -8px;
+                                                }
+     
+                                                i.pull-right.icon-comment {
+                                                    top: 30%;
+                                                }
+     
+                                                span.icon-stack {
+                                                    width: 32px;
+     
+                                                    i.icon-user {
+                                                        font-size: 2em;
+                                                        position: absolute;
+                                                        left: -4px;
+                                                    }
+     
+                                                    i.icon-minus,
+                                                    i.icon-plus {
+                                                        font-size: 8px;
+                                                        position: absolute;
+                                                        right: -12px;
+                                                    }
+                                                }
+     
+                                                strong { font-weight: 700; }
+     
+                                                p { 
+                                                    line-height: 16px;
+                                                    padding-top: 6px;
+                                                    position: absolute;
+                                                    width: 80%;
+                                                }
+     
+                                                p.follow {
+                                                    padding-top: 12px;
+     
+                                                    a {
+                                                        img.img-circle {
+                                                            width: 25px;
+                                                            height: 25px;
+                                                            margin-right: 9px;
+                                                            margin-top: 1px;
+                                                        }
+                 
+                                                        span {
+                                                            line-height: 12px;
+                                                            position: relative;
+                                                            vertical-align: top;
+     
+                                                            em {
+                                                                color: rgba(102, 102, 102, 0.83);
+                                                                display: block;
+                                                                font: italic 11px/11px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                                text-decoration: none;
+                                                                left: 0;
+                                                                position: absolute;
+                                                                text-decoration: none;
+                                                                top: 18px;
+                                                                width: 410px;
+                                                            }
+                                                        } 
+     
+                                                        &:hover, &:focus, &:active {
+                                                            em { text-decoration: none; }
+                                                        }
+                                                    }
+                                                }
+                                            }
+     
+                                            h3 {
+                                                position: absolute;
+                                                bottom: 0;
+                                                right: 0;
+                                            }
+                                        }
+                                    }
+                                
+                                    &.animate {
+                                        -webkit-animation: fadeIn 0.65s ease forwards;
+                                        -moz-animation: fadeIn 0.65s ease forwards;
+                                        animation: fadeIn 0.65s ease forwards;
+                                    }
+
+                                    &:nth-child(2n) {
+                                        margin-right: 0;
+                                    }
+
+                                    &.shown {
+                                        opacity: 1;
+                                    }
+
+                                    &.empty {
+                                        background: #f5f5f5 !important;
+                                        float: none;
+                                        padding: 0;
+                                        width: 97.5%;
+                                        height: 50px !important;
+
+                                        div.alert {
+                                            background: white;
+                                            border-color: rgba(0, 0, 0, 0);
+                                            color: #272727;
+                                            font: 300 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                            margin: 0;
+                                            padding: 18px;
+                                            text-align: center;
+                                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+                                            width: 598px;
+
+                                            strong { font-weight: 700; }
+                                        }
+                                    }
+
+                                    @-webkit-keyframes fadeIn {
+                                        to { opacity: 1; }
+                                    }
+
+                                    @-moz-keyframes fadeIn {
+                                        to { opacity: 1; }
+                                    }
+
+                                    @keyframes fadeIn {
+                                        to { opacity: 1; }
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     &.video {
@@ -616,647 +968,6 @@ div.marketing-content {
                     a.modal-button {
                         cursor: pointer;
                         display: block;
-                    }
-
-                    div.tab-pane {
-                        opacity: 0;
-                        @include single-transition(opacity 0.55s ease-in-out);
-
-                        &.active {
-                            opacity: 1;
-                            @include single-transition(opacity 0.55s ease-in-out);                        
-                        }
-
-                        .endless-loading {
-                            display: none !important;
-                        }
-
-                        ul {
-                            li {
-                                &.empty {
-                                    background: #f5f5f5 !important;
-                                    float: none;
-                                    padding: 0;
-                                    width: 97.5%;
-                                    height: 50px !important;
-
-                                    div.alert {
-                                        background: white;
-                                        border-color: rgba(0, 0, 0, 0);
-                                        color: #272727;
-                                        font: 300 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                        margin: 0;
-                                        padding: 18px;
-                                        text-align: center;
-                                        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-                                        width: 598px;
-
-                                        strong { font-weight: 700; }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    #following, #followers, #activity, #myfeed {
-                        ul#feed {
-                            li {
-                                @include border-radius(5px, 5px);
-                                box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
-                                background: #f5f5f5;
-                                display: block;
-                                font-family: 'futura-pt-condensed', Helvetica, Arial, sans-serif;
-                                margin-bottom: 18px;
-                                padding: 5px;
-                                width: 97.5%;
-
-                                div.user-wrapper {
-                                    @include border-radius(3px, 3px);
-                                    background-color: white;
-                                    padding: 9px;
-
-                                    img.img-circle {
-                                        -moz-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Firefox */  
-                                        -webkit-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
-                                        box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* CSS3 */
-                                        display: block;
-                                        float: left;
-                                        height: 55px;
-                                        margin-right: 9px;
-                                        margin-top: -1px;
-                                        width: 55px;
-                                    }
-                                    
-                                    div.feed-header {
-                                        padding: 0 5px;
-                                        margin-top: 3px;
-                                        position: relative;
-
-                                        p.bio {
-                                            color: rgba(102, 102, 102, 0.83);
-                                            float: left;
-                                            font: italic 300 14px/17px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                            left: 63px;
-                                            position: absolute;
-                                            top: 29px;
-                                            width: 80%;
-                                        }
-
-                                        h2 { float: left; }
-                                        h3 { float: right; }
-
-                                        h2 {
-                                            a {
-                                                color: rgba(31, 31, 31, 0.83);
-                                                font-size: 25px;
-                                                font-weight: 500;
-                                            }
-                                        }
-
-                                        h3 {
-                                            color: rgba(102, 102, 102, 0.83);
-                                            font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
-                                            font-weight: 500;
-                                            font-size: 12px; 
-                                        }
-
-                                        a.toggle-follow {
-                                            opacity: 1;
-                                            outline: 0;
-                                            position: absolute;
-                                            right: 0;
-                                            bottom: 0;
-
-                                            &:hover, &:focus, &:active {
-                                                text-decoration: none;
-                                            }
-
-                                            span.icon-stack {
-                                                display: block;
-                                                position: relative;
-                                                width: 32px;
-
-                                                i.icon-stack-base {
-                                                    font-size: 32px;
-                                                }
-
-                                                i.icon-user {
-                                                    font-size: 16px;
-                                                    position: absolute;
-                                                    left: -4px;
-                                                }
-
-                                                i.icon-minus,
-                                                i.icon-plus {
-                                                    font-size: 8px;
-                                                    position: absolute;
-                                                    right: -7px;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    
-                                    div.comments {
-                                        clear: left;
-                                        padding: 9px 0;
-
-                                        ul {
-                                            border: none;
-
-                                            li {
-                                                background-color: white;
-                                                box-shadow: none;
-                                                float: left;
-                                                height: 83px;
-                                                opacity: 1;
-                                                margin-bottom: 0;
-                                                padding: 3px;
-                                                position: relative;
-                                                width: 100%;
-                                                z-index: 1;
-
-                                                a.modal-button {
-                                                    @include border-radius(3px, 3px);
-                                                    background-color: black;
-                                                    display: block;
-                                                    float: left;
-                                                    height: 90px;
-                                                    width: 120px;
-
-                                                    img {
-                                                        @include border-radius(3px, 3px);
-                                                        height: 90px;
-                                                        width: 120px;
-                                                    }
-                                                }
-                                        
-                                                p.counter {
-                                                    @include border-radius(3px, 3px);
-                                                    background-color: rgba(0, 0, 0, 0.75);
-                                                    bottom: 13%;
-                                                    color: white;
-                                                    font-family: 'futura-pt-condensed', Helvetica, Arial, sans-serif;
-                                                    font-size: 14px;
-                                                    font-weight: 500;
-                                                    left: 80px;
-                                                    line-height: 10px;
-                                                    min-height: 10px;
-                                                    padding: 5px;
-                                                    position: absolute;
-                                                    width: 25px;
-                                                    text-align: center;
-                                                    z-index: 20;
-
-                                                    span.corner {
-                                                        position: absolute;
-                                                        display: block;
-                                                        width: 0;
-                                                        height: 0;
-                                                        line-height: 0;
-                                                        border: solid 8px rgba(0, 0, 0, 0.75);
-                                                        border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
-                                                        -webkit-border-radius: 0;
-                                                        -moz-border-radius: 0;
-                                                        border-radius: 0;
-                                                        bottom: -14px;
-                                                        left: 9px;
-                                                    }
-                                                }
-
-                                                p.bubble {
-                                                    @include border-radius(3px, 3px);
-                                                    background-color: #2C85CA;
-                                                    color: #FFFFFF;
-                                                    float: left;
-                                                    font: 300 13px/13px 'proxima-nova',Helvetica,Arial,sans-serif;
-                                                    margin: 4% 0 2% 16px;
-                                                    padding: 12px;
-                                                    position: relative;
-                                                    width: auto;
-
-                                                    span.corner {
-                                                        position: absolute;
-                                                        display: block;
-                                                        width: 0;
-                                                        height: 0;
-                                                        line-height: 0;
-                                                        border: solid 10px rgba(44, 133, 202, 1.0);
-                                                        border-color: transparent rgba(44, 133, 202, 1) transparent transparent;
-                                                        -webkit-border-radius: 0;
-                                                        -moz-border-radius: 0;
-                                                        border-radius: 0;
-                                                        left: -19px;
-                                                        top: 24%;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    #activity, #myfeed {
-                        ul#feed {
-                            li {
-                                div.user-wrapper {
-                                    padding: 9px;
-                                    position: relative;
-                                    height: 58px;
-
-                                    a.avatar {
-                                        float: left;
-                                    }
-                                    
-                                    div.feed-header {
-                                        margin-top: 0;
-                                        float: left;
-                                        position: relative;
-                                        width: 87%;
-                                        height: 100%;
-
-                                        div.action {
-                                            font: 300 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                            display: inline-block;
-                                            vertical-align: bottom;
-                                            position: relative;
-                                            padding-right: 25px;
-                                            width: 95%;
-
-                                            i.pull-right,
-                                            span.icon-stack {
-                                                display: inline-block;
-                                                position: absolute;
-                                                right: -11px;
-                                                top: 35%;
-                                            }
-
-                                            i.pull-right.icon-heart {
-                                                right: -8px;
-                                            }
-
-                                            i.pull-right.icon-comment {
-                                                top: 30%;
-                                            }
-
-                                            span.icon-stack {
-                                                width: 32px;
-
-                                                i.icon-user {
-                                                    font-size: 2em;
-                                                    position: absolute;
-                                                    left: -4px;
-                                                }
-
-                                                i.icon-minus,
-                                                i.icon-plus {
-                                                    font-size: 8px;
-                                                    position: absolute;
-                                                    right: -12px;
-                                                }
-                                            }
-
-                                            strong { font-weight: 700; }
-
-                                            p { 
-                                                line-height: 16px;
-                                                padding-top: 6px;
-                                                position: absolute;
-                                                width: 80%;
-                                            }
-
-                                            p.follow {
-                                                padding-top: 12px;
-
-                                                a {
-                                                    img.img-circle {
-                                                        width: 25px;
-                                                        height: 25px;
-                                                        margin-right: 9px;
-                                                        margin-top: 1px;
-                                                    }
-            
-                                                    span {
-                                                        line-height: 12px;
-                                                        position: relative;
-                                                        vertical-align: top;
-
-                                                        em {
-                                                            color: rgba(102, 102, 102, 0.83);
-                                                            display: block;
-                                                            font: italic 11px/11px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                                            text-decoration: none;
-                                                            left: 0;
-                                                            position: absolute;
-                                                            text-decoration: none;
-                                                            top: 18px;
-                                                            width: 410px;
-                                                        }
-                                                    } 
-
-                                                    &:hover, &:focus, &:active {
-                                                        em { text-decoration: none; }
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        h3 {
-                                            position: absolute;
-                                            bottom: 0;
-                                            right: 0;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    #videos.share {
-                        margin-top: 36px;
-
-                        ul#feed {
-                            li {
-                                position: static !important;
-                            }
-                        }
-                    }
-
-                    ul.grid > li {
-                        background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
-                        background-color: white;
-                        box-shadow: 0 -5px 0 5px rgba(0, 0, 0, 0.10);
-                    }
-
-                    ul.grid {
-                        list-style: none outside none;
-                        margin: 18px 3px;
-                        max-width: 652px;
-                        padding: 0;
-
-                        li {
-                            display: block;
-                            float: left;
-                            width: 47%;
-                            opacity: 0;
-
-                            &.animate {
-                                -webkit-animation: fadeIn 0.65s ease forwards;
-                                -moz-animation: fadeIn 0.65s ease forwards;
-                                animation: fadeIn 0.65s ease forwards;
-                            }
-
-                            &:nth-child(2n) {
-                                margin-right: 0;
-                            }
-
-                            @-webkit-keyframes fadeIn {
-                                to { opacity: 1; }
-                            }
-
-                            @-moz-keyframes fadeIn {
-                                to { opacity: 1; }
-                            }
-
-                            @keyframes fadeIn {
-                                to { opacity: 1; }
-                            }
-                        }
-                    }
-
-                    ul.grid li.shown, 
-                    .no-js ul.grid li,
-                    .no-cssanimations ul.grid li {
-                        opacity: 1;
-                    }
-
-                    ul.profile-conversations > li {
-                        @include border-radius(5px, 5px);
-                        box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
-                        float: left;
-                        margin-right: 18px;
-                        width: 47%;
-                        margin-bottom: 18px;
-                        padding: 5px;
-                        height: 240px;
-                        position: relative;
-                    }
-
-                    #videos ul.profile-conversations {
-                        li {
-                            
-
-                            div.video-wrapper div.video-details div.shared ul li { 
-                                position: static !important; 
-                                min-height: 34px !important;
-                            }
-
-                            div.video-wrapper div.video-actions ul li {
-                                position: static !important;
-                                min-height: 25px !important;
-                            }
-                        }
-                    }
-
-                    ul.profile-conversations {
-                        border: none;
-
-                        li {
-                            height: 316px;
-                            
-                            div.video-wrapper {
-                                @include border-radius(3px, 3px);
-                                background-color: #FFFFFF;
-                                height: 96.8%;
-                                padding: 9px 9px 0;
-                                position: relative;
-
-                                img.featured {
-                                    left: -6px;
-                                    height: 50px;
-                                    left: -1px;
-                                    position: absolute;
-                                    top: 0;
-                                    width: 96px;
-                                    z-index: 20;
-                                }
-
-                                a.thumbnail-link {
-                                    display: block;
-                                    height: 165px;
-                                    width: 100%;
-
-                                    img.video-thumbnail {
-                                        @include border-radius(3px, 3px);
-                                        background: rgba(102, 102, 102, .90);
-                                        height: 165px;
-                                        position: relative;
-                                        width: 100%;
-                                        z-index: 10;
-                                    }
-                                }
-
-                                div.comment {
-                                    border-radius: 0px 0px 3px 3px;
-                                    background-color: rgba(0, 0, 0, 0.5);
-                                    font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
-                                    font-size: 11px;
-                                    font-weight: 500;
-                                    line-height: 18px;
-                                    padding: 9px 9px 7px;
-                                    position: absolute;
-                                    top: 123px;
-                                    width: 270px;
-                                    z-index: 20;
-
-                                    span.corner {
-                                        position: absolute;
-                                        display: block;
-                                        width: 0;
-                                        height: 0;
-                                        line-height: 0;
-                                        border: solid 9px rgba(0, 0, 0, 0.5);
-                                        border-color: transparent transparent rgba(0, 0, 0, 0.5);
-                                        display: block;
-                                        height: 0;
-                                        left: 140.5px;
-                                        line-height: 0;
-                                        position: absolute;
-                                        top: -18px;
-                                        width: 0;
-                                    }
-
-                                    p {
-                                        font: 500 13px/15px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                        color: white;
-                                        padding: 6px 0;
-                                        word-wrap: break-word;
-                                        width: 74%;
-                                        position: absolute;
-                                        left: 53px;
-
-                                        a {
-                                            color: white;
-                                            height: auto !important;
-                                        }
-                                    }
-
-                                    img.img-circle {
-                                        -moz-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Firefox */  
-                                        -webkit-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
-                                        box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* CSS3 */
-                                        display: block;
-                                        float: left;
-                                        height: 35px;
-                                        margin-right: 9px;
-                                        width: 35px;
-                                        z-index: 2;
-                                    }
-                                }
-
-                                div.video-details {
-                                    font: 500 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
-
-                                    a {
-                                        color: #272727;
-                                        font: 300 18px/18px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
-                                        padding-bottom: 3px;
-                                    }
-
-                                    h3 { padding: 3px 0; }
-
-                                    h4 { color: #969696; }
-
-                                    div.shared {
-                                        @include border-radius(3px, 3px);
-                                        border: 1px solid #dddddd;
-                                        padding: 6px 6px 3px;
-                                        margin-top: 6px;
-
-                                        h5 { color: #dddddd; }
-
-                                        ul {
-                                            height: 35px;
-                                            overflow: auto;
-                                            padding-top: 1px;
-
-                                            li {
-                                                float: left;
-                                                min-height: 34px;
-                                                width: 34px;
-                                                opacity: 1;
-                                                
-                                                a {
-                                                    display: block;
-                                                    height: 22px;
-                                                    padding: 7px 0;
-                                                    width: 22px;
-                                                    opacity: 1;
-
-                                                    img.img-circle {
-                                                        -moz-box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1); /* Firefox */  
-                                                        -webkit-box-shadow: 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
-                                                        box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1); /* CSS3 */
-                                                        height: 22px;
-                                                        width: 22px;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    
-                                    span {
-                                        color: rgba(73, 73, 73, 0.83);
-                                        display: block;
-                                        font-size: 11px;
-                                    }
-                                }
-
-                                div.video-actions {
-                                    height: 25px;
-                                    position: absolute;
-                                    bottom: 9px;
-                                    right: 9px;
-
-                                    ul {
-                                        height: 25px;
-
-                                        li {
-                                            opacity: 1;
-                                            float: right;
-                                            width: 29px;
-                                            min-height: 25px;
-
-                                            a {
-                                                color: #cecece;
-                                                display: block;
-                                                font: 300 20px/29px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                                height: 19px;
-                                                outline: 0;
-                                                padding-top: 6px;
-                                                text-align: right;
-                                                text-decoration: none;
-                                                width: 29px;
-
-                                                i {
-                                                    position: relative;
-                                                    bottom: 3px;
-                                                }
-
-                                                &.active, &:hover {
-                                                    color: #67a3cb;
-                                                }
-
-                                                &:hover, &:focus, &:active {
-                                                    text-decoration: none;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
 
@@ -1490,6 +1201,7 @@ div.marketing-content {
     }
 }
 
+.no-js ul.grid li, .no-cssanimations ul.grid li { opacity: 1; }
 .modal-backdrop, .modal-backdrop.fade.in { opacity: 0.6; }
 
 #add-framebuzz-modal,
@@ -1628,6 +1340,10 @@ div.marketing-content {
     div.modal-body {
         min-height: 700px;
         max-height: 700px;
+
+        div.avatar-section {
+            width: 100%;
+        }
     }
 }
 

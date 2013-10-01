@@ -14,6 +14,15 @@
         <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
         <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
         <meta itemprop="image" content="{{ video.poster_image }}" />
+    {% else %}
+        <meta property="og:title" content="FrameBuzz: {{ profile_user|display_name }}'s Profile" />
+        <meta property="og:url" content="http://framebuzz.com{{ profile_user.get_absolute_url }}" />
+        <meta property="og:image" content="http://framebuzz.com{% avatar_url profile_user 265 %}" />
+        <meta property="og:description" content="{{ profile_user.get_profile.tagline }}" />
+        <meta property="og:site_name" content="FrameBuzz" />
+        <meta itemprop="name" content="FrameBuzz: {{ profile_user|display_name }}'s Profile" />
+        <meta itemprop="description" content="{{ profile_user.get_profile.tagline }}" />
+        <meta itemprop="image" content="http://framebuzz.com{% avatar_url profile_user 265 %}" />
     {% endif %}
 {% endblock %}
 
@@ -28,237 +37,182 @@
 {% endblock %}
 
 {% block marketing_content %}
-    <div id="fb">
-        <div class="content">
-            <div class="wrapper clearfix">
-                <div class="background">
-                    <div id="profile-container" class="clearfix">                        
-                        <nav id="profile-sections" class="span4{% if request.user.is_authenticated and profile_user.id == request.user.id %} edit{% endif %}">
-                            {% if request.user.is_authenticated and profile_user.id == request.user.id %}
-                                <a data-target="#upload-modal" data-placement="right" title="Personalize My Profile" data-role="button" class="fileupload tooltip" data-toggle="modal" href="{% url 'avatar_change' %}">
-                                  <span class="icon-stack">
-                                    <i class="icon-user"></i>
-                                    <i class="icon-magic"></i>
-                                  </span>   
-                                </a>
-                            {% endif %}
-                            <div class="user-info clearfix">
-                                <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link avatar">
-                                    <img src="{% avatar_url profile_user 265 %}" alt="" height="177" width="177" class="img-circle" />
-                                </a>
-                                <div class="user-details">
-                                    {% spaceless %}
-                                    <h1 class="clearfix">
-                                        <span class="username-field">
-                                            {% if request.user.is_authenticated and profile_user.id == request.user.id %}
-                                                <a href="#" class="display-name clearfix">
-                                                    <span class="editable" data-placement="right" data-name="display_name" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Display Name">
-                                                        {{ profile_user|display_name }}
-                                                    </span>
-                                                </a>
-                                            {% else %}
-                                                {{ profile_user|display_name }}
-                                            {% endif %}
-                                        </span>
-                                        <span class="location-field clearfix">
-                                            {% if request.user.is_authenticated and profile_user.id == request.user.id %}
-                                                <i class="icon-map-marker"></i>
-                                                <a href="#" class="location clearfix">
-                                                    <span class="editable" data-placement="right" data-name="location" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Location">
-                                                        {% if profile_user.get_profile.location %}
-                                                            {{ profile_user.get_profile.location }}
-                                                        {% else %}
-                                                            Add Location
-                                                        {% endif %}
-                                                    </span>
-                                                </a>
-                                            {% else %}
-                                                {% if profile_user.get_profile.location %}
-                                                    <i class="icon-map-marker"></i>
-                                                    {{ profile_user.get_profile.location }}
-                                                {% endif %}
-                                            {% endif %}
-                                        </span>
-                                    </h1>
-                                    {% endspaceless %}
-                                    {% if profile_user.get_profile %}
-                                        {% spaceless %}
-                                        <h2>
-                                            {% if request.user.is_authenticated and profile_user.id == request.user.id %}
-                                                &ldquo;<a href="#" data-name="tagline" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-placement="right" data-title="Edit Tagline">{% if profile_user.get_profile.tagline %}{{ profile_user.get_profile.tagline }}{% else %}Add your FrameBuzz Tagline{% endif %}</a>&rdquo;
-                                            {% else %}
-                                                {% if profile_user.get_profile.tagline %}&ldquo;{{ profile_user.get_profile.tagline }}&rdquo;{% endif %}
-                                            {% endif %}
-                                        </h2>
-                                        {% endspaceless %}
-                                        <ul class="nav nav-tabs clearfix">
-                                            <li class="home{% if not is_share %} active{% endif %}">
-                                                <a data-url="{% url 'profiles-activity' profile_user.username %}" href="#activity" class="tab-link"></a>
-                                            </li>
-                                            <li class="followers">
-                                                <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
-                                                    <em>{{ profile_followers|length }}</em>
-                                                    <br>
-                                                    Fan{{ profile_followers|length|pluralize }}
-                                                </a>
-                                            </li>
-                                            <li class="following">
-                                                <a data-url="{% url 'profiles-following' profile_user.username %}" href="#following" class="tab-link">
-                                                    <em>{{ profile_following|length }}</em>
-                                                    <br>
-                                                    Fan of
-                                                </a>
-                                            </li>
-                                            <li class="videos">
-                                                <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link">
-                                                    <em>{{ profile_library|length }}</em>
-                                                    <br>
-                                                    Video{{ profile_library|length|pluralize }}
-                                                </a>
-                                            </li>
-                                            <li class="conversations">
-                                                <a data-url="{% url 'profiles-conversations' profile_user.username %}" href="#conversations" class="tab-link">
-                                                    <em>{{ profile_conversations|length }}</em>
-                                                    <br>
-                                                    Comment{{ profile_conversations|length|pluralize }}
-                                                </a>
-                                            </li>
-                                            <li class="favorites">
-                                                <a data-url="{% url 'profiles-favorites' profile_user.username %}" href="#favorites" class="tab-link">
-                                                    <em>{{ profile_favorites|length }}</em>
-                                                    <br>
-                                                    Favorite{{ profile_favorites|length|pluralize }}
-                                                </a>
-                                            </li>
-                                        </ul>   
-                                        {% if request.user.is_authenticated and profile_user.id == request.user.id %}                                            
-                                            <p class="bio">&ldquo;<a href="#" data-name="bio" class="editable" data-type="textarea" data-pk="{{ profile_user.get_profile.id }}" data-url="{% url 'profiles-edit' profile_user.username %}" data-title="Edit Bio" data-placement="bottom">{% if profile_user.get_profile.bio and profile_user.get_profile.bio|length > 0 %}{{ profile_user.get_profile.bio }}{% else %}Add a description of who you are and the things you love.{% endif %}</a>&rdquo;</p>
+    <div class="content">
+        <div class="wrapper">
+            <div class="background">
+                <div id="profile-container" class="clearfix">                        
+                    <nav id="profile-sections" class="span4{% if is_my_profile %} edit{% endif %}">
+                        {% if is_my_profile %}
+                            <a data-target="#upload-modal" data-placement="right" title="Personalize My Profile" data-role="button" class="fileupload tooltip" data-toggle="modal" href="{% url 'avatar_change' %}">
+                              <span class="icon-stack">
+                                <i class="icon-user"></i>
+                                <i class="icon-magic"></i>
+                              </span>   
+                            </a>
+                        {% endif %}
+                        <div class="user-info clearfix">
+                            <a href="{% url 'profiles-home' profile_user.username %}" class="avatar">
+                                <img src="{% avatar_url profile_user 265 %}" alt="" height="177" width="177" class="img-circle" />
+                            </a>
+                            <div class="user-details">
+                                {% spaceless %}
+                                <h1 class="clearfix">
+                                    <span class="username-field">
+                                        {% if is_my_profile %}
+                                            <a href="#" class="display-name clearfix">
+                                                <span class="editable" data-placement="right" data-name="display_name" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Display Name">
+                                                    {{ profile_user|display_name }}
+                                                </span>
+                                            </a>
                                         {% else %}
-                                            <p class="bio">
-                                                {% if profile_user.get_profile.bio %}
-                                                    &ldquo;{{ profile_user.get_profile.bio }}&rdquo;
-                                                {% endif %}
-                                            </p>
+                                            {{ profile_user|display_name }}
                                         {% endif %}
-                                    {% endif %}
-                                </div>
-                                {% if request.user.is_authenticated and profile_user.id == request.user.id %}
-                                    <div class="recommendations clearfix">
-                                        <h2>Recommendations</h2>
-                                        <div class="users">
-                                            <ul class="clearfix">
-                                                {% for user in top_users %}
-                                                    <li class="shown">
-                                                        <a class="tooltip" data-placement="bottom" title="{{ user|display_name }}" href="{% url 'profiles-home' user.username %}">
-                                                            <img src="{% avatar_url user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
-                                                        </a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        <div class="videos">
-                                            <ul>
-                                                {% for video in top_videos %}
-                                                    <li class="shown">
-                                                      <a class="thumbnail-link tooltip" data-placement="bottom" title="{{ video.title|title }}" href="{% spaceless %}{% if request.user.is_authenticated %}
-                                                        {% if video.found_by %}
-                                                            {% url 'profiles-share' video.found_by.username video.video_id %}
-                                                        {% else %}
-                                                            {% url 'profiles-share' request.user.username video.video_id %}
-                                                        {% endif %}
+                                    </span>
+                                    <span class="location-field clearfix">
+                                        {% if is_my_profile %}
+                                            <i class="icon-map-marker"></i>
+                                            <a href="#" class="location clearfix">
+                                                <span class="editable" data-placement="right" data-name="location" data-type="text" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-title="Edit Location">
+                                                    {% if profile_user.get_profile.location %}
+                                                        {{ profile_user.get_profile.location }}
                                                     {% else %}
-                                                        {% if video.found_by %}
-                                                            {% url 'profiles-share' video.found_by.username video.video_id %}
-                                                        {% else %}
-                                                        {{ video.get_share_url }}
-                                                        {% endif %}
-                                                    {% endif %}{% endspaceless %}">
-                                                            <img class="video-thumbnail lazy" height="107" width="190" src="{{ video.large_thumbnail }}" />
-                                                            <i class="icon-play"></i>
-                                                        </a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    </div>
+                                                        Add Location
+                                                    {% endif %}
+                                                </span>
+                                            </a>
+                                        {% else %}
+                                            {% if profile_user.get_profile.location %}
+                                                <i class="icon-map-marker"></i>
+                                                {{ profile_user.get_profile.location }}
+                                            {% endif %}
+                                        {% endif %}
+                                    </span>
+                                </h1>
+                                {% endspaceless %}
+                                {% if profile_user.get_profile %}
+                                    {% spaceless %}
+                                    <h2>
+                                        {% if is_my_profile %}
+                                            &ldquo;<a href="#" data-name="tagline" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-placement="right" data-title="Edit Tagline">{% if profile_user.get_profile.tagline %}{{ profile_user.get_profile.tagline }}{% else %}Add your FrameBuzz Tagline{% endif %}</a>&rdquo;
+                                        {% else %}
+                                            {% if profile_user.get_profile.tagline %}&ldquo;{{ profile_user.get_profile.tagline }}&rdquo;{% endif %}
+                                        {% endif %}
+                                    </h2>
+                                    {% endspaceless %}
+                                    <ul class="nav nav-tabs clearfix">
+                                        <li class="videos">
+                                            <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=posts&page=1">
+                                                <em>{{ profile_library|length }}</em>
+                                                <br>
+                                                Post{{ profile_library|length|pluralize }}
+                                            </a>
+                                        </li>
+                                        <li class="conversations">
+                                            <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=comments&page=1">
+                                                <em>{{ profile_conversations|length }}</em>
+                                                <br>
+                                                Comment{{ profile_conversations|length|pluralize }}
+                                            </a>
+                                        </li>
+                                        <li class="favorites">
+                                            <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=favorites&page=1">
+                                                <em>{{ profile_favorites|length }}</em>
+                                                <br>
+                                                Favorite{{ profile_favorites|length|pluralize }}
+                                            </a>
+                                        </li>
+                                        <li class="followers">
+                                            <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=followers&page=1">
+                                                <em>{{ profile_followers|length }}</em>
+                                                <br>
+                                                Follower{{ profile_followers|length|pluralize }}
+                                            </a>
+                                        </li>
+                                        <li class="following">
+                                            <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=following&page=1">
+                                                <em>{{ profile_following|length }}</em>
+                                                <br>
+                                                Following
+                                            </a>
+                                        </li>
+                                    </ul>   
+                                    {% if is_my_profile %}                                            
+                                        <p class="bio">&ldquo;<a href="#" data-name="bio" class="editable" data-type="textarea" data-pk="{{ profile_user.get_profile.id }}" data-url="{% url 'profiles-edit' profile_user.username %}" data-title="Edit Bio" data-placement="bottom">{% if profile_user.get_profile.bio and profile_user.get_profile.bio|length > 0 %}{{ profile_user.get_profile.bio }}{% else %}Add a description of who you are and the things you love.{% endif %}</a>&rdquo;</p>
+                                    {% else %}
+                                        <p class="bio">
+                                            {% if profile_user.get_profile.bio %}
+                                                &ldquo;{{ profile_user.get_profile.bio }}&rdquo;
+                                            {% endif %}
+                                        </p>
+                                    {% endif %}
                                 {% endif %}
                             </div>
-                        </nav>
-                        <div class="tab-content span7">
-                            <nav class="clearfix">
-                                <ul class="nav nav-tabs nav-pills clearfix">
-                                    <li class="start {% if not is_share %} active{% endif %}">
-                                        <a class="tab-link" href="#activity" data-url="{% url 'profiles-activity' profile_user.username %}">Activity</a>
-                                    </li>
-                                    {% if request.user.is_authenticated and request.user.id == profile_user.id %}
-                                        <li class="feed">
-                                            <a class="tab-link" href="#myfeed" data-url="{% url 'profiles-feed' profile_user.username %}">News Feed</a>
-                                        </li>
-                                    {% endif %}
-                                    <li class="followers">
-                                        <a data-url="{% url 'profiles-followers' profile_user.username %}" href="#followers" class="tab-link">
-                                            Fans
-                                        </a>
-                                    </li>
-                                    <li class="following">
-                                        <a data-url="{% url 'profiles-following' profile_user.username %}" href="#following" class="tab-link">
-                                            Fan of
-                                        </a>
-                                    </li>
-                                    <li class="videos{% if is_share %} active{% endif %}">
-                                        <a data-url="{% url 'profiles-videos' profile_user.username %}" href="#videos" class="tab-link">
-                                            Videos
-                                        </a>
-                                    </li>
-                                    <li class="conversations">
-                                        <a data-url="{% url 'profiles-conversations' profile_user.username %}" href="#conversations" class="tab-link">
-                                            Comments
-                                        </a>
-                                    </li>
-                                    <li class="favorites">
-                                        <a data-url="{% url 'profiles-favorites' profile_user.username %}" href="#favorites" class="tab-link">
-                                            Favorites
-                                        </a>
-                                    </li>
-                                </ul>
-                                {% ifequal request.user profile_user %}
-                                    <a data-target="#add-framebuzz-modal" role="button" class="modal-button add-video tooltip" data-toggle="modal" class="add-video" title="Add FrameBuzz Video" data-placement="right" href="{% url 'profiles-add-video' profile_user %}"><i class="icon-plus-sign-alt"></i></a>
-                                {% else %}
-                                    {% if request.user.is_authenticated %}
-                                        <a class="toggle-follow unfollow-button tooltip" title="You're a Fan of This User" data-placement="right" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>
-                                          <span class="icon-stack">
-                                            <i class="icon-sign-blank icon-stack-base"></i>
-                                            <i class="icon-user icon-light"></i>
-                                            <i class="icon-minus icon-light"></i>
-                                          </span>            
-                                        </a>
-                                        <a class="toggle-follow follow-button tooltip" title="Become a Fan" data-placement="right" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>
-                                          <span class="icon-stack">
-                                            <i class="icon-sign-blank icon-stack-base"></i>
-                                            <i class="icon-user icon-light"></i>
-                                            <i class="icon-plus icon-light"></i>
-                                          </span>
-                                        </a>
-                                    {% endif %}
-                                {% endifequal %}
-                            </nav>
-                            {% if is_share %}
-                                {% include "player/snippets/share.html" %}
+                            {% if is_my_profile %}
+                                <div class="recommendations clearfix">
+                                    <h2>Recommendations</h2>
+                                    <div class="ajax">
+                                        <div class="spin">
+                                            <i class="icon-spinner icon-spin icon-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             {% endif %}
-                            <div class="tab-pane{% if not is_share %} active{% endif %}" id="activity"></div>
-                            <div class="tab-pane" id="myfeed"></div>
-                            <div class="tab-pane" id="followers"></div>
-                            <div class="tab-pane" id="following"></div>
-                            <div class="tab-pane" id="conversations"></div>
-                            <div class="tab-pane" id="favorites"></div>
-                            <div class="tab-pane{% if is_share %} active share{% endif %}" id="videos"></div>
+                        </div>
+                    </nav>
+                    <div class="tab-content span7">
+                        <nav class="clearfix">
+                            <ul class="nav nav-pills clearfix">
+                                <li class="start active">
+                                    <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=posts&page=1">Posts</a>
+                                </li>
+                                <li>
+                                    <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=comments&page=1">Comments</a>
+                                </li>
+                                <li>
+                                    <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=favorites&page=1">Favorites</a>
+                                </li>
+                                <li>
+                                    <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=followers&page=1">Followers</a>
+                                </li>
+                                <li>
+                                    <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=following&page=1">Following</a>
+                                </li>                                                                        
+                            </ul>
+                            {% if is_my_profile %}
+                                <a data-target="#add-framebuzz-modal" role="button" class="modal-button add-video tooltip" data-toggle="modal" class="add-video" title="Add FrameBuzz Video" data-placement="right" href="{% url 'profiles-add-video' profile_user %}"><i class="icon-plus-sign-alt"></i></a>
+                            {% else %}
+                                {% if request.user.is_authenticated %}
+                                    <a class="toggle-follow unfollow-button tooltip" title="You're a Fan of This User" data-placement="right" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>
+                                      <span class="icon-stack">
+                                        <i class="icon-sign-blank icon-stack-base"></i>
+                                        <i class="icon-user icon-light"></i>
+                                        <i class="icon-minus icon-light"></i>
+                                      </span>            
+                                    </a>
+                                    <a class="toggle-follow follow-button tooltip" title="Become a Fan" data-placement="right" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>
+                                      <span class="icon-stack">
+                                        <i class="icon-sign-blank icon-stack-base"></i>
+                                        <i class="icon-user icon-light"></i>
+                                        <i class="icon-plus icon-light"></i>
+                                      </span>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </nav>
+                        {% if is_share %}
+                            {% include "player/snippets/share.html" %}
+                        {% endif %}
+                        <div id="feed">
+                            <div class="spin">
+                                <i class="icon-spinner icon-spin icon-3x"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="upload-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="upload-modal" class="modal hide fade" tabindex="-1end" role="dialog" aria-hidden="true">
         <div class="modal-header graphite-flat-button">
             Customize Profile
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -281,9 +235,9 @@
         <script src="{% static 'framebuzz/profiles/js/classie.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/AnimOnScroll.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/jquery.lazyload.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/js/bootstrap-editable.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/jquery-paged-scroll.min.js' %}"></script>
-        {% if request.user.is_authenticated and profile_user.id == request.user.id %}
+        {% if is_my_profile %}
+            <script src="{% static 'framebuzz/profiles/js/bootstrap-editable.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/js/jquery.fileupload.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/js/jquery.fileupload-process.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/js/jquery.fileupload-image.js' %}"></script>
@@ -292,7 +246,14 @@
         <script src="{% static 'framebuzz/profiles/js/framebuzz.profiles.js' %}"></script>
         <script type="text/javascript">
             $(function(){
-                FrameBuzzProfile.init();
+                var isMyProfile = '{{ is_my_profile|lower }}' == 'true';
+                var isShare = '{{ is_share|lower }} == true';
+                var urls = {
+                    'feed': '{% url "profiles-feed" profile_user.username %}',
+                    'recommendations': '{% url "recommendations" %}'
+                };
+
+                FrameBuzzProfile.init(isMyProfile, isShare, urls);
             });
         </script>
     {% endcompress %}

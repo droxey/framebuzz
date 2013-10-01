@@ -1,0 +1,37 @@
+{% load avatar_tags profile_tags %}
+
+<div class="users">
+    <ul class="clearfix">
+        {% for user in top_users %}
+            <li class="shown">
+                <a class="tooltip" data-placement="bottom" title="{{ user|display_name }}" href="{% url 'profiles-home' user.username %}">
+                    <img src="{% avatar_url user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="videos">
+    <ul>
+        {% for video in top_videos %}
+            <li class="shown">
+              <a class="thumbnail-link tooltip" data-placement="bottom" title="{{ video.title|title }}" href="{% spaceless %}{% if request.user.is_authenticated %}
+                {% if video.found_by %}
+                    {% url 'profiles-share' video.found_by.username video.video_id %}
+                {% else %}
+                    {% url 'profiles-share' request.user.username video.video_id %}
+                {% endif %}
+            {% else %}
+                {% if video.found_by %}
+                    {% url 'profiles-share' video.found_by.username video.video_id %}
+                {% else %}
+                {{ video.get_share_url }}
+                {% endif %}
+            {% endif %}{% endspaceless %}">
+                    <img class="video-thumbnail lazy" height="107" width="190" src="{{ video.large_thumbnail }}" />
+                    <i class="icon-play"></i>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

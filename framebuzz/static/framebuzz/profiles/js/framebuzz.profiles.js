@@ -1,11 +1,9 @@
 var FrameBuzzProfile = (function($) {
-    var isShare = false,
-        currentPageUrl,
-        currentVideoUrl,
-        currentTab = '#activity';
+    var _isShare = false,
+        _isMyProfile = false;
 
     function triggerMasonry() {
-        new AnimOnScroll( document.getElementById( 'feed' ), {
+        new AnimOnScroll( document.getElementById( 'feed-list' ), {
             minDuration : 0.4,
             maxDuration : 0.7,
             viewportFactor : 0.2
@@ -14,57 +12,6 @@ var FrameBuzzProfile = (function($) {
         setTimeout( function() {
             $( window ).trigger( 'scroll' );
         }, 50 );
-    }
-
-    function bindTabs() {
-        bindScroll();
-
-        $('body').on('click', 'a.tab-link', function(e) {
-            e.preventDefault();
-            if (currentTab == this.hash) { return; }
-            isShare = $('#share').length > 0;
-
-            var shareHidden = false;
-            if (isShare && currentTab == '#videos') {
-                $('#share').removeClass('fadein');
-                shareHidden = true;
-            }
-          
-            currentPageUrl = $(this).attr('data-url');
-            currentTab = this.hash;
-            var pane = $(this);
-
-            if (currentTab == '#avatar') {
-                $('div.tab-pane').removeClass('active');
-                $('ul.dropdown-menu li').removeClass('active'); 
-            }
-            
-            $('ul.nav-tabs li').removeClass('active'); 
-            $(currentTab).load(currentPageUrl, function(result) { 
-                $('div.tab-pane').removeClass('active');
-                $('ul.dropdown-menu li').removeClass('active');
-
-                if (shareHidden) { 
-                    $('#share').addClass('hidden');
-                    $('#videos').removeClass('share');
-                }
-
-                pane.tab('show');
-                $('a[href="' + currentTab + '"]').parent().addClass('active');
-
-                if (currentTab == '#avatar') {
-                    $('#id_avatar').fileupload({
-                        done: function (e, data) {
-                            window.location.reload();
-                        }
-                    });
-                }
-
-                bindScroll();
-                triggerMasonry();
-                initTooltips();
-            });
-        });
     }
 
     function bindAddVideoModal() {
@@ -306,41 +253,29 @@ var FrameBuzzProfile = (function($) {
     }
 
     return {
-      init: function() {
-        bindAddVideoModal();
-        initTooltips();
-        initEditables();
-        initToggleButtons();
-        bindTabs();
-        
-        isShare = $('#share').length > 0;
-        if (isShare && currentTab == '#videos') {
-            $('#share').removeClass('fadein');
-        }
+      init: function(isMyProfile, isShare, urls) {
+        _isShare = isShare;
+        _isMyProfile = isMyProfile;
 
-        var canUpload = $('a.fileupload').length > 0;
-        if (canUpload) {
+        if (_isMyProfile) {
+            bindAddVideoModal();
+            initEditables();
             initUploaders();
         }
 
-        var activeTab = $('ul.nav-tabs li.active a');
-        currentPageUrl = activeTab.attr('data-url');
-        currentTab = activeTab.attr('href');
+        var feedContainer = $('#feed');
+        var recommendationsContainer = $('div.recommendations > div.ajax');
 
-        $(currentTab).load(currentPageUrl, function(result) {
-            $('ul.nav-tabs').tab('show');
-
-            if (currentTab == '#activity') {
-                $('#profile-container ul.nav-tabs li.start').addClass('active');
-            }
-            
-            if (isShare && currentTab == '#videos') {
-                $('#profile-container ul.nav-tabs li.videos').addClass('active');
-                $('#share').addClass('fadein');
-                initTooltips();      
-            }
-
+        feedContainer.load(urls.feed, function(html) {
+            feedContainer.html(html);
+            bindScroll();
             triggerMasonry();
+            initTooltips();
+            initToggleButtons();
+        });
+
+        recommendationsContainer.load(urls.recommendations, function(html) {
+            recommendationsContainer.html(html);
         });
       }
     };

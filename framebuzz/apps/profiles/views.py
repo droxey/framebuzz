@@ -27,17 +27,49 @@ VALID_FEED_VERBS = ['commented on', 'started following', 'added to favorites',
                     'replied to comment', 'added video to library']
 
 
-def get_profile_header(username):
-    user = User.objects.get(username__iexact=username)
-    actions = Action.objects.favorite_comments_stream(user)
-    favorite_comment_ids = [a.action_object_object_id for a in actions]
-    profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
-    profile_conversations = MPTTComment.objects.filter(user=user, parent=None)
-    profile_followers = followers(user)
-    profile_following = following(user)
-    profile_library = UserVideo.objects.filter(user=user)
-    ct = ContentType.objects.get(model='user')
+def feed(request, username):
+    """
+        Returns the rendered template(s) used by the newsfeed.
+    """
+    try:
+        page = request.GET.get('page', 1)
+    except PageNotAnInteger:
+        page = 1
 
+    user = None
+    kwargs = dict()
+    kwargs['verb__in'] = VALID_FEED_VERBS
+
+    if request.user.is_authenticated() and request.user.username == username:
+        user = request.user
+
+        user_following = following(user)
+        following_ids = [f.id for f in user_following]
+        following_ids.append(user.id)
+ 
+        feed = Action.objects.filter(Q(action_object_object_id__in=following_ids) | \
+                                     Q(target_object_id__in=following_ids), verb__in=VALID_FEED_VERBS) \
+                                    .order_by('-timestamp')
+    else:
+        kwargs['actor_only'] = True
+        user = User.objects.get(username__iexact=username)
+        feed = Action.objects.filter(verb__in=VALID_FEED_VERBS,
+                                     actor_object_id=user.id).order_by('-timestamp')
+
+    p = Paginator(feed, 20, request=request)
+
+    if request.is_ajax() and page > 1:
+        template = 'profiles/snippets/item.html'
+    else:
+        template = 'profiles/snippets/feed.html'
+
+    return render_to_response(template, {
+        'profile_user': user,
+        'page_obj': p.page(page),
+    }, context_instance=RequestContext(request))
+
+
+def recommendations(request):
     top_video_actions = Action.objects.filter(verb='viewed video') \
         .values('action_object_object_id') \
         .annotate(views=Count('id')) \
@@ -54,18 +86,10 @@ def get_profile_header(username):
     top_user_ids = [u.get('actor_object_id') for u in top_user_actions]
     top_users = User.objects.filter(id__in=top_user_ids)
 
-    return {
-        'profile_favorites': profile_favorites,
-        'profile_conversations': profile_conversations,
-        'profile_followers': profile_followers,
-        'profile_following': profile_following,
-        'profile_user': user,
-        'profile_library': profile_library,
-        'user_content_type': ct,
+    return render_to_response('profiles/snippets/recommendations.html', {
         'top_videos': top_videos,
         'top_users': top_users,
-    }
-
+    }, context_instance=RequestContext(request))
 
 def video_share(request, username=None, video_id=None):
     video, created = get_or_create_video(video_id)
@@ -105,11 +129,31 @@ def logged_in(request):
 
 
 def home(request, username):
-    context = get_profile_header(username)
+    user = User.objects.get(username__iexact=username)
+    actions = Action.objects.favorite_comments_stream(user)
+    favorite_comment_ids = [a.action_object_object_id for a in actions]
+    profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
+    profile_conversations = MPTTComment.objects.filter(user=user, parent=None)
+    profile_followers = followers(user)
+    profile_following = following(user)
+    profile_library = UserVideo.objects.filter(user=user)
+    ct = ContentType.objects.get(model='user')
+    is_my_profile = request.user.is_authenticated() and \
+                    request.user.id == user.id
+    context = {
+        'profile_favorites': profile_favorites,
+        'profile_conversations': profile_conversations,
+        'profile_followers': profile_followers,
+        'profile_following': profile_following,
+        'profile_user': user,
+        'profile_library': profile_library,
+        'user_content_type': ct,
+        'is_my_profile': is_my_profile,
+    }
 
     share_context = request.session.get('share', None)
     if share_context:
-        share_context['shares'] = get_total_shares(share_context['path'])
+        context['shares'] = get_total_shares(share_context['path'])
         context.update(share_context)
         del request.session['share']
 
@@ -117,223 +161,23 @@ def home(request, username):
                               context,
                               context_instance=RequestContext(request))
 
-
-def activity(request, username):
-    try:
-        page = request.GET.get('page', 1)
-    except PageNotAnInteger:
-        page = 1
-
-    user = User.objects.get(username__iexact=username)
-    actions = Action.objects.filter(verb__in=VALID_FEED_VERBS,
-                                    actor_object_id=user.id).order_by('-timestamp')
-    p = Paginator(actions, 12, request=request)
-
-    if request.is_ajax() and page > 1:
-        template = 'profiles/snippets/item.html'
-    else:
-        template = 'profiles/snippets/activity.html'
-
-    return render_to_response(template, {
-                              'profile_user': user,
-                              'page_obj': p.page(page),
-                              }, context_instance=RequestContext(request))
-
-
-def profile_followers(request, username):
-    user = User.objects.get(username__iexact=username)
-    user_followers = followers(user)
-    profile_followers = dict()
-
-    for followed_user in user_followers:
-        latest_comments = MPTTComment.objects.filter(
-            user=followed_user).order_by('-submit_date')[:1]
-        profile_followers[followed_user.username] = {
-            'user': followed_user,
-            'comments': latest_comments,
-        }
-
-    ct = ContentType.objects.get(model='user')
-    return render_to_response('profiles/snippets/followers.html', {
-        'profile_user': user,
-        'followers': profile_followers,
-        'user_content_type': ct,
-    }, context_instance=RequestContext(request))
-
-
-def profile_following(request, username):
-    user = User.objects.get(username__iexact=username)
-    user_following = following(user)
-    profile_following = dict()
-
-    for following_user in user_following:
-        latest_comments = MPTTComment.objects.filter(
-            user=following_user).order_by('-submit_date')[:1]
-        profile_following[following_user.username] = {
-            'user': following_user,
-            'comments': latest_comments,
-        }
-
-    ct = ContentType.objects.get(model='user')
-    return render_to_response('profiles/snippets/following.html', {
-        'profile_user': user,
-        'following': profile_following,
-        'user_content_type': ct,
-    }, context_instance=RequestContext(request))
-
-
-def feed(request, username):
-    try:
-        page = request.GET.get('page', 1)
-    except PageNotAnInteger:
-        page = 1
-
-    user = User.objects.get(username__iexact=username)
-    user_following = following(user)
-    following_ids = [f.id for f in user_following]
-    following_ids.append(user.id)
-
-    feed = Action.objects.filter(Q(action_object_object_id__in=following_ids) | \
-                                 Q(target_object_id__in=following_ids), verb__in=VALID_FEED_VERBS) \
-                                .order_by('-timestamp')
-    p = Paginator(feed, 12, request=request)
-
-    if request.is_ajax() and page > 1:
-        template = 'profiles/snippets/item.html'
-    else:
-        template = 'profiles/snippets/feed.html'
-
-    return render_to_response(template, {
-        'profile_user': user,
-        'page_obj': p.page(page),
-    }, context_instance=RequestContext(request))
-
-
-def conversations(request, username):
-    try:
-        page = request.GET.get('page', 1)
-    except PageNotAnInteger:
-        page = 1
-
-    user = User.objects.get(username__iexact=username)
-    user_videos = UserVideo.objects.filter(user=user)
-    conversations = MPTTComment.objects.filter(user=user, parent=None).order_by('-submit_date')
-
-    favorites = Action.objects.favorite_comments_stream(user)
-    favorite_comment_ids = [int(f.action_object_object_id)for f in favorites]
-
-    p = Paginator(conversations, 12, request=request)
-    featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
-
-    if request.is_ajax() and page > 1:
-        template = 'profiles/snippets/video.html'
-    else:
-        template = 'profiles/snippets/conversations.html'
-
-    return render_to_response(template, {
-        'profile_user': user,
-        'page_obj': p.page(page),
-        'video_library_ids': [uv.video.id for uv in user_videos],
-        'featured_video_ids': featured_video_ids,
-        'favorite_comment_ids': favorite_comment_ids,
-        'show_favorite_button': True,
-        'error': "hasn't posted any comments yet!",
-    }, context_instance=RequestContext(request))
-
-
-def favorites(request, username):
-    try:
-        page = request.GET.get('page', 1)
-    except PageNotAnInteger:
-        page = 1
-
-    user = User.objects.get(username__iexact=username)
-    user_videos = UserVideo.objects.filter(user=user)
-
-    favorites = Action.objects.favorite_comments_stream(user)
-    favorite_comment_ids = [int(f.action_object_object_id) for f in favorites]
-
-    profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
-    p = Paginator(profile_favorites, 12, request=request)
-    featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
-
-    if request.is_ajax() and page > 1:
-        template = 'profiles/snippets/video.html'
-    else:
-        template = 'profiles/snippets/favorites.html'
-
-    return render_to_response(template, {
-        'profile_user': user,
-        'page_obj': p.page(page),
-        'video_library_ids': [uv.video.id for uv in user_videos],
-        'featured_video_ids': featured_video_ids,
-        'favorite_comment_ids': favorite_comment_ids,
-        'show_favorite_button': True,
-        'error': "hasn't added any favorites yet!",
-    }, context_instance=RequestContext(request))
-
-
-def videos(request, username):
-    try:
-        page = request.GET.get('page', 1)
-    except PageNotAnInteger:
-        page = 1
-
-    user = User.objects.get(username__iexact=username)
-    user_videos = UserVideo.objects.filter(user=user).order_by('-added_on')
-    all_videos = [uv.video for uv in user_videos]
-    video_comments = list()
-
-    favorites = Action.objects.favorite_comments_stream(user)
-    favorite_comment_ids = [int(f.action_object_object_id) for f in favorites]
-
-    for video in all_videos:
-        comments = MPTTComment.objects.filter(user=user, object_pk=video.id)
-        if len(comments) > 0:
-            video_comments.append(comments[0])
-        else:
-            fake_comment = MPTTComment()
-            fake_comment.content_object = video
-            video_comments.append(fake_comment)
-
-    p = Paginator(video_comments, 12, request=request)
-    featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
-
-    if request.is_ajax() and page > 1:
-        template = 'profiles/snippets/video.html'
-    else:
-        template = 'profiles/snippets/videos.html'
-
-    return render_to_response(template, {
-        'profile_user': user,
-        'page_obj': p.page(page),
-        'is_adding_video': False,
-        'show_embed_button': False,
-        'video_library_ids': [uv.video.id for uv in user_videos],
-        'featured_video_ids': featured_video_ids,
-        'favorite_comment_ids': favorite_comment_ids,
-        'show_favorite_button': False,
-        'error': "hasn't added any videos to their library yet!",
-    }, context_instance=RequestContext(request))
-
-
 @login_required
 @csrf_exempt
 def edit_profile(request, username):
     if username != request.user.username:
         return HttpResponseRedirect(
             reverse('profiles-edit', args=[request.user.username, ]))
-
+ 
     user = User.objects.get(username=username)
     submitted = request.method == 'POST'
     success = False
     profile = user.get_profile()
-
+ 
     if submitted:
         form = UserProfileForm(instance=profile,
                                data=request.POST)
         success = form.is_valid()
-
+ 
         if success:
             profile = form.save()
             action.send(
@@ -354,6 +198,50 @@ def edit_profile(request, username):
             return HttpResponse(json.dumps(outbound_message),
                                 content_type="application/json")
     return HttpResponse()
+ 
+
+def videos(request, username):
+    try:
+        page = request.GET.get('page', 1)
+    except PageNotAnInteger:
+        page = 1
+ 
+    user = User.objects.get(username__iexact=username)
+    user_videos = UserVideo.objects.filter(user=user).order_by('-added_on')
+    all_videos = [uv.video for uv in user_videos]
+    video_comments = list()
+ 
+    favorites = Action.objects.favorite_comments_stream(user)
+    favorite_comment_ids = [int(f.action_object_object_id) for f in favorites]
+ 
+    for video in all_videos:
+        comments = MPTTComment.objects.filter(user=user, object_pk=video.id)
+        if len(comments) > 0:
+            video_comments.append(comments[0])
+        else:
+            fake_comment = MPTTComment()
+            fake_comment.content_object = video
+            video_comments.append(fake_comment)
+ 
+    p = Paginator(video_comments, 12, request=request)
+    featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
+ 
+    if request.is_ajax() and page > 1:
+        template = 'profiles/snippets/video.html'
+    else:
+        template = 'profiles/snippets/videos.html'
+ 
+    return render_to_response(template, {
+        'profile_user': user,
+        'page_obj': p.page(page),
+        'is_adding_video': False,
+        'show_embed_button': False,
+        'video_library_ids': [uv.video.id for uv in user_videos],
+        'featured_video_ids': featured_video_ids,
+        'favorite_comment_ids': favorite_comment_ids,
+        'show_favorite_button': False,
+        'error': "hasn't added any videos to their library yet!",
+    }, context_instance=RequestContext(request))
 
 
 @login_required
