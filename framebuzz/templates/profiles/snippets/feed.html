@@ -1,14 +1,6 @@
 {% load i18n avatar_tags profile_tags %}
 
 
-<ul id="feed-list" class="grid endless" data-next-url="{% url 'profiles-feed' profile_user.username %}" data-total-pages="{{ page_obj.pages|length }}">
-  {% if page_obj.object_list|length > 0 %}
-    {% include "profiles/snippets/item.html" %}
-  {% else %}
-    <li class="shown empty">
-      <div class="alert alert-info">
-        No recent updates.
-      </div>
-    </li>
-  {% endif %}
+<ul id="feed-list" class="grid endless clearfix" data-next-url="{% url 'profiles-feed' profile_user.username %}" data-total-pages="{{ page_obj.pages|length }}">
+    <li class="brick-sizer"></li>
 </ul>

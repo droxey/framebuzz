@@ -101,35 +101,35 @@
                                     {% endspaceless %}
                                     <ul class="nav nav-tabs clearfix">
                                         <li class="videos">
-                                            <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=posts&page=1">
+                                            <a class="filter" href="?filter=posts&page=1">
                                                 <em>{{ profile_library|length }}</em>
                                                 <br>
                                                 Post{{ profile_library|length|pluralize }}
                                             </a>
                                         </li>
                                         <li class="conversations">
-                                            <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=comments&page=1">
+                                            <a class="filter" href="?filter=comments&page=1">
                                                 <em>{{ profile_conversations|length }}</em>
                                                 <br>
                                                 Comment{{ profile_conversations|length|pluralize }}
                                             </a>
                                         </li>
                                         <li class="favorites">
-                                            <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=favorites&page=1">
+                                            <a class="filter" href="?filter=favorites&page=1">
                                                 <em>{{ profile_favorites|length }}</em>
                                                 <br>
                                                 Favorite{{ profile_favorites|length|pluralize }}
                                             </a>
                                         </li>
                                         <li class="followers">
-                                            <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=followers&page=1">
+                                            <a class="filter" href="?filter=followers&page=1">
                                                 <em>{{ profile_followers|length }}</em>
                                                 <br>
                                                 Follower{{ profile_followers|length|pluralize }}
                                             </a>
                                         </li>
                                         <li class="following">
-                                            <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=following&page=1">
+                                            <a class="filter" href="?filter=following&page=1">
                                                 <em>{{ profile_following|length }}</em>
                                                 <br>
                                                 Following
@@ -163,19 +163,19 @@
                         <nav class="clearfix">
                             <ul class="nav nav-pills clearfix">
                                 <li class="start active">
-                                    <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=posts&page=1">Posts</a>
+                                    <a class="filter" href="?filter=posts&page=1">Posts</a>
                                 </li>
                                 <li>
-                                    <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=comments&page=1">Comments</a>
+                                    <a class="filter" href="?filter=comments&page=1">Comments</a>
                                 </li>
                                 <li>
-                                    <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=favorites&page=1">Favorites</a>
+                                    <a class="filter" href="?filter=favorites&page=1">Favorites</a>
                                 </li>
                                 <li>
-                                    <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=followers&page=1">Followers</a>
+                                    <a class="filter" href="?filter=followers&page=1">Followers</a>
                                 </li>
                                 <li>
-                                    <a class="filter" href="{% url 'profiles-feed' profile_user.username %}?filter=following&page=1">Following</a>
+                                    <a class="filter" href="?filter=following&page=1">Following</a>
                                 </li>                                                                        
                             </ul>
                             {% if is_my_profile %}
@@ -230,12 +230,13 @@
 
 {% block page_javascript %}
     {% compress js %}
-        <script src="{% static 'framebuzz/profiles/js/masonry.pkgd.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/imagesloaded.pkgd.min.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/js/jquery.lazyload.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/js/jquery.easing.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/js/jquery-paged-scroll.min.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/js/masonry.pkgd.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/classie.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/AnimOnScroll.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/js/jquery.lazyload.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/js/jquery-paged-scroll.min.js' %}"></script>
         {% if is_my_profile %}
             <script src="{% static 'framebuzz/profiles/js/bootstrap-editable.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/js/jquery.fileupload.js' %}"></script>

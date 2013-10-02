@@ -47,21 +47,18 @@ def feed(request, username):
         following_ids = [f.id for f in user_following]
         following_ids.append(user.id)
  
-        feed = Action.objects.filter(Q(action_object_object_id__in=following_ids) | \
-                                     Q(target_object_id__in=following_ids), verb__in=VALID_FEED_VERBS) \
-                                    .order_by('-timestamp')
+        feed = Action.objects.filter(Q(verb__in=VALID_FEED_VERBS), Q(action_object_object_id__in=following_ids) | Q(target_object_id__in=following_ids)).order_by('-timestamp')
     else:
-        kwargs['actor_only'] = True
         user = User.objects.get(username__iexact=username)
         feed = Action.objects.filter(verb__in=VALID_FEED_VERBS,
                                      actor_object_id=user.id).order_by('-timestamp')
 
-    p = Paginator(feed, 20, request=request)
+    p = Paginator(feed, 10, request=request)
 
-    if request.is_ajax() and page > 1:
-        template = 'profiles/snippets/item.html'
-    else:
+    if page == 1 and request.GET.get('init', None) is not None:
         template = 'profiles/snippets/feed.html'
+    else:
+        template = 'profiles/snippets/item.html'
 
     return render_to_response(template, {
         'profile_user': user,

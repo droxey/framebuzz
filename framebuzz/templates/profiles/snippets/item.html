@@ -1,18 +1,19 @@
-{% load i18n avatar_tags activity_tags %}
+{% load i18n avatar_tags activity_tags profile_tags %}
 
 {% if page_obj.object_list %}
   {% for action in page_obj.object_list %}
-      <li class="clearfix">
-        <div class="user-wrapper clearfix">
-          <a class="avatar" href="{% url 'profiles-home' action.actor.username %}"> 
-            <img src="{% avatar_url action.actor 64 %}" alt="" height="32" width="32" class="img-circle lazy" />
-          </a>
-          <div class="feed-header clearfix">
-            <div class="action">
-              {% display_action action %}
+      <li class="brick">
+          <div class="action-wrapper">
+            <h1>{% display_action action %}</h1>
+            <div class="entity">
+              {% if action.verb == 'started following' %}
+                {% include "profiles/snippets/following.html" %}
+              {% else %}
+                {% with action.action_object as comment %}
+                  {% include "profiles/snippets/video.html" %}
+                {% endwith %}
+              {% endif %}
             </div>
-            <h3>{{ action.timestamp|timesince }} {% trans "ago" %}</h3>
-          </div>
         </div>
       </li>
     {% endfor %}

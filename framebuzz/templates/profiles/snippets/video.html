@@ -1,84 +1,69 @@
-{% load staticfiles avatar_tags profile_tags %}
+{% load i18n staticfiles avatar_tags profile_tags %}
 
-{% for comment in page_obj.object_list %}
-  <li>
-    <div class="video-wrapper">
-      {% if featured_video_ids %}
-        {% if comment.content_object.id in featured_video_ids %}
-          <img src="{% static 'framebuzz/profiles/img/featured-banner.png' %}" alt="Featured" height="50" width="96" class="featured" />
-        {% endif %}
+<div class="video-wrapper">
+  <div class="thumb">
+    <a class="thumbnail-link" href="{% if comment.comment %}{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{{ comment.get_player_url }}{% else %}{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{% endif %}">
+      <img class="video-thumbnail lazy" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
+    </a>
+    {% if comment.comment %}
+        <div class="comment">
+             <span class="corner"></span>
+             <img src="{% avatar_url comment.user 110 %}" alt="" height="55" width="55" class="img-circle lazy" />
+             <p>&ldquo;{{ comment.formatted_comment }}&rdquo;</p>
+        </div>
+    {% endif %}
+  </div>
+  <div class="video-details">
+      <h3>
+        <a href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}">{{ comment.content_object.title|title|truncatechars:"54" }}</a>
+      </h3>
+      {% if comment.content_object.uservideo_set.all|length > 0 %}
+        <div class="shared">
+          <h5>Also playing in these libraries:</h5>
+          <ul class="clearfix">
+            {% for uv in comment.content_object.uservideo_set.all %}
+            <li class="shown">
+              <a class="tooltip" data-placement="bottom" title="{{ uv.user|display_name }}" href="{% url 'profiles-home' uv.user.username %}">
+                <img src="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
       {% endif %}
-      <a class="thumbnail-link" href="{% if comment.comment %}{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{{ comment.get_player_url }}{% else %}{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{% endif %}">
-        <img class="video-thumbnail lazy" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
-      </a>
-      {% if comment.comment %}
-          <div class="comment">
-               <span class="corner"></span>
-               <img src="{% avatar_url comment.user 110 %}" alt="" height="55" width="55" class="img-circle lazy" />
-               <p>&ldquo;{{ comment.formatted_comment }}&rdquo;</p>
-          </div>
-      {% endif %}
-      <div class="video-details">
-          <h3>
-            <a href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}">{{ comment.content_object.title|title|truncatechars:"54" }}</a>
-          </h3>
-          <h4>{% if comment.comment %}Posted on {{ comment.submit_date|date:"N d, Y" }}{% else %}&nbsp;{% endif %}</h4>
-          {% if comment.content_object.uservideo_set.all|length > 0 %}
-            <div class="shared">
-              <h5>Also playing in these libraries:</h5>
-              <ul class="clearfix">
-                {% for uv in comment.content_object.uservideo_set.all %}
-                <li class="shown">
-                  <a class="tooltip" data-placement="bottom" title="{{ uv.user|display_name }}" href="{% url 'profiles-home' uv.user.username %}">
-                    <img src="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
-                  </a>
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
-      </div>
-      <div class="video-actions">
-        <ul class="clearfix">
+  </div>
+  <div class="video-actions clearfix">
+    <div class="left">
+      <span class="posted"><i class="icon-time"></i> {{ action.timestamp|timesince }} {% trans "ago" %}</span>
+    </div>
+    <div class="right">
+      {% if not comment.comment %}
         {% if request.user.id == profile_user.id %}
-            <li class="shown">
-              <a class="video-toggle-button tooltip library{% if comment.content_object.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in video_library_ids %}Added to Library{% else %}Add to Library{% endif %}" data-placement="bottom">
-                  {% if comment.content_object.id in video_library_ids %}
-                    <i class="icon-minus-sign-alt"></i>
-                  {% else %}
-                    <i class="icon-plus-sign-alt"></i>
-                  {% endif %}
-                </a>
-            </li>
-            <li class="shown">
-                <a class="video-toggle-button tooltip featured{% if comment.content_object.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in featured_video_ids %}Featured Video{% else %}Feature this Video{% endif %}" data-placement="bottom">
-                  {% if comment.content_object.id in featured_video_ids %}
-                    <i class="icon-star"></i>
-                  {% else %}
-                    <i class="icon-star-empty"></i>
-                  {% endif %}
-                </a>
-            </li>
+          <a class="video-toggle-button tooltip library{% if comment.content_object.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in video_library_ids %}Added to Library{% else %}Add to Library{% endif %}" data-placement="bottom">
+              {% if comment.content_object.id in video_library_ids %}
+                <i class="icon-minus-sign-alt"></i>
+              {% else %}
+                <i class="icon-plus-sign-alt"></i>
+              {% endif %}
+            </a>
+            <a class="video-toggle-button tooltip featured{% if comment.content_object.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in featured_video_ids %}Featured Video{% else %}Feature this Video{% endif %}" data-placement="bottom">
+              {% if comment.content_object.id in featured_video_ids %}
+                <i class="icon-star"></i>
+              {% else %}
+                <i class="icon-star-empty"></i>
+              {% endif %}
+              </a>
           {% endif %}
           {% if show_favorite_button and request.user.is_authenticated %}
-            <li class="shown">
-                <a class="video-toggle-button tooltip favorite{% if comment.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username comment.id %}" title="{% if comment.id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="bottom">
-                  {% if comment.id in favorite_comment_ids %}
-                    <i class="icon-heart"></i>
-                  {% else %}
-                    <i class="icon-heart-empty"></i>
-                  {% endif %}
-                </a>
-            </li>
+            <a class="video-toggle-button tooltip favorite{% if comment.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username comment.id %}" title="{% if comment.id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="bottom">
+              {% if comment.id in favorite_comment_ids %}
+                <i class="icon-heart"></i>
+              {% else %}
+                <i class="icon-heart-empty"></i>
+              {% endif %}
+            </a>
           {% endif %}
-        </ul>
-      </div>
+      {% endif %}
     </div>
-  </li>
-{% empty %}
-    <li class="shown empty">
-      <div class="alert alert-info">
-        <strong>{{ profile_user|display_name }}</strong> {{ error }}
-      </div>
-    </li>
-{% endfor %}
+  </div>
+</div>

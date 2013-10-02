@@ -1,17 +1,14 @@
 var FrameBuzzProfile = (function($) {
     var _isShare = false,
-        _isMyProfile = false;
+        _isMyProfile = false,
+        _page = 1,
+        _urls = {},
+        _masonry = null;
 
     function triggerMasonry() {
-        new AnimOnScroll( document.getElementById( 'feed-list' ), {
-            minDuration : 0.4,
-            maxDuration : 0.7,
-            viewportFactor : 0.2
-        } );
-
-        setTimeout( function() {
-            $( window ).trigger( 'scroll' );
-        }, 50 );
+        if (_masonry !== null) {
+            _masonry.masonry( 'reloadItems' );
+        }
     }
 
     function bindAddVideoModal() {
@@ -79,29 +76,26 @@ var FrameBuzzProfile = (function($) {
     }
 
     function bindScroll() {
-        var targetElement = $('#profile-container div.tab-content div.tab-pane.active');
-        if ($('ul.endless', targetElement).length > 0) {
-            var grid = $('ul.endless', targetElement),
-                pages = parseInt(grid.attr('data-total-pages'));
+        var grid = $('#feed-list'),
+            pages = parseInt(grid.attr('data-total-pages'));
 
-            $(window).paged_scroll({
-                handleScroll:function (page,container,doneCallback) {
-                    page = page + 1;
-                    var nextPageUrl = currentPageUrl + '?page=' + page;
+        $(window).paged_scroll({
+            handleScroll:function (page,container,doneCallback) {
+                _page = page + 1;
+                var nextPageUrl = _urls.feed + '?page=' + _page;
 
-                    if (page <= pages) {
-                        $.get(nextPageUrl, function(pageHtml) {
-                            grid.append(pageHtml);
-                            triggerMasonry();
-                        });
-                    }
-                },
-                triggerFromBottom: '10%',
-                targetElement: targetElement,
-                loader:'<div class="loader">Loading next page&hellip;</div>',
-                pagesToScroll: pages
-            });
-        }
+                if (_page <= pages) {
+                    $.get(nextPageUrl, function(pageHtml) {
+                        var $boxes = $(pageHtml);
+                        grid.append($boxes).masonry('appended', $boxes, true);
+                    });
+                }
+            },
+            triggerFromBottom: '10%',
+            targetElement: $('#feed'),
+            loader:'',
+            pagesToScroll: pages
+        });
     }
 
     function youtube_parser(url){
@@ -256,6 +250,10 @@ var FrameBuzzProfile = (function($) {
       init: function(isMyProfile, isShare, urls) {
         _isShare = isShare;
         _isMyProfile = isMyProfile;
+        _urls = urls;
+
+        initTooltips();
+        initToggleButtons();
 
         if (_isMyProfile) {
             bindAddVideoModal();
@@ -266,12 +264,27 @@ var FrameBuzzProfile = (function($) {
         var feedContainer = $('#feed');
         var recommendationsContainer = $('div.recommendations > div.ajax');
 
-        feedContainer.load(urls.feed, function(html) {
+        $.get(urls.feed + '?init=true', function(html) {
             feedContainer.html(html);
             bindScroll();
-            triggerMasonry();
-            initTooltips();
-            initToggleButtons();
+            
+            var feedList = $('#feed-list');
+            $.get(urls.feed + '?page=1', function(items) {
+                var $boxes = $(items);
+                feedList.html($boxes);
+
+                new AnimOnScroll( document.getElementById( 'feed-list' ), {
+                    minDuration : 0.4,
+                    maxDuration : 0.7,
+                    viewportFactor : 0.2
+                });
+
+
+         
+                setTimeout( function() {
+                    $( window ).trigger( 'scroll' );
+                }, 50 );
+            });
         });
 
         recommendationsContainer.load(urls.recommendations, function(html) {

@@ -1,44 +1,11 @@
 {% load i18n profile_tags avatar_tags %}
 
-{% spaceless %}
-    <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a>
-    {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
-        {% if action.target %}
-            {{ action.verb }}
-            <i class="icon-comment icon-2x pull-right icon-muted"></i>
-            <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a>:
-            <p><i class="icon-quote-left icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
-        {% endif %}
-    {% elif action.verb == 'added to favorites' %}
-        <i class="icon-heart icon-2x pull-right icon-muted"></i>
-        added <a href="{% url 'profiles-home' action.action_object.user.username %}">{{ action.action_object.user|display_name }}</a>'s comment on
-        <a href="{% url 'profiles-share' action.actor.username action.target.video_id %}">{{ action.target.title|title }}</a> to favorites:
-        <p><i class="icon-quote-left icon-2x pull-left icon-muted"></i>{{ action.action_object.formatted_comment }}</p>
-    {% elif action.verb == 'added video to library' %}
-        added <a href="{% url 'profiles-share' action.actor.username action.action_object.video_id %}">{{ action.action_object.title|title }}</a> to library.
-    {% else %}
-        <span class="icon-stack">
-            <i class="icon-user icon-2x pull-left icon-muted"></i>
-            <i class="icon-plus icon-2x pull-left icon-muted"></i>
-        </span>
-        became a fan of <a href="{% url 'profiles-home' action.target.username %}">{{ action.target|display_name }}</a>:
-        <p class="follow">
-            <a href="{% url 'profiles-home' action.target.username %}">
-                <img src="{% avatar_url action.target 110 %}" alt="" height="30" width="30" class="img-circle" />
-                <span>
-                    {{ action.target|display_name }}
-                    {% if action.target.get_profile.bio or action.target.get_profile.tagline %}
-                        <br>
-                        <em>
-                            {% if action.target.get_profile.tagline %}
-                                &ldquo;{{ action.target.get_profile.tagline }}&rdquo;
-                            {% else %}
-                                &ldquo;{{ action.target.get_profile.bio }}&rdquo;
-                            {% endif %}
-                        </em>
-                    {% endif %} 
-                </span>
-            </a>
-        </p>
-    {% endif %}
-{% endspaceless %}
+{% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
+    <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> said&hellip;
+{% elif action.verb == 'added to favorites' %}
+    <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> <i class="icon-heart"></i> this comment:
+{% elif action.verb == 'added video to library' %}
+    <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> <i class="icon-add-alt"></i> this video:
+{% else %}
+    <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> started following <a href="{% url 'profiles-home' action.target.username %}">{{ action.target|display_name }}</a>:
+{% endif %}

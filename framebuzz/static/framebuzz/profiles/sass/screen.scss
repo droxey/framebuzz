@@ -204,6 +204,8 @@ div.marketing-content {
                                     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 
                                     a {
+                                        color: white;
+
                                         &:hover, &:active, &:focus {
                                             text-decoration: none;
                                         }
@@ -464,7 +466,7 @@ div.marketing-content {
                         overflow: visible;
                         position: relative;
                         left: 28%;
-                        width: 670px;
+                        width: 740px;
                         
                         nav {
                             width: 100%;
@@ -566,345 +568,323 @@ div.marketing-content {
                         }
 
                         #feed {
+                            margin-left: 3px;
+                            margin-top: 16px;
                             width: 100%;
 
                             div.spin { top: 170px; }
 
+                            .endless-loading { display: none !important; }
+
                             ul.grid {
                                 border: none;
+                                width: 740px;
+                                -webkit-transition-property: height, width;
+                                -moz-transition-property: height, width;
+                                -ms-transition-property: height, width;
+                                -o-transition-property: height, width;
+                                transition-property: height, width;
 
-                                li {
-                                    @include border-radius(5px, 5px);
-                                    background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
-                                    background-color: white;
-                                    box-shadow: 0 -5px 0 5px rgba(0, 0, 0, 0.10);
+                                li.brick {
                                     display: block;
                                     float: left;
                                     height: auto;
-                                    opacity: 0;
+                                    opacity: 1;
                                     list-style: none outside none;
-                                    margin-right: 18px;
-                                    margin-bottom: 18px;
-                                    max-width: 652px;
-                                    padding: 5px;
+                                    margin-bottom: 24px;
                                     position: relative;
-                                    width: 47%;
-                            
-                                    div.video-wrapper {
-                                        @include border-radius(3px, 3px);
-                                        background-color: #FFFFFF;
-                                        height: 316px;
-                                        padding: 9px 9px 0;
+                                    width: 336px;
+                                    -webkit-transition-duration: 0.7s;
+                                    -moz-transition-duration: 0.7s;
+                                    -ms-transition-duration: 0.7s;
+                                    -o-transition-duration: 0.7s;
+                                    transition-duration: 0.7s;
+                                    
+                                    div.action-wrapper {
+                                        @include border-radius(5px, 5px);
+                                        background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+                                        box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.10);
+                                        padding: 5px 6px 6px 6px;
                                         position: relative;
-
-                                        img.featured {
-                                            left: -6px;
-                                            height: 50px;
-                                            left: -1px;
-                                            position: absolute;
-                                            top: 0;
-                                            width: 96px;
-                                            z-index: 20;
-                                        }
-
-                                        a.thumbnail-link {
-                                            display: block;
-                                            height: 165px;
-                                            width: 100%;
-
-                                            img.video-thumbnail {
-                                                @include border-radius(3px, 3px);
-                                                background: rgba(102, 102, 102, .90);
-                                                height: 165px;
-                                                position: relative;
-                                                width: 100%;
-                                                z-index: 10;
-                                            }
-                                        }
-
-                                        div.comment {
-                                            border-radius: 0px 0px 3px 3px;
-                                            background-color: rgba(0, 0, 0, 0.5);
-                                            font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
-                                            font-size: 11px;
-                                            font-weight: 500;
-                                            line-height: 18px;
-                                            padding: 9px 9px 7px;
-                                            position: absolute;
-                                            top: 123px;
-                                            width: 270px;
-                                            z-index: 20;
-
-                                            span.corner {
-                                                position: absolute;
-                                                display: block;
-                                                width: 0;
-                                                height: 0;
-                                                line-height: 0;
-                                                border: solid 9px rgba(0, 0, 0, 0.5);
-                                                border-color: transparent transparent rgba(0, 0, 0, 0.5);
-                                                display: block;
-                                                height: 0;
-                                                left: 140.5px;
-                                                line-height: 0;
-                                                position: absolute;
-                                                top: -18px;
-                                                width: 0;
-                                            }
-
-                                            p {
-                                                font: 500 13px/15px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                                color: white;
-                                                padding: 6px 0;
-                                                word-wrap: break-word;
-                                                width: 74%;
-                                                position: absolute;
-                                                left: 53px;
-
-                                                a {
-                                                    color: white;
-                                                    height: auto !important;
-                                                }
-                                            }
-
-                                            img.img-circle {
-                                                -moz-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Firefox */  
-                                                -webkit-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
-                                                box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* CSS3 */
-                                                display: block;
-                                                float: left;
-                                                height: 35px;
-                                                margin-right: 9px;
-                                                width: 35px;
-                                                z-index: 2;
-                                            }
-                                        }
-
-                                        div.video-details {
+                                        width: 300px;
+                                    
+                                        h1 {
+                                            color: rgba(102, 102, 102, 0.60);
                                             font: 500 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                            padding: 3px 2px;
 
                                             a {
-                                                color: #272727;
-                                                font: 300 18px/18px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
-                                                padding-bottom: 3px;
+                                                color: rgba(102, 102, 102, 0.83);
+                                                font-weight: 700;
                                             }
 
-                                            h3 { padding: 3px 0; }
-
-                                            h4 { color: #969696; }
-
-                                            div.shared {
-                                                @include border-radius(3px, 3px);
-                                                border: 1px solid #dddddd;
-                                                padding: 6px 6px 3px;
-                                                margin-top: 6px;
-
-                                                h5 { color: #dddddd; }
-
-                                                ul {
-                                                    height: 35px;
-                                                    overflow: auto;
-                                                    padding-top: 1px;
-
-                                                    li {
-                                                        float: left;
-                                                        min-height: 34px;
-                                                        width: 34px;
-                                                        opacity: 1;
-                                                        
-                                                        a {
-                                                            display: block;
-                                                            height: 22px;
-                                                            padding: 7px 0;
-                                                            width: 22px;
-                                                            opacity: 1;
-
-                                                            img.img-circle {
-                                                                -moz-box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1); /* Firefox */  
-                                                                -webkit-box-shadow: 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
-                                                                box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1); /* CSS3 */
-                                                                height: 22px;
-                                                                width: 22px;
-                                                            }
-                                                        }
-                                                    }
-                                                }
+                                            i { 
+                                                color: rgba(102, 102, 102, 0.60);
+                                                font-size: 14px;
                                             }
-                                            
-                                            span {
-                                                color: rgba(73, 73, 73, 0.83);
-                                                display: block;
-                                                font-size: 11px;
+
+                                            i.icon-heart {
+                                                position: relative;
+                                                top: 1px;
                                             }
                                         }
 
-                                        div.video-actions {
+                                        span.posted {
+                                            bottom: 3px;
+                                            color: #CECECE;
+                                            display: inline-block;
+                                            font: 500 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
                                             height: 25px;
                                             position: absolute;
-                                            bottom: 9px;
-                                            right: 9px;
+                                            vertical-align: middle;
 
-                                            ul {
-                                                height: 25px;
-
-                                                li {
-                                                    opacity: 1;
-                                                    float: right;
-                                                    width: 29px;
-                                                    min-height: 25px;
-
-                                                    a {
-                                                        color: #cecece;
-                                                        display: block;
-                                                        font: 300 20px/29px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                                        height: 19px;
-                                                        outline: 0;
-                                                        padding-top: 6px;
-                                                        text-align: right;
-                                                        text-decoration: none;
-                                                        width: 29px;
-
-                                                        i {
-                                                            position: relative;
-                                                            bottom: 3px;
-                                                        }
-
-                                                        &.active, &:hover {
-                                                            color: #67a3cb;
-                                                        }
-
-                                                        &:hover, &:focus, &:active {
-                                                            text-decoration: none;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    div.user-wrapper {
-                                        padding: 9px;
-                                        position: relative;
-                                        height: 240px;
-     
-                                        a.avatar {
-                                            float: left;
-                                        }
-                                         
-                                        div.feed-header {
-                                            margin-top: 0;
-                                            float: left;
-                                            position: relative;
-                                            width: 87%;
-                                            height: 100%;
-     
-                                            div.action {
-                                                font: 300 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                                display: inline-block;
-                                                vertical-align: bottom;
+                                            i {
+                                                color: #CECECE;
+                                                font-size: 20px;
                                                 position: relative;
-                                                padding-right: 25px;
-                                                width: 95%;
-     
-                                                i.pull-right,
-                                                span.icon-stack {
-                                                    display: inline-block;
-                                                    position: absolute;
-                                                    right: -11px;
-                                                    top: 35%;
-                                                }
-     
-                                                i.pull-right.icon-heart {
-                                                    right: -8px;
-                                                }
-     
-                                                i.pull-right.icon-comment {
-                                                    top: 30%;
-                                                }
-     
-                                                span.icon-stack {
-                                                    width: 32px;
-     
-                                                    i.icon-user {
-                                                        font-size: 2em;
-                                                        position: absolute;
-                                                        left: -4px;
-                                                    }
-     
-                                                    i.icon-minus,
-                                                    i.icon-plus {
-                                                        font-size: 8px;
-                                                        position: absolute;
-                                                        right: -12px;
-                                                    }
-                                                }
-     
-                                                strong { font-weight: 700; }
-     
-                                                p { 
-                                                    line-height: 16px;
-                                                    padding-top: 6px;
-                                                    position: absolute;
-                                                    width: 80%;
-                                                }
-     
-                                                p.follow {
-                                                    padding-top: 12px;
-     
-                                                    a {
-                                                        img.img-circle {
-                                                            width: 25px;
-                                                            height: 25px;
-                                                            margin-right: 9px;
-                                                            margin-top: 1px;
-                                                        }
-                 
-                                                        span {
-                                                            line-height: 12px;
+                                                top: 4px;
+                                            }
+                                        }
+                                        
+                                        div.entity {
+                                            div.video-wrapper {
+                                                position: relative;
+                                                
+                                                div.thumb {
+                                                    height: 165px;
+                                                    overflow: hidden;
+                                                    position: relative;
+                                                    width: 100%;
+
+                                                    a.thumbnail-link {
+                                                        display: block;
+                                                        height: 165px;
+                                                        width: 100%;
+
+                                                        img.video-thumbnail {
+                                                            @include border-radius(3px, 3px);
+                                                            background: rgba(102, 102, 102, .90);
+                                                            height: 165px;
                                                             position: relative;
-                                                            vertical-align: top;
-     
-                                                            em {
-                                                                color: rgba(102, 102, 102, 0.83);
-                                                                display: block;
-                                                                font: italic 11px/11px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                                                text-decoration: none;
-                                                                left: 0;
-                                                                position: absolute;
-                                                                text-decoration: none;
-                                                                top: 18px;
-                                                                width: 410px;
+                                                            width: 100%;
+                                                            z-index: 10;
+                                                        }
+                                                    }
+
+                                                    div.comment {
+                                                        border-radius: 0px 0px 3px 3px;
+                                                        background-color: rgba(0, 0, 0, 0.75);
+                                                        font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                        font-size: 11px;
+                                                        font-weight: 500;
+                                                        line-height: 18px;
+                                                        padding: 9px 9px 8px;
+                                                        position: absolute;
+                                                        bottom: 0;
+                                                        width: 94%;
+                                                        z-index: 20;
+
+                                                        span.corner {
+                                                            position: absolute;
+                                                            display: block;
+                                                            width: 0;
+                                                            height: 0;
+                                                            line-height: 0;
+                                                            border: solid 9px rgba(0, 0, 0, 0.75);
+                                                            border-color: transparent transparent rgba(0, 0, 0, 0.75);
+                                                            display: block;
+                                                            height: 0;
+                                                            left: 140.5px;
+                                                            line-height: 0;
+                                                            position: absolute;
+                                                            top: -18px;
+                                                            width: 0;
+                                                        }
+
+                                                        p {
+                                                            font: 500 13px/15px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                            color: white;
+                                                            padding: 6px 0;
+                                                            word-wrap: break-word;
+                                                            width: 81%;
+                                                            position: absolute;
+                                                            left: 53px;
+                                                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+
+                                                            a {
+                                                                color: white;
+                                                                height: auto !important;
                                                             }
-                                                        } 
-     
-                                                        &:hover, &:focus, &:active {
-                                                            em { text-decoration: none; }
+                                                        }
+
+                                                        img.img-circle {
+                                                            -moz-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                            -webkit-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                            box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                            display: block;
+                                                            float: left;
+                                                            height: 35px;
+                                                            margin-right: 9px;
+                                                            width: 35px;
+                                                            z-index: 2;
+                                                        }
+                                                    }
+                                                }
+
+
+                                                div.video-details {
+                                                    font: 500 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                    margin-top: 3px;
+
+                                                    a {
+                                                        color: #272727;
+                                                        font: 300 18px/18px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+                                                        padding-bottom: 3px;
+                                                    }
+
+                                                    div.shared {
+                                                        @include border-radius(3px, 3px);
+                                                        border: 1px solid #dddddd;
+                                                        padding: 6px 6px 3px;
+                                                        margin-top: 6px;
+
+                                                        h5 { color: #dddddd; }
+
+                                                        ul {
+                                                            height: 35px;
+                                                            overflow: auto;
+                                                            padding-top: 1px;
+
+                                                            li {
+                                                                float: left;
+                                                                min-height: 34px;
+                                                                width: 34px;
+                                                                opacity: 1;
+                                                                
+                                                                a {
+                                                                    display: block;
+                                                                    height: 22px;
+                                                                    padding: 7px 0;
+                                                                    width: 22px;
+                                                                    opacity: 1;
+
+                                                                    img.img-circle {
+                                                                        -moz-box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                                        -webkit-box-shadow: 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                                        box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                                        height: 22px;
+                                                                        width: 22px;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    
+                                                    span {
+                                                        color: rgba(73, 73, 73, 0.83);
+                                                        display: block;
+                                                        font-size: 11px;
+                                                    }
+                                                }
+
+                                                div.video-actions {
+                                                    bottom: 0;
+                                                    height: 25px;
+                                                    width: 100%;
+
+                                                    div.left { 
+                                                        float: left;
+                                                        width: 250px; 
+
+                                                        span.posted { bottom: -3px; }
+                                                    }
+
+                                                    div.right {
+                                                        float: right;
+                                                        width: 58px;
+
+                                                        a {
+                                                            color: #cecece;
+                                                            display: block;
+                                                            font: 300 20px/29px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                            float: right;
+                                                            height: 19px;
+                                                            outline: 0;
+                                                            padding-top: 6px;
+                                                            position: relative;
+                                                            text-align: right;
+                                                            text-decoration: none;
+                                                            width: 29px;
+
+                                                            i {
+                                                                position: relative;
+                                                                bottom: 3px;
+                                                            }
+
+                                                            &.active, &:hover {
+                                                                color: #67a3cb;
+                                                            }
+
+                                                            &:hover, &:focus, &:active {
+                                                                text-decoration: none;
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
-     
-                                            h3 {
-                                                position: absolute;
-                                                bottom: 0;
-                                                right: 0;
+
+                                            a.following {
+                                                display: block;
+                                                font: 300 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                margin: 20px 20px 30px;
+                                                line-height: 16px;
+                                                text-decoration: none;
+
+                                                img.img-circle {
+                                                    width: 25px;
+                                                    height: 25px;
+                                                    margin-right: 6px;
+                                                    -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                    -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                }
+         
+                                                span {
+                                                    display: inline-block;
+                                                    line-height: 12px;
+                                                    position: relative;
+                                                    vertical-align: top;
+                                                    width: 85%;
+
+                                                    em {
+                                                        color: rgba(102, 102, 102, 0.83);
+                                                        display: block;
+                                                        font: italic 11px/11px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                        text-decoration: none;
+                                                        position: absolute;
+                                                        text-decoration: none;
+                                                        top: 14px;
+                                                        width: inherit;
+                                                    }
+                                                } 
+
+                                                &:hover, &:focus, &:active {
+                                                    em { text-decoration: none; }
+                                                }
                                             }
                                         }
                                     }
-                                
+                                    
+                                    
                                     &.animate {
-                                        -webkit-animation: fadeIn 0.65s ease forwards;
-                                        -moz-animation: fadeIn 0.65s ease forwards;
-                                        animation: fadeIn 0.65s ease forwards;
-                                    }
+                                      -webkit-transition-property: left, right, top;
+                                         -moz-transition-property: left, right, top;
+                                          -ms-transition-property: left, right, top;
+                                           -o-transition-property: left, right, top;
+                                              transition-property: left, right, top;
+                                    } 
 
-                                    &:nth-child(2n) {
-                                        margin-right: 0;
-                                    }
-
-                                    &.shown {
-                                        opacity: 1;
-                                    }
+                                    &.shown { opacity: 1; }
 
                                     &.empty {
                                         background: #f5f5f5 !important;
@@ -951,18 +931,6 @@ div.marketing-content {
 
                             nav { display: none; }
                         }
-                    }
-
-                    h1 {
-                        border-bottom: 1px solid #f7f7f7;
-                        color: #333333;
-                        display: block;
-                        font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
-                        font-weight: 300;
-                        font-size: 26.15px;
-                        margin-bottom: 18px;
-                        padding-bottom: 9px;
-                        width: 100%;
                     }
 
                     a.modal-button {

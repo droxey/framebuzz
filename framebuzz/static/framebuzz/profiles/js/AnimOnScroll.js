@@ -93,20 +93,21 @@
 
 			var self = this;
 
-			imagesLoaded( this.el, function() {
+			var container = $('#feed-list');
+			imagesLoaded(container, function() {
 				
 				// initialize masonry
-				new Masonry( self.el, {
-					itemSelector: 'li',
-					transitionDuration : 0,
-					gutterWidth: 18,
-		            isAnimated: true,
-		            animationOptions: {
-		                duration: this.filterSpeed,
-		                easing: 'swing',
-		                queue: false
-		            }
-				} );
+				container.masonry({
+                    itemSelector: 'li.brick',
+                    gutterWidth: 24,
+                    columnWidth: 'li.brick',
+                    isAnimated: true,
+                      animationOptions: {
+                        duration: 750,
+                        easing: 'linear',
+                        queue: false
+                    }
+                });
 
 				if (self.items.length) {
 					$(self.items).find( '.lazy' ).lazyload({
