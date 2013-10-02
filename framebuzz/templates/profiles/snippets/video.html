@@ -37,9 +37,9 @@
       <span class="posted"><i class="icon-time"></i> {{ action.timestamp|timesince }} {% trans "ago" %}</span>
     </div>
     <div class="right">
-      {% if not comment.comment %}
+      {% if comment.comment %}
         {% if request.user.id == profile_user.id %}
-          <a class="video-toggle-button tooltip library{% if comment.content_object.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in video_library_ids %}Added to Library{% else %}Add to Library{% endif %}" data-placement="bottom">
+          <a class="video-toggle-button tooltip library{% if comment.content_object.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in video_library_ids %}Added to Posts{% else %}Post this Video{% endif %}" data-placement="bottom">
               {% if comment.content_object.id in video_library_ids %}
                 <i class="icon-minus-sign-alt"></i>
               {% else %}

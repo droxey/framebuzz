@@ -75,29 +75,6 @@ var FrameBuzzProfile = (function($) {
         $('.editable').editable();
     }
 
-    function bindScroll() {
-        var grid = $('#feed-list'),
-            pages = parseInt(grid.attr('data-total-pages'));
-
-        $(window).paged_scroll({
-            handleScroll:function (page,container,doneCallback) {
-                _page = page + 1;
-                var nextPageUrl = _urls.feed + '?page=' + _page;
-
-                if (_page <= pages) {
-                    $.get(nextPageUrl, function(pageHtml) {
-                        var $boxes = $(pageHtml);
-                        grid.append($boxes).masonry('appended', $boxes, true);
-                    });
-                }
-            },
-            triggerFromBottom: '10%',
-            targetElement: $('#feed'),
-            loader:'',
-            pagesToScroll: pages
-        });
-    }
-
     function youtube_parser(url){
         var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
         var match = url.match(regExp);
@@ -252,6 +229,7 @@ var FrameBuzzProfile = (function($) {
         _isMyProfile = isMyProfile;
         _urls = urls;
 
+        // Init common elements.
         initTooltips();
         initToggleButtons();
 
@@ -261,33 +239,44 @@ var FrameBuzzProfile = (function($) {
             initUploaders();
         }
 
+        // Init isotope and infinite scroll.
         var feedContainer = $('#feed');
         var recommendationsContainer = $('div.recommendations > div.ajax');
 
         $.get(urls.feed + '?init=true', function(html) {
             feedContainer.html(html);
-            bindScroll();
-            
-            var feedList = $('#feed-list');
-            $.get(urls.feed + '?page=1', function(items) {
-                var $boxes = $(items);
-                feedList.html($boxes);
 
-                new AnimOnScroll( document.getElementById( 'feed-list' ), {
-                    minDuration : 0.4,
-                    maxDuration : 0.7,
-                    viewportFactor : 0.2
-                });
+            var $container = $('#feed-list'),
+                pages = parseInt($container.attr('data-total-pages'));
 
+            $container.isotope({
+                itemSelector : 'li.brick',
+                animationEngine: 'best-available',
+                masonry: {
+                    columnWidth: 336
+                }
+            });
 
-         
-                setTimeout( function() {
-                    $( window ).trigger( 'scroll' );
-                }, 50 );
+            $(window).paged_scroll({
+                handleScroll: function (page, container, doneCallback) {
+                    _page = page + 1;
+                    var nextPageUrl = _urls.feed + '?page=' + _page;
+     
+                    if (_page <= pages) {
+                        $.get(nextPageUrl, function(newElements) {
+                            $container.isotope('insert', $(newElements));
+                        });
+                    }
+                },
+                triggerFromBottom: '10%',
+                targetElement: feedContainer,
+                loader:'',
+                pagesToScroll: pages
             });
         });
 
-        recommendationsContainer.load(urls.recommendations, function(html) {
+        // Load recommendations.
+        $.get(urls.recommendations, function(html) {
             recommendationsContainer.html(html);
         });
       }

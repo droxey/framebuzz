@@ -15,12 +15,12 @@
 
  body {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
-    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.6)), color-stop(100%, rgba(23, 136, 188, 1.0)));
-    background-image: -webkit-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, rgba(23, 136, 188, 1.0) 100%);
-    background-image: -moz-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, rgba(23, 136, 188, 1.0) 100%);
-    background-image: -ms-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, rgba(23, 136, 188, 1.0) 100%);
-    background-image: -o-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.5) -120%, rgba(23, 136, 188, 1.0) 100%);
-    background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.5) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.3)), color-stop(100%, rgba(23, 136, 188, 1.0)));
+    background-image: -webkit-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: -moz-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: -ms-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: -o-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
  }
 
 @mixin background-image-retina($file, $type, $width, $height) {
@@ -69,9 +69,9 @@ img.img-circle {
 }
 
 div.marketing-content {
-    background-color: rgb(169,228,247); // Old browsers
+    background-color: rgba(34,137,186,1); // Old browsers
     @include filter-gradient(#a9e4f7, #2289ba, horizontal); // IE6-9 fallback on horizontal gradient
-    @include background-image(radial-gradient(center, ellipse cover, rgba(169,228,247,1) 0%,rgba(34,137,186,1) 100%));
+    @include background-image(radial-gradient(center, ellipse cover, rgba(169,228,247,0.5) 0%,rgba(34,137,186,1) 100%));
     height: 100%;
 
     div.content {
@@ -217,7 +217,7 @@ div.marketing-content {
 
                                 h2 a.editable,
                                 p.bio a.editable {
-                                    font: 300 16px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                    font: 300 14px/18px 'proxima-nova',Helvetica,Arial,sans-serif;
                                     color: white;
                                     outline: none;
 
@@ -579,11 +579,6 @@ div.marketing-content {
                             ul.grid {
                                 border: none;
                                 width: 740px;
-                                -webkit-transition-property: height, width;
-                                -moz-transition-property: height, width;
-                                -ms-transition-property: height, width;
-                                -o-transition-property: height, width;
-                                transition-property: height, width;
 
                                 li.brick {
                                     display: block;
@@ -591,19 +586,15 @@ div.marketing-content {
                                     height: auto;
                                     opacity: 1;
                                     list-style: none outside none;
-                                    margin-bottom: 24px;
+                                    margin-bottom: 18px;
                                     position: relative;
                                     width: 336px;
-                                    -webkit-transition-duration: 0.7s;
-                                    -moz-transition-duration: 0.7s;
-                                    -ms-transition-duration: 0.7s;
-                                    -o-transition-duration: 0.7s;
-                                    transition-duration: 0.7s;
                                     
                                     div.action-wrapper {
                                         @include border-radius(5px, 5px);
                                         background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
                                         box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.10);
+                                        margin: 5px;
                                         padding: 5px 6px 6px 6px;
                                         position: relative;
                                         width: 300px;
@@ -611,7 +602,7 @@ div.marketing-content {
                                         h1 {
                                             color: rgba(102, 102, 102, 0.60);
                                             font: 500 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                            padding: 3px 2px;
+                                            padding: 3px 2px 8px 2px;
 
                                             a {
                                                 color: rgba(102, 102, 102, 0.83);
@@ -630,12 +621,11 @@ div.marketing-content {
                                         }
 
                                         span.posted {
-                                            bottom: 3px;
                                             color: #CECECE;
-                                            display: inline-block;
+                                            display: block;
                                             font: 500 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                            height: 25px;
-                                            position: absolute;
+                                            height: 21px;
+                                            margin-top: 21px;
                                             vertical-align: middle;
 
                                             i {
@@ -647,6 +637,8 @@ div.marketing-content {
                                         }
                                         
                                         div.entity {
+                                            position: relative;
+
                                             div.video-wrapper {
                                                 position: relative;
                                                 
@@ -734,7 +726,7 @@ div.marketing-content {
 
                                                 div.video-details {
                                                     font: 500 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                                    margin-top: 3px;
+                                                    margin: 6px 0;
 
                                                     a {
                                                         color: #272727;
@@ -796,7 +788,12 @@ div.marketing-content {
                                                         float: left;
                                                         width: 250px; 
 
-                                                        span.posted { bottom: -3px; }
+                                                        span.posted {     
+                                                            bottom: -3px;
+                                                            height: 25px;
+                                                            margin-top: 0;
+                                                            position: relative; 
+                                                        }
                                                     }
 
                                                     div.right {
@@ -805,13 +802,13 @@ div.marketing-content {
 
                                                         a {
                                                             color: #cecece;
-                                                            display: block;
+                                                            display: table;
                                                             font: 300 20px/29px 'proxima-nova', Helvetica, Arial, sans-serif;
                                                             float: right;
                                                             height: 19px;
                                                             outline: 0;
-                                                            padding-top: 6px;
-                                                            position: relative;
+                                                            margin-top: -19px;
+                                                            position: static;
                                                             text-align: right;
                                                             text-decoration: none;
                                                             width: 29px;
@@ -835,14 +832,15 @@ div.marketing-content {
 
                                             a.following {
                                                 display: block;
-                                                font: 300 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                                margin: 20px 20px 30px;
-                                                line-height: 16px;
+                                                font: 700 14px/16px 'proxima-nova',Helvetica,Arial,sans-serif;
+                                                height: 100%;
+                                                margin: 6px 0 0 12px;
+                                                position: relative;
                                                 text-decoration: none;
 
                                                 img.img-circle {
-                                                    width: 25px;
-                                                    height: 25px;
+                                                    width: 45px;
+                                                    height: 45px;
                                                     margin-right: 6px;
                                                     -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Firefox */  
                                                     -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
@@ -852,18 +850,16 @@ div.marketing-content {
                                                 span {
                                                     display: inline-block;
                                                     line-height: 12px;
-                                                    position: relative;
-                                                    vertical-align: top;
-                                                    width: 85%;
+                                                    position: absolute;
+                                                    vertical-align: middle;
+                                                    width: 84%;
 
                                                     em {
                                                         color: rgba(102, 102, 102, 0.83);
                                                         display: block;
-                                                        font: italic 11px/11px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                        font: italic 12px/14px 'proxima-nova',Helvetica,Arial,sans-serif;
+                                                        padding-top: 2px;
                                                         text-decoration: none;
-                                                        position: absolute;
-                                                        text-decoration: none;
-                                                        top: 14px;
                                                         width: inherit;
                                                     }
                                                 } 
@@ -874,15 +870,6 @@ div.marketing-content {
                                             }
                                         }
                                     }
-                                    
-                                    
-                                    &.animate {
-                                      -webkit-transition-property: left, right, top;
-                                         -moz-transition-property: left, right, top;
-                                          -ms-transition-property: left, right, top;
-                                           -o-transition-property: left, right, top;
-                                              transition-property: left, right, top;
-                                    } 
 
                                     &.shown { opacity: 1; }
 
@@ -920,6 +907,56 @@ div.marketing-content {
                                         to { opacity: 1; }
                                     }
                                 }
+                            }
+
+                            /**** Isotope Filtering ****/
+
+                            .isotope-item {
+                              z-index: 2;
+                            }
+
+                            .isotope-hidden.isotope-item {
+                              pointer-events: none;
+                              z-index: 1;
+                            }
+
+                            /**** Isotope CSS3 transitions ****/
+
+                            .isotope,
+                            .isotope .isotope-item {
+                              -webkit-transition-duration: 0.5s;
+                                 -moz-transition-duration: 0.5s;
+                                  -ms-transition-duration: 0.5s;
+                                   -o-transition-duration: 0.5s;
+                                      transition-duration: 0.5s;
+                            }
+
+                            .isotope {
+                              -webkit-transition-property: height, width;
+                                 -moz-transition-property: height, width;
+                                  -ms-transition-property: height, width;
+                                   -o-transition-property: height, width;
+                                      transition-property: height, width;
+                            }
+
+                            .isotope .isotope-item {
+                              -webkit-transition-property: -webkit-transform, opacity;
+                                 -moz-transition-property:    -moz-transform, opacity;
+                                  -ms-transition-property:     -ms-transform, opacity;
+                                   -o-transition-property:      -o-transform, opacity;
+                                      transition-property:         transform, opacity;
+                            }
+
+                            /**** disabling Isotope CSS3 transitions ****/
+
+                            .isotope.no-transition,
+                            .isotope.no-transition .isotope-item,
+                            .isotope .isotope-item.no-transition {
+                              -webkit-transition-duration: 0s;
+                                 -moz-transition-duration: 0s;
+                                  -ms-transition-duration: 0s;
+                                   -o-transition-duration: 0s;
+                                      transition-duration: 0s;
                             }
                         }
                     }

@@ -2,5 +2,11 @@
 
 
 <ul id="feed-list" class="grid endless clearfix" data-next-url="{% url 'profiles-feed' profile_user.username %}" data-total-pages="{{ page_obj.pages|length }}">
-    <li class="brick-sizer"></li>
+  {% if page_obj.object_list|length > 0 %}
+    {% include "profiles/snippets/item.html" %}
+  {% else %}
+    <li class="empty shown">
+        <p>No activity yet!</p>
+    </li>
+  {% endif %}
 </ul>

@@ -38,7 +38,6 @@ def feed(request, username):
 
     user = None
     kwargs = dict()
-    kwargs['verb__in'] = VALID_FEED_VERBS
 
     if request.user.is_authenticated() and request.user.username == username:
         user = request.user
@@ -54,6 +53,7 @@ def feed(request, username):
                                      actor_object_id=user.id).order_by('-timestamp')
 
     p = Paginator(feed, 10, request=request)
+    page_obj = p.page(page)
 
     if page == 1 and request.GET.get('init', None) is not None:
         template = 'profiles/snippets/feed.html'

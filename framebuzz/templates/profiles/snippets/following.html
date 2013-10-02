@@ -1,0 +1,19 @@
+{% load i18n avatar_tags activity_tags profile_tags %}
+
+<a class="following" href="{% url 'profiles-home' action.target.username %}">
+  <img src="{% avatar_url action.target 110 %}" alt="" height="30" width="30" class="img-circle" />
+  <span>
+    {{ action.target|display_name }}
+    {% if action.target.get_profile.bio or action.target.get_profile.tagline %}
+        <br>
+        <em>
+            {% if action.target.get_profile.tagline %}
+                &ldquo;{{ action.target.get_profile.tagline }}&rdquo;
+            {% else %}
+                &ldquo;{{ action.target.get_profile.bio }}&rdquo;
+            {% endif %}
+        </em>
+    {% endif %} 
+  </span>
+</a>
+<span class="posted"><i class="icon-time"></i> {{ action.timestamp|timesince }} {% trans "ago" %}</span>
