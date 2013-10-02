@@ -8,9 +8,9 @@
         <br>
         <em>
             {% if action.target.get_profile.tagline %}
-                &ldquo;{{ action.target.get_profile.tagline }}&rdquo;
+                &ldquo;{{ action.target.get_profile.tagline|truncatechars:"80" }}&rdquo;
             {% else %}
-                &ldquo;{{ action.target.get_profile.bio }}&rdquo;
+                &ldquo;{{ action.target.get_profile.bio|truncatechars:"80" }}&rdquo;
             {% endif %}
         </em>
     {% endif %} 

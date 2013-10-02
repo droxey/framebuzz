@@ -15,22 +15,42 @@
     <ul>
         {% for video in top_videos %}
             <li class="shown">
-              <a class="thumbnail-link tooltip" data-placement="bottom" title="{{ video.title|title }}" href="{% spaceless %}{% if request.user.is_authenticated %}
-                {% if video.found_by %}
-                    {% url 'profiles-share' video.found_by.username video.video_id %}
-                {% else %}
-                    {% url 'profiles-share' request.user.username video.video_id %}
-                {% endif %}
-            {% else %}
-                {% if video.found_by %}
-                    {% url 'profiles-share' video.found_by.username video.video_id %}
-                {% else %}
-                {{ video.get_share_url }}
-                {% endif %}
-            {% endif %}{% endspaceless %}">
-                    <img class="video-thumbnail lazy" height="107" width="190" src="{{ video.large_thumbnail }}" />
-                    <i class="icon-play"></i>
-                </a>
+                <div class="thumb">
+                    <a class="thumbnail-link" href="{% spaceless %}{% if request.user.is_authenticated %}
+                            {% if video.found_by %}
+                                {% url 'profiles-share' video.found_by.username video.video_id %}
+                            {% else %}
+                                {% url 'profiles-share' request.user.username video.video_id %}
+                            {% endif %}
+                        {% else %}
+                            {% if video.found_by %}
+                                {% url 'profiles-share' video.found_by.username video.video_id %}
+                            {% else %}
+                            {{ video.get_share_url }}
+                            {% endif %}
+                        {% endif %}{% endspaceless %}">
+                      <img class="video-thumbnail lazy" width="190" height="107" src="{{ video.large_thumbnail }}" />
+                      <i class="icon-play"></i>
+                    </a>
+                    <div class="comment">
+                         <span class="corner"></span>
+                         <p>
+                            <a href="{% spaceless %}{% if request.user.is_authenticated %}
+                            {% if video.found_by %}
+                                {% url 'profiles-share' video.found_by.username video.video_id %}
+                            {% else %}
+                                {% url 'profiles-share' request.user.username video.video_id %}
+                            {% endif %}
+                        {% else %}
+                            {% if video.found_by %}
+                                {% url 'profiles-share' video.found_by.username video.video_id %}
+                            {% else %}
+                            {{ video.get_share_url }}
+                            {% endif %}
+                        {% endif %}{% endspaceless %}">{{ video.title|title }}</a>
+                        </p>
+                    </div>
+                </div>
             </li>
         {% endfor %}
     </ul>
