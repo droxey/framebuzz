@@ -117,14 +117,26 @@ var FrameBuzzProfile = (function($) {
         });
     }
 
+    function filter(el, filterClass) {
+        $('#feed-list').isotope({ filter: filterClass });
+        $('ul.nav-pills li.active').removeClass('active');
+        el.parent().addClass('active');
+    }
+
     function bindFilter() {
         $('body').on('click', 'a.filter', function() {
-            $('ul.nav-pills li.active').removeClass('active');
-
             _currentFilterClass = $(this).attr('data-filter');
-            $('#feed-list').isotope({ filter: _currentFilterClass });
+            var el = $(this);
 
-            $(this).parent().addClass('active');
+            if (_isShare) {
+                $('#share').fadeOut('fast', function() {
+                    $('#share').remove();
+                    filter(el, _currentFilterClass);
+                });
+            }
+            else {
+                filter(el, _currentFilterClass);
+            }
 
             return false;
         });
