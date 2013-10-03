@@ -150,6 +150,9 @@ class Action(models.Model):
     def get_absolute_url(self):
         return ('actstream.views.detail', [self.pk])
 
+    def class_name(self):
+        return self.verb.replace(' ', '_')
+
 
 # convenient accessors
 actor_stream = Action.objects.actor

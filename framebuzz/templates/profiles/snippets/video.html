@@ -38,7 +38,7 @@
     </div>
     <div class="right">
       {% if comment.comment %}
-        {% if request.user.id == profile_user.id %}
+        {% if request.user.is_authenticated %}
           <a class="video-toggle-button tooltip library{% if comment.content_object.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in video_library_ids %}Added to Posts{% else %}Post this Video{% endif %}" data-placement="bottom">
               {% if comment.content_object.id in video_library_ids %}
                 <i class="icon-minus-sign-alt"></i>
@@ -54,7 +54,7 @@
               {% endif %}
               </a>
           {% endif %}
-          {% if show_favorite_button and request.user.is_authenticated %}
+          {% if show_favorite_button %}
             <a class="video-toggle-button tooltip favorite{% if comment.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username comment.id %}" title="{% if comment.id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="bottom">
               {% if comment.id in favorite_comment_ids %}
                 <i class="icon-heart"></i>

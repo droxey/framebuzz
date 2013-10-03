@@ -120,7 +120,7 @@ div.marketing-content {
                         position: absolute;
                         width: 330px;
 
-                        ul {
+                        ul.nav-tabs {
                             border-top: 1px solid rgba(255, 255, 255, 0.5);
                             border-bottom: none;
                             margin-bottom: 0;
@@ -130,7 +130,7 @@ div.marketing-content {
                                 padding: 9px 0 10px 0;
                                 width: auto;
 
-                                a {
+                                a.filter {
                                     @include border-radius(0px, 0px);
                                     border: 1px solid transparent;
                                     border-right: 1px solid rgba(255, 255, 255, 0.2);
@@ -271,7 +271,7 @@ div.marketing-content {
                                 }
 
                                 h2 {
-                                    font: italic 300 16px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                    font: italic 300 14px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
                                     padding-left: 0;
                                     padding-right: 0;
                                     padding-bottom: 20px;
@@ -351,93 +351,80 @@ div.marketing-content {
                                             margin-bottom: 9px;
                                             position: relative;
 
-                                            a {
-                                                border: none;
-                                                display: block;
+                                            div.thumb {
                                                 height: 107px;
-                                                text-decoration: none;
+                                                overflow: hidden;
                                                 position: relative;
-                                                padding: 0;
+                                                width: 190px;
 
-                                                img {
-                                                    @include border-radius(2px, 2px);
+                                                a.thumbnail-link {
+                                                    display: block;
                                                     height: 107px;
-                                                    position: relative;
-                                                    width: 190px;
-                                                    z-index: 1;
+                                                    width: 100%;
+
+                                                    img.video-thumbnail {
+                                                        @include border-radius(3px, 3px);
+                                                        background: rgba(102, 102, 102, .90);
+                                                        height: 107px;
+                                                        position: relative;
+                                                        width: 100%;
+                                                        z-index: 10;
+                                                    }
                                                 }
 
-                                                i.icon-play {
-                                                    color: rgba(255, 255, 255, 0.8);
+                                                div.comment {
+                                                    @include single-box-shadow(0px 1px 5px rgba(255, 255, 255, 0.7));
+                                                    border-radius: 0px 0px 3px 3px;
+                                                    background-color: rgba(0, 0, 0, 0.75);
+                                                    font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                    font-size: 11px;
+                                                    font-weight: 500;
+                                                    height: auto;
+                                                    padding: 5px;
                                                     position: absolute;
-                                                    top: 32%;
-                                                    left: 45%;
-                                                    font-size: 30px;
-                                                    z-index: 10;
-                                                    @include single-transition(color 5ms ease-out);
-                                                }
+                                                    width: 180px;
+                                                    bottom: 0;
+                                                    z-index: 20;
 
-                                                &.hover {
-                                                    color: rgba(255, 255, 255, 0.95);
-                                                    @include single-transition(color 5ms ease-in);
-                                                }
-                                            }
+                                                    span.corner {
+                                                        position: absolute;
+                                                        display: block;
+                                                        width: 0;
+                                                        height: 0;
+                                                        line-height: 0;
+                                                        border: solid 5px rgba(0, 0, 0, 0.75);
+                                                        border-color: transparent transparent rgba(0, 0, 0, 0.75);
+                                                        display: block;
+                                                        height: 0;
+                                                        left: 48%;
+                                                        line-height: 0;
+                                                        position: absolute;
+                                                        top: -10px;
+                                                        width: 0;
+                                                    }
 
-                                            div.tooltip {
-                                                font: 500 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
-                                                left: 4px !important;
-                                                position: absolute !important;
-                                                top: 59px !important;
-                                                width: 191px !important;
-                                                text-align: left;
+                                                    p {
+                                                        width: 100%; 
+
+                                                        a {
+                                                            color: white;
+                                                            clear: left;
+                                                            font: 500 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                            height: auto !important;
+                                                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+                                                            word-wrap: break-word;
+                                                            text-decoration: none;
+
+                                                            &:hover, &:active, &:focus { text-decoration: none; }
+
+                                                            i.icon-play { padding: 3% 2px 0; }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            }
-                        }
-
-                        a.fileupload {
-                            display: block;
-                            font: 500 26px/26px 'proxima-nova',Helvetica,Arial,sans-serif;
-                            left: 9px;
-                            opacity: 1;
-                            position: absolute;
-                            text-align: center;
-                            text-decoration: none;
-                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-                            top: 9px; 
-
-                            span.icon-stack {
-                                color: rgba(255, 255, 255, 0.95);
-                                display: block;
-                                height: 37px;
-                                position: relative;
-                                width: 37px;
-
-                                i {
-                                    height: 100%;
-                                    position: absolute;
-                                }
-
-                                i.icon-user {
-                                    bottom: 7px;
-                                    left: 0;
-                                    width: 50%;
-                                }
-                                
-                                i.icon-magic {
-                                    bottom: 8px;
-                                    font-size: 12px;
-                                    right: 2px;
-                                    width: 45%;
-                                }
-                            }
-
-                            &:hover, &:active, &:focus {
-                                background: none;
-                                outline: 0 none;
-                                text-decoration: none;
                             }
                         }
 
@@ -462,17 +449,17 @@ div.marketing-content {
                         overflow: visible;
                         position: relative;
                         left: 28%;
-                        width: 740px;
+                        width: 700px;
                         
                         nav {
-                            width: 100%;
+                            width: 678px;
 
                             ul.nav-pills {
                                 border-bottom: none;
                                 float: left;
                                 padding-top: 12px;
                                 margin-bottom: 0;
-                                width: 94%;
+                                width: 80%;
 
                                 li {
                                     margin-right: 18px;
@@ -493,33 +480,31 @@ div.marketing-content {
                             }
 
                             a.add-video,
-                            a.toggle-follow {
-                                color: rgba(0, 0, 0, 0.15);
+                            a.toggle-follow,
+                            a.fileupload {
+                                color: rgba(255, 255, 255, .95);
                                 display: block;
                                 float: right;
                                 font-size: 25px;
                                 outline: 0;
                                 position: relative;
                                 right: 0;
-                                top: 27px;
+                                top: 18px;
                                 width: 30px;
                                 opacity: 1;
-                                @include single-transition(color 5ms ease-out);
 
                                 &:hover, &:focus, &:active {
-                                    color: rgba(0, 0, 0, 0.25);
+                                    color: rgba(255, 255, 255, 1);
                                     text-decoration: none;
-                                    @include single-transition(color 5ms ease-in);
                                 }
                             }
 
-                            a.add-video {
-                                top: 20px;
+                            a.add-video { 
                                 right: 6px;
                             }
 
                             div.tooltip {
-                                margin-top: -2px;
+                                margin-left: -2px;
                             }
 
                             a.toggle-follow {
@@ -550,6 +535,37 @@ div.marketing-content {
                                 }                                
                             }
 
+                            a.fileupload {
+                                right: 32px;
+                                top: 15px;
+
+                                span.icon-stack {
+                                    color: rgba(255, 255, 255, .95);
+                                    display: block;
+                                    height: 30px;
+                                    position: relative;
+                                    width: 30px;
+
+                                    i {
+                                        height: 100%;
+                                        position: absolute;
+                                    }
+
+                                    i.icon-user {
+                                        bottom: 7px;
+                                        left: 0;
+                                        width: 50%;
+                                    }
+                                    
+                                    i.icon-cogs {
+                                        bottom: 9px;
+                                        font-size: 11px;
+                                        right: -1px;
+                                        width: 45%;
+                                    }
+                                }
+                            }
+
                             .nav-pills > li > a {
                                 padding: 3px 9px;
                             }
@@ -574,7 +590,7 @@ div.marketing-content {
 
                             ul.grid {
                                 border: none;
-                                width: 740px;
+                                width: 678px;
 
                                 li.brick {
                                     display: block;
@@ -627,8 +643,9 @@ div.marketing-content {
                                             i {
                                                 color: #CECECE;
                                                 font-size: 20px;
+                                                font-weight: normal;
                                                 position: relative;
-                                                top: 4px;
+                                                top: 3px;
                                             }
                                         }
                                         
@@ -660,13 +677,14 @@ div.marketing-content {
                                                     }
 
                                                     div.comment {
+                                                        @include single-box-shadow(0px 1px 5px rgba(255, 255, 255, 0.7));
                                                         border-radius: 0px 0px 3px 3px;
                                                         background-color: rgba(0, 0, 0, 0.75);
                                                         font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
                                                         font-size: 11px;
                                                         font-weight: 500;
                                                         line-height: 18px;
-                                                        padding: 9px 9px 8px;
+                                                        padding: 9px;
                                                         position: absolute;
                                                         bottom: 0;
                                                         width: 94%;
@@ -973,15 +991,8 @@ div.marketing-content {
                 }
 
                 #share {
-                    opacity: 0;
                     padding: 0;
                     width: 905px;
-                    @include single-transition(opacity 10ms ease-out);
-
-                    &.fadein {
-                        opacity: 1;
-                        @include single-transition(opacity 10ms ease-in);
-                    }
 
                     &.standalone {
                         margin: 0 auto;

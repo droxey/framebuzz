@@ -30,7 +30,6 @@
                             {% endif %}
                         {% endif %}{% endspaceless %}">
                       <img class="video-thumbnail lazy" width="190" height="107" src="{{ video.large_thumbnail }}" />
-                      <i class="icon-play"></i>
                     </a>
                     <div class="comment">
                          <span class="corner"></span>
@@ -47,7 +46,7 @@
                             {% else %}
                             {{ video.get_share_url }}
                             {% endif %}
-                        {% endif %}{% endspaceless %}">{{ video.title|title }}</a>
+                        {% endif %}{% endspaceless %}"><i class="pull-left icon-play"></i> {{ video.title|title }}</a>
                         </p>
                     </div>
                 </div>

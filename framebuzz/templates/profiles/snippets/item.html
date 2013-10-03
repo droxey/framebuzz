@@ -2,7 +2,21 @@
 
 {% if page_obj.object_list %}
   {% for action in page_obj.object_list %}
-      <li class="brick">
+      <li class="brick {% spaceless %}
+                        {% if action.verb == 'started following' %}
+                          {% if profile_user.id == action.actor.id %}
+                            following
+                          {% else %}
+                            followers
+                        {% endif %}
+                      {% else %}
+                        {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
+                          conversations
+                        {% else %}
+                          {{ action.class_name }}
+                        {% endif %}
+                      {% endif %}
+                    {% endspaceless %}">
           <div class="action-wrapper">
             <h1>{% display_action action %}</h1>
             <div class="entity">

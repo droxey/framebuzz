@@ -3,7 +3,8 @@ var FrameBuzzProfile = (function($) {
         _isMyProfile = false,
         _page = 1,
         _urls = {},
-        _masonry = null;
+        _masonry = null,
+        _currentFilterClass = null;
 
     function triggerMasonry() {
         if (_masonry !== null) {
@@ -112,6 +113,19 @@ var FrameBuzzProfile = (function($) {
         $('body').on('click', 'a.follow-button, a.unfollow-button', function () {
             $.post($(this).attr("href"), {});
             $(this).parent().find("a.follow-button, a.unfollow-button").toggle();
+            return false;
+        });
+    }
+
+    function bindFilter() {
+        $('body').on('click', 'a.filter', function() {
+            $('ul.nav-pills li.active').removeClass('active');
+
+            _currentFilterClass = $(this).attr('data-filter');
+            $('#feed-list').isotope({ filter: _currentFilterClass });
+
+            $(this).parent().addClass('active');
+
             return false;
         });
     }
@@ -232,6 +246,7 @@ var FrameBuzzProfile = (function($) {
         // Init common elements.
         initTooltips();
         initToggleButtons();
+        bindFilter();
 
         if (_isMyProfile) {
             bindAddVideoModal();
@@ -278,6 +293,7 @@ var FrameBuzzProfile = (function($) {
         // Load recommendations.
         $.get(urls.recommendations, function(html) {
             recommendationsContainer.html(html);
+            initTooltips();
         });
       }
     };
