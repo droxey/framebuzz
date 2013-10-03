@@ -1,4 +1,5 @@
 import json
+import random
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -37,7 +38,17 @@ def feed(request, username):
         page = 1
 
     user = None
-    kwargs = dict()
+    user_feed = None
+
+    verb_filter = request.GET.get('filter', VALID_FEED_VERBS)
+    if verb_filter != VALID_FEED_VERBS:
+        if verb_filter.startswith('follow'):
+            verb_filter = ['started following']
+        elif verb_filter == 'conversations':
+            verb_filter = ['commented on', 'replied to comment']
+        else:
+            f = verb_filter.replace('_', ' ')
+            verb_filter = [f]
 
     if request.user.is_authenticated() and request.user.username == username:
         user = request.user
@@ -45,15 +56,17 @@ def feed(request, username):
         user_following = following(user)
         following_ids = [f.id for f in user_following]
         following_ids.append(user.id)
- 
-        feed = Action.objects.filter(Q(verb__in=VALID_FEED_VERBS), Q(action_object_object_id__in=following_ids) | Q(target_object_id__in=following_ids)).order_by('-timestamp')
+
+        user_feed = Action.objects.filter(Q(verb__in=verb_filter),
+                                          Q(action_object_object_id__in=following_ids) |
+                                          Q(target_object_id__in=following_ids) |
+                                          Q(actor_object_id__in=following_ids))
     else:
         user = User.objects.get(username__iexact=username)
-        feed = Action.objects.filter(verb__in=VALID_FEED_VERBS,
-                                     actor_object_id=user.id).order_by('-timestamp')
+        user_feed = Action.objects.filter(verb__in=verb_filter,
+                                          actor_object_id=user.id)
 
-    p = Paginator(feed, 10, request=request)
-    page_obj = p.page(page)
+    p = Paginator(user_feed, 10, request=request)
 
     if page == 1 and request.GET.get('init', None) is not None:
         template = 'profiles/snippets/feed.html'
@@ -67,26 +80,36 @@ def feed(request, username):
 
 
 def recommendations(request):
-    top_video_actions = Action.objects.filter(verb='viewed video') \
-        .values('action_object_object_id') \
-        .annotate(views=Count('id')) \
-        .order_by('-views')[1:4]
-    top_video_ids = [v.get('action_object_object_id')
-                     for v in top_video_actions]
+    top_video_actions = Action.objects.filter(verb='commented on') \
+        .values('target_object_id') \
+        .annotate(comments=Count('id')) \
+        .order_by('-comments')
+
+    top_random_videos = sorted(
+        top_video_actions[0:50], key=lambda x: random.random())
+
+    top_video_ids = [v.get('target_object_id')
+                     for v in top_random_videos]
+
     top_videos = Video.objects.filter(id__in=top_video_ids)
 
     top_user_actions = Action.objects.filter(verb__in=
-        ['commented on', 'replied to comment']) \
+                                             ['commented on',
+                                              'replied to comment']) \
         .values('actor_object_id') \
         .annotate(comments=Count('id')) \
-        .order_by('-comments')[:12]
-    top_user_ids = [u.get('actor_object_id') for u in top_user_actions]
+        .order_by('-comments')
+
+    top_random_users = sorted(
+        top_user_actions[0:50], key=lambda x: random.random())
+    top_user_ids = [u.get('actor_object_id') for u in top_random_users]
     top_users = User.objects.filter(id__in=top_user_ids)
 
     return render_to_response('profiles/snippets/recommendations.html', {
         'top_videos': top_videos,
         'top_users': top_users,
     }, context_instance=RequestContext(request))
+
 
 def video_share(request, username=None, video_id=None):
     video, created = get_or_create_video(video_id)
@@ -98,7 +121,7 @@ def video_share(request, username=None, video_id=None):
                             .values('actor_object_id')
     action_ids = [int(a['actor_object_id']) for a in actions]
     commenters = User.objects.filter(id__in=action_ids)
-    
+
     context['video'] = video
     context['is_share'] = True
     context['commenters'] = commenters
@@ -136,7 +159,7 @@ def home(request, username):
     profile_library = UserVideo.objects.filter(user=user)
     ct = ContentType.objects.get(model='user')
     is_my_profile = request.user.is_authenticated() and \
-                    request.user.id == user.id
+        request.user.id == user.id
     context = {
         'profile_favorites': profile_favorites,
         'profile_conversations': profile_conversations,
@@ -158,23 +181,24 @@ def home(request, username):
                               context,
                               context_instance=RequestContext(request))
 
+
 @login_required
 @csrf_exempt
 def edit_profile(request, username):
     if username != request.user.username:
         return HttpResponseRedirect(
             reverse('profiles-edit', args=[request.user.username, ]))
- 
+
     user = User.objects.get(username=username)
     submitted = request.method == 'POST'
     success = False
     profile = user.get_profile()
- 
+
     if submitted:
         form = UserProfileForm(instance=profile,
                                data=request.POST)
         success = form.is_valid()
- 
+
         if success:
             profile = form.save()
             action.send(
@@ -195,22 +219,22 @@ def edit_profile(request, username):
             return HttpResponse(json.dumps(outbound_message),
                                 content_type="application/json")
     return HttpResponse()
- 
+
 
 def videos(request, username):
     try:
         page = request.GET.get('page', 1)
     except PageNotAnInteger:
         page = 1
- 
+
     user = User.objects.get(username__iexact=username)
     user_videos = UserVideo.objects.filter(user=user).order_by('-added_on')
     all_videos = [uv.video for uv in user_videos]
     video_comments = list()
- 
+
     favorites = Action.objects.favorite_comments_stream(user)
     favorite_comment_ids = [int(f.action_object_object_id) for f in favorites]
- 
+
     for video in all_videos:
         comments = MPTTComment.objects.filter(user=user, object_pk=video.id)
         if len(comments) > 0:
@@ -219,15 +243,15 @@ def videos(request, username):
             fake_comment = MPTTComment()
             fake_comment.content_object = video
             video_comments.append(fake_comment)
- 
+
     p = Paginator(video_comments, 12, request=request)
     featured_video_ids = [uv.video.id for uv in user_videos if uv.is_featured]
- 
+
     if request.is_ajax() and page > 1:
         template = 'profiles/snippets/video.html'
     else:
         template = 'profiles/snippets/videos.html'
- 
+
     return render_to_response(template, {
         'profile_user': user,
         'page_obj': p.page(page),

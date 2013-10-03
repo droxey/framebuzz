@@ -1,3 +1,5 @@
+from actstream import action
+
 from django import forms
 from django.db import IntegrityError
 
@@ -62,6 +64,11 @@ class AddVideoForm(forms.ModelForm):
                 user_video.is_featured = self.cleaned_data.get(
                     'is_featured', False)
                 user_video.save()
+
+                action.send(self.request.user,
+                            verb='added video to library',
+                            action_object=video,
+                            target=user_video)
         except IntegrityError:
             raise forms.ValidationError(
                 'This video is already in your library!')

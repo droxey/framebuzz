@@ -1,5 +1,4 @@
 from django.db.models import Q
-
 from actstream.managers import ActionManager, stream
 
 

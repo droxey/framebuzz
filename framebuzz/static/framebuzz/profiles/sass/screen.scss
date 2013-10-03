@@ -492,6 +492,7 @@ div.marketing-content {
                                 top: 18px;
                                 width: 30px;
                                 opacity: 1;
+                                z-index: 3;
 
                                 &:hover, &:focus, &:active {
                                     color: rgba(255, 255, 255, 1);
@@ -715,7 +716,7 @@ div.marketing-content {
                                                         p {
                                                             font: 500 13px/15px 'proxima-nova', Helvetica, Arial, sans-serif;
                                                             color: white;
-                                                            padding: 6px 0;
+                                                            padding-bottom: 6px;
                                                             word-wrap: break-word;
                                                             width: 81%;
                                                             position: absolute;
@@ -849,29 +850,36 @@ div.marketing-content {
                                                 }
                                             }
 
-                                            a.following {
+                                            div.follow {
                                                 display: block;
                                                 font: 700 14px/16px 'proxima-nova',Helvetica,Arial,sans-serif;
                                                 height: 100%;
-                                                margin: 6px 0 0 12px;
                                                 position: relative;
                                                 text-decoration: none;
+                                                
+                                                a.following {
+                                                    margin: 6px 0 0 12px;
+                                                    display: inline-block;
+                                                    width: 51px;
+                                                    height: 51px;
 
-                                                img.img-circle {
-                                                    width: 45px;
-                                                    height: 45px;
-                                                    margin-right: 6px;
-                                                    -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Firefox */  
-                                                    -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
-                                                    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                    img.img-circle {
+                                                        width: 45px;
+                                                        height: 45px;
+                                                        margin-right: 6px;
+                                                        -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                        -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                    }
                                                 }
          
-                                                span {
+                                                span.quote {
                                                     display: inline-block;
                                                     line-height: 12px;
+                                                    margin: 6px 0 0;
                                                     position: absolute;
                                                     vertical-align: middle;
-                                                    width: 84%;
+                                                    width: 87%;
 
                                                     em {
                                                         color: rgba(102, 102, 102, 0.83);
@@ -880,6 +888,10 @@ div.marketing-content {
                                                         padding-top: 2px;
                                                         text-decoration: none;
                                                         width: inherit;
+                                                    }
+
+                                                    &.username {
+                                                        padding: 15px 0 15px 1px;
                                                     }
                                                 } 
 

@@ -6,12 +6,6 @@ var FrameBuzzProfile = (function($) {
         _masonry = null,
         _currentFilterClass = null;
 
-    function triggerMasonry() {
-        if (_masonry !== null) {
-            _masonry.masonry( 'reloadItems' );
-        }
-    }
-
     function bindAddVideoModal() {
         $('body').on('hide', '#add-framebuzz-modal', function () {
             $(this).removeData('modal');
@@ -94,22 +88,15 @@ var FrameBuzzProfile = (function($) {
             var url = link.attr('href');
 
             $.get(url, function(data) {
-                $(currentTab).load(currentPageUrl, function(result) {
-                    $('ul.nav-tabs').tab('show');
-                    //$('div.tab-pane').removeClass('active');
-
-                    $('ul.nav-tabs li a[href="' + currentTab + '"]').addClass('active');
-                    $(currentTab).addClass('active');
-
-                    bindScroll();
-                    triggerMasonry();
-                    initTooltips();
-                });
+                link.toggleClass('active');
+                console.log(link.prev('li'));
             });
 
             return false;
         });
+    }
 
+    function initFollowButton() {
         $('body').on('click', 'a.follow-button, a.unfollow-button', function () {
             $.post($(this).attr("href"), {});
             $(this).parent().find("a.follow-button, a.unfollow-button").toggle();
@@ -118,15 +105,15 @@ var FrameBuzzProfile = (function($) {
     }
 
     function filter(el, filterClass) {
-        $('#feed-list').isotope({ filter: filterClass });
-        $('ul.nav-pills li.active').removeClass('active');
-        el.parent().addClass('active');
+        $('ul.nav-pills li.active').toggleClass('active');
+        $('a[data-filter="' + filterClass +'"]').parent().toggleClass('active');
+        getPage(1, true);
     }
 
     function bindFilter() {
         $('body').on('click', 'a.filter', function() {
-            _currentFilterClass = $(this).attr('data-filter');
             var el = $(this);
+            _currentFilterClass = el.attr('data-filter');
 
             if (_isShare) {
                 $('#share').fadeOut('fast', function() {
@@ -249,21 +236,60 @@ var FrameBuzzProfile = (function($) {
             });
     }
 
+    function bindCardFunctions() {
+        initTooltips();
+        initToggleButtons();
+    }
+
+    function getPage(page, filter) {
+        var $container = $('#feed-list'),
+            nextPageUrl = _urls.feed;
+
+        if (_currentFilterClass != null) {
+            nextPageUrl = nextPageUrl + '?page=1&filter=' + _currentFilterClass.replace('.', '');
+        }
+        else {
+            nextPageUrl = nextPageUrl + '?page=' + page;
+        }
+
+        console.log(nextPageUrl);
+
+        $.get(nextPageUrl, function(newElements) {
+            if (filter) {
+                $container.isotope({ filter: _currentFilterClass });
+
+                if (_currentFilterClass == '*') { 
+                    _currentFilterClass = null;
+                }
+            }
+
+            $container.isotope('insert', $(newElements), function() {
+                bindCardFunctions();
+            });
+        });
+    }
+
     return {
       init: function(isMyProfile, isShare, urls) {
         _isShare = isShare;
         _isMyProfile = isMyProfile;
         _urls = urls;
 
-        // Init common elements.
-        initTooltips();
-        initToggleButtons();
         bindFilter();
 
         if (_isMyProfile) {
             bindAddVideoModal();
             initEditables();
-            initUploaders();
+            //initUploaders();
+
+            // Load recommendations.
+            $.get(urls.recommendations, function(html) {
+                recommendationsContainer.html(html);
+                initTooltips();
+            });
+        }
+        else {
+            initFollowButton();
         }
 
         // Init isotope and infinite scroll.
@@ -276,38 +302,33 @@ var FrameBuzzProfile = (function($) {
             var $container = $('#feed-list'),
                 pages = parseInt($container.attr('data-total-pages'));
 
-            $container.isotope({
+            $.when($container.isotope({
                 itemSelector : 'li.brick',
                 animationEngine: 'best-available',
                 masonry: {
                     columnWidth: 336
                 }
-            });
+            }))
+            .then(function() {
+                bindCardFunctions();
 
-            $(window).paged_scroll({
-                handleScroll: function (page, container, doneCallback) {
-                    _page = page + 1;
-                    var nextPageUrl = _urls.feed + '?page=' + _page;
-     
-                    if (_page <= pages) {
-                        $.get(nextPageUrl, function(newElements) {
-                            $container.isotope('insert', $(newElements));
-                        });
-                    }
-                },
-                triggerFromBottom: '10%',
-                targetElement: feedContainer,
-                loader:'',
-                pagesToScroll: pages
-            });
-        });
+                    $(window).paged_scroll({
+                        handleScroll: function (page, container, doneCallback) {
+                            _page = page + 1;
+                            var filter = _currentFilterClass != null;
 
-        // Load recommendations.
-        $.get(urls.recommendations, function(html) {
-            recommendationsContainer.html(html);
-            initTooltips();
-        });
-      }
+                            if (page <= pages) {
+                                getPage(page, filter);
+                            }
+                        },
+                        triggerFromBottom: '10%',
+                        targetElement: feedContainer,
+                        loader:'',
+                        pagesToScroll: pages
+                    });
+                });
+            });
+        }
     };
 }(jQuery));
 

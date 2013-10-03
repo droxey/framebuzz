@@ -87,7 +87,7 @@
                                         {% if is_my_profile %}
                                             &ldquo;<a href="#" data-name="tagline" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-placement="right" data-title="Edit Tagline">{% if profile_user.get_profile.tagline %}{{ profile_user.get_profile.tagline }}{% else %}Add your FrameBuzz Tagline{% endif %}</a>&rdquo;
                                         {% else %}
-                                            {% if profile_user.get_profile.tagline %}&ldquo;{{ profile_user.get_profile.tagline }}&rdquo;{% endif %}
+                                            {% if profile_user.get_profile.tagline %}&ldquo;{{ profile_user.get_profile.tagline|urlize }}&rdquo;{% endif %}
                                         {% endif %}
                                     </h2>
                                     {% endspaceless %}
@@ -133,7 +133,7 @@
                                     {% else %}
                                         <p class="bio">
                                             {% if profile_user.get_profile.bio %}
-                                                &ldquo;{{ profile_user.get_profile.bio }}&rdquo;
+                                                &ldquo;{{ profile_user.get_profile.bio|urlize }}&rdquo;
                                             {% endif %}
                                         </p>
                                     {% endif %}
@@ -246,7 +246,7 @@
         <script type="text/javascript">
             $(function(){
                 var isMyProfile = '{{ is_my_profile|lower }}' == 'true';
-                var isShare = '{{ is_share|lower }} == true';
+                var isShare = '{{ is_share|lower }}' == 'true';
                 var urls = {
                     'feed': '{% url "profiles-feed" profile_user.username %}',
                     'recommendations': '{% url "recommendations" %}'
