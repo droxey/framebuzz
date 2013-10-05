@@ -37,16 +37,17 @@ def feed(request, username):
     """
         Returns the rendered template(s) used by the newsfeed.
     """
+    user = User.objects.get(username__iexact=username)
+    user_feed, follow_feed, favorite_comment_ids, \
+        video_library_ids, featured_video_ids = [], [], [], [], []
+
     try:
         page = request.GET.get('page', 1)
     except PageNotAnInteger:
         page = 1
 
-    user = User.objects.get(username__iexact=username)
-    user_feed, follow_feed, favorite_comment_ids, \
-        video_library_ids, featured_video_ids = [], [], [], [], []
     verb_filter = request.GET.get('filter', VALID_FEED_VERBS)
-
+    
     if verb_filter != VALID_FEED_VERBS:
         if verb_filter.startswith('follow'):
             verb_filter = 'started following'
@@ -57,29 +58,27 @@ def feed(request, username):
             verb_filter = [f]
 
     if request.user.is_authenticated():
+        follow_feed = user_stream(user)
+
         favorites = Action.objects.favorite_comments_stream(request.user)
         favorite_comment_ids = [int(fav.action_object_object_id)
                                 for fav in favorites]
+        print favorite_comment_ids
 
         user_videos = UserVideo.objects.filter(user=request.user)
         video_library_ids = [uv.video.id for uv in user_videos]
         featured_video_ids = [uv.video.id for uv in user_videos
                               if uv.is_featured]
 
-        if request.user.id == user.id:
-            user_feed = model_stream(user)
-        else:
-            user_feed = user.actor_actions.all()
-    else:
-        user_feed = user.actor_actions.all()
+    user_feed = user.actor_actions.all()
 
     if isinstance(verb_filter, list):
-        if verb_filter == VALID_FEED_VERBS:
-            follow_feed = user_stream(user)
-
         filtered_feed = user_feed.filter(verb__in=verb_filter)
     else:
-        filtered_feed = user_stream(user)   # Following/Followers
+        if request.user.is_authenticated:
+            filtered_feed = []
+        else:
+            filtered_feed = user_stream(user)
 
     adjusted_feed = sorted(
         chain(filtered_feed, follow_feed),

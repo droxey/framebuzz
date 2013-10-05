@@ -455,6 +455,7 @@ div.marketing-content {
 
                             ul.nav-pills {
                                 display: none;
+                                opacity: 0;
                                 border-bottom: none;
                                 float: left;
                                 padding-top: 12px;
@@ -490,7 +491,7 @@ div.marketing-content {
                                 position: relative;
                                 right: 0;
                                 top: 18px;
-                                width: 30px;
+                                width: 25px;
                                 opacity: 1;
                                 z-index: 3;
 
@@ -501,13 +502,15 @@ div.marketing-content {
                             }
 
                             a.add-video { 
-                                right: 6px;
+                                height: 25px;
+                                margin-bottom: 30px;
+                                right: 11px;
                             }
 
                             div.tooltip {
                                 left: 620.5px !important;
                                 padding: 0;
-                                margin-top: -4px;
+                                top: 50px !important;
                                 margin-left: -5px;
 
                                 .tooltip-arrow { top: -5px; }
@@ -515,14 +518,19 @@ div.marketing-content {
 
                             a.toggle-follow {
                                 opacity: 1;
-                                top: 15px;
+                                height: 32px;
+                                top: 18px;
+                                right: 20px;
 
                                 span.icon-stack {
                                     display: block;
                                     position: relative;
                                     width: 32px;
+                                    height: 32px;
+                                    line-height: 32px;
 
                                     i.icon-stack-base {
+                                        color: rgba(0, 0, 0, 0.1);
                                         font-size: 32px;
                                     }
 
@@ -597,6 +605,7 @@ div.marketing-content {
                             ul.grid {
                                 border: none;
                                 width: 678px;
+                                padding-bottom: 36px;
 
                                 li.brick {
                                     display: block;
@@ -791,6 +800,10 @@ div.marketing-content {
                                                                         width: 22px;
                                                                     }
                                                                 }
+
+                                                                div.tooltip.bottom {
+                                                                    margin-top: -4px;
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -830,11 +843,12 @@ div.marketing-content {
                                                             float: right;
                                                             height: 19px;
                                                             outline: 0;
+                                                            margin-left: 10px;
                                                             margin-top: -19px;
                                                             position: static;
                                                             text-align: right;
                                                             text-decoration: none;
-                                                            width: 29px;
+                                                            width: 19px;
 
                                                             i {
                                                                 position: relative;
@@ -848,6 +862,15 @@ div.marketing-content {
                                                             &:hover, &:focus, &:active {
                                                                 text-decoration: none;
                                                             }
+                                                        }
+
+                                                        .tooltip.left {
+                                                            float: none;
+                                                            margin-left: -12px;
+                                                            margin-top: -3px;
+                                                            width: auto;
+
+                                                            .tooltip-arrow { margin-top: -6px; }
                                                         }
                                                     }
                                                 }

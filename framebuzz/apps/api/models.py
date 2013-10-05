@@ -13,6 +13,7 @@ from django.utils.translation import ugettext as _
 from django.utils.html import urlize
 from django.utils.safestring import mark_safe
 
+from actstream.models import actstream_register_model
 from templated_email import send_templated_mail
 from timezone_field import TimeZoneField
 from mptt.models import MPTTModel, TreeForeignKey
@@ -401,3 +402,9 @@ watson.register(MPTTComment.objects.filter(parent=None),
                 CommentSearchAdapter,
                 fields=("comment",),
                 store=("comment", "user__username",))
+
+
+actstream_register_model(MPTTComment)
+actstream_register_model(User)
+actstream_register_model(Video)
+actstream_register_model(UserVideo)

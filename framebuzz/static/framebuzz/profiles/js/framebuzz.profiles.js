@@ -35,20 +35,10 @@ var FrameBuzzProfile = (function($) {
                     'csrfmiddlewaretoken': csrfToken
                 }, function(data, textStatus, jqXHR) {
                     if (data.length == 0) {
-                        var videosUrl = $('ul.nav-tabs a[href="#videos"]').attr('data-url');
-                        $('#videos').load(videosUrl, function(result) {
-                            $('ul.nav-tabs').tab('show');
-                            $('div.tab-pane').removeClass('active');
-                            $('#videos').addClass('active');
+                        $('#add-framebuzz-modal').modal('hide');
 
-                            $('#share').addClass('fadein');
-
-                            $('#add-framebuzz-modal').modal('hide');
-
-                            bindScroll();
-                            triggerMasonry();
-                            initTooltips();
-                        });
+                        var redirectUrl = window.location.href + 'share/' + video_id + '/';
+                        window.location.href = redirectUrl;
                     }
                     else {
                         var container = $('#add-framebuzz-modal div.modal-body');
@@ -252,15 +242,30 @@ var FrameBuzzProfile = (function($) {
         }
 
         $.get(nextPageUrl, function(newElements) {
-            if (filter) {
-                $container.isotope({ filter: _currentFilterClass });
+            var offset = 0;
 
+            if (filter) {
+                if (page == 1) {
+                    offset = $('li' + _currentFilterClass, $container).length;
+                }
+                
+                $container.isotope({ filter: _currentFilterClass });
+                
                 if (_currentFilterClass == '*') { 
+                    $container.isotope('remove', $container.children());
+
                     _currentFilterClass = null;
                 }
             }
 
-            $container.isotope('insert', $(newElements), function() {
+            var newElements = $(newElements);
+            if (offset > 0) {
+                newElements = newElements.slice(offset, (10 - offset));
+            }
+
+            console.log(newElements);
+
+            $container.isotope('insert', newElements, function() {
                 bindCardFunctions();
 
                 if (callback != null) {
@@ -299,7 +304,9 @@ var FrameBuzzProfile = (function($) {
 
         $.get(urls.feed + '?init=true', function(html) {
             if ($(html).find('li.empty').length == 0) {
-                $('ul.nav-pills').show();
+                $('ul.nav-pills').show(function() {
+                    $(this).animate({ opacity: 1.0 }, 500);
+                });
             }
 
             feedContainer.html(html);

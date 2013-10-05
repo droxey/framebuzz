@@ -190,7 +190,7 @@
                                         <i class="icon-minus icon-light"></i>
                                       </span>            
                                     </a>
-                                    <a class="toggle-follow follow-button tooltip" title="Become a Fan" data-placement="right" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>
+                                    <a class="toggle-follow follow-button tooltip" title="Follow" data-placement="bottom" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>
                                       <span class="icon-stack">
                                         <i class="icon-sign-blank icon-stack-base"></i>
                                         <i class="icon-user icon-light"></i>

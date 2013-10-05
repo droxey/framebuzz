@@ -10,9 +10,9 @@
              <span class="corner"></span>
              <img src="{% avatar_url action.actor 110 %}" alt="" height="55" width="55" class="img-circle lazy" />
              {% if action.verb == 'replied to comment' %}
-                <p>&ldquo;{{ action.action_object }}&rdquo;</p>
+                <p>&ldquo;{{ action.action_object.parent.comment }}&rdquo;</p>
              {% else %}
-                <p>&ldquo;{{ action }}&rdquo;</p>
+                <p>&ldquo;{{ action.action_object.comment }}&rdquo;</p>
              {% endif %}
         </div>
     {% endif %}
@@ -42,14 +42,14 @@
     </div>
     <div class="right">
       {% if request.user.is_authenticated %}
-        <a class="video-toggle-button tooltip library{% if video.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username video.video_id %}" title="{% if video.id in video_library_ids %}Added to Posts{% else %}Post this Video{% endif %}" data-placement="bottom">
+        <a class="video-toggle-button tooltip library{% if video.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username video.video_id %}" title="{% if video.id in video_library_ids %}Added to Posts{% else %}Post this Video{% endif %}" data-placement="left">
             {% if video.id in video_library_ids %}
               <i class="icon-minus-sign-alt"></i>
             {% else %}
               <i class="icon-plus-sign-alt"></i>
             {% endif %}
           </a>
-          <a class="video-toggle-button tooltip featured{% if video.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username video.video_id %}" title="{% if video.id in featured_video_ids %}Featured Video{% else %}Feature this Video{% endif %}" data-placement="bottom">
+          <a class="video-toggle-button tooltip featured{% if video.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username video.video_id %}" title="{% if video.id in featured_video_ids %}Featured Video{% else %}Feature this Video{% endif %}" data-placement="left">
             {% if video.id in featured_video_ids %}
               <i class="icon-star"></i>
             {% else %}
@@ -57,9 +57,9 @@
             {% endif %}
             </a>
         {% endif %}
-        {% if action.verb != 'added video to library' and action.action_object_object_id %}
-          <a class="video-toggle-button tooltip favorite{% if action.action_object_object_id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username action.action_object_object_id %}" title="{% if action.action_object_object_id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="bottom">
-            {% if action.action_object_object_id in favorite_comment_ids %}
+        {% if action.verb != 'added video to library' and action.action_object %}
+          <a class="video-toggle-button tooltip favorite{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username action.action_object_object_id %}" title="{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="left">
+            {% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}
               <i class="icon-heart"></i>
             {% else %}
               <i class="icon-heart-empty"></i>
