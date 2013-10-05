@@ -1,21 +1,16 @@
 {% load i18n avatar_tags activity_tags profile_tags %}
 
 <div class="follow">
-  <a class="following" href="{% url 'profiles-home' action.target.username %}">
-    <img src="{% avatar_url action.target 110 %}" alt="" height="30" width="30" class="img-circle" />
-  </a>
-  <span class="quote{% if not action.target.get_profile.bio or not action.target.get_profile.tagline %} username{% endif %}">
-    <a href="{% url 'profiles-home' action.target.username %}">{{ action.target|display_name }}</a>
-    {% if action.target.get_profile.bio or action.target.get_profile.tagline %}
-        <br>
-        <em>
-            {% if action.target.get_profile.tagline %}
-                &ldquo;{{ action.target.get_profile.tagline|truncatechars:"90"|urlize }}&rdquo;
-            {% else %}
-                &ldquo;{{ action.target.get_profile.bio|truncatechars:"90"|urlize }}&rdquo;
-            {% endif %}
-        </em>
-    {% endif %} 
-  </span>
+  {% if action.target.id == profile_user.id %}
+    {% with action.actor as user %}
+      {% include "profiles/snippets/user.html" %}
+    {% endwith %}
+  {% else %}
+    {% if action.actor.id == profile_user.id %}
+      {% with action.target as user %}
+        {% include "profiles/snippets/user.html" %}
+      {% endwith %}
+    {% endif %}
+  {% endif %}
   <span class="posted"><i class="icon-time"></i> {{ action.timestamp|timesince }} {% trans "ago" %}</span>
 </div>

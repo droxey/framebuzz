@@ -1,54 +1,18 @@
 {% load i18n avatar_tags activity_tags profile_tags comments %}
-      
-<li class="clearfix">
-  <div class="user-wrapper clearfix">
-    <a href="{% url 'profiles-home' profile_user.username %}"> 
-      <img src="{% avatar_url follower_comments.user 110 %}" alt="" height="55" width="55" class="img-circle" />
-    </a>
-    <div class="feed-header clearfix">
-      <h2><a href="{% url 'profiles-home' follower_comments.user %}">{{ follower_comments.user|display_name }}</a></h2>
-      <h3>Member Since: {{ follower_comments.user.date_joined|date:"N Y" }}</h3>
-      <p class="bio">{% if follower_comments.user.get_profile.tagline %}&ldquo;{{ follower_comments.user.get_profile.tagline }}&rdquo;{% else %}{% if follower_comments.user.get_profile.bio %}&ldquo;{{ follower_comments.user.get_profile.bio|truncatechars:"180" }}&rdquo;{% endif %}{% endif %}</p>
-      {% if request.user.is_authenticated %}
-        <a class="toggle-follow unfollow-button tooltip" title="Remove from Fans" data-placement="left" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=follower_comments.user.pk %}" {% if not request.user|is_following:follower_comments.user %} style="display:none"{% endif %}>
-          <span class="icon-stack">
-            <i class="icon-sign-blank icon-stack-base"></i>
-            <i class="icon-user icon-light"></i>
-            <i class="icon-minus icon-light"></i>
-          </span>
-        </a>
-        <a class="toggle-follow follow-button tooltip" title="Add to Fans" data-placement="left" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=follower_comments.user.pk %}" {% if request.user|is_following:follower_comments.user %} style="display:none"{% endif %}>
-          <span class="icon-stack">
-            <i class="icon-sign-blank icon-stack-base"></i>
-            <i class="icon-user icon-light"></i>
-            <i class="icon-plus icon-light"></i>
-          </span>
-        </a>
-    {% endif %}
-    </div>
-    {% if follower_comments.comments %}
-    <div class="comments">
-      <ul>
-        {% for comment in follower_comments.comments %}
-        <li class="clearfix">
-          <a href="{% url 'profiles-share' comment.user.username comment.content_object.video_id %}{{ comment.get_player_url }}" role="button" class="modal-button" data-toggle="modal">
-            {% get_comment_count for comment.content_object as comment_count %}
-            <p class="counter">
-              {{ comment_count }}
-              <span class="corner"></span>
-            </p>
-            <img class="video-thumbnail" height="90" width="120" src="{{ comment.content_object.default_thumbnail }}" />
-          </a>
-          <p class="bubble">
-            &ldquo;{{ comment.formatted_comment }}&rdquo;
-            <span class="corner"></span>
-          </p>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-  </div>
-</li>
 
-
+<a class="following" href="{% url 'profiles-home' user.username %}">
+  <img src="{% avatar_url user 110 %}" alt="" height="30" width="30" class="img-circle" />
+</a>
+<span class="quote{% if not user.get_profile.bio or not user.get_profile.tagline %} username{% endif %}">
+  <a href="{% url 'profiles-home' user.username %}">{{ user|display_name }}</a>
+  {% if user.get_profile.bio or user.get_profile.tagline %}
+      <br>
+      <em>
+          {% if user.get_profile.tagline %}
+              &ldquo;{{ user.get_profile.tagline|truncatechars:"90"|urlize }}&rdquo;
+          {% else %}
+              &ldquo;{{ user.get_profile.bio|truncatechars:"90"|urlize }}&rdquo;
+          {% endif %}
+      </em>
+  {% endif %} 
+</span>

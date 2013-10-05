@@ -79,7 +79,6 @@ var FrameBuzzProfile = (function($) {
 
             $.get(url, function(data) {
                 link.toggleClass('active');
-                console.log(link.prev('li'));
             });
 
             return false;
@@ -94,28 +93,25 @@ var FrameBuzzProfile = (function($) {
         });
     }
 
-    function filter(el, filterClass) {
-        $('ul.nav-pills li.active').toggleClass('active');
-        $('a[data-filter="' + filterClass +'"]').parent().toggleClass('active');
-        getPage(1, true, null);
-    }
-
     function bindFilter() {
         $('body').on('click', 'a.filter', function() {
             var el = $(this);
             _currentFilterClass = el.attr('data-filter');
+            _pages = parseInt(el.attr('data-pages'));
 
             if (_isShare) {
-                $('#share').fadeOut('fast', function() {
-                    _currentFilterClass = '.added_video_to_library';
+                _currentFilterClass = '.added_video_to_library';
 
+                $('#share').fadeOut('fast', function() {
                     $('#share').remove();
-                    filter(el, _currentFilterClass);
                 });
             }
-            else {
-                filter(el, _currentFilterClass);
-            }
+
+            $('#feed-list').isotope({ filter: _currentFilterClass });
+            $('ul.nav-pills li.active').removeClass('active');
+            $('a[data-filter="' + _currentFilterClass +'"]').parent().toggleClass('active');
+
+            //getPage(1, true);
 
             return false;
         });
@@ -233,7 +229,7 @@ var FrameBuzzProfile = (function($) {
         initToggleButtons();
     }
 
-    function getPage(page, filter, callback) {
+    function getPage(page, filtering) {
         var $container = $('#feed-list'),
             nextPageUrl = _urls.feed + '?page=' + page;
 
@@ -242,35 +238,14 @@ var FrameBuzzProfile = (function($) {
         }
 
         $.get(nextPageUrl, function(newElements) {
-            var offset = 0;
-
-            if (filter) {
-                if (page == 1) {
-                    offset = $('li' + _currentFilterClass, $container).length;
-                }
-                
-                $container.isotope({ filter: _currentFilterClass });
-                
-                if (_currentFilterClass == '*') { 
-                    $container.isotope('remove', $container.children());
-
+            if (filtering) {
+                if (_currentFilterClass == '*') {
                     _currentFilterClass = null;
                 }
             }
 
-            var newElements = $(newElements);
-            if (offset > 0) {
-                newElements = newElements.slice(offset, (10 - offset));
-            }
-
-            console.log(newElements);
-
-            $container.isotope('insert', newElements, function() {
+            $container.isotope('insert', $(newElements), function() {
                 bindCardFunctions();
-
-                if (callback != null) {
-                    callback();
-                }
             });
         });
     }
@@ -336,12 +311,13 @@ var FrameBuzzProfile = (function($) {
                         handleScroll: function (page, container, doneCallback) {
                             _page = page;
 
-                            if (_currentFilterClass != null) {
+                            var filtering = _currentFilterClass != null && _currentFilterClass != '*';
+                            if (filtering) {
                                 _pages = $('a[data-filter="' + _currentFilterClass +'"]').eq(0).attr('data-pages');
                             }
 
-                            if (_page <= pages) {
-                                getPage(page, filter, doneCallback);
+                            if (_page <= _pages) {
+                                getPage(page, filtering);
                             }
                         },
                         afterPageChanged:function (page, container) {

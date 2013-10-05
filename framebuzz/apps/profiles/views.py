@@ -8,17 +8,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 
-from itertools import chain
-
 from actstream import action
-from actstream.models import Action, followers, following, \
-    model_stream, user_stream
+from actstream.models import Action, followers, following
 from pure_pagination import Paginator, PageNotAnInteger
 from templated_email import send_templated_mail
 
@@ -28,7 +25,7 @@ from framebuzz.apps.api.utils import errors_to_json, get_total_shares
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
-VALID_FEED_VERBS = ['commented on', 'added to favorites',
+VALID_FEED_VERBS = ['commented on', 'added to favorites', 'started following',
                     'replied to comment', 'added video to library']
 ITEMS_PER_PAGES = 10
 
@@ -50,7 +47,7 @@ def feed(request, username):
     
     if verb_filter != VALID_FEED_VERBS:
         if verb_filter.startswith('follow'):
-            verb_filter = 'started following'
+            verb_filter = ['started following']
         elif verb_filter == 'conversations':
             verb_filter = ['commented on', 'replied to comment']
         else:
@@ -58,34 +55,30 @@ def feed(request, username):
             verb_filter = [f]
 
     if request.user.is_authenticated():
-        follow_feed = user_stream(user)
-
         favorites = Action.objects.favorite_comments_stream(request.user)
         favorite_comment_ids = [int(fav.action_object_object_id)
                                 for fav in favorites]
-        print favorite_comment_ids
-
         user_videos = UserVideo.objects.filter(user=request.user)
         video_library_ids = [uv.video.id for uv in user_videos]
         featured_video_ids = [uv.video.id for uv in user_videos
                               if uv.is_featured]
 
-    user_feed = user.actor_actions.all()
+    if request.user.is_authenticated() and user.id == request.user.id:
+        user_following = following(user)
+        following_ids = [u.id for u in user_following]
+        following_ids.append(user.id)
 
-    if isinstance(verb_filter, list):
-        filtered_feed = user_feed.filter(verb__in=verb_filter)
+        feed = Action.objects.filter(
+            Q(verb__in=VALID_FEED_VERBS),
+            Q(action_object_object_id__in=following_ids) |
+            Q(target_object_id__in=following_ids) |
+            Q(actor_object_id__in=following_ids)
+            )
     else:
-        if request.user.is_authenticated:
-            filtered_feed = []
-        else:
-            filtered_feed = user_stream(user)
+        feed = Action.objects.actor(user).filter(verb__in=VALID_FEED_VERBS)
 
-    adjusted_feed = sorted(
-        chain(filtered_feed, follow_feed),
-        key=lambda instance: instance.timestamp,
-        reverse=True)
-
-    p = Paginator(adjusted_feed, ITEMS_PER_PAGES, request=request)
+    sorted_feed = feed.order_by('-timestamp')
+    p = Paginator(sorted_feed, ITEMS_PER_PAGES, request=request)
 
     if page == 1 and request.GET.get('init', None) is not None:
         template = 'profiles/snippets/feed.html'
