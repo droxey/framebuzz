@@ -2,26 +2,30 @@
 
 <div class="video-wrapper">
   <div class="thumb">
-    <a class="thumbnail-link" href="{% if comment.comment %}{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{{ comment.get_player_url }}{% else %}{% url 'profiles-share' profile_user.username comment.content_object.video_id %}{% endif %}">
-      <img class="video-thumbnail lazy" height="182" width="287" src="{{ comment.content_object.large_thumbnail }}" />
+    <a class="thumbnail-link" href="{% url 'profiles-share' profile_user.username video.video_id %}">
+      <img class="video-thumbnail lazy" height="182" width="287" src="{{ video.large_thumbnail }}" />
     </a>
-    {% if comment.comment %}
+    {% if action.verb != 'added video to library' %}
         <div class="comment">
              <span class="corner"></span>
-             <img src="{% avatar_url comment.user 110 %}" alt="" height="55" width="55" class="img-circle lazy" />
-             <p>&ldquo;{{ comment.formatted_comment }}&rdquo;</p>
+             <img src="{% avatar_url action.actor 110 %}" alt="" height="55" width="55" class="img-circle lazy" />
+             {% if action.verb == 'replied to comment' %}
+                <p>&ldquo;{{ action.action_object }}&rdquo;</p>
+             {% else %}
+                <p>&ldquo;{{ action }}&rdquo;</p>
+             {% endif %}
         </div>
     {% endif %}
   </div>
   <div class="video-details">
       <h3>
-        <a href="{% url 'profiles-share' profile_user.username comment.content_object.video_id %}">{{ comment.content_object.title|title|truncatechars:"54" }}</a>
+        <a href="{% url 'profiles-share' profile_user.username video.video_id %}">{{ video.title|title|truncatechars:"54" }}</a>
       </h3>
-      {% if comment.content_object.uservideo_set.all|length > 0 %}
+      {% if video.uservideo_set.all|length > 0 and action.verb == 'added video to library' %}
         <div class="shared">
           <h5>Also playing in these libraries:</h5>
           <ul class="clearfix">
-            {% for uv in comment.content_object.uservideo_set.all %}
+            {% for uv in video.uservideo_set.all %}
             <li class="shown">
               <a class="tooltip" data-placement="bottom" title="{{ uv.user|display_name }}" href="{% url 'profiles-home' uv.user.username %}">
                 <img src="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
@@ -37,32 +41,30 @@
       <span class="posted"><i class="icon-time"></i> {{ action.timestamp|timesince }} {% trans "ago" %}</span>
     </div>
     <div class="right">
-      {% if comment.comment %}
-        {% if request.user.is_authenticated %}
-          <a class="video-toggle-button tooltip library{% if comment.content_object.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in video_library_ids %}Added to Posts{% else %}Post this Video{% endif %}" data-placement="bottom">
-              {% if comment.content_object.id in video_library_ids %}
-                <i class="icon-minus-sign-alt"></i>
-              {% else %}
-                <i class="icon-plus-sign-alt"></i>
-              {% endif %}
+      {% if request.user.is_authenticated %}
+        <a class="video-toggle-button tooltip library{% if video.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username video.video_id %}" title="{% if video.id in video_library_ids %}Added to Posts{% else %}Post this Video{% endif %}" data-placement="bottom">
+            {% if video.id in video_library_ids %}
+              <i class="icon-minus-sign-alt"></i>
+            {% else %}
+              <i class="icon-plus-sign-alt"></i>
+            {% endif %}
+          </a>
+          <a class="video-toggle-button tooltip featured{% if video.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username video.video_id %}" title="{% if video.id in featured_video_ids %}Featured Video{% else %}Feature this Video{% endif %}" data-placement="bottom">
+            {% if video.id in featured_video_ids %}
+              <i class="icon-star"></i>
+            {% else %}
+              <i class="icon-star-empty"></i>
+            {% endif %}
             </a>
-            <a class="video-toggle-button tooltip featured{% if comment.content_object.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username comment.content_object.video_id %}" title="{% if comment.content_object.id in featured_video_ids %}Featured Video{% else %}Feature this Video{% endif %}" data-placement="bottom">
-              {% if comment.content_object.id in featured_video_ids %}
-                <i class="icon-star"></i>
-              {% else %}
-                <i class="icon-star-empty"></i>
-              {% endif %}
-              </a>
-          {% endif %}
-          {% if show_favorite_button %}
-            <a class="video-toggle-button tooltip favorite{% if comment.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username comment.id %}" title="{% if comment.id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="bottom">
-              {% if comment.id in favorite_comment_ids %}
-                <i class="icon-heart"></i>
-              {% else %}
-                <i class="icon-heart-empty"></i>
-              {% endif %}
-            </a>
-          {% endif %}
+        {% endif %}
+        {% if action.verb != 'added video to library' and action.action_object_object_id %}
+          <a class="video-toggle-button tooltip favorite{% if action.action_object_object_id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username action.action_object_object_id %}" title="{% if action.action_object_object_id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="bottom">
+            {% if action.action_object_object_id in favorite_comment_ids %}
+              <i class="icon-heart"></i>
+            {% else %}
+              <i class="icon-heart-empty"></i>
+            {% endif %}
+          </a>
       {% endif %}
     </div>
   </div>

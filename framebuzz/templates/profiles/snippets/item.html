@@ -4,7 +4,7 @@
   {% for action in page_obj.object_list %}
       <li class="brick {% spaceless %}
                         {% if action.verb == 'started following' %}
-                          {% if profile_user.id == action.actor.id %}
+                        {% if profile_user|is_following:action.target %}
                             following
                           {% else %}
                             followers
@@ -23,9 +23,15 @@
               {% if action.verb == 'started following' %}
                 {% include "profiles/snippets/following.html" %}
               {% else %}
-                {% with action.action_object as comment %}
-                  {% include "profiles/snippets/video.html" %}
-                {% endwith %}
+                {% if action.verb == 'added video to library' %}
+                  {% with action.action_object as video %}
+                    {% include "profiles/snippets/video.html" %}
+                  {% endwith %}
+                {% else %}
+                  {% with action.target as video and %}
+                      {% include "profiles/snippets/video.html" %}
+                  {% endwith %}
+                {% endif %}
               {% endif %}
             </div>
         </div>

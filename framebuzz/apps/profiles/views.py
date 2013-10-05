@@ -1,3 +1,4 @@
+import math
 import json
 import random
 
@@ -7,14 +8,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
-from django.db.models import Count, Q
+from django.db.models import Count
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 
+from itertools import chain
+
 from actstream import action
-from actstream.models import Action, followers, following
+from actstream.models import Action, followers, following, \
+    model_stream, user_stream
 from pure_pagination import Paginator, PageNotAnInteger
 from templated_email import send_templated_mail
 
@@ -24,8 +28,9 @@ from framebuzz.apps.api.utils import errors_to_json, get_total_shares
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
-VALID_FEED_VERBS = ['commented on', 'started following', 'added to favorites',
+VALID_FEED_VERBS = ['commented on', 'added to favorites',
                     'replied to comment', 'added video to library']
+ITEMS_PER_PAGES = 10
 
 
 def feed(request, username):
@@ -37,36 +42,51 @@ def feed(request, username):
     except PageNotAnInteger:
         page = 1
 
-    user = None
-    user_feed = None
-
+    user = User.objects.get(username__iexact=username)
+    user_feed, follow_feed, favorite_comment_ids, \
+        video_library_ids, featured_video_ids = [], [], [], [], []
     verb_filter = request.GET.get('filter', VALID_FEED_VERBS)
+
     if verb_filter != VALID_FEED_VERBS:
         if verb_filter.startswith('follow'):
-            verb_filter = ['started following']
+            verb_filter = 'started following'
         elif verb_filter == 'conversations':
             verb_filter = ['commented on', 'replied to comment']
         else:
             f = verb_filter.replace('_', ' ')
             verb_filter = [f]
 
-    if request.user.is_authenticated() and request.user.username == username:
-        user = request.user
+    if request.user.is_authenticated():
+        favorites = Action.objects.favorite_comments_stream(request.user)
+        favorite_comment_ids = [int(fav.action_object_object_id)
+                                for fav in favorites]
 
-        user_following = following(user)
-        following_ids = [f.id for f in user_following]
-        following_ids.append(user.id)
+        user_videos = UserVideo.objects.filter(user=request.user)
+        video_library_ids = [uv.video.id for uv in user_videos]
+        featured_video_ids = [uv.video.id for uv in user_videos
+                              if uv.is_featured]
 
-        user_feed = Action.objects.filter(Q(verb__in=verb_filter),
-                                          Q(action_object_object_id__in=following_ids) |
-                                          Q(target_object_id__in=following_ids) |
-                                          Q(actor_object_id__in=following_ids))
+        if request.user.id == user.id:
+            user_feed = model_stream(user)
+        else:
+            user_feed = user.actor_actions.all()
     else:
-        user = User.objects.get(username__iexact=username)
-        user_feed = Action.objects.filter(verb__in=verb_filter,
-                                          actor_object_id=user.id)
+        user_feed = user.actor_actions.all()
 
-    p = Paginator(user_feed, 10, request=request)
+    if isinstance(verb_filter, list):
+        if verb_filter == VALID_FEED_VERBS:
+            follow_feed = user_stream(user)
+
+        filtered_feed = user_feed.filter(verb__in=verb_filter)
+    else:
+        filtered_feed = user_stream(user)   # Following/Followers
+
+    adjusted_feed = sorted(
+        chain(filtered_feed, follow_feed),
+        key=lambda instance: instance.timestamp,
+        reverse=True)
+
+    p = Paginator(adjusted_feed, ITEMS_PER_PAGES, request=request)
 
     if page == 1 and request.GET.get('init', None) is not None:
         template = 'profiles/snippets/feed.html'
@@ -76,6 +96,9 @@ def feed(request, username):
     return render_to_response(template, {
         'profile_user': user,
         'page_obj': p.page(page),
+        'video_library_ids': video_library_ids,
+        'featured_video_ids': featured_video_ids,
+        'favorite_comment_ids': favorite_comment_ids
     }, context_instance=RequestContext(request))
 
 
@@ -160,6 +183,16 @@ def home(request, username):
     ct = ContentType.objects.get(model='user')
     is_my_profile = request.user.is_authenticated() and \
         request.user.id == user.id
+
+    page_counts = {
+        'favorites': int(math.ceil(len(profile_favorites) / ITEMS_PER_PAGES)),
+        'conversations':
+            int(math.ceil(len(profile_conversations) / ITEMS_PER_PAGES)),
+        'followers': int(math.ceil(len(profile_followers) / ITEMS_PER_PAGES)),
+        'following': int(math.ceil(len(profile_following) / ITEMS_PER_PAGES)),
+        'videos': int(math.ceil(len(profile_library) / ITEMS_PER_PAGES)),
+    }
+
     context = {
         'profile_favorites': profile_favorites,
         'profile_conversations': profile_conversations,
@@ -169,6 +202,7 @@ def home(request, username):
         'profile_library': profile_library,
         'user_content_type': ct,
         'is_my_profile': is_my_profile,
+        'page_counts': page_counts,
     }
 
     share_context = request.session.get('share', None)

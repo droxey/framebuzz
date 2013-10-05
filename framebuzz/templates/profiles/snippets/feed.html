@@ -5,8 +5,10 @@
   {% if page_obj.object_list|length > 0 %}
     {% include "profiles/snippets/item.html" %}
   {% else %}
-    <li class="empty shown">
-        <p>No activity yet!</p>
+    <li class="brick empty">
+        <div class="action-wrapper">
+            <p>No activity yet!</p>
+        </div>
     </li>
   {% endif %}
 </ul>

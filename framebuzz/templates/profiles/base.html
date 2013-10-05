@@ -82,46 +82,44 @@
                                 </h1>
                                 {% endspaceless %}
                                 {% if profile_user.get_profile %}
-                                    {% spaceless %}
-                                    <h2>
+                                    {% spaceless %}                                
                                         {% if is_my_profile %}
-                                            &ldquo;<a href="#" data-name="tagline" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-placement="right" data-title="Edit Tagline">{% if profile_user.get_profile.tagline %}{{ profile_user.get_profile.tagline }}{% else %}Add your FrameBuzz Tagline{% endif %}</a>&rdquo;
+                                            <h2><a href="#" data-name="tagline" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-placement="right" data-title="Edit Tagline">{% if profile_user.get_profile.tagline %}{{ profile_user.get_profile.tagline }}{% else %}Add your FrameBuzz Tagline{% endif %}</a></h2>
                                         {% else %}
-                                            {% if profile_user.get_profile.tagline %}&ldquo;{{ profile_user.get_profile.tagline|urlize }}&rdquo;{% endif %}
+                                            {% if profile_user.get_profile.tagline %}<h2>{{ profile_user.get_profile.tagline|urlize }}</h2>{% endif %}
                                         {% endif %}
-                                    </h2>
                                     {% endspaceless %}
                                     <ul class="nav nav-tabs clearfix">
                                         <li class="videos">
-                                            <a class="filter" data-filter=".added_video_to_library" href="#">
+                                            <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">
                                                 <em>{{ profile_library|length }}</em>
                                                 <br>
                                                 Post{{ profile_library|length|pluralize }}
                                             </a>
                                         </li>
                                         <li class="conversations">
-                                            <a class="filter" data-filter=".conversations" href="#">
+                                            <a class="filter" data-filter=".conversations" href="#" data-pages="{{ page_counts.conversations }}">
                                                 <em>{{ profile_conversations|length }}</em>
                                                 <br>
                                                 Comment{{ profile_conversations|length|pluralize }}
                                             </a>
                                         </li>
                                         <li class="favorites">
-                                            <a class="filter" data-filter=".added_to_favorites" href="#">
+                                            <a class="filter" data-filter=".added_to_favorites" href="#" data-pages="{{ page_counts.favorites }}">
                                                 <em>{{ profile_favorites|length }}</em>
                                                 <br>
                                                 Favorite{{ profile_favorites|length|pluralize }}
                                             </a>
                                         </li>
                                         <li class="followers">
-                                            <a class="filter" data-filter=".followers" href="#">
+                                            <a class="filter" data-filter=".followers" href="#" data-pages="{{ page_counts.followers }}">
                                                 <em>{{ profile_followers|length }}</em>
                                                 <br>
                                                 Follower{{ profile_followers|length|pluralize }}
                                             </a>
                                         </li>
                                         <li class="following">
-                                            <a class="filter" data-filter=".following" href="#">
+                                            <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">
                                                 <em>{{ profile_following|length }}</em>
                                                 <br>
                                                 Following
@@ -129,11 +127,11 @@
                                         </li>
                                     </ul>   
                                     {% if is_my_profile %}                                            
-                                        <p class="bio">&ldquo;<a href="#" data-name="bio" class="editable" data-type="textarea" data-pk="{{ profile_user.get_profile.id }}" data-url="{% url 'profiles-edit' profile_user.username %}" data-title="Edit Bio" data-placement="bottom">{% if profile_user.get_profile.bio and profile_user.get_profile.bio|length > 0 %}{{ profile_user.get_profile.bio }}{% else %}Add a description of who you are and the things you love.{% endif %}</a>&rdquo;</p>
+                                        <p class="bio"><a href="#" data-name="bio" class="editable" data-type="textarea" data-pk="{{ profile_user.get_profile.id }}" data-url="{% url 'profiles-edit' profile_user.username %}" data-title="Edit Bio" data-placement="bottom">{% if profile_user.get_profile.bio and profile_user.get_profile.bio|length > 0 %}{{ profile_user.get_profile.bio }}{% else %}Add a description of who you are and the things you love.{% endif %}</a></p>
                                     {% else %}
                                         <p class="bio">
                                             {% if profile_user.get_profile.bio %}
-                                                &ldquo;{{ profile_user.get_profile.bio|urlize }}&rdquo;
+                                                {{ profile_user.get_profile.bio|urlize }}
                                             {% endif %}
                                         </p>
                                     {% endif %}
@@ -158,19 +156,19 @@
                                     <a class="filter" data-filter="*" href="#">Latest</a>
                                 </li>
                                 <li{% if is_share %} class="active"{% endif %}>
-                                    <a class="filter" data-filter=".added_video_to_library" href="#">Posts</a>
+                                    <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">Posts</a>
                                 </li>
                                 <li>
-                                    <a class="filter" data-filter=".conversations" href="#">Comments</a>
+                                    <a class="filter" data-filter=".conversations" href="#" data-pages="{{ page_counts.conversations }}">Comments</a>
                                 </li>
                                 <li>
-                                    <a class="filter" data-filter=".added_to_favorites" href="#">Favorites</a>
+                                    <a class="filter" data-filter=".added_to_favorites" href="#" data-pages="{{ page_counts.favorites }}">Favorites</a>
                                 </li>
                                 <li>
-                                    <a class="filter" data-filter=".followers" href="#">Followers</a>
+                                    <a class="filter" data-filter=".followers" href="#" data-pages="{{ page_counts.followers }}">Followers</a>
                                 </li>
                                 <li>
-                                    <a class="filter" data-filter=".following" href="#">Following</a>
+                                    <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">Following</a>
                                 </li>                                                                        
                             </ul>
                             {% if is_my_profile %}

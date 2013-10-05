@@ -2,8 +2,8 @@ var FrameBuzzProfile = (function($) {
     var _isShare = false,
         _isMyProfile = false,
         _page = 1,
+        _pages = 1,
         _urls = {},
-        _masonry = null,
         _currentFilterClass = null;
 
     function bindAddVideoModal() {
@@ -107,7 +107,7 @@ var FrameBuzzProfile = (function($) {
     function filter(el, filterClass) {
         $('ul.nav-pills li.active').toggleClass('active');
         $('a[data-filter="' + filterClass +'"]').parent().toggleClass('active');
-        getPage(1, true);
+        getPage(1, true, null);
     }
 
     function bindFilter() {
@@ -117,6 +117,8 @@ var FrameBuzzProfile = (function($) {
 
             if (_isShare) {
                 $('#share').fadeOut('fast', function() {
+                    _currentFilterClass = '.added_video_to_library';
+
                     $('#share').remove();
                     filter(el, _currentFilterClass);
                 });
@@ -241,18 +243,13 @@ var FrameBuzzProfile = (function($) {
         initToggleButtons();
     }
 
-    function getPage(page, filter) {
+    function getPage(page, filter, callback) {
         var $container = $('#feed-list'),
-            nextPageUrl = _urls.feed;
+            nextPageUrl = _urls.feed + '?page=' + page;
 
-        if (_currentFilterClass != null) {
-            nextPageUrl = nextPageUrl + '?page=1&filter=' + _currentFilterClass.replace('.', '');
+        if (_currentFilterClass != null && _currentFilterClass != '*') {
+            nextPageUrl = nextPageUrl + '&filter=' + _currentFilterClass.replace('.', '');
         }
-        else {
-            nextPageUrl = nextPageUrl + '?page=' + page;
-        }
-
-        console.log(nextPageUrl);
 
         $.get(nextPageUrl, function(newElements) {
             if (filter) {
@@ -265,6 +262,10 @@ var FrameBuzzProfile = (function($) {
 
             $container.isotope('insert', $(newElements), function() {
                 bindCardFunctions();
+
+                if (callback != null) {
+                    callback();
+                }
             });
         });
     }
@@ -297,10 +298,14 @@ var FrameBuzzProfile = (function($) {
         var recommendationsContainer = $('div.recommendations > div.ajax');
 
         $.get(urls.feed + '?init=true', function(html) {
+            if (!$(html).find('li.empty')) {
+                $('ul.nav-pills').show();
+            }
+
             feedContainer.html(html);
 
             var $container = $('#feed-list'),
-                pages = parseInt($container.attr('data-total-pages'));
+                _pages = parseInt($container.attr('data-total-pages'));
 
             $.when($container.isotope({
                 itemSelector : 'li.brick',
@@ -313,18 +318,28 @@ var FrameBuzzProfile = (function($) {
                 bindCardFunctions();
 
                     $(window).paged_scroll({
-                        handleScroll: function (page, container, doneCallback) {
-                            _page = page + 1;
-                            var filter = _currentFilterClass != null;
+                        startPage: 1,
+                        triggerFromBottom: '10%',
+                        targetElement: $container,
+                        loader:'<div class="spin"><i class="icon-spinner icon-spin icon-large"></i></div>',
+                        pagesToScroll: _pages,
+                        beforePageChanged:function (page, container) {
 
-                            if (page <= pages) {
-                                getPage(page, filter);
+                        },
+                        handleScroll: function (page, container, doneCallback) {
+                            _page = page;
+
+                            if (_currentFilterClass != null) {
+                                _pages = $('a[data-filter="' + _currentFilterClass +'"]').eq(0).attr('data-pages');
+                            }
+
+                            if (_page <= pages) {
+                                getPage(page, filter, doneCallback);
                             }
                         },
-                        triggerFromBottom: '10%',
-                        targetElement: feedContainer,
-                        loader:'',
-                        pagesToScroll: pages
+                        afterPageChanged:function (page, container) {
+
+                        }
                     });
                 });
             });
