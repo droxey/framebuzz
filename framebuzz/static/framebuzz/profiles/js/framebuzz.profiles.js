@@ -298,7 +298,7 @@ var FrameBuzzProfile = (function($) {
         var recommendationsContainer = $('div.recommendations > div.ajax');
 
         $.get(urls.feed + '?init=true', function(html) {
-            if (!$(html).find('li.empty')) {
+            if ($(html).find('li.empty').length == 0) {
                 $('ul.nav-pills').show();
             }
 

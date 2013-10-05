@@ -84,7 +84,7 @@
                                 {% if profile_user.get_profile %}
                                     {% spaceless %}                                
                                         {% if is_my_profile %}
-                                            <h2><a href="#" data-name="tagline" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-placement="right" data-title="Edit Tagline">{% if profile_user.get_profile.tagline %}{{ profile_user.get_profile.tagline }}{% else %}Add your FrameBuzz Tagline{% endif %}</a></h2>
+                                            <h2><a href="#" data-name="tagline" class="editable" data-type="textarea" data-pk="{{ request.user.get_profile.id }}" data-url="{% url 'profiles-edit' request.user.username %}" data-placement="right" data-title="Edit Tagline">{% if profile_user.get_profile.tagline %}{{ profile_user.get_profile.tagline }}{% else %}Click to add your tagline{% endif %}</a></h2>
                                         {% else %}
                                             {% if profile_user.get_profile.tagline %}<h2>{{ profile_user.get_profile.tagline|urlize }}</h2>{% endif %}
                                         {% endif %}
@@ -127,7 +127,7 @@
                                         </li>
                                     </ul>   
                                     {% if is_my_profile %}                                            
-                                        <p class="bio"><a href="#" data-name="bio" class="editable" data-type="textarea" data-pk="{{ profile_user.get_profile.id }}" data-url="{% url 'profiles-edit' profile_user.username %}" data-title="Edit Bio" data-placement="bottom">{% if profile_user.get_profile.bio and profile_user.get_profile.bio|length > 0 %}{{ profile_user.get_profile.bio }}{% else %}Add a description of who you are and the things you love.{% endif %}</a></p>
+                                        <p class="bio"><a href="#" data-name="bio" class="editable" data-type="textarea" data-pk="{{ profile_user.get_profile.id }}" data-url="{% url 'profiles-edit' profile_user.username %}" data-title="Edit Bio" data-placement="bottom">{% if profile_user.get_profile.bio and profile_user.get_profile.bio|length > 0 %}{{ profile_user.get_profile.bio }}{% else %}Click to add a description of who you are and the things you love.{% endif %}</a></p>
                                     {% else %}
                                         <p class="bio">
                                             {% if profile_user.get_profile.bio %}

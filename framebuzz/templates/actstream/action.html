@@ -5,7 +5,7 @@
 {% elif action.verb == 'added to favorites' %}
     <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> <i class="icon-heart"></i> this comment:
 {% elif action.verb == 'added video to library' %}
-    <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> <i class="icon-add-alt"></i> this video:
+    <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> <i class="icon-plus-sign-alt"></i> this video:
 {% else %}
     <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> started following <a href="{% url 'profiles-home' action.target.username %}">{{ action.target|display_name }}</a>:
 {% endif %}
