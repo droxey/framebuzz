@@ -4,7 +4,15 @@ var FrameBuzzProfile = (function($) {
         _page = 1,
         _pages = 1,
         _urls = {},
-        _currentFilterClass = null;
+        _currentFilterClass = null,
+        _endOfPageMessages = {
+            'latest': '', 
+            'added_video_to_library': '',
+            'conversations': '',
+            'favorites': '',
+            'following': '',
+            'followers': ''
+        };
 
     function bindAddVideoModal() {
         $('body').on('hide', '#add-framebuzz-modal', function () {
@@ -326,7 +334,7 @@ var FrameBuzzProfile = (function($) {
                         beforePageChanged:function (page, container) {
 
                         },
-                        handleScroll: function (page, container, doneCallback) {
+                        handleScroll: function(page, container, doneCallback) {
                             _page = page;
 
                             var filtering = _currentFilterClass != null && _currentFilterClass != '*';
@@ -337,12 +345,12 @@ var FrameBuzzProfile = (function($) {
                             if (_page <= _pages) {
                                 getPage(page, filtering);
                             }
-                            else {
-                                console.log('end of page');
-                            }
                         },
-                        afterPageChanged:function (page, container) {
-
+                        afterPageChanged: function(page, container) {
+                            if (page == _pages) {
+                                var emptyBrick = $('<li class="brick empty" />');
+                                var messageContainer = $('<div class="action-wrapper" />');
+                            }
                         }
                     });
                 });

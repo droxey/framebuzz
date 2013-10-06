@@ -75,7 +75,7 @@
                             <i class="icon-cog"></i> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url 'profiles-home' request.user.username %}">{{ request.user.username|lower }}'s Profile</a></li>
+                            <li><a href="{% url 'profiles-home' request.user.username %}">View Profile</a></li>
                             {% if accounts|length == 0 %}<li><a href="{% url 'account_change_password' %}">Change Password</a></li>{% endif %}
                             <li><a href="{% url 'account_logout' %}">Log Out</a></li>
                         </ul>

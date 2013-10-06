@@ -26,7 +26,8 @@ from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
 VALID_FEED_VERBS = ['commented on', 'added to favorites', 'started following',
-                    'replied to comment', 'added video to library']
+                    'replied to comment', 'added video to library',
+                    'joined framebuzz']
 ITEMS_PER_PAGES = 10
 
 
@@ -35,6 +36,9 @@ def feed(request, username):
         Returns the rendered template(s) used by the newsfeed.
     """
     user = User.objects.get(username__iexact=username)
+    user_following = following(user)
+    following_ids = [u.id for u in user_following]
+
     user_feed, follow_feed, favorite_comment_ids, \
         video_library_ids, featured_video_ids = [], [], [], [], []
 
@@ -64,18 +68,21 @@ def feed(request, username):
                               if uv.is_featured]
 
     if request.user.is_authenticated() and user.id == request.user.id:
-        user_following = following(user)
-        following_ids = [u.id for u in user_following]
         following_ids.append(user.id)
-
+        
         feed = Action.objects.filter(
             Q(verb__in=verb_filter),
-            Q(action_object_object_id__in=following_ids) |
-            Q(target_object_id__in=following_ids) |
-            Q(actor_object_id__in=following_ids)
+            Q(actor_object_id__in=following_ids) | Q(
+                Q(target_object_id__in=following_ids) &
+                Q(verb='started following'))
             )
     else:
-        feed = Action.objects.actor(user).filter(verb__in=verb_filter)
+        feed = Action.objects.filter(
+            Q(verb__in=verb_filter),
+            Q(actor_object_id=user.id) | Q(
+                Q(target_object_id__in=following_ids) &
+                Q(verb='started following'))
+            )
 
     sorted_feed = feed.order_by('-timestamp')
     p = Paginator(sorted_feed, ITEMS_PER_PAGES, request=request)

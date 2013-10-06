@@ -1,4 +1,7 @@
+import os
+import hashlib
 import watson
+
 from datetime import datetime
 
 from django.conf import settings
@@ -8,12 +11,16 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.models import Comment, CommentFlag
 from django.db import models
 from django.db.models.signals import post_save
+from django.utils.encoding import force_bytes
 from django.utils.hashcompat import md5_constructor
 from django.utils.translation import ugettext as _
 from django.utils.html import urlize
 from django.utils.safestring import mark_safe
 
+from actstream import action
 from actstream.models import actstream_register_model
+from actstream.actions import follow
+from avatar.util import get_username
 from templated_email import send_templated_mail
 from timezone_field import TimeZoneField
 from mptt.models import MPTTModel, TreeForeignKey
@@ -27,6 +34,27 @@ TIMELINE_BLOCKS = 32
 SIGNIFICANCE_FACTOR = 20.0
 
 
+def bkg_file_path(instance=None, filename=None, size=None, ext=None):
+    tmppath = [settings.BACKGROUND_STORAGE_DIR]
+
+    tmp = hashlib.md5(get_username(instance.user)).hexdigest()
+    tmppath.extend([tmp[0], tmp[1], get_username(instance.user)])
+
+    if not filename:
+        # Filename already stored in database
+        filename = instance.background.name
+        if ext:
+            (root, oldext) = os.path.splitext(filename)
+            filename = root + "." + ext
+    else:
+        (root, ext) = os.path.splitext(filename)
+        filename = hashlib.md5(force_bytes(filename)).hexdigest()
+        filename = filename + ext
+    
+    tmppath.append(os.path.basename(filename))
+    return os.path.join(*tmppath)
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     bio = models.CharField(max_length=500, blank=True, null=True)
@@ -38,6 +66,9 @@ class UserProfile(models.Model):
     tagline = models.CharField(max_length=180, null=True, blank=True)
     display_name = models.CharField(max_length=120, null=True, blank=True)
     has_commented = models.BooleanField(default=False)
+    background = models.ImageField(max_length=1024,
+                                   upload_to=bkg_file_path,
+                                   blank=True, null=True)
 
     class Meta:
         verbose_name = 'User Profile'
@@ -103,6 +134,16 @@ def create_user_profile(sender, instance, created, **kwargs):
         comment_flag_ct = ContentType.objects.get_for_model(CommentFlag)
         comment_flag_permissions = Permission.objects.filter(
             content_type=comment_flag_ct)
+
+        action.send(instance, verb='joined framebuzz')
+
+        try:
+            # Start following framebuzz, and framebuzz follows you.
+            fbz_user = User.objects.get(username__iexact='framebuzz')
+            follow(fbz_user, instance, actor_only=False)
+        except User.DoesNotExist:
+            # No framebuzz user, probably on a dev machine.
+            pass
 
         for perm in comment_flag_permissions:
             profile.user.user_permissions.add(perm.id)

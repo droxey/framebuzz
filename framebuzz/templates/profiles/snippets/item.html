@@ -22,6 +22,8 @@
             <div class="entity">
               {% if action.verb == 'started following' %}
                 {% include "profiles/snippets/following.html" %}
+              {% elif action.verb == 'joined framebuzz' %}
+                {% include "profiles/snippets/joined.html" %}
               {% else %}
                 {% if action.verb == 'added video to library' %}
                   {% with action.action_object as video %}
