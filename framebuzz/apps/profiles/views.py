@@ -69,13 +69,13 @@ def feed(request, username):
         following_ids.append(user.id)
 
         feed = Action.objects.filter(
-            Q(verb__in=VALID_FEED_VERBS),
+            Q(verb__in=verb_filter),
             Q(action_object_object_id__in=following_ids) |
             Q(target_object_id__in=following_ids) |
             Q(actor_object_id__in=following_ids)
             )
     else:
-        feed = Action.objects.actor(user).filter(verb__in=VALID_FEED_VERBS)
+        feed = Action.objects.actor(user).filter(verb__in=verb_filter)
 
     sorted_feed = feed.order_by('-timestamp')
     p = Paginator(sorted_feed, ITEMS_PER_PAGES, request=request)

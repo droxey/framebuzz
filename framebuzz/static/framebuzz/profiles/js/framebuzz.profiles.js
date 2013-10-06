@@ -111,7 +111,7 @@ var FrameBuzzProfile = (function($) {
             $('ul.nav-pills li.active').removeClass('active');
             $('a[data-filter="' + _currentFilterClass +'"]').parent().toggleClass('active');
 
-            //getPage(1, true);
+            getPage(1, true);
 
             return false;
         });
@@ -229,6 +229,12 @@ var FrameBuzzProfile = (function($) {
         initToggleButtons();
     }
 
+    function insertCards(container, elements) {
+        container.isotope('insert', elements, function() {
+            bindCardFunctions();
+        });
+    }
+
     function getPage(page, filtering) {
         var $container = $('#feed-list'),
             nextPageUrl = _urls.feed + '?page=' + page;
@@ -238,15 +244,27 @@ var FrameBuzzProfile = (function($) {
         }
 
         $.get(nextPageUrl, function(newElements) {
-            if (filtering) {
+            var $elements = $(newElements);
+
+            if (filtering && page == 1) {
+                var oldItemsCount = $('li' + _currentFilterClass, $container).size();
+                if (oldItemsCount == 0) {
+                    insertCards($container, $elements);
+                }
+                else {
+                    var newItemsCount = $elements.size();
+                    var newElementsSlice = $elements.slice(oldItemsCount, (newItemsCount - oldItemsCount));
+
+                    insertCards($container, newElementsSlice);
+                }
+
                 if (_currentFilterClass == '*') {
                     _currentFilterClass = null;
                 }
             }
-
-            $container.isotope('insert', $(newElements), function() {
-                bindCardFunctions();
-            });
+            else {
+                insertCards($container, $elements);
+            }
         });
     }
 
@@ -318,6 +336,9 @@ var FrameBuzzProfile = (function($) {
 
                             if (_page <= _pages) {
                                 getPage(page, filtering);
+                            }
+                            else {
+                                console.log('end of page');
                             }
                         },
                         afterPageChanged:function (page, container) {
