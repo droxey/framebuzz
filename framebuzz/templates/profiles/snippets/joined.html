@@ -1,5 +1,9 @@
 {% load i18n avatar_tags activity_tags profile_tags %}
 
 <div class="joined">
+  <div class="days clearfix">
+    <i class="icon-trophy pull-left"></i>
+    <span>Buzzing since {{ action.actor.date_joined|date:"F jS, Y" }}!</span>
+  </div>
   <span class="posted"><i class="icon-time"></i> {{ action.timestamp|timesince }} {% trans "ago" %}</span>
 </div>
