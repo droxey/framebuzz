@@ -275,7 +275,10 @@ var FrameBuzzProfile = (function($) {
     }
 
     function lazyLoadImages() {
-        $("img.lazy").lazyload({ effect : "fadeIn" });
+        $("img.lazy").lazyload({ 
+            effect: "fadeIn",
+            event: 'scroll trigger-lazy-load'
+        });
     }
 
     return {
@@ -286,6 +289,7 @@ var FrameBuzzProfile = (function($) {
 
         bindFilter();
         lazyLoadImages();
+        $(document).trigger('trigger-lazy-load');
 
         // Init isotope and infinite scroll.
         var feedContainer = $('#feed');
