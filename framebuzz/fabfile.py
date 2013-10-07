@@ -555,23 +555,6 @@ def remove_old_activities():
                "comments_with_no_video_target.delete();")
 
 
-@task
-@log_call
-def update_avatars():
-    with project():
-        from avatar.models import Avatar
-        from django.contrib.auth.models import User
-        AUTO_GENERATE_AVATAR_SIZES = (354, 110, 66, 58, 40,)
-
-        avatars = Avatar.objects.all().values('user__id')
-        users_avs = [a['user__id'] for a in avatars]
-        users_no_avs = User.objects.exclude(id__in=users_avs)
-
-        for user in users_no_avs:
-            if user.get_profile():
-                user.get_profile().generate_default_avatar()
-
-
 def sshagent_run(cmd):
     """
     Helper function.
