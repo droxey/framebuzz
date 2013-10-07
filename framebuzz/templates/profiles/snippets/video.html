@@ -55,16 +55,16 @@
             {% else %}
               <i class="icon-star-empty"></i>
             {% endif %}
+            </a>      
+          {% if action.verb != 'added video to library' and action.action_object %}
+            <a class="video-toggle-button tooltip favorite{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username action.action_object_object_id %}" title="{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="left">
+              {% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}
+                <i class="icon-heart"></i>
+              {% else %}
+                <i class="icon-heart-empty"></i>
+              {% endif %}
             </a>
         {% endif %}
-        {% if action.verb != 'added video to library' and action.action_object %}
-          <a class="video-toggle-button tooltip favorite{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username action.action_object_object_id %}" title="{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="left">
-            {% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}
-              <i class="icon-heart"></i>
-            {% else %}
-              <i class="icon-heart-empty"></i>
-            {% endif %}
-          </a>
       {% endif %}
     </div>
   </div>
