@@ -80,7 +80,7 @@ def feed(request, username):
         feed = Action.objects.filter(
             Q(verb__in=verb_filter),
             Q(actor_object_id=user.id) | Q(
-                Q(target_object_id__in=following_ids) &
+                Q(target_object_id=user.id) &
                 Q(verb='started following'))
             )
 
