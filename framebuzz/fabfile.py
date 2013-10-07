@@ -426,6 +426,11 @@ def regenerate_avatars():
 
 @task
 @log_call
+def cleanup_actions():
+    manage('cleanup_actions')
+
+@task
+@log_call
 def update_video_urls():
     with project():
         manage('update_video_urls')
@@ -543,16 +548,7 @@ def all():
                "site.domain = '" + env.live_host + "';"
                "site.save();")
 
-        manage("createsuperuser");
-
-
-@task
-@log_call
-def remove_old_activities():
-    with project():
-        python("from actstream.models import Action;"
-               "comments_with_no_video_target = Action.objects.filter(verb='commented on', target_object_id=None);"
-               "comments_with_no_video_target.delete();")
+        manage("createsuperuser")
 
 
 def sshagent_run(cmd):
