@@ -29,8 +29,11 @@
 {% block page_css %}
     {% compress css %}
         <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/iconic.css' %}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/bootstrap-editable.css' %}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/flat-buttons.css' %}" type="text/css" media="screen" />
+        {% if is_my_profile %}
+            <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/bootstrap-editable.css' %}" type="text/css" media="screen" />
+            <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/flat-buttons.css' %}" type="text/css" media="screen" />
+            <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/modal-effects.css' %}" type="text/css" media="screen" />
+        {% endif %}
         <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" type="text/css" media="screen" />
     {% endcompress %}
     {% block extra_css %}{% endblock %}
@@ -43,6 +46,9 @@
                 <div id="profile-container" class="clearfix">                        
                     <nav id="profile-sections" class="span4{% if is_my_profile %} edit{% endif %}">
                         <div class="user-info clearfix">
+                            {% if is_my_profile %}
+                                <a data-modal="customize-modal" data-role="button" class="customize md-trigger" href="{% url 'avatar_add' %}"><i class="icon-cogs"></i></a>
+                            {% endif %}
                             <a href="{% url 'profiles-home' profile_user.username %}" class="avatar filter" data-filter="*">
                                 <img src="{% avatar_url profile_user 265 %}" alt="" height="177" width="177" class="img-circle" />
                             </a>
@@ -150,10 +156,17 @@
                         </div>
                     </nav>
                     <div class="tab-content span7">
+                        {% if is_my_profile %}
+                            <div id="add-video">
+                                <span class="corner"></span>
+                                {% include "profiles/snippets/add_video.html" %}
+                            </div>
+                        {% endif %}
                         <nav class="clearfix">
                             <ul class="nav nav-pills clearfix">
+                                <li class="filter"><i class="icon-filter"></i></li>
                                 <li class="start{% if not is_share %} active{% endif %}">
-                                    <a class="filter" data-filter="*" href="#">Latest</a>
+                                    <a class="filter latest" data-filter="*" href="#">Latest</a>
                                 </li>
                                 <li{% if is_share %} class="active"{% endif %}>
                                     <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">Posts</a>
@@ -171,17 +184,7 @@
                                     <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">Following</a>
                                 </li>                                                                        
                             </ul>
-                            {% if is_my_profile %}
-                                <a data-target="#add-framebuzz-modal" role="button" class="modal-button add-video tooltip" data-toggle="modal" class="add-video" title="Post Video" data-placement="bottom" href="{% url 'profiles-add-video' profile_user %}"><i class="icon-plus-sign-alt"></i></a>
-                                {% comment %}
-                                <a data-target="#upload-modal" data-placement="bottom" title="Personalize My Profile" data-role="button" class="fileupload tooltip" data-toggle="modal" href="{% url 'avatar_change' %}">
-                                  <span class="icon-stack">
-                                    <i class="icon-user"></i>
-                                    <i class="icon-cogs"></i>
-                                  </span>   
-                                </a>
-                                {% endcomment %}
-                            {% else %}
+                            {% if not is_my_profile %}
                                 {% if request.user.is_authenticated %}
                                     <a class="toggle-follow unfollow-button tooltip" title="Following" data-placement="bottom" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>
                                       <span class="icon-stack">
@@ -213,20 +216,35 @@
             </div>
         </div>
     </div>
-    <div id="upload-modal" class="modal hide fade" tabindex="-1end" role="dialog" aria-hidden="true">
-        <div class="modal-header graphite-flat-button">
-            Customize Profile
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+{% endblock %}
+
+{% block modals %}
+    <div class="md-modal md-effect-1" id="customize-modal">
+        <div class="md-content">
+            <h3>Customize Profile <button class="md-close"><i class="icon-remove"></i></button></h3>
+            <nav>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#add" data-url="{% url 'avatar_add' %}">Upload Avatar</a>
+                    </li>
+                    {% comment %}
+                    <li>
+                        <a href="#change" data-url="{% url 'avatar_change' %}">Change Avatar</a>
+                    </li>
+                    <li>
+                        <a href="#background">Change Background</a>
+                    </li>
+                    {% endcomment %}
+                </ul>
+            </nav>
+            <div class="tab-content">
+                <div id="add" class="tab-pane active"></div>
+                <div id="change" class="tab-pane"></div>
+                <div id="background" class="tab-pane"></div>
+            </div>
         </div>
-        <div class="modal-body"></div>
     </div>
-    <div id="add-framebuzz-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-header graphite-flat-button">
-            Post Video
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        </div>
-        <div class="modal-body"></div>
-    </div>
+    <div class="md-overlay"></div>
 {% endblock %}
 
 {% block page_javascript %}
@@ -235,10 +253,19 @@
         <script src="{% static 'framebuzz/profiles/js/jquery.isotope.min.js' %}"></script>
         {% if is_my_profile %}
             <script src="{% static 'framebuzz/profiles/js/bootstrap-editable.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/js/load-image.min.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/js/jquery.fileupload.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/js/jquery.fileupload-process.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/js/jquery.fileupload-image.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/js/jquery.fileupload-validate.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/js/classie.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/js/modalEffects.js' %}"></script>
+            <script>
+                // this is important for IEs
+                var polyfilter_scriptpath = '/static/framebuzz/profiles/js/';
+            </script>
+            <script src="{% static 'framebuzz/profiles/js/cssParser.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/js/css-filters-polyfill.js' %}"></script>
         {% endif %}
         <script src="{% static 'framebuzz/profiles/js/framebuzz.profiles.js' %}"></script>
         <script type="text/javascript">

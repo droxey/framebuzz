@@ -43,14 +43,12 @@ class AddVideoForm(forms.ModelForm):
 
     class Meta:
         model = UserVideo
-        fields = ('video_id', 'is_featured',)
-        exclude = ('user', 'video',)
+        fields = ('video_id',)
+        exclude = ('user', 'video', 'is_featured',)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(AddVideoForm, self).__init__(*args, **kwargs)
-        self.fields[
-            'is_featured'].label = 'Feature this video on your profile'
 
     def clean(self):
         video_id = self.cleaned_data.get('video_id', None)
@@ -61,8 +59,7 @@ class AddVideoForm(forms.ModelForm):
                 user_video = UserVideo()
                 user_video.user = self.request.user
                 user_video.video = video
-                user_video.is_featured = self.cleaned_data.get(
-                    'is_featured', False)
+                user_video.is_featured = False
                 user_video.save()
 
                 action.send(self.request.user,

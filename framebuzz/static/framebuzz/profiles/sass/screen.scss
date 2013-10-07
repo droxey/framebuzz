@@ -120,6 +120,17 @@ div.marketing-content {
                         width: 330px;
 
                         div.user-info {
+                            a.customize {
+                                color: #FFFFFF;
+                                font-size: 26px;
+                                left: 6px;
+                                position: absolute;
+                                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                                top: 19px;
+
+                                &:hover, &:active, &:focus { text-decoration: none; }
+                            }
+
                             a.avatar {
                                 display: block;
                                 margin: 0 auto;
@@ -443,12 +454,40 @@ div.marketing-content {
                     div.tab-content {
                         margin-left: 34px;
                         margin-top: 0px;
+                        margin-bottom: 18px;
                         float: left;
                         height: 100%;
                         overflow: visible;
                         position: relative;
                         left: 28%;
                         width: 694px;
+
+                        #add-video {
+                            @include border-radius(5px, 5px);
+                            background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+                            box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.10);
+                            margin-top: 13px;
+                            margin-bottom: 25px;
+                            padding: 6px;
+                            width: 656px;
+                            
+                            span.corner {
+
+                            }
+
+                            form {
+                                #id_video_id {
+                                    font: 500 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                    margin-bottom: 0;
+                                    width: 525px;
+                                    float: left;
+                                }
+
+                                button {
+                                    float: right;
+                                }
+                            }
+                        }
                         
                         nav {
                             width: 678px;
@@ -460,10 +499,20 @@ div.marketing-content {
                                 float: left;
                                 padding-top: 12px;
                                 margin-bottom: 0;
-                                width: 80%;
+                                width: 81%;
 
                                 li {
                                     margin-right: 18px;
+                                    
+                                    &.filter {
+                                        padding: 10px 0px;
+
+                                        i {
+                                            color: rgba(255, 255, 255, 1);
+                                            font-size: 20px;
+                                            text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+                                        }
+                                    }
 
                                     a {
                                         border-color: transparent !important;
@@ -480,9 +529,7 @@ div.marketing-content {
                                 }
                             }
 
-                            a.add-video,
-                            a.toggle-follow,
-                            a.fileupload {
+                            a.toggle-follow {
                                 color: rgba(255, 255, 255, .95);
                                 display: block;
                                 float: right;
@@ -499,12 +546,6 @@ div.marketing-content {
                                     color: rgba(255, 255, 255, 1);
                                     text-decoration: none;
                                 }
-                            }
-
-                            a.add-video { 
-                                height: 25px;
-                                margin-bottom: 30px;
-                                right: 11px;
                             }
 
                             div.tooltip {
@@ -547,37 +588,6 @@ div.marketing-content {
                                         right: -7px;
                                     }
                                 }                                
-                            }
-
-                            a.fileupload {
-                                right: 32px;
-                                top: 15px;
-
-                                span.icon-stack {
-                                    color: rgba(255, 255, 255, .95);
-                                    display: block;
-                                    height: 30px;
-                                    position: relative;
-                                    width: 30px;
-
-                                    i {
-                                        height: 100%;
-                                        position: absolute;
-                                    }
-
-                                    i.icon-user {
-                                        bottom: 7px;
-                                        left: 0;
-                                        width: 50%;
-                                    }
-                                    
-                                    i.icon-cogs {
-                                        bottom: 9px;
-                                        font-size: 11px;
-                                        right: -1px;
-                                        width: 45%;
-                                    }
-                                }
                             }
 
                             .nav-pills > li > a {
@@ -1303,149 +1313,6 @@ div.marketing-content {
 .no-js ul.grid li, .no-cssanimations ul.grid li { opacity: 1; }
 .modal-backdrop, .modal-backdrop.fade.in { opacity: 0.6; }
 
-#add-framebuzz-modal,
-#upload-modal {
-    @include border-radius(2px, 2px);
-    background: none;
-    background-color: white;
-    box-shadow: none;
-    border: 5px solid rgba(47, 46, 46, 1.0);
-    margin-left: -260px;
-    max-height: 340px;
-    min-height: 232px;
-    width: 470px;
-
-    div.modal-header {
-        cursor: default;
-        font: 700 20px/20px 'proxima-nova',Helvetica,Arial,sans-serif;
-        height: auto;
-        padding: 15px 0;
-        width: 100%;
-
-        button.close {
-            color: rgba(0, 0, 0, 0.95);
-            z-index: 10;
-            position: relative;
-            top: -3px;
-            right: 9px;
-        }
-    }
-
-    div.modal-body {
-        border-top: 0 none;
-        font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
-        font-weight: 300;
-        line-height: 25px;
-        min-height: 232px;
-        max-height: 340px;
-        overflow: visible;
-        padding: 15px;
-        position: relative;
-        margin-left:auto;
-        margin-right:auto;
-        padding-left:20px;
-        padding-right:20px;
-        padding-top:18px;
-        color:#555555;
-        font-size:13px;
-        text-align:center;
-        line-height:24px;
-        cursor:default;
-        top: -1px;
-
-        p {
-            font-size: 16px;
-            font-weight: 300;
-            line-height: 20px;
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        ul.errorlist {
-            margin-bottom: 5px;
-
-            li {
-                color: #C0392B;
-                font: 500 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
-                text-align: left;
-                text-indent: 95px;
-            }
-        }
-
-        form {
-            position: relative;
-            height: 180px;
-
-            p {
-                text-align: left;
-                margin-bottom: 9px;
-
-                label {
-                    font-weight: 700;
-                    font-size: 16px;
-                    display: inline-block;
-                    margin-right: 10px;
-                    vertical-align: text-bottom;
-                }
-
-                input[type='checkbox'] {
-                    position: relative;
-                    left: -5px;
-                    top: -3px;
-                }
-
-                input[type='text'] {
-                    width: 320px;
-                }
-            }
-            
-            div.submit {
-                bottom: 0;
-                height: 44px;
-                margin-bottom: 5px;
-                position: absolute;
-                width: 100%;
-
-                .flat-button {
-                    @include border-radius(2px, 2px);
-                    font: 700 20px/50px 'proxima-nova', Helvetica, Arial, sans-serif;
-                    height: auto;
-                    width: 180px;
-                }
-
-                a {
-                    float: left;
-                    opacity: 1;
-
-                    &:hover, &:focus, &:active {
-                        color: #fff;
-                        text-decoration: none;
-                    }
-                }
-
-                button {
-                    float: right;
-                }
-            }
-        }
-    }
-}
-
-#upload-modal {
-    min-height: auto;
-    max-height: 700px;
-    width: 600px;
-
-    div.modal-body {
-        min-height: 700px;
-        max-height: 700px;
-
-        div.avatar-section {
-            width: 100%;
-        }
-    }
-}
-
 #watch {
     height: 770px;
 
@@ -1525,6 +1392,222 @@ div.marketing-content {
                     top: -1px;
                     vertical-align: middle;
                 }
+            }
+        }
+    }
+}
+
+.md-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.6);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.md-modal {
+    @include border-radius(5px, 5px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    max-width: 630px;
+    min-width: 320px;
+    height: auto;
+    z-index: 2000;
+    visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+
+    &.md-show {
+        visibility: visible;
+    }
+
+    &.md-show ~ .md-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .md-content {
+        @include border-radius(3px, 3px);
+        color: #fff;
+        position: relative;
+        margin: 0 auto;
+
+
+        h3 {
+            margin: 0;
+            padding: 18px;
+            text-align: center;
+            font: 500 18px/18px 'proxima-nova', Helvetica, Arial, sans-sarif;
+            color: white;
+            background-color: #272727;
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMzA4KSIvPjxzdG9wIG9mZnNldD0iMC45OCIgc3RvcC1jb2xvcj0icmdiYSgwLCAwLCAwLCAwKSIvPjwvcmFkaWFsR3JhZGllbnQ+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDApIiAvPjxyZWN0IHg9Ii0yMC45MDkxJSIgeT0iLTEwMC40MiUiIHdpZHRoPSIxNTYwcHgiIGhlaWdodD0iMjAwLjg0JSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
+            background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 780, color-stop(0%, rgba(255, 255, 255, 0.308)), color-stop(100%, rgba(0, 0, 0, 0)));
+            background-image: -webkit-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+            background-image: -moz-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+            background-image: -ms-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+            background-image: -o-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+            background-image: radial-gradient(780px 100.42% at center 0%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+            border: 0 none;
+            border-radius: 3px 3px 0 0;
+            text-shadow: rgba(0, 0, 0, 0.6);
+            position: relative;
+            margin-top: -1px;
+
+            button.md-close {
+                background: none;
+                border: none;
+                padding: none;
+                position: absolute;
+                right: 20px;
+            }
+        }
+
+        nav {
+            background: #f5f5f5;
+            padding-top: 6px;
+            margin-bottom: 0;
+
+            ul.nav-tabs {
+                @include border-radius(0px, 0px);
+                margin-bottom: 0;
+                border-top: none;
+
+                li {
+                    a {
+                        font: 500 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+                    }
+
+                    &.active {
+                        a {
+                            background-color: #F5F5F5;
+                            border-bottom: none;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .md-content > div {
+        background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+        border-radius: 0 0 3px 3px;
+        color: #272727;
+        font: 14px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
+        margin: 0;
+        font-weight: 300;
+        font-size: 1.15em;
+        padding: 18px 18px 0 18px;
+
+        div.tab-pane {
+            
+
+            div.avatar-section {
+                h1 {
+                    font-weight: 700px;
+                }
+
+                p {
+                    font-size: 13px;
+                }
+
+                i.icon-upload {
+                    opacity: 0.5;
+                    text-shadow: 0 1px 1px #FFFFFF;
+                }
+
+                div.upload-here {
+                    @include border-radius(3px, 3px);
+                    background: #eee;
+                    border: 1px dashed #ccc;
+                    margin: 12px 0;
+                    padding: 6px;
+        
+                    form {
+                        float: left;
+                        padding: 22px 0;
+                        width: 80%;
+
+                        label { display: none; }
+
+                        .fileinput-button {
+                            font-weight: 500;
+                            display: block;
+                            float: left;
+                            position: relative;
+                            overflow: hidden;
+
+                            input {
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                margin: 0;
+                                opacity: 0;
+                                -ms-filter: 'alpha(opacity=0)';
+                                font-size: 200px;
+                                direction: ltr;
+                                cursor: pointer;
+                            }
+                        }
+
+                        div.actions {
+                            float: right;
+
+                            button { font: Arial, Helvetica, sans-serif; }
+                        }
+                    }
+                }
+            }
+
+            #files {
+                margin-bottom: 18px;
+
+                div {
+                    p {
+                        canvas {
+                            height: 100px;
+                            float: left;
+                            margin-right: 18px;
+                            width: 100px;
+                        }
+
+                        span {
+                            font-size: 16px;
+                            float: left;
+                        }
+
+                        span.text-danger,
+                        span.text-success { 
+                            font-weight: 500;
+                            padding-top: 12px;
+                        }
+                        
+                        span.text-danger { color: #D9534F; }
+                        span.text-success { color: #5CB85C; }
+
+                        button {
+                            float: right;
+                        }
+                    }
+                }
+            }
+
+            #progress {
+                
             }
         }
     }

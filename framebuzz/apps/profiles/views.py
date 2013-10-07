@@ -210,6 +210,7 @@ def home(request, username):
         context.update(share_context)
         del request.session['share']
 
+    context['form'] = AddVideoForm(request=request)
     return render_to_response('profiles/base.html',
                               context,
                               context_instance=RequestContext(request))

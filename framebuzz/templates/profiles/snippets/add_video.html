@@ -1,9 +1,5 @@
-<p>FrameBuzzing a video is easy. Enter a YouTube URL below to add that video to your library. Then, add comments and share.</p>
-<form action="{% url 'profiles-add-video' request.user %}" method="POST">
+<form id="add-video-form" action="{% url 'profiles-add-video' profile_user %}" method="POST" class="clearfix">
     {% csrf_token %}
-    {{ form.as_p }}
-    <div class="submit clearfix">
-        <a href="#" class="close pomegranate-flat-button flat-button" data-dismiss="modal"><i class="icon-remove"></i> Cancel</a>
-        <button type="submit" class="add-video nephritis-flat-button flat-button"><i class="icon-ok"></i> Post Video</button>
-    </div>
+    <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
+    <button type="submit" class="add-video btn btn-success"><i class="icon-facetime-video"></i> Post Video</button>
 </form>

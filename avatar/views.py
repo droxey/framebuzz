@@ -1,4 +1,6 @@
-from django.http import Http404
+import json
+
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import six
 from django.utils.translation import ugettext as _
@@ -70,7 +72,18 @@ def add(request, extra_context=None, next_override=None,
             avatar.save()
             messages.success(request, _("Successfully uploaded a new avatar."))
             avatar_updated.send(sender=Avatar, user=request.user, avatar=avatar)
-            return redirect(next_override or _get_next(request))
+            
+            files_dict = { 
+                "files": [{
+                    "name": image_file.name,
+                    "size": len(image_file),
+                    "url": avatar.avatar.url,
+                    "thumbnailUrl": avatar.avatar.url,
+                    "deleteUrl": "",
+                    "deleteType": "DELETE"
+                  }]
+            }
+            return HttpResponse(json.dumps(files_dict), content_type='application/json')
     context = {
         'avatar': avatar,
         'avatars': avatars,
