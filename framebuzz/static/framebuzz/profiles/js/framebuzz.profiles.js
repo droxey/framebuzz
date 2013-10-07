@@ -5,6 +5,7 @@ var FrameBuzzProfile = (function($) {
         _pages = 1,
         _urls = {},
         _currentFilterClass = null,
+        _currentRequest = null,
         _endOfPageMessages = {
             'latest': '', 
             'added_video_to_library': '',
@@ -92,7 +93,7 @@ var FrameBuzzProfile = (function($) {
     function bindFilter() {
         $('body').on('click', 'a.filter', function() {
             var el = $(this);
-            _currentFilterClass = el.attr('data-filter');
+            filterClass = el.attr('data-filter');
             _pages = parseInt(el.attr('data-pages'));
 
             if (_isShare) {
@@ -103,11 +104,18 @@ var FrameBuzzProfile = (function($) {
                 });
             }
 
-            $('#feed-list').isotope({ filter: _currentFilterClass });
+            $('#feed-list').isotope({ filter: filterClass });
             $('ul.nav-pills li.active').removeClass('active');
-            $('a[data-filter="' + _currentFilterClass +'"]').parent().toggleClass('active');
+            $('a[data-filter="' + filterClass +'"]').parent().toggleClass('active');
 
-            getPage(1, true);
+            if (filterClass == '*' && _currentFilterClass != '*') {
+                _pages = parseInt($('#feed-list').attr('data-total-pages'));
+                _page = 1;
+            }
+            else {
+                _currentFilterClass = filterClass;
+                getPage(1, true);
+            }
 
             return false;
         });
@@ -227,6 +235,10 @@ var FrameBuzzProfile = (function($) {
     }
 
     function getPage(page, filtering) {
+        if (_currentRequest != null) {
+            _currentRequest.abort();
+        }
+        
         var $container = $('#feed-list'),
             nextPageUrl = _urls.feed + '?page=' + page;
 
@@ -234,7 +246,7 @@ var FrameBuzzProfile = (function($) {
             nextPageUrl = nextPageUrl + '&filter=' + _currentFilterClass.replace('.', '');
         }
 
-        $.get(nextPageUrl, function(newElements) {
+        _currentRequest = $.get(nextPageUrl, function(newElements) {
             var $elements = $(newElements);
 
             if (filtering && page == 1) {
@@ -256,6 +268,8 @@ var FrameBuzzProfile = (function($) {
             else {
                 insertCards($container, $elements);
             }
+
+            _currentRequest = null;
         });
     }
 
