@@ -1,3 +1,6 @@
+LOCAL_SETTINGS = True
+from settings import *
+
 DEBUG = False
 
 DATABASES = {
@@ -43,3 +46,23 @@ EMAIL_HOST_USER = 'framebuzz'
 EMAIL_HOST_PASSWORD = 'TG2-aJq-2bV-VYa'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+VARNISH_SETTINGS = {
+    'WATCHED_MODELS': ('auth.User',
+                       'api.UserProfile',
+                       'api.Video',
+                       'api.UserVideo',
+                       'api.MPTTComment',
+                       'api.Thumbnail',
+                       'actstream.Action',
+                       'actstream.Follow',
+                       'avatar.Avatar',
+                       ),
+    'MANAGEMENT_ADDRS': ('127.0.0.1:6082',),
+    'SECRET': 'b4b570a1-8e4b-4d3c-b8ef-6333ce1541f6',
+    'THREADED': False,
+}
+
+INSTALLED_APPS += (
+    'varnishapp',
+)

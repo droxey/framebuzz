@@ -1,0 +1,40 @@
+{% extends 'admin/change_list.html' %}
+{% load i18n %}
+
+{% block title %}Varnish {{ block.super }}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url admin:index %}">{% trans "Home" %}</a>
+    &rsaquo; Varnish
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<form action="" method="post">{% csrf_token %}
+    <input type="text" name="command" class="vTextField"/>
+    <input type="submit" value="Run command"/>
+</form>
+
+{% if results %}
+<h2>Results</h2>
+<table>
+    <tr>
+        <th>Server</th>
+        <th>Result</th>
+    </tr>
+    {% for server, result in results %}
+    <tr>
+        <td><p>{{ server }}</p></td>
+        <td>{{ result|linebreaks }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<h2>Available commands</h2>
+<pre>
+{{ help }}
+</pre>
+
+{% endblock %}
