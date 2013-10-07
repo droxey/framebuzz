@@ -131,6 +131,8 @@ var FrameBuzzProfile = (function($) {
                             data = $this.data();
                         $this
                             .off('click')
+                            .removeClass('btn-info')
+                            .addClass('btn-danger')
                             .text('Abort')
                             .on('click', function () {
                                 $this.remove();
@@ -185,10 +187,15 @@ var FrameBuzzProfile = (function($) {
                 }).on('fileuploaddone', function (e, data) {
                     $.each(data.result.files, function (index, file) {
                         if (file.url) {
-                            var success = $('<span class="text-success"/>').text(file.error);
+                            var success = $('<span class="text-success"/>').text('Upload successful!');
                             $(data.context.children()[index]).append('<br>').append(success);
 
-                            window.location.reload();
+                            window.setTimeout(function() {
+                                $.when($('button.md-close').trigger('click'))
+                                 .then(function() {
+                                    window.location.reload();
+                                });
+                            }, 2000);
                         } else if (file.error) {
                             var error = $('<span class="text-danger"/>').text(file.error);
                             $(data.context.children()[index]).append('<br>').append(error);
