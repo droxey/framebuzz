@@ -125,7 +125,7 @@ def recommendations(request):
     top_random_users = sorted(
         top_user_actions[0:50], key=lambda x: random.random())
     top_user_ids = [u.get('actor_object_id') for u in top_random_users]
-    top_users = User.objects.filter(id__in=top_user_ids[:20])
+    top_users = User.objects.filter(id__in=top_user_ids[:12])
 
     return render_to_response('profiles/snippets/recommendations.html', {
         'top_videos': top_videos,
