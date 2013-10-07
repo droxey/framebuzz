@@ -371,6 +371,7 @@ div.marketing-content {
                                                 a.thumbnail-link {
                                                     display: block;
                                                     height: 107px;
+                                                    position: relative;
                                                     width: 100%;
 
                                                     img.video-thumbnail {
@@ -380,6 +381,10 @@ div.marketing-content {
                                                         position: relative;
                                                         width: 100%;
                                                         z-index: 10;
+                                                    }
+
+                                                    &:hover, &:focus, &:active {
+                                                        text-decoration: none;
                                                     }
                                                 }
 
@@ -397,6 +402,23 @@ div.marketing-content {
                                                     width: 180px;
                                                     bottom: 0;
                                                     z-index: 20;
+
+                                                     i.icon-play-sign {
+                                                        @include border-radius(500px, 500px);
+                                                        background: url('../img/blank.png') no-repeat;
+                                                        color: #FFFFFF;
+                                                        display: block;
+                                                        font-size: 26px;
+                                                        height: 22px;
+                                                        left: 79px;
+                                                        line-height: 23px;
+                                                        padding: 5px;
+                                                        position: absolute;
+                                                        text-align: center;
+                                                        top: -40px;
+                                                        width: 22px;
+                                                        z-index: 11;
+                                                    }
 
                                                     span.corner {
                                                         position: absolute;
@@ -431,8 +453,6 @@ div.marketing-content {
                                                             text-decoration: none;
 
                                                             &:hover, &:active, &:focus { text-decoration: none; }
-
-                                                            i.icon-play { padding: 3% 2px 0; }
                                                         }
                                                     }
                                                 }

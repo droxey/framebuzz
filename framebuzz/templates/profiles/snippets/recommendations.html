@@ -1,11 +1,11 @@
-{% load avatar_tags profile_tags %}
+{% load staticfiles avatar_tags profile_tags %}
 
 <div class="users">
     <ul class="clearfix">
         {% for user in top_users %}
             <li class="shown">
                 <a class="tooltip" data-placement="bottom" title="{{ user|display_name }}" href="{% url 'profiles-home' user.username %}">
-                    <img src="{% avatar_url user 90 %}" alt="" height="45" width="45" class="img-circle lazy" />
+                    <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user 90 %}" alt="" height="45" width="45" class="img-circle lazy" />
                 </a>
             </li>
         {% endfor %}
@@ -29,9 +29,10 @@
                             {{ video.get_share_url }}
                             {% endif %}
                         {% endif %}{% endspaceless %}">
-                      <img class="video-thumbnail lazy" width="190" height="107" src="{{ video.large_thumbnail }}" />
+                        <img class="video-thumbnail lazy" width="190" height="107" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.large_thumbnail }}" />
                     </a>
                     <div class="comment">
+                        <i class="icon-play-sign"></i>
                          <span class="corner"></span>
                          <p>
                             <a href="{% spaceless %}{% if request.user.is_authenticated %}
@@ -46,7 +47,7 @@
                             {% else %}
                             {{ video.get_share_url }}
                             {% endif %}
-                        {% endif %}{% endspaceless %}"><i class="pull-left icon-play"></i> {{ video.title|title }}</a>
+                        {% endif %}{% endspaceless %}">{{ video.title|title }}</a>
                         </p>
                     </div>
                 </div>

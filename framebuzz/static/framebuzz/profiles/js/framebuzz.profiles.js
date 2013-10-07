@@ -226,6 +226,7 @@ var FrameBuzzProfile = (function($) {
     function bindCardFunctions() {
         initTooltips();
         initToggleButtons();
+        lazyLoadImages();
     }
 
     function insertCards(container, elements) {
@@ -238,7 +239,7 @@ var FrameBuzzProfile = (function($) {
         if (_currentRequest != null) {
             _currentRequest.abort();
         }
-        
+
         var $container = $('#feed-list'),
             nextPageUrl = _urls.feed + '?page=' + page;
 
@@ -273,6 +274,10 @@ var FrameBuzzProfile = (function($) {
         });
     }
 
+    function lazyLoadImages() {
+        $("img.lazy").lazyload({ effect : "fadeIn" });
+    }
+
     return {
       init: function(isMyProfile, isShare, urls) {
         _isShare = isShare;
@@ -280,6 +285,7 @@ var FrameBuzzProfile = (function($) {
         _urls = urls;
 
         bindFilter();
+        lazyLoadImages();
 
         // Init isotope and infinite scroll.
         var feedContainer = $('#feed');
@@ -294,6 +300,7 @@ var FrameBuzzProfile = (function($) {
             $.get(urls.recommendations, function(html) {
                 recommendationsContainer.html(html);
                 initTooltips();
+                lazyLoadImages();
             });
         }
         else {

@@ -3,12 +3,12 @@
 <div class="video-wrapper">
   <div class="thumb">
     <a class="thumbnail-link" href="{% url 'profiles-share' profile_user.username video.video_id %}">
-      <img class="video-thumbnail lazy" height="182" width="287" src="{{ video.large_thumbnail }}" />
+      <img class="video-thumbnail lazy" height="182" width="287" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.large_thumbnail }}" />
     </a>
     {% if action.verb != 'added video to library' %}
         <div class="comment">
              <span class="corner"></span>
-             <img src="{% avatar_url action.actor 110 %}" alt="" height="55" width="55" class="img-circle lazy" />
+             <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url action.actor 110 %}" alt="" height="55" width="55" class="img-circle lazy" />
              {% if action.verb == 'replied to comment' %}
                 <p>&ldquo;{{ action.action_object.parent.comment }}&rdquo;</p>
              {% else %}
@@ -28,7 +28,7 @@
             {% for uv in video.uservideo_set.all %}
             <li class="shown">
               <a class="tooltip" data-placement="bottom" title="{{ uv.user|display_name }}" href="{% url 'profiles-home' uv.user.username %}">
-                <img src="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
+                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
               </a>
             </li>
             {% endfor %}

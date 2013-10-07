@@ -50,7 +50,7 @@
                                 <a data-modal="customize-modal" data-role="button" class="customize md-trigger" href="{% url 'avatar_add' %}"><i class="icon-cogs"></i></a>
                             {% endif %}
                             <a href="{% url 'profiles-home' profile_user.username %}" class="avatar filter" data-filter="*">
-                                <img src="{% avatar_url profile_user 265 %}" alt="" height="177" width="177" class="img-circle" />
+                                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url profile_user 265 %}" alt="" height="177" width="177" class="lazy img-circle" />
                             </a>
                             <div class="user-details">
                                 {% spaceless %}
@@ -249,6 +249,7 @@
 
 {% block page_javascript %}
     {% compress js %}
+        <script src="{% static 'framebuzz/profiles/js/jquery.lazyload.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/jquery-paged-scroll.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/jquery.isotope.min.js' %}"></script>
         {% if is_my_profile %}
