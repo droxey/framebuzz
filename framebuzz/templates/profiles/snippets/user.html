@@ -3,7 +3,7 @@
 <a class="following" href="{% url 'profiles-home' user.username %}">
   <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user 110 %}" alt="" height="30" width="30" class="img-circle lazy" />
 </a>
-<span class="quote{% if not user.get_profile.bio or not user.get_profile.tagline %} username{% endif %}">
+<span class="quote{% if user.get_profile.bio|length == 0 and user.get_profile.tagline|length == 0 %} username{% endif %}">
   <a href="{% url 'profiles-home' user.username %}">{{ user|display_name }}</a>
   {% if user.get_profile.bio or user.get_profile.tagline %}
       <br>
