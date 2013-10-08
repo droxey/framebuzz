@@ -231,7 +231,8 @@ var FrameBuzzProfile = (function($) {
     function insertCards(container, elements) {
         container.isotope('insert', elements, function() {
             bindCardFunctions();
-            $('img.lazy', container).lazyload({ 
+
+            $('img.lazy', elements).lazyload({ 
                 effect: "fadeIn",
                 event: 'scroll trigger-lazy-load'
             });
