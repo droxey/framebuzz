@@ -1,6 +1,7 @@
 import os
 import hashlib
 import watson
+import caching.base
 
 from datetime import datetime
 
@@ -55,7 +56,7 @@ def bkg_file_path(instance=None, filename=None, size=None, ext=None):
     return os.path.join(*tmppath)
 
 
-class UserProfile(models.Model):
+class UserProfile(caching.base.CachingMixin, models.Model):
     user = models.OneToOneField(User)
     bio = models.CharField(max_length=500, blank=True, null=True)
     time_zone = TimeZoneField(blank=True, null=True)
@@ -157,7 +158,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 post_save.connect(create_user_profile, sender=User)
 
 
-class Video(models.Model):
+class Video(caching.base.CachingMixin, models.Model):
     video_id = models.CharField(max_length=255, unique=True, null=True,
                                 help_text=_("The Youtube id of the video"))
     title = models.CharField(max_length=200, null=True, blank=True)
@@ -291,7 +292,7 @@ class Video(models.Model):
         return "%02d:%02d:%02d" % (hours, minutes, seconds)
 
 
-class UserVideo(models.Model):
+class UserVideo(caching.base.CachingMixin, models.Model):
     video = models.ForeignKey(Video)
     user = models.ForeignKey(User)
     added_on = models.DateTimeField(auto_now=True)
@@ -307,7 +308,7 @@ class UserVideo(models.Model):
         return "'%s' in %s's video library" % (self.video.title, self.user.username)
 
 
-class Thumbnail(models.Model):
+class Thumbnail(caching.base.CachingMixin, models.Model):
     video = models.ForeignKey(Video, null=True)
     url = models.URLField(max_length=255)
 
@@ -322,7 +323,7 @@ class Thumbnail(models.Model):
         return self.url
 
 
-class MPTTComment(MPTTModel, Comment):
+class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
 
     """
         Threaded comments - Adds support for the parent comment
