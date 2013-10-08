@@ -38,7 +38,10 @@ $(document).ready(function() {
         pageContainer.fadeOut('slow', function() {
           pageContainer.html(pageHtml);
           pageContainer.fadeIn('slow', function() {
-            $('img.lazy', pageContainer).trigger('trigger-lazy-load');
+            $('img.lazy', pageContainer).lazyload({ 
+                effect: "fadeIn",
+                event: 'scroll trigger-lazy-load'
+            });
             pageContainer.highlight(query);
           });
         });
