@@ -1,4 +1,4 @@
-<form id="add-video-form" action="{% url 'profiles-add-video' profile_user %}" method="POST" class="clearfix">
+<form id="add-video-form" action="{% url 'profiles-add-video' profile_user.username %}" method="POST" class="clearfix">
     {% csrf_token %}
     <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
     <button type="submit" class="add-video btn btn-success"><i class="icon-facetime-video"></i> Post Video</button>
