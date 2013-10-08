@@ -334,7 +334,8 @@ angular.module('framebuzz.controllers', []).
                         var time = angular.copy($scope.currentTime);
                         var foundThread = null;
                         
-                        if ($scope.videoInstance.threads.length > 0) {
+                        if $scope.videoInstance.threads !== undefined 
+                                && $scope.videoInstance.threads.length > 0) {
                             for (var i = 0; i < $scope.videoInstance.threads.length; i++) {
                                 if ($scope.videoInstance.threads[i].time <= time) {
                                     foundThread = $scope.videoInstance.threads[i];
@@ -465,7 +466,8 @@ angular.module('framebuzz.controllers', []).
 
                 $scope.$on('player_paused', function() {
                     if ($state.is('player.blendedView')) {
-                        if ($scope.videoInstance.threads.length > 0) {
+                        if ($scope.videoInstance.threads !== undefined 
+                                && $scope.videoInstance.threads.length > 0) {
                             $scope.setSelectedThread();
                         }
                         else {
