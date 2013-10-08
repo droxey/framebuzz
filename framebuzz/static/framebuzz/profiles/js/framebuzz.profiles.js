@@ -226,12 +226,15 @@ var FrameBuzzProfile = (function($) {
     function bindCardFunctions() {
         initTooltips();
         initToggleButtons();
-        lazyLoadImages();
     }
 
     function insertCards(container, elements) {
         container.isotope('insert', elements, function() {
             bindCardFunctions();
+            $('img.lazy', container).lazyload({ 
+                effect: "fadeIn",
+                event: 'scroll trigger-lazy-load'
+            });
         });
     }
 
@@ -303,7 +306,10 @@ var FrameBuzzProfile = (function($) {
             $.get(urls.recommendations, function(html) {
                 recommendationsContainer.html(html);
                 initTooltips();
-                $('img.lazy', recommendationsContainer).trigger('trigger-lazy-load');
+                $('img.lazy', recommendationsContainer).lazyload({ 
+                    effect: "fadeIn",
+                    event: 'scroll trigger-lazy-load'
+                });
             });
         }
         else {
@@ -318,7 +324,11 @@ var FrameBuzzProfile = (function($) {
             }
 
             feedContainer.html(html);
-            $('img.lazy', feedContainer).trigger('trigger-lazy-load');
+
+            $('img.lazy', feedContainer).lazyload({ 
+                effect: "fadeIn",
+                event: 'scroll trigger-lazy-load'
+            });
 
             var $container = $('#feed-list'),
                 _pages = parseInt($container.attr('data-total-pages'));
