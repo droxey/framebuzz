@@ -289,7 +289,6 @@ var FrameBuzzProfile = (function($) {
 
         bindFilter();
         lazyLoadImages();
-        $(document).trigger('trigger-lazy-load');
 
         // Init isotope and infinite scroll.
         var feedContainer = $('#feed');
@@ -304,7 +303,7 @@ var FrameBuzzProfile = (function($) {
             $.get(urls.recommendations, function(html) {
                 recommendationsContainer.html(html);
                 initTooltips();
-                lazyLoadImages();
+                $('img.lazy', recommendationsContainer).trigger('trigger-lazy-load');
             });
         }
         else {
@@ -319,6 +318,7 @@ var FrameBuzzProfile = (function($) {
             }
 
             feedContainer.html(html);
+            $('img.lazy', feedContainer).trigger('trigger-lazy-load');
 
             var $container = $('#feed-list'),
                 _pages = parseInt($container.attr('data-total-pages'));
