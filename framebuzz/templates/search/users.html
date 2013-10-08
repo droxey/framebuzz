@@ -4,7 +4,7 @@
     {% for result in search_results.object_list %}
         <li class="clearfix">
             <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
-                <img src="{% avatar_url result.object.user 92 %}" alt="" height="46" width="46" class="img-circle" />
+                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url result.object.user 92 %}" alt="" height="46" width="46" class="img-circle lazy" />
             </a>
             <div class="user{% if result.object.bio %} bio{% endif %}">
                <strong>

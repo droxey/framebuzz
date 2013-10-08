@@ -26,6 +26,11 @@ $(document).ready(function() {
   var bindPagination = function(listName, url, query) {
     var pageContainer = getList(listName);
 
+    $("img.lazy").lazyload({ 
+        effect: "fadeIn",
+        event: 'scroll trigger-lazy-load'
+    });
+
     pageContainer.on('click', 'a.page-link', function() {
       var pageUrl = $(this).attr('href');
 
@@ -33,6 +38,7 @@ $(document).ready(function() {
         pageContainer.fadeOut('slow', function() {
           pageContainer.html(pageHtml);
           pageContainer.fadeIn('slow', function() {
+            $('img.lazy', pageContainer).trigger('trigger-lazy-load');
             pageContainer.highlight(query);
           });
         });
