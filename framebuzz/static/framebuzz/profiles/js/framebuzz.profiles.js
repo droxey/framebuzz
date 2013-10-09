@@ -104,7 +104,13 @@ var FrameBuzzProfile = (function($) {
                 });
             }
 
-            $('#feed-list').isotope({ filter: filterClass });
+            if (_isMyProfile && filterClass != '*') {
+                $('#feed-list').isotope({ filter: filterClass + '.mine' });
+            }
+            else {
+                $('#feed-list').isotope({ filter: filterClass });
+            }
+
             $('ul.nav-pills li.active').removeClass('active');
             $('a[data-filter="' + filterClass +'"]').parent().toggleClass('active');
 

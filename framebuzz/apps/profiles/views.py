@@ -36,6 +36,7 @@ def feed(request, username):
         Returns the rendered template(s) used by the newsfeed.
     """
     user = User.objects.get(username__iexact=username)
+    is_my_profile = request.user.is_authenticated() and user.id == request.user.id
     user_following = following(user)
     following_ids = [u.id for u in user_following]
 
@@ -67,7 +68,7 @@ def feed(request, username):
         featured_video_ids = [uv.video.id for uv in user_videos
                               if uv.is_featured]
 
-    if request.user.is_authenticated() and user.id == request.user.id:
+    if is_my_profile and verb_filter == VALID_FEED_VERBS:
         following_ids.append(user.id)
         
         feed = Action.objects.filter(
@@ -97,7 +98,8 @@ def feed(request, username):
         'page_obj': p.page(page),
         'video_library_ids': video_library_ids,
         'featured_video_ids': featured_video_ids,
-        'favorite_comment_ids': favorite_comment_ids
+        'favorite_comment_ids': favorite_comment_ids,
+        'is_my_profile': is_my_profile
     }, context_instance=RequestContext(request))
 
 
