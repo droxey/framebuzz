@@ -380,9 +380,6 @@ SHORTEN_MODELS = {
     'v': 'api.Video',
 }
 
-SHORT_BASE_URL = 'http://localhost:9999/s/'
-SHORTEN_FULL_BASE_URL = 'http://localhost:9999/s/'
-
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/profile/%s/" % u.username,
 }
