@@ -27,6 +27,9 @@ def mobile(request):
 
 
 def home(request):
+    if request.user.is_authenticated():
+        return reverse('profiles-home', args=[request.user.username])
+ 
     return render_to_response('marketing/home.html', {
     }, context_instance=RequestContext(request))
 
