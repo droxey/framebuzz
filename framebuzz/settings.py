@@ -3,7 +3,6 @@ import djcelery
 
 djcelery.setup_loader()
 
-DEBUG = True
 TEMPLATE_DEBUG = True
 SENTRY_TESTING = True
 
