@@ -1,16 +1,8 @@
 {% load i18n avatar_tags activity_tags profile_tags %}
 
 <div class="follow">
-  {% if action.target.id == profile_user.id %}
-    {% with action.actor as user %}
-      {% include "profiles/snippets/user.html" %}
-    {% endwith %}
-  {% else %}
-    {% if action.actor.id == profile_user.id %}
-      {% with action.target as user %}
-        {% include "profiles/snippets/user.html" %}
-      {% endwith %}
-    {% endif %}
-  {% endif %}
+  {% with action as user %}
+    {% include "profiles/snippets/user.html" %}
+  {% endwith %}
   <span class="posted"><i class="icon-time"></i> {{ action.timestamp|timesince }} {% trans "ago" %}</span>
 </div>

@@ -3,38 +3,54 @@
 {% if page_obj.object_list %}
   {% for action in page_obj.object_list %}
       <li class="brick {% spaceless %}
-                        {% if is_my_profile and action.actor.id == profile_user.id %} mine {% endif %}
-                        {% if action.verb == 'started following' %}
-                        {% if profile_user|is_following:action.target %}
+                        {% if action.verb %}
+                          {% if is_my_profile and action.actor.id == profile_user.id %} mine {% endif %}
+                          {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
+                            conversations
+                          {% else %}
+                            {{ action.class_name }}
+                          {% endif %}
+                        {% else %}
+                        {% if is_my_profile and action.user.id == profile_user.id %} mine {% endif %}
+                        {% if profile_user|is_following:action %}
                             following
                           {% else %}
                             followers
                         {% endif %}
-                      {% else %}
-                        {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
-                          conversations
-                        {% else %}
-                          {{ action.class_name }}
-                        {% endif %}
                       {% endif %}
                     {% endspaceless %}">
           <div class="action-wrapper">
-            <h1>{% display_action action %}</h1>
-            <div class="entity">
-              {% if action.verb == 'started following' %}
-                {% include "profiles/snippets/following.html" %}
-              {% elif action.verb == 'joined framebuzz' %}
-                {% include "profiles/snippets/joined.html" %}
-              {% else %}
-                {% if action.verb == 'added video to library' %}
-                  {% with action.action_object as video %}
-                    {% include "profiles/snippets/video.html" %}
-                  {% endwith %}
+            {% if action.verb %}
+              <h1>{% display_action action %}</h1>
+            {% else %}
+              <h1>
+                {{ action.user }}
+                {% comment %}
+                {% ifequal profile_user action.user %}
+                    <a href="{% url 'profiles-home' profile_user.username %}">{{ profile_user|display_name }}</a> started following <a href="{% url 'profiles-home' action.user.username %}">{{ action.user|display_name }}</a>:
                 {% else %}
-                  {% with action.target as video %}
+                    <a href="{% url 'profiles-home' action.user.username %}">{{ action.user|display_name }}</a> started following <a href="{% url 'profiles-home' profile_user.username %}">{{ profile_user|display_name }}</a>:
+                {% endifequal %}
+                {% endcomment %}
+              </h1>
+            {% endif %}
+            <div class="entity">
+              {% if action.verb %}
+                {% if action.verb == 'joined framebuzz' %}
+                  {% include "profiles/snippets/joined.html" %}
+                {% else %}
+                  {% if action.verb == 'added video to library' %}
+                    {% with action.action_object as video %}
                       {% include "profiles/snippets/video.html" %}
-                  {% endwith %}
+                    {% endwith %}
+                  {% else %}
+                    {% with action.target as video %}
+                        {% include "profiles/snippets/video.html" %}
+                    {% endwith %}
+                  {% endif %}
                 {% endif %}
+              {% else %}
+                {% include "profiles/snippets/following.html" %}
               {% endif %}
             </div>
         </div>

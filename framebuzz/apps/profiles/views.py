@@ -49,43 +49,45 @@ def feed(request, username):
         page = 1
 
     verb_filter = request.GET.get('filter', VALID_FEED_VERBS)
-    
     if verb_filter != VALID_FEED_VERBS:
-        if verb_filter.startswith('follow'):
-            verb_filter = ['started following']
-        elif verb_filter == 'conversations':
+        if verb_filter == 'conversations':
             verb_filter = ['commented on', 'replied to comment']
         else:
-            f = verb_filter.replace('_', ' ')
-            verb_filter = [f]
+            if not verb_filter.startswith('follow'):
+                f = verb_filter.replace('_', ' ')
+                verb_filter = [f]
 
-    if request.user.is_authenticated():
-        favorites = Action.objects.favorite_comments_stream(request.user)
-        favorite_comment_ids = [int(fav.action_object_object_id)
-                                for fav in favorites]
-        user_videos = UserVideo.objects.filter(user=request.user)
-        video_library_ids = [uv.video.id for uv in user_videos]
-        featured_video_ids = [uv.video.id for uv in user_videos
-                              if uv.is_featured]
+    if isinstance(verb_filter, list):
+        print 'a list'
+        if request.user.is_authenticated():
+            favorites = Action.objects.favorite_comments_stream(request.user)
+            favorite_comment_ids = [int(fav.action_object_object_id)
+                                    for fav in favorites]
+            user_videos = UserVideo.objects.filter(user=request.user)
+            video_library_ids = [uv.video.id for uv in user_videos]
+            featured_video_ids = [uv.video.id for uv in user_videos
+                                  if uv.is_featured]
 
-    if is_my_profile and verb_filter == VALID_FEED_VERBS:
-        following_ids.append(user.id)
-        
-        feed = Action.objects.filter(
-            Q(verb__in=verb_filter),
-            Q(actor_object_id__in=following_ids) | Q(
-                Q(target_object_id__in=following_ids) &
-                Q(verb='started following'))
-            )
+        if is_my_profile and verb_filter == VALID_FEED_VERBS:
+            following_ids.append(user.id)
+            
+            feed = Action.objects.filter(
+                Q(verb__in=verb_filter),
+                Q(actor_object_id__in=following_ids))
+        else:
+            feed = Action.objects.filter(
+                Q(verb__in=verb_filter),
+                Q(actor_object_id=user.id) | Q(
+                    Q(target_object_id=user.id) &
+                    Q(verb='started following'))
+                )
+        sorted_feed = feed.order_by('-timestamp')
     else:
-        feed = Action.objects.filter(
-            Q(verb__in=verb_filter),
-            Q(actor_object_id=user.id) | Q(
-                Q(target_object_id=user.id) &
-                Q(verb='started following'))
-            )
+        if verb_filter == 'followers':
+            sorted_feed = followers(user)
+        else:
+            sorted_feed = following(user)
 
-    sorted_feed = feed.order_by('-timestamp')
     p = Paginator(sorted_feed, ITEMS_PER_PAGES, request=request)
 
     if page == 1 and request.GET.get('init', None) is not None:

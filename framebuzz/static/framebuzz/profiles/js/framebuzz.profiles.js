@@ -127,7 +127,7 @@ var FrameBuzzProfile = (function($) {
         });
     }
 
-    function initCustomize () {
+    function initCustomize() {
         $('body').on('click', 'a.customize', function() {
             var avatarUrl = $(this).attr('href');
 
