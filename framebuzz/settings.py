@@ -181,6 +181,7 @@ MIDDLEWARE_CLASSES = (
 
     'watson.middleware.SearchContextMiddleware',
     'framebuzz.libs.middleware.timezone.TimezoneMiddleware',
+    'maintenancemode.middleware.MaintenanceModeMiddleware',
 )
 
 ROOT_URLCONF = 'framebuzz.urls'
@@ -243,6 +244,7 @@ INSTALLED_APPS = (
     #'tracking',
     'watson',
     'django_mobile',
+    'maintenancemode',
 
     # Required by Zinnia
     'tinymce',

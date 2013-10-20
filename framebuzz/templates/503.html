@@ -1,0 +1,24 @@
+{% extends "marketing/base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans "FrameBuzz - Error!" %}{% endblock %}
+
+{% block page_classes %}background-bottom accounts{% endblock %}
+
+{% block marketing_content %}
+<div id="signup-page">
+  <div class="wrapper">
+    <h1>We'll be right back!</h1>
+    <p style="text-align: center; width: 100%;">The FrameBuzz team is performing scheduled maintenance. We'll be back online shortly!</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_javascript %}
+    <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('div.marketing-content').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150, positionY: 0});
+        });
+    </script>
+{% endblock %}

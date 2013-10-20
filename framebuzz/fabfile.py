@@ -473,6 +473,8 @@ def deploy():
     collect any new static assets, and restart gunicorn's work
     processes for the project.
     """
+    toggle_maintenance('on')
+
     if not exists(env.venv_path):
         prompt = raw_input("\nVirtualenv doesn't exist: %s\nWould you like "
                            "to create it? (yes/no) " % env.proj_name)
@@ -501,14 +503,22 @@ def deploy():
         manage("syncdb --noinput")
         manage("migrate --noinput")
         manage("loaddata %s/framebuzz/fixtures/social_accounts.json" % env.proj_path)
+        manage("loaddata %s/maintenancemode/fixtures/initial_data.json" % env.proj_path)
 
     #remove_old_activities()
     clear_cache()
     restart()
+    toggle_maintenance('off')
     notify_team()
 
     return True
 
+
+@task
+@log_call
+def toggle_maintenance(flag):
+    with project():
+        manage("maintenance 1 %s" % flag)
 
 @task
 @log_call
