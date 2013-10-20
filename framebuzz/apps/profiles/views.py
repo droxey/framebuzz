@@ -25,7 +25,7 @@ from framebuzz.apps.api.utils import errors_to_json, get_total_shares
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
-VALID_FEED_VERBS = ['commented on', 'added to favorites', 'started following',
+VALID_FEED_VERBS = ['commented on', 'added to favorites',
                     'replied to comment', 'added video to library',
                     'joined framebuzz']
 ITEMS_PER_PAGES = 10
