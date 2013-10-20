@@ -11,12 +11,8 @@
                             {{ action.class_name }}
                           {% endif %}
                         {% else %}
-                          {% if is_my_profile and action.user.id == profile_user.id %} mine {% endif %}
-                          {% if profile_user|is_following:action %}
-                            following
-                          {% else %}
-                            followers
-                        {% endif %}
+                          {% if is_my_profile and action.id == profile_user.id %} mine {% endif %}
+                          {{ verb_filter }}
                       {% endif %}
                     {% endspaceless %}">
           <div class="action-wrapper">

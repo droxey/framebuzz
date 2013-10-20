@@ -58,7 +58,6 @@ def feed(request, username):
                 verb_filter = [f]
 
     if isinstance(verb_filter, list):
-        print 'a list'
         if request.user.is_authenticated():
             favorites = Action.objects.favorite_comments_stream(request.user)
             favorite_comment_ids = [int(fav.action_object_object_id)
@@ -101,7 +100,8 @@ def feed(request, username):
         'video_library_ids': video_library_ids,
         'featured_video_ids': featured_video_ids,
         'favorite_comment_ids': favorite_comment_ids,
-        'is_my_profile': is_my_profile
+        'is_my_profile': is_my_profile,
+        'verb_filter': verb_filter,
     }, context_instance=RequestContext(request))
 
 
