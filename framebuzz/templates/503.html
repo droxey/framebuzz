@@ -1,24 +1,75 @@
-{% extends "marketing/base.html" %}
-{% load i18n staticfiles %}
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress feedback_tags %}
 
-{% block title %}{% trans "FrameBuzz - Error!" %}{% endblock %}
-
-{% block page_classes %}background-bottom accounts{% endblock %}
-
-{% block marketing_content %}
-<div id="signup-page">
-  <div class="wrapper">
-    <h1>We'll be right back!</h1>
-    <p style="text-align: center; width: 100%;">The FrameBuzz team is performing scheduled maintenance. We'll be back online shortly!</p>
-  </div>
-</div>
-{% endblock %}
-
-{% block page_javascript %}
-    <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('div.marketing-content').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150, positionY: 0});
-        });
-    </script>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=false;">
+    <title>FrameBuzz: Scheduled Maintenance</title>
+    {% compress js %}
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            kitId: 'jbo8iic',
+            scriptTimeout: 3000
+          };
+          var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+        })();
+      </script>
+    {% endcompress %}
+    {% compress css %}
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/font-awesome.css' %}" type="text/css" rel="stylesheet" />
+        <style type="text/css">
+            body { background: #0d0d0d; color: #666; font: 500 21px/24px 'futura-pt-condensed', Helvetica, Arial, sans-serif; }
+            .wf-loading div.wrapper { visibility: hidden; }
+            .wrapper { margin: 50px auto; width: 290px; }
+            #logo { margin: 20px 0; }
+            #logo img { height: 44px; padding: 0 20px; width: 250px; }
+            #message { background: white; border: 3px solid #2289ba; border-radius: 24px; -webkit-box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.3); -moz-box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.3); box-shadow: inset 0px 0px 50px 5px rgba(0,0,0,0.3); margin: 0 10px; padding: 12px; width: 246px; }
+            #message p { text-align: center; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); }
+            #message h1 { color: #333; font-size: 32px; font-weight: 700; text-align: center; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); }
+            #links table { margin: 24px auto 0; width: 215px; }
+            #links table tr td { line-height: 32px; padding: 0 6px; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); }
+            #links table tr td a { border-radius: 50%; box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1); display: block; height: 32px; width: 32px; }
+            #links table tr td a.facebook { background-color: #3B5998; }
+            #links table tr td a.google { background-color: #D34836; }
+            #links table tr td a.twitter { background-color: #4099FF; }
+            #links table tr td a img { height: 16px; padding: 0 8px; width: 16px; }
+        </style>
+    {% endcompress %}
+  </head>
+  <body>
+    <div class="wrapper">
+        <div id="logo">
+            <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="88" width="500" />
+        </div>
+        <div id="message">
+            <h1>We'll be right back!</h1>
+            <p>The FrameBuzz team is performing scheduled maintenance.<br><br>Thanks for being patient, we promise it won't take long!</p>
+        </div>
+        <div id="links">
+            <table cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>Visit us on:</td>
+                        <td>
+                            <a title="Facebook" class="socialaccount_provider facebook img-circle" href="http://facebook.com/framebuzz">
+                                <img src="/static/framebuzz/dashboard/img/social_icons/facebook.png" height="32" width="32" alt="facebook">
+                           </a>
+                        </td>
+                        <td>
+                            <a title="Twitter" class="socialaccount_provider twitter img-circle" href="http://twitter.com/framebuzz">
+                                <img src="/static/framebuzz/dashboard/img/social_icons/twitter.png" height="32" width="32" alt="twitter">
+                            </a>
+                        </td>
+                        <td>
+                            <a title="Google" class="socialaccount_provider google img-circle" href="https://plus.google.com/110572112311049789354">
+                                <img src="/static/framebuzz/dashboard/img/social_icons/google.png" height="32" width="32" alt="google">
+                           </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </body>
