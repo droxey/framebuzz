@@ -104,13 +104,11 @@ var FrameBuzzProfile = (function($) {
                 });
             }
 
-            if (_isMyProfile && filterClass != '*') {
-                $('#feed-list').isotope({ filter: filterClass + '.mine' });
-            }
-            else {
-                $('#feed-list').isotope({ filter: filterClass });
-            }
+            var isotopeFilter = (_isMyProfile && filterClass != '*') 
+                                ? filterClass + '.mine' 
+                                : filterClass;
 
+            $('#feed-list').isotope({ filter: isotopeFilter });
             $('ul.nav-pills li.active').removeClass('active');
             $('a[data-filter="' + filterClass +'"]').parent().toggleClass('active');
 
@@ -236,6 +234,7 @@ var FrameBuzzProfile = (function($) {
 
     function insertCards(container, elements) {
         container.isotope('insert', elements, function() {
+            elements.removeClass('isotope-hidden');
             bindCardFunctions();
 
             $('img.lazy', elements).lazyload({ 

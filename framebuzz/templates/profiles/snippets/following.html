@@ -4,5 +4,7 @@
   {% with action as user %}
     {% include "profiles/snippets/user.html" %}
   {% endwith %}
+  {% comment %}
   <span class="posted"><i class="icon-time"></i> {{ action.started|timesince }} {% trans "ago" %}</span>
+  {% endcomment %}
 </div>

@@ -11,24 +11,13 @@
                             {{ action.class_name }}
                           {% endif %}
                         {% else %}
-                          {% if is_my_profile and action.id == profile_user.id %} mine {% endif %}
+                          {% if is_my_profile %} mine {% endif %}
                           {{ verb_filter }}
                       {% endif %}
                     {% endspaceless %}">
           <div class="action-wrapper">
             {% if action.verb %}
               <h1>{% display_action action %}</h1>
-            {% else %}
-              <h1>
-                {{ action.user }}
-                {% comment %}
-                {% ifequal profile_user action.user %}
-                    <a href="{% url 'profiles-home' profile_user.username %}">{{ profile_user|display_name }}</a> started following <a href="{% url 'profiles-home' action.user.username %}">{{ action.user|display_name }}</a>:
-                {% else %}
-                    <a href="{% url 'profiles-home' action.user.username %}">{{ action.user|display_name }}</a> started following <a href="{% url 'profiles-home' profile_user.username %}">{{ profile_user|display_name }}</a>:
-                {% endifequal %}
-                {% endcomment %}
-              </h1>
             {% endif %}
             <div class="entity">
               {% if action.verb %}
