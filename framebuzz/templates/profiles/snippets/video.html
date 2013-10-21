@@ -25,7 +25,7 @@
         <div class="shared">
           <h5>Also playing in these libraries:</h5>
           <ul class="clearfix">
-            {% for uv in video.uservideo_set.all %}
+            {% for uv in video.uservideo_set.all|slice:":8" %}
             <li class="shown">
               <a class="tooltip" data-placement="bottom" title="{{ uv.user|display_name }}" href="{% url 'profiles-home' uv.user.username %}">
                 <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
