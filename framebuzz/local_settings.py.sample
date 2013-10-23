@@ -1,0 +1,63 @@
+LOCAL_SETTINGS = True
+from settings import *
+
+###################
+# DATABASE        # 
+###################
+DEBUG = True
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django_postgrespool',
+        'NAME': 'framebuzz',
+        'USER': 'framebuzz',
+        'PASSWORD': 'framebuzz',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+# Django Compress
+COMPRESS_ENABLED = True
+
+SHORT_BASE_URL = 'http://localhost:9999/s/'
+SHORTEN_FULL_BASE_URL = 'http://localhost:9999/s/'
+
+# Django Debug Toolbar:
+INSTALLED_APPS += (
+    'debug_toolbar',
+    'inspector_panel',
+    'template_timings_panel',
+)
+
+#INTERNAL_IPS = ('127.0.0.1', '0.0.0.0',)
+
+MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
+
+IGNORED_TEMPLATES = ["debug_toolbar/*"]
+
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'inspector_panel.panels.inspector.InspectorPanel',
+    'template_timings_panel.panels.TemplateTimings.TemplateTimings',
+    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    'debug_toolbar.panels.headers.HeaderDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
+)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'caching.backends.locmem.CacheClass',
+        'PREFIX': 'fbz:'
+    }
+}
+
+CACHE_COUNT_TIMEOUT = 60
