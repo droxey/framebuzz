@@ -37,6 +37,11 @@ DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
 }
 
+MAINTENANCE_IGNORE_URLS = (
+    r'^/admin',
+    r'^/mobile'
+)
+
 IGNORED_TEMPLATES = ["debug_toolbar/*"]
 
 DEBUG_TOOLBAR_PANELS = (

@@ -42,3 +42,8 @@ CACHES = {
 }
 
 CACHE_COUNT_TIMEOUT = 60
+
+MAINTENANCE_IGNORE_URLS = (
+    r'^/admin',
+    r'^/mobile'
+)
