@@ -362,7 +362,8 @@ TEMPLATED_EMAIL_DJANGO_SUBJECTS = {
     'passwordchange-notification': 'FrameBuzz: Password Reset Requested',
     'reply-notification': 'FrameBuzz: New Comment Reply!',
     'welcome-newuser': 'Thanks for joining FrameBuzz.',
-    'share-email': 'FrameBuzz: Check out this video!'
+    'share-email': 'FrameBuzz: Check out this video!',
+    'comment-notification': 'FrameBuzz: New Video Reply!'
 }
 
 # Django-Celery Settings:
