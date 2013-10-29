@@ -170,24 +170,24 @@ def post_new_comment(context):
                 profile.save()
                 profile.generate_default_avatar()
 
-        # Send a notification to the video's owner that someone has commented on their video.
-        if video.found_by and video.found_by.id != user.id:
-            user_channel = '/framebuzz/%s/user/%s' % (video.video_id, video.found_by.username)
-            notification = { 'message': 'You have 1 new reply!', 'objectType': 'reply', 'objectId': comment.id }
-            message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
-            _send_to_channel.delay(channel = user_channel, message = message)
-
-            if video.found_by.email:
-                send_templated_mail(
-                    template_name='comment-notification',
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[video.found_by.email],
-                    context={
-                        'comment': comment,
-                        'site': Site.objects.get_current()
-                    })
-
         if not comment.parent:
+            # Send a notification to the video's owner that someone has commented on their video.
+            if video.found_by and video.found_by.id != user.id:
+                user_channel = '/framebuzz/%s/user/%s' % (video.video_id, video.found_by.username)
+                notification = { 'message': 'You have 1 new comment!', 'objectType': 'reply', 'objectId': comment.id }
+                message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
+                _send_to_channel.delay(channel = user_channel, message = message)
+
+                if video.found_by.email:
+                    send_templated_mail(
+                        template_name='comment-notification',
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=[video.found_by.email],
+                        context={
+                            'comment': comment,
+                            'site': Site.objects.get_current()
+                        })
+
             action.send(user, verb='commented on', action_object=comment, target=video)
 
             threadSerializer = MPTTCommentSerializer(comment, context={ 'user': user })
