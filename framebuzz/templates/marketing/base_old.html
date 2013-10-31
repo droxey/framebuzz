@@ -1,0 +1,155 @@
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress feedback_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    {% block marketing_title %}<title>FrameBuzz</title>{% endblock %}
+    {% block marketing_meta %}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta itemprop="description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
+        <meta itemprop="image" content="http://framebuzz.com{% static 'framebuzz/marketing/img/share_logo.jpg' %}" />
+        <meta property="og:image:url" content="http://framebuzz.com{% static 'framebuzz/marketing/img/share_logo.jpg' %}">
+        <meta property="og:url" content="http://framebuzz.com">
+        <meta property="og:description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
+        <meta property="og:title" content="FrameBuzz: Watch Whenever, Talk Together.">
+        <meta property="og:site_name" content="FrameBuzz">
+    {% endblock %}
+    {% compress js %}
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            kitId: 'jbo8iic',
+            scriptTimeout: 3000
+          };
+          var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+        })();
+      </script>
+      <script src="{% static 'framebuzz/marketing/js/modernizr-2.6.2.js' %}"></script>
+      <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+    {% endcompress %}
+    {% block head_javascript %}{% endblock %}
+    {% compress css %}
+        <!-- bootstrap -->
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap.css' %}" rel="stylesheet" />
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap-responsive.css' %}" rel="stylesheet" />
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap-overrides.css' %}" type="text/css" rel="stylesheet" />
+
+        <!-- libraries -->
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/jquery-ui-1.10.2.custom.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/font-awesome.css' %}" type="text/css" rel="stylesheet" />
+        <link href="{% static 'framebuzz/player/app/css/animations.css' %}" type="text/css" rel="stylesheet" />
+
+        <!-- global styles -->
+        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/layout.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/elements.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/icons.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/marketing/stylesheets/sharrre.css' %}">
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/stylesheets/screen.css' %}" type="text/css" media="screen" />
+    {% endcompress %}
+    {% block page_css %}{% endblock %}
+  </head>
+  <body class="{% block page_classes %}{% endblock %}"{% block body_attributes %}{% endblock %}>
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <div class="wrapper clearfix">
+                <a class="brand" href="http://www.framebuzz.com">
+                    <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="71" width="310" />
+                </a>
+                <form id="search-form" data-users-url="{% url 'search-users' %}" data-conversations-url="{% url 'search-conversations' %}" data-videos-url="{% url 'search-videos' %}" method="GET" action="{% url 'fbz-search' %}" class="navbar-search">
+                  <i class="icon-search"></i>
+                  <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search people, conversations, and videos..." class="search-query span2">
+                  <button type="submit"></button>
+                </form>
+                <ul class="nav pull-right clearfix">
+                    <li class="link{% if request.user.is_authenticated %} logged-in{% endif %}">
+                      {% if request.user.is_authenticated %}
+                        {% get_social_accounts request.user as accounts %}
+                        <a href="{% url 'profiles-home' request.user.username %}" role="button" class="avatar">
+                            <img src="{% avatar_url request.user 58 %}" alt="" height="28" width="28" class="img-circle" />
+                        </a>
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-cog"></i> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'profiles-home' request.user.username %}">View Profile</a></li>
+                            {% if accounts|length == 0 %}<li><a href="{% url 'account_change_password' %}">Change Password</a></li>{% endif %}
+                            <li><a href="{% url 'account_logout' %}">Log Out</a></li>
+                        </ul>
+                      {% else %}
+                        <a href="{% url 'account_login' %}" title="Sign In">Sign In</a>  
+                      {% endif %} 
+                    </li>
+                    <li class="divider-vertical"></li>           
+                    <li class="social clearfix hidden-tablet">
+                        <div id="twitter" data-url="http://framebuzz.com/" data-text="Watch whenever, talk together."></div>
+                        <div id="facebook" data-url="http://framebuzz.com/" data-text="Watch whenever, talk together."></div>
+                        <div id="googleplus" data-url="http://framebuzz.com/" data-text="Watch whenever, talk together."></div>
+                    </li>
+                </ul>  
+            </div>         
+        </div>        
+    </div>
+    <div class="search-results">
+      <div class="wrapper">
+      </div>
+    </div>
+    <div class="marketing-content">
+        {% block marketing_content %}{% endblock %}
+    </div>
+    <div class="footer">
+      <div class="wrapper clearfix">
+        <span class="copyright">&copy; 2013 FrameBuzz. All rights reserved. Patent-pending.</span>
+        <a href="{% url 'terms' %}" title="Terms of Service">Terms of Service</a>
+        <a href="{% url 'privacy' %}" title="Privacy Policy">Privacy Policy</a>
+        <i>&bull;</i>
+        <a href="{% url 'press' %}" title="Press">Press</a>
+        <a href="{% url 'about' %}" title="About FrameBuzz">About</a>
+        <a href="{% url 'zinnia_entry_archive_index' %}">Blog</a>
+      </div>
+    </div>
+  </div>
+    {% block modals %}{% endblock %}
+    {% compress js %}
+        <script src="{% static 'framebuzz/marketing/js/jquery-latest.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/jquery-ui.js' %}"></script>
+        <script src="{% static 'framebuzz/dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/jquery.sharrre-1.3.4.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/jquery.highlight.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/js/jquery.lazyload.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/framebuzz.share.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/framebuzz.search.js' %}"></script>
+    {% endcompress %}
+    {% block page_javascript %}{% endblock %}
+    <script>
+    var _prum = [['id', '526acad9abe53d0e0d000000'],
+                 ['mark', 'firstbyte', (new Date()).getTime()]];
+    (function() {
+        var s = document.getElementsByTagName('script')[0]
+          , p = document.createElement('script');
+        p.async = 'async';
+        p.src = '//rum-static.pingdom.net/prum.min.js';
+        s.parentNode.insertBefore(p, s);
+    })();
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-43394419-1', 'framebuzz.com');
+      ga('send', 'pageview');
+    </script>
+    <script type="text/javascript">
+        setTimeout(function(){
+            var a=document.createElement("script");
+            var b=document.getElementsByTagName("script")[0];
+            a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0018/6248.js?"+Math.floor(new Date().getTime()/3600000);
+            a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+  </body>
+</html>

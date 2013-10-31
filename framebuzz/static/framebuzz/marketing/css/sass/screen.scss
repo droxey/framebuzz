@@ -1,0 +1,116 @@
+@import "compass/css3/border-radius";
+
+html {
+    /* Needed for fullscreen background. */
+    background: url('../../img/background.jpg') no-repeat center center;
+    min-height: 100%;
+    background-size: cover;
+}
+
+body {
+    /* Needed for fullscreen background. */
+    background-color: transparent;
+    min-height: 100%;
+}
+
+body.content {
+    /* Styles used by the homepage, about page, and other marketing pages. */
+
+    #base {
+        @include border-radius(10px, 10px);
+        background: white;
+        margin-top: 24px;
+
+        #main {
+            #logo {
+                padding: 33px 0;
+
+                a {
+                    display: block;
+                    height: 40px;
+                    margin: 0 auto;
+                    width: 184px;
+
+                    img {
+                        height: 40px;
+                        width: 184px;
+                    }
+                }
+            }
+
+            #video-container {
+                background: transparent url('../../img/player-separator.png') no-repeat center bottom;
+                margin: 0 auto;
+                padding-bottom: 50px;
+                width: 640px;
+
+                iframe {
+                    @include border-radius(1px, 1px);
+                    background: #202020;
+                    height: 398px;
+                    width: 640px;
+                }
+            }
+
+            #links {
+                padding-top: 10px;
+
+                div {
+                    
+                    padding: 0;
+                    text-align: center;
+
+                    a { 
+                        color: #878787;
+                        font-size: 1.05em;
+                    }
+
+                    i.icon-muted { 
+                        color: #F0F0F0;
+                        display: inline-block;
+                        font-size: 1.5em;
+                        position: relative;
+                        top: -3px;
+                    }
+                }
+            }
+
+            #callout {
+                padding-top: 105px;
+                padding-bottom: 65px;
+
+                img {
+                    display: block;
+                    height: 294px;
+                    margin: 0 auto;
+                    width: 541px;
+                }
+            }
+        }
+    }
+}
+
+#footer {
+    @include border-top-left-radius(0px);
+    @include border-top-right-radius(0px);
+    @include border-bottom-left-radius(10px);
+    @include border-bottom-right-radius(10px);
+    background-color: #6b6b6b;
+    padding-top: 13px;
+    padding-bottom: 10px;
+
+    a { color: white; }
+    div.col-xs-1 a { font-weight: 700; }
+    div.col-xs-2 { padding: 0; }
+}
+
+#copyright {
+    padding-top: 12px;
+    padding-bottom: 130px;
+
+    strong {
+        font-size: 1.05em;
+        color: white;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    }
+}
