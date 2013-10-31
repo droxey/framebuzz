@@ -39,16 +39,29 @@ body.content {
             }
 
             #video-container {
+                @include border-top-left-radius(5px);
+                @include border-top-right-radius(5px);
+                @include border-bottom-left-radius(0px);
+                @include border-bottom-right-radius(0px);
                 background: transparent url('../../img/player-separator.png') no-repeat center bottom;
                 margin: 0 auto;
-                padding-bottom: 50px;
+                overflow: hidden;
+                padding-bottom: 56px;
                 width: 640px;
 
-                iframe {
-                    @include border-radius(1px, 1px);
+                div.video {
+                                            @include border-top-left-radius(6px);
+                        @include border-top-right-radius(6px);
+                        @include border-bottom-left-radius(0px);
+                        @include border-bottom-right-radius(0px);
                     background: #202020;
                     height: 398px;
                     width: 640px;
+
+                    iframe {
+                        height: 100%;
+                        width: 100%;
+                    }
                 }
             }
 
@@ -100,8 +113,10 @@ body.content {
     padding-bottom: 10px;
 
     a { color: white; }
-    div.col-xs-1 a { font-weight: 700; }
-    div.col-xs-2 { padding: 0; }
+
+    div.col-xs-1 { 
+        padding: 0; 
+    }
 }
 
 #copyright {

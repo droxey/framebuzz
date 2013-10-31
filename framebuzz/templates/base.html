@@ -58,11 +58,11 @@
         <div id="footer" class="row">
             <div class="col-xs-2"></div>
             <div class="col-xs-1"><a href="{% url 'zinnia_entry_archive_index' %}"><strong>Blog</strong></a></div>
-            <div class="col-xs-1"><a href="{% url 'about' %}" title="About FrameBuzz">About</a></div>
-            <div class="col-xs-1"><a href="{% url 'contact' %}" title="Contact">Contact</a></div>
-            <div class="col-xs-1"><a href="{% url 'press' %}" title="Press">Press</a></div>
+            <div class="col-xs-1"><a href="{% url 'about' %}" title="About FrameBuzz"><strong>About</strong></a></div>
+            <div class="col-xs-1"><a href="{% url 'press' %}" title="Press"><strong>Press</strong></a></div>
+            <div class="col-xs-2"></div>
             <div class="col-xs-2"><a href="{% url 'terms' %}" title="Terms of Service" class="pull-right">Terms of Service</a></div>
-            <div class="col-xs-2"><a href="{% url 'privacy' %}" title="Privacy Policy" class="pull-right">Privacy Policy</a></div>
+            <div class="col-xs-1"><a href="{% url 'privacy' %}" title="Privacy Policy" class="pull-right">Privacy Policy</a></div>
             <div class="col-xs-2"></div>
         </div>
     </div>
@@ -74,20 +74,19 @@
     {% compress js %}
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-
         <script src="{% static 'framebuzz/marketing/js/framebuzz.base.js' %}"></script>
     {% endcompress %}
     {% block page_javascript %}{% endblock %}
     <script>
-    var _prum = [['id', '526acad9abe53d0e0d000000'],
-                 ['mark', 'firstbyte', (new Date()).getTime()]];
-    (function() {
-        var s = document.getElementsByTagName('script')[0]
-          , p = document.createElement('script');
-        p.async = 'async';
-        p.src = '//rum-static.pingdom.net/prum.min.js';
-        s.parentNode.insertBefore(p, s);
-    })();
+      var _prum = [['id', '526acad9abe53d0e0d000000'],
+                   ['mark', 'firstbyte', (new Date()).getTime()]];
+      (function() {
+          var s = document.getElementsByTagName('script')[0]
+            , p = document.createElement('script');
+          p.async = 'async';
+          p.src = '//rum-static.pingdom.net/prum.min.js';
+          s.parentNode.insertBefore(p, s);
+      })();
     </script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -8,17 +8,19 @@
         </a>
     </div>
     <div id="video-container" class="row">
-        <iframe src="{% url 'video-embed' 'uDBTVSwgz4o' %}" scrolling="no" frameBorder="0" height="398" width="640"></iframe>
+        <div class="video">
+            <iframe src="{% url 'video-embed' 'uDBTVSwgz4o' %}" scrolling="no" frameBorder="0" height="398" width="640"></iframe>
+        </div>
     </div>
     <div id="links" class="row">
         <div class="col-xs-2"></div>
         <div class="col-xs-8">
             <div class="row">
-                <div class="col-xs-3"><a href="#"><strong>About FrameBuzz</strong></a></div>
+                <div class="col-xs-3"><a href="{% url 'about' %}" title="About FrameBuzz"><strong>About FrameBuzz</strong></a></div>
                 <div class="col-xs-2"><i class="icon-muted">&bull;</i></div>
                 <div class="col-xs-3"><a href="#"><strong>WordPress Plugin</strong></a></div>
                 <div class="col-xs-2"><i class="icon-muted">&bull;</i></div>
-                <div class="col-xs-2"><a href="#"><strong>Contact</strong></a></div>
+                <div class="col-xs-2"><a href="{% url 'contact' %}" title="Contact"><strong>Contact</strong></a></div>
             </div>
         </div>
         <div class="col-xs-2"></div>
