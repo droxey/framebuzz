@@ -27,7 +27,7 @@
                 }
 
                 div.mejs-layers {
-                    .mejs-controls { display: none; }
+                    .mejs-controls, .mejs-overlay-button { display: none; }
 
                     .mejs-poster {
                         position: relative;
@@ -41,22 +41,6 @@
                             z-index: 0;
                         }
                     }
-
-                    .mejs-overlay-button {
-                        background-image: none;
-                        height: auto;
-                        margin: 18px 0 0 -63px;
-                        opacity: 1;
-                        width: 126px;
-                        z-index: 999;
-
-                        .btn-info {
-                            color: #fff;
-                            background-color: #5bc0de;
-                            border-color: #46b8da;
-                            font-weight: 500;
-                        }
-                    }
                 }
             }
         }
@@ -68,12 +52,21 @@
             z-index: 5;
 
             div.step {
+                background-color: rgba(255, 255, 255, 0.81);
+                display: none;
+                padding: 55px 27px;
+                height: 233px;
+                width: 403px;
+
+                .btn-info {
+                    background-color: #5bc0de;
+                    border-color: #46b8da;
+                    color: #fff;
+                }
+                
                 &.step1 {
-                    background-color: rgba(255, 255, 255, 0.81);
+                    display: block;
                     margin: 31px auto 0;
-                    padding: 55px 27px;
-                    height: 233px;
-                    width: 403px;
 
                     h1 { 
                         color: #424242;
@@ -82,6 +75,35 @@
                         text-align: center;
 
                         strong { font-weight: 700; }
+                    }
+
+                    .btn-info {
+                        display: block;
+                        margin: 0 auto;
+                        font-weight: 500;
+                        width: 126px;
+                    }
+                }
+
+                &.step2 {
+                    margin: 31px 0;
+                    position: relative;
+
+                    h1 {
+                        color: #848484;
+                        font-size: 20px;
+                        font-weight: 500;
+                        margin-top: 0;
+                    }
+                    
+                    form.form-inline {
+                        margin: 0;
+                        
+                        label {
+                            color: #595959;
+                            font-size: 30px;
+                            font-weight: 300;
+                        }
                     }
                 }
             }

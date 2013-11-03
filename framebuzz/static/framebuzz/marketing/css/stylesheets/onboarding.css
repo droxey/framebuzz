@@ -29,7 +29,7 @@
   z-index: 0;
 }
 /* line 30, ../sass/onboarding.scss */
-#onboarding #video div.mejs-container div.mejs-inner div.mejs-layers .mejs-controls {
+#onboarding #video div.mejs-container div.mejs-inner div.mejs-layers .mejs-controls, #onboarding #video div.mejs-container div.mejs-inner div.mejs-layers .mejs-overlay-button {
   display: none;
 }
 /* line 32, ../sass/onboarding.scss */
@@ -45,45 +45,69 @@
   left: 0;
   z-index: 0;
 }
-/* line 45, ../sass/onboarding.scss */
-#onboarding #video div.mejs-container div.mejs-inner div.mejs-layers .mejs-overlay-button {
-  background-image: none;
-  height: auto;
-  margin: 18px 0 0 -63px;
-  opacity: 1;
-  width: 126px;
-  z-index: 999;
-}
-/* line 53, ../sass/onboarding.scss */
-#onboarding #video div.mejs-container div.mejs-inner div.mejs-layers .mejs-overlay-button .btn-info {
-  color: #fff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
-  font-weight: 500;
-}
-/* line 64, ../sass/onboarding.scss */
+/* line 48, ../sass/onboarding.scss */
 #onboarding #video #steps {
   position: absolute;
   top: 0;
   width: 610px;
   z-index: 5;
 }
-/* line 71, ../sass/onboarding.scss */
-#onboarding #video #steps div.step.step1 {
+/* line 54, ../sass/onboarding.scss */
+#onboarding #video #steps div.step {
   background-color: rgba(255, 255, 255, 0.81);
-  margin: 31px auto 0;
+  display: none;
   padding: 55px 27px;
   height: 233px;
   width: 403px;
 }
-/* line 78, ../sass/onboarding.scss */
+/* line 61, ../sass/onboarding.scss */
+#onboarding #video #steps div.step .btn-info {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  color: #fff;
+}
+/* line 67, ../sass/onboarding.scss */
+#onboarding #video #steps div.step.step1 {
+  display: block;
+  margin: 31px auto 0;
+}
+/* line 71, ../sass/onboarding.scss */
 #onboarding #video #steps div.step.step1 h1 {
   color: #424242;
   font-weight: 300;
   font-size: 23px;
   text-align: center;
 }
-/* line 84, ../sass/onboarding.scss */
+/* line 77, ../sass/onboarding.scss */
 #onboarding #video #steps div.step.step1 h1 strong {
   font-weight: 700;
+}
+/* line 80, ../sass/onboarding.scss */
+#onboarding #video #steps div.step.step1 .btn-info {
+  display: block;
+  margin: 0 auto;
+  font-weight: 500;
+  width: 126px;
+}
+/* line 88, ../sass/onboarding.scss */
+#onboarding #video #steps div.step.step2 {
+  margin: 31px 0;
+  position: relative;
+}
+/* line 92, ../sass/onboarding.scss */
+#onboarding #video #steps div.step.step2 h1 {
+  color: #848484;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 0;
+}
+/* line 99, ../sass/onboarding.scss */
+#onboarding #video #steps div.step.step2 form.form-inline {
+  margin: 0;
+}
+/* line 102, ../sass/onboarding.scss */
+#onboarding #video #steps div.step.step2 form.form-inline label {
+  color: #595959;
+  font-size: 30px;
+  font-weight: 300;
 }

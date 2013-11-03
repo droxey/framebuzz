@@ -9,9 +9,22 @@ $(document).ready(function() {
         defaultVideoHeight: 306,
         success: function(media) {
             $('.mejs-controls').remove();
+            $('.mejs-overlay-button').remove();
+
             $('.mejs-video').css({ height: '306px', width: '610px' });
             $('video').css({ height: '306px', width: '610px' });
-            $('.mejs-overlay-button').append('<button type="button" class="btn btn-lg btn-info">Get Started</button>');
+
+            $('#btn-start').click(function() {
+                $('div.step1').hide('fast', function() {
+                    media.play();
+                });
+            });
+
+            media.addEventListener('playing', function(e) {
+                $('div.step2').show('fast', function() {
+
+                });
+            });
         }
     });
 });
