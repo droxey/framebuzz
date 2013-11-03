@@ -1,5 +1,5 @@
 {% extends "marketing/base.html" %}
-{% load staticfiles compress addendum_tags %}
+{% load socialaccount staticfiles compress addendum_tags %}
 
 {% block page_css %}
     {% compress css %}
@@ -7,6 +7,8 @@
         <link href="{% static 'framebuzz/player/app/css/animations.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/marketing/css/stylesheets/onboarding.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
     {% endcompress %}
+
+    {% providers_media_js %}
 {% endblock %}
 
 {% block content_center %}
@@ -36,11 +38,64 @@
                         <h1>Welcome to FrameBuzz.</h1>
                         <form id="prompt-form" class="row form-inline" role="form">
                             <label for="prompt">Answer this question?</label>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="prompt" placeholder="Type your answer...">
+                            <div class="form-group col-xs-10">
+                                <input type="text" class="form-control" name="prompt" value="" maxlength="180" placeholder="Type your answer...">
                             </div>
-                            <button class="btn btn-info">OK</button>
+                            <div class="col-xs-2">
+                                <button class="btn btn-info">OK</button>
+                            </div>
                         </form>
+                    </div>
+                    <div class="step step3">
+                        <div class="row">
+                            <div class="comment col-xs-5 pull-right">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <img src="{% static 'framebuzz/marketing/img/user-avatar.jpg' %}" alt="You" height="52" width="52" class="img-circle">
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <strong>You</strong>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <p id="comment-text"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="bubble bubble-confirm col-xs-6 pull-right">
+                                <span class="corner"></span>
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">
+                                        See how it works? <strong>You’re a pro.</strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button type="button" id="btn-signup" class="btn btn-lg btn-info">Now join the conversation!</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step4 bubble bubble-signup col-xs-11 pull-right">
+                                <span class="corner"></span>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <p>
+                                            That was way better than a YouTube comment. Well done.
+                                            <br>
+                                            <strong><i>Now join the conversation!</i></strong>
+                                        </p>
+                                        <div id="signup"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

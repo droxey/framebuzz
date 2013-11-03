@@ -1,36 +1,45 @@
-{% extends "marketing/base.html" %}
-{% load i18n staticfiles addendum_tags %}
+{% load i18n staticfiles addendum_tags socialaccount %}
 
-{% block title %}{% trans "FrameBuzz - Sign up" %}{% endblock %}
-
-{% block page_classes %}background-bottom accounts{% endblock %}
-
-{% block marketing_content %}
-<div id="signup-page">
-  <div class="wrapper">
-    <h1>{% trans "Sign up" %}</h1>
-    <p class="description">{% snippet 'signup:signup_header' %}Already a user? Or want to log in with your social network?{% endsnippet %} <a href="{{ login_url }}" class="login-link">Click here</a>.</p>
-      <form class="signup form-vertical" id="signup_form" method="post" action="{% url 'account_signup' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <p class="terms">By registering for FrameBuzz, you acknowledge that you agree to our <a href="{% url 'terms' %}" target="_blank">Terms of Service</a>.</p>
-        <div class="actions clearfix">
-          <a class="secondaryAction" href="{% url 'account_login' %}">Back to Login</a>
-          <button class="signup" type="submit">SIGN UP <em>&#9654;</em></button>
+<form id="signup-form" class="form-inline" role="form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    <div class="row form-row">
+        <div class="form-group col-xs-4">
+            <label for="id_username">Choose a username:</label>
+            {{ form.username }}
         </div>
-    </form>
-  </div>
-</div>
-{% endblock %}
-
-{% block page_javascript %}
-    <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('div.marketing-content').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150, positionY: 0});
-        });
-    </script>
-{% endblock %}
+        <div class="form-group col-xs-3">
+            <label for="id_username">Password:</label>
+            {{ form.password1 }}
+        </div>
+        <div class="form-group col-xs-3">
+            <label for="id_username">Password again:</label>
+            {{ form.password2 }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            <button class="btn btn-info" type="submit">Create Account</button>
+        </div>
+        <div class="col-xs-1 text-center or">
+            <i>- or -</i>
+        </div>
+        {% if socialaccount.providers %}
+            {% for provider in socialaccount.providers %}
+                <div class="col-xs-1 social">
+                    <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btn btn-info" href="{% provider_login_url provider.id %}">
+                      {% if provider.id == 'facebook' %}
+                        <img src="{% static 'framebuzz/dashboard/img/social_icons/facebook.png' %}" height="21" width="21" alt="{{ provider.id }}">
+                      {% elif provider.id == 'twitter' %}
+                        <img src="{% static 'framebuzz/dashboard/img/social_icons/twitter.png' %}" height="21" width="21" alt="{{ provider.id }}">
+                      {% else %}
+                        <img src="{% static 'framebuzz/dashboard/img/social_icons/google.png' %}" height="21" width="21" alt="{{ provider.id }}">
+                      {% endif %}
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+</form>

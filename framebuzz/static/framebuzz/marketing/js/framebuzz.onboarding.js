@@ -21,8 +21,41 @@ $(document).ready(function() {
             });
 
             media.addEventListener('playing', function(e) {
-                $('div.step2').show('fast', function() {
+                var step2 = $('div.step2');
 
+                step2.show('fast', function() {
+                    $('#prompt-form').submit(function(ev) {
+                        ev.preventDefault();
+
+                        var text = $('input[type="text"]', $(this)).val();
+                        if (text.length > 0) {
+                            step2.hide('fast', function() {
+                                var step3 = $('div.step3');
+
+                                step3.show('fast', function() {
+                                    $('#comment-text').text(text);
+
+                                    $('#btn-signup').click(function() {
+                                        $('div.bubble-confirm', step3).hide('fast', function() {
+                                            $.get('/accounts/signup/', function(html) {
+                                                var step4 = $('div.step4');
+                                                $('#signup').html(html);
+
+                                                step4.show('fast', function() {
+
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        }
+                        else {
+                            // TODO: Validation.
+                        }
+
+                        return false;
+                    });
                 });
             });
         }
