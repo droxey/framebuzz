@@ -39,6 +39,7 @@
     {% block head_javascript %}{% endblock %}
     {% compress css %}
         <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/bootstrap/css/bootstrap.min.css' %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/jquery/vegas/jquery.vegas.min.css' %}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{% static 'framebuzz/marketing/css/stylesheets/screen.css' %}" type="text/css" media="screen" />
     {% endcompress %}
@@ -88,9 +89,12 @@
         <div class="col-xs-12 text-center"><strong>&copy; 2013, FrameBuzz. All Rights Reserved, Patent Pending.</strong></div>
       </div>
     </div>
+    <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'framebuzz/marketing/vendor/jquery/vegas/jquery.vegas.js' %}"></script>
     {% compress js %}
-        <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
+        
         <script src="{% static 'framebuzz/marketing/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
         <script src="{% static 'framebuzz/marketing/js/framebuzz.base.js' %}"></script>
     {% endcompress %}
     {% block page_javascript %}{% endblock %}
