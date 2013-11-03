@@ -1,4 +1,14 @@
-/* line 3, ../sass/screen.scss */
+/* line 8, ../sass/screen.scss */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
+acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike,
+strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* line 12, ../sass/screen.scss */
 html {
   /* Needed for fullscreen background. */
   background: url("../../img/background.jpg") no-repeat center center;
@@ -6,23 +16,28 @@ html {
   background-size: cover;
 }
 
-/* line 10, ../sass/screen.scss */
+/* line 19, ../sass/screen.scss */
 body {
   /* Needed for fullscreen background. */
   background-color: transparent;
   min-height: 100%;
 }
 
-/* line 16, ../sass/screen.scss */
+/* line 25, ../sass/screen.scss */
 .text-justify {
   text-align: justify;
 }
 
-/* line 19, ../sass/screen.scss */
+/* line 29, ../sass/screen.scss */
+.wf-loading #main {
+  visibility: hidden;
+}
+
+/* line 32, ../sass/screen.scss */
 body.content {
   /* Styles used by the homepage, about page, and other marketing pages. */
 }
-/* line 22, ../sass/screen.scss */
+/* line 35, ../sass/screen.scss */
 body.content #base {
   -webkit-border-radius: 10px 10px;
   -moz-border-radius: 10px / 10px;
@@ -30,80 +45,37 @@ body.content #base {
   background: white;
   margin-top: 24px;
 }
-/* line 27, ../sass/screen.scss */
+/* line 40, ../sass/screen.scss */
 body.content #base #logo {
   padding: 33px 0;
 }
-/* line 30, ../sass/screen.scss */
+/* line 43, ../sass/screen.scss */
 body.content #base #logo a {
   display: block;
   height: 40px;
   margin: 0 auto;
   width: 184px;
 }
-/* line 36, ../sass/screen.scss */
+/* line 49, ../sass/screen.scss */
 body.content #base #logo a img {
   height: 40px;
   width: 184px;
 }
-/* line 44, ../sass/screen.scss */
-body.content #base #main #video-container {
-  -moz-border-radius-topleft: 5px;
-  -webkit-border-top-left-radius: 5px;
-  border-top-left-radius: 5px;
-  -moz-border-radius-topright: 5px;
-  -webkit-border-top-right-radius: 5px;
-  border-top-right-radius: 5px;
-  -moz-border-radius-bottomleft: 0px;
-  -webkit-border-bottom-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-  -moz-border-radius-bottomright: 0px;
-  -webkit-border-bottom-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  background: transparent url("../../img/player-separator.png") no-repeat center bottom;
-  margin: 0 auto;
-  overflow: hidden;
-  padding-bottom: 56px;
-  width: 640px;
-}
-/* line 55, ../sass/screen.scss */
-body.content #base #main #video-container div.video {
-  -moz-border-radius-topleft: 6px;
-  -webkit-border-top-left-radius: 6px;
-  border-top-left-radius: 6px;
-  -moz-border-radius-topright: 6px;
-  -webkit-border-top-right-radius: 6px;
-  border-top-right-radius: 6px;
-  -moz-border-radius-bottomleft: 0px;
-  -webkit-border-bottom-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-  -moz-border-radius-bottomright: 0px;
-  -webkit-border-bottom-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  background: #202020;
-  height: 398px;
-  width: 640px;
-}
-/* line 64, ../sass/screen.scss */
-body.content #base #main #video-container div.video iframe {
-  height: 100%;
-  width: 100%;
-}
-/* line 71, ../sass/screen.scss */
+/* line 57, ../sass/screen.scss */
 body.content #base #main #links {
   padding-top: 10px;
 }
-/* line 74, ../sass/screen.scss */
+/* line 60, ../sass/screen.scss */
 body.content #base #main #links div {
   padding: 0;
   text-align: center;
 }
-/* line 79, ../sass/screen.scss */
+/* line 65, ../sass/screen.scss */
 body.content #base #main #links div a {
   color: #878787;
   font-size: 1.05em;
 }
-/* line 84, ../sass/screen.scss */
+/* line 70, ../sass/screen.scss */
 body.content #base #main #links div i.icon-muted {
   color: #F0F0F0;
   display: inline-block;
@@ -111,12 +83,12 @@ body.content #base #main #links div i.icon-muted {
   position: relative;
   top: -3px;
 }
-/* line 94, ../sass/screen.scss */
+/* line 80, ../sass/screen.scss */
 body.content #base #main #callout {
   padding-top: 105px;
   padding-bottom: 65px;
 }
-/* line 98, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 body.content #base #main #callout img {
   display: block;
   height: 294px;
@@ -124,12 +96,16 @@ body.content #base #main #callout img {
   width: 541px;
 }
 
-/* line 110, ../sass/screen.scss */
+/* line 95, ../sass/screen.scss */
+body.about {
+  color: #595959;
+}
+/* line 98, ../sass/screen.scss */
 body.about img.img-circle {
   height: 137px;
   width: 137px;
 }
-/* line 115, ../sass/screen.scss */
+/* line 103, ../sass/screen.scss */
 body.about h1.wrapper {
   background: #8F8F8F;
   color: white;
@@ -139,17 +115,22 @@ body.about h1.wrapper {
   line-height: 14px;
   padding: 10px 25px;
 }
-/* line 125, ../sass/screen.scss */
+/* line 113, ../sass/screen.scss */
 body.about div.person {
   overflow: hidden;
 }
-/* line 128, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 body.about div.person h2 {
+  color: #00aeef;
   margin-bottom: 0;
   margin-top: 10px;
 }
+/* line 122, ../sass/screen.scss */
+body.about div.person p.title {
+  color: #666666;
+}
 
-/* line 139, ../sass/screen.scss */
+/* line 128, ../sass/screen.scss */
 #footer {
   -moz-border-radius-topleft: 0px;
   -webkit-border-top-left-radius: 0px;
@@ -168,21 +149,21 @@ body.about div.person h2 {
   padding-top: 13px;
   padding-bottom: 10px;
 }
-/* line 149, ../sass/screen.scss */
+/* line 138, ../sass/screen.scss */
 #footer a {
   color: white;
 }
-/* line 151, ../sass/screen.scss */
+/* line 140, ../sass/screen.scss */
 #footer div.col-xs-1 {
   padding: 0;
 }
 
-/* line 156, ../sass/screen.scss */
+/* line 145, ../sass/screen.scss */
 #copyright {
   padding-top: 12px;
   padding-bottom: 130px;
 }
-/* line 160, ../sass/screen.scss */
+/* line 149, ../sass/screen.scss */
 #copyright strong {
   font-size: 1.05em;
   color: white;

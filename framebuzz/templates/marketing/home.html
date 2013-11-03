@@ -1,12 +1,37 @@
 {% extends "marketing/base.html" %}
-{% load staticfiles addendum_tags %}
+{% load staticfiles compress addendum_tags %}
+
+{% block page_css %}
+    {% compress css %}
+        <link href="{% static 'framebuzz/player/app/css/mediaelementplayer.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/animations.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/marketing/css/stylesheets/onboarding.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+    {% endcompress %}
+{% endblock %}
 
 {% block content_center %}
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <div id="video-container" class="row">
-            <div class="video">
-                <iframe src="{% url 'video-embed' 'uDBTVSwgz4o' %}" scrolling="no" frameBorder="0" height="398" width="640"></iframe>
+        <div id="onboarding" class="row">
+            <div id="video">
+                <video style="height: 100%; width: 100%;" preload="true" poster="{% static 'framebuzz/marketing/img/onboarding-poster.jpg' %}">
+                    <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+                    <source type="video/mp4" src="{% static 'framebuzz/marketing/test/test.mp4' %}" />
+                    <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+                    <source type="video/webm" src="{% static 'framebuzz/marketing/test/test.webm' %}" />
+                    <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
+                    <object style="height: 100%; width: 100%;" type="application/x-shockwave-flash" data="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
+                        <param name="movie" value="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}" />
+                        <param name="flashvars" value="controls=true&amp;file={% static 'framebuzz/marketing/test/test.flv' %}" />
+                        <!-- Image as a last resort -->
+                        <img src="{% static 'framebuzz/marketing/img/onboarding-poster.jpg' %}" height="306" width="610" title="No video playback capabilities" />
+                    </object>
+                </video>
+                <div id="steps">
+                    <div class="step step1">
+                        <h1>FrameBuzz is a community of<br><strong>video-integrated</strong> commentary.</h1>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="links" class="row">
@@ -34,5 +59,8 @@
 {% endblock %}
 
 {% block page_javascript %}
-
+    {% compress js %}
+        <script src="{% static 'framebuzz/player/app/lib/mediaelement-and-player.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/framebuzz.onboarding.js' %}"></script> 
+    {% endcompress %}
 {% endblock %}
