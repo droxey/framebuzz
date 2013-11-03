@@ -3,24 +3,13 @@
 
 {% block title %}{% trans "FrameBuzz - Error!" %}{% endblock %}
 
-{% block page_classes %}background-bottom accounts{% endblock %}
-
-{% block marketing_content %}
-<div id="signup-page">
-  <div class="wrapper">
-    <h1>Oops...</h1>
-    <div class="alert alert-error">
-      An error has occured while retreiving your request. This error has automatically been forwarded to our developers.
+{% block content_center %}
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h1>Oops...</h1>
+      <div class="alert alert-error">
+        An error has occured while retreiving your request. This error has automatically been forwarded to our developers.
+      </div>
     </div>
-  </div>
-</div>
-{% endblock %}
-
-{% block page_javascript %}
-    <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('div.marketing-content').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150, positionY: 0});
-        });
-    </script>
+    <div class="col-md-2"></div>
 {% endblock %}

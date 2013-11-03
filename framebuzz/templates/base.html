@@ -43,6 +43,9 @@
         <link rel="stylesheet" href="{% static 'framebuzz/marketing/css/stylesheets/screen.css' %}" type="text/css" media="screen" />
     {% endcompress %}
     {% block page_css %}{% endblock %}
+    {% if not request.user.is_authenticated %}
+      {% providers_media_js %}
+    {% endif %}
   </head>
   <body class="{% block page_classes %}{% endblock %}"{% block body_attributes %}{% endblock %}>
     <!--[if lte IE 8]>
@@ -51,6 +54,14 @@
       </div>
     <![endif]-->
     <div id="base" class="container">
+        {% if not request.user.is_authenticated %}
+          <ul class="nav nav-pills pull-right">
+              <li class="dropdown">
+                  <a id="btn-login" class="dropdown-toggle" href="#" data-toggle="dropdown">Sign in</a>
+                  <div id="login-container" class="dropdown-menu"></div>
+              </li>
+          </ul>
+        {% endif %}
         <div id="logo" class="row">
           <div class="col-xs-12">
             <a href="{% url 'home' %}">
