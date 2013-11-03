@@ -13,6 +13,9 @@ body {
     min-height: 100%;
 }
 
+.text-justify { text-align: justify; }
+.img-circle {}
+
 body.content {
     /* Styles used by the homepage, about page, and other marketing pages. */
 
@@ -21,23 +24,23 @@ body.content {
         background: white;
         margin-top: 24px;
 
-        #main {
-            #logo {
-                padding: 33px 0;
+        #logo {
+            padding: 33px 0;
 
-                a {
-                    display: block;
+            a {
+                display: block;
+                height: 40px;
+                margin: 0 auto;
+                width: 184px;
+
+                img {
                     height: 40px;
-                    margin: 0 auto;
                     width: 184px;
-
-                    img {
-                        height: 40px;
-                        width: 184px;
-                    }
                 }
             }
+        }
 
+        #main {
             #video-container {
                 @include border-top-left-radius(5px);
                 @include border-top-right-radius(5px);
@@ -50,10 +53,10 @@ body.content {
                 width: 640px;
 
                 div.video {
-                                            @include border-top-left-radius(6px);
-                        @include border-top-right-radius(6px);
-                        @include border-bottom-left-radius(0px);
-                        @include border-bottom-right-radius(0px);
+                    @include border-top-left-radius(6px);
+                    @include border-top-right-radius(6px);
+                    @include border-bottom-left-radius(0px);
+                    @include border-bottom-right-radius(0px);
                     background: #202020;
                     height: 398px;
                     width: 640px;
@@ -103,12 +106,43 @@ body.content {
     }
 }
 
+body.about {
+    img.img-circle {
+        height: 137px;
+        width: 137px;
+    }
+
+    h1.wrapper {
+        background: #8F8F8F;
+        color: white;
+        font-size: 1.5em;
+        font-weight: 700;
+        margin-bottom: 14px;
+        line-height: 14px;
+        padding: 10px 25px;
+    }
+
+    div.person {
+        overflow: hidden;
+        
+        h2 { 
+            margin-bottom: 0;
+            margin-top: 10px;
+        }
+
+        p.title {
+
+        }
+    }
+}
+
 #footer {
     @include border-top-left-radius(0px);
     @include border-top-right-radius(0px);
     @include border-bottom-left-radius(10px);
     @include border-bottom-right-radius(10px);
     background-color: #6b6b6b;
+    margin-top: 33px;
     padding-top: 13px;
     padding-bottom: 10px;
 
