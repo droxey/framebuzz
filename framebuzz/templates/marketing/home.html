@@ -1,6 +1,10 @@
 {% extends "marketing/base.html" %}
 {% load socialaccount staticfiles compress addendum_tags %}
 
+{% block optimizely %}
+    <script src="//cdn.optimizely.com/js/393060191.js"></script>
+{% endblock %}
+
 {% block page_css %}
     {% compress css %}
         <link href="{% static 'framebuzz/player/app/css/mediaelementplayer.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">

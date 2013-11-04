@@ -1,5 +1,11 @@
-<form id="add-video-form" action="{% url 'profiles-add-video' profile_user.username %}" method="POST" class="clearfix">
+<form id="add-video-form" action="{% url 'profiles-add-video' profile_user.username %}" method="POST" class="col-md-12">
     {% csrf_token %}
-    <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
-    <button type="submit" class="add-video btn btn-success"><i class="icon-facetime-video"></i> Post Video</button>
+    <div class="row">
+        <div class="col-md-9 input">
+            <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
+        </div>
+        <div class="col-md-3 submit">
+            <button type="submit" class="add-video"><i class="fa fa-video-camera"></i> Post Video to Profile</button>
+        </div>
+    </div>
 </form>
