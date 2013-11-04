@@ -36,6 +36,35 @@
     {% block extra_css %}{% endblock %}
 {% endblock %}
 
+{% block main_header %}
+  <div id="logo" class="row">
+    <div class="col-xs-2 row-logo">
+      <a href="{% url 'home' %}">
+        <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="25" width="116">
+      </a>
+    </div>
+    <div class="col-xs-8 row-search">
+        <form id="search-form" data-users-url="{% url 'search-users' %}" data-conversations-url="{% url 'search-conversations' %}" data-videos-url="{% url 'search-videos' %}" method="GET" action="{% url 'fbz-search' %}" class="navbar-search">
+            <i class="fa fa-search"></i>
+            <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search people, conversations, and videos..." class="search-query span2">
+            <button type="submit"></button>
+        </form>
+    </div>
+    <div class="col-xs-2 row-user">
+        <ul class="nav pull-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle clearfix" href="#" data-toggle="dropdown">
+                    <img src="{% avatar_url profile_user 82 %}" alt="{{ profile_user|display_name }}" height="41" width="41" class="img-circle pull-left">
+                    <i class="fa fa-cog pull-left"></i>
+                    <i class="fa fa-caret-down pull-left"></i>
+                </a>
+                <div class="dropdown-menu"></div>
+            </li>
+        </ul>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content_center %}
     {% comment %}
     <div class="content">

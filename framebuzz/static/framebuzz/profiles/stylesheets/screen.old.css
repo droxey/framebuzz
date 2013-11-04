@@ -1,0 +1,1800 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 17, ../../../../../../../../../../Applications/compass.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../../../../Applications/compass.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../../../../Applications/compass.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../../../../Applications/compass.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../../../../Applications/compass.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../../../../Applications/compass.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../../../../Applications/compass.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../../../../Applications/compass.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../../../../Applications/compass.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/*
+ *      Mixins
+ */
+/* line 16, ../sass/screen.old.scss */
+body {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.3)), color-stop(100%, #1788bc));
+  background-image: -webkit-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, #1788bc 100%);
+  background-image: -moz-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, #1788bc 100%);
+  background-image: -ms-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, #1788bc 100%);
+  background-image: -o-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, #1788bc 100%);
+  background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.3) -120%, #1788bc 100%);
+  background-attachment: fixed;
+}
+
+/* line 38, ../sass/screen.old.scss */
+a, a:focus, a:hover, a:active {
+  outline: 0 !important;
+}
+/* line 41, ../sass/screen.old.scss */
+a.tooltip, a:focus.tooltip, a:hover.tooltip, a:active.tooltip {
+  opacity: 1 !important;
+}
+
+/* line 44, ../sass/screen.old.scss */
+div.alert {
+  font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  width: 233px;
+}
+
+/* line 51, ../sass/screen.old.scss */
+div.form-actions {
+  bottom: 30px;
+  left: 220px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 695px;
+}
+
+/* line 60, ../sass/screen.old.scss */
+div.tooltip {
+  color: white;
+  font: 500 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
+  opacity: 1;
+  padding: 3px 0;
+  z-index: 99999;
+}
+
+/* line 68, ../sass/screen.old.scss */
+img.img-circle {
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.52);
+  -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.52);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.52);
+}
+
+/* line 72, ../sass/screen.old.scss */
+div.marketing-content {
+  background: none;
+  height: 100%;
+}
+/* line 76, ../sass/screen.old.scss */
+div.marketing-content div.content {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  height: 100%;
+  min-height: 925px;
+  padding-bottom: 0;
+  overflow: visible;
+}
+/* line 87, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper {
+  width: 1180px;
+  margin: 0 auto;
+}
+/* line 91, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background {
+  height: 100%;
+  width: 100%;
+}
+/* line 95, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container {
+  margin-bottom: 37px;
+  height: 100%;
+  z-index: 1;
+}
+/* line 100, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.spin {
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  width: 40px;
+}
+/* line 106, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.spin i {
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+/* line 112, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: -2px 0px 0px 3px rgba(0, 0, 0, 0.1);
+  float: left;
+  height: 100%;
+  margin-left: 8px;
+  padding: 30px 6px;
+  position: absolute;
+  width: 330px;
+}
+/* line 123, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info a.customize {
+  color: #FFFFFF;
+  font-size: 26px;
+  left: 6px;
+  position: absolute;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  top: 19px;
+}
+/* line 131, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info a.customize:hover, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info a.customize:active, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info a.customize:focus {
+  text-decoration: none;
+}
+/* line 134, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info a.avatar {
+  display: block;
+  margin: 0 auto;
+  width: 193px;
+}
+/* line 139, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info a.avatar img.img-circle {
+  -moz-box-shadow: 0px 0px 0px 5px white, 0 0px 0 10px rgba(0, 0, 0, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 0px 0px 0px 5px white, 0 0px 0 10px rgba(0, 0, 0, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 0px 0px 0px 5px white, 0 0px 0 10px rgba(0, 0, 0, 0.1);
+  /* CSS3 */
+  display: block;
+  height: 177px;
+  width: 177px;
+}
+/* line 149, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info ul.nav-tabs {
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: none;
+  margin-bottom: 0;
+}
+/* line 154, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info ul.nav-tabs li {
+  float: left;
+  padding: 9px 0 10px 0;
+  width: auto;
+}
+/* line 159, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info ul.nav-tabs li a.filter {
+  -webkit-border-radius: 0px 0px;
+  -moz-border-radius: 0px / 0px;
+  border-radius: 0px / 0px;
+  border: 1px solid transparent;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font: 500 14px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
+  padding: 0 7px 0 2px;
+  text-align: center;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+/* line 170, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info ul.nav-tabs li a.filter em {
+  font-weight: 700;
+}
+/* line 172, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info ul.nav-tabs li a.filter:hover, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info ul.nav-tabs li a.filter:active, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info ul.nav-tabs li a.filter:focus {
+  background: none;
+  outline: 0 none;
+  opacity: 1;
+  -webkit-transition: opacity 50ms ease-in, 1s;
+  -moz-transition: opacity 50ms ease-in, 1s;
+  -o-transition: opacity 50ms ease-in, 1s;
+  transition: opacity 50ms ease-in, 1s;
+}
+/* line 181, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info ul.nav-tabs li.active a {
+  background: none;
+  opacity: 1;
+  -webkit-transition: opacity 50ms ease-in, 1s;
+  -moz-transition: opacity 50ms ease-in, 1s;
+  -o-transition: opacity 50ms ease-in, 1s;
+  transition: opacity 50ms ease-in, 1s;
+}
+/* line 189, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info ul.nav-tabs li:first-child a {
+  border-left: none;
+  padding-left: 0;
+}
+/* line 196, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info ul.nav-tabs li:last-child a {
+  border-right: none;
+  padding-right: 0;
+}
+/* line 204, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details {
+  padding: 9px 0 9px 0;
+}
+/* line 207, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 {
+  border-bottom: none;
+  color: white;
+  font: 500 30px/30px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+  margin-bottom: 0;
+  padding: 0 6px 3px;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+}
+/* line 215, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1 a, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 a {
+  color: white;
+}
+/* line 218, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1 a:hover, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1 a:active, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1 a:focus, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 a:hover, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 a:active, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 a:focus {
+  text-decoration: none;
+}
+/* line 221, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1 a span, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 a span {
+  color: white;
+}
+/* line 228, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 a.editable,
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details p.bio a.editable {
+  font: 300 14px/18px 'proxima-nova',Helvetica,Arial,sans-serif;
+  color: white;
+  outline: none;
+}
+/* line 233, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 a.editable:hover, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 a.editable:active, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 a.editable:focus,
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details p.bio a.editable:hover,
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details p.bio a.editable:active,
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details p.bio a.editable:focus {
+  text-decoration: none;
+}
+/* line 238, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1 {
+  padding: 0 0 9px 0;
+  position: relative;
+  width: 100%;
+}
+/* line 243, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1 span.username-field {
+  float: left;
+  display: inline-block;
+  width: 100%;
+}
+/* line 249, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1 span.location-field {
+  float: right;
+  font: 300 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+  position: absolute;
+  top: 2px;
+  right: 0;
+}
+/* line 256, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1 span.location-field i.icon-map-marker {
+  font-size: 26px;
+  line-height: 30px;
+  padding-right: 3px;
+}
+/* line 262, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h1 span.location-field a {
+  float: right;
+  line-height: 30px;
+  font-weight: 500;
+}
+/* line 270, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details p.bio {
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  font: 300 14px/17px 'proxima-nova', Helvetica, Arial, sans-serif;
+  padding: 18px 0;
+  text-align: justify;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+}
+/* line 278, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details p.bio a.editable {
+  line-height: 22px;
+}
+/* line 283, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 {
+  font: italic 300 14px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 20px;
+}
+/* line 289, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.user-details h2 i {
+  position: relative;
+  top: 2px;
+}
+/* line 296, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations {
+  height: 500px;
+  margin: 36px 0;
+  position: relative;
+  z-index: 1;
+}
+/* line 302, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations h2 {
+  color: white;
+  font: 300 25px/25px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+  margin-bottom: 18px;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+/* line 311, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.users {
+  float: left;
+  height: 100%;
+  width: 30%;
+}
+/* line 316, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.users ul {
+  border: none;
+}
+/* line 319, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.users ul li {
+  height: 50px;
+  margin-bottom: 9px;
+  float: left;
+  padding: 0;
+  width: 49px;
+}
+/* line 326, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.users ul li a {
+  border: none;
+  display: block;
+  height: 44px;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
+  width: 44px;
+}
+/* line 335, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.users ul li a img {
+  -moz-box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* CSS3 */
+  height: 44px;
+  width: 44px;
+}
+/* line 345, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.users ul li:nth-child(2n) a {
+  padding-left: 9px;
+}
+/* line 351, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos {
+  float: right;
+  height: 100%;
+  width: 60%;
+}
+/* line 356, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul {
+  border: none;
+}
+/* line 359, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li {
+  float: none;
+  padding: 0;
+  margin-bottom: 9px;
+  position: relative;
+}
+/* line 365, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb {
+  height: 107px;
+  overflow: hidden;
+  position: relative;
+  width: 190px;
+}
+/* line 371, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb a.thumbnail-link {
+  display: block;
+  height: 107px;
+  position: relative;
+  width: 100%;
+}
+/* line 377, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb a.thumbnail-link img.video-thumbnail {
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  background: rgba(102, 102, 102, 0.9);
+  height: 107px;
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+/* line 386, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb a.thumbnail-link:hover, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb a.thumbnail-link:focus, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb a.thumbnail-link:active {
+  text-decoration: none;
+}
+/* line 391, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb div.comment {
+  -webkit-box-shadow: 0px 0px 5px 0px 1px 5px rgba(255, 255, 255, 0.7);
+  -moz-box-shadow: 0px 0px 5px 0px 1px 5px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 5px 0px 1px 5px rgba(255, 255, 255, 0.7);
+  border-radius: 0px 0px 3px 3px;
+  background-color: rgba(0, 0, 0, 0.75);
+  font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  height: auto;
+  min-height: 23px;
+  padding: 5px;
+  position: absolute;
+  width: 180px;
+  bottom: 0;
+  z-index: 20;
+}
+/* line 406, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb div.comment i.icon-play-sign {
+  -webkit-border-radius: 500px 500px;
+  -moz-border-radius: 500px / 500px;
+  border-radius: 500px / 500px;
+  background: url("../img/blank.png") no-repeat;
+  color: #FFFFFF;
+  display: block;
+  font-size: 26px;
+  height: 22px;
+  left: 79px;
+  line-height: 22px;
+  padding: 5px;
+  position: absolute;
+  text-align: center;
+  top: -40px;
+  width: 22px;
+  z-index: 11;
+}
+/* line 423, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb div.comment span.corner {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border: solid 5px rgba(0, 0, 0, 0.75);
+  border-color: transparent transparent rgba(0, 0, 0, 0.75);
+  display: block;
+  height: 0;
+  left: 48%;
+  line-height: 0;
+  position: absolute;
+  top: -10px;
+  width: 0;
+}
+/* line 440, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb div.comment p {
+  width: 100%;
+}
+/* line 443, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb div.comment p a {
+  color: white;
+  clear: left;
+  font: 500 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
+  height: auto !important;
+  vertical-align: baseline;
+  padding: 4px 0;
+  display: inline-block;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+  word-wrap: break-word;
+  text-decoration: none;
+}
+/* line 455, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb div.comment p a:hover, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb div.comment p a:active, div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections div.user-info div.recommendations div.videos ul li div.thumb div.comment p a:focus {
+  text-decoration: none;
+}
+/* line 466, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections .tooltip.right .tooltip-arrow {
+  margin-top: -8px;
+}
+/* line 472, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container #profile-sections.edit:hover .editable {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.5) !important;
+}
+/* line 479, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content {
+  margin-left: 34px;
+  margin-top: 0px;
+  margin-bottom: 18px;
+  float: left;
+  height: 100%;
+  overflow: visible;
+  position: relative;
+  left: 28%;
+  width: 694px;
+}
+/* line 490, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #add-video {
+  -webkit-border-radius: 5px 5px;
+  -moz-border-radius: 5px / 5px;
+  border-radius: 5px / 5px;
+  background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
+  background-color: white;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-top: 13px;
+  margin-bottom: 25px;
+  padding: 6px;
+  width: 656px;
+}
+/* line 505, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #add-video form #id_video_id {
+  font: 500 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+  margin-bottom: 0;
+  width: 525px;
+  float: left;
+}
+/* line 512, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #add-video form button {
+  float: right;
+}
+/* line 518, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav {
+  width: 678px;
+}
+/* line 521, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav ul.nav-pills {
+  display: none;
+  opacity: 0;
+  border-bottom: none;
+  float: left;
+  padding-top: 12px;
+  margin-bottom: 0;
+  width: 81%;
+}
+/* line 530, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav ul.nav-pills li {
+  margin-right: 18px;
+}
+/* line 533, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav ul.nav-pills li.filter {
+  padding: 10px 0px;
+}
+/* line 536, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav ul.nav-pills li.filter i {
+  color: white;
+  font-size: 20px;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+}
+/* line 543, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav ul.nav-pills li a {
+  border-color: transparent !important;
+  color: rgba(255, 255, 255, 0.9);
+  font: 300 22px/30px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+  text-align: left;
+  text-decoration: none;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+}
+/* line 558, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav a.toggle-follow {
+  color: rgba(255, 255, 255, 0.95);
+  display: block;
+  float: right;
+  font-size: 25px;
+  outline: 0;
+  position: relative;
+  right: 0;
+  top: 18px;
+  width: 25px;
+  opacity: 1;
+  z-index: 3;
+}
+/* line 571, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav a.toggle-follow:hover, div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav a.toggle-follow:focus, div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav a.toggle-follow:active {
+  color: white;
+  text-decoration: none;
+}
+/* line 577, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav div.tooltip {
+  left: 620.5px !important;
+  padding: 0;
+  top: 50px !important;
+  margin-left: -5px;
+}
+/* line 583, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav div.tooltip .tooltip-arrow {
+  top: -5px;
+}
+/* line 586, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav a.toggle-follow {
+  opacity: 1;
+  height: 32px;
+  top: 18px;
+  right: 20px;
+}
+/* line 592, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav a.toggle-follow span.icon-stack {
+  display: block;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+/* line 599, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav a.toggle-follow span.icon-stack i.icon-stack-base {
+  color: rgba(0, 0, 0, 0.1);
+  font-size: 32px;
+}
+/* line 604, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav a.toggle-follow span.icon-stack i.icon-user {
+  font-size: 16px;
+  position: absolute;
+  left: -4px;
+}
+/* line 611, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav a.toggle-follow span.icon-stack i.icon-minus,
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav a.toggle-follow span.icon-stack i.icon-plus {
+  font-size: 8px;
+  position: absolute;
+  right: -7px;
+}
+/* line 619, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav .nav-pills > li > a {
+  padding: 3px 9px;
+}
+/* line 626, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav .nav-pills > .active > a,
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav .nav-pills > .active > a:hover,
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav .nav-pills > .active > a:focus,
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content nav .nav-pills > li > a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
+}
+/* line 632, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed {
+  margin-left: 3px;
+  margin-top: 16px;
+  width: 100%;
+  /**** Isotope Filtering ****/
+  /**** Isotope CSS3 transitions ****/
+  /**** disabling Isotope CSS3 transitions ****/
+}
+/* line 637, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed div.spin {
+  top: 170px;
+}
+/* line 639, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed .endless-loading {
+  display: none !important;
+}
+/* line 641, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid {
+  border: none;
+  width: 678px;
+  padding-bottom: 36px;
+}
+/* line 646, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick {
+  display: block;
+  float: left;
+  height: auto;
+  opacity: 1;
+  list-style: none outside none;
+  margin-bottom: 18px;
+  position: relative;
+  width: 336px;
+  @-webkit-keyframes fadeIn {
+    /* line 1036, ../sass/screen.old.scss */
+    to {
+      opacity: 1;
+    }
+}
+
+  @-moz-keyframes fadeIn {
+    /* line 1040, ../sass/screen.old.scss */
+    to {
+      opacity: 1;
+    }
+}
+
+  @keyframes fadeIn {
+    /* line 1044, ../sass/screen.old.scss */
+    to {
+      opacity: 1;
+    }
+}
+
+}
+/* line 656, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper {
+  -webkit-border-radius: 5px 5px;
+  -moz-border-radius: 5px / 5px;
+  border-radius: 5px / 5px;
+  background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
+  background-color: white;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+  padding: 5px 6px 6px 6px;
+  position: relative;
+  width: 300px;
+}
+/* line 666, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper h1 {
+  color: rgba(102, 102, 102, 0.6);
+  font: 500 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+  padding: 3px 2px 8px 2px;
+}
+/* line 671, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper h1 a {
+  color: rgba(102, 102, 102, 0.83);
+  font-weight: 700;
+}
+/* line 676, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper h1 i {
+  color: rgba(102, 102, 102, 0.6);
+  font-size: 14px;
+}
+/* line 681, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper h1 i.icon-heart {
+  vertical-align: sub;
+}
+/* line 685, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper h1 i.icon-plus-sign-alt {
+  font-size: 18px;
+  vertical-align: sub;
+}
+/* line 691, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper span.posted {
+  color: #CECECE;
+  display: block;
+  font: 500 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
+  height: 21px;
+  margin-top: 2px;
+  vertical-align: middle;
+}
+/* line 699, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper span.posted i {
+  color: #CECECE;
+  font-size: 20px;
+  font-weight: normal;
+  position: relative;
+  top: 3px;
+}
+/* line 708, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity {
+  position: relative;
+}
+/* line 711, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper {
+  position: relative;
+}
+/* line 714, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.thumb {
+  height: 165px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+/* line 720, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.thumb a.thumbnail-link {
+  display: block;
+  height: 165px;
+  width: 100%;
+}
+/* line 725, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.thumb a.thumbnail-link img.video-thumbnail {
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  background: rgba(102, 102, 102, 0.9);
+  height: 165px;
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+/* line 735, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.thumb div.comment {
+  -webkit-box-shadow: 0px 0px 5px 0px 1px 5px rgba(255, 255, 255, 0.7);
+  -moz-box-shadow: 0px 0px 5px 0px 1px 5px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 5px 0px 1px 5px rgba(255, 255, 255, 0.7);
+  border-radius: 0px 0px 3px 3px;
+  background-color: rgba(0, 0, 0, 0.75);
+  font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 18px;
+  padding: 9px;
+  position: absolute;
+  bottom: 0;
+  width: 94%;
+  z-index: 20;
+}
+/* line 749, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.thumb div.comment span.corner {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border: solid 9px rgba(0, 0, 0, 0.75);
+  border-color: transparent transparent rgba(0, 0, 0, 0.75);
+  display: block;
+  height: 0;
+  left: 140.5px;
+  line-height: 0;
+  position: absolute;
+  top: -18px;
+  width: 0;
+}
+/* line 766, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.thumb div.comment p {
+  font: 500 13px/15px 'proxima-nova', Helvetica, Arial, sans-serif;
+  color: white;
+  word-wrap: break-word;
+  width: 100%;
+  position: relative;
+  left: 0;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+}
+/* line 775, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.thumb div.comment p a {
+  color: white;
+  height: auto !important;
+}
+/* line 781, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.thumb div.comment img.img-circle {
+  -moz-box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* CSS3 */
+  display: block;
+  float: left;
+  height: 35px;
+  margin-right: 9px;
+  width: 35px;
+  z-index: 2;
+}
+/* line 796, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-details {
+  font: 500 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+  margin: 6px 0;
+}
+/* line 800, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-details a {
+  color: #272727;
+  font: 300 18px/18px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+  padding-bottom: 3px;
+}
+/* line 806, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-details div.shared {
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  border: 1px solid #dddddd;
+  padding: 6px 6px 3px;
+  margin-top: 6px;
+}
+/* line 812, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-details div.shared h5 {
+  color: #dddddd;
+}
+/* line 814, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-details div.shared ul {
+  height: 35px;
+  overflow: auto;
+  padding-top: 1px;
+}
+/* line 819, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-details div.shared ul li {
+  float: left;
+  min-height: 34px;
+  width: 34px;
+  opacity: 1;
+}
+/* line 825, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-details div.shared ul li a {
+  display: block;
+  height: 22px;
+  padding: 7px 0;
+  width: 22px;
+  opacity: 1;
+}
+/* line 832, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-details div.shared ul li a img.img-circle {
+  -moz-box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1);
+  /* CSS3 */
+  height: 22px;
+  width: 22px;
+}
+/* line 841, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-details div.shared ul li div.tooltip.bottom {
+  margin-top: -4px;
+}
+/* line 848, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-details span {
+  color: rgba(73, 73, 73, 0.83);
+  display: block;
+  font-size: 11px;
+}
+/* line 855, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions {
+  bottom: 0;
+  height: 25px;
+  width: 100%;
+}
+/* line 860, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.left {
+  float: left;
+  width: 250px;
+}
+/* line 864, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.left span.posted {
+  bottom: -3px;
+  height: 25px;
+  margin-top: 0;
+  position: relative;
+}
+/* line 872, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.right {
+  float: right;
+  width: 88px;
+}
+/* line 876, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.right a {
+  color: #cecece;
+  display: table;
+  font: 300 20px/29px 'proxima-nova', Helvetica, Arial, sans-serif;
+  float: right;
+  height: 19px;
+  outline: 0;
+  margin-left: 10px;
+  margin-top: -19px;
+  position: static;
+  text-align: right;
+  text-decoration: none;
+  width: 19px;
+}
+/* line 890, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.right a i {
+  position: relative;
+  bottom: 3px;
+}
+/* line 895, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.right a.active, div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.right a:hover {
+  color: #67a3cb;
+}
+/* line 899, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.right a:hover, div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.right a:focus, div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.right a:active {
+  text-decoration: none;
+}
+/* line 904, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.right .tooltip.left {
+  float: none;
+  margin-left: -12px;
+  margin-top: -3px;
+  width: auto;
+}
+/* line 910, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.video-wrapper div.video-actions div.right .tooltip.left .tooltip-arrow {
+  margin-top: -6px;
+}
+/* line 916, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.follow {
+  display: block;
+  font: 700 14px/16px 'proxima-nova',Helvetica,Arial,sans-serif;
+  height: 100%;
+  position: relative;
+  text-decoration: none;
+}
+/* line 923, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.follow a.following {
+  margin: 6px 0 0 12px;
+  display: inline-block;
+  width: 51px;
+  height: 51px;
+}
+/* line 929, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.follow a.following img.img-circle {
+  width: 45px;
+  height: 45px;
+  margin-right: 6px;
+  -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  /* CSS3 */
+}
+/* line 939, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.follow span.quote {
+  display: inline-block;
+  line-height: 12px;
+  margin: 6px 0 0;
+  position: absolute;
+  vertical-align: middle;
+  width: 87%;
+}
+/* line 947, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.follow span.quote em {
+  color: rgba(102, 102, 102, 0.83);
+  display: block;
+  font: italic 12px/14px 'proxima-nova',Helvetica,Arial,sans-serif;
+  padding-top: 2px;
+  text-decoration: none;
+  width: inherit;
+}
+/* line 956, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.follow span.quote.username {
+  padding: 15px 0 15px 1px;
+}
+/* line 962, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.follow:hover em, div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.follow:focus em, div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.follow:active em {
+  text-decoration: none;
+}
+/* line 966, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.joined {
+  display: block;
+  font: 500 13px/16px 'proxima-nova',Helvetica,Arial,sans-serif;
+  height: 100%;
+  position: relative;
+  text-decoration: none;
+}
+/* line 973, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.joined div.days {
+  color: rgba(102, 102, 102, 0.83);
+  margin: 6px 0 0 12px;
+  display: inline-block;
+  width: 51px;
+  height: 51px;
+}
+/* line 980, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.joined div.days i {
+  -webkit-border-radius: 500px 500px;
+  -moz-border-radius: 500px / 500px;
+  border-radius: 500px / 500px;
+  background-color: #1788bc;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.3)), color-stop(100%, #1788bc));
+  background-image: -webkit-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, #1788bc 100%);
+  background-image: -moz-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, #1788bc 100%);
+  background-image: -ms-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, #1788bc 100%);
+  background-image: -o-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, #1788bc 100%);
+  background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.3) -120%, #1788bc 100%);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 32px;
+  padding-top: 6px;
+  margin-right: 6px;
+  -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  /* CSS3 */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  height: 38px;
+  width: 45px;
+}
+/* line 1003, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick div.action-wrapper div.entity div.joined div.days span {
+  display: inline-block;
+  line-height: 12px;
+  position: absolute;
+  padding: 15px 0 15px 1px;
+  vertical-align: middle;
+  width: 87%;
+}
+/* line 1016, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick.shown {
+  opacity: 1;
+}
+/* line 1018, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick.empty {
+  float: none;
+  margin-top: 12px;
+  padding: 0;
+  width: 97.5%;
+  height: 50px !important;
+}
+/* line 1025, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick.empty div.action-wrapper {
+  font: 700 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+  padding: 18px;
+  text-align: center;
+  width: 614px;
+}
+/* line 1031, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed ul.grid li.brick.empty div.action-wrapper strong {
+  font-weight: 700;
+}
+/* line 1051, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed .isotope-item {
+  z-index: 2;
+}
+/* line 1055, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed .isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+/* line 1063, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed .isotope,
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed .isotope .isotope-item {
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+/* line 1071, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed .isotope {
+  -webkit-transition-property: height, width;
+  -moz-transition-property: height, width;
+  -ms-transition-property: height, width;
+  -o-transition-property: height, width;
+  transition-property: height, width;
+}
+/* line 1079, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed .isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform, opacity;
+  -ms-transition-property: -ms-transform, opacity;
+  -o-transition-property: -o-transform, opacity;
+  transition-property: transform, opacity;
+}
+/* line 1091, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed .isotope.no-transition,
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed .isotope.no-transition .isotope-item,
+div.marketing-content div.content div.wrapper div.background #profile-container div.tab-content #feed .isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -ms-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+/* line 1102, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container.video div.tab-content {
+  padding: 18px 0;
+  width: 810px;
+}
+/* line 1106, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container.video div.tab-content nav {
+  display: none;
+}
+/* line 1110, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #profile-container a.modal-button {
+  cursor: pointer;
+  display: block;
+}
+/* line 1116, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share {
+  margin: 18px 0 24px;
+  padding: 0;
+  width: 905px;
+}
+/* line 1121, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share.standalone {
+  margin: 0 auto;
+}
+/* line 1125, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container {
+  padding-left: 8px;
+}
+/* line 1128, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #stats-container {
+  float: right;
+  margin-right: 0;
+  padding: 19px 0;
+  width: 222px;
+}
+/* line 1134, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #stats-container div.stat {
+  color: white;
+  font: 500 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+  min-height: 100px;
+  margin-bottom: 18px;
+  width: 39%;
+}
+/* line 1141, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #stats-container div.stat p {
+  height: 44px;
+  position: relative;
+}
+/* line 1145, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #stats-container div.stat p i {
+  color: rgba(0, 0, 0, 0.15);
+  display: block;
+  font-size: 3em;
+  text-align: center;
+  z-index: 5;
+}
+/* line 1153, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #stats-container div.stat p span {
+  display: block;
+  font: 700 20px/20px 'proxima-nova', Helvetica, Arial, sans-serif;
+  position: relative;
+  top: 3px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  width: 4.3em;
+  z-index: 10;
+}
+/* line 1165, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #stats-container div.stat h4 {
+  color: white;
+  font: 500 14px/15px 'proxima-nova', Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: 20px;
+  z-index: 10;
+}
+/* line 1181, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #stats-container div.stat.shares {
+  margin-top: -6px;
+  margin-bottom: 0;
+}
+/* line 1186, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #stats-container div.stat.shares p i {
+  position: relative;
+  top: 6px;
+}
+/* line 1199, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container {
+  -webkit-border-radius: 5px 5px;
+  -moz-border-radius: 5px / 5px;
+  border-radius: 5px / 5px;
+  background: #f5f5f5;
+  box-shadow: 0 0px 0 5px rgba(0, 0, 0, 0.1);
+  float: left;
+  margin-right: 18px;
+  width: 650px;
+}
+/* line 1207, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame {
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
+  background-color: white;
+  padding: 5px;
+}
+/* line 1213, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame iframe {
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+}
+/* line 1217, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details {
+  padding: 6px 3px 0px;
+}
+/* line 1220, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details h1 {
+  border-bottom: none;
+  color: #272727;
+  font: 300 30px/30px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+}
+/* line 1228, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social {
+  color: #272727;
+  font: 300 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+}
+/* line 1233, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li {
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  border: 1px solid #F7F7F7;
+  color: #aaaaaa;
+  float: left;
+  min-height: 93px;
+  margin-right: 6px;
+  padding: 9px;
+}
+/* line 1242, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li h2 {
+  color: #aaaaaa;
+  font: 300 20px/20px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+  margin-bottom: 9px;
+}
+/* line 1248, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.user {
+  width: 75px;
+}
+/* line 1251, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.user h2 {
+  text-align: center;
+}
+/* line 1255, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.user img.img-circle, div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.user a {
+  display: block;
+  height: 55px;
+  margin: 0 auto;
+  text-align: center;
+}
+/* line 1262, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.user a {
+  color: #cecece;
+  text-decoration: none;
+  width: 75px;
+}
+/* line 1267, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.user a:hover, div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.user a:active, div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.user a:focus {
+  color: #67a3cb;
+  text-decoration: none;
+}
+/* line 1272, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.user a i {
+  font-size: 55px;
+  line-height: 55px;
+}
+/* line 1278, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.user img.img-circle {
+  -moz-box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* CSS3 */
+  width: 55px;
+}
+/* line 1286, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.description {
+  width: 220px;
+}
+/* line 1290, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.commenters {
+  margin-right: 0;
+  width: 267px;
+}
+/* line 1294, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.commenters h2 {
+  margin-bottom: 5px;
+}
+/* line 1297, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.commenters ul li {
+  border: none;
+  float: left;
+  min-height: 42px;
+  padding: 0;
+  height: 42px;
+  width: 42px;
+}
+/* line 1305, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.commenters ul li a {
+  display: block;
+  height: 30px;
+  opacity: 1;
+  padding: 4px 0;
+  width: 30px;
+  position: relative;
+  z-index: 1;
+}
+/* line 1314, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.commenters ul li a img.img-circle {
+  -moz-box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 0px 0px 0px 2px white, 0 0px 0 4px rgba(0, 0, 0, 0.1);
+  /* CSS3 */
+  height: 30px;
+  width: 30px;
+}
+/* line 1323, ../sass/screen.old.scss */
+div.marketing-content div.content div.wrapper div.background #share #share-container #video-container div.frame div.details div.social ul li.commenters ul li.empty {
+  width: 100%;
+}
+
+/* line 1340, ../sass/screen.old.scss */
+.no-js ul.grid li, .no-cssanimations ul.grid li {
+  opacity: 1;
+}
+
+/* line 1341, ../sass/screen.old.scss */
+.modal-backdrop, .modal-backdrop.fade.in {
+  opacity: 0.6;
+}
+
+/* line 1343, ../sass/screen.old.scss */
+#watch {
+  height: 770px;
+}
+/* line 1346, ../sass/screen.old.scss */
+#watch #watch-container {
+  padding: 50px 0;
+  width: 1200px;
+  margin: 0 auto;
+}
+/* line 1351, ../sass/screen.old.scss */
+#watch #watch-container #video-container {
+  padding-left: 500px;
+  background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
+  border-radius: 2px 2px 2px 2px;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
+  float: left;
+  overflow: hidden;
+  padding: 17px 17px 20px 17px;
+  margin-left: 262px;
+  background-color: white;
+  height: 440px;
+  margin: 0 38px 0 262px;
+  width: 640px;
+}
+/* line 1365, ../sass/screen.old.scss */
+#watch #watch-container #video-container iframe {
+  background: #202020;
+  border-bottom: 3px solid #202020;
+  border-radius: 3px 3px 3px 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+/* line 1373, ../sass/screen.old.scss */
+#watch #watch-container #callout {
+  -webkit-border-radius: 2px 2px;
+  -moz-border-radius: 2px / 2px;
+  border-radius: 2px / 2px;
+  background: rgba(255, 255, 255, 0.75);
+  height: 215px;
+  margin-top: 0;
+  float: left;
+  padding: 17px;
+  width: 192px;
+  position: relative;
+}
+/* line 1383, ../sass/screen.old.scss */
+#watch #watch-container #callout p {
+  font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 25px;
+  margin-bottom: 22px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+/* line 1392, ../sass/screen.old.scss */
+#watch #watch-container #callout a.signup {
+  -webkit-border-radius: 2px 2px;
+  -moz-border-radius: 2px / 2px;
+  border-radius: 2px / 2px;
+  background-color: #9e0f84;
+  display: block;
+  color: white;
+  font-family: 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 8px 0;
+  text-align: center;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
+  width: 130px;
+  position: absolute;
+  bottom: 17px;
+  right: 17px;
+  -webkit-transition: background-color 0.1s ease-in-out, 1s;
+  -moz-transition: background-color 0.1s ease-in-out, 1s;
+  -o-transition: background-color 0.1s ease-in-out, 1s;
+  transition: background-color 0.1s ease-in-out, 1s;
+}
+/* line 1409, ../sass/screen.old.scss */
+#watch #watch-container #callout a.signup:hover {
+  text-decoration: none;
+  background-color: #7A0066;
+  -webkit-transition: background-color 0.1s ease-in-out, 1s;
+  -moz-transition: background-color 0.1s ease-in-out, 1s;
+  -o-transition: background-color 0.1s ease-in-out, 1s;
+  transition: background-color 0.1s ease-in-out, 1s;
+}
+/* line 1415, ../sass/screen.old.scss */
+#watch #watch-container #callout a.signup em {
+  font-size: 10px;
+  padding-left: 2px;
+  position: relative;
+  top: -1px;
+  vertical-align: middle;
+}
+
+/* line 1427, ../sass/screen.old.scss */
+.md-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+/* line 1442, ../sass/screen.old.scss */
+.md-modal {
+  -webkit-border-radius: 5px 5px;
+  -moz-border-radius: 5px / 5px;
+  border-radius: 5px / 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  max-width: 630px;
+  min-width: 320px;
+  height: auto;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+/* line 1462, ../sass/screen.old.scss */
+.md-modal.md-show {
+  visibility: visible;
+  opacity: 1;
+}
+/* line 1467, ../sass/screen.old.scss */
+.md-modal.md-show ~ .md-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+/* line 1472, ../sass/screen.old.scss */
+.md-modal .md-content {
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  color: #fff;
+  position: relative;
+  margin: 0 auto;
+}
+/* line 1479, ../sass/screen.old.scss */
+.md-modal .md-content h3 {
+  margin: 0;
+  padding: 18px;
+  text-align: center;
+  font: 500 18px/18px 'proxima-nova', Helvetica, Arial, sans-sarif;
+  color: white;
+  background-color: #272727;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMzA4KSIvPjxzdG9wIG9mZnNldD0iMC45OCIgc3RvcC1jb2xvcj0icmdiYSgwLCAwLCAwLCAwKSIvPjwvcmFkaWFsR3JhZGllbnQ+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDApIiAvPjxyZWN0IHg9Ii0yMC45MDkxJSIgeT0iLTEwMC40MiUiIHdpZHRoPSIxNTYwcHgiIGhlaWdodD0iMjAwLjg0JSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
+  background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 780, color-stop(0%, rgba(255, 255, 255, 0.308)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background-image: -webkit-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: -moz-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: -ms-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: -o-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: radial-gradient(780px 100.42% at center 0%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+  border: 0 none;
+  border-radius: 3px 3px 0 0;
+  text-shadow: rgba(0, 0, 0, 0.6);
+  position: relative;
+  margin-top: -1px;
+}
+/* line 1499, ../sass/screen.old.scss */
+.md-modal .md-content h3 button.md-close {
+  background: none;
+  border: none;
+  padding: none;
+  position: absolute;
+  right: 20px;
+}
+/* line 1508, ../sass/screen.old.scss */
+.md-modal .md-content nav {
+  background: #f5f5f5;
+  padding-top: 6px;
+  margin-bottom: 0;
+}
+/* line 1513, ../sass/screen.old.scss */
+.md-modal .md-content nav ul.nav-tabs {
+  -webkit-border-radius: 0px 0px;
+  -moz-border-radius: 0px / 0px;
+  border-radius: 0px / 0px;
+  margin-bottom: 0;
+  border-top: none;
+}
+/* line 1519, ../sass/screen.old.scss */
+.md-modal .md-content nav ul.nav-tabs li a {
+  font: 500 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+}
+/* line 1524, ../sass/screen.old.scss */
+.md-modal .md-content nav ul.nav-tabs li.active a {
+  background-color: #F5F5F5;
+  border-bottom: none;
+  font-weight: 700;
+}
+/* line 1535, ../sass/screen.old.scss */
+.md-modal .md-content > div {
+  background: linear-gradient(to bottom, #f5f5f5 0%, #ffffff 19%, #ffffff 77%, #f5f5f5 100%) repeat scroll 0 0 transparent;
+  background-color: white;
+  border-radius: 0 0 3px 3px;
+  color: #272727;
+  font: 14px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.15em;
+  padding: 18px 18px 0 18px;
+}
+/* line 1550, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane div.avatar-section h1 {
+  font-weight: 700px;
+}
+/* line 1554, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane div.avatar-section p {
+  font-size: 13px;
+}
+/* line 1558, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane div.avatar-section i.icon-upload {
+  opacity: 0.5;
+  text-shadow: 0 1px 1px #FFFFFF;
+}
+/* line 1563, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane div.avatar-section div.upload-here {
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  background: #eee;
+  border: 1px dashed #ccc;
+  margin: 12px 0;
+  padding: 6px;
+}
+/* line 1570, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane div.avatar-section div.upload-here form {
+  float: left;
+  padding: 22px 0;
+  width: 80%;
+}
+/* line 1575, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane div.avatar-section div.upload-here form label {
+  display: none;
+}
+/* line 1577, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane div.avatar-section div.upload-here form .fileinput-button {
+  font-weight: 500;
+  display: block;
+  float: left;
+  position: relative;
+  overflow: hidden;
+}
+/* line 1584, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane div.avatar-section div.upload-here form .fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+/* line 1597, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane div.avatar-section div.upload-here form div.actions {
+  float: right;
+}
+/* line 1600, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane div.avatar-section div.upload-here form div.actions button {
+  font: Arial, Helvetica, sans-serif;
+}
+/* line 1606, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane #files {
+  margin-bottom: 18px;
+}
+/* line 1611, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane #files div p canvas {
+  height: 100px;
+  float: left;
+  margin-right: 18px;
+  width: 100px;
+}
+/* line 1618, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane #files div p span {
+  font-size: 16px;
+  float: left;
+}
+/* line 1624, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane #files div p span.text-danger,
+.md-modal .md-content > div div.tab-pane #files div p span.text-success {
+  font-weight: 500;
+  padding-top: 12px;
+}
+/* line 1629, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane #files div p span.text-danger {
+  color: #D9534F;
+}
+/* line 1630, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane #files div p span.text-success {
+  color: #5CB85C;
+}
+/* line 1632, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane #files div p button {
+  float: right;
+}
+/* line 1639, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane #progress {
+  height: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+/* line 1648, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane #progress .progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #428bca;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
+/* line 1662, ../sass/screen.old.scss */
+.md-modal .md-content > div div.tab-pane #progress .progress-bar-success {
+  background-color: #5cb85c;
+}

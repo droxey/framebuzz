@@ -1,0 +1,1668 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass";
+@import "compass/reset";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/transition";
+
+/*
+ *      Mixins
+ */
+
+ body {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.3)), color-stop(100%, rgba(23, 136, 188, 1.0)));
+    background-image: -webkit-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: -moz-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: -ms-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: -o-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+    background-attachment: fixed;
+ }
+
+@mixin background-image-retina($file, $type, $width, $height) {
+  background-image: url($file + '.' + $type);
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 144dpi) {
+    & {
+      background-image: url($file + '@2x.' + $type);
+      background-size: $width $height;
+    }
+  }
+}
+
+a, a:focus, a:hover, a:active {
+    outline: 0 !important;
+
+    &.tooltip { opacity: 1 !important; }
+}
+
+div.alert {
+    font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    width: 233px;
+}
+
+div.form-actions {
+    bottom: 30px;
+    left: 220px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 695px;
+}
+
+div.tooltip {
+    color: white;
+    font: 500 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
+    opacity: 1;
+    padding: 3px 0;
+    z-index: 99999;
+}
+
+img.img-circle {
+    @include single-box-shadow(rgba(0, 0, 0, 0.52), 1px, 1px, 3px);
+}
+
+div.marketing-content {
+    background: none; 
+    height: 100%;
+
+    div.content {
+        background: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+        height: 100%;
+        min-height: 925px;
+        padding-bottom: 0;
+        overflow: visible;
+
+        div.wrapper {
+            width: 1180px;
+            margin: 0 auto;
+
+            div.background {
+                height: 100%;
+                width: 100%;
+
+                #profile-container {
+                    margin-bottom: 37px;
+                    height: 100%;
+                    z-index: 1;
+
+                    div.spin {
+                        margin: 0 auto;
+                        position: relative;
+                        text-align: center;
+                        width: 40px;
+                        
+                        i {
+                            color: white;
+                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                        }
+                    }
+
+                    #profile-sections {
+                        background: rgba(0, 0, 0, 0.05);
+                        box-shadow: -2px 0px 0px 3px rgba(0, 0, 0, 0.1);
+                        float: left;
+                        height: 100%;
+                        margin-left: 8px;
+                        padding: 30px 6px;
+                        position: absolute;
+                        width: 330px;
+
+                        div.user-info {
+                            a.customize {
+                                color: #FFFFFF;
+                                font-size: 26px;
+                                left: 6px;
+                                position: absolute;
+                                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                                top: 19px;
+
+                                &:hover, &:active, &:focus { text-decoration: none; }
+                            }
+
+                            a.avatar {
+                                display: block;
+                                margin: 0 auto;
+                                width: 193px;
+
+                                img.img-circle {
+                                    -moz-box-shadow: 0px 0px 0px 5px #fff, 0 0px 0 10px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                    -webkit-box-shadow: 0px 0px 0px 5px #fff, 0 0px 0 10px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                    box-shadow: 0px 0px 0px 5px #fff, 0 0px 0 10px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                    display: block;
+                                    height: 177px;
+                                    width: 177px;
+                                }
+                            }
+
+                            ul.nav-tabs {
+                                border-top: 1px solid rgba(255, 255, 255, 0.5);
+                                border-bottom: none;
+                                margin-bottom: 0;
+
+                                li {
+                                    float: left;
+                                    padding: 9px 0 10px 0;
+                                    width: auto;
+
+                                    a.filter {
+                                        @include border-radius(0px, 0px);
+                                        border: 1px solid transparent;
+                                        border-right: 1px solid rgba(255, 255, 255, 0.2);
+                                        color: white;
+                                        font: 500 14px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                        padding: 0 7px 0 2px;
+                                        text-align: center;
+                                        text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+                                        text-decoration: none;
+
+                                        em { font-weight: 700; }
+
+                                        &:hover, &:active, &:focus {
+                                            background: none;
+                                            outline: 0 none;
+                                            opacity: 1;
+                                            @include single-transition(opacity 50ms ease-in);
+                                        }
+                                    }
+
+                                    &.active {
+                                        a {
+                                            background: none;
+                                            opacity: 1;
+                                            @include single-transition(opacity 50ms ease-in);
+                                        }
+                                    }
+
+                                    &:first-child {
+                                        a {
+                                            border-left: none;
+                                            padding-left: 0;
+                                        }
+                                    }
+
+                                    &:last-child {
+                                        a {
+                                            border-right: none;
+                                            padding-right: 0;
+                                        }
+                                    }
+                                }
+                            }
+
+                            div.user-details {
+                                padding: 9px 0 9px 0;
+
+                                h1, h2 {
+                                    border-bottom: none;
+                                    color: white;
+                                    font: 500 30px/30px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+                                    margin-bottom: 0;
+                                    padding: 0 6px 3px;
+                                    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+
+                                    a {
+                                        color: white;
+
+                                        &:hover, &:active, &:focus {
+                                            text-decoration: none;
+                                        }
+                                        span {
+                                            color: white;
+                                        }
+                                    }
+                                }
+
+                                h2 a.editable,
+                                p.bio a.editable {
+                                    font: 300 14px/18px 'proxima-nova',Helvetica,Arial,sans-serif;
+                                    color: white;
+                                    outline: none;
+
+                                    &:hover, &:active, &:focus {
+                                        text-decoration: none;
+                                    }
+                                }
+
+                                h1 {
+                                    padding: 0 0 9px 0;
+                                    position: relative;
+                                    width: 100%;
+
+                                    span.username-field { 
+                                        float: left;
+                                        display: inline-block;
+                                        width: 100%;
+                                    }
+
+                                    span.location-field { 
+                                        float: right;
+                                        font: 300 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                        position: absolute;
+                                        top: 2px;
+                                        right: 0;
+
+                                        i.icon-map-marker {
+                                            font-size: 26px;
+                                            line-height: 30px;
+                                            padding-right: 3px;
+                                        }
+
+                                        a { 
+                                            float: right;
+                                            line-height: 30px;
+                                            font-weight: 500;
+                                        }
+                                    }
+                                }   
+
+                                p.bio {
+                                    border-top: 1px solid rgba(255, 255, 255, 0.5);
+                                    color: white;
+                                    font: 300 14px/17px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                    padding: 18px 0;
+                                    text-align: justify;
+                                    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+
+                                    a.editable {
+                                        line-height: 22px;
+                                    }
+                                }
+
+                                h2 {
+                                    font: italic 300 14px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                    padding-left: 0;
+                                    padding-right: 0;
+                                    padding-bottom: 20px;
+
+                                    i {
+                                        position: relative;
+                                        top: 2px;
+                                    }
+                                }
+                            }
+
+                            div.recommendations {
+                                height: 500px;
+                                margin: 36px 0;
+                                position: relative;
+                                z-index: 1;
+
+                                h2 {
+                                    color: white;
+                                    font: 300 25px/25px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+                                    margin-bottom: 18px;
+                                    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+                                    padding-bottom: 9px;
+                                    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+                                }
+
+                                div.users {
+                                    float: left;
+                                    height: 100%;
+                                    width: 30%;
+
+                                    ul {
+                                        border: none;
+
+                                        li {
+                                            height: 50px;
+                                            margin-bottom: 9px;
+                                            float: left;
+                                            padding: 0;
+                                            width: 49px;
+
+                                            a {
+                                                border: none;
+                                                display: block;
+                                                height: 44px;
+                                                margin: 0 auto;
+                                                padding-left: 0;
+                                                padding-right: 0;
+                                                width: 44px;
+
+                                                img {
+                                                    -moz-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                    -webkit-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                    box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                    height: 44px;
+                                                    width: 44px;
+                                                }
+                                            }
+
+                                            &:nth-child(2n) {
+                                                a { padding-left: 9px; }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                div.videos {
+                                    float: right;
+                                    height: 100%;
+                                    width: 60%;
+
+                                    ul {
+                                        border: none;
+
+                                        li {
+                                            float: none;
+                                            padding: 0;
+                                            margin-bottom: 9px;
+                                            position: relative;
+
+                                            div.thumb {
+                                                height: 107px;
+                                                overflow: hidden;
+                                                position: relative;
+                                                width: 190px;
+
+                                                a.thumbnail-link {
+                                                    display: block;
+                                                    height: 107px;
+                                                    position: relative;
+                                                    width: 100%;
+
+                                                    img.video-thumbnail {
+                                                        @include border-radius(3px, 3px);
+                                                        background: rgba(102, 102, 102, .90);
+                                                        height: 107px;
+                                                        position: relative;
+                                                        width: 100%;
+                                                        z-index: 10;
+                                                    }
+
+                                                    &:hover, &:focus, &:active {
+                                                        text-decoration: none;
+                                                    }
+                                                }
+
+                                                div.comment {
+                                                    @include single-box-shadow(0px 1px 5px rgba(255, 255, 255, 0.7));
+                                                    border-radius: 0px 0px 3px 3px;
+                                                    background-color: rgba(0, 0, 0, 0.75);
+                                                    font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                    font-size: 11px;
+                                                    font-weight: 500;
+                                                    height: auto;
+                                                    min-height: 23px;
+                                                    padding: 5px;
+                                                    position: absolute;
+                                                    width: 180px;
+                                                    bottom: 0;
+                                                    z-index: 20;
+
+                                                     i.icon-play-sign {
+                                                        @include border-radius(500px, 500px);
+                                                        background: url('../img/blank.png') no-repeat;
+                                                        color: #FFFFFF;
+                                                        display: block;
+                                                        font-size: 26px;
+                                                        height: 22px;
+                                                        left: 79px;
+                                                        line-height: 22px;
+                                                        padding: 5px;
+                                                        position: absolute;
+                                                        text-align: center;
+                                                        top: -40px;
+                                                        width: 22px;
+                                                        z-index: 11;
+                                                    }
+
+                                                    span.corner {
+                                                        position: absolute;
+                                                        display: block;
+                                                        width: 0;
+                                                        height: 0;
+                                                        line-height: 0;
+                                                        border: solid 5px rgba(0, 0, 0, 0.75);
+                                                        border-color: transparent transparent rgba(0, 0, 0, 0.75);
+                                                        display: block;
+                                                        height: 0;
+                                                        left: 48%;
+                                                        line-height: 0;
+                                                        position: absolute;
+                                                        top: -10px;
+                                                        width: 0;
+                                                    }
+
+                                                    p {
+                                                        width: 100%; 
+
+                                                        a {
+                                                            color: white;
+                                                            clear: left;
+                                                            font: 500 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                            height: auto !important;
+                                                            vertical-align: baseline;
+                                                            padding: 4px 0;
+                                                            display: inline-block;
+                                                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+                                                            word-wrap: break-word;
+                                                            text-decoration: none;
+
+                                                            &:hover, &:active, &:focus { text-decoration: none; }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .tooltip.right .tooltip-arrow {
+                            margin-top: -8px;
+                        }
+                                
+                        &.edit {
+                            &:hover {
+                                .editable {
+                                    border-bottom: 1px dashed rgba(255, 255, 255, 0.5) !important;
+                                }
+                            }
+                        }
+                    }
+
+                    div.tab-content {
+                        margin-left: 34px;
+                        margin-top: 0px;
+                        margin-bottom: 18px;
+                        float: left;
+                        height: 100%;
+                        overflow: visible;
+                        position: relative;
+                        left: 28%;
+                        width: 694px;
+
+                        #add-video {
+                            @include border-radius(5px, 5px);
+                            background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+                            background-color: white;
+                            box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.10);
+                            margin-top: 13px;
+                            margin-bottom: 25px;
+                            padding: 6px;
+                            width: 656px;
+                            
+                            span.corner {
+
+                            }
+
+                            form {
+                                #id_video_id {
+                                    font: 500 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                    margin-bottom: 0;
+                                    width: 525px;
+                                    float: left;
+                                }
+
+                                button {
+                                    float: right;
+                                }
+                            }
+                        }
+                        
+                        nav {
+                            width: 678px;
+
+                            ul.nav-pills {
+                                display: none;
+                                opacity: 0;
+                                border-bottom: none;
+                                float: left;
+                                padding-top: 12px;
+                                margin-bottom: 0;
+                                width: 81%;
+
+                                li {
+                                    margin-right: 18px;
+                                    
+                                    &.filter {
+                                        padding: 10px 0px;
+
+                                        i {
+                                            color: rgba(255, 255, 255, 1);
+                                            font-size: 20px;
+                                            text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+                                        }
+                                    }
+
+                                    a {
+                                        border-color: transparent !important;
+                                        color: rgba(255, 255, 255, 0.9);
+                                        font: 300 22px/30px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+                                        text-align: left;
+                                        text-decoration: none;
+                                        text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+
+                                        &:hover, &:focus, &:active {
+                                            
+                                        }
+                                    }
+                                }
+                            }
+
+                            a.toggle-follow {
+                                color: rgba(255, 255, 255, .95);
+                                display: block;
+                                float: right;
+                                font-size: 25px;
+                                outline: 0;
+                                position: relative;
+                                right: 0;
+                                top: 18px;
+                                width: 25px;
+                                opacity: 1;
+                                z-index: 3;
+
+                                &:hover, &:focus, &:active {
+                                    color: rgba(255, 255, 255, 1);
+                                    text-decoration: none;
+                                }
+                            }
+
+                            div.tooltip {
+                                left: 620.5px !important;
+                                padding: 0;
+                                top: 50px !important;
+                                margin-left: -5px;
+
+                                .tooltip-arrow { top: -5px; }
+                            }
+
+                            a.toggle-follow {
+                                opacity: 1;
+                                height: 32px;
+                                top: 18px;
+                                right: 20px;
+
+                                span.icon-stack {
+                                    display: block;
+                                    position: relative;
+                                    width: 32px;
+                                    height: 32px;
+                                    line-height: 32px;
+
+                                    i.icon-stack-base {
+                                        color: rgba(0, 0, 0, 0.1);
+                                        font-size: 32px;
+                                    }
+
+                                    i.icon-user {
+                                        font-size: 16px;
+                                        position: absolute;
+                                        left: -4px;
+                                    }
+
+                                    i.icon-minus,
+                                    i.icon-plus {
+                                        font-size: 8px;
+                                        position: absolute;
+                                        right: -7px;
+                                    }
+                                }                                
+                            }
+
+                            .nav-pills > li > a {
+                                padding: 3px 9px;
+                            }
+
+                            .nav-pills > .active > a, 
+                            .nav-pills > .active > a:hover, 
+                            .nav-pills > .active > a:focus,
+                            .nav-pills > li > a:hover {
+                                background-color: rgba(0, 0, 0, 0.1);
+                                color: rgba(255, 255, 255, 1);
+                            }
+                        }
+
+                        #feed {
+                            margin-left: 3px;
+                            margin-top: 16px;
+                            width: 100%;
+
+                            div.spin { top: 170px; }
+
+                            .endless-loading { display: none !important; }
+
+                            ul.grid {
+                                border: none;
+                                width: 678px;
+                                padding-bottom: 36px;
+
+                                li.brick {
+                                    display: block;
+                                    float: left;
+                                    height: auto;
+                                    opacity: 1;
+                                    list-style: none outside none;
+                                    margin-bottom: 18px;
+                                    position: relative;
+                                    width: 336px;
+                                    
+                                    div.action-wrapper {
+                                        @include border-radius(5px, 5px);
+                                        background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+                                        background-color: white;
+                                        box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.10);
+                                        margin: 5px;
+                                        padding: 5px 6px 6px 6px;
+                                        position: relative;
+                                        width: 300px;
+                                    
+                                        h1 {
+                                            color: rgba(102, 102, 102, 0.60);
+                                            font: 500 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                            padding: 3px 2px 8px 2px;
+
+                                            a {
+                                                color: rgba(102, 102, 102, 0.83);
+                                                font-weight: 700;
+                                            }
+
+                                            i { 
+                                                color: rgba(102, 102, 102, 0.60);
+                                                font-size: 14px;
+                                            }
+
+                                            i.icon-heart {
+                                                vertical-align: sub;
+                                            }
+
+                                            i.icon-plus-sign-alt {
+                                                font-size: 18px;
+                                                vertical-align: sub;
+                                            }
+                                        }
+
+                                        span.posted {
+                                            color: #CECECE;
+                                            display: block;
+                                            font: 500 12px/12px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                            height: 21px;
+                                            margin-top: 2px;
+                                            vertical-align: middle;
+
+                                            i {
+                                                color: #CECECE;
+                                                font-size: 20px;
+                                                font-weight: normal;
+                                                position: relative;
+                                                top: 3px;
+                                            }
+                                        }
+                                        
+                                        div.entity {
+                                            position: relative;
+
+                                            div.video-wrapper {
+                                                position: relative;
+                                                
+                                                div.thumb {
+                                                    height: 165px;
+                                                    overflow: hidden;
+                                                    position: relative;
+                                                    width: 100%;
+
+                                                    a.thumbnail-link {
+                                                        display: block;
+                                                        height: 165px;
+                                                        width: 100%;
+
+                                                        img.video-thumbnail {
+                                                            @include border-radius(3px, 3px);
+                                                            background: rgba(102, 102, 102, .90);
+                                                            height: 165px;
+                                                            position: relative;
+                                                            width: 100%;
+                                                            z-index: 10;
+                                                        }
+                                                    }
+
+                                                    div.comment {
+                                                        @include single-box-shadow(0px 1px 5px rgba(255, 255, 255, 0.7));
+                                                        border-radius: 0px 0px 3px 3px;
+                                                        background-color: rgba(0, 0, 0, 0.75);
+                                                        font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                        font-size: 11px;
+                                                        font-weight: 500;
+                                                        line-height: 18px;
+                                                        padding: 9px;
+                                                        position: absolute;
+                                                        bottom: 0;
+                                                        width: 94%;
+                                                        z-index: 20;
+
+                                                        span.corner {
+                                                            position: absolute;
+                                                            display: block;
+                                                            width: 0;
+                                                            height: 0;
+                                                            line-height: 0;
+                                                            border: solid 9px rgba(0, 0, 0, 0.75);
+                                                            border-color: transparent transparent rgba(0, 0, 0, 0.75);
+                                                            display: block;
+                                                            height: 0;
+                                                            left: 140.5px;
+                                                            line-height: 0;
+                                                            position: absolute;
+                                                            top: -18px;
+                                                            width: 0;
+                                                        }
+
+                                                        p {
+                                                            font: 500 13px/15px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                            color: white;
+                                                            word-wrap: break-word;
+                                                            width: 100%;
+                                                            position: relative;
+                                                            left: 0;
+                                                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+
+                                                            a {
+                                                                color: white;
+                                                                height: auto !important;
+                                                            }
+                                                        }
+
+                                                        img.img-circle {
+                                                            -moz-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                            -webkit-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                            box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                            display: block;
+                                                            float: left;
+                                                            height: 35px;
+                                                            margin-right: 9px;
+                                                            width: 35px;
+                                                            z-index: 2;
+                                                        }
+                                                    }
+                                                }
+
+
+                                                div.video-details {
+                                                    font: 500 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                    margin: 6px 0;
+
+                                                    a {
+                                                        color: #272727;
+                                                        font: 300 18px/18px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+                                                        padding-bottom: 3px;
+                                                    }
+
+                                                    div.shared {
+                                                        @include border-radius(3px, 3px);
+                                                        border: 1px solid #dddddd;
+                                                        padding: 6px 6px 3px;
+                                                        margin-top: 6px;
+
+                                                        h5 { color: #dddddd; }
+
+                                                        ul {
+                                                            height: 35px;
+                                                            overflow: auto;
+                                                            padding-top: 1px;
+
+                                                            li {
+                                                                float: left;
+                                                                min-height: 34px;
+                                                                width: 34px;
+                                                                opacity: 1;
+                                                                
+                                                                a {
+                                                                    display: block;
+                                                                    height: 22px;
+                                                                    padding: 7px 0;
+                                                                    width: 22px;
+                                                                    opacity: 1;
+
+                                                                    img.img-circle {
+                                                                        -moz-box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                                        -webkit-box-shadow: 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                                        box-shadow: 0 0px 0 2px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                                        height: 22px;
+                                                                        width: 22px;
+                                                                    }
+                                                                }
+
+                                                                div.tooltip.bottom {
+                                                                    margin-top: -4px;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    
+                                                    span {
+                                                        color: rgba(73, 73, 73, 0.83);
+                                                        display: block;
+                                                        font-size: 11px;
+                                                    }
+                                                }
+
+                                                div.video-actions {
+                                                    bottom: 0;
+                                                    height: 25px;
+                                                    width: 100%;
+
+                                                    div.left { 
+                                                        float: left;
+                                                        width: 250px; 
+
+                                                        span.posted {     
+                                                            bottom: -3px;
+                                                            height: 25px;
+                                                            margin-top: 0;
+                                                            position: relative; 
+                                                        }
+                                                    }
+
+                                                    div.right {
+                                                        float: right;
+                                                        width: 88px;
+
+                                                        a {
+                                                            color: #cecece;
+                                                            display: table;
+                                                            font: 300 20px/29px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                                            float: right;
+                                                            height: 19px;
+                                                            outline: 0;
+                                                            margin-left: 10px;
+                                                            margin-top: -19px;
+                                                            position: static;
+                                                            text-align: right;
+                                                            text-decoration: none;
+                                                            width: 19px;
+
+                                                            i {
+                                                                position: relative;
+                                                                bottom: 3px;
+                                                            }
+
+                                                            &.active, &:hover {
+                                                                color: #67a3cb;
+                                                            }
+
+                                                            &:hover, &:focus, &:active {
+                                                                text-decoration: none;
+                                                            }
+                                                        }
+
+                                                        .tooltip.left {
+                                                            float: none;
+                                                            margin-left: -12px;
+                                                            margin-top: -3px;
+                                                            width: auto;
+
+                                                            .tooltip-arrow { margin-top: -6px; }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            div.follow {
+                                                display: block;
+                                                font: 700 14px/16px 'proxima-nova',Helvetica,Arial,sans-serif;
+                                                height: 100%;
+                                                position: relative;
+                                                text-decoration: none;
+                                                
+                                                a.following {
+                                                    margin: 6px 0 0 12px;
+                                                    display: inline-block;
+                                                    width: 51px;
+                                                    height: 51px;
+
+                                                    img.img-circle {
+                                                        width: 45px;
+                                                        height: 45px;
+                                                        margin-right: 6px;
+                                                        -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                        -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                    }
+                                                }
+         
+                                                span.quote {
+                                                    display: inline-block;
+                                                    line-height: 12px;
+                                                    margin: 6px 0 0;
+                                                    position: absolute;
+                                                    vertical-align: middle;
+                                                    width: 87%;
+
+                                                    em {
+                                                        color: rgba(102, 102, 102, 0.83);
+                                                        display: block;
+                                                        font: italic 12px/14px 'proxima-nova',Helvetica,Arial,sans-serif;
+                                                        padding-top: 2px;
+                                                        text-decoration: none;
+                                                        width: inherit;
+                                                    }
+
+                                                    &.username {
+                                                        padding: 15px 0 15px 1px;
+                                                    }
+                                                } 
+
+                                                &:hover, &:focus, &:active {
+                                                    em { text-decoration: none; }
+                                                }
+                                            }
+
+                                            div.joined {
+                                                display: block;
+                                                font: 500 13px/16px 'proxima-nova',Helvetica,Arial,sans-serif;
+                                                height: 100%;
+                                                position: relative;
+                                                text-decoration: none;
+
+                                                div.days {
+                                                    color: rgba(102, 102, 102, 0.83);
+                                                    margin: 6px 0 0 12px;
+                                                    display: inline-block;
+                                                    width: 51px;
+                                                    height: 51px;
+
+                                                    i {
+                                                        @include border-radius(500px, 500px);
+                                                        background-color: rgba(23, 136, 188, 1.0);
+                                                        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2IoMTM0LCAxOTEsIDIxOCkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMjhhYmIiLz48L3JhZGlhbEdyYWRpZW50PjxyZWN0IHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzIyOGFiYiIgLz48cmVjdCB4PSItMC4wNjcxJSIgeT0iLTkxNi4yMDY5JSIgd2lkdGg9IjEwMC4xMzQyJSIgaGVpZ2h0PSIxOTMyLjQxMzclIiBmaWxsPSJ1cmwoI2cpIiAvPjwvc3ZnPg==);
+                                                        background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 551, color-stop(0%, rgba(23, 136, 188, 0.3)), color-stop(100%, rgba(23, 136, 188, 1.0)));
+                                                        background-image: -webkit-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+                                                        background-image: -moz-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+                                                        background-image: -ms-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+                                                        background-image: -o-radial-gradient(center center, closest-corner circle, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+                                                        background-image: radial-gradient(closest-corner circle at center center, rgba(255, 255, 255, 0.3) -120%, rgba(23, 136, 188, 1.0) 100%);
+                                                        color: rgba(255, 255, 255, 0.9);
+                                                        font-size: 32px;
+                                                        padding-top: 6px;
+                                                        margin-right: 6px;
+                                                        -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                        -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                                                        text-align: center;
+                                                        height: 38px;
+                                                        width: 45px;
+                                                    }
+
+                                                    span {
+                                                        display: inline-block;
+                                                        line-height: 12px;
+                                                        position: absolute;
+                                                        padding: 15px 0 15px 1px;
+                                                        vertical-align: middle;
+                                                        width: 87%;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    &.shown { opacity: 1; }
+
+                                    &.empty {
+                                        float: none;
+                                        margin-top: 12px;
+                                        padding: 0;
+                                        width: 97.5%;
+                                        height: 50px !important;
+
+                                        div.action-wrapper {
+                                            font: 700 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                            padding: 18px;
+                                            text-align: center;
+                                            width: 614px;
+
+                                            strong { font-weight: 700; }
+                                        }
+                                    }
+
+                                    @-webkit-keyframes fadeIn {
+                                        to { opacity: 1; }
+                                    }
+
+                                    @-moz-keyframes fadeIn {
+                                        to { opacity: 1; }
+                                    }
+
+                                    @keyframes fadeIn {
+                                        to { opacity: 1; }
+                                    }
+                                }
+                            }
+
+                            /**** Isotope Filtering ****/
+
+                            .isotope-item {
+                              z-index: 2;
+                            }
+
+                            .isotope-hidden.isotope-item {
+                              pointer-events: none;
+                              z-index: 1;
+                            }
+
+                            /**** Isotope CSS3 transitions ****/
+
+                            .isotope,
+                            .isotope .isotope-item {
+                              -webkit-transition-duration: 0.5s;
+                                 -moz-transition-duration: 0.5s;
+                                  -ms-transition-duration: 0.5s;
+                                   -o-transition-duration: 0.5s;
+                                      transition-duration: 0.5s;
+                            }
+
+                            .isotope {
+                              -webkit-transition-property: height, width;
+                                 -moz-transition-property: height, width;
+                                  -ms-transition-property: height, width;
+                                   -o-transition-property: height, width;
+                                      transition-property: height, width;
+                            }
+
+                            .isotope .isotope-item {
+                              -webkit-transition-property: -webkit-transform, opacity;
+                                 -moz-transition-property:    -moz-transform, opacity;
+                                  -ms-transition-property:     -ms-transform, opacity;
+                                   -o-transition-property:      -o-transform, opacity;
+                                      transition-property:         transform, opacity;
+                            }
+
+                            /**** disabling Isotope CSS3 transitions ****/
+
+                            .isotope.no-transition,
+                            .isotope.no-transition .isotope-item,
+                            .isotope .isotope-item.no-transition {
+                              -webkit-transition-duration: 0s;
+                                 -moz-transition-duration: 0s;
+                                  -ms-transition-duration: 0s;
+                                   -o-transition-duration: 0s;
+                                      transition-duration: 0s;
+                            }
+                        }
+                    }
+
+                    &.video {
+                        div.tab-content {
+                            padding: 18px 0;
+                            width: 810px;
+
+                            nav { display: none; }
+                        }
+                    }
+
+                    a.modal-button {
+                        cursor: pointer;
+                        display: block;
+                    }
+                }
+
+                #share {
+                    margin: 18px 0 24px;
+                    padding: 0;
+                    width: 905px;
+
+                    &.standalone {
+                        margin: 0 auto;
+                    }
+
+                    #share-container {
+                        padding-left: 8px;
+
+                        #stats-container {
+                            float: right;
+                            margin-right: 0;
+                            padding: 19px 0;
+                            width: 222px;
+
+                            div.stat {
+                                color: white;
+                                font: 500 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                min-height: 100px;
+                                margin-bottom: 18px;
+                                width: 39%;
+
+                                p {
+                                    height: 44px;
+                                    position: relative;
+
+                                    i {
+                                        color: rgba(0, 0, 0, 0.15);
+                                        display: block;
+                                        font-size: 3em;
+                                        text-align: center;
+                                        z-index: 5;
+                                    }
+
+                                    span {
+                                        display: block;
+                                        font: 700 20px/20px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                        position: relative;
+                                        top: 3px;
+                                        text-align: center;
+                                        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+                                        width: 4.3em;
+                                        z-index: 10;
+                                    }
+                                }
+
+                                h4 {
+                                    color: white;
+                                    font: 500 14px/15px 'proxima-nova', Helvetica, Arial, sans-serif;
+                                    text-align: center;
+                                    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+                                    position: relative;
+                                    top: 20px;
+                                    z-index: 10;
+                                }
+
+                                &.comments {
+                                }
+
+                                &.commenters {
+                                }
+
+                                &.shares {
+                                    margin-top: -6px;
+                                    margin-bottom: 0;
+
+                                    p {
+                                        i {
+                                            position: relative;
+                                            top: 6px;
+                                        }
+
+                                        span { }
+                                    }
+
+                                    h4 { }
+                                }
+                            }
+                        }
+
+                        #video-container {
+                            @include border-radius(5px, 5px);
+                            background: #f5f5f5;
+                            box-shadow: 0 0px 0 5px rgba(0, 0, 0, 0.1);
+                            float: left;
+                            margin-right: 18px;
+                            width: 650px;
+
+                            div.frame {
+                                @include border-radius(3px, 3px);
+                                background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+                                background-color: white;
+                                padding: 5px;
+
+                                iframe {
+                                     @include border-radius(3px, 3px);
+                                }
+
+                                div.details {
+                                    padding: 6px 3px 0px;
+
+                                    h1 {
+                                        border-bottom: none;
+                                        color: #272727;
+                                        font: 300 30px/30px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+                                        margin-bottom: 6px;
+                                        padding-bottom: 6px;
+                                    }
+
+                                    div.social {
+                                        color: #272727;
+                                        font: 300 13px/13px 'proxima-nova', Helvetica, Arial, sans-serif;
+
+                                        ul {
+                                            li {
+                                                @include border-radius(3px, 3px);
+                                                border: 1px solid #F7F7F7;
+                                                color: #aaaaaa;
+                                                float: left;
+                                                min-height: 93px;
+                                                margin-right: 6px;
+                                                padding: 9px;
+
+                                                h2 {
+                                                    color: #aaaaaa;
+                                                    font: 300 20px/20px 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+                                                    margin-bottom: 9px;
+                                                }
+
+                                                &.user {
+                                                    width: 75px;
+
+                                                    h2 {
+                                                        text-align: center;
+                                                    }
+
+                                                    img.img-circle, a {
+                                                        display: block;
+                                                        height: 55px;
+                                                        margin: 0 auto;
+                                                        text-align: center;
+                                                    }
+
+                                                    a {
+                                                        color: #cecece;
+                                                        text-decoration: none;
+                                                        width: 75px;
+                                            
+                                                        &:hover, &:active, &:focus {
+                                                            color: #67a3cb;
+                                                            text-decoration: none;
+                                                        }
+
+                                                        i {
+                                                            font-size: 55px;
+                                                            line-height: 55px;
+                                                        }
+                                                    }
+
+                                                    img.img-circle {
+                                                        -moz-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                        -webkit-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                        box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                        width: 55px;
+                                                    }
+                                                }
+
+                                                &.description {
+                                                    width: 220px;
+                                                }
+
+                                                &.commenters {
+                                                    margin-right: 0;
+                                                    width: 267px;
+
+                                                    h2 { margin-bottom: 5px; }
+
+                                                    ul {
+                                                        li {
+                                                            border: none;
+                                                            float: left;
+                                                            min-height: 42px;
+                                                            padding: 0;
+                                                            height: 42px;
+                                                            width: 42px;
+                                                            
+                                                            a {
+                                                                display: block;
+                                                                height: 30px;
+                                                                opacity: 1;
+                                                                padding: 4px 0;
+                                                                width: 30px;
+                                                                position: relative;
+                                                                z-index: 1;
+
+                                                                img.img-circle {
+                                                                    -moz-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Firefox */  
+                                                                    -webkit-box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* Safari, Chrome */  
+                                                                    box-shadow: 0px 0px 0px 2px #fff, 0 0px 0 4px rgba(0, 0, 0, 0.1); /* CSS3 */
+                                                                    height: 30px;
+                                                                    width: 30px;
+                                                                }
+                                                            }
+                                                            
+                                                            &.empty { width: 100%; }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.no-js ul.grid li, .no-cssanimations ul.grid li { opacity: 1; }
+.modal-backdrop, .modal-backdrop.fade.in { opacity: 0.6; }
+
+#watch {
+    height: 770px;
+
+    #watch-container {
+        padding: 50px 0;
+        width: 1200px;
+        margin: 0 auto;
+
+        #video-container {
+            padding-left: 500px;
+            background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+            border-radius: 2px 2px 2px 2px;
+            box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.10);
+            float: left;
+            overflow: hidden;
+            padding: 17px 17px 20px 17px;
+            margin-left: 262px;
+            background-color: white;
+            height: 440px;
+            margin: 0 38px 0 262px;
+            width: 640px;
+
+            iframe {
+                background: #202020;
+                border-bottom: 3px solid #202020;
+                border-radius: 3px 3px 3px 3px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        #callout {
+            @include border-radius(2px, 2px);
+            background: rgba(255, 255, 255, 0.75);
+            height: 215px;
+            margin-top: 0;
+            float: left;
+            padding: 17px;
+            width: 192px;
+            position: relative;
+
+            p {
+                font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+                font-weight: 300;
+                font-size: 16px;
+                line-height: 25px;
+                margin-bottom: 22px;
+                text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
+            }
+
+            a.signup {
+                @include border-radius(2px, 2px);
+                background-color: #9e0f84;
+                display: block;
+                color: white;
+                font-family: 'futura-pt-condensed', Helvetica, Arial, sans-serif;
+                font-size: 20px;
+                font-weight: 700;
+                padding: 8px 0;
+                text-align: center;
+                text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
+                width: 130px;
+                position: absolute;
+                bottom: 17px;
+                right: 17px;
+                @include single-transition(background-color .1s ease-in-out);
+
+                &:hover { 
+                    text-decoration: none;
+                    background-color: #7A0066;
+                    @include single-transition(background-color .1s ease-in-out);
+                }
+
+                em {
+                    font-size: 10px;
+                    padding-left: 2px;
+                    position: relative;
+                    top: -1px;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
+
+.md-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.6);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.md-modal {
+    @include border-radius(5px, 5px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    max-width: 630px;
+    min-width: 320px;
+    height: auto;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+
+    &.md-show {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &.md-show ~ .md-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .md-content {
+        @include border-radius(3px, 3px);
+        color: #fff;
+        position: relative;
+        margin: 0 auto;
+
+
+        h3 {
+            margin: 0;
+            padding: 18px;
+            text-align: center;
+            font: 500 18px/18px 'proxima-nova', Helvetica, Arial, sans-sarif;
+            color: white;
+            background-color: #272727;
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMzA4KSIvPjxzdG9wIG9mZnNldD0iMC45OCIgc3RvcC1jb2xvcj0icmdiYSgwLCAwLCAwLCAwKSIvPjwvcmFkaWFsR3JhZGllbnQ+PHJlY3QgeD0iMCUiIHk9IjAlIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDApIiAvPjxyZWN0IHg9Ii0yMC45MDkxJSIgeT0iLTEwMC40MiUiIHdpZHRoPSIxNTYwcHgiIGhlaWdodD0iMjAwLjg0JSIgZmlsbD0idXJsKCNnKSIgLz48L3N2Zz4=);
+            background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 780, color-stop(0%, rgba(255, 255, 255, 0.308)), color-stop(100%, rgba(0, 0, 0, 0)));
+            background-image: -webkit-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+            background-image: -moz-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+            background-image: -ms-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+            background-image: -o-radial-gradient(center 0%, 780px 100.42%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+            background-image: radial-gradient(780px 100.42% at center 0%, rgba(255, 255, 255, 0.308) 0%, rgba(0, 0, 0, 0) 100%);
+            border: 0 none;
+            border-radius: 3px 3px 0 0;
+            text-shadow: rgba(0, 0, 0, 0.6);
+            position: relative;
+            margin-top: -1px;
+
+            button.md-close {
+                background: none;
+                border: none;
+                padding: none;
+                position: absolute;
+                right: 20px;
+            }
+        }
+
+        nav {
+            background: #f5f5f5;
+            padding-top: 6px;
+            margin-bottom: 0;
+
+            ul.nav-tabs {
+                @include border-radius(0px, 0px);
+                margin-bottom: 0;
+                border-top: none;
+
+                li {
+                    a {
+                        font: 500 14px/14px 'proxima-nova', Helvetica, Arial, sans-serif;
+                    }
+
+                    &.active {
+                        a {
+                            background-color: #F5F5F5;
+                            border-bottom: none;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .md-content > div {
+        background: linear-gradient(to bottom, #F5F5F5 0%, #FFFFFF 19%, #FFFFFF 77%, #F5F5F5 100%) repeat scroll 0 0 transparent;
+        background-color: white;
+        border-radius: 0 0 3px 3px;
+        color: #272727;
+        font: 14px/16px 'proxima-nova', Helvetica, Arial, sans-serif;
+        margin: 0;
+        font-weight: 300;
+        font-size: 1.15em;
+        padding: 18px 18px 0 18px;
+
+        div.tab-pane {
+            
+
+            div.avatar-section {
+                h1 {
+                    font-weight: 700px;
+                }
+
+                p {
+                    font-size: 13px;
+                }
+
+                i.icon-upload {
+                    opacity: 0.5;
+                    text-shadow: 0 1px 1px #FFFFFF;
+                }
+
+                div.upload-here {
+                    @include border-radius(3px, 3px);
+                    background: #eee;
+                    border: 1px dashed #ccc;
+                    margin: 12px 0;
+                    padding: 6px;
+        
+                    form {
+                        float: left;
+                        padding: 22px 0;
+                        width: 80%;
+
+                        label { display: none; }
+
+                        .fileinput-button {
+                            font-weight: 500;
+                            display: block;
+                            float: left;
+                            position: relative;
+                            overflow: hidden;
+
+                            input {
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                margin: 0;
+                                opacity: 0;
+                                -ms-filter: 'alpha(opacity=0)';
+                                font-size: 200px;
+                                direction: ltr;
+                                cursor: pointer;
+                            }
+                        }
+
+                        div.actions {
+                            float: right;
+
+                            button { font: Arial, Helvetica, sans-serif; }
+                        }
+                    }
+                }
+            }
+
+            #files {
+                margin-bottom: 18px;
+
+                div {
+                    p {
+                        canvas {
+                            height: 100px;
+                            float: left;
+                            margin-right: 18px;
+                            width: 100px;
+                        }
+
+                        span {
+                            font-size: 16px;
+                            float: left;
+                        }
+
+                        span.text-danger,
+                        span.text-success { 
+                            font-weight: 500;
+                            padding-top: 12px;
+                        }
+                        
+                        span.text-danger { color: #D9534F; }
+                        span.text-success { color: #5CB85C; }
+
+                        button {
+                            float: right;
+                        }
+                    }
+                }
+            }
+
+            #progress {
+              height: 20px;
+              margin-bottom: 20px;
+              overflow: hidden;
+              background-color: #f5f5f5;
+              border-radius: 4px;
+              -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+                      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+
+                .progress-bar {
+                  float: left;
+                  width: 0;
+                  height: 100%;
+                  font-size: 12px;
+                  color: #ffffff;
+                  text-align: center;
+                  background-color: #428bca;
+                  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+                          box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+                  -webkit-transition: width 0.6s ease;
+                          transition: width 0.6s ease;
+                }
+
+                .progress-bar-success {
+                  background-color: #5cb85c;
+                } 
+            }
+        }
+    }
+}
