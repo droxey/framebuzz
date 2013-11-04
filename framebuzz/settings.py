@@ -255,7 +255,6 @@ INSTALLED_APPS = (
 
     # FrameBuzz Apps
     'framebuzz.apps.api',
-    'framebuzz.apps.dashboard',
     'framebuzz.apps.profiles',
     'framebuzz.apps.marketing',
     'framebuzz.apps.search',

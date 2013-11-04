@@ -1,5 +1,7 @@
-{% extends "marketing/base.html" %}
+{% extends "base.html" %}
 {% load staticfiles compress avatar_tags activity_tags profile_tags %}
+
+{% block page_classes %}content profiles{% endblock %}
 
 {% block title %}{{ profile_user|display_name }}'s Profile{% endblock %}
 
@@ -28,18 +30,14 @@
 
 {% block page_css %}
     {% compress css %}
-        <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/iconic.css' %}" type="text/css" media="screen" />
-        {% if is_my_profile %}
-            <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/bootstrap-editable.css' %}" type="text/css" media="screen" />
-            <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/flat-buttons.css' %}" type="text/css" media="screen" />
-            <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/modal-effects.css' %}" type="text/css" media="screen" />
-        {% endif %}
-        <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" type="text/css" media="screen" />
+        <link href="{% static 'framebuzz/profiles/vendor/timeline/css/stylesheet.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
     {% endcompress %}
     {% block extra_css %}{% endblock %}
 {% endblock %}
 
-{% block marketing_content %}
+{% block content_center %}
+    {% comment %}
     <div class="content">
         <div class="wrapper">
             <div class="background">
@@ -216,6 +214,16 @@
             </div>
         </div>
     </div>
+    {% endcomment %}
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-9">
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block modals %}
@@ -249,21 +257,17 @@
 
 {% block page_javascript %}
     {% compress js %}
-        <script src="{% static 'framebuzz/profiles/js/jquery-paged-scroll.min.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/js/jquery.isotope.min.js' %}"></script>
         {% if is_my_profile %}
-            <script src="{% static 'framebuzz/profiles/js/bootstrap-editable.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/js/canvas-to-blob.min.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/js/load-image.min.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/js/jquery.iframe-transport.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/js/jquery.fileupload.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/js/jquery.fileupload-process.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/js/jquery.fileupload-image.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/js/jquery.fileupload-validate.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/js/classie.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/js/modalEffects.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/js/cssParser.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/canvas-to-blob.min.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/load-image.min.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.iframe-transport.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-process.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-image.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-validate.js' %}"></script>
+            <script src="{% static 'framebuzz/profiles/vendor/jquery/modalEffects.js' %}"></script>
         {% endif %}
+        <script src="{% static 'framebuzz/profiles/vendor/timeline/timeline.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/framebuzz.profiles.js' %}"></script>
         <script type="text/javascript">
             $(function(){
