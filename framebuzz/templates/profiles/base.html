@@ -76,9 +76,6 @@
                             {% if is_my_profile %}
                                 <a data-modal="customize-modal" data-role="button" class="customize md-trigger" href="{% url 'avatar_add' %}"><i class="icon-cogs"></i></a>
                             {% endif %}
-                            <a href="{% url 'profiles-home' profile_user.username %}" class="avatar filter" data-filter="*">
-                                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url profile_user 265 %}" alt="" height="177" width="177" class="lazy img-circle" />
-                            </a>
                             <div class="user-details">
                                 {% spaceless %}
                                 <h1 class="clearfix">
@@ -247,7 +244,41 @@
 
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-3">
+            <div id="sidebar" class="col-md-3">
+                <div id="user-avatar" class="row">
+                    <a href="{% url 'profiles-home' profile_user.username %}" class="avatar filter" data-filter="*">
+                        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url profile_user 109 %}" alt="" class="img-responsive lazy">
+                    </a>
+                </div>
+                <div id="user-display-name" class="row">
+                    <div class="col-md-10">
+                        <h1>{{ profile_user|display_name }}</h1>
+                    </div>
+                    <div class="col-md-2">
+                        {% comment %}
+                        {% if not is_my_profile %}
+                        {% endcomment %}
+                            {% if request.user.is_authenticated %}
+                                <a class="toggle-follow unfollow-button pull-right img-circle" title="Following" data-placement="bottom" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>
+                                  <span class="fa-stack">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                                    <i class="fa fa-minus fa-stack-1x fa-inverse pull-right"></i>
+                                  </span>            
+                                </a>
+                                <a class="toggle-follow follow-button pull-right img-circle" title="Follow" data-placement="bottom" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>
+                                  <span class="fa-stack">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                                    <i class="fa fa-plus fa-stack-1x fa-inverse pull-right"></i>
+                                  </span>
+                                </a>
+                            {% endif %}
+                        {% comment %}
+                        {% endif %}
+                        {% endcomment %}
+                    </div>
+                </div>
             </div>
             <div class="col-md-9">
             </div>

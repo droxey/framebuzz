@@ -4,6 +4,7 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass";
+@import "compass/css3/border-radius";
 
 body.profiles {
     #base {
@@ -74,6 +75,67 @@ body.profiles {
                         color: #9C9C9C;
                         margin-right: 0;
                         padding-right: 0;
+                    }
+                }
+            }
+        }
+
+        #sidebar {
+            #user-avatar {
+                a {
+                    display: block;
+                    height: 109px;
+                    width: 100%;
+
+                    img {
+                        height: 109px;
+                        width: 100%;
+                    }
+                }
+            }
+
+            #user-display-name {
+                background-color: #2B2727;
+
+                div {
+                    h1 {
+                        color: #FFFFFF;
+                        font-size: 20px;
+                        font-weight: 700;
+                        margin: 10px 9px 10px;
+                    }
+
+                    a.toggle-follow {
+                        display: block;
+                        line-height: 34px;
+
+                        .fa-user {
+                            font-size: 18px;
+                            line-height: 34px;
+                            text-align: left;
+                            text-indent: 5px;
+                        }
+
+                        .fa-plus, .fa-minus {
+                            font-size: 9px;
+                            line-height: 34px;
+                            text-align: left;
+                            text-indent: 18px;
+                        }
+
+                        &.follow-button {
+                            i.fa-circle {
+                                color: #6CC561;
+                                font-size: 2.5em;
+                            }
+                        }
+
+                        &.unfollow-button {
+                            i.fa-circle {
+                                color: #D75452;
+                                font-size: 2.5em;
+                            }
+                        }
                     }
                 }
             }
