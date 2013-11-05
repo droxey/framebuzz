@@ -331,6 +331,11 @@ var FrameBuzzProfile = (function($) {
 
             feedContainer.html(html);
 
+            $('.responsive-timeline').rTimeline({
+                theme: 'light', 
+                url: urls.page 
+            });
+
             $('img.lazy', feedContainer).lazyload({ 
                 effect: "fadeIn",
                 event: 'scroll trigger-lazy-load'

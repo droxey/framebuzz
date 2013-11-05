@@ -5,21 +5,6 @@
  */
 
 
-/* ===== Fonts ========================================================
-   Author: Yukulelix
-   ========================================================================== */
-@font-face {
-    font-family: 'EntypoRegular';
-    src: url('entypo-webfont.eot');
-    src: url('entypo-webfont.eot?#iefix') format('embedded-opentype'),
-         url('entypo-webfont.woff') format('woff'),
-         url('entypo-webfont.ttf') format('truetype'),
-         url('entypo-webfont.svg#EntypoRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
 /* ===== Basic Styles ========================================================
    Author: Yukulelix
    ========================================================================== */
@@ -28,7 +13,6 @@
 	margin: 0;
 	font-family:arial; 
 	font-size:13px;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 300;
 }
 
@@ -44,7 +28,6 @@
 }
 
 .responsive-timeline .icon{
-	font-family: 'EntypoRegular';
 }
 
 /*
@@ -160,8 +143,6 @@
 */
 .responsive-timeline footer{
 	position: relative;
-	height: 65px;
-	margin-top: 10px;
 }
 .responsive-timeline footer .embossed{
 	position: absolute;
@@ -249,8 +230,6 @@
 
 .responsive-timeline .containertop .cover{
 	width: 100%;
-	margin-top: -1px;
-	border-radius: 5px 5px 0 0;
 }
 
 .responsive-timeline .containertop .arrow{
@@ -284,7 +263,6 @@
 	float: left;
 	margin-top:10px;
 	min-height:50px;
-	border-radius: 5px;
 	text-align:justify;
 	word-wrap:break-word; 
 	left:0;
@@ -322,9 +300,8 @@
 	left: 50%;
 }
 .responsive-timeline .item .cover{
-	width: 100%;
-	margin-top: -1px;
-	border-radius: 5px 5px 0 0;
+    margin-top: 4px;
+    width: 100%;
 }
 
 .responsive-timeline .item.left footer .comments-toggle{
@@ -426,9 +403,6 @@
 .responsive-timeline.light .comment-item .comment-meta{
 	color: #645972;
 }
-.responsive-timeline.light footer{
-	border-top: 1px solid #D8D8D8;
-}
 .responsive-timeline.light footer .embossed{
 	background-color: #d8d8d8;
 	box-shadow: inset 1px 1px 1px #bababa;
@@ -453,6 +427,7 @@
 	background:transparent url(../images/light/cross_scratches.png) repeat;
 	color: #aeaeae;
 }
+.responsive-timeline.light footer a.thumbnail-link { display: block; }
 .responsive-timeline.light footer .link{
 	color: #fbfbfb;
 	text-shadow: 1px 1px #969696;
@@ -462,17 +437,12 @@
 	color: #48484b;
 }
 
-.responsive-timeline.light .containertop .cover{
-	border-bottom: 1px solid #fff;
-	box-shadow: #E6E6E6 0px 1px;
-}
-
 .responsive-timeline.light .containertop .arrow{
 	background:transparent url(../images/light/bottom.png) repeat; 
 	color: #48484b;
 }
 .responsive-timeline.light .item {
-	background:transparent url(../images/light/cross_scratches.png) repeat;
+	background: #E6E8E8;
 	color: #48484b;
 }
 
@@ -485,122 +455,7 @@
 .responsive-timeline.light .circle{
 	background-image: url("../images/light/circle.png");
 }
-.responsive-timeline.light .item .cover{
-	border-bottom: 1px solid #fff;
-	box-shadow: #E6E6E6 0px 1px;
-}
 .responsive-timeline.light .loadMore{
 	background: transparent url(../images/light/cross_scratches.png) repeat;
 	color: #645972;
-}
-
-
-
-
-/* dark theme */
-.responsive-timeline.dark{
-	text-shadow: 1px 1px #000;
-}
-.responsive-timeline.dark h1{
-	color: #9ba68d;
-}
-.responsive-timeline.dark .timeline{        
-	background-color:#0c0c0c;
-	box-shadow: black 0px 0 10px;
-}
-.responsive-timeline.dark .tags{
-	color: #AEAEAE;
-}
-.responsive-timeline.dark .tags .icon{
-	background-color: rgba(0,0,0,.4);
-	color: #FBFBFB;
-}
-.responsive-timeline.dark .tags .tags-container{
-	background: rgba(0,0,0,0.5);
-	color: white;
-}
-.responsive-timeline.dark .tags .tag:hover{
-	background-color: rgba(50, 50, 50, 0.5);
-}
-.responsive-timeline.dark .comment-item{
-	background-color: #272727;
-	box-shadow: inset 1px 1px 1px #454545;
-	text-shadow: 1px 1px #000;
-}
-.responsive-timeline.dark .comment-item .avatar{
-	border: 5px solid #aeaeae;
-}
-.responsive-timeline.dark .comment-item h1 a{
-	color: #9ba68d;
-}
-.responsive-timeline.dark .comment-item .comment-meta{
-	color: #9ba68d;
-}
-.responsive-timeline.dark footer{
-	border-top: 1px solid #272727;
-}
-.responsive-timeline.dark footer .embossed{
-	background-color: #272727;
-	box-shadow: inset 1px 1px 1px #454545;
-	color: #fbfbfb;
-	text-shadow: 1px 1px #969696;
-}
-.responsive-timeline.dark footer .comments-toggle:hover{
-	background: #272727;
-	box-shadow: inset 1px 1px 1px #454545;
-	color: #fbfbfb;
-	text-shadow: 1px 1px #969696;
-}
-.responsive-timeline.dark footer .author{
-	color: #fff;
-	text-shadow: none;
-}
-.responsive-timeline.dark footer .date{
-	background:transparent url(../images/dark/cross_scratches.png) repeat;
-	color: #aeaeae;
-}
-.responsive-timeline.dark footer .comments-toggle{
-	background:transparent url(../images/dark/cross_scratches.png) repeat;
-	color: #aeaeae;
-}
-.responsive-timeline.dark footer .link{
-	color: #fff;
-	text-shadow: none;
-}
-.responsive-timeline.dark .containertop	{
-	background:transparent url(../images/dark/cross_scratches.png) repeat; 
-	color: #b7b7b4;
-}
-
-.responsive-timeline.dark .containertop .cover{
-	border-bottom: 1px solid #000;
-	box-shadow: #191919 0px 1px;
-}
-
-.responsive-timeline.dark .containertop .arrow{
-	background:transparent url(../images/dark/bottom.png) repeat; 
-	color: #B7B7B4;
-}
-.responsive-timeline.dark .item {
-	background:transparent url(../images/dark/cross_scratches.png) repeat;
-	color: #B7B7B4;
-}
-
-.responsive-timeline.dark .item .corner{
-	background-image: url("../images/dark/left.png");
-}
-.responsive-timeline.dark .item.left .corner {
-    background-image: url("../images/dark/right.png");
-}
-.responsive-timeline.dark .circle{
-	background-image: url("../images/dark/circle.png");
-}
-.responsive-timeline.dark .item .cover{
-	border-bottom: 1px solid #000;
-	box-shadow: #191919 0px 1px;
-}
-.responsive-timeline.dark .loadMore{
-	background: transparent url(../images/dark/cross_scratches.png) repeat;
-	color: #9ba68d;
-
 }

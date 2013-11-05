@@ -1,14 +1,18 @@
 {% load i18n avatar_tags profile_tags %}
 
 
-<ul id="feed-list" class="grid endless clearfix" data-current-filter="*" data-next-url="{% url 'profiles-feed' profile_user.username %}" data-total-pages="{{ page_obj.pages|length }}">
-  {% if page_obj.object_list|length > 0 %}
-    {% include "profiles/snippets/item.html" %}
-  {% else %}
-    <li class="brick empty">
-        <div class="action-wrapper">
-            <p>No activity yet!</p>
+<div class="responsive-timeline" data-current-filter="*" data-next-url="{% url 'profiles-feed' profile_user.username %}" data-total-pages="{{ page_obj.pages|length }}">
+    <div class="container">
+        <div class="timeline_container">
+            <div class="timeline">
+                <div class="plus"></div>
+            </div>
         </div>
-    </li>
-  {% endif %}
-</ul>
+        {% if page_obj.object_list|length > 0 %}
+            {% include "profiles/snippets/item.html" %}
+        {% endif %}
+    </div>
+    <div class="loadMore">
+       <p>Load more posts</p>
+    </div>
+</div>
