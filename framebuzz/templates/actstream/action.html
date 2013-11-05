@@ -2,13 +2,13 @@
 
 {% if action.verb %}
     {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
-        <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> said&hellip;
+        <strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong> said
     {% elif action.verb == 'added to favorites' %}
-        <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> <i class="icon-heart"></i> this comment:
+        <strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong> faved
     {% elif action.verb == 'added video to library' %}
-        <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> <i class="icon-plus-sign-alt"></i> this video:
+        <strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong> posted
     {% elif action.verb == 'joined framebuzz' %}
-       <a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a> joined FrameBuzz!
+       <strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong> joined FrameBuzz!
     {% else %}
     {% endif %}
 {% endif %}

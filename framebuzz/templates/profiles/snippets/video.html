@@ -2,18 +2,24 @@
 
 
 <div class="content">
-  {% if action.verb != 'added video to library' %}
+  
     <div class="row header">
       <div class="col-md-2">
         <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url action.actor 110 %}" alt="" height="82" width="82" class="header-avatar img-circle lazy" />
       </div>
       <div class="col-md-9 header-content">
-        <p><strong>{% display_action action %}</strong></p>
-        <p><i class="fa fa-quote-left"></i><span>{{ action.action_object.comment }}</span><i class="fa fa-quote-right fa-flip-vertical"></i></p>
+        {% if action.verb != 'added video to library' %}
+          <p>{% display_action action %}</p>
+          <p><i class="fa fa-quote-left"></i><span>{{ action.action_object.comment }}</span><i class="fa fa-quote-right fa-flip-vertical"></i></p>
+        {% else %}
+            <p><strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong> posted <strong>{{ action.action_object.title|title }}</strong></p>
+        {% endif %}
       </div>
       <div class="col-md-1 action-type">
         {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
           <i class="fa fa-comment"></i>
+        {% elif action.verb == 'added video to library' %}
+          <i class="fa fa-video-camera"></i>
         {% else %}
           <i class="fa fa-heart"></i>
         {% endif %}
@@ -24,7 +30,6 @@
         <i class="fa fa-clock-o"></i> {{ action.timestamp|timesince }} {% trans "ago" %}
       </div>
     </div>
-  {% endif %}
   {% comment %}
   <div class="video-details">
       {% if video.uservideo_set.all|length > 0 and action.verb == 'added video to library' %}

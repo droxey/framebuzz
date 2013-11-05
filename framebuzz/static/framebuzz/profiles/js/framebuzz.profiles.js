@@ -284,10 +284,9 @@ var FrameBuzzProfile = (function($) {
     }
 
     function lazyLoadImages() {
-        $("img.lazy").lazyload({ 
-            effect: "fadeIn",
-            event: 'scroll trigger-lazy-load'
-        });
+            $('img.lazy').not('.loaded').lazyload({ 
+                event: 'scroll trigger-lazy-load'
+            }).addClass('loaded');
     }
 
     return {
@@ -297,7 +296,7 @@ var FrameBuzzProfile = (function($) {
         _urls = urls;
 
         //bindFilter();
-        //lazyLoadImages();
+        lazyLoadImages();
 
         // Init isotope and infinite scroll.
         var feedContainer = $('#feed');
@@ -311,11 +310,7 @@ var FrameBuzzProfile = (function($) {
             // Load recommendations.
             $.get(urls.recommendations, function(html) {
                 recommendationsContainer.html(html);
-                //initTooltips();
-                $('img.lazy', recommendationsContainer).lazyload({ 
-                    effect: "fadeIn",
-                    event: 'scroll trigger-lazy-load'
-                });
+                lazyLoadImages();
             });
         }
         else {
@@ -330,14 +325,27 @@ var FrameBuzzProfile = (function($) {
             }
 
             feedContainer.html(html);
+            _page = 2;
 
             $('.responsive-timeline').rTimeline({
                 theme: 'light', 
-                url: urls.page 
+                url: urls.feed,
+                data: function(iteration) {
+                    var instUrl = urls.feed + '?page=' + _page;
+
+                    $(document).ajaxSuccess(function(event, xhr, settings) {
+                        if (settings.url == instUrl) {
+                            _page = _page + 1;
+
+                            lazyLoadImages();
+                        }
+                    });
+
+                    return { 'page': _page };
+                }
             });
 
             $('img.lazy', feedContainer).lazyload({ 
-                effect: "fadeIn",
                 event: 'scroll trigger-lazy-load'
             });
 

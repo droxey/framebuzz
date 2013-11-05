@@ -178,7 +178,7 @@
 			infiniteScroll : true,
 			scrollForMore : true,
 			url : '',
-			doneText : "No more posts",
+			doneText : "No more posts!",
 			data : function(iteration){
 				return "";
 			}
