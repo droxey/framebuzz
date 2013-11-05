@@ -1,57 +1,22 @@
 {% load staticfiles avatar_tags profile_tags %}
 
-<div class="users">
-    <ul class="clearfix">
-        {% for user in top_users %}
-            <li class="shown">
-                <a class="tooltip" data-placement="bottom" title="{{ user|display_name }}" href="{% url 'profiles-home' user.username %}">
-                    <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user 90 %}" alt="" height="45" width="45" class="img-circle lazy" />
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
-<div class="videos">
-    <ul>
-        {% for video in top_videos %}
-            <li class="shown">
-                <div class="thumb">
-                    <a class="thumbnail-link" href="{% spaceless %}{% if request.user.is_authenticated %}
-                            {% if video.found_by %}
-                                {% url 'profiles-share' video.found_by.username video.video_id %}
-                            {% else %}
-                                {% url 'profiles-share' request.user.username video.video_id %}
-                            {% endif %}
-                        {% else %}
-                            {% if video.found_by %}
-                                {% url 'profiles-share' video.found_by.username video.video_id %}
-                            {% else %}
-                            {{ video.get_share_url }}
-                            {% endif %}
-                        {% endif %}{% endspaceless %}">
-                        <img class="video-thumbnail lazy" width="190" height="107" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.large_thumbnail }}" />
-                    </a>
-                    <div class="comment">
-                        <i class="icon-play-sign"></i>
-                         <span class="corner"></span>
-                         <p>
-                            <a href="{% spaceless %}{% if request.user.is_authenticated %}
-                            {% if video.found_by %}
-                                {% url 'profiles-share' video.found_by.username video.video_id %}
-                            {% else %}
-                                {% url 'profiles-share' request.user.username video.video_id %}
-                            {% endif %}
-                        {% else %}
-                            {% if video.found_by %}
-                                {% url 'profiles-share' video.found_by.username video.video_id %}
-                            {% else %}
-                            {{ video.get_share_url }}
-                            {% endif %}
-                        {% endif %}{% endspaceless %}">{{ video.title|title }}</a>
-                        </p>
-                    </div>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+
+{% for video in top_videos %}
+    <div class="col-md-6 pull-left">
+        <a class="thumbnail-link" href="{% spaceless %}{% if request.user.is_authenticated %}
+                {% if video.found_by %}
+                    {% url 'profiles-share' video.found_by.username video.video_id %}
+                {% else %}
+                    {% url 'profiles-share' request.user.username video.video_id %}
+                {% endif %}
+            {% else %}
+                {% if video.found_by %}
+                    {% url 'profiles-share' video.found_by.username video.video_id %}
+                {% else %}
+                {{ video.get_share_url }}
+                {% endif %}
+            {% endif %}{% endspaceless %}">
+            <img class="img-responsive video-thumbnail lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.large_thumbnail }}" alt="{{ video.title|title }}" />
+        </a>
+    </div>
+{% endfor %}
