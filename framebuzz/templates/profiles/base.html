@@ -275,10 +275,95 @@
                         {% endif %}
                     </div>
                 </div>
+                <div id="user-details" class="row">
+                    <h2></h2>
+                    <h3></h3>
+                    <em></em>
+                </div>
+                <div id="user-stats" class="row container">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="videos">
+                                <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">
+                                    <i class="fa fa-video-camera"></i>
+                                    <strong>{{ profile_library|length }}</strong>
+                                </a>
+                            </li>
+                            <li class="conversations">
+                                <a class="filter" data-filter=".conversations" href="#" data-pages="{{ page_counts.conversations }}">
+                                    <i class="fa fa-comment"></i>
+                                    <strong>{{ profile_conversations|length }}</strong>
+                                </a>
+                            </li>
+                            <li class="favorites">
+                                <a class="filter" data-filter=".added_to_favorites" href="#" data-pages="{{ page_counts.favorites }}">
+                                    <i class="fa fa-heart"></i>
+                                    <strong>{{ profile_favorites|length }}</strong>
+                                </a>
+                            </li>
+                            <li class="followers">
+                                <a class="filter" data-filter=".followers" href="#" data-pages="{{ page_counts.followers }}">
+                                    <i class="fa fa-group"></i>
+                                    <strong>{{ profile_followers|length }}</strong>
+                                </a>
+                            </li>
+                            <li class="following">
+                                <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">
+                                    <i class="fa fa-user"></i>
+                                    <strong>{{ profile_following|length }}</strong>
+                                </a>
+                            </li>
+                        </ul>  
+                    </div>
+                </div>
+                {% if is_my_profile %}
+                    <div id="recommendations" class="row">
+                        <div class="col-md-12">
+                            <h2>Recommendations</h2>
+                            <div class="ajax">
+                                <div class="spin">
+                                    <i class="icon-spinner icon-spin icon-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
             <div id="profile-content" class="col-md-9">
                 <div id="add-video" class="row">
                     {% include "profiles/snippets/add_video.html" %}
+                </div>
+                <div id="timeline" class="row">
+                    <div class="col-md-12">
+                        <nav class="row">
+                            <ul class="nav nav-pills clearfix">
+                                <li class="filter"><i class="icon-filter"></i></li>
+                                <li class="start{% if not is_share %} active{% endif %}">
+                                    <a class="filter latest" data-filter="*" href="#">Latest</a>
+                                </li>
+                                <li{% if is_share %} class="active"{% endif %}>
+                                    <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">Posts</a>
+                                </li>
+                                <li>
+                                    <a class="filter" data-filter=".conversations" href="#" data-pages="{{ page_counts.conversations }}">Comments</a>
+                                </li>
+                                <li>
+                                    <a class="filter" data-filter=".added_to_favorites" href="#" data-pages="{{ page_counts.favorites }}">Favorites</a>
+                                </li>
+                                <li>
+                                    <a class="filter" data-filter=".followers" href="#" data-pages="{{ page_counts.followers }}">Followers</a>
+                                </li>
+                                <li>
+                                    <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">Following</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div id="feed" class="row">
+                            <div class="spin">
+                                <i class="icon-spinner icon-spin icon-3x"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -317,6 +402,7 @@
 {% block page_javascript %}
     {% compress js %}
         {% if is_my_profile %}
+            <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/canvas-to-blob.min.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/load-image.min.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.iframe-transport.js' %}"></script>
@@ -324,8 +410,8 @@
             <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-process.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-image.js' %}"></script>
             <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-validate.js' %}"></script>
-            <script src="{% static 'framebuzz/profiles/vendor/jquery/modalEffects.js' %}"></script>
         {% endif %}
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/jquery.lazyload.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/timeline/timeline.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/framebuzz.profiles.js' %}"></script>
         <script type="text/javascript">

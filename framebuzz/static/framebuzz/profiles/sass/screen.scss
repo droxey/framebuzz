@@ -11,7 +11,7 @@ body.profiles {
         margin-top: 16px;
 
         #logo {
-            padding: 16px 0 13px 0;
+            padding: 16px 0 0 0;
 
             div.row-logo {
                 padding: 0 53px 0 29px;
@@ -139,9 +139,52 @@ body.profiles {
                     }
                 }
             }
+
+            #user-details {
+                background: #FFFFFF;
+                padding: 0 28px;
+
+                h2 {
+                    color: #6e6e6e;
+                    font-weight: 500;
+                    font-size: 18px;
+                }
+
+                h3 {
+                    color: #bfbfbf;
+                    font-size: 17px;
+                    font-weight: 300;
+                }
+
+                em {
+                    color: #9d9c9c;
+                    font-size: 15px;
+                    font-style: italic;
+                }
+            }
+
+            #user-stats {
+                background: #E9E9E9;
+
+                .nav-tabs {
+                    border-bottom: none;
+
+                    li {
+                        a {
+                            color: #898686;
+                            font-size: 17px;
+                            font-weight: 700;
+
+                            i { color: #AEAEAE; }
+                        }
+                    }
+                }
+            }
         }
 
         #profile-content {
+            background: #05171E;
+
             #add-video {
                 background: #1DAFEC;
 
@@ -171,6 +214,43 @@ body.profiles {
                             text-indent: 9px;
 
                             i { color: white; }
+                        }
+                    }
+                }
+            }
+
+            #timeline {
+                padding: 10px 0;
+
+                nav {
+                    background: #05171E;
+                    margin-bottom: 16px;
+
+                    .nav-pills > li + li { margin-left: 4.5%; }
+
+                    ul.nav-pills {
+                        padding: 0 28px;
+
+                        li {
+
+                            a {
+                                color: #898989;
+                                font-size: 13px;
+                                font-weight: 500;
+                                padding: 12px 24px;
+                            }
+
+                            &.active, &:hover {
+                                 a {
+                                    @include border-radius(3px, 3px);
+                                    background-color: #102e3b;
+                                    color: #c5c5c5;
+                                    font-weight: 700;
+                                    text-align: center;
+                                }
+                            }
+
+                            &.start { margin-left: 0; }
                         }
                     }
                 }

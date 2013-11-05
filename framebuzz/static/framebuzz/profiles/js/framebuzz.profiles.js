@@ -296,22 +296,22 @@ var FrameBuzzProfile = (function($) {
         _isMyProfile = isMyProfile;
         _urls = urls;
 
-        bindFilter();
-        lazyLoadImages();
+        //bindFilter();
+        //lazyLoadImages();
 
         // Init isotope and infinite scroll.
         var feedContainer = $('#feed');
-        var recommendationsContainer = $('div.recommendations > div.ajax');
+        var recommendationsContainer = $('#recommendations div.ajax');
 
         if (_isMyProfile) {
             bindAddVideoButton();
-            initEditables();
-            initCustomize();
+            //initEditables();
+            //initCustomize();
 
             // Load recommendations.
             $.get(urls.recommendations, function(html) {
                 recommendationsContainer.html(html);
-                initTooltips();
+                //initTooltips();
                 $('img.lazy', recommendationsContainer).lazyload({ 
                     effect: "fadeIn",
                     event: 'scroll trigger-lazy-load'
@@ -339,46 +339,7 @@ var FrameBuzzProfile = (function($) {
             var $container = $('#feed-list'),
                 _pages = parseInt($container.attr('data-total-pages'));
 
-            $.when($container.isotope({
-                itemSelector : 'li.brick',
-                animationEngine: 'best-available',
-                masonry: {
-                    columnWidth: 336
-                }
-            }))
-            .then(function() {
-                bindCardFunctions();
 
-                    $(window).paged_scroll({
-                        startPage: 1,
-                        triggerFromBottom: '10%',
-                        targetElement: $container,
-                        loader:'<div class="spin"><i class="icon-spinner icon-spin icon-large"></i></div>',
-                        pagesToScroll: _pages,
-                        beforePageChanged:function (page, container) {
-
-                        },
-                        handleScroll: function(page, container, doneCallback) {
-                            _page = page;
-
-                            var filtering = _currentFilterClass != null && _currentFilterClass != '*';
-                            if (filtering) {
-                                _pages = $('a[data-filter="' + _currentFilterClass +'"]').eq(0).attr('data-pages');
-                            }
-
-                            if (_page <= _pages) {
-                                getPage(page, filtering);
-                            }
-                        },
-                        afterPageChanged: function(page, container) {
-                            if (page == _pages) {
-                                var emptyBrick = $('<li class="brick empty" />');
-                                var messageContainer = $('<div class="action-wrapper" />');
-                            }
-                        }
-                    });
-                });
-            });
-        }
-    };
+        });
+    }};
 }(jQuery));
