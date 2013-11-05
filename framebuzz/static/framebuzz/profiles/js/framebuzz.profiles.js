@@ -318,12 +318,6 @@ var FrameBuzzProfile = (function($) {
         }
 
         $.get(urls.feed + '?init=true', function(html) {
-            if ($(html).find('li.empty').length == 0) {
-                $('ul.nav-pills').show(function() {
-                    $(this).animate({ opacity: 1.0 }, 500);
-                });
-            }
-
             feedContainer.html(html);
             _page = 2;
 
