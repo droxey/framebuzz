@@ -3,20 +3,20 @@
 
 <div class="content">
   {% if action.verb != 'added video to library' %}
-    <div class="row">
+    <div class="row header">
       <div class="col-md-2">
         <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url action.actor 110 %}" alt="" height="82" width="82" class="header-avatar img-circle lazy" />
       </div>
-      <div class="col-md-9">
+      <div class="col-md-9 header-content">
         <p><strong>{% display_action action %}</strong></p>
         <p>&ldquo;{{ action.action_object.comment }}&rdquo;</p>
       </div>
       <div class="col-md-1">
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <i class="fa fa-time"></i> {{ action.timestamp|timesince }} {% trans "ago" %}
+    <div class="row posted">
+      <div class="col-md-10 col-md-offset-2">
+        <i class="fa fa-clock-o"></i> {{ action.timestamp|timesince }} {% trans "ago" %}
       </div>
     </div>
   {% endif %}
