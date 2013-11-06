@@ -149,6 +149,12 @@ body.profiles {
                     font-weight: 500;
                     font-size: 18px;
                     margin-bottom: 0;
+
+                    i.fa-play {
+                        color: #05171E;
+                        position: relative;
+                        left: 28px;
+                    }
                 }
 
                 h3 {
@@ -169,17 +175,30 @@ body.profiles {
 
             #user-stats {
                 background: #E9E9E9;
+                padding: 20px 14px;
 
                 .nav-tabs {
                     border-bottom: none;
 
                     li {
+                        float: left;
+                        width: 33%;
+
                         a {
                             color: #898686;
                             font-size: 17px;
                             font-weight: 700;
+                            padding: 0;
+                            margin: 0;
 
                             i { color: #AEAEAE; }
+                        }
+
+                        &.active {
+                            a {
+                                background-color: transparent;
+                                border-color: transparent;
+                            }
                         }
                     }
                 }
@@ -211,6 +230,7 @@ body.profiles {
 
         #profile-content {
             background: #05171E;
+            min-height: 800px;
             
             #add-video {
                 background: #1DAFEC;
@@ -247,13 +267,13 @@ body.profiles {
             }
 
             #timeline {
-                padding: 10px 0;
+                background: #05171E;
+                padding: 20px 0;
 
                 nav {
-                    background: #05171E;
                     margin-bottom: 16px;
 
-                    .nav-pills > li + li { margin-left: 4.5%; }
+                    .nav-pills > li + li { margin-left: 6%; }
 
                     ul.nav-pills {
                         padding: 0 28px;
@@ -270,11 +290,15 @@ body.profiles {
                             &.active, &:hover {
                                  a {
                                     @include border-radius(3px, 3px);
+                                    border-color: #102e3b;
                                     background-color: #102e3b;
                                     color: #c5c5c5;
-                                    font-weight: 700;
                                     text-align: center;
                                 }
+                            }
+
+                            &.active {
+                                font-weight: 700;
                             }
 
                             &.start { margin-left: 0; }
@@ -284,7 +308,6 @@ body.profiles {
 
                 div.responsive-timeline {
                     font-family: "ff-dagny-web-pro", sans-serif;
-                    min-height: 700px;
 
                     div.item {
                         div.content {
@@ -315,13 +338,13 @@ body.profiles {
                                     i {
                                         color: #b2bbbe;
                                         font-size: 7px;
-                                        position: absolute;
-                                        top: 2px;
+                                        position: relative;
+                                        top: -5px;
                                     }
 
                                     span { 
                                         font-weight: 500;
-                                        padding: 0 4px 0 10px; 
+                                        padding: 0 4px 0 4px; 
                                     }
                                 }
 
@@ -345,7 +368,7 @@ body.profiles {
 
                         footer {
                             span.corner { top: -47px; }
-                            
+
                             a.thumbnail-link {
                                 display: block;
                                 overflow: hidden;
@@ -360,7 +383,15 @@ body.profiles {
                         }
                     }
                 }
+
+                div.load-wrap {
+                    visibility: hidden;
+                }
             }
         }
+    }
+
+    #footer {
+        margin-top: 0;
     }
 }

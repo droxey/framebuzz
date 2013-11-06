@@ -141,46 +141,65 @@ body.profiles #base #sidebar #user-details h2 {
   font-size: 18px;
   margin-bottom: 0;
 }
-/* line 154, ../sass/screen.scss */
+/* line 153, ../sass/screen.scss */
+body.profiles #base #sidebar #user-details h2 i.fa-play {
+  color: #05171E;
+  position: relative;
+  left: 28px;
+}
+/* line 160, ../sass/screen.scss */
 body.profiles #base #sidebar #user-details h3 {
   color: #bfbfbf;
   font-size: 17px;
   font-weight: 300;
   margin-top: 0;
 }
-/* line 160, ../sass/screen.scss */
+/* line 166, ../sass/screen.scss */
 body.profiles #base #sidebar #user-details h3 i {
   font-size: 20px;
 }
-/* line 163, ../sass/screen.scss */
+/* line 169, ../sass/screen.scss */
 body.profiles #base #sidebar #user-details em {
   color: #9d9c9c;
   font-size: 15px;
   font-style: italic;
 }
-/* line 170, ../sass/screen.scss */
+/* line 176, ../sass/screen.scss */
 body.profiles #base #sidebar #user-stats {
   background: #E9E9E9;
+  padding: 20px 14px;
 }
-/* line 173, ../sass/screen.scss */
+/* line 180, ../sass/screen.scss */
 body.profiles #base #sidebar #user-stats .nav-tabs {
   border-bottom: none;
 }
-/* line 177, ../sass/screen.scss */
+/* line 183, ../sass/screen.scss */
+body.profiles #base #sidebar #user-stats .nav-tabs li {
+  float: left;
+  width: 33%;
+}
+/* line 187, ../sass/screen.scss */
 body.profiles #base #sidebar #user-stats .nav-tabs li a {
   color: #898686;
   font-size: 17px;
   font-weight: 700;
+  padding: 0;
+  margin: 0;
 }
-/* line 182, ../sass/screen.scss */
+/* line 194, ../sass/screen.scss */
 body.profiles #base #sidebar #user-stats .nav-tabs li a i {
   color: #AEAEAE;
 }
-/* line 188, ../sass/screen.scss */
+/* line 198, ../sass/screen.scss */
+body.profiles #base #sidebar #user-stats .nav-tabs li.active a {
+  background-color: transparent;
+  border-color: transparent;
+}
+/* line 207, ../sass/screen.scss */
 body.profiles #base #sidebar #recommendations {
   overflow: hidden;
 }
-/* line 191, ../sass/screen.scss */
+/* line 210, ../sass/screen.scss */
 body.profiles #base #sidebar #recommendations h2 {
   color: #ACABAB;
   font-size: 20px;
@@ -190,24 +209,25 @@ body.profiles #base #sidebar #recommendations h2 {
   top: 6px;
   text-indent: 9px;
 }
-/* line 201, ../sass/screen.scss */
+/* line 220, ../sass/screen.scss */
 body.profiles #base #sidebar #recommendations div.pull-left {
   padding: 0;
   margin-left: -1px;
 }
-/* line 205, ../sass/screen.scss */
+/* line 224, ../sass/screen.scss */
 body.profiles #base #sidebar #recommendations div.pull-left img.img-responsive {
   max-width: 102%;
 }
-/* line 212, ../sass/screen.scss */
+/* line 231, ../sass/screen.scss */
 body.profiles #base #profile-content {
   background: #05171E;
+  min-height: 800px;
 }
-/* line 215, ../sass/screen.scss */
+/* line 235, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video {
   background: #1DAFEC;
 }
-/* line 219, ../sass/screen.scss */
+/* line 239, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form input {
   background: #1DAFEC;
   border: none;
@@ -218,13 +238,13 @@ body.profiles #base #profile-content #add-video #add-video-form input {
   padding: 20px 11px 0px 0px;
   width: 98%;
 }
-/* line 230, ../sass/screen.scss */
+/* line 250, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form div.submit {
   background: #1EABE4;
   padding: 0;
   height: 100%;
 }
-/* line 235, ../sass/screen.scss */
+/* line 255, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form div.submit button {
   background: #1EABE4;
   border: none;
@@ -233,71 +253,74 @@ body.profiles #base #profile-content #add-video #add-video-form div.submit butto
   color: white;
   text-indent: 9px;
 }
-/* line 243, ../sass/screen.scss */
+/* line 263, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form div.submit button i {
   color: white;
 }
-/* line 249, ../sass/screen.scss */
+/* line 269, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline {
-  padding: 10px 0;
-}
-/* line 252, ../sass/screen.scss */
-body.profiles #base #profile-content #timeline nav {
   background: #05171E;
+  padding: 20px 0;
+}
+/* line 273, ../sass/screen.scss */
+body.profiles #base #profile-content #timeline nav {
   margin-bottom: 16px;
 }
-/* line 256, ../sass/screen.scss */
+/* line 276, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav .nav-pills > li + li {
-  margin-left: 4.5%;
+  margin-left: 6%;
 }
-/* line 258, ../sass/screen.scss */
+/* line 278, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav ul.nav-pills {
   padding: 0 28px;
 }
-/* line 263, ../sass/screen.scss */
+/* line 283, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav ul.nav-pills li a {
   color: #898989;
   font-size: 13px;
   font-weight: 500;
   padding: 12px 24px;
 }
-/* line 271, ../sass/screen.scss */
+/* line 291, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav ul.nav-pills li.active a, body.profiles #base #profile-content #timeline nav ul.nav-pills li:hover a {
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
+  border-color: #102e3b;
   background-color: #102e3b;
   color: #c5c5c5;
-  font-weight: 700;
   text-align: center;
 }
-/* line 280, ../sass/screen.scss */
+/* line 300, ../sass/screen.scss */
+body.profiles #base #profile-content #timeline nav ul.nav-pills li.active {
+  font-weight: 700;
+}
+/* line 304, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav ul.nav-pills li.start {
   margin-left: 0;
 }
-/* line 285, ../sass/screen.scss */
+/* line 309, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline {
   font-family: "ff-dagny-web-pro", sans-serif;
-  min-height: 700px;
 }
-/* line 290, ../sass/screen.scss */
+/* line 313, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content {
   padding-bottom: 0;
 }
-/* line 294, ../sass/screen.scss */
+/* line 317, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header div.header-content {
   padding-left: 0;
 }
-/* line 298, ../sass/screen.scss */
+/* line 321, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header img.header-avatar {
   height: 41px;
   width: 41px;
 }
-/* line 303, ../sass/screen.scss */
+/* line 326, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header a {
   color: #247cc0;
 }
-/* line 307, ../sass/screen.scss */
+/* line 330, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header p {
   color: #565555;
   margin-bottom: 0;
@@ -306,43 +329,51 @@ body.profiles #base #profile-content #timeline div.responsive-timeline div.item 
   text-align: left;
   font-weight: 500;
 }
-/* line 315, ../sass/screen.scss */
+/* line 338, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header p i {
   color: #b2bbbe;
   font-size: 7px;
-  position: absolute;
-  top: 2px;
+  position: relative;
+  top: -5px;
 }
-/* line 322, ../sass/screen.scss */
+/* line 345, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header p span {
   font-weight: 500;
-  padding: 0 4px 0 10px;
+  padding: 0 4px 0 4px;
 }
-/* line 329, ../sass/screen.scss */
+/* line 352, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type i {
   color: #C5C6C6;
   font-size: 20px;
   position: relative;
   right: 20px;
 }
-/* line 339, ../sass/screen.scss */
+/* line 362, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.posted div {
   color: #949292;
   padding: 0;
 }
-/* line 347, ../sass/screen.scss */
+/* line 370, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer span.corner {
   top: -47px;
 }
-/* line 349, ../sass/screen.scss */
+/* line 372, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer a.thumbnail-link {
   display: block;
   overflow: hidden;
   height: 294px;
   width: 100%;
 }
-/* line 355, ../sass/screen.scss */
+/* line 378, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer a.thumbnail-link img.cover {
   max-height: 294px;
   width: 101%;
+}
+/* line 387, ../sass/screen.scss */
+body.profiles #base #profile-content #timeline div.load-wrap {
+  visibility: hidden;
+}
+/* line 394, ../sass/screen.scss */
+body.profiles #footer {
+  margin-top: 0;
 }

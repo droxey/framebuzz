@@ -89,10 +89,12 @@ def feed(request, username):
 
     p = Paginator(sorted_feed, ITEMS_PER_PAGES, request=request)
 
-    if page == 1 and request.GET.get('init', None) is not None:
+    if int(page) == 1:
         template = 'profiles/snippets/feed.html'
     else:
         template = 'profiles/snippets/item.html'
+
+    print template
 
     return render_to_response(template, {
         'profile_user': user,

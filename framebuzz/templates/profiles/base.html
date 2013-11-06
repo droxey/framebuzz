@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <div id="user-details" class="row">
-                    {% if profile_user.get_profile.tagline %}<h2>{{ profile_user.get_profile.tagline }}</h2>{% endif %}
+                    {% if profile_user.get_profile.tagline %}<h2>{{ profile_user.get_profile.tagline }} <i class="fa fa-play fa-flip-horizontal pull-right"></i></h2>{% endif %}
                     {% if profile_user.get_profile.location %}<h3>{{ profile_user.get_profile.location }} <i class="fa fa-map-marker"></i></h3>{% endif %}
                     {% if profile_user.get_profile.bio %}<em>&ldquo;{{ profile_user.get_profile.bio }}&rdquo;</em>{% endif %}
                 </div>
@@ -109,31 +109,31 @@
                         <ul class="nav nav-tabs">
                             <li class="videos">
                                 <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">
-                                    <i class="fa fa-video-camera"></i>
+                                    <i class="fa fa-video-camera fa-fw"></i>
                                     <strong>{{ profile_library|length }}</strong>
                                 </a>
                             </li>
                             <li class="conversations">
                                 <a class="filter" data-filter=".conversations" href="#" data-pages="{{ page_counts.conversations }}">
-                                    <i class="fa fa-comment"></i>
+                                    <i class="fa fa-comment fa-fw"></i>
                                     <strong>{{ profile_conversations|length }}</strong>
                                 </a>
                             </li>
                             <li class="favorites">
                                 <a class="filter" data-filter=".added_to_favorites" href="#" data-pages="{{ page_counts.favorites }}">
-                                    <i class="fa fa-heart"></i>
+                                    <i class="fa fa-heart fa-fw"></i>
                                     <strong>{{ profile_favorites|length }}</strong>
                                 </a>
                             </li>
                             <li class="followers">
                                 <a class="filter" data-filter=".followers" href="#" data-pages="{{ page_counts.followers }}">
-                                    <i class="fa fa-group"></i>
+                                    <i class="fa fa-group fa-fw"></i>
                                     <strong>{{ profile_followers|length }}</strong>
                                 </a>
                             </li>
                             <li class="following">
                                 <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">
-                                    <i class="fa fa-user"></i>
+                                    <i class="fa fa-user fa-fw"></i>
                                     <strong>{{ profile_following|length }}</strong>
                                 </a>
                             </li>
@@ -161,7 +161,6 @@
                     <div class="col-md-12">
                         <nav class="row">
                             <ul class="nav nav-pills clearfix">
-                                <li class="filter"><i class="icon-filter"></i></li>
                                 <li class="start{% if not is_share %} active{% endif %}">
                                     <a class="filter latest" data-filter="*" href="#">Latest</a>
                                 </li>

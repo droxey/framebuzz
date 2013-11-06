@@ -6,6 +6,7 @@ var FrameBuzzProfile = (function($) {
         _urls = {},
         _currentFilterClass = null,
         _currentRequest = null,
+        _timeline = null,
         _endOfPageMessages = {
             'latest': '', 
             'added_video_to_library': '',
@@ -104,22 +105,12 @@ var FrameBuzzProfile = (function($) {
                 });
             }
 
-            var isotopeFilter = (_isMyProfile && filterClass != '*') 
-                                ? filterClass + '.mine' 
-                                : filterClass;
-
-            $('#feed-list').isotope({ filter: isotopeFilter });
             $('ul.nav-pills li.active').removeClass('active');
             $('a[data-filter="' + filterClass +'"]').parent().toggleClass('active');
+            $('#feed').html('');
 
-            if (filterClass == '*' && _currentFilterClass != '*') {
-                _pages = parseInt($('#feed-list').attr('data-total-pages'));
-                _page = 1;
-            }
-            else {
-                _currentFilterClass = filterClass;
-                getPage(1, true);
-            }
+            _currentFilterClass = filterClass;
+            getPage(1, true);
 
             return false;
         });
@@ -232,24 +223,12 @@ var FrameBuzzProfile = (function($) {
         initToggleButtons();
     }
 
-    function insertCards(container, elements) {
-        container.isotope('insert', elements, function() {
-            elements.removeClass('isotope-hidden');
-            bindCardFunctions();
-
-            $('img.lazy', elements).lazyload({ 
-                effect: "fadeIn",
-                event: 'scroll trigger-lazy-load'
-            });
-        });
-    }
-
     function getPage(page, filtering) {
         if (_currentRequest != null) {
             _currentRequest.abort();
         }
 
-        var $container = $('#feed-list'),
+        var $container = $('div.responsive-timeline div.container'),
             nextPageUrl = _urls.feed + '?page=' + page;
 
         if (_currentFilterClass != null && _currentFilterClass != '*') {
@@ -257,29 +236,12 @@ var FrameBuzzProfile = (function($) {
         }
 
         _currentRequest = $.get(nextPageUrl, function(newElements) {
-            var $elements = $(newElements);
+            _page = _page + 1;
 
-            if (filtering && page == 1) {
-                var oldItemsCount = $('li' + _currentFilterClass, $container).size();
-                if (oldItemsCount == 0) {
-                    insertCards($container, $elements);
-                }
-                else {
-                    var newItemsCount = $elements.size();
-                    var newElementsSlice = $elements.slice(oldItemsCount, (newItemsCount - oldItemsCount));
+            $('#feed').html(newElements);
+            initTimeline();
 
-                    insertCards($container, newElementsSlice);
-                }
-
-                if (_currentFilterClass == '*') {
-                    _currentFilterClass = null;
-                }
-            }
-            else {
-                insertCards($container, $elements);
-            }
-
-            _currentRequest = null;
+            $(window).trigger('resize');
         });
     }
 
@@ -289,13 +251,49 @@ var FrameBuzzProfile = (function($) {
             }).addClass('loaded');
     }
 
+    function initTimeline() {
+        console.log('bind');
+        $('.responsive-timeline').rTimeline({
+            theme: 'light', 
+            url: _urls.feed,
+            data: function(iteration) {
+                var instUrl = $(this).url;
+                _page = 2;
+
+                $(document).ajaxSuccess(function(event, xhr, settings) {
+                    if (settings.url == instUrl) {
+                        console.log('success');
+
+                        _page = _page + 1;
+
+                        lazyLoadImages();
+
+                        $('div.load-wrap').show();
+                    }
+
+                    $(document).unbind('ajaxSuccess');
+                });
+
+                if (_currentFilterClass != null && _currentFilterClass != '*') {
+                    return { 'page': _page, 'filter': _currentFilterClass };
+                }
+
+                return { 'page': _page };
+            }
+        });
+
+        $('img.lazy', '#feed').lazyload({ 
+            event: 'scroll trigger-lazy-load'
+        }).addClass('loaded');
+    }
+
     return {
       init: function(isMyProfile, isShare, urls) {
         _isShare = isShare;
         _isMyProfile = isMyProfile;
         _urls = urls;
 
-        //bindFilter();
+        bindFilter();
         lazyLoadImages();
 
         // Init isotope and infinite scroll.
@@ -321,32 +319,7 @@ var FrameBuzzProfile = (function($) {
             feedContainer.html(html);
             _page = 2;
 
-            $('.responsive-timeline').rTimeline({
-                theme: 'light', 
-                url: urls.feed,
-                data: function(iteration) {
-                    var instUrl = urls.feed + '?page=' + _page;
-
-                    $(document).ajaxSuccess(function(event, xhr, settings) {
-                        if (settings.url == instUrl) {
-                            _page = _page + 1;
-
-                            lazyLoadImages();
-                        }
-                    });
-
-                    return { 'page': _page };
-                }
-            });
-
-            $('img.lazy', feedContainer).lazyload({ 
-                event: 'scroll trigger-lazy-load'
-            });
-
-            var $container = $('#feed-list'),
-                _pages = parseInt($container.attr('data-total-pages'));
-
-
+            initTimeline();
         });
     }};
 }(jQuery));
