@@ -98,7 +98,11 @@
 						timeline.reload();
 						timeline.initEvents();
 						timeline.loading = false;
-						timeline.iteration =  1;
+						timeline.iteration += 1;
+
+						$('img.lazy').not('.loaded').lazyload({ 
+				            event: 'scroll trigger-lazy-load'
+				        }).addClass('loaded');
 					},
 					dataType: "html"
 
