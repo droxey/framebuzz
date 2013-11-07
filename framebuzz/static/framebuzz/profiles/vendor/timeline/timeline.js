@@ -67,7 +67,6 @@
 	};
 
 	Timeline.prototype.init = function(params) {
-		console.log('init');
 		var timeline = this;
 		timeline.reload();
 		timeline.reload();
@@ -88,7 +87,6 @@
 					url: params.url,
 					data: data,
 					success: function(res){
-						console.log(timeline.$innerContainer);
 						if(res == ""){
 							timeline.$container.find('.loadMore').removeClass('loading').find('p').html(params.doneText);
 							timeline.loading = true;
@@ -141,7 +139,6 @@
 			var $t = $(this);
 			var timeline;
 			timeline = new Timeline();
-			console.log($t);
 
 			$(document).ready(function () {
 				timeline.$container = $t;
