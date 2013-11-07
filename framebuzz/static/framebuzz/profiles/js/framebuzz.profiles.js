@@ -53,10 +53,6 @@ var FrameBuzzProfile = (function($) {
         $('.tooltip').tooltip();
     }
 
-    function initEditables() {
-        $('.editable').editable();
-    }
-
     function youtube_parser(url){
         var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
         var match = url.match(regExp);
@@ -228,16 +224,13 @@ var FrameBuzzProfile = (function($) {
             _currentRequest.abort();
         }
 
-        var $container = $('div.responsive-timeline div.container'),
-            nextPageUrl = _urls.feed + '?page=' + page;
-
+        var nextPageUrl = _urls.feed + '?page=' + page;
         if (_currentFilterClass != null && _currentFilterClass != '*') {
             nextPageUrl = nextPageUrl + '&filter=' + _currentFilterClass.replace('.', '');
         }
 
         _currentRequest = $.get(nextPageUrl, function(newElements) {
-            _page = _page + 1;
-
+            _page = 1;
             $('#feed').html(newElements);
             initTimeline();
 
@@ -246,36 +239,36 @@ var FrameBuzzProfile = (function($) {
     }
 
     function lazyLoadImages() {
-            $('img.lazy').not('.loaded').lazyload({ 
-                event: 'scroll trigger-lazy-load'
-            }).addClass('loaded');
+        $('img.lazy').not('.loaded').lazyload({ 
+            event: 'scroll trigger-lazy-load'
+        }).addClass('loaded');
     }
 
     function initTimeline() {
-        console.log('bind');
         $('.responsive-timeline').rTimeline({
             theme: 'light', 
             url: _urls.feed,
             data: function(iteration) {
-                var instUrl = $(this).url;
-                _page = 2;
-
                 $(document).ajaxSuccess(function(event, xhr, settings) {
-                    if (settings.url == instUrl) {
+                    var nextPageUrl = _urls.feed + '?page=' + _page;
+
+                    console.log(_page);
+
+                    if (_currentFilterClass != null && _currentFilterClass != '*') {
+                        nextPageUrl = nextPageUrl + '&filter=' + _currentFilterClass.replace('.', '');
+                    }
+
+                    if (settings.url == nextPageUrl) {
                         console.log('success');
-
                         _page = _page + 1;
-
                         lazyLoadImages();
 
                         $('div.load-wrap').show();
                     }
-
-                    $(document).unbind('ajaxSuccess');
                 });
 
                 if (_currentFilterClass != null && _currentFilterClass != '*') {
-                    return { 'page': _page, 'filter': _currentFilterClass };
+                    return { 'page': _page, 'filter': _currentFilterClass.replace('.', '') };
                 }
 
                 return { 'page': _page };
@@ -316,9 +309,8 @@ var FrameBuzzProfile = (function($) {
         }
 
         $.get(urls.feed + '?init=true', function(html) {
-            feedContainer.html(html);
             _page = 2;
-
+            feedContainer.html(html);
             initTimeline();
         });
     }};

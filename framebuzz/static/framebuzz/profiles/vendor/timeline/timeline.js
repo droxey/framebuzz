@@ -66,7 +66,7 @@
 		}
 	};
 
-	Timeline.prototype.init = function(params){
+	Timeline.prototype.init = function(params) {
 		var timeline = this;
 		timeline.reload();
 		timeline.reload();
@@ -197,6 +197,16 @@
 
 			$(window).load(function () {
 				timeline.init(params);
+
+				$(document).ajaxSuccess(function(event, xhr, settings) {
+					if (settings.url.indexOf('?page=1') != -1) {
+						timeline.init(params);
+
+						$(window).resize(function(){
+							timeline.reload();
+						});
+					}
+				});
 			});
 
 			$(window).resize(function(){
