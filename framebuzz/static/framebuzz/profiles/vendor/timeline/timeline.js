@@ -67,6 +67,7 @@
 	};
 
 	Timeline.prototype.init = function(params) {
+		console.log('init');
 		var timeline = this;
 		timeline.reload();
 		timeline.reload();
@@ -87,6 +88,7 @@
 					url: params.url,
 					data: data,
 					success: function(res){
+						console.log(timeline.$innerContainer);
 						if(res == ""){
 							timeline.$container.find('.loadMore').removeClass('loading').find('p').html(params.doneText);
 							timeline.loading = true;
@@ -109,67 +111,18 @@
 		if(params.scrollForMore)
 		{
 			$(window).scroll(function(){
-				var offset = timeline.$container.find('.loadMore').offset();
+				var offset = timeline.$container.find('.loadMore').position();
+
 				if((offset.top-$(window).height() <= $(window).scrollTop()) && !timeline.loading)
 				{
-					timeline.$container.find('.loadMore').click()
+					timeline.$container.find('.loadMore').click();
 				}
 			});
 		}
 	};
 
 	Timeline.prototype.initEvents = function(){
-		var timeline = this;
-
-		timeline.$container.find('.comments-container').each(function () {
-	        if(!$(this).data('height')){
-		        var height = $(this).height();
-		        $(this).data('height', height).css({
-		            height: 0
-		        });
-	    	}
-	    });
-
-		timeline.$container.find('.tags').find('.icon').unbind('click').toggle(function(){
-			var height = $(this).parent().parent().find('.cover').height();
-			$(this).parent().find('.tags-container').animate({
-				height : height+'px'
-			});
-			return false;
-		}, function(){
-			$(this).parent().find('.tags-container').animate({
-				height : 0
-			});
-			return false;
-		});
-	    timeline.$container.find('.comments-toggle').unbind('click').click(function () {
-	        $parent = $(this).parent().parent();
-	        if (!$parent.hasClass('shown')) {
-	            $parent.addClass('shown');
-	            $commentsContainer = $parent.find('.comments-container');
-	            var current = parseInt($parent.css('marginBottom'));
-	            $parent.css({
-	                'marginBottom': current + $commentsContainer.data('height') + 'px'
-	            });
-				timeline.reload();
-	            $commentsContainer.animate({
-	                'height': $commentsContainer.data('height') + 'px'
-	            }, 750);
-	            $parent.animate({
-	                'marginBottom': current + 'px'
-	            }, 750, function(){
-	});
-	        } else {
-	            $parent.removeClass('shown');
-	            $commentsContainer = $parent.find('.comments-container');
-	            $commentsContainer.animate({
-	                'height': '0px'
-	            }, 750, function () {
-					timeline.reload();
-	            });
-	        }
-	        return false;
-	    });
+		
 	};
 
 	$.fn.rTimeline = function(params) {
@@ -188,6 +141,7 @@
 			var $t = $(this);
 			var timeline;
 			timeline = new Timeline();
+			console.log($t);
 
 			$(document).ready(function () {
 				timeline.$container = $t;
@@ -197,16 +151,6 @@
 
 			$(window).load(function () {
 				timeline.init(params);
-
-				$(document).ajaxSuccess(function(event, xhr, settings) {
-					if (settings.url.indexOf('?page=1') != -1) {
-						timeline.init(params);
-
-						$(window).resize(function(){
-							timeline.reload();
-						});
-					}
-				});
 			});
 
 			$(window).resize(function(){

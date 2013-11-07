@@ -16,7 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from actstream import action
 from actstream.models import Action, followers, following
-from pure_pagination import Paginator, PageNotAnInteger
+from pure_pagination import Paginator, PageNotAnInteger, EmptyPage
 from templated_email import send_templated_mail
 
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
@@ -35,6 +35,7 @@ def feed(request, username):
     """
         Returns the rendered template(s) used by the newsfeed.
     """
+    page_obj = None
     user = User.objects.get(username__iexact=username)
     is_my_profile = request.user.is_authenticated() and user.id == request.user.id
     user_following = following(user)
@@ -87,18 +88,20 @@ def feed(request, username):
         else:
             sorted_feed = following(user)
 
-    p = Paginator(sorted_feed, ITEMS_PER_PAGES, request=request)
+    try:
+        p = Paginator(sorted_feed, ITEMS_PER_PAGES, request=request)
+        page_obj = p.page(page)
 
-    if int(page) == 1:
-        template = 'profiles/snippets/feed.html'
-    else:
-        template = 'profiles/snippets/item.html'
-
-    print template
+        if int(page) == 1:
+            template = 'profiles/snippets/feed.html'
+        else:
+            template = 'profiles/snippets/item.html'
+    except EmptyPage:
+        template = 'profiles/snippets/blank.html'
 
     return render_to_response(template, {
         'profile_user': user,
-        'page_obj': p.page(page),
+        'page_obj': page_obj,
         'video_library_ids': video_library_ids,
         'featured_video_ids': featured_video_ids,
         'favorite_comment_ids': favorite_comment_ids,

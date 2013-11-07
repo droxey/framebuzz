@@ -12,9 +12,11 @@
             {% include "profiles/snippets/item.html" %}
         {% endif %}
     </div>
-    <div class="row load-wrap">
-        <div class="col-md-12 loadMore">
-           <p>Load more posts...</p>
-        </div>
+    <div class="col-md-12 loadMore">
+        {% if page_obj.object_list|length > 0 %}
+            <p>Load more posts...</p>
+        {% else %}
+            <p>No more posts!</p>
+        {% endif %}
     </div>
 </div>

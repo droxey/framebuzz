@@ -1,20 +1,9 @@
 var FrameBuzzProfile = (function($) {
     var _isShare = false,
         _isMyProfile = false,
-        _page = 1,
-        _pages = 1,
         _urls = {},
         _currentFilterClass = null,
-        _currentRequest = null,
-        _timeline = null,
-        _endOfPageMessages = {
-            'latest': '', 
-            'added_video_to_library': '',
-            'conversations': '',
-            'favorites': '',
-            'following': '',
-            'followers': ''
-        };
+        _currentRequest = null;
 
     function bindAddVideoButton() {
         var video_id = null;
@@ -89,9 +78,12 @@ var FrameBuzzProfile = (function($) {
 
     function bindFilter() {
         $('body').on('click', 'a.filter', function() {
-            var el = $(this);
-            filterClass = el.attr('data-filter');
-            _pages = parseInt(el.attr('data-pages'));
+            if (_currentRequest != null) { _currentRequest.abort(); }
+
+            var el = $(this),
+                filterClass = el.attr('data-filter'),
+                innerContainer = $('div.responsive-timeline > div.container'),
+                nextPageUrl = _urls.feed + '?page=1';
 
             if (_isShare) {
                 _currentFilterClass = '.added_video_to_library';
@@ -101,12 +93,24 @@ var FrameBuzzProfile = (function($) {
                 });
             }
 
-            $('ul.nav-pills li.active').removeClass('active');
-            $('a[data-filter="' + filterClass +'"]').parent().toggleClass('active');
-            $('#feed').html('');
+            $('a.filter').parent().removeClass('active');
+            el.parent().toggleClass('active');
+            innerContainer.find('div.item').remove();
 
-            _currentFilterClass = filterClass;
-            getPage(1, true);
+            if (filterClass != null && filterClass != '*') {
+                nextPageUrl = nextPageUrl + '&filter=' + filterClass.replace('.', '');
+            }
+
+            _currentRequest = $.get(nextPageUrl, function(newElements) {
+                var elements = $('div.item', $(newElements));
+                innerContainer.append(elements);
+
+                lazyLoadImages();
+
+                _currentFilterClass = filterClass;
+
+                $(window).trigger('resize');
+            });
 
             return false;
         });
@@ -219,25 +223,6 @@ var FrameBuzzProfile = (function($) {
         initToggleButtons();
     }
 
-    function getPage(page, filtering) {
-        if (_currentRequest != null) {
-            _currentRequest.abort();
-        }
-
-        var nextPageUrl = _urls.feed + '?page=' + page;
-        if (_currentFilterClass != null && _currentFilterClass != '*') {
-            nextPageUrl = nextPageUrl + '&filter=' + _currentFilterClass.replace('.', '');
-        }
-
-        _currentRequest = $.get(nextPageUrl, function(newElements) {
-            _page = 1;
-            $('#feed').html(newElements);
-            initTimeline();
-
-            $(window).trigger('resize');
-        });
-    }
-
     function lazyLoadImages() {
         $('img.lazy').not('.loaded').lazyload({ 
             event: 'scroll trigger-lazy-load'
@@ -249,29 +234,13 @@ var FrameBuzzProfile = (function($) {
             theme: 'light', 
             url: _urls.feed,
             data: function(iteration) {
-                $(document).ajaxSuccess(function(event, xhr, settings) {
-                    var nextPageUrl = _urls.feed + '?page=' + _page;
-
-                    console.log(_page);
-
-                    if (_currentFilterClass != null && _currentFilterClass != '*') {
-                        nextPageUrl = nextPageUrl + '&filter=' + _currentFilterClass.replace('.', '');
-                    }
-
-                    if (settings.url == nextPageUrl) {
-                        console.log('success');
-                        _page = _page + 1;
-                        lazyLoadImages();
-
-                        $('div.load-wrap').show();
-                    }
-                });
+                var page = iteration + 2;
 
                 if (_currentFilterClass != null && _currentFilterClass != '*') {
-                    return { 'page': _page, 'filter': _currentFilterClass.replace('.', '') };
+                    return { 'page': page, 'filter': _currentFilterClass.replace('.', '') };
                 }
 
-                return { 'page': _page };
+                return { 'page': page };
             }
         });
 
@@ -295,8 +264,6 @@ var FrameBuzzProfile = (function($) {
 
         if (_isMyProfile) {
             bindAddVideoButton();
-            //initEditables();
-            //initCustomize();
 
             // Load recommendations.
             $.get(urls.recommendations, function(html) {
@@ -309,7 +276,6 @@ var FrameBuzzProfile = (function($) {
         }
 
         $.get(urls.feed + '?init=true', function(html) {
-            _page = 2;
             feedContainer.html(html);
             initTimeline();
         });
