@@ -32,20 +32,7 @@
     </div>
   {% comment %}
   <div class="video-details">
-      {% if video.uservideo_set.all|length > 0 and action.verb == 'added video to library' %}
-        <div class="shared">
-          <h5>Also playing in these libraries:</h5>
-          <ul class="clearfix">
-            {% for uv in video.uservideo_set.all|slice:":8" %}
-            <li class="shown">
-              <a class="tooltip" data-placement="bottom" title="{{ uv.user|display_name }}" href="{% url 'profiles-home' uv.user.username %}">
-                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url uv.user 64 %}" alt="" height="22" width="22" class="img-circle lazy" />
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
+
   </div>
   <div class="video-actions clearfix">
     <div class="left">
@@ -85,5 +72,16 @@
     <span class="corner"></span>
     <a class="thumbnail-link" href="{% url 'profiles-share' profile_user.username video.video_id %}">
         <img class="cover lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.large_thumbnail }}" />
-    </a>
+    </a>    
+    {% if video.uservideo_set.all|length > 0 %}
+      <div class="users">
+        <div class="row clearfix">
+          {% for uv in video.uservideo_set.all|slice:":12" %}
+            <a class="user pull-right" data-placement="bottom" title="{{ uv.user|display_name }}" href="{% url 'profiles-home' uv.user.username %}">
+              <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url uv.user 64 %}" alt="" class="img-responsive lazy" />
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
 </footer>

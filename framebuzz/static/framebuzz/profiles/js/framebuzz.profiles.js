@@ -106,6 +106,7 @@ var FrameBuzzProfile = (function($) {
                 innerContainer.append(elements);
 
                 lazyLoadImages();
+                initTooltips();
 
                 _currentFilterClass = filterClass;
 
@@ -218,11 +219,6 @@ var FrameBuzzProfile = (function($) {
         });
     }
 
-    function bindCardFunctions() {
-        initTooltips();
-        initToggleButtons();
-    }
-
     function lazyLoadImages() {
         $('img.lazy').not('.loaded').lazyload({ 
             event: 'scroll trigger-lazy-load'
@@ -244,9 +240,10 @@ var FrameBuzzProfile = (function($) {
             }
         });
 
-        $('img.lazy', '#feed').lazyload({ 
-            event: 'scroll trigger-lazy-load'
-        }).addClass('loaded');
+        lazyLoadImages();
+        initTooltips();
+
+        $(window).trigger('resize');
     }
 
     return {
