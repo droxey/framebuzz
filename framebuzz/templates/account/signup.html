@@ -7,11 +7,11 @@
             <label for="id_username">Choose a username:</label>
             {{ form.username }}
         </div>
-        <div class="form-group col-xs-3">
+        <div class="form-group col-xs-4">
             <label for="id_username">Password:</label>
             {{ form.password1 }}
         </div>
-        <div class="form-group col-xs-3">
+        <div class="form-group col-xs-4">
             <label for="id_username">Password again:</label>
             {{ form.password2 }}
         </div>
@@ -21,7 +21,7 @@
             <button class="btn btn-info" type="submit">Create Account</button>
         </div>
         <div class="col-xs-1 text-center or">
-            <i>- or -</i>
+            <i>-or-</i>
         </div>
         {% if socialaccount.providers %}
             {% for provider in socialaccount.providers %}

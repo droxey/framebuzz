@@ -2,7 +2,7 @@
 
 
 {% for video in top_videos %}
-    <div class="col-md-6 pull-left">
+    <div class="col-xs-6 pull-left">
         <a class="thumbnail-link play-video" href="{% spaceless %}{% if request.user.is_authenticated %}
                 {% if video.found_by %}
                     {% url 'profiles-share' video.found_by.username video.video_id %}

@@ -2,7 +2,7 @@
 
 <div class="content">
   <div class="row">
-    <div class="col-md-8 user">
+    <div class="col-xs-8 user">
         <strong><a href="{% url 'profiles-home' user.username %}">{{ user|display_name }}</a></strong>
         <br>
         <strong>joined FrameBuzz!</strong>
@@ -17,9 +17,9 @@
             </em>
         {% endif %} 
     </div>
-    <div class="col-md-4 avatar">
-        <a class="following" href="{% url 'profiles-home' profile_user.username %}">
-          <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url profile_user 110 %}" alt="" class="img-responsive lazy" />
+    <div class="col-xs-4 avatar">
+        <a class="following" href="{% url 'profiles-home' user.username %}">
+          <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user 110 %}" alt="" class="img-responsive lazy" />
           <span class="img-corner"></span>
         </a>
     </div>

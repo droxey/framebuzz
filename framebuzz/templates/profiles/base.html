@@ -37,9 +37,9 @@
 {% endblock %}
 
 {% block content_center %}
-    <div class="col-md-12">
+    <div class="col-xs-12">
         <div class="row">
-            <div id="sidebar" class="col-sm-3">
+            <div id="sidebar" class="col-xs-3">
                 <div id="user-avatar" class="row">
                     <a href="{% url 'profiles-home' profile_user.username %}" class="avatar filter" data-filter="*">
                         <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url profile_user 109 %}" alt="" class="img-responsive lazy">
@@ -48,7 +48,7 @@
                 {% if profile_user.uservideo_set.all|length > 0 %}
                     <div id="user-videos" class="row clearfix">
                         {% for uv in profile_user.uservideo_set.all|slice:":4" %}
-                            <div class="vid col-sm-3 pull-right">
+                            <div class="vid col-xs-3 pull-right">
                                 <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username uv.video.video_id %}">
                                     <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ uv.video.large_thumbnail }}" alt="{{ uv.video.title|title }}" class="img-responsive lazy">
                                 </a>
@@ -57,10 +57,10 @@
                     </div>
                 {% endif %}
                 <div id="user-display-name" class="row">
-                    <div class="col-md-10">
+                    <div class="col-xs-10">
                         <h1>{{ profile_user|display_name }}</h1>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-xs-2">
                         {% if not is_my_profile %}
                             {% if request.user.is_authenticated %}
                                 <a class="toggle-follow unfollow-button pull-right img-circle" title="Following" data-placement="bottom" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>
@@ -89,7 +89,7 @@
                 </div>
                 {% endif %}
                 <div id="user-stats" class="row container">
-                    <div class="col-md-12">
+                    <div class="col-xs-12">
                         <ul class="nav nav-tabs">
                             <li class="videos">
                                 <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">
@@ -126,10 +126,10 @@
                 </div>
                 {% if is_my_profile %}
                     <div id="recommendations" class="row">
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <h2>Recommendations</h2>
                             <div class="row ajax">
-                                <div class="spin col-md-12 text-center">
+                                <div class="spin col-xs-12 text-center">
                                     <i class="icon-spinner icon-spin icon-2x"></i>
                                 </div>
                             </div>
@@ -137,12 +137,12 @@
                     </div>
                 {% endif %}
             </div>
-            <div id="profile-content" class="col-md-9">
+            <div id="profile-content" class="col-xs-9">
                 <div id="add-video" class="row">
                     {% include "profiles/snippets/add_video.html" %}
                 </div>
                 <div id="timeline" class="row">
-                    <div class="col-md-12">
+                    <div class="col-xs-12">
                         <nav class="row">
                             <ul class="nav nav-pills clearfix">
                                 <li class="start{% if not is_share %} active{% endif %}">

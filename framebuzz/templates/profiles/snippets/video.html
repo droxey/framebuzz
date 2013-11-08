@@ -4,10 +4,10 @@
 <div class="content">
   
     <div class="row header">
-      <div class="col-md-2">
+      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 avatar">
         <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url action.actor 110 %}" alt="" height="82" width="82" class="header-avatar img-circle lazy" />
       </div>
-      <div class="col-md-9 header-content">
+      <div class="col-xs-8 header-content">
         {% if action.verb != 'added video to library' %}
           <p>{% display_action action %}</p>
           <p><i class="fa fa-quote-left"></i><span>{{ action.action_object.comment }}</span><i class="fa fa-quote-right fa-flip-vertical"></i></p>
@@ -15,7 +15,7 @@
             <p><strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong> posted <strong>{{ action.action_object.title|title }}</strong></p>
         {% endif %}
       </div>
-      <div class="col-md-1 action-type">
+      <div class="col-xs-1 action-type pull-right">
         {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
           <i class="fa fa-comment"></i>
         {% elif action.verb == 'added video to library' %}
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="row posted">
-      <div class="col-md-10 col-md-offset-2">
+      <div class="col-sm-9 col-xs-10 col-md-offset-2 col-sm-offset-3">
         <i class="fa fa-clock-o"></i> {{ action.timestamp|timesince }} {% trans "ago" %}
       </div>
     </div>
@@ -39,7 +39,7 @@
     <div class="actions">
       <div class="row">
           {% if request.user.is_authenticated %}
-              <div class="col-sm-4">
+              <div class="col-xs-4">
                   <a class="img-circle video-toggle-button tooltip library{% if video.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username video.video_id %}" title="{% if video.id in video_library_ids %}Added to Posts{% else %}Post this Video{% endif %}" data-placement="left">
                       {% if video.id in video_library_ids %}
                         <i class="fa fa-minus fa-fw"></i>
@@ -48,12 +48,12 @@
                       {% endif %}
                     </a>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-xs-4">
                     <a class="img-circle video-toggle-button play play-video" href="{% url 'profiles-share' profile_user.username video.video_id %}">
                       <i class="fa fa-play fa-fw"></i>
                     </a>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-xs-4">
                     {% if action.verb != 'added video to library' and action.action_object %}
                       <a class="img-circle video-toggle-button tooltip favorite{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username action.action_object_object_id %}" title="{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="left">
                         {% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}

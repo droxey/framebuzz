@@ -2,7 +2,7 @@
 
 
   <div class="row clearfix">
-    <div class="col-md-8 user">
+    <div class="col-xs-8 user">
         <strong><a href="{% url 'profiles-home' user.username %}">{{ user|display_name }}</a></strong>
         {% if user.get_profile.bio or user.get_profile.tagline %}
             <br>
@@ -15,7 +15,7 @@
             </em>
         {% endif %} 
     </div>
-    <div class="col-md-4 avatar">
+    <div class="col-xs-4 avatar">
       <a class="following" href="{% url 'profiles-home' user.username %}">
         <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user 110 %}" alt="" class="img-responsive lazy" />
         <span class="img-corner"></span>
@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="row">
-      <div class="col-md-12 follow">
+      <div class="col-xs-12 follow">
         {% if request.user.is_authenticated and user.id != request.user.id %}
             <a class="toggle-follow unfollow-button img-circle" title="Following" data-placement="bottom" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=user.pk %}" {% if not request.user|is_following:user %} style="display:none"{% endif %}>
               <span class="fa-stack">

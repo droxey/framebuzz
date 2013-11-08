@@ -66,12 +66,12 @@
           </ul>
         {% else %}
           <div id="logo" class="row">
-            <div class="col-xs-2 row-logo">
+            <div class="col-xs-3 row-logo">
               <a href="{% url 'home' %}">
                 <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="25" width="116">
               </a>
             </div>
-            <div class="col-xs-8 row-search">
+            <div class="col-xs-7 row-search">
                 <form id="search-form" data-users-url="{% url 'search-users' %}" data-conversations-url="{% url 'search-conversations' %}" data-videos-url="{% url 'search-videos' %}" method="GET" action="{% url 'fbz-search' %}" class="navbar-search">
                     <i class="fa fa-search"></i>
                     <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search people, conversations, and videos..." class="search-query span2">

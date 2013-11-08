@@ -48,13 +48,13 @@ body.profiles {
             padding: 16px 0 0 0;
 
             div.row-logo {
-                padding: 0 53px 0 29px;
+                margin: 0;
 
                 a {
                     display: block;
                     height: 25px;
-                    margin: 0 auto;
-                    width: 116px;
+                    margin-left: 13px;
+                    width: 100%;
 
                     img {
                         height: 25px;
@@ -66,7 +66,7 @@ body.profiles {
             div.row-search {
                 #search-form {
                     border-bottom: 1px solid #f6f6f6;
-                    width: 45%;
+                    width: 100%;
 
                     i { color: #999999; }
 
@@ -248,6 +248,8 @@ body.profiles {
             
             #add-video {
                 background: #1DAFEC;
+                height: 54px;
+                overflow: hidden;
 
                 #add-video-form {
                     input {
@@ -269,10 +271,12 @@ body.profiles {
                         button {
                             background: #1EABE4;
                             border: none;
-                            font-weight: bold;
-                            padding: 17px 0;
+                            font-weight: 700;
                             color: white;
-                            text-indent: 9px;
+                            text-align: center;
+                            line-height: 54px;
+                            font-size: 0.88em;
+                            width: 100%;
 
                             i { color: white; }
                         }
@@ -335,13 +339,19 @@ body.profiles {
                             padding-bottom: 0;
                         
                             div.header {
+
                                 div.header-content {
-                                    padding-left: 0;
+                                    position: relative;
                                 }
 
                                 img.header-avatar {
                                     height: 41px;
                                     width: 41px;
+                                }
+
+                                div.avatar {
+                                    padding-right: 0;
+                                    max-width: 56px;
                                 }
 
                                 a {
@@ -366,11 +376,15 @@ body.profiles {
                                     span { 
                                         color: #383838;
                                         font-weight: 700;
-                                        padding: 0 4px 0 4px; 
+                                        padding: 0 2px; 
                                     }
                                 }
 
                                 div.action-type {
+                                    position: absolute;
+                                    right: -10px;
+                                    top: 5px;
+
                                     i {
                                         color: #C5C6C6;
                                         font-size: 20px;
@@ -396,7 +410,7 @@ body.profiles {
                             a.thumbnail-link {
                                 display: block;
                                 overflow: hidden;
-                                height: 294px;
+                                max-height: 294px;
                                 width: 100%;
 
                                 img.cover {
