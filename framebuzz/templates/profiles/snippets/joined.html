@@ -4,8 +4,10 @@
   <div class="row">
     <div class="col-md-8 user">
         <strong><a href="{% url 'profiles-home' user.username %}">{{ user|display_name }}</a></strong>
+        <br>
+        <strong>joined FrameBuzz!</strong>
         {% if user.get_profile.bio or user.get_profile.tagline %}
-            <br>
+            <br><br>
             <em>
                 {% if user.get_profile.tagline %}
                     &ldquo;{{ user.get_profile.tagline|truncatechars:"90"|urlize }}&rdquo;

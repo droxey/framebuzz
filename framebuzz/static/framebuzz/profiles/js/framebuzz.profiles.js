@@ -107,6 +107,8 @@ var FrameBuzzProfile = (function($) {
 
                 lazyLoadImages();
                 initTooltips();
+                initFollowButton();
+                initToggleButtons();
 
                 _currentFilterClass = filterClass;
 
@@ -240,10 +242,24 @@ var FrameBuzzProfile = (function($) {
             }
         });
 
+        initToggleButtons();
+        initFollowButton();
         lazyLoadImages();
         initTooltips();
 
         $(window).trigger('resize');
+    }
+
+    function initVideoPlayer() {
+        $('a.play-video').click(function() {
+            var url = $(this).attr('href');
+
+            $.get(url, function(data) {
+                $('#share').html(data);
+            });
+
+            return false;
+        });
     }
 
     return {

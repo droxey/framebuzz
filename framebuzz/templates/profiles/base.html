@@ -49,7 +49,7 @@
                     <div id="user-videos" class="row clearfix">
                         {% for uv in profile_user.uservideo_set.all|slice:":4" %}
                             <div class="vid col-sm-3 pull-right">
-                                <a class="thumbnail-link" href="{% url 'profiles-share' profile_user.username uv.video.video_id %}">
+                                <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username uv.video.video_id %}">
                                     <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ uv.video.large_thumbnail }}" alt="{{ uv.video.title|title }}" class="img-responsive lazy">
                                 </a>
                             </div>
@@ -81,11 +81,13 @@
                         {% endif %}
                     </div>
                 </div>
+                {% if profile_user.get_profile.tagline|length > 0 or  profile_user.get_profile.location|length > 0 or profile_user.get_profile.bio|length > 0 %}
                 <div id="user-details" class="row">
                     {% if profile_user.get_profile.tagline %}<h2>{{ profile_user.get_profile.tagline }} <i class="fa fa-play fa-flip-horizontal pull-right"></i></h2>{% endif %}
                     {% if profile_user.get_profile.location %}<h3>{{ profile_user.get_profile.location }} <i class="fa fa-map-marker"></i></h3>{% endif %}
                     {% if profile_user.get_profile.bio %}<em>&ldquo;{{ profile_user.get_profile.bio }}&rdquo;</em>{% endif %}
                 </div>
+                {% endif %}
                 <div id="user-stats" class="row container">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">

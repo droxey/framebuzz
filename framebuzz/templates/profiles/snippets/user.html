@@ -22,3 +22,23 @@
       </a>
     </div>
   </div>
+  <div class="row">
+      <div class="col-md-12 follow">
+        {% if request.user.is_authenticated and user.id != request.user.id %}
+            <a class="toggle-follow unfollow-button img-circle" title="Following" data-placement="bottom" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=user.pk %}" {% if not request.user|is_following:user %} style="display:none"{% endif %}>
+              <span class="fa-stack">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                <i class="fa fa-minus fa-stack-1x fa-inverse pull-right"></i>
+              </span>            
+            </a>
+            <a class="toggle-follow follow-button img-circle" title="Follow" data-placement="bottom" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=user.pk %}" {% if request.user|is_following:user %} style="display:none"{% endif %}>
+              <span class="fa-stack">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                <i class="fa fa-plus fa-stack-1x fa-inverse pull-right"></i>
+              </span>
+            </a>
+        {% endif %}
+    </div>
+  </div>

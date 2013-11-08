@@ -33,7 +33,7 @@
 </div>
 <footer>
     <span class="corner"></span>
-    <a class="thumbnail-link" href="{% url 'profiles-share' profile_user.username video.video_id %}">
+    <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username video.video_id %}">
         <img class="cover lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.large_thumbnail }}" />
     </a>
     <div class="actions">
@@ -49,7 +49,7 @@
                     </a>
                 </div>
                 <div class="col-sm-4">
-                    <a class="img-circle video-toggle-button play" href="{% url 'profiles-share' profile_user.username video.video_id %}">
+                    <a class="img-circle video-toggle-button play play-video" href="{% url 'profiles-share' profile_user.username video.video_id %}">
                       <i class="fa fa-play fa-fw"></i>
                     </a>
                 </div>

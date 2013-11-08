@@ -99,6 +99,7 @@ def feed(request, username):
     except EmptyPage:
         template = 'profiles/snippets/blank.html'
 
+    ct = ContentType.objects.get(model='user')
     return render_to_response(template, {
         'profile_user': user,
         'page_obj': page_obj,
@@ -107,6 +108,7 @@ def feed(request, username):
         'favorite_comment_ids': favorite_comment_ids,
         'is_my_profile': is_my_profile,
         'verb_filter': verb_filter,
+        'user_content_type': ct
     }, context_instance=RequestContext(request))
 
 

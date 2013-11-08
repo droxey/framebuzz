@@ -7,6 +7,40 @@
 @import "compass/css3/border-radius";
 
 body.profiles {
+
+    a.toggle-follow {
+        display: block;
+        line-height: 34px;
+
+        .fa-user {
+            font-size: 18px;
+            line-height: 34px;
+            text-align: left;
+            text-indent: 5px;
+        }
+
+        .fa-plus, .fa-minus {
+            font-size: 9px;
+            line-height: 34px;
+            text-align: left;
+            text-indent: 18px;
+        }
+
+        &.follow-button {
+            i.fa-circle {
+                color: #6CC561;
+                font-size: 2.5em;
+            }
+        }
+
+        &.unfollow-button {
+            i.fa-circle {
+                color: #D75452;
+                font-size: 2.5em;
+            }
+        }
+    }
+
     #base {
         margin-top: 16px;
 
@@ -103,39 +137,6 @@ body.profiles {
                         font-size: 20px;
                         font-weight: 700;
                         margin: 10px 9px 10px;
-                    }
-
-                    a.toggle-follow {
-                        display: block;
-                        line-height: 34px;
-
-                        .fa-user {
-                            font-size: 18px;
-                            line-height: 34px;
-                            text-align: left;
-                            text-indent: 5px;
-                        }
-
-                        .fa-plus, .fa-minus {
-                            font-size: 9px;
-                            line-height: 34px;
-                            text-align: left;
-                            text-indent: 18px;
-                        }
-
-                        &.follow-button {
-                            i.fa-circle {
-                                color: #6CC561;
-                                font-size: 2.5em;
-                            }
-                        }
-
-                        &.unfollow-button {
-                            i.fa-circle {
-                                color: #D75452;
-                                font-size: 2.5em;
-                            }
-                        }
                     }
                 }
             }
@@ -328,6 +329,8 @@ body.profiles {
                     }
 
                     div.item {
+                        margin-bottom: 20px;
+
                         div.content {
                             padding-bottom: 0;
                         
@@ -361,7 +364,8 @@ body.profiles {
                                     }
 
                                     span { 
-                                        font-weight: 500;
+                                        color: #383838;
+                                        font-weight: 700;
                                         padding: 0 4px 0 4px; 
                                     }
                                 }
@@ -475,6 +479,10 @@ body.profiles {
 
                             &.left, &.right {
                                 div.content {
+                                    div.user {
+                                        line-height: 16px;
+                                    }
+
                                     div.avatar {
                                         right: 66.6667%;
 
@@ -490,6 +498,19 @@ body.profiles {
                                             left: 0;
                                             top: 0;
                                             width: 93%;
+                                        }
+                                    }
+
+                                    div.follow {
+                                        bottom: 8px;
+                                        margin-left: 10px;
+                                        position: absolute;
+
+                                        a.toggle-follow {
+                                            float: right;
+
+                                            .fa { line-height: 31px; }
+                                            .fa-plus, .fa-minus { text-indent: 16px; }
                                         }
                                     }
                                 }
@@ -516,14 +537,21 @@ body.profiles {
                                             width: 7px;
                                         }
                                     }
+
+                                    div.follow {
+                                        margin-right: 18px;
+
+                                        a {
+                                            float: left;
+                                        }
+                                    }
                                 }
                             }
 
                             &.right {
-                                                                    div.user {
-                                        left: 25%;
-                                    }
-
+                                div.user {
+                                    left: 25%;
+                                }
                             }
                         }
                     }
