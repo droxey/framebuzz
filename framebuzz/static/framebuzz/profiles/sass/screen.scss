@@ -223,7 +223,7 @@ body.profiles {
 
                 h2 {
                     color: #ACABAB;
-                    font-size: 20px;
+                    font-size: 18px;
                     font-weight: 700;
                     margin-bottom: 0;
                     position: relative;
@@ -291,18 +291,27 @@ body.profiles {
                 nav {
                     margin-bottom: 19px;
 
-                    .nav-pills > li + li { margin-left: 6%; }
+                    .nav-pills > li + li { 
+                        margin-left: 0;
+                    }
 
                     ul.nav-pills {
                         padding: 0 28px;
 
                         li {
-
                             a {
                                 color: #898989;
                                 font-size: 13px;
                                 font-weight: 500;
-                                padding: 12px 24px;
+                                padding: 12px;
+                                text-align: center;
+                                width: 100%;
+                            }
+
+                            &:last-child {
+                                padding-left: 0;
+                                margin-right: 0;
+                                padding-right: 0;
                             }
 
                             &.active, &:hover {

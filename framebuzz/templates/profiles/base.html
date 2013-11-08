@@ -126,7 +126,7 @@
                 </div>
                 {% if is_my_profile %}
                     <div id="recommendations" class="row">
-                        <div class="col-xs-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <h2>Recommendations</h2>
                             <div class="row ajax">
                                 <div class="spin col-xs-12 text-center">
@@ -145,22 +145,22 @@
                     <div class="col-xs-12">
                         <nav class="row">
                             <ul class="nav nav-pills clearfix">
-                                <li class="start{% if not is_share %} active{% endif %}">
+                                <li class="col-xs-4 col-md-2 start{% if not is_share %} active{% endif %}">
                                     <a class="filter latest" data-filter="*" href="#">Latest</a>
                                 </li>
-                                <li{% if is_share %} class="active"{% endif %}>
+                                <li class="col-xs-4 col-md-2 {% if is_share %} active{% endif %}">
                                     <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">Posts</a>
                                 </li>
-                                <li>
+                                <li class="col-xs-4 col-md-2">
                                     <a class="filter" data-filter=".conversations" href="#" data-pages="{{ page_counts.conversations }}">Comments</a>
                                 </li>
-                                <li>
+                                <li class="col-xs-4 col-md-2">
                                     <a class="filter" data-filter=".added_to_favorites" href="#" data-pages="{{ page_counts.favorites }}">Favorites</a>
                                 </li>
-                                <li>
+                                <li class="col-xs-4 col-md-2">
                                     <a class="filter" data-filter=".followers" href="#" data-pages="{{ page_counts.followers }}">Followers</a>
                                 </li>
-                                <li>
+                                <li class="col-xs-4 col-md-2">
                                     <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">Following</a>
                                 </li>
                             </ul>
