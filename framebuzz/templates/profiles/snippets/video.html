@@ -30,49 +30,51 @@
         <i class="fa fa-clock-o"></i> {{ action.timestamp|timesince }} {% trans "ago" %}
       </div>
     </div>
-  {% comment %}
-  <div class="video-details">
-
-  </div>
-  <div class="video-actions clearfix">
-    <div class="left">
-      <span class="posted"></span>
-    </div>
-    <div class="right">
-      {% if request.user.is_authenticated %}
-        <a class="video-toggle-button tooltip library{% if video.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username video.video_id %}" title="{% if video.id in video_library_ids %}Added to Posts{% else %}Post this Video{% endif %}" data-placement="left">
-            {% if video.id in video_library_ids %}
-              <i class="icon-minus-sign-alt"></i>
-            {% else %}
-              <i class="icon-plus-sign-alt"></i>
-            {% endif %}
-          </a>
-          <a class="video-toggle-button tooltip featured{% if video.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username video.video_id %}" title="{% if video.id in featured_video_ids %}Featured Video{% else %}Feature this Video{% endif %}" data-placement="left">
-            {% if video.id in featured_video_ids %}
-              <i class="icon-star"></i>
-            {% else %}
-              <i class="icon-star-empty"></i>
-            {% endif %}
-            </a>      
-          {% if action.verb != 'added video to library' and action.action_object %}
-            <a class="video-toggle-button tooltip favorite{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username action.action_object_object_id %}" title="{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="left">
-              {% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}
-                <i class="icon-heart"></i>
-              {% else %}
-                <i class="icon-heart-empty"></i>
-              {% endif %}
-            </a>
-        {% endif %}
-      {% endif %}
-    </div>
-  </div>
-  {% endcomment %}
 </div>
 <footer>
     <span class="corner"></span>
     <a class="thumbnail-link" href="{% url 'profiles-share' profile_user.username video.video_id %}">
         <img class="cover lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.large_thumbnail }}" />
-    </a>    
+    </a>
+    <div class="actions">
+      <div class="row">
+          {% if request.user.is_authenticated %}
+              <div class="col-sm-4">
+                  <a class="img-circle video-toggle-button tooltip library{% if video.id in video_library_ids %} active{% endif %}" href="{% url 'profiles-toggle-library' request.user.username video.video_id %}" title="{% if video.id in video_library_ids %}Added to Posts{% else %}Post this Video{% endif %}" data-placement="left">
+                      {% if video.id in video_library_ids %}
+                        <i class="fa fa-minus fa-fw"></i>
+                      {% else %}
+                        <i class="fa fa-plus fa-fw"></i>
+                      {% endif %}
+                    </a>
+                </div>
+                <div class="col-sm-4">
+                    <a class="img-circle video-toggle-button play" href="{% url 'profiles-share' profile_user.username video.video_id %}">
+                      <i class="fa fa-play fa-fw"></i>
+                    </a>
+                </div>
+                <div class="col-sm-4">
+                    {% if action.verb != 'added video to library' and action.action_object %}
+                      <a class="img-circle video-toggle-button tooltip favorite{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %} active{% endif %}" href="{% url 'profiles-toggle-favorite' request.user.username action.action_object_object_id %}" title="{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}Added to Favorites{% else %}Favorite this Comment{% endif %}" data-placement="left">
+                        {% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %}
+                          <i class="fa fa-heart fa-fw"></i>
+                        {% else %}
+                          <i class="fa fa-heart-empty fa-fw"></i>
+                        {% endif %}
+                      </a>
+                    {% else %}
+                      <a class="img-circle video-toggle-button tooltip featured{% if video.id in featured_video_ids %} active{% endif %}" href="{% url 'profiles-toggle-featured' request.user.username video.video_id %}" title="{% if video.id in featured_video_ids %}Featured Video{% else %}Feature this Video{% endif %}" data-placement="left">
+                        {% if video.id in featured_video_ids %}
+                          <i class="fa fa-star fa-fw"></i>
+                        {% else %}
+                          <i class="fa fa-star-empty fa-fw"></i>
+                        {% endif %}
+                        </a>
+                     {% endif %}   
+                </div>   
+            {% endif %}
+        </div>
+    </div>  
     {% if video.uservideo_set.all|length > 0 %}
       <div class="users">
         <div class="row clearfix">
