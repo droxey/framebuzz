@@ -251,15 +251,7 @@ var FrameBuzzProfile = (function($) {
     }
 
     function initVideoPlayer() {
-        $('a.play-video').click(function() {
-            var url = $(this).attr('href');
 
-            $.get(url, function(data) {
-                $('#share').html(data);
-            });
-
-            return false;
-        });
     }
 
     return {
@@ -270,6 +262,17 @@ var FrameBuzzProfile = (function($) {
 
         bindFilter();
         lazyLoadImages();
+
+        $(document).on('click', 'a.play-video', function() {
+            var url = $(this).attr('href');
+
+            $.get(url, function(data) {
+                console.log(data);
+                $('#share').html(data);
+            });
+
+            return false;
+        });
 
         // Init isotope and infinite scroll.
         var feedContainer = $('#feed');

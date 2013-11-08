@@ -1,7 +1,8 @@
 {% load avatar_tags profile_tags comments %}
 
 {% regroup commenters by actor.username as commenter_list %}
-<div id="share"{% if not profile_user %} class="standalone"{% endif %}>
+<div class="col-xs-12{% if not profile_user %} standalone{% endif %}">
+    {% comment %}
     <div id="share-container" class="clearfix">
         <div id="stats-container">
             {% get_comment_count for video as comment_count %}
@@ -37,52 +38,50 @@
                 <h4>Share{{ shares|pluralize }}</h4>
             </div>
         </div>
-        <div id="video-container">
-            <div class="frame">
-                <iframe src="{% url 'video-embed' video.video_id %}" scrolling="no" frameBorder="0" height="398" width="640"></iframe>
-                <div class="details">
-                    <h1>{{ video.title|title }}</h1>
-                    <div class="social">
-                        <ul class="clearfix">
-                            <li class="user{% if not request.user.is_authenticated and not found_by %} hidden{% endif %}">
-                                {% if found_by %}
-                                    <h2>Found By</h2>
-                                    <a class="tooltip" data-placement="bottom" title="{{ found_by|display_name }}" href="{% url 'profiles-home' found_by.username %}">
-                                        <img src="{% avatar_url found_by 110 %}" alt="" height="55" width="55" class="img-circle" />
-                                    </a>
-                                {% else %}
-                                    {% if request.user.is_authenticated %}
-                                        <h2>Add to Library</h2>
-                                        <a class="add-to-library video-toggle-button" href="{% url 'profiles-toggle-library' request.user.username video.video_id %}">
-                                            <i class="icon-plus-sign-alt"></i>
-                                        </a>
-                                    {% endif %}
-                                {% endif %}
-                            </li>
-                            <li class="description">
-                                <h2>Description</h2>
-                                <p>{{ video.formatted_description|linebreaks }}</p>
-                            </li>
-                            <li class="commenters">
-                                <h2>Commenters</h2>
-                                <ul>
-                                    {% for commenter in commenter_list %}
-                                        {% for item in commenter.list %}
-                                            <li class="shown">
-                                                <a class="tooltip" data-placement="bottom" title="{{ item|display_name }}" href="{% url 'profiles-home' item.username %}">
-                                                    <img src="{% avatar_url item 60 %}" alt="" height="30" width="30" class="img-circle" />
-                                                </a>
-                                            </li>
-                                        {% empty %}
-                                            <li class="empty shown">No commenters yet!</li>
-                                        {% endfor %}
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        {% endcomment %}
+        <div class="row video">
+            <div class="col-xs-12">
+                <h1>{{ video.title|title }}</h1>
+                <iframe src="{% url 'video-embed' video.video_id %}" scrolling="no" frameBorder="0" height="398" width="640" class="center-block"></iframe>
             </div>
         </div>
-    </div>
+        <div class="row container details clearfix">
+            <div class="col-xs-3 {% if not request.user.is_authenticated and not found_by %} hidden{% endif %}">
+                {% if found_by %}
+                    <h2>Found By</h2>
+                    <a title="{{ found_by|display_name }}" href="{% url 'profiles-home' found_by.username %}">
+                        <img src="{% avatar_url found_by 110 %}" alt="" class="img-responsive" />
+                    </a>
+                {% else %}
+                    {% if request.user.is_authenticated %}
+                        <h2>Add to Library</h2>
+                        <a class="add-to-library video-toggle-button" href="{% url 'profiles-toggle-library' request.user.username video.video_id %}">
+                            <i class="icon-plus-sign-alt"></i>
+                        </a>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="col-xs-5 description">
+                <h2>Description</h2>
+                <div class="scroller">
+                    <p>{{ video.formatted_description|linebreaks|urlize }}</p>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <h2>Commenters</h2>
+                <ul class="row">
+                    {% for commenter in commenter_list|slice:":8" %}
+                        {% for item in commenter.list %}
+                            <li class="pull-left">
+                                <a title="{{ item|display_name }}" href="{% url 'profiles-home' item.username %}">
+                                    <img src="{% avatar_url item 60 %}" alt="" width="48" height="48" class="img-responsive" />
+                                </a>
+                            </li>
+                        {% empty %}
+                            <li class="empty shown">No commenters yet!</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
 </div>

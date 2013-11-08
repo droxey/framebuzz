@@ -284,6 +284,82 @@ body.profiles {
                 }
             }
 
+            #share {
+                padding: 0 5px;
+                width: 680px;
+
+                div.row {
+                    border-bottom: 1px solid #272525;
+
+                    &.video {
+                        h1 {
+                            background-color: #6f6c6c;
+                            color: white;
+                            font-weight: 700;
+                            font-size: 22px;
+                            padding: 11px 0 7px;
+                            text-indent: 9px;
+                            margin-bottom: 0;
+                        }
+
+                        iframe {
+                            background-color: #3d3939;
+                        }
+                    }
+
+                    &.details {
+                        border-bottom: 5px solid #2b2727;
+                        background-color: #3d3939;
+                        padding: 0;
+                        margin: -7px 0 0 0;
+
+                        .col-xs-4, .col-xs-3, .col-xs-5 {
+                            padding: 0;
+                        }
+
+                        h2 {
+                            color: #6c6969;
+                            font-size: 15px;
+                            font-weight: 700;
+                            text-indent: 9px;
+                            margin-bottom: 3px;
+                            margin-top: 9px;
+                        }
+
+                        ul { 
+                            margin: 0;
+                            padding: 0;
+
+                            li {
+                                a {
+                                    display: block;
+                                    margin-left: -1px;
+
+                                    img {
+                                        height: 48px;
+                                        width: 48px;
+                                    }
+                                }
+                            }
+                        }
+
+                        p {
+                            color: #cac8c8;
+                            font-size: 12px;
+                        }
+
+                        div.description {
+                            div.scroller {
+                                background-color: #393535;
+                                max-height: 119px;
+                                overflow: scroll;
+                                padding: 1px 9px;
+                            }
+                        }
+                    }
+                }
+            }
+
             #timeline {
                 background: #05171E;
                 padding: 13px 0;
@@ -564,7 +640,7 @@ body.profiles {
                                     div.follow {
                                         margin-right: 18px;
 
-                                        a {
+                                        a.toggle-follow {
                                             float: left;
                                         }
                                     }
