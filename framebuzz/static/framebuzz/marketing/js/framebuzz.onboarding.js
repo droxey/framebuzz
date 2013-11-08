@@ -7,6 +7,7 @@ $(document).ready(function() {
         autosizeProgress: false,
         defaultVideoWidth: 610,
         defaultVideoHeight: 306,
+        enablePseudoStreaming: true,
         success: function(media) {
             $('.mejs-controls').remove();
             $('.mejs-overlay-button').remove();
