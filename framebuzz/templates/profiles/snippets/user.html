@@ -1,18 +1,24 @@
 {% load i18n staticfiles avatar_tags activity_tags profile_tags comments %}
 
-<a class="following" href="{% url 'profiles-home' user.username %}">
-  <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user 110 %}" alt="" height="30" width="30" class="img-circle lazy" />
-</a>
-<span class="quote{% if user.get_profile.bio|length == 0 and user.get_profile.tagline|length == 0 %} username{% endif %}">
-  <a href="{% url 'profiles-home' user.username %}">{{ user|display_name }}</a>
-  {% if user.get_profile.bio or user.get_profile.tagline %}
-      <br>
-      <em>
-          {% if user.get_profile.tagline %}
-              &ldquo;{{ user.get_profile.tagline|truncatechars:"90"|urlize }}&rdquo;
-          {% else %}
-              &ldquo;{{ user.get_profile.bio|truncatechars:"90"|urlize }}&rdquo;
-          {% endif %}
-      </em>
-  {% endif %} 
-</span>
+
+  <div class="row clearfix">
+    <div class="col-md-8 user">
+        <strong><a href="{% url 'profiles-home' user.username %}">{{ user|display_name }}</a></strong>
+        {% if user.get_profile.bio or user.get_profile.tagline %}
+            <br>
+            <em>
+                {% if user.get_profile.tagline %}
+                    &ldquo;{{ user.get_profile.tagline|truncatechars:"90"|urlize }}&rdquo;
+                {% else %}
+                    &ldquo;{{ user.get_profile.bio|truncatechars:"90"|urlize }}&rdquo;
+                {% endif %}
+            </em>
+        {% endif %} 
+    </div>
+    <div class="col-md-4 avatar">
+      <a class="following" href="{% url 'profiles-home' user.username %}">
+        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user 110 %}" alt="" class="img-responsive lazy" />
+        <span class="img-corner"></span>
+      </a>
+    </div>
+  </div>

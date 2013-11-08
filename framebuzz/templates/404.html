@@ -6,11 +6,22 @@
 {% block content_center %}
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <h1>Oops...</h1>
-      <div class="alert alert-error">
-        We couldn't find the page you were looking for!
-      </div>
-      <p><a href="{% url 'home' %}">Back to Homepage</a></p>
+        <div id="logo" class="row">
+            <div class="col-xs-12">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="40" width="184">
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                  <h1>Oops...</h1>
+                  <div class="alert alert-error">
+                    We couldn't find the page you were looking for!
+                  </div>
+                  <p><a href="{% url 'home' %}">Back to Homepage</a></p>
+            </div>
+        </div>
     </div>
     <div class="col-md-2"></div>
 {% endblock %}

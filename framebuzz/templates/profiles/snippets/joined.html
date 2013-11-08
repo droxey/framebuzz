@@ -1,12 +1,28 @@
-{% load i18n avatar_tags activity_tags profile_tags %}
+{% load staticfiles i18n avatar_tags activity_tags profile_tags %}
 
 <div class="content">
-  <div class="days clearfix">
-    <i class="icon-trophy pull-left"></i>
-    <span>Buzzing since {{ action.actor.date_joined|date:"F jS, Y" }}!</span>
+  <div class="row">
+    <div class="col-md-8 user">
+        <strong><a href="{% url 'profiles-home' user.username %}">{{ user|display_name }}</a></strong>
+        {% if user.get_profile.bio or user.get_profile.tagline %}
+            <br>
+            <em>
+                {% if user.get_profile.tagline %}
+                    &ldquo;{{ user.get_profile.tagline|truncatechars:"90"|urlize }}&rdquo;
+                {% else %}
+                    &ldquo;{{ user.get_profile.bio|truncatechars:"90"|urlize }}&rdquo;
+                {% endif %}
+            </em>
+        {% endif %} 
+    </div>
+    <div class="col-md-4 avatar">
+        <a class="following" href="{% url 'profiles-home' profile_user.username %}">
+          <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url profile_user 110 %}" alt="" class="img-responsive lazy" />
+          <span class="img-corner"></span>
+        </a>
+    </div>
   </div>
-  <span class="posted"><i class="icon-time"></i> {{ action.timestamp|timesince }} {% trans "ago" %}</span>
-    <footer>
-        <span class="corner"></span>
-    </footer>
 </div>
+<footer>
+    <span class="corner"></span>
+</footer>

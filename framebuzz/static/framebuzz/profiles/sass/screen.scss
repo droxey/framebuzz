@@ -441,6 +441,91 @@ body.profiles {
                                 }
                             }
                         }
+
+                        &.following, &.followers, &.joined_framebuzz {
+                            div.content {
+                                padding-top: 0;
+                                padding-right: 0;
+                                
+                                div.avatar {
+                                    padding-left: 0;
+                                    padding-right: 0;
+
+                                    a {
+                                        display: block;
+                                        overflow: hidden;
+                                        height: 100%;
+                                        width: 100%;
+                                    }
+                                }
+
+                                div.user {
+                                    padding: 20px 28px;
+                                }
+                            }
+
+                            footer {
+                                padding: 0;
+                                margin: 0;
+
+                                span.corner {
+                                    background: none;
+                                }
+                            }
+
+                            &.left, &.right {
+                                div.content {
+                                    div.avatar {
+                                        right: 66.6667%;
+
+                                        img {
+                                            margin-left: 0;
+                                        }
+
+                                        span.img-corner {
+                                            background:  url('../vendor/timeline/images/light/left_bkg.png') no-repeat top left;
+                                            display: block;    
+                                            height: 150px;
+                                            position: absolute;
+                                            left: 0;
+                                            top: 0;
+                                            width: 93%;
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.left {
+                                div.content {
+                                    padding-left: 0;
+
+                                    div.avatar {
+                                        right: 0;
+
+                                        img {
+                                            margin-left: 16px;
+                                        }
+
+                                        span.img-corner {
+                                            background: url('../vendor/timeline/images/light/right_bkg.png') no-repeat top right;
+                                            display: block;
+                                            height: 150px;
+                                            position: absolute;
+                                            left: 85%;
+                                            top: 0;
+                                            width: 7px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            &.right {
+                                                                    div.user {
+                                        left: 25%;
+                                    }
+
+                            }
+                        }
                     }
                 }
 
