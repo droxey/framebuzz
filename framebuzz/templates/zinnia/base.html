@@ -24,29 +24,23 @@
 {% endblock %}
 
 {% block sidebar %}
-<aside id="widget-categories" class="widget">
-  <h3>{% trans "Categories" %}</h3>
-  {% get_categories %}
+<aside id="widget-categories" class="widget row">
+  <div class="col-xs-12">
+    <h3>{% trans "Categories" %}</h3>
+    {% get_categories %}
+  </div>
 </aside>
-<aside id="widget-authors" class="widget">
-  <h3>{% trans "Authors" %}</h3>
-  {% get_authors %}
+<aside id="widget-recents" class="widget row">
+  <div class="col-xs-12">
+    <h3>{% trans "Recent Entries" %}</h3>
+    {% get_recent_entries %}
+  </div>
 </aside>
-<aside id="widget-recents" class="widget">
-  <h3>{% trans "Recent Entries" %}</h3>
-  {% get_recent_entries %}
-</aside>
-<aside id="widget-comments" class="widget">
-  <h3>{% trans "Recent Comments" %}</h3>
-  {% get_recent_comments %}
-</aside>
-<aside id="widget-linkbacks" class="widget">
-  <h3>{% trans "Recent Linkbacks" %}</h3>
-  {% get_recent_linkbacks %}
-</aside>
-<aside id="widget-populars" class="widget">
-  <h3>{% trans "Popular Entries" %}</h3>
-  {% get_popular_entries %}
+<aside id="widget-populars" class="widget row">
+  <div class="col-xs-12">
+    <h3>{% trans "Popular Entries" %}</h3>
+    {% get_popular_entries %}
+  </div>
 </aside>
 {% if user.is_authenticated and perms.zinnia %}
 <aside id="widget-tools" class="widget">
