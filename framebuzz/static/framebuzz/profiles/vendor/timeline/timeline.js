@@ -70,7 +70,13 @@
 		var timeline = this;
 		timeline.reload();
 		timeline.reload();
-		
+
+		$('a.filter').click(function() {
+			timeline.loading = false;
+			timeline.$container.find('.loadMore').removeClass('loading').find('p').html('Load more posts...');
+			timeline.iteration = 0;
+		});
+
 		timeline.initEvents();
 		if(params.infiniteScroll)
 		{

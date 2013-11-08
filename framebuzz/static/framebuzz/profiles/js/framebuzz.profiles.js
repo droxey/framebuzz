@@ -94,7 +94,7 @@ var FrameBuzzProfile = (function($) {
             }
 
             $('a.filter').parent().removeClass('active');
-            el.parent().toggleClass('active');
+            $('a[data-filter="' + filterClass + '"]').parent().toggleClass('active');
             innerContainer.find('div.item').remove();
 
             if (filterClass != null && filterClass != '*') {
