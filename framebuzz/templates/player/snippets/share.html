@@ -1,44 +1,8 @@
 {% load avatar_tags profile_tags comments %}
 
+{% get_comment_count for video as comment_count %}
 {% regroup commenters by actor.username as commenter_list %}
 <div class="col-xs-12{% if not profile_user %} standalone{% endif %}">
-    {% comment %}
-    <div id="share-container" class="clearfix">
-        <div id="stats-container">
-            {% get_comment_count for video as comment_count %}
-            <div class="stat comments">
-                <p>
-                    <i class="icon-4x icon-comment"></i>
-                    <span>{{ comment_count }}</span>
-                </p>
-                <h4>Comment{{ comment_count|pluralize }}</h4>
-            </div>
-            {% for commenter in commenter_list %}
-                <div class="stat commenters">
-                    <p>
-                        <i class="icon-4x icon-group"></i>
-                        <span>{{ commenter.list|length }}</span>
-                    </p>
-                    <h4>Commenter{{ commenter.list|length|pluralize }}</h4>
-                </div> 
-            {% empty %}
-                <div class="stat commenters">
-                    <p>
-                        <i class="icon-4x icon-group"></i>
-                        <span>0</span>
-                    </p>
-                    <h4>Commenter{{ commenter.list|length|pluralize }}</h4>
-                </div>
-            {% endfor %}
-            <div class="stat shares">
-                <p>
-                    <i class="icon-4x icon-fbshare"></i>
-                    <span>{{ shares }}</span>
-                </p>
-                <h4>Share{{ shares|pluralize }}</h4>
-            </div>
-        </div>
-        {% endcomment %}
         <div class="row video">
             <div class="col-xs-12">
                 <h1>{{ video.title|title }}</h1>
