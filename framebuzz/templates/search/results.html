@@ -48,7 +48,7 @@
     		 		</div>
     			</div>
             {% else %}
-                <div class="col-xs-10 row-{{ filter }} clearfix">
+                <div class="col-xs-12 row-{{ filter }} clearfix">
                     <h2>{{ filter }} <strong>({{ results_count }})</strong></h2>
                     {% for result in search_results.object_list %}
                         {% if filter == 'videos' %}
@@ -64,12 +64,12 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="col-xs-2"></div>
+                <div class="col-xs-4"></div>
             {% endif %}
 		</div>
         {% if filter != None and search_results.pages > 1 %}
             <div class="row">
-                <div class="col-xs-10">
+                <div class="col-xs-12">
                     <div class="row">
                         <div class="col-xs-8">
                             <a class="pull-left more" href="{% url 'fbz-search' %}?query={{ query }}"><i class="fa fa-caret-left fa-fw"></i> back to results</a>

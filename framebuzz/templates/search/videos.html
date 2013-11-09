@@ -1,7 +1,7 @@
 {% load avatar_tags staticfiles comments %}
 
 {% get_comment_count for result.object as comment_count %}
-<div class="video col-xs-6 pull-left">
+<div class="video {% if filter != None %}col-xs-4{% else %}col-xs-6{% endif %} pull-left">
     <a class="thumbnail-link" href="{% spaceless %}{% if request.user.is_authenticated %}
                 {% if result.object.found_by %}
                     {% url 'profiles-share' result.object.found_by.username result.object.video_id %}
