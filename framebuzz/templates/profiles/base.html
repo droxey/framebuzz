@@ -50,7 +50,7 @@
                         {% for uv in profile_user.uservideo_set.all|slice:":4" %}
                             <div class="vid col-xs-3 pull-right">
                                 <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username uv.video.video_id %}">
-                                    <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ uv.video.large_thumbnail }}" alt="{{ uv.video.title|title }}" class="img-responsive lazy">
+                                    <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ uv.video.default_thumbnail }}" alt="{{ uv.video.title|title }}" class="img-responsive lazy">
                                 </a>
                             </div>
                         {% endfor %}

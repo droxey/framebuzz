@@ -85,11 +85,11 @@ var FrameBuzzProfile = (function($) {
                 innerContainer = $('div.responsive-timeline > div.container'),
                 nextPageUrl = _urls.feed + '?page=1';
 
-            if (_isShare) {
+            if ($('#share').length > 0) {
                 _currentFilterClass = '.added_video_to_library';
 
                 $('#share').fadeOut('fast', function() {
-                    $('#share').remove();
+                    $('#share').hide();
                 });
             }
 
@@ -263,7 +263,8 @@ var FrameBuzzProfile = (function($) {
             var url = $(this).attr('href');
 
             $.get(url, function(data) {
-                $('#share').html(data);
+                $('#share').html(data).show();;
+                $('li.start').addClass('active');
             });
 
             return false;

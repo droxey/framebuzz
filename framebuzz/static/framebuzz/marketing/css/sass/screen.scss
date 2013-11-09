@@ -124,15 +124,26 @@ body.content {
             div.row-search {
                 #search-form {
                     border-bottom: 1px solid #f6f6f6;
+                    box-shadow: none;
                     width: 100%;
 
                     i { color: #999999; }
 
                     input {
+                        @include border-radius(0px, 0px);
                         border: none;
+                        box-shadow: none;
                         color: #5c5c5c;
+                        font-size: 14px;
+                        margin-bottom: 0;
+                        height: 22px;
+                        padding-left: 0;
                         text-indent: 5px;
                         width: 95%;
+
+                        &:focus {
+                            outline: 0;
+                        }
                     }
 
                     button { display: none; }
@@ -300,7 +311,57 @@ body.search {
             }
 
             div.row-videos {
-                
+                div.video {
+                    padding: 0;
+                    position: relative;
+                    margin-bottom: 9px;
+
+                    a.thumbnail-link {
+                        display: block;
+                        overflow: hidden;
+                    }
+
+                    a.title {
+                        display: inline-block;
+                        width: 93%;
+                    }
+
+                    h3 {
+                        background-color: rgba(0, 0, 0, .35);
+                        color: white;
+                        font-weight: 700;
+                        font-size: 11px;
+                        padding: 7px;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 99%;
+                        margin: 0;
+                        height: 59px;
+
+                        a {
+                            color: white;
+                        }
+
+                        span.comment-count {
+                            font-size: 12px;
+                            margin-top: 4px;
+                            text-align: right;
+
+                            i {
+                                left: 4px;
+                                position: relative;
+                            }
+                        }
+                    }
+
+                    img.img-responsive {
+                        margin: 0 auto;
+                        max-height: 215px;
+                        max-width: 98%;
+                        min-height: 215px;
+                    }
+                }      
             }
 
             div.row-convos {
@@ -375,57 +436,6 @@ body.search {
                 }
             }
 
-            div.video {
-                padding: 0;
-                position: relative;
-                margin-bottom: 9px;
-
-                a.thumbnail-link {
-                    display: block;
-                    overflow: hidden;
-                }
-
-                a.title {
-                    display: inline-block;
-                    width: 93%;
-                }
-
-                h3 {
-                    background-color: rgba(0, 0, 0, .35);
-                    color: white;
-                    font-weight: 700;
-                    font-size: 11px;
-                    padding: 7px;
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 99%;
-                    margin: 0;
-                    height: 59px;
-
-                    a {
-                        color: white;
-                    }
-
-                    span.comment-count {
-                        font-size: 12px;
-                        margin-top: 4px;
-                        text-align: right;
-
-                        i {
-                            left: 4px;
-                            position: relative;
-                        }
-                    }
-                }
-
-                img.img-responsive {
-                    margin: 0 auto;
-                    max-height: 215px;
-                    max-width: 98%;
-                    min-height: 215px;
-                }
-            }
 
             div.empty {
                 h3 {

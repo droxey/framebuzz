@@ -2,7 +2,6 @@
 
 
 <div class="content">
-  
     <div class="row header">
       <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 avatar">
         <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url action.actor 110 %}" alt="" height="82" width="82" class="header-avatar img-circle lazy" />
@@ -34,7 +33,7 @@
 <footer>
     <span class="corner"></span>
     <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username video.video_id %}">
-        <img class="cover lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.large_thumbnail }}" />
+        <img class="cover lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.default_thumbnail }}" />
     </a>
     <div class="actions">
       <div class="row">

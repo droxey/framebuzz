@@ -157,7 +157,7 @@ body.profiles {
                     font-weight: 700;
                     margin-bottom: 0;
                     position: relative;
-                    top: 6px;
+                    top: 4px;
                     text-indent: 9px;
                 }
 
@@ -186,11 +186,31 @@ body.profiles {
                         background: #1DAFEC;
                         border: none;
                         border-bottom: 1px solid #A3D9ED;
-                        color: #bce0ed;
+                        color: #A3D9ED;
                         margin-left: 13px;
                         margin-bottom: 15px;
                         padding: 20px 11px 0px 0px;
                         width: 98%;
+
+                        &::-webkit-input-placeholder { /* WebKit browsers */
+                            color:    #A3D9ED;
+                        }
+                        
+                        &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                            color:    #A3D9ED;
+                        }
+                        
+                        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                            color:    #A3D9ED;
+                        }
+                        
+                        &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                            color:    #A3D9ED;
+                        }
+
+                        &:focus {
+                            outline: 0;
+                        }
                     }
 
                     div.submit {
@@ -523,9 +543,11 @@ body.profiles {
 }
 
 #share {
-    margin-bottom: 30px;
-    padding: 0 5px;
-    width: 680px;
+    display: none;
+    margin-bottom: 23px;
+    margin-left: 14px;
+    margin-top: 23px;
+    width: 670px;
 
     div.row {
         border-bottom: 1px solid #272525;
