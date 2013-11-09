@@ -8,30 +8,58 @@ from framebuzz.apps.api.models import UserProfile, Video, MPTTComment
 from framebuzz.apps.api.backends.youtube import find_video_by_keyword
 
 
-MINIMUM_TOTAL_RESULTS = 6
+MINIMUM_TOTAL_RESULTS = 30
 RESULTS_PER_PAGE = 6
 
 
 def search(request):
     query = None
+    q_filter = None
     conversations = None
     users = None
     videos = None
+    search_results = []
+    results_count = 0
 
     if request.method == 'GET':
         query = request.GET.get('query', None)
+        q_filter = request.GET.get('filter', None)
 
-        conversations = watson.search(query, models=(MPTTComment,))
-        users = watson.search(query, models=(UserProfile,))
-        videos = watson.search(query, models=(Video,))
-        
-        if len(videos) < RESULTS_PER_PAGE:
-            count = MINIMUM_TOTAL_RESULTS - len(videos)
-            yt, token = find_video_by_keyword(query, results=count)
-
-            # Update search, since find_video_by_keyword
-            # stores a copy in our db.
+        if q_filter is None or q_filter == 'videos':
             videos = watson.search(query, models=(Video,))
+            total = RESULTS_PER_PAGE if q_filter == None else MINIMUM_TOTAL_RESULTS
+
+            if len(videos) < total:
+                count = total - len(videos)
+                yt, token = find_video_by_keyword(query, results=count)
+
+                # Update search, since find_video_by_keyword
+                # stores a copy in our db.
+                videos = watson.search(query, models=(Video,))
+        
+        if q_filter is None or q_filter == 'conversations':
+            conversations = watson.search(query, models=(MPTTComment,))
+        
+        if q_filter is None or q_filter == 'users':
+            users = watson.search(query, models=(UserProfile,))
+
+        if q_filter is not None:
+            try:
+                page = request.GET.get('page', 1)
+            except PageNotAnInteger:
+                page = 1
+
+            if q_filter == 'videos':
+                paginator = Paginator(videos, RESULTS_PER_PAGE, request=request)
+                results_count = len(videos)
+            elif q_filter == 'users':
+                paginator = Paginator(users, RESULTS_PER_PAGE, request=request)
+                results_count = len(users)
+            else:
+                paginator = Paginator(conversations, RESULTS_PER_PAGE, request=request)
+                results_count = len(conversations)
+
+            search_results = paginator.page(page)
 
     return render_to_response('search/results.html', {
         'query': query,
@@ -39,6 +67,9 @@ def search(request):
         'conversations': conversations,
         'users': users,
         'videos': videos,
+        'filter': q_filter,
+        'search_results': search_results,
+        'results_count': results_count,
     }, context_instance=RequestContext(request))
 
 

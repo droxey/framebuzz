@@ -5,27 +5,82 @@
 
 {% block content_center %}
     <div id="search-results" class="col-xs-12">
-    	{% if query %}<h1>searching for&hellip; <strong>{{ query }}</strong></h1>{% endif %}
+    	{% if query %}
+            <h1>searching for&hellip; <strong>{{ query }}</strong> 
+            </h1>
+        {% endif %}
     	<div class="row">
-    		<div class="col-xs-8 row-videos">
-    			<h2>videos <strong>({{ videos|length }})</strong></h2>
-    			{% include "search/videos.html" %}
-    		</div>
-		 	<div class="col-xs-4">
-		 		<div class="row">
-		 			<div class="col-xs-12 row-users">
-		 				<h2>users <strong>({{ users|length }})</strong></h2>
-		 				{% include "search/users.html" %}
-		 			</div>
-		 		</div>
-		 		<div class="row">
-		 			<div class="col-xs-12 row-convos">
-		 				<h2>conversations <strong>({{ conversations|length }})</strong></h2>
-		 				{% include "search/conversations.html" %}
-		 			</div>
-		 		</div>
-			</div>
+            {% if filter == None %}
+        		<div class="col-xs-8 row-videos clearfix">
+        			<h2>videos <strong>({{ videos|length }})</strong></h2>
+                    {% for result in videos|slice:":6" %}
+        			     {% include "search/videos.html" %}
+                    {% empty %}
+                        <div class="empty">
+                            <h3 class="empty">No videos found.</h3>
+                        </div>
+                    {% endfor %}
+        		</div>
+    		 	<div class="col-xs-4">
+    		 		<div class="row">
+    		 			<div class="col-xs-12 row-users">
+    		 				<h2>users <strong>({{ users|length }})</strong></h2>
+                            {% for result in users|slice:":6" %}
+    		 				     {% include "search/users.html" %}
+                            {% empty %}
+                                <div class="empty">
+                                    <h3 class="empty">No users found.</h3>
+                                </div>
+                            {% endfor %}
+    		 			</div>
+    		 		</div>
+    		 		<div class="row">
+    		 			<div class="col-xs-12 row-convos">
+    		 				<h2>conversations <strong>({{ conversations|length }})</strong></h2>
+                            {% for result in conversations|slice:":3" %}
+    		 				     {% include "search/conversations.html" %}
+                            {% empty %}
+                                <div class="empty">
+                                    <h3 class="empty">No conversations found.</h3>
+                                </div>
+                            {% endfor %}
+    		 			</div>
+    		 		</div>
+    			</div>
+            {% else %}
+                <div class="col-xs-10 row-{{ filter }} clearfix">
+                    <h2>{{ filter }} <strong>({{ results_count }})</strong></h2>
+                    {% for result in search_results.object_list %}
+                        {% if filter == 'videos' %}
+                            {% include "search/videos.html" %}
+                        {% elif filter == 'users' %}
+                            {% include "search/users.html" %}
+                        {% else %}
+                            {% include "search/conversations.html" %}
+                        {% endif %}
+                    {% empty %}
+                        <div class="empty">
+                            <h3 class="empty">No conversations found.</h3>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-xs-2"></div>
+            {% endif %}
 		</div>
+        {% if filter != None and search_results.pages > 1 %}
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <a class="pull-left more" href="{% url 'fbz-search' %}?query={{ query }}"><i class="fa fa-caret-left fa-fw"></i> back to results</a>
+                        </div>
+                        <div class="col-xs-4">
+                            {% include "search/snippets/pagination.html" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 	</div>
 {% endblock %}
 

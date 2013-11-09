@@ -1,12 +1,12 @@
 {% load i18n %}
 
 
-<div class="fbz-pagination pagination-left">
+<div class="fbz-pagination pagination-left pull-right">
     <ul class="clearfix">
         <li>
             {% if search_results.has_previous %}
                 <a href="?{{ search_results.previous_page_number.querystring }}" class="prev page-link">
-                    <i class="icon-caret-left"></i>
+                    <i class="fa fa-caret-left"></i>
                 </a>
             {% endif %}
         </li>
@@ -20,7 +20,7 @@
         <li>
             {% if search_results.has_next %}
                 <a href="?{{ search_results.next_page_number.querystring }}" class="next page-link">
-                    <i class="icon-caret-right"></i>
+                    <i class="fa fa-caret-right"></i>
                 </a>
             {% endif %}
         </li>

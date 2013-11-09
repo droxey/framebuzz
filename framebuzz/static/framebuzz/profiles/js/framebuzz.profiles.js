@@ -250,10 +250,6 @@ var FrameBuzzProfile = (function($) {
         $(window).trigger('resize');
     }
 
-    function initVideoPlayer() {
-
-    }
-
     return {
       init: function(isMyProfile, isShare, urls) {
         _isShare = isShare;
@@ -292,7 +288,10 @@ var FrameBuzzProfile = (function($) {
 
         $.get(urls.feed + '?init=true', function(html) {
             feedContainer.html(html);
-            initTimeline();
+            setTimeout(function() {
+                initTimeline();
+            }, 1000);
+            
         });
     }};
 }(jQuery));

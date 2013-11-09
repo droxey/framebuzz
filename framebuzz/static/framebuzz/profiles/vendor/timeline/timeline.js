@@ -163,6 +163,8 @@
 			$(window).resize(function(){
 				timeline.reload();
 			});
+
+			timeline.init(params);
 	            
 	    });
 		return this;

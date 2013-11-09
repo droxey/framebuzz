@@ -1,34 +1,35 @@
-{% load avatar_tags staticfiles %}
+{% load avatar_tags staticfiles comments %}
 
-
-{% for result in videos|slice:":6" %}
-    <div class="video col-xs-6 pull-left">
-        <a href="{% spaceless %}{% if request.user.is_authenticated %}
-                    {% if result.object.found_by %}
-                        {% url 'profiles-share' result.object.found_by.username result.object.video_id %}
-                    {% else %}
-                        {% url 'profiles-share' request.user.username result.object.video_id %}
-                    {% endif %}
+{% get_comment_count for result.object as comment_count %}
+<div class="video col-xs-6 pull-left">
+    <a class="thumbnail-link" href="{% spaceless %}{% if request.user.is_authenticated %}
+                {% if result.object.found_by %}
+                    {% url 'profiles-share' result.object.found_by.username result.object.video_id %}
                 {% else %}
-                    {% if video.found_by %}
-                        {% url 'profiles-share' result.object.found_by.username result.object.video_id %}
-                    {% else %}
-                    {{ result.object.get_share_url }}
-                    {% endif %}
-                {% endif %}{% endspaceless %}" title="{{ result.title|title }}">
-            <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ result.object.large_thumbnail }}" alt="{{ result.title }}" class="lazy img-responsive" />
-        </a>
-        <h3><a href="{{ result.object.get_share_url }}">{{ result.title|title }}</a></h3>
-    </div>
-    {% if forloop.last and videos|length > 6 %}
-        <div class="row">
-            <div class="col-xs-12 clearfix">
-                <a href="#" class="pull-right more">view more videos...</a>
-            </div>
+                    {% url 'profiles-share' request.user.username result.object.video_id %}
+                {% endif %}
+            {% else %}
+                {% if video.found_by %}
+                    {% url 'profiles-share' result.object.found_by.username result.object.video_id %}
+                {% else %}
+                {{ result.object.get_share_url }}
+                {% endif %}
+            {% endif %}{% endspaceless %}" title="{{ result.title|title }}">
+        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ result.object.large_thumbnail }}" alt="{{ result.title }}" class="lazy img-responsive" />
+    </a>
+    <h3>
+        <a class="title" href="{{ result.object.get_share_url }}">{{ result.title|title }}</a>
+        <span class="pull-right comment-count">
+            <i class="fa fa-comment fa-fw pull-right"></i>
+            <br>
+            {{ comment_count }}
+        </span>
+    </h3>
+</div>
+{% if forloop.last and videos|length > 6 and filter == None %}
+    <div class="row">
+        <div class="col-xs-12 clearfix">
+            <a href="{% url 'fbz-search' %}?query={{ query }}&filter=videos" class="pull-right more">view more videos...</a>
         </div>
-    {% endif %}
-{% empty %}
-    <div class="empty">
-        <h3 class="empty">No videos found.</h3>
     </div>
-{% endfor %}
+{% endif %}

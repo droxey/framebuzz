@@ -148,7 +148,7 @@ def video_share(request, username=None, video_id=None):
     context['found_by'] = video.found_by
     context['shares'] = get_total_shares(request.path)
 
-    if username is not None:
+    if username is not None and request.is_ajax():
         request.session['share'] = context
         template = 'player/snippets/share.html'
     else:

@@ -1,35 +1,28 @@
 {% load avatar_tags staticfiles %}
 
-
-{% for result in users|slice:":6" %}
-    <div class="user row">
-      <div class="col-xs-2 avatar">
-        <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
-            <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url result.object.user 92 %}" alt="" class="lazy img-responsive" />
-        </a>
-      </div>
-      <div class="col-xs-10">
-        <div class="row">
-          <div class="col-xs-12">
-            <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile"><strong>{{ result.object.user.username }}</strong></a>
-          </div>
-        </div>
-        {% if result.object.tagline %}
-          <div class="row row-tagline">
-            <div class="col-xs-12">{{ result.object.tagline }}</div>
-          </div>
-        {% endif %}
+<div class="user row">
+  <div class="col-xs-2 avatar">
+    <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
+        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url result.object.user 92 %}" alt="" class="lazy img-responsive" />
+    </a>
+  </div>
+  <div class="col-xs-10">
+    <div class="row">
+      <div class="col-xs-12">
+        <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile"><strong>{{ result.object.user.username }}</strong></a>
       </div>
     </div>
-    {% if forloop.last and users|length > 6 %}
-      <div class="row">
-        <div class="col-xs-12 clearfix">
-          <a class="pull-right more" href="#">view more users...</a>
-        </div>
+    {% if result.object.tagline %}
+      <div class="row row-tagline">
+        <div class="col-xs-12">{{ result.object.tagline }}</div>
       </div>
     {% endif %}
-{% empty %}
-    <div class="empty">
-        <h3 class="empty">No users found.</h3>
+  </div>
+</div>
+{% if forloop.last and users|length > 6 and filter == None %}
+  <div class="row">
+    <div class="col-xs-12 clearfix">
+      <a class="pull-right more" href="{% url 'fbz-search' %}?query={{ query }}&filter=users">view more users...</a>
     </div>
-{% endfor %}
+  </div>
+{% endif %}

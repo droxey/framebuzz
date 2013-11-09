@@ -86,7 +86,7 @@ body.content {
         background: white;
         margin-top: 24px;
 
-        #logo {
+        #homepage-logo {
             padding: 33px 0;
 
             a {
@@ -98,6 +98,81 @@ body.content {
                 img {
                     height: 40px;
                     width: 184px;
+                }
+            }
+        }
+
+        #logo {
+            padding: 16px 0 0 0;
+
+            div.row-logo {
+                margin: 0;
+
+                a {
+                    display: block;
+                    height: 25px;
+                    margin-left: 13px;
+                    width: 100%;
+
+                    img {
+                        height: 25px;
+                        width: 116px;
+                    }
+                }                
+            }
+
+            div.row-search {
+                #search-form {
+                    border-bottom: 1px solid #f6f6f6;
+                    width: 100%;
+
+                    i { color: #999999; }
+
+                    input {
+                        border: none;
+                        color: #5c5c5c;
+                        text-indent: 5px;
+                        width: 95%;
+                    }
+
+                    button { display: none; }
+                }
+            }
+
+            div.row-user {
+                a.dropdown-toggle {
+                    display: block;
+                    height: 41px;
+                    line-height: 41px;
+                    margin: 0;
+                    padding: 0;
+                    top: -10px;
+                    width: auto;
+
+                    img.img-circle {
+                        height: 41px;
+                        width: 41px;
+                    }
+
+                    i.fa { line-height: 41px; }
+
+                    i.fa-cog {
+                        color: #CACACA;
+                        font-size: 24px;
+                        margin-right: 5px;
+                        padding-left: 5px;
+                    }
+
+                    i.fa-caret-down {
+                        color: #9C9C9C;
+                        margin-right: 0;
+                        padding-right: 0;
+                    }
+                }
+
+                #btn-login {
+                    margin: 0 10px;
+                    padding: 0 5px;
                 }
             }
         }
@@ -170,78 +245,6 @@ body.about {
 
         p.title {
             color: #666666;
-        }
-    }
-}
-
-body.logged-in {
-    #base #logo {
-        padding: 16px 0 0 0;
-
-        div.row-logo {
-            margin: 0;
-
-            a {
-                display: block;
-                height: 25px;
-                margin-left: 13px;
-                width: 100%;
-
-                img {
-                    height: 25px;
-                    width: 116px;
-                }
-            }                
-        }
-
-        div.row-search {
-            #search-form {
-                border-bottom: 1px solid #f6f6f6;
-                width: 100%;
-
-                i { color: #999999; }
-
-                input {
-                    border: none;
-                    color: #5c5c5c;
-                    text-indent: 5px;
-                    width: 95%;
-                }
-
-                button { display: none; }
-            }
-        }
-
-        div.row-user {
-            a.dropdown-toggle {
-                display: block;
-                height: 41px;
-                line-height: 41px;
-                margin: 0;
-                padding: 0;
-                top: -10px;
-                width: auto;
-
-                img.img-circle {
-                    height: 41px;
-                    width: 41px;
-                }
-
-                i.fa { line-height: 41px; }
-
-                i.fa-cog {
-                    color: #CACACA;
-                    font-size: 24px;
-                    margin-right: 5px;
-                    padding-left: 5px;
-                }
-
-                i.fa-caret-down {
-                    color: #9C9C9C;
-                    margin-right: 0;
-                    padding-right: 0;
-                }
-            }
         }
     }
 }
@@ -375,7 +378,17 @@ body.search {
             div.video {
                 padding: 0;
                 position: relative;
-                margin-bottom: 7px;
+                margin-bottom: 9px;
+
+                a.thumbnail-link {
+                    display: block;
+                    overflow: hidden;
+                }
+
+                a.title {
+                    display: inline-block;
+                    width: 93%;
+                }
 
                 h3 {
                     background-color: rgba(0, 0, 0, .35);
@@ -393,10 +406,22 @@ body.search {
                     a {
                         color: white;
                     }
+
+                    span.comment-count {
+                        font-size: 12px;
+                        margin-top: 4px;
+                        text-align: right;
+
+                        i {
+                            left: 4px;
+                            position: relative;
+                        }
+                    }
                 }
 
                 img.img-responsive {
                     max-width: 98%;
+                    min-height: 207px;
                 }
             }
 
@@ -406,6 +431,32 @@ body.search {
                     font-size: 14px;
                     font-weight: 500; 
                     font-style: italic;                   
+                }
+            }
+
+            div.fbz-pagination {
+                min-width: 20%;
+
+                ul {
+                    list-style: none outside none;
+
+                    li {
+                        float: left;
+                        width: 25px;
+
+                        a {
+                            display: inline-block;
+                            text-align: right;
+                            width: 100%;
+                        }
+
+                        &.active {
+                            a {
+                                font-weight: 700;
+                                color: white;
+                            }
+                        }
+                    }
                 }
             }
         }

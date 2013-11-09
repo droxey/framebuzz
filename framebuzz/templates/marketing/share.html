@@ -21,17 +21,11 @@
     {% block extra_css %}{% endblock %}
 {% endblock %}
 
-{% block page_classes %}share{% endblock %}
+{% block page_classes %}content profiles share{% endblock %}
 
-{% block marketing_content %}
-    <div id="fb">
-        <div class="content">
-            <div class="wrapper clearfix">
-                <div class="background">
-                    {% include "player/snippets/share.html" %}
-                </div>
-            </div>
-        </div>
+{% block content_center %}
+    <div id="share" class="row">
+            {% include "player/snippets/share.html" %}
     </div>
 {% endblock %}
 
