@@ -49,7 +49,7 @@
       {% providers_media_js %}
     {% endif %}
   </head>
-  <body class="{% block page_classes %}{% endblock %}"{% block body_attributes %}{% endblock %}>
+  <body class="{% if request.user.is_authenticated %}logged-in {% endif %}{% block page_classes %}{% endblock %}"{% block body_attributes %}{% endblock %}>
     <!--[if lte IE 8]>
       <div class="chromeframe">
         You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.

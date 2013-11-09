@@ -250,14 +250,15 @@ INSTALLED_APPS = (
     'tinymce',
     'tagging',
     'mptt',
-    'zinnia_bootstrap',
-    'zinnia',
 
     # FrameBuzz Apps
     'framebuzz.apps.api',
     'framebuzz.apps.profiles',
     'framebuzz.apps.marketing',
     'framebuzz.apps.search',
+
+    'zinnia_bootstrap',
+    'zinnia',
 )
 
 # Django-Grappelli:

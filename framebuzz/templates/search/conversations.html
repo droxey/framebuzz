@@ -1,33 +1,41 @@
 {% load avatar_tags staticfiles %}
 
-<ul class="conversations">
-    {% for result in search_results.object_list %}
-        <li>
-            <div class="comment clearfix">
+
+{% for result in conversations|slice:":3" %}
+    <div class="conversations">
+        <div class="row comment clearfix">
+            <div class="col-xs-1">
                 <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
                     <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url result.object.user 72 %}" alt="" height="36" width="36" class="img-circle lazy" />
                 </a>
-                <p><span>&ldquo;{{ result.object.comment }}&rdquo;</span></p>
-                <span class="corner"></span>
             </div>
-            <p class="description">on <a href="{% spaceless %}{% if request.user.is_authenticated %}
-                        {% if result.object.content_object.found_by %}
-                            {% url 'profiles-share' result.object.content_object.found_by.username result.object.content_object.video_id %}
-                        {% else %}
-                            {% url 'profiles-share' request.user.username result.object.content_object.video_id %}
-                        {% endif %}
-                    {% else %}
-                        {% if result.object.content_object.found_by %}
-                            {% url 'profiles-share' result.object.content_object.found_by.username result.object.content_object.video_id %}
-                        {% else %}
-                            {{ result.object.content_object.get_share_url }}
-                        {% endif %}
-                    {% endif %}{% endspaceless %}">{{ result.object.content_object.title|title|truncatechars:38 }}</a></p>
-        </li>
-    {% empty %}
-        <li class="empty">
-            <h3 class="empty">No conversations found.</h3>
-        </li>
-    {% endfor %}
-</ul>
-{% include "search/snippets/pagination.html" %}
+            <div class="col-xs-11 text">&ldquo;{{ result.object.comment }}&rdquo;</div>
+        </div>
+        <p class="description">on <a href="{% spaceless %}{% if request.user.is_authenticated %}
+                {% if result.object.content_object.found_by %}
+                    {% url 'profiles-share' result.object.content_object.found_by.username result.object.content_object.video_id %}
+                {% else %}
+                    {% url 'profiles-share' request.user.username result.object.content_object.video_id %}
+                {% endif %}
+            {% else %}
+                {% if result.object.content_object.found_by %}
+                    {% url 'profiles-share' result.object.content_object.found_by.username result.object.content_object.video_id %}
+                {% else %}
+                    {{ result.object.content_object.get_share_url }}
+                {% endif %}
+            {% endif %}{% endspaceless %}">{{ result.object.content_object.title|title }}</a>
+            <span class="corner"></span>
+        </p>
+    </div>
+    {% if forloop.last and conversations|length > 3 %}
+        <div class="row">
+            <div class="col-xs-12 clearfix">
+                <a href="#" class="pull-right more">view more conversations...</a>
+            </div>
+        </div>
+    {% endif %}
+{% empty %}
+    <div class="empty">
+        <h3 class="empty">No conversations found.</h3>
+    </div>
+{% endfor %}

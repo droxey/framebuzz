@@ -267,7 +267,6 @@ var FrameBuzzProfile = (function($) {
             var url = $(this).attr('href');
 
             $.get(url, function(data) {
-                console.log(data);
                 $('#share').html(data);
             });
 

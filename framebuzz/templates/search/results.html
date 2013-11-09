@@ -1,18 +1,39 @@
-{% load watson avatar_tags %}
+{% extends "base.html" %}
+{% load watson staticfiles compress avatar_tags activity_tags profile_tags %}
 
-<div id="results-list" data-token="{{ token }}">
-	<button class="close">&times;</button>
-	{% if query %}<h1>Searching for &lsquo;<strong>{{ query }}</strong>&hellip;&rsquo;</h1>{% endif %}
-	<div class="row">
-		{% for name in search_criteria %}
-			<div class="span4">
-				<h2>{{ name|upper }}</h2>
-				<div class="pagination-page {{ name|lower }}-results">
-					<div class="spin">
-	                    <i class="icon-spinner icon-spin icon-large"></i>
-	                </div>
-				</div>
+{% block page_classes %}content search{% endblock %}
+
+{% block content_center %}
+    <div id="search-results" class="col-xs-12">
+    	{% if query %}<h1>searching for&hellip; <strong>{{ query }}</strong></h1>{% endif %}
+    	<div class="row">
+    		<div class="col-xs-8 row-videos">
+    			<h2>videos <strong>({{ videos|length }})</strong></h2>
+    			{% include "search/videos.html" %}
+    		</div>
+		 	<div class="col-xs-4">
+		 		<div class="row">
+		 			<div class="col-xs-12 row-users">
+		 				<h2>users <strong>({{ users|length }})</strong></h2>
+		 				{% include "search/users.html" %}
+		 			</div>
+		 		</div>
+		 		<div class="row">
+		 			<div class="col-xs-12 row-convos">
+		 				<h2>conversations <strong>({{ conversations|length }})</strong></h2>
+		 				{% include "search/conversations.html" %}
+		 			</div>
+		 		</div>
 			</div>
-		{% endfor %}
+		</div>
 	</div>
-</div>
+{% endblock %}
+
+{% block page_javascript %}
+    <script src="{% static 'framebuzz/profiles/vendor/jquery/jquery.lazyload.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('img.lazy').lazyload();
+        });
+    </script>
+{% endblock %}

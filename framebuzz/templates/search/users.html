@@ -1,24 +1,35 @@
 {% load avatar_tags staticfiles %}
 
-<ul class="users">
-    {% for result in search_results.object_list %}
-        <li class="clearfix">
-            <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
-                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url result.object.user 92 %}" alt="" height="46" width="46" class="img-circle lazy" />
-            </a>
-            <div class="user{% if result.object.bio %} bio{% endif %}">
-               <strong>
-                <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">{{ result.object.user.username }}</a>
-               </strong>
-               {% if result.object.bio %}
-                    <span class="bio">{{ result.object.bio|truncatechars:108 }}</span>
-               {% endif %}
-            </div>
-        </li>
-    {% empty %}
-        <li class="empty">
-            <h3 class="empty">No users found.</h3>
-        </li>
-    {% endfor %}
-</ul>
-{% include "search/snippets/pagination.html" %}
+
+{% for result in users|slice:":6" %}
+    <div class="user row">
+      <div class="col-xs-2 avatar">
+        <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
+            <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url result.object.user 92 %}" alt="" class="lazy img-responsive" />
+        </a>
+      </div>
+      <div class="col-xs-10">
+        <div class="row">
+          <div class="col-xs-12">
+            <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile"><strong>{{ result.object.user.username }}</strong></a>
+          </div>
+        </div>
+        {% if result.object.tagline %}
+          <div class="row row-tagline">
+            <div class="col-xs-12">{{ result.object.tagline }}</div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    {% if forloop.last and users|length > 6 %}
+      <div class="row">
+        <div class="col-xs-12 clearfix">
+          <a class="pull-right more" href="#">view more users...</a>
+        </div>
+      </div>
+    {% endif %}
+{% empty %}
+    <div class="empty">
+        <h3 class="empty">No users found.</h3>
+    </div>
+{% endfor %}

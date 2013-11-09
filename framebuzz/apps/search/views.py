@@ -8,19 +8,37 @@ from framebuzz.apps.api.models import UserProfile, Video, MPTTComment
 from framebuzz.apps.api.backends.youtube import find_video_by_keyword
 
 
-MINIMUM_TOTAL_RESULTS = 30
+MINIMUM_TOTAL_RESULTS = 6
 RESULTS_PER_PAGE = 6
 
 
 def search(request):
     query = None
+    conversations = None
+    users = None
+    videos = None
 
     if request.method == 'GET':
         query = request.GET.get('query', None)
 
+        conversations = watson.search(query, models=(MPTTComment,))
+        users = watson.search(query, models=(UserProfile,))
+        videos = watson.search(query, models=(Video,))
+        
+        if len(videos) < RESULTS_PER_PAGE:
+            count = MINIMUM_TOTAL_RESULTS - len(videos)
+            yt, token = find_video_by_keyword(query, results=count)
+
+            # Update search, since find_video_by_keyword
+            # stores a copy in our db.
+            videos = watson.search(query, models=(Video,))
+
     return render_to_response('search/results.html', {
         'query': query,
         'search_criteria': ['videos', 'conversations', 'users'],
+        'conversations': conversations,
+        'users': users,
+        'videos': videos,
     }, context_instance=RequestContext(request))
 
 
