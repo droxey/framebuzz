@@ -26,8 +26,6 @@
 						"left"		: "52%"
 					});
 					timeline.rightLimit = newBottom;
-					console.log('left bottom:');
-					console.log(newBottom);
 				}
 				else{
 					var newBottom = timeline.leftLimit + $item.outerHeight(true);
@@ -40,11 +38,9 @@
 						"left"		: "0"
 					});
 					timeline.leftLimit = newBottom;
-										console.log('right bottom:');
-					console.log(newBottom);
 				}
 			});
-			timeline.$innerContainer.height(Math.max(timeline.leftLimit, timeline.rightLimit)+20);
+			timeline.$innerContainer.height(Math.max(timeline.leftLimit, timeline.rightLimit) + 20);
 		}
 		else{
 			timeline.$container.find('.item').stop(true, true).css({
