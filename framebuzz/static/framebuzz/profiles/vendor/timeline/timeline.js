@@ -14,6 +14,7 @@
 				
 			timeline.$container.find('.item').each(function(){
 				var $item = $(this);
+
 				if(timeline.leftLimit > timeline.rightLimit){
 					var newBottom = timeline.rightLimit + $item.outerHeight(true);
 					if (newBottom < timeline.leftLimit + 20){
@@ -25,6 +26,8 @@
 						"left"		: "52%"
 					});
 					timeline.rightLimit = newBottom;
+					console.log('left bottom:');
+					console.log(newBottom);
 				}
 				else{
 					var newBottom = timeline.leftLimit + $item.outerHeight(true);
@@ -37,20 +40,11 @@
 						"left"		: "0"
 					});
 					timeline.leftLimit = newBottom;
+										console.log('right bottom:');
+					console.log(newBottom);
 				}
-				var $circle = $('<span class="circle"></span>').appendTo(timeline.$innerContainer);
-				$circle.css({
-					'top' : (newBottom - $item.find('footer').outerHeight(true))
-				});
 			});
 			timeline.$innerContainer.height(Math.max(timeline.leftLimit, timeline.rightLimit)+20);
-			timeline.$container.find('.comments-container').css('height', 'auto');
-			timeline.$container.find('.comments-container').each(function () {
-	            var height = $(this).height();
-	            $(this).data('height', height).css({
-	                height: 0
-	            });
-	        });
 		}
 		else{
 			timeline.$container.find('.item').stop(true, true).css({

@@ -16,7 +16,7 @@
       </div>
       <div class="col-xs-1 action-type pull-right">
         {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}
-          <i class="fa fa-comment"></i>
+          <i class="fa fa-comment fa-flip-horizontal"></i>
         {% elif action.verb == 'added video to library' %}
           <i class="fa fa-video-camera"></i>
         {% else %}
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="row posted">
-      <div class="col-sm-9 col-xs-10 col-md-offset-2 col-sm-offset-3">
+      <div class="col-xs-10 col-sm-9 col-md-10 col-lg-10 col-sm-offset-3 col-md-offset-2 col-lg-offset-2">
         <i class="fa fa-clock-o"></i> {{ action.timestamp|timesince }} {% trans "ago" %}
       </div>
     </div>
@@ -33,7 +33,7 @@
 <footer>
     <span class="corner"></span>
     <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username video.video_id %}">
-        <img class="cover lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.poster_image }}" />
+        <img class="cover lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ video.video_id }}/mqdefault.jpg" />
     </a>
     <div class="actions">
       <div class="row">

@@ -48,13 +48,12 @@
                             <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url profile_user 295 %}" alt="" class="img-responsive lazy">
                         </a>
                     </div>
-
                     {% if profile_user.uservideo_set.all|length > 0 %}
                         <div id="user-videos" class="row clearfix">
                             {% for uv in profile_user.uservideo_set.all|slice:":4" %}
                                 <div class="vid col-xs-3 pull-left">
                                     <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username uv.video.video_id %}">
-                                        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ uv.video.poster_image }}" alt="{{ uv.video.title|title }}" class="img-responsive lazy">
+                                        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ uv.video.video_id }}/mqdefault.jpg" alt="{{ uv.video.title|title }}" class="img-responsive lazy">
                                     </a>
                                 </div>
                             {% endfor %}
@@ -152,22 +151,22 @@
                     <div class="col-xs-12">
                         <nav class="row">
                             <ul class="nav nav-pills clearfix">
-                                <li class="col-xs-4 col-md-2 start{% if not is_share %} active{% endif %}">
+                                <li class="col-xs-4 col-md-2 col-lg-2 start{% if not is_share %} active{% endif %}">
                                     <a class="filter latest" data-filter="*" href="#">Latest</a>
                                 </li>
-                                <li class="col-xs-4 col-md-2">
+                                <li class="col-xs-4 col-md-2 col-lg-2">
                                     <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">Posts</a>
                                 </li>
-                                <li class="col-xs-4 col-md-2">
+                                <li class="col-xs-4 col-md-2 col-lg-2">
                                     <a class="filter" data-filter=".conversations" href="#" data-pages="{{ page_counts.conversations }}">Comments</a>
                                 </li>
-                                <li class="col-xs-4 col-md-2">
+                                <li class="col-xs-4 col-md-2 col-lg-2">
                                     <a class="filter" data-filter=".added_to_favorites" href="#" data-pages="{{ page_counts.favorites }}">Favorites</a>
                                 </li>
-                                <li class="col-xs-4 col-md-2">
+                                <li class="col-xs-4 col-md-2 col-lg-2">
                                     <a class="filter" data-filter=".followers" href="#" data-pages="{{ page_counts.followers }}">Followers</a>
                                 </li>
-                                <li class="col-xs-4 col-md-2">
+                                <li class="col-xs-4 col-md-2 col-lg-2">
                                     <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">Following</a>
                                 </li>
                             </ul>

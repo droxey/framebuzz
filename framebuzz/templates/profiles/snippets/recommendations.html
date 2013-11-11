@@ -16,7 +16,7 @@
                 {{ video.get_share_url }}
                 {% endif %}
             {% endif %}{% endspaceless %}">
-            <img class="img-responsive video-thumbnail lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ video.large_thumbnail }}" alt="{{ video.title|title }}" />
+            <img class="img-responsive video-thumbnail lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ video.video_id }}/mqdefault.jpg" alt="{{ video.title|title }}" />
         </a>
     </div>
 {% endfor %}
