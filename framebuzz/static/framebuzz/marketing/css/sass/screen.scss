@@ -103,7 +103,12 @@ body.content {
         }
 
         #logo {
+            @include border-top-left-radius(10px);
+            @include border-top-right-radius(10px);
+            background: white;
             padding: 16px 0 0 0;
+            position: relative;
+            z-index: 10;
 
             div.row-logo {
                 margin: 0;

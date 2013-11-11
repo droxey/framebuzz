@@ -15,7 +15,7 @@
                 {{ result.object.get_share_url }}
                 {% endif %}
             {% endif %}{% endspaceless %}" title="{{ result.title|title }}">
-        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ result.object.default_thumbnail }}" alt="{{ result.title }}" class="lazy img-responsive" />
+        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{{ result.object.poster_image }}" alt="{{ result.title }}" class="lazy img-responsive" />
     </a>
     <h3>
         <a class="title" href="{{ result.object.get_share_url }}">{{ result.title|title }}</a>

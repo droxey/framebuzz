@@ -45,46 +45,69 @@ body.profiles {
         margin-top: 16px;
 
         #sidebar {
-            #user-avatar {
-                a {
-                    display: block;
-                    height: 109px;
+            position: relative;
+
+            #details-wrapper {
+                height: 294px;
+                left: -15px;
+                margin: 0;
+                overflow: hidden;
+                position: relative;
+                top: -47px;
+                width: 294px;
+
+                .details-col { padding: 0; }
+            
+                #user-avatar {
+                    a {
+                        display: block;
+                        height: 292px;
+                        width: 100%;
+
+                        img {
+                            height: 292px;
+                            width: 100%;
+                        }
+                    }
+                }
+
+                #user-display-name {
+                    background-color: #2B2727;
+                    bottom: 0;
+                    margin: 0;
+                    position: absolute;
                     width: 100%;
 
-                    img {
-                        height: 109px;
-                        width: 100%;
+                    div {
+                        h1 {
+                            color: #FFFFFF;
+                            font-size: 20px;
+                            font-weight: 700;
+                            margin: 10px 9px 10px;
+                        }
                     }
                 }
-            }
 
-            #user-display-name {
-                background-color: #2B2727;
+                #user-videos {
+                    background-color: #2B2727;
+                    bottom: 42px;
+                    margin: 0;
+                    position: absolute;
+                    width: 100%;
 
-                div {
-                    h1 {
-                        color: #FFFFFF;
-                        font-size: 20px;
-                        font-weight: 700;
-                        margin: 10px 9px 10px;
+                    div.vid {
+                        padding: 0;
+                        margin: 0 -1px 0 0;
+
+                        img { max-width: 101%; }
                     }
-                }
-            }
-
-            #user-videos {
-                background-color: #2B2727;
-
-                div.vid {
-                    padding: 0;
-                    margin: 0 -1px 0 0;
-
-                    img { max-width: 101%; }
                 }
             }
 
             #user-details {
                 background: #FFFFFF;
                 padding: 8px 28px 23px;
+                margin-top: -47px;
 
                 h2 {
                     color: #6e6e6e;

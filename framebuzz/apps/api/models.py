@@ -223,6 +223,9 @@ class Video(caching.base.CachingMixin, models.Model):
         if len(poster_thumbnail) == 0:
             poster_thumbnail = self.thumbnail_set.filter(
                 url__endswith='hqdefault.jpg')
+        if len(poster_thumbnail) == 0:
+            poster_thumbnail = self.thumbnail_set.filter(
+                url__endswith='mqdefault.jpg')
 
         try:
             poster = poster_thumbnail[0]
