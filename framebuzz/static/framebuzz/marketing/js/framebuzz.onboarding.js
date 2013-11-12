@@ -38,13 +38,9 @@ $(document).ready(function() {
 
                                     $('#btn-signup').click(function() {
                                         $('div.bubble-confirm', step3).hide('fast', function() {
-                                            $.get('/accounts/signup/', function(html) {
-                                                var step4 = $('div.step4');
-                                                $('#signup').html(html);
+                                            var step4 = $('div.step4');
+                                            step4.show('fast', function() {
 
-                                                step4.show('fast', function() {
-
-                                                });
                                             });
                                         });
                                     });

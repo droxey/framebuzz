@@ -1,0 +1,45 @@
+{% load i18n staticfiles addendum_tags socialaccount %}
+
+<form id="signup-form" class="form-inline" role="form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    <div class="row form-row">
+        <div class="form-group col-xs-4">
+            <label for="id_username">Choose a username:</label>
+            <input type="text" name="username" maxlength="30" id="id_username">
+        </div>
+        <div class="form-group col-xs-4">
+            <label for="id_username">Password:</label>
+            <input type="password" placeholder="" name="password1" id="id_password1">
+        </div>
+        <div class="form-group col-xs-4">
+            <label for="id_username">Password again:</label>
+            <input type="password" placeholder="" name="password2" id="id_password2">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            <button class="btn btn-info" type="submit">Create Account</button>
+        </div>
+        <div class="col-xs-1 text-center or">
+            <i>-or-</i>
+        </div>
+        {% if socialaccount.providers %}
+            {% for provider in socialaccount.providers %}
+                <div class="col-xs-1 social">
+                    <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btn btn-info" href="{% provider_login_url provider.id %}">
+                      {% if provider.id == 'facebook' %}
+                        <img src="{% static 'framebuzz/dashboard/img/social_icons/facebook.png' %}" height="21" width="21" alt="{{ provider.id }}">
+                      {% elif provider.id == 'twitter' %}
+                        <img src="{% static 'framebuzz/dashboard/img/social_icons/twitter.png' %}" height="21" width="21" alt="{{ provider.id }}">
+                      {% else %}
+                        <img src="{% static 'framebuzz/dashboard/img/social_icons/google.png' %}" height="21" width="21" alt="{{ provider.id }}">
+                      {% endif %}
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+</form>
