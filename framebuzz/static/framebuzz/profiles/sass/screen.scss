@@ -672,20 +672,31 @@ body.profiles {
 }
 
 body.share {
-    .container { max-width: 660px; }
+    .container { max-width: 640px; }
 
     #main {
         background: #05171E;
-        padding-bottom: 10px;
     }
 
     #share {
         margin-bottom: 0;
         overflow: hidden;
-        padding: 0 10px;
+        padding: 0;
         width: auto;
 
-        h1 { margin-top: 10px; }
+        div.row {
+            &.video {
+                h1 { margin-top: 0px; }
+                div { margin: 0 15px; }
+                iframe { margin: 0; }
+            }
+
+            &.details {
+                margin: -6px 0 0;
+                position: relative;
+                z-index: 10;
+            }
+        }
     }
 
     #footer { margin-top: 0; }
