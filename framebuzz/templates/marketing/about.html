@@ -1,19 +1,36 @@
 {% extends "marketing/base.html" %}
 {% load staticfiles addendum_tags %}
 
-{% block page_classes %}content about{% endblock %}
+{% block page_classes %}content subpage about{% endblock %}
 
 {% block content_center %}
     <div class="col-xs-12">
-        <div id="logo" class="row">
-            <div class="col-xs-12">
-                <a href="{% url 'home' %}">
-                    <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="40" width="184">
-                </a>
+        <div class="row container header">
+            <div class="col-xs-4">
+                <img src="{% static 'framebuzz/marketing/img/about/callout.jpg' %}" alt="FrameBuzz" class="img-responsive">
+            </div>
+            <div class="col-xs-8 header-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1><span class="frame">frame</span><span class="buzz">buzz</span> <em>is</em> online video conversation.</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p><strong>FrameBuzz is a free, online video conversation platform that enables moment-by-moment discussions within a video.</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>As the facilitator of interesting conversations between content creators, experts, and consumers, FrameBuzz brings more to a conversation than just words – it brings meaningful connections and unique perspectives that help shape the way a video is perceived, shared, and discovered.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row container">
-            <h1 class="wrapper">{% snippet 'about:team_header' %}MEET THE TEAM{% endsnippet %}</h1>
+        <div class="row row-description">
+            <div class="col-xs-12">
+                <h2>Meet the Team</h2>
+            </div>
         </div>
         <div class="row container">
             <div class="person col-lg-4 text-center">
