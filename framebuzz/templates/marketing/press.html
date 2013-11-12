@@ -1,22 +1,28 @@
 {% extends "marketing/base.html" %}
 {% load staticfiles addendum_tags %}
 
-{% block page_classes %}content press{% endblock %}
+{% block page_classes %}content subpage press{% endblock %}
 
 {% block content_center %}
-<div class="col-xs-12">
-    <div id="logo" class="row">
-        <div class="col-xs-12">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="40" width="184">
-            </a>
+    <div class="col-xs-12">
+        <div class="row row-header">
+            <div class="col-xs-12">
+                <h1>{% snippet 'about:press_header' %}press{% endsnippet %}</h1>
+            </div>
         </div>
-    </div>
-    <div class="row container">
-        <div class="col-xs-12">
-            <h1>Press Coverage</h1>
-            <div class="wrapper">
-                <h2>RECENT MEDIA COVERAGE</h2>
+        <div class="row row-description">
+            <div class="col-xs-4">
+                <h2>Recent Media Coverage</h2>
+            </div>
+            <div class="col-xs-4">
+                <h2>Media Kit</h2>
+            </div>
+            <div class="col-xs-4">
+                <h2>Inquiries</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
                 <article>
                     <button class="close">&times;</button>
                     <title>KXAN - FrameBuzz Launches Social Video Platform</title>
@@ -51,44 +57,9 @@
                     </div>
                 </article>
             </div>
-        </div>
-    </div>
-    <div id="media" class="row container">
-        <div class="col-xs-12">
-            <h1>Media Kits</h1>
-
-            <h2>ASSETS</h2>
-            <div class="row container">
-                <div class="col-xs-4">
-                    <div class="row">
-                        <a href="{% static 'framebuzz/marketing/press/FrameBuzz-logos.zip' %}" title="FrameBuzz Logo Package" class="clearfix">
-                            <div class="col-xs-3">
-                                <img src="{% static 'framebuzz/marketing/img/doc-zip.png' %}" height="63" width="50" alt="FrameBuzz Logo Package" class="img-responsive" />
-                            </div>
-                            <div class="file col-xs-9">
-                                <span class="title">FrameBuzz Logo Package</span>
-                                <br>
-                                <span class="type">ZIP File</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="row">
-                        <a href="{% static 'framebuzz/marketing/press/FrameBuzz-logos.zip' %}" title="FrameBuzz Logo Package" class="clearfix">
-                            <div class="col-xs-3">
-                                <img src="{% static 'framebuzz/marketing/img/doc-zip.png' %}" height="63" width="50" alt="FrameBuzz Logo Package" class="img-responsive"/>
-                            </div>
-                            <div class="file col-xs-9">
-                                <span class="title">FrameBuzz Logo Package</span>
-                                <br>
-                                <span class="type">ZIP File</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="row">
+            <div class="col-xs-4">
+                <div class="row row-media">
+                    <div class="col-xs-12">
                         <a href="{% static 'framebuzz/marketing/press/FrameBuzz-logo-large.png' %}" target="_blank" title="FrameBuzz Logo (Large)" class="clearfix">
                             <div class="col-xs-3">
                                 <img src="{% static 'framebuzz/marketing/img/doc-picture.png' %}" height="63" width="50" alt="FrameBuzz Logo (Large)" class="img-responsive" />
@@ -103,10 +74,8 @@
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="row container">
-                <div class="col-xs-4">
-                    <div class="row">
+                <div class="row row-media">
+                    <div class="col-xs-12">
                         <a href="{% static 'framebuzz/marketing/press/FrameBuzz-logo-small.png' %}" target="_blank" title="FrameBuzz Logo (Small)" class="clearfix">
                             <div class="col-xs-3">
                                 <img src="{% static 'framebuzz/marketing/img/doc-picture.png' %}" height="63" width="50" alt="FrameBuzz Logo (Small)" class="img-responsive" />
@@ -121,74 +90,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-xs-4">
-                    <div class="row">
-                        <a href="{% static 'framebuzz/marketing/press/FrameBuzz-logo-on-grey.png' %}" target="_blank" title="FrameBuzz Logo (Large, Grey Background)" class="clearfix">
-                            <div class="col-xs-3">
-                                <img src="{% static 'framebuzz/marketing/img/doc-picture.png' %}" height="63" width="50" alt="FrameBuzz Logo (Large, Grey Background)"  class="img-responsive" />
-                            </div>
-                            <div class="file col-xs-9">
-                                <span class="title">FrameBuzz Logo</span>
-                                <br>
-                                <span class="type">Large, Grey Background</span>
-                                <br>
-                                <span class="type">PNG File</span>
-                            </div> 
-                        </a> 
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="row">
-                        <a href="{% static 'framebuzz/marketing/press/FrameBuzz-logo-on-grey-small.png' %}" target="_blank" title="FrameBuzz Logo (Small, Grey Background)" class="clearfix">
-                            <div class="col-xs-3">
-                                <img src="{% static 'framebuzz/marketing/img/doc-picture.png' %}" height="63" width="50" alt="FrameBuzz Logo (Small, Grey Background)"  class="img-responsive" />
-                            </div>
-                            <div class="file col-xs-9">
-                                <span class="title">FrameBuzz Logo</span>
-                                <br>
-                                <span class="type">Small, Grey Background</span>
-                                <br>
-                                <span class="type">PNG File</span>
-                            </div>                                
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row container">
-                <div class="col-xs-4">
-                    <div class="row">
-                        <a href="{% static 'framebuzz/marketing/press/FrameBuzz-logo-on-white.png' %}" target="_blank" title="FrameBuzz Logo (Large, White Background)" class="clearfix">
-                            <div class="col-xs-3">
-                                <img src="{% static 'framebuzz/marketing/img/doc-picture.png' %}" height="63" width="50" alt="FrameBuzz Logo (Large, White Background)"  class="img-responsive" />
-                            </div>
-                            <div class="file col-xs-9">
-                                <span class="title">FrameBuzz Logo</span>
-                                <br>
-                                <span class="type">Large, White Background</span>
-                                <br>
-                                <span class="type">PNG File</span>
-                            </div> 
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="row">
-                        <a href="{% static 'framebuzz/marketing/press/FrameBuzz-logo-on-white-small.png' %}" target="_blank" title="FrameBuzz Logo (Small, White Background)" class="clearfix">
-                            <div class="col-xs-3">
-                                <img src="{% static 'framebuzz/marketing/img/doc-picture.png' %}" height="63" width="50" alt="FrameBuzz Logo (Small)" class="img-responsive" />
-                            </div>
-                            <div class="file col-xs-9">
-                                <span class="title">FrameBuzz Logo</span>
-                                <br>
-                                <span class="type">Small, White Background</span>
-                                <br>
-                                <span class="type">PNG File</span>
-                            </div> 
-                        </a> 
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="row">
+                <div class="row row-media">
+                    <div class="col-xs-12">
                         <a href="{% static 'framebuzz/marketing/press/FrameBuzz.mp4' %}" title="FrameBuzz Intro Video with Founding Team" class="clearfix">
                             <div class="col-xs-3">
                                 <img src="{% static 'framebuzz/marketing/img/doc-picture.png' %}" height="63" width="50" alt="FrameBuzz Intro Video with Founding Team"  class="img-responsive" />
@@ -202,22 +105,18 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xs-4">
+                <p>For media inquiries, contact:</p>
+                <p>
+                    Nikol Schiller, INK
+                    <br>
+                    <a href="mailto:framebuzz@ink-pr.com"><strong>framebuzz@ink-pr.com</strong></a>
+                    <br>
+                    <a href="tel:5123828984">512-382-8984</a>
+                </p>
+            </div>
         </div>
     </div>
-    <div id="contact" class="row">
-        <div class="col-xs-12">
-            <h2>INQUIRIES</h2>
-            <p>For media inquiries, contact:</p>
-            <p>
-                Nikol Schiller, INK
-                <br>
-                <a href="mailto:framebuzz@ink-pr.com">framebuzz@ink-pr.com</a>
-                <br>
-                <a href="tel:5123828984">512-382-8984</a>
-            </p>
-        </div>
-    </div>
-</div>
 {% endblock %}
 
 {% block page_javascript %}
