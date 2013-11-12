@@ -1,0 +1,46 @@
+{% extends "marketing/base.html" %}
+{% load staticfiles addendum_tags %}
+
+{% block page_classes %}content subpage contact{% endblock %}
+
+{% block content_center %}
+    <div class="col-xs-12">
+        <div class="row row-header">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                <h1>{% snippet 'about:contact_header' %}contact us{% endsnippet %}</h1>
+            </div>
+        </div>
+        <div class="row row-description">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                <p>Send us your comments, feedback, questions, life stories, etc&hellip;</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                {% if success %}
+                    <div class="alert alert-success">
+                        {% snippet 'about:contact_success' %}Thanks! We'll be in touch soon.{% endsnippet %}
+                    </div>
+                {% endif %}
+                <form id="contact-form" name="contact" action="" method="post" class="clearfix">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">{{ form.name.label }}:</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">{{ form.email.label }}:</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        <label for="description">{{ form.description.label }}:</label>
+                        {{ form.description }}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-large btn-success pull-right">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

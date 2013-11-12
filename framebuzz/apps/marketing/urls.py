@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
    url(r'^$', 'framebuzz.apps.marketing.views.home', name='home'),
    url(r'^contact/$', 'framebuzz.apps.marketing.views.contact', name='contact'),
+   url(r'^wordpress/$', 'framebuzz.apps.marketing.views.wordpress', name='wordpress'),
    url(r'^about/$', 'framebuzz.apps.marketing.views.about', name='about'),
    url(r'^terms/$', 'framebuzz.apps.marketing.views.terms', name='terms'),
    url(r'^privacy-policy/$',

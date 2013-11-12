@@ -35,6 +35,16 @@ def home(request):
 
 
 def about(request):
+    return render_to_response('marketing/about.html', {
+    }, context_instance=RequestContext(request))
+
+
+def wordpress(request):
+    return render_to_response('marketing/wordpress.html', {
+    }, context_instance=RequestContext(request))
+
+
+def contact(request):
     success = False
 
     if request.method == 'POST':
@@ -46,14 +56,10 @@ def about(request):
     else:
         form = ContactRequestForm()
 
-    return render_to_response('marketing/about.html', {
+    return render_to_response('marketing/contact.html', {
         'form': form,
         'success': success,
     }, context_instance=RequestContext(request))
-
-
-def contact(request):
-    return HttpResponseRedirect('%s#contact' % reverse('about'))
 
 
 def terms(request):
