@@ -83,33 +83,28 @@
                     {% endif %}
     			</div>
             {% else %}
-                <div class="col-xs-12 row-{{ filter }} clearfix">
+                <div class="col-xs-12">
                     <div class="row">
                         <div class="col-xs-12">
                             <h2>{{ filter }} <strong>({{ results_count }})</strong></h2>
                         </div>
                     </div>
-                    {% for result in search_results.object_list %}
-                        {% if filter == 'videos' %}
-                            <div class="row">
+                    <div class="row row-{{ filter }} clearfix">
+                        {% for result in search_results.object_list %}
+                            {% if filter == 'videos' %}
                                 {% include "search/videos.html" %}
-                            </div> 
-                        {% elif filter == 'users' %}
-                            <div class="row">
+                            {% elif filter == 'users' %}
                                 {% include "search/users.html" %}
-                            </div>
-                        {% else %}
-                            <div class="row">
+                            {% else %}
                                 {% include "search/conversations.html" %}
+                            {% endif %}
+                        {% empty %}
+                            <div class="empty">
+                                <h3 class="empty">No conversations found.</h3>
                             </div>
-                        {% endif %}
-                    {% empty %}
-                        <div class="empty">
-                            <h3 class="empty">No conversations found.</h3>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
-                <div class="col-xs-4"></div>
             {% endif %}
 		</div>
         {% if filter != None and search_results.pages > 1 %}
