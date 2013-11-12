@@ -83,9 +83,7 @@
                           <li><a href="{% url 'account_logout' %}">Log out</a></li>
                         </ul>
                     {% else %}
-                      <a id="btn-login" class="dropdown-toggle" href="#" data-toggle="dropdown">Sign in</a>
-                      <div id="login-container" class="dropdown-menu">
-                      </div>
+                      <a id="btn-login" class="dropdown-toggle" href="{% url 'account_login' %}">Sign in</a>
                     {% endif %}
                   </li>
               </ul>
