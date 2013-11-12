@@ -7,7 +7,6 @@
 
 {% block page_css %}
     {% compress css %}
-        <link href="{% static 'framebuzz/profiles/vendor/timeline/css/stylesheet.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
     {% endcompress %}
     {% block extra_css %}{% endblock %}
@@ -81,14 +80,6 @@
 
 {% block page_javascript %}
     {% compress js %}
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/canvas-to-blob.min.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/load-image.min.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.iframe-transport.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-process.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-image.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-validate.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/jquery.lazyload.min.js' %}"></script>
         <script type="text/javascript">
             $(document).ready(function() {
