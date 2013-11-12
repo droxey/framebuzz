@@ -26,10 +26,3 @@
         <span class="corner"></span>
     </p>
 </div>
-{% if forloop.last and conversations|length > 3 and filter == None %}
-    <div class="row">
-        <div class="col-xs-12 clearfix">
-            <a href="{% url 'fbz-search' %}?query={{ query }}&filter=videos" class="pull-right more">view more conversations...</a>
-        </div>
-    </div>
-{% endif %}

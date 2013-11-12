@@ -19,10 +19,3 @@
     {% endif %}
   </div>
 </div>
-{% if forloop.last and users|length > 6 and filter == None %}
-  <div class="row">
-    <div class="col-xs-12 clearfix">
-      <a class="pull-right more" href="{% url 'fbz-search' %}?query={{ query }}&filter=users">view more users...</a>
-    </div>
-  </div>
-{% endif %}

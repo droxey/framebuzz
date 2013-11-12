@@ -165,6 +165,10 @@ body.content {
                     top: -10px;
                     width: auto;
 
+                    &:focus, &:hover {
+                        background: none;
+                    }
+
                     img.img-circle {
                         height: 41px;
                         width: 41px;
@@ -289,6 +293,7 @@ body.search {
                 color: white;
                 font-size: 17px;
                 font-weight: 700;
+                margin-bottom: 0;
             }
 
             a.more {
@@ -297,7 +302,7 @@ body.search {
             }
 
             div.row-users {
-                height: 440px;
+                height: 404px;
 
                 div.user {
                     padding: 9px 14px;
@@ -318,10 +323,13 @@ body.search {
             }
 
             div.row-videos {
+                margin-top: 9px;
+
                 div.video {
+                    margin: 0px 5px 10px;
                     padding: 0;
                     position: relative;
-                    margin-bottom: 9px;
+                    width: 48%;
 
                     a.thumbnail-link {
                         display: block;
@@ -342,7 +350,7 @@ body.search {
                         position: absolute;
                         bottom: 0;
                         left: 0;
-                        width: 99%;
+                        width: 100%;
                         margin: 0;
                         height: 59px;
 
@@ -363,16 +371,14 @@ body.search {
                     }
 
                     img.img-responsive {
-                        margin: 0 auto;
-                        max-height: 215px;
-                        max-width: 98%;
-                        min-height: 215px;
+                        height: 177px;
+                        max-width: 100%;
                     }
                 }      
             }
 
             div.row-convos {
-                height: 440px;
+                margin-top: 9px;
 
                 div.comment {
                     @include border-radius(12px, 12px);
@@ -509,6 +515,8 @@ body.subpage {
                 padding: 10px 0;
                 margin: 0;
             }
+
+            h2 { font-weight: 700; }
         }
     }
 }
@@ -562,6 +570,7 @@ body.press {
 
     a {
         color: #4B86C6;
+        font-weight: 500;
     }
 
     article {
