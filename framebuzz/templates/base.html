@@ -80,6 +80,7 @@
                       </a>
                         <ul class="dropdown-menu">
                           <li><a href="{% url 'profiles-home' request.user.username %}">View profile</a></li>
+                          <li><a href="{% url 'profiles-edit' request.user.username %}">Edit profile</a></li>
                           <li><a href="{% url 'account_logout' %}">Log out</a></li>
                         </ul>
                     {% else %}

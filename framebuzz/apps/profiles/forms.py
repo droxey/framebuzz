@@ -8,34 +8,15 @@ from framebuzz.apps.api.backends.youtube import get_or_create_video
 
 
 class UserProfileForm(forms.ModelForm):
-    pk = forms.IntegerField(required=True)
-    name = forms.CharField(max_length=15, required=True)
-    value = forms.CharField(max_length=500, required=True)
-
     class Meta:
         model = UserProfile
-        fields = ('value', 'name', 'pk',)
+        fields = ('display_name', 'location', 'tagline', 'bio')
 
-    def save(self, commit=True):
-        pk = self.cleaned_data['pk']
-        name = self.cleaned_data['name']
-        value = self.cleaned_data['value']
-        profile = UserProfile.objects.get(pk=pk)
-
-        if name == 'bio':
-            profile.bio = value
-
-        if name == 'tagline':
-            profile.tagline = value
-
-        if name == 'display_name':
-            profile.display_name = value
-
-        if name == 'location':
-            profile.location = value
-
-        profile.save()
-        return profile
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.fields['bio'].widget = forms.Textarea(attrs={'cols':'38', 'rows':'5'})
+        self.fields['tagline'].widget = forms.Textarea(attrs={'cols':'38', 'rows':'5'})
 
 
 class AddVideoForm(forms.ModelForm):

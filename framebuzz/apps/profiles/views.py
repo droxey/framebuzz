@@ -235,21 +235,22 @@ def edit_profile(request, username):
             action.send(
                 request.user, verb='updated profile',
                 action_object=request.user)
-            outbound_message = {
-                'msg': 'success',
-                'status': 'success',
-            }
-            return HttpResponse(json.dumps(outbound_message),
-                                content_type="application/json")
-        else:
-            errors = json.loads(errors_to_json(form.errors))
-            outbound_message = {
-                'msg': errors,
-                'status': 'error',
-            }
-            return HttpResponse(json.dumps(outbound_message),
-                                content_type="application/json")
-    return HttpResponse()
+            return HttpResponseRedirect(
+                reverse('profiles-home', args=[request.user.username, ]))
+    else:
+        form = UserProfileForm(initial={
+                'display_name': profile.display_name,
+                'location': profile.location,
+                'bio': profile.bio,
+                'user': profile.user,
+                'tagline': profile.tagline
+            })
+
+    return render_to_response('profiles/edit.html', {
+        'profile_user': user,
+        'form': form,
+        'success': success
+    }, context_instance=RequestContext(request))
 
 
 def videos(request, username):

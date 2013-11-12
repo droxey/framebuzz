@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load staticfiles compress avatar_tags activity_tags profile_tags %}
+
+{% block page_classes %}content profiles edit{% endblock %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block page_css %}
+    {% compress css %}
+        <link href="{% static 'framebuzz/profiles/vendor/timeline/css/stylesheet.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+    {% endcompress %}
+    {% block extra_css %}{% endblock %}
+{% endblock %}
+
+{% block content_center %}
+    <div id="sidebar" class="col-xs-3">
+        <div id="details-wrapper" class="row">
+            <div class="col-xs-12 details-col">
+                <div id="user-avatar" class="row">
+                    <a href="{% url 'profiles-home' profile_user.username %}" class="avatar filter" data-filter="*">
+                        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url profile_user 295 %}" alt="" class="img-responsive lazy">
+                    </a>
+                </div>
+                {% if profile_user.uservideo_set.all|length > 0 %}
+                    <div id="user-videos" class="row clearfix">
+                        {% for uv in profile_user.uservideo_set.all|slice:":4" %}
+                            <div class="vid col-xs-3 pull-left">
+                                <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username uv.video.video_id %}">
+                                    <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ uv.video.video_id }}/mqdefault.jpg" alt="{{ uv.video.title|title }}" class="img-responsive lazy">
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div id="user-display-name" class="row">
+                    <div class="col-xs-12">
+                        <h1>{{ profile_user|display_name }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="user-details" class="row">
+            <h2><strong>Edit Profile</strong> <i class="fa fa-play fa-flip-horizontal pull-right"></i></h2>
+        </div>
+    </div>
+    <div id="profile-content" class="col-xs-9">
+        <div id="add-video" class="row">
+            <p class="description">Edit your profile information below.</p>
+        </div>
+        <div class="row container">
+            <div class="col-xs-12">
+                <form action="" method="post" class="form-vertical">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.is_hidden %}
+                            {{ field }}
+                        {% else %}
+                            <div class="form-row">
+                                <div class="form-group col-xs-6">
+                                    <div class="form-row">
+                                        {{ field.label_tag|title }}
+                                    </div>
+                                    <div class="form-row">
+                                        {{ field }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="form-row container">
+                        <div class="form-group col-xs-2 pull-right">
+                            <button type="submit" class="btn btn-large btn-info">Save Profile</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_javascript %}
+    {% compress js %}
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/canvas-to-blob.min.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/load-image.min.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.iframe-transport.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-process.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-image.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/fileupload/jquery.fileupload-validate.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/jquery.lazyload.min.js' %}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('img.lazy').lazyload();
+            });
+        </script>
+    {% endcompress %}
+{% endblock %}
