@@ -330,7 +330,6 @@ body.search {
                     padding: 0;
                     position: relative;
                     
-
                     &.col-xs-6 {
                         width: 48%;
                     }
@@ -598,6 +597,75 @@ body.press {
 
             span.type {
                 color: #A4A4A4;
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+body.wordpress {
+    #video {
+        position: relative;
+
+        div.mejs-container {
+            height: 325px !important;
+            width: 580px !important;
+
+            div.mejs-inner {
+                div.mejs-mediaelement {
+                    position: relative;
+
+                    video {
+                        position: absolute;
+                        height: 325px !important;
+                        width: 580px !important;
+                        top: 0;
+                        left: 0;
+                        z-index: 0;
+                    }
+                }
+
+                div.mejs-layers {
+                    .mejs-controls { display: none; }
+
+                    .mejs-poster {
+                        position: relative;
+                            height: 325px !important;
+                            width: 580px !important;
+
+                        img {
+                            position: absolute;
+                            height: 325px !important;
+                            width: 580px !important;
+                            top: 0;
+                            left: 0;
+                            z-index: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    div.sidebar {
+        div.details {
+            color: #6B6B6B;
+
+            h1 {
+                font-size: 18px;
+                font-weight: 700;
+            }
+        }
+
+        div.or {
+            color: #bbb;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        div.register {
+            em { 
+                color: #bbb;
                 font-size: 12px;
             }
         }

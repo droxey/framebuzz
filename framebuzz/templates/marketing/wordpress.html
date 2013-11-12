@@ -1,9 +1,71 @@
 {% extends "marketing/base.html" %}
-{% load staticfiles addendum_tags %}
+{% load staticfiles addendum_tags compress %}
 
-{% block page_classes %}content wordpress{% endblock %}
+{% block page_classes %}content subpage wordpress{% endblock %}
+
+{% block page_css %}
+    {% compress css %}
+        <link href="{% static 'framebuzz/player/app/css/mediaelementplayer.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+    {% endcompress %}
+{% endblock %}
 
 {% block content_center %}
-    <div class="col-md-12">
+    <div id="wp" class="col-md-12">
+        <div id="video" class="row container">
+            <div class="col-xs-4 sidebar">
+                <div class="row container">
+                    <div class="col-xs-12 details">
+                        <h1>Vlogger Heaven</h1>
+                        <p>Add moment-by-moment commentary to the videos you post, and let your users interact with you and each other around every second of a video.</p>
+                    </div>
+                </div>
+                <div class="row container">
+                    <div class="col-xs-7 download">
+                        <a href="#" class="btn btn-info btn-large">Download Plugin</a>
+                    </div>
+                </div>
+                <div class="row container">
+                    <div class="col-xs-7 text-center or">- or -</div>
+                </div>
+                <div class="row container">
+                    <div class="col-xs-7 register">
+                        <a href="#" class="btn btn-info btn-large">Create an Account</a>
+                        <br>
+                        <em class="text-center">(and explore FrameBuzz!)</em>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-8 video-container">
+                <video style="height: 100%; width: 100%;" preload="true" poster="{% static 'framebuzz/marketing/img/wp-onboarding.jpg' %}">
+                    <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+                    <source type="video/mp4" src="http://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/framebuzz.mp4" />
+                </video>
+            </div>
+        </div>
     </div>
+{% endblock %}
+
+{% block page_javascript %}
+    {% compress js %}
+        <script src="{% static 'framebuzz/marketing/vendor/mediaelement-and-player.min.js' %}"></script>
+        <script type="text/javascript">
+            $(document).ready(function()) {
+                $('video').mediaelementplayer({
+                    features: ['playpause'],
+                    alwaysShowControls: false,
+                    enableKeyboard: false,
+                    enablePluginSmoothing: true,
+                    autosizeProgress: false,
+                    defaultVideoWidth: 580,
+                    defaultVideoHeight: 325,
+                    enablePseudoStreaming: true,
+                    success: function(media) {
+                        $('.mejs-controls').remove();
+
+                        $('.mejs-video').css({ height: '325px', width: '580px' });
+                        $('video').css({ height: '325px', width: '580px' });
+                    });
+            });
+        </script>
+    {% endcompress %}
 {% endblock %}
