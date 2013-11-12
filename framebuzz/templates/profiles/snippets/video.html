@@ -35,6 +35,7 @@
     <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username video.video_id %}">
         <img class="cover lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ video.video_id }}/mqdefault.jpg" />
     </a>
+    {% comment %}
     <div class="actions">
       <div class="row">
           {% if request.user.is_authenticated %}
@@ -74,7 +75,8 @@
             {% endif %}
         </div>
     </div>  
-    {% if video.uservideo_set.all|length > 0 %}
+    {% endcomment %}
+    {% if video.uservideo_set.all|length > 0 and action.verb == 'added video to library' %}
       <div class="users">
         <div class="row clearfix">
           {% for uv in video.uservideo_set.all|slice:":12" %}
