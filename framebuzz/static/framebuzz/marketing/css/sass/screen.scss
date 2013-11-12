@@ -543,6 +543,12 @@ body.search {
 }
 
 body.subpage {
+    .btn-info {
+        background-color: #5bc0de;
+        border-color: #46b8da;
+        color: #fff;
+    }
+                
     div.row-header {
         position: relative;
 
@@ -775,7 +781,8 @@ body.account {
             div.or { 
                 color: #666666;
                 font-size: 12px;
-                padding: 9px 14px 9px 8px;
+                padding: 9px 10px 9px 8px;
+                margin-left: -15px;
             }
 
             button.btn-info { 
@@ -793,6 +800,15 @@ body.account {
                     padding: 6px 8px;
                 }
             }
+
+            div.terms {
+                margin-top: 9px;
+
+                p {
+                    font-weight: 300;
+                    font-size: 12px;
+                }
+            }
         }
     }
 
@@ -802,10 +818,14 @@ body.account {
 }
 
 body.login {
-    #main div.box #signup-form {
-        input[type='text'],
-        input[type='password'] {
-            width: 95%;
+    #main { 
+        div.box {
+            #signup-form {
+                input[type='text'],
+                input[type='password'] {
+                    width: 95%;
+                }
+            }
         }
     }
 }
