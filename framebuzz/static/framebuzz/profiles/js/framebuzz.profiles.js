@@ -174,16 +174,16 @@ var FrameBuzzProfile = (function($) {
 
         if (_isMyProfile) {
             bindAddVideoButton();
-
-            // Load recommendations.
-            $.get(urls.recommendations, function(html) {
-                recommendationsContainer.html(html);
-                lazyLoadImages();
-            });
         }
         else {
             initFollowButton();
         }
+
+        // Load recommendations.
+        $.get(urls.recommendations, function(html) {
+            recommendationsContainer.html(html);
+            lazyLoadImages();
+        });
 
         $.get(urls.feed + '?init=true', function(html) {
             feedContainer.html(html);
