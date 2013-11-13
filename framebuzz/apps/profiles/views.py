@@ -117,17 +117,30 @@ def recommendations(request):
         .values('target_object_id') \
         .annotate(comments=Count('id')) \
         .order_by('-comments')
-
+ 
     top_random_videos = sorted(
         top_video_actions[0:50], key=lambda x: random.random())
-
+ 
     top_video_ids = [v.get('target_object_id')
                      for v in top_random_videos]
-
-    top_videos = Video.objects.filter(id__in=top_video_ids[:20])
-
+ 
+    top_videos = Video.objects.filter(id__in=top_video_ids)
+ 
+    top_user_actions = Action.objects.filter(verb__in=
+                                             ['commented on',
+                                              'replied to comment']) \
+        .values('actor_object_id') \
+        .annotate(comments=Count('id')) \
+        .order_by('-comments')
+ 
+    top_random_users = sorted(
+        top_user_actions[0:50], key=lambda x: random.random())
+    top_user_ids = [u.get('actor_object_id') for u in top_random_users]
+    top_users = User.objects.filter(id__in=top_user_ids)
+ 
     return render_to_response('profiles/snippets/recommendations.html', {
         'top_videos': top_videos,
+        'top_users': top_users,
     }, context_instance=RequestContext(request))
 
 

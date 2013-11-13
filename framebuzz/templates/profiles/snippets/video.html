@@ -81,6 +81,9 @@
         <div class="row clearfix">
           {% for uv in video.uservideo_set.all|slice:":12" %}
             <a class="user pull-right" data-placement="bottom" title="{{ uv.user|display_name }}" href="{% url 'profiles-home' uv.user.username %}">
+              {% if forloop.last and video.uservideo_set.all|length > 12 %}
+                <span class="counter">+{{ video.uservideo_set.all|length|add:-12 }}</span>
+              {% endif %}
               <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url uv.user 64 %}" alt="" class="img-responsive lazy" />
             </a>
           {% endfor %}

@@ -261,6 +261,7 @@ body.profiles {
                 background: #05171E;
                 padding: 13px 0;
                 overflow: hidden;
+                min-height: 800px;
 
                 nav {
                     margin-bottom: 19px;
@@ -270,7 +271,7 @@ body.profiles {
                     }
 
                     ul.nav-pills {
-                        padding: 0;
+                        padding: 0 17px;
 
                         li {
                             a {
@@ -302,7 +303,10 @@ body.profiles {
                                 font-weight: 700;
                             }
 
-                            &.start { margin-left: 0; }
+                            &.start { 
+                                margin-left: 0;
+                                padding-left: 0;
+                            }
                         }
                     }
                 }
@@ -417,6 +421,21 @@ body.profiles {
                                         height: 33px;
                                         margin-right: -1px;
                                         width: auto;
+                                        position: relative;
+
+                                        span {
+                                            background-color: rgba(18, 101, 158, .74);
+                                            display: block;
+                                            line-height: 33px;
+                                            height: 33px;
+                                            position: absolute;
+                                            width: 33px;
+                                            top: 0;
+                                            left: 0;
+                                            font-weight: 500;
+                                            text-align: center;
+                                            color: white;
+                                        }
 
                                         img {
                                            height: 33px;
@@ -454,8 +473,9 @@ body.profiles {
                                     a {
                                         display: block;
                                         overflow: hidden;
-                                        height: 100%;
-                                        width: 100%;
+                                        height: 90%;
+                                        width: 90%;
+                                        position: relative;
                                     }
                                 }
 
@@ -524,7 +544,7 @@ body.profiles {
                                             display: block;
                                             height: 150px;
                                             position: absolute;
-                                            left: 85%;
+                                            left: 94%;
                                             top: 0;
                                             width: 7px;
                                         }

@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </div>
-                {% if profile_user.get_profile.tagline|length > 0 or  profile_user.get_profile.location|length > 0 or profile_user.get_profile.bio|length > 0 %}
+                {% if profile_user.get_profile.tagline or profile_user.get_profile.location or profile_user.get_profile.bio %}
                 <div id="user-details" class="row">
                     {% if profile_user.get_profile.tagline %}<h2>{{ profile_user.get_profile.tagline }} <i class="fa fa-play fa-flip-horizontal pull-right"></i></h2>{% endif %}
                     {% if profile_user.get_profile.location %}<h3>{{ profile_user.get_profile.location }} <i class="fa fa-map-marker"></i></h3>{% endif %}
