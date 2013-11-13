@@ -56,8 +56,8 @@
             <div class="col-xs-4 commenters">
                 <h2>Commenters</h2>
                 <ul class="row">
-                    {% for commenter in commenter_list|slice:":8" %}
-                        {% for item in commenter.list %}
+                    {% for commenter in commenter_list %}
+                        {% for item in commenter.list|slice:":8"  %}
                             <li class="pull-left">
                                 <a title="{{ item|display_name }}" href="{% url 'profiles-home' item.username %}">
                                     {% if forloop.last and commenter.list|length > 8 %}
