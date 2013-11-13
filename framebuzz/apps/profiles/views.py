@@ -119,7 +119,7 @@ def recommendations(request):
         .order_by('-comments')
  
     top_random_videos = sorted(
-        top_video_actions[0:50], key=lambda x: random.random())
+        top_video_actions[0:20], key=lambda x: random.random())
  
     top_video_ids = [v.get('target_object_id')
                      for v in top_random_videos]
