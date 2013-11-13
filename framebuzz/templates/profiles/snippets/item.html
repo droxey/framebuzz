@@ -2,7 +2,7 @@
 
 {% if page_obj.object_list %}
   {% for action in page_obj.object_list %}
-      <div class="item {% spaceless %}
+      <div class="item init {% spaceless %}
                         {% if action.verb %}
                           {% if is_my_profile and action.actor.id == profile_user.id %} mine {% endif %}
                           {% if action.verb == 'commented on' or action.verb == 'replied to comment' %}

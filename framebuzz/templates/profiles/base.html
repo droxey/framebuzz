@@ -129,18 +129,16 @@
                         </ul>  
                     </div>
                 </div>
-                {% if is_my_profile %}
-                    <div id="recommendations" class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h2>Recommendations</h2>
-                            <div class="row ajax">
-                                <div class="spin col-xs-12 text-center">
-                                    <i class="icon-spinner icon-spin icon-2x"></i>
-                                </div>
+                <div id="recommendations" class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h2>Recommendations</h2>
+                        <div class="row ajax">
+                            <div class="spin col-xs-12 text-center">
+                                <i class="icon-spinner fa fa-spin fa-2x"></i>
                             </div>
                         </div>
                     </div>
-                {% endif %}
+                </div>
             </div>
             <div id="profile-content" class="col-xs-9 pull-right">
                 {% if is_my_profile %}
@@ -187,35 +185,6 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block modals %}
-    <div class="md-modal md-effect-1" id="customize-modal">
-        <div class="md-content">
-            <h3>Customize Profile <button class="md-close"><i class="icon-remove"></i></button></h3>
-            <nav>
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#add" data-url="{% url 'avatar_add' %}">Upload Avatar</a>
-                    </li>
-                    {% comment %}
-                    <li>
-                        <a href="#change" data-url="{% url 'avatar_change' %}">Change Avatar</a>
-                    </li>
-                    <li>
-                        <a href="#background">Change Background</a>
-                    </li>
-                    {% endcomment %}
-                </ul>
-            </nav>
-            <div class="tab-content">
-                <div id="add" class="tab-pane active"></div>
-                <div id="change" class="tab-pane"></div>
-                <div id="background" class="tab-pane"></div>
-            </div>
-        </div>
-    </div>
-    <div class="md-overlay"></div>
 {% endblock %}
 
 {% block page_javascript %}

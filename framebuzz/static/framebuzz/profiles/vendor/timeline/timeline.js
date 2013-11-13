@@ -54,6 +54,7 @@
 			});
 			timeline.$innerContainer.height(height);
 		}
+		timeline.$container.find('.item.init').removeClass('init');
 	};
 
 	Timeline.prototype.init = function(params) {
