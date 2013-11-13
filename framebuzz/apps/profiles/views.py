@@ -113,10 +113,10 @@ def feed(request, username):
 
 
 def recommendations(request):
-    top_video_actions = Action.objects.filter(verb='commented on') \
+    top_video_actions = Action.objects.filter(verb='viewed video') \
         .values('target_object_id') \
-        .annotate(comments=Count('id')) \
-        .order_by('-comments')
+        .annotate(views=Count('id')) \
+        .order_by('-views')
  
     top_random_videos = sorted(
         top_video_actions[0:20], key=lambda x: random.random())
