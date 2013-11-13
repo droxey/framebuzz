@@ -11,6 +11,7 @@ $(document).ready(function() {
         pluginPath: '/static/framebuzz/player/app/swf/',
         flashName: 'flashmediaelement.swf',
         silverlightName: 'silverlightmediaelement.xap',
+        pseudoStreamingStartQueryParam: '',
         success: function(media) {
             $('.mejs-controls').remove();
             $('.mejs-overlay-button').remove();

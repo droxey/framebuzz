@@ -24,7 +24,7 @@
         </div>
         <div id="onboarding" class="row">
             <div id="video">
-                <video src="http://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/onboarding.mp4" poster="{% static 'framebuzz/marketing/img/onboarding-poster.jpg' %}" width="610" height="306"></video>
+                <video src="http://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/onboarding.mp4" type="video/mp4" poster="{% static 'framebuzz/marketing/img/onboarding-poster.jpg' %}" width="610" height="306"></video>
                 <div id="steps">
                     <div class="step step1">
                         <h1>Find, share and discuss <br><strong>buzz-worthy</strong> videos.</h1>
@@ -127,7 +127,7 @@
 
 {% block page_javascript %}
     {% compress js %}
-        <script src="{% static 'framebuzz/marketing/vendor/mediaelement-and-player.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/vendor/mediaelement-and-player.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.onboarding.js' %}"></script> 
     {% endcompress %}
 {% endblock %}

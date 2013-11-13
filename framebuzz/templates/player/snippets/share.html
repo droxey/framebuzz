@@ -60,6 +60,9 @@
                         {% for item in commenter.list %}
                             <li class="pull-left">
                                 <a title="{{ item|display_name }}" href="{% url 'profiles-home' item.username %}">
+                                    {% if forloop.last and commenter.list|length > 8 %}
+                                        <span class="counter">+{{ commenter.list|length|add:-8 }}</span>
+                                    {% endif %}
                                     <img src="{% avatar_url item 60 %}" alt="" width="48" height="48" class="img-responsive" />
                                 </a>
                             </li>
