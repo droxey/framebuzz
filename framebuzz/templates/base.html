@@ -80,11 +80,12 @@
                         <i class="fa fa-cog pull-left"></i>
                         <i class="fa fa-caret-down pull-left"></i>
                     </a>
+                      {% get_social_accounts request.user as accounts %}
                       <ul class="dropdown-menu">
                         <li><a href="{% url 'profiles-home' request.user.username %}">View profile</a></li>
                         <li><a href="{% url 'profiles-edit' request.user.username %}">Edit profile</a></li>
                         <li><a href="{% url 'avatar_add' %}">Change avatar</a></li>
-                        <li><a href="{% url 'account_change_password' %}">Change password</a></li>
+                        {% if accounts|length == 0 %}<li><a href="{% url 'account_change_password' %}">Change password</a></li>{% endif %}
                         <li><a href="{% url 'account_logout' %}">Log out</a></li>
                       </ul>
                   </li>
