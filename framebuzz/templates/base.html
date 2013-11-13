@@ -73,8 +73,10 @@
             {% if request.user.is_authenticated %}
               <ul class="nav pull-right">
                   <li class="dropdown clearfix">
-                    <a class="dropdown-toggle clearfix" href="#" data-toggle="dropdown">
-                        <img src="{% avatar_url request.user 82 %}" alt="{{ request.user|display_name }}" height="41" width="41" class="img-circle pull-left">
+                    <a class="nav-link pull-left" href="{% url 'profiles-home' request.user.username %}">
+                      <img src="{% avatar_url request.user 82 %}" height="41" width="41" class="img-circle">
+                    </a>
+                    <a class="dropdown-toggle pull-right clearfix" href="#" data-toggle="dropdown">
                         <i class="fa fa-cog pull-left"></i>
                         <i class="fa fa-caret-down pull-left"></i>
                     </a>
