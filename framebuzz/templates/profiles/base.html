@@ -143,9 +143,11 @@
                 {% endif %}
             </div>
             <div id="profile-content" class="col-xs-9">
-                <div id="add-video" class="row">
-                    {% include "profiles/snippets/add_video.html" %}
-                </div>
+                {% if is_my_profile %}
+                    <div id="add-video" class="row">
+                        {% include "profiles/snippets/add_video.html" %}
+                    </div>
+                {% endif %}
                 <div id="share" class="row"></div>
                 <div id="timeline" class="row">
                     <div class="col-xs-12">

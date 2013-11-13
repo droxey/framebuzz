@@ -63,7 +63,7 @@
 
 		$('a.filter').click(function() {
 			timeline.loading = false;
-			timeline.$container.find('.loadMore').removeClass('loading').find('p').html('Load more posts...');
+			timeline.$container.find('.loadMore').removeClass('loading').find('p').html('Loading...');
 			timeline.iteration = 0;
 		});
 
