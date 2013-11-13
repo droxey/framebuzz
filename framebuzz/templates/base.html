@@ -62,34 +62,36 @@
               <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="25" width="116">
             </a>
           </div>
-          <div class="col-xs-7 row-search">
+          <div class="col-xs-6 row-search">
               <form id="search-form" data-users-url="{% url 'search-users' %}" data-conversations-url="{% url 'search-conversations' %}" data-videos-url="{% url 'search-videos' %}" method="GET" action="{% url 'fbz-search' %}" class="navbar-search">
                   <i class="fa fa-search"></i>
                   <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search people, conversations, and videos..." class="search-query span2">
                   <button type="submit"></button>
               </form>
           </div>
-          <div class="col-xs-2 row-user">
-              <ul class="nav nav-pills pull-right">
-                  <li class="dropdown">
-                    {% if request.user.is_authenticated %}
-                      <a class="dropdown-toggle clearfix" href="#" data-toggle="dropdown">
-                          <img src="{% avatar_url request.user 82 %}" alt="{{ request.user|display_name }}" height="41" width="41" class="img-circle pull-left">
-                          <i class="fa fa-cog pull-left"></i>
-                          <i class="fa fa-caret-down pull-left"></i>
-                      </a>
-                        <ul class="dropdown-menu">
-                          <li><a href="{% url 'profiles-home' request.user.username %}">View profile</a></li>
-                          <li><a href="{% url 'profiles-edit' request.user.username %}">Edit profile</a></li>
-                          <li><a href="{% url 'avatar_add' %}">Change avatar</a></li>
-                          <li><a href="{% url 'account_change_password' %}">Change password</a></li>
-                          <li><a href="{% url 'account_logout' %}">Log out</a></li>
-                        </ul>
-                    {% else %}
-                      <a id="btn-login" class="dropdown-toggle" href="{% url 'account_login' %}">Sign in</a>
-                    {% endif %}
+          <div class="col-xs-3 row-user">
+            {% if request.user.is_authenticated %}
+              <ul class="nav pull-right">
+                  <li class="dropdown clearfix">
+                    <a class="dropdown-toggle clearfix" href="#" data-toggle="dropdown">
+                        <img src="{% avatar_url request.user 82 %}" alt="{{ request.user|display_name }}" height="41" width="41" class="img-circle pull-left">
+                        <i class="fa fa-cog pull-left"></i>
+                        <i class="fa fa-caret-down pull-left"></i>
+                    </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="{% url 'profiles-home' request.user.username %}">View profile</a></li>
+                        <li><a href="{% url 'profiles-edit' request.user.username %}">Edit profile</a></li>
+                        <li><a href="{% url 'avatar_add' %}">Change avatar</a></li>
+                        <li><a href="{% url 'account_change_password' %}">Change password</a></li>
+                        <li><a href="{% url 'account_logout' %}">Log out</a></li>
+                      </ul>
                   </li>
               </ul>
+          {% else %}
+            <p class="navbar-text navbar-right">
+              <a id="btn-signup" class="nav-link pull-left" href="{% url 'account_signup' %}">Create an Account</a><span></span><a id="btn-login" class="nav-link pull-right" href="{% url 'account_login' %}">Sign in</a>
+            </p>
+          {% endif %}
           </div>
         </div>
         <div id="main" class="row">
