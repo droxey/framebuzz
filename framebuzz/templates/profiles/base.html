@@ -148,7 +148,11 @@
                         {% include "profiles/snippets/add_video.html" %}
                     </div>
                 {% endif %}
-                <div id="share" class="row"></div>
+                <div id="share" class="row"{% if is_share %} style="display: block;"{% endif %}>
+                    {% if is_share %}
+                        {% include 'player/snippets/share.html' %}
+                    {% endif %}
+                </div>
                 <div id="timeline" class="row">
                     <div class="col-xs-12">
                         <nav class="row">
