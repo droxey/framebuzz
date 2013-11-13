@@ -117,7 +117,7 @@ body.profiles {
                     i.fa-play {
                         color: #05171E;
                         position: relative;
-                        left: 28px;
+                        left: 29px;
                     }
                 }
 
@@ -172,25 +172,45 @@ body.profiles {
 
             #recommendations {
                 overflow: hidden;
+                width: 244px;
 
-                h2 {
-                    color: #ACABAB;
-                    font-size: 18px;
-                    font-weight: 700;
-                    margin-bottom: 0;
+                div {
                     position: relative;
-                    top: 4px;
-                    text-indent: 9px;
-                }
-
-                div.pull-left {
+                    left: 0;
                     padding: 0;
-                    margin-left: -1px;
 
-                    img.img-responsive {
-                        height: 75px;
-                        width: 103%;
-                        max-width: 103%;
+                    h2 {
+                        color: #ACABAB;
+                        font-size: 18px;
+                        font-weight: 700;
+                        margin-bottom: 0;
+                        position: relative;
+                        top: 4px;
+                        text-indent: 9px;
+                    }
+
+                    div.left,
+                    div.pull-right {
+                        width: 44%;
+
+                        a {
+                            height: 70px;
+                            width: 127px;
+                            max-width: 103%;
+
+                            img.img-responsive {
+                                height: 70px;
+                                max-width: 115%;
+                            }
+                        }
+                    }
+
+                    div.left {
+                        margin-left: 15px;
+                    }
+
+                    div.ajax {
+                        width: 100%;
                     }
                 }
             }
@@ -587,6 +607,7 @@ body.profiles {
     display: none;
     margin-bottom: 23px;
     width: 730px;
+    overflow: hidden;
 
     div.row {
         border-bottom: 1px solid #272525;

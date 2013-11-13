@@ -112,7 +112,7 @@ body.profiles #base #sidebar #user-details h2 {
 body.profiles #base #sidebar #user-details h2 i.fa-play {
   color: #05171E;
   position: relative;
-  left: 28px;
+  left: 29px;
 }
 /* line 124, ../sass/screen.scss */
 body.profiles #base #sidebar #user-details h3 {
@@ -169,9 +169,16 @@ body.profiles #base #sidebar #user-stats .nav-tabs li.active a i {
 /* line 173, ../sass/screen.scss */
 body.profiles #base #sidebar #recommendations {
   overflow: hidden;
+  width: 244px;
 }
-/* line 176, ../sass/screen.scss */
-body.profiles #base #sidebar #recommendations h2 {
+/* line 177, ../sass/screen.scss */
+body.profiles #base #sidebar #recommendations div {
+  position: relative;
+  left: 0;
+  padding: 0;
+}
+/* line 182, ../sass/screen.scss */
+body.profiles #base #sidebar #recommendations div h2 {
   color: #ACABAB;
   font-size: 18px;
   font-weight: 700;
@@ -180,30 +187,45 @@ body.profiles #base #sidebar #recommendations h2 {
   top: 4px;
   text-indent: 9px;
 }
-/* line 186, ../sass/screen.scss */
-body.profiles #base #sidebar #recommendations div.pull-left {
-  padding: 0;
-  margin-left: -1px;
+/* line 193, ../sass/screen.scss */
+body.profiles #base #sidebar #recommendations div div.left,
+body.profiles #base #sidebar #recommendations div div.pull-right {
+  width: 44%;
 }
-/* line 190, ../sass/screen.scss */
-body.profiles #base #sidebar #recommendations div.pull-left img.img-responsive {
-  height: 75px;
-  width: 103%;
+/* line 196, ../sass/screen.scss */
+body.profiles #base #sidebar #recommendations div div.left a,
+body.profiles #base #sidebar #recommendations div div.pull-right a {
+  height: 70px;
+  width: 127px;
   max-width: 103%;
 }
-/* line 199, ../sass/screen.scss */
+/* line 201, ../sass/screen.scss */
+body.profiles #base #sidebar #recommendations div div.left a img.img-responsive,
+body.profiles #base #sidebar #recommendations div div.pull-right a img.img-responsive {
+  height: 70px;
+  max-width: 115%;
+}
+/* line 208, ../sass/screen.scss */
+body.profiles #base #sidebar #recommendations div div.left {
+  margin-left: 15px;
+}
+/* line 212, ../sass/screen.scss */
+body.profiles #base #sidebar #recommendations div div.ajax {
+  width: 100%;
+}
+/* line 219, ../sass/screen.scss */
 body.profiles #base #profile-content {
   background: #05171E;
   min-height: 800px;
   padding-right: 14px;
 }
-/* line 204, ../sass/screen.scss */
+/* line 224, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video {
   background: #1DAFEC;
   height: 54px;
   overflow: hidden;
 }
-/* line 210, ../sass/screen.scss */
+/* line 230, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form input {
   background: #1DAFEC;
   border: none;
@@ -214,37 +236,37 @@ body.profiles #base #profile-content #add-video #add-video-form input {
   padding: 20px 11px 0px 0px;
   width: 98%;
 }
-/* line 220, ../sass/screen.scss */
+/* line 240, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form input::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #A3D9ED;
 }
-/* line 224, ../sass/screen.scss */
+/* line 244, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form input:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #A3D9ED;
 }
-/* line 228, ../sass/screen.scss */
+/* line 248, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form input::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #A3D9ED;
 }
-/* line 232, ../sass/screen.scss */
+/* line 252, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form input:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #A3D9ED;
 }
-/* line 236, ../sass/screen.scss */
+/* line 256, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form input:focus {
   outline: 0;
 }
-/* line 241, ../sass/screen.scss */
+/* line 261, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form div.submit {
   background: #1EABE4;
   padding: 0;
   height: 100%;
 }
-/* line 246, ../sass/screen.scss */
+/* line 266, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form div.submit button {
   background: #1EABE4;
   border: none;
@@ -255,30 +277,30 @@ body.profiles #base #profile-content #add-video #add-video-form div.submit butto
   font-size: 0.88em;
   width: 100%;
 }
-/* line 256, ../sass/screen.scss */
+/* line 276, ../sass/screen.scss */
 body.profiles #base #profile-content #add-video #add-video-form div.submit button i {
   color: white;
 }
-/* line 262, ../sass/screen.scss */
+/* line 282, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline {
   background: #05171E;
   padding: 13px 0;
   overflow: hidden;
   min-height: 800px;
 }
-/* line 268, ../sass/screen.scss */
+/* line 288, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav {
   margin-bottom: 19px;
 }
-/* line 271, ../sass/screen.scss */
+/* line 291, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav .nav-pills > li + li {
   margin-left: 0;
 }
-/* line 275, ../sass/screen.scss */
+/* line 295, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav ul.nav-pills {
   padding: 0 17px;
 }
-/* line 279, ../sass/screen.scss */
+/* line 299, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav ul.nav-pills li a {
   color: #898989;
   font-size: 13px;
@@ -287,13 +309,13 @@ body.profiles #base #profile-content #timeline nav ul.nav-pills li a {
   text-align: center;
   width: 100%;
 }
-/* line 288, ../sass/screen.scss */
+/* line 308, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav ul.nav-pills li:last-child {
   padding-left: 0;
   margin-right: 0;
   padding-right: 0;
 }
-/* line 295, ../sass/screen.scss */
+/* line 315, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav ul.nav-pills li.active a, body.profiles #base #profile-content #timeline nav ul.nav-pills li:hover a {
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
@@ -303,51 +325,51 @@ body.profiles #base #profile-content #timeline nav ul.nav-pills li.active a, bod
   color: #c5c5c5;
   text-align: center;
 }
-/* line 304, ../sass/screen.scss */
+/* line 324, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav ul.nav-pills li.active {
   font-weight: 700;
 }
-/* line 308, ../sass/screen.scss */
+/* line 328, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline nav ul.nav-pills li.start {
   margin-left: 0;
   padding-left: 0;
 }
-/* line 316, ../sass/screen.scss */
+/* line 336, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline {
   margin: -5px 0 0;
   font-family: "ff-dagny-web-pro", sans-serif;
 }
-/* line 320, ../sass/screen.scss */
+/* line 340, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.container {
   min-height: 605px;
 }
-/* line 324, ../sass/screen.scss */
+/* line 344, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item {
   margin-bottom: 18px;
 }
-/* line 327, ../sass/screen.scss */
+/* line 347, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content {
   padding-bottom: 0;
 }
-/* line 332, ../sass/screen.scss */
+/* line 352, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header div.header-content {
   position: relative;
 }
-/* line 336, ../sass/screen.scss */
+/* line 356, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header img.header-avatar {
   height: 41px;
   width: 41px;
 }
-/* line 341, ../sass/screen.scss */
+/* line 361, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header div.avatar {
   padding-right: 0;
   max-width: 56px;
 }
-/* line 346, ../sass/screen.scss */
+/* line 366, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header a {
   color: #247cc0;
 }
-/* line 350, ../sass/screen.scss */
+/* line 370, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header p {
   color: #565555;
   margin-bottom: 0;
@@ -356,57 +378,57 @@ body.profiles #base #profile-content #timeline div.responsive-timeline div.item 
   text-align: left;
   font-weight: 500;
 }
-/* line 358, ../sass/screen.scss */
+/* line 378, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header p i {
   color: #b2bbbe;
   font-size: 7px;
   position: relative;
   top: -5px;
 }
-/* line 365, ../sass/screen.scss */
+/* line 385, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header p span {
   color: #383838;
   font-weight: 700;
   padding: 0 2px;
 }
-/* line 372, ../sass/screen.scss */
+/* line 392, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type {
   position: absolute;
   right: -9px;
   top: 5px;
 }
-/* line 377, ../sass/screen.scss */
+/* line 397, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type i {
   color: #C5C6C6;
   font-size: 20px;
   position: relative;
   right: 20px;
 }
-/* line 387, ../sass/screen.scss */
+/* line 407, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item div.content div.posted div {
   color: #949292;
 }
-/* line 393, ../sass/screen.scss */
+/* line 413, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer {
   position: relative;
 }
-/* line 396, ../sass/screen.scss */
+/* line 416, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer span.corner {
   top: -47px;
 }
-/* line 398, ../sass/screen.scss */
+/* line 418, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer a.thumbnail-link {
   display: block;
   overflow: hidden;
   max-height: 294px;
   width: 100%;
 }
-/* line 404, ../sass/screen.scss */
+/* line 424, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer a.thumbnail-link img.cover {
   height: 180px;
   width: 100%;
 }
-/* line 410, ../sass/screen.scss */
+/* line 430, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer div.users {
   height: 33px;
   overflow: hidden;
@@ -414,12 +436,12 @@ body.profiles #base #profile-content #timeline div.responsive-timeline div.item 
   bottom: 0;
   right: 0;
 }
-/* line 417, ../sass/screen.scss */
+/* line 437, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer div.users div.row {
   margin: 0;
   padding: 0;
 }
-/* line 421, ../sass/screen.scss */
+/* line 441, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer div.users div.row a.user {
   display: block;
   height: 33px;
@@ -427,7 +449,7 @@ body.profiles #base #profile-content #timeline div.responsive-timeline div.item 
   width: auto;
   position: relative;
 }
-/* line 428, ../sass/screen.scss */
+/* line 448, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer div.users div.row a.user span {
   background-color: rgba(18, 101, 158, 0.74);
   display: block;
@@ -441,35 +463,35 @@ body.profiles #base #profile-content #timeline div.responsive-timeline div.item 
   text-align: center;
   color: white;
 }
-/* line 442, ../sass/screen.scss */
+/* line 462, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer div.users div.row a.user img {
   height: 33px;
 }
-/* line 449, ../sass/screen.scss */
+/* line 469, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer div.actions {
   position: absolute;
   top: 30%;
 }
-/* line 455, ../sass/screen.scss */
+/* line 475, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer div.actions div.row div a {
   background-color: rgba(0, 0, 0, 0.3);
   display: block;
 }
-/* line 459, ../sass/screen.scss */
+/* line 479, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item footer div.actions div.row div a i {
   color: white;
 }
-/* line 467, ../sass/screen.scss */
+/* line 487, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following div.content, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers div.content, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz div.content {
   padding-top: 0;
   padding-right: 0;
 }
-/* line 471, ../sass/screen.scss */
+/* line 491, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following div.content div.avatar, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers div.content div.avatar, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz div.content div.avatar {
   padding-left: 0;
   padding-right: 0;
 }
-/* line 475, ../sass/screen.scss */
+/* line 495, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following div.content div.avatar a, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers div.content div.avatar a, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz div.content div.avatar a {
   display: block;
   overflow: hidden;
@@ -477,32 +499,32 @@ body.profiles #base #profile-content #timeline div.responsive-timeline div.item.
   width: 90%;
   position: relative;
 }
-/* line 484, ../sass/screen.scss */
+/* line 504, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following div.content div.user, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers div.content div.user, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz div.content div.user {
   padding: 20px 28px;
 }
-/* line 489, ../sass/screen.scss */
+/* line 509, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following footer, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers footer, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz footer {
   padding: 0;
   margin: 0;
 }
-/* line 493, ../sass/screen.scss */
+/* line 513, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following footer span.corner, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers footer span.corner, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz footer span.corner {
   background: none;
 }
-/* line 500, ../sass/screen.scss */
+/* line 520, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.user, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.right div.content div.user, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.user, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.right div.content div.user, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.user, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.right div.content div.user {
   line-height: 16px;
 }
-/* line 504, ../sass/screen.scss */
+/* line 524, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.avatar, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.right div.content div.avatar, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.avatar, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.right div.content div.avatar, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.avatar, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.right div.content div.avatar {
   right: 66.6667%;
 }
-/* line 507, ../sass/screen.scss */
+/* line 527, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.avatar img, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.right div.content div.avatar img, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.avatar img, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.right div.content div.avatar img, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.avatar img, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.right div.content div.avatar img {
   margin-left: 0;
 }
-/* line 511, ../sass/screen.scss */
+/* line 531, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.avatar span.img-corner, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.right div.content div.avatar span.img-corner, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.avatar span.img-corner, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.right div.content div.avatar span.img-corner, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.avatar span.img-corner, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.right div.content div.avatar span.img-corner {
   background: url("../vendor/timeline/images/light/left_bkg.png") no-repeat top left;
   display: block;
@@ -512,33 +534,33 @@ body.profiles #base #profile-content #timeline div.responsive-timeline div.item.
   top: 0;
   width: 93%;
 }
-/* line 522, ../sass/screen.scss */
+/* line 542, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.right div.content div.follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.right div.content div.follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.right div.content div.follow {
   bottom: 8px;
   margin-left: 10px;
   position: absolute;
 }
-/* line 527, ../sass/screen.scss */
+/* line 547, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.follow a.toggle-follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.right div.content div.follow a.toggle-follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.follow a.toggle-follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.right div.content div.follow a.toggle-follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.follow a.toggle-follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.right div.content div.follow a.toggle-follow {
   float: right;
 }
-/* line 530, ../sass/screen.scss */
+/* line 550, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.follow a.toggle-follow .fa, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.right div.content div.follow a.toggle-follow .fa, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.follow a.toggle-follow .fa, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.right div.content div.follow a.toggle-follow .fa, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.follow a.toggle-follow .fa, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.right div.content div.follow a.toggle-follow .fa {
   line-height: 31px;
 }
-/* line 531, ../sass/screen.scss */
+/* line 551, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.follow a.toggle-follow .fa-plus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.follow a.toggle-follow .fa-minus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.right div.content div.follow a.toggle-follow .fa-plus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.right div.content div.follow a.toggle-follow .fa-minus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.follow a.toggle-follow .fa-plus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.follow a.toggle-follow .fa-minus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.right div.content div.follow a.toggle-follow .fa-plus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.right div.content div.follow a.toggle-follow .fa-minus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.follow a.toggle-follow .fa-plus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.follow a.toggle-follow .fa-minus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.right div.content div.follow a.toggle-follow .fa-plus, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.right div.content div.follow a.toggle-follow .fa-minus {
   text-indent: 16px;
 }
-/* line 538, ../sass/screen.scss */
+/* line 558, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content {
   padding-left: 0;
 }
-/* line 541, ../sass/screen.scss */
+/* line 561, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.avatar, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.avatar, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.avatar {
   right: 0;
 }
-/* line 544, ../sass/screen.scss */
+/* line 564, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.avatar span.img-corner, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.avatar span.img-corner, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.avatar span.img-corner {
   background: url("../vendor/timeline/images/light/right_bkg.png") no-repeat top right;
   display: block;
@@ -548,34 +570,35 @@ body.profiles #base #profile-content #timeline div.responsive-timeline div.item.
   top: 0;
   width: 7px;
 }
-/* line 555, ../sass/screen.scss */
+/* line 575, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.follow {
   margin-right: 18px;
 }
-/* line 558, ../sass/screen.scss */
+/* line 578, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.left div.content div.follow a.toggle-follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.left div.content div.follow a.toggle-follow, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.left div.content div.follow a.toggle-follow {
   float: left;
 }
-/* line 566, ../sass/screen.scss */
+/* line 586, ../sass/screen.scss */
 body.profiles #base #profile-content #timeline div.responsive-timeline div.item.following.right div.user, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.followers.right div.user, body.profiles #base #profile-content #timeline div.responsive-timeline div.item.joined_framebuzz.right div.user {
   left: 25%;
 }
-/* line 581, ../sass/screen.scss */
+/* line 601, ../sass/screen.scss */
 body.profiles #footer {
   margin-top: 0;
 }
 
-/* line 586, ../sass/screen.scss */
+/* line 606, ../sass/screen.scss */
 #share {
   display: none;
   margin-bottom: 23px;
   width: 730px;
+  overflow: hidden;
 }
-/* line 591, ../sass/screen.scss */
+/* line 612, ../sass/screen.scss */
 #share div.row {
   border-bottom: 1px solid #272525;
 }
-/* line 595, ../sass/screen.scss */
+/* line 616, ../sass/screen.scss */
 #share div.row.video div {
   background: #202020;
   margin-left: 15px;
@@ -583,7 +606,7 @@ body.profiles #footer {
   padding: 0;
   width: 96%;
 }
-/* line 603, ../sass/screen.scss */
+/* line 624, ../sass/screen.scss */
 #share div.row.video h1 {
   background-color: #202020;
   color: #cac8c8;
@@ -593,24 +616,24 @@ body.profiles #footer {
   margin-bottom: 0;
   margin-top: 15px;
 }
-/* line 613, ../sass/screen.scss */
+/* line 634, ../sass/screen.scss */
 #share div.row.video iframe {
   background-color: #202020;
   margin: 0 30px;
   width: 637px;
 }
-/* line 620, ../sass/screen.scss */
+/* line 641, ../sass/screen.scss */
 #share div.row.details {
   border-bottom: 5px solid #2b2727;
   background-color: #3d3939;
   padding: 0;
   margin: -7px 0 0 0;
 }
-/* line 626, ../sass/screen.scss */
+/* line 647, ../sass/screen.scss */
 #share div.row.details .col-xs-4, #share div.row.details .col-xs-3, #share div.row.details .col-xs-5, #share div.row.details .col-xs-2 {
   padding: 0;
 }
-/* line 630, ../sass/screen.scss */
+/* line 651, ../sass/screen.scss */
 #share div.row.details h2 {
   color: #6c6969;
   font-size: 15px;
@@ -619,70 +642,70 @@ body.profiles #footer {
   margin-bottom: 3px;
   margin-top: 9px;
 }
-/* line 639, ../sass/screen.scss */
+/* line 660, ../sass/screen.scss */
 #share div.row.details ul {
   margin: 0;
   padding: 0;
 }
-/* line 644, ../sass/screen.scss */
+/* line 665, ../sass/screen.scss */
 #share div.row.details ul li a {
   display: block;
   margin-left: -1px;
 }
-/* line 648, ../sass/screen.scss */
+/* line 669, ../sass/screen.scss */
 #share div.row.details ul li a img {
   height: 48px;
   width: 48px;
 }
-/* line 656, ../sass/screen.scss */
+/* line 677, ../sass/screen.scss */
 #share div.row.details p {
   color: #cac8c8;
   font-size: 12px;
 }
-/* line 662, ../sass/screen.scss */
+/* line 683, ../sass/screen.scss */
 #share div.row.details div.description div.scroller {
   background-color: #393535;
   max-height: 112px;
   overflow: scroll;
   padding: 1px 9px;
 }
-/* line 670, ../sass/screen.scss */
+/* line 691, ../sass/screen.scss */
 #share div.row.details div.stats {
   padding-left: 15px;
   padding-right: 15px;
 }
-/* line 674, ../sass/screen.scss */
+/* line 695, ../sass/screen.scss */
 #share div.row.details div.stats p {
   color: #f2f2f2;
   font-size: 14px;
   font-weight: 500;
 }
-/* line 679, ../sass/screen.scss */
+/* line 700, ../sass/screen.scss */
 #share div.row.details div.stats p i {
   color: #aeaeae;
   font-size: 18px;
   vertical-align: top;
 }
-/* line 688, ../sass/screen.scss */
+/* line 709, ../sass/screen.scss */
 #share div.row.details div.commenters h2 {
   text-indent: 0;
 }
-/* line 692, ../sass/screen.scss */
+/* line 713, ../sass/screen.scss */
 #share div.row.details div.commenters ul {
   margin: -15px 0 0 0;
 }
-/* line 695, ../sass/screen.scss */
+/* line 716, ../sass/screen.scss */
 #share div.row.details div.commenters ul li {
   height: 48px;
   width: 48px;
 }
-/* line 699, ../sass/screen.scss */
+/* line 720, ../sass/screen.scss */
 #share div.row.details div.commenters ul li a {
   position: relative;
   height: 48px;
   width: 48px;
 }
-/* line 704, ../sass/screen.scss */
+/* line 725, ../sass/screen.scss */
 #share div.row.details div.commenters ul li a span {
   background-color: rgba(18, 101, 158, 0.74);
   display: block;
@@ -697,49 +720,49 @@ body.profiles #footer {
   color: white;
 }
 
-/* line 726, ../sass/screen.scss */
+/* line 747, ../sass/screen.scss */
 body.share .container {
   max-width: 640px;
 }
-/* line 728, ../sass/screen.scss */
+/* line 749, ../sass/screen.scss */
 body.share #main {
   background: #05171E;
 }
-/* line 732, ../sass/screen.scss */
+/* line 753, ../sass/screen.scss */
 body.share #share {
   margin-bottom: 0;
   overflow: hidden;
   padding: 0;
   width: auto;
 }
-/* line 740, ../sass/screen.scss */
+/* line 761, ../sass/screen.scss */
 body.share #share div.row.video h1 {
   margin-top: 0px;
 }
-/* line 741, ../sass/screen.scss */
+/* line 762, ../sass/screen.scss */
 body.share #share div.row.video div {
   margin: 0 15px;
 }
-/* line 742, ../sass/screen.scss */
+/* line 763, ../sass/screen.scss */
 body.share #share div.row.video iframe {
   margin: 0;
 }
-/* line 745, ../sass/screen.scss */
+/* line 766, ../sass/screen.scss */
 body.share #share div.row.details {
   margin: -6px 0 0;
   position: relative;
   z-index: 10;
 }
-/* line 753, ../sass/screen.scss */
+/* line 774, ../sass/screen.scss */
 body.share #footer {
   margin-top: 0;
 }
 
-/* line 757, ../sass/screen.scss */
+/* line 778, ../sass/screen.scss */
 body.profiles.edit #base #profile-content {
   min-height: 560px;
 }
-/* line 761, ../sass/screen.scss */
+/* line 782, ../sass/screen.scss */
 body.profiles.edit #base #profile-content #add-video p {
   color: white;
   font-weight: 700;
@@ -748,21 +771,21 @@ body.profiles.edit #base #profile-content #add-video p {
   text-indent: 20px;
   line-height: 54px;
 }
-/* line 771, ../sass/screen.scss */
+/* line 792, ../sass/screen.scss */
 body.profiles.edit #base #profile-content #timeline {
   min-height: 600px;
 }
-/* line 775, ../sass/screen.scss */
+/* line 796, ../sass/screen.scss */
 body.profiles.edit #base #profile-content div.avatar-section {
   color: white;
   padding: 27px 18px;
 }
-/* line 780, ../sass/screen.scss */
+/* line 801, ../sass/screen.scss */
 body.profiles.edit #base #profile-content form {
   padding-top: 32px;
   padding-bottom: 18px;
 }
-/* line 784, ../sass/screen.scss */
+/* line 805, ../sass/screen.scss */
 body.profiles.edit #base #profile-content form input, body.profiles.edit #base #profile-content form textarea {
   display: block;
   border: none;
@@ -770,14 +793,14 @@ body.profiles.edit #base #profile-content form input, body.profiles.edit #base #
   padding: 5px;
   width: 100%;
 }
-/* line 792, ../sass/screen.scss */
+/* line 813, ../sass/screen.scss */
 body.profiles.edit #base #profile-content form label {
   color: white;
   display: block;
   margin: 0;
   padding: 0;
 }
-/* line 799, ../sass/screen.scss */
+/* line 820, ../sass/screen.scss */
 body.profiles.edit #base #profile-content form .btn-info {
   background-color: #5bc0de;
   border-color: #46b8da;
