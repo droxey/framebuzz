@@ -163,6 +163,7 @@ body.content {
                         margin: 0;
                         padding: 0;
                         font-size: 12px;
+                        line-height: 20px;
                     }
 
                     #btn-signup {
@@ -176,7 +177,7 @@ body.content {
                         width: 1px;
                         height: 20px;
                         line-height: 20px;
-                        margin: 0 3px;
+                        margin: 0 5px;
                     }
                 }
 
@@ -677,36 +678,24 @@ body.press {
 }
 
 body.wordpress {
-    #video {
-        position: relative;
+    #onboarding {
+        background: none; 
+        width: auto;
+        padding-top: 56px;
+        padding-bottom: 0;
 
-        div.mejs-container {
-            height: 325px !important;
-            width: 580px !important;
+        #video {
+            position: relative;
 
-            div.mejs-inner {
-                div.mejs-mediaelement {
-                    position: relative;
+            div.mejs-container {
+                height: 325px !important;
+                width: 580px !important;
 
-                    video {
-                        position: absolute;
-                        height: 325px !important;
-                        width: 580px !important;
-                        top: 0;
-                        left: 0;
-                        z-index: 0;
-                    }
-                }
-
-                div.mejs-layers {
-                    .mejs-controls { display: none; }
-
-                    .mejs-poster {
+                div.mejs-inner {
+                    div.mejs-mediaelement {
                         position: relative;
-                            height: 325px !important;
-                            width: 580px !important;
 
-                        img {
+                        video {
                             position: absolute;
                             height: 325px !important;
                             width: 580px !important;
@@ -715,7 +704,30 @@ body.wordpress {
                             z-index: 0;
                         }
                     }
+
+                    div.mejs-layers {
+                        .mejs-controls { display: none; }
+
+                        .mejs-poster {
+                            position: relative;
+                                height: 325px !important;
+                                width: 580px !important;
+
+                            img {
+                                position: absolute;
+                                height: 325px !important;
+                                width: 580px !important;
+                                top: 0;
+                                left: 0;
+                                z-index: 0;
+                            }
+                        }
+                    }
                 }
+            }
+
+            #steps div.step1 {
+                background: none;
             }
         }
     }

@@ -8,6 +8,9 @@ $(document).ready(function() {
         defaultVideoWidth: 610,
         defaultVideoHeight: 306,
         enablePseudoStreaming: true,
+        pluginPath: '/static/framebuzz/player/app/swf/',
+        flashName: 'flashmediaelement.swf',
+        silverlightName: 'silverlightmediaelement.xap',
         success: function(media) {
             $('.mejs-controls').remove();
             $('.mejs-overlay-button').remove();

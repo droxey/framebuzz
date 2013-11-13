@@ -24,30 +24,20 @@
         </div>
         <div id="onboarding" class="row">
             <div id="video">
-                <video style="height: 100%; width: 100%;" preload="true" poster="{% static 'framebuzz/marketing/img/onboarding-poster.jpg' %}">
-                    <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
-                    <source type="video/mp4" src="http://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/onboarding.mp4" />
-                    <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
-                    <source type="video/webm" src="http://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/onboarding.webm" />
-                    <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
-                    <object style="height: 100%; width: 100%;" type="application/x-shockwave-flash" data="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
-                        <param name="movie" value="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}" />
-                        <param name="flashvars" value="controls=true&amp;file=http://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/onboarding.mp4" />
-                        <!-- Image as a last resort -->
-                        <img src="{% static 'framebuzz/marketing/img/onboarding-poster.jpg' %}" height="306" width="610" title="No video playback capabilities" />
-                    </object>
-                </video>
+                <video src="http://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/onboarding.mp4" poster="{% static 'framebuzz/marketing/img/onboarding-poster.jpg' %}" width="610" height="306"></video>
                 <div id="steps">
                     <div class="step step1">
-                        <h1>FrameBuzz is a community of<br><strong>video-integrated</strong> commentary.</h1>
+                        <h1>Find, share and discuss <br><strong>buzz-worthy</strong> videos.</h1>
                         <button type="button" id="btn-start" class="btn btn-lg btn-info">Get Started</button>
                     </div>
                     <div class="step step2">
-                        <h1>Welcome to FrameBuzz.</h1>
+                        <h1>Let's see how it works.</h1>
                         <form id="prompt-form" class="row form-inline" role="form">
-                            <label for="prompt">What killed the radio star?</label>
+                            <label for="prompt">What made Austin, Texas famous?</label>
                             <div class="form-group col-xs-10">
                                 <input type="text" class="form-control" name="prompt" value="" maxlength="180" placeholder="Type your answer...">
+                                <br>
+                                <em class="text-muted">(There’s no right or wrong answer, just popular opinion.)</em>
                             </div>
                             <div class="col-xs-2">
                                 <button class="btn btn-info">OK</button>
@@ -81,6 +71,8 @@
                                 <span class="corner"></span>
                                 <div class="row">
                                     <div class="col-xs-12 text-center">
+                                        &hellip;and it’s the Live Music Capital of the World!
+                                        <br>
                                         See how it works? <strong>You’re a pro.</strong>
                                     </div>
                                 </div>
