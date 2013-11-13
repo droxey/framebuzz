@@ -74,7 +74,7 @@
               <ul class="nav pull-right">
                   <li class="dropdown clearfix">
                     <a class="nav-link avatar pull-left" href="{% url 'profiles-home' request.user.username %}">
-                      <img src="{% avatar_url request.user 82 %}" height="41" width="41" class="img-circle">
+                      <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url request.user 82 %}" height="41" width="41" class="img-circle lazy">
                     </a>
                     <a class="dropdown-toggle pull-right clearfix" href="#" data-toggle="dropdown">
                         <i class="fa fa-cog pull-left"></i>
@@ -125,6 +125,7 @@
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/vendor/jquery/vegas/jquery.vegas.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/jquery.lazyload.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.base.js' %}"></script>
     {% endcompress %}
     {% block page_javascript %}{% endblock %}
