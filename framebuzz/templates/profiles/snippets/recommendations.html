@@ -1,22 +1,37 @@
 {% load staticfiles avatar_tags profile_tags %}
 
 
-{% for video in top_videos %}
-    <div class="col-xs-6 {% cycle 'left' 'pull-right' %}">
-        <a class="thumbnail-link play-video" href="{% spaceless %}{% if request.user.is_authenticated %}
-                {% if video.found_by %}
-                    {% url 'profiles-share' video.found_by.username video.video_id %}
-                {% else %}
-                    {% url 'profiles-share' request.user.username video.video_id %}
-                {% endif %}
-            {% else %}
-                {% if video.found_by %}
-                    {% url 'profiles-share' video.found_by.username video.video_id %}
-                {% else %}
-                {{ video.get_share_url }}
-                {% endif %}
-            {% endif %}{% endspaceless %}">
-            <img class="img-responsive video-thumbnail lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ video.video_id }}/mqdefault.jpg" alt="{{ video.title|title }}" />
-        </a>
+<div class="col-xs-12">
+{% for row in rows %}
+    <div class="row row-videos">
+        {% for video in row.videos %}
+            <div class="col-xs-6 video-column {% cycle 'left' 'pull-right' %}">
+                <a class="thumbnail-link play-video" href="{% spaceless %}{% if request.user.is_authenticated %}
+                        {% if video.found_by %}
+                            {% url 'profiles-share' video.found_by.username video.video_id %}
+                        {% else %}
+                            {% url 'profiles-share' request.user.username video.video_id %}
+                        {% endif %}
+                    {% else %}
+                        {% if video.found_by %}
+                            {% url 'profiles-share' video.found_by.username video.video_id %}
+                        {% else %}
+                            {{ video.get_share_url }}
+                        {% endif %}
+                    {% endif %}{% endspaceless %}">
+                    <img class="img-responsive video-thumbnail lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ video.video_id }}/mqdefault.jpg" alt="{{ video.title|title }}" />
+                </a>     
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row row-users">
+        {% for user in row.users %}
+            <div class="col-xs-2 user-column pull-left">
+                <a class="" href="{% url 'profiles-home' user.username %}">
+                    <img class="img-responsive lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user.username 80 %}"  />
+                </a>
+            </div>
+        {% endfor %}
     </div>
 {% endfor %}
+</div>

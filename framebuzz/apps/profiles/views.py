@@ -113,18 +113,13 @@ def feed(request, username):
 
 
 def recommendations(request):
-    top_video_actions = Action.objects.filter(verb='commented on') \
-        .values('target_object_id') \
-        .annotate(comments=Count('id')) \
-        .order_by('-comments')
+    top_video_actions = Action.objects.filter(verb='viewed video') \
+        .values('action_object_object_id') \
+        .annotate(views=Count('id')) \
+        .order_by('-views')
 
     top_random_videos = sorted(
-        top_video_actions[0:20], key=lambda x: random.random())
- 
-    top_video_ids = [v.get('target_object_id')
-                     for v in top_random_videos]
- 
-    top_videos = Video.objects.filter(id__in=top_video_ids)
+        top_video_actions[0:10], key=lambda x: random.random())
  
     top_user_actions = Action.objects.filter(verb__in=
                                              ['commented on',
@@ -134,13 +129,24 @@ def recommendations(request):
         .order_by('-comments')
  
     top_random_users = sorted(
-        top_user_actions[0:50], key=lambda x: random.random())
-    top_user_ids = [u.get('actor_object_id') for u in top_random_users]
-    top_users = User.objects.filter(id__in=top_user_ids)
- 
+        top_user_actions[0:30], key=lambda x: random.random())
+
+    user_offset = 0
+    rows = list()
+    for action_count in xrange(0, len(top_random_videos)):
+        if action_count % 2 == 0:
+            video_ids = [v.get('action_object_object_id') for v in top_random_videos[action_count:action_count+2]]
+            user_ids = [u.get('actor_object_id') for u in top_random_users[user_offset:user_offset+6]]
+
+            row = dict()
+            row['videos'] = Video.objects.filter(id__in=video_ids)
+            row['users'] = User.objects.filter(id__in=user_ids)
+
+            user_offset = user_offset + 6
+            rows.append(row)
+
     return render_to_response('profiles/snippets/recommendations.html', {
-        'top_videos': top_videos,
-        'top_users': top_users,
+        'rows': rows
     }, context_instance=RequestContext(request))
 
 
