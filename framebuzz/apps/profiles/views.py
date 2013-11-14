@@ -119,7 +119,7 @@ def recommendations(request):
         .order_by('-views')
 
     top_random_videos = sorted(
-        top_video_actions[0:14], key=lambda x: random.random())
+        top_video_actions[0:16], key=lambda x: random.random())
  
     top_user_actions = Action.objects.filter(verb__in=
                                              ['commented on',
