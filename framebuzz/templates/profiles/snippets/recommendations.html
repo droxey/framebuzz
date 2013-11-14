@@ -27,7 +27,7 @@
     <div class="row row-users">
         {% for user in row.users %}
             <div class="col-xs-2 user-column pull-left">
-                <a class="" href="{% url 'profiles-home' user.username %}">
+                <a class="avatar" href="{% url 'profiles-home' user.username %}">
                     <img class="img-responsive lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user.username 80 %}"  />
                 </a>
             </div>
