@@ -34,7 +34,7 @@ def video_embed(request, video_id):
     next_url = '%s?close=true' % reverse('video-embed', args=(video.video_id,))
 
     mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
-    webm_url = 'http://www.ytapi.com/api/%s/direct/44/' % video_id
+    webm_url = 'http://www.ytapi.com/api/%s/direct/43/' % video_id
 
     #mp4_url = get_url(mp4, 18, request)
     #webm_url = get_url(webm, 44, request)

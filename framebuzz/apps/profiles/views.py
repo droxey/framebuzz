@@ -134,8 +134,8 @@ def recommendations(request):
     user_offset = 0
     rows = list()
     for action_count in xrange(0, len(top_random_videos)):
-        if action_count % 2 == 0:
-            video_ids = [v.get('action_object_object_id') for v in top_random_videos[action_count:action_count+2]]
+        if action_count % 4 == 0:
+            video_ids = [v.get('action_object_object_id') for v in top_random_videos[action_count:action_count+4]]
             user_ids = [u.get('actor_object_id') for u in top_random_users[user_offset:user_offset+6]]
 
             row = dict()
