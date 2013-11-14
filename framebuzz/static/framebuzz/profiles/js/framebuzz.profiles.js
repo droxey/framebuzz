@@ -160,8 +160,10 @@ var FrameBuzzProfile = (function($) {
         $(document).on('click', 'a.play-video', function() {
             var url = $(this).attr('href');
 
+            $("html, body").animate({ scrollTop: 0 }, "normal");
+
             $.get(url, function(data) {
-                $('#share').html(data).show();;
+                $('#share').html(data).show();
                 $('li.start').addClass('active');
             });
 
