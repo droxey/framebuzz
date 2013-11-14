@@ -168,10 +168,10 @@ def video_share(request, username=None, video_id=None):
     context['shares'] = get_total_shares(request.path)
 
     if username is not None:
-        request.session['share'] = context
         if request.is_ajax():
             template = 'player/snippets/share.html'
         else:
+            request.session['share'] = context
             return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
     else:
         template = 'marketing/share.html'

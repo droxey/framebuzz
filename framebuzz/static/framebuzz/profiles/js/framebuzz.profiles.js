@@ -160,11 +160,18 @@ var FrameBuzzProfile = (function($) {
         $(document).on('click', 'a.play-video', function() {
             var url = $(this).attr('href');
 
-            $("html, body").animate({ scrollTop: 0 }, "normal");
+            $("html, body").animate({ scrollTop: 0 }, "normal", function() {
+                $('#share div.ajax').fadeIn('fast', function() {
+                    $('#video-container').html('');
+                    $('#share').show();
+                });
 
-            $.get(url, function(data) {
-                $('#share').html(data).show();
-                $('li.start').addClass('active');
+                $.get(url, function(data) {
+                    $('#share div.ajax').fadeOut('fast', function() {
+                       $('#video-container').html(data);
+                       $('li.start').addClass('active');
+                   });
+                });
             });
 
             return false;
