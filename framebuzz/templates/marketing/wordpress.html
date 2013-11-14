@@ -38,7 +38,19 @@
                 </div>
             </div>
             <div class="col-xs-8 video-container">
-                <video src="http://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/framebuzz.mp4" poster="{% static 'framebuzz/marketing/img/wp-onboarding.jpg' %}" width="580" height="325"></video>
+                <video style="height: 100%; width: 100%;" preload="true" poster="{% static 'framebuzz/marketing/img/wp-onboarding.jpg' %}">
+                  <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+                  <source type="video/mp4" src="hhttp://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/framebuzz.mp4" />
+                  <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+                  <source type="video/webm" src="http://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/framebuzz.webm" />
+                  <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
+                  <object style="height: 100%; width: 100%;" type="application/x-shockwave-flash" data="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
+                      <param name="movie" value="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}" />
+                      <param name="flashvars" value="controls=true&amp;file=http://p.fbzvideos.framebuzz.netdna-cdn.com/vod/fbzvideos.framebuzz/framebuzz.mp4" />
+                      <!-- Image as a last resort -->
+                      <img src="{% static 'framebuzz/marketing/img/wp-onboarding.jpg' %}" width="580" height="325" title="No video playback capabilities" />
+                  </object>
+                </video>
                 <div id="steps">
                     <div class="step step1">
                         <button type="button" id="btn-start" class="btn btn-lg btn-success"><i class="fa fa-video-camera fa-fw"></i> Learn More</button>
@@ -62,10 +74,7 @@
                     autosizeProgress: false,
                     defaultVideoWidth: 580,
                     defaultVideoHeight: 325,
-                    enablePseudoStreaming: true,
                     pluginPath: '/static/framebuzz/player/app/swf/',
-                    flashName: 'flashmediaelement.swf',
-                    silverlightName: 'silverlightmediaelement.xap',
                     success: function(media) {
                         $('.mejs-controls').remove();
 
