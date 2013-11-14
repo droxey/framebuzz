@@ -196,30 +196,35 @@ body.profiles {
                         text-indent: 9px;
                     }
 
-                    div.row-videos {
-                        div.left,
-                        div.pull-right {
-                            width: 50%;
+                    div.left,
+                    div.pull-right {
+                        width: 50%;
 
-                            a {
+                        a.video-thumbnail {
+                            display: block;
+                            height: 70px;
+                            width: 127px;
+                            max-width: 103%;
+                            cursor: pointer;
+
+                            img.img-responsive {
                                 height: 70px;
-                                width: 127px;
-                                max-width: 103%;
-
-                                img.img-responsive {
-                                    height: 70px;
-                                    max-width: 115%;
-                                }
+                                max-width: 115%;
                             }
                         }
+                    }
 
-                        div.left {
-                           
-                        }
+                    div.left {
+                       
                     }
 
                     div.row-users {
                         div.user-column {
+
+                            &.pull-right {
+                                width: auto;
+                            }
+                            
                             a.avatar {
                                 display: block;
                                 height: 44px;

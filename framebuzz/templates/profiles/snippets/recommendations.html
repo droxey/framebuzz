@@ -3,7 +3,8 @@
 
 <div class="col-xs-12">
 {% for row in rows %}
-        {% for video in row.videos %}
+    <div class="row row-videos">
+        {% for video in row.videos %}        
             <div class="col-xs-6 video-column {% cycle 'left' 'pull-right' %}">
                 <a class="thumbnail-link play-video" href="{% spaceless %}{% if request.user.is_authenticated %}
                         {% if video.found_by %}
