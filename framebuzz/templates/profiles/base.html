@@ -61,7 +61,7 @@
                     {% endif %}
                     <div id="user-display-name" class="row">
                         <div class="col-xs-10">
-                            <h1>{{ profile_user|display_name }}</h1>
+                            <h1><a href="{% url 'profiles-home' profile_user.username %}">{{ profile_user|display_name }}</a></h1>
                         </div>
                         <div class="col-xs-2">
                             {% if not is_my_profile %}
