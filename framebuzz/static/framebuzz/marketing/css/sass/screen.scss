@@ -128,7 +128,7 @@ body.content {
 
             div.row-search {
                 #search-form {
-                    border-bottom: 1px solid #f6f6f6;
+                    border-bottom: 1px solid #cccccc;
                     box-shadow: none;
                     width: 100%;
 
@@ -138,13 +138,29 @@ body.content {
                         @include border-radius(0px, 0px);
                         border: none;
                         box-shadow: none;
-                        color: #5c5c5c;
+                        color: #666666;
                         font-size: 14px;
                         margin-bottom: 0;
                         height: 22px;
                         padding-left: 0;
                         text-indent: 5px;
                         width: 95%;
+
+                        &::-webkit-input-placeholder { /* WebKit browsers */
+                            color:    #666666;
+                        }
+                        
+                        &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                            color:    #666666;
+                        }
+                        
+                        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                            color:    #666666;
+                        }
+                        
+                        &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                            color:    #666666;
+                        }
 
                         &:focus {
                             outline: 0;
