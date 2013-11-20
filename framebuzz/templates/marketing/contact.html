@@ -15,13 +15,16 @@
                 <p>Send us your comments, feedback, questions, life stories, etc&hellip;</p>
             </div>
         </div>
+        {% if success %}
+            <div class="row row-success bs-callout bs-callout-success">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+                    <h4>Request Received!</h4>
+                    <p>We got your message and will respond ASAP!</p>
+                </div>
+            </div>
+        {% endif %}
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
-                {% if success %}
-                    <div class="alert alert-success">
-                        {% snippet 'about:contact_success' %}Thanks! We'll be in touch soon.{% endsnippet %}
-                    </div>
-                {% endif %}
                 <form id="contact-form" name="contact" action="" method="post" class="form-horizontal">
                     {% csrf_token %}
                     <div class="form-group">
