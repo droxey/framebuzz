@@ -1,108 +1,19 @@
-{% load staticfiles compress avatar_tags %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>FrameBuzz</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ video.description }}" />
-    <meta property="og:title" content="FrameBuzz: {{ video.title }}" />
-    <meta property="og:type" content="Video" />
-    <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.video_id %}" />
-    <meta property="og:image" content="{{ video.poster_image }}" />
-    <meta property="og:description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
-    <meta property="og:site_name" content="FrameBuzz" />
-    <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
-    <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
-    <meta itemprop="image" content="{{ video.poster_image }}" />
-    {% compress css %}
-        <!-- bootstrap -->
-        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap.css' %}" rel="stylesheet" />
-        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap-responsive.css' %}" rel="stylesheet" />
-        <link href="{% static 'framebuzz/dashboard/bootstrap/css/bootstrap/bootstrap-overrides.css' %}" type="text/css" rel="stylesheet" />
+{% extends "marketing/base.html" %}
+{% load socialaccount staticfiles compress addendum_tags %}
 
-        <!-- libraries -->
-        <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/jquery-ui-1.10.2.custom.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'framebuzz/dashboard/bootstrap/css/lib/font-awesome.css' %}" type="text/css" rel="stylesheet" />
-
-        <!-- global styles -->
-        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/layout.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/elements.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/bootstrap/css/icons.css' %}">
-
-        <!-- profiles styles -->
-        <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" type="text/css" media="screen" />
-    {% endcompress %}
-    {% block page_css %}{% endblock %}
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="//use.typekit.net/jbo8iic.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-</head>
-<body>
-    <div class="navbar navbar-inverse">
-        <div class="navbar-inner">
-            <div class="wrapper">
-                <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="brand" href="http://www.framebuzz.com">
-                    <img src="{% static 'framebuzz/profiles/img/logo.png' %}" alt="FrameBuzz" height="48" width="208" />
+{% block content_center %}
+    <div class="col-xs-12">
+        <div id="homepage-logo" class="row">
+            <div class="col-xs-12">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="40" width="184">
                 </a>
-                {% if request.user.is_authenticated %}
-                    <ul class="nav pull-right">               
-                        <li class="settings user clearfix">
-                            <a href="{% url 'profiles-home' request.user.username %}" role="button" class="avatar">
-                                <img src="{% avatar_url request.user 58 %}" alt="" height="28" width="28" class="img-circle" />
-                            </a>
-                            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-cog"></i> <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{% url 'account_logout' %}">Log Out</a></li>
-                            </ul>
-                        </li>
-                    </ul>  
-                {% endif %} 
-            </div>         
-        </div>
-    </div>
-    <div id="watch">
-        <div id="watch-container" class="wrapper clearfix">
-            <div id="video-container">
-                <iframe src="{% url 'video-embed' video.video_id %}" scrolling="no" frameBorder="0" height="360" width="580"></iframe>
             </div>
-            <div id="callout">
-                <p>Create a FrameBuzz account to jump into this conversation, and start your own conversations around your favorite videos.</p>
-                <a class="signup" href="{% url 'account_signup' %}" target="_blank">SIGN UP <em>&#9654;</em></a>
+        </div>
+        <div id="onboarding" class="row">
+            <div id="video" style="width: 580px; margin: 0 auto;">
+                <iframe src="{% url 'video-embed' video.video_id %}" scrolling="no" frameBorder="0" height="360" width="580" style="height: 360px; width: 580px;"></iframe>
             </div>
         </div>
     </div>
-    <footer></footer>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    {% compress js %}
-        <script src="{% static 'framebuzz/dashboard/bootstrap/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'framebuzz/dashboard/bootstrap/js/jquery-ui-1.10.2.custom.min.js' %}"></script>
-        <script src="{% static 'framebuzz/marketing/js/jquery.anystretch.min.js' %}"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {                       
-                $('#watch').anystretch("{% static 'framebuzz/profiles/img/background.jpg' %}", {speed: 150, positionY: 'bottom' });
-            });
-        </script>
-    {% endcompress %}
-    {% block page_javascript %}{% endblock %}
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-43394419-1', 'framebuzz.com');
-      ga('send', 'pageview');
-
-    </script>
-</body>
-</html>
+{% endblock %}
