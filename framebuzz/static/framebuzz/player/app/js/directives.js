@@ -52,8 +52,8 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     //  CSS Changes
                     //  =====
-                    $('.mejs-video').css({ height: '385px', width: '640px' });
-                    $('video').css({ height: '385px', width: '640px' });
+                    //$('.mejs-video').css({ height: '385px', width: '640px' });
+                    //$('video').css({ height: '385px', width: '640px' });
                     $('.mejs-overlay-loading').remove();
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
