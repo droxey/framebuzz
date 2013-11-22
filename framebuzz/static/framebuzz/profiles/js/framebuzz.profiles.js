@@ -192,6 +192,21 @@ var FrameBuzzProfile = (function($) {
         $.get(urls.recommendations, function(html) {
             recommendationsContainer.html(html);
             lazyLoadImages();
+
+            $('a.avatar')
+                .mouseenter(function() {
+                    var title = $(this).parent().siblings('span.title');
+                    var name = $('strong', title);
+                    var newText = $(this).attr('data-name');
+
+                    name.text(newText);
+                })
+                .mouseleave(function() {
+                    var title = $(this).parent().siblings('span.title');
+                    var name = $('strong', title);
+
+                    name.text('Popular Users');
+                });
         });
 
         $.get(urls.feed + '?init=true', function(html) {
