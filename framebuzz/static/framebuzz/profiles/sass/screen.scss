@@ -70,7 +70,6 @@ body.profiles {
                         overflow: hidden;
                         position: relative;
                         top: -47px;
-                        width: 244px;
 
                         .details-col { padding: 0; }
                     
@@ -127,7 +126,38 @@ body.profiles {
                                 padding: 0;
                                 margin: 0 -1px 0 0;
 
-                                img { max-width: 101%; }
+                                a.thumbnail-link {
+                                    display: block;
+                                    height: auto;
+                                    cursor: pointer;
+                                    position: relative;
+
+                                    span.play {
+                                        @include border-radius(50%, 50%);
+                                        background-color: rgba(0, 0, 0, 0.4);
+                                        height: 22px;
+                                        width: 22px;
+
+                                        i.fa-play {
+                                            color: rgba(255, 255, 255, 0.9);
+                                            display: block;
+                                            font-size: 13px;
+                                            height: 14px;
+                                            padding-left: 3px;
+                                            width: 14px;
+                                        }
+                                    }
+
+                                    img { max-width: 108%; }
+
+                                    &:hover {
+                                        span.play {
+                                            background-color: rgba(0, 0, 0, 0.7);
+
+                                            i.fa-play { color: rgba(255, 255, 255, 1); }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
