@@ -27,10 +27,10 @@
         </div>
     {% endfor %}
     {% if row.users|length > 0 %}
-        <div class="row row-users">
+        <div class="row row-users clearfix">
             <span class="title"><strong>Popular Users</strong></span>
             {% for user in row.users %}
-                <div class="col-xs-3 user-column{% if forloop.last %} pull-right{% endif %}">
+                <div class="col-xs-3 user-column">
                     <a class="avatar" href="{% url 'profiles-home' user.username %}" data-name="{{ user|display_name }}">
                         <img class="img-responsive lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user.username 80 %}"  />
                     </a>

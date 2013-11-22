@@ -42,497 +42,238 @@ body.profiles {
     }
 
     #base {
+        background: #05171E;
         margin-top: 16px;
 
-        #sidebar {
+        #content-wrapper {
             position: relative;
 
-            #details-wrapper {
-                height: 244px;
-                left: 0;
-                overflow: hidden;
-                position: relative;
-                top: -47px;
-                width: 244px;
+            &:after {
+                content: '';
+                display: block;
+                clear: left;
+            }
 
-                .details-col { padding: 0; }
-            
-                #user-avatar {
-                    a {
-                        display: block;
-                        height: 247px;
-                        width: 100%;
+            #profile-wrapper {
+                height: 100%;
+                width: 100%;
 
-                        img {
-                            height: 247px;
-                            width: 100%;
-                        }
-                    }
-                }
+                #sidebar {
+                    background-color: white;
+                    position: static;
+                    float: left;
+                    height: 100%;
 
-                #user-display-name {
-                    background-color: #2B2727;
-                    bottom: 0;
-                    margin: 0;
-                    position: absolute;
-                    width: 100%;
+                    #details-wrapper {
+                        height: 244px;
+                        left: 0;
+                        overflow: hidden;
+                        position: relative;
+                        top: -47px;
+                        width: 244px;
 
-                    div {
-                        h1 {
-                            color: #FFFFFF;
-                            font-size: 20px;
-                            font-weight: 700;
-                            margin: 10px 9px 10px;
-
+                        .details-col { padding: 0; }
+                    
+                        #user-avatar {
                             a {
-                                color: white;
-
-                                &:active, &:hover, &:focus {
-                                    text-decoration: none;
-                                }
-                            }
-                        }
-
-                        a.toggle-follow {
-                            span.fa-stack { top: -2px; }
-                        }
-                    }
-                }
-
-                #user-videos {
-                    background-color: #2B2727;
-                    bottom: 42px;
-                    margin: 0;
-                    position: absolute;
-                    width: 100%;
-
-                    div.vid {
-                        padding: 0;
-                        margin: 0 -1px 0 0;
-
-                        img { max-width: 101%; }
-                    }
-                }
-            }
-
-            #user-details {
-                background: #FFFFFF;
-                padding: 8px 28px 23px;
-                margin-top: -47px;
-
-                h2 {
-                    color: #6e6e6e;
-                    font-weight: 500;
-                    font-size: 18px;
-                    margin-bottom: 0;
-                    position: relative;
-
-                    i.fa-play {
-                        color: #05171E;
-                        position: absolute;
-                        right: -30px;
-                        top: 40%;
-                    }
-                }
-
-                h3 {
-                    color: #bfbfbf;
-                    font-size: 17px;
-                    font-weight: 300;
-                    margin-top: 0;
-
-                    i { font-size: 20px; }
-                }
-
-                em {
-                    color: #9d9c9c;
-                    font-size: 15px;
-                    font-style: italic;
-                }
-            }
-
-            #user-stats {
-                background: #E9E9E9;
-                padding: 20px 14px;
-
-                .nav-tabs {
-                    border-bottom: none;
-
-                    li {
-                        float: left;
-                        width: 33%;
-
-                        a {
-                            color: #898686;
-                            font-size: 17px;
-                            font-weight: 700;
-                            padding: 0;
-                            margin: 0;
-
-                            i { color: #AEAEAE; }
-                        }
-
-                        &.active {
-                            a {
-                                background-color: transparent;
-                                border-color: transparent;
-
-                                i { color: #4a8cc5; }   
-                            }
-                        }
-                    }
-                }
-            }
-
-            #recommendations {
-                overflow: hidden;
-                width: 244px;
-
-                div {
-                    position: relative;
-                    left: 0;
-                    padding: 0;
-                    margin: 0;
-
-                    h2 {
-                        color: #ACABAB;
-                        font-size: 18px;
-                        font-weight: 700;
-                        line-height: 23px;
-                        margin-bottom: -5px;
-                        position: relative;
-                        text-indent: 9px;
-                        text-shadow: 1px 0 0 rgba(255, 255, 255, 0.8);
-                        z-index: 10;
-                    }
-
-                    a.thumbnail-link {
-                        display: block;
-                        height: auto;
-                        width: 100%;
-                        max-width: 103%;
-                        cursor: pointer;
-                        position: relative;
-                        
-                        span {
-                            color: white;
-                            display: block;
-                            z-index: 5;
-                        }
-
-                        span.play {
-                            @include border-radius(50%, 50%);
-                            background-color: rgba(0, 0, 0, 0.4);
-                            height: 45px;
-                            width: 45px;
-
-                            i.fa-play {
-                                color: rgba(255, 255, 255, 0.9);
                                 display: block;
-                                font-size: 22px;
-                                height: 21px;
-                                padding-left: 4px;
-                                width: 21px;
-                            }
-                        }
-
-                        span.title {
-                            background-color: rgba(0, 0, 0, 0.4);
-                            bottom: 0;
-                            font-size: 12px;
-                            line-height: 14px;
-                            position: absolute;
-                            padding: 5px;
-                            width: 100%;
-                            visibility: hidden;
-
-                            strong {
-                                font-weight: 700;
-                            }
-                        }
-
-                        &:hover {
-                            span.play {
-                                background-color: rgba(0, 0, 0, 0.7);
-
-                                i.fa-play { color: rgba(255, 255, 255, 1); }
-                            }
-
-                            span.title {
-                                visibility: visible;
-                            }
-                        }
-                    }
-
-                    div.row-users {
-                        position: relative;
-
-                        span.title {
-                            background-color: rgba(0, 0, 0, 0.4);
-                            bottom: 0;
-                            color: white;
-                            font-size: 12px;
-                            left: 0;
-                            line-height: 14px;
-                            padding: 5px;
-                            position: absolute;
-                            width: 100%;
-                            z-index: 10;
-
-                            strong {
-                                font-weight: 700;
-                            }
-                        }
-
-                        div.user-column {
-                            a.avatar {
-                                display: block;
-                                height: 100%;
+                                height: 247px;
                                 width: 100%;
 
                                 img {
-                                    max-width: 104%;
+                                    height: 247px;
+                                    width: 100%;
                                 }
                             }
                         }
-                    }
 
-                    div.ajax {
-                        width: 100%;
-                    }
-                }
-            }
-        }
-
-        #profile-content {
-            background: #05171E;
-            min-height: 1129px;
-            padding-right: 14px;
-            
-            #add-video {
-                background: #1DAFEC;
-                height: 54px;
-                overflow: hidden;
-
-                #add-video-form {
-                    input {
-                        background: #1DAFEC;
-                        border: none;
-                        border-bottom: 1px solid #A3D9ED;
-                        color: #A3D9ED;
-                        margin-left: 13px;
-                        margin-bottom: 15px;
-                        padding: 20px 11px 0px 0px;
-                        width: 98%;
-
-                        &::-webkit-input-placeholder { /* WebKit browsers */
-                            color:    #A3D9ED;
-                        }
-                        
-                        &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-                            color:    #A3D9ED;
-                        }
-                        
-                        &::-moz-placeholder { /* Mozilla Firefox 19+ */
-                            color:    #A3D9ED;
-                        }
-                        
-                        &:-ms-input-placeholder { /* Internet Explorer 10+ */
-                            color:    #A3D9ED;
-                        }
-
-                        &:focus {
-                            outline: 0;
-                        }
-                    }
-
-                    div.submit {
-                        background: #1EABE4;
-                        padding: 0;
-                        height: 100%;
-
-                        button {
-                            background: #1EABE4;
-                            border: none;
-                            font-weight: 700;
-                            color: white;
-                            text-align: center;
-                            line-height: 54px;
-                            font-size: 0.88em;
+                        #user-display-name {
+                            background-color: #2B2727;
+                            bottom: 0;
+                            margin: 0;
+                            position: absolute;
                             width: 100%;
 
-                            i { color: white; }
-                        }
-                    }
-                }
-            }
+                            div {
+                                h1 {
+                                    color: #FFFFFF;
+                                    font-size: 20px;
+                                    font-weight: 700;
+                                    margin: 10px 9px 10px;
 
-            #timeline {
-                background: #05171E;
-                padding: 13px 0;
-                overflow: hidden;
-                min-height: 1055px;
+                                    a {
+                                        color: white;
 
-                nav {
-                    margin-bottom: 19px;
-
-                    .nav-pills > li + li { 
-                        margin-left: 0;
-                    }
-
-                    ul.nav-pills {
-                        padding: 0 17px;
-
-                        li {
-                            a {
-                                color: #898989;
-                                font-size: 13px;
-                                font-weight: 500;
-                                padding: 12px;
-                                text-align: center;
-                                width: 100%;
-                            }
-
-                            &:last-child {
-                                padding-left: 0;
-                                margin-right: 0;
-                                padding-right: 0;
-                            }
-
-                            &.active, &:hover {
-                                 a {
-                                    @include border-radius(3px, 3px);
-                                    border-color: #102e3b;
-                                    background-color: #102e3b;
-                                    color: #c5c5c5;
-                                    text-align: center;
-                                }
-                            }
-
-                            &.active {
-                                font-weight: 700;
-                            }
-
-                            &.start { 
-                                margin-left: 0;
-                                padding-left: 0;
-                            }
-                        }
-                    }
-                }
-
-                div.responsive-timeline {
-                    margin: -5px 0 0;
-                    font-family: "ff-dagny-web-pro", sans-serif;
-
-                    div.container {
-                        min-height: 605px;
-                    }
-
-                    div.item {
-                        margin-bottom: 18px;
-
-                        &.init {
-                            visibility: hidden;
-                        }
-
-                        div.content {
-                            padding-bottom: 0;
-                        
-                            div.header {
-
-                                div.header-content {
-                                    position: relative;
-                                }
-
-                                img.header-avatar {
-                                    height: 41px;
-                                    width: 41px;
-                                }
-
-                                div.avatar {
-                                    padding-right: 0;
-                                    max-width: 56px;
-                                }
-
-                                a {
-                                    color: #247cc0;
-                                }
-
-                                p {
-                                    color: #565555;
-                                    margin-bottom: 0;
-                                    position: relative;
-                                    line-height: 16px;
-                                    text-align: left;
-                                    font-weight: 500;
-
-                                    i {
-                                        color: #b2bbbe;
-                                        font-size: 7px;
-                                        position: relative;
-                                        top: -5px;
-                                    }
-
-                                    span { 
-                                        color: #383838;
-                                        font-weight: 700;
-                                        padding: 0 2px; 
+                                        &:active, &:hover, &:focus {
+                                            text-decoration: none;
+                                        }
                                     }
                                 }
 
-                                div.action-type {
-                                    position: absolute;
-                                    right: -9px;
-                                    top: 5px;
-
-                                    i {
-                                        color: #C5C6C6;
-                                        font-size: 20px;
-                                        position: relative;
-                                        right: 20px;
-                                    }
+                                a.toggle-follow {
+                                    span.fa-stack { top: -2px; }
                                 }
-                            }
-
-                            div.posted {
-                                div {
-                                    color: #949292;
-                                }   
                             }
                         }
 
-                        footer {
+                        #user-videos {
+                            background-color: #2B2727;
+                            bottom: 42px;
+                            margin: 0;
+                            position: absolute;
+                            width: 100%;
+
+                            div.vid {
+                                padding: 0;
+                                margin: 0 -1px 0 0;
+
+                                img { max-width: 101%; }
+                            }
+                        }
+                    }
+
+                    #user-details {
+                        background: #FFFFFF;
+                        padding: 8px 28px 23px;
+                        margin-top: -47px;
+
+                        h2 {
+                            color: #6e6e6e;
+                            font-weight: 500;
+                            font-size: 18px;
+                            margin-bottom: 0;
                             position: relative;
 
-                            span.corner { top: -47px; }
+                            i.fa-play {
+                                color: #05171E;
+                                position: absolute;
+                                right: -30px;
+                                top: 40%;
+                            }
+                        }
+
+                        h3 {
+                            color: #bfbfbf;
+                            font-size: 17px;
+                            font-weight: 300;
+                            margin-top: 0;
+
+                            i { font-size: 20px; }
+                        }
+
+                        em {
+                            color: #9d9c9c;
+                            font-size: 15px;
+                            font-style: italic;
+                        }
+                    }
+
+                    #user-stats {
+                        background: #E9E9E9;
+                        padding: 20px 14px;
+
+                        .nav-tabs {
+                            border-bottom: none;
+
+                            li {
+                                float: left;
+                                width: 33%;
+
+                                a {
+                                    color: #898686;
+                                    font-size: 17px;
+                                    font-weight: 700;
+                                    padding: 0;
+                                    margin: 0;
+
+                                    i { color: #AEAEAE; }
+                                }
+
+                                &.active {
+                                    a {
+                                        background-color: transparent;
+                                        border-color: transparent;
+
+                                        i { color: #4a8cc5; }   
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    #recommendations {
+                        overflow: hidden;
+
+                        div {
+                            position: relative;
+                            left: 0;
+                            padding: 0;
+                            margin: 0;
+
+                            h2 {
+                                color: #ACABAB;
+                                font-size: 18px;
+                                font-weight: 700;
+                                line-height: 23px;
+                                margin-bottom: -5px;
+                                position: relative;
+                                text-indent: 9px;
+                                text-shadow: 1px 0 0 rgba(255, 255, 255, 0.8);
+                                z-index: 10;
+                            }
 
                             a.thumbnail-link {
                                 display: block;
-                                overflow: hidden;
-                                max-height: 294px;
+                                height: auto;
                                 width: 100%;
-                                height: 100%;
-
-                                img.cover {
-                                    height: 180px;
-                                    width: 100%;
+                                cursor: pointer;
+                                position: relative;
+                                overflow: hidden;
+                                
+                                span {
+                                    color: white;
+                                    display: block;
+                                    z-index: 5;
                                 }
 
                                 span.play {
                                     @include border-radius(50%, 50%);
-                                    color: white;
-                                    background-color: rgba(0, 0, 0, 0.3);
-                                    height: 55px;
-                                    width: 55px;
-                                    z-index: 5;
+                                    background-color: rgba(0, 0, 0, 0.4);
+                                    height: 45px;
+                                    width: 45px;
 
                                     i.fa-play {
                                         color: rgba(255, 255, 255, 0.9);
                                         display: block;
-                                        height: 24px;
-                                        padding-left: 5px;
-                                        width: 24px;
+                                        font-size: 22px;
+                                        height: 21px;
+                                        padding-left: 4px;
+                                        width: 21px;
+                                    }
+                                }
+
+                                img.video-thumbnail {
+                                    height: 137px;
+                                    margin-top: -1px;
+
+                                    &.loaded {
+                                        height: auto;
+                                        width: auto;
+                                    }
+                                }
+
+                                span.title {
+                                    background-color: rgba(0, 0, 0, 0.4);
+                                    bottom: 0;
+                                    font-size: 12px;
+                                    line-height: 14px;
+                                    position: absolute;
+                                    padding: 5px;
+                                    width: 100%;
+                                    visibility: hidden;
+
+                                    strong {
+                                        font-weight: 700;
                                     }
                                 }
 
@@ -540,179 +281,466 @@ body.profiles {
                                     span.play {
                                         background-color: rgba(0, 0, 0, 0.7);
 
-                                        i.fa-play {
-                                            color: rgba(255, 255, 255, 1.0);
-                                        }
+                                        i.fa-play { color: rgba(255, 255, 255, 1); }
+                                    }
+
+                                    span.title {
+                                        visibility: visible;
                                     }
                                 }
                             }
 
-                            div.users {
-                                height: 33px;
-                                overflow: hidden;
-                                position: absolute;
-                                bottom: 0;
-                                right: 0;
+                            div.row-users {
+                                position: relative;
 
-                                div.row {
-                                    margin: 0;
-                                    padding: 0;
+                                span.title {
+                                    background-color: rgba(0, 0, 0, 0.4);
+                                    bottom: 0;
+                                    color: white;
+                                    font-size: 12px;
+                                    left: 0;
+                                    line-height: 14px;
+                                    padding: 5px;
+                                    position: absolute;
+                                    width: 100%;
+                                    z-index: 10;
 
-                                    a.user {
+                                    strong {
+                                        font-weight: 700;
+                                    }
+                                }
+
+                                div.user-column {
+                                    a.avatar {
                                         display: block;
-                                        height: 33px;
-                                        margin-right: -1px;
-                                        width: auto;
-                                        position: relative;
-
-                                        span {
-                                            background-color: rgba(18, 101, 158, .74);
-                                            display: block;
-                                            line-height: 33px;
-                                            height: 33px;
-                                            position: absolute;
-                                            width: 33px;
-                                            top: 0;
-                                            left: 0;
-                                            font-weight: 500;
-                                            text-align: center;
-                                            color: white;
-                                        }
+                                        height: 100%;
+                                        width: 100%;
 
                                         img {
-                                           height: 33px;
+                                            max-width: 104%;
                                         }
                                     }
                                 }
                             }
 
-                            div.actions {
-                                position: absolute;
-                                top: 30%;
-
-                                div.row {
-                                    div {
-                                        a {
-                                            background-color: rgba(0, 0, 0, 0.3);
-                                            display: block;
-
-                                            i { color: white; }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        &.following, &.followers, &.joined_framebuzz {
-                            div.content {
-                                padding-top: 0;
-                                padding-right: 0;
-                                
-                                div.avatar {
-                                    padding-left: 0;
-                                    padding-right: 0;
-
-                                    a {
-                                        display: block;
-                                        overflow: hidden;
-                                        height: 90%;
-                                        width: 90%;
-                                        position: relative;
-                                    }
-                                }
-
-                                div.user {
-                                    padding: 20px 28px;
-                                }
-                            }
-
-                            footer {
-                                padding: 0;
-                                margin: 0;
-
-                                span.corner {
-                                    background: none;
-                                }
-                            }
-
-                            &.left, &.right {
-                                div.content {
-                                    div.user {
-                                        line-height: 16px;
-                                    }
-
-                                    div.avatar {
-                                        right: 66.6667%;
-
-                                        img {
-                                            margin-left: 0;
-                                        }
-
-                                        span.img-corner {
-                                            background:  url('../vendor/timeline/images/light/left_bkg.png') no-repeat top left;
-                                            display: block;    
-                                            height: 150px;
-                                            position: absolute;
-                                            left: 0;
-                                            top: 0;
-                                            width: 93%;
-                                        }
-                                    }
-
-                                    div.follow {
-                                        bottom: 8px;
-                                        margin-left: 10px;
-                                        position: absolute;
-
-                                        a.toggle-follow {
-                                            float: right;
-
-                                            .fa { line-height: 31px; }
-                                            .fa-plus, .fa-minus { text-indent: 16px; }
-                                        }
-                                    }
-                                }
-                            }
-
-                            &.left {
-                                div.content {
-                                    padding-left: 0;
-
-                                    div.avatar {
-                                        right: 0;
-
-                                        span.img-corner {
-                                            background: url('../vendor/timeline/images/light/right_bkg.png') no-repeat top right;
-                                            display: block;
-                                            height: 150px;
-                                            position: absolute;
-                                            left: 94%;
-                                            top: 0;
-                                            width: 7px;
-                                        }
-                                    }
-
-                                    div.follow {
-                                        margin-right: 18px;
-
-                                        a.toggle-follow {
-                                            float: left;
-                                        }
-                                    }
-                                }
-                            }
-
-                            &.right {
-                                div.user {
-                                    left: 25%;
-                                }
+                            div.ajax {
+                                width: 100%;
                             }
                         }
                     }
                 }
 
-                div.loadMore {
+                #profile-content {
+                    min-height: 1129px;
+                    padding-right: 14px;
+                    height: 100%;
+                    
+                    #add-video {
+                        background: #1DAFEC;
+                        height: 54px;
+                        overflow: hidden;
 
+                        #add-video-form {
+                            input {
+                                background: #1DAFEC;
+                                border: none;
+                                border-bottom: 1px solid #A3D9ED;
+                                color: #A3D9ED;
+                                margin-left: 13px;
+                                margin-bottom: 15px;
+                                padding: 20px 11px 0px 0px;
+                                width: 98%;
+
+                                &::-webkit-input-placeholder { /* WebKit browsers */
+                                    color:    #A3D9ED;
+                                }
+                                
+                                &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                                    color:    #A3D9ED;
+                                }
+                                
+                                &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                                    color:    #A3D9ED;
+                                }
+                                
+                                &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                                    color:    #A3D9ED;
+                                }
+
+                                &:focus {
+                                    outline: 0;
+                                }
+                            }
+
+                            div.submit {
+                                background: #1EABE4;
+                                padding: 0;
+                                height: 100%;
+
+                                button {
+                                    background: #1EABE4;
+                                    border: none;
+                                    font-weight: 700;
+                                    color: white;
+                                    text-align: center;
+                                    line-height: 54px;
+                                    font-size: 0.88em;
+                                    width: 100%;
+
+                                    i { color: white; }
+                                }
+                            }
+                        }
+                    }
+
+                    #timeline {
+                        background: #05171E;
+                        padding: 13px 0;
+                        overflow: hidden;
+                        min-height: 1055px;
+
+                        nav {
+                            margin-bottom: 19px;
+
+                            .nav-pills > li + li { 
+                                margin-left: 0;
+                            }
+
+                            ul.nav-pills {
+                                padding: 0 17px;
+
+                                li {
+                                    a {
+                                        color: #898989;
+                                        font-size: 13px;
+                                        font-weight: 500;
+                                        padding: 12px;
+                                        text-align: center;
+                                        width: 100%;
+                                    }
+
+                                    &:last-child {
+                                        padding-left: 0;
+                                        margin-right: 0;
+                                        padding-right: 0;
+                                    }
+
+                                    &.active, &:hover {
+                                         a {
+                                            @include border-radius(3px, 3px);
+                                            border-color: #102e3b;
+                                            background-color: #102e3b;
+                                            color: #c5c5c5;
+                                            text-align: center;
+                                        }
+                                    }
+
+                                    &.active {
+                                        font-weight: 700;
+                                    }
+
+                                    &.start { 
+                                        margin-left: 0;
+                                        padding-left: 0;
+                                    }
+                                }
+                            }
+                        }
+
+                        div.responsive-timeline {
+                            margin: -5px 0 0;
+                            font-family: "ff-dagny-web-pro", sans-serif;
+
+                            div.container {
+                                min-height: 605px;
+                            }
+
+                            div.item {
+                                margin-bottom: 18px;
+
+                                &.init {
+                                    visibility: hidden;
+                                }
+
+                                div.content {
+                                    padding-bottom: 0;
+                                
+                                    div.header {
+
+                                        div.header-content {
+                                            position: relative;
+                                        }
+
+                                        img.header-avatar {
+                                            height: 41px;
+                                            width: 41px;
+                                        }
+
+                                        div.avatar {
+                                            padding-right: 0;
+                                            max-width: 56px;
+                                        }
+
+                                        a {
+                                            color: #247cc0;
+                                        }
+
+                                        p {
+                                            color: #565555;
+                                            margin-bottom: 0;
+                                            position: relative;
+                                            line-height: 16px;
+                                            text-align: left;
+                                            font-weight: 500;
+
+                                            i {
+                                                color: #b2bbbe;
+                                                font-size: 7px;
+                                                position: relative;
+                                                top: -5px;
+                                            }
+
+                                            span { 
+                                                color: #383838;
+                                                font-weight: 700;
+                                                padding: 0 2px; 
+                                            }
+                                        }
+
+                                        div.action-type {
+                                            position: absolute;
+                                            right: -9px;
+                                            top: 5px;
+
+                                            i {
+                                                color: #C5C6C6;
+                                                font-size: 20px;
+                                                position: relative;
+                                                right: 20px;
+                                            }
+                                        }
+                                    }
+
+                                    div.posted {
+                                        div {
+                                            color: #949292;
+                                        }   
+                                    }
+                                }
+
+                                footer {
+                                    position: relative;
+
+                                    span.corner { top: -47px; }
+
+                                    a.thumbnail-link {
+                                        display: block;
+                                        overflow: hidden;
+                                        max-height: 294px;
+                                        width: 100%;
+                                        height: 100%;
+
+                                        img.cover {
+                                            height: 180px;
+                                            width: 100%;
+                                        }
+
+                                        span.play {
+                                            @include border-radius(50%, 50%);
+                                            color: white;
+                                            background-color: rgba(0, 0, 0, 0.3);
+                                            height: 55px;
+                                            width: 55px;
+                                            z-index: 5;
+
+                                            i.fa-play {
+                                                color: rgba(255, 255, 255, 0.9);
+                                                display: block;
+                                                height: 24px;
+                                                padding-left: 5px;
+                                                width: 24px;
+                                            }
+                                        }
+
+                                        &:hover {
+                                            span.play {
+                                                background-color: rgba(0, 0, 0, 0.7);
+
+                                                i.fa-play {
+                                                    color: rgba(255, 255, 255, 1.0);
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    div.users {
+                                        height: 33px;
+                                        overflow: hidden;
+                                        position: absolute;
+                                        bottom: 0;
+                                        right: 0;
+
+                                        div.row {
+                                            margin: 0;
+                                            padding: 0;
+
+                                            a.user {
+                                                display: block;
+                                                height: 33px;
+                                                margin-right: -1px;
+                                                width: auto;
+                                                position: relative;
+
+                                                span {
+                                                    background-color: rgba(18, 101, 158, .74);
+                                                    display: block;
+                                                    line-height: 33px;
+                                                    height: 33px;
+                                                    position: absolute;
+                                                    width: 33px;
+                                                    top: 0;
+                                                    left: 0;
+                                                    font-weight: 500;
+                                                    text-align: center;
+                                                    color: white;
+                                                }
+
+                                                img {
+                                                   height: 33px;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    div.actions {
+                                        position: absolute;
+                                        top: 30%;
+
+                                        div.row {
+                                            div {
+                                                a {
+                                                    background-color: rgba(0, 0, 0, 0.3);
+                                                    display: block;
+
+                                                    i { color: white; }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                &.following, &.followers, &.joined_framebuzz {
+                                    div.content {
+                                        padding-top: 0;
+                                        padding-right: 0;
+                                        
+                                        div.avatar {
+                                            padding-left: 0;
+                                            padding-right: 0;
+
+                                            a {
+                                                display: block;
+                                                overflow: hidden;
+                                                height: 90%;
+                                                width: 90%;
+                                                position: relative;
+                                            }
+                                        }
+
+                                        div.user {
+                                            padding: 20px 28px;
+                                        }
+                                    }
+
+                                    footer {
+                                        padding: 0;
+                                        margin: 0;
+
+                                        span.corner {
+                                            background: none;
+                                        }
+                                    }
+
+                                    &.left, &.right {
+                                        div.content {
+                                            div.user {
+                                                line-height: 16px;
+                                            }
+
+                                            div.avatar {
+                                                right: 66.6667%;
+
+                                                img {
+                                                    margin-left: 0;
+                                                }
+
+                                                span.img-corner {
+                                                    background:  url('../vendor/timeline/images/light/left_bkg.png') no-repeat top left;
+                                                    display: block;    
+                                                    height: 150px;
+                                                    position: absolute;
+                                                    left: 0;
+                                                    top: 0;
+                                                    width: 93%;
+                                                }
+                                            }
+
+                                            div.follow {
+                                                bottom: 8px;
+                                                margin-left: 10px;
+                                                position: absolute;
+
+                                                a.toggle-follow {
+                                                    float: right;
+
+                                                    .fa { line-height: 31px; }
+                                                    .fa-plus, .fa-minus { text-indent: 16px; }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    &.left {
+                                        div.content {
+                                            padding-left: 0;
+
+                                            div.avatar {
+                                                right: 0;
+
+                                                span.img-corner {
+                                                    background: url('../vendor/timeline/images/light/right_bkg.png') no-repeat top right;
+                                                    display: block;
+                                                    height: 150px;
+                                                    position: absolute;
+                                                    left: 94%;
+                                                    top: 0;
+                                                    width: 7px;
+                                                }
+                                            }
+
+                                            div.follow {
+                                                margin-right: 18px;
+
+                                                a.toggle-follow {
+                                                    float: left;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    &.right {
+                                        div.user {
+                                            left: 25%;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        div.loadMore {
+
+                        }
+                    }
                 }
             }
         }
@@ -755,7 +783,7 @@ body.profiles {
                 color: #cac8c8;
                 font-weight: 500;
                 font-size: 22px;
-                padding: 10px;
+                padding: 10px 10px 10px 10px;
                 margin-bottom: 0;
                 margin-top: 15px;
             }

@@ -37,55 +37,54 @@
 {% endblock %}
 
 {% block content_center %}
-    <div class="col-xs-12">
-        <div class="row">
+    <div id="content-wrapper" class="col-xs-12">
+        <div id="profile-wrapper" class="row clearfix">
             <div id="sidebar" class="col-xs-3">
-
-            <div id="details-wrapper" class="row">
-                <div class="col-xs-12 details-col">
-                    <div id="user-avatar" class="row">
-                        <a href="{% url 'profiles-home' profile_user.username %}" class="avatar filter" data-filter="*">
-                            <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url profile_user 295 %}" alt="" class="img-responsive lazy">
-                        </a>
-                    </div>
-                    {% if profile_user.uservideo_set.all|length > 0 %}
-                        <div id="user-videos" class="row clearfix">
-                            {% for uv in profile_user.uservideo_set.all|slice:":4" %}
-                                <div class="vid col-xs-3 pull-left">
-                                    <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username uv.video.video_id %}">
-                                        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ uv.video.video_id }}/mqdefault.jpg" alt="{{ uv.video.title|title }}" class="img-responsive lazy">
-                                    </a>
-                                </div>
-                            {% endfor %}
+                <div id="details-wrapper" class="row">
+                    <div class="col-xs-12 details-col">
+                        <div id="user-avatar" class="row">
+                            <a href="{% url 'profiles-home' profile_user.username %}" class="avatar filter" data-filter="*">
+                                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url profile_user 295 %}" alt="" class="img-responsive lazy">
+                            </a>
                         </div>
-                    {% endif %}
-                    <div id="user-display-name" class="row">
-                        <div class="col-xs-10">
-                            <h1><a href="{% url 'profiles-home' profile_user.username %}">{{ profile_user|display_name }}</a></h1>
-                        </div>
-                        <div class="col-xs-2">
-                            {% if not is_my_profile %}
-                                {% if request.user.is_authenticated %}
-                                    <a class="toggle-follow unfollow-button pull-right img-circle" title="Following" data-placement="bottom" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>
-                                      <span class="fa-stack">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-user fa-stack-1x fa-inverse"></i>
-                                        <i class="fa fa-minus fa-stack-1x fa-inverse pull-right"></i>
-                                      </span>            
-                                    </a>
-                                    <a class="toggle-follow follow-button pull-right img-circle" title="Follow" data-placement="bottom" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>
-                                      <span class="fa-stack">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-user fa-stack-1x fa-inverse"></i>
-                                        <i class="fa fa-plus fa-stack-1x fa-inverse pull-right"></i>
-                                      </span>
-                                    </a>
+                        {% if profile_user.uservideo_set.all|length > 0 %}
+                            <div id="user-videos" class="row clearfix">
+                                {% for uv in profile_user.uservideo_set.all|slice:":4" %}
+                                    <div class="vid col-xs-3 pull-left">
+                                        <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username uv.video.video_id %}">
+                                            <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ uv.video.video_id }}/mqdefault.jpg" alt="{{ uv.video.title|title }}" class="img-responsive lazy">
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div id="user-display-name" class="row">
+                            <div class="col-xs-10">
+                                <h1><a href="{% url 'profiles-home' profile_user.username %}">{{ profile_user|display_name }}</a></h1>
+                            </div>
+                            <div class="col-xs-2">
+                                {% if not is_my_profile %}
+                                    {% if request.user.is_authenticated %}
+                                        <a class="toggle-follow unfollow-button pull-right img-circle" title="Following" data-placement="bottom" href="{% url 'actstream_unfollow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if not request.user|is_following:profile_user %} style="display:none"{% endif %}>
+                                          <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                                            <i class="fa fa-minus fa-stack-1x fa-inverse pull-right"></i>
+                                          </span>            
+                                        </a>
+                                        <a class="toggle-follow follow-button pull-right img-circle" title="Follow" data-placement="bottom" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>
+                                          <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                                            <i class="fa fa-plus fa-stack-1x fa-inverse pull-right"></i>
+                                          </span>
+                                        </a>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
                 {% if profile_user.get_profile.tagline or profile_user.get_profile.location or profile_user.get_profile.bio %}
                 <div id="user-details" class="row">
                     {% if profile_user.get_profile.tagline %}<h2>{{ profile_user.get_profile.tagline }} <i class="fa fa-play fa-flip-horizontal pull-right"></i></h2>{% endif %}
