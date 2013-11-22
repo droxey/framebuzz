@@ -204,39 +204,89 @@ body.profiles {
                         text-indent: 9px;
                     }
 
-                    div.left,
-                    div.pull-right {
-                        width: 50%;
-
-                        a.video-thumbnail {
+                    a.thumbnail-link {
+                        display: block;
+                        height: auto;
+                        width: 100%;
+                        max-width: 103%;
+                        cursor: pointer;
+                        position: relative;
+                        
+                        span {
+                            color: white;
                             display: block;
-                            height: 70px;
-                            width: 127px;
-                            max-width: 103%;
-                            cursor: pointer;
+                            z-index: 5;
+                        }
 
-                            img.img-responsive {
-                                height: 70px;
-                                max-width: 115%;
+                        span.play {
+                            @include border-radius(50%, 50%);
+                            background-color: rgba(0, 0, 0, 0.4);
+                            height: 45px;
+                            width: 45px;
+
+                            i.fa-play {
+                                color: rgba(255, 255, 255, 0.9);
+                                display: block;
+                                font-size: 22px;
+                                height: 21px;
+                                padding-left: 4px;
+                                width: 21px;
+                            }
+                        }
+
+                        span.title {
+                            background-color: rgba(0, 0, 0, 0.4);
+                            bottom: 0;
+                            font-size: 12px;
+                            line-height: 14px;
+                            position: absolute;
+                            padding: 5px;
+                            width: 100%;
+                            visibility: hidden;
+
+                            strong {
+                                font-weight: 700;
+                            }
+                        }
+
+                        &:hover {
+                            span.play {
+                                background-color: rgba(0, 0, 0, 0.7);
+
+                                i.fa-play { color: rgba(255, 255, 255, 1); }
+                            }
+
+                            span.title {
+                                visibility: visible;
                             }
                         }
                     }
 
-                    div.left {
-                       
-                    }
-
                     div.row-users {
-                        div.user-column {
+                        position: relative;
 
-                            &.pull-right {
-                                width: auto;
+                        span.title {
+                            background-color: rgba(0, 0, 0, 0.4);
+                            bottom: 0;
+                            color: white;
+                            font-size: 12px;
+                            left: 0;
+                            line-height: 14px;
+                            padding: 5px;
+                            position: absolute;
+                            width: 100%;
+                            z-index: 10;
+
+                            strong {
+                                font-weight: 700;
                             }
+                        }
 
+                        div.user-column {
                             a.avatar {
                                 display: block;
-                                height: 40px;
-                                width: 40px;
+                                height: 100%;
+                                width: 100%;
 
                                 img {
                                     max-width: 104%;
@@ -460,10 +510,38 @@ body.profiles {
                                 overflow: hidden;
                                 max-height: 294px;
                                 width: 100%;
+                                height: 100%;
 
                                 img.cover {
                                     height: 180px;
                                     width: 100%;
+                                }
+
+                                span.play {
+                                    @include border-radius(50%, 50%);
+                                    color: white;
+                                    background-color: rgba(0, 0, 0, 0.3);
+                                    height: 55px;
+                                    width: 55px;
+                                    z-index: 5;
+
+                                    i.fa-play {
+                                        color: rgba(255, 255, 255, 0.9);
+                                        display: block;
+                                        height: 24px;
+                                        padding-left: 5px;
+                                        width: 24px;
+                                    }
+                                }
+
+                                &:hover {
+                                    span.play {
+                                        background-color: rgba(0, 0, 0, 0.7);
+
+                                        i.fa-play {
+                                            color: rgba(255, 255, 255, 1.0);
+                                        }
+                                    }
                                 }
                             }
 
@@ -734,7 +812,7 @@ body.profiles {
             div.description {
                 div.scroller {
                     background-color: #393535;
-                    min-height: 106px;
+                    height: 106px;
                     overflow: scroll;
                     padding: 1px 9px;
                     word-wrap: break-word;
