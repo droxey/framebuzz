@@ -127,7 +127,7 @@ def get_or_create_video(video_id):
         if len(seconds) == 0:
           seconds = 0
       else:
-        seconds = duration
+        seconds = duration.rstrip('H')
         minutes = 0
 
       video.duration = (int(hours) * 1400) + (int(minutes) * 60) + int(seconds)
