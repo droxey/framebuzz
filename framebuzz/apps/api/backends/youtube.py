@@ -107,9 +107,12 @@ def get_or_create_video(video_id):
       duration = contentDetails.get('duration').lstrip('PT')
 
       if 'H' in duration:
-        hours, minutes_seconds = duration.split('H')
-        hours = hours.rstrip('H')
-        duration = minutes_seconds
+        if 'M' in duration:
+          hours, minutes_seconds = duration.split('H')
+          hours = hours.rstrip('H')
+          duration = minutes_seconds
+        else:
+          hours = duration.rstrip('H')
       else:
         hours = 0
 
