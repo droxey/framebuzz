@@ -5,6 +5,10 @@
 
 {% block title %}{{ profile_user|display_name }}'s Profile{% endblock %}
 
+{% block optimizely %}
+    <script src="//cdn.optimizely.com/js/393060191.js"></script>
+{% endblock %}
+
 {% block marketing_meta %}
     {% if is_share %}
         <meta property="og:title" content="FrameBuzz: {{ video.title }}" />

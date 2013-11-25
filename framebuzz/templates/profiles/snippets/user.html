@@ -6,11 +6,11 @@
         <strong><a href="{% url 'profiles-home' user.username %}">{{ user|display_name }}</a></strong>
         {% if user.get_profile.bio or user.get_profile.tagline %}
             <br>
-            <em>
+            <em class="text-left">
                 {% if user.get_profile.tagline %}
-                    &ldquo;{{ user.get_profile.tagline|truncatechars:"90"|urlize }}&rdquo;
+                    &ldquo;{{ user.get_profile.tagline|truncatechars:"60"|urlize }}&rdquo;
                 {% else %}
-                    &ldquo;{{ user.get_profile.bio|truncatechars:"90"|urlize }}&rdquo;
+                    &ldquo;{{ user.get_profile.bio|truncatechars:"60"|urlize }}&rdquo;
                 {% endif %}
             </em>
         {% endif %} 
