@@ -205,7 +205,7 @@ var FrameBuzzProfile = (function($) {
                     var title = $(this).parent().siblings('span.title');
                     var name = $('strong', title);
 
-                    name.text('Popular Users');
+                    name.text('Popular Personalities');
                 });
         });
 

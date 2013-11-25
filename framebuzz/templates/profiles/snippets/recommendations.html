@@ -28,7 +28,7 @@
     {% endfor %}
     {% if row.users|length > 0 %}
         <div class="row row-users clearfix">
-            <span class="title"><strong>Popular Users</strong></span>
+            <span class="title"><strong>Popular Personalities</strong></span>
             {% for user in row.users %}
                 <div class="col-xs-3 user-column">
                     <a class="avatar" href="{% url 'profiles-home' user.username %}" data-name="{{ user|display_name }}">
