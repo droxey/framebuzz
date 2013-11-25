@@ -6,6 +6,7 @@ from django.contrib.sessions.models import Session
 class FrameBuzzVideoAdmin(admin.ModelAdmin):
     list_display = ('title', 'video_id', 'duration', 'added_by', 'added_on',)
     list_filter = ('added_by', 'added_on',)
+    search_fields = ['title', ]
 
 
 class MPTTCommentAdmin(admin.ModelAdmin):
