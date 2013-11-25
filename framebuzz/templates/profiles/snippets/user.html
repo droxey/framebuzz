@@ -8,9 +8,9 @@
             <br>
             <em class="text-left">
                 {% if user.get_profile.tagline %}
-                    &ldquo;{{ user.get_profile.tagline|truncatechars:"60"|urlize }}&rdquo;
+                    &ldquo;{{ user.get_profile.tagline|truncatechars:"55"|urlize }}&rdquo;
                 {% else %}
-                    &ldquo;{{ user.get_profile.bio|truncatechars:"60"|urlize }}&rdquo;
+                    &ldquo;{{ user.get_profile.bio|truncatechars:"55"|urlize }}&rdquo;
                 {% endif %}
             </em>
         {% endif %} 
