@@ -172,7 +172,10 @@ def video_share(request, username=None, video_id=None):
             template = 'player/snippets/share.html'
         else:
             request.session['share'] = context
-            return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
+            if username:
+                return HttpResponseRedirect(reverse('profiles-home', args=[username,]))
+            if request.user.is_authenticated():
+                return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
     else:
         template = 'marketing/share.html'
 
