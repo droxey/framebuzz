@@ -26,8 +26,7 @@ from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
 VALID_FEED_VERBS = ['commented on', 'added to favorites',
-                    'replied to comment', 'added video to library',
-                    'joined framebuzz']
+                    'replied to comment', 'added video to library',]
 ITEMS_PER_PAGES = 10
 
 
