@@ -218,21 +218,27 @@ class Video(caching.base.CachingMixin, models.Model):
             pass
 
     def poster_image(self):
-        poster_thumbnail = self.thumbnail_set.filter(
-            url__endswith='maxresdefault.jpg')
-        if len(poster_thumbnail) == 0:
+        if self.video_id == 'DEL7-ftmrxI' or self.video_id == 'Tqvb0NUJem8':
+            if self.video_id == 'DEL7-ftmrxI':
+                return '/static/framebuzz/marketing/img/poster1.jpg'
+            else:
+                return '/static/framebuzz/marketing/img/poster2.jpg'
+        else:
             poster_thumbnail = self.thumbnail_set.filter(
-                url__endswith='hqdefault.jpg')
-        if len(poster_thumbnail) == 0:
-            poster_thumbnail = self.thumbnail_set.filter(
-                url__endswith='mqdefault.jpg')
+                url__endswith='maxresdefault.jpg')
+            if len(poster_thumbnail) == 0:
+                poster_thumbnail = self.thumbnail_set.filter(
+                    url__endswith='hqdefault.jpg')
+            if len(poster_thumbnail) == 0:
+                poster_thumbnail = self.thumbnail_set.filter(
+                    url__endswith='mqdefault.jpg')
 
-        try:
-            poster = poster_thumbnail[0]
-        except:
-            poster = self.default_thumbnail()
-        finally:
-            return poster.url
+            try:
+                poster = poster_thumbnail[0]
+            except:
+                poster = self.default_thumbnail()
+            finally:
+                return poster.url
 
     def embed_code(self):
         full_url = 'http://frame.bz%s' % self.get_absolute_url()

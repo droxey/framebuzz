@@ -31,8 +31,19 @@
                                 consumers whose interactions will shape the way video 
                                 content is produced, shared and discovered.</p>
                             </div>
-                            <div class="col-xs-5 pull-right">
+                            <div class="col-xs-5 pull-right callouts">
                                 <img src="{% static 'framebuzz/marketing/img/fbz-profiles.png' %}" alt="" class="img-responsive">
+
+                                    {% spaceless %}
+                                    <a href="{% url 'account_signup' %}" class="btn btn-info btn-large btn-signup absolute-center">
+                                        Try It Out
+                                        <span class="fa-stack fa-lg">
+                                          <i class="fa fa-circle fa-stack-1x fa-inverse"></i>
+                                          <i class="fa fa-play fa-stack-1x"></i>
+                                        </span>
+                                    </a>
+                                    {% endspaceless %}
+
                             </div>
                         </div>
                         <div class="row corner">

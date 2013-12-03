@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('.slider > ul').bxSlider({
-      auto: false,
+      auto: true,
       controls: false,
       speed: 500,
       autoHover: true,
