@@ -22,18 +22,23 @@
 
                 h1 {
                     background-color: rgba(255, 255, 255, .90);
-                    color: #f200bc;
-                    font-style: italic;
-                    font-weight: 500;
-                    font-size: 26px;
-                    margin: 0 0 18px 0;
-                    padding: 0 18px;
-                    line-height: 44px;
+
+                    span {
+                        color: #f200bc;
+                        font-style: italic;
+                        font-weight: 500;
+                        font-size: 20px;
+                        margin: 0 0 18px 0;
+                        padding: 0 18px;
+                        line-height: 44px;
+                    }
 
                     strong { font-weight: 700; }
                 }
 
                 div.bubble {
+                    position: relative;
+
                     div.bubble-inner {
                         @include border-radius(3px, 3px);
                         background-color: rgba(255, 255, 255, .90);
@@ -70,15 +75,14 @@
                         }
                     }
 
-                    div.corner {
+                    i.corner {
+                        display: inline-block;
                         position: relative;
                         left: 15%;
-                        position: relative;
-                        top: -3px;
-
-                        i {
-                            color: rgba(255, 255, 255, .90);
-                        }
+                        bottom: 0;
+                        height: 22px;
+                        line-height: 22px;
+                        color: rgba(255, 255, 255, .90);
                     }
                 }
             }
@@ -164,6 +168,7 @@
                     border: none;
                     box-shadow: none;
                     left: 0;
+                    width: 99.9% !important;
             
                     ul {
                         padding: 0;
@@ -179,6 +184,7 @@
                             div.slide-inner {
                                 position: absolute;
                                 top: 0;
+                                width: 100%;
                                 z-index: 5;
 
                                 h4 {
@@ -250,7 +256,7 @@
                                         p {
                                             background-color: rgba(0, 0, 0, 0.75);
                                             padding: 10px 17px;
-                                            margin: 0 0 32px 0;
+                                            margin: 0 0 30px 0;
                                         }
 
                                         span.corner {
@@ -286,7 +292,7 @@
 
                                     &.discover-2 {
                                         div.discover-inner {
-                                            margin-left: 22%;
+                                            margin-left: 14%;
 
                                             p {
                                                 margin-bottom: 0;
@@ -358,10 +364,10 @@
                         padding-top: 0;
 
                         a.bx-pager-link {
-                            background: #535353;
+                            background: white;
 
                             &.active {
-                                background: #ababab;
+                                background: #ffd800;
                             }
                         }
                     }
