@@ -167,6 +167,25 @@ object, embed, video, iframe {
                     width: 700px !important;
                 }
 
+                .mejs-overlay-button {
+                    @include border-radius(500px, 500px);
+                    background: rgba(255, 255, 255, 0.5);
+                    margin: -40px 0 0 -40px;
+                    height: 80px;
+                    width: 80px;
+                    opacity: 1;
+
+                    img {
+                        height: 34px;
+                        width: 30px;
+                        margin: 24px 18px 23px 31px;
+                    }
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.75);
+                    }
+                }
+
                 div.mejs-mediaelement {
                     width: 640px !important;
                     height: 360px !important;

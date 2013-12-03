@@ -2728,7 +2728,7 @@ if (typeof jQuery != 'undefined') {
 			// this needs to come last so it's on top
 			bigPlay = 
 				$('<div class="mejs-overlay mejs-layer mejs-overlay-play">'+
-					'<div class="mejs-overlay-button"></div>'+
+					'<div class="mejs-overlay-button"><img src="/static/framebuzz/player/app/img/play-icon.png" height="34" width="30"></div>'+
 				'</div>')
 				.appendTo(layers)
 				.click(function() {
