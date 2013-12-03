@@ -125,6 +125,7 @@
     }
 
     #how-to-fbz {
+        background: #000000;
         max-height: 322px;
         overflow: hidden;
         position: relative;
@@ -161,8 +162,179 @@
                         margin: 0;
 
                         li {
+                            position: relative;
+
                             img.img-responsive {
                                 width: 100%;
+                            }
+
+                            div.slide-inner {
+                                position: absolute;
+                                top: 0;
+                                z-index: 5;
+
+                                h4 {
+                                    line-height: 36px;
+                                    margin-top: 22px;
+                                    margin-bottom: 7px;
+                                    padding: 0;
+
+                                    i.fa-icon {
+                                        color: white;
+                                        padding-left: 18px;
+                                        padding-right: 9px;
+                                        font-size: 20px;
+                                        width: 45px;
+                                    }
+
+                                    span {
+                                        background: white;
+                                        color: black;
+                                        display: inline-block;
+                                        height: 100%;
+                                        font-style: italic;
+                                        padding: 0 13px;
+                                        font-size: 17px;
+                                    }
+                                }
+
+                                p {
+                                    color: #cccccc;
+                                    font-size: 16px;
+                                    font-weight: 300;
+                                    font-style: italic;
+                                    line-height: 16px;
+
+                                    strong {
+                                        font-weight: 700;
+                                    }
+                                }
+
+                                div.person {
+                                    background-color: rgba(0, 0, 0, 0.75);
+                                    margin: 0 0 10px 0;
+                                    width: 101%;
+
+                                    &.person-1 {
+                                        border-left: 7px solid #f26c00;
+                                    }
+
+                                    &.person-2 {
+                                        border-left: 7px solid #01b3f6;
+                                        margin-bottom: 0;
+                                    }
+
+                                    p {
+                                        margin: 16px 0 16px 47px;
+                                    }
+
+                                    div.avatar {
+                                        padding-top: 4px;
+                                        padding-bottom: 4px;
+                                    }
+                                }
+
+                                div.discover {
+                                    div.discover-inner {
+                                        padding: 0;
+                                        position: relative;
+
+                                        p {
+                                            background-color: rgba(0, 0, 0, 0.75);
+                                            padding: 10px 17px;
+                                            margin: 0 0 32px 0;
+                                        }
+
+                                        span.corner {
+                                            position: absolute;
+                                            display: block;
+                                            width: 0;
+                                            height: 44px;
+                                            line-height: 0;
+                                            display: block;
+                                            right: 0;
+                                            line-height: 0;
+                                            position: absolute;
+                                            top: -23px;
+                                            width: 0;
+                                            -webkit-transform: rotate(45deg); 
+                                            -moz-transform: rotate(45deg);
+                                            -o-transform: rotate(45deg);  
+                                            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=5);
+                                        }
+                                    }
+
+                                    &.discover-1 {
+                                        div.discover-inner {
+                                            margin-left: 14.5%;
+
+                                            span.corner {
+                                                border: solid 22px #dd0986;
+                                                border-color: transparent transparent #dd0986;
+                                                right: -22px;
+                                            }
+                                        }
+                                    }
+
+                                    &.discover-2 {
+                                        div.discover-inner {
+                                            margin-left: 22%;
+
+                                            p {
+                                                margin-bottom: 0;
+                                            }
+
+                                            span.corner {
+                                                border: solid 22px #01b3f6;
+                                                border-color: transparent transparent #01b3f6;
+                                                right: -3px;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                div.influence {
+                                    background-color: rgba(0, 0, 0, 0.75);
+                                    padding: 10px 17px;
+                                    margin: 0 0 8px 0;
+
+                                    &.influence-1 {
+
+                                    }
+
+                                    div.influence-inner {
+                                        p { 
+                                            margin: 0 15px 0 0;
+                                            width: 106%;
+                                        }
+
+                                        div.icon { 
+                                            padding: 0;
+
+                                            i.fa-icon {
+                                                margin: 18% 0;
+                                            }
+
+                                            i.fa-group {
+                                                color: #01b3f6;
+                                            }
+
+                                            i.fa-thumbs-up, i.fa-bullhorn {
+                                                color: #ffd800;
+                                            }
+                                        }
+                                    }
+
+                                    &.influence-2 {
+                                        div.influence-inner {
+                                            div.icon {
+                                                i.fa-icon.fa-group {
+                                                    margin: 5% 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -280,7 +452,7 @@
     }
 
     iframe {
-        height: 322px;
+        height: 328px;
         width: 580px;
     }
 }
