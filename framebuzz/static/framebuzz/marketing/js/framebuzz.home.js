@@ -17,14 +17,14 @@ $(document).ready(function() {
             taglineSpan.html(taglines[currentTaglineIndex]);
             taglineSpan.fadeIn('fast');
         });    
-    }, 10000);
+    }, 5000);
 
     $('.slider > ul').bxSlider({
       auto: true,
       controls: false,
       speed: 500,
       autoHover: true,
-      pause: 5000,
+      pause: 10000,
       easing: 'easeInOutSine'
     });
 });
