@@ -107,7 +107,6 @@ var FrameBuzzProfile = (function($) {
 
                 lazyLoadImages();
                 initTooltips();
-                initFollowButton();
                 initToggleButtons();
 
                 _currentFilterClass = filterClass;
@@ -141,7 +140,6 @@ var FrameBuzzProfile = (function($) {
         });
 
         initToggleButtons();
-        initFollowButton();
         lazyLoadImages();
         initTooltips();
 
@@ -156,6 +154,7 @@ var FrameBuzzProfile = (function($) {
 
         bindFilter();
         lazyLoadImages();
+        initFollowButton();
 
         $(document).on('click', 'a.play-video', function() {
             var url = $(this).attr('href');
@@ -183,9 +182,6 @@ var FrameBuzzProfile = (function($) {
 
         if (_isMyProfile) {
             bindAddVideoButton();
-        }
-        else {
-            initFollowButton();
         }
 
         // Load recommendations.
