@@ -15,6 +15,22 @@
                         </a>
                     </div>
                 </div>
+                {% if form.errors %}
+                    <div class="row row-error bs-callout bs-callout-danger">
+                        <div class="col-xs-12 error-wrap">
+                            <h4><i class="fa fa-icon fa-rocket fa-fw"></i> Houston, we have a problem!</h4>
+                            <ol>
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>
+                                            {% if field|lower != '__all__' %}<strong>{{ field|title }}</strong>: {% endif %}{{ error }}
+                                        </li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                {% endif %}
                 <div class="row">
                     <div class="col-xs-12">
                         <form id="signup-form" class="form-vertical container" role="form" method="post" action="{% url 'account_login' %}">
