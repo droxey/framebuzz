@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles compress avatar_tags activity_tags profile_tags %}
+{% load staticfiles compress avatar_tags activity_tags profile_tags humanize %}
 
 {% block page_classes %}content profiles{% endblock %}
 
@@ -98,36 +98,36 @@
                 </div>
                 {% endif %}
                 <div id="user-stats" class="row container">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 stats-wrapper">
                         <ul class="nav nav-tabs">
                             <li class="videos">
                                 <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">
                                     <i class="fa fa-video-camera fa-fw"></i>
-                                    <strong>{{ profile_library|length }}</strong>
+                                    <strong>{{ profile_library|length|short_number }}</strong>
                                 </a>
                             </li>
                             <li class="conversations">
                                 <a class="filter" data-filter=".conversations" href="#" data-pages="{{ page_counts.conversations }}">
                                     <i class="fa fa-comment fa-fw"></i>
-                                    <strong>{{ profile_conversations|length }}</strong>
+                                    <strong>{{ profile_conversations|length|short_number }}</strong>
                                 </a>
                             </li>
                             <li class="favorites">
                                 <a class="filter" data-filter=".added_to_favorites" href="#" data-pages="{{ page_counts.favorites }}">
                                     <i class="fa fa-heart fa-fw"></i>
-                                    <strong>{{ profile_favorites|length }}</strong>
+                                    <strong>{{ profile_favorites|length|short_number }}</strong>
                                 </a>
                             </li>
                             <li class="followers">
                                 <a class="filter" data-filter=".followers" href="#" data-pages="{{ page_counts.followers }}">
                                     <i class="fa fa-group fa-fw"></i>
-                                    <strong>{{ profile_followers|length }}</strong>
+                                    <strong>{{ profile_followers|length|short_number }}</strong>
                                 </a>
                             </li>
                             <li class="following">
                                 <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">
                                     <i class="fa fa-user fa-fw"></i>
-                                    <strong>{{ profile_following|length }}</strong>
+                                    <strong>{{ profile_following|length|short_number }}</strong>
                                 </a>
                             </li>
                         </ul>  
