@@ -1,6 +1,6 @@
 import math
-import json
 import random
+from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -21,12 +21,12 @@ from templated_email import send_templated_mail
 
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
 from framebuzz.apps.api.backends.youtube import get_or_create_video
-from framebuzz.apps.api.utils import errors_to_json, get_total_shares
+from framebuzz.apps.api.utils import get_total_shares
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
 
 
 VALID_FEED_VERBS = ['commented on', 'added to favorites',
-                    'replied to comment', 'added video to library',]
+                    'replied to comment', 'added video to library', ]
 ITEMS_PER_PAGES = 10
 
 
@@ -112,7 +112,13 @@ def feed(request, username):
 
 
 def recommendations(request):
-    top_video_actions = Action.objects.filter(verb='viewed video') \
+    dt = datetime.today()
+    start = dt - timedelta(days=(dt.weekday() + 1) % 7)
+    end = start + timedelta(days=6)
+
+    top_video_actions = Action.objects.filter(verb='viewed video',
+        timestamp__gte=start,
+        timestamp__lte=end) \
         .values('action_object_object_id') \
         .annotate(views=Count('id')) \
         .order_by('-views')[:100]
