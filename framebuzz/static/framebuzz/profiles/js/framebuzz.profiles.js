@@ -152,6 +152,10 @@ var FrameBuzzProfile = (function($) {
         _isMyProfile = isMyProfile;
         _urls = urls;
 
+        if (_isMyProfile) {
+            bindAddVideoButton();
+        }
+        
         bindFilter();
         lazyLoadImages();
         initFollowButton();
@@ -176,13 +180,8 @@ var FrameBuzzProfile = (function($) {
             return false;
         });
 
-        // Init isotope and infinite scroll.
         var feedContainer = $('#feed');
         var recommendationsContainer = $('#recommendations div.ajax');
-
-        if (_isMyProfile) {
-            bindAddVideoButton();
-        }
 
         // Load recommendations.
         $.get(urls.recommendations, function(html) {

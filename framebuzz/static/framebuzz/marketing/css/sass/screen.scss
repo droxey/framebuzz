@@ -241,6 +241,14 @@ body.content {
                     width: auto;
                     overflow: hidden;
 
+                    &:focus, &:hover, &:active {
+                        background: none;
+
+                        i.fa-cog {
+                            background: none;
+                        }
+                    }
+
                     i.fa { line-height: 41px; }
 
                     i.fa-cog {
@@ -254,6 +262,14 @@ body.content {
                         color: #9C9C9C;
                         margin-right: 0;
                         padding-right: 0;
+                    }
+                }
+
+                ul.dropdown-menu {
+                    li {
+                        &:hover {
+                            background: #F200BC;
+                        }
                     }
                 }
             }
