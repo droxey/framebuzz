@@ -183,8 +183,8 @@ class BaseSignupForm(_base_signup_form_class()):
             self.fields["email"].required = False
         if not app_settings.USERNAME_REQUIRED:
             del self.fields["username"]
-        self.fields['password1'].widget.attrs['placeholder'] = ''
-        self.fields['password2'].widget.attrs['placeholder'] = ''
+        #self.fields['password1'].widget.attrs['placeholder'] = ''
+        #self.fields['password2'].widget.attrs['placeholder'] = ''
 
     def clean_username(self):
         value = self.cleaned_data["username"]

@@ -1,27 +1,29 @@
 {% load i18n staticfiles addendum_tags socialaccount %}
 
-<form id="signup-form" class="form-inline" role="form" method="post" action="{% url 'account_signup' %}">
+<form id="signup-form" class="form-inline" role="form" method="post">
     {% csrf_token %}
     <div class="row form-row">
         <div class="form-group col-xs-6">
             <label for="id_username">Choose a username:</label>
-            <input type="text" name="username" maxlength="30" id="id_username">
+            {{ form.username }}
         </div>
         <div class="form-group col-xs-6">
             <label for="id_username">Email address:</label>
-            <input type="text" name="email" maxlength="30" id="id_email">
+            {{ form.email }}
         </div>
     </div>
-    <div class="row form-row">
-        <div class="form-group col-xs-6">
-            <label for="id_username">Password:</label>
-            <input type="password" placeholder="" name="password1" id="id_password1">
+    {% if form.password1 and form.password2 %}
+        <div class="row form-row">
+            <div class="form-group col-xs-6">
+                <label for="id_username">Password:</label>
+                {{ form.password1 }}
+            </div>
+            <div class="form-group col-xs-6">
+                <label for="id_username">Password again:</label>
+                {{ form.password2 }}
+            </div>
         </div>
-        <div class="form-group col-xs-6">
-            <label for="id_username">Password again:</label>
-            <input type="password" placeholder="" name="password2" id="id_password2">
-        </div>
-    </div>
+    {% endif %}
     <div class="row">
         <div class="col-xs-3">
             <button class="btn btn-info" type="submit">Create Account</button>
