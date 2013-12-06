@@ -145,6 +145,10 @@ angular.module('framebuzz.controllers', []).
                 }
                 
                 $scope.postNewThread = function() {
+                    if ($scope.newThread == null || $scope.newThread.comment.length == 0) {
+                        return;
+                    }
+
                     var time = $scope.postTime == null 
                         ? angular.copy($scope.currentTime) 
                         : angular.copy($scope.postTime);
