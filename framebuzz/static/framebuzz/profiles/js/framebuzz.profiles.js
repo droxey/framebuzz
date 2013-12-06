@@ -139,11 +139,11 @@ var FrameBuzzProfile = (function($) {
             }
         });
 
+        $(window).trigger('resize');
+
         initToggleButtons();
         lazyLoadImages();
         initTooltips();
-
-        $(window).trigger('resize');
     }
 
     return {
