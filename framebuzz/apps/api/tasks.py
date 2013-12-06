@@ -163,13 +163,6 @@ def post_new_comment(context):
         return_data['heatmap'] = video.heatmap()
         return_data['channel'] = channel
 
-        if user.get_profile() is not None:
-            profile = user.get_profile()
-            if profile.has_commented == False:
-                profile.has_commented = True
-                profile.save()
-                profile.generate_default_avatar()
-
         if not comment.parent:
             # Send a notification to the video's owner that someone has commented on their video.
             if video.found_by and video.found_by.id != user.id:
