@@ -112,13 +112,12 @@ def feed(request, username):
 
 
 def recommendations(request):
-    dt = datetime.today()
-    start = dt - timedelta(days=(dt.weekday() + 1) % 7)
-    end = start + timedelta(days=6)
+    today = datetime.today()
+    end = today - timedelta(days=6)
 
     top_video_actions = Action.objects.filter(verb='viewed video',
-        timestamp__gte=start,
-        timestamp__lte=end) \
+        timestamp__gte=end,
+        timestamp__lte=today) \
         .values('action_object_object_id') \
         .annotate(views=Count('id')) \
         .order_by('-views')[:100]
