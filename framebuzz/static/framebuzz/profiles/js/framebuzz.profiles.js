@@ -111,7 +111,7 @@ var FrameBuzzProfile = (function($) {
 
                 _currentFilterClass = filterClass;
 
-                $(window).trigger('resize');
+                //$(window).trigger('smartresize');
             });
 
             return false;
@@ -139,7 +139,7 @@ var FrameBuzzProfile = (function($) {
             }
         });
 
-        $(window).trigger('resize');
+        //$(window).trigger('smartresize');
 
         initToggleButtons();
         lazyLoadImages();

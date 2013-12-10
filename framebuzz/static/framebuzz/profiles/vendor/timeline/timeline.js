@@ -151,7 +151,7 @@
 				timeline.init(params);
 			});
 
-			$(window).resize(function(){
+			$(window).smartresize(function(){
 				timeline.reload();
 			});
 

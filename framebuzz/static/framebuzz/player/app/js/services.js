@@ -21,10 +21,17 @@ angular.module('framebuzz.services', [])
     })
     .service('socket', ['$rootScope', 'broadcaster', function($rootScope, broadcaster) {
         var createSocket = function () {
-            var reconnect = true;
-            var socket = new SockJS('http://' + SOCK.host + ':' + SOCK.port + '/' + SOCK.channel, '', {
-                'debug': true
-            });
+            var reconnect = true,
+                socket = null;
+
+            if (SOCK.host.indexOf('localhost') !== -1) {
+                socket = new SockJS('http://' + SOCK.host + ':' + SOCK.port + '/' + SOCK.channel, '', {
+                    'debug': true
+                });
+            }
+            else {
+                socket = new SockJS('http://' + SOCK.host + '/echo/');
+            }
 
             socket.onopen = function() {
                 if (socket.readyState !== SockJS.OPEN) {
