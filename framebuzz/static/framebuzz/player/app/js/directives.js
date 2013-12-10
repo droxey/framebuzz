@@ -220,7 +220,16 @@ angular.module('framebuzz.directives', [])
         return {
             link: function(scope, element, attrs) {
                 element.ready(function() {
-                    $(element).on('focus', function() {
+                    var unsetPostTime = function() {
+                        scope.postTime = 0;
+                        safeApply(scope);
+
+                        $(element).val('');
+                        $('#post-time').hide();
+                        $('#duration').show().addClass('active');
+                    };
+
+                    $(element).on('keyup', function(e) {
                         var setPostTime = function() {
                             scope.setPostTime();
                             
@@ -236,16 +245,14 @@ angular.module('framebuzz.directives', [])
                                 unregisterFocus();
                             }
                         }, true);
+
+                        if ($(element).val().length == 0) {
+                            unsetPostTime();
+                        }
                     });
 
                     $(element).on('blur', function() {
-                        scope.postTime = 0;
-                        safeApply(scope);
-
-                        $(element).val('');
-                        $('#post-time').hide();
-                        $('#duration').show().addClass('active');
-
+                        unsetPostTime();
                         return false;
                     });
                 });
