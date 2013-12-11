@@ -3,7 +3,8 @@
 <div class="user row">
   <div class="col-xs-2 avatar">
     <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
-        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url result.object.user 92 %}" alt="" class="lazy img-responsive" />
+        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="{% avatar_url result.object.user 92 %}" alt="" class="lazy-load img-responsive">
+        <noscript><img src="{% avatar_url result.object.user 92 %}"></noscript>
     </a>
   </div>
   <div class="col-xs-10">

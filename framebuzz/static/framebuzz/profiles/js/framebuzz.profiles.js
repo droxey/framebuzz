@@ -105,23 +105,14 @@ var FrameBuzzProfile = (function($) {
                 var elements = $('div.item', $(newElements));
                 innerContainer.append(elements);
 
-                lazyLoadImages();
                 initTooltips();
                 initToggleButtons();
 
                 _currentFilterClass = filterClass;
-
-                //$(window).trigger('smartresize');
             });
 
             return false;
         });
-    }
-
-    function lazyLoadImages() {
-        $('img.lazy').not('.loaded').lazyload({ 
-            event: 'scroll trigger-lazy-load'
-        }).addClass('loaded');
     }
 
     function initTimeline() {
@@ -139,10 +130,7 @@ var FrameBuzzProfile = (function($) {
             }
         });
 
-        //$(window).trigger('smartresize');
-
         initToggleButtons();
-        lazyLoadImages();
         initTooltips();
     }
 
@@ -157,7 +145,6 @@ var FrameBuzzProfile = (function($) {
         }
         
         bindFilter();
-        lazyLoadImages();
         initFollowButton();
 
         $(document).on('click', 'a.play-video', function() {
@@ -186,7 +173,6 @@ var FrameBuzzProfile = (function($) {
         // Load recommendations.
         $.get(urls.recommendations, function(html) {
             recommendationsContainer.html(html);
-            lazyLoadImages();
 
             $('a.avatar')
                 .mouseenter(function() {
@@ -206,10 +192,7 @@ var FrameBuzzProfile = (function($) {
 
         $.get(urls.feed + '?init=true', function(html) {
             feedContainer.html(html);
-            setTimeout(function() {
-                initTimeline();
-            }, 1000);
-            
+            initTimeline();
         });
     }};
 }(jQuery));

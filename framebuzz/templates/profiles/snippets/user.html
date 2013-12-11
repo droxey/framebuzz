@@ -17,7 +17,8 @@
     </div>
     <div class="col-xs-4 avatar">
       <a class="following" href="{% url 'profiles-home' user.username %}">
-        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url user 110 %}" alt="" class="img-responsive lazy" />
+        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="{% avatar_url user 110 %}" alt="" class="img-responsive lazy-load">
+        <noscript><img src="{% avatar_url user 110 %}"></noscript>
         <span class="img-corner"></span>
       </a>
     </div>

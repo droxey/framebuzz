@@ -5,7 +5,8 @@
     <div class="row comment clearfix">
         <div class="col-xs-2">
             <a href="{% url 'profiles-home' result.object.user.username %}" title="View {{ result.object.user.username }}'s Profile">
-                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url result.object.user 72 %}" alt="" height="36" width="36" class="img-circle lazy" />
+                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="{% avatar_url result.object.user 72 %}" alt="" height="36" width="36" class="img-circle lazy-load">
+                <noscript><img src="{% avatar_url result.object.user 72 %}"></noscript>
             </a>
         </div>
         <div class="col-xs-10 text">&ldquo;{{ result.object.comment }}&rdquo;</div>

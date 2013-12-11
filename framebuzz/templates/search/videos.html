@@ -15,7 +15,8 @@
                 {{ result.object.get_share_url }}
                 {% endif %}
             {% endif %}{% endspaceless %}" title="{{ result.title|title }}">
-        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ result.object.video_id }}/mqdefault.jpg" alt="{{ result.title }}" class="lazy img-responsive" />
+        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="https://i1.ytimg.com/vi/{{ result.object.video_id }}/mqdefault.jpg" alt="{{ result.title }}" class="lazy-load img-responsive">
+        <noscript><img src="https://i1.ytimg.com/vi/{{ result.object.video_id }}/mqdefault.jpg"></noscript>
     </a>
     <h3>
         <a class="title" href="{{ result.object.get_share_url }}">{{ result.title|title }}</a>

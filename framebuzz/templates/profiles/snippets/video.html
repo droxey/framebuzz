@@ -4,9 +4,10 @@
 <div class="content">
     <div class="row header">
       <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 avatar">
-        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url action.actor 110 %}" alt="" height="82" width="82" class="header-avatar img-circle lazy" />
+        <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="{% avatar_url action.actor 110 %}" alt="" height="82" width="82" class="header-avatar img-circle lazy-load">
+        <noscript><img src="{% avatar_url action.actor 110 %}"></noscript>
       </div>
-      <div class="col-xs-8 header-content">
+      <div class="col-xs-9 header-content">
         {% if action.verb != 'added video to library' %}
           <p>{% display_action action %}</p>
           <p><i class="fa fa-quote-left"></i><span>{{ action.action_object.comment }}</span><i class="fa fa-quote-right fa-flip-vertical"></i></p>
@@ -33,7 +34,8 @@
 <footer>
     <span class="corner"></span>
     <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username video.video_id %}">
-        <img class="cover lazy" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="https://i1.ytimg.com/vi/{{ video.video_id }}/mqdefault.jpg" />
+        <img class="cover lazy-load" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="https://i1.ytimg.com/vi/{{ video.video_id }}/mqdefault.jpg">
+        <noscript><img src="https://i1.ytimg.com/vi/{{ video.video_id }}/mqdefault.jpg"></noscript>
         <span class="play absolute-center"><i class="fa fa-icon fa-play fa-2x absolute-center"></i></span>
     </a>
     {% comment %}
@@ -85,7 +87,8 @@
               {% if forloop.last and video.uservideo_set.all|length > 12 %}
                 <span class="counter">+{{ video.uservideo_set.all|length|add:-12 }}</span>
               {% endif %}
-              <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-original="{% avatar_url uv.user 64 %}" alt="" class="img-responsive lazy" />
+              <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="{% avatar_url uv.user 64 %}" alt="" class="img-responsive lazy-load">
+              <noscript><img src="{% avatar_url uv.user 64 %}"></noscript>
             </a>
           {% endfor %}
         </div>
