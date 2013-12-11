@@ -24,14 +24,14 @@ angular.module('framebuzz.services', [])
             var reconnect = true,
                 socket = null;
 
-            if (SOCK.host.indexOf('localhost') !== -1) {
+            //if (SOCK.host.indexOf('localhost') !== -1) {
                 socket = new SockJS('http://' + SOCK.host + ':' + SOCK.port + '/' + SOCK.channel, '', {
-                    'debug': true
+                    'debug': false
                 });
-            }
-            else {
-                socket = new SockJS('http://' + SOCK.host + '/echo/');
-            }
+            //}
+            //else {
+            //    socket = new SockJS('http://' + SOCK.host + '/echo/');
+            //}
 
             socket.onopen = function() {
                 if (socket.readyState !== SockJS.OPEN) {
