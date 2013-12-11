@@ -5,6 +5,17 @@ var FrameBuzzProfile = (function($) {
         _currentFilterClass = null,
         _currentRequest = null;
 
+    function youtube_parser(url){
+        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+        var match = url.match(regExp);
+        if (match&&match[7].length==11){
+            return match[7];
+        } else{
+            $('#id_video_id').val('');
+            $('#id_video_id').attr('placeholder', "This doesn't seem to be a YouTube URL! Please try again.");
+        }
+    }
+
     function bindAddVideoButton() {
         var video_id = null;
 
@@ -17,40 +28,28 @@ var FrameBuzzProfile = (function($) {
         });
 
         $('body').on('submit', '#add-video-form', function(e) {
-            e.preventDefault();
+            video_id = youtube_parser($('#id_video_id').val());
 
-            var postUrl = $(this).attr('action');
-            var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+            if (video_id !== null) {
+                var postUrl = $(this).attr('action');
+                var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
 
-            $.post(postUrl, {
-                'video_id': video_id, 
-                'is_featured': $('#id_is_featured').is(':checked'),
-                'csrfmiddlewaretoken': csrfToken
-            }, function(data, textStatus, jqXHR) {
-                if (data.length == 0) {
+                $.post(postUrl, {
+                    'video_id': video_id, 
+                    'is_featured': 'false',
+                    'csrfmiddlewaretoken': csrfToken
+                }, function(data, textStatus, jqXHR) {
                     var redirectUrl = window.location.href + 'share/' + video_id + '/';
                     window.location.href = redirectUrl;
-                }
-                else {
-                    console.log(data);
-                }
-            });
+                });
+            }
+
+            return false;
         });
     }
 
     function initTooltips() {
         $('.tooltip').tooltip();
-    }
-
-    function youtube_parser(url){
-        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-        var match = url.match(regExp);
-        if (match&&match[7].length==11){
-            return match[7];
-        } else{
-            $('#id_video_id').val('');
-            $('#id_video_id').attr('placeholder', "This doesn't seem to be a YouTube URL! Please try again.");
-        }
     }
 
     function initToggleButtons() {
