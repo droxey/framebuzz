@@ -109,6 +109,7 @@ var FrameBuzzProfile = (function($) {
                 initToggleButtons();
 
                 _currentFilterClass = filterClass;
+                $(window).trigger('resize');
             });
 
             return false;
