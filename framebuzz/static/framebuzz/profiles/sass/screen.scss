@@ -942,6 +942,187 @@ body.profiles {
     }
 }
 
+#modal-help {
+    div.modal-dialog {
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 27px;
+        max-width: 975px;
+        position: relative;
+        left: -8px;
+        width: auto;
+
+        div.modal-body {
+            padding: 0;
+        }    
+
+        div.modal-content {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            
+            div.row {
+                margin: 0;
+
+                div {
+                    position: relative;
+
+                    p {
+                        color: white;
+                        font-size: 14px;
+                        font-weight: 700;
+                        margin-bottom: 0;
+                        line-height: 35px;
+                    }
+
+                    span.bracket {
+                        display: block;
+                        position: absolute;
+                    }
+                }
+
+                div.videos,
+                div.edit,
+                div.activity {
+                    border-bottom: 3px solid white;
+
+                    p {
+                        text-align: center;
+                    }   
+                }
+
+                div.search,
+                div.add-video {
+                    border-left: 3px solid white;
+
+                    span.bracket {
+                        border-top: 3px solid white;
+                        border-bottom: 3px solid white;
+                        line-height: 35px;
+                        height: 35px;
+                        width: 18px;
+                        left: -18px;
+                        top: 0;
+                    }
+                }
+
+                div.videos,
+                div.activity {
+                    span.bracket {
+                        border-left: 3px solid white;
+                        border-right: 3px solid white;
+                        line-height: 13px;
+                        height: 13px;
+                        top: 35px;
+                    }
+                }
+
+                div.search {
+                    background: #982378; 
+                    left: -18px;
+                    margin-bottom: 22px;
+                    position: relative;
+                }
+
+                div.add-video {
+                    background: #c27005;
+                    margin-bottom: 37px;
+                }
+
+                div.videos {
+                    background: #28a370;
+                    margin-bottom: 26px;
+
+                    span.bracket {
+                        width: 100%;
+                        left: 0;
+                    }
+                }
+
+                div.edit {
+                    background: #a02e4e;
+                    border-top: 3px solid white;
+                    border-bottom: none;
+                    left: 67px;
+                    padding: 0;
+                    position: relative;
+                    margin-bottom: 12px;
+                    text-align: center;
+
+                    span.bracket {
+                        border-left: 3px solid white;
+                        border-right: 3px solid white;
+                        line-height: 13px;
+                        height: 13px;
+                        top: -13px;
+                        left: 0;
+                        width: 100%;
+                    }
+                }
+
+                div.activity {
+                    border-bottom: none;
+                    text-align: center;
+                    padding: 0 18px;
+
+                    p {
+                        background: #0187bc;
+                        border-bottom: 3px solid white;
+                    }
+
+                    span.bracket {
+                        width: 95.1%;
+                        left: 18px;
+                    }
+
+                    i.fa-chevron-circle-down {
+                        color: white;
+                        padding-top: 13px;
+                        padding-bottom: 27px;
+                    }
+                }
+
+                div.steps {
+                    background: #0187bc;
+                    border-bottom: none;
+                    padding: 0 18px;
+
+                    h2 {
+                        color: white;
+                        font-weight: 700;
+                        font-size: 24px;
+                    }
+
+                    ol {
+                        margin-bottom: 12px;
+
+                        li {
+                            color: white;
+                            font-weight: 700;
+                            font-size: 18px;
+                            line-height: 14px;
+
+                            &:last-child { padding-bottom: 0; }
+                        }
+                    }
+                }
+
+                button {
+                    background: #f20384;
+                    border: 3px solid white;
+                    color: white;
+                    font-weight: 700;
+                    font-size: 20px;
+                    padding: 8px 47px;
+                    margin: 0 0 12px 15px;
+                }
+            }
+        }
+    }
+}
+
+.modal-backdrop.in, .modal-backdrop.fade.in { opacity: 0.7; }
+
 body.share {
     .container { max-width: 700px; }
 

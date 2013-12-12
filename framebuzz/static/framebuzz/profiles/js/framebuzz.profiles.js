@@ -134,6 +134,23 @@ var FrameBuzzProfile = (function($) {
         initTooltips();
     }
 
+    function initHelpDialog() {
+        var dialog = $('#modal-help');
+        dialog.modal();
+
+        function triggerUserMenu() { 
+            $('#user-dropdown').trigger('click'); 
+        }
+
+        dialog.on('shown.bs.modal', function(e) {
+            triggerUserMenu();
+        });
+
+        dialog.on('hidden.bs.modal', function(e) {
+            triggerUserMenu();
+        });
+    }
+
     return {
       init: function(isMyProfile, isShare, urls) {
         _isShare = isShare;
@@ -142,6 +159,7 @@ var FrameBuzzProfile = (function($) {
 
         if (_isMyProfile) {
             bindAddVideoButton();
+            //initHelpDialog();
         }
         
         bindFilter();
