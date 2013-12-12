@@ -135,19 +135,20 @@ var FrameBuzzProfile = (function($) {
     }
 
     function initHelpDialog() {
+        var menu = $('ul.dropdown-menu');
         var dialog = $('#modal-help');
         dialog.modal();
 
-        function triggerUserMenu() { 
-            $('#user-dropdown').trigger('click'); 
-        }
-
         dialog.on('shown.bs.modal', function(e) {
-            triggerUserMenu();
+            if (!menu.is(':visible')) { 
+                menu.addClass('open');
+            }
+            menu.find('li.help').addClass('active');
         });
 
         dialog.on('hidden.bs.modal', function(e) {
-            triggerUserMenu();
+            menu.removeClass('open');
+            menu.find('li.help').removeClass('active');
         });
     }
 
@@ -164,6 +165,11 @@ var FrameBuzzProfile = (function($) {
             if (_showHelp) {
                 initHelpDialog();
             }
+
+            $('#menu-show-help').click(function() {
+                initHelpDialog();
+                return false;
+            });
         }
         
         bindFilter();

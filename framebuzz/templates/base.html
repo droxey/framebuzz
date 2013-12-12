@@ -87,7 +87,8 @@
                         <li><a href="{% url 'profiles-edit' request.user.username %}">Edit profile</a></li>
                         <li><a href="{% url 'avatar_add' %}">Change avatar</a></li>
                         {% if accounts|length == 0 %}<li><a href="{% url 'account_change_password' %}">Change password</a></li>{% endif %}
-                        <li><a href="{% url 'account_logout' %}">Log out</a></li>
+                        {% if is_my_profile %}<li class="help"><a href="" id="menu-show-help">Help</a></li>{% endif %}
+                        <li><a href="{% url 'account_logout' %}">Sign out</a></li>
                       </ul>
                   </li>
               </ul>
