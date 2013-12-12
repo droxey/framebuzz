@@ -208,6 +208,7 @@ def home(request, username):
     ct = ContentType.objects.get(model='user')
     is_my_profile = request.user.is_authenticated() and \
         request.user.id == user.id
+    show_help = request.session.get('show_help', False) and is_my_profile
 
     page_counts = {
         'favorites': int(math.ceil(len(profile_favorites) / ITEMS_PER_PAGES)),
@@ -217,6 +218,9 @@ def home(request, username):
         'following': int(math.ceil(len(profile_following) / ITEMS_PER_PAGES)),
         'videos': int(math.ceil(len(profile_library) / ITEMS_PER_PAGES)),
     }
+
+    if show_help:
+        del request.session['show_help']
 
     context = {
         'profile_favorites': profile_favorites,
@@ -228,6 +232,7 @@ def home(request, username):
         'user_content_type': ct,
         'is_my_profile': is_my_profile,
         'page_counts': page_counts,
+        'show_help': show_help
     }
 
     share_context = request.session.get('share', None)

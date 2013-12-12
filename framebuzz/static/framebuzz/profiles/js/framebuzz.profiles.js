@@ -152,14 +152,18 @@ var FrameBuzzProfile = (function($) {
     }
 
     return {
-      init: function(isMyProfile, isShare, urls) {
+      init: function(isMyProfile, isShare, urls, showHelp) {
         _isShare = isShare;
         _isMyProfile = isMyProfile;
         _urls = urls;
+        _showHelp = showHelp;
 
         if (_isMyProfile) {
             bindAddVideoButton();
-            //initHelpDialog();
+            
+            if (_showHelp) {
+                initHelpDialog();
+            }
         }
         
         bindFilter();

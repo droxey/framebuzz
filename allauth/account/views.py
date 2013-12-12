@@ -126,6 +126,7 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView)
 
     def form_valid(self, form):
         user = form.save(self.request)
+        self.request.session['show_help'] = True
         return complete_signup(self.request, user, self.get_success_url())
 
     def get_context_data(self, **kwargs):
