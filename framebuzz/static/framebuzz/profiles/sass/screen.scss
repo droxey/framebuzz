@@ -549,15 +549,90 @@ body.profiles {
                                         }
 
                                         div.action-type {
+                                            padding: 0;
                                             position: absolute;
-                                            right: -9px;
+                                            right: 7px;
                                             top: 5px;
 
-                                            i {
-                                                color: #C5C6C6;
-                                                font-size: 20px;
-                                                position: relative;
-                                                right: 20px;
+                                            a.feed-item-type {
+                                                display: block;
+                                                height: 18px;
+                                                outline: 0 none;
+
+                                                span.fa-stack {
+                                                    line-height: 18px;
+                                                    height: 18px;
+                                                    position: relative;
+                                                    left: 6px;
+                                                    vertical-align: top;
+
+                                                    i.fa-video-camera, i.fa-heart {
+                                                        color: #39CA74;
+                                                        font-size: 20px;
+                                                    }
+
+                                                    i.fa-plus, i.fa-minus {
+                                                        font-size: 11px;
+                                                        text-shadow: 0 0 1px 0 #30AD63;
+                                                    }
+
+                                                    &.favorite {
+                                                        top: 0;
+
+                                                        i.fa-heart {
+                                                            font-size: 21px;
+                                                        }
+
+                                                        i.fa-plus, i.fa-minus {
+                                                            text-indent: -0.05em;
+                                                        }
+
+                                                        i.fa-plus {
+                                                            line-height: 21px;
+                                                        }
+
+                                                        i.fa-minus {
+                                                            line-height: 20px;
+                                                        }
+                                                    }
+
+                                                    &.video {
+                                                        top: -1px;
+                                                        
+                                                        i.fa-plus, i.fa-minus {
+                                                            line-height: 20px;
+                                                            text-indent: -5px;
+                                                        }
+
+                                                        i.fa-minus {
+                                                            font-size: 10px;
+                                                        }
+                                                    }
+
+                                                    &.active {
+                                                        i.fa-video-camera, i.fa-heart {
+                                                            color: #BDC3C7;                                                          
+                                                        }
+
+                                                        i.fa-plus, i.fa-minus {
+                                                            text-shadow: 0 0 1px 0 #95A5A6;
+                                                        }
+                                                    }
+                                                }
+
+                                                &:hover {
+                                                    span.fa-stack {
+                                                        i.fa-video-camera, i.fa-heart {
+                                                            color: #30AD63;
+                                                        }
+
+                                                        &.active {
+                                                            i.fa-video-camera, i.fa-heart {
+                                                                color: #95A5A6;
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -565,6 +640,7 @@ body.profiles {
                                     div.posted {
                                         div {
                                             color: #949292;
+                                            line-height: 18px;
                                         }   
                                     }
                                 }

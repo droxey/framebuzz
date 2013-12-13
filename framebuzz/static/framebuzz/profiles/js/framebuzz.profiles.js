@@ -65,6 +65,27 @@ var FrameBuzzProfile = (function($) {
 
             return false;
         });
+
+        $('body').on('click', 'a.feed-item-type.toggle', function(e) {
+            e.preventDefault();
+
+            var link = $(this);
+            var url = link.attr('href');
+
+            $.get(url, function(data) {
+                link.find('.fa-stack').toggleClass('active');
+
+                var addOrRemoveIcon = link.find('.fa-stack-1x');
+                if (addOrRemoveIcon.hasClass('fa-minus')) {
+                    addOrRemoveIcon.removeClass('fa-minus').addClass('fa-plus');
+                }
+                else {
+                    addOrRemoveIcon.removeClass('fa-plus').addClass('fa-minus');
+                }
+            });
+
+            return false;
+        });
     }
 
     function initFollowButton() {
@@ -105,7 +126,6 @@ var FrameBuzzProfile = (function($) {
                 innerContainer.append(elements);
 
                 initTooltips();
-                initToggleButtons();
 
                 _currentFilterClass = filterClass;
                 $(window).trigger('resize');
