@@ -69,18 +69,80 @@ var FrameBuzzProfile = (function($) {
         $('body').on('click', 'a.feed-item-type.toggle', function(e) {
             e.preventDefault();
 
-            var link = $(this);
-            var url = link.attr('href');
+            var url = $(this).attr('href'),
+                links = $('a[href="' + url + '"]'),
+                stats = $('#user-stats'),
+                parentItem = $(this).parent().parent().parent().parent(),
+                isFavorite = parentItem.hasClass('added_to_favorites'),
+                isVideo = parentItem.hasClass('added_video_to_library'),
+                isMine = parentItem.hasClass('mine'),
+                addOrRemoveIcon = $(this).find('.fa-stack-1x'),
+                removing = addOrRemoveIcon.hasClass('fa-minus'),
+                statsItem = null;
 
             $.get(url, function(data) {
-                link.find('.fa-stack').toggleClass('active');
+                links.each(function(k, v) {
+                    $(v).find('.fa-stack').toggleClass('active');
+                });
+                
+                if (removing) {
+                    links.each(function(k, v) {
+                        $(v).find('.fa-stack-1x').removeClass('fa-minus').addClass('fa-plus');
+                    });
 
-                var addOrRemoveIcon = link.find('.fa-stack-1x');
-                if (addOrRemoveIcon.hasClass('fa-minus')) {
-                    addOrRemoveIcon.removeClass('fa-minus').addClass('fa-plus');
+                    if (isMine && (isFavorite || isVideo)) {
+                        parentItem
+                            .removeClass('added')
+                            .addClass('removed')
+                            .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+                              $(this).remove();
+                              $(window).trigger('resize');
+                           });
+                    }
                 }
                 else {
-                    addOrRemoveIcon.removeClass('fa-plus').addClass('fa-minus');
+                    links.each(function(k, v) {
+                        $(v).find('.fa-stack-1x').removeClass('fa-plus').addClass('fa-minus');
+                    });
+
+                    if (_isMyProfile) {
+                        var newItem = parentItem.clone(true),
+                            username = $('#user-display-name').find('a').text(),
+                            headerLink = $('.header-content > p > strong > a', newItem),
+                            headerAvatar = $('div.row.header > div.avatar > img', newItem),
+                            avatarLinkSrc = $('a.nav-link.avatar > img').attr('src');
+
+                        newItem.addClass('mine');
+                        newItem.find('.action-timestamp').text(' 0 minutes ago');
+                        headerAvatar.attr('src', avatarLinkSrc);
+                        headerLink.text(username);
+                        headerLink.attr('href', window.location.href);
+
+                        if (newItem.hasClass('conversations')) {
+                            isFavorite = true;
+
+                            newItem.removeClass('conversations').addClass('added_to_favorites');
+                            newItem.find('.action-name').text(' faved');
+                        }
+
+                        newItem.insertBefore(parentItem.parent().children().eq(0));
+                        newItem.addClass('added');
+
+                        $(window).trigger('resize');
+                    }
+                }
+
+                if (_isMyProfile) {
+                    if (isFavorite) {
+                        statsItem = stats.find('li.favorites');
+                    }
+                    else {
+                        statsItem = stats.find('li.videos');
+                    }
+
+                    var statsText = parseInt($('a.filter > strong', statsItem).text());
+                    var updateStats = removing ? (statsText - 1) : (statsText + 1);
+                    $('a.filter > strong', statsItem).text(updateStats);
                 }
             });
 

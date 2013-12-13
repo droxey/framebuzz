@@ -499,6 +499,19 @@ body.profiles {
                             div.item {
                                 margin-bottom: 18px;
 
+                                &.removed {
+                                  -webkit-animation: removed-item-animation .3s cubic-bezier(.55,-0.04,.91,.94) forwards;
+                                  -o-animation: removed-item-animation .3s cubic-bezier(.55,-0.04,.91,.94) forwards;
+                                  animation: removed-item-animation .3s cubic-bezier(.55,-0.04,.91,.94) forwards;
+                                }
+
+                                &.added {
+                                  opacity: 0;
+                                  -webkit-animation: new-item-animation .3s linear forwards;
+                                  -o-animation: new-item-animation .3s linear forwards;
+                                  animation: new-item-animation .3s linear forwards
+                                }
+
                                 &.init {
                                     visibility: hidden;
                                 }
@@ -545,6 +558,12 @@ body.profiles {
                                                 color: #383838;
                                                 font-weight: 700;
                                                 padding: 0 2px; 
+
+                                                &.action-name {
+                                                    color: #565555;
+                                                    font-weight: normal;
+                                                    padding: 0;
+                                                }
                                             }
                                         }
 
@@ -1299,4 +1318,108 @@ body.profiles.edit {
             }
         }
     }
+}
+
+@keyframes new-item-animation {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0)
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@-webkit-keyframes new-item-animation {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0)
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@-o-keyframes new-item-animation {
+  from {
+    opacity: 0;
+    -o-transform: scale(0);
+    transform: scale(0)
+  }
+
+  to {
+    opacity: 1;
+    -o-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@-webkit-keyframes openspace {
+  to {
+    height: auto
+  }
+}
+
+@-o-keyframes openspace {
+  to {
+    height: auto
+  }
+}
+
+@keyframes removed-item-animation {
+  from {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1)
+  }
+
+  to {
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+    opacity: 0
+  }
+}
+
+@-webkit-keyframes removed-item-animation {
+  from {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  to {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0
+  }
+}
+
+@-o-keyframes removed-item-animation {
+  from {
+    opacity: 1;
+    -o-transform: scale(1);
+    transform: scale(1)
+  }
+
+  to {
+    -o-transform: scale(0);
+    transform: scale(0);
+    opacity: 0
+  }
 }

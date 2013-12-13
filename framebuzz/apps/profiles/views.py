@@ -395,7 +395,11 @@ def toggle_video_library(request, username, video_id):
         user_video.user = user
         user_video.is_featured = False
         user_video.save()
-        print 'saved'
+
+        action.send(user,
+            verb='added video to library',
+            action_object=video,
+            target=user_video)
 
     return HttpResponse()
 
