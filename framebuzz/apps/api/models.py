@@ -141,7 +141,8 @@ def create_user_profile(sender, instance, created, **kwargs):
         try:
             # Start following framebuzz, and framebuzz follows you.
             fbz_user = User.objects.get(username__iexact='framebuzz')
-            follow(fbz_user, instance, actor_only=False)
+            follow(fbz_user, instance)
+            follow(instance, fbz_user)
         except User.DoesNotExist:
             # No framebuzz user, probably on a dev machine.
             pass
