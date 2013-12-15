@@ -32,36 +32,125 @@ body.profiles a.toggle-follow.unfollow-button i.fa-circle {
   font-size: 2.5em;
 }
 /* line 44, ../sass/screen.scss */
+body.profiles a.feed-item-type {
+  display: block;
+  height: 18px;
+  outline: 0 none;
+}
+/* line 49, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack {
+  line-height: 18px;
+  height: 18px;
+  position: relative;
+  left: 6px;
+  vertical-align: top;
+}
+/* line 56, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack i.fa-video-camera, body.profiles a.feed-item-type span.fa-stack i.fa-heart {
+  color: #39CA74;
+  font-size: 20px;
+}
+/* line 61, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack i.fa-plus, body.profiles a.feed-item-type span.fa-stack i.fa-minus {
+  font-size: 11px;
+  text-shadow: 0 0 1px 0 #30AD63;
+}
+/* line 66, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack.favorite {
+  top: 0;
+}
+/* line 69, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack.favorite i.fa-heart {
+  font-size: 21px;
+}
+/* line 73, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack.favorite i.fa-plus, body.profiles a.feed-item-type span.fa-stack.favorite i.fa-minus {
+  text-indent: -0.05em;
+}
+/* line 77, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack.favorite i.fa-plus {
+  line-height: 21px;
+}
+/* line 81, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack.favorite i.fa-minus {
+  line-height: 20px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /* line 86, ../sass/screen.scss */
+  body.profiles a.feed-item-type span.fa-stack.favorite i.fa-plus {
+    line-height: 22px;
+  }
+  /* line 90, ../sass/screen.scss */
+  body.profiles a.feed-item-type span.fa-stack.favorite i.fa-minus {
+    line-height: 21px;
+  }
+}
+/* line 96, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack.video {
+  top: -1px;
+}
+/* line 99, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack.video i.fa-plus, body.profiles a.feed-item-type span.fa-stack.video i.fa-minus {
+  line-height: 20px;
+  text-indent: -5px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /* line 99, ../sass/screen.scss */
+  body.profiles a.feed-item-type span.fa-stack.video i.fa-plus, body.profiles a.feed-item-type span.fa-stack.video i.fa-minus {
+    line-height: 21px;
+  }
+}
+/* line 108, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack.video i.fa-minus {
+  font-size: 10px;
+}
+/* line 114, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack.active i.fa-video-camera, body.profiles a.feed-item-type span.fa-stack.active i.fa-heart {
+  color: #BDC3C7;
+}
+/* line 118, ../sass/screen.scss */
+body.profiles a.feed-item-type span.fa-stack.active i.fa-plus, body.profiles a.feed-item-type span.fa-stack.active i.fa-minus {
+  text-shadow: 0 0 1px 0 #95A5A6;
+}
+/* line 126, ../sass/screen.scss */
+body.profiles a.feed-item-type:hover span.fa-stack i.fa-video-camera, body.profiles a.feed-item-type:hover span.fa-stack i.fa-heart {
+  color: #30AD63;
+}
+/* line 131, ../sass/screen.scss */
+body.profiles a.feed-item-type:hover span.fa-stack.active i.fa-video-camera, body.profiles a.feed-item-type:hover span.fa-stack.active i.fa-heart {
+  color: #95A5A6;
+}
+/* line 139, ../sass/screen.scss */
 body.profiles #main {
   background: #05171E;
 }
-/* line 48, ../sass/screen.scss */
+/* line 143, ../sass/screen.scss */
 body.profiles #base {
   background: #05171E;
   margin-top: 16px;
 }
-/* line 52, ../sass/screen.scss */
+/* line 147, ../sass/screen.scss */
 body.profiles #base #content-wrapper {
   position: relative;
 }
-/* line 55, ../sass/screen.scss */
+/* line 150, ../sass/screen.scss */
 body.profiles #base #content-wrapper:after {
   content: '';
   display: block;
   clear: left;
 }
-/* line 61, ../sass/screen.scss */
+/* line 156, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper {
   height: 100%;
 }
-/* line 64, ../sass/screen.scss */
+/* line 159, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar {
   background-color: white;
   position: static;
   float: left;
   height: 100%;
 }
-/* line 70, ../sass/screen.scss */
+/* line 165, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper {
   height: 244px;
   left: 0;
@@ -69,26 +158,26 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper 
   position: relative;
   top: -47px;
 }
-/* line 77, ../sass/screen.scss */
+/* line 172, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper .details-col {
   padding: 0;
 }
-/* line 79, ../sass/screen.scss */
+/* line 174, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-avatar {
   margin: 0;
 }
-/* line 82, ../sass/screen.scss */
+/* line 177, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-avatar a {
   display: block;
   height: 247px;
   width: 100%;
 }
-/* line 87, ../sass/screen.scss */
+/* line 182, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-avatar a img {
   height: 247px;
   width: 100%;
 }
-/* line 94, ../sass/screen.scss */
+/* line 189, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-display-name {
   background-color: #2B2727;
   bottom: 0;
@@ -96,7 +185,7 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper 
   position: absolute;
   width: 100%;
 }
-/* line 102, ../sass/screen.scss */
+/* line 197, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-display-name div h1 {
   color: #FFFFFF;
   font-size: 20px;
@@ -105,19 +194,19 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper 
   position: relative;
   left: -1px;
 }
-/* line 110, ../sass/screen.scss */
+/* line 205, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-display-name div h1 a {
   color: white;
 }
-/* line 113, ../sass/screen.scss */
+/* line 208, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-display-name div h1 a:active, body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-display-name div h1 a:hover, body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-display-name div h1 a:focus {
   text-decoration: none;
 }
-/* line 120, ../sass/screen.scss */
+/* line 215, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-display-name div a.toggle-follow span.fa-stack {
   top: -2px;
 }
-/* line 125, ../sass/screen.scss */
+/* line 220, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-videos {
   background-color: #2B2727;
   bottom: 42px;
@@ -125,19 +214,19 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper 
   position: absolute;
   width: 100%;
 }
-/* line 132, ../sass/screen.scss */
+/* line 227, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-videos div.vid {
   padding: 0;
   margin: 0 -1px 0 0;
 }
-/* line 136, ../sass/screen.scss */
+/* line 231, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-videos div.vid a.thumbnail-link {
   display: block;
   height: auto;
   cursor: pointer;
   position: relative;
 }
-/* line 142, ../sass/screen.scss */
+/* line 237, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-videos div.vid a.thumbnail-link span.play {
   -webkit-border-radius: 50% 50%;
   -moz-border-radius: 50% / 50%;
@@ -146,7 +235,7 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper 
   height: 22px;
   width: 22px;
 }
-/* line 148, ../sass/screen.scss */
+/* line 243, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-videos div.vid a.thumbnail-link span.play i.fa-play {
   color: black;
   display: block;
@@ -155,70 +244,70 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper 
   padding-left: 4px;
   width: 14px;
 }
-/* line 158, ../sass/screen.scss */
+/* line 253, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-videos div.vid a.thumbnail-link img {
   max-width: 108%;
 }
-/* line 161, ../sass/screen.scss */
+/* line 256, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #details-wrapper #user-videos div.vid a.thumbnail-link:hover span.play {
   background-color: rgba(255, 255, 255, 0.75);
 }
-/* line 170, ../sass/screen.scss */
+/* line 265, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-details {
   background: #FFFFFF;
   padding: 8px 17px 23px;
   margin-top: -47px;
 }
-/* line 175, ../sass/screen.scss */
+/* line 270, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-details h2 {
   color: #6e6e6e;
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 0;
 }
-/* line 181, ../sass/screen.scss */
+/* line 276, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-details h2 i.fa-play {
   color: #05171E;
   left: 9%;
   position: relative;
   top: 8%;
 }
-/* line 189, ../sass/screen.scss */
+/* line 284, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-details h3 {
   color: #bfbfbf;
   font-size: 17px;
   font-weight: 300;
   margin-top: 0;
 }
-/* line 195, ../sass/screen.scss */
+/* line 290, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-details h3 i {
   font-size: 20px;
 }
-/* line 198, ../sass/screen.scss */
+/* line 293, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-details em {
   color: #9d9c9c;
   font-size: 15px;
   font-style: italic;
 }
-/* line 205, ../sass/screen.scss */
+/* line 300, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-stats {
   background: #E9E9E9;
   padding: 20px 0;
 }
-/* line 209, ../sass/screen.scss */
+/* line 304, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-stats div.stats-wrapper {
   padding-right: 0;
 }
-/* line 213, ../sass/screen.scss */
+/* line 308, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-stats .nav-tabs {
   border-bottom: none;
 }
-/* line 216, ../sass/screen.scss */
+/* line 311, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-stats .nav-tabs li {
   float: left;
   width: 33%;
 }
-/* line 220, ../sass/screen.scss */
+/* line 315, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-stats .nav-tabs li a {
   color: #898686;
   font-size: 17px;
@@ -226,32 +315,32 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-stats .nav-
   padding: 0;
   margin: 0;
 }
-/* line 227, ../sass/screen.scss */
+/* line 322, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-stats .nav-tabs li a i {
   color: #AEAEAE;
 }
-/* line 231, ../sass/screen.scss */
+/* line 326, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-stats .nav-tabs li.active a {
   background-color: transparent;
   border-color: transparent;
 }
-/* line 235, ../sass/screen.scss */
+/* line 330, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #user-stats .nav-tabs li.active a i {
   color: #4a8cc5;
 }
-/* line 242, ../sass/screen.scss */
+/* line 337, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations {
   background: white;
   overflow: hidden;
 }
-/* line 246, ../sass/screen.scss */
+/* line 341, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div {
   position: relative;
   left: 0;
   padding: 0;
   margin: 0;
 }
-/* line 252, ../sass/screen.scss */
+/* line 347, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div h2 {
   color: #ACABAB;
   font-size: 18px;
@@ -263,7 +352,7 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations 
   text-shadow: 1px 0 0 rgba(255, 255, 255, 0.8);
   z-index: 10;
 }
-/* line 264, ../sass/screen.scss */
+/* line 359, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div a.thumbnail-link {
   display: block;
   height: auto;
@@ -272,13 +361,13 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations 
   position: relative;
   overflow: hidden;
 }
-/* line 272, ../sass/screen.scss */
+/* line 367, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div a.thumbnail-link span {
   color: white;
   display: block;
   z-index: 5;
 }
-/* line 278, ../sass/screen.scss */
+/* line 373, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div a.thumbnail-link span.play {
   -webkit-border-radius: 50% 50%;
   -moz-border-radius: 50% / 50%;
@@ -287,7 +376,7 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations 
   height: 45px;
   width: 45px;
 }
-/* line 284, ../sass/screen.scss */
+/* line 379, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div a.thumbnail-link span.play i.fa-play {
   color: black;
   display: block;
@@ -296,17 +385,17 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations 
   padding-left: 4px;
   width: 21px;
 }
-/* line 294, ../sass/screen.scss */
+/* line 389, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div a.thumbnail-link img.video-thumbnail {
   height: 137px;
   margin-top: -1px;
 }
-/* line 298, ../sass/screen.scss */
+/* line 393, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div a.thumbnail-link img.video-thumbnail.loaded {
   height: auto;
   width: auto;
 }
-/* line 304, ../sass/screen.scss */
+/* line 399, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div a.thumbnail-link span.title {
   background-color: rgba(0, 0, 0, 0.4);
   bottom: 0;
@@ -317,23 +406,23 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations 
   width: 100%;
   visibility: hidden;
 }
-/* line 314, ../sass/screen.scss */
+/* line 409, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div a.thumbnail-link span.title strong {
   font-weight: 700;
 }
-/* line 320, ../sass/screen.scss */
+/* line 415, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div a.thumbnail-link:hover span.play {
   background-color: rgba(255, 255, 255, 0.75);
 }
-/* line 324, ../sass/screen.scss */
+/* line 419, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div a.thumbnail-link:hover span.title {
   visibility: visible;
 }
-/* line 330, ../sass/screen.scss */
+/* line 425, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div div.row-users {
   position: relative;
 }
-/* line 333, ../sass/screen.scss */
+/* line 428, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div div.row-users span.title {
   background-color: rgba(0, 0, 0, 0.4);
   bottom: 0;
@@ -346,39 +435,39 @@ body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations 
   width: 100%;
   z-index: 10;
 }
-/* line 345, ../sass/screen.scss */
+/* line 440, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div div.row-users span.title strong {
   font-weight: 700;
 }
-/* line 351, ../sass/screen.scss */
+/* line 446, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div div.row-users div.user-column a.avatar {
   display: block;
   height: 100%;
   width: 100%;
 }
-/* line 356, ../sass/screen.scss */
+/* line 451, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div div.row-users div.user-column a.avatar img {
   max-width: 105%;
 }
-/* line 363, ../sass/screen.scss */
+/* line 458, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #sidebar #recommendations div div.ajax {
   background: #05171E;
   width: 100%;
 }
-/* line 371, ../sass/screen.scss */
+/* line 466, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content {
   background: #05171E;
   min-height: 1129px;
   padding-right: 14px;
   height: 100%;
 }
-/* line 377, ../sass/screen.scss */
+/* line 472, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-video {
   background: #1DAFEC;
   height: 54px;
   overflow: hidden;
 }
-/* line 383, ../sass/screen.scss */
+/* line 478, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-video #add-video-form input {
   background: #1DAFEC;
   border: none;
@@ -389,37 +478,37 @@ body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-vide
   padding: 20px 11px 0px 0px;
   width: 98%;
 }
-/* line 393, ../sass/screen.scss */
+/* line 488, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-video #add-video-form input::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #A3D9ED;
 }
-/* line 397, ../sass/screen.scss */
+/* line 492, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-video #add-video-form input:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #A3D9ED;
 }
-/* line 401, ../sass/screen.scss */
+/* line 496, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-video #add-video-form input::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #A3D9ED;
 }
-/* line 405, ../sass/screen.scss */
+/* line 500, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-video #add-video-form input:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #A3D9ED;
 }
-/* line 409, ../sass/screen.scss */
+/* line 504, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-video #add-video-form input:focus {
   outline: 0;
 }
-/* line 414, ../sass/screen.scss */
+/* line 509, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-video #add-video-form div.submit {
   background: #1EABE4;
   padding: 0;
   height: 100%;
 }
-/* line 419, ../sass/screen.scss */
+/* line 514, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-video #add-video-form div.submit button {
   background: #1EABE4;
   border: none;
@@ -430,30 +519,30 @@ body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-vide
   font-size: 0.88em;
   width: 100%;
 }
-/* line 429, ../sass/screen.scss */
+/* line 524, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #add-video #add-video-form div.submit button i {
   color: white;
 }
-/* line 435, ../sass/screen.scss */
+/* line 530, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline {
   background: #05171E;
   padding: 13px 0;
   overflow: hidden;
   min-height: 1055px;
 }
-/* line 441, ../sass/screen.scss */
+/* line 536, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline nav {
   margin-bottom: 19px;
 }
-/* line 444, ../sass/screen.scss */
+/* line 539, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline nav .nav-pills > li + li {
   margin-left: 0;
 }
-/* line 448, ../sass/screen.scss */
+/* line 543, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline nav ul.nav-pills {
   padding: 0 17px;
 }
-/* line 452, ../sass/screen.scss */
+/* line 547, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline nav ul.nav-pills li a {
   color: #898989;
   font-size: 13px;
@@ -462,13 +551,13 @@ body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline
   text-align: center;
   width: 100%;
 }
-/* line 461, ../sass/screen.scss */
+/* line 556, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline nav ul.nav-pills li:last-child {
   padding-left: 0;
   margin-right: 0;
   padding-right: 0;
 }
-/* line 468, ../sass/screen.scss */
+/* line 563, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline nav ul.nav-pills li.active a, body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline nav ul.nav-pills li:hover a {
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
@@ -478,70 +567,70 @@ body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline
   color: #c5c5c5;
   text-align: center;
 }
-/* line 477, ../sass/screen.scss */
+/* line 572, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline nav ul.nav-pills li.active {
   font-weight: 700;
 }
-/* line 481, ../sass/screen.scss */
+/* line 576, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline nav ul.nav-pills li.start {
   margin-left: 0;
   padding-left: 0;
 }
-/* line 489, ../sass/screen.scss */
+/* line 584, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline {
   background: #05171E;
   margin: -5px 0 0;
   font-family: "ff-dagny-web-pro", sans-serif;
 }
-/* line 494, ../sass/screen.scss */
+/* line 589, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.container {
   background: #05171E;
   min-height: 605px;
 }
-/* line 499, ../sass/screen.scss */
+/* line 594, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item {
   margin-bottom: 18px;
 }
-/* line 502, ../sass/screen.scss */
+/* line 597, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item.removed {
   -webkit-animation: removed-item-animation 0.3s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
   -o-animation: removed-item-animation 0.3s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
   animation: removed-item-animation 0.3s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
 }
-/* line 508, ../sass/screen.scss */
+/* line 603, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item.added {
   opacity: 0;
   -webkit-animation: new-item-animation .3s linear forwards;
   -o-animation: new-item-animation .3s linear forwards;
   animation: new-item-animation 0.3s linear forwards;
 }
-/* line 515, ../sass/screen.scss */
+/* line 610, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item.init {
   visibility: hidden;
 }
-/* line 519, ../sass/screen.scss */
+/* line 614, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content {
   padding-bottom: 0;
 }
-/* line 524, ../sass/screen.scss */
+/* line 619, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.header-content {
   position: relative;
 }
-/* line 528, ../sass/screen.scss */
+/* line 623, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header img.header-avatar {
   height: 41px;
   width: 41px;
 }
-/* line 533, ../sass/screen.scss */
+/* line 628, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.avatar {
   padding-right: 0;
   max-width: 56px;
 }
-/* line 538, ../sass/screen.scss */
+/* line 633, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header a {
   color: #247cc0;
 }
-/* line 542, ../sass/screen.scss */
+/* line 637, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header p {
   color: #565555;
   margin-bottom: 0;
@@ -550,120 +639,31 @@ body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline
   text-align: left;
   font-weight: 500;
 }
-/* line 550, ../sass/screen.scss */
+/* line 645, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header p i {
   color: #b2bbbe;
   font-size: 7px;
   position: relative;
   top: -5px;
 }
-/* line 557, ../sass/screen.scss */
+/* line 652, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header p span {
   color: #383838;
   font-weight: 700;
   padding: 0 2px;
 }
-/* line 562, ../sass/screen.scss */
+/* line 657, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header p span.action-name {
   color: #565555;
   font-weight: normal;
   padding: 0;
 }
-/* line 570, ../sass/screen.scss */
+/* line 665, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type {
   padding: 0;
   position: absolute;
   right: 7px;
   top: 5px;
-}
-/* line 576, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type {
-  display: block;
-  height: 18px;
-  outline: 0 none;
-}
-/* line 581, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack {
-  line-height: 18px;
-  height: 18px;
-  position: relative;
-  left: 6px;
-  vertical-align: top;
-}
-/* line 588, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack i.fa-video-camera, body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack i.fa-heart {
-  color: #39CA74;
-  font-size: 20px;
-}
-/* line 593, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack i.fa-plus, body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack i.fa-minus {
-  font-size: 11px;
-  text-shadow: 0 0 1px 0 #30AD63;
-}
-/* line 598, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.favorite {
-  top: 0;
-}
-/* line 601, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.favorite i.fa-heart {
-  font-size: 21px;
-}
-/* line 605, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.favorite i.fa-plus, body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.favorite i.fa-minus {
-  text-indent: -0.05em;
-}
-/* line 609, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.favorite i.fa-plus {
-  line-height: 21px;
-}
-/* line 613, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.favorite i.fa-minus {
-  line-height: 20px;
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  /* line 618, ../sass/screen.scss */
-  body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.favorite i.fa-plus {
-    line-height: 22px;
-  }
-  /* line 622, ../sass/screen.scss */
-  body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.favorite i.fa-minus {
-    line-height: 21px;
-  }
-}
-/* line 628, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.video {
-  top: -1px;
-}
-/* line 631, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.video i.fa-plus, body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.video i.fa-minus {
-  line-height: 20px;
-  text-indent: -5px;
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  /* line 631, ../sass/screen.scss */
-  body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.video i.fa-plus, body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.video i.fa-minus {
-    line-height: 21px;
-  }
-}
-/* line 640, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.video i.fa-minus {
-  font-size: 10px;
-}
-/* line 646, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.active i.fa-video-camera, body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.active i.fa-heart {
-  color: #BDC3C7;
-}
-/* line 650, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.active i.fa-plus, body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type span.fa-stack.active i.fa-minus {
-  text-shadow: 0 0 1px 0 #95A5A6;
-}
-/* line 658, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type:hover span.fa-stack i.fa-video-camera, body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type:hover span.fa-stack i.fa-heart {
-  color: #30AD63;
-}
-/* line 663, ../sass/screen.scss */
-body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type:hover span.fa-stack.active i.fa-video-camera, body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.header div.action-type a.feed-item-type:hover span.fa-stack.active i.fa-heart {
-  color: #95A5A6;
 }
 /* line 674, ../sass/screen.scss */
 body.profiles #base #content-wrapper #profile-wrapper #profile-content #timeline div.responsive-timeline div.item div.content div.posted div {
@@ -977,33 +977,73 @@ body.profiles #footer {
   color: #f2f2f2;
   font-size: 14px;
   font-weight: 500;
+  left: -3px;
+  position: relative;
 }
-/* line 1008, ../sass/screen.scss */
-#share div.row.details div.stats p i {
+/* line 1010, ../sass/screen.scss */
+#share div.row.details div.stats p a.feed-item-type {
+  color: #f2f2f2;
+  height: 31px;
+  left: -6px;
+  margin-bottom: 19px;
+  padding: 6px 0;
+  position: relative;
+}
+/* line 1018, ../sass/screen.scss */
+#share div.row.details div.stats p a.feed-item-type span.fa-stack {
+  left: 0;
+}
+/* line 1022, ../sass/screen.scss */
+#share div.row.details div.stats p a.feed-item-type.remove {
+  width: 107px;
+}
+/* line 1026, ../sass/screen.scss */
+#share div.row.details div.stats p a.feed-item-type.add {
+  width: 98px;
+}
+/* line 1030, ../sass/screen.scss */
+#share div.row.details div.stats p a.feed-item-type:hover, #share div.row.details div.stats p a.feed-item-type:active, #share div.row.details div.stats p a.feed-item-type:focus {
+  text-decoration: none;
+}
+/* line 1034, ../sass/screen.scss */
+#share div.row.details div.stats p a.feed-item-type span.toggle-text {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  position: relative;
+  top: -1px;
+  left: -3px;
+}
+/* line 1044, ../sass/screen.scss */
+#share div.row.details div.stats p i.fa-group, #share div.row.details div.stats p i.fa-comment {
   color: #aeaeae;
   font-size: 18px;
   vertical-align: top;
 }
-/* line 1017, ../sass/screen.scss */
+/* line 1052, ../sass/screen.scss */
+#share div.row.details div.commenters {
+  padding-left: 15px;
+}
+/* line 1055, ../sass/screen.scss */
 #share div.row.details div.commenters h2 {
   text-indent: 0;
 }
-/* line 1021, ../sass/screen.scss */
+/* line 1059, ../sass/screen.scss */
 #share div.row.details div.commenters ul {
   list-style: none;
 }
-/* line 1024, ../sass/screen.scss */
+/* line 1062, ../sass/screen.scss */
 #share div.row.details div.commenters ul li {
   height: 48px;
   width: 48px;
 }
-/* line 1028, ../sass/screen.scss */
+/* line 1066, ../sass/screen.scss */
 #share div.row.details div.commenters ul li a {
   position: relative;
   height: 48px;
   width: 48px;
 }
-/* line 1033, ../sass/screen.scss */
+/* line 1071, ../sass/screen.scss */
 #share div.row.details div.commenters ul li a span {
   background-color: rgba(18, 101, 158, 0.74);
   display: block;
@@ -1018,7 +1058,7 @@ body.profiles #footer {
   color: white;
 }
 
-/* line 1055, ../sass/screen.scss */
+/* line 1093, ../sass/screen.scss */
 #modal-help div.modal-dialog {
   padding-left: 0;
   padding-right: 0;
@@ -1028,25 +1068,25 @@ body.profiles #footer {
   left: -8px;
   width: auto;
 }
-/* line 1064, ../sass/screen.scss */
+/* line 1102, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-body {
   padding: 0;
 }
-/* line 1068, ../sass/screen.scss */
+/* line 1106, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content {
   background-color: transparent;
   border: none;
   box-shadow: none;
 }
-/* line 1073, ../sass/screen.scss */
+/* line 1111, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row {
   margin: 0;
 }
-/* line 1076, ../sass/screen.scss */
+/* line 1114, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div {
   position: relative;
 }
-/* line 1079, ../sass/screen.scss */
+/* line 1117, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div p {
   color: #FFFFFF;
   display: block;
@@ -1057,29 +1097,29 @@ body.profiles #footer {
   margin-bottom: 0;
   overflow: hidden;
 }
-/* line 1090, ../sass/screen.scss */
+/* line 1128, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div span.bracket {
   display: block;
   position: absolute;
 }
-/* line 1098, ../sass/screen.scss */
+/* line 1136, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.videos,
 #modal-help div.modal-dialog div.modal-content div.row div.edit,
 #modal-help div.modal-dialog div.modal-content div.row div.activity {
   border-bottom: 3px solid white;
 }
-/* line 1101, ../sass/screen.scss */
+/* line 1139, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.videos p,
 #modal-help div.modal-dialog div.modal-content div.row div.edit p,
 #modal-help div.modal-dialog div.modal-content div.row div.activity p {
   text-align: center;
 }
-/* line 1107, ../sass/screen.scss */
+/* line 1145, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.search,
 #modal-help div.modal-dialog div.modal-content div.row div.add-video {
   border-left: 3px solid white;
 }
-/* line 1110, ../sass/screen.scss */
+/* line 1148, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.search span.bracket,
 #modal-help div.modal-dialog div.modal-content div.row div.add-video span.bracket {
   border-top: 3px solid white;
@@ -1090,7 +1130,7 @@ body.profiles #footer {
   left: -18px;
   top: 0;
 }
-/* line 1123, ../sass/screen.scss */
+/* line 1161, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.videos span.bracket,
 #modal-help div.modal-dialog div.modal-content div.row div.activity span.bracket {
   border-left: 3px solid white;
@@ -1099,29 +1139,29 @@ body.profiles #footer {
   height: 13px;
   top: 35px;
 }
-/* line 1132, ../sass/screen.scss */
+/* line 1170, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.search {
   background: #982378;
   margin-left: -18px;
   margin-bottom: 22px;
   position: relative;
 }
-/* line 1139, ../sass/screen.scss */
+/* line 1177, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.add-video {
   background: #c27005;
   margin-bottom: 37px;
 }
-/* line 1144, ../sass/screen.scss */
+/* line 1182, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.videos {
   background: #28a370;
   margin-bottom: 51px;
 }
-/* line 1148, ../sass/screen.scss */
+/* line 1186, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.videos span.bracket {
   width: 100%;
   left: 0;
 }
-/* line 1154, ../sass/screen.scss */
+/* line 1192, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.edit {
   background: #a02e4e;
   border-top: 3px solid white;
@@ -1132,7 +1172,7 @@ body.profiles #footer {
   margin-bottom: 12px;
   text-align: center;
 }
-/* line 1164, ../sass/screen.scss */
+/* line 1202, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.edit span.bracket {
   border-left: 3px solid white;
   border-right: 3px solid white;
@@ -1142,55 +1182,55 @@ body.profiles #footer {
   left: 0;
   width: 100%;
 }
-/* line 1175, ../sass/screen.scss */
+/* line 1213, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.activity {
   border-bottom: none;
   text-align: center;
   padding: 0 18px;
 }
-/* line 1180, ../sass/screen.scss */
+/* line 1218, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.activity p {
   background: #0187bc;
   border-bottom: 3px solid white;
 }
-/* line 1185, ../sass/screen.scss */
+/* line 1223, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.activity span.bracket {
   width: 95.1%;
   left: 18px;
 }
-/* line 1190, ../sass/screen.scss */
+/* line 1228, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.activity i.fa-chevron-circle-down {
   color: white;
   padding-top: 13px;
   padding-bottom: 27px;
 }
-/* line 1197, ../sass/screen.scss */
+/* line 1235, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.steps {
   background: #0187bc;
   border-bottom: none;
   padding: 0 18px;
 }
-/* line 1202, ../sass/screen.scss */
+/* line 1240, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.steps h2 {
   color: white;
   font-weight: 700;
   font-size: 24px;
 }
-/* line 1208, ../sass/screen.scss */
+/* line 1246, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.steps ol {
   margin-bottom: 12px;
 }
-/* line 1211, ../sass/screen.scss */
+/* line 1249, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.steps ol li {
   color: white;
   font-weight: 700;
   font-size: 18px;
 }
-/* line 1216, ../sass/screen.scss */
+/* line 1254, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row div.steps ol li:last-child {
   padding-bottom: 0;
 }
-/* line 1221, ../sass/screen.scss */
+/* line 1259, ../sass/screen.scss */
 #modal-help div.modal-dialog div.modal-content div.row button {
   background: #f20384;
   border: 3px solid white;
@@ -1201,67 +1241,67 @@ body.profiles #footer {
   margin: 0 0 12px 15px;
 }
 
-/* line 1235, ../sass/screen.scss */
+/* line 1273, ../sass/screen.scss */
 .modal-backdrop.in, .modal-backdrop.fade.in {
   opacity: 0.7;
 }
 
-/* line 1238, ../sass/screen.scss */
+/* line 1276, ../sass/screen.scss */
 body.share .container {
   max-width: 700px;
 }
-/* line 1243, ../sass/screen.scss */
+/* line 1281, ../sass/screen.scss */
 body.share #base #logo div.row-logo a {
   margin-left: 0;
 }
-/* line 1248, ../sass/screen.scss */
+/* line 1286, ../sass/screen.scss */
 body.share #base #logo div.row-search #search-form input {
   width: 94%;
 }
-/* line 1250, ../sass/screen.scss */
+/* line 1288, ../sass/screen.scss */
 body.share #base #logo div.row-user {
   padding-left: 0;
   padding-right: 14px;
 }
-/* line 1257, ../sass/screen.scss */
+/* line 1295, ../sass/screen.scss */
 body.share #main {
   background: #05171E;
 }
-/* line 1261, ../sass/screen.scss */
+/* line 1299, ../sass/screen.scss */
 body.share #share {
   margin-bottom: 0;
   overflow: hidden;
   padding: 0;
   width: auto;
 }
-/* line 1269, ../sass/screen.scss */
+/* line 1307, ../sass/screen.scss */
 body.share #share div.row.video h1 {
   margin-top: 0px;
 }
-/* line 1270, ../sass/screen.scss */
+/* line 1308, ../sass/screen.scss */
 body.share #share div.row.video div {
   margin: 0 15px;
 }
-/* line 1271, ../sass/screen.scss */
+/* line 1309, ../sass/screen.scss */
 body.share #share div.row.video iframe {
   margin: 0;
 }
-/* line 1274, ../sass/screen.scss */
+/* line 1312, ../sass/screen.scss */
 body.share #share div.row.details {
   margin: -6px 0 0;
   position: relative;
   z-index: 10;
 }
-/* line 1282, ../sass/screen.scss */
+/* line 1320, ../sass/screen.scss */
 body.share #footer {
   margin-top: 0;
 }
 
-/* line 1286, ../sass/screen.scss */
+/* line 1324, ../sass/screen.scss */
 body.profiles.edit #base #profile-content {
   min-height: 560px;
 }
-/* line 1290, ../sass/screen.scss */
+/* line 1328, ../sass/screen.scss */
 body.profiles.edit #base #profile-content #add-video p {
   color: white;
   font-weight: 700;
@@ -1270,21 +1310,21 @@ body.profiles.edit #base #profile-content #add-video p {
   text-indent: 20px;
   line-height: 54px;
 }
-/* line 1300, ../sass/screen.scss */
+/* line 1338, ../sass/screen.scss */
 body.profiles.edit #base #profile-content #timeline {
   min-height: 600px;
 }
-/* line 1304, ../sass/screen.scss */
+/* line 1342, ../sass/screen.scss */
 body.profiles.edit #base #profile-content div.avatar-section {
   color: white;
   padding: 27px 18px;
 }
-/* line 1309, ../sass/screen.scss */
+/* line 1347, ../sass/screen.scss */
 body.profiles.edit #base #profile-content form {
   padding-top: 32px;
   padding-bottom: 18px;
 }
-/* line 1313, ../sass/screen.scss */
+/* line 1351, ../sass/screen.scss */
 body.profiles.edit #base #profile-content form input, body.profiles.edit #base #profile-content form textarea {
   display: block;
   border: none;
@@ -1292,14 +1332,14 @@ body.profiles.edit #base #profile-content form input, body.profiles.edit #base #
   padding: 5px;
   width: 100%;
 }
-/* line 1321, ../sass/screen.scss */
+/* line 1359, ../sass/screen.scss */
 body.profiles.edit #base #profile-content form label {
   color: white;
   display: block;
   margin: 0;
   padding: 0;
 }
-/* line 1328, ../sass/screen.scss */
+/* line 1366, ../sass/screen.scss */
 body.profiles.edit #base #profile-content form .btn-info {
   background-color: #5bc0de;
   border-color: #46b8da;
@@ -1307,7 +1347,7 @@ body.profiles.edit #base #profile-content form .btn-info {
 }
 
 @keyframes new-item-animation {
-  /* line 1338, ../sass/screen.scss */
+  /* line 1376, ../sass/screen.scss */
   from {
     opacity: 0;
     -webkit-transform: scale(0);
@@ -1316,7 +1356,7 @@ body.profiles.edit #base #profile-content form .btn-info {
     transform: scale(0);
   }
 
-  /* line 1346, ../sass/screen.scss */
+  /* line 1384, ../sass/screen.scss */
   to {
     opacity: 1;
     -webkit-transform: scale(1);
@@ -1327,14 +1367,14 @@ body.profiles.edit #base #profile-content form .btn-info {
 }
 
 @-webkit-keyframes new-item-animation {
-  /* line 1356, ../sass/screen.scss */
+  /* line 1394, ../sass/screen.scss */
   from {
     opacity: 0;
     -webkit-transform: scale(0);
     transform: scale(0);
   }
 
-  /* line 1362, ../sass/screen.scss */
+  /* line 1400, ../sass/screen.scss */
   to {
     opacity: 1;
     -webkit-transform: scale(1);
@@ -1343,14 +1383,14 @@ body.profiles.edit #base #profile-content form .btn-info {
 }
 
 @-o-keyframes new-item-animation {
-  /* line 1370, ../sass/screen.scss */
+  /* line 1408, ../sass/screen.scss */
   from {
     opacity: 0;
     -o-transform: scale(0);
     transform: scale(0);
   }
 
-  /* line 1376, ../sass/screen.scss */
+  /* line 1414, ../sass/screen.scss */
   to {
     opacity: 1;
     -o-transform: scale(1);
@@ -1359,21 +1399,21 @@ body.profiles.edit #base #profile-content form .btn-info {
 }
 
 @-webkit-keyframes openspace {
-  /* line 1384, ../sass/screen.scss */
+  /* line 1422, ../sass/screen.scss */
   to {
     height: auto;
   }
 }
 
 @-o-keyframes openspace {
-  /* line 1390, ../sass/screen.scss */
+  /* line 1428, ../sass/screen.scss */
   to {
     height: auto;
   }
 }
 
 @keyframes removed-item-animation {
-  /* line 1396, ../sass/screen.scss */
+  /* line 1434, ../sass/screen.scss */
   from {
     opacity: 1;
     -webkit-transform: scale(1);
@@ -1382,7 +1422,7 @@ body.profiles.edit #base #profile-content form .btn-info {
     transform: scale(1);
   }
 
-  /* line 1404, ../sass/screen.scss */
+  /* line 1442, ../sass/screen.scss */
   to {
     -webkit-transform: scale(0);
     -ms-transform: scale(0);
@@ -1393,14 +1433,14 @@ body.profiles.edit #base #profile-content form .btn-info {
 }
 
 @-webkit-keyframes removed-item-animation {
-  /* line 1414, ../sass/screen.scss */
+  /* line 1452, ../sass/screen.scss */
   from {
     opacity: 1;
     -webkit-transform: scale(1);
     transform: scale(1);
   }
 
-  /* line 1420, ../sass/screen.scss */
+  /* line 1458, ../sass/screen.scss */
   to {
     -webkit-transform: scale(0);
     transform: scale(0);
@@ -1409,14 +1449,14 @@ body.profiles.edit #base #profile-content form .btn-info {
 }
 
 @-o-keyframes removed-item-animation {
-  /* line 1428, ../sass/screen.scss */
+  /* line 1466, ../sass/screen.scss */
   from {
     opacity: 1;
     -o-transform: scale(1);
     transform: scale(1);
   }
 
-  /* line 1434, ../sass/screen.scss */
+  /* line 1472, ../sass/screen.scss */
   to {
     -o-transform: scale(0);
     transform: scale(0);

@@ -78,7 +78,9 @@ var FrameBuzzProfile = (function($) {
                 isMine = parentItem.hasClass('mine'),
                 addOrRemoveIcon = $(this).find('.fa-stack-1x'),
                 removing = addOrRemoveIcon.hasClass('fa-minus'),
-                statsItem = null;
+                statsItem = null,
+                isVideoScreen = $(this).hasClass('share-add'),
+                toggleText = $(this).find('.toggle-text');
 
             $.get(url, function(data) {
                 links.each(function(k, v) {
@@ -90,45 +92,57 @@ var FrameBuzzProfile = (function($) {
                         $(v).find('.fa-stack-1x').removeClass('fa-minus').addClass('fa-plus');
                     });
 
-                    if (isMine && (isFavorite || isVideo)) {
-                        parentItem
-                            .removeClass('added')
-                            .addClass('removed')
-                            .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
-                              $(this).remove();
-                              $(window).trigger('resize');
-                           });
-                    }
+                    if (isVideoScreen) {
+                        toggleText.parent().removeClass('remove').addClass('add');
+                        toggleText.text('Post Video');
+                    } 
+                    else {
+                        if (isMine && (isFavorite || isVideo)) {
+                            parentItem
+                                .removeClass('added')
+                                .addClass('removed')
+                                .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+                                  $(this).remove();
+                                  $(window).trigger('resize');
+                               });
+                        }
+                    }   
                 }
                 else {
                     links.each(function(k, v) {
                         $(v).find('.fa-stack-1x').removeClass('fa-plus').addClass('fa-minus');
                     });
 
-                    if (_isMyProfile) {
-                        var newItem = parentItem.clone(true),
-                            username = $('#user-display-name').find('a').text(),
-                            headerLink = $('.header-content > p > strong > a', newItem),
-                            headerAvatar = $('div.row.header > div.avatar > img', newItem),
-                            avatarLinkSrc = $('a.nav-link.avatar > img').attr('src');
+                    if (isVideoScreen) {
+                        toggleText.parent().removeClass('add').addClass('remove');
+                        toggleText.text('Remove Post');
+                    }
+                    else {
+                        if (_isMyProfile) {
+                            var newItem = parentItem.clone(true),
+                                username = $('#user-display-name').find('a').text(),
+                                headerLink = $('.header-content > p > strong > a', newItem),
+                                headerAvatar = $('div.row.header > div.avatar > img', newItem),
+                                avatarLinkSrc = $('a.nav-link.avatar > img').attr('src');
 
-                        newItem.addClass('mine');
-                        newItem.find('.action-timestamp').text(' 0 minutes ago');
-                        headerAvatar.attr('src', avatarLinkSrc);
-                        headerLink.text(username);
-                        headerLink.attr('href', window.location.href);
+                            newItem.addClass('mine');
+                            newItem.find('.action-timestamp').text(' 0 minutes ago');
+                            headerAvatar.attr('src', avatarLinkSrc);
+                            headerLink.text(username);
+                            headerLink.attr('href', window.location.href);
 
-                        if (newItem.hasClass('conversations')) {
-                            isFavorite = true;
+                            if (newItem.hasClass('conversations')) {
+                                isFavorite = true;
 
-                            newItem.removeClass('conversations').addClass('added_to_favorites');
-                            newItem.find('.action-name').text(' faved');
+                                newItem.removeClass('conversations').addClass('added_to_favorites');
+                                newItem.find('.action-name').text(' faved');
+                            }
+
+                            newItem.insertBefore(parentItem.parent().children().eq(0));
+                            newItem.addClass('added');
+
+                            $(window).trigger('resize');
                         }
-
-                        newItem.insertBefore(parentItem.parent().children().eq(0));
-                        newItem.addClass('added');
-
-                        $(window).trigger('resize');
                     }
                 }
 
@@ -224,6 +238,7 @@ var FrameBuzzProfile = (function($) {
         dialog.on('shown.bs.modal', function(e) {
             if (!menu.is(':visible')) { 
                 menu.addClass('open');
+                menu.css({ 'display': 'block !important; '});
             }
             menu.find('li.help').addClass('active');
         });

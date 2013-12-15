@@ -10,22 +10,15 @@
             </div>
         </div>
         <div class="row container details clearfix">
-            <div class="col-xs-2 {% if not request.user.is_authenticated and not found_by %} hidden{% endif %}">
-                {% if found_by %}
+            {% if found_by %}
+                <div class="col-xs-2">                
                     <h2>Found By</h2>
                     <a title="{{ found_by|display_name }}" href="{% url 'profiles-home' found_by.username %}">
                         <img src="{% avatar_url found_by 110 %}" alt="" class="img-responsive" />
                     </a>
-                {% else %}
-                    {% if request.user.is_authenticated %}
-                        <h2>Add to Library</h2>
-                        <a class="add-to-library video-toggle-button" href="{% url 'profiles-toggle-library' request.user.username video.video_id %}">
-                            <i class="icon-plus-sign-alt"></i>
-                        </a>
-                    {% endif %}
-                {% endif %}
-            </div>
-            <div class="col-xs-4 description">
+                </div>
+            {% endif %}
+            <div class="{% if found_by %}col-xs-4{% else %}col-xs-6{% endif %} description">
                 <h2>Description</h2>
                 <div class="scroller">
                     <p>{{ video.formatted_description|linebreaks|urlize }}</p>
@@ -33,6 +26,15 @@
             </div>
             <div class="col-xs-2 stats">
                 <h2>&nbsp;</h2>
+                <p>
+                  <a class="feed-item-type share-add btn btn-info{% if video_in_library %} remove{% else %} add{% endif %}{% if request.user.is_authenticated %} toggle{% endif %}" href="{% if request.user.is_authenticated %}{% url 'profiles-toggle-library' request.user.username video.video_id %}{% else %}{% url 'account_signup' %}{% endif %}">
+                    <span class="fa-stack video{% if video_in_library %} active{% endif %}">
+                        <i class="fa fa-video-camera fa-fw fa-stack-2x"></i>
+                        <i class="fa {% if video_in_library %}fa-minus{% else %}fa-plus{% endif %} fa-inverse fa-stack-1x"></i>
+                    </span>
+                    <span class="toggle-text">{% if video_in_library %}Remove Post{% else %}Post Video{% endif %}</span>
+                  </a>
+                </p>
                 <p>
                     <i class="fa fa-comment fa-fw"></i>
                     <span>{{ comment_count }}</span>
@@ -48,12 +50,6 @@
                         <span>0</span>
                     </p>
                 {% endfor %}
-                <p>
-                    {% comment %}
-                    <i class="fa fa-share fa-fw"></i>
-                    <span>{{ shares }}</span>
-                    {% endcomment %}
-                </p>
             </div>
             <div class="col-xs-4 commenters">
                 <h2>Commenters</h2>

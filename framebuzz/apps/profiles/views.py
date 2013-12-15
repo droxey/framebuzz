@@ -155,6 +155,7 @@ def recommendations(request):
 
 
 def video_share(request, username=None, video_id=None):
+    video_in_library = False
     video, created = get_or_create_video(video_id)
     context = dict()
 
@@ -164,12 +165,16 @@ def video_share(request, username=None, video_id=None):
     action_ids = [a.actor_object_id for a in actions]
     commenters = User.objects.filter(id__in=action_ids)
 
+    if request.user.is_authenticated():
+        user_video = UserVideo.objects.filter(user=request.user, video=video)
+        video_in_library = len(user_video) > 0
+
     context['video'] = video
     context['is_share'] = True
     context['commenters'] = commenters
     context['path'] = request.path
     context['found_by'] = video.found_by
-    context['shares'] = get_total_shares(request.path)
+    context['video_in_library'] = video_in_library
 
     if username is not None:
         if request.is_ajax():
