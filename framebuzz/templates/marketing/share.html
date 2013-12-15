@@ -34,15 +34,37 @@
         $(document).ready(function() {
             $('.tooltip').tooltip();
 
-            $('body').on('click', 'a.video-toggle-button', function(e) {
+            $('body').on('click', 'a.feed-item-type.toggle', function(e) {
                 e.preventDefault();
 
-                var link = $(this);
-                var url = link.attr('href');
+                var url = $(this).attr('href'),
+                    links = $('a[href="' + url + '"]'),
+                    addOrRemoveIcon = $(this).find('.fa-stack-1x'),
+                    removing = addOrRemoveIcon.hasClass('fa-minus'),
+                    toggleText = $(this).find('.toggle-text');
 
-                $.get(url, function(data) {
-                    window.location.reload();
-                });
+                    $.get(url, function(data) {
+                        links.each(function(k, v) {
+                            $(v).find('.fa-stack').toggleClass('active');
+                        });
+                        
+                        if (removing) {
+                            links.each(function(k, v) {
+                                $(v).find('.fa-stack-1x').removeClass('fa-minus').addClass('fa-plus');
+                            });
+                            
+                            toggleText.parent().removeClass('remove').addClass('add');
+                            toggleText.text('Post Video'); 
+                        }
+                        else {
+                            links.each(function(k, v) {
+                                $(v).find('.fa-stack-1x').removeClass('fa-plus').addClass('fa-minus');
+                            });
+
+                            toggleText.parent().removeClass('add').addClass('remove');
+                            toggleText.text('Remove Post');
+                        }
+                    });
 
                 return false;
             });
