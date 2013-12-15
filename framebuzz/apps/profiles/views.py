@@ -10,7 +10,7 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db.models import Count, Q
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 
@@ -202,7 +202,7 @@ def logged_in(request):
 
 
 def home(request, username):
-    user = User.objects.get(username__iexact=username)
+    user = get_object_or_404(User, username__iexact=username)
     actions = Action.objects.favorite_comments_stream(user)
     favorite_comment_ids = [a.action_object_object_id for a in actions]
     profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
