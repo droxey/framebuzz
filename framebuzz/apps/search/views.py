@@ -29,6 +29,9 @@ def search(request):
             total = RESULTS_PER_PAGE if q_filter == None else MINIMUM_TOTAL_RESULTS
             yt, token = find_video_by_keyword(query, results=total)
 
+            while token is not None:
+                yt, token = find_video_by_keyword(query, results=total, next_page_token=token)
+
             # Update search, since find_video_by_keyword
             # stores a copy in our db.
             videos = watson.search(query, models=(Video,))

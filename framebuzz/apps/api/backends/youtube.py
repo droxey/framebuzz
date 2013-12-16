@@ -51,7 +51,7 @@ def get_uploaded_videos(auth_token):
   return uploaded_videos
 
 
-def find_video_by_keyword(q, results=12, nextPageToken=None):
+def find_video_by_keyword(q, results=12, next_page_token=None):
   videos = list()
   params = {
      'alt': 'json',
@@ -64,21 +64,19 @@ def find_video_by_keyword(q, results=12, nextPageToken=None):
      'key': settings.YOUTUBE_API_KEY_SERVER
   }
 
-  if nextPageToken is not None:
-    params['pageToken'] = nextPageToken
+  if next_page_token is not None:
+    params['pageToken'] = next_page_token
 
   response = requests.get('https://www.googleapis.com/youtube/v3/search', params=params)
   query_response = response.json()
-  nextPageToken = query_response.get("tokenPagination", {}).get("nextPageToken")
+  next_page_token = query_response.get("tokenPagination", {}).get("nextPageToken")
 
   for search_result in query_response.get("items", []):
       video_id = search_result["id"]["videoId"]
       video, created = get_or_create_video(video_id)
       videos.append(video)
 
-  print videos
-
-  return videos, nextPageToken
+  return videos, next_page_token
 
 
 @watson.update_index()
