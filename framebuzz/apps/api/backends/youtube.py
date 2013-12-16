@@ -2,6 +2,7 @@ import json
 import urllib
 import iso8601
 import requests
+import watson
 
 from django.conf import settings
 from framebuzz.apps.api.models import Video, Thumbnail
@@ -59,7 +60,7 @@ def find_video_by_keyword(q, results=12, nextPageToken=None):
      'type': 'video',
      'videoEmbeddable': 'true',
      'maxResults': results,
-     'order': 'relevance',
+     'order': 'viewCount',
      'key': settings.YOUTUBE_API_KEY_SERVER
   }
 
@@ -80,7 +81,7 @@ def find_video_by_keyword(q, results=12, nextPageToken=None):
   return videos, nextPageToken
 
 
-
+@watson.update_index()
 def get_or_create_video(video_id):
   try:
     video = Video.objects.get(video_id = video_id)
