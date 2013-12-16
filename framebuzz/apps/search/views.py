@@ -26,16 +26,12 @@ def search(request):
         q_filter = request.GET.get('filter', None)
 
         if q_filter is None or q_filter == 'videos':
-            videos = watson.search(query, models=(Video,))
             total = RESULTS_PER_PAGE if q_filter == None else MINIMUM_TOTAL_RESULTS
+            yt, token = find_video_by_keyword(query, results=total)
 
-            if len(videos) < total:
-                count = total - len(videos)
-                yt, token = find_video_by_keyword(query, results=count)
-
-                # Update search, since find_video_by_keyword
-                # stores a copy in our db.
-                videos = watson.search(query, models=(Video,))
+            # Update search, since find_video_by_keyword
+            # stores a copy in our db.
+            videos = watson.search(query, models=(Video,))
         
         if q_filter is None or q_filter == 'conversations':
             conversations = watson.search(query, models=(MPTTComment,))

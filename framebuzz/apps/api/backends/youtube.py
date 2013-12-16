@@ -59,6 +59,7 @@ def find_video_by_keyword(q, results=12, nextPageToken=None):
      'type': 'video',
      'videoEmbeddable': 'true',
      'maxResults': results,
+     'order': 'relevance',
      'key': settings.YOUTUBE_API_KEY_SERVER
   }
 
@@ -72,8 +73,9 @@ def find_video_by_keyword(q, results=12, nextPageToken=None):
   for search_result in query_response.get("items", []):
       video_id = search_result["id"]["videoId"]
       video, created = get_or_create_video(video_id)
-      if created:
-        videos.append(video)
+      videos.append(video)
+
+  print videos
 
   return videos, nextPageToken
 
