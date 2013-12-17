@@ -59,9 +59,11 @@ def find_video_by_keyword(q, results=12, next_page_token=None):
      'q': q,
      'type': 'video',
      'videoEmbeddable': 'true',
+     'videoSyndicated': 'true',
      'maxResults': results,
      'order': 'viewCount',
-     'key': settings.YOUTUBE_API_KEY_SERVER
+     'key': settings.YOUTUBE_API_KEY_SERVER,
+     'fields': 'items(id),nextPageToken,pageInfo,prevPageToken,tokenPagination'
   }
 
   if next_page_token is not None:
@@ -70,6 +72,8 @@ def find_video_by_keyword(q, results=12, next_page_token=None):
   response = requests.get('https://www.googleapis.com/youtube/v3/search', params=params)
   query_response = response.json()
   next_page_token = query_response.get("tokenPagination", {}).get("nextPageToken")
+
+  print query_response.get('pageInfo', {})
 
   for search_result in query_response.get("items", []):
       video_id = search_result["id"]["videoId"]
