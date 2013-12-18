@@ -561,6 +561,41 @@ def all():
         manage("createsuperuser")
 
 
+@task
+@log_call
+def send_email_blast():
+    """ Sends a fbz email to all users."""
+    from django.contrib.auth.models import User
+    from templated_email import send_templated_mail
+
+    users = User.objects.exclude(email=None)
+    for user in users:
+        send_templated_mail(template_name='welcome-back',
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=user.email,
+                        context={'username': user.username})
+
+
+@task
+@log_call
+def follow_fbz():
+    from actstream.actions import follow
+    from actstream.models import Follow
+    from django.contrib.auth.models import User
+
+    users = User.objects.exclude(username__iexact='framebuzz')
+    fbz_user = User.objects.filter(username__iexact='framebuzz')
+
+    for user in users:
+        if not Follow.objects.is_following(user, fbz_user):
+            follow(user, fbz_user)
+        if not Follow.objects.is_following(fbz_user, user):
+            follow(fbz_user, user)
+
+
+
+
+
 def sshagent_run(cmd):
     """
     Helper function.

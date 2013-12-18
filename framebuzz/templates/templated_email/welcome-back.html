@@ -1,0 +1,26 @@
+{% extends "templated_email/base.html" %}
+
+{% block email_recipient %}Welcome to FrameBuzz!{% endblock %}
+
+{% block email_message %}
+    If you haven’t visited your FrameBuzz page yet today, <a href="http://{{ username }}.framebuzz.com">check it out</a>. You’ll find:
+    <br><br>
+    <ul>
+        <li>An updated look and feel that makes it easier to discover new videos, people and conversations</li>
+        <li>New video blogging features for sharing your content </li>
+        <li>Improved recommendations that highlight the cool stuff people are doing on FrameBuzz</li>
+        <li>Enhanced follower/following tools so you can better see what your FrameBuzz friends are up to</li>
+        <li>Refined commenting features making it even easier to start conversations</li>
+    </ul>
+    <br><br>
+    And that’s just a start, there’s lots more to come. 
+    <br><br>
+    For instance, lots of people are using FrameBuzz to watch music videos, share recipes, and create video collages of topics interesting to them. We’re working on a suite of new features that will make FrameBuzz an even better place to discover and share new content, and connect with people on topics you find interesting. 
+    Stay tuned for more updates in the next month, there’s plenty more in store.
+    <br><br>
+    In the meantime, please tell your friends to sign up to watch and follow you on FrameBuzz, and we’ll continue to build you the best video blogging site around.
+    <br><br>
+    Happy Holidays!
+    <br><br>
+    <strong>The FrameBuzz Team</strong>
+{% endblock %}

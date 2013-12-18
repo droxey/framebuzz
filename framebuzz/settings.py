@@ -363,7 +363,8 @@ TEMPLATED_EMAIL_DJANGO_SUBJECTS = {
     'reply-notification': 'FrameBuzz: New Comment Reply!',
     'welcome-newuser': 'Thanks for joining FrameBuzz.',
     'share-email': 'FrameBuzz: Check out this video!',
-    'comment-notification': 'FrameBuzz: New Video Reply!'
+    'comment-notification': 'FrameBuzz: New Video Reply!',
+    'welcome-back': 'Check out the new FrameBuzz!'
 }
 
 # Django-Celery Settings:
