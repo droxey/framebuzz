@@ -11,10 +11,11 @@ class Command(NoArgsCommand):
         users = User.objects.exclude(email=None)
         sent_to = []
         for user in users:
-            send_templated_mail(template_name='welcome-back',
-                                from_email=settings.DEFAULT_FROM_EMAIL,
-                                recipient_list=user.email,
-                                context={'username': user.username})
-            sent_to.append(user.username)
+            if user.email:
+                send_templated_mail(template_name='welcome-back',
+                                    from_email=settings.DEFAULT_FROM_EMAIL,
+                                    recipient_list=[user.email],
+                                    context={'username': user.username})
+                sent_to.append(user.username)
 
         print '%s users received blast: %s' % (len(sent_to), ', '.join(sent_to))
