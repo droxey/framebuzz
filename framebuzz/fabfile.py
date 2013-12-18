@@ -584,26 +584,27 @@ def send_email_blast():
 @task
 @log_call
 def follow_fbz():
-    from actstream.actions import follow
-    from actstream.models import Follow
-    from django.contrib.auth.models import User
+    with project():
+        from actstream.actions import follow
+        from actstream.models import Follow
+        from django.contrib.auth.models import User
 
-    users = User.objects.exclude(username__iexact='framebuzz')
-    fbz_user = User.objects.filter(username__iexact='framebuzz')
+        users = User.objects.exclude(username__iexact='framebuzz')
+        fbz_user = User.objects.filter(username__iexact='framebuzz')
 
-    now_following_fbz = []
-    fbz_now_following = []
+        now_following_fbz = []
+        fbz_now_following = []
 
-    for user in users:
-        if not Follow.objects.is_following(user, fbz_user):
-            follow(user, fbz_user)
-            now_following_fbz.append(user.username)
-        if not Follow.objects.is_following(fbz_user, user):
-            follow(fbz_user, user)
-            fbz_now_following.append(user.username)
+        for user in users:
+            if not Follow.objects.is_following(user, fbz_user):
+                follow(user, fbz_user)
+                now_following_fbz.append(user.username)
+            if not Follow.objects.is_following(fbz_user, user):
+                follow(fbz_user, user)
+                fbz_now_following.append(user.username)
 
-    print '%s users now following framebuzz: %s' % (len(now_following_fbz), now_following_fbz.join(', '))
-    print 'framebuzz now following %s users: %s' % (len(fbz_now_following), fbz_now_following.join(', '))
+        print '%s users now following framebuzz: %s' % (len(now_following_fbz), now_following_fbz.join(', '))
+        print 'framebuzz now following %s users: %s' % (len(fbz_now_following), fbz_now_following.join(', '))
 
 
 def sshagent_run(cmd):
