@@ -11,11 +11,11 @@ class Command(NoArgsCommand):
         users = User.objects.exclude(email=None)
         sent_to = []
         for user in users:
-            if user.email:
-                send_templated_mail(template_name='welcome-back',
+            if user.email and user.email not in sent_to:
+                send_templated_mail(template_name='happy-holidays',
                                     from_email=settings.DEFAULT_FROM_EMAIL,
                                     recipient_list=[user.email],
                                     context={'username': user.username})
-                sent_to.append(user.username)
+                sent_to.append(user.email)
 
         print '%s users received blast: %s' % (len(sent_to), ', '.join(sent_to))
