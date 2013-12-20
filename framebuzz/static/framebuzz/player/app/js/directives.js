@@ -220,6 +220,7 @@ angular.module('framebuzz.directives', [])
         return {
             link: function(scope, element, attrs) {
                 element.ready(function() {
+                    var timeSet = false;
                     var unsetPostTime = function() {
                         scope.postTime = 0;
                         safeApply(scope);
@@ -227,6 +228,8 @@ angular.module('framebuzz.directives', [])
                         $(element).val('');
                         $('#post-time').hide();
                         $('#duration').show().addClass('active');
+
+                        timeSet = false;
                     };
 
                     $(element).on('keyup', function(e) {
@@ -235,9 +238,20 @@ angular.module('framebuzz.directives', [])
                             
                             $('#duration').hide();
                             $('#post-time').show().addClass('active');
+
+                            timeSet = true;
                         };
 
-                        setPostTime();
+                        if (!timeSet) {
+                            setPostTime();
+                        }
+                        else {
+                            if ($(element).val().length == 0) {
+                                if (e.keyCode == 8 || e.keyCode == 46) {
+                                    unsetPostTime();
+                                }
+                            }
+                        }
 
                         var unregisterFocus = scope.$watch('clearFocus', function(val) {
                             if (val) {
@@ -245,10 +259,6 @@ angular.module('framebuzz.directives', [])
                                 unregisterFocus();
                             }
                         }, true);
-
-                        if ($(element).val().length == 0) {
-                            unsetPostTime();
-                        }
                     });
 
                     $(element).on('blur', function() {
