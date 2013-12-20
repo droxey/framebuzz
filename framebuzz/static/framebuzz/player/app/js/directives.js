@@ -243,7 +243,9 @@ angular.module('framebuzz.directives', [])
                         };
 
                         if (!timeSet) {
-                            setPostTime();
+                            if (e.keyCode != 8 && e.keyCode != 46) {
+                                setPostTime();
+                            }
                         }
                         else {
                             if ($(element).val().length == 0) {
