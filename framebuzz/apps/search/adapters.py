@@ -17,10 +17,10 @@ class VideoSearchAdapter(watson.SearchAdapter):
         Weight search results by title, then description.
     '''
     def get_title(self, obj):
-        return obj.title
+        return obj.title or ''
 
     def get_description(self, obj):
-        return obj.description
+        return obj.description or ''
 
 
 class CommentSearchAdapter(watson.SearchAdapter):
