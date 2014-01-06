@@ -897,11 +897,18 @@ body.account {
                     }
                 }
 
-                h4 { 
+                h1, h4 {
+                    color: white;
                     font-size: 16px;
                     font-weight: 700;
                     font-style: italic;
                     margin-bottom: 10px;
+                }
+
+                h1 {
+                    font-size: 2em;
+                    line-height: 1.5em;
+                    margin: 0;
                 }
             }
 
@@ -943,6 +950,35 @@ body.login {
             }
         }
     }
+}
+
+body.error-page {
+    #main {
+        div.box {
+            div.row-error.bs-callout {
+                margin-top: -40px;
+            }
+
+            i.fa-4x {
+                display: block;
+                z-index: 0;
+                opacity: 0.05;
+                font-size: 8em;
+                height: 0.9em;
+            }
+
+            p {
+                color: #666666;
+                font-weight: bold;
+                font-size: 20px;
+                line-height: 30px;
+                text-align: justify;
+                margin: 0;
+                padding: 0;
+                margin-top: 20px;
+            }
+        }    
+    } 
 }
 
 #footer {

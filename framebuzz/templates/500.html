@@ -3,24 +3,25 @@
 
 {% block title %}{% trans "FrameBuzz - Error!" %}{% endblock %}
 
+{% block page_classes %}content subpage account error-page{% endblock %}
+
 {% block content_center %}
-    <div class="col-xs-2"></div>
-    <div class="col-xs-8">
-        <div id="logo" class="row">
-            <div class="col-xs-12">
-                <a href="{% url 'home' %}">
-                    <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="40" width="184">
-                </a>
-            </div>
-        </div>
+    <div class="col-xs-12">
         <div class="row">
-            <div class="col-xs-12">
-              <h1>Oops...</h1>
-              <div class="alert alert-error">
-                An error has occured while retreiving your request. This error has automatically been forwarded to our developers.
-              </div>
+            <div class="box col-xs-8 col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                <div class="row row-error bs-callout bs-callout-danger">
+                    <div class="col-xs-12 error-wrap">
+                        <h1><i class="fa fa-icon fa-rocket fa-fw"></i> Houston, we have a problem!</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <i class="fa fa-fw fa-4x fa-exclamation-triangle absolute-center"></i>
+                        <p>An error has occured while retreiving your request. This error has automatically been forwarded to our developers.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-xs-2"></div>
 {% endblock %}
