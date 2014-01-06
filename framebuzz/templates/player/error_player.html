@@ -1,0 +1,27 @@
+{% load compress staticfiles %}
+
+<!DOCTYPE html>
+<head>
+    <title>FrameBuzz: Unable to Play Video</title>
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/bootstrap/css/bootstrap.css' %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/jquery/vegas/jquery.vegas.min.css' %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/css/stylesheets/screen.css' %}" type="text/css" media="screen" />
+    {% endcompress %}
+    {% compress js %}
+        <script type="text/javascript">
+            // Detect if the page is not loaded in an iFrame.
+            if (window == window.top) {
+                document.location.href = "{% url 'video-share' video_id %}";
+            }
+        </script>
+    {% endcompress %}
+</head>
+<body class="content subpage account error-page">
+    <div class="container">
+        <div id="main">
+            {% include "player/snippets/error.html" %}
+        </div>
+    </div>
+</body>

@@ -1,7 +1,7 @@
 import json
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import logout
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
@@ -15,7 +15,6 @@ from rest_framework.renderers import JSONRenderer
 
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.backends.youtube import get_or_create_video
-#from framebuzz.apps.api.backends.yturl import get_url
 from framebuzz.apps.api.serializers import UserSerializer
 from framebuzz.apps.api.utils import errors_to_json
 
@@ -30,28 +29,34 @@ def video_test(request, video_id):
 
 @xframe_options_exempt
 def video_embed(request, video_id):
-    video, created = get_or_create_video(video_id)
-    next_url = '%s?close=true' % reverse('video-embed', args=(video.video_id,))
+    try:
+        video, created = get_or_create_video(video_id)
+        next_url = '%s?close=true' % reverse('video-embed', args=(video.video_id,))
+        mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
+        webm_url = 'http://www.ytapi.com/api/%s/direct/43/' % video_id
 
-    mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
-    webm_url = 'http://www.ytapi.com/api/%s/direct/43/' % video_id
+        if request.user.is_authenticated():
+            action.send(request.user, verb='viewed video', action_object=video)
 
-    #mp4_url = get_url(mp4, 18, request)
-    #webm_url = get_url(webm, 44, request)
+        return render_to_response('player/video_embed.html', {
+            'close_window': request.GET.get('close', None),
+            'video': video,
+            'socket_port': settings.SOCKJS_PORT,
+            'socket_channel': settings.SOCKJS_CHANNEL,
+            'user_channel': '/framebuzz/session/%s' % request.session.session_key,
+            'is_authenticated': request.user.is_authenticated(),
+            'next_url': next_url,
+            'mp4_url': mp4_url,
+            'webm_url': webm_url,
+        }, context_instance=RequestContext(request))
+    except TypeError:
+        return HttpResponseRedirect(reverse('video-embed-error', args=(video_id,)))
 
-    if request.user.is_authenticated():
-        action.send(request.user, verb='viewed video', action_object=video)
 
-    return render_to_response('player/video_embed.html', {
-        'close_window': request.GET.get('close', None),
-        'video': video,
-        'socket_port': settings.SOCKJS_PORT,
-        'socket_channel': settings.SOCKJS_CHANNEL,
-        'user_channel': '/framebuzz/session/%s' % request.session.session_key,
-        'is_authenticated': request.user.is_authenticated(),
-        'next_url': next_url,
-        'mp4_url': mp4_url,
-        'webm_url': webm_url,
+@xframe_options_exempt
+def video_embed_error(request, video_id):
+    return render_to_response('player/error_player.html', {
+        'video_id': video_id,
     }, context_instance=RequestContext(request))
 
 

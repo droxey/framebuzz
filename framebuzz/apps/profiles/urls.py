@@ -36,6 +36,4 @@ urlpatterns = patterns('',
     url(r'^(?P<username>[\w.@+-]+)/edit/$',
         'framebuzz.apps.profiles.views.edit_profile',
         name='profiles-edit'),
-
-
     )

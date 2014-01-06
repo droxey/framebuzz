@@ -30,6 +30,11 @@ urlpatterns = patterns('',
     # Django-Avatar:
     url(r'^avatar/', include('avatar.urls')),
 
+    # Share Error Page:
+    url(r'^share/(?P<video_id>[\w.@+-]+)/error/$',
+        'framebuzz.apps.profiles.views.video_share_error',
+        name='video-share-error'),
+
     # Share Page (Shared by unauthenticated user):
     url(r'^share/(?P<video_id>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.video_share', name='video-share'),

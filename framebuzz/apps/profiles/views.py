@@ -155,42 +155,55 @@ def recommendations(request):
 
 
 def video_share(request, username=None, video_id=None):
-    video_in_library = False
-    video, created = get_or_create_video(video_id)
-    context = dict()
+    try:
+        video_in_library = False
+        video, created = get_or_create_video(video_id)
+        context = dict()
 
-    valid_verbs = ['commented on', 'replied to comment']
-    actions = Action.objects.filter(verb__in=valid_verbs,
-                                    target_object_id=video.id)
-    action_ids = [a.actor_object_id for a in actions]
-    commenters = User.objects.filter(id__in=action_ids)
+        valid_verbs = ['commented on', 'replied to comment']
+        actions = Action.objects.filter(verb__in=valid_verbs,
+                                        target_object_id=video.id)
+        action_ids = [a.actor_object_id for a in actions]
+        commenters = User.objects.filter(id__in=action_ids)
 
-    if request.user.is_authenticated():
-        user_video = UserVideo.objects.filter(user=request.user, video=video)
-        video_in_library = len(user_video) > 0
+        if request.user.is_authenticated():
+            user_video = UserVideo.objects.filter(user=request.user, video=video)
+            video_in_library = len(user_video) > 0
 
-    context['video'] = video
-    context['is_share'] = True
-    context['commenters'] = commenters
-    context['path'] = request.path
-    context['found_by'] = video.found_by
-    context['video_in_library'] = video_in_library
+        context['video'] = video
+        context['is_share'] = True
+        context['commenters'] = commenters
+        context['path'] = request.path
+        context['found_by'] = video.found_by
+        context['video_in_library'] = video_in_library
 
-    if username is not None:
-        if request.is_ajax():
-            template = 'player/snippets/share.html'
+        if username is not None:
+            if request.is_ajax():
+                template = 'player/snippets/share.html'
+            else:
+                request.session['share'] = context
+                if username:
+                    return HttpResponseRedirect(reverse(
+                                                    'profiles-home',
+                                                    args=[username, ]))
+                if request.user.is_authenticated():
+                    return HttpResponseRedirect(reverse(
+                                                    'profiles-home',
+                                                    args=[request.user.username, ]))
         else:
-            request.session['share'] = context
-            if username:
-                return HttpResponseRedirect(reverse('profiles-home', args=[username,]))
-            if request.user.is_authenticated():
-                return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username,]))
-    else:
-        template = 'marketing/share.html'
+            template = 'marketing/share.html'
+    except TypeError:
+        return HttpResponseRedirect(reverse('video-share-error', args=(video_id,)))
 
     return render_to_response(template,
                               context,
                               context_instance=RequestContext(request))
+
+
+def video_share_error(request, video_id):
+    return render_to_response('player/error_share.html', {
+        'video_id': video_id,
+    }, context_instance=RequestContext(request))
 
 
 def logged_in(request):

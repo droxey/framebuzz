@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
+   url(r'^(?P<video_id>[\w.@+-]+)/error/$',
+       'framebuzz.apps.api.views.video_embed_error', name='video-embed-error'),
    url(r'^(?P<video_id>[\w.@+-]+)/$',
        'framebuzz.apps.api.views.video_embed', name='video-embed'),
    url(r'^(?P<video_id>[\w.@+-]+)/login/$',

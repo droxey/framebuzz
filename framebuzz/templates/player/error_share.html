@@ -1,0 +1,14 @@
+{% extends "marketing/base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans "FrameBuzz - Error!" %}{% endblock %}
+
+{% block page_classes %}content subpage account error-page{% endblock %}
+
+{% block content_center %}
+    <div class="col-xs-12">
+        <div class="row">
+            {% include "player/snippets/error.html" %}
+        </div>
+    </div>
+{% endblock %}
