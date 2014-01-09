@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
    url(r'^$', 'framebuzz.apps.marketing.views.home', name='home'),
+   url(r'^learn-more/$', 'framebuzz.apps.marketing.views.learn_more', name='learn-more'),
    url(r'^contact/$', 'framebuzz.apps.marketing.views.contact', name='contact'),
    url(r'^wordpress/$', 'framebuzz.apps.marketing.views.wordpress', name='wordpress'),
    url(r'^about/$', 'framebuzz.apps.marketing.views.about', name='about'),

@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 
+from allauth.account.forms import SignupForm
 from framebuzz.apps.marketing.forms import ContactRequestForm
 from framebuzz.apps.api.utils import get_share_count
 
@@ -28,9 +29,16 @@ def mobile(request):
 
 def home(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('profiles-home', args=[request.user.username]))
- 
+        return HttpResponseRedirect(reverse('profiles-home',
+                                            args=[request.user.username]))
+    form = SignupForm()
     return render_to_response('marketing/home.html', {
+        'form': form,
+    }, context_instance=RequestContext(request))
+
+
+def learn_more(request):
+    return render_to_response('marketing/learn_more.html', {
     }, context_instance=RequestContext(request))
 
 

@@ -12,258 +12,88 @@
     {% endcompress %}
 {% endblock %}
 
+{% block page_classes %}content home{% endblock %}
+
 {% block content_center %}
     <div class="col-xs-12">
-        <div id="fbz-header" class="row full-wrap">
+        <div id="fbz-home" class="row full-wrap">
             <div class="col-xs-12 full-wrap-inner">
-                <img src="{% static 'framebuzz/marketing/img/fbz-header.jpg' %}" alt="" class="img-responsive">
-                <div class="info">
-                    <div class="row">
-                        <div class="col-xs-8"> 
-                            <h1 id="tagline"><span></span></h1>
-                        </div>
-                    </div>
-                    <div class="bubble container">
-                        <div class="row bubble-inner clearfix">
-                            <div class="col-xs-7">
-                                <p>FrameBuzz facilitates meaningful conversations around video.</p>
-                                <p>We provide the glue between content creators, experts and 
-                                consumers whose interactions will shape the way video 
-                                content is produced, shared and discovered.</p>
-                            </div>
-                            <div class="col-xs-5 pull-right callouts">
-                                <img src="{% static 'framebuzz/marketing/img/fbz-profiles.png' %}" alt="" class="img-responsive">
-
-                                    {% spaceless %}
-                                    <a href="{% url 'account_signup' %}" class="btn btn-info btn-large btn-signup absolute-center">
-                                        Try It Out
-                                        <span class="fa-stack fa-lg">
-                                          <i class="fa fa-circle fa-stack-1x fa-inverse"></i>
-                                          <i class="fa fa-play fa-stack-1x"></i>
-                                        </span>
-                                    </a>
-                                    {% endspaceless %}
-
-                            </div>
-                        </div>
-                        <i class="fa fa-icon fa-play fa-rotate-90 fa-2x corner"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="fbz-features" class="row full-wrap">
-            <div class="col-xs-12 full-wrap-inner">
-                <h2>FrameBuzz in Action</h2>
-                <div class="row">
-                    <div class="col-xs-7">
-                        <iframe src="{% url 'video-embed' 'DEL7-ftmrxI' %}" scrolling="no" frameBorder="0" height="322" width="580" class="center-block"></iframe>
-                    </div>
-                    <div class="col-xs-5">
-                        <ul>
-                            <li><i class="fa fa-icon fa-comment fa-fw"></i> Interact with a great community</li>
-                            <li class="blue"><i class="fa fa-icon fa-cloud fa-fw"></i> Discover new videos</li>
-                            <li><i class="fa fa-icon fa-globe fa-fw"></i> Influence your community and the world</li>
-                            <li class="blue"><i class="fa fa-icon fa-rocket fa-fw"></i> Share. Enjoy. Learn.</li>
-                            <li class="signup">
-                                <i class="fa fa-icon fa-blank fa-fw"></i>
-                                {% spaceless %}
-                                <a href="{% url 'account_signup' %}" class="btn btn-info btn-large btn-signup">
-                                    Sign Up
-                                    <span class="fa-stack fa-lg">
-                                      <i class="fa fa-circle fa-stack-1x fa-inverse"></i>
-                                      <i class="fa fa-play fa-stack-1x"></i>
-                                    </span>
-                                </a>
-                                {% endspaceless %}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="how-to-fbz" class="row full-wrap clearfix">
-            <div class="col-xs-5 full-wrap-inner pull-left slider">
-                <h2>So how do you want to FrameBuzz?</h2>
-                <ul>
-                    <li>
-                        <img src="{% static 'framebuzz/marketing/img/slide1.jpg' %}" alt="" class="img-responsive">
-                        <div class="slide-inner">
-                            <h4><i class="fa fa-icon fa-comment fa-fw"></i><span>Interact with a great community</span></h4>
-                            <div class="row person person-1 clearfix">
-                                <div class="col-xs-9">
-                                    <p>
-                                        Create conversations directly <strong>in</strong><br>
-                                        <strong>your video –</strong> about specific<br>
-                                        moments <strong>you created</strong>
-                                    </p>
-                                </div>
-                                <div class="col-xs-3 avatar pull-right">
-                                    <img src="{% static 'framebuzz/marketing/img/person1.png' %}" alt="" class="img-responsive">
-                                </div>
-                            </div>
-                            <div class="row person person-2 clearfix">
-                                <div class="col-xs-9">
-                                    <p>
-                                        DIY, music, education – work<br>
-                                        with a group of <strong>like-minded</strong><br>
-                                        <strong>people based</strong> upon your interests
-                                    </p>
-                                </div>
-                                <div class="col-xs-3 avatar pull-right">
-                                    <img src="{% static 'framebuzz/marketing/img/person2.png' %}" alt="" class="img-responsive">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="{% static 'framebuzz/marketing/img/slide2.jpg' %}" alt="" class="img-responsive">
-                        <div class="slide-inner">
-                            <h4><i class="fa fa-icon fa-cloud fa-fw"></i><span>Discover new videos</span></h4>
-                            <div class="row container discover discover-1 clearfix">
-                                <div class="col-xs-9 discover-inner">
-                                    <span class="corner"></span>
-                                    <p>
-                                        Forget the <strong>firehouse</strong> of social<br>
-                                        media, instead <strong>follow interesting</strong><br>
-                                        <strong>people</strong> find to new content.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row container discover discover-2 clearfix">
-                                <div class="col-xs-11 discover-inner">
-                                    <span class="corner"></span>
-                                    <p>
-                                        Comments are attached to specific<br>
-                                        <strong>moments in the video</strong> – follow the heat map<br>
-                                        to the most interesting sections.<br>
-                                        Continue <strong>conversations frame-by-frame</strong>.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="{% static 'framebuzz/marketing/img/slide3.jpg' %}" alt="" class="img-responsive">
-                        <div class="slide-inner">
-                            <h4><i class="fa fa-icon fa-globe fa-fw"></i><span>Influence your community and the world</span></h4>
-                            <div class="row container influence influence-1">
-                                <div class="col-xs-12 influence-inner">
-                                    <div class="row">
-                                        <div class="col-xs-2 icon">
-                                            <i class="fa fa-icon fa-fw fa-thumbs-up fa-3x"></i>
-                                        </div>
-                                        <div class="col-xs-10 description">
-                                            <p>
-                                                Going <strong>beyond the broken comment</strong><br>
-                                                <strong>systems</strong> of most video, <strong>FrameBuzz</strong> makes<br> 
-                                                your comments relevant and real;<br> 
-                                                <strong>create real conversations</strong>.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row container influence influence-2">
-                                <div class="col-xs-12 influence-inner">
-                                    <div class="row">
-                                        <div class="col-xs-2 icon">
-                                            <i class="fa fa-icon fa-fw fa-group fa-3x"></i>
-                                        </div>
-                                        <div class="col-xs-10 description">
-                                            <p>
-                                                <strong>FrameBuzz</strong> gives people the opportunity<br>
-                                                to <strong>shape opinions</strong> around a video and<br> 
-                                                <strong>influence future content</strong>. 
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="{% static 'framebuzz/marketing/img/slide4.jpg' %}" alt="" class="img-responsive">
-                        <div class="slide-inner">
-                            <h4><i class="fa fa-icon fa-rocket fa-fw"></i><span>Share. Enjoy. Learn.</span></h4>
-                            <div class="row container influence influence-1">
-                                <div class="col-xs-12 influence-inner">
-                                    <div class="row">
-                                        <div class="col-xs-2 icon">
-                                            <i class="fa fa-icon fa-fw fa-group fa-3x"></i>
-                                        </div>
-                                        <div class="col-xs-10 description">
-                                            <p>
-                                                Create an electronic version of a <strong>watch</strong><br> 
-                                                <strong>party</strong> with your smartest friends, with<br>
-                                                the added bonus that the <strong>director might<br>
-                                                join in the debate</strong>.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row container influence influence-2">
-                                <div class="col-xs-12 influence-inner">
-                                    <div class="row">
-                                        <div class="col-xs-2 icon">
-                                            <i class="fa fa-icon fa-fw fa-bullhorn fa-3x"></i>
-                                        </div>
-                                        <div class="col-xs-10 description">
-                                            <p>
-                                                Get <strong>meaningful feedback</strong> on your DIY<br> 
-                                                project, <strong>discuss</strong> how to <strong>make your music</strong><br>
-                                                <strong>video better</strong> or just post a video around<br>
-                                                your biggest questions.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-xs-7 full-wrap-inner pull-right">
-                <iframe src="{% url 'video-embed' 'Tqvb0NUJem8' %}" scrolling="no" frameBorder="0" height="322" width="580" class="center-block"></iframe>
-            </div>
-        </div>
-        <div id="signup" class="row">
-            <p class="text-center">
-                <strong>What are you waiting for? </strong>
-                {% spaceless %}
-                <a href="{% url 'account_signup' %}" class="btn btn-info btn-large btn-signup">
-                    Sign Up
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-circle fa-stack-1x fa-inverse"></i>
-                      <i class="fa fa-play fa-stack-1x"></i>
-                    </span>
-                </a>
-                {% endspaceless %}
-                or <a class="login" href="{% url 'account_login' %}">login</a> if you have an account.
-            </p>
-        </div>
-        <div id="callout" class="row">
-            <div class="col-xs-1"></div>
-            <div class="col-xs-10">
-                <div class="row">
+                <h1>Your Video Blogging Platform</h1>
+                <h2>Influence Your Community and the World with Video</h2>
+                <div id="video-carousel" class="row container">
                     <div class="col-xs-12">
-                        <img src="{% static 'framebuzz/marketing/img/callout.jpg' %}" alt="FrameBuzz" height="294" width="541">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 callout-text">
-                        <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" class="logo pull-left" height="48" width="192">
-                        <span class="line1">
-                            lets you <strong>create</strong>
-                        </span><br>
-                        <strong>conversation</strong> with your <strong>friends</strong> and<br>
-                        the rest of the world around<br>
-                        the <strong>content you<br>    
-                        love</strong>.          
                     </div>
                 </div>
             </div>
-            <div class="col-xs-1"></div>
+        </div>
+        <div id="fbz-signup" class="row full-wrap">
+            <div class="col-xs-12 full-wrap-inner">
+                <h4>Start Influencing Today - It's FREE!</h4>
+                <div id="signup-container" class="row container">
+                    <div class="col-xs-4 col-xs-push-2">
+                        {% if socialaccount.providers %}
+                            {% for provider in socialaccount.providers %}
+                                <div class="col-xs-12 social">
+                                    <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} clearfix" href="{% provider_login_url provider.id %}">
+                                        <span class="btn-icon pull-left"><i class="fa fa-fw fa-{{ provider.id|lower }}{% if provider.id == 'google' %}-plus{% endif %} absolute-center"></i></span>
+                                        <span class="btn-title pull-right">SIGN IN WITH {{ provider.id|upper }}</span>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-5 col-xs-pull-1 pull-right">
+                        <form id="signup-form" class="form-inline" role="form" method="post" action="{% url 'account_signup' %}">
+                            {% csrf_token %}
+                            <div class="row form-row">
+                                <label class="col-xs-4" for="id_username">Username:</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="row form-row">
+                                <label class="col-xs-4" for="id_email">Email:</label>
+                                {{ form.email }}
+                            </div>
+                            {% if form.password1 and form.password2 %}
+                                <div class="row form-row">
+                                    <label class="col-xs-4" for="id_password1">Password:</label>
+                                    {{ form.password1 }}
+                                </div>
+                                <div class="row form-row">
+                                    <label class="col-xs-4" for="id_password2">Password again:</label>
+                                    {{ form.password2 }}
+                                </div>
+                            {% endif %}
+                            <div class="row form-row row-submit">
+                                <div class="col-xs-12 col-xs-pull-7">
+                                    <button class="absolute-center" type="submit">Start Influencing Now!</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="fbz-media-logos" class="row">
+            <div class="col-xs-3">
+                <a href="http://www.austin360.com/weblogs/digital-savant/2013/aug/29/austins-framebuzz-wants-give-vloggers-another-tool/" title="Austin's FrameBuzz wants to give vloggers another tool for commentary" target="_blank">
+                    <img src="{% static 'framebuzz/marketing/img/austin360logo.png' %}" alt="FrameBuzz on Austin360" class="img-responsive absolute-center">
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="http://www.crunchbase.com/company/framebuzz" title="FrameBuzz: Our Profile on CrunchBase" target="_blank">
+                    <img src="{% static 'framebuzz/marketing/img/crunchbaselogo.png' %}" alt="FrameBuzz on CrunchBase" class="img-responsive absolute-center">
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="http://illuminatehollywood.com/framebuzz-the-future-of-social-commenting-for-online-video/" title="FrameBuzz: the Future of Social Commenting for Online Video?" target="_blank">
+                    <img src="{% static 'framebuzz/marketing/img/illuminatelogo.png' %}" alt="FrameBuzz on Illuminate" class="img-responsive absolute-center">
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="http://www.kxan.com/news/local/austin/framebuzz-launches-social-video-platform" title="FrameBuzz launches social video platform" target="_blank">
+                    <img src="{% static 'framebuzz/marketing/img/kxanlogo.png' %}" alt="FrameBuzz on KXAN" class="img-responsive absolute-center">
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}
