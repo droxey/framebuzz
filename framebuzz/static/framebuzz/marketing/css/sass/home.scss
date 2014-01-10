@@ -4,6 +4,10 @@
 #main {
     overflow: hidden;
 
+    div.main-wrapper {
+        overflow: hidden;
+    }
+
     .full-wrap {
         margin-left: -17px;
 
@@ -437,6 +441,7 @@
         padding: 0;
         height: 443px;
         overflow: hidden;
+        margin-left: -15px;
 
         #fbz-player-container {
             background: #202020;
@@ -461,6 +466,14 @@
 
                 .bx-caption {
                     background: rgba(0, 0, 0, 0.7);
+
+                    span {
+                        font-family: 'pragmatica-web-condensed';
+                        font-size: 1em;
+                        padding: 0 10px;
+                        vertical-align: middle;
+                        line-height: 48px;
+                    }
                 }
 
                 .bx-prev {
@@ -490,134 +503,186 @@
     }
 
     #fbz-signup {
-        h4 {
-            font-size: 30px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            margin-top: 20px;
-            text-align: center;
-        }
+        background: #00B0AE;
+        margin-top: -1px;
+        margin-left: -16px;
+        padding: 20px 20px 0;
+        position: relative;
+        z-index: 10;
 
-        #signup-container {
-            div.social {
-                padding: 0;
-                width: 95%;
+        div.signup-bkg {
+            background: #05171E;
+            padding: 0 0 28px 0;
+            position: relative;
+            overflow: hidden;
 
-                a.socialaccount_provider {
-                    color: white;
-                    display: block;
-                    height: 37px;
-                    margin-bottom: 13px;
-                    position: relative;
-                    text-decoration: none;
-                    width: 100%;
+            img.img-responsive {
+                height: 100%;
+                max-width: 140%;
+                position: absolute;
+                top: 0;
+                z-index: 0;
+            }
 
-                    span.btn-title {
+            h4 {
+                background: rgba(0, 0, 0, 0.4);
+                color: #FFFFFF;
+                font-size: 2.64em;
+                font-weight: bold;
+                margin: 0;
+                text-align: center;
+                padding: 34px 0;
+                position: relative;
+                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+                z-index: 10;
+
+                span {
+                    font-family: "lobster";
+                }
+            }
+
+            #signup-container {
+                background: rgba(255, 255, 255, 0.8);
+                margin: 0 22px;
+                padding: 22px 7px;
+                position: relative;
+                z-index: 10;
+
+                div.social {
+                    padding: 0;
+                    width: 95%;
+
+                    a.socialaccount_provider {
+                        color: white;
                         display: block;
-                        line-height: 37px;
-                        text-align: center;
-                        width: 86%;
-                    }
-
-                    span.btn-icon {
-                        display: block;
-                        width: 37px;
                         height: 37px;
+                        margin-bottom: 13px;
                         position: relative;
+                        text-decoration: none;
+                        width: 100%;
 
-                        i {
+                        span.btn-title {
+                            font-family: 'pragmatica-web-condensed';
+                            font-size: 1.2em;
                             display: block;
-                            font-size: 1.6em;
-                            padding-top: 7px;
+                            line-height: 39px;
+                            text-align: center;
+                            text-indent: -37px;
+                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                            width: 85%;
                         }
-                    }
-
-                    &.facebook {
-                        background: #3b5998;
 
                         span.btn-icon {
-                            background: #354f88;
+                            display: block;
+                            width: 37px;
+                            height: 37px;
+                            position: relative;
 
                             i {
+                                display: block;
+                                font-size: 1.6em;
                                 padding-top: 7px;
+                                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
                             }
                         }
-                    }
 
-                    &.twitter {
-                        background: #45b0e3;
+                        &.facebook {
+                            background: #3b5998;
 
-                        span.btn-icon {
-                            background: #40a2d1;
-                        }
-                    }
+                            span.btn-icon {
+                                background: #354f88;
 
-                    &.google {
-                        background: #de4c34;
-
-                        span.btn-icon {
-                            background: #ce3e26;
-
-                            i {
-                                padding-top: 8px;
+                                i {
+                                    padding-top: 7px;
+                                }
                             }
                         }
+
+                        &.twitter {
+                            background: #45b0e3;
+
+                            span.btn-icon {
+                                background: #40a2d1;
+                            }
+                        }
+
+                        &.google {
+                            background: #de4c34;
+
+                            span.btn-icon {
+                                background: #ce3e26;
+
+                                i {
+                                    padding-top: 8px;
+                                }
+                            }
+                        }
+
+                        &:hover, &:focus, &:active {
+
+                        }
+                    }
+                }
+
+                #signup-form {
+                    div.form-row {
+                        margin-bottom: 12px;
+
+                        label {
+                            line-height: 27px;
+                            margin-bottom: 0;
+                            padding: 0 8px 0 0;
+                            text-align: right;
+                        }
+
+                        input { 
+                            width: 50%;
+                        }
                     }
 
-                    &:hover, &:focus, &:active {
+                    div.row-submit {
+                        margin-bottom: 0;
+                        position: relative;
+                        height: 65px;
+                        margin-top: -24px;
 
+                        button {
+                            background: #f200bc;
+                            border: 0;
+                            color: white;
+                            font-weight: bold;
+                            font-size: 18px;
+                            height: 37px;
+                            line-height: 37px;
+                            margin: 28px 0 0;
+                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                            width: 83%;
+                            z-index: 10;
+                        }
                     }
                 }
             }
 
-            #signup-form {
-                div.form-row {
-                    margin-bottom: 10px;
+            div.row-learn-more {
+                left: -56px;
+                margin-bottom: 0;
+                position: relative;
 
-                    label {
-                        line-height: 27px;
-                        margin-bottom: 0;
-                        padding: 0 8px 0 0;
-                        text-align: right;
-                    }
+                div.col-xs-4 {
+                    background: rgba(255, 255, 255, 0.8);
+                    height: 30px;
+                    padding: 0;
+                    position: absolute;
+                    z-index: 0;
+                    left: 68.8%;
 
-                    input { 
-                        width: 50%;
-                    }
-                }
-
-                div.row-submit {
-                    position: relative;
-                    height: 37px;
-
-                    button {
-                        background: #f200bc;
-                        border: 0;
-                        color: white;
-                        font-weight: bold;
-                        font-size: 18px;
-                        height: 37px;
-                        line-height: 37px;
-                        margin: 20px 25% 0;
-                        width: 75%;
-                    }
-                }
-
-                div.row-learn-more {
-                    margin-bottom: 20px;
-
-                    div {
-                        height: 37px;
-                        padding: 0;
-
-                        a {
-                            display: block;
-                            height: 42px;
-                            line-height: 42px;
-                            text-align: center;
-                            text-indent: 33px;
-                            width: 100%;
-                        }
+                    a {
+                        color: rgba(0, 0, 0, 0.8);
+                        display: block;
+                        line-height: 25px;
+                        text-align: center;
+                        text-decoration: underline;
+                        width: 100%;
                     }
                 }
             }
@@ -625,25 +690,36 @@
     }
 
     #fbz-media-logos {
-        background: #05171E;
+        background: #00B0AE;
+        border-right: 1px solid #05171E;
+        left: 1px;
+        margin-top: -1px;
+        padding: 0 35px 21px;
         position: relative;
 
-        div.col-xs-3 {
-            a {
-                display: block;
-                height: 70px;
-                
-                img.img-responsive {
-                    max-width: 50%;
-                    opacity: 0.85;
-                    @include single-transition(opacity 0.25s ease-in-out);
-                }
-            }
+        div.logo-bkg {
+            border-top: 1px solid black;
+            background: #05171E;
 
-            &:hover {
-                img.img-responsive {
-                    opacity: 1;
-                    @include single-transition(opacity 0.25s ease-in-out);
+            div.col-xs-3 {
+                background: #05171E;
+
+                a {
+                    display: block;
+                    height: 70px;
+                    
+                    img.img-responsive {
+                        max-width: 50%;
+                        opacity: 0.85;
+                        @include single-transition(opacity 0.25s ease-in-out);
+                    }
+                }
+
+                &:hover {
+                    img.img-responsive {
+                        opacity: 1;
+                        @include single-transition(opacity 0.25s ease-in-out);
+                    }
                 }
             }
         }
@@ -689,6 +765,74 @@ body.home {
     iframe {
         height: 445px;
         width: 700px;
+        margin-top: -5px;
+    }
+
+    #main {
+        #fbz-header {
+            background-color: #202020;
+            position: relative;
+            z-index: 50;
+
+            img.img-responsive {
+                max-width: 101%;
+            }
+
+            div.info {
+                height: 400px;
+                width: 100%;
+
+                h1 {
+                    height: 44px;
+                    width: 50%;
+
+                    span {
+                        font-family: 'pragmatica-web-condensed';
+                        display: inline-block;
+                        font-weight: 300;
+                        width: 100%;
+                        font-style: normal;
+                        line-height: 30px;
+                        font-size: 30px;
+                        text-align: center;
+                    }
+                }
+
+                div.bubble {
+                    bottom: -15px;
+                    padding: 0;
+                    position: absolute;
+                    width: 100%;
+
+                    i.corner {
+                        color: white;
+                        line-height: 13px;
+                        height: 13px;
+                    }
+
+                    div.bubble-inner {
+                        padding: 11px;
+                        border-radius: 0;
+
+                        &.staff-picks {
+                            width: 100%;
+                            padding: 13px 11px 8px 11px;
+                        }
+
+                        p {
+                            font-style: normal;
+
+                            strong {
+                                font-family: 'pragmatica-web-condensed';
+                                font-weight: 300;
+                                font-size: 30px;
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     #footer {

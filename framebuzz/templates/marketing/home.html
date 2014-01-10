@@ -15,15 +15,37 @@
 {% block page_classes %}content home{% endblock %}
 
 {% block content_center %}
-    <div class="col-xs-12">
-        {% include "marketing/snippets/header.html" %}
+    <div class="col-xs-12 main-wrapper">
+        <div id="fbz-header" class="row full-wrap">
+            <div class="col-xs-12 full-wrap-inner">
+                <img src="{% static 'framebuzz/marketing/img/fbz-header-home.jpg' %}" alt="" class="img-responsive">
+                <div class="info">
+                    <div class="row">
+                        <div class="col-xs-12"> 
+                            <h1 id="tagline" class="absolute-center"><span>Your Video Blogging Platform</span></h1>
+                        </div>
+                    </div>
+                    <div class="bubble container">
+                        <div class="row bubble-inner staff-picks clearfix">
+                            <div class="col-xs-12">
+                                <p class="clearfix">
+                                    <strong class="pull-left">Staff Picks</strong>
+                                    <strong class="pull-right">Influence Your Community and the World with Video</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <i class="fa fa-icon fa-play fa-rotate-90 fa-2x corner"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="video-carousel" class="row clearfix full-wrap">
             <div id="staff-picks" class="col-xs-3 pull-left full-wrap-inner">
                 <div id="thumbs">
                     <ul class="bxslider">
+                      <li><img src="https://i1.ytimg.com/vi/xTvAwhaGY88/mqdefault.jpg" data-video-url="{% url 'video-embed' 'xTvAwhaGY88' %}" title="Baby Alpaca - Wild Child (Official Video)" class="img-responsive"></li>
                       <li><img src="https://i1.ytimg.com/vi/Fl_wdODKGtM/mqdefault.jpg" data-video-url="{% url 'video-embed' 'Fl_wdODKGtM' %}" title="Episode #1 // Hitrecord On Tv" class="img-responsive"></li>
                       <li><img src="https://i1.ytimg.com/vi/bpOSxM0rNPM/mqdefault.jpg" data-video-url="{% url 'video-embed' 'bpOSxM0rNPM' %}" title="Arctic Monkeys - Do I Wanna Know? (Official Video)"  class="img-responsive"></li>
-                      <li><img src="https://i1.ytimg.com/vi/xTvAwhaGY88/mqdefault.jpg" data-video-url="{% url 'video-embed' 'xTvAwhaGY88' %}" title="Baby Alpaca - Wild Child (Official Video)" class="img-responsive"></li>
                       <li><img src="https://i1.ytimg.com/vi/r4VQoP2_eL4/mqdefault.jpg" data-video-url="{% url 'video-embed' 'r4VQoP2_eL4' %}" title="M.I.A. X The Partysquad X Kenzo - Y.A.L.A. (Official Video)"  class="img-responsive"></li>
                       <li><img src="https://i1.ytimg.com/vi/UGz8jcbJjRw/mqdefault.jpg" data-video-url="{% url 'video-embed' 'UGz8jcbJjRw' %}" title="&ldquo;Teddy Bear,&rdquo; The Porcupine, Doesn't Like To Share&hellip;" class="img-responsive"></li>
                       <li><img src="https://i1.ytimg.com/vi/xk_SOgcLBTI/mqdefault.jpg" data-video-url="{% url 'video-embed' 'xk_SOgcLBTI' %}" title="Metric - Speed The Collapse (Live At The Edge)"  class="img-responsive"></li>
@@ -34,26 +56,27 @@
                 </div>
             </div>
             <div id="fbz-player-container" class="col-xs-9 clearfix full-wrap-inner">
-                <iframe src="{% url 'video-embed' 'Fl_wdODKGtM' %}" scrolling="no" frameBorder="0" height="445" width="700" class="absolute-center pull-right"></iframe>
+                <iframe src="{% url 'video-embed' 'xTvAwhaGY88' %}" scrolling="no" frameBorder="0" height="445" width="700" class="absolute-center pull-right"></iframe>
             </div>
         </div>
-        <div id="fbz-signup" class="row full-wrap">
-            <div class="col-xs-12 full-wrap-inner">
-                <h4>Start Influencing Today - It's FREE!</h4>
-                <div id="signup-container" class="row container">
-                    <div class="col-xs-4 col-xs-push-2">
+        <div id="fbz-signup" class="row">
+            <div class="signup-bkg col-xs-12 full-wrap-inner">
+                <img src="{% static 'framebuzz/marketing/img/fbz-header.jpg' %}" alt="" class="img-responsive">
+                <h4>Start <span>Influencing</span> - It's FREE!</h4>
+                <div id="signup-container" class="row">
+                    <div class="signup-left col-xs-5 col-xs-push-1">
                         {% if socialaccount.providers %}
                             {% for provider in socialaccount.providers %}
                                 <div class="col-xs-12 social">
                                     <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} clearfix" href="{% provider_login_url provider.id %}">
                                         <span class="btn-icon pull-left"><i class="fa fa-fw fa-{{ provider.id|lower }}{% if provider.id == 'google' %}-plus{% endif %} absolute-center"></i></span>
-                                        <span class="btn-title pull-right">SIGN IN WITH {{ provider.id|upper }}</span>
+                                        <span class="btn-title pull-right">SIGN IN WITH {{ provider.id|upper }}{% if provider.id == 'google' %}+{% endif %}</span>
                                     </a>
                                 </div>
                             {% endfor %}
                         {% endif %}
                     </div>
-                    <div class="col-xs-5 col-xs-pull-1 pull-right">
+                    <div class="signup-right col-xs-6 col-xs-push-1 pull-left">
                         <form id="signup-form" class="form-inline" role="form" method="post" action="{% url 'account_signup' %}">
                             {% csrf_token %}
                             <div class="row form-row">
@@ -75,40 +98,48 @@
                                 </div>
                             {% endif %}
                             <div class="row form-row row-submit">
-                                <div class="col-xs-12 col-xs-pull-7">
-                                    <button class="absolute-center" type="submit">Start Influencing Now!</button>
-                                </div>
-                            </div>
-                            <div class="row form-row row-learn-more">
-                                <div class="col-xs-12 col-xs-pull-6">
-                                    <a href="{% url 'learn-more' %}" title="Learn More About The FrameBuzz Platform" class="learn-more-link absolute-center">or learn more about our video blogging platform</a>
+                                <div class="col-xs-12 col-xs-pull-5">
+                                    <button class="absolute-center" type="submit">Begin!</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
+                <div class="row form-row row-learn-more clearfix">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-4 pull-right">
+                                <a href="{% url 'learn-more' %}" title="Learn More About The FrameBuzz Platform" class="learn-more-link absolute-center">or <strong>learn more</strong> about our video blogging platform</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="fbz-media-logos" class="row">
-            <div class="col-xs-3">
-                <a href="http://www.austin360.com/weblogs/digital-savant/2013/aug/29/austins-framebuzz-wants-give-vloggers-another-tool/" title="Austin's FrameBuzz wants to give vloggers another tool for commentary" target="_blank">
-                    <img src="{% static 'framebuzz/marketing/img/austin360logo.png' %}" alt="FrameBuzz on Austin360" class="img-responsive absolute-center">
-                </a>
-            </div>
-            <div class="col-xs-3">
-                <a href="http://www.crunchbase.com/company/framebuzz" title="FrameBuzz: Our Profile on CrunchBase" target="_blank">
-                    <img src="{% static 'framebuzz/marketing/img/crunchbaselogo.png' %}" alt="FrameBuzz on CrunchBase" class="img-responsive absolute-center">
-                </a>
-            </div>
-            <div class="col-xs-3">
-                <a href="http://illuminatehollywood.com/framebuzz-the-future-of-social-commenting-for-online-video/" title="FrameBuzz: the Future of Social Commenting for Online Video?" target="_blank">
-                    <img src="{% static 'framebuzz/marketing/img/illuminatelogo.png' %}" alt="FrameBuzz on Illuminate" class="img-responsive absolute-center">
-                </a>
-            </div>
-            <div class="col-xs-3">
-                <a href="http://www.kxan.com/news/local/austin/framebuzz-launches-social-video-platform" title="FrameBuzz launches social video platform" target="_blank">
-                    <img src="{% static 'framebuzz/marketing/img/kxanlogo.png' %}" alt="FrameBuzz on KXAN" class="img-responsive absolute-center">
-                </a>
+        <div id="fbz-media-logos" class="row full-wrap">
+            <div class="col-xs-12 logo-bkg full-wrap-inner">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <a href="http://www.austin360.com/weblogs/digital-savant/2013/aug/29/austins-framebuzz-wants-give-vloggers-another-tool/" title="Austin's FrameBuzz wants to give vloggers another tool for commentary" target="_blank">
+                            <img src="{% static 'framebuzz/marketing/img/austin360logo.png' %}" alt="FrameBuzz on Austin360" class="img-responsive absolute-center">
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        <a href="http://www.crunchbase.com/company/framebuzz" title="FrameBuzz: Our Profile on CrunchBase" target="_blank">
+                            <img src="{% static 'framebuzz/marketing/img/crunchbaselogo.png' %}" alt="FrameBuzz on CrunchBase" class="img-responsive absolute-center">
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        <a href="http://illuminatehollywood.com/framebuzz-the-future-of-social-commenting-for-online-video/" title="FrameBuzz: the Future of Social Commenting for Online Video?" target="_blank">
+                            <img src="{% static 'framebuzz/marketing/img/illuminatelogo.png' %}" alt="FrameBuzz on Illuminate" class="img-responsive absolute-center">
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        <a href="http://www.kxan.com/news/local/austin/framebuzz-launches-social-video-platform" title="FrameBuzz launches social video platform" target="_blank">
+                            <img src="{% static 'framebuzz/marketing/img/kxanlogo.png' %}" alt="FrameBuzz on KXAN" class="img-responsive absolute-center">
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

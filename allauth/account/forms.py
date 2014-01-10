@@ -164,10 +164,11 @@ class BaseSignupForm(_base_signup_form_class()):
         label = _("Username"),
         max_length = 30,
         min_length = app_settings.USERNAME_MIN_LENGTH,
-        widget = forms.TextInput()
+        widget = forms.TextInput(attrs={'placeholder':
+                                                  _("choose a username") })
     )
     email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder':
-                                                  _('E-mail address') }))
+                                                  _("we won't spam you, promise!") }))
 
     def __init__(self, *args, **kwargs):
         super(BaseSignupForm, self).__init__(*args, **kwargs)
@@ -183,8 +184,8 @@ class BaseSignupForm(_base_signup_form_class()):
             self.fields["email"].required = False
         if not app_settings.USERNAME_REQUIRED:
             del self.fields["username"]
-        #self.fields['password1'].widget.attrs['placeholder'] = ''
-        #self.fields['password2'].widget.attrs['placeholder'] = ''
+        self.fields['password1'].widget.attrs['placeholder'] = 'enter your password'
+        self.fields['password2'].widget.attrs['placeholder'] = 're-enter your password'
 
     def clean_username(self):
         value = self.cleaned_data["username"]
