@@ -12,45 +12,11 @@
     {% endcompress %}
 {% endblock %}
 
+{% block page_classes %}content learn-more{% endblock %}
+
 {% block content_center %}
     <div class="col-xs-12">
-        <div id="fbz-header" class="row full-wrap">
-            <div class="col-xs-12 full-wrap-inner">
-                <img src="{% static 'framebuzz/marketing/img/fbz-header.jpg' %}" alt="" class="img-responsive">
-                <div class="info">
-                    <div class="row">
-                        <div class="col-xs-8"> 
-                            <h1 id="tagline"><span></span></h1>
-                        </div>
-                    </div>
-                    <div class="bubble container">
-                        <div class="row bubble-inner clearfix">
-                            <div class="col-xs-7">
-                                <p>FrameBuzz facilitates meaningful conversations around video.</p>
-                                <p>We provide the glue between content creators, experts and 
-                                consumers whose interactions will shape the way video 
-                                content is produced, shared and discovered.</p>
-                            </div>
-                            <div class="col-xs-5 pull-right callouts">
-                                <img src="{% static 'framebuzz/marketing/img/fbz-profiles.png' %}" alt="" class="img-responsive">
-
-                                    {% spaceless %}
-                                    <a href="{% url 'account_signup' %}" class="btn btn-info btn-large btn-signup absolute-center">
-                                        Sign Up Now!
-                                        <span class="fa-stack fa-lg">
-                                          <i class="fa fa-circle fa-stack-1x fa-inverse"></i>
-                                          <i class="fa fa-play fa-stack-1x"></i>
-                                        </span>
-                                    </a>
-                                    {% endspaceless %}
-
-                            </div>
-                        </div>
-                        <i class="fa fa-icon fa-play fa-rotate-90 fa-2x corner"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include "marketing/snippets/header.html" %}
         <div id="fbz-features" class="row full-wrap">
             <div class="col-xs-12 full-wrap-inner">
                 <h2>FrameBuzz in Action</h2>

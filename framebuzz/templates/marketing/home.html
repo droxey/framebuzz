@@ -16,14 +16,25 @@
 
 {% block content_center %}
     <div class="col-xs-12">
-        <div id="fbz-home" class="row full-wrap">
-            <div class="col-xs-12 full-wrap-inner">
-                <h1>Your Video Blogging Platform</h1>
-                <h2>Influence Your Community and the World with Video</h2>
-                <div id="video-carousel" class="row container">
-                    <div class="col-xs-12">
-                    </div>
+        {% include "marketing/snippets/header.html" %}
+        <div id="video-carousel" class="row clearfix full-wrap">
+            <div id="staff-picks" class="col-xs-3 pull-left full-wrap-inner">
+                <div id="thumbs">
+                    <ul class="bxslider">
+                      <li><img src="https://i1.ytimg.com/vi/Fl_wdODKGtM/mqdefault.jpg" data-video-url="{% url 'video-embed' 'Fl_wdODKGtM' %}" title="Episode #1 // Hitrecord On Tv" class="img-responsive"></li>
+                      <li><img src="https://i1.ytimg.com/vi/bpOSxM0rNPM/mqdefault.jpg" data-video-url="{% url 'video-embed' 'bpOSxM0rNPM' %}" title="Arctic Monkeys - Do I Wanna Know? (Official Video)"  class="img-responsive"></li>
+                      <li><img src="https://i1.ytimg.com/vi/xTvAwhaGY88/mqdefault.jpg" data-video-url="{% url 'video-embed' 'xTvAwhaGY88' %}" title="Baby Alpaca - Wild Child (Official Video)" class="img-responsive"></li>
+                      <li><img src="https://i1.ytimg.com/vi/r4VQoP2_eL4/mqdefault.jpg" data-video-url="{% url 'video-embed' 'r4VQoP2_eL4' %}" title="M.I.A. X The Partysquad X Kenzo - Y.A.L.A. (Official Video)"  class="img-responsive"></li>
+                      <li><img src="https://i1.ytimg.com/vi/UGz8jcbJjRw/mqdefault.jpg" data-video-url="{% url 'video-embed' 'UGz8jcbJjRw' %}" title="&ldquo;Teddy Bear,&rdquo; The Porcupine, Doesn't Like To Share&hellip;" class="img-responsive"></li>
+                      <li><img src="https://i1.ytimg.com/vi/xk_SOgcLBTI/mqdefault.jpg" data-video-url="{% url 'video-embed' 'xk_SOgcLBTI' %}" title="Metric - Speed The Collapse (Live At The Edge)"  class="img-responsive"></li>
+                      <li><img src="https://i1.ytimg.com/vi/kFtMl-uipA8/mqdefault.jpg" data-video-url="{% url 'video-embed' 'kFtMl-uipA8' %}" title="Fka Twigs - Water Me" class="img-responsive"></li>
+                      <li><img src="https://i1.ytimg.com/vi/YAzbNuFNySs/mqdefault.jpg" data-video-url="{% url 'video-embed' 'YAzbNuFNySs' %}" title="Loiter Squad: Zombie Cooking Hour Pt 1" class="img-responsive"></li>
+                      <li><img src="https://i1.ytimg.com/vi/FPO3aenqT4o/mqdefault.jpg" data-video-url="{% url 'video-embed' 'FPO3aenqT4o' %}" title="Brave New World - Summary &amp; Analysis By Thug Notes" class="img-responsive"></li>
+                    </ul>
                 </div>
+            </div>
+            <div id="fbz-player-container" class="col-xs-9 clearfix full-wrap-inner">
+                <iframe src="{% url 'video-embed' 'Fl_wdODKGtM' %}" scrolling="no" frameBorder="0" height="445" width="700" class="absolute-center pull-right"></iframe>
             </div>
         </div>
         <div id="fbz-signup" class="row full-wrap">
@@ -68,6 +79,11 @@
                                     <button class="absolute-center" type="submit">Start Influencing Now!</button>
                                 </div>
                             </div>
+                            <div class="row form-row row-learn-more">
+                                <div class="col-xs-12 col-xs-pull-6">
+                                    <a href="{% url 'learn-more' %}" title="Learn More About The FrameBuzz Platform" class="learn-more-link absolute-center">or learn more about our video blogging platform</a>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -101,7 +117,7 @@
 {% block page_javascript %}
     {% compress js %}
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.easing.1.3.js' %}"></script> 
-        <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.bxslider.js' %}"></script> 
+        <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.bxslider.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.home.js' %}"></script> 
     {% endcompress %}
 {% endblock %}

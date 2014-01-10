@@ -285,6 +285,7 @@ var FrameBuzzProfile = (function($) {
                     $('#share div.ajax').fadeOut('fast', function() {
                        $('#video-container').html(data);
                        $('li.start').addClass('active');
+                       $('#video-container div.details div.description div.scroller').perfectScrollbar({suppressScrollX: true});
                    });
                 });
             });

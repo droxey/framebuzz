@@ -431,30 +431,71 @@
         }
     }
 
-    #fbz-home {
-        background: #05171E;
+    #video-carousel {
+        background: #202020;
+        margin-top: -1px;
+        padding: 0;
+        height: 443px;
+        overflow: hidden;
 
-        div.full-wrap-inner {
-            h1, h2 {
-                color: white;
-                text-align: center;
-            }
+        #fbz-player-container {
+            background: #202020;
+            margin-left: -1px;
+            padding: 0;
+            width: 71.75%;
+            height: 445px;
+        }
 
-            h1 { 
-                font-weight: bold; 
-            }
+        #staff-picks {
+            height: 445px;
+            overflow: hidden;
+            padding: 0;
+            position: relative;
+            width: 28.43%;
+            z-index: 10;
 
-            #video-carousel {
-                height: 400px;
+            div.bx-wrapper {
+                height: 445px !important;
+                max-width: 100% !important;
+                left: 6px;
+
+                .bx-caption {
+                    background: rgba(0, 0, 0, 0.7);
+                }
+
+                .bx-prev {
+                    left: 0px;
+                }
+
+                div.bx-viewport {
+                    border: none;
+                    background: none;
+                    box-shadow: none;
+
+                    ul {
+                        padding: 0;
+
+                        li {
+                            cursor: pointer;
+                            height: 148px;
+
+                            img {
+                                
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 
     #fbz-signup {
         h4 {
-            text-align: center;
+            font-size: 30px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
+            margin-top: 20px;
+            text-align: center;
         }
 
         #signup-container {
@@ -546,7 +587,6 @@
                 }
 
                 div.row-submit {
-                    margin: 20px 0;
                     position: relative;
                     height: 37px;
 
@@ -555,9 +595,29 @@
                         border: 0;
                         color: white;
                         font-weight: bold;
+                        font-size: 18px;
                         height: 37px;
-                        margin: 0 25%;
+                        line-height: 37px;
+                        margin: 20px 25% 0;
                         width: 75%;
+                    }
+                }
+
+                div.row-learn-more {
+                    margin-bottom: 20px;
+
+                    div {
+                        height: 37px;
+                        padding: 0;
+
+                        a {
+                            display: block;
+                            height: 42px;
+                            line-height: 42px;
+                            text-align: center;
+                            text-indent: 33px;
+                            width: 100%;
+                        }
                     }
                 }
             }
@@ -623,15 +683,22 @@
             }
         }
     }
-
-    iframe {
-        height: 322px;
-        width: 580px;
-    }
 }
 
 body.home {
+    iframe {
+        height: 445px;
+        width: 700px;
+    }
+
     #footer {
         margin-top: 0;
+    }
+}
+
+body.learn-more {
+    iframe {
+        height: 322px;
+        width: 580px;
     }
 }

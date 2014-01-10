@@ -1,24 +1,28 @@
 $(document).ready(function() {
-    var taglines = [
-        'Story + Community = <strong>Meaningful Conversations</strong>',
-        'Don’t Just Share a Video. <strong>Share the Experience of Watching It</strong>.',
-        'Community-Curated <strong>Online Conversations</strong>',
-        'Taking Social Media to the <strong>Next Level of Conversation</strong>',
-        'Go Beyond Video Comments – Get Into a <strong>Meaningful Conversation</strong>'
-    ];
+  if ($('body').hasClass('home')) {
+    $('.bxslider').bxSlider({
+      captions: true,
+      pager: false,
+      minSlides: 3,
+      maxSlides: 3,
+      slideMargin: 0,
+      mode: 'vertical',
+      onSliderLoad: function() {
+        $('#thumbs ul li').click(function() {
+          var videoUrl = $(this).find('img').attr('data-video-url'),
+              playerContainer = $('#fbz-player-container'),
+              newFrame = $('<iframe src="" scrolling="no" frameBorder="0" height="445" width="700" class="absolute-center pull-right"></iframe>');
 
-    var currentTaglineIndex = Math.floor(Math.random() * taglines.length);
-    var taglineSpan = $('#tagline > span');
-    taglineSpan.html(taglines[currentTaglineIndex]);
-    
-    setInterval(function() { 
-        taglineSpan.fadeOut('fast', function() {
-            currentTaglineIndex = (currentTaglineIndex == 4) ? 0 : (currentTaglineIndex + 1); 
-            taglineSpan.html(taglines[currentTaglineIndex]);
-            taglineSpan.fadeIn('fast');
-        });    
-    }, 5000);
-
+          $('iframe', playerContainer).fadeOut(100, function() {
+            playerContainer.html('');
+            newFrame.attr('src', videoUrl);
+            playerContainer.append(newFrame);
+          });
+        });
+      }
+    });
+  }
+  else {
     $('.slider > ul').bxSlider({
       auto: true,
       controls: false,
@@ -27,4 +31,5 @@ $(document).ready(function() {
       pause: 10000,
       easing: 'easeInOutSine'
     });
+  }
 });
