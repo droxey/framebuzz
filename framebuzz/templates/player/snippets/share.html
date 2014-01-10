@@ -36,13 +36,17 @@
                   </a>
                 </p>
                 <p>
+                    <i class="fa fa-play fa-fw"></i>
+                    <span>{{ plays|short_number }}</span>
+                </p>
+                <p>
                     <i class="fa fa-comment fa-fw"></i>
-                    <span>{{ comment_count }}</span>
+                    <span>{{ comment_count|short_number }}</span>
                 </p>
                 {% for commenter in commenter_list %}
                     <p>
                         <i class="fa fa-group fa-fw"></i>
-                        <span>{{ commenter.list|length }}</span>
+                        <span>{{ commenter.list|length|short_number }}</span>
                     </p>
                 {% empty %}
                     <p>

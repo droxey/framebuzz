@@ -165,9 +165,12 @@ def video_share(request, username=None, video_id=None):
                                         target_object_id=video.id)
         action_ids = [a.actor_object_id for a in actions]
         commenters = User.objects.filter(id__in=action_ids)
+        plays = len(Action.objects.filter(verb='played video',
+                                          action_object_object_id=video.id))
 
         if request.user.is_authenticated():
-            user_video = UserVideo.objects.filter(user=request.user, video=video)
+            user_video = UserVideo.objects.filter(user=request.user,
+                                                  video=video)
             video_in_library = len(user_video) > 0
 
         context['video'] = video
@@ -176,6 +179,7 @@ def video_share(request, username=None, video_id=None):
         context['path'] = request.path
         context['found_by'] = video.found_by
         context['video_in_library'] = video_in_library
+        context['plays'] = plays
 
         if username is not None:
             if request.is_ajax():
