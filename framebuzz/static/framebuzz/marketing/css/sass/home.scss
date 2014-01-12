@@ -852,7 +852,11 @@ body.home-v3 {
     #main {
         #fbz-header {
             div.info {
-                height: 500px;
+                height: 495px;
+
+                div.bubble div.bubble-inner {
+                    border-bottom: 1px solid black;
+                }
             }
         }
 
@@ -862,6 +866,78 @@ body.home-v3 {
 
             div.col-xs-3 {
                 border-top: none;
+            }
+        }
+    }
+}
+
+body.home-v2 {
+    #main {
+        #fbz-header {
+            div.info {
+                div.bubble.reasons,
+                div.bubble.signup-button,
+                div.bubble.learn-more-button {
+                    position: relative;
+                    bottom: 0;
+                    margin-top: 42px;
+
+                    div.button-wrap {
+                        height: 37px;
+
+                        a {
+                            color: white;
+                            display: block;
+                            height: 37px;
+                            line-height: 37px;
+                            text-align: center;
+                            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+                            width: 33%;
+                        }
+                    }                   
+                }
+
+                div.bubble.reasons {
+                    div.bubble-inner {
+                        border-bottom: none;
+                        padding: 11px 11px 0 11px;
+
+                        div.col-xs-6 {
+                            padding: 0;
+                        }
+
+                        p {
+                            font-family: 'pragmatica-web-condensed';
+                            font-size: 1.6em;
+                            font-weight: 500;
+                            margin: 0;
+
+                            &.bottom {
+                                margin-bottom: 11px;
+                            }
+                        }
+                    }
+                }
+
+                div.bubble.signup-button {
+                    margin-top: 84px;
+
+                    div.button-wrap {
+                        a {
+                            background: rgba(247, 0, 179, 0.8);
+                            font-weight: bold;
+                            font-size: 20px;
+                        }
+                    }
+                }
+
+                div.bubble.learn-more-button {
+                    div.button-wrap {
+                        a {
+                            background: rgba(0, 165, 236, 0.8);
+                        }
+                    }
+                }
             }
         }
     }
