@@ -1,0 +1,61 @@
+{% load staticfiles socialaccount %}
+
+<div id="fbz-signup" class="row">
+    <div class="signup-bkg col-xs-12 full-wrap-inner">
+        {% if show_full_signup %}
+            <img src="{% static 'framebuzz/marketing/img/fbz-header.jpg' %}" alt="" class="img-responsive">
+        {% endif %}
+        <h4>Start <span>Influencing</span> - It's FREE!</h4>
+        <div id="signup-container" class="row">
+            <div class="signup-left col-xs-5 col-xs-push-1">
+                {% if socialaccount.providers %}
+                    {% for provider in socialaccount.providers %}
+                        <div class="col-xs-12 social">
+                            <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} clearfix" href="{% provider_login_url provider.id %}">
+                                <span class="btn-icon pull-left"><i class="fa fa-fw fa-{{ provider.id|lower }}{% if provider.id == 'google' %}-plus{% endif %} absolute-center"></i></span>
+                                <span class="btn-title pull-right">SIGN IN WITH {{ provider.id|upper }}{% if provider.id == 'google' %}+{% endif %}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="signup-right col-xs-6 col-xs-push-1 pull-left">
+                <form id="signup-form" class="form-inline" role="form" method="post" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+                    <div class="row form-row">
+                        <label class="col-xs-4" for="id_username">Username:</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="row form-row">
+                        <label class="col-xs-4" for="id_email">Email:</label>
+                        {{ form.email }}
+                    </div>
+                    {% if form.password1 and form.password2 %}
+                        <div class="row form-row">
+                            <label class="col-xs-4" for="id_password1">Password:</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="row form-row">
+                            <label class="col-xs-4" for="id_password2">Password again:</label>
+                            {{ form.password2 }}
+                        </div>
+                    {% endif %}
+                    <div class="row form-row row-submit">
+                        <div class="col-xs-12 col-xs-pull-5">
+                            <button class="absolute-center" type="submit">Begin!</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row form-row row-learn-more clearfix">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-4 pull-right">
+                        <a href="{% url 'learn-more' %}" title="Learn More About The FrameBuzz Platform" class="learn-more-link absolute-center">or <strong>learn more</strong> about our video blogging platform</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

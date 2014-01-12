@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
-   url(r'^$', 'framebuzz.apps.marketing.views.home', name='home'),
+   url(r'^$', 'framebuzz.apps.marketing.views.home', {'template': 'marketing/home1.html'}, name='home'),
+   url(r'^v2/$', 'framebuzz.apps.marketing.views.home', {'template': 'marketing/home2.html'}, name='home2'),
+   url(r'^v3/$', 'framebuzz.apps.marketing.views.home', {'template': 'marketing/home3.html'}, name='home3'),
    url(r'^learn-more/$', 'framebuzz.apps.marketing.views.learn_more', name='learn-more'),
    url(r'^contact/$', 'framebuzz.apps.marketing.views.contact', name='contact'),
    url(r'^wordpress/$', 'framebuzz.apps.marketing.views.wordpress', name='wordpress'),

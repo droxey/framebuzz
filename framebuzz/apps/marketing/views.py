@@ -27,13 +27,16 @@ def mobile(request):
     }, context_instance=RequestContext(request))
 
 
-def home(request):
+def home(request, template='marketing/home1.html'):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('profiles-home',
                                             args=[request.user.username]))
     form = SignupForm()
-    return render_to_response('marketing/home.html', {
+    show_full_signup = template is 'marketing/home1.html'
+
+    return render_to_response(template, {
         'form': form,
+        'show_full_signup': show_full_signup
     }, context_instance=RequestContext(request))
 
 
