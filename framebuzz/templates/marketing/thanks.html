@@ -1,0 +1,59 @@
+{% extends "marketing/base.html" %}
+{% load i18n compress staticfiles addendum_tags socialaccount %}
+
+
+{% block page_classes %}content subpage account login thanks{% endblock %}
+
+{% block page_css %}
+    {% compress css %}
+        <style type="text/css">
+            body.account.thanks #main #thanks h1, body.account.thanks #main #thanks p { text-align: center; }
+            body.account.thanks #main #homepage-logo { margin-bottom: 0; }
+        </style>
+    {% endcompress %}
+{% endblock %}
+
+{% block content_center %}
+    <div id="thanks" class="col-xs-12">
+        <div class="row">
+            <div class="box col-xs-8 col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                <div id="homepage-logo" class="row">
+                    <div class="col-xs-12">
+                        <a href="{% url 'home' %}">
+                            <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="40" width="184">
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1>Welcome{% if request.user.is_authenticated %}, {{ request.user.username }}{% endif %}!</h1>
+                        <p>
+                            You will be redirected to your profile in <strong class="counter">3</strong> <strong>seconds</strong>&hellip;
+                            <br>
+                            or, <a href="{% url 'home' %}"><strong>click here</strong></a> to view your profile immediately.</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_javascript %}
+    {% compress js %}
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var count = 3;
+                var profileUrl = '{% url "home" %}';
+                var countdown = setInterval(function() {
+                    $("strong.counter").html(count);
+                    if (count == 0) {
+                        clearInterval(countdown);
+                        window.open(profileUrl, "_self");
+                    }
+                    count--;
+                }, 1000);
+            });
+        </script>
+    {% endcompress %}
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
    url(r'^$', 'framebuzz.apps.marketing.views.home', {'template': 'marketing/home1.html'}, name='home'),
@@ -15,5 +15,5 @@ urlpatterns = patterns('',
    url(r'^press/$', 'framebuzz.apps.marketing.views.press', name='press'),
    url(r'^ajax/google-plus-count/$',
        'framebuzz.apps.marketing.views.google_plus_count', name='google-plus-count'),
-   url(r'^mobile/$', 'framebuzz.apps.marketing.views.mobile', name='mobile'),
+   url(r'^accounts/thanks/$', 'framebuzz.apps.marketing.views.thanks', name='thanks'),
 )

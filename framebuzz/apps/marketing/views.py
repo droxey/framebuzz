@@ -22,6 +22,11 @@ def server_404(request):
     return response
 
 
+def thanks(request):
+    return render_to_response('marketing/thanks.html', {
+    }, context_instance=RequestContext(request))
+
+
 def mobile(request):
     return render_to_response('marketing/mobile.html', {
     }, context_instance=RequestContext(request))
