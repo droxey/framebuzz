@@ -2,6 +2,7 @@ import os
 import hashlib
 import watson
 import caching.base
+import django_filepicker
 
 from datetime import datetime
 
@@ -170,6 +171,10 @@ class Video(caching.base.CachingMixin, models.Model):
     duration = models.BigIntegerField()
     added_by = models.ForeignKey(User, blank=True, null=True)
     added_on = models.DateTimeField(auto_now=True)
+    
+    # FPFileField is a field that will render as a filepicker dragdrop widget, but
+    # When accessed will provide a File-like interface (so you can do fpfile.read(), for instance)
+    fpfile = django_filepicker.models.FPFileField(upload_to='uploads')
 
     class Meta:
         verbose_name = 'FrameBuzz Video'

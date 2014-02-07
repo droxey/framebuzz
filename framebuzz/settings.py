@@ -241,7 +241,6 @@ INSTALLED_APPS = (
     'addendum',
     'feedback',
     'shorturls',
-    #'tracking',
     'watson',
     'django_mobile',
     'maintenancemode',
@@ -441,6 +440,9 @@ SOCKJS_CHANNEL = 'echo'
 SOCKJS_CLASSES = (
     'framebuzz.apps.api.sockserver.ConnectionHandler',
 )
+
+# django-filepicker
+FILEPICKER_API_KEY = 'AXQRyfZ2cQjWD3yy2flkFz'
 
 # Dashboard
 LOGIN_URL = '/accounts/login/'
