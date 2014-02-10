@@ -36,6 +36,7 @@
     {% compress css %}
         <link href="{% static 'framebuzz/profiles/vendor/timeline/css/stylesheet.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/profiles/stylesheets/uploads.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
     {% endcompress %}
     {% block extra_css %}{% endblock %}
 {% endblock %}
@@ -265,6 +266,7 @@
     {% compress js %}
         <script src="{% static 'framebuzz/profiles/vendor/jquery/jquery.smartresize.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/timeline/timeline.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/js/framebuzz.uploads.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/js/framebuzz.profiles.js' %}"></script>
         <script type="text/javascript">
             $(function(){

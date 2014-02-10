@@ -1,9 +1,5 @@
-import urlparse
-
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.comments.models import CommentFlag
-from django.contrib.sites.models import Site
-from django.utils.hashcompat import md5_constructor
 from django.utils import dateformat
 from django.utils import timezone
 from django.utils.html import urlize
@@ -11,7 +7,6 @@ from django.utils.html import urlize
 from actstream.actions import is_following
 from actstream.models import Action
 from avatar.util import get_primary_avatar, get_default_avatar_url
-from avatar.settings import AVATAR_GRAVATAR_BACKUP
 from rest_framework import serializers
 
 from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
@@ -26,7 +21,7 @@ class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ('id', 'video_id', 'title', 'duration', 'swf_url', 
+        fields = ('id', 'video_id', 'title', 'duration', 
             'time_hms', 'embed_code', 'embed_url', 'share_url',)
 
     def get_channel(self, obj):

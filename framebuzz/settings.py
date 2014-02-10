@@ -244,6 +244,7 @@ INSTALLED_APPS = (
     'watson',
     'django_mobile',
     'maintenancemode',
+    'autoslug',
 
     # Required by Zinnia
     'tinymce',

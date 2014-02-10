@@ -107,7 +107,6 @@ def get_or_create_video(video_id):
       video.title = snippet.get('title')
       video.description = snippet.get('description')
       video.youtube_url = 'http://www.youtube.com/watch?v=%s&feature=youtube_gdata_player' % new_video_id
-      video.swf_url = 'http://www.youtube.com/v/%s?f=videos&app=youtube_gdata&enablejsapi=1&modestbranding=1&version=3' % new_video_id
       video.uploaded = iso8601.parse_date(snippet.get('publishedAt'))
       duration = contentDetails.get('duration').lstrip('PT')
 

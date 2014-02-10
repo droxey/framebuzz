@@ -22,6 +22,7 @@ from django.utils.safestring import mark_safe
 from actstream import action
 from actstream.models import actstream_register_model
 from actstream.actions import follow
+from autoslug import AutoSlugField
 from avatar.util import get_username
 from templated_email import send_templated_mail
 from timezone_field import TimeZoneField
@@ -164,17 +165,17 @@ class Video(caching.base.CachingMixin, models.Model):
     video_id = models.CharField(max_length=255, unique=True, null=True,
                                 help_text=_("The Youtube id of the video"))
     title = models.CharField(max_length=200, null=True, blank=True)
+    slug = AutoSlugField(populate_from='title', blank=True, null=True)
     description = models.TextField(null=True, blank=True)
     youtube_url = models.URLField(max_length=255, null=True, blank=True)
-    swf_url = models.URLField(max_length=255, null=True, blank=True)
     uploaded = models.DateTimeField()
     duration = models.BigIntegerField()
     added_by = models.ForeignKey(User, blank=True, null=True)
     added_on = models.DateTimeField(auto_now=True)
-    
-    # FPFileField is a field that will render as a filepicker dragdrop widget, but
-    # When accessed will provide a File-like interface (so you can do fpfile.read(), for instance)
-    fpfile = django_filepicker.models.FPFileField(upload_to='uploads')
+    mp4_url = models.URLField(max_length=255, null=True, blank=True)
+    webm_url = models.URLField(max_length=255, null=True, blank=True)
+    job_id = models.BigIntegerField(blank=True, null=True)
+    processing = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'FrameBuzz Video'
