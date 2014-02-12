@@ -13,9 +13,12 @@
     </li>
     <li class="youtube">
         <a href="#upload-youtube" data-toggle="tab">
-            <i class="fa fa-youtube-square fa-fw"></i>
+            <i class="fa fa-youtube-play fa-fw"></i>
             <strong>YouTube</strong>
         </a>
+    </li>
+    <li class="indicator file">
+        <i class="fa fa-play fa-rotate-270"></i>
     </li>
 </ul>
 <div class="tab-content">
@@ -31,18 +34,18 @@
                     </div>
                     <div class="row input-row textarea-row">
                         <div class="col-xs-12">
-                            <textarea></textarea>
+                            <textarea placeholder="Enter a description for the video..."></textarea>
                         </div>
                     </div>
                     <div class="row drop-pane-row-inner">
-                        <div id="upload-drop-pane" class="col-xs-12">Drag and drop video files here.<br>Or, <a href="#" id="upload-click-here">click here</a> to upload videos from Dropbox, Google Drive, and more!</div>
+                        <div id="upload-drop-pane" class="col-xs-12">Drag and drop your video files here.<br>Or, <a href="#" id="upload-click-here">click here</a> to upload videos from Dropbox, Google Drive, and more!</div>
                     </div>
                     <div class="row submit-row">
                         <div class="col-xs-6 clearfix">
-                            <button class="btn cancel-upload pull-left">Cancel</button>
+                            <button class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</button>
                         </div>
                         <div class="col-xs-6 clearfix">
-                            <button class="btn confirm-upload pull-right">Upload Video</button>
+                            <button class="btn confirm-upload pull-right"><i class="fa fa-play-circle"></i> Upload &amp; Post Video</button>
                         </div>
                     </div>
                 </div>
@@ -64,15 +67,15 @@
                     </div>
                     <div class="row input-row textarea-row">
                         <div class="col-xs-12">
-                            <textarea></textarea>
+                            <textarea placeholder="Enter a description for the video..."></textarea>
                         </div>
                     </div>
                     <div class="row submit-row">
                         <div class="col-xs-6 clearfix">
-                            <button class="btn cancel-upload pull-left">Cancel</button>
+                            <button class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</button>
                         </div>
                         <div class="col-xs-6 clearfix">
-                            <button id="activate-webcam-upload" class="btn confirm-upload pull-right">Activate Webcam</button>
+                            <button id="activate-webcam-upload" class="btn confirm-upload pull-right"><i class="fa fa-play-circle"></i> Record &amp; Post Video</button>
                         </div>
                     </div>
                 </div>
@@ -80,19 +83,23 @@
         </form>
     </div>
     <div id="upload-youtube" class="tab-pane">
-        <form id="add-video-form" action="{% url 'profiles-add-video' request.user.username %}" method="POST" class="col-xs-12">
+        <form id="add-video-form" action="{% url 'profiles-add-video' request.user.username %}" method="POST">
             {% csrf_token %}
-            <div class="row">
-                <div class="col-xs-12 input">
-                    <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
-                </div>
-            </div>
-            <div class="row submit-row">
-                <div class="col-xs-6 clearfix">
-                    <button class="btn cancel-upload pull-left">Cancel</button>
-                </div>
-                <div class="col-xs-6 clearfix">
-                    <button type="submit" class="btn add-video pull-right"><i class="fa fa-link"></i> Post Video to Profile</button>
+            <div class="row drop-pane-row">
+                <div class="col-xs-12">
+                    <div class="row input-row">
+                        <div class="col-xs-12">
+                            <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
+                        </div>
+                    </div>
+                    <div class="row submit-row">
+                        <div class="col-xs-6 clearfix">
+                            <button class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</button>
+                        </div>
+                        <div class="col-xs-6 clearfix">
+                            <button type="submit" class="btn add-video confirm-upload pull-right"><i class="fa fa-play-circle"></i> Post Video</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

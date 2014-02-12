@@ -6,13 +6,6 @@
 @import "compass";
 @import "compass/css3/border-radius";
 
-
-
-#upload-file {
-    background-color: #0591c5;
-    padding: 5px;
-}
-
 #add-video {
     .nav-tabs {
         background-color: white;
@@ -24,6 +17,7 @@
         li {
             background-color: white;
             border-right: 1px solid #CCC;
+            position: relative;
 
             @include border-radius(0px, 0px);
 
@@ -61,6 +55,30 @@
                     color: #999999;
                     font-size: 12px;
                     font-weight: 500;
+                }
+            }
+
+            &.indicator {
+                background: transparent;
+                top: 45px;
+                position: absolute;
+                z-index: 99;
+
+                i {
+                    color: #0591C5;
+                    font-size: 1.6em;
+                }
+
+                &.file {
+                    left: 25px;
+                }
+
+                &.webcam {
+                    left: 96px;
+                }
+
+                &.youtube {
+                    left: 173px;
                 }
             }
 
@@ -102,6 +120,11 @@
         }
     }
 
+    div.tab-pane {
+        background-color: #0591c5;
+        padding: 5px;
+    }
+
     .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
         border-color: transparent;
         background-color: white;
@@ -117,10 +140,16 @@
                 button {
                     border: none;
                     color: white;
+                    font-size: 0.9em;
                     padding: 3px 9px;
+
+                    i {
+                        line-height: 1.42857em;
+                    }
 
                     &.confirm-upload {
                         background: #E45DBE;
+                        font-weight: bold;
 
                         &:hover, &:active, &:focus {
                             background: #DE3FB1;
@@ -128,10 +157,14 @@
                     }
 
                     &.cancel-upload {
-                        background: #a5a5a5;
+                        padding-right: 0;
+                        padding-left: 0;
+                        background: transparent;
+                        color: #6E4949;
 
                         &:hover, &:active, &:focus {
-                            background: #8F8F8F;
+                            background: transparent;
+                            color: #774040;
                         }
                     }
                 }
@@ -165,9 +198,45 @@
 
                     input, textarea {
                         border: 1px solid #CCCCCC;
+                        color: #AAA;
                         padding: 0 5px;
                         width: 100%;
                         @include border-radius(3px, 3px);
+
+                        &::-webkit-input-placeholder { /* WebKit browsers */
+                            color:    #AAA;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+                        
+                        &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                            color:    #AAA;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+                        
+                        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                            color:    #AAA;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+                        
+                        &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                            color:    #AAA;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+
+                        &.placeholder {
+                            color:    #AAA;
+                            font-weight: 300;
+                            font-style: italic;                            
+                        }
+
+                        &:focus {
+                            border: 1px solid #AAA;
+                            outline: 0;
+                        }
                     }
                 }
             }
@@ -176,7 +245,7 @@
                 margin-bottom: 5px;
 
                 textarea {
-            
+                    height: 43px;
                 }
             }
         }

@@ -1,4 +1,6 @@
 $(function() {
+    $('input, textarea').placeholder();
+
     filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
     //var zenKey = 'e990db716cb4d5b55a9ca91ceaba6c00'; // full access
     var zenKey = '75e13910e393a6ccafc1a3272f3a6a48'; //integration mode
@@ -27,6 +29,19 @@ $(function() {
         onProgress: function(percentage) {
             $("#upload-drop-pane").text("Uploading ("+percentage+"%)");
         }
+    });
+
+    var selectedTabIndicator = $('ul.nav-tabs li.indicator');
+    $('#add-video ul.nav-tabs li a').click(function() {
+      var newClass = $(this).parent().attr('class');
+      selectedTabIndicator.removeClass('video youtube webcam');
+      selectedTabIndicator.show();
+      selectedTabIndicator.addClass(newClass);
+    });
+
+    $('#add-video button.cancel-upload').click(function() {
+      selectedTabIndicator.hide();
+      $('#add-video div.tab-content div.tab-pane').removeClass('active');
     });
 
 
