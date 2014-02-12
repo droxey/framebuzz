@@ -376,7 +376,7 @@ def add_video_to_library(request, username):
     }, context_instance=RequestContext(request))
 
 
-def upload_video(request):
+def upload_video(request, username):
     submitted = request.method == 'POST'
     success = False
 

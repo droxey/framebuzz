@@ -365,7 +365,8 @@ TEMPLATED_EMAIL_DJANGO_SUBJECTS = {
     'share-email': 'FrameBuzz: Check out this video!',
     'comment-notification': 'FrameBuzz: New Video Reply!',
     'welcome-back': 'Check out the new FrameBuzz!',
-    'happy-holidays': 'Happy Holidays from FrameBuzz!'
+    'happy-holidays': 'Happy Holidays from FrameBuzz!',
+    'upload-success': 'Your Uploaded Video is Now Available on FrameBuzz!'
 }
 
 # Django-Celery Settings:

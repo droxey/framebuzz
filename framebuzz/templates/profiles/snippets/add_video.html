@@ -23,16 +23,18 @@
             <div id="upload-file" class="tab-pane">
                 <form id="upload-file-form" action="{% url 'profiles-upload-video' request.user.username %}" method="POST">
                     {% csrf_token %}
+                    {{ upload_form.fp_url.as_hidden }}
+                    {{ upload_form.fp_filename.as_hidden }}
                     <div class="row drop-pane-row">
                         <div class="col-xs-12">
                             <div class="row input-row">
                                 <div class="col-xs-12">
-                                    <input type="text" placeholder="Enter video title..." id="id_title" name="title">
+                                    {{ upload_form.title }}
                                 </div>
                             </div>
                             <div class="row input-row textarea-row">
                                 <div class="col-xs-12">
-                                    <textarea placeholder="Enter a description for the video..."></textarea>
+                                    {{ upload_form.description }}
                                 </div>
                             </div>
                             <div class="row drop-pane-row-inner">

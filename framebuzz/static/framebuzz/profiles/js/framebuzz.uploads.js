@@ -1,38 +1,42 @@
 $(function() {
+    var addVideoDiv = $('#add-video');
+        selectedTabIndicator = $('ul.nav-tabs li.indicator', addVideoDiv),
+        dropPaneDiv = $('#upload-drop-pane'),
+        dropResultDiv = $("#drop-result-bar"),
+        acceptedExtensions = [
+          '3g2','3gp','3gp2','3gpp','3gpp2','aac','ac3','eac3','ec3','f4a','f4b','f4v',
+          'flv','highwinds','m4a','m4b','m4r','m4v','mkv','mov','mp3','mp4','oga','ogg',
+          'ogv','ogx','ts','webm','wma','wmv'
+        ];
+
+    // Add placeholder text for forms.
     $('input, textarea').placeholder();
 
+    // Set filepicker.io key and drop panes for uploads.
     filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
-    //var zenKey = 'e990db716cb4d5b55a9ca91ceaba6c00'; // full access
-    var zenKey = '75e13910e393a6ccafc1a3272f3a6a48'; //integration mode
-    var acceptedExtensions = [
-      '3g2','3gp','3gp2','3gpp','3gpp2','aac','ac3','eac3','ec3','f4a','f4b','f4v',
-      'flv','highwinds','m4a','m4b','m4r','m4v','mkv','mov','mp3','mp4','oga','ogg',
-      'ogv','ogx','ts','webm','wma','wmv'
-    ];
-
-    filepicker.makeDropPane($('#upload-drop-pane')[0], {
+    filepicker.makeDropPane(dropPaneDiv[0], {
         multiple: false,
         extensions: acceptedExtensions,
         dragEnter: function() {
-            $("#upload-drop-pane").html("Drop to upload.");
+            dropPaneDiv.html("Drop to upload.");
         },
         dragLeave: function() {
-            $("#upload-drop-pane").html("Drop files here.");
+            dropPaneDiv.html("Drop files here.");
         },
         onSuccess: function(InkBlobs) {
-            $("#upload-drop-pane").text("Done, see result below");
-            $("#drop-result-bar").text(JSON.stringify(InkBlobs));
+            dropPaneDiv.text("Done, see result below");
+            dropResultDiv.text(JSON.stringify(InkBlobs));
         },
         onError: function(type, message) {
-            $("#drop-result-bar").text('('+type+') '+ message);
+            dropResultDiv.text('('+type+') '+ message);
         },
         onProgress: function(percentage) {
-            $("#upload-drop-pane").text("Uploading ("+percentage+"%)");
+            dropPaneDiv.text("Uploading ("+percentage+"%)");
         }
     });
 
-    var selectedTabIndicator = $('ul.nav-tabs li.indicator');
-    $('#add-video ul.nav-tabs li a').click(function() {
+    // Move the active tab indicator and hide/show active form.
+    $('ul.nav-tabs li a', addVideoDiv).click(function() {
       var newClass = $(this).parent().attr('class');
       var oldTabDiv = $($(this).attr('href'));
 
@@ -41,14 +45,24 @@ $(function() {
       selectedTabIndicator.addClass(newClass);
     });
 
-    $('#add-video a.cancel-upload').click(function() {
+    // Cancel upload button.
+    $('a.cancel-upload', addVideoDiv).click(function() {
       selectedTabIndicator.hide();
 
-      $('#add-video ul.nav-tabs li').removeClass('active');
-      $('#add-video div.tab-content div.tab-pane').removeClass('active');
+      $('ul.nav-tabs li', addVideoDiv).removeClass('active');
+      $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
     });
 
+    // Upload Video submit button.
+    $('#upload-file-form', addVideoDiv).submit(function(e) {
+      e.preventDefault();
 
+      console.log('clicked');
+
+      return false;
+    }); 
+
+    /*
     $('#upload-click-here').click(function(e) {
       e.preventDefault();
 
@@ -72,43 +86,10 @@ $(function() {
             var uploadedFilename = fpfiles[0].key;
             var filenameWithoutExt = uploadedFilename.split(".");
             var folderName = convertToSlug(filenameWithoutExt[0]);
-            var s3Url = "s3://framebuzz-zencoder/videos/" + folderName + "/" + folderName;
+          });
+      });
 
-            // HTML5 video.
-            var request = {
-              "input": uploadedFileUrl,
-              "outputs": [
-                {
-                  "credentials": "s3",
-                  "rrs": true,
-                  "url": s3Url + ".mp4",
-                  "size": "640x480",
-                  "public": true
-                },
-                {
-                  "credentials": "s3",
-                  "rrs": true,
-                  "url": s3Url + ".webm",
-                  "size": "640x480",
-                  "public": true
-                }
-              ]
-            };
 
-           // Use $.ajax instead of $.post so we can specify custom headers.
-           $.ajax({
-              url: 'https://app.zencoder.com/api/v2/jobs',
-              type: 'POST',
-              data: JSON.stringify(request),
-              headers: { "Zencoder-Api-Key": zenKey },
-              dataType: 'json',
-              success: function(data) {
-                $('body').append('Job created! <a href="https://app.zencoder.com/jobs/'+ data.id +'">View Job</a>')
-              },
-              error: function(data) {
-                 console.log(data);
-              }
-           });
-      }); 
    });
+*/
 });

@@ -47,3 +47,6 @@ MAINTENANCE_IGNORE_URLS = (
     r'^/admin',
     r'^/mobile'
 )
+
+
+ZENCODER_API_KEY = 'e990db716cb4d5b55a9ca91ceaba6c00'

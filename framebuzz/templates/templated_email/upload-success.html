@@ -1,0 +1,13 @@
+{% extends "templated_email/base.html" %}
+{% load profile_tags %}
+
+
+{% block email_recipient %}
+    Hey, {{ user.username }}!
+{% endblock %}
+
+{% block email_message %}
+    <b>Good news!</b> Your video, "<b>{{ video.title }}</b>," has been successfully uploaded.
+    <br><br>
+    <a href="">Click here to watch now!</a>
+{% endblock %}

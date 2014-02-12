@@ -5,6 +5,7 @@ from django.db import IntegrityError
 
 from framebuzz.apps.api.models import UserProfile, UserVideo, Video
 from framebuzz.apps.api.backends.youtube import get_or_create_video
+from framebuzz.apps.api.backends.fbz import start_zencoder_job
 
 
 class UserProfileForm(forms.ModelForm):
@@ -55,13 +56,22 @@ class AddVideoForm(forms.ModelForm):
 
 
 class UploadVideoForm(forms.ModelForm):
+    fp_url = forms.CharField(max_length=500)
+    fp_filename = forms.CharField(max_length=500)
+
     class Meta:
         model = Video
-        fields = ('title', 'description', 'webm_url', 'mp4_url',)
+        fields = ('title', 'description', 'fp_url')
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(UploadVideoForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget = forms.TextInput(attrs={'placeholder':'Enter video title...'})
+        self.fields['description'].widget = forms.Textarea(attrs={'placeholder':'Enter a description for the video...'})
 
     def clean(self):
         return self.cleaned_data
+
+    def save(self):
+        pass
+
