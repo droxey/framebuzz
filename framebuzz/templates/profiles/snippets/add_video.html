@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs">
-    <li class="file active">
+    <li class="file">
         <a href="#upload-file" data-toggle="tab">
             <i class="fa fa-film fa-fw"></i>
             <strong>Video</strong>
@@ -22,7 +22,7 @@
     </li>
 </ul>
 <div class="tab-content">
-    <div id="upload-file" class="tab-pane active">
+    <div id="upload-file" class="tab-pane">
         <form action="">
             {% csrf_token %}
             <div class="row drop-pane-row">
@@ -42,7 +42,7 @@
                     </div>
                     <div class="row submit-row">
                         <div class="col-xs-6 clearfix">
-                            <button class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</button>
+                            <a class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</a>
                         </div>
                         <div class="col-xs-6 clearfix">
                             <button class="btn confirm-upload pull-right"><i class="fa fa-play-circle"></i> Upload &amp; Post Video</button>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="row submit-row">
                         <div class="col-xs-6 clearfix">
-                            <button class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</button>
+                            <a class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</a>
                         </div>
                         <div class="col-xs-6 clearfix">
                             <button id="activate-webcam-upload" class="btn confirm-upload pull-right"><i class="fa fa-play-circle"></i> Record &amp; Post Video</button>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="row submit-row">
                         <div class="col-xs-6 clearfix">
-                            <button class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</button>
+                            <a class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</a>
                         </div>
                         <div class="col-xs-6 clearfix">
                             <button type="submit" class="btn add-video confirm-upload pull-right"><i class="fa fa-play-circle"></i> Post Video</button>

@@ -34,13 +34,17 @@ $(function() {
     var selectedTabIndicator = $('ul.nav-tabs li.indicator');
     $('#add-video ul.nav-tabs li a').click(function() {
       var newClass = $(this).parent().attr('class');
+      var oldTabDiv = $($(this).attr('href'));
+
       selectedTabIndicator.removeClass('video youtube webcam');
       selectedTabIndicator.show();
       selectedTabIndicator.addClass(newClass);
     });
 
-    $('#add-video button.cancel-upload').click(function() {
+    $('#add-video a.cancel-upload').click(function() {
       selectedTabIndicator.hide();
+
+      $('#add-video ul.nav-tabs li').removeClass('active');
       $('#add-video div.tab-content div.tab-pane').removeClass('active');
     });
 
