@@ -1,4 +1,5 @@
 import celery
+import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -35,13 +36,18 @@ def start_zencoder_job(username, title, description, video_url, filename):
     ])
 
     if response.code == 201:  # Created
+        added_by = User.objects.get(username__iexact=username)
+
         video = Video()
+        video.added_by = added_by
         video.video_id = slugify(title)
         video.title = title
         video.description = description
         video.processing = True
         video.job_id = response.body.get('id', 0)
         video.duration = 0  # Unknown until Zencoder is done encoding.
+        video.uploaded = datetime.datetime.now()
+
         video.save()
     pass
 
@@ -61,15 +67,39 @@ def check_zencoder_progress(username, job_id):
 
         if job:
             input_file = job.get('input_media_file', None)
+            output_files = job.get('output_media_files', list())
+            mp4_url = None
+            webm_url = None
+
             if not input_file:
                 return 0
 
+            if len(output_files) == 2:
+                for output in output_files:
+                    url = output.get('url', '')
+                    if url.endswith('.mp4'):
+                        mp4_url = url
+                    elif url.endswith('.webm'):
+                        webm_url = url
+                    else:
+                        pass
+
+                if webm_url is None and mp4_url is None:
+                    return 0
+
             # Update video attributes.
+            duration = input_file.get('duration_in_ms', 0)
+            if duration > 0:
+                duration = duration / 1000
+
             video = Video.objects.get(job_id=job_id)
             video.processing = False
-            video.duration = input_file.get('duration_in_ms', 0)
+            video.duration = duration
+            video.webm_url = webm_url
+            video.mp4_url = mp4_url
             video.save()
 
+            # Save video poster image.
             added_by = User.objects.get(username__iexact=username)
 
             # Add UserVideo entry.
@@ -90,7 +120,7 @@ def check_zencoder_progress(username, job_id):
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[added_by.email],
                     context={'username': added_by.username, 'video': video})
-                
+
             return 100
     else:
         return response.get('progress', 0)
