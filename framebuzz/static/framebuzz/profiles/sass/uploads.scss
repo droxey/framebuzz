@@ -5,3 +5,47 @@
 
 @import "compass";
 @import "compass/css3/border-radius";
+
+
+div.drop-pane-row {
+    background-color: #f6f6f6;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: 5px;
+    @include border-radius(5px, 5px);
+
+    #upload-drop-pane {
+        color: #ababab;
+        text-align: center;
+        padding: 15px 0;
+        background-color: #f0f0f0;
+        border: 2px dashed #d8d8d8;
+        font-size: 0.9em;
+        margin: 5px;
+        width: 98.5%;
+        @include border-radius(3px, 3px);
+    }
+
+    div.input-row {
+        margin-left: -10px;
+        margin-right: -10px;
+        padding-top: 5px;
+        
+        div {
+            padding: 0;
+
+            input, textarea {
+                border: 1px solid #CCCCCC;
+                padding: 0 5px;
+                width: 100%;
+                @include border-radius(3px, 3px);
+            }
+        }
+    }
+
+    div.textarea-row {
+        textarea {
+
+        }
+    }
+}

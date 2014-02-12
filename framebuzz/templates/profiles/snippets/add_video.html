@@ -5,12 +5,43 @@
             <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
         </div>
         <div class="col-xs-3 submit">
-            <button type="submit" class="add-video"><i class="fa fa-video-camera"></i> Post Video to Profile</button>
+            <button type="submit" class="add-video"><i class="fa fa-link"></i> Post Video to Profile</button>
         </div>
+    </div>
+    <div class="row drop-pane-row">
+        <div class="col-xs-12">
+            <div class="row input-row">
+                <div class="col-xs-12">
+                    <input type="text" placeholder="Enter video title..." id="id_title" name="title">
+                </div>
+            </div>
+            <div class="row input-row textarea-row">
+                <div class="col-xs-12">
+                    <textarea></textarea>
+                </div>
+            </div>
+            <div class="row drop-pane-row-inner">
+                <div id="upload-drop-pane" class="col-xs-12">Drag and drop video files here.<br>Or, click this panel to upload videos from your webcam, Dropbox, and more!</div>
+            </div>
+        </div>
+    </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
-            <a id="upload-link" href="#" class="btn-warning">Upload Files</a>
+        <div id="drop-result-bar" class="col-xs-12"></div>
+    </div>
+    {% comment %}
+    <div class="row clearfix">
+        <div class="col-xs-6 submit pull-left">
+            <button id="upload-link" type="submit" class="add-video"><i class="fa fa-upload"></i> Upload Videos</button>
+        </div>
+        <div class="col-xs-6 submit pull-right">
+            <button type="submit" class="add-video"><i class="fa fa-link"></i> Post YouTube Link</button>
         </div>
     </div>
+    <div class="row drag-pane">
+        <div class="col-xs-12">
+            <input type="filepicker-dragdrop" data-fp-button-class="btn-pick-file" data-fp-drag-text="Drop files here."/>
+        </div>
+    </div>
+    {% endcomment %}
 </form>

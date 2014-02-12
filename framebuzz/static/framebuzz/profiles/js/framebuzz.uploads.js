@@ -1,9 +1,36 @@
 $(function() {
-    //Put your Filepicker.io API key here:
     filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
-    //Zencoder API key
     //var zenKey = 'e990db716cb4d5b55a9ca91ceaba6c00'; // full access
     var zenKey = '75e13910e393a6ccafc1a3272f3a6a48'; //integration mode
+    var acceptedExtensions = [
+      '3g2','3gp','3gp2','3gpp','3gpp2','aac','ac3','eac3','ec3','f4a','f4b','f4v',
+      'flv','highwinds','m4a','m4b','m4r','m4v','mkv','mov','mp3','mp4','oga','ogg',
+      'ogv','ogx','ts','webm','wma','wmv'
+    ];
+
+    filepicker.makeDropPane($('#upload-drop-pane')[0], {
+        multiple: false,
+        extensions: acceptedExtensions,
+        dragEnter: function() {
+            $("#upload-drop-pane").html("Drop to upload.");
+        },
+        dragLeave: function() {
+            $("#upload-drop-pane").html("Drop files here.");
+        },
+        onSuccess: function(InkBlobs) {
+            $("#upload-drop-pane").text("Done, see result below");
+            $("#drop-result-bar").text(JSON.stringify(InkBlobs));
+        },
+        onError: function(type, message) {
+            $("#drop-result-bar").text('('+type+') '+ message);
+        },
+        onProgress: function(percentage) {
+            $("#upload-drop-pane").text("Uploading ("+percentage+"%)");
+        }
+    });
+
+      /*
+
     $('#upload-link').click(function(e) {
       e.preventDefault();
 
@@ -21,6 +48,7 @@ $(function() {
             ;
       };
 
+
       filepicker.pickAndStore(
           {
             extensions: acceptedExtensions,
@@ -33,7 +61,7 @@ $(function() {
             var uploadedFilename = fpfiles[0].key;
             var filenameWithoutExt = uploadedFilename.split(".");
             var folderName = convertToSlug(filenameWithoutExt[0]);
-            var s3Url = "s3://framebuzz-zencoder/" + folderName + "/" + folderName;
+            var s3Url = "s3://framebuzz-zencoder/videos/" + folderName + "/" + folderName;
 
             // HTML5 video.
             var request = {
@@ -70,6 +98,6 @@ $(function() {
                  console.log(data);
               }
            });
-      });
-   });
+      }); 
+   }); */
 });

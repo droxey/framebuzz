@@ -53,6 +53,10 @@ def video_embed(request, video_id):
         return HttpResponseRedirect(reverse('video-embed-error', args=(video_id,)))
 
 
+def upload_video(request):
+    pass
+
+
 @xframe_options_exempt
 def video_embed_error(request, video_id):
     return render_to_response('player/error_player.html', {
