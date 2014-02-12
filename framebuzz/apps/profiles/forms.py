@@ -3,7 +3,7 @@ from actstream import action
 from django import forms
 from django.db import IntegrityError
 
-from framebuzz.apps.api.models import UserProfile, UserVideo
+from framebuzz.apps.api.models import UserProfile, UserVideo, Video
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 
 
@@ -51,4 +51,17 @@ class AddVideoForm(forms.ModelForm):
             raise forms.ValidationError(
                 'This video is already in your library!')
 
+        return self.cleaned_data
+
+
+class UploadVideoForm(forms.ModelForm):
+    class Meta:
+        model = Video
+        fields = ('title', 'description', 'webm_url', 'mp4_url',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(UploadVideoForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
         return self.cleaned_data

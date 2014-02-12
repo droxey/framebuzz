@@ -32,8 +32,16 @@ def video_embed(request, video_id):
     try:
         video, created = get_or_create_video(video_id)
         next_url = '%s?close=true' % reverse('video-embed', args=(video.video_id,))
-        mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
-        webm_url = 'http://www.ytapi.com/api/%s/direct/43/' % video_id
+
+        if video.mp4_url:
+            mp4_url = video.mp4_url
+        else:
+            mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
+
+        if video.webm_url:
+            webm_url = video.webm_url
+        else:
+            webm_url = 'http://www.ytapi.com/api/%s/direct/43/' % video_id
 
         if request.user.is_authenticated():
             action.send(request.user, verb='viewed video', action_object=video)
@@ -51,10 +59,6 @@ def video_embed(request, video_id):
         }, context_instance=RequestContext(request))
     except TypeError:
         return HttpResponseRedirect(reverse('video-embed-error', args=(video_id,)))
-
-
-def upload_video(request):
-    pass
 
 
 @xframe_options_exempt

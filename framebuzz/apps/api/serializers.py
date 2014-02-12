@@ -22,7 +22,8 @@ class VideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video
         fields = ('id', 'video_id', 'title', 'duration', 
-            'time_hms', 'embed_code', 'embed_url', 'share_url',)
+            'time_hms', 'embed_code', 'embed_url', 'share_url',
+            'mp4_url', 'webm_url')
 
     def get_channel(self, obj):
         return '/framebuzz/video/%s' % obj.video_id

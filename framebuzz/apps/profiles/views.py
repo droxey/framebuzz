@@ -22,7 +22,7 @@ from templated_email import send_templated_mail
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.api.utils import get_total_shares
-from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm
+from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm, UploadVideoForm
 
 
 VALID_FEED_VERBS = ['commented on', 'added to favorites',
@@ -264,6 +264,7 @@ def home(request, username):
         del request.session['share']
 
     context['form'] = AddVideoForm(request=request)
+    context['upload_form'] = UploadVideoForm(request=request)
     return render_to_response('profiles/base.html',
                               context,
                               context_instance=RequestContext(request))
@@ -367,6 +368,26 @@ def add_video_to_library(request, username):
             return HttpResponse()
     else:
         form = AddVideoForm(request=request)
+
+    return render_to_response('profiles/snippets/add_video.html', {
+        'form': form,
+        'success': success,
+        'submitted': submitted
+    }, context_instance=RequestContext(request))
+
+
+def upload_video(request):
+    submitted = request.method == 'POST'
+    success = False
+
+    if submitted:
+        form = UploadVideoForm(data=request.POST, request=request)
+        success = form.is_valid()
+
+        if success:
+            return HttpResponse()
+    else:
+        form = UploadVideoForm(request=request)
 
     return render_to_response('profiles/snippets/add_video.html', {
         'form': form,

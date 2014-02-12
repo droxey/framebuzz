@@ -7,12 +7,6 @@
                     <strong>Video</strong>
                 </a>
             </li>
-            <li class="webcam">
-                <a href="#upload-webcam" data-toggle="tab">
-                    <i class="fa fa-camera fa-fw"></i>
-                    <strong>Webcam</strong>
-                </a>
-            </li>
             <li class="youtube">
                 <a href="#upload-youtube" data-toggle="tab">
                     <i class="fa fa-youtube-play fa-fw"></i>
@@ -27,7 +21,7 @@
     <div class="row">
         <div class="col-xs-12 tab-content">
             <div id="upload-file" class="tab-pane">
-                <form action="">
+                <form id="upload-file-form" action="{% url 'profiles-upload-video' request.user.username %}" method="POST">
                     {% csrf_token %}
                     <div class="row drop-pane-row">
                         <div class="col-xs-12">
@@ -61,38 +55,6 @@
                     </div>
                     <div class="row">
                         <div id="drop-result-bar" class="col-xs-12"></div>
-                    </div>
-                </form>
-            </div>
-            <div id="upload-webcam" class="tab-pane">
-                <form action="" class="">
-                    {% csrf_token %}
-                    <div class="row drop-pane-row">
-                        <div class="col-xs-12">
-                            <div class="row input-row">
-                                <div class="col-xs-12">
-                                    <input type="text" placeholder="Enter video title..." id="id_title" name="title">
-                                </div>
-                            </div>
-                            <div class="row input-row textarea-row">
-                                <div class="col-xs-12">
-                                    <textarea placeholder="Enter a description for the video..."></textarea>
-                                </div>
-                            </div>
-                            <div class="row submit-row">
-                                <div class="col-xs-6 clearfix">
-                                    <a class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</a>
-                                </div>
-                                <div class="col-xs-6 clearfix">
-                                    <button id="activate-webcam-upload" type="submit" class="btn add-video confirm-upload pull-right">
-                                        <span class="fa-stack video">
-                                            <i class="fa fa-video-camera fa-stack-2x"></i>
-                                            <i class="fa fa-plus fa-inverse fa-stack-1x"></i>
-                                        </span> Record &amp; Post Video
-                                    </button>                        
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div>
