@@ -373,6 +373,15 @@ TEMPLATED_EMAIL_DJANGO_SUBJECTS = {
 BROKER_URL = 'redis://localhost:6379/0'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 CELERY_DISABLE_RATE_LIMITS = True
+CELERY_TIMEZONE = 'UTC'
+
+from datetime import timedelta
+CELERYBEAT_SCHEDULE = {
+    'check-zencoder-status': {
+        'task': 'framebuzz.api.backends.fbz.check_zencoder_status',
+        'schedule': timedelta(seconds=30)
+    },
+}
 
 # Django-Celery-Email Settings:
 CELERY_EMAIL_TASK_CONFIG = {

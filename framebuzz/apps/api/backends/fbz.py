@@ -53,74 +53,73 @@ def start_zencoder_job(username, title, description, video_url, filename):
 
 
 @celery.task(ignore_result=True)
-def check_zencoder_progress(username, job_id):
+def check_zencoder_progress():
     client = Zencoder(settings.ZENCODER_API_KEY)
-    response = client.job.progress(job_id)
+    videos = Video.objects.get(processing=True)
 
-    if response.get('state', '') == 'finished':
-        # Get file details.
-        details_response = client.job.details(job_id)
+    for video in videos:
+        response = client.job.progress(video.job_id)
 
-        job = details_response.get('job', None)
-        if not job:
-            return 0
+        if response.get('state', '') == 'finished':
+            # Get file details.
+            details_response = client.job.details(job_id)
 
-        if job:
-            input_file = job.get('input_media_file', None)
-            output_files = job.get('output_media_files', list())
-            mp4_url = None
-            webm_url = None
-
-            if not input_file:
+            job = details_response.get('job', None)
+            if not job:
                 return 0
 
-            if len(output_files) == 2:
-                for output in output_files:
-                    url = output.get('url', '')
-                    if url.endswith('.mp4'):
-                        mp4_url = url
-                    elif url.endswith('.webm'):
-                        webm_url = url
-                    else:
-                        pass
+            if job:
+                input_file = job.get('input_media_file', None)
+                output_files = job.get('output_media_files', list())
+                mp4_url = None
+                webm_url = None
 
-                if webm_url is None and mp4_url is None:
+                if not input_file:
                     return 0
 
-            # Update video attributes.
-            duration = input_file.get('duration_in_ms', 0)
-            if duration > 0:
-                duration = duration / 1000
+                if len(output_files) == 2:
+                    for output in output_files:
+                        url = output.get('url', '')
+                        if url.endswith('.mp4'):
+                            mp4_url = url
+                        elif url.endswith('.webm'):
+                            webm_url = url
+                        else:
+                            pass
 
-            video = Video.objects.get(job_id=job_id)
-            video.processing = False
-            video.duration = duration
-            video.webm_url = webm_url
-            video.mp4_url = mp4_url
-            video.save()
+                    if webm_url is None and mp4_url is None:
+                        return
 
-            # Save video poster image.
-            added_by = User.objects.get(username__iexact=username)
+                # Update video attributes.
+                duration = input_file.get('duration_in_ms', 0)
+                if duration > 0:
+                    duration = duration / 1000
 
-            # Add UserVideo entry.
-            user_video = UserVideo()
-            user_video.user = added_by
-            user_video.video = video
-            user_video.is_featured = False
-            user_video.save()
+                video = Video.objects.get(job_id=video.job_id)
+                video.processing = False
+                video.duration = duration
+                video.webm_url = webm_url
+                video.mp4_url = mp4_url
+                video.save()
 
-            action.send(added_by,
-                        verb='added video to library',
-                        action_object=video,
-                        target=user_video)
+                # Save video poster image.
+                # TODO
 
-            # Send email that video has been successfully uploaded.
-            if added_by.email:
-                send_templated_mail(template_name='upload-success',
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[added_by.email],
-                    context={'username': added_by.username, 'video': video})
+                # Add UserVideo entry.
+                user_video = UserVideo()
+                user_video.user = video.added_by
+                user_video.video = video
+                user_video.is_featured = False
+                user_video.save()
 
-            return 100
-    else:
-        return response.get('progress', 0)
+                action.send(video.added_by,
+                            verb='added video to library',
+                            action_object=video,
+                            target=user_video)
+
+                # Send email that video has been successfully uploaded.
+                if video.added_by.email:
+                    send_templated_mail(template_name='upload-success',
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=[video.added_by.email],
+                        context={'username': video.added_by.username, 'video': video})
