@@ -16,8 +16,14 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(UserProfileForm, self).__init__(*args, **kwargs)
-        self.fields['bio'].widget = forms.Textarea(attrs={'cols':'38', 'rows':'5'})
-        self.fields['tagline'].widget = forms.Textarea(attrs={'cols':'38', 'rows':'5'})
+        self.fields['bio'].widget = forms.Textarea(attrs={
+            'cols': '38',
+            'rows': '5'
+        })
+        self.fields['tagline'].widget = forms.Textarea(attrs={
+            'cols': '38',
+            'rows': '5'
+        })
 
 
 class AddVideoForm(forms.ModelForm):
@@ -61,17 +67,28 @@ class UploadVideoForm(forms.ModelForm):
 
     class Meta:
         model = Video
-        fields = ('title', 'description', 'fp_url')
+        fields = ('title', 'description', 'fp_url', 'fp_filename')
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(UploadVideoForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget = forms.TextInput(attrs={'placeholder':'Enter video title...'})
-        self.fields['description'].widget = forms.Textarea(attrs={'placeholder':'Enter a description for the video...'})
-
-    def clean(self):
-        return self.cleaned_data
+        self.fields['title'].widget = forms.TextInput(attrs={
+            'placeholder': 'Enter video title...'
+        })
+        self.fields['description'].widget = forms.Textarea(attrs={
+            'placeholder': 'Enter a description for the video...'
+        })
 
     def save(self):
-        pass
+        file_url = self.cleaned_data.get('fp_url', None)
+        filename = self.cleaned_data.get('fp_filename', None)
+        title = self.cleaned_data.get('title', None)
+        description = self.cleaned_data.get('description', None)
+
+        start_zencoder_job.apply_async(args=[
+            self.request.user.username,
+            title,
+            description,
+            file_url, filename
+        ])
 
