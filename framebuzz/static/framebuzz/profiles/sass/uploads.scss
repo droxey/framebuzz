@@ -7,12 +7,18 @@
 @import "compass/css3/border-radius";
 
 #add-video {
+    position: relative;
+
+    div.tabs-wrapper {
+        background: #00AFF0;
+    }
+
     .nav-tabs {
         background-color: white;
         border-bottom: none;
-        margin: 5px;
+        margin: 9px;
         padding: 5px 0px;
-        @include border-radius(5px, 5px);
+        @include border-radius(3px, 3px);
 
         li {
             background-color: white;
@@ -54,14 +60,13 @@
                 strong {
                     color: #999999;
                     font-size: 12px;
-                    font-weight: 500;
                 }
             }
 
             &.indicator {
                 display: none;
                 background: transparent;
-                top: 45px;
+                top: 49px;
                 position: absolute;
                 z-index: 99;
 
@@ -71,15 +76,15 @@
                 }
 
                 &.file {
-                    left: 25px;
+                    left: 29px;
                 }
 
                 &.webcam {
-                    left: 96px;
+                    left: 100px;
                 }
 
                 &.youtube {
-                    left: 173px;
+                    left: 177px;
                 }
             }
 
@@ -124,13 +129,23 @@
     }
 
     div.tab-pane {
+        @include border-bottom-left-radius(3px);
+        @include border-bottom-right-radius(3px);
         background-color: #0591c5;
-        padding: 5px;
+        padding: 9px;
     }
 
     .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
         border-color: transparent;
         background-color: white;
+    }
+
+    div.tab-content {
+        @include border-bottom-left-radius(3px);
+        @include border-bottom-right-radius(3px);
+        padding: 0 17px 0 18px;
+        position: absolute;
+        z-index: 999;
     }
 
     form {
@@ -146,16 +161,39 @@
                     font-size: 0.9em;
                     padding: 3px 9px;
 
-                    i {
-                        line-height: 1.42857em;
-                    }
-
                     &.confirm-upload {
                         background: #E45DBE;
                         font-weight: bold;
 
                         &:hover, &:active, &:focus {
                             background: #DE3FB1;
+                        }
+
+                        span.fa-stack {
+                            line-height: 1.42857em;
+                            height: 14px;
+                            position: relative;
+                            left: 0;
+                            top: -4px;
+
+                            i.fa-video-camera {
+                                color: white;
+                                font-size: 20px;
+                            }
+
+                            i.fa-plus {
+                                color: #E45DBE;
+                                font-size: 0.9em;
+                                padding-top: 1px;
+                                text-indent: -6px;
+                            }
+
+                            @media screen and (-webkit-min-device-pixel-ratio:0) {
+                                i.fa-plus {
+                                    padding-top: 2px;
+                                    text-indent: -5px;
+                                }
+                            }
                         }
                     }
 
@@ -164,6 +202,10 @@
                         padding-left: 0;
                         background: transparent;
                         color: #6E4949;
+
+                        i {
+                            line-height: 1.42857em;
+                        }
 
                         &:hover, &:active, &:focus {
                             background: transparent;
@@ -202,9 +244,9 @@
                     input, textarea {
                         border: 1px solid #CCCCCC;
                         color: #AAA;
-                        padding: 0 5px;
+                        padding: 3px 5px;
                         width: 100%;
-                        @include border-radius(3px, 3px);
+                        @include border-radius(2px, 2px);
 
                         &::-webkit-input-placeholder { /* WebKit browsers */
                             color:    #AAA;

@@ -1,107 +1,128 @@
-<ul class="nav nav-tabs">
-    <li class="file">
-        <a href="#upload-file" data-toggle="tab">
-            <i class="fa fa-film fa-fw"></i>
-            <strong>Video</strong>
-        </a>
-    </li>
-    <li class="webcam">
-        <a href="#upload-webcam" data-toggle="tab">
-            <i class="fa fa-camera fa-fw"></i>
-            <strong>Webcam</strong>
-        </a>
-    </li>
-    <li class="youtube">
-        <a href="#upload-youtube" data-toggle="tab">
-            <i class="fa fa-youtube-play fa-fw"></i>
-            <strong>YouTube</strong>
-        </a>
-    </li>
-    <li class="indicator file">
-        <i class="fa fa-play fa-rotate-270"></i>
-    </li>
-</ul>
-<div class="tab-content">
-    <div id="upload-file" class="tab-pane">
-        <form action="">
-            {% csrf_token %}
-            <div class="row drop-pane-row">
-                <div class="col-xs-12">
-                    <div class="row input-row">
-                        <div class="col-xs-12">
-                            <input type="text" placeholder="Enter video title..." id="id_title" name="title">
-                        </div>
-                    </div>
-                    <div class="row input-row textarea-row">
-                        <div class="col-xs-12">
-                            <textarea placeholder="Enter a description for the video..."></textarea>
-                        </div>
-                    </div>
-                    <div class="row drop-pane-row-inner">
-                        <div id="upload-drop-pane" class="col-xs-12">Drag and drop your video files here.<br>Or, <a href="#" id="upload-click-here">click here</a> to upload videos from Dropbox, Google Drive, and more!</div>
-                    </div>
-                    <div class="row submit-row">
-                        <div class="col-xs-6 clearfix">
-                            <a class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</a>
-                        </div>
-                        <div class="col-xs-6 clearfix">
-                            <button class="btn confirm-upload pull-right"><i class="fa fa-play-circle"></i> Upload &amp; Post Video</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div id="drop-result-bar" class="col-xs-12"></div>
-            </div>
-        </form>
+<div class="col-xs-12">
+    <div class="row tabs-wrapper">
+        <ul class="nav nav-tabs">
+            <li class="file">
+                <a href="#upload-file" data-toggle="tab">
+                    <i class="fa fa-film fa-fw"></i>
+                    <strong>Video</strong>
+                </a>
+            </li>
+            <li class="webcam">
+                <a href="#upload-webcam" data-toggle="tab">
+                    <i class="fa fa-camera fa-fw"></i>
+                    <strong>Webcam</strong>
+                </a>
+            </li>
+            <li class="youtube">
+                <a href="#upload-youtube" data-toggle="tab">
+                    <i class="fa fa-youtube-play fa-fw"></i>
+                    <strong>YouTube</strong>
+                </a>
+            </li>
+            <li class="indicator file">
+                <i class="fa fa-play fa-rotate-270"></i>
+            </li>
+        </ul>
     </div>
-    <div id="upload-webcam" class="tab-pane">
-        <form action="" class="">
-            {% csrf_token %}
-            <div class="row drop-pane-row">
-                <div class="col-xs-12">
-                    <div class="row input-row">
+    <div class="row">
+        <div class="col-xs-12 tab-content">
+            <div id="upload-file" class="tab-pane">
+                <form action="">
+                    {% csrf_token %}
+                    <div class="row drop-pane-row">
                         <div class="col-xs-12">
-                            <input type="text" placeholder="Enter video title..." id="id_title" name="title">
+                            <div class="row input-row">
+                                <div class="col-xs-12">
+                                    <input type="text" placeholder="Enter video title..." id="id_title" name="title">
+                                </div>
+                            </div>
+                            <div class="row input-row textarea-row">
+                                <div class="col-xs-12">
+                                    <textarea placeholder="Enter a description for the video..."></textarea>
+                                </div>
+                            </div>
+                            <div class="row drop-pane-row-inner">
+                                <div id="upload-drop-pane" class="col-xs-12">Drag and drop your video files here.<br>Or, <a href="#" id="upload-click-here">click here</a> to upload videos from Dropbox, Google Drive, and more!</div>
+                            </div>
+                            <div class="row submit-row">
+                                <div class="col-xs-6 clearfix">
+                                    <a class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</a>
+                                </div>
+                                <div class="col-xs-6 clearfix">
+                                    <button type="submit" class="btn add-video confirm-upload pull-right">
+                                        <span class="fa-stack video">
+                                            <i class="fa fa-video-camera fa-stack-2x"></i>
+                                            <i class="fa fa-plus fa-inverse fa-stack-1x"></i>
+                                        </span> Upload &amp; Post Video
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row input-row textarea-row">
-                        <div class="col-xs-12">
-                            <textarea placeholder="Enter a description for the video..."></textarea>
-                        </div>
+                    <div class="row">
+                        <div id="drop-result-bar" class="col-xs-12"></div>
                     </div>
-                    <div class="row submit-row">
-                        <div class="col-xs-6 clearfix">
-                            <a class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</a>
-                        </div>
-                        <div class="col-xs-6 clearfix">
-                            <button id="activate-webcam-upload" class="btn confirm-upload pull-right"><i class="fa fa-play-circle"></i> Record &amp; Post Video</button>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
-        </form>
-    </div>
-    <div id="upload-youtube" class="tab-pane">
-        <form id="add-video-form" action="{% url 'profiles-add-video' request.user.username %}" method="POST">
-            {% csrf_token %}
-            <div class="row drop-pane-row">
-                <div class="col-xs-12">
-                    <div class="row input-row">
+            <div id="upload-webcam" class="tab-pane">
+                <form action="" class="">
+                    {% csrf_token %}
+                    <div class="row drop-pane-row">
                         <div class="col-xs-12">
-                            <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
+                            <div class="row input-row">
+                                <div class="col-xs-12">
+                                    <input type="text" placeholder="Enter video title..." id="id_title" name="title">
+                                </div>
+                            </div>
+                            <div class="row input-row textarea-row">
+                                <div class="col-xs-12">
+                                    <textarea placeholder="Enter a description for the video..."></textarea>
+                                </div>
+                            </div>
+                            <div class="row submit-row">
+                                <div class="col-xs-6 clearfix">
+                                    <a class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</a>
+                                </div>
+                                <div class="col-xs-6 clearfix">
+                                    <button id="activate-webcam-upload" type="submit" class="btn add-video confirm-upload pull-right">
+                                        <span class="fa-stack video">
+                                            <i class="fa fa-video-camera fa-stack-2x"></i>
+                                            <i class="fa fa-plus fa-inverse fa-stack-1x"></i>
+                                        </span> Record &amp; Post Video
+                                    </button>                        
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row submit-row">
-                        <div class="col-xs-6 clearfix">
-                            <a class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</a>
-                        </div>
-                        <div class="col-xs-6 clearfix">
-                            <button type="submit" class="btn add-video confirm-upload pull-right"><i class="fa fa-play-circle"></i> Post Video</button>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
-        </form>
+            <div id="upload-youtube" class="tab-pane">
+                <form id="add-video-form" action="{% url 'profiles-add-video' request.user.username %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row drop-pane-row">
+                        <div class="col-xs-12">
+                            <div class="row input-row">
+                                <div class="col-xs-12">
+                                    <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
+                                </div>
+                            </div>
+                            <div class="row submit-row">
+                                <div class="col-xs-6 clearfix">
+                                    <a class="btn cancel-upload pull-left"><i class="fa fa-times"></i> Cancel</a>
+                                </div>
+                                <div class="col-xs-6 clearfix">
+                                    <button type="submit" class="btn add-video confirm-upload pull-right">
+                                        <span class="fa-stack video">
+                                            <i class="fa fa-video-camera fa-stack-2x"></i>
+                                            <i class="fa fa-plus fa-inverse fa-stack-1x"></i>
+                                        </span> Post Video
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
