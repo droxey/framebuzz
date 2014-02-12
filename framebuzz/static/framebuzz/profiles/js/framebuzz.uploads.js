@@ -29,16 +29,9 @@ $(function() {
         }
     });
 
-      /*
 
-    $('#upload-link').click(function(e) {
+    $('#upload-click-here').click(function(e) {
       e.preventDefault();
-
-      var acceptedExtensions = [
-        '3g2','3gp','3gp2','3gpp','3gpp2','aac','ac3','eac3','ec3','f4a','f4b','f4v',
-        'flv','highwinds','m4a','m4b','m4r','m4v','mkv','mov','mp3','mp4','oga','ogg',
-        'ogv','ogx','ts','webm','wma','wmv'
-      ];
 
       var convertToSlug = function(input) {
         return input
@@ -47,7 +40,6 @@ $(function() {
             .replace(/ +/g,'-')
             ;
       };
-
 
       filepicker.pickAndStore(
           {
@@ -99,5 +91,5 @@ $(function() {
               }
            });
       }); 
-   }); */
+   });
 });

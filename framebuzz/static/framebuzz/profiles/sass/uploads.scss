@@ -7,45 +7,178 @@
 @import "compass/css3/border-radius";
 
 
-div.drop-pane-row {
-    background-color: #f6f6f6;
-    margin-left: -10px;
-    margin-right: -10px;
-    margin-bottom: 5px;
-    @include border-radius(5px, 5px);
 
-    #upload-drop-pane {
-        color: #ababab;
-        text-align: center;
-        padding: 15px 0;
-        background-color: #f0f0f0;
-        border: 2px dashed #d8d8d8;
-        font-size: 0.9em;
+#upload-file {
+    background-color: #0591c5;
+    padding: 5px;
+}
+
+#add-video {
+    .nav-tabs {
+        background-color: white;
+        border-bottom: none;
         margin: 5px;
-        width: 98.5%;
-        @include border-radius(3px, 3px);
-    }
+        padding: 5px 0px;
+        @include border-radius(5px, 5px);
 
-    div.input-row {
-        margin-left: -10px;
-        margin-right: -10px;
-        padding-top: 5px;
-        
-        div {
-            padding: 0;
+        li {
+            background-color: white;
+            border-right: 1px solid #CCC;
 
-            input, textarea {
-                border: 1px solid #CCCCCC;
-                padding: 0 5px;
-                width: 100%;
-                @include border-radius(3px, 3px);
+            @include border-radius(0px, 0px);
+
+            &.active {
+                background-color: white;
+            }
+
+            &:last-child {
+                border-right: none;
+            }
+
+            a {
+                border: none;
+                border-color: transparent;
+                background-color: white;
+                padding: 2px 15px;
+
+                &:hover {
+                    border: none;
+                    border-color: transparent;
+                    background-color: white;                   
+                }
+
+                i, strong { 
+                    display: block;
+                    text-align: center;
+                    width: 100%;
+                }
+
+                i {
+                    font-size: 20px;
+                }
+
+                strong {
+                    color: #999999;
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+            }
+
+            &.webcam {
+                a i {
+                    color: #1EABE4;
+                }
+
+                &:hover, &:active, &:focus, &.active {
+                    a strong {
+                        color: #1EABE4;
+                    }
+                }
+            }
+
+            &.file {
+                a i {
+                    color: #6CC561;
+                }
+
+                &:hover, &:active, &:focus, &.active {
+                    a strong {
+                        color: #6CC561;
+                    }
+                }
+            }
+
+            &.youtube {
+                a i {
+                    color: #CF000F;
+                }
+
+                &:hover, &:active, &:focus, &.active {
+                    a strong {
+                        color: #CF000F;
+                    }
+                }
             }
         }
     }
 
-    div.textarea-row {
-        textarea {
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+        border-color: transparent;
+        background-color: white;
+    }
 
+    form {
+        div.submit-row {
+            margin: 5px -15px;
+
+            div.col-xs-6 {
+                padding: 0 5px;
+
+                button {
+                    border: none;
+                    color: white;
+                    padding: 3px 9px;
+
+                    &.confirm-upload {
+                        background: #E45DBE;
+
+                        &:hover, &:active, &:focus {
+                            background: #DE3FB1;
+                        }
+                    }
+
+                    &.cancel-upload {
+                        background: #a5a5a5;
+
+                        &:hover, &:active, &:focus {
+                            background: #8F8F8F;
+                        }
+                    }
+                }
+            }
+        }
+
+        div.drop-pane-row {
+            background-color: #f6f6f6;
+            margin: 0;
+            @include border-radius(5px, 5px);
+
+            #upload-drop-pane {
+                color: #ababab;
+                text-align: center;
+                padding: 15px 0;
+                background-color: #f0f0f0;
+                border: 2px dashed #d8d8d8;
+                font-size: 0.9em;
+                margin: 0 5px;
+                width: 98.5%;
+                @include border-radius(3px, 3px);
+            }
+
+            div.input-row {
+                margin-left: -10px;
+                margin-right: -10px;
+                padding-top: 5px;
+                
+                div {
+                    padding: 0;
+
+                    input, textarea {
+                        border: 1px solid #CCCCCC;
+                        padding: 0 5px;
+                        width: 100%;
+                        @include border-radius(3px, 3px);
+                    }
+                }
+            }
+
+            div.textarea-row {
+                margin-bottom: 5px;
+
+                textarea {
+            
+                }
+            }
         }
     }
 }

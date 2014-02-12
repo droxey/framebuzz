@@ -1,47 +1,100 @@
-<form id="add-video-form" action="{% url 'profiles-add-video' request.user.username %}" method="POST" class="col-xs-12">
-    {% csrf_token %}
-    <div class="row">
-        <div class="col-xs-9 input">
-            <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
-        </div>
-        <div class="col-xs-3 submit">
-            <button type="submit" class="add-video"><i class="fa fa-link"></i> Post Video to Profile</button>
-        </div>
-    </div>
-    <div class="row drop-pane-row">
-        <div class="col-xs-12">
-            <div class="row input-row">
+<ul class="nav nav-tabs">
+    <li class="file active">
+        <a href="#upload-file" data-toggle="tab">
+            <i class="fa fa-film fa-fw"></i>
+            <strong>Video</strong>
+        </a>
+    </li>
+    <li class="webcam">
+        <a href="#upload-webcam" data-toggle="tab">
+            <i class="fa fa-camera fa-fw"></i>
+            <strong>Webcam</strong>
+        </a>
+    </li>
+    <li class="youtube">
+        <a href="#upload-youtube" data-toggle="tab">
+            <i class="fa fa-youtube-square fa-fw"></i>
+            <strong>YouTube</strong>
+        </a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div id="upload-file" class="tab-pane active">
+        <form action="">
+            {% csrf_token %}
+            <div class="row drop-pane-row">
                 <div class="col-xs-12">
-                    <input type="text" placeholder="Enter video title..." id="id_title" name="title">
+                    <div class="row input-row">
+                        <div class="col-xs-12">
+                            <input type="text" placeholder="Enter video title..." id="id_title" name="title">
+                        </div>
+                    </div>
+                    <div class="row input-row textarea-row">
+                        <div class="col-xs-12">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                    <div class="row drop-pane-row-inner">
+                        <div id="upload-drop-pane" class="col-xs-12">Drag and drop video files here.<br>Or, <a href="#" id="upload-click-here">click here</a> to upload videos from Dropbox, Google Drive, and more!</div>
+                    </div>
+                    <div class="row submit-row">
+                        <div class="col-xs-6 clearfix">
+                            <button class="btn cancel-upload pull-left">Cancel</button>
+                        </div>
+                        <div class="col-xs-6 clearfix">
+                            <button class="btn confirm-upload pull-right">Upload Video</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row input-row textarea-row">
+            <div class="row">
+                <div id="drop-result-bar" class="col-xs-12"></div>
+            </div>
+        </form>
+    </div>
+    <div id="upload-webcam" class="tab-pane">
+        <form action="" class="">
+            {% csrf_token %}
+            <div class="row drop-pane-row">
                 <div class="col-xs-12">
-                    <textarea></textarea>
+                    <div class="row input-row">
+                        <div class="col-xs-12">
+                            <input type="text" placeholder="Enter video title..." id="id_title" name="title">
+                        </div>
+                    </div>
+                    <div class="row input-row textarea-row">
+                        <div class="col-xs-12">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                    <div class="row submit-row">
+                        <div class="col-xs-6 clearfix">
+                            <button class="btn cancel-upload pull-left">Cancel</button>
+                        </div>
+                        <div class="col-xs-6 clearfix">
+                            <button id="activate-webcam-upload" class="btn confirm-upload pull-right">Activate Webcam</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row drop-pane-row-inner">
-                <div id="upload-drop-pane" class="col-xs-12">Drag and drop video files here.<br>Or, click this panel to upload videos from your webcam, Dropbox, and more!</div>
+        </form>
+    </div>
+    <div id="upload-youtube" class="tab-pane">
+        <form id="add-video-form" action="{% url 'profiles-add-video' request.user.username %}" method="POST" class="col-xs-12">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-xs-12 input">
+                    <input type="text" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
+                </div>
             </div>
-        </div>
+            <div class="row submit-row">
+                <div class="col-xs-6 clearfix">
+                    <button class="btn cancel-upload pull-left">Cancel</button>
+                </div>
+                <div class="col-xs-6 clearfix">
+                    <button type="submit" class="btn add-video pull-right"><i class="fa fa-link"></i> Post Video to Profile</button>
+                </div>
+            </div>
+        </form>
     </div>
-    </div>
-    <div class="row">
-        <div id="drop-result-bar" class="col-xs-12"></div>
-    </div>
-    {% comment %}
-    <div class="row clearfix">
-        <div class="col-xs-6 submit pull-left">
-            <button id="upload-link" type="submit" class="add-video"><i class="fa fa-upload"></i> Upload Videos</button>
-        </div>
-        <div class="col-xs-6 submit pull-right">
-            <button type="submit" class="add-video"><i class="fa fa-link"></i> Post YouTube Link</button>
-        </div>
-    </div>
-    <div class="row drag-pane">
-        <div class="col-xs-12">
-            <input type="filepicker-dragdrop" data-fp-button-class="btn-pick-file" data-fp-drag-text="Drop files here."/>
-        </div>
-    </div>
-    {% endcomment %}
-</form>
+</div>

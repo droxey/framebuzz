@@ -2,46 +2,168 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* line 10, ../sass/uploads.scss */
-div.drop-pane-row {
-  background-color: #f6f6f6;
-  margin-left: -10px;
-  margin-right: -10px;
-  margin-bottom: 5px;
+/* line 11, ../sass/uploads.scss */
+#upload-file {
+  background-color: #0591c5;
+  padding: 5px;
+}
+
+/* line 17, ../sass/uploads.scss */
+#add-video .nav-tabs {
+  background-color: white;
+  border-bottom: none;
+  margin: 5px;
+  padding: 5px 0px;
   -webkit-border-radius: 5px 5px;
   -moz-border-radius: 5px / 5px;
   border-radius: 5px / 5px;
 }
-/* line 17, ../sass/uploads.scss */
-div.drop-pane-row #upload-drop-pane {
+/* line 24, ../sass/uploads.scss */
+#add-video .nav-tabs li {
+  background-color: white;
+  border-right: 1px solid #CCC;
+  -webkit-border-radius: 0px 0px;
+  -moz-border-radius: 0px / 0px;
+  border-radius: 0px / 0px;
+}
+/* line 30, ../sass/uploads.scss */
+#add-video .nav-tabs li.active {
+  background-color: white;
+}
+/* line 34, ../sass/uploads.scss */
+#add-video .nav-tabs li:last-child {
+  border-right: none;
+}
+/* line 38, ../sass/uploads.scss */
+#add-video .nav-tabs li a {
+  border: none;
+  border-color: transparent;
+  background-color: white;
+  padding: 2px 15px;
+}
+/* line 44, ../sass/uploads.scss */
+#add-video .nav-tabs li a:hover {
+  border: none;
+  border-color: transparent;
+  background-color: white;
+}
+/* line 50, ../sass/uploads.scss */
+#add-video .nav-tabs li a i, #add-video .nav-tabs li a strong {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+/* line 56, ../sass/uploads.scss */
+#add-video .nav-tabs li a i {
+  font-size: 20px;
+}
+/* line 60, ../sass/uploads.scss */
+#add-video .nav-tabs li a strong {
+  color: #999999;
+  font-size: 12px;
+  font-weight: 500;
+}
+/* line 68, ../sass/uploads.scss */
+#add-video .nav-tabs li.webcam a i {
+  color: #1EABE4;
+}
+/* line 73, ../sass/uploads.scss */
+#add-video .nav-tabs li.webcam:hover a strong, #add-video .nav-tabs li.webcam:active a strong, #add-video .nav-tabs li.webcam:focus a strong, #add-video .nav-tabs li.webcam.active a strong {
+  color: #1EABE4;
+}
+/* line 80, ../sass/uploads.scss */
+#add-video .nav-tabs li.file a i {
+  color: #6CC561;
+}
+/* line 85, ../sass/uploads.scss */
+#add-video .nav-tabs li.file:hover a strong, #add-video .nav-tabs li.file:active a strong, #add-video .nav-tabs li.file:focus a strong, #add-video .nav-tabs li.file.active a strong {
+  color: #6CC561;
+}
+/* line 92, ../sass/uploads.scss */
+#add-video .nav-tabs li.youtube a i {
+  color: #CF000F;
+}
+/* line 97, ../sass/uploads.scss */
+#add-video .nav-tabs li.youtube:hover a strong, #add-video .nav-tabs li.youtube:active a strong, #add-video .nav-tabs li.youtube:focus a strong, #add-video .nav-tabs li.youtube.active a strong {
+  color: #CF000F;
+}
+/* line 105, ../sass/uploads.scss */
+#add-video .nav-tabs > li.active > a, #add-video .nav-tabs > li.active > a:hover, #add-video .nav-tabs > li.active > a:focus {
+  border-color: transparent;
+  background-color: white;
+}
+/* line 111, ../sass/uploads.scss */
+#add-video form div.submit-row {
+  margin: 5px -15px;
+}
+/* line 114, ../sass/uploads.scss */
+#add-video form div.submit-row div.col-xs-6 {
+  padding: 0 5px;
+}
+/* line 117, ../sass/uploads.scss */
+#add-video form div.submit-row div.col-xs-6 button {
+  border: none;
+  color: white;
+  padding: 3px 9px;
+}
+/* line 122, ../sass/uploads.scss */
+#add-video form div.submit-row div.col-xs-6 button.confirm-upload {
+  background: #E45DBE;
+}
+/* line 125, ../sass/uploads.scss */
+#add-video form div.submit-row div.col-xs-6 button.confirm-upload:hover, #add-video form div.submit-row div.col-xs-6 button.confirm-upload:active, #add-video form div.submit-row div.col-xs-6 button.confirm-upload:focus {
+  background: #DE3FB1;
+}
+/* line 130, ../sass/uploads.scss */
+#add-video form div.submit-row div.col-xs-6 button.cancel-upload {
+  background: #a5a5a5;
+}
+/* line 133, ../sass/uploads.scss */
+#add-video form div.submit-row div.col-xs-6 button.cancel-upload:hover, #add-video form div.submit-row div.col-xs-6 button.cancel-upload:active, #add-video form div.submit-row div.col-xs-6 button.cancel-upload:focus {
+  background: #8F8F8F;
+}
+/* line 141, ../sass/uploads.scss */
+#add-video form div.drop-pane-row {
+  background-color: #f6f6f6;
+  margin: 0;
+  -webkit-border-radius: 5px 5px;
+  -moz-border-radius: 5px / 5px;
+  border-radius: 5px / 5px;
+}
+/* line 146, ../sass/uploads.scss */
+#add-video form div.drop-pane-row #upload-drop-pane {
   color: #ababab;
   text-align: center;
   padding: 15px 0;
   background-color: #f0f0f0;
   border: 2px dashed #d8d8d8;
   font-size: 0.9em;
-  margin: 5px;
+  margin: 0 5px;
   width: 98.5%;
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
 }
-/* line 29, ../sass/uploads.scss */
-div.drop-pane-row div.input-row {
+/* line 158, ../sass/uploads.scss */
+#add-video form div.drop-pane-row div.input-row {
   margin-left: -10px;
   margin-right: -10px;
   padding-top: 5px;
 }
-/* line 34, ../sass/uploads.scss */
-div.drop-pane-row div.input-row div {
+/* line 163, ../sass/uploads.scss */
+#add-video form div.drop-pane-row div.input-row div {
   padding: 0;
 }
-/* line 37, ../sass/uploads.scss */
-div.drop-pane-row div.input-row div input, div.drop-pane-row div.input-row div textarea {
+/* line 166, ../sass/uploads.scss */
+#add-video form div.drop-pane-row div.input-row div input, #add-video form div.drop-pane-row div.input-row div textarea {
   border: 1px solid #CCCCCC;
   padding: 0 5px;
   width: 100%;
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
+}
+/* line 175, ../sass/uploads.scss */
+#add-video form div.drop-pane-row div.textarea-row {
+  margin-bottom: 5px;
 }
