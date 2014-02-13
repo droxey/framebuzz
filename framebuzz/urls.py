@@ -43,6 +43,11 @@ urlpatterns = patterns('',
     url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<video_id>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.video_share', name='profiles-share'),
 
+    # Zencoder completion webhook:
+    url(r'^video/notifications/$',
+        'framebuzz.apps.profiles.views.zencoder_webhook',
+        name='video-notification'),
+
     # Dashboard:
     #url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
 

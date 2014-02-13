@@ -21,6 +21,7 @@ from templated_email import send_templated_mail
 
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
 from framebuzz.apps.api.backends.youtube import get_or_create_video
+from framebuzz.apps.api.backends.tasks import check_zencoder_progress
 from framebuzz.apps.api.utils import get_total_shares
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm, UploadVideoForm
 
@@ -385,6 +386,7 @@ def upload_video(request, username):
         success = form.is_valid()
 
         if success:
+            form.save()
             return HttpResponse()
     else:
         form = UploadVideoForm(request=request)
@@ -394,6 +396,13 @@ def upload_video(request, username):
         'success': success,
         'submitted': submitted
     }, context_instance=RequestContext(request))
+
+
+def zencoder_webhook(request):
+    job = request.POST.get('job', None)
+    if job:
+        check_zencoder_progress.apply_async([job.get('id', 0)])
+    return HttpResponse(200)
 
 
 @login_required

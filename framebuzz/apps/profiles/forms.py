@@ -5,7 +5,7 @@ from django.db import IntegrityError
 
 from framebuzz.apps.api.models import UserProfile, UserVideo, Video
 from framebuzz.apps.api.backends.youtube import get_or_create_video
-from framebuzz.apps.api.backends.fbz import start_zencoder_job
+from framebuzz.apps.api.backends.tasks import start_zencoder_job
 
 
 class UserProfileForm(forms.ModelForm):

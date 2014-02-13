@@ -50,3 +50,4 @@ MAINTENANCE_IGNORE_URLS = (
 
 
 ZENCODER_API_KEY = 'e990db716cb4d5b55a9ca91ceaba6c00'
+ZENCODER_WEBHOOK_URL = 'http://framebuzz.com/video/notifications/'
