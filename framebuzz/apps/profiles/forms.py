@@ -89,6 +89,7 @@ class UploadVideoForm(forms.ModelForm):
             self.request.user.username,
             title,
             description,
-            file_url, filename
+            file_url,
+            filename
         ])
 

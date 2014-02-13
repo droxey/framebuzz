@@ -20,18 +20,25 @@ def start_zencoder_job(username, title, description, video_url, filename):
 
     response = client.job.create(video_url, outputs=[
         {
-            'credentials': 's3',
-            'rrs': 'true',
-            'size': '640x480',
-            'public': 'true',
-            'url': mp4_url
-        },
-        {
-            'credentials': 's3',
-            'rrs': 'true',
-            'size': '640x480',
-            'public': 'true',
-            'url': webm_url
+            {
+                'credentials': 's3',
+                'size': '640x480',
+                'url': mp4_url
+            },
+            {
+                'credentials': 's3',
+                'size': '640x480',
+                'url': webm_url
+            },
+            {
+                "thumbnails": [
+                    {
+                        'number': 5,
+                        'size': '640x480',
+                        'credentials': 's3'
+                    }
+                ]
+            }
         }
     ])
 
@@ -49,7 +56,6 @@ def start_zencoder_job(username, title, description, video_url, filename):
         video.uploaded = datetime.datetime.now()
 
         video.save()
-    pass
 
 
 @celery.task(ignore_result=True)

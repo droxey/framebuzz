@@ -373,7 +373,6 @@ TEMPLATED_EMAIL_DJANGO_SUBJECTS = {
 BROKER_URL = 'redis://localhost:6379/0'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 CELERY_DISABLE_RATE_LIMITS = True
-CELERY_TIMEZONE = 'UTC'
 
 from datetime import timedelta
 CELERYBEAT_SCHEDULE = {

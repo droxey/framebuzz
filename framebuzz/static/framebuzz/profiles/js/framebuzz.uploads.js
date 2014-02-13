@@ -9,6 +9,24 @@ $(function() {
           'ogv','ogx','ts','webm','wma','wmv'
         ];
 
+
+    var convertToSlug = function(input) {
+      return input
+          .toLowerCase()
+          .replace(/[^\w ]+/g,'')
+          .replace(/ +/g,'-')
+          ;
+    };
+
+    var setHiddenFormFields = function(url, key) {
+      var filenameWithoutExt = key.split(".");
+      var folderName = convertToSlug(filenameWithoutExt[0]);
+
+      $('#id_fp_url').val(url);
+      $('#id_fp_filename').val(folderName);
+    };
+
+
     // Add placeholder text for forms.
     $('input, textarea').placeholder();
 
@@ -25,7 +43,7 @@ $(function() {
         },
         onSuccess: function(InkBlobs) {
             dropPaneDiv.text("Done, see result below");
-            dropResultDiv.text(JSON.stringify(InkBlobs));
+            setHiddenFormFields(InkBlobs[0].url, InkBlobs[0].key);
         },
         onError: function(type, message) {
             dropResultDiv.text('('+type+') '+ message);
@@ -53,43 +71,29 @@ $(function() {
       $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
     });
 
-    // Upload Video submit button.
-    $('#upload-file-form', addVideoDiv).submit(function(e) {
-      e.preventDefault();
+    // // Upload Video submit button.
+    // $('#upload-file-form', addVideoDiv).submit(function(e) {
+    //   e.preventDefault();
 
-      console.log('clicked');
+    //   console.log('clicked');
 
-      return false;
-    }); 
+    //   return false;
+    // });
 
-    /*
     $('#upload-click-here').click(function(e) {
-      e.preventDefault();
+        e.preventDefault();
 
-      var convertToSlug = function(input) {
-        return input
-            .toLowerCase()
-            .replace(/[^\w ]+/g,'')
-            .replace(/ +/g,'-')
-            ;
-      };
-
-      filepicker.pickAndStore(
+        filepicker.pickAndStore(
           {
             extensions: acceptedExtensions,
             services: ['COMPUTER','VIDEO','BOX','DROPBOX','GOOGLE_DRIVE','GMAIL','URL','FTP']
           },
           {
             location: 's3'
-          }, function(fpfiles){
-            var uploadedFileUrl = fpfiles[0].url;
-            var uploadedFilename = fpfiles[0].key;
-            var filenameWithoutExt = uploadedFilename.split(".");
-            var folderName = convertToSlug(filenameWithoutExt[0]);
-          });
-      });
-
-
-   });
-*/
+          }, function(fpfiles) {
+            console.log(fpfiles[0]);
+            dropPaneDiv.html('<i class="fa fa-film"></i> <strong>' + fpfiles[0].filename + ' added!</strong>');
+            setHiddenFormFields(fpfiles[0].url, fpfiles[0].key);
+        });
+    });
 });
