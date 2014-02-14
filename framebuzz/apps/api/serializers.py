@@ -21,9 +21,9 @@ class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ('id', 'video_id', 'title', 'duration', 
-            'time_hms', 'embed_code', 'embed_url', 'share_url',
-            'mp4_url', 'webm_url')
+        fields = ('id', 'video_id', 'title', 'duration',
+                  'time_hms', 'embed_code', 'embed_url', 'share_url',
+                  'mp4_url', 'webm_url', 'slug',)
 
     def get_channel(self, obj):
         return '/framebuzz/video/%s' % obj.video_id
@@ -48,7 +48,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'avatar_url', 'video_in_library', 'profile_url',)
+        fields = ('id', 'username', 'avatar_url',
+                  'video_in_library', 'profile_url',)
 
     def get_profile_url(self, obj):
         return obj.get_profile().get_absolute_url()
@@ -86,9 +87,9 @@ class BaseCommentSerializer(serializers.ModelSerializer):
         user = self.context.get('user', None)
 
         if user and user.id != obj.user.id and not isinstance(user, AnonymousUser):
-            is_favorite = Action.objects.actor(user, 
-                verb='added to favorites', 
-                action_object_object_id=obj.id)
+            is_favorite = Action.objects.actor(user,
+                                               verb='added to favorites',
+                                               action_object_object_id=obj.id)
             return len(is_favorite) > 0
 
         return False
@@ -97,8 +98,8 @@ class BaseCommentSerializer(serializers.ModelSerializer):
         user = self.context.get('user', None)
 
         if user and user.id != obj.user.id and not isinstance(user, AnonymousUser):
-            flags = CommentFlag.objects.filter(comment=obj, user=user, 
-                flag = CommentFlag.SUGGEST_REMOVAL)
+            flags = CommentFlag.objects.filter(comment=obj, user=user,
+                                               flag=CommentFlag.SUGGEST_REMOVAL)
             return len(flags) > 0
 
         return False
@@ -129,7 +130,8 @@ class MPTTCommentReplySerializer(BaseCommentSerializer):
         model = MPTTComment
         depth = 2
         fields = ('id', 'user', 'comment', 'submit_date',
-            'is_favorite', 'is_flagged', 'is_following', 'is_visible', 'parent_id',)
+                  'is_favorite', 'is_flagged', 'is_following',
+                  'is_visible', 'parent_id',)
 
     def get_parent_id(self, obj):
         return obj.parent.id
@@ -145,9 +147,10 @@ class MPTTCommentSerializer(BaseCommentSerializer):
     class Meta:
         model = MPTTComment
         depth = 4
-        fields = ('id', 'user', 'comment', 'parent', 'submit_date', 'hidden_by_id',
-                  'replies', 'time_hms', 'time', 'is_favorite', 'has_replies', 'thread_url',
-                  'is_flagged', 'is_following', 'is_visible', 'has_hidden_siblings',)
+        fields = ('id', 'user', 'comment', 'parent', 'submit_date',
+                  'hidden_by_id', 'replies', 'time_hms', 'time', 'is_favorite',
+                  'has_replies', 'thread_url', 'is_flagged', 'is_following',
+                  'is_visible', 'has_hidden_siblings',)
 
     def get_time_hms(self, obj):
         return obj.timeInHMS
