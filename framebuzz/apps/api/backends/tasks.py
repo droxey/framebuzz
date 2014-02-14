@@ -3,7 +3,6 @@ import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.template.defaultfilters import slugify
 
 from actstream import action
 from templated_email import send_templated_mail
@@ -11,41 +10,46 @@ from zencoder import Zencoder
 
 from framebuzz.apps.api.models import Video, UserVideo
 
+MP4_URL = 's3://framebuzz-zencoder/videos/%s/%s.mp4'
+WEBM_URL = 's3://framebuzz-zencoder/videos/%s/%s.webm'
 
-@celery.task(name='framebuzz.apps.api.backends.tasks.start_zencoder_job', ignore_result=True)
+
+@celery.task(name='framebuzz.apps.api.backends.tasks.start_zencoder_job',
+             ignore_result=True)
 def start_zencoder_job(username, title, description, video_url, filename):
     client = Zencoder(settings.ZENCODER_API_KEY)
-    mp4_url = 's3://framebuzz-zencoder/videos/%s/%s.mp4' % (filename, filename)
-    webm_url = 's3://framebuzz-zencoder/videos/%s/%s.webm' % (filename, filename)
+    mp4_url = MP4_URL % (filename, filename)
+    webm_url = WEBM_URL % (filename, filename)
 
     response = client.job.create(video_url,
         outputs=[
-        {
-            'credentials': 's3',
-            'size': '640x480',
-            'url': mp4_url
-        },
-        {
-            'credentials': 's3',
-            'size': '640x480',
-            'url': webm_url
-        },
-        {
-            "notifications": [
-                {
-                    "url": settings.ZENCODER_WEBHOOK_URL
-                }
-            ],
-            "thumbnails": [
-                {
-                    'number': 5,
-                    'size': '640x480',
-                    'credentials': 's3',
-                    'label': 'poster'
-                }
-            ]
-        }
-    ])
+            {
+                'credentials': 's3',
+                'size': '640x480',
+                'url': mp4_url
+            },
+            {
+                'credentials': 's3',
+                'size': '640x480',
+                'url': webm_url
+            },
+            {
+                "notifications": [
+                    {
+                        "url": settings.ZENCODER_WEBHOOK_URL
+                    }
+                ],
+                "thumbnails": [
+                    {
+                        'number': 5,
+                        'size': '640x480',
+                        'credentials': 's3',
+                        'label': 'poster'
+                    }
+                ]
+            }
+        ]
+    )
 
     print response.__dict__
 
@@ -127,6 +131,7 @@ def check_zencoder_progress(job_id):
         # Send email that video has been successfully uploaded.
         if video.added_by.email:
             send_templated_mail(template_name='upload-success',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[video.added_by.email],
-                context={'username': video.added_by.username, 'video': video})
+                                from_email=settings.DEFAULT_FROM_EMAIL,
+                                recipient_list=[video.added_by.email],
+                                context={'username': video.added_by.username,
+                                         'video': video})
