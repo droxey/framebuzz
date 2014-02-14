@@ -67,7 +67,7 @@ class UploadVideoForm(forms.ModelForm):
 
     class Meta:
         model = Video
-        fields = ('title', 'description', 'fp_url', 'fp_filename')
+        fields = ('title', 'description', 'fp_url', 'fp_filename',)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -92,4 +92,3 @@ class UploadVideoForm(forms.ModelForm):
             file_url,
             filename
         ])
-

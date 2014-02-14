@@ -244,7 +244,7 @@ INSTALLED_APPS = (
     'watson',
     'django_mobile',
     'maintenancemode',
-    'autoslug',
+    'randomslugfield',
 
     # Required by Zinnia
     'tinymce',
@@ -443,6 +443,9 @@ SOCKJS_CHANNEL = 'echo'
 SOCKJS_CLASSES = (
     'framebuzz.apps.api.sockserver.ConnectionHandler',
 )
+
+# django-randomslugfield
+RANDOMSLUG_LENGTH = 16
 
 # django-filepicker
 FILEPICKER_API_KEY = 'AXQRyfZ2cQjWD3yy2flkFz'

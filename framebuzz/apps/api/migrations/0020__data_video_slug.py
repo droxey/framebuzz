@@ -1,55 +1,31 @@
 # -*- coding: utf-8 -*-
 import datetime
+
 from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from south.v2 import DataMigration
+
+from django.conf import settings
+
+from randomslugfield import RandomSlugField
+from framebuzz.apps.api.utils import queryset_iterator
 
 
-class Migration(SchemaMigration):
+class Migration(DataMigration):
 
     def forwards(self, orm):
-        # Adding field 'Video.slug'
-        db.add_column(u'api_video', 'slug',
-                      self.gf('randomslugfield.fields.RandomSlugField')(exclude_lower=False, null=True, exclude_digits=False, exclude_upper=False, length=16, max_length=16, blank=True, unique=True),
-                      keep_default=False)
-
-        # Adding field 'Video.mp4_url'
-        db.add_column(u'api_video', 'mp4_url',
-                      self.gf('django.db.models.fields.URLField')(max_length=255, null=True, blank=True),
-                      keep_default=False)
-
-        # Adding field 'Video.webm_url'
-        db.add_column(u'api_video', 'webm_url',
-                      self.gf('django.db.models.fields.URLField')(max_length=255, null=True, blank=True),
-                      keep_default=False)
-
-        # Adding field 'Video.job_id'
-        db.add_column(u'api_video', 'job_id',
-                      self.gf('django.db.models.fields.BigIntegerField')(null=True, blank=True),
-                      keep_default=False)
-
-        # Adding field 'Video.processing'
-        db.add_column(u'api_video', 'processing',
-                      self.gf('django.db.models.fields.BooleanField')(default=False),
-                      keep_default=False)
-
+        for item in queryset_iterator(orm['api.video'].objects.all()):
+            if not item.slug:
+                slugfield = RandomSlugField(length=settings.RANDOMSLUG_LENGTH)
+                setattr(slugfield, 'attname', 'slug')
+                video_slug = slugfield.pre_save(item, True)
+                item.slug = video_slug
+                item.save()
 
     def backwards(self, orm):
-        # Deleting field 'Video.slug'
-        db.delete_column(u'api_video', 'slug')
-
-        # Deleting field 'Video.mp4_url'
-        db.delete_column(u'api_video', 'mp4_url')
-
-        # Deleting field 'Video.webm_url'
-        db.delete_column(u'api_video', 'webm_url')
-
-        # Deleting field 'Video.job_id'
-        db.delete_column(u'api_video', 'job_id')
-
-        # Deleting field 'Video.processing'
-        db.delete_column(u'api_video', 'processing')
-
+        for item in queryset_iterator(orm['api.video'].objects.all()):
+            if item.slug:
+                item.slug = None
+                item.save()
 
     models = {
         u'actstream.action': {
@@ -187,3 +163,4 @@ class Migration(SchemaMigration):
     }
 
     complete_apps = ['api']
+    symmetrical = True

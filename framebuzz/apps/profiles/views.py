@@ -12,6 +12,7 @@ from django.db.models import Count, Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
 from actstream import action
@@ -398,6 +399,8 @@ def upload_video(request, username):
     }, context_instance=RequestContext(request))
 
 
+@csrf_exempt
+@require_http_methods(['POST', ])
 def zencoder_webhook(request):
     job = request.POST.get('job', None)
     if job:

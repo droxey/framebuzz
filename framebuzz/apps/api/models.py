@@ -2,7 +2,6 @@ import os
 import hashlib
 import watson
 import caching.base
-import django_filepicker
 
 from datetime import datetime
 
@@ -22,8 +21,8 @@ from django.utils.safestring import mark_safe
 from actstream import action
 from actstream.models import actstream_register_model
 from actstream.actions import follow
-from autoslug import AutoSlugField
 from avatar.util import get_username
+from randomslugfield import RandomSlugField
 from templated_email import send_templated_mail
 from timezone_field import TimeZoneField
 from mptt.models import MPTTModel, TreeForeignKey
@@ -162,10 +161,10 @@ post_save.connect(create_user_profile, sender=User)
 
 
 class Video(caching.base.CachingMixin, models.Model):
+    slug = RandomSlugField(length=settings.RANDOMSLUG_LENGTH, blank=True, null=True)
     video_id = models.CharField(max_length=255, unique=True, null=True,
                                 help_text=_("The Youtube id of the video"))
     title = models.CharField(max_length=200, null=True, blank=True)
-    slug = AutoSlugField(populate_from='title', blank=True, null=True)
     description = models.TextField(null=True, blank=True)
     youtube_url = models.URLField(max_length=255, null=True, blank=True)
     uploaded = models.DateTimeField()

@@ -8,6 +8,20 @@ from django.conf import settings
 from framebuzz.apps.api.models import Video
 
 
+def queryset_iterator(queryset, chunksize=1000):
+    import gc
+    pk = 0
+    last_pk = queryset.order_by('-pk')[0].pk
+    queryset = queryset.order_by('pk')
+    if queryset.count() < 1:
+        pass
+    while pk < last_pk:
+        for row in queryset.filter(pk__gt=pk)[:chunksize]:
+            pk = row.pk
+            yield row
+        gc.collect()
+
+
 def get_client_ip(request):
     if settings.DEBUG:
         return '75.13.90.154'

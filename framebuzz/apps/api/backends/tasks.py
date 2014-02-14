@@ -19,41 +19,41 @@ def start_zencoder_job(username, title, description, video_url, filename):
     webm_url = 's3://framebuzz-zencoder/videos/%s/%s.webm' % (filename, filename)
 
     response = client.job.create(video_url,
-        notifications=[
-            {
-                "url": settings.ZENCODER_WEBHOOK_URL
-            }
-        ],
         outputs=[
         {
-            {
-                'credentials': 's3',
-                'size': '640x480',
-                'url': mp4_url
-            },
-            {
-                'credentials': 's3',
-                'size': '640x480',
-                'url': webm_url
-            },
-            {
-                "thumbnails": [
-                    {
-                        'number': 5,
-                        'size': '640x480',
-                        'credentials': 's3'
-                    }
-                ]
-            }
+            'credentials': 's3',
+            'size': '640x480',
+            'url': mp4_url
+        },
+        {
+            'credentials': 's3',
+            'size': '640x480',
+            'url': webm_url
+        },
+        {
+            "notifications": [
+                {
+                    "url": settings.ZENCODER_WEBHOOK_URL
+                }
+            ],
+            "thumbnails": [
+                {
+                    'number': 5,
+                    'size': '640x480',
+                    'credentials': 's3',
+                    'label': 'poster'
+                }
+            ]
         }
     ])
+
+    print response.__dict__
 
     if response.code == 201:  # Created
         added_by = User.objects.get(username__iexact=username)
 
         video = Video()
         video.added_by = added_by
-        video.video_id = slugify(title)
         video.title = title
         video.description = description
         video.processing = True
