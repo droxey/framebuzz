@@ -93,18 +93,17 @@ def check_zencoder_progress(job_id):
         if not input_file:
             return
 
-        if len(output_files) == 2:
-            for output in output_files:
-                url = output.get('url', '')
-                if url.endswith('.mp4'):
-                    mp4_url = url
-                elif url.endswith('.webm'):
-                    webm_url = url
-                else:
-                    pass
+        for output in output_files[:2]:
+            url = output.get('url', '')
+            if url.endswith('.mp4'):
+                mp4_url = url
+            elif url.endswith('.webm'):
+                webm_url = url
+            else:
+                pass
 
-            if webm_url is None and mp4_url is None:
-                return
+        if webm_url is None and mp4_url is None:
+            return
 
         # Update video attributes.
         duration = input_file.get('duration_in_ms', 0)
