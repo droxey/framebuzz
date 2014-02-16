@@ -71,14 +71,53 @@ $(function() {
       $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
     });
 
-    // // Upload Video submit button.
-    // $('#upload-file-form', addVideoDiv).submit(function(e) {
-    //   e.preventDefault();
+    // Upload Video submit button.
+    var hasError = false;
+    $('#upload-file-form', addVideoDiv).submit(function(e) {
+      e.preventDefault();
 
-    //   console.log('clicked');
+      // Simple validation.
+      if ($('#id_fp_filename').val().length == 0) {
+        dropPaneDiv.addClass('error');
+        hasError = true;
+      }
+      else {
+        dropPaneDiv.removeClass('error');
+      }
 
-    //   return false;
-    // });
+      if ($('#id_title').val().length == 0) {
+        $('#id_title').addClass('error');
+        $('#id_title').attr('placeholder', 'Please enter a title for the uploaded video.');
+        hasError = true;
+      }
+      else {
+        $('#id_title').removeClass('error');
+      }
+
+      if (hasError) {
+        return false;
+      }
+
+      var url = $(this).attr('action');
+      var data = $(this).serialize();
+
+      $.post(url, data, function(response) {
+        $('ul.nav-tabs li', addVideoDiv).removeClass('active');
+        $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
+        selectedTabIndicator.hide();
+
+        $('#id_fp_filename').val('');
+        $('#id_fp_url').val('');
+        $('#id_title').val('');
+        $('#id_description').val('');
+
+        $('input, textarea').placeholder();
+
+        dropPaneDiv.html('<div id="upload-drop-pane" class="col-xs-12">Drag and drop your video files here.<br>Or, <a href="#" id="upload-click-here">click here</a> to upload videos from Dropbox, Google Drive, and more!</div>');
+      });
+
+      return false;
+    });
 
     $('#upload-click-here').click(function(e) {
         e.preventDefault();

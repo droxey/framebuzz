@@ -278,6 +278,34 @@
                             border: 1px solid #AAA;
                             outline: 0;
                         }
+
+                        &.error {
+                            border: 1px solid red;
+
+                            &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                                color:    red;
+                                font-weight: 300;
+                                font-style: italic;
+                            }
+                            
+                            &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                                color:    red;
+                                font-weight: 300;
+                                font-style: italic;
+                            }
+                            
+                            &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                                color:    red;
+                                font-weight: 300;
+                                font-style: italic;
+                            }
+
+                            &.placeholder {
+                                color:    red;
+                                font-weight: 300;
+                                font-style: italic;                            
+                            }
+                        }
                     }
                 }
             }
