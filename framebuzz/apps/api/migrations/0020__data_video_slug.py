@@ -16,7 +16,8 @@ class Migration(DataMigration):
         for item in queryset_iterator(orm['api.video'].objects.all()):
             if not item.slug:
                 slugfield = RandomSlugField(length=settings.RANDOMSLUG_LENGTH)
-                setattr(slugfield, 'attname', 'slug')
+                # Set required attribute since we're using fields in a non-standard way.
+                setattr(slugfield, 'attname', 'slug')   
                 video_slug = slugfield.pre_save(item, True)
                 item.slug = video_slug
                 item.save()

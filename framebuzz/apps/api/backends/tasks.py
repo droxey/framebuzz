@@ -25,12 +25,12 @@ def start_zencoder_job(username, title, description, video_url, filename):
         outputs=[
             {
                 'credentials': 's3',
-                'size': '640x480',
+                'size': '700x470',
                 'url': mp4_url
             },
             {
                 'credentials': 's3',
-                'size': '640x480',
+                'size': '700x470',
                 'url': webm_url
             },
             {
@@ -42,7 +42,7 @@ def start_zencoder_job(username, title, description, video_url, filename):
                 "thumbnails": [
                     {
                         'number': 5,
-                        'size': '640x480',
+                        'size': '700x470',
                         'credentials': 's3',
                         'label': 'poster'
                     }
@@ -74,8 +74,13 @@ def check_zencoder_progress(job_id):
 
     # Get file details.
     details_response = client.job.details(job_id)
+    response_dict = details_response.__dict__
 
-    job = details_response.get('job', None)
+    response_body = response_dict.get('body', None)
+    if not response_body:
+        return
+
+    job = response_body.get('job', None)
     if not job:
         return
 
