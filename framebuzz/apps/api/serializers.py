@@ -26,7 +26,7 @@ class VideoSerializer(serializers.ModelSerializer):
                   'mp4_url', 'webm_url', 'slug',)
 
     def get_channel(self, obj):
-        return '/framebuzz/video/%s' % obj.video_id
+        return '/framebuzz/video/%s' % obj.slug
 
     def get_time_hms(self, obj):
         return obj.timeInHMS

@@ -157,10 +157,10 @@ def recommendations(request):
     }, context_instance=RequestContext(request))
 
 
-def video_share(request, username=None, video_id=None):
+def video_share(request, username=None, slug=None):
     try:
         video_in_library = False
-        video, created = get_or_create_video(video_id)
+        video, created = get_or_create_video(slug)
         context = dict()
 
         valid_verbs = ['commented on', 'replied to comment']
@@ -200,16 +200,16 @@ def video_share(request, username=None, video_id=None):
         else:
             template = 'marketing/share.html'
     except TypeError:
-        return HttpResponseRedirect(reverse('video-share-error', args=(video_id,)))
+        return HttpResponseRedirect(reverse('video-share-error', args=(slug,)))
 
     return render_to_response(template,
                               context,
                               context_instance=RequestContext(request))
 
 
-def video_share_error(request, video_id):
+def video_share_error(request, slug):
     return render_to_response('player/error_share.html', {
-        'video_id': video_id,
+        'video_id': slug,
     }, context_instance=RequestContext(request))
 
 
@@ -412,9 +412,9 @@ def zencoder_webhook(request):
 
 
 @login_required
-def toggle_video_featured(request, username, video_id):
+def toggle_video_featured(request, username, slug):
     user = User.objects.get(username=username)
-    video = Video.objects.get(video_id=video_id)
+    video = Video.objects.get(slug=slug)
 
     user_videos = UserVideo.objects.filter(user=user, video=video)
     if len(user_videos) > 0:
@@ -436,9 +436,9 @@ def toggle_video_featured(request, username, video_id):
 
 
 @login_required
-def toggle_video_library(request, username, video_id):
+def toggle_video_library(request, username, slug):
     user = User.objects.get(username=username)
-    video = Video.objects.get(video_id=video_id)
+    video = Video.objects.get(slug=slug)
 
     user_videos = UserVideo.objects.filter(user=user, video=video)
 

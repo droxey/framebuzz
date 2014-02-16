@@ -31,16 +31,16 @@ urlpatterns = patterns('',
     url(r'^avatar/', include('avatar.urls')),
 
     # Share Error Page:
-    url(r'^share/(?P<video_id>[\w.@+-]+)/error/$',
+    url(r'^share/(?P<slug>[\w.@+-]+)/error/$',
         'framebuzz.apps.profiles.views.video_share_error',
         name='video-share-error'),
 
     # Share Page (Shared by unauthenticated user):
-    url(r'^share/(?P<video_id>[\w.@+-]+)/$',
+    url(r'^share/(?P<slug>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.video_share', name='video-share'),
 
     # Share Page (Shared by authenticated user):
-    url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<video_id>[\w.@+-]+)/$',
+    url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.video_share', name='profiles-share'),
 
     # Zencoder completion webhook:
@@ -97,7 +97,7 @@ if settings.DEBUG:
                             url(r'^test/not-found/$', handler404, name='test-404'),
                             url(r'^test/server-error/$', handler500, name='test-500'),
                             url(r'^test/maintenance/$', handler503, name='test-503'),
-                            url(r'^test/(?P<video_id>[\w.@+-]+)/$',
+                            url(r'^test/(?P<slug>[\w.@+-]+)/$',
                                 'framebuzz.apps.api.views.video_test',
                                 name='video-test'),
                             )

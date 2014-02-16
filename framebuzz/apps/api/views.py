@@ -19,8 +19,8 @@ from framebuzz.apps.api.serializers import UserSerializer
 from framebuzz.apps.api.utils import errors_to_json
 
 
-def video_test(request, video_id):
-    video, created = get_or_create_video(video_id)
+def video_test(request, slug):
+    video, created = get_or_create_video(slug)
 
     return render_to_response('player/test.html', {
         'video': video,
@@ -28,20 +28,20 @@ def video_test(request, video_id):
 
 
 @xframe_options_exempt
-def video_embed(request, video_id):
+def video_embed(request, slug):
     try:
-        video, created = get_or_create_video(video_id)
-        next_url = '%s?close=true' % reverse('video-embed', args=(video.video_id,))
+        video, created = get_or_create_video(slug)
+        next_url = '%s?close=true' % reverse('video-embed', args=(video.slug,))
 
         if video.mp4_url:
             mp4_url = video.mp4_url
         else:
-            mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video_id
+            mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video.video_id
 
         if video.webm_url:
             webm_url = video.webm_url
         else:
-            webm_url = 'http://www.ytapi.com/api/%s/direct/43/' % video_id
+            webm_url = 'http://www.ytapi.com/api/%s/direct/43/' % video.video_id
 
         if request.user.is_authenticated():
             action.send(request.user, verb='viewed video', action_object=video)
@@ -58,22 +58,22 @@ def video_embed(request, video_id):
             'webm_url': webm_url,
         }, context_instance=RequestContext(request))
     except TypeError:
-        return HttpResponseRedirect(reverse('video-embed-error', args=(video_id,)))
+        return HttpResponseRedirect(reverse('video-embed-error', args=(video.slug,)))
 
 
 @xframe_options_exempt
-def video_embed_error(request, video_id):
+def video_embed_error(request, slug):
     return render_to_response('player/error_player.html', {
-        'video_id': video_id,
+        'video_id': slug,
     }, context_instance=RequestContext(request))
 
 
 @xframe_options_exempt
-def video_login(request, video_id):
+def video_login(request, slug):
     if not request.method == 'POST':
         raise Exception('This view is meant to be called via a POST request.')
 
-    video, created = get_or_create_video(video_id)
+    video, created = get_or_create_video(slug)
     login_success = False
     outbound_message = dict()
     outbound_message[DATA_KEY] = {}
@@ -91,7 +91,7 @@ def video_login(request, video_id):
         outbound_message[DATA_KEY]['user'] = json.loads(userSerialized)
         outbound_message[DATA_KEY]['share_url'] = reverse('profiles-share',
                                                           args=[user.username,
-                                                                video_id, ])
+                                                                slug, ])
     else:
         outbound_message[DATA_KEY]['errors'] = \
             json.loads(errors_to_json(form.errors))
@@ -106,12 +106,12 @@ def video_login(request, video_id):
 
 
 @xframe_options_exempt
-def video_logout(request, video_id):
+def video_logout(request, slug):
     if not request.method == 'POST':
         raise Exception('This view is meant to be called via a POST request.')
 
     logout(request)
-    share_url = reverse('video-share', args=[video_id, ])
+    share_url = reverse('video-share', args=[slug, ])
     context = {'logged_out': True, 'share_url': share_url}
 
     return HttpResponse(json.dumps(context),
@@ -119,11 +119,11 @@ def video_logout(request, video_id):
 
 
 @xframe_options_exempt
-def video_signup(request, video_id):
+def video_signup(request, slug):
     if not request.method == 'POST':
         raise Exception('This view is meant to be called via a POST request.')
 
-    video, created = get_or_create_video(video_id)
+    video, created = get_or_create_video(slug)
     login_success = False
     outbound_message = dict()
     outbound_message[DATA_KEY] = {}
@@ -142,7 +142,7 @@ def video_signup(request, video_id):
         outbound_message[DATA_KEY]['user'] = json.loads(userSerialized)
         outbound_message[DATA_KEY]['share_url'] = reverse('profiles-share',
                                                           args=[user.username,
-                                                                video_id, ])
+                                                                slug, ])
     else:
         outbound_message[DATA_KEY]['errors'] = \
             json.loads(errors_to_json(form.errors))

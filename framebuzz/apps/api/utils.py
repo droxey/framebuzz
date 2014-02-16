@@ -92,7 +92,7 @@ def get_total_shares(path):
     path_split = [str(s) for s in path.split('/')]
     if len(path_split) > 3:
         video_id = path_split[-2]
-        video = Video.objects.get(video_id=video_id)
+        video = Video.objects.get(slug=video_id)
         email_shares = Action.objects.filter(verb='shared',
                                              action_object_object_id=video.id)
         final = final + len(email_shares)

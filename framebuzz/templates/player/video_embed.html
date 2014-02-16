@@ -11,7 +11,7 @@
       <script type="text/javascript">
         // Detect if the page is not loaded in an iFrame.
         if (window == window.top) {
-            document.location.href = "{% url 'video-share' video.video_id %}";
+            document.location.href = "{% url 'video-share' video.slug %}";
         }
       </script>
     {% endif %}
@@ -19,7 +19,7 @@
     {% revcanonical video %}
     <meta property="og:title" content="FrameBuzz: {{ video.title }}" />
     <meta property="og:type" content="Video" />
-    <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.video_id %}" />
+    <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.slug %}" />
     <meta property="og:image" content="{{ video.poster_image }}" />
     <meta property="og:description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
     <meta property="og:site_name" content="FrameBuzz" />
@@ -67,12 +67,12 @@
           host: location.hostname,
           port: {{ socket_port }},
           channel: '{{ socket_channel }}',
-          video_channel: '/framebuzz/video/' + '{{ video.video_id }}',
+          video_channel: '/framebuzz/video/' + '{{ video.slug }}',
           root_path: '/static/framebuzz/player/app/',
           user_channel: '{{ user_channel }}',
-          login_url: "{% url 'video-login' video.video_id %}",
-          logout_url: "{% url 'video-logout' video.video_id %}",
-          signup_url: "{% url 'video-signup' video.video_id %}",
+          login_url: "{% url 'video-login' video.slug %}",
+          logout_url: "{% url 'video-logout' video.slug %}",
+          signup_url: "{% url 'video-signup' video.slug %}",
           is_authenticated: is_authenticated,
           share_url: "{% shorturl video %}",
           login_urls: {

@@ -195,14 +195,14 @@ class Video(caching.base.CachingMixin, models.Model):
         if not isinstance(user, AnonymousUser):
             return reverse('profiles-share', kwargs={
                            'username': user.username,
-                           'video_id': str(video.video_id)})
+                           'slug': str(video.slug)})
         return video.get_share_url()
 
     def get_absolute_url(self):
-        return reverse('video-embed', kwargs={'video_id': str(self.video_id)})
+        return reverse('video-embed', kwargs={'slug': str(self.slug)})
 
     def get_share_url(self):
-        return reverse('video-share', kwargs={'video_id': str(self.video_id)})
+        return reverse('video-share', kwargs={'slug': str(self.slug)})
 
     @property
     def found_by(self):
@@ -244,7 +244,8 @@ class Video(caching.base.CachingMixin, models.Model):
             except:
                 poster = self.default_thumbnail()
             finally:
-                return poster.url
+                if poster is not None:
+                    return poster.url
 
     def embed_code(self):
         full_url = 'http://frame.bz%s' % self.get_absolute_url()
@@ -400,12 +401,12 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
     def get_absolute_url(self):
         video = Video.objects.get(id=self.object_pk)
         url_id = self.id if self.parent is None else self.parent.id
-        return '%s#/player/panel/active/comments/%s' % (reverse('video-embed', kwargs={'video_id': str(video.video_id)}), str(url_id))
+        return '%s#/player/panel/active/comments/%s' % (reverse('video-embed', kwargs={'slug': str(video.slug)}), str(url_id))
 
     def get_share_url(self):
         video = Video.objects.get(id=self.object_pk)
         url_id = self.id if self.parent is None else self.parent.id
-        return '%s#/player/panel/active/comments/%s' % (reverse('video-share', kwargs={'video_id': str(video.video_id)}), str(url_id))
+        return '%s#/player/panel/active/comments/%s' % (reverse('video-share', kwargs={'slug': str(video.slug)}), str(url_id))
 
     def get_player_url(self):
         url_id = self.id if self.parent is None else self.parent.id
@@ -453,7 +454,7 @@ watson.register(UserProfile,
 watson.register(Video,
                 VideoSearchAdapter,
                 fields=("title", "description",),
-                store=("title", "description", "video_id",))
+                store=("title", "description", "video_id","slug",))
 
 watson.register(MPTTComment.objects.filter(parent=None),
                 CommentSearchAdapter,

@@ -84,14 +84,18 @@ def find_video_by_keyword(q, results=12, next_page_token=None):
 
 
 @watson.update_index()
-def get_or_create_video(video_id):
+def get_or_create_video(slug):
   try:
-    video = Video.objects.get(video_id = video_id)
+    if len(slug) == settings.RANDOMSLUG_LENGTH:
+      # fbz slugs are 16.
+      video = Video.objects.get(slug=slug)
+    else:
+      video = Video.objects.get(video_id=slug)
     created = False
     
     return video, created
   except Video.DoesNotExist:
-    query_params = dict(id=video_id, part='snippet,player,contentDetails', key=settings.YOUTUBE_API_KEY_SERVER)
+    query_params = dict(id=slug, part='snippet,player,contentDetails', key=settings.YOUTUBE_API_KEY_SERVER)
     query_url = 'https://www.googleapis.com/youtube/v3/videos?%s' % urllib.urlencode(query_params)
     query_response = json.loads(urllib.urlopen(query_url).read())
     results = query_response.get('items', None)

@@ -109,7 +109,7 @@ def initialize_video_player(context):
     logger.info(video_id)
 
     # Get Video.
-    video = Video.objects.get(video_id=video_id)
+    video = Video.objects.get(slug=video_id)
     threads = MPTTComment.objects.filter(object_pk=video.id,
                                          is_removed=False,
                                          parent=None).order_by('-time')
@@ -140,7 +140,7 @@ def post_new_comment(context):
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
     comment = None
-    video = Video.objects.get(video_id=video_id)
+    video = Video.objects.get(slug=video_id)
 
     if thread_data.get('username', None):
         user = auth.models.User.objects.get(username=thread_data['username'])
@@ -217,7 +217,7 @@ def add_comment_action(context):
     thread_data = context.get(DATA_KEY, None)
     channel = context.get('outbound_channel', None)
     video_id = context.get('video_id', None)
-    video = Video.objects.get(video_id=video_id)
+    video = Video.objects.get(slug=video_id)
     action_name = None
 
     if thread_data.get('username', None):
@@ -352,7 +352,7 @@ def add_player_action(context):
     player_data = context.get(DATA_KEY, None)
     player_action = player_data.get('action', None)
     video_id = context.get('video_id', None)
-    video = Video.objects.get(video_id=video_id)
+    video = Video.objects.get(slug=video_id)
     verb = None
 
     if player_data.get('username', None):
@@ -485,7 +485,7 @@ def get_user_profile(context):
 def email_share(context):
     context_data = context.get(DATA_KEY, None)
     video_id = context.get('video_id', None)
-    video = Video.objects.get(video_id=video_id)
+    video = Video.objects.get(slug=video_id)
     share_with_email = context_data.get('shareWithEmail', None)
     shared_by = None
 
@@ -516,7 +516,7 @@ def add_to_library(context):
     context_data = context.get(DATA_KEY, None)
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
-    video = Video.objects.get(video_id=video_id)
+    video = Video.objects.get(slug=video_id)
 
     if context_data.get('username', None):
         user = auth.models.User.objects.get(username=context_data['username'])

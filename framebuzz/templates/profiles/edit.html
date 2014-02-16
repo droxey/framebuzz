@@ -26,7 +26,7 @@
                     <div id="user-videos" class="row clearfix">
                         {% for uv in profile_user.uservideo_set.all|slice:":4" %}
                             <div class="vid col-xs-3 pull-left">
-                                <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username uv.video.video_id %}">
+                                <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username uv.video.slug %}">
                                     <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="https://i1.ytimg.com/vi/{{ uv.video.video_id }}/mqdefault.jpg" alt="{{ uv.video.title|title }}" class="img-responsive lazy-load">
                                     <noscript><img src="https://i1.ytimg.com/vi/{{ uv.video.video_id }}/mqdefault.jpg"></noscript>
                                 </a>

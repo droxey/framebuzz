@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block email_message %}
-     Hey, don’t look now, but {{ comment.user.username }} commented on a video you made on <a href="http://{{ site.domain }}{% url 'profiles-share' comment.content_object.found_by.username comment.content_object.video_id %}{{ comment.get_player_url }}" style="color: #0C94C8;">{{ comment.content_object.title }}</a>.
+     Hey, don’t look now, but {{ comment.user.username }} commented on a video you made on <a href="http://{{ site.domain }}{% url 'profiles-share' comment.content_object.found_by.username comment.content_object.slug %}{{ comment.get_player_url }}" style="color: #0C94C8;">{{ comment.content_object.title }}</a>.
      <br><br>
     <a style="color: #0C94C8;" href="http://{{ site.domain }}{{ comment.get_share_url }}">{{ comment.formatted_comment }}</a>
 {% endblock %}

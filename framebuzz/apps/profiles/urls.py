@@ -21,11 +21,11 @@ urlpatterns = patterns('',
         'framebuzz.apps.profiles.views.upload_video',
         name='profiles-upload-video'),
 
-    url(r'^(?P<username>[\w.@+-]+)/library/toggle/(?P<video_id>[\w.@+-]+)/$',
+    url(r'^(?P<username>[\w.@+-]+)/library/toggle/(?P<slug>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.toggle_video_library',
         name='profiles-toggle-library'),
 
-    url(r'^(?P<username>[\w.@+-]+)/library/featured/(?P<video_id>[\w.@+-]+)/$',
+    url(r'^(?P<username>[\w.@+-]+)/library/featured/(?P<slug>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.toggle_video_featured',
         name='profiles-toggle-featured'),
 
