@@ -213,7 +213,10 @@ class Video(caching.base.CachingMixin, models.Model):
 
     def default_thumbnail(self):
         try:
-            return self.thumbnail_set.all()[0]
+            if self.video_id:
+                return 'https://i1.ytimg.com/vi/%s/mqdefault.jpg' % self.video_id
+            else:
+                return self.thumbnail_set.all()[1].url
         except:
             pass
 
@@ -224,12 +227,13 @@ class Video(caching.base.CachingMixin, models.Model):
             pass
 
     def poster_image(self):
-        if self.video_id == 'DEL7-ftmrxI' or self.video_id == 'Tqvb0NUJem8':
-            if self.video_id == 'DEL7-ftmrxI':
-                return '/static/framebuzz/marketing/img/poster1.jpg'
-            else:
-                return '/static/framebuzz/marketing/img/poster2.jpg'
-        else:
+        if self.video_id:
+            if self.video_id == 'DEL7-ftmrxI' or self.video_id == 'Tqvb0NUJem8':
+                if self.video_id == 'DEL7-ftmrxI':
+                    return '/static/framebuzz/marketing/img/poster1.jpg'
+                else:
+                    return '/static/framebuzz/marketing/img/poster2.jpg'
+
             poster_thumbnail = self.thumbnail_set.filter(
                 url__endswith='maxresdefault.jpg')
             if len(poster_thumbnail) == 0:
@@ -246,6 +250,11 @@ class Video(caching.base.CachingMixin, models.Model):
             finally:
                 if poster is not None:
                     return poster.url
+        else:
+            try:
+                return self.thumbnail_set.all()[1]
+            except:
+                pass
 
     def embed_code(self):
         full_url = 'http://frame.bz%s' % self.get_absolute_url()

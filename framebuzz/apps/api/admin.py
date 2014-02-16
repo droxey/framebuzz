@@ -1,5 +1,5 @@
 from django.contrib import admin
-from framebuzz.apps.api.models import MPTTComment, Video, UserProfile, UserVideo
+from framebuzz.apps.api.models import MPTTComment, Video, UserProfile, UserVideo, Thumbnail
 from django.contrib.sessions.models import Session
 
 
@@ -29,8 +29,14 @@ class UserVideoAdmin(admin.ModelAdmin):
     list_display = ('user', 'video', 'added_on',)
 
 
+class ThumbnailAdmin(admin.ModelAdmin):
+    list_display = ('video', 'url',)
+    list_filter = ('video',)
+
+
 admin.site.register(MPTTComment, MPTTCommentAdmin)
 admin.site.register(Video, FrameBuzzVideoAdmin)
 admin.site.register(Session, SessionAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(UserVideo, UserVideoAdmin)
+admin.site.register(Thumbnail, ThumbnailAdmin)

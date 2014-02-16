@@ -19,8 +19,8 @@
                             {{ video.get_share_url }}
                         {% endif %}
                     {% endif %}{% endspaceless %}">
-                    <img class="img-responsive video-thumbnail lazy-load" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="https://i1.ytimg.com/vi/{{ video.video_id }}/mqdefault.jpg" alt="{{ video.title|title }}" />
-                    <noscript><img src="https://i1.ytimg.com/vi/{{ video.video_id }}/mqdefault.jpg"></noscript>
+                    <img class="img-responsive video-thumbnail lazy-load" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="{{ video.default_thumbnail }}" alt="{{ video.title|title }}" />
+                    <noscript><img src="{{ video.default_thumbnail }}"></noscript>
                     <span class="play absolute-center"><i class="fa fa-icon fa-play fa-2x absolute-center"></i></span>
                     <span class="title"><strong>{{ video.title|title }}</strong></span>
                 </a>     

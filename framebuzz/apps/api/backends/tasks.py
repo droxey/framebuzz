@@ -8,7 +8,7 @@ from actstream import action
 from templated_email import send_templated_mail
 from zencoder import Zencoder
 
-from framebuzz.apps.api.models import Video, UserVideo
+from framebuzz.apps.api.models import Video, UserVideo, Thumbnail
 
 MP4_URL = 's3://framebuzz-zencoder/videos/%s/%s.mp4'
 WEBM_URL = 's3://framebuzz-zencoder/videos/%s/%s.webm'
@@ -87,6 +87,7 @@ def check_zencoder_progress(job_id):
     if job:
         input_file = job.get('input_media_file', None)
         output_files = job.get('output_media_files', list())
+        thumbnails = job.get('thumbnails', list())
         mp4_url = None
         webm_url = None
 
@@ -117,8 +118,13 @@ def check_zencoder_progress(job_id):
         video.mp4_url = mp4_url
         video.save()
 
-        # Save video poster image.
-        # TODO
+        # Save video poster images.
+        for thumb in thumbnails:
+            if thumb.get('url', None):
+                t = Thumbnail()
+                t.url = thumb.get('url')
+                t.video = video
+                t.save()
 
         # Add UserVideo entry.
         user_video = UserVideo()
