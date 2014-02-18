@@ -10,8 +10,8 @@ from zencoder import Zencoder
 
 from framebuzz.apps.api.models import Video, UserVideo, Thumbnail
 
-MP4_URL = 's3://framebuzz-zencoder/videos/%s/%s.mp4'
-WEBM_URL = 's3://framebuzz-zencoder/videos/%s/%s.webm'
+MP4_URL = 's3://fbz-zc/%s/%s.mp4'
+WEBM_URL = 's3://fbz-zc/%s/%s.webm'
 
 
 @celery.task(name='framebuzz.apps.api.backends.tasks.start_zencoder_job',
@@ -26,12 +26,14 @@ def start_zencoder_job(username, title, description, video_url, filename):
             {
                 'credentials': 's3',
                 'size': '700x470',
-                'url': mp4_url
+                'url': mp4_url,
+                'public': True
             },
             {
                 'credentials': 's3',
                 'size': '700x470',
-                'url': webm_url
+                'url': webm_url,
+                'public': True
             },
             {
                 "notifications": [
