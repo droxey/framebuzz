@@ -53,8 +53,6 @@ def start_zencoder_job(username, title, description, video_url, filename):
         ]
     )
 
-    print response.__dict__
-
     if response.code == 201:  # Created
         added_by = User.objects.get(username__iexact=username)
 

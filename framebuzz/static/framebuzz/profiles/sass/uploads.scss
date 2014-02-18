@@ -76,11 +76,15 @@
                 }
 
                 &.file {
-                    left: 29px;
+                    left: 4.1%;
                 }
 
                 &.youtube {
-                    left: 102px;
+                    left: 14%;
+                }
+
+                &.uploads {
+                    left: 92.1%;
                 }
             }
 
@@ -144,7 +148,7 @@
         z-index: 999;
     }
 
-    form {
+    form, div.pending {
         div.submit-row {
             margin: 5px -15px;
 
@@ -315,6 +319,34 @@
 
                 textarea {
                     height: 43px;
+                }
+            }
+        }
+    }
+
+    #pending-uploads {
+        div.pending {
+            div.uploads-row {
+                background-color: #f0f0f0;
+                border: 2px dashed #d8d8d8;
+                margin: 5px -10px;
+                padding: 15px 0;
+                @include border-radius(3px, 3px);
+
+                table {
+                    width: 100%;
+                    
+                    tr {
+                        td {
+                            color: #ABABAB;
+                            font-size: 0.9em;
+
+                            &.no-uploads {
+                                text-align: center;
+                                font-style: italic;
+                            }
+                        }
+                    }
                 }
             }
         }

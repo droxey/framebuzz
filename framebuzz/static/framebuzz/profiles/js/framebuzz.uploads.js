@@ -58,7 +58,7 @@ $(function() {
       var newClass = $(this).parent().attr('class');
       var oldTabDiv = $($(this).attr('href'));
 
-      selectedTabIndicator.removeClass('video youtube webcam');
+      selectedTabIndicator.removeClass('video youtube webcam uploads');
       selectedTabIndicator.show();
       selectedTabIndicator.addClass(newClass);
     });

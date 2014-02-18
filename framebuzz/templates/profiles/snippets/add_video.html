@@ -13,6 +13,12 @@
                     <strong>YouTube</strong>
                 </a>
             </li>
+            <li class="uploads pull-right">
+                <a href="#pending-uploads" data-toggle="tab">
+                    <i class="fa fa-upload fa-fw"></i>
+                    <strong>Uploads</strong>
+                </a>
+            </li>
             <li class="indicator file">
                 <i class="fa fa-play fa-rotate-270"></i>
             </li>
@@ -86,6 +92,40 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div id="pending-uploads" class="tab-pane">
+                <div class="pending">
+                    <div class="row drop-pane-row">
+                        <div class="col-xs-12">
+                            <div class="row uploads-row">
+                                <div class="col-xs-12">
+                                    <table cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            {% for video in pending_uploads %}
+                                                <tr>
+                                                    <td>{{ video.title }}</td>
+                                                    <td>0%</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            {% empty %}
+                                                <tr>
+                                                    <td colspan="3" class="no-uploads">
+                                                        No pending uploads!
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row submit-row">
+                                <div class="col-xs-6 col-xs-push-6 clearfix">
+                                    <a class="btn cancel-upload pull-right"><i class="fa fa-times"></i> Close</a>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
             </div>
         </div>
     </div>

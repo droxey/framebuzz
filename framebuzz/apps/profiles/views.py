@@ -101,6 +101,10 @@ def feed(request, username):
     except EmptyPage:
         template = 'profiles/snippets/blank.html'
 
+    pending_uploads = []
+    if is_my_profile:
+        pending_uploads = Video.objects.filter(added_by=request.user, processing=True)
+
     ct = ContentType.objects.get(model='user')
     return render_to_response(template, {
         'profile_user': user,
@@ -110,7 +114,8 @@ def feed(request, username):
         'favorite_comment_ids': favorite_comment_ids,
         'is_my_profile': is_my_profile,
         'verb_filter': verb_filter,
-        'user_content_type': ct
+        'user_content_type': ct,
+        'pending_uploads': pending_uploads
     }, context_instance=RequestContext(request))
 
 
