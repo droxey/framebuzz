@@ -268,7 +268,7 @@ def home(request, username):
 
     share_context = request.session.get('share', None)
     if share_context:
-        context['shares'] = get_total_shares(share_context['path'])
+        #context['shares'] = get_total_shares(share_context['path'])
         context.update(share_context)
         del request.session['share']
 

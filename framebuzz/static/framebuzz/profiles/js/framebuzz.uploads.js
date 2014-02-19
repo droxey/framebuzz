@@ -34,7 +34,7 @@ $(function() {
     var resetForm = function() {
         $('ul.nav-tabs li', addVideoDiv).removeClass('active');
         $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
-        selectedTabIndicator.hide();
+        selectedTabIndicator.removeClass('active');
 
         $('#id_fp_filename').val('');
         $('#id_fp_url').val('');
@@ -132,10 +132,30 @@ $(function() {
     // Add placeholder text for forms.
     $('input, textarea').placeholder();
 
-    // Event callback for bootstrap tabs.
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+    // Click tab event.
+    $(document).on('click', '#add-video-tabs a[data-toggle="tab"]', function (e) {
+      e.preventDefault();
+
+      var newClass = $(this).parent().attr('class'),
+          oldTabDiv = $($(this).attr('href')),
+          tab = $($(this).attr('href'));
+
+      $('div.tab-pane', addVideoDiv).removeClass('active');
+      $('#add-video-tabs li', addVideoDiv).removeClass('active');
+      $('div.tab-pane', addVideoDiv).hide();
+
+      selectedTabIndicator.removeClass('file youtube webcam uploads');
+      selectedTabIndicator.addClass('active');
+      selectedTabIndicator.addClass(newClass, 100);
+      tab.slideDown('fast');
+    });
+
+    // Show tab event.
+    $(document).on('shown.bs.tab', '#add-video-tabs a[data-toggle="tab"]', function (e) {
       if ($(e.target).attr('href') == '#pending-uploads') {
         $('#uploads-table tr').each(function(key, value) {
+          // Update progress bar when the Uploads tab is selected.
           var progressBar = $(this).find('div.progress-bar');
           progress(progressBar.attr('data-percentage'), progressBar);
         });
@@ -165,22 +185,15 @@ $(function() {
         }
     });
 
-    // Move the active tab indicator and hide/show active form.
-    $('ul.nav-tabs li a', addVideoDiv).click(function() {
-      var newClass = $(this).parent().attr('class');
-      var oldTabDiv = $($(this).attr('href'));
-
-      selectedTabIndicator.removeClass('video youtube webcam uploads');
-      selectedTabIndicator.show();
-      selectedTabIndicator.addClass(newClass);
-    });
-
     // Cancel upload button.
     $('a.cancel-upload', addVideoDiv).click(function() {
-      selectedTabIndicator.hide();
+      selectedTabIndicator.removeClass('active');
 
       $('ul.nav-tabs li', addVideoDiv).removeClass('active');
       $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
+
+      var tabToHide = $($(this).attr('data-hide-tab'));
+      tabToHide.slideUp('fast');
     });
 
     // Upload Video submit button.
