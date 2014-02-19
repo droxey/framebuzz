@@ -145,10 +145,10 @@ $(function() {
       $('#add-video-tabs li', addVideoDiv).removeClass('active');
       $('div.tab-pane', addVideoDiv).hide();
 
+      tab.slideDown('fast');
       selectedTabIndicator.removeClass('file youtube webcam uploads');
       selectedTabIndicator.addClass('active');
-      selectedTabIndicator.addClass(newClass, 100);
-      tab.slideDown('fast');
+      selectedTabIndicator.addClass(newClass);
     });
 
     // Show tab event.
