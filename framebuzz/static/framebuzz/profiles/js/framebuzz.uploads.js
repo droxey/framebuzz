@@ -213,7 +213,7 @@ $(function() {
       var data = $(this).serialize();
 
       $.post(url, data, function(response) {
-        window.location.reload();
+        window.setTimeout(function() { window.location.reload(); }, 2000);
       });
 
       return false;
