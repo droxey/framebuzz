@@ -420,12 +420,23 @@ def zencoder_webhook(request):
 
 @login_required
 def get_video_tile(request, job_id):
-    video = Video.object.get(job_id=job_id)
-    action = Action.objects.filter(actor=request.user,
-                                   action_object=video,
+    try:
+        page = request.GET.get('page', 1)
+    except PageNotAnInteger:
+        page = 1
+
+    video = Video.objects.get(job_id=job_id)
+    action = Action.objects.filter(action_object_object_id=video.id,
                                    verb='added video to library')[0]
-    return render_to_response('profiles/snippets/video.html', {
-        'action', action,
+    p = Paginator([action, ], ITEMS_PER_PAGES, request=request)
+    page_obj = p.page(page)
+
+    return render_to_response('profiles/snippets/item.html', {
+        'action': action,
+        'video': video,
+        'profile_user': request.user,
+        'page_obj': page_obj,
+        'is_my_profile': True
     }, context_instance=RequestContext(request))
 
 
@@ -473,9 +484,9 @@ def toggle_video_library(request, username, slug):
         user_video.save()
 
         action.send(user,
-            verb='added video to library',
-            action_object=video,
-            target=user_video)
+                    verb='added video to library',
+                    action_object=video,
+                    target=user_video)
 
     return HttpResponse()
 

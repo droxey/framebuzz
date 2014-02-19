@@ -59,7 +59,9 @@ $(function() {
     var renderNewVideoTile = function(job_id) {
       var url = '/video/tile/' + job_id + '/';
       $.get(url, function(html) {
-        console.log(html);
+        var container = $('#feed').find('div.timeline_container');
+        $(html).insertAfter(container);
+        $(window).trigger('resize'); // re-inits the timeline.
       });
     };
 
@@ -120,7 +122,7 @@ $(function() {
       if (checkJobsInterval === null) {
         checkZencoderJobs();
 
-        checkJobsInterval = setInterval(checkZencoderJobs, 60000);
+        checkJobsInterval = setInterval(checkZencoderJobs, 30000);
       }
     };
 
@@ -152,7 +154,7 @@ $(function() {
             dropPaneDiv.html("Drop files here.");
         },
         onSuccess: function(InkBlobs) {
-            dropPaneDiv.text("Done, see result below");
+            dropPaneDiv.html('<i class="fa fa-film"></i> <strong>' + InkBlobs[0].filename + ' added!</strong>');
             setHiddenFormFields(InkBlobs[0].url, InkBlobs[0].key);
         },
         onError: function(type, message) {
