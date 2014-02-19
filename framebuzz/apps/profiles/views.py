@@ -101,10 +101,6 @@ def feed(request, username):
     except EmptyPage:
         template = 'profiles/snippets/blank.html'
 
-    pending_uploads = []
-    if is_my_profile:
-        pending_uploads = Video.objects.filter(added_by=request.user, processing=True)
-
     ct = ContentType.objects.get(model='user')
     return render_to_response(template, {
         'profile_user': user,
@@ -114,8 +110,7 @@ def feed(request, username):
         'favorite_comment_ids': favorite_comment_ids,
         'is_my_profile': is_my_profile,
         'verb_filter': verb_filter,
-        'user_content_type': ct,
-        'pending_uploads': pending_uploads
+        'user_content_type': ct
     }, context_instance=RequestContext(request))
 
 
@@ -252,6 +247,11 @@ def home(request, username):
     if show_help:
         del request.session['show_help']
 
+    pending_uploads = []
+    if is_my_profile:
+        pending_uploads = Video.objects.filter(added_by=request.user, processing=True)
+    print pending_uploads
+
     context = {
         'profile_favorites': profile_favorites,
         'profile_conversations': profile_conversations,
@@ -262,7 +262,8 @@ def home(request, username):
         'user_content_type': ct,
         'is_my_profile': is_my_profile,
         'page_counts': page_counts,
-        'show_help': show_help
+        'show_help': show_help,
+        'pending_uploads': pending_uploads,
     }
 
     share_context = request.session.get('share', None)
@@ -394,7 +395,8 @@ def upload_video(request, username):
 
         if success:
             form.save()
-            return HttpResponse()
+            success = True
+            return HttpResponse(200)
     else:
         form = UploadVideoForm(request=request)
 
@@ -414,6 +416,17 @@ def zencoder_webhook(request):
     if job:
         check_zencoder_progress.apply_async([job.get('id', 0)])
     return HttpResponse(200)
+
+
+@login_required
+def get_video_tile(request, job_id):
+    video = Video.object.get(job_id=job_id)
+    action = Action.objects.filter(actor=request.user,
+                                   action_object=video,
+                                   verb='added video to library')[0]
+    return render_to_response('profiles/snippets/video.html', {
+        'action', action,
+    }, context_instance=RequestContext(request))
 
 
 @login_required

@@ -1,0 +1,13 @@
+<tr data-job-id="{{ video.job_id }}"{% if forloop.first %} class="first"{% endif %}{% if forloop.last %} class="last"{% endif %}>
+    <td class="icon" valign="middle">
+        <i class="fa fa-film fa-3x"></i>
+    </td>
+    <td>
+        <strong>{{ video.title|title }}</strong>
+        <br>
+        <span class="uploaded"><i>Uploaded on {{ video.uploaded }}</i></span>
+    </td>
+    <td class="percentage">
+        <div class="progress-bar" data-percentage="0"><div></div></div>
+    </td>
+</tr>

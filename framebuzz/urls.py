@@ -48,6 +48,11 @@ urlpatterns = patterns('',
         'framebuzz.apps.profiles.views.zencoder_webhook',
         name='video-notification'),
 
+    # Job status:
+    url(r'^video/tile/(?P<job_id>[\d]+)/$',
+        'framebuzz.apps.profiles.views.get_video_tile',
+        name='get-video-tile'),
+
     # Dashboard:
     #url(r'^dashboard/', include('framebuzz.apps.dashboard.urls')),
 
