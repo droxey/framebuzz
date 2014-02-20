@@ -1,9 +1,11 @@
 <tr data-job-id="{{ video.job_id }}"{% if forloop.first %} class="first"{% endif %}{% if forloop.last %} class="last"{% endif %}>
     <td class="icon" valign="middle">
-        <i class="fa fa-film fa-3x"></i>
+        <a class="video-link" href="{% url 'profiles-share' request.user.username video.slug %}">
+            <i class="fa fa-film fa-3x"></i>
+        </a>
     </td>
     <td>
-        <strong>{{ video.title|title }}</strong>
+        <a class="video-link" href="{% url 'profiles-share' request.user.username video.slug %}"><strong>{{ video.title|title }}</strong></a>
         <br>
         <span class="uploaded"><i>Uploaded on {{ video.uploaded }}</i></span>
     </td>

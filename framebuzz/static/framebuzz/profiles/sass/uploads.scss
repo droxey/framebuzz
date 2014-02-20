@@ -350,6 +350,21 @@
                             padding: 5px 0;
                             width: 50%;
 
+                            a.video-link {
+                                color: #ABABAB;
+                                text-decoration: none;
+                                cursor: default;
+
+                                &.finished {
+                                    color: #00aeef;
+                                    cursor: pointer;
+
+                                    &:hover {
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+
                             div.progress-bar {
                                 height: 22px;
                                 border: 1px solid #111;
@@ -368,6 +383,14 @@
 
                             &.icon {
                                 width: 8%;
+
+                                a.video-link {
+                                    &.finished {
+                                        &:hover {
+                                            text-decoration: none;
+                                        }
+                                    }
+                                }
                             }
 
                             &.percentage {

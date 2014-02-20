@@ -97,6 +97,10 @@ $(function() {
                       currentCount = currentCount - 1;
 
                       renderNewVideoTile(row.attr('data-job-id'));
+
+                      row.find('a.video-link').addClass('finished');
+                      row.find('i.fa-film').addClass('i.fa-play-circle');
+                      row.find('i.fa-film').removeClass('i.fa-film');
                     }
                   }
                 },
@@ -163,6 +167,13 @@ $(function() {
       }
     });
 
+    $(document).on('click', '#pending-uploads a.video-link', function(e) {
+      var link = $(this);
+      if (!link.hasClass('finished')) {
+        return false;
+      }
+    });
+
     // Set filepicker.io key and drop panes for uploads.
     filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
     filepicker.makeDropPane(dropPaneDiv[0], {
@@ -193,6 +204,8 @@ $(function() {
       $('ul.nav-tabs li', addVideoDiv).removeClass('active');
       $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
 
+      resetForm();
+      
       var tabToHide = $($(this).attr('data-hide-tab'));
       tabToHide.slideUp('fast');
     });
@@ -239,7 +252,7 @@ $(function() {
         filepicker.pickAndStore(
           {
             extensions: acceptedExtensions,
-            services: ['COMPUTER','VIDEO','BOX','DROPBOX','GOOGLE_DRIVE','GMAIL','URL','FTP']
+            services: ['COMPUTER','VIDEO','BOX','DROPBOX','GOOGLE_DRIVE','URL','FTP']
           },
           {
             location: 's3'
