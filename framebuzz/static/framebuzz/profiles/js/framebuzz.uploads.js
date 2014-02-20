@@ -139,7 +139,8 @@ $(function() {
 
       var newClass = $(this).parent().attr('class'),
           oldTabDiv = $($(this).attr('href')),
-          tab = $($(this).attr('href'));
+          tab = $($(this).attr('href')),
+          isActive = tab.hasClass('active');
 
       $('div.tab-pane', addVideoDiv).removeClass('active');
       $('#add-video-tabs li', addVideoDiv).removeClass('active');
