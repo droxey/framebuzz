@@ -340,6 +340,21 @@ def install():
     sudo("pip install virtualenv")
 
 
+
+@task
+@log_call
+def create_database():
+    pw = db_pass()
+    user_sql_args = (env.proj_name, pw.replace("'", "\'"))
+    user_sql = "CREATE USER %s WITH ENCRYPTED PASSWORD '%s';" % user_sql_args
+    psql(user_sql, show=False)
+    shadowed = "*" * len(pw)
+    print_command(user_sql.replace("'%s'" % pw, "'%s'" % shadowed))
+    psql("CREATE DATABASE %s WITH OWNER %s ENCODING = 'UTF8' "
+         "LC_CTYPE = '%s' LC_COLLATE = '%s' TEMPLATE template0;" %
+         (env.proj_name, env.proj_name, env.locale, env.locale))
+
+
 @task
 @log_call
 def create():
@@ -374,15 +389,15 @@ def create():
         sshagent_run("%s clone %s %s" % (vcs, env.repo_url, env.proj_path))
 
     # Create DB and DB user.
-    pw = db_pass()
-    user_sql_args = (env.proj_name, pw.replace("'", "\'"))
-    user_sql = "CREATE USER %s WITH ENCRYPTED PASSWORD '%s';" % user_sql_args
-    psql(user_sql, show=False)
-    shadowed = "*" * len(pw)
-    print_command(user_sql.replace("'%s'" % pw, "'%s'" % shadowed))
-    psql("CREATE DATABASE %s WITH OWNER %s ENCODING = 'UTF8' "
-         "LC_CTYPE = '%s' LC_COLLATE = '%s' TEMPLATE template0;" %
-         (env.proj_name, env.proj_name, env.locale, env.locale))
+    # pw = db_pass()
+    # user_sql_args = (env.proj_name, pw.replace("'", "\'"))
+    # user_sql = "CREATE USER %s WITH ENCRYPTED PASSWORD '%s';" % user_sql_args
+    # psql(user_sql, show=False)
+    # shadowed = "*" * len(pw)
+    # print_command(user_sql.replace("'%s'" % pw, "'%s'" % shadowed))
+    # psql("CREATE DATABASE %s WITH OWNER %s ENCODING = 'UTF8' "
+    #      "LC_CTYPE = '%s' LC_COLLATE = '%s' TEMPLATE template0;" %
+    #      (env.proj_name, env.proj_name, env.locale, env.locale))
 
     conf_path = "/etc/nginx/conf.d"
     if not exists(conf_path):
