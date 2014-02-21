@@ -334,7 +334,7 @@ def install():
     apt("gcc libc6 zlib1g-dev libexpat1-dev libssl-dev python2.7-dev libc-dev "
         "libjpeg-turbo8-dev comerr-dev libjpeg8-dev nginx libkrb5-dev "
         "libjpeg-dev python-dev python-setuptools git-core "
-        "postgresql libpq-dev memcached supervisor redis-server "
+        "postgresql libpq-dev memcached supervisor redis-server libxml2-dev libxslt1-dev "
         "python-software-properties")
     sudo("easy_install pip")
     sudo("pip install virtualenv")
@@ -407,7 +407,7 @@ def create():
     upload_template_and_reload("settings")
     with project():
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "framebuzz.settings")
-        
+
         if env.reqs_path:
             pip("-r %s/%s" % (env.proj_path, env.reqs_path))
         pip("gunicorn setproctitle south psycopg2 "
