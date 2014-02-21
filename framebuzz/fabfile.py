@@ -406,6 +406,8 @@ def create():
     # Set up project.
     upload_template_and_reload("settings")
     with project():
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "framebuzz.settings")
+        
         if env.reqs_path:
             pip("-r %s/%s" % (env.proj_path, env.reqs_path))
         pip("gunicorn setproctitle south psycopg2 "
