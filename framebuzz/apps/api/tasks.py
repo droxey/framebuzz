@@ -541,3 +541,17 @@ def add_to_library(context):
         'user': json.loads(userSerialized)
     }
     return construct_message('FB_ADD_TO_LIBRARY', channel, return_data)
+
+
+@celery.task
+def start_private_convo(context):
+    context_data = context.get(DATA_KEY, None)
+    video_id = context.get('video_id', None)
+    channel = context.get('outbound_channel', None)
+    video = Video.objects.get(slug=video_id)
+
+    return_data = {
+
+    }
+    
+    return construct_message('FB_START_PRIVATE_CONVO', channel, return_data)

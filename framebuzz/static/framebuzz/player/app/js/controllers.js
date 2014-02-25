@@ -47,7 +47,8 @@ angular.module('framebuzz.controllers', []).
                     shareViaEmail: 'FB_EMAIL_SHARE',
                     addToLibrary: 'FB_ADD_TO_LIBRARY',
                     notification: 'FB_USER_NOTIFICATION',
-                    toggleFollow: 'FB_TOGGLE_FOLLOW'
+                    toggleFollow: 'FB_TOGGLE_FOLLOW',
+                    startPrivateConvo: 'FB_START_PRIVATE_CONVO'
                 };
 
                 // --
@@ -433,6 +434,20 @@ angular.module('framebuzz.controllers', []).
                         notificationFactory.error('Please log in first!');
                     } 
                 });
+
+                $scope.$on('player_startprivateconvo', function() {
+                    if ($scope.videoInstance.is_authenticated) {
+                        socket.send_json({
+                            eventType: eventTypes.startPrivateConvo, 
+                            channel: SOCK.user_channel, 
+                            data: {
+                            }
+                        });
+                    }
+                    else {
+                        notificationFactory.error('Please log in first!');
+                    }
+                }
 
                 $scope.$on('player_muteconvo', function() {
                     $scope.isCollapsed = true;
