@@ -12,6 +12,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.currentTime = 0;
                 $scope.currentTimeHMS = '00:00';
                 $scope.newThread = {};
+                $scope.newThread.session_key = SOCK.private_session_key;
                 $scope.newReply = {};
                 $scope.selectedThread = null;
                 $scope.clearFocus = false;
@@ -170,6 +171,7 @@ angular.module('framebuzz.controllers', []).
                     });
 
                     $scope.newThread = {};
+                    $scope.newThread.session_key = SOCK.private_session_key;
                     $scope.clearFocus = true;
                     safeApply($scope);
                 };
@@ -592,6 +594,10 @@ angular.module('framebuzz.controllers', []).
                     }
                     else if (jsonData.eventType == eventTypes.notification) {
                         notificationFactory.info(jsonData.data.message);
+                    }
+                    else if (jsonData.eventType == eventTypes.startPrivateConvo) {
+                        console.log('=== Private Convo Callback ===');
+                        console.log(jsonData);
                     }
                     else {
                         console.log('Socket received unhandled message.');

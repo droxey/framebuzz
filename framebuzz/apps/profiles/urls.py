@@ -4,6 +4,10 @@ urlpatterns = patterns('',
     url(r'^recommendations/$',
         'framebuzz.apps.profiles.views.recommendations',
         name='recommendations'),
+
+    url(r'^(?P<username>[\w.@+-]+)/convo/(?P<slug>[\w.@+-]+)/$',
+        'framebuzz.apps.profiles.views.private_convo',
+        name='private-convo'),
     
     url(r'^(?P<username>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.home',

@@ -21,7 +21,7 @@ from actstream.models import Action, followers, following
 from pure_pagination import Paginator, PageNotAnInteger, EmptyPage
 from templated_email import send_templated_mail
 
-from framebuzz.apps.api.models import MPTTComment, UserVideo, Video
+from framebuzz.apps.api.models import MPTTComment, UserVideo, Video, PrivateSession, SessionInvitation
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.api.backends.tasks import check_zencoder_progress
 from framebuzz.apps.api.utils import get_total_shares
@@ -155,6 +155,33 @@ def recommendations(request):
     return render_to_response('profiles/snippets/recommendations.html', {
         'rows': rows
     }, context_instance=RequestContext(request))
+
+
+@login_required
+def private_convo(request, username, slug):
+    context = {}
+    private_session = PrivateSession.objects.get(slug=slug)
+    session_invitees = SessionInvitation.objects.filter(session=private_session)
+    invitee_usernames = [i.invitee.username for i in session_invitees]
+    invitee_addrs = [i.email or '' for i in session_invitees]
+
+    if request.user == private_session.owner or \
+       request.user.username in invitee_usernames or \
+       request.user.email in invitee_addrs:
+        invitee = SessionInvitation.objects.get(invitee=request.user,
+                                                session=private_session)
+        if not invitee.accepted:
+            invitee.accepted = True
+            invitee.accepted_on = datetime.datetime.now()
+            invitee.save()
+
+        template = 'profiles/home.html'
+    else:
+        template = 'profiles/private_convo_error.html'
+
+    return render_to_response(template,
+                              context,
+                              context_instance=RequestContext(request))
 
 
 def video_share(request, username=None, slug=None):
