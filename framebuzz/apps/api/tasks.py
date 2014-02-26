@@ -4,6 +4,8 @@ import json
 import redis
 
 from django.conf import settings
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 from django.contrib import auth
 from django.contrib.comments.models import CommentFlag
 from django.contrib.sites.models import Site
@@ -17,7 +19,7 @@ from templated_email import send_templated_mail
 
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.forms import MPTTCommentForm
-from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
+from framebuzz.apps.api.models import MPTTComment, Video, UserVideo, PrivateSession, SessionInvitation
 from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
 
 
@@ -549,9 +551,64 @@ def start_private_convo(context):
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
     video = Video.objects.get(slug=video_id)
+    invitees = list()
+    send_to_list = list()
+
+    if context_data.get('username', None):
+        user = auth.models.User.objects.get(username=context_data['username'])
+    else:
+        user = context.get('user', None)
+
+    # Create the session.
+    private_session = PrivateSession()
+    private_session.video = video
+    private_session.owner = user
+    private_session.save()
+
+    # Iterate over the invitees.
+    for invitee in invitees:
+        email_addr = None
+        fbz_user = None
+
+        try:
+            is_email_address = validate_email(invitee)
+            email_addr = invitee
+        except ValidationError:
+            is_email_address = False
+
+        if is_email_address:
+            fbz_user = auth.models.User.objects.get(email=email_addr)
+        else:
+            # Get the email addy from our db, if we can.
+            fbz_user = auth.models.User.objects.get(username=invitee)
+            if fbz_user and fbz_user.email is not None:
+                email_addr = fbz_user.email
+
+        if email_addr:
+            # Create and send the invite.
+            invite = SessionInvitation()
+            invite.session = private_session
+            invite.invitee = fbz_user
+            invite.email = email_addr
+            invite.save()
+
+            send_to_list.append(email_addr)
+
+    if len(send_to_list) > 0:
+        # Send notifications to receipients.
+        send_templated_mail(
+            template_name='private-session-invite',
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=send_to_list,
+            context={
+                'session': private_session,
+                'site': Site.objects.get_current(),
+                'video': video,
+                'send_to_list': send_to_list
+            })
 
     return_data = {
-
+        'session_key': private_session.slug
     }
-    
+
     return construct_message('FB_START_PRIVATE_CONVO', channel, return_data)

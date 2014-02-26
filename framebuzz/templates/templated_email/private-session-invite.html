@@ -1,0 +1,9 @@
+{% extends "templated_email/base.html" %}
+
+{% block email_recipient %}
+    
+{% endblock %}
+
+{% block email_message %}
+     {{ session.owner.username }} would like to start a private conversation with you{% if send_to_list|length > 0 %} and <strong>{{ send_to_list|length }}</strong> others{% endif %} while watching <strong>{{ video.title|title }}</strong>. Click <a href="{{ session.slug }}">here</a> to accept the invitation!
+{% endblock %}

@@ -348,6 +348,29 @@ class Thumbnail(caching.base.CachingMixin, models.Model):
         return self.url
 
 
+class PrivateSession(caching.base.CachingMixin, models.Model):
+    slug = RandomSlugField(length=settings.RANDOMSLUG_LENGTH)
+    owner = models.ForeignKey(User)
+    video = models.ForeignKey(Video)
+
+    class Meta:
+        verbose_name = 'Private Session'
+        verbose_name_plural = 'Private Sessions'
+
+
+class SessionInvitation(caching.base.CachingMixin, models.Model):
+    session = models.ForeignKey(PrivateSession)
+    invitee = models.ForeignKey(User, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    accepted = models.BooleanField(default=False)
+    invited_on = models.DateTimeField(auto_now=True)
+    accepted_on = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Private Conversation Invitation'
+        verbose_name_plural = 'Private Conversation Invitations'
+
+
 class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
 
     """
@@ -364,6 +387,8 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
     is_visible = models.BooleanField(default=True)
     has_hidden_siblings = models.BooleanField(default=False)
     hidden_by_id = models.IntegerField(blank=True, null=True)
+
+    session = models.ForeignKey(PrivateSession, blank=True, null=True)
 
     @property
     def timeInHMS(self):

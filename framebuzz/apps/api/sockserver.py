@@ -181,7 +181,8 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                             extra_context={
                                 'video_id': video_id,
                                 'data': data, 
-                                'outbound_channel': self.session_channel
+                                'outbound_channel': self.session_channel,
+                                'username': data.get('username', None)
                             }) \
                         | tasks.start_private_convo.s() \
                         | tasks.message_outbound.s()
