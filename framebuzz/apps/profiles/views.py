@@ -162,8 +162,9 @@ def private_convo(request, username, slug):
     context = {}
     private_session = PrivateSession.objects.get(slug=slug)
     session_invitees = SessionInvitation.objects.filter(session=private_session)
-    invitee_usernames = [i.invitee.username for i in session_invitees]
-    invitee_addrs = [i.email or '' for i in session_invitees]
+    invitees = [i.invitee for i in session_invitees]
+    invitee_usernames = [i.username for i in invitees]
+    invitee_addrs = [i.email or '' for i in invitees]
 
     if request.user == private_session.owner or \
        request.user.username in invitee_usernames or \
@@ -175,7 +176,21 @@ def private_convo(request, username, slug):
             invitee.accepted_on = datetime.datetime.now()
             invitee.save()
 
-        template = 'profiles/home.html'
+        plays = len(Action.objects.filter(verb='played video',
+                                  actor_object_id__in=[i.id for i in invitees],
+                                  action_object_object_id=private_session.video.id))
+
+        context['video'] = private_session.video
+        context['is_share'] = True
+        context['is_convo'] = True
+        context['private_session'] = private_session
+        context['commenters'] = invitees
+        context['path'] = request.path
+        context['found_by'] = private_session.owner
+        context['video_in_library'] = False
+        context['plays'] = plays
+
+        template = 'profiles/base.html'
     else:
         template = 'profiles/private_convo_error.html'
 
@@ -253,7 +268,9 @@ def home(request, username):
     actions = Action.objects.favorite_comments_stream(user)
     favorite_comment_ids = [a.action_object_object_id for a in actions]
     profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
-    profile_conversations = MPTTComment.objects.filter(user=user, parent=None)
+    profile_conversations = MPTTComment.objects.filter(user=user, 
+                                                       parent=None, 
+                                                       is_public=True)
     profile_followers = followers(user)
     profile_following = following(user)
     profile_library = UserVideo.objects.filter(user=user)

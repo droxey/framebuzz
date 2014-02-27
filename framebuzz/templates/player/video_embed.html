@@ -75,7 +75,7 @@
           signup_url: "{% url 'video-signup' video.slug %}",
           is_authenticated: is_authenticated,
           share_url: "{% shorturl video %}",
-          private_session_key: '',
+          private_session_key: '{{ convo_slug }}',
           login_urls: {
             twitter: "{% provider_login_url 'twitter' next=next_url method='oauth2' display='popup' %}",
             facebook: "{% provider_login_url 'facebook' next=next_url method='oauth2' display='popup' %}",

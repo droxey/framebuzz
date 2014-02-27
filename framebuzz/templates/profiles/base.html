@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block marketing_meta %}
-    {% if is_share %}
+    {% if is_share and not is_convo %}
         <meta property="og:title" content="FrameBuzz: {{ video.title }}" />
         <meta property="og:type" content="Video" />
         <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.slug %}" />
@@ -149,7 +149,7 @@
                 </div>
             </div>
             <div id="profile-content" class="col-xs-9 pull-left">
-                {% if is_my_profile %}
+                {% if is_my_profile and not is_convo %}
                     <div id="add-video" class="row">
                         {% include "profiles/snippets/add_video.html" %}
                     </div>
@@ -157,6 +157,8 @@
                 <div id="share" class="row"{% if is_share %} style="display: block;"{% endif %}>
                     {% if is_share %}
                         {% include 'player/snippets/share.html' %}
+                    {% elif is_convo %}
+                        {% include 'player/snippets/convo.html' %}
                     {% else %}
                         <div id="video-container"></div>
                         <div class="row ajax">
@@ -166,37 +168,39 @@
                         </div>
                     {% endif %}
                 </div>
-                <div id="timeline" class="row">
-                    <div class="col-xs-12">
-                        <nav class="row">
-                            <ul class="nav nav-pills clearfix">
-                                <li class="col-xs-4 col-md-2 col-lg-2 start{% if not is_share %} active{% endif %}">
-                                    <a class="filter latest" data-filter="*" href="#">Latest</a>
-                                </li>
-                                <li class="col-xs-4 col-md-2 col-lg-2">
-                                    <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">Posts</a>
-                                </li>
-                                <li class="col-xs-4 col-md-2 col-lg-2">
-                                    <a class="filter" data-filter=".conversations" href="#" data-pages="{{ page_counts.conversations }}">Comments</a>
-                                </li>
-                                <li class="col-xs-4 col-md-2 col-lg-2">
-                                    <a class="filter" data-filter=".added_to_favorites" href="#" data-pages="{{ page_counts.favorites }}">Favorites</a>
-                                </li>
-                                <li class="col-xs-4 col-md-2 col-lg-2">
-                                    <a class="filter" data-filter=".followers" href="#" data-pages="{{ page_counts.followers }}">Followers</a>
-                                </li>
-                                <li class="col-xs-4 col-md-2 col-lg-2">
-                                    <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">Following</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div id="feed" class="row">
-                            <div class="spin">
-                                <i class="icon-spinner icon-spin icon-3x"></i>
+                {% if not is_convo %}
+                    <div id="timeline" class="row">
+                        <div class="col-xs-12">
+                            <nav class="row">
+                                <ul class="nav nav-pills clearfix">
+                                    <li class="col-xs-4 col-md-2 col-lg-2 start{% if not is_share %} active{% endif %}">
+                                        <a class="filter latest" data-filter="*" href="#">Latest</a>
+                                    </li>
+                                    <li class="col-xs-4 col-md-2 col-lg-2">
+                                        <a class="filter" data-filter=".added_video_to_library" href="#" data-pages="{{ page_counts.videos }}">Posts</a>
+                                    </li>
+                                    <li class="col-xs-4 col-md-2 col-lg-2">
+                                        <a class="filter" data-filter=".conversations" href="#" data-pages="{{ page_counts.conversations }}">Comments</a>
+                                    </li>
+                                    <li class="col-xs-4 col-md-2 col-lg-2">
+                                        <a class="filter" data-filter=".added_to_favorites" href="#" data-pages="{{ page_counts.favorites }}">Favorites</a>
+                                    </li>
+                                    <li class="col-xs-4 col-md-2 col-lg-2">
+                                        <a class="filter" data-filter=".followers" href="#" data-pages="{{ page_counts.followers }}">Followers</a>
+                                    </li>
+                                    <li class="col-xs-4 col-md-2 col-lg-2">
+                                        <a class="filter" data-filter=".following" href="#" data-pages="{{ page_counts.following }}">Following</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <div id="feed" class="row">
+                                <div class="spin">
+                                    <i class="icon-spinner icon-spin icon-3x"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>
