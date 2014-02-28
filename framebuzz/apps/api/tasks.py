@@ -143,6 +143,7 @@ def initialize_video_player(context):
     data['heatmap'] = video.heatmap(session_key=session_key)
     data['threads'] = json.loads(threadsSerialized)
     data['is_authenticated'] = is_authenticated
+    data['private_session_key'] = session_key
 
     if data['is_authenticated']:
         userSerializer = UserSerializer(user, context={'video': video})

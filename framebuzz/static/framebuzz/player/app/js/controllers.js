@@ -3,16 +3,16 @@
 /* Controllers */
 
 angular.module('framebuzz.controllers', []).
-  controller('VideoPlayerCtrl', 
-        ['$rootScope', '$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 'notificationFactory', 
-            function($rootScope, $scope, $state, $filter, $http, socket, broadcaster, safeApply, notificationFactory) {    
+  controller('VideoPlayerCtrl',
+        ['$rootScope', '$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 'notificationFactory',
+            function($rootScope, $scope, $state, $filter, $http, socket, broadcaster, safeApply, notificationFactory) {
                 $scope.rootPath = SOCK.root_path;
                 $scope.videoInstance = {};
                 $scope.videoInstance.is_authenticated = SOCK.is_authenticated;
                 $scope.currentTime = 0;
                 $scope.currentTimeHMS = '00:00';
                 $scope.newThread = {};
-                $scope.newThread.session_key = SOCK.private_session_key;
+                $scope.sessionKey = SOCK.private_session_key;
                 $scope.newReply = {};
                 $scope.selectedThread = null;
                 $scope.clearFocus = false;
@@ -55,13 +55,13 @@ angular.module('framebuzz.controllers', []).
                 // --
                 // PUBLIC METHODS
                 // --
-                
+
                 $scope.login = function() {
                     $http({
-                        method: 'POST', 
-                        url: SOCK.login_url, 
-                        data: { 
-                            login: $scope.loginModel.username, 
+                        method: 'POST',
+                        url: SOCK.login_url,
+                        data: {
+                            login: $scope.loginModel.username,
                             password: $scope.loginModel.password
                         },
                         headers: {
@@ -86,13 +86,13 @@ angular.module('framebuzz.controllers', []).
                         }
                     })
                     .error(function(data, status, headers, config) {
-                        
+
                     });
                 };
 
                 $scope.logout = function() {
                     $http({
-                        method: 'POST', 
+                        method: 'POST',
                         url: SOCK.logout_url
                     })
                     .success(function(data, status, headers, config) {
@@ -117,8 +117,8 @@ angular.module('framebuzz.controllers', []).
                     };
 
                     $http({
-                        method: 'POST', 
-                        url: SOCK.signup_url, 
+                        method: 'POST',
+                        url: SOCK.signup_url,
                         data: messageData,
                         headers: {
                             "Content-Type": "application/json; charset=UTF-8"
@@ -142,17 +142,17 @@ angular.module('framebuzz.controllers', []).
                         }
                     })
                     .error(function(data, status, headers, config) {
-                    
+
                     });
                 }
-                
+
                 $scope.postNewThread = function() {
                     if ($scope.newThread == null || $scope.newThread.comment.length == 0) {
                         return;
                     }
 
-                    var time = $scope.postTime == null 
-                        ? angular.copy($scope.currentTime) 
+                    var time = $scope.postTime == null
+                        ? angular.copy($scope.currentTime)
                         : angular.copy($scope.postTime);
 
                     var timeTruncated = parseFloat(time.toString().substring(0, 9));
@@ -165,8 +165,8 @@ angular.module('framebuzz.controllers', []).
                     };
 
                     socket.send_json({
-                        eventType: eventTypes.postNewComment, 
-                        channel: SOCK.video_channel, 
+                        eventType: eventTypes.postNewComment,
+                        channel: SOCK.video_channel,
                         data: postData
                     });
 
@@ -187,8 +187,8 @@ angular.module('framebuzz.controllers', []).
                     };
 
                     socket.send_json({
-                        eventType: eventTypes.postNewComment, 
-                        channel: SOCK.video_channel, 
+                        eventType: eventTypes.postNewComment,
+                        channel: SOCK.video_channel,
                         data: postData
                     });
 
@@ -198,10 +198,10 @@ angular.module('framebuzz.controllers', []).
 
                 $scope.postCommentAction = function(comment, action) {
                     socket.send_json({
-                        eventType: eventTypes.commentAction, 
-                        channel: SOCK.user_channel, 
-                        data: { 
-                            threadId: comment.id, 
+                        eventType: eventTypes.commentAction,
+                        channel: SOCK.user_channel,
+                        data: {
+                            threadId: comment.id,
                             action: action,
                             username: $scope.videoInstance.user.username
                         }
@@ -240,10 +240,10 @@ angular.module('framebuzz.controllers', []).
 
                 $scope.getActivityStream = function() {
                     socket.send_json({
-                        eventType: eventTypes.getActivityStream, 
-                        channel: SOCK.user_channel, 
-                        data: { 
-                            username: $scope.videoInstance.user.username 
+                        eventType: eventTypes.getActivityStream,
+                        channel: SOCK.user_channel,
+                        data: {
+                            username: $scope.videoInstance.user.username
                         }
                     });
                 };
@@ -254,10 +254,10 @@ angular.module('framebuzz.controllers', []).
                     }
 
                     socket.send_json({
-                        eventType: eventTypes.getUserProfile, 
-                        channel: SOCK.user_channel, 
-                        data: { 
-                            username: username 
+                        eventType: eventTypes.getUserProfile,
+                        channel: SOCK.user_channel,
+                        data: {
+                            username: username
                         }
                     });
                 }
@@ -276,8 +276,8 @@ angular.module('framebuzz.controllers', []).
                     };
 
                     socket.send_json({
-                        eventType: eventTypes.shareViaEmail, 
-                        channel: SOCK.user_channel, 
+                        eventType: eventTypes.shareViaEmail,
+                        channel: SOCK.user_channel,
                         data: postData
                     });
 
@@ -290,11 +290,11 @@ angular.module('framebuzz.controllers', []).
 
                 $scope.toggleFollow = function(username) {
                     socket.send_json({
-                        eventType: eventTypes.toggleFollow, 
-                        channel: SOCK.user_channel, 
-                        data: { 
+                        eventType: eventTypes.toggleFollow,
+                        channel: SOCK.user_channel,
+                        data: {
                             'user_to_toggle': username,
-                            'username': $scope.videoInstance.user.username,
+                            'username': $scope.videoInstance.user.username
                         }
                     });
                 };
@@ -312,10 +312,25 @@ angular.module('framebuzz.controllers', []).
                     $scope.player.play();
                 };
 
+                $scope.startPrivateConvo = function() {
+                    if ($scope.videoInstance.is_authenticated) {
+                        socket.send_json({
+                            eventType: eventTypes.startPrivateConvo,
+                            channel: SOCK.user_channel,
+                            data: {
+                                'username': $scope.videoInstance.user.username
+                            }
+                        });
+                    }
+                    else {
+                        notificationFactory.error('Please log in first!');
+                    }
+                };
+
                 // --
                 // PRIVATE METHODS
                 // --
-                
+
                 var getThreadById = function(threadId) {
                     var found = null;
 
@@ -340,8 +355,8 @@ angular.module('framebuzz.controllers', []).
                     if ($scope.currentTime > 0) {
                         var time = angular.copy($scope.currentTime);
                         var foundThread = null;
-                        
-                        if ($scope.videoInstance.threads !== undefined 
+
+                        if ($scope.videoInstance.threads !== undefined
                                 && $scope.videoInstance.threads.length > 0) {
                             for (var i = 0; i < $scope.videoInstance.threads.length; i++) {
                                 if ($scope.videoInstance.threads[i].time <= time) {
@@ -359,7 +374,7 @@ angular.module('framebuzz.controllers', []).
                         return foundThread;
                     }
                 }
-                
+
                 var threadInCollection = function(thread) {
                     for (var i = 0; i < $scope.videoInstance.threads.length; i++) {
                         if ($scope.videoInstance.threads[i].id === thread.id) {
@@ -372,16 +387,16 @@ angular.module('framebuzz.controllers', []).
 
                 var addNewThread = function(newThread) {
                     var changed = false;
-                    
+
                     if (!threadInCollection(newThread)) {
                         if (newThread.hidden_by_id !== undefined && !newThread.is_visible) {
-                            angular.forEach($scope.videoInstance.threads, function(thread, key) {    
+                            angular.forEach($scope.videoInstance.threads, function(thread, key) {
                                 if (thread.id == newThread.hidden_by_id) {
                                     thread.has_hidden_siblings = true;
                                 }
                             });
                         }
-                        
+
                         $scope.videoInstance.threads.push(newThread);
                         changed = true;
                     }
@@ -425,31 +440,17 @@ angular.module('framebuzz.controllers', []).
                 $scope.$on('player_addtolibrary', function() {
                     if ($scope.videoInstance.is_authenticated) {
                         socket.send_json({
-                            eventType: eventTypes.addToLibrary, 
-                            channel: SOCK.user_channel, 
-                            data: { 
+                            eventType: eventTypes.addToLibrary,
+                            channel: SOCK.user_channel,
+                            data: {
                                 username: $scope.videoInstance.user.username
                             }
                         });
                     }
                     else {
                         notificationFactory.error('Please log in first!');
-                    } 
+                    }
                 });
-
-                $scope.$on('player_startprivateconvo', function() {
-                    if ($scope.videoInstance.is_authenticated) {
-                        socket.send_json({
-                            eventType: eventTypes.startPrivateConvo, 
-                            channel: SOCK.user_channel, 
-                            data: {
-                            }
-                        });
-                    }
-                    else {
-                        notificationFactory.error('Please log in first!');
-                    }
-                }
 
                 $scope.$on('player_muteconvo', function() {
                     $scope.isCollapsed = true;
@@ -462,8 +463,8 @@ angular.module('framebuzz.controllers', []).
                 });
 
                 $scope.$on('player_playing', function() {
-                    if (!$state.is('player.loginView') && 
-                        !$state.is('player.signupView') && 
+                    if (!$state.is('player.loginView') &&
+                        !$state.is('player.signupView') &&
                         !$state.is('player.blendedView')) {
                         $state.transitionTo('player.blendedView');
                     }
@@ -471,23 +472,23 @@ angular.module('framebuzz.controllers', []).
                     $scope.playing = true;
                     $scope.paused = false;
                     safeApply($scope);
-                
+
                     if ($scope.videoInstance.is_authenticated) {
                         socket.send_json({
-                            eventType: eventTypes.playerAction, 
-                            channel: SOCK.user_channel, 
-                            data: { 
+                            eventType: eventTypes.playerAction,
+                            channel: SOCK.user_channel,
+                            data: {
                                 action: 'player_playing',
                                 username: $scope.videoInstance.user.username,
                                 time: $scope.currentTime
                             }
                         });
-                    } 
+                    }
                 });
 
                 $scope.$on('player_paused', function() {
                     if ($state.is('player.blendedView')) {
-                        if ($scope.videoInstance.threads !== undefined 
+                        if ($scope.videoInstance.threads !== undefined
                                 && $scope.videoInstance.threads.length > 0) {
                             $scope.setSelectedThread();
                         }
@@ -502,9 +503,9 @@ angular.module('framebuzz.controllers', []).
 
                     if ($scope.videoInstance.is_authenticated) {
                         socket.send_json({
-                            eventType: eventTypes.playerAction, 
-                            channel: SOCK.user_channel, 
-                            data: { 
+                            eventType: eventTypes.playerAction,
+                            channel: SOCK.user_channel,
+                            data: {
                                 action: 'player_paused',
                                 username: $scope.videoInstance.user.username,
                                 time: $scope.currentTime
@@ -521,7 +522,9 @@ angular.module('framebuzz.controllers', []).
                     socket.send_json({
                         eventType: eventTypes.initVideo,
                         channel: SOCK.video_channel,
-                        data: ''
+                        data: {
+                            'private_session_key': $scope.sessionKey
+                        }
                     });
                 });
 
@@ -561,7 +564,7 @@ angular.module('framebuzz.controllers', []).
                             $scope.updateSlider = true;
                             safeApply($scope);
                         }
-                        
+
                         if (jsonData.data.reply !== undefined) {
                             var newReply = jsonData.data.reply;
                             addNewReply(newReply);
@@ -569,7 +572,7 @@ angular.module('framebuzz.controllers', []).
                     }
                     else if (jsonData.eventType == eventTypes.commentAction) {
                         $scope.selectedThread = jsonData.data.thread;
-                        safeApply($scope); 
+                        safeApply($scope);
                     }
                     else if (jsonData.eventType == eventTypes.getActivityStream) {
                         $scope.activities = jsonData.data.activities;
@@ -582,7 +585,7 @@ angular.module('framebuzz.controllers', []).
                         safeApply($scope);
 
                         $scope.player.pause();
-                        
+
                         if (!$state.is('player.userProfileView')) {
                             $state.transitionTo('player.userProfileView', { username: $scope.userProfile.user.username });
                         }
@@ -600,13 +603,15 @@ angular.module('framebuzz.controllers', []).
                         notificationFactory.info(jsonData.data.message);
                     }
                     else if (jsonData.eventType == eventTypes.startPrivateConvo) {
-                        console.log('=== Private Convo Callback ===');
-                        console.log(jsonData);
+                        $scope.sessionKey = jsonData.data.session_key;
+                        safeApply($scope);
+
+                        $state.transitionTo('player.startPrivateConvo');
                     }
                     else {
                         console.log('Socket received unhandled message.');
                         console.log(jsonData);
-                    }        
+                    }
                 });
 
                 socket.onsent(function(e) {
@@ -618,5 +623,5 @@ angular.module('framebuzz.controllers', []).
                     $state.transitionTo('player.initView');
                 });
             }
-        ]    
+        ]
     );

@@ -2,27 +2,27 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('framebuzz', 
+angular.module('framebuzz',
     [
         'truncate',
         'fbExceptions',
         'ngCookies',
         'ngSanitize',
-        'ui.state', 
-        'ui.bootstrap', 
-        'framebuzz.filters', 
-        'framebuzz.services', 
-        'framebuzz.directives', 
-        'framebuzz.animations', 
+        'ui.state',
+        'ui.bootstrap',
+        'framebuzz.filters',
+        'framebuzz.services',
+        'framebuzz.directives',
+        'framebuzz.animations',
         'framebuzz.controllers'
     ])
-    .config(['$routeProvider', '$stateProvider', '$urlRouterProvider', 
+    .config(['$routeProvider', '$stateProvider', '$urlRouterProvider',
         function($routeProvider, $stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise('/');
 
             var templateRootPath = SOCK.root_path + 'partials/';
 
-            var player = { 
+            var player = {
                 name: 'player',
                 abstract: true,
                 controller: 'VideoPlayerCtrl',
@@ -57,6 +57,17 @@ angular.module('framebuzz',
                 }
             };
 
+            var playerStartPrivateConvoView = {
+                name: 'player.startPrivateConvo',
+                parent: playerPanelView,
+                templateUrl: templateRootPath + 'player.startPrivateConvo.html',
+                url: '/share/private',
+                data: {
+                    panelId: 'share-view',
+                    animation: 'panel'
+                }
+            };
+
             var loginView = {
                 name: 'player.loginView',
                 parent: playerPanelView,
@@ -79,24 +90,24 @@ angular.module('framebuzz',
                 }
             };
 
-            var playerBlendedView = { 
+            var playerBlendedView = {
                 name: 'player.blendedView',
                 parent: playerPanelView,
                 templateUrl: templateRootPath + 'player.blendedView.html',
                 url: '/blended',
                 data: {
                     panelId: 'blended-view'
-                }   
+                }
             };
 
-            var playerActiveView = { 
+            var playerActiveView = {
                 name: 'player.activeView',
                 parent: playerPanelView,
                 templateUrl: templateRootPath + 'player.activeView.html',
                 url: '/active',
                 data: {
                     panelId: 'active-view'
-                }   
+                }
             };
 
             var userProfileView = {
@@ -149,34 +160,34 @@ angular.module('framebuzz',
                 }
             };
 
-            var playerActiveViewComments = { 
+            var playerActiveViewComments = {
                 name: 'player.activeView.comments',
                 parent: playerActiveView,
                 templateUrl: templateRootPath + 'player.activeView.comments.html',
                 url: '/comments',
                 data: {
                     panelId: 'active-view'
-                }   
+                }
             };
 
-            var playerActiveViewActivity = { 
+            var playerActiveViewActivity = {
                 name: 'player.activeView.activity',
                 parent: playerActiveView,
                 templateUrl: templateRootPath + 'player.activeView.activity.html',
                 url: '/activity',
                 data: {
                     panelId: 'active-view'
-                }   
+                }
             };
 
-            var playerActiveViewThread = { 
+            var playerActiveViewThread = {
                 name: 'player.activeView.thread',
                 parent: playerActiveViewComments,
                 templateUrl: templateRootPath + 'player.activeView.thread.html',
                 url: '/:threadId',
                 data: {
                     panelId: 'active-view'
-                }   
+                }
             };
 
             $stateProvider
@@ -184,6 +195,7 @@ angular.module('framebuzz',
                 .state(playerInitView)
                 .state(playerPanelView)
                 .state(playerShareView)
+                .state(playerStartPrivateConvoView)
                 .state(loginView)
                 .state(signupView)
                 .state(playerBlendedView)
@@ -199,10 +211,10 @@ angular.module('framebuzz',
         }
     ]).run(
         [
-            '$rootScope', 
-            '$state', 
+            '$rootScope',
+            '$state',
             '$stateParams',
-            '$cookies', 
+            '$cookies',
             '$http',
             function($rootScope, $state, $stateParams, $cookies, $http) {
                 // attach django's CSRF token to sent data
@@ -212,7 +224,7 @@ angular.module('framebuzz',
                     var threadId = document.location.hash.split("/")[5];
                     $rootScope.selectedThreadId = parseInt(threadId);
                 }
-                
+
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
                 $state.transitionTo('player.panelView');
