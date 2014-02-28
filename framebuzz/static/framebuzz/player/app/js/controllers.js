@@ -312,7 +312,7 @@ angular.module('framebuzz.controllers', []).
                     $scope.player.play();
                 };
 
-                $scope.startPrivateConvo = function() {
+                $scope.initPrivateConvo = function() {
                     if ($scope.videoInstance.is_authenticated) {
                         socket.send_json({
                             eventType: eventTypes.startPrivateConvo,
@@ -605,8 +605,6 @@ angular.module('framebuzz.controllers', []).
                     else if (jsonData.eventType == eventTypes.startPrivateConvo) {
                         $scope.sessionKey = jsonData.data.session_key;
                         safeApply($scope);
-
-                        $state.transitionTo('player.startPrivateConvo');
                     }
                     else {
                         console.log('Socket received unhandled message.');
