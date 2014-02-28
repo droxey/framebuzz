@@ -52,7 +52,7 @@ def bkg_file_path(instance=None, filename=None, size=None, ext=None):
         (root, ext) = os.path.splitext(filename)
         filename = hashlib.md5(force_bytes(filename)).hexdigest()
         filename = filename + ext
-    
+
     tmppath.append(os.path.basename(filename))
     return os.path.join(*tmppath)
 
@@ -106,8 +106,8 @@ class UserProfile(caching.base.CachingMixin, models.Model):
         obands = list(overlay.split())
         if len(obands) == 4:
             # Assuming alpha is the last band
-            obands[3] = obands[3].point(lambda x: x*0.25)
-        
+            obands[3] = obands[3].point(lambda x: x * 0.25)
+
         overlay = Image.merge(overlay.mode, obands)
         base.paste(overlay, (0, 0), overlay)
 
@@ -116,7 +116,8 @@ class UserProfile(caching.base.CachingMixin, models.Model):
         base.save(tmphandle, 'png')
         tmphandle.seek(0)
 
-        suf = SimpleUploadedFile(tmpname, tmphandle.read(), content_type='image/png')
+        suf = SimpleUploadedFile(tmpname, tmphandle.read(),
+                                 content_type='image/png')
         av = Avatar(user=self.user, primary=True)
         av.avatar.save(tmpname, suf, save=False)
         av.save()
@@ -161,7 +162,8 @@ post_save.connect(create_user_profile, sender=User)
 
 
 class Video(caching.base.CachingMixin, models.Model):
-    slug = RandomSlugField(length=settings.RANDOMSLUG_LENGTH, blank=True, null=True)
+    slug = RandomSlugField(length=settings.RANDOMSLUG_LENGTH,
+                           blank=True, null=True)
     video_id = models.CharField(max_length=255, unique=True, null=True,
                                 help_text=_("The Youtube id of the video"))
     title = models.CharField(max_length=200, null=True, blank=True)
@@ -258,14 +260,23 @@ class Video(caching.base.CachingMixin, models.Model):
 
     def embed_code(self):
         full_url = 'http://frame.bz%s' % self.get_absolute_url()
-        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0" height="398" width="640"></iframe>' % full_url)
+        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0"'
+                         ' height="398" width="640"></iframe>' % full_url)
 
-    def heatmap(self):
+    def heatmap(self, session_key=None):
         rank_per_block = list()
 
         if self.id:
-            comments = MPTTComment.objects.filter(
-                object_pk=self.id).order_by('time')
+            comments = MPTTComment.objects.filter(object_pk=self.id)
+
+            # Filter by session key for private conversations.
+            if session_key:
+                comments = comments.filter(session__slug=session_key,
+                                           is_public=False)
+            else:
+                comments = comments.filter(session=None,
+                                           is_public=True)
+            comments = comments.order_by('time')
             seconds_per_block = float(self.duration) / float(TIMELINE_BLOCKS)
 
             rank_1 = (float(comments.count()) + SIGNIFICANCE_FACTOR) / 3.0
@@ -330,7 +341,8 @@ class UserVideo(caching.base.CachingMixin, models.Model):
         unique_together = ['video', 'user']
 
     def __unicode__(self):
-        return "'%s' in %s's video library" % (self.video.title, self.user.username)
+        return "'%s' in %s's video library" % (self.video.title,
+                                               self.user.username)
 
 
 class Thumbnail(caching.base.CachingMixin, models.Model):
@@ -435,12 +447,18 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
     def get_absolute_url(self):
         video = Video.objects.get(id=self.object_pk)
         url_id = self.id if self.parent is None else self.parent.id
-        return '%s#/player/panel/active/comments/%s' % (reverse('video-embed', kwargs={'slug': str(video.slug)}), str(url_id))
+        return '%s#/player/panel/active/comments/%s' % (reverse('video-embed',
+                                                        kwargs={
+                                                            'slug': video.slug
+                                                        }), str(url_id))
 
     def get_share_url(self):
         video = Video.objects.get(id=self.object_pk)
         url_id = self.id if self.parent is None else self.parent.id
-        return '%s#/player/panel/active/comments/%s' % (reverse('video-share', kwargs={'slug': str(video.slug)}), str(url_id))
+        return '%s#/player/panel/active/comments/%s' % (reverse('video-share',
+                                                        kwargs={
+                                                            'slug': video.slug
+                                                        }), str(url_id))
 
     def get_player_url(self):
         url_id = self.id if self.parent is None else self.parent.id
@@ -452,7 +470,7 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
         if not self.submit_date:
             self.submit_date = datetime.now()
 
-        if not self.parent and self.has_hidden_siblings == False:
+        if not self.parent and self.has_hidden_siblings is False:
             comments_in_range = self.get_thread_siblings()
 
             if self.pk:
@@ -482,15 +500,19 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
 '''
 watson.register(UserProfile,
                 UserProfileSearchAdapter,
-                fields=("bio", "user__username", "location", "display_name", "tagline",),
-                store=("bio", "user__username", "location", "display_name", "tagline",))
+                fields=("bio", "user__username", "location",
+                        "display_name", "tagline",),
+                store=("bio", "user__username", "location",
+                       "display_name", "tagline",))
 
 watson.register(Video,
                 VideoSearchAdapter,
                 fields=("title", "description",),
-                store=("title", "description", "video_id","slug",))
+                store=("title", "description", "video_id", "slug",))
 
-watson.register(MPTTComment.objects.filter(parent=None),
+watson.register(MPTTComment.objects.filter(parent=None,
+                                           is_public=True,
+                                           session=None),
                 CommentSearchAdapter,
                 fields=("comment",),
                 store=("comment", "user__username",))

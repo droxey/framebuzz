@@ -81,15 +81,19 @@ def get_user_by_session_key(session_key, extra_context=None):
 @celery.task
 def initialize_video_player(context):
     '''
-    The general idea is to show a warmer color for areas of the video with more comment activity while accounting for videos with fewer comments.
+    The general idea is to show a warmer color for areas of the video with more
+    comment activity while accounting for videos with fewer comments.
 
-    Each video is split into a number of equal time buckets (B). In the example, it's set to 30 and would be a site-wide setting.
-    The total number of comments for an entire video is TC and is recalculated every time a comment is added or deleted.
+    Each video is split into a number of equal time buckets (B).
+    In the example,it's set to 30 and would be a site-wide setting.
+    The total number of comments for an entire video is TC and is recalculated
+    every time a comment is added or deleted.
     The total number of comments per bucket is calculated (C1, C2, C3, etc.)
-    A minimum significance number is set as S (20 in the example and would be a site-wide setting). This accounts for videos with fewer comments.
+    A minimum significance number is set as S (20 in the example and would be a
+    site-wide setting). This accounts for videos with fewer comments.
 
-
-    The algorithm calculates 8 levels of significance for the overall video every time TC changes:
+    The algorithm calculates 8 levels of significance for the overall
+    video every time TC changes:
 
         Rank 1: (TC+S)/3
         Rank 2: Rank 1 - (Rank 1 / 7)
@@ -101,33 +105,45 @@ def initialize_video_player(context):
         Rank 8: 0
 
 
-    For each bucket, it's assigned a rank number based upon the values C1, C2, C3 etc. Each rank number maps to a background color for the bucket.
+    For each bucket, it's assigned a rank number based upon the values
+    C1, C2, C3 etc. Each rank number maps to a background color for the bucket.
     '''
-    logger = initialize_video_player.get_logger()
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
     user = context.get('user', None)
+    init_data = context.get(DATA_KEY, None)
+    session_key = init_data.get('private_session_key', None)
 
-    logger.info(video_id)
-
-    # Get Video.
+    # Get Video and associated MPTTComments.
     video = Video.objects.get(slug=video_id)
     threads = MPTTComment.objects.filter(object_pk=video.id,
                                          is_removed=False,
-                                         parent=None).order_by('-time')
+                                         parent=None)
+
+    # Filter based on public/private comments.
+    if session_key:
+        threads = threads.filter(session__slug=session_key,
+                                 is_public=False)
+    else:
+        threads = threads.filter(session=None,
+                                 is_public=True)
+
+    # Serialize objects to JSON.
+    threads = threads.order_by('-time')
     videoSerializer = VideoSerializer(video)
     videoSerialized = JSONRenderer().render(videoSerializer.data)
     threadsSerializer = MPTTCommentSerializer(threads, context={'user': user})
     threadsSerialized = JSONRenderer().render(threadsSerializer.data)
+    is_authenticated = isinstance(user, auth.models.AnonymousUser) is False
 
     data = {}
     data['video'] = json.loads(videoSerialized)
-    data['heatmap'] = video.heatmap()
+    data['heatmap'] = video.heatmap(session_key=session_key)
     data['threads'] = json.loads(threadsSerialized)
-    data['is_authenticated'] = isinstance(user, auth.models.AnonymousUser) is False
+    data['is_authenticated'] = is_authenticated
 
     if data['is_authenticated']:
-        userSerializer = UserSerializer(user, context={ 'video': video })
+        userSerializer = UserSerializer(user, context={'video': video})
         userSerialized = JSONRenderer().render(userSerializer.data)
         data['user'] = json.loads(userSerialized)
     else:
@@ -143,6 +159,7 @@ def post_new_comment(context):
     channel = context.get('outbound_channel', None)
     comment = None
     video = Video.objects.get(slug=video_id)
+    session_key = thread_data.get('session_key', None)
 
     if thread_data.get('username', None):
         user = auth.models.User.objects.get(username=thread_data['username'])
@@ -153,6 +170,17 @@ def post_new_comment(context):
         comment_form = MPTTCommentForm(video, data=thread_data)
         if comment_form.is_valid():
             data = comment_form.get_comment_create_data()
+
+            # If a session key is available,
+            # this comment is part of a private conversation.
+            if session_key:
+                try:
+                    session = PrivateSession.objects.get(slug=session_key)
+                    data['is_public'] = False
+                    data['session'] = session
+                except:
+                    pass
+
             data['user'] = user
             comment = MPTTComment(**data)
             comment.save()
@@ -162,17 +190,28 @@ def post_new_comment(context):
 
     if comment:
         return_data = dict()
-        return_data['heatmap'] = video.heatmap()
+        return_data['heatmap'] = video.heatmap(session_key=session_key)
         return_data['channel'] = channel
 
         if not comment.parent:
-            # Send a notification to the video's owner that someone has commented on their video.
+            # Send a notification to the video's owner that
+            # someone has commented on their video.
             if video.found_by and video.found_by.id != user.id:
-                user_channel = '/framebuzz/%s/user/%s' % (video.video_id, video.found_by.username)
-                notification = { 'message': 'You have 1 new comment!', 'objectType': 'reply', 'objectId': comment.id }
-                message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
-                _send_to_channel.delay(channel = user_channel, message = message)
+                user_channel = '/framebuzz/%s/user/%s' % (video.video_id,
+                                                          video.found_by.username)
+                notification = {
+                    'message': 'You have 1 new comment!',
+                    'objectType': 'reply',
+                    'objectId': comment.id
+                }
 
+                # Send a Toast notification to the video owner.
+                message = construct_message('FB_USER_NOTIFICATION',
+                                            user_channel, notification)
+                _send_to_channel.delay(channel=user_channel,
+                                       message=message)
+
+                # Send an email to the video owner.
                 if video.found_by.email:
                     send_templated_mail(
                         template_name='comment-notification',
@@ -183,21 +222,37 @@ def post_new_comment(context):
                             'site': Site.objects.get_current()
                         })
 
-            action.send(user, verb='commented on', action_object=comment, target=video)
+            # Record that a comment was made.
+            action.send(user, verb='commented on',
+                        action_object=comment, target=video)
 
-            threadSerializer = MPTTCommentSerializer(comment, context={ 'user': user })
+            # Serialize the comment to JSON to return to the UI.
+            threadSerializer = MPTTCommentSerializer(comment,
+                                                     context={'user': user})
             threadSerialized = JSONRenderer().render(threadSerializer.data)
             return_data['thread'] = json.loads(threadSerialized)
         else:
-            action.send(user, verb='replied to comment', action_object=comment, target=video)
+            # Record that a reply was made.
+            action.send(user, verb='replied to comment',
+                        action_object=comment, target=video)
 
-            # Send a notification to the thread's owner that someone has replied to their comment.
+            # Send a notification to the thread's owner that someone has
+            # replied to their comment.
             if comment.parent.user.id != user.id:
-                user_channel = '/framebuzz/%s/user/%s' % (video.video_id, comment.parent.user.username)
-                notification = { 'message': 'You have 1 new reply!', 'objectType': 'reply', 'objectId': comment.id }
-                message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
-                _send_to_channel.delay(channel = user_channel, message = message)
+                user_channel = '/framebuzz/%s/user/%s' % (video.video_id,
+                                                          comment.parent.user.username)
+                notification = {
+                    'message': 'You have 1 new reply!',
+                    'objectType': 'reply',
+                    'objectId': comment.id
+                }
 
+                # Send a Toast notification to the thread starter.
+                message = construct_message('FB_USER_NOTIFICATION',
+                                            user_channel, notification)
+                _send_to_channel.delay(channel=user_channel, message=message)
+
+                # Send an email notification the thread starter.
                 if comment.parent.user.email:
                     send_templated_mail(
                         template_name='reply-notification',
@@ -208,11 +263,15 @@ def post_new_comment(context):
                             'site': Site.objects.get_current()
                         })
 
-            replySerializer = MPTTCommentReplySerializer(comment, context={ 'user': user })
+            # Serialize the comment to JSON to return to the UI.
+            replySerializer = MPTTCommentReplySerializer(comment,
+                                                         context={'user': user})
             replySerialized = JSONRenderer().render(replySerializer.data)
             return_data['reply'] = json.loads(replySerialized)
         
+        # Send completed message to the UI.
         return construct_message('FB_POST_NEW_COMMENT', channel, return_data)
+
 
 @celery.task
 def add_comment_action(context):

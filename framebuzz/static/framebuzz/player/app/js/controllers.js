@@ -518,7 +518,11 @@ angular.module('framebuzz.controllers', []).
                 // --
 
                 socket.onopen(function() {
-                    socket.send_json({eventType: eventTypes.initVideo, channel: SOCK.video_channel, data: ''});
+                    socket.send_json({
+                        eventType: eventTypes.initVideo,
+                        channel: SOCK.video_channel,
+                        data: ''
+                    });
                 });
 
                 socket.onmessage(function(e) {
