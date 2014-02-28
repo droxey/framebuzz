@@ -2313,6 +2313,9 @@ object, embed, video, iframe {
             }
 
             #create-private-convo {
+                height: 330px;
+                top: 13px;
+
                 h3 {
                     font-family: 'proxima-nova';
                     font-size: 15px;
@@ -2326,34 +2329,112 @@ object, embed, video, iframe {
                     font-family: 'proxima-nova';
                     font-size: 12px;
                     line-height: 16px;
-                    padding: 0 5px 5px 5px;
+                    padding: 0 0 5px 5px;
 
                     &.intro {
-                        font-size: 13px;
+                        font-size: 12px;
                         font-style: italic;
+                        line-height: 14px;
                         padding-bottom: 10px;
                     }
 
-                    input[type='text'] {
-                        width: 100%;
-                    }
+                    &.tip {
+                        font-size: 0.62em;
+                        font-style: italic;
+                        line-height: 10px;
+                        margin-top: -3px;
+                        padding-bottom: 0;
+                        padding-left: 8px;
 
-                    span {
-                        color: #2284B2;
-                        font-weight: 700;
-                        text-transform: uppercase;
-
-                        em {
-                            color: white;
-                            font-style: italic;
-                            font-weight: normal;
-                            text-transform: none;
+                        i {
+                            color: #0099CC;
+                            font-size: 13px;
+                            position: relative;
+                            top: 1px;
                         }
                     }
 
+                    &.fields {
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                    }
+
+                    #users-autocomplete {
+                        float: left;
+                        margin-bottom: 0;
+                        margin-top: 0;
+                        width: 89%;
+                    }
+
+                    #btn-add-user-convo {
+                        float: right;
+                        margin: auto;
+                        width: auto;
+                    }
+
+                    span {
+                        display: inline-block;
+                        float: left;
+                    }
+
+                    span.fa-stack {
+                        margin-right: 3px;
+                        position: relative;
+                        top: 2px;
+
+                        .fa-stack-1x {
+                            color: white;
+                            font-family: 'proxima-nova';
+                            font-size: 1em;
+                            font-weight: bold;
+                            text-shadow: 0px 1px 1px rgba(0, 0, 0, .1);
+                            width: 95%;
+                        }
+
+                        .fa-circle {
+                            color: #F200BC;
+                        }
+                    }
+
+                    span.instruction {
+                        font-size: 0.93em;
+                        line-height: 13px;
+                        width: 92%;
+                    }
+
                     button {
-                        margin: 5px 22% 0;
-                        width: 55%;
+                        margin: 5px 20% 0;
+                        width: 61%;
+                    }
+                }
+
+                div.users {
+                    background: rgba(0, 0, 0, 0.4);
+                    font: 10px/12px 'proxima-nova';
+                    height: 74px;
+                    margin: 0 5px 5px;
+                    overflow: hidden;
+                    padding: 5px;
+                    @include border-radius(3px, 3px);
+
+                    #convo-selected-users {
+                        li {
+                            display: block;
+                            float: left;
+
+                            i.fa-user {
+                                color: rgba(0, 0, 0, 0.5);
+                                text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
+                            }
+
+                            i.fa-square {
+                                color: rgba(255, 255, 255, 0.5);
+                            }
+
+                            &.empty {
+                                width: 100%;
+                            }
+                        }
                     }
                 }
             }
