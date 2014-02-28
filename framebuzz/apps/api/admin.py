@@ -1,5 +1,6 @@
 from django.contrib import admin
-from framebuzz.apps.api.models import MPTTComment, Video, UserProfile, UserVideo, Thumbnail
+from framebuzz.apps.api.models import MPTTComment, Video, \
+    UserProfile, UserVideo, Thumbnail, PrivateSession, SessionInvitation
 from django.contrib.sessions.models import Session
 
 
@@ -34,9 +35,22 @@ class ThumbnailAdmin(admin.ModelAdmin):
     list_filter = ('video',)
 
 
+class PrivateSessionAdmin(admin.ModelAdmin):
+    list_display = ('owner', 'video', 'slug',)
+    list_filter = ('owner', 'video',)
+
+
+class SessionInvitationAdmin(admin.ModelAdmin):
+    list_display = ('session', 'invitee', 'email',
+                    'accepted', 'invited_on', 'accepted_on',)
+    list_filter = ('session', 'invitee', 'email', 'accepted',)
+
+
 admin.site.register(MPTTComment, MPTTCommentAdmin)
 admin.site.register(Video, FrameBuzzVideoAdmin)
 admin.site.register(Session, SessionAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(UserVideo, UserVideoAdmin)
 admin.site.register(Thumbnail, ThumbnailAdmin)
+admin.site.register(PrivateSession, PrivateSessionAdmin)
+admin.site.register(SessionInvitation, SessionInvitationAdmin)

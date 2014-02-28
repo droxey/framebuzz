@@ -329,6 +329,9 @@ class Video(caching.base.CachingMixin, models.Model):
 
 
 class UserVideo(caching.base.CachingMixin, models.Model):
+    '''
+        Used to construct a User's collected Videos.
+    '''
     video = models.ForeignKey(Video)
     user = models.ForeignKey(User)
     added_on = models.DateTimeField(auto_now=True)
@@ -346,6 +349,10 @@ class UserVideo(caching.base.CachingMixin, models.Model):
 
 
 class Thumbnail(caching.base.CachingMixin, models.Model):
+    '''
+        Zero-to-many Thumbnails may be associated with a
+        Video object.
+    '''
     video = models.ForeignKey(Video, null=True)
     url = models.URLField(max_length=255)
 
@@ -361,6 +368,9 @@ class Thumbnail(caching.base.CachingMixin, models.Model):
 
 
 class PrivateSession(caching.base.CachingMixin, models.Model):
+    '''
+        A Private FBZ conversation.
+    '''
     slug = RandomSlugField(length=settings.RANDOMSLUG_LENGTH)
     owner = models.ForeignKey(User)
     video = models.ForeignKey(Video)
@@ -371,6 +381,9 @@ class PrivateSession(caching.base.CachingMixin, models.Model):
 
 
 class SessionInvitation(caching.base.CachingMixin, models.Model):
+    '''
+        Invitations for Private FBZ sessions.
+    '''
     session = models.ForeignKey(PrivateSession)
     invitee = models.ForeignKey(User, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
@@ -400,6 +413,7 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
     has_hidden_siblings = models.BooleanField(default=False)
     hidden_by_id = models.IntegerField(blank=True, null=True)
 
+    # A private session that this comment belongs to, if any.
     session = models.ForeignKey(PrivateSession, blank=True, null=True)
 
     @property
