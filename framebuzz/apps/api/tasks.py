@@ -19,8 +19,10 @@ from templated_email import send_templated_mail
 
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.forms import MPTTCommentForm
-from framebuzz.apps.api.models import MPTTComment, Video, UserVideo, PrivateSession, SessionInvitation
-from framebuzz.apps.api.serializers import VideoSerializer, MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
+from framebuzz.apps.api.models import MPTTComment, Video, UserVideo, \
+    PrivateSession, SessionInvitation
+from framebuzz.apps.api.serializers import VideoSerializer, \
+    MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
 
 
 def construct_message(event_type, channel, data):
@@ -44,7 +46,7 @@ def _send_to_channel(channel, message):
 @celery.task(ignore_result=True)
 def message_outbound(message):
     """
-    Constructs a JSON message and sends it to the 
+    Constructs a JSON message and sends it to the
     proper channel via Redis.
 
     Sample Message:
@@ -197,8 +199,8 @@ def post_new_comment(context):
             # Send a notification to the video's owner that
             # someone has commented on their video.
             if video.found_by and video.found_by.id != user.id:
-                user_channel = '/framebuzz/%s/user/%s' % (video.video_id,
-                                                          video.found_by.username)
+                user_channel = '/framebuzz/%s/user/%s' \
+                    % (video.video_id, video.found_by.username)
                 notification = {
                     'message': 'You have 1 new comment!',
                     'objectType': 'reply',
@@ -239,8 +241,8 @@ def post_new_comment(context):
             # Send a notification to the thread's owner that someone has
             # replied to their comment.
             if comment.parent.user.id != user.id:
-                user_channel = '/framebuzz/%s/user/%s' % (video.video_id,
-                                                          comment.parent.user.username)
+                user_channel = '/framebuzz/%s/user/%s' \
+                    % (video.video_id, comment.parent.user.username)
                 notification = {
                     'message': 'You have 1 new reply!',
                     'objectType': 'reply',
@@ -264,11 +266,11 @@ def post_new_comment(context):
                         })
 
             # Serialize the comment to JSON to return to the UI.
-            replySerializer = MPTTCommentReplySerializer(comment,
-                                                         context={'user': user})
-            replySerialized = JSONRenderer().render(replySerializer.data)
+            rSerializer = MPTTCommentReplySerializer(comment,
+                                                     context={'user': user})
+            replySerialized = JSONRenderer().render(rSerializer.data)
             return_data['reply'] = json.loads(replySerialized)
-        
+
         # Send completed message to the UI.
         return construct_message('FB_POST_NEW_COMMENT', channel, return_data)
 
@@ -301,11 +303,18 @@ def add_comment_action(context):
                 follow(user, thread.user)
 
                 if thread.user.id != user.id and thread.user.email:
-                    user_channel = '/framebuzz/%s/user/%s' % (video.video_id, thread.user.username)
+                    user_channel = '/framebuzz/%s/user/%s' \
+                        % (video.video_id, thread.user.username)
                     message_text = '%s is now following you!' % user.username
-                    notification = { 'message': message_text, 'objectType': 'follow', 'objectId': None }
-                    message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
-                    _send_to_channel.delay(channel = user_channel, message = message)
+                    notification = {
+                        'message': message_text,
+                        'objectType': 'follow',
+                        'objectId': None
+                    }
+                    message = construct_message('FB_USER_NOTIFICATION',
+                                                user_channel, notification)
+                    _send_to_channel.delay(channel=user_channel,
+                                           message=message)
 
                     send_templated_mail(
                         template_name='following-notification',
@@ -317,22 +326,33 @@ def add_comment_action(context):
                             'recipient': thread.user,
                         })
         elif thread_action == 'favorite':
-            is_favorite = Action.objects.actor(user, verb='added to favorites', action_object_object_id=thread.id)
+            is_fav = Action.objects.actor(user, verb='added to favorites',
+                                          action_object_object_id=thread.id)
 
-            if is_favorite:
+            if is_fav:
                 action_name = 'removed_favorite'
-                action.send(user, verb='removed from favorites', action_object=thread, target=video)
-                is_favorite.delete()
+                action.send(user, verb='removed from favorites',
+                            action_object=thread, target=video)
+                is_fav.delete()
             else:
                 action_name = 'added_favorite'
-                action.send(user, verb='added to favorites', action_object=thread, target=video)
+                action.send(user, verb='added to favorites',
+                            action_object=thread, target=video)
 
                 if thread.user.id != user.id and thread.user.email:
-                    user_channel = '/framebuzz/%s/user/%s' % (video.video_id, thread.user.username)
-                    message_text = '%s added your comment to favorites!' % user.username
-                    notification = { 'message': message_text, 'objectType': 'favorite', 'objectId': None }
-                    message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
-                    _send_to_channel.delay(channel = user_channel, message = message)
+                    user_channel = '/framebuzz/%s/user/%s' \
+                        % (video.video_id, thread.user.username)
+                    message_text = '%s added your comment to favorites!' \
+                        % user.username
+                    notification = {
+                        'message': message_text,
+                        'objectType': 'favorite',
+                        'objectId': None
+                    }
+                    message = construct_message('FB_USER_NOTIFICATION',
+                                                user_channel, notification)
+                    _send_to_channel.delay(channel=user_channel,
+                                           message=message)
 
                     send_templated_mail(
                         template_name='favorites-notification',
@@ -346,28 +366,35 @@ def add_comment_action(context):
                         })
         elif thread_action == 'flag':
             commentFlag, created = CommentFlag.objects.get_or_create(
-                comment = thread,
-                user = user,
-                flag = CommentFlag.SUGGEST_REMOVAL
+                comment=thread,
+                user=user,
+                flag=CommentFlag.SUGGEST_REMOVAL
             )
 
             if created:
                 action_name = 'flagged_comment'
-                action.send(user, verb='flagged comment', action_object=thread, target=video)
+                action.send(user, verb='flagged comment',
+                            action_object=thread, target=video)
             else:
                 action_name = 'unflagged_comment'
-                action.send(user, verb='unflagged comment', action_object=thread, target=video)
+                action.send(user, verb='unflagged comment',
+                            action_object=thread, target=video)
                 commentFlag.delete()
         else:
             pass
 
         updatedThread = MPTTComment.objects.get(id=thread_data.get('threadId'))
-        returnThread = updatedThread if updatedThread.parent is None else updatedThread.parent
+        returnThread = updatedThread if updatedThread.parent is None \
+            else updatedThread.parent
 
-        threadSerializer = MPTTCommentSerializer(returnThread, context={ 'user': user })
+        threadSerializer = MPTTCommentSerializer(returnThread,
+                                                 context={'user': user})
         threadSerialized = JSONRenderer().render(threadSerializer.data)
 
-        return_data = { 'action': action_name, 'thread': json.loads(threadSerialized) }
+        return_data = {
+            'action': action_name,
+            'thread': json.loads(threadSerialized)
+        }
         return construct_message('FB_COMMENT_ACTION', channel, return_data)
 
 
@@ -376,9 +403,10 @@ def toggle_user_follow(context):
     thread_data = context.get(DATA_KEY, None)
     user = context.get('user', None)
     video_id = context.get('video_id', None)
+    toggle_user = thread_data.get('user_to_toggle', None)
 
-    if thread_data.get('user_to_toggle', None):
-        user_to_toggle = auth.models.User.objects.get(username=thread_data['user_to_toggle'])
+    if toggle_user:
+        user_to_toggle = auth.models.User.objects.get(username=toggle_user)
 
         check_following = Follow.objects.is_following(user, user_to_toggle)
         if check_following:
@@ -387,11 +415,17 @@ def toggle_user_follow(context):
             follow(user, user_to_toggle)
 
             if user_to_toggle.id != user.id and user_to_toggle.email:
-                user_channel = '/framebuzz/%s/user/%s' % (video_id, user_to_toggle.username)
+                user_channel = '/framebuzz/%s/user/%s' % \
+                    (video_id, user_to_toggle.username)
                 message_text = '%s is now following you!' % user.username
-                notification = { 'message': message_text, 'objectType': 'follow', 'objectId': None }
-                message = construct_message('FB_USER_NOTIFICATION', user_channel, notification)
-                _send_to_channel.delay(channel = user_channel, message = message)
+                notification = {
+                    'message': message_text,
+                    'objectType': 'follow',
+                    'objectId': None
+                }
+                message = construct_message('FB_USER_NOTIFICATION',
+                                            user_channel, notification)
+                _send_to_channel.delay(channel=user_channel, message=message)
 
                 send_templated_mail(
                     template_name='following-notification',
@@ -449,14 +483,17 @@ def get_activity_stream(context):
     else:
         user = context.get('user', None)
 
-    valid_verbs = ['started following', 'added to favorites', 'replied to comment', 'added video to library']
-    last_login_minus_day = user.last_login - datetime.timedelta(days=1)
-    user_activity_stream = Action.objects.filter(verb__in=valid_verbs, timestamp__gte = last_login_minus_day)
+    valid_verbs = ['started following', 'added to favorites',
+                   'replied to comment', 'added video to library']
+    last_login = user.last_login - datetime.timedelta(days=1)
+    user_activity_stream = Action.objects.filter(verb__in=valid_verbs,
+                                                 timestamp__gte=last_login)
 
     stream_data = list()
     for activity in user_activity_stream:
         if activity.action_object is not None and activity.actor.id != user.id:
-            if activity.action_object_content_type.model == 'mpttcomment' and activity.action_object.user.id == user.id:
+            if activity.action_object_content_type.model == 'mpttcomment' \
+                    and activity.action_object.user.id == user.id:
                 verb = activity.verb
                 if verb == 'replied to comment':
                     verb = 'replied to your comment'
@@ -485,7 +522,7 @@ def get_activity_stream(context):
                 }
                 stream_data.append(act)
 
-    return_data = { 'activities': stream_data }
+    return_data = {'activities': stream_data}
     return construct_message('FB_ACTIVITY_STREAM', channel, return_data)
 
 
@@ -499,7 +536,8 @@ def get_user_profile(context):
     if not current_user:
         current_user = context.get('user', None)
 
-    favorite_comment_ids = [action.action_object_object_id for action in Action.objects.favorite_comments_stream(user)]
+    all_actions = Action.objects.favorite_comments_stream(user)
+    favorite_comment_ids = [a.action_object_object_id for a in all_actions]
     favorite_comments = MPTTComment.objects.filter(id__in=favorite_comment_ids)
 
     total_comments = MPTTComment.objects.filter(user=user)
@@ -509,10 +547,12 @@ def get_user_profile(context):
     userSerializer = UserSerializer(user)
     userSerialized = JSONRenderer().render(userSerializer.data)
 
-    favoritesSerializer = MPTTCommentSerializer(favorite_comments, context={ 'user': user })
+    favoritesSerializer = MPTTCommentSerializer(favorite_comments,
+                                                context={'user': user})
     favoritesSerialized = JSONRenderer().render(favoritesSerializer.data)
 
-    commentsSerializer = MPTTCommentSerializer(total_comments, context={ 'user': user })
+    commentsSerializer = MPTTCommentSerializer(total_comments,
+                                               context={'user': user})
     commentsSerialized = JSONRenderer().render(commentsSerializer.data)
 
     followersSerializer = UserSerializer(user_followers)
@@ -521,7 +561,8 @@ def get_user_profile(context):
     followingSerializer = UserSerializer(user_following)
     followingSerialized = JSONRenderer().render(followingSerializer.data)
 
-    if current_user and not isinstance(current_user, auth.models.AnonymousUser):
+    is_anon_user = isinstance(current_user, auth.models.AnonymousUser)
+    if current_user and not is_anon_user:
         check_following = Follow.objects.is_following(current_user, user)
     else:
         check_following = False
@@ -584,18 +625,21 @@ def add_to_library(context):
     else:
         user = context.get('user', None)
 
-    user_video, created = UserVideo.objects.get_or_create(video=video, user=user)
-    
+    user_video, created = UserVideo.objects.get_or_create(video=video,
+                                                          user=user)
+
     if not created:
-        old_action = Action.objects.actor(user, verb='added video to library', action_object_object_id=video.id)
+        old_action = Action.objects.actor(user, verb='added video to library',
+                                          action_object_object_id=video.id)
         old_action.delete()
         user_video.delete()
         message = 'Video removed from library.'
     else:
-        action.send(user, verb='added video to library', action_object=video, target=user_video)
+        action.send(user, verb='added video to library',
+                    action_object=video, target=user_video)
         message = 'Video added to library.'
 
-    userSerializer = UserSerializer(user, context={ 'video': video })
+    userSerializer = UserSerializer(user, context={'video': video})
     userSerialized = JSONRenderer().render(userSerializer.data)
     return_data = {
         'message': message,
