@@ -363,7 +363,7 @@ angular.module('framebuzz.directives', [])
             }
         };
     })
-    .directive('typeahead', ["$timeout", "$rootScope", function($timeout, $rootScope) {
+    .directive('typeahead', ["$timeout", function($timeout) {
         return {
             restrict: 'E',
             transclude: true,
@@ -504,7 +504,7 @@ angular.module('framebuzz.directives', [])
         return {
             require: '^typeahead',
             link: function(scope, element, attrs, controller) {
-
+                console.log(controller);
                 var item = scope.$eval(attrs.typeaheadItem);
 
                 scope.$watch(function() { return controller.isActive(item); }, function(active) {

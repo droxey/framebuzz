@@ -28,10 +28,9 @@
                 <p class="clearfix fields">
                     <typeahead class="typeahead" items="music" term="term" search="searchUsers(term)" select="selecUser(item)">
                         <div class="menu" ng-cloak>
-                            <h3 ng-show="hasSearchResults()">Personalities</h3>
                             <ul>
-                                <li typeahead-item="user" ng-repeat="user in searchResults" class="results">
-                                    <img ng-src="{{user.avatar_url}}">
+                                <li data-typeahead-item="user" data-ng-repeat="user in searchResults" class="results">
+                                    <img data-ng-src="{{user.avatar_url}}" height="30" width="30" alt="{{user.display_name}}">
                                     <p class="name">{{user.display_name}}</p>
                                 </li>
                             </ul>

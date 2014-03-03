@@ -45,11 +45,11 @@ class UserSerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField('get_avatar_url')
     profile_url = serializers.SerializerMethodField('get_profile_url')
     video_in_library = serializers.SerializerMethodField('get_video_in_library')
-    display_name = serializers.SerializerMethodField('display_name')
+    display_name = serializers.SerializerMethodField('get_display_name')
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'avatar_url',
+        fields = ('id', 'username', 'avatar_url', 'display_name',
                   'video_in_library', 'profile_url',)
 
     def get_profile_url(self, obj):
@@ -70,7 +70,7 @@ class UserSerializer(serializers.ModelSerializer):
             return False
 
     def get_display_name(self, obj):
-        return obj.get_profile().display_name or user.username
+        return obj.get_profile().display_name or obj.username
 
 
 class BaseCommentSerializer(serializers.ModelSerializer):
