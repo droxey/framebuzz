@@ -35,6 +35,8 @@ angular.module('framebuzz.controllers', []).
                 $scope.share = {};
                 $scope.shareUrl = SOCK.share_url;
 
+                $scope.searchResults = [];
+
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
                     postNewComment: 'FB_POST_NEW_COMMENT',
@@ -49,7 +51,8 @@ angular.module('framebuzz.controllers', []).
                     addToLibrary: 'FB_ADD_TO_LIBRARY',
                     notification: 'FB_USER_NOTIFICATION',
                     toggleFollow: 'FB_TOGGLE_FOLLOW',
-                    startPrivateConvo: 'FB_START_PRIVATE_CONVO'
+                    startPrivateConvo: 'FB_START_PRIVATE_CONVO',
+                    searchUsers: 'FB_SEARCH_USERS'
                 };
 
                 // --
@@ -327,6 +330,15 @@ angular.module('framebuzz.controllers', []).
                     }
                 };
 
+                $scope.selectUser = function(item) {
+                    console.log('user selected!', item);
+                    $scope.term = item.name;
+                };
+
+                $scope.hasSearchResults = function() {
+                    return $scope.searchResults.length > 0;
+                };
+
                 // --
                 // PRIVATE METHODS
                 // --
@@ -514,6 +526,23 @@ angular.module('framebuzz.controllers', []).
                     }
                 });
 
+                $scope.$on('player_searchusers', function() {
+                    var term = broadcaster.message.term;
+                    if ($scope.videoInstance.is_authenticated) {
+                        socket.send_json({
+                            eventType: eventTypes.searchUsers,
+                            channel: SOCK.user_channel,
+                            data: {
+                                'term': term,
+                                'username': $scope.videoInstance.user.username
+                            }
+                        });
+                    }
+                    else {
+                        notificationFactory.error('Please log in first!');
+                    }
+                });
+
                 // --
                 // EVENT HANDLERS
                 // --
@@ -605,6 +634,12 @@ angular.module('framebuzz.controllers', []).
                     else if (jsonData.eventType == eventTypes.startPrivateConvo) {
                         $scope.sessionKey = jsonData.data.session_key;
                         safeApply($scope);
+                    }
+                    else if (jsonData.eventType == eventTypes.searchUsers) {
+                        if (jsonData.data.users.length > 0) {
+                            $scope.searchResults = jsonData.data.users;
+                            safeApply($scope);
+                        }
                     }
                     else {
                         console.log('Socket received unhandled message.');

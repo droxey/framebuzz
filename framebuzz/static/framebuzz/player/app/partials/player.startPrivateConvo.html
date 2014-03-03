@@ -10,8 +10,8 @@
         </h1>
         <h3>Start a Private FrameBuzz</h3>
         <p class="intro">
-            Got something to say, but don't want the whole world to hear?
-            <br>Invite your friends to discuss this video privately.
+            Have something to say, but don't want the whole world to hear?
+            <br>Invite your friends and start your own discussion!
         </p>
         <div id="start-convo" class="clearfix">
             <form id="start-convo-form" data-ng-submit="initPrivateConvo()" action="" method="POST">
@@ -26,8 +26,17 @@
                     </span>
                 </p>
                 <p class="clearfix fields">
-                    <input id="users-autocomplete" data-ng-model="privateConvo.users" type="text" placeholder="Start typing to invite FrameBuzz users...">
-                    <button id="btn-add-user-convo" type="button" class="btn btn-small btn-success"><i class="fa fa-plus-square"></i></button>
+                    <typeahead class="typeahead" items="music" term="term" search="searchUsers(term)" select="selecUser(item)">
+                        <div class="menu" ng-cloak>
+                            <h3 ng-show="hasSearchResults()">Personalities</h3>
+                            <ul>
+                                <li typeahead-item="user" ng-repeat="user in searchResults" class="results">
+                                    <img ng-src="{{user.avatar_url}}">
+                                    <p class="name">{{user.display_name}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </typeahead>
                 </p>
                 <p class="tip">
                     <i class="fa fa-question-circle"></i>

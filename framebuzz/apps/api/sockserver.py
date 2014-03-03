@@ -185,6 +185,17 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                             }) \
                         | tasks.add_to_library.s() \
                         | tasks.message_outbound.s()
+                elif event_type == 'FB_SEARCH_USERS':
+                    task_chain = tasks.get_user_by_session_key.s(
+                            session_key=self.session_key,
+                            extra_context={
+                                'video_id': video_id,
+                                'data': data,
+                                'outbound_channel': self.session_channel,
+                                'username': data.get('username', None)
+                            }) \
+                        | tasks.search_user_list.s() \
+                        | tasks.message_outbound.s()
                 elif event_type == 'FB_START_PRIVATE_CONVO':
                     task_chain = tasks.get_user_by_session_key.s(
                             session_key=self.session_key,

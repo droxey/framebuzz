@@ -64,7 +64,7 @@ angular.module('framebuzz.directives', [])
                     $('.mejs-mediaelement').mouseenter(function(e) {
                         $('.mejs-video').addClass('show-controls');
                     });
-                    
+
                     $('.mejs-video').mouseleave(function(e) {
                         $('.mejs-video').addClass('fade-out-controls');
 
@@ -160,7 +160,7 @@ angular.module('framebuzz.directives', [])
                 });
             });
 
-            scope.$on('player_timeupdate', function() { 
+            scope.$on('player_timeupdate', function() {
                 $(element).perfectScrollbar('update');
             });
         };
@@ -191,17 +191,17 @@ angular.module('framebuzz.directives', [])
                         preloadImages: 'all',
                         autoStart: false,
                         prevText: '&nbsp;',
-                        nextText: '&nbsp;', 
+                        nextText: '&nbsp;',
                         prevSelector: '.icon-left-dir',
-                        nextSelector: '.icon-right-dir', 
+                        nextSelector: '.icon-right-dir',
                         easing: 'ease-in-out'
                     };
-                        
+
                     slider = element.parent().bxSlider(sliderOpts);
                     element.parent().css({ 'width': '99999px' });
                     element.parent().parent().css({ 'width': '130px', 'height': '23px' });
                     element.parent().parent().parent().css({ 'width': '131px', 'max-width': '131px' });
-                    
+
                     $('div.bx-loading').remove();
 
                     scope.$watch('updateSlider', function(val) {
@@ -214,7 +214,7 @@ angular.module('framebuzz.directives', [])
                     }, true);
                 });
             }
-        }; 
+        };
     }])
     .directive('onfocus', ['safeApply', function(safeApply) {
         return {
@@ -235,7 +235,7 @@ angular.module('framebuzz.directives', [])
                     $(element).on('keyup', function(e) {
                         var setPostTime = function() {
                             scope.setPostTime();
-                            
+
                             $('#duration').hide();
                             $('#post-time').show().addClass('active');
 
@@ -292,20 +292,20 @@ angular.module('framebuzz.directives', [])
     })
     .directive('copytoclipboard', ['notificationFactory', function(notificationFactory) {
         return function(scope, element, attrs) {
-            $(element).zclip({ 
-                path: '/static/framebuzz/player/app/lib/jquery/ZeroClipboard.swf', 
+            $(element).zclip({
+                path: '/static/framebuzz/player/app/lib/jquery/ZeroClipboard.swf',
                 copy: attrs.copytoclipboard,
                 afterCopy: function() {
                     notificationFactory.success('Copied to Clipboard!');
                 }
             });
 
-            $('.zclip').css({ 
-                'height': '26px', 
-                'left': '352px', 
-                'top': '195px', 
-                'width': '50px', 
-                'z-index': 200 
+            $('.zclip').css({
+                'height': '26px',
+                'left': '352px',
+                'top': '195px',
+                'width': '50px',
+                'z-index': 200
             });
 
             $('.zclip').hoverIntent({
@@ -359,6 +359,168 @@ angular.module('framebuzz.directives', [])
                         $(this).addClass('active');
                         e.stopPropagation();
                     });
+                });
+            }
+        };
+    })
+    .directive('typeahead', ["$timeout", "$rootScope", function($timeout, $rootScope) {
+        return {
+            restrict: 'E',
+            transclude: true,
+            replace: true,
+            template: '<div class="fields">
+                        <form class="clearfix">
+                            <input id="users-autocomplete" data-ng-model="term" data-ng-change="query()" type="text" placeholder="Start typing to invite FrameBuzz users..." autocomplete="off">
+                            <div ng-transclude></div>
+                            <button id="btn-add-user-convo" type="button" class="btn btn-small btn-success"><i class="fa fa-plus-square"></i></button>
+                        </form>
+                        <div ng-transclude></div>
+                      </div>',
+            scope: {
+                search: "&",
+                select: "&",
+                items: "=",
+                term: "="
+            },
+            controller: ["$scope", "broadcaster", function($scope, broadcaster) {
+                $scope.items = [];
+                $scope.hide = false;
+
+                this.activate = function(item) {
+                    $scope.active = item;
+                };
+
+                this.activateNextItem = function() {
+                    var index = $scope.items.indexOf($scope.active);
+                    this.activate($scope.items[(index + 1) % $scope.items.length]);
+                };
+
+                this.activatePreviousItem = function() {
+                    var index = $scope.items.indexOf($scope.active);
+                    this.activate($scope.items[index === 0 ? $scope.items.length - 1 : index - 1]);
+                };
+
+                this.isActive = function(item) {
+                    return $scope.active === item;
+                };
+
+                this.selectActive = function() {
+                    this.select($scope.active);
+                };
+
+                this.select = function(item) {
+                    $scope.hide = true;
+                    $scope.focused = true;
+                    $scope.select({item:item});
+                };
+
+                $scope.isVisible = function() {
+                    return !$scope.hide && ($scope.focused || $scope.mousedOver);
+                };
+
+                $scope.query = function() {
+                    $scope.hide = false;
+                    console.log('Scope Term: ' + $scope.term);
+                    broadcaster.prepForBroadcast({ broadcastType: 'player_searchusers', term: $scope.term });
+                }
+            }],
+
+            link: function(scope, element, attrs, controller) {
+
+                var $input = element.find('form > input');
+                var $list = element.find('> div');
+
+                $input.bind('focus', function() {
+                    scope.$apply(function() { scope.focused = true; });
+                });
+
+                $input.bind('blur', function() {
+                    scope.$apply(function() { scope.focused = false; });
+                });
+
+                $list.bind('mouseover', function() {
+                    scope.$apply(function() { scope.mousedOver = true; });
+                });
+
+                $list.bind('mouseleave', function() {
+                    scope.$apply(function() { scope.mousedOver = false; });
+                });
+
+                $input.bind('keyup', function(e) {
+                    if (e.keyCode === 9 || e.keyCode === 13) {
+                        scope.$apply(function() { controller.selectActive(); });
+                    }
+
+                    if (e.keyCode === 27) {
+                        scope.$apply(function() { scope.hide = true; });
+                    }
+                });
+
+                $input.bind('keydown', function(e) {
+                    if (e.keyCode === 9 || e.keyCode === 13 || e.keyCode === 27) {
+                        e.preventDefault();
+                    };
+
+                    if (e.keyCode === 40) {
+                        e.preventDefault();
+                        scope.$apply(function() { controller.activateNextItem(); });
+                    }
+
+                    if (e.keyCode === 38) {
+                        e.preventDefault();
+                        scope.$apply(function() { controller.activatePreviousItem(); });
+                    }
+                });
+
+                scope.$watch('items', function(items) {
+                    controller.activate(items.length ? items[0] : null);
+                });
+
+                scope.$watch('focused', function(focused) {
+                    if (focused) {
+                        $timeout(function() { $input.focus(); }, 0, false);
+                    }
+                });
+
+                scope.$watch('isVisible()', function(visible) {
+                    if (visible) {
+                        var pos = $input.position();
+                        var height = $input[0].offsetHeight;
+
+                        $list.css({
+                            top: pos.top + height,
+                            left: pos.left,
+                            position: 'absolute',
+                            display: 'block'
+                        });
+                    } else {
+                        $list.css('display', 'none');
+                    }
+                });
+            }
+        }
+    }])
+    .directive('typeaheadItem', function() {
+        return {
+            require: '^typeahead',
+            link: function(scope, element, attrs, controller) {
+
+                var item = scope.$eval(attrs.typeaheadItem);
+
+                scope.$watch(function() { return controller.isActive(item); }, function(active) {
+                    if (active) {
+                        element.addClass('active');
+                    } else {
+                        element.removeClass('active');
+                    }
+                });
+
+                element.bind('mouseenter', function(e) {
+                    scope.$apply(function() { controller.activate(item); });
+                });
+
+                element.bind('click', function(e) {
+                    scope.$apply(function() { controller.select(item); });
                 });
             }
         };

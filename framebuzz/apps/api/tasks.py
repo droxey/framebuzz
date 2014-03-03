@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.contrib import auth
 from django.contrib.comments.models import CommentFlag
 from django.contrib.sites.models import Site
+from django.db.models import Q
 from django.utils import importlib
 
 from actstream import action
@@ -20,7 +21,7 @@ from templated_email import send_templated_mail
 from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.forms import MPTTCommentForm
 from framebuzz.apps.api.models import MPTTComment, Video, UserVideo, \
-    PrivateSession, SessionInvitation
+    PrivateSession, SessionInvitation, UserProfile
 from framebuzz.apps.api.serializers import VideoSerializer, \
     MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
 
@@ -647,6 +648,27 @@ def add_to_library(context):
         'user': json.loads(userSerialized)
     }
     return construct_message('FB_ADD_TO_LIBRARY', channel, return_data)
+
+
+@celery.task
+def search_user_list(context):
+    channel = context.get('outbound_channel', None)
+    context_data = context.get(DATA_KEY, None)
+    video_id = context.get('video_id', None)
+    video = Video.objects.get(slug=video_id)
+    term = context_data.get('term', None)
+
+    if term and len(term) > 2:
+        profiles = UserProfile.objects.filter(
+                                            Q(user__username__startswith=term) | \
+                                            Q(display_name__startswith=term))
+        users = [p.user for p in profiles]
+        usersSerializer = UserSerializer(users, context={'video': video})
+        usersSerialized = JSONRenderer().render(usersSerializer.data)
+        return_data = {
+            'users': json.loads(usersSerialized)
+        }
+        return construct_message('FB_SEARCH_USERS', channel, return_data)
 
 
 @celery.task

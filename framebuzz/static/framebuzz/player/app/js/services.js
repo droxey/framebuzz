@@ -62,21 +62,21 @@ angular.module('framebuzz.services', [])
                     self.socket_handlers.onclose.apply(socket, args);
                 });
             };
- 
+
             return socket;
         };
- 
+
         self.socket_handlers = {};
         var socket = createSocket();
 
         $rootScope.$on('reconnect', function() {
             socket.close();
         });
- 
-        var methods = { 
+
+        var methods = {
             onopen: function(callback) {
                 self.socket_handlers.onopen = callback;
-            }, 
+            },
             onmessage: function(callback) {
                 self.socket_handlers.onmessage = callback;
             },
@@ -121,19 +121,19 @@ angular.module('framebuzz.services', [])
                         FB.api('/me', function(response) {
                             resolve(null, response, deferred);
                         });
-                    } 
+                    }
                     else if (response.status == 'not_authorized') {
                         FB.login(function(response) {
                             if (response.authResponse) {
                                 FB.api('/me', function(response) {
                                     resolve(null, response, deferred);
                                 });
-                            } 
+                            }
                             else {
                                 resolve(response.error, null, deferred);
                             }
                         });
-                    } 
+                    }
                 });
 
                 promise = deferred.promise;
@@ -158,7 +158,7 @@ angular.module('framebuzz.services', [])
             }
         }
     })
-    .factory('notificationFactory', function () { 
+    .factory('notificationFactory', function () {
         toastr.options = {
           "debug": false,
           "positionClass": "toast-top-full-width",
