@@ -13,7 +13,7 @@
     <div id="signup-or-login-prompt" data-ng-hide="videoInstance.is_authenticated">
       <p><a data-ng-href="#/player/panel/signup" title="Signup">Sign up</a> or <a data-ng-href="#/player/panel/login" title="Login">Log in</a> to post a comment...</p>
     </div>
-    <input data-ng-model="newThread.comment" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-ng-show="videoInstance.is_authenticated" data-maxinput="" data-onfocus="" />
+    <input data-ng-model="newThread.comment" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-ng-show="videoInstance.is_authenticated" data-maxinput="" data-onfocus="" autocomplete="off" />
     <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
   </div>
 </form>

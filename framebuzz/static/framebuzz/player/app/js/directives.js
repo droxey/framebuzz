@@ -368,14 +368,13 @@ angular.module('framebuzz.directives', [])
             restrict: 'E',
             transclude: true,
             replace: true,
-            template: '<div class="fields">
-                        <form class="clearfix">
-                            <input id="users-autocomplete" data-ng-model="term" data-ng-change="query()" type="text" placeholder="Start typing to invite FrameBuzz users..." autocomplete="off">
-                            <div ng-transclude></div>
-                            <button id="btn-add-user-convo" type="button" class="btn btn-small btn-success"><i class="fa fa-plus-square"></i></button>
-                        </form>
-                        <div ng-transclude></div>
-                      </div>',
+            template: '<div class="fields">' +
+                        '<form class="clearfix">' +
+                            '<input id="users-autocomplete" data-ng-model="term" data-ng-change="query()" type="text" placeholder="Start typing to invite FrameBuzz users..." autocomplete="off">' +
+                            '<div ng-transclude></div>' +
+                        '</form>' +
+                        '<div ng-transclude></div>' +
+                     '</div>',
             scope: {
                 search: "&",
                 select: "&",
@@ -385,6 +384,7 @@ angular.module('framebuzz.directives', [])
             controller: ["$scope", function($scope) {
                 $scope.items = [];
                 $scope.hide = false;
+                $scope.active = null;
 
                 this.activate = function(item) {
                     $scope.active = item;
@@ -433,7 +433,7 @@ angular.module('framebuzz.directives', [])
             }],
 
             link: function(scope, element, attrs, controller) {
-
+                var controllerSet = false;
                 var $input = element.find('form > input');
                 var $list = element.find('> div');
 
@@ -455,7 +455,7 @@ angular.module('framebuzz.directives', [])
 
                 $input.bind('keyup', function(e) {
                     if (e.keyCode === 9 || e.keyCode === 13) {
-                        scope.$apply(function() { controller.selectActive(); });
+                        scope.$apply(function() { this.selectActive(); });
                     }
 
                     if (e.keyCode === 27) {
@@ -505,29 +505,22 @@ angular.module('framebuzz.directives', [])
                     }
                 });
             }
-        }
+        };
     }])
-    .directive('typeaheadItem', function() {
+    .directive('typeaheadItem', ['broadcaster', function(broadcaster) {
         return {
-            require: '^typeahead',
-            link: function(scope, element, attrs, controller) {
-                var item = scope.$eval(attrs.typeaheadItem);
+             link: function($scope, $element, $attributes) {
+                 var item = $scope.$eval($attributes.typeaheadItem);
+                 var siblings = $element.parent().children();
 
-                scope.$watch(function() { return controller.isActive(item); }, function(active) {
-                    if (active) {
-                        element.addClass('active');
-                    } else {
-                        element.removeClass('active');
-                    }
-                });
+                 $element.bind('click', function(e) {
+                     siblings.removeClass('active');
+                     $element.addClass('active');
 
-                element.bind('mouseenter', function(e) {
-                    scope.$apply(function() { controller.activate(item); });
-                });
+                    broadcaster.prepForBroadcast({ broadcastType: 'player_addinvitee', invitee: item });
 
-                element.bind('click', function(e) {
-                    scope.$apply(function() { controller.select(item); });
-                });
+                    $element.parent().parent().hide();
+                 });
             }
         };
-    });
+ }]);

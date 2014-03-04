@@ -2,8 +2,8 @@
 
 /* Controllers */
 
-angular.module('framebuzz.controllers', []).
-  controller('VideoPlayerCtrl',
+angular.module('framebuzz.controllers', [])
+  .controller('VideoPlayerCtrl',
         ['$rootScope', '$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 'notificationFactory',
             function($rootScope, $scope, $state, $filter, $http, socket, broadcaster, safeApply, notificationFactory) {
                 $scope.rootPath = SOCK.root_path;
@@ -36,6 +36,7 @@ angular.module('framebuzz.controllers', []).
                 $scope.shareUrl = SOCK.share_url;
 
                 $scope.searchResults = [];
+                $scope.invitees = [];
 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -317,11 +318,17 @@ angular.module('framebuzz.controllers', []).
 
                 $scope.initPrivateConvo = function() {
                     if ($scope.videoInstance.is_authenticated) {
+                        var usernames = [];
+                        for (var i = 0; i <= $scope.invitees.length; i++) {
+                            usernames.push($scope.invitees[i].username);
+                        }
+
                         socket.send_json({
                             eventType: eventTypes.startPrivateConvo,
                             channel: SOCK.user_channel,
                             data: {
-                                'username': $scope.videoInstance.user.username
+                                'username': $scope.videoInstance.user.username,
+                                'invitees': usernames
                             }
                         });
                     }
@@ -330,8 +337,11 @@ angular.module('framebuzz.controllers', []).
                     }
                 };
 
-                //$scope.searchUsers = function(term) {
-$scope.$on('player_searchusers', function() {
+                $scope.hasSearchResults = function() {
+                    return $scope.searchResults.length > 0;
+                };
+
+                $scope.$on('player_searchusers', function() {
                     var term = broadcaster.message.term;
                     if ($scope.videoInstance.is_authenticated) {
                         if (term.length > 1) {
@@ -355,13 +365,14 @@ $scope.$on('player_searchusers', function() {
                     }
                 });
 
+                $scope.$on('player_addinvitee', function() {
+                    var invitee = broadcaster.message.invitee;
+                    $scope.invitees.push(invitee);
+                    safeApply($scope);
+                });
+
                 $scope.selectUser = function(item) {
                     console.log('user selected!', item);
-                    $scope.term = item.name;
-                };
-
-                $scope.hasSearchResults = function() {
-                    return $scope.searchResults.length > 0;
                 };
 
                 // --

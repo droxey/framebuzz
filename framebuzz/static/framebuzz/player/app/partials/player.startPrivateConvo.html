@@ -27,10 +27,10 @@
                 </p>
                 <p class="clearfix fields">
                     <typeahead class="typeahead" items="searchResults" term="term" search="searchUsers(term)" select="selectUser(item)">
-                        <div class="menu" ng-cloak>
+                        <div class="menu" ng-show="hasSearchResults()">
                             <ul>
                                 <li typeahead-item="user" ng-repeat="user in searchResults" class="results">
-                                    <img ng-src="{{user.avatar_url}}" height="30" width="30" alt="{{user.display_name}}">
+                                    <img class="img-circle" ng-src="{{user.avatar_url}}" height="25" width="25" alt="{{user.display_name}}">
                                     <p class="name">{{user.display_name}}</p>
                                 </li>
                             </ul>
@@ -43,7 +43,12 @@
                 </p>
                 <div class="users">
                     <ul id="convo-selected-users" class="clearfix">
-                        <li class="empty">
+                        <h3>Selected Users</h3>
+                        <li class="invitee" ng-show="invitees.length > 0" ng-repeat="invitee in invitees">
+                            <img class="img-circle" ng-src="{{invitee.avatar_url}}" height="25" width="25" alt="{{invitee.display_name}}">
+                            <p class="name">{{invitee.display_name}}</p>
+                        </li>
+                        <li class="empty" ng-show="invitees.length == 0">
                             <span class="fa-stack fa-lg no-users">
                               <i class="fa fa-square fa-stack-2x"></i>
                               <i class="fa fa-user fa-stack-1x fa-inverse"></i>
@@ -63,8 +68,8 @@
                     </span>
                 </p>
                 <p>
-                    <button id="init-private-session" class="rounded" type="submit">
-                        Send Invitations &amp; Start Chatting Privately
+                    <button id="init-private-session" class="rounded" type="button" ng-click="initPrivateConvo()">
+                        Send Invitations &amp; Start the Conversation!
                     </button>
                 </p>
             </form>
