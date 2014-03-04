@@ -363,7 +363,7 @@ angular.module('framebuzz.directives', [])
             }
         };
     })
-    .directive('typeahead', ["$timeout", function($timeout) {
+    .directive('typeahead', ["$timeout", "$rootScope", "broadcaster", function($timeout, $rootScope, broadcaster) {
         return {
             restrict: 'E',
             transclude: true,
@@ -382,7 +382,7 @@ angular.module('framebuzz.directives', [])
                 items: "=",
                 term: "="
             },
-            controller: ["$scope", "broadcaster", function($scope, broadcaster) {
+            controller: ["$scope", function($scope) {
                 $scope.items = [];
                 $scope.hide = false;
 
@@ -420,9 +420,16 @@ angular.module('framebuzz.directives', [])
 
                 $scope.query = function() {
                     $scope.hide = false;
-                    console.log('Scope Term: ' + $scope.term);
                     broadcaster.prepForBroadcast({ broadcastType: 'player_searchusers', term: $scope.term });
                 }
+
+                $scope.$on('user_search_complete', function() {
+                    $scope.items = broadcaster.message.data;
+
+                    if ($scope.items.length == 0) {
+                        $scope.hide = true;
+                    }
+                });
             }],
 
             link: function(scope, element, attrs, controller) {
@@ -504,7 +511,6 @@ angular.module('framebuzz.directives', [])
         return {
             require: '^typeahead',
             link: function(scope, element, attrs, controller) {
-                console.log(controller);
                 var item = scope.$eval(attrs.typeaheadItem);
 
                 scope.$watch(function() { return controller.isActive(item); }, function(active) {

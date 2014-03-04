@@ -652,23 +652,28 @@ def add_to_library(context):
 
 @celery.task
 def search_user_list(context):
-    channel = context.get('outbound_channel', None)
     context_data = context.get(DATA_KEY, None)
     video_id = context.get('video_id', None)
     video = Video.objects.get(slug=video_id)
     term = context_data.get('term', None)
+    channel = context.get('outbound_channel', None)
+    return_data = dict()
 
-    if term and len(term) > 2:
+    print term
+
+    if term:
         profiles = UserProfile.objects.filter(
                                             Q(user__username__startswith=term) | \
                                             Q(display_name__startswith=term))
         users = [p.user for p in profiles]
         usersSerializer = UserSerializer(users, context={'video': video})
         usersSerialized = JSONRenderer().render(usersSerializer.data)
-        return_data = {
-            'users': json.loads(usersSerialized)
-        }
+        return_data['users'] = json.loads(usersSerialized)
         return construct_message('FB_SEARCH_USERS', channel, return_data)
+
+    return_data['users'] = []
+    return construct_message('FB_SEARCH_USERS', channel, return_data)
+
 
 
 @celery.task

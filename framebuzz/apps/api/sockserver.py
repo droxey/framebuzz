@@ -192,7 +192,8 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                                 'video_id': video_id,
                                 'data': data,
                                 'outbound_channel': self.session_channel,
-                                'username': data.get('username', None)
+                                'username': data.get('username', None),
+                                'term': data.get('term', None)
                             }) \
                         | tasks.search_user_list.s() \
                         | tasks.message_outbound.s()

@@ -330,6 +330,31 @@ angular.module('framebuzz.controllers', []).
                     }
                 };
 
+                //$scope.searchUsers = function(term) {
+$scope.$on('player_searchusers', function() {
+                    var term = broadcaster.message.term;
+                    if ($scope.videoInstance.is_authenticated) {
+                        if (term.length > 1) {
+                            socket.send_json({
+                                eventType: eventTypes.searchUsers,
+                                channel: SOCK.user_channel,
+                                data: {
+                                    'term': term,
+                                    'username': $scope.videoInstance.user.username
+                                }
+                            });
+                        }
+                        else {
+                            $scope.searchResults = [];
+                            safeApply($scope);
+                            broadcaster.prepForBroadcast({ broadcastType: 'user_search_complete', data: $scope.searchResults });
+                        }
+                    }
+                    else {
+                        notificationFactory.error('Please log in first!');
+                    }
+                });
+
                 $scope.selectUser = function(item) {
                     console.log('user selected!', item);
                     $scope.term = item.name;
@@ -526,23 +551,6 @@ angular.module('framebuzz.controllers', []).
                     }
                 });
 
-                $scope.$on('player_searchusers', function() {
-                    var term = broadcaster.message.term;
-                    if ($scope.videoInstance.is_authenticated) {
-                        socket.send_json({
-                            eventType: eventTypes.searchUsers,
-                            channel: SOCK.user_channel,
-                            data: {
-                                'term': term,
-                                'username': $scope.videoInstance.user.username
-                            }
-                        });
-                    }
-                    else {
-                        notificationFactory.error('Please log in first!');
-                    }
-                });
-
                 // --
                 // EVENT HANDLERS
                 // --
@@ -636,10 +644,9 @@ angular.module('framebuzz.controllers', []).
                         safeApply($scope);
                     }
                     else if (jsonData.eventType == eventTypes.searchUsers) {
-                        if (jsonData.data.users.length > 0) {
-                            $scope.searchResults = jsonData.data.users;
-                            safeApply($scope);
-                        }
+                        $scope.searchResults = jsonData.data.users;
+                        safeApply($scope);
+                        broadcaster.prepForBroadcast({ broadcastType: 'user_search_complete', data: $scope.searchResults });
                     }
                     else {
                         console.log('Socket received unhandled message.');
