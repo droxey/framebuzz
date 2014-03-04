@@ -193,7 +193,8 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                                 'data': data,
                                 'outbound_channel': self.session_channel,
                                 'username': data.get('username', None),
-                                'term': data.get('term', None)
+                                'term': data.get('term', None),
+                                'selected_users': data.get('selected_users', None)
                             }) \
                         | tasks.search_user_list.s() \
                         | tasks.message_outbound.s()
@@ -204,7 +205,8 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                                 'video_id': video_id,
                                 'data': data,
                                 'outbound_channel': self.session_channel,
-                                'username': data.get('username', None)
+                                'username': data.get('username', None),
+                                'invitees': data.get('invitees', None)
                             }) \
                         | tasks.start_private_convo.s() \
                         | tasks.message_outbound.s()

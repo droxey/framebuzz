@@ -657,12 +657,15 @@ def search_user_list(context):
     video = Video.objects.get(slug=video_id)
     term = context_data.get('term', None)
     channel = context.get('outbound_channel', None)
+    username = context_data.get('username', None)
     return_data = dict()
 
-    print term
+    # Add the authenticated user's name to the filter.
+    selected_users = context.get('selected_users', None) or list()
+    selected_users.append(username)
 
     if term:
-        profiles = UserProfile.objects.filter(
+        profiles = UserProfile.objects.exclude(user__username__in=selected_users).filter(
                                             Q(user__username__startswith=term) | \
                                             Q(display_name__startswith=term))
         users = [p.user for p in profiles]
@@ -682,7 +685,7 @@ def start_private_convo(context):
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
     video = Video.objects.get(slug=video_id)
-    invitees = list()
+    invitees = context.get('invitees', None) or list()
     send_to_list = list()
 
     if context_data.get('username', None):

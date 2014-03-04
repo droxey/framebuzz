@@ -2751,50 +2751,41 @@ object, embed, video, iframe {
 }
 /* line 2341, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo p.tip {
-  font-size: 0.62em;
+  font-size: 0.68em;
   font-style: italic;
-  line-height: 10px;
-  margin-top: -3px;
+  line-height: 12px;
+  margin: 4px 0;
   padding-bottom: 0;
-  padding-left: 8px;
+  padding-left: 3px;
 }
 /* line 2349, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo p.tip i {
   color: #0099CC;
+  float: left;
   font-size: 13px;
+  margin-right: 3px;
   position: relative;
   top: 1px;
 }
-/* line 2357, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo p.fields {
-  padding-top: 5px;
-  padding-bottom: 5px;
+/* line 2358, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo p.tip span {
+  display: inline-block;
+  position: relative;
+  top: 1px;
+  width: 90%;
 }
-/* line 2362, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo p #users-autocomplete {
-  float: left;
-  margin-bottom: 0;
-  margin-top: 0;
-  width: 89%;
-}
-/* line 2369, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo p #btn-add-user-convo {
-  float: right;
-  margin: auto;
-  width: auto;
-}
-/* line 2375, ../sass/screen.scss */
+/* line 2366, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo p span {
   display: inline-block;
   float: left;
 }
-/* line 2380, ../sass/screen.scss */
+/* line 2371, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo p span.fa-stack {
   margin-right: 3px;
   position: relative;
   top: 2px;
 }
-/* line 2385, ../sass/screen.scss */
+/* line 2376, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo p span.fa-stack .fa-stack-1x {
   color: white;
   font-family: 'proxima-nova';
@@ -2803,84 +2794,98 @@ object, embed, video, iframe {
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   width: 95%;
 }
-/* line 2394, ../sass/screen.scss */
+/* line 2385, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo p span.fa-stack .fa-circle {
   color: #F200BC;
 }
-/* line 2399, ../sass/screen.scss */
+/* line 2390, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo p span.instruction {
   font-size: 0.93em;
   line-height: 13px;
   width: 92%;
 }
-/* line 2405, ../sass/screen.scss */
+/* line 2396, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo p button {
   margin: 5px 20% 0;
   width: 61%;
 }
-/* line 2411, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.users {
-  background: rgba(0, 0, 0, 0.4);
-  font: 10px/12px 'proxima-nova';
-  height: 74px;
-  margin: 0 5px 5px;
-  overflow: hidden;
-  padding: 5px;
+/* line 2402, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.fields-wrapper {
+  margin: 10px -8px 15px;
+}
+/* line 2406, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.shadow {
+  background: rgba(55, 55, 55, 0.85);
+  box-shadow: 0 0 6px #212121 inset;
+  min-height: 89px;
+  padding: 3px;
+  width: 205px;
   -webkit-border-radius: 3px 3px;
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
 }
-/* line 2421, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li {
-  display: block;
-  float: left;
+/* line 2414, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.shadow h3 {
+  color: #0099CC;
+  font-family: 'proxima-nova';
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 0 3px 1px;
+  line-height: 10px;
+  text-transform: uppercase;
 }
 /* line 2425, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li i.fa-user {
-  color: rgba(0, 0, 0, 0.5);
-  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
+#player-container #buzz-layer #share-view #create-private-convo div.fields {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  float: left;
 }
-/* line 2430, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li i.fa-square {
-  color: rgba(255, 255, 255, 0.5);
+/* line 2431, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.fields div.input-fields .typeahead {
+  margin: 0;
 }
 /* line 2434, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li.empty {
-  width: 100%;
+#player-container #buzz-layer #share-view #create-private-convo div.fields div.input-fields form #users-autocomplete {
+  font-size: 11px;
+  margin-bottom: 3px;
+  margin-left: 3px;
+  margin-top: 3px;
+  padding: 0 5px;
+  width: 187px;
 }
-/* line 2441, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.menu {
-  background-color: black;
-  height: 107px;
-  margin-left: 8px;
-  margin-top: -9px;
+/* line 2445, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.fields div.menu {
+  background: rgba(0, 0, 0, 0.9);
+  height: 84px;
+  margin-left: 2px;
+  margin-top: -2px;
   overflow: auto;
+  padding-left: 4px;
+  padding-top: 0;
   position: absolute;
-  width: 362px;
+  width: 195px;
   z-index: 10;
 }
-/* line 2451, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.menu ul {
-  background-color: #FFF;
+/* line 2457, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul {
   margin: 0;
-  margin-left: 3px;
-  padding: 0;
+  padding: 3px;
   list-style: none;
 }
-/* line 2458, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.menu ul li {
-  background-color: black;
+/* line 2462, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li {
+  cursor: pointer;
   margin: auto;
   text-align: left;
   min-height: 26px;
   padding: 0 0 2px;
 }
-/* line 2465, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.menu ul li.active, #player-container #buzz-layer #share-view #create-private-convo div.menu ul li:hover {
+/* line 2469, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li.active, #player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li:hover {
   background-color: #2e4f9c;
 }
-/* line 2469, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.menu ul li p.name {
+/* line 2473, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li p.name {
   color: white;
   font-family: 'proxima-nova';
   font-size: 11px;
@@ -2888,14 +2893,89 @@ object, embed, video, iframe {
   padding: 0;
   text-indent: 3px;
 }
-/* line 2478, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo div.menu ul li img {
+/* line 2482, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li img {
+  height: 25px;
+  width: 25px;
+  float: left;
+}
+/* line 2492, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users {
+  font: 10px/12px 'proxima-nova';
+  float: right;
+  overflow: hidden;
+  height: 93px;
+}
+/* line 2498, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users {
+  margin: 0;
+  padding: 3px;
+  list-style: none;
+}
+/* line 2503, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li {
+  cursor: pointer;
+  margin: auto;
+  text-align: left;
+  min-height: 26px;
+  padding: 0 0 2px;
+}
+/* line 2510, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li i.fa-user {
+  color: rgba(0, 0, 0, 0.5);
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
+}
+/* line 2515, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li i.fa-square {
+  color: rgba(255, 255, 255, 0.5);
+}
+/* line 2519, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li.empty {
+  width: 100%;
+}
+/* line 2523, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name {
+  color: white;
+  font-family: 'proxima-nova';
+  font-size: 11px;
+  float: left;
+  line-height: 23px;
+  padding: 0;
+  text-indent: 3px;
+}
+/* line 2532, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name span.name {
+  display: inline-block;
+  float: left;
+  width: 160px;
+}
+/* line 2538, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item {
+  border: none;
+  box-shadow: none;
+  background: none;
+  color: white;
+  float: right;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+/* line 2548, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item i {
+  color: rgba(255, 255, 255, 0.9);
+}
+/* line 2552, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item:hover, #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item:focus, #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item:active {
+  color: white;
+}
+/* line 2558, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li img {
   height: 25px;
   width: 25px;
   float: left;
 }
 
-/* line 2494, ../sass/screen.scss */
+/* line 2574, ../sass/screen.scss */
 .wf-loading #player-container, .ng-cloak #player-container {
   visibility: hidden;
 }

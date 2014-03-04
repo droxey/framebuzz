@@ -2339,37 +2339,28 @@ object, embed, video, iframe {
                     }
 
                     &.tip {
-                        font-size: 0.62em;
+                        font-size: 0.68em;
                         font-style: italic;
-                        line-height: 10px;
-                        margin-top: -3px;
+                        line-height: 12px;
+                        margin: 4px 0;
                         padding-bottom: 0;
-                        padding-left: 8px;
+                        padding-left: 3px;
 
                         i {
                             color: #0099CC;
+                            float: left;
                             font-size: 13px;
+                            margin-right: 3px;
                             position: relative;
                             top: 1px;
                         }
-                    }
 
-                    &.fields {
-                        padding-top: 5px;
-                        padding-bottom: 5px;
-                    }
-
-                    #users-autocomplete {
-                        float: left;
-                        margin-bottom: 0;
-                        margin-top: 0;
-                        width: 89%;
-                    }
-
-                    #btn-add-user-convo {
-                        float: right;
-                        margin: auto;
-                        width: auto;
+                        span {
+                            display: inline-block;
+                            position: relative;
+                            top: 1px;
+                            width: 90%;
+                        }
                     }
 
                     span {
@@ -2408,19 +2399,113 @@ object, embed, video, iframe {
                     }
                 }
 
-                div.users {
-                    background: rgba(0, 0, 0, 0.4);
-                    font: 10px/12px 'proxima-nova';
-                    height: 74px;
-                    margin: 0 5px 5px;
-                    overflow: hidden;
-                    padding: 5px;
+                div.fields-wrapper {
+                    margin: 10px -8px 15px;
+                }
+
+                div.shadow {
+                    background: rgba(55, 55, 55, 0.85);
+                    box-shadow: 0 0 6px #212121 inset;
+                    min-height: 89px;
+                    padding: 3px;
+                    width: 205px;
                     @include border-radius(3px, 3px);
 
+                    h3 {
+                        color: #0099CC;
+                        font-family: 'proxima-nova';
+                        font-size: 12px;
+                        font-weight: 700;
+                        padding: 0 0 3px 1px;
+                        line-height: 10px;
+                        text-transform: uppercase;
+                    }
+                }
+
+                div.fields {
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    float: left;
+
+                    div.input-fields {
+                        .typeahead { margin: 0; }
+
+                        form {
+                            #users-autocomplete {
+                                font-size: 11px;
+                                margin-bottom: 3px;
+                                margin-left: 3px;
+                                margin-top: 3px;
+                                padding: 0 5px;
+                                width: 187px;
+                            }
+                        }
+                    }
+
+                    div.menu {
+                        background: rgba(0, 0, 0, 0.9);
+                        height: 84px;
+                        margin-left: 2px;
+                        margin-top: -2px;
+                        overflow: auto;
+                        padding-left: 4px;
+                        padding-top: 0;
+                        position: absolute;
+                        width: 195px;
+                        z-index: 10;
+
+                        ul {
+                            margin: 0;
+                            padding: 3px;
+                            list-style: none;
+
+                            li {
+                                cursor: pointer;
+                                margin: auto;
+                                text-align: left;
+                                min-height: 26px;
+                                padding: 0 0 2px;
+
+                                &.active, &:hover {
+                                     background-color: rgb(46, 79, 156);
+                                }
+
+                                p.name {
+                                    color: white;
+                                    font-family: 'proxima-nova';
+                                    font-size: 11px;
+                                    line-height: 23px;
+                                    padding: 0;
+                                    text-indent: 3px;
+                                }
+
+                                img {
+                                    height: 25px;
+                                    width: 25px;
+                                    float: left;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                div.users {
+                    font: 10px/12px 'proxima-nova';
+                    float: right;
+                    overflow: hidden;
+                    height: 93px;
+
                     #convo-selected-users {
+                        margin: 0;
+                        padding: 3px;
+                        list-style: none;
+
                         li {
-                            display: block;
-                            float: left;
+                            cursor: pointer;
+                            margin: auto;
+                            text-align: left;
+                            min-height: 26px;
+                            padding: 0 0 2px;
 
                             i.fa-user {
                                 color: rgba(0, 0, 0, 0.5);
@@ -2434,45 +2519,40 @@ object, embed, video, iframe {
                             &.empty {
                                 width: 100%;
                             }
-                        }
-                    }
-                }
-
-                div.menu {
-                    background-color: black;
-                    height: 107px;
-                    margin-left: 8px;
-                    margin-top: -8px;
-                    overflow: auto;
-                    position: absolute;
-                    width: 362px;
-                    z-index: 10;
-
-                    ul {
-                        background-color: #FFF;
-                        margin: 0;
-                        margin-left: 3px;
-                        padding: 0;
-                        list-style: none;
-
-                        li {
-                            background-color: black;
-                            margin: auto;
-                            text-align: left;
-                            min-height: 26px;
-                            padding: 0 0 2px;
-
-                            &.active, &:hover {
-                                 background-color: rgb(46, 79, 156);
-                            }
 
                             p.name {
                                 color: white;
                                 font-family: 'proxima-nova';
                                 font-size: 11px;
+                                float: left;
                                 line-height: 23px;
                                 padding: 0;
                                 text-indent: 3px;
+
+                                span.name {
+                                    display: inline-block;
+                                    float: left;
+                                    width: 160px;
+                                }
+
+                                button.remove-item {
+                                    border: none;
+                                    box-shadow: none;
+                                    background: none;
+                                    color: white;
+                                    float: right;
+                                    margin: 0;
+                                    padding: 0;
+                                    width: auto;
+
+                                    i {
+                                        color: rgba(255, 255, 255, 0.9);
+                                    }
+
+                                    &:hover, &:focus, &:active {
+                                        color: rgba(255, 255, 255, 1);
+                                    }
+                                }
                             }
 
                             img {

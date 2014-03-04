@@ -368,9 +368,9 @@ angular.module('framebuzz.directives', [])
             restrict: 'E',
             transclude: true,
             replace: true,
-            template: '<div class="fields">' +
+            template: '<div class="input-fields">' +
                         '<form class="clearfix">' +
-                            '<input id="users-autocomplete" data-ng-model="term" data-ng-change="query()" type="text" placeholder="Start typing to invite FrameBuzz users..." autocomplete="off">' +
+                            '<input id="users-autocomplete" data-ng-model="term" data-ng-change="query()" type="text" placeholder="Find friends&hellip;" autocomplete="off">' +
                             '<div ng-transclude></div>' +
                         '</form>' +
                         '<div ng-transclude></div>' +
@@ -519,7 +519,8 @@ angular.module('framebuzz.directives', [])
 
                     broadcaster.prepForBroadcast({ broadcastType: 'player_addinvitee', invitee: item });
 
-                    $element.parent().parent().hide();
+                    $('div.menu').hide();
+                    $element.remove();
                  });
             }
         };

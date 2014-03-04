@@ -318,11 +318,7 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.initPrivateConvo = function() {
                     if ($scope.videoInstance.is_authenticated) {
-                        var usernames = [];
-                        for (var i = 0; i <= $scope.invitees.length; i++) {
-                            usernames.push($scope.invitees[i].username);
-                        }
-
+                        var usernames = getUsernamesFromInvitees();
                         socket.send_json({
                             eventType: eventTypes.startPrivateConvo,
                             channel: SOCK.user_channel,
@@ -341,43 +337,24 @@ angular.module('framebuzz.controllers', [])
                     return $scope.searchResults.length > 0;
                 };
 
-                $scope.$on('player_searchusers', function() {
-                    var term = broadcaster.message.term;
-                    if ($scope.videoInstance.is_authenticated) {
-                        if (term.length > 1) {
-                            socket.send_json({
-                                eventType: eventTypes.searchUsers,
-                                channel: SOCK.user_channel,
-                                data: {
-                                    'term': term,
-                                    'username': $scope.videoInstance.user.username
-                                }
-                            });
-                        }
-                        else {
-                            $scope.searchResults = [];
-                            safeApply($scope);
-                            broadcaster.prepForBroadcast({ broadcastType: 'user_search_complete', data: $scope.searchResults });
-                        }
-                    }
-                    else {
-                        notificationFactory.error('Please log in first!');
-                    }
-                });
-
-                $scope.$on('player_addinvitee', function() {
-                    var invitee = broadcaster.message.invitee;
-                    $scope.invitees.push(invitee);
-                    safeApply($scope);
-                });
-
-                $scope.selectUser = function(item) {
-                    console.log('user selected!', item);
+                $scope.removeInvitee = function(invitee) {
+                    var index = $scope.invitees.indexOf(invitee);
+                    $scope.invitees.splice(index, 1);
                 };
 
                 // --
                 // PRIVATE METHODS
                 // --
+
+                var getUsernamesFromInvitees = function() {
+                    var usernames = [];
+                    if ($scope.invitees.length > 0) {
+                        for (var i = 0; i < $scope.invitees.length; i++) {
+                            usernames.push($scope.invitees[i].username);
+                        }
+                    }
+                    return usernames;
+                };
 
                 var getThreadById = function(threadId) {
                     var found = null;
@@ -560,6 +537,39 @@ angular.module('framebuzz.controllers', [])
                             }
                         });
                     }
+                });
+
+                $scope.$on('player_searchusers', function() {
+                    var term = broadcaster.message.term;
+                    var usernames = getUsernamesFromInvitees();
+
+                    if ($scope.videoInstance.is_authenticated) {
+                        if (term.length > 1) {
+                            socket.send_json({
+                                eventType: eventTypes.searchUsers,
+                                channel: SOCK.user_channel,
+                                data: {
+                                    'term': term,
+                                    'invitees': usernames,
+                                    'username': $scope.videoInstance.user.username
+                                }
+                            });
+                        }
+                        else {
+                            $scope.searchResults = [];
+                            safeApply($scope);
+                            broadcaster.prepForBroadcast({ broadcastType: 'user_search_complete', data: $scope.searchResults });
+                        }
+                    }
+                    else {
+                        notificationFactory.error('Please log in first!');
+                    }
+                });
+
+                $scope.$on('player_addinvitee', function() {
+                    var invitee = broadcaster.message.invitee;
+                    $scope.invitees.push(invitee);
+                    safeApply($scope);
                 });
 
                 // --

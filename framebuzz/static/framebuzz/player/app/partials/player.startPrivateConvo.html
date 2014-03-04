@@ -25,37 +25,38 @@
                         Click their name to invite them to join the conversation.
                     </span>
                 </p>
-                <p class="clearfix fields">
-                    <typeahead class="typeahead" items="searchResults" term="term" search="searchUsers(term)" select="selectUser(item)">
-                        <div class="menu" ng-show="hasSearchResults()">
-                            <ul>
-                                <li typeahead-item="user" ng-repeat="user in searchResults" class="results">
-                                    <img class="img-circle" ng-src="{{user.avatar_url}}" height="25" width="25" alt="{{user.display_name}}">
-                                    <p class="name">{{user.display_name}}</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </typeahead>
-                </p>
-                <p class="tip">
-                    <i class="fa fa-question-circle"></i>
-                    Can't find someone? Enter their email address above, and we'll handle the rest!
-                </p>
-                <div class="users">
-                    <ul id="convo-selected-users" class="clearfix">
-                        <h3>Selected Users</h3>
-                        <li class="invitee" ng-show="invitees.length > 0" ng-repeat="invitee in invitees">
-                            <img class="img-circle" ng-src="{{invitee.avatar_url}}" height="25" width="25" alt="{{invitee.display_name}}">
-                            <p class="name">{{invitee.display_name}}</p>
-                        </li>
-                        <li class="empty" ng-show="invitees.length == 0">
-                            <span class="fa-stack fa-lg no-users">
-                              <i class="fa fa-square fa-stack-2x"></i>
-                              <i class="fa fa-user fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <strong>No users added yet!</strong>
-                        </li>
-                    </ul>
+                <div class="fields-wrapper clearfix">
+                    <div class="fields shadow">
+                        <h3>
+                            <i class="fa fa-search"></i> Search
+                        </h3>
+                        <typeahead class="typeahead clearfix" items="searchResults" term="term" search="searchUsers(term)" select="selectUser(item)">
+                            <div class="menu" ng-show="hasSearchResults()">
+                                <ul>
+                                    <li typeahead-item="user" ng-repeat="user in searchResults" class="results">
+                                        <img class="img-circle" ng-src="{{user.avatar_url}}" height="25" width="25" alt="{{user.display_name}}">
+                                        <p class="name">{{user.display_name}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </typeahead>
+                        <p class="tip">
+                            <i class="fa fa-question-circle"></i>
+                            <span>Can't find someone? Enter their email address above, and we'll handle the rest!</span>
+                        </p>
+                    </div>
+                    <div class="users shadow">
+                        <h3><i class="fa fa-envelope"></i> Invites ({{invitees.length}})</h3>
+                        <ul id="convo-selected-users" class="clearfix" ng-show="invitees.length > 0">
+                            <li class="invitee" ng-repeat="invitee in invitees">
+                                <img class="img-circle" ng-src="{{invitee.avatar_url}}" height="25" width="25" alt="{{invitee.display_name}}">
+                                <p class="name clearfix">
+                                    <span class="name">{{invitee.display_name}}</span>
+                                    <button type="button" class="remove-item" ng-click="removeInvitee(invitee)"><i class="fa fa-trash-o"></i></button>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <p class="clearfix">
                     <span class="fa-stack">
