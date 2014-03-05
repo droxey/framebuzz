@@ -2911,8 +2911,9 @@ object, embed, video, iframe {
   margin: 0;
   padding: 3px;
   list-style: none;
+  margin-top: 4px;
 }
-/* line 2503, ../sass/screen.scss */
+/* line 2504, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li {
   cursor: pointer;
   margin: auto;
@@ -2920,20 +2921,20 @@ object, embed, video, iframe {
   min-height: 26px;
   padding: 0 0 2px;
 }
-/* line 2510, ../sass/screen.scss */
+/* line 2511, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li i.fa-user {
   color: rgba(0, 0, 0, 0.5);
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
 }
-/* line 2515, ../sass/screen.scss */
+/* line 2516, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li i.fa-square {
   color: rgba(255, 255, 255, 0.5);
 }
-/* line 2519, ../sass/screen.scss */
+/* line 2520, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li.empty {
   width: 100%;
 }
-/* line 2523, ../sass/screen.scss */
+/* line 2524, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name {
   color: white;
   font-family: 'proxima-nova';
@@ -2943,13 +2944,13 @@ object, embed, video, iframe {
   padding: 0;
   text-indent: 3px;
 }
-/* line 2532, ../sass/screen.scss */
+/* line 2533, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name span.name {
   display: inline-block;
   float: left;
   width: 160px;
 }
-/* line 2538, ../sass/screen.scss */
+/* line 2539, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item {
   border: none;
   box-shadow: none;
@@ -2960,22 +2961,122 @@ object, embed, video, iframe {
   padding: 0;
   width: auto;
 }
-/* line 2548, ../sass/screen.scss */
+/* line 2549, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item i {
   color: rgba(255, 255, 255, 0.9);
 }
-/* line 2552, ../sass/screen.scss */
+/* line 2553, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item:hover, #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item:focus, #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item:active {
   color: white;
 }
-/* line 2558, ../sass/screen.scss */
+/* line 2559, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li img {
   height: 25px;
   width: 25px;
   float: left;
 }
 
-/* line 2574, ../sass/screen.scss */
+/* line 2575, ../sass/screen.scss */
 .wf-loading #player-container, .ng-cloak #player-container {
   visibility: hidden;
+}
+
+/* line 2580, ../sass/screen.scss */
+.animate-invitee-add {
+  -webkit-animation: add-invitee 600ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  animation: add-invitee 600ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  display: block;
+  position: relative;
+}
+
+@-webkit-keyframes add-invitee {
+  /* line 2587, ../sass/screen.scss */
+  from {
+    opacity: 0;
+    height: 0px;
+    top: -70px;
+  }
+
+  /* line 2592, ../sass/screen.scss */
+  75% {
+    top: 15px;
+  }
+
+  /* line 2595, ../sass/screen.scss */
+  to {
+    opacity: 1;
+    height: 30px;
+    top: 0px;
+  }
+}
+
+@keyframes add-invitee {
+  /* line 2602, ../sass/screen.scss */
+  from {
+    opacity: 0;
+    height: 0px;
+    top: -70px;
+  }
+
+  /* line 2607, ../sass/screen.scss */
+  75% {
+    top: 15px;
+  }
+
+  /* line 2610, ../sass/screen.scss */
+  to {
+    opacity: 1;
+    height: 30px;
+    top: 0px;
+  }
+}
+
+/* line 2617, ../sass/screen.scss */
+.animate-invitee-remove {
+  -webkit-animation: remove-invitee 600ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  animation: remove-invitee 600ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  display: block;
+  position: relative;
+}
+
+@-webkit-keyframes remove-invitee {
+  /* line 2624, ../sass/screen.scss */
+  to {
+    opacity: 0;
+    height: 0px;
+    top: -70px;
+  }
+
+  /* line 2629, ../sass/screen.scss */
+  25% {
+    top: 15px;
+  }
+
+  /* line 2632, ../sass/screen.scss */
+  from {
+    opacity: 1;
+    height: 30px;
+    top: 0px;
+  }
+}
+
+@keyframes remove-invitee {
+  /* line 2639, ../sass/screen.scss */
+  to {
+    opacity: 0;
+    height: 0px;
+    top: -70px;
+  }
+
+  /* line 2644, ../sass/screen.scss */
+  25% {
+    top: 15px;
+  }
+
+  /* line 2647, ../sass/screen.scss */
+  from {
+    opacity: 1;
+    height: 30px;
+    top: 0px;
+  }
 }

@@ -542,6 +542,7 @@ angular.module('framebuzz.controllers', [])
                 $scope.$on('player_searchusers', function() {
                     var term = broadcaster.message.term;
                     var usernames = getUsernamesFromInvitees();
+                    console.log(usernames);
 
                     if ($scope.videoInstance.is_authenticated) {
                         if (term.length > 1) {
@@ -550,7 +551,7 @@ angular.module('framebuzz.controllers', [])
                                 channel: SOCK.user_channel,
                                 data: {
                                     'term': term,
-                                    'invitees': usernames,
+                                    'selected_users': usernames,
                                     'username': $scope.videoInstance.user.username
                                 }
                             });
