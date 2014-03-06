@@ -2382,7 +2382,7 @@ object, embed, video, iframe {
                             width: 95%;
                         }
 
-                        .fa-circle {
+                        .fa-square {
                             color: #F200BC;
                         }
                     }
@@ -2401,6 +2401,24 @@ object, embed, video, iframe {
 
                 div.fields-wrapper {
                     margin: 10px -8px 15px;
+                }
+
+                span.email-stack {
+                    display: block;
+                    float: left;
+                    height: 25px;
+                    width: 25px;
+
+                    i.fa-circle {
+                        color: #00AFF0;
+                        font-size: 27px;
+                        line-height: 23px;
+                    }
+
+                    i.fa-envelope {
+                        font-size: 12px;
+                        line-height: 23px;
+                    }
                 }
 
                 div.shadow {
@@ -2437,16 +2455,18 @@ object, embed, video, iframe {
                                 margin-left: 3px;
                                 margin-top: 3px;
                                 padding: 0 5px;
+                                position: relative;
                                 width: 187px;
+                                z-index: 11;
                             }
                         }
                     }
 
                     div.menu {
-                        background: rgba(0, 0, 0, 0.9);
-                        height: 84px;
+                        background: none repeat scroll 0 0 rgba(0, 0, 0, 0.9);
+                        bottom: 64px;
+                        height: 92px;
                         margin-left: 2px;
-                        margin-top: -2px;
                         overflow: auto;
                         padding-left: 4px;
                         padding-top: 0;
@@ -2456,7 +2476,7 @@ object, embed, video, iframe {
 
                         ul {
                             margin: 0;
-                            padding: 3px;
+                            padding: 3px 3px 0;
                             list-style: none;
 
                             li {
@@ -2464,7 +2484,7 @@ object, embed, video, iframe {
                                 margin: auto;
                                 text-align: left;
                                 min-height: 26px;
-                                padding: 0 0 2px;
+                                padding: 3px 0;
 
                                 &.active, &:hover {
                                      background-color: rgb(46, 79, 156);
@@ -2485,6 +2505,18 @@ object, embed, video, iframe {
                                     float: left;
                                 }
                             }
+
+                            li.email {
+                                p.name {
+                                    display: block;
+                                    line-height: 10px;
+                                    margin-left: 10px;
+                                    text-indent: 0;
+                                    width: 90%;
+
+                                    strong { font-weight: 700; }
+                                }
+                            }
                         }
                     }
                 }
@@ -2493,7 +2525,9 @@ object, embed, video, iframe {
                     font: 10px/12px 'proxima-nova';
                     float: right;
                     overflow: hidden;
-                    height: 93px;
+                    height: 94px;
+
+                    h3 { margin-top: 2px; }
 
                     #convo-selected-users {
                         margin: 0;

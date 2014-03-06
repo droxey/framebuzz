@@ -37,6 +37,7 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.searchResults = [];
                 $scope.invitees = [];
+                $scope.inviteeUsernamesOrEmails = [];
 
                 var eventTypes = {
                     initVideo: 'FB_INITIALIZE_VIDEO',
@@ -318,13 +319,12 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.initPrivateConvo = function() {
                     if ($scope.videoInstance.is_authenticated) {
-                        var usernames = getUsernamesFromInvitees();
                         socket.send_json({
                             eventType: eventTypes.startPrivateConvo,
                             channel: SOCK.user_channel,
                             data: {
                                 'username': $scope.videoInstance.user.username,
-                                'invitees': usernames
+                                'invitees': $scope.inviteeUsernamesOrEmails
                             }
                         });
                     }
@@ -342,19 +342,24 @@ angular.module('framebuzz.controllers', [])
                     $scope.invitees.splice(index, 1);
                 };
 
+                $scope.addInviteeEmailAddress = function(term) {
+                    var invitee = {
+                        display_name: term,
+                        avatar_url: null
+                    };
+
+                    $scope.invitees.unshift(invitee);
+                    $scope.inviteeUsernamesOrEmails.unshift(term);
+                    safeApply($scope);
+
+                    // TODO: this is bad and you should feel bad. fix it.
+                    $('div.menu').hide();
+                };
+
+
                 // --
                 // PRIVATE METHODS
                 // --
-
-                var getUsernamesFromInvitees = function() {
-                    var usernames = [];
-                    if ($scope.invitees.length > 0) {
-                        for (var i = 0; i < $scope.invitees.length; i++) {
-                            usernames.push($scope.invitees[i].username);
-                        }
-                    }
-                    return usernames;
-                };
 
                 var getThreadById = function(threadId) {
                     var found = null;
@@ -541,8 +546,6 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.$on('player_searchusers', function() {
                     var term = broadcaster.message.term;
-                    var usernames = getUsernamesFromInvitees();
-                    console.log(usernames);
 
                     if ($scope.videoInstance.is_authenticated) {
                         if (term.length > 1) {
@@ -551,7 +554,7 @@ angular.module('framebuzz.controllers', [])
                                 channel: SOCK.user_channel,
                                 data: {
                                     'term': term,
-                                    'selected_users': usernames,
+                                    'selected_users': $scope.inviteeUsernamesOrEmails,
                                     'username': $scope.videoInstance.user.username
                                 }
                             });
@@ -568,8 +571,10 @@ angular.module('framebuzz.controllers', [])
                 });
 
                 $scope.$on('player_addinvitee', function() {
-                    var invitee = broadcaster.message.invitee;
-                    $scope.invitees.push(invitee);
+                    var broadcastObject = broadcaster.message.invitee;
+
+                    $scope.inviteeUsernamesOrEmails.unshift(broadcastObject.username);
+                    $scope.invitees.unshift(broadcastObject);
                     safeApply($scope);
                 });
 

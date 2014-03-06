@@ -17,7 +17,7 @@
             <form id="start-convo-form" data-ng-submit="initPrivateConvo()" action="" method="POST">
                 <p class="clearfix">
                     <span class="fa-stack">
-                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-square fa-stack-2x"></i>
                         <i class="fa-stack-1x">1</i>
                      </span>
                     <span class="instruction">
@@ -30,12 +30,19 @@
                         <h3>
                             <i class="fa fa-search"></i> Search
                         </h3>
-                        <typeahead class="typeahead clearfix" items="searchResults" term="term" search="searchUsers(term)" select="selectUser(item)">
-                            <div class="menu" ng-show="hasSearchResults()">
+                        <typeahead class="typeahead clearfix" items="searchResults" term="term" search="searchUsers(term)">
+                            <div class="menu" ng-show="searchResults.length > 0 && term.length > 2">
                                 <ul>
                                     <li typeahead-item="user" ng-repeat="user in searchResults" class="results">
                                         <img class="img-circle" ng-src="{{user.avatar_url}}" height="25" width="25" alt="{{user.display_name}}">
                                         <p class="name">{{user.display_name}}</p>
+                                    </li>
+                                    <li ng-click="addInviteeEmailAddress(term)" class="email" ng-hide="searchResults.length > 0 || term.length < 2">
+                                        <span class="fa-stack email-stack">
+                                          <i class="fa fa-circle fa-stack-2x"></i>
+                                          <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                        <p class="name"><strong>Enter email address</strong>:<br>{{term}}</p>
                                     </li>
                                 </ul>
                             </div>
@@ -47,10 +54,14 @@
                     </div>
                     <div class="users shadow">
                         <h3><i class="fa fa-envelope"></i> Invites ({{invitees.length}})</h3>
-                        <div class="scroller" data-scrollbar="true">
+                        <div class="scroller">
                             <ul id="convo-selected-users" class="clearfix" ng-show="invitees.length > 0">
                                 <li class="invitee" ng-repeat="invitee in invitees" ng-animate="{ enter: 'animate-invitee-add', leave: 'animate-invitee-remove' }">
-                                    <img class="img-circle" ng-src="{{invitee.avatar_url}}" height="25" width="25" alt="{{invitee.display_name}}">
+                                    <img ng-hide="invitee.avatar_url == null" class="img-circle" ng-src="{{invitee.avatar_url}}" height="25" width="25" alt="{{invitee.display_name}}">
+                                    <span ng-show="invitee.avatar_url == null" class="fa-stack email-stack">
+                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                      <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                                    </span>
                                     <p class="name clearfix">
                                         <span class="name">{{invitee.display_name}}</span>
                                         <button type="button" class="remove-item" ng-click="removeInvitee(invitee)"><i class="fa fa-trash-o"></i></button>
@@ -62,7 +73,7 @@
                 </div>
                 <p class="clearfix">
                     <span class="fa-stack">
-                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-square fa-stack-2x"></i>
                         <i class="fa-stack-1x">2</i>
                     </span>
                     <span class="instruction">
@@ -72,7 +83,7 @@
                 </p>
                 <p>
                     <button id="init-private-session" class="rounded" type="button" ng-click="initPrivateConvo()">
-                        Send Invitations &amp; Start the Conversation!
+                        Send Invites &amp; Start Chatting!
                     </button>
                 </p>
             </form>

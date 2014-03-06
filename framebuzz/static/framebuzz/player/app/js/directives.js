@@ -421,14 +421,10 @@ angular.module('framebuzz.directives', [])
                 $scope.query = function() {
                     $scope.hide = false;
                     broadcaster.prepForBroadcast({ broadcastType: 'player_searchusers', term: $scope.term });
-                }
+                };
 
                 $scope.$on('user_search_complete', function() {
                     $scope.items = broadcaster.message.data;
-
-                    if ($scope.items.length == 0) {
-                        $scope.hide = true;
-                    }
                 });
             }],
 
@@ -521,6 +517,7 @@ angular.module('framebuzz.directives', [])
 
                     $('div.menu').hide();
                     $element.remove();
+                    $('#users-autocomplete').val('');
                  });
             }
         };

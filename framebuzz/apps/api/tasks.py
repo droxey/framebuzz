@@ -662,7 +662,6 @@ def search_user_list(context):
 
     # Add the authenticated user's name to the filter.
     selected_users = context.get('selected_users', None) or list()
-    print selected_users
     selected_users.append(username)
 
     if term:

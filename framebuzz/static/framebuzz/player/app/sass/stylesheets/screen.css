@@ -2795,7 +2795,7 @@ object, embed, video, iframe {
   width: 95%;
 }
 /* line 2385, ../sass/screen.scss */
-#player-container #buzz-layer #share-view #create-private-convo p span.fa-stack .fa-circle {
+#player-container #buzz-layer #share-view #create-private-convo p span.fa-stack .fa-square {
   color: #F200BC;
 }
 /* line 2390, ../sass/screen.scss */
@@ -2814,6 +2814,24 @@ object, embed, video, iframe {
   margin: 10px -8px 15px;
 }
 /* line 2406, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo span.email-stack {
+  display: block;
+  float: left;
+  height: 25px;
+  width: 25px;
+}
+/* line 2412, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo span.email-stack i.fa-circle {
+  color: #00AFF0;
+  font-size: 27px;
+  line-height: 23px;
+}
+/* line 2418, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo span.email-stack i.fa-envelope {
+  font-size: 12px;
+  line-height: 23px;
+}
+/* line 2424, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.shadow {
   background: rgba(55, 55, 55, 0.85);
   box-shadow: 0 0 6px #212121 inset;
@@ -2824,7 +2842,7 @@ object, embed, video, iframe {
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
 }
-/* line 2414, ../sass/screen.scss */
+/* line 2432, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.shadow h3 {
   color: #0099CC;
   font-family: 'proxima-nova';
@@ -2834,31 +2852,33 @@ object, embed, video, iframe {
   line-height: 10px;
   text-transform: uppercase;
 }
-/* line 2425, ../sass/screen.scss */
+/* line 2443, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.fields {
   padding-top: 5px;
   padding-bottom: 5px;
   float: left;
 }
-/* line 2431, ../sass/screen.scss */
+/* line 2449, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.fields div.input-fields .typeahead {
   margin: 0;
 }
-/* line 2434, ../sass/screen.scss */
+/* line 2452, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.fields div.input-fields form #users-autocomplete {
   font-size: 11px;
   margin-bottom: 3px;
   margin-left: 3px;
   margin-top: 3px;
   padding: 0 5px;
+  position: relative;
   width: 187px;
+  z-index: 11;
 }
-/* line 2445, ../sass/screen.scss */
+/* line 2465, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.fields div.menu {
-  background: rgba(0, 0, 0, 0.9);
-  height: 84px;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.9);
+  bottom: 64px;
+  height: 92px;
   margin-left: 2px;
-  margin-top: -2px;
   overflow: auto;
   padding-left: 4px;
   padding-top: 0;
@@ -2866,25 +2886,25 @@ object, embed, video, iframe {
   width: 195px;
   z-index: 10;
 }
-/* line 2457, ../sass/screen.scss */
+/* line 2477, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul {
   margin: 0;
-  padding: 3px;
+  padding: 3px 3px 0;
   list-style: none;
 }
-/* line 2462, ../sass/screen.scss */
+/* line 2482, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li {
   cursor: pointer;
   margin: auto;
   text-align: left;
   min-height: 26px;
-  padding: 0 0 2px;
+  padding: 3px 0;
 }
-/* line 2469, ../sass/screen.scss */
+/* line 2489, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li.active, #player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li:hover {
   background-color: #2e4f9c;
 }
-/* line 2473, ../sass/screen.scss */
+/* line 2493, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li p.name {
   color: white;
   font-family: 'proxima-nova';
@@ -2893,27 +2913,43 @@ object, embed, video, iframe {
   padding: 0;
   text-indent: 3px;
 }
-/* line 2482, ../sass/screen.scss */
+/* line 2502, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li img {
   height: 25px;
   width: 25px;
   float: left;
 }
-/* line 2492, ../sass/screen.scss */
+/* line 2510, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li.email p.name {
+  display: block;
+  line-height: 10px;
+  margin-left: 10px;
+  text-indent: 0;
+  width: 90%;
+}
+/* line 2517, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.fields div.menu ul li.email p.name strong {
+  font-weight: 700;
+}
+/* line 2524, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users {
   font: 10px/12px 'proxima-nova';
   float: right;
   overflow: hidden;
-  height: 93px;
+  height: 94px;
 }
-/* line 2498, ../sass/screen.scss */
+/* line 2530, ../sass/screen.scss */
+#player-container #buzz-layer #share-view #create-private-convo div.users h3 {
+  margin-top: 2px;
+}
+/* line 2532, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users {
   margin: 0;
   padding: 3px;
   list-style: none;
   margin-top: 4px;
 }
-/* line 2504, ../sass/screen.scss */
+/* line 2538, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li {
   cursor: pointer;
   margin: auto;
@@ -2921,20 +2957,20 @@ object, embed, video, iframe {
   min-height: 26px;
   padding: 0 0 2px;
 }
-/* line 2511, ../sass/screen.scss */
+/* line 2545, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li i.fa-user {
   color: rgba(0, 0, 0, 0.5);
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);
 }
-/* line 2516, ../sass/screen.scss */
+/* line 2550, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li i.fa-square {
   color: rgba(255, 255, 255, 0.5);
 }
-/* line 2520, ../sass/screen.scss */
+/* line 2554, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li.empty {
   width: 100%;
 }
-/* line 2524, ../sass/screen.scss */
+/* line 2558, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name {
   color: white;
   font-family: 'proxima-nova';
@@ -2944,13 +2980,13 @@ object, embed, video, iframe {
   padding: 0;
   text-indent: 3px;
 }
-/* line 2533, ../sass/screen.scss */
+/* line 2567, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name span.name {
   display: inline-block;
   float: left;
   width: 160px;
 }
-/* line 2539, ../sass/screen.scss */
+/* line 2573, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item {
   border: none;
   box-shadow: none;
@@ -2961,27 +2997,27 @@ object, embed, video, iframe {
   padding: 0;
   width: auto;
 }
-/* line 2549, ../sass/screen.scss */
+/* line 2583, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item i {
   color: rgba(255, 255, 255, 0.9);
 }
-/* line 2553, ../sass/screen.scss */
+/* line 2587, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item:hover, #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item:focus, #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li p.name button.remove-item:active {
   color: white;
 }
-/* line 2559, ../sass/screen.scss */
+/* line 2593, ../sass/screen.scss */
 #player-container #buzz-layer #share-view #create-private-convo div.users #convo-selected-users li img {
   height: 25px;
   width: 25px;
   float: left;
 }
 
-/* line 2575, ../sass/screen.scss */
+/* line 2609, ../sass/screen.scss */
 .wf-loading #player-container, .ng-cloak #player-container {
   visibility: hidden;
 }
 
-/* line 2580, ../sass/screen.scss */
+/* line 2614, ../sass/screen.scss */
 .animate-invitee-add {
   -webkit-animation: add-invitee 600ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
   animation: add-invitee 600ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
@@ -2990,19 +3026,19 @@ object, embed, video, iframe {
 }
 
 @-webkit-keyframes add-invitee {
-  /* line 2587, ../sass/screen.scss */
+  /* line 2621, ../sass/screen.scss */
   from {
     opacity: 0;
     height: 0px;
     top: -70px;
   }
 
-  /* line 2592, ../sass/screen.scss */
+  /* line 2626, ../sass/screen.scss */
   75% {
     top: 15px;
   }
 
-  /* line 2595, ../sass/screen.scss */
+  /* line 2629, ../sass/screen.scss */
   to {
     opacity: 1;
     height: 30px;
@@ -3011,19 +3047,19 @@ object, embed, video, iframe {
 }
 
 @keyframes add-invitee {
-  /* line 2602, ../sass/screen.scss */
+  /* line 2636, ../sass/screen.scss */
   from {
     opacity: 0;
     height: 0px;
     top: -70px;
   }
 
-  /* line 2607, ../sass/screen.scss */
+  /* line 2641, ../sass/screen.scss */
   75% {
     top: 15px;
   }
 
-  /* line 2610, ../sass/screen.scss */
+  /* line 2644, ../sass/screen.scss */
   to {
     opacity: 1;
     height: 30px;
@@ -3031,7 +3067,7 @@ object, embed, video, iframe {
   }
 }
 
-/* line 2617, ../sass/screen.scss */
+/* line 2651, ../sass/screen.scss */
 .animate-invitee-remove {
   -webkit-animation: remove-invitee 600ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
   animation: remove-invitee 600ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
@@ -3040,19 +3076,19 @@ object, embed, video, iframe {
 }
 
 @-webkit-keyframes remove-invitee {
-  /* line 2624, ../sass/screen.scss */
+  /* line 2658, ../sass/screen.scss */
   to {
     opacity: 0;
     height: 0px;
     top: -70px;
   }
 
-  /* line 2629, ../sass/screen.scss */
+  /* line 2663, ../sass/screen.scss */
   25% {
     top: 15px;
   }
 
-  /* line 2632, ../sass/screen.scss */
+  /* line 2666, ../sass/screen.scss */
   from {
     opacity: 1;
     height: 30px;
@@ -3061,19 +3097,19 @@ object, embed, video, iframe {
 }
 
 @keyframes remove-invitee {
-  /* line 2639, ../sass/screen.scss */
+  /* line 2673, ../sass/screen.scss */
   to {
     opacity: 0;
     height: 0px;
     top: -70px;
   }
 
-  /* line 2644, ../sass/screen.scss */
+  /* line 2678, ../sass/screen.scss */
   25% {
     top: 15px;
   }
 
-  /* line 2647, ../sass/screen.scss */
+  /* line 2681, ../sass/screen.scss */
   from {
     opacity: 1;
     height: 30px;
