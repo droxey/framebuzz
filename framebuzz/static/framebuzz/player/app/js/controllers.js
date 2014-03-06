@@ -166,7 +166,8 @@ angular.module('framebuzz.controllers', [])
                         'content_type': 'core.video',
                         'time': timeTruncated,
                         'comment': $scope.newThread.comment,
-                        'username': $scope.videoInstance.user.username
+                        'username': $scope.videoInstance.user.username,
+                        'session_key': $scope.sessionKey
                     };
 
                     socket.send_json({
@@ -188,7 +189,8 @@ angular.module('framebuzz.controllers', [])
                         'time': 0.000,
                         'comment': $scope.newReply.comment,
                         'parent': $scope.selectedThread.id,
-                        'username': $scope.videoInstance.user.username
+                        'username': $scope.videoInstance.user.username,
+                        'session_key': $scope.sessionKey
                     };
 
                     socket.send_json({
@@ -667,8 +669,8 @@ angular.module('framebuzz.controllers', [])
                         notificationFactory.info(jsonData.data.message);
                     }
                     else if (jsonData.eventType == eventTypes.startPrivateConvo) {
-                        $scope.sessionKey = jsonData.data.session_key;
-                        safeApply($scope);
+                        var url = 'http://' + jsonData.data.convo_url;
+                        broadcaster.prepForBroadcast({ broadcastType: 'private_convo_started', data: url });
                     }
                     else if (jsonData.eventType == eventTypes.searchUsers) {
                         $scope.searchResults = jsonData.data.users;

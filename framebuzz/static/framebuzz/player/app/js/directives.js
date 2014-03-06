@@ -521,4 +521,31 @@ angular.module('framebuzz.directives', [])
                  });
             }
         };
+ }])
+ .directive('redirectConversation', ['broadcaster', function(broadcaster) {
+     return {
+         link: function($scope, $element, $attributes) {
+            $scope.$on('private_convo_started', function() {
+                console.log(broadcaster.message.data);
+
+                var url = broadcaster.message.data;
+                var seconds = 4;
+                var countdownTimer = window.setInterval(timer, 1000);
+
+                function timer() {
+                    seconds = seconds - 1;
+                    if (seconds <= 0) {
+                        $element.text('Redirecting...');
+
+                        clearInterval(countdownTimer);
+                        window.location.href = url;
+                    }
+                    else {
+                        var secondText = seconds == 1 ? ' second...' : ' seconds...';
+                        $element.text('Loading new conversation in ' + seconds.toString() + secondText);
+                    }
+                }
+            });
+         }
+     };
  }]);

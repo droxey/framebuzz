@@ -6,6 +6,7 @@ import redis
 from django.conf import settings
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.contrib.comments.models import CommentFlag
 from django.contrib.sites.models import Site
@@ -164,6 +165,7 @@ def post_new_comment(context):
     comment = None
     video = Video.objects.get(slug=video_id)
     session_key = thread_data.get('session_key', None)
+    is_public = True
 
     if thread_data.get('username', None):
         user = auth.models.User.objects.get(username=thread_data['username'])
@@ -178,6 +180,8 @@ def post_new_comment(context):
             # If a session key is available,
             # this comment is part of a private conversation.
             if session_key:
+                is_public = False
+
                 try:
                     session = PrivateSession.objects.get(slug=session_key)
                     data['is_public'] = False
@@ -228,7 +232,8 @@ def post_new_comment(context):
 
             # Record that a comment was made.
             action.send(user, verb='commented on',
-                        action_object=comment, target=video)
+                        action_object=comment, target=video,
+                        kwargs={'public':is_public})
 
             # Serialize the comment to JSON to return to the UI.
             threadSerializer = MPTTCommentSerializer(comment,
@@ -238,7 +243,7 @@ def post_new_comment(context):
         else:
             # Record that a reply was made.
             action.send(user, verb='replied to comment',
-                        action_object=comment, target=video)
+                        action_object=comment, target=video, kwargs={'public':is_public})
 
             # Send a notification to the thread's owner that someone has
             # replied to their comment.
@@ -686,6 +691,7 @@ def start_private_convo(context):
     channel = context.get('outbound_channel', None)
     video = Video.objects.get(slug=video_id)
     invitees = context.get('invitees', None) or list()
+    site = Site.objects.get_current()
     send_to_list = list()
 
     if context_data.get('username', None):
@@ -736,13 +742,12 @@ def start_private_convo(context):
             recipient_list=send_to_list,
             context={
                 'session': private_session,
-                'site': Site.objects.get_current(),
+                'site': site,
                 'video': video,
                 'send_to_list': send_to_list
             })
 
-    return_data = {
-        'session_key': private_session.slug
-    }
-
+    convo_embed_url = reverse('convo-embed', args=[video.slug, private_session.slug])
+    url = '%s%s' % (site.domain, convo_embed_url)
+    return_data = {'convo_url': url}
     return construct_message('FB_START_PRIVATE_CONVO', channel, return_data)
