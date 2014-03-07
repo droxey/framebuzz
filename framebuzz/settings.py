@@ -11,7 +11,7 @@ ADMINS = (
     ('Dani Roxberry', 'dani@framebuzz.com'),
 )
 
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0',
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'frbz.in',
                  'localhost', 'framebuzz.com', 'frame.bz', ]
 
 MANAGERS = ADMINS
