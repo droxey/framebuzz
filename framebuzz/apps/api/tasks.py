@@ -205,35 +205,35 @@ def post_new_comment(context):
             # Send a notification to the video's owner that
             # someone has commented on their video.
             if video.found_by and video.found_by.id != user.id:
-                user_channel = '/framebuzz/%s/user/%s' \
-                    % (video.video_id, video.found_by.username)
-                notification = {
-                    'message': 'You have 1 new comment!',
-                    'objectType': 'reply',
-                    'objectId': comment.id
-                }
+                if is_public:
+                    user_channel = '/framebuzz/%s/user/%s' \
+                        % (video.video_id, video.found_by.username)
+                    notification = {
+                        'message': 'You have 1 new comment!',
+                        'objectType': 'reply',
+                        'objectId': comment.id
+                    }
 
-                # Send a Toast notification to the video owner.
-                message = construct_message('FB_USER_NOTIFICATION',
-                                            user_channel, notification)
-                _send_to_channel.delay(channel=user_channel,
-                                       message=message)
+                    # Send a Toast notification to the video owner.
+                    message = construct_message('FB_USER_NOTIFICATION',
+                                                user_channel, notification)
+                    _send_to_channel.delay(channel=user_channel,
+                                           message=message)
 
-                # Send an email to the video owner.
-                if video.found_by.email:
-                    send_templated_mail(
-                        template_name='comment-notification',
-                        from_email=settings.DEFAULT_FROM_EMAIL,
-                        recipient_list=[video.found_by.email],
-                        context={
-                            'comment': comment,
-                            'site': Site.objects.get_current()
-                        })
+                    # Send an email to the video owner.
+                    if video.found_by.email:
+                        send_templated_mail(
+                            template_name='comment-notification',
+                            from_email=settings.DEFAULT_FROM_EMAIL,
+                            recipient_list=[video.found_by.email],
+                            context={
+                                'comment': comment,
+                                'site': Site.objects.get_current()
+                            })
 
             # Record that a comment was made.
             action.send(user, verb='commented on',
-                        action_object=comment, target=video,
-                        kwargs={'public':is_public})
+                        action_object=comment, target=video, public=is_public)
 
             # Serialize the comment to JSON to return to the UI.
             threadSerializer = MPTTCommentSerializer(comment,
@@ -243,34 +243,35 @@ def post_new_comment(context):
         else:
             # Record that a reply was made.
             action.send(user, verb='replied to comment',
-                        action_object=comment, target=video, kwargs={'public':is_public})
+                        action_object=comment, target=video, public=is_public)
 
             # Send a notification to the thread's owner that someone has
             # replied to their comment.
             if comment.parent.user.id != user.id:
-                user_channel = '/framebuzz/%s/user/%s' \
-                    % (video.video_id, comment.parent.user.username)
-                notification = {
-                    'message': 'You have 1 new reply!',
-                    'objectType': 'reply',
-                    'objectId': comment.id
-                }
+                if is_public:
+                    user_channel = '/framebuzz/%s/user/%s' \
+                        % (video.video_id, comment.parent.user.username)
+                    notification = {
+                        'message': 'You have 1 new reply!',
+                        'objectType': 'reply',
+                        'objectId': comment.id
+                    }
 
-                # Send a Toast notification to the thread starter.
-                message = construct_message('FB_USER_NOTIFICATION',
-                                            user_channel, notification)
-                _send_to_channel.delay(channel=user_channel, message=message)
+                    # Send a Toast notification to the thread starter.
+                    message = construct_message('FB_USER_NOTIFICATION',
+                                                user_channel, notification)
+                    _send_to_channel.delay(channel=user_channel, message=message)
 
-                # Send an email notification the thread starter.
-                if comment.parent.user.email:
-                    send_templated_mail(
-                        template_name='reply-notification',
-                        from_email=settings.DEFAULT_FROM_EMAIL,
-                        recipient_list=[comment.parent.user.email],
-                        context={
-                            'comment': comment,
-                            'site': Site.objects.get_current()
-                        })
+                    # Send an email notification the thread starter.
+                    if comment.parent.user.email:
+                        send_templated_mail(
+                            template_name='reply-notification',
+                            from_email=settings.DEFAULT_FROM_EMAIL,
+                            recipient_list=[comment.parent.user.email],
+                            context={
+                                'comment': comment,
+                                'site': Site.objects.get_current()
+                            })
 
             # Serialize the comment to JSON to return to the UI.
             rSerializer = MPTTCommentReplySerializer(comment,

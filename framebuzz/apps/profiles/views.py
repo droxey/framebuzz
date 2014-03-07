@@ -72,12 +72,14 @@ def feed(request, username):
 
         if is_my_profile and verb_filter == VALID_FEED_VERBS:
             following_ids.append(user.id)
-            
+
             feed = Action.objects.filter(
+                Q(public=True),
                 Q(verb__in=verb_filter),
                 Q(actor_object_id__in=following_ids))
         else:
             feed = Action.objects.filter(
+                Q(public=True),
                 Q(verb__in=verb_filter),
                 Q(actor_object_id=user.id) | Q(
                     Q(target_object_id=user.id) &
@@ -127,14 +129,14 @@ def recommendations(request):
 
     top_random_videos = sorted(
         top_video_actions[0:14], key=lambda x: random.random())
- 
+
     top_user_actions = Action.objects.filter(verb__in=
                                              ['commented on',
                                               'replied to comment']) \
         .values('actor_object_id') \
         .annotate(comments=Count('id')) \
         .order_by('-comments')[:100]
- 
+
     top_random_users = sorted(
         top_user_actions[0:28], key=lambda x: random.random())
 
@@ -268,8 +270,8 @@ def home(request, username):
     actions = Action.objects.favorite_comments_stream(user)
     favorite_comment_ids = [a.action_object_object_id for a in actions]
     profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
-    profile_conversations = MPTTComment.objects.filter(user=user, 
-                                                       parent=None, 
+    profile_conversations = MPTTComment.objects.filter(user=user,
+                                                       parent=None,
                                                        is_public=True)
     profile_followers = followers(user)
     profile_following = following(user)

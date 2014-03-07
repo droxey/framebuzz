@@ -66,13 +66,16 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
         channel = json_message.get(CHANNEL_KEY, None)
         data = json_message.get(DATA_KEY, None)
 
+        private_session_key = data.get('session_key', None)
+        video_id = data.get('video_id', None)
+
+        print 'session key: %s' % private_session_key
+        print 'video id: %s' % video_id
+
         if event_type and channel:
             task_chain = None
 
             if event_type == 'FB_INITIALIZE_VIDEO':
-                video_id = channel.split('/')[3]
-                private_session_key = data.get('private_session_key', None)
-
                 self.session_channel = '/framebuzz/%s/session/%s' \
                     % (video_id, self.session_key)
 
@@ -99,8 +102,6 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                     | tasks.initialize_video_player.s() \
                     | tasks.message_outbound.s()
             else:
-                video_id = self.video_channel.split('/')[3]
-
                 if event_type == 'FB_POST_NEW_COMMENT':
                     task_chain = tasks.get_user_by_session_key.s(
                             session_key=self.session_key,

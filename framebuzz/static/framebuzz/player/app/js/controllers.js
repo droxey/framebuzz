@@ -167,7 +167,8 @@ angular.module('framebuzz.controllers', [])
                         'time': timeTruncated,
                         'comment': $scope.newThread.comment,
                         'username': $scope.videoInstance.user.username,
-                        'session_key': $scope.sessionKey
+                        'session_key': $scope.sessionKey,
+                        'video_id': SOCK.video_id
                     };
 
                     socket.send_json({
@@ -177,7 +178,6 @@ angular.module('framebuzz.controllers', [])
                     });
 
                     $scope.newThread = {};
-                    $scope.newThread.session_key = SOCK.private_session_key;
                     $scope.clearFocus = true;
                     safeApply($scope);
                 };
@@ -190,7 +190,8 @@ angular.module('framebuzz.controllers', [])
                         'comment': $scope.newReply.comment,
                         'parent': $scope.selectedThread.id,
                         'username': $scope.videoInstance.user.username,
-                        'session_key': $scope.sessionKey
+                        'session_key': $scope.sessionKey,
+                        'video_id': SOCK.video_id
                     };
 
                     socket.send_json({
@@ -210,7 +211,9 @@ angular.module('framebuzz.controllers', [])
                         data: {
                             threadId: comment.id,
                             action: action,
-                            username: $scope.videoInstance.user.username
+                            username: $scope.videoInstance.user.username,
+                            session_key: $scope.sessionKey,
+                            video_id: SOCK.video_id
                         }
                     });
                 };
@@ -250,7 +253,9 @@ angular.module('framebuzz.controllers', [])
                         eventType: eventTypes.getActivityStream,
                         channel: SOCK.user_channel,
                         data: {
-                            username: $scope.videoInstance.user.username
+                            username: $scope.videoInstance.user.username,
+                            session_key: $scope.sessionKey,
+                            video_id: SOCK.video_id
                         }
                     });
                 };
@@ -264,7 +269,9 @@ angular.module('framebuzz.controllers', [])
                         eventType: eventTypes.getUserProfile,
                         channel: SOCK.user_channel,
                         data: {
-                            username: username
+                            username: username,
+                            session_key: $scope.sessionKey,
+                            video_id: SOCK.video_id
                         }
                     });
                 }
@@ -280,6 +287,8 @@ angular.module('framebuzz.controllers', [])
                 $scope.shareViaEmail = function() {
                     var postData = {
                         'shareWithEmail': $scope.share.email,
+                        'session_key': $scope.sessionKey,
+                        'video_id': SOCK.video_id
                     };
 
                     socket.send_json({
@@ -301,7 +310,9 @@ angular.module('framebuzz.controllers', [])
                         channel: SOCK.user_channel,
                         data: {
                             'user_to_toggle': username,
-                            'username': $scope.videoInstance.user.username
+                            'username': $scope.videoInstance.user.username,
+                            'session_key': $scope.sessionKey,
+                            'video_id': SOCK.video_id
                         }
                     });
                 };
@@ -326,7 +337,9 @@ angular.module('framebuzz.controllers', [])
                             channel: SOCK.user_channel,
                             data: {
                                 'username': $scope.videoInstance.user.username,
-                                'invitees': $scope.inviteeUsernamesOrEmails
+                                'invitees': $scope.inviteeUsernamesOrEmails,
+                                'session_key': $scope.sessionKey,
+                                'video_id': SOCK.video_id
                             }
                         });
                     }
@@ -475,7 +488,9 @@ angular.module('framebuzz.controllers', [])
                             eventType: eventTypes.addToLibrary,
                             channel: SOCK.user_channel,
                             data: {
-                                username: $scope.videoInstance.user.username
+                                username: $scope.videoInstance.user.username,
+                                session_key: $scope.sessionKey,
+                                video_id: SOCK.video_id
                             }
                         });
                     }
@@ -512,7 +527,9 @@ angular.module('framebuzz.controllers', [])
                             data: {
                                 action: 'player_playing',
                                 username: $scope.videoInstance.user.username,
-                                time: $scope.currentTime
+                                time: $scope.currentTime,
+                                session_key: $scope.sessionKey,
+                                video_id: SOCK.video_id
                             }
                         });
                     }
@@ -540,7 +557,9 @@ angular.module('framebuzz.controllers', [])
                             data: {
                                 action: 'player_paused',
                                 username: $scope.videoInstance.user.username,
-                                time: $scope.currentTime
+                                time: $scope.currentTime,
+                                session_key: $scope.sessionKey,
+                                video_id: SOCK.video_id
                             }
                         });
                     }
@@ -557,7 +576,9 @@ angular.module('framebuzz.controllers', [])
                                 data: {
                                     'term': term,
                                     'selected_users': $scope.inviteeUsernamesOrEmails,
-                                    'username': $scope.videoInstance.user.username
+                                    'username': $scope.videoInstance.user.username,
+                                    'session_key': $scope.sessionKey,
+                                    'video_id': SOCK.video_id
                                 }
                             });
                         }
@@ -589,7 +610,8 @@ angular.module('framebuzz.controllers', [])
                         eventType: eventTypes.initVideo,
                         channel: SOCK.video_channel,
                         data: {
-                            'private_session_key': $scope.sessionKey
+                            'session_key': $scope.sessionKey,
+                            'video_id': SOCK.video_id
                         }
                     });
                 });
