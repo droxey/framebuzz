@@ -31,13 +31,13 @@
                             <i class="fa fa-search"></i> Search
                         </h3>
                         <typeahead class="typeahead clearfix" items="searchResults" term="term" search="searchUsers(term)">
-                            <div class="menu" ng-show="searchResults.length > 0 && term.length > 2">
+                            <div class="menu" ng-show="term.length > 0">
                                 <ul>
-                                    <li typeahead-item="user" ng-repeat="user in searchResults" class="results">
+                                    <li typeahead-item="user" ng-repeat="user in searchResults" class="results" ng-show="searchResults.length > 0 && term.length > 2">
                                         <img class="img-circle" ng-src="{{user.avatar_url}}" height="25" width="25" alt="{{user.display_name}}">
                                         <p class="name">{{user.display_name}}</p>
                                     </li>
-                                    <li ng-click="addInviteeEmailAddress(term)" class="email" ng-hide="searchResults.length > 0 || term.length < 2">
+                                    <li ng-click="addInviteeEmailAddress(term)" class="email" ng-hide="searchResults.length > 0 && term.length < 2">
                                         <span class="fa-stack email-stack">
                                           <i class="fa fa-circle fa-stack-2x"></i>
                                           <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>

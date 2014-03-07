@@ -373,7 +373,6 @@ angular.module('framebuzz.directives', [])
                             '<input id="users-autocomplete" data-ng-model="term" data-ng-change="query()" type="text" placeholder="Find friends&hellip;" autocomplete="off">' +
                             '<div ng-transclude></div>' +
                         '</form>' +
-                        '<div ng-transclude></div>' +
                      '</div>',
             scope: {
                 search: "&",
