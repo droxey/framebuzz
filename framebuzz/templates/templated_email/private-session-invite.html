@@ -5,5 +5,5 @@
 {% endblock %}
 
 {% block email_message %}
-     {{ session.owner.username }} would like to start a private conversation with you{% if send_to_list|length > 0 %} and <strong>{{ send_to_list|length }}</strong> others{% endif %} while watching <strong>{{ video.title|title }}</strong>. Click <a href="{% url 'profiles-convo-share' session.owner.username video.slug session.slug %}">here</a> to accept the invitation!
+     {{ session.owner.username }} would like to start a private conversation with you{% if send_to_list|length > 0 %} and <strong>{{ send_to_list|length }}</strong> others{% endif %} while watching <strong>{{ video.title|title }}</strong>. Click <a href="http://framebuzz.com{% url 'profiles-convo-share' session.owner.username video.slug session.slug %}">here</a> to accept the invitation!
 {% endblock %}
