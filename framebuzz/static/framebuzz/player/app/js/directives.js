@@ -526,8 +526,6 @@ angular.module('framebuzz.directives', [])
      return {
          link: function($scope, $element, $attributes) {
             $scope.$on('private_convo_started', function() {
-                console.log(broadcaster.message.data);
-
                 var url = broadcaster.message.data;
                 var seconds = 4;
                 var countdownTimer = window.setInterval(timer, 1000);

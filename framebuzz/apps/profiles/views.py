@@ -209,6 +209,10 @@ def video_share(request, username=None, slug=None, convo_slug=None):
                     invitee.accepted = True
                     invitee.accepted_on = datetime.datetime.now()
                     invitee.save()
+
+                    action.send(request.user, verb='joined private conversation',
+                                action_object=private_session, target=video)
+
                 can_access = True
 
                 if can_access:

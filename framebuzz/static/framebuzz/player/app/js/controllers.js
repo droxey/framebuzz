@@ -639,8 +639,6 @@ angular.module('framebuzz.controllers', [])
                             var className = $scope.videoInstance.user.video_in_library ? 'added' : 'removed';
                             broadcaster.prepForBroadcast({ broadcastType: 'library_toggle_complete', className: className });
                         }
-
-                        console.log($scope.videoInstance);
                     }
                     else if (jsonData.eventType == eventTypes.postNewComment) {
                         $scope.videoInstance.heatmap = jsonData.data.heatmap;
