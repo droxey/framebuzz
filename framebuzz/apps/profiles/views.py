@@ -74,12 +74,13 @@ def feed(request, username):
 
         if is_my_profile and verb_filter == VALID_FEED_VERBS:
             following_ids.append(user.id)
-            verb_filter.append('joined private conversation')
 
             feed = Action.objects.filter(
                 Q(public=True),
-                Q(verb__in=verb_filter),
-                Q(actor_object_id__in=following_ids))
+                Q(actor_object_id__in=following_ids),
+                Q(verb__in=verb_filter) | Q(
+                    Q(actor_object_id=user.id) &
+                    Q(verb='joined private conversation')))
         else:
             feed = Action.objects.filter(
                 Q(public=True),
