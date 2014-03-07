@@ -8,11 +8,15 @@
         <noscript><img src="{% avatar_url action.actor 110 %}"></noscript>
       </div>
       <div class="col-xs-9 header-content">
-        {% if action.verb != 'added video to library' %}
+        {% if action.verb != 'added video to library' and action.verb != 'joined private conversation' %}
           <p>{% display_action action %}</p>
           <p><i class="fa fa-quote-left"></i><span>{{ action.action_object.comment }}</span><i class="fa fa-quote-right fa-flip-vertical"></i></p>
         {% else %}
-            <p><strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong> posted <strong>{{ action.action_object.title|title }}</strong></p>
+            {% if action.verb == 'joined private conversation' %}
+                <p><strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong> privately discussed <strong>{{ action.target.title|title }}</strong></p>
+            {% else %}
+                <p><strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong> posted <strong>{{ action.action_object.title|title }}</strong></p>
+            {% endif %}
         {% endif %}
       </div>
       <div class="col-xs-1 action-type pull-right">
@@ -23,6 +27,8 @@
                     <i class="fa {% if video.id in video_library_ids %}fa-minus{% else %}fa-plus{% endif %} fa-inverse fa-stack-1x"></i>
                 </span>
               </a>
+          {% elif action.verb == 'joined private conversation' %}
+              <i class="fa fa-lock pull-right" style="font-size: 20px; color: #ccc;"></i>
           {% else %}
               <a class="feed-item-type{% if request.user.is_authenticated %} toggle{% endif %}" href="{% if request.user.is_authenticated %}{% url 'profiles-toggle-favorite' request.user.username action.action_object_object_id %}{% else %}{% url 'account_signup' %}{% endif %}">
                 <span class="fa-stack favorite{% if action.action_object.id in favorite_comment_ids or action.action_object.parent.id in favorite_comment_ids %} active{% endif %}">
@@ -41,7 +47,7 @@
 </div>
 <footer>
     <span class="corner"></span>
-    <a class="thumbnail-link play-video" href="{% url 'profiles-share' profile_user.username video.slug %}">
+    <a class="thumbnail-link play-video" href="{% if action.verb == 'joined private conversation' %}{% url 'profiles-convo-share' profile_user.username video.slug action.action_object.slug %}{% else %}{% url 'profiles-share' profile_user.username video.slug %}{% endif %}">
         <img class="cover lazy-load" src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="{{ video.default_thumbnail }}">
         <noscript><img src="{{ video.default_thumbnail }}"></noscript>
         <span class="play absolute-center"><i class="fa fa-icon fa-play fa-2x absolute-center"></i></span>

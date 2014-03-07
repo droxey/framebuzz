@@ -75,6 +75,7 @@
           logout_url: "{% url 'video-logout' video.slug %}",
           signup_url: "{% url 'video-signup' video.slug %}",
           is_authenticated: is_authenticated,
+          username: is_authenticated ? '{{ request.user.username }}' : '',
           video_id: '{{ video.slug }}',
           share_url: "{% shorturl video %}",
           private_session_key: {% if convo_slug %}'{{ convo_slug }}'{% else %}null{% endif %},

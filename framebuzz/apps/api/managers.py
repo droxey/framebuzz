@@ -12,5 +12,5 @@ class FrameBuzzActionManager(ActionManager):
 
     @stream
     def favorite_comments_stream(self, obj):
-        return obj.actor_actions.filter(verb='added to favorites') \
+        return obj.actor_actions.filter(verb='added to favorites', public=True) \
             .order_by('-timestamp')

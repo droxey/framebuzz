@@ -116,7 +116,7 @@ def initialize_video_player(context):
     channel = context.get('outbound_channel', None)
     user = context.get('user', None)
     init_data = context.get(DATA_KEY, None)
-    session_key = init_data.get('private_session_key', None)
+    session_key = init_data.get('session_key', None)
 
     # Get Video and associated MPTTComments.
     video = Video.objects.get(slug=video_id)
@@ -334,6 +334,9 @@ def add_comment_action(context):
                             'recipient': thread.user,
                         })
         elif thread_action == 'favorite':
+            is_public = True
+            if thread.session is None:
+                is_public = False
             is_fav = Action.objects.actor(user, verb='added to favorites',
                                           action_object_object_id=thread.id)
 
@@ -345,7 +348,7 @@ def add_comment_action(context):
             else:
                 action_name = 'added_favorite'
                 action.send(user, verb='added to favorites',
-                            action_object=thread, target=video)
+                            action_object=thread, target=video, public=is_public)
 
                 if thread.user.id != user.id and thread.user.email:
                     user_channel = '/framebuzz/%s/user/%s' \
@@ -734,6 +737,9 @@ def start_private_convo(context):
             invite.save()
 
             send_to_list.append(email_addr)
+
+    action.send(user, verb='joined private conversation',
+                action_object=private_session, target=video)
 
     if len(send_to_list) > 0:
         # Send notifications to receipients.

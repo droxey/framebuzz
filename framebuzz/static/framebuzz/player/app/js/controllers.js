@@ -526,7 +526,7 @@ angular.module('framebuzz.controllers', [])
                             channel: SOCK.user_channel,
                             data: {
                                 action: 'player_playing',
-                                username: $scope.videoInstance.user.username,
+                                username: SOCK.username,
                                 time: $scope.currentTime,
                                 session_key: $scope.sessionKey,
                                 video_id: SOCK.video_id
@@ -639,6 +639,8 @@ angular.module('framebuzz.controllers', [])
                             var className = $scope.videoInstance.user.video_in_library ? 'added' : 'removed';
                             broadcaster.prepForBroadcast({ broadcastType: 'library_toggle_complete', className: className });
                         }
+
+                        console.log($scope.videoInstance);
                     }
                     else if (jsonData.eventType == eventTypes.postNewComment) {
                         $scope.videoInstance.heatmap = jsonData.data.heatmap;

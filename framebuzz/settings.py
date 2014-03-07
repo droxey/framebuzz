@@ -270,6 +270,7 @@ ACTSTREAM_SETTINGS = {
         'api.MPTTComment',
         'api.Video',
         'api.UserVideo',
+        'api.PrivateSession',
         'allauth.EmailAddress',
         'allauth.EmailConfirmation',
         'allauth.SocialAccount',

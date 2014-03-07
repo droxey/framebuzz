@@ -5,10 +5,6 @@ urlpatterns = patterns('',
         'framebuzz.apps.profiles.views.recommendations',
         name='recommendations'),
 
-    url(r'^(?P<username>[\w.@+-]+)/convo/(?P<slug>[\w.@+-]+)/$',
-        'framebuzz.apps.profiles.views.private_convo',
-        name='private-convo'),
-    
     url(r'^(?P<username>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.home',
         name='profiles-home'),
@@ -40,7 +36,7 @@ urlpatterns = patterns('',
     url(r'^(?P<username>[\w.@+-]+)/videos/$',
         'framebuzz.apps.profiles.views.videos',
         name='profiles-videos'),
- 
+
     url(r'^(?P<username>[\w.@+-]+)/edit/$',
         'framebuzz.apps.profiles.views.edit_profile',
         name='profiles-edit'),

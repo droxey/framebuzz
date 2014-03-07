@@ -43,6 +43,9 @@ urlpatterns = patterns('',
     url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.video_share', name='profiles-share'),
 
+    url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/convo/(?P<convo_slug>[\w.@+-]+)/$',
+        'framebuzz.apps.profiles.views.video_share', name='profiles-convo-share'),
+
     # Zencoder completion webhook:
     url(r'^video/notifications/$',
         'framebuzz.apps.profiles.views.zencoder_webhook',

@@ -55,6 +55,8 @@ def feed(request, username):
     if verb_filter != VALID_FEED_VERBS:
         if verb_filter == 'conversations':
             verb_filter = ['commented on', 'replied to comment']
+            if is_my_profile:
+                verb_filter.append('joined private conversation')
         else:
             if not verb_filter.startswith('follow'):
                 f = verb_filter.replace('_', ' ')
@@ -72,6 +74,7 @@ def feed(request, username):
 
         if is_my_profile and verb_filter == VALID_FEED_VERBS:
             following_ids.append(user.id)
+            verb_filter.append('joined private conversation')
 
             feed = Action.objects.filter(
                 Q(public=True),
@@ -159,49 +162,7 @@ def recommendations(request):
     }, context_instance=RequestContext(request))
 
 
-@login_required
-def private_convo(request, username, slug):
-    context = {}
-    private_session = PrivateSession.objects.get(slug=slug)
-    session_invitees = SessionInvitation.objects.filter(session=private_session)
-    invitees = [i.invitee for i in session_invitees]
-    invitee_usernames = [i.username for i in invitees]
-    invitee_addrs = [i.email or '' for i in invitees]
-
-    if request.user == private_session.owner or \
-       request.user.username in invitee_usernames or \
-       request.user.email in invitee_addrs:
-        invitee = SessionInvitation.objects.get(invitee=request.user,
-                                                session=private_session)
-        if not invitee.accepted:
-            invitee.accepted = True
-            invitee.accepted_on = datetime.datetime.now()
-            invitee.save()
-
-        plays = len(Action.objects.filter(verb='played video',
-                                  actor_object_id__in=[i.id for i in invitees],
-                                  action_object_object_id=private_session.video.id))
-
-        context['video'] = private_session.video
-        context['is_share'] = True
-        context['is_convo'] = True
-        context['private_session'] = private_session
-        context['commenters'] = invitees
-        context['path'] = request.path
-        context['found_by'] = private_session.owner
-        context['video_in_library'] = False
-        context['plays'] = plays
-
-        template = 'profiles/base.html'
-    else:
-        template = 'profiles/private_convo_error.html'
-
-    return render_to_response(template,
-                              context,
-                              context_instance=RequestContext(request))
-
-
-def video_share(request, username=None, slug=None):
+def video_share(request, username=None, slug=None, convo_slug=None):
     try:
         video_in_library = False
         video, created = get_or_create_video(slug)
@@ -227,6 +188,41 @@ def video_share(request, username=None, slug=None):
         context['found_by'] = video.found_by
         context['video_in_library'] = video_in_library
         context['plays'] = plays
+
+        if convo_slug:
+            private_session = PrivateSession.objects.get(slug=convo_slug)
+            session_invitees = SessionInvitation.objects.filter(session=private_session)
+            invitees = [i.invitee for i in session_invitees]
+            invitee_usernames = [i.username for i in invitees]
+            invitee_addrs = [i.email or '' for i in invitees]
+            can_access = False
+
+            if request.user == private_session.owner:
+                can_access = True
+
+            if can_access is False and \
+               request.user.username in invitee_usernames or \
+               request.user.email in invitee_addrs:
+                invitee = SessionInvitation.objects.get(invitee=request.user,
+                                                        session=private_session)
+                if not invitee.accepted:
+                    invitee.accepted = True
+                    invitee.accepted_on = datetime.datetime.now()
+                    invitee.save()
+                can_access = True
+
+                if can_access:
+                    plays = len(Action.objects.filter(verb='played video',
+                                              actor_object_id__in=[i.id for i in invitees],
+                                              action_object_object_id=private_session.video.id))
+                else:
+                    template = 'profiles/private_convo_error.html'
+
+            context['is_convo'] = True
+            context['private_session'] = private_session
+            context['commenters'] = invitees
+            context['found_by'] = private_session.owner
+
 
         if username is not None:
             if request.is_ajax():
