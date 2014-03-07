@@ -183,6 +183,7 @@ def video_share(request, username=None, slug=None, convo_slug=None):
 
         context['video'] = video
         context['is_share'] = True
+        context['is_convo'] = False
         context['commenters'] = commenters
         context['path'] = request.path
         context['found_by'] = video.found_by
