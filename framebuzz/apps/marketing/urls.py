@@ -16,4 +16,5 @@ urlpatterns = patterns('',
    url(r'^ajax/google-plus-count/$',
        'framebuzz.apps.marketing.views.google_plus_count', name='google-plus-count'),
    url(r'^accounts/thanks/$', 'framebuzz.apps.marketing.views.thanks', name='thanks'),
+   url(r'^mobile/$', 'framebuzz.apps.marketing.views.mobile', name='mobile'),
 )
