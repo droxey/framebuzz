@@ -498,7 +498,8 @@ def get_activity_stream(context):
                    'replied to comment', 'added video to library']
     last_login = user.last_login - datetime.timedelta(days=1)
     user_activity_stream = Action.objects.filter(verb__in=valid_verbs,
-                                                 timestamp__gte=last_login)
+                                                 timestamp__gte=last_login,
+                                                 public=True)
 
     stream_data = list()
     for activity in user_activity_stream:
