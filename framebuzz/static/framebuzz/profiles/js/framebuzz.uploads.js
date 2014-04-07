@@ -12,7 +12,7 @@ $(function() {
         acceptedExtensions = [
           '3g2','3gp','3gp2','3gpp','3gpp2','ac3','eac3','ec3','f4a','f4b','f4v',
           'flv','highwinds','m4a','m4b','m4r','m4v','mkv','mov','mp4','oga',
-          'ogv','ogx','ts','webm','wma','wmv'
+          'ogv','ogx','ts','webm','wma','wmv', 'mpg', 'avi'
         ];
 
     var convertToSlug = function(input) {
