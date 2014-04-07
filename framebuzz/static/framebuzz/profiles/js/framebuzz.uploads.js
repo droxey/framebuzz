@@ -10,8 +10,8 @@ $(function() {
         checkJobsInterval = null,
         finishedUploads = [],
         acceptedExtensions = [
-          '3g2','3gp','3gp2','3gpp','3gpp2','aac','ac3','eac3','ec3','f4a','f4b','f4v',
-          'flv','highwinds','m4a','m4b','m4r','m4v','mkv','mov','mp3','mp4','oga','ogg',
+          '3g2','3gp','3gp2','3gpp','3gpp2','ac3','eac3','ec3','f4a','f4b','f4v',
+          'flv','highwinds','m4a','m4b','m4r','m4v','mkv','mov','mp4','oga',
           'ogv','ogx','ts','webm','wma','wmv'
         ];
 
@@ -205,7 +205,7 @@ $(function() {
       $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
 
       resetForm();
-      
+
       var tabToHide = $($(this).attr('data-hide-tab'));
       tabToHide.slideUp('fast');
     });
