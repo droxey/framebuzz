@@ -8,12 +8,7 @@ $(function() {
         hasError = false,
         baseUrl = 'https://app.zencoder.com/api/v2/jobs/',
         checkJobsInterval = null,
-        finishedUploads = [],
-        acceptedExtensions = [
-          '3g2','3gp','3gp2','3gpp','3gpp2','ac3','eac3','ec3','f4a','f4b','f4v',
-          'flv','highwinds','m4a','m4b','m4r','m4v','mkv','mov','mp4','oga',
-          'ogv','ogx','ts','webm','wma','wmv', 'mpg', 'avi'
-        ];
+        finishedUploads = [];
 
     var setHiddenFormFields = function(key) {
       $('#id_fpname').val(key);
@@ -121,24 +116,6 @@ $(function() {
     // Set filepicker.io key and drop panes for uploads.
     filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
 
-    // filepicker.makeDropPane(dropPaneDiv[0], {
-    //     multiple: false,
-    //     extensions: acceptedExtensions,
-    //     dragEnter: function() {
-    //         dropPaneDiv.html("Drop to upload.");
-    //     },
-    //     dragLeave: function() {
-    //         dropPaneDiv.html("Drop files here.");
-    //     },
-    //     onSuccess: function(InkBlobs) {
-    //         dropPaneDiv.html('<i class="fa fa-film"></i> <strong>' + InkBlobs[0].filename + ' added!</strong>');
-    //         setHiddenFormFields(InkBlobs[0].key);
-    //     },
-    //     onError: function(type, message) {
-    //         dropResultDiv.text('('+type+') '+ message);
-    //     }
-    // });
-
     // Check jobs.
     startJobCheckInterval();
 
@@ -230,20 +207,4 @@ $(function() {
 
       return false;
     });
-
-    // $(document).on('click', '#upload-drop-pane > div > button.btn-success', function(e) {
-    //     e.preventDefault();
-    //
-    //     filepicker.pick(
-    //       {
-    //         extensions: acceptedExtensions,
-    //         services: ['COMPUTER','VIDEO','BOX','DROPBOX','GOOGLE_DRIVE','URL','FTP']
-    //       },
-    //       {
-    //         location: 's3'
-    //       }, function(fpfiles) {
-    //         dropPaneDiv.html('<i class="fa fa-film"></i> <strong>' + fpfiles[0].filename + ' added!</strong>');
-    //         setHiddenFormFields(fpfiles[0].key);
-    //     });
-    // });
 });
