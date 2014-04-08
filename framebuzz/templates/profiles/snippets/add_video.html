@@ -30,8 +30,7 @@
             <div id="upload-file" class="tab-pane">
                 <form id="upload-file-form" action="{% url 'profiles-upload-video' request.user.username %}" method="POST">
                     {% csrf_token %}
-                    {{ upload_form.fp_url.as_hidden }}
-                    {{ upload_form.fp_filename.as_hidden }}
+                    {{ upload_form.fpname.as_hidden }}
                     <div class="row drop-pane-row">
                         <div class="col-xs-12">
                             <div class="row input-row">
@@ -45,7 +44,9 @@
                                 </div>
                             </div>
                             <div class="row drop-pane-row-inner">
-                                <div id="upload-drop-pane" class="col-xs-12">Drag and drop your video files here.<br>Or, <a href="#" id="upload-click-here">click here</a> to upload videos from Dropbox, Google Drive, and more!</div>
+                                <div id="upload-drop-pane" class="col-xs-12 clearfix">
+                                    {{ upload_form.fpfile }}
+                                </div>
                             </div>
                             <div class="row submit-row">
                                 <div class="col-xs-6 clearfix">
@@ -120,7 +121,7 @@
                                     <a class="btn cancel-upload pull-right" data-hide-tab="#pending-uploads"><i class="fa fa-times"></i> Close</a>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>

@@ -44,10 +44,10 @@
                 &:hover {
                     border: none;
                     border-color: transparent;
-                    background-color: white;                   
+                    background-color: white;
                 }
 
-                i, strong { 
+                i, strong {
                     display: block;
                     text-align: center;
                     width: 100%;
@@ -227,65 +227,146 @@
             margin: 0;
             @include border-radius(5px, 5px);
 
-            #upload-drop-pane {
-                color: #ababab;
-                text-align: center;
-                padding: 15px 0;
-                background-color: #f0f0f0;
-                border: 2px dashed #d8d8d8;
-                font-size: 0.9em;
-                margin: 0 5px;
-                width: 98.5%;
+            /*
+            #upload-drop-pane > div {
+                background-color: #F0F0F0;
+                border: 2px dashed #D8D8D8;
+                color: #ABABAB;
+                height: 47px;
+                margin: 0 -10px;
+                padding: 5px !important;
+                position: relative;
                 @include border-radius(3px, 3px);
+
+                button {
+                    background-color: #5CB85C;
+                    border-color: #4CAE4C;
+                    color: #FFFFFF;
+                    border: 1px solid rgba(0, 0, 0, 0);
+                    cursor: pointer;
+                    display: inline-block;
+                    float: left;
+                    font-size: 14px;
+                    font-weight: normal;
+                    line-height: 1.42857;
+                    margin-bottom: 0;
+                    padding: 6px 12px;
+                    text-align: center;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    width: 18%;
+                    position: relative;
+                    z-index: 5;
+                    @include border-radius(3px, 3px);
+                }
+
+                div {
+                    background: transparent !important;
+                    border: 0 none !important;
+                    color: #ABABAB !important;
+                    display: inline-block;
+                    height: 47px;
+                    left: 0;
+                    line-height: 47px !important;
+                    margin: 0 0 0 4px !important;
+                    padding: 0 !important;
+                    position: absolute;
+                    text-align: center;
+                    top: 0;
+                    width: 100% !important;
+                    z-index: 100;
+                }
+            }
+            */
+
+            #upload-drop-pane {
+                margin: 0 0 0 -10px;
+            }
+
+            #upload-drop-pane > div {
+                clear: both;
+                height: 50px;
+                width: 103%;
+            }
+
+            #upload-drop-pane > div > button {
+                height: 100%;
+                line-height: 15px;
+                width: 19%;
+
+                i {
+                    color: rgba(255, 255, 255, 0.4);
+                    font-size: 24px;
+                    line-height: 19px;
+                }
+            }
+
+            #upload-drop-pane > div > div {
+                background-color: #F0F0F0 !important;
+                border: 2px dashed #D8D8D8 !important;
+                color: #888 !important;
+                float: right;
+                font-size: 0.9em !important;
+                margin: 0 0 0 5px !important;
+                padding: 4px 0 !important;
+                text-align: center !important;
+                width: 80% !important;
+                height: 100%;
+                line-height: 18px !important;
+            }
+
+            #upload-drop-pane > div > div > div {
+                height: 22px !important;
+                margin: 0 3px !important;
             }
 
             div.input-row {
                 margin-left: -10px;
                 margin-right: -10px;
                 padding-top: 5px;
-                
+
                 div {
                     padding: 0;
 
                     input, textarea {
                         border: 1px solid #CCCCCC;
-                        color: #AAA;
+                        color: #666;
                         padding: 3px 5px;
                         width: 100%;
                         @include border-radius(2px, 2px);
 
                         &::-webkit-input-placeholder { /* WebKit browsers */
-                            color:    #AAA;
+                            color:    #666;
                             font-weight: 300;
                             font-style: italic;
                         }
-                        
+
                         &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-                            color:    #AAA;
+                            color:    #666;
                             font-weight: 300;
                             font-style: italic;
                         }
-                        
+
                         &::-moz-placeholder { /* Mozilla Firefox 19+ */
-                            color:    #AAA;
+                            color:    #666;
                             font-weight: 300;
                             font-style: italic;
                         }
-                        
+
                         &:-ms-input-placeholder { /* Internet Explorer 10+ */
-                            color:    #AAA;
+                            color:    #666;
                             font-weight: 300;
                             font-style: italic;
                         }
 
                         &.placeholder {
-                            color:    #AAA;
+                            color:    #666;
                             font-weight: 300;
-                            font-style: italic;                            
+                            font-style: italic;
                         }
 
                         &:focus {
-                            border: 1px solid #AAA;
+                            border: 1px solid #666;
                             outline: 0;
                         }
 
@@ -297,13 +378,13 @@
                                 font-weight: 300;
                                 font-style: italic;
                             }
-                            
+
                             &::-moz-placeholder { /* Mozilla Firefox 19+ */
                                 color:    red;
                                 font-weight: 300;
                                 font-style: italic;
                             }
-                            
+
                             &:-ms-input-placeholder { /* Internet Explorer 10+ */
                                 color:    red;
                                 font-weight: 300;
@@ -313,7 +394,7 @@
                             &.placeholder {
                                 color:    red;
                                 font-weight: 300;
-                                font-style: italic;                            
+                                font-style: italic;
                             }
                         }
                     }
@@ -341,7 +422,7 @@
 
                 table {
                     width: 100%;
-                    
+
                     tr {
                         td {
                             border-top: 1px dashed #d8d8d8;

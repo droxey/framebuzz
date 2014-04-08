@@ -228,120 +228,198 @@
   -webkit-border-radius: 5px 5px;
   -moz-border-radius: 5px / 5px;
   border-radius: 5px / 5px;
+            /*
+            #upload-drop-pane > div {
+                background-color: #F0F0F0;
+                border: 2px dashed #D8D8D8;
+                color: #ABABAB;
+                height: 47px;
+                margin: 0 -10px;
+                padding: 5px !important;
+                position: relative;
+                @include border-radius(3px, 3px);
+
+                button {
+                    background-color: #5CB85C;
+                    border-color: #4CAE4C;
+                    color: #FFFFFF;
+                    border: 1px solid rgba(0, 0, 0, 0);
+                    cursor: pointer;
+                    display: inline-block;
+                    float: left;
+                    font-size: 14px;
+                    font-weight: normal;
+                    line-height: 1.42857;
+                    margin-bottom: 0;
+                    padding: 6px 12px;
+                    text-align: center;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    width: 18%;
+                    position: relative;
+                    z-index: 5;
+                    @include border-radius(3px, 3px);
+                }
+
+                div {
+                    background: transparent !important;
+                    border: 0 none !important;
+                    color: #ABABAB !important;
+                    display: inline-block;
+                    height: 47px;
+                    left: 0;
+                    line-height: 47px !important;
+                    margin: 0 0 0 4px !important;
+                    padding: 0 !important;
+                    position: absolute;
+                    text-align: center;
+                    top: 0;
+                    width: 100% !important;
+                    z-index: 100;
+                }
+            }
+            */
 }
-/* line 230, ../sass/uploads.scss */
+/* line 282, ../sass/uploads.scss */
 #add-video form div.drop-pane-row #upload-drop-pane, #add-video div.pending div.drop-pane-row #upload-drop-pane {
-  color: #ababab;
-  text-align: center;
-  padding: 15px 0;
-  background-color: #f0f0f0;
-  border: 2px dashed #d8d8d8;
-  font-size: 0.9em;
-  margin: 0 5px;
-  width: 98.5%;
-  -webkit-border-radius: 3px 3px;
-  -moz-border-radius: 3px / 3px;
-  border-radius: 3px / 3px;
+  margin: 0 0 0 -10px;
 }
-/* line 242, ../sass/uploads.scss */
+/* line 286, ../sass/uploads.scss */
+#add-video form div.drop-pane-row #upload-drop-pane > div, #add-video div.pending div.drop-pane-row #upload-drop-pane > div {
+  clear: both;
+  height: 50px;
+  width: 103%;
+}
+/* line 292, ../sass/uploads.scss */
+#add-video form div.drop-pane-row #upload-drop-pane > div > button, #add-video div.pending div.drop-pane-row #upload-drop-pane > div > button {
+  height: 100%;
+  line-height: 15px;
+  width: 19%;
+}
+/* line 297, ../sass/uploads.scss */
+#add-video form div.drop-pane-row #upload-drop-pane > div > button i, #add-video div.pending div.drop-pane-row #upload-drop-pane > div > button i {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 24px;
+  line-height: 19px;
+}
+/* line 304, ../sass/uploads.scss */
+#add-video form div.drop-pane-row #upload-drop-pane > div > div, #add-video div.pending div.drop-pane-row #upload-drop-pane > div > div {
+  background-color: #F0F0F0 !important;
+  border: 2px dashed #D8D8D8 !important;
+  color: #888 !important;
+  float: right;
+  font-size: 0.9em !important;
+  margin: 0 0 0 5px !important;
+  padding: 4px 0 !important;
+  text-align: center !important;
+  width: 80% !important;
+  height: 100%;
+  line-height: 18px !important;
+}
+/* line 318, ../sass/uploads.scss */
+#add-video form div.drop-pane-row #upload-drop-pane > div > div > div, #add-video div.pending div.drop-pane-row #upload-drop-pane > div > div > div {
+  height: 22px !important;
+  margin: 0 3px !important;
+}
+/* line 323, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row, #add-video div.pending div.drop-pane-row div.input-row {
   margin-left: -10px;
   margin-right: -10px;
   padding-top: 5px;
 }
-/* line 247, ../sass/uploads.scss */
+/* line 328, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div, #add-video div.pending div.drop-pane-row div.input-row div {
   padding: 0;
 }
-/* line 250, ../sass/uploads.scss */
+/* line 331, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input, #add-video form div.drop-pane-row div.input-row div textarea, #add-video div.pending div.drop-pane-row div.input-row div input, #add-video div.pending div.drop-pane-row div.input-row div textarea {
   border: 1px solid #CCCCCC;
-  color: #AAA;
+  color: #666;
   padding: 3px 5px;
   width: 100%;
   -webkit-border-radius: 2px 2px;
   -moz-border-radius: 2px / 2px;
   border-radius: 2px / 2px;
 }
-/* line 257, ../sass/uploads.scss */
+/* line 338, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input::-webkit-input-placeholder, #add-video form div.drop-pane-row div.input-row div textarea::-webkit-input-placeholder, #add-video div.pending div.drop-pane-row div.input-row div input::-webkit-input-placeholder, #add-video div.pending div.drop-pane-row div.input-row div textarea::-webkit-input-placeholder {
   /* WebKit browsers */
-  color: #AAA;
+  color: #666;
   font-weight: 300;
   font-style: italic;
 }
-/* line 263, ../sass/uploads.scss */
+/* line 344, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input:-moz-placeholder, #add-video form div.drop-pane-row div.input-row div textarea:-moz-placeholder, #add-video div.pending div.drop-pane-row div.input-row div input:-moz-placeholder, #add-video div.pending div.drop-pane-row div.input-row div textarea:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
-  color: #AAA;
+  color: #666;
   font-weight: 300;
   font-style: italic;
 }
-/* line 269, ../sass/uploads.scss */
+/* line 350, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input::-moz-placeholder, #add-video form div.drop-pane-row div.input-row div textarea::-moz-placeholder, #add-video div.pending div.drop-pane-row div.input-row div input::-moz-placeholder, #add-video div.pending div.drop-pane-row div.input-row div textarea::-moz-placeholder {
   /* Mozilla Firefox 19+ */
-  color: #AAA;
+  color: #666;
   font-weight: 300;
   font-style: italic;
 }
-/* line 275, ../sass/uploads.scss */
+/* line 356, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input:-ms-input-placeholder, #add-video form div.drop-pane-row div.input-row div textarea:-ms-input-placeholder, #add-video div.pending div.drop-pane-row div.input-row div input:-ms-input-placeholder, #add-video div.pending div.drop-pane-row div.input-row div textarea:-ms-input-placeholder {
   /* Internet Explorer 10+ */
-  color: #AAA;
+  color: #666;
   font-weight: 300;
   font-style: italic;
 }
-/* line 281, ../sass/uploads.scss */
+/* line 362, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input.placeholder, #add-video form div.drop-pane-row div.input-row div textarea.placeholder, #add-video div.pending div.drop-pane-row div.input-row div input.placeholder, #add-video div.pending div.drop-pane-row div.input-row div textarea.placeholder {
-  color: #AAA;
+  color: #666;
   font-weight: 300;
   font-style: italic;
 }
-/* line 287, ../sass/uploads.scss */
+/* line 368, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input:focus, #add-video form div.drop-pane-row div.input-row div textarea:focus, #add-video div.pending div.drop-pane-row div.input-row div input:focus, #add-video div.pending div.drop-pane-row div.input-row div textarea:focus {
-  border: 1px solid #AAA;
+  border: 1px solid #666;
   outline: 0;
 }
-/* line 292, ../sass/uploads.scss */
+/* line 373, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input.error, #add-video form div.drop-pane-row div.input-row div textarea.error, #add-video div.pending div.drop-pane-row div.input-row div input.error, #add-video div.pending div.drop-pane-row div.input-row div textarea.error {
   border: 1px solid red;
 }
-/* line 295, ../sass/uploads.scss */
+/* line 376, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input.error:-moz-placeholder, #add-video form div.drop-pane-row div.input-row div textarea.error:-moz-placeholder, #add-video div.pending div.drop-pane-row div.input-row div input.error:-moz-placeholder, #add-video div.pending div.drop-pane-row div.input-row div textarea.error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 301, ../sass/uploads.scss */
+/* line 382, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input.error::-moz-placeholder, #add-video form div.drop-pane-row div.input-row div textarea.error::-moz-placeholder, #add-video div.pending div.drop-pane-row div.input-row div input.error::-moz-placeholder, #add-video div.pending div.drop-pane-row div.input-row div textarea.error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 307, ../sass/uploads.scss */
+/* line 388, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input.error:-ms-input-placeholder, #add-video form div.drop-pane-row div.input-row div textarea.error:-ms-input-placeholder, #add-video div.pending div.drop-pane-row div.input-row div input.error:-ms-input-placeholder, #add-video div.pending div.drop-pane-row div.input-row div textarea.error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 313, ../sass/uploads.scss */
+/* line 394, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.input-row div input.error.placeholder, #add-video form div.drop-pane-row div.input-row div textarea.error.placeholder, #add-video div.pending div.drop-pane-row div.input-row div input.error.placeholder, #add-video div.pending div.drop-pane-row div.input-row div textarea.error.placeholder {
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 323, ../sass/uploads.scss */
+/* line 404, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.textarea-row, #add-video div.pending div.drop-pane-row div.textarea-row {
   margin-bottom: 5px;
 }
-/* line 326, ../sass/uploads.scss */
+/* line 407, ../sass/uploads.scss */
 #add-video form div.drop-pane-row div.textarea-row textarea, #add-video div.pending div.drop-pane-row div.textarea-row textarea {
   height: 43px;
 }
-/* line 335, ../sass/uploads.scss */
+/* line 416, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row {
   background-color: #f0f0f0;
   border: 2px dashed #d8d8d8;
@@ -351,11 +429,11 @@
   -moz-border-radius: 3px / 3px;
   border-radius: 3px / 3px;
 }
-/* line 342, ../sass/uploads.scss */
+/* line 423, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table {
   width: 100%;
 }
-/* line 346, ../sass/uploads.scss */
+/* line 427, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr td {
   border-top: 1px dashed #d8d8d8;
   color: #ABABAB;
@@ -363,29 +441,29 @@
   padding: 5px 0;
   width: 50%;
 }
-/* line 353, ../sass/uploads.scss */
+/* line 434, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr td a.video-link {
   color: #ABABAB;
   text-decoration: none;
   cursor: default;
 }
-/* line 358, ../sass/uploads.scss */
+/* line 439, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr td a.video-link.finished {
   color: #00aeef;
   cursor: pointer;
 }
-/* line 362, ../sass/uploads.scss */
+/* line 443, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr td a.video-link.finished:hover {
   text-decoration: underline;
 }
-/* line 368, ../sass/uploads.scss */
+/* line 449, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr td div.progress-bar {
   height: 22px;
   border: 1px solid #111;
   background-color: #292929;
   width: 100%;
 }
-/* line 374, ../sass/uploads.scss */
+/* line 455, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr td div.progress-bar div {
   height: 100%;
   color: #fff;
@@ -395,34 +473,34 @@
   width: 0;
   background-color: #0099ff;
 }
-/* line 384, ../sass/uploads.scss */
+/* line 465, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr td.icon {
   width: 8%;
 }
-/* line 389, ../sass/uploads.scss */
+/* line 470, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr td.icon a.video-link.finished:hover {
   text-decoration: none;
 }
-/* line 396, ../sass/uploads.scss */
+/* line 477, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr td.percentage {
   width: 42%;
 }
-/* line 400, ../sass/uploads.scss */
+/* line 481, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr td.no-uploads {
   border-top: none;
   text-align: center;
   font-style: italic;
 }
-/* line 408, ../sass/uploads.scss */
+/* line 489, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr.first td {
   padding-top: 0;
   border-top: none;
 }
-/* line 415, ../sass/uploads.scss */
+/* line 496, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table tr.last td {
   padding-bottom: 0;
 }
-/* line 421, ../sass/uploads.scss */
+/* line 502, ../sass/uploads.scss */
 #add-video #pending-uploads div.pending div.uploads-row table.complete {
   display: none;
 }

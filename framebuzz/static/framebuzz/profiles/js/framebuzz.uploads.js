@@ -1,7 +1,7 @@
 $(function() {
     var addVideoDiv = $('#add-video');
         selectedTabIndicator = $('ul.nav-tabs li.indicator', addVideoDiv),
-        dropPaneDiv = $('#upload-drop-pane'),
+        dropPaneDiv = $('#upload-drop-pane > div > div'),
         dropResultDiv = $("#drop-result-bar"),
         uploadBadge = $('#upload-badge'),
         currentCount = parseInt(uploadBadge.attr('data-upload-count')),
@@ -15,20 +15,8 @@ $(function() {
           'ogv','ogx','ts','webm','wma','wmv', 'mpg', 'avi'
         ];
 
-    var convertToSlug = function(input) {
-      return input
-          .toLowerCase()
-          .replace(/[^\w ]+/g,'')
-          .replace(/ +/g,'-')
-          ;
-    };
-
-    var setHiddenFormFields = function(url, key) {
-      var filenameWithoutExt = key.split(".");
-      var folderName = convertToSlug(filenameWithoutExt[0]);
-
-      $('#id_fp_url').val(url);
-      $('#id_fp_filename').val(folderName);
+    var setHiddenFormFields = function(key) {
+      $('#id_fpname').val(key);
     };
 
     var resetForm = function() {
@@ -36,8 +24,8 @@ $(function() {
         $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
         selectedTabIndicator.removeClass('active');
 
-        $('#id_fp_filename').val('');
-        $('#id_fp_url').val('');
+        $('#id_fpname').val('');
+        $('#id_fpfile').val('');
         $('#id_title').val('');
         $('#id_description').val('');
 
@@ -130,12 +118,32 @@ $(function() {
       }
     };
 
+    // Set filepicker.io key and drop panes for uploads.
+    filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
+
+    // filepicker.makeDropPane(dropPaneDiv[0], {
+    //     multiple: false,
+    //     extensions: acceptedExtensions,
+    //     dragEnter: function() {
+    //         dropPaneDiv.html("Drop to upload.");
+    //     },
+    //     dragLeave: function() {
+    //         dropPaneDiv.html("Drop files here.");
+    //     },
+    //     onSuccess: function(InkBlobs) {
+    //         dropPaneDiv.html('<i class="fa fa-film"></i> <strong>' + InkBlobs[0].filename + ' added!</strong>');
+    //         setHiddenFormFields(InkBlobs[0].key);
+    //     },
+    //     onError: function(type, message) {
+    //         dropResultDiv.text('('+type+') '+ message);
+    //     }
+    // });
+
     // Check jobs.
     startJobCheckInterval();
 
     // Add placeholder text for forms.
     $('input, textarea').placeholder();
-
 
     // Click tab event.
     $(document).on('click', '#add-video-tabs a[data-toggle="tab"]', function (e) {
@@ -174,29 +182,6 @@ $(function() {
       }
     });
 
-    // Set filepicker.io key and drop panes for uploads.
-    filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
-    filepicker.makeDropPane(dropPaneDiv[0], {
-        multiple: false,
-        extensions: acceptedExtensions,
-        dragEnter: function() {
-            dropPaneDiv.html("Drop to upload.");
-        },
-        dragLeave: function() {
-            dropPaneDiv.html("Drop files here.");
-        },
-        onSuccess: function(InkBlobs) {
-            dropPaneDiv.html('<i class="fa fa-film"></i> <strong>' + InkBlobs[0].filename + ' added!</strong>');
-            setHiddenFormFields(InkBlobs[0].url, InkBlobs[0].key);
-        },
-        onError: function(type, message) {
-            dropResultDiv.text('('+type+') '+ message);
-        },
-        onProgress: function(percentage) {
-            dropPaneDiv.text("Uploading ("+percentage+"%)");
-        }
-    });
-
     // Cancel upload button.
     $('a.cancel-upload', addVideoDiv).click(function() {
       selectedTabIndicator.removeClass('active');
@@ -215,7 +200,7 @@ $(function() {
       e.preventDefault();
 
       // Simple validation.
-      if ($('#id_fp_filename').val().length == 0) {
+      if ($('#id_fpname').val().length == 0) {
         dropPaneDiv.addClass('error');
         hasError = true;
       }
@@ -246,19 +231,19 @@ $(function() {
       return false;
     });
 
-    $('#upload-click-here').click(function(e) {
-        e.preventDefault();
-
-        filepicker.pickAndStore(
-          {
-            extensions: acceptedExtensions,
-            services: ['COMPUTER','VIDEO','BOX','DROPBOX','GOOGLE_DRIVE','URL','FTP']
-          },
-          {
-            location: 's3'
-          }, function(fpfiles) {
-            dropPaneDiv.html('<i class="fa fa-film"></i> <strong>' + fpfiles[0].filename + ' added!</strong>');
-            setHiddenFormFields(fpfiles[0].url, fpfiles[0].key);
-        });
-    });
+    // $(document).on('click', '#upload-drop-pane > div > button.btn-success', function(e) {
+    //     e.preventDefault();
+    //
+    //     filepicker.pick(
+    //       {
+    //         extensions: acceptedExtensions,
+    //         services: ['COMPUTER','VIDEO','BOX','DROPBOX','GOOGLE_DRIVE','URL','FTP']
+    //       },
+    //       {
+    //         location: 's3'
+    //       }, function(fpfiles) {
+    //         dropPaneDiv.html('<i class="fa fa-film"></i> <strong>' + fpfiles[0].filename + ' added!</strong>');
+    //         setHiddenFormFields(fpfiles[0].key);
+    //     });
+    // });
 });

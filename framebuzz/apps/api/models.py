@@ -2,6 +2,7 @@ import os
 import hashlib
 import watson
 import caching.base
+import django_filepicker
 
 from datetime import datetime
 
@@ -13,7 +14,6 @@ from django.contrib.comments.models import Comment, CommentFlag
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.encoding import force_bytes
-from django.utils.hashcompat import md5_constructor
 from django.utils.translation import ugettext as _
 from django.utils.html import urlize
 from django.utils.safestring import mark_safe
@@ -25,6 +25,7 @@ from avatar.util import get_username
 from randomslugfield import RandomSlugField
 from templated_email import send_templated_mail
 from timezone_field import TimeZoneField
+from storages.backends.s3boto import S3BotoStorage
 from mptt.models import MPTTModel, TreeForeignKey
 
 from framebuzz.apps.search.adapters import VideoSearchAdapter, \
@@ -34,6 +35,12 @@ from framebuzz.apps.search.adapters import VideoSearchAdapter, \
 COMMENT_VISIBILITY_TIME_RANGE = 1
 TIMELINE_BLOCKS = 32
 SIGNIFICANCE_FACTOR = 20.0
+
+
+video_storage = S3BotoStorage(
+    acl='public',
+    bucket='framebuzz-filepicker',
+)
 
 
 def bkg_file_path(instance=None, filename=None, size=None, ext=None):
@@ -77,7 +84,7 @@ class UserProfile(caching.base.CachingMixin, models.Model):
         verbose_name_plural = 'User Profiles'
 
     def get_uhash(self):
-        return md5_constructor(self.user.username).hexdigest()
+        return hashlib.md5(self.user.username).hexdigest()
 
     def get_color_code(self):
         uhash = self.get_uhash()
@@ -164,19 +171,21 @@ post_save.connect(create_user_profile, sender=User)
 class Video(caching.base.CachingMixin, models.Model):
     slug = RandomSlugField(length=settings.RANDOMSLUG_LENGTH,
                            blank=True, null=True)
-    video_id = models.CharField(max_length=255, unique=True, null=True,
-                                help_text=_("The Youtube id of the video"))
+    video_id = models.CharField(max_length=255, unique=True, null=True)
     title = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     youtube_url = models.URLField(max_length=255, null=True, blank=True)
     uploaded = models.DateTimeField()
-    duration = models.BigIntegerField()
+    duration = models.BigIntegerField(default=0)
     added_by = models.ForeignKey(User, blank=True, null=True)
     added_on = models.DateTimeField(auto_now=True)
     mp4_url = models.URLField(max_length=255, null=True, blank=True)
     webm_url = models.URLField(max_length=255, null=True, blank=True)
     job_id = models.BigIntegerField(blank=True, null=True)
     processing = models.BooleanField(default=False)
+    fpfile = django_filepicker.models.FPFileField(upload_to='uploads',
+                                                  blank=True, null=True)
+    filename = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
         verbose_name = 'FrameBuzz Video'

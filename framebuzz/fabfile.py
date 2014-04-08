@@ -469,8 +469,8 @@ def notify_team():
 
         hipster = hipchat.HipChat(token='77e2890abb18c924c2bfa6d7e1a783')
         hipster.method('rooms/message', method='POST', parameters={
-            'room_id': 257772, 
-            'from': 'Deploy', 
+            'room_id': 257772,
+            'from': 'Deploy',
             'message': message,
         })
 
@@ -507,7 +507,7 @@ def deploy():
         sudo("tar -cf last.tar %s" % static())
 
     with cd(env.proj_path):
-        sshagent_run('git pull origin master -f')
+        sshagent_run('git pull gitlab master -f')
 
     with project():
         git = env.git
@@ -526,7 +526,7 @@ def deploy():
     clear_cache()
     restart()
     toggle_maintenance('off')
-    notify_team()
+    #notify_team()
 
     return True
 

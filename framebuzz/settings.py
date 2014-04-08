@@ -50,7 +50,6 @@ USE_TZ = True
 DATABASES = {
     "default": {
         # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-        "ENGINE": "django.db.backends.",
         # DB name or path to database file if using sqlite3.
         "NAME": "",
         # Not used with sqlite3.
@@ -245,6 +244,7 @@ INSTALLED_APPS = (
     'django_mobile',
     'maintenancemode',
     'randomslugfield',
+    'storages',
 
     # Required by Zinnia
     'tinymce',

@@ -1,6 +1,10 @@
+import datetime
+import django_filepicker
+
 from actstream import action
 
 from django import forms
+from django.contrib.auth.models import User
 from django.db import IntegrityError
 
 from framebuzz.apps.api.models import UserProfile, UserVideo, Video
@@ -62,12 +66,12 @@ class AddVideoForm(forms.ModelForm):
 
 
 class UploadVideoForm(forms.ModelForm):
-    fp_url = forms.CharField(max_length=500)
-    fp_filename = forms.CharField(max_length=500)
+    fpfile = django_filepicker.forms.FPUrlField()
+    fpname = forms.CharField(max_length=500)
 
     class Meta:
         model = Video
-        fields = ('title', 'description', 'fp_url', 'fp_filename',)
+        fields = ('title', 'description', 'fpfile', 'fpname',)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -79,16 +83,43 @@ class UploadVideoForm(forms.ModelForm):
             'placeholder': 'Enter a description for the video...'
         })
 
-    def save(self):
-        file_url = self.cleaned_data.get('fp_url', None)
-        filename = self.cleaned_data.get('fp_filename', None)
+        self.fields['fpfile'].widget.attrs['data-fp-mimetypes'] = ''
+        self.fields['fpfile'].widget.attrs['data-fp-button-text'] = \
+            '<i class="fa fa-cloud-upload"></i><br>Select File...'
+        self.fields['fpfile'].widget.attrs['data-fp-button-class'] = \
+            'btn btn-large btn-success'
+        self.fields['fpfile'].widget.attrs['data-fp-services'] = \
+            'COMPUTER,VIDEO,BOX,DROPBOX,GOOGLE_DRIVE,URL,FTP'
+        self.fields['fpfile'].widget.attrs['data-fp-extensions'] = \
+            '3g2,3gp,3gp2,3gpp,3gpp2,ac3,eac3,ec3,f4a,f4b,f4v,flv,highwinds,' \
+            'm4a,m4b,m4r,m4v,mkv,mov,mp4,oga,ogv,ogx,ts,webm,wma,wmv,mpg,avi'
+        self.fields['fpfile'].widget.attrs['data-fp-drag-text'] = \
+            'Drag and drop your video files here.<br>Or, click ' \
+            '<strong>Select File...</strong>' \
+            ' to upload videos from Dropbox, Google Drive, and more!'
+
+    def save(self, commit=True):
+        fpfile = self.cleaned_data.get('fpfile', None)
+        fpname = self.cleaned_data.get('fpname', None)
         title = self.cleaned_data.get('title', None)
         description = self.cleaned_data.get('description', None)
 
-        start_zencoder_job.apply_async(args=[
-            self.request.user.username,
-            title,
-            description,
-            file_url,
-            filename
-        ])
+        if fpfile:
+            user = User.objects.get(username__iexact=self.request.user.username)
+
+            vid = super(UploadVideoForm, self).save(commit=False)
+            vid.title = title
+            vid.description = description
+            vid.filename = fpname
+            vid.added_by = user
+            vid.processing = True
+            vid.uploaded = datetime.datetime.now()
+            vid.save()
+
+            # start_zencoder_job.apply_async(args=[
+            #     self.request.user.username,
+            #     title,
+            #     description,
+            #     file_url,
+            #     filename
+            # ])

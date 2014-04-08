@@ -297,8 +297,8 @@ def home(request, username):
 
     pending_uploads = []
     if is_my_profile:
-        pending_uploads = Video.objects.filter(added_by=request.user, processing=True)
-    print pending_uploads
+        pending_uploads = Video.objects.filter(added_by=request.user,
+                                               processing=True)
 
     context = {
         'profile_favorites': profile_favorites,
@@ -438,7 +438,9 @@ def upload_video(request, username):
     success = False
 
     if submitted:
-        form = UploadVideoForm(data=request.POST, request=request)
+        form = UploadVideoForm(data=request.POST,
+                               files=request.FILES,
+                               request=request)
         success = form.is_valid()
 
         if success:
