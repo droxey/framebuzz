@@ -1,7 +1,8 @@
 import os
 import re
 import sys
-import hipchat
+import flowdock
+
 from functools import wraps
 from getpass import getpass, getuser
 from glob import glob
@@ -452,6 +453,7 @@ def update_video_urls():
     with project():
         manage('update_video_urls')
 
+
 @task
 @log_call
 def restart():
@@ -460,25 +462,26 @@ def restart():
     """
     sudo("supervisorctl restart all")
 
+
 @task
 @log_call
 def notify_team():
     with project():
         commit_info = run('git log -1 --pretty="[%h] %an (%ar): %s"')
-        message = '%s has been updated! Current revision: %s' % (env.live_host, str(commit_info))
-
-        hipster = hipchat.HipChat(token='77e2890abb18c924c2bfa6d7e1a783')
-        hipster.method('rooms/message', method='POST', parameters={
-            'room_id': 257772,
-            'from': 'Deploy',
-            'message': message,
-        })
+        message = '%s has been updated! Current revision: %s' \
+            % (env.live_host, str(commit_info))
+        flowdock.post('dani@framebuzz.com',
+                      'Deployment Successful',
+                      '<p>%s</p>' % message,
+                      from_name='Dani',
+                      tags=['deployment'])
 
 @task
 @log_call
 def clear_cache():
     if exists(env.static_cache_path):
         sudo("rm -rf %s" % env.static_cache_path)
+
 
 @task
 @log_call
@@ -522,11 +525,10 @@ def deploy():
         manage("loaddata %s/framebuzz/fixtures/social_accounts.json" % env.proj_path)
         manage("loaddata %s/maintenancemode/fixtures/initial_data.json" % env.proj_path)
 
-    #remove_old_activities()
     clear_cache()
     restart()
     toggle_maintenance('off')
-    #notify_team()
+    notify_team()
 
     return True
 
