@@ -92,7 +92,7 @@ class UploadVideoForm(forms.ModelForm):
             'COMPUTER,VIDEO,BOX,DROPBOX,GOOGLE_DRIVE,URL,FTP'
         self.fields['fpfile'].widget.attrs['data-fp-extensions'] = \
             '3g2,3gp,3gp2,3gpp,3gpp2,ac3,eac3,ec3,f4a,f4b,f4v,flv,highwinds,' \
-            'm4a,m4b,m4r,m4v,mkv,mov,mp4,oga,ogv,ogx,ts,webm,wma,wmv,mpg,avi'
+            'm4a,m4b,m4r,m4v,mov,mp4,oga,ogv,ogx,ts,webm,wma,mpg,avi'
         self.fields['fpfile'].widget.attrs['data-fp-drag-text'] = \
             'Drag and drop your video files here.<br>Or, click ' \
             '<strong>Select File...</strong>' \
