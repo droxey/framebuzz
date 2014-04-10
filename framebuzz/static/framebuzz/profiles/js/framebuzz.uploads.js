@@ -52,8 +52,8 @@ $(function() {
         var deferreds = [];
 
         $('#uploads-table tr').not('.complete').each(function(key, value) {
-         // var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=e9d23782542efd39f402fc40a7b4edaf';
-          var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=75e13910e393a6ccafc1a3272f3a6a48';
+          var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=e9d23782542efd39f402fc40a7b4edaf';
+          // test: var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=75e13910e393a6ccafc1a3272f3a6a48';
           var row = $(this);
 
           deferreds.push(
@@ -174,17 +174,6 @@ $(function() {
       e.preventDefault();
 
       // Simple validation.
-     // console.log(dropPaneDiv.text());
-    //   if ($('#id_fpname').val().length == 0) {
-    //     dropPaneDiv.addClass('error');
-    //     hasError = true;
-    //   }
-    //   else {
-    //     dropPaneDiv.removeClass('error');
-    //   }
-
-      //console.log($('#id_fpname').val());
-
       if ($('#id_title').val().length == 0) {
         $('#id_title').addClass('error');
         $('#id_title').attr('placeholder', 'Please enter a title for the uploaded video.');
