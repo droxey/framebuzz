@@ -10,8 +10,9 @@ from zencoder import Zencoder
 
 from framebuzz.apps.api.models import Video, UserVideo, Thumbnail
 
-MP4_URL = 's3://fbz-zc/%s/%s.mp4'
-WEBM_URL = 's3://fbz-zc/%s/%s.webm'
+MP4 = '%s.mp4'
+WEBM = '%s.webm'
+DIRECTORY = 's3://fbz-zc/%s/'
 
 
 @celery.task(name='framebuzz.apps.api.backends.tasks.start_zencoder_job',
@@ -20,23 +21,27 @@ def start_zencoder_job(video_url, filename):
     logger = start_zencoder_job.get_logger()
     logger.info('Uploading %s: %s' % (filename, video_url))
 
+    directory = video_url.split('/')[-1]
+
+    base_dir = DIRECTORY % (directory)
+    mp4_file = MP4 % (directory)
+    webm_file = WEBM % (directory)
+
     client = Zencoder(settings.ZENCODER_API_KEY)
-    mp4_url = MP4_URL % (filename, filename)
-    webm_url = WEBM_URL % (filename, filename)
     requeue = False
 
     response = client.job.create(video_url,
         outputs=[
             {
-                'credentials': 's3',
                 'size': '700x470',
-                'url': mp4_url,
+                'base_url': base_dir,
+                'filename': mp4_file,
                 'public': True
             },
             {
-                'credentials': 's3',
                 'size': '700x470',
-                'url': webm_url,
+                'base_url': base_dir,
+                'filename': webm_file,
                 'public': True
             },
             {
@@ -49,7 +54,7 @@ def start_zencoder_job(video_url, filename):
                     {
                         'number': 5,
                         'size': '700x470',
-                        'credentials': 's3',
+                        'public': True,
                         'label': 'poster'
                     }
                 ]
