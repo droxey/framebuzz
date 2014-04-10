@@ -252,17 +252,16 @@ class Video(caching.base.CachingMixin, models.Model):
             if len(poster_thumbnail) == 0:
                 poster_thumbnail = self.thumbnail_set.filter(
                     url__endswith='mqdefault.jpg')
+            if len(poster_thumbnail) == 0:
+                poster_thumbnail = self.thumbnail_set.all()
 
             try:
                 poster = poster_thumbnail[0]
             except:
                 poster = self.default_thumbnail()
             finally:
-                if poster is not None:
-                    if isinstance(poster, basestring):
-                        return poster
-                    else:
-                        return poster.url
+                if poster is not None and not isinstance(poster, basestring):
+                    return poster.url
         else:
             try:
                 return self.thumbnail_set.all()[1]
