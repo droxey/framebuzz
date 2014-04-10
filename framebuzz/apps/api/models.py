@@ -237,7 +237,7 @@ class Video(caching.base.CachingMixin, models.Model):
             pass
 
     def poster_image(self):
-        if self.video_id:
+        if self.video_id and len(self.video_id) < 12:
             if self.video_id == 'DEL7-ftmrxI' or self.video_id == 'Tqvb0NUJem8':
                 if self.video_id == 'DEL7-ftmrxI':
                     return '/static/framebuzz/marketing/img/poster1.jpg'
@@ -264,7 +264,7 @@ class Video(caching.base.CachingMixin, models.Model):
                     return poster.url
         else:
             try:
-                return self.thumbnail_set.all()[1]
+                return self.thumbnail_set.all()[0].url
             except:
                 pass
 
