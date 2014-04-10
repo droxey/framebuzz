@@ -107,6 +107,7 @@ def feed(request, username):
     except EmptyPage:
         template = 'profiles/snippets/blank.html'
 
+
     ct = ContentType.objects.get(model='user')
     return render_to_response(template, {
         'profile_user': user,
@@ -317,6 +318,7 @@ def home(request, username):
 
     share_context = request.session.get('share', None)
     if share_context:
+        context.update(share_context)
         del request.session['share']
 
     context['form'] = AddVideoForm(request=request)

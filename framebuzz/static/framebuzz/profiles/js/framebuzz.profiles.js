@@ -35,7 +35,7 @@ var FrameBuzzProfile = (function($) {
                 var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
 
                 $.post(postUrl, {
-                    'video_id': video_id, 
+                    'video_id': video_id,
                     'is_featured': 'false',
                     'csrfmiddlewaretoken': csrfToken
                 }, function(data, textStatus, jqXHR) {
@@ -86,7 +86,7 @@ var FrameBuzzProfile = (function($) {
                 links.each(function(k, v) {
                     $(v).find('.fa-stack').toggleClass('active');
                 });
-                
+
                 if (removing) {
                     links.each(function(k, v) {
                         $(v).find('.fa-stack-1x').removeClass('fa-minus').addClass('fa-plus');
@@ -95,7 +95,7 @@ var FrameBuzzProfile = (function($) {
                     if (isVideoScreen) {
                         toggleText.parent().removeClass('remove').addClass('add');
                         toggleText.text('Post Video');
-                    } 
+                    }
                     else {
                         if (isMine && (isFavorite || isVideo)) {
                             parentItem
@@ -106,7 +106,7 @@ var FrameBuzzProfile = (function($) {
                                   $(window).trigger('resize');
                                });
                         }
-                    }   
+                    }
                 }
                 else {
                     links.each(function(k, v) {
@@ -213,7 +213,7 @@ var FrameBuzzProfile = (function($) {
 
     function initTimeline() {
         $('.responsive-timeline').rTimeline({
-            theme: 'light', 
+            theme: 'light',
             url: _urls.feed,
             data: function(iteration) {
                 var page = iteration + 2;
@@ -236,7 +236,7 @@ var FrameBuzzProfile = (function($) {
         dialog.modal();
 
         dialog.on('shown.bs.modal', function(e) {
-            if (!menu.is(':visible')) { 
+            if (!menu.is(':visible')) {
                 menu.addClass('open');
                 menu.css({ 'display': 'block !important; '});
             }
@@ -258,7 +258,7 @@ var FrameBuzzProfile = (function($) {
 
         if (_isMyProfile) {
             bindAddVideoButton();
-            
+
             if (_showHelp) {
                 initHelpDialog();
             }
@@ -268,30 +268,30 @@ var FrameBuzzProfile = (function($) {
                 return false;
             });
         }
-        
+
         bindFilter();
         initFollowButton();
 
-        $(document).on('click', 'a.play-video', function() {
-            var url = $(this).attr('href');
-
-            $("html, body").animate({ scrollTop: 0 }, "normal", function() {
-                $('#share div.ajax').fadeIn('fast', function() {
-                    $('#video-container').html('');
-                    $('#share').show();
-                });
-
-                $.get(url, function(data) {
-                    $('#share div.ajax').fadeOut('fast', function() {
-                       $('#video-container').html(data);
-                       $('li.start').addClass('active');
-                       $('#video-container div.details div.description div.scroller').perfectScrollbar({suppressScrollX: true});
-                   });
-                });
-            });
-
-            return false;
-        });
+        // $(document).on('click', 'a.play-video', function() {
+        //     var url = $(this).attr('href');
+        //
+        //     $("html, body").animate({ scrollTop: 0 }, "normal", function() {
+        //         $('#share div.ajax').fadeIn('fast', function() {
+        //             $('#video-container').html('');
+        //             $('#share').show();
+        //         });
+        //
+        //         $.get(url, function(data) {
+        //             $('#share div.ajax').fadeOut('fast', function() {
+        //                $('#video-container').html(data);
+        //                $('li.start').addClass('active');
+        //                $('#video-container div.details div.description div.scroller').perfectScrollbar({suppressScrollX: true});
+        //            });
+        //         });
+        //     });
+        //
+        //     return false;
+        // });
 
         var feedContainer = $('#feed');
         var recommendationsContainer = $('#recommendations div.ajax');
