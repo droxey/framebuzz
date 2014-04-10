@@ -182,7 +182,7 @@ MIDDLEWARE_CLASSES = (
     'framebuzz.libs.middleware.timezone.TimezoneMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
 
-    'django_filepicker.middleware.URLFileMapperMiddleware',
+    #'django_filepicker.middleware.URLFileMapperMiddleware',
 )
 
 ROOT_URLCONF = 'framebuzz.urls'

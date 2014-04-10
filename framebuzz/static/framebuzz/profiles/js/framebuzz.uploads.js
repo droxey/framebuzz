@@ -52,7 +52,8 @@ $(function() {
         var deferreds = [];
 
         $('#uploads-table tr').not('.complete').each(function(key, value) {
-          var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=e9d23782542efd39f402fc40a7b4edaf';
+         // var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=e9d23782542efd39f402fc40a7b4edaf';
+          var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=75e13910e393a6ccafc1a3272f3a6a48';
           var row = $(this);
 
           deferreds.push(

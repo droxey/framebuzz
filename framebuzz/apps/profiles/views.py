@@ -297,7 +297,9 @@ def home(request, username):
 
     pending_uploads = []
     if is_my_profile:
-        pending_uploads = Video.objects.exclude(fpfile=None).filter(added_by=request.user, processing=True)
+        pending_uploads = Video.objects.exclude(
+            Q(Q(fp_url=None) | Q(job_id=None))).filter(
+            added_by=request.user, processing=True)
 
     context = {
         'profile_favorites': profile_favorites,
@@ -315,8 +317,6 @@ def home(request, username):
 
     share_context = request.session.get('share', None)
     if share_context:
-        #context['shares'] = get_total_shares(share_context['path'])
-        #context.update(share_context)
         del request.session['share']
 
     context['form'] = AddVideoForm(request=request)

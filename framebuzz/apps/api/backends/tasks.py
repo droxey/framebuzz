@@ -16,10 +16,14 @@ WEBM_URL = 's3://fbz-zc/%s/%s.webm'
 
 @celery.task(name='framebuzz.apps.api.backends.tasks.start_zencoder_job',
              ignore_result=True)
-def start_zencoder_job(username, title, description, video_url, filename):
+def start_zencoder_job(video_url, filename):
+    logger = start_zencoder_job.get_logger()
+    logger.info('Uploading %s: %s' % (filename, video_url))
+
     client = Zencoder(settings.ZENCODER_API_KEY)
     mp4_url = MP4_URL % (filename, filename)
     webm_url = WEBM_URL % (filename, filename)
+    requeue = False
 
     response = client.job.create(video_url,
         outputs=[
@@ -53,19 +57,13 @@ def start_zencoder_job(username, title, description, video_url, filename):
         ]
     )
 
-    if response.code == 201:  # Created
-        added_by = User.objects.get(username__iexact=username)
+    vid = Video.objects.get(fp_url=video_url)
+    vid.job_id = response.body.get('id', 0)
+    vid.save()
 
-        video = Video()
-        video.added_by = added_by
-        video.title = title
-        video.description = description
-        video.processing = True
-        video.job_id = response.body.get('id', 0)
-        video.duration = 0  # Unknown until Zencoder is done encoding.
-        video.uploaded = datetime.datetime.now()
-
-        video.save()
+    if response.code != 201 or vid.job_id == 0:  # 201: CREATED
+        # TODO: Implement requeue.
+        requeue = True
 
 
 @celery.task(name='framebuzz.apps.api.backends.tasks.check_zencoder_progress')

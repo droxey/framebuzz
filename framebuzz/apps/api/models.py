@@ -183,8 +183,7 @@ class Video(caching.base.CachingMixin, models.Model):
     webm_url = models.URLField(max_length=255, null=True, blank=True)
     job_id = models.BigIntegerField(blank=True, null=True)
     processing = models.BooleanField(default=False)
-    fpfile = django_filepicker.models.FPFileField(upload_to='uploads',
-                                                  blank=True, null=True)
+    fp_url = models.URLField(max_length=500, blank=True, null=True)
     filename = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:

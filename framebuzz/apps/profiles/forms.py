@@ -4,6 +4,7 @@ import django_filepicker
 from actstream import action
 
 from django import forms
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 
@@ -66,8 +67,7 @@ class AddVideoForm(forms.ModelForm):
 
 
 class UploadVideoForm(forms.ModelForm):
-    fpfile = django_filepicker.forms.FPUrlField()
-    fpname = forms.CharField(max_length=500)
+    fpfile = django_filepicker.forms.FPFileField()
 
     class Meta:
         model = Video
@@ -102,8 +102,8 @@ class UploadVideoForm(forms.ModelForm):
         fpfile = self.cleaned_data.get('fpfile', None)
         title = self.cleaned_data.get('title', None)
         description = self.cleaned_data.get('description', None)
-
         user = User.objects.get(username__iexact=self.request.user.username)
+        url = self.request.POST['fpfile'] or None
 
         vid = Video()
         vid.title = title
@@ -112,14 +112,16 @@ class UploadVideoForm(forms.ModelForm):
         vid.processing = True
         vid.uploaded = datetime.datetime.now()
         vid.filename = fpfile.name or None
-        vid.fpfile = self.request.POST['fpfile']
+        vid.fp_url = url
+        vid.save()
+
+        vid.video_id = vid.slug
         vid.save()
 
         if fpfile:  # Send it to ZenCoder!
             start_zencoder_job.apply_async(args=[
-                self.request.user.username,
-                vid.title,
-                vid.description,
-                vid.file_url,
+                vid.fp_url,
                 vid.filename
             ])
+
+        return vid
