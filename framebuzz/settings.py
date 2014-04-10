@@ -181,6 +181,8 @@ MIDDLEWARE_CLASSES = (
     'watson.middleware.SearchContextMiddleware',
     'framebuzz.libs.middleware.timezone.TimezoneMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
+
+    'django_filepicker.middleware.URLFileMapperMiddleware',
 )
 
 ROOT_URLCONF = 'framebuzz.urls'

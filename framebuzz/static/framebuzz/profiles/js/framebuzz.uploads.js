@@ -10,10 +10,6 @@ $(function() {
         checkJobsInterval = null,
         finishedUploads = [];
 
-    var setHiddenFormFields = function(key) {
-      $('#id_fpname').val(key);
-    };
-
     var resetForm = function() {
         $('ul.nav-tabs li', addVideoDiv).removeClass('active');
         $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
@@ -177,13 +173,16 @@ $(function() {
       e.preventDefault();
 
       // Simple validation.
-      if ($('#id_fpname').val().length == 0) {
-        dropPaneDiv.addClass('error');
-        hasError = true;
-      }
-      else {
-        dropPaneDiv.removeClass('error');
-      }
+     // console.log(dropPaneDiv.text());
+    //   if ($('#id_fpname').val().length == 0) {
+    //     dropPaneDiv.addClass('error');
+    //     hasError = true;
+    //   }
+    //   else {
+    //     dropPaneDiv.removeClass('error');
+    //   }
+
+      //console.log($('#id_fpname').val());
 
       if ($('#id_title').val().length == 0) {
         $('#id_title').addClass('error');

@@ -71,7 +71,7 @@ class UploadVideoForm(forms.ModelForm):
 
     class Meta:
         model = Video
-        fields = ('title', 'description', 'fpfile', 'fpname',)
+        fields = ('title', 'description', 'fpfile',)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -100,26 +100,26 @@ class UploadVideoForm(forms.ModelForm):
 
     def save(self, commit=True):
         fpfile = self.cleaned_data.get('fpfile', None)
-        fpname = self.cleaned_data.get('fpname', None)
         title = self.cleaned_data.get('title', None)
         description = self.cleaned_data.get('description', None)
 
-        if fpfile:
-            user = User.objects.get(username__iexact=self.request.user.username)
+        user = User.objects.get(username__iexact=self.request.user.username)
 
-            vid = super(UploadVideoForm, self).save(commit=False)
-            vid.title = title
-            vid.description = description
-            vid.filename = fpname
-            vid.added_by = user
-            vid.processing = True
-            vid.uploaded = datetime.datetime.now()
-            vid.save()
+        vid = Video()
+        vid.title = title
+        vid.description = description
+        vid.added_by = user
+        vid.processing = True
+        vid.uploaded = datetime.datetime.now()
+        vid.filename = fpfile.name or None
+        vid.fpfile = self.request.POST['fpfile']
+        vid.save()
 
-            # start_zencoder_job.apply_async(args=[
-            #     self.request.user.username,
-            #     title,
-            #     description,
-            #     file_url,
-            #     filename
-            # ])
+        if fpfile:  # Send it to ZenCoder!
+            start_zencoder_job.apply_async(args=[
+                self.request.user.username,
+                vid.title,
+                vid.description,
+                vid.file_url,
+                vid.filename
+            ])
