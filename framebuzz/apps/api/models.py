@@ -223,7 +223,7 @@ class Video(caching.base.CachingMixin, models.Model):
 
     def default_thumbnail(self):
         try:
-            if self.video_id:
+            if self.video_id and len(self.video_id) < 12:
                 return 'https://i1.ytimg.com/vi/%s/mqdefault.jpg' % self.video_id
             else:
                 return self.thumbnail_set.all()[1].url
@@ -264,7 +264,7 @@ class Video(caching.base.CachingMixin, models.Model):
                     return poster.url
         else:
             try:
-                return self.thumbnail_set.all()[0].url
+                return self.thumbnail_set.all()[1].url
             except:
                 pass
 
