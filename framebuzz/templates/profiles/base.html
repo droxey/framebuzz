@@ -79,7 +79,7 @@
                                             <i class="fa fa-circle fa-stack-2x"></i>
                                             <i class="fa fa-user fa-stack-1x fa-inverse"></i>
                                             <i class="fa fa-minus fa-stack-1x fa-inverse pull-right"></i>
-                                          </span>
+                                          </span>            
                                         </a>
                                         <a class="toggle-follow follow-button pull-right img-circle" title="Follow" data-placement="bottom" href="{% url 'actstream_follow' content_type_id=user_content_type.pk object_id=profile_user.pk %}" {% if request.user|is_following:profile_user %} style="display:none"{% endif %}>
                                           <span class="fa-stack">
@@ -134,16 +134,16 @@
                                     <strong>{{ profile_following|length|short_number }}</strong>
                                 </a>
                             </li>
-                        </ul>
+                        </ul>  
                     </div>
                 </div>
                 <div id="recommendations" class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <h2>Popular Picks</h2>
                         <div class="row ajax">
-                            {% if is_share %}
-
-                            {% endif %}
+                            <div class="spin col-xs-12 text-center">
+                                <i class="fa fa-spinner fa-spin fa-2x"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -160,6 +160,12 @@
                     {% elif is_convo %}
                         {% include 'player/snippets/convo.html' %}
                     {% else %}
+                        <div id="video-container"></div>
+                        <div class="row ajax">
+                            <div class="spin col-xs-12 text-center">
+                                <i class="fa fa-spinner fa-spin fa-4x"></i>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
                 {% if not is_convo %}
@@ -280,7 +286,7 @@
     {% if is_my_profile %}
         {% compress js %}
             <script type="text/javascript">
-            (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v1/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document);
+            (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v1/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document); 
             </script>
             <script src="{% static 'framebuzz/profiles/js/framebuzz.uploads.js' %}"></script>
         {% endcompress %}
