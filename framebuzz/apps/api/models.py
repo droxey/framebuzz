@@ -259,7 +259,10 @@ class Video(caching.base.CachingMixin, models.Model):
                 poster = self.default_thumbnail()
             finally:
                 if poster is not None:
-                    return poster.url
+                    if isinstance(poster, basestring):
+                        return poster
+                    else:
+                        return poster.url
         else:
             try:
                 return self.thumbnail_set.all()[1]
