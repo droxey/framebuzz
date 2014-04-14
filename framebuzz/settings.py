@@ -259,10 +259,9 @@ INSTALLED_APPS = (
     'framebuzz.apps.profiles',
     'framebuzz.apps.marketing',
     'framebuzz.apps.search',
-    'framebuzz.apps.seo',
 
-    'zinnia_bootstrap',
-    'zinnia',
+    # 'zinnia_bootstrap',
+    # 'zinnia',
 )
 
 # Django-Grappelli:
