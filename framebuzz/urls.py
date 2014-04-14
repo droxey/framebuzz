@@ -76,13 +76,6 @@ urlpatterns = patterns('',
     # Django-Activity-Stream:
     (r'^activity/', include('actstream.urls')),
 
-    # Feedback:
-    (r'^feedback/', include('feedback.urls')),
-
-    # Zinnia:
-    (r'^tinymce/', include('tinymce.urls')),
-    url(r'^blog/', include('zinnia.urls')),
-
     # Django-Shorturls:
     ('^s/', include('shorturls.urls')),
 

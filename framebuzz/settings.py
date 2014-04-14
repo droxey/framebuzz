@@ -148,8 +148,6 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
 
-    'zinnia.context_processors.version',
-
     'django_mobile.context_processors.flavour',
 
     "allauth.account.context_processors.account",
@@ -159,21 +157,12 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
 MIDDLEWARE_CLASSES = (
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
 
-    #'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-
-    #'tracking.middleware.VisitorTrackingMiddleware',
-    #'tracking.middleware.VisitorCleanUpMiddleware',
-    #'tracking.middleware.BannedIPMiddleware',
-
-    # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    #'django.middleware.cache.FetchFromCacheMiddleware',
 
     'framebuzz.apps.marketing.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
@@ -181,8 +170,6 @@ MIDDLEWARE_CLASSES = (
     'watson.middleware.SearchContextMiddleware',
     'framebuzz.libs.middleware.timezone.TimezoneMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
-
-    #'django_filepicker.middleware.URLFileMapperMiddleware',
 )
 
 ROOT_URLCONF = 'framebuzz.urls'
@@ -240,7 +227,6 @@ INSTALLED_APPS = (
     'compressor',
     'raven.contrib.django.raven_compat',
     'addendum',
-    'feedback',
     'shorturls',
     'watson',
     'django_mobile',
@@ -248,9 +234,6 @@ INSTALLED_APPS = (
     'randomslugfield',
     'storages',
     'rollyourown.seo',
-
-    # Required by Zinnia
-    'tinymce',
     'tagging',
     'mptt',
 
@@ -259,9 +242,6 @@ INSTALLED_APPS = (
     'framebuzz.apps.profiles',
     'framebuzz.apps.marketing',
     'framebuzz.apps.search',
-
-    # 'zinnia_bootstrap',
-    # 'zinnia',
 )
 
 # Django-Grappelli:
