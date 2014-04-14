@@ -7,6 +7,11 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
+# DjangoSEO
+from rollyourown.seo.admin import register_seo_admin
+from framebuzz.apps.api.seo import FbzMetadata
+register_seo_admin(admin.site, FbzMetadata)
+
 handler503 = 'maintenancemode.views.defaults.temporary_unavailable'
 handler500 = "framebuzz.apps.marketing.views.server_error"
 handler404 = "framebuzz.apps.marketing.views.server_404"

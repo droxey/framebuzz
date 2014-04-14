@@ -247,6 +247,7 @@ INSTALLED_APPS = (
     'maintenancemode',
     'randomslugfield',
     'storages',
+    'rollyourown.seo',
 
     # Required by Zinnia
     'tinymce',
@@ -258,6 +259,7 @@ INSTALLED_APPS = (
     'framebuzz.apps.profiles',
     'framebuzz.apps.marketing',
     'framebuzz.apps.search',
+    'framebuzz.apps.seo',
 
     'zinnia_bootstrap',
     'zinnia',
