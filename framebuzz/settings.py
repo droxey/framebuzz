@@ -236,6 +236,7 @@ INSTALLED_APPS = (
     'rollyourown.seo',
     'tagging',
     'mptt',
+    'robots',
 
     # FrameBuzz Apps
     'framebuzz.apps.api',

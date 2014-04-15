@@ -81,6 +81,9 @@ urlpatterns = patterns('',
 
     # Marketing:
     url(r'^', include('framebuzz.apps.marketing.urls')),
+
+    # Robots.txt:
+    (r'^robots\.txt$', include('robots.urls')),
 )
 
 
