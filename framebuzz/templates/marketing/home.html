@@ -1,60 +1,96 @@
-{% extends "marketing/base.html" %}
-{% load socialaccount staticfiles compress addendum_tags %}
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags %}
 
-{% block optimizely %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="en">
+  <head>
     <script src="//cdn.optimizely.com/js/393060191.js"></script>
-{% endblock %}
-
-{% block page_css %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="{% static 'framebuzz/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'framebuzz/favicon.ico' %}" type="image/x-icon">
+    <title>FrameBuzz: Make a Better Video.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta itemprop="description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
+    <meta itemprop="image" content="http://framebuzz.com{% static 'framebuzz/marketing/img/share_logo.jpg' %}" />
+    <meta property="og:image:url" content="http://framebuzz.com{% static 'framebuzz/marketing/img/share_logo.jpg' %}">
+    <meta property="og:url" content="http://framebuzz.com">
+    <meta property="og:description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
+    <meta property="og:title" content="FrameBuzz: Make a Better Video.">
+    <meta property="og:site_name" content="FrameBuzz">
     {% compress css %}
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/bootstrap/css/bootstrap.css' %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/jquery/vegas/jquery.vegas.min.css' %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/jquery/perfect-scrollbar-0.4.6.min.css' %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/css/stylesheets/screen.css' %}" type="text/css" media="screen" />
         <link href="{% static 'framebuzz/marketing/vendor/jquery/jquery.bxslider.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/marketing/css/stylesheets/home.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
     {% endcompress %}
-{% endblock %}
-
-{% block page_classes %}content home{% endblock %}
-
-{% block content_center %}
-    <div class="col-xs-12 main-wrapper">
-        <div id="fbz-header" class="row full-wrap">
-            <div class="col-xs-12 full-wrap-inner">
-                {% block home_header %}{% endblock %}
-            </div>
-        </div>
-        {% block home_content %}{% endblock %}
-        <div id="fbz-media-logos" class="row full-wrap">
-            <div class="col-xs-12 logo-bkg full-wrap-inner">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <a href="http://www.austin360.com/weblogs/digital-savant/2013/aug/29/austins-framebuzz-wants-give-vloggers-another-tool/" title="Austin's FrameBuzz wants to give vloggers another tool for commentary" target="_blank">
-                            <img src="{% static 'framebuzz/marketing/img/austin360logo.png' %}" alt="FrameBuzz on Austin360" class="img-responsive absolute-center">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="http://www.crunchbase.com/company/framebuzz" title="FrameBuzz: Our Profile on CrunchBase" target="_blank">
-                            <img src="{% static 'framebuzz/marketing/img/crunchbaselogo.png' %}" alt="FrameBuzz on CrunchBase" class="img-responsive absolute-center">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="http://illuminatehollywood.com/framebuzz-the-future-of-social-commenting-for-online-video/" title="FrameBuzz: the Future of Social Commenting for Online Video?" target="_blank">
-                            <img src="{% static 'framebuzz/marketing/img/illuminatelogo.png' %}" alt="FrameBuzz on Illuminate" class="img-responsive absolute-center">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="http://www.kxan.com/news/local/austin/framebuzz-launches-social-video-platform" title="FrameBuzz launches social video platform" target="_blank">
-                            <img src="{% static 'framebuzz/marketing/img/kxanlogo.png' %}" alt="FrameBuzz on KXAN" class="img-responsive absolute-center">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
-{% block page_javascript %}
     {% compress js %}
-        <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.easing.1.3.js' %}"></script> 
-        <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.bxslider.js' %}"></script>
-        <script src="{% static 'framebuzz/marketing/js/framebuzz.home.js' %}"></script> 
+        <script type="text/javascript">
+            (function() {
+                var config = {
+                  kitId: 'rdh5ygj',
+                  scriptTimeout: 3000
+                };
+                var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+            })();
+        </script>
+        <script src="{% static 'framebuzz/marketing/vendor/compat/modernizr.min.js' %}"></script>
     {% endcompress %}
-{% endblock %}
+  </head>
+  <body class="homepage">
+    <!--[if lte IE 8]>
+        <div class="chromeframe">
+        You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or
+        <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.
+        </div>
+    <![endif]-->
+    <div id="base" class="container">
+    </div>
+    {% compress js %}
+        <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+        <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/vendor/jquery/vegas/jquery.vegas.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/framebuzz.base.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/js/framebuzz.home.js' %}"></script>
+    {% endcompress %}
+    <script>
+      var _prum = [['id', '526acad9abe53d0e0d000000'],
+                   ['mark', 'firstbyte', (new Date()).getTime()]];
+      (function() {
+          var s = document.getElementsByTagName('script')[0]
+            , p = document.createElement('script');
+          p.async = 'async';
+          p.src = '//rum-static.pingdom.net/prum.min.js';
+          s.parentNode.insertBefore(p, s);
+      })();
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-43394419-1', 'framebuzz.com');
+      ga('send', 'pageview');
+    </script>
+    <script type="text/javascript">
+        setTimeout(function(){
+            var a=document.createElement("script");
+            var b=document.getElementsByTagName("script")[0];
+            a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0018/6248.js?"+Math.floor(new Date().getTime()/3600000);
+            a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+  </body>
+ </html>
