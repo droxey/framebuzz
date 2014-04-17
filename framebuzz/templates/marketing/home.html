@@ -55,7 +55,108 @@
         </div>
     <![endif]-->
     <div id="base" class="container">
-    </div>
+        <div class="row">
+            <div id="login" class="col-xs-2 pull-right">
+                <a href="{% url 'account_login' %}" title="Login" class="pull-right">Login</a>
+            </div>
+        </div>
+        <div class="row">
+            <div id="intro" class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-4" id="logo-white">
+                        <img src="{% static 'framebuzz/marketing/img/logo-white.png' %}" height="57" width="272" alt="FrameBuzz: Make a Better Video" class="img-responsive">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6" id="tagline">
+                        <h1>Make a Better Video</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5" id="callout">
+                        <p>The best video player for audience<br>engagement and customer service.</p>
+                    </div>
+                </div>
+                {% include "marketing/snippets/buttons.html" %}
+            </div>
+        </div>
+        <div class="row">
+            <div id="engage" class="col-xs-12">
+                <h2>Drive Viewer Engagement</h2>
+                <div class="row">
+                    <div class="col-xs-6 pull-left">
+                        <img src="{% static 'framebuzz/marketing/img/callout.jpg' %}" height="234" width="367" alt="FrameBuzz: Advertising" class="img-responsive">
+                    </div>
+                    <div class="col-xs-6 pull-right">
+                        <h3>Moment-by-Moment Commenting</h3>
+                        <p>Video players provide a one-way conversation, until now!
+                            Our patented feature attaches viewers’ comments to
+                            specific moments in the video.</p>
+                    </div>
+                </div>
+                {% include "marketing/snippets/buttons.html" %}
+            </div>
+        </div>
+        <div class="row">
+            <div id="traffic" class="col-xs-12">
+                <h2>Increase Organic Traffic</h2>
+                <div class="row">
+                    <div class="col-xs-6 pull-left">
+                        <h3>Video SEO</h3>
+                        <P>Each comment is indexed as a new webpage,
+                            increasing your inbound links and content engagement.</P>
+                    </div>
+                    <div class="col-xs-6 pull-right">
+                        <img src="{% static 'framebuzz/marketing/img/comment.jpg' %}" height="243" width="375" alt="FrameBuzz: Video SEO" class="img-responsive">
+                    </div>
+                </div>
+                {% include "marketing/snippets/buttons.html" %}
+            </div>
+        </div>
+        <div class="row">
+            <div id="ads" class="col-xs-12">
+                <h2>Run Unobtrusive Ads that Convert</h2>
+                <div class="row">
+                    <div class="col-xs-6 pull-left">
+                        <img src="{% static 'framebuzz/marketing/img/callout.jpg' %}" height="195" width="357" alt="FrameBuzz: Advertising" class="img-responsive">
+                    </div>
+                    <div class="col-xs-6 pull-right">
+                        <h3>Highly Effective Ads</h3>
+                        <p></p>
+                    </div>
+                </div>
+                {% include "marketing/snippets/buttons.html" %}
+            </div>
+        </div>
+        <div class="row">
+            <div id="dashboard" class="col-xs-12">
+                <h2>Measure and Improve What Matters</h2>
+                <div class="row">
+                    <img src="{% static 'framebuzz/marketing/img/dashboard.jpg' %}" height="235" width="366" alt="FrameBuzz: Dashboard" class="img-responsive">
+                </div>
+                <div class="row button-row">
+                    <div class="col-xs-6">
+                        <a href="#" class="btn btn-demo">Request a Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="quote" class="col-xs-12">
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="follow" class="col-xs-12">
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+        <footer>
+        </footer>
     {% compress js %}
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
