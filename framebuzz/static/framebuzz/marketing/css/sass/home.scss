@@ -1,6 +1,9 @@
 @import "compass/css3/border-radius";
 @import "compass/css3/transition";
 
+body {
+    background: white;
+}
 
 h1 {
     color: white;
@@ -13,6 +16,8 @@ h2 {
     color: #333333;
     font-size: 60px;
     font-family: 'lobster';
+    padding-top: 70px;
+    padding-bottom: 15px;
     text-align: center;
 }
 
@@ -25,5 +30,29 @@ h3 {
 #base {
     div.row {
         background: white;
+
+        div.container {
+            padding-top: 58px;
+            padding-bottom: 58px;
+        }
+
+
+        &.dark {
+            background: #0b2531;
+
+            div.container {
+                background: #0b2531;
+
+                div.row {
+                    background: #0b2531;
+                    color: white;
+                }
+            }
+
+            h2 {
+                background: #05171f;
+                color: white;
+            }
+        }
     }
 }
