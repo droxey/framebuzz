@@ -7,7 +7,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <html lang="en">
   <head>
-    <script src="//cdn.optimizely.com/js/393060191.js"></script>
+    <!--<script src="//cdn.optimizely.com/js/393060191.js"></script>-->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -38,7 +38,7 @@
         <script type="text/javascript">
             (function() {
                 var config = {
-                  kitId: 'rdh5ygj',
+                  kitId: 'mss1prs',
                   scriptTimeout: 3000
                 };
                 var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
@@ -54,14 +54,14 @@
         <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.
         </div>
     <![endif]-->
-    <div class="container">
-        <div class="row">
-            <div id="login" class="col-xs-2 pull-right">
-                <a href="{% url 'account_login' %}" title="Login" class="pull-right">Login</a>
+    <div class="row" id="background">
+        <div class="container">
+            <div class="row">
+                <div id="login" class="col-xs-2 pull-right">
+                    <a href="{% url 'account_login' %}" title="Login" class="pull-right">Login</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row" id="background">
         <div class="container">
             <div id="intro" class="col-xs-12">
                 <div class="row">
@@ -183,7 +183,7 @@
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
-        <script src="{% static 'framebuzz/marketing/vendor/jquery/vegas/jquery.vegas.js' %}"></script>
+        <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.backstretch.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.base.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.home.js' %}"></script>
