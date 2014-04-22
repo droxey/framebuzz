@@ -215,6 +215,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.twitter',
 
     # Helper Apps
+    'localflavor',
     'rest_framework',
     'south',
     'gunicorn',

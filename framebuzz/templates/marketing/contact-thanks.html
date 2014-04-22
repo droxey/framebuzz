@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <link rel="shortcut icon" href="{% static 'framebuzz/favicon.ico' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'framebuzz/favicon.ico' %}" type="image/x-icon">
-    <title>FrameBuzz: Request a Demo.</title>
+    <title>FrameBuzz: Thanks!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta itemprop="description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
@@ -47,7 +47,7 @@
         <script src="{% static 'framebuzz/marketing/vendor/compat/modernizr.min.js' %}"></script>
     {% endcompress %}
   </head>
-  <body class="demo">
+  <body class="demo demo-thanks">
     <!--[if lte IE 8]>
         <div class="chromeframe">
         You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or
@@ -64,48 +64,47 @@
                 </div>
             </div>
         </div>
-        <div id="header">
+        <div id="thanks" class="row">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h1>Request a FREE Demo of the FrameBuzz Player!</h1>
-                        <h2>The Best Video Player for Audience Engagement and Customer Service</h2>
+                        <h2>Thanks! We'll get in touch with you shortly!</h2>
+                        <p>Your request for a demo is being reviewed by our team of experts. We'll be in touch with you shortly!</p>
+                        <p>In the meantime, connect with us on social media and get access to new features, as well as helpful advice and resources.</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-4">
-                    <p>We want to talk with you! Let us walk you through FrameBuzz's video player
-                        and show you how you provide your audience with a higher quality experience.</p>
-                    <p>With FrameBuzz's video player, you can:</p>
-                    <ul class="fa-ul">
-                        <li><i class="fa-li fa fa-check"></i> Drive Viewer Engagement</li>
-                        <li><i class="fa-li fa fa-check"></i> Increase Organic Traffic</li>
-                        <li><i class="fa-li fa fa-check"></i> Run Unobtrusive Ads That Convert</li>
-                        <li><i class="fa-li fa fa-check"></i> Measure and Improve What Matters</li>
-                    </ul>
-                    <p>Get a free demonstration of FrameBuzz to see how it works by filling out the form.</p>
-                </div>
-                <div class="col-xs-4 center">
-                    <img src="{% static 'framebuzz/marketing/img/player.jpg' %}" width="310" alt="FrameBuzz: Advertising" class="pull-left">
-                </div>
-                <div class="col-xs-4 form">
-                    <h3>See FrameBuzz in Action!</h3>
-                    <form id="contact-form" name="contact" action="" method="post" class="form-horizontal">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-demo pull-right">
-                                Request a Demo
-                                <span class="fa-stack fa-sm">
-                                  <i class="fa fa-circle fa-stack-2x"></i>
-                                  <i class="fa fa-play fa-stack-1x fa-inverse"></i>
-                              </button>
-                            </a>
-                        </div>
-                    </form>
+        <div id="follow" class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-5">
+                        <p><span>Follow</span><img class="logo pull-right" src="{% static 'framebuzz/marketing/img/logo.png' %}" width="249" alt="Follow FrameBuzz"></p>
+                    </div>
+                    <div class="col-xs-1">
+                        <a href="https://plus.google.com/105150048887128713309" target="_blank" class="google">
+                            <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="col-xs-1">
+                        <a href="https://twitter.com/framebuzz" target="_blank" class="twitter">
+                            <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="col-xs-1">
+                        <a href="https://www.linkedin.com/company/framebuzz" target="_blank" class="linkedin">
+                            <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,37 +126,37 @@
         </footer>
     </div>
     {% compress js %}
-        <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
-        <script src="{% static 'framebuzz/marketing/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+    <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
+    <script src="{% static 'framebuzz/marketing/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
     {% endcompress %}
     <script>
-    var _prum = [['id', '526acad9abe53d0e0d000000'],
+        var _prum = [['id', '526acad9abe53d0e0d000000'],
                ['mark', 'firstbyte', (new Date()).getTime()]];
-    (function() {
-      var s = document.getElementsByTagName('script')[0]
+        (function() {
+        var s = document.getElementsByTagName('script')[0]
         , p = document.createElement('script');
-      p.async = 'async';
-      p.src = '//rum-static.pingdom.net/prum.min.js';
-      s.parentNode.insertBefore(p, s);
-    })();
+        p.async = 'async';
+        p.src = '//rum-static.pingdom.net/prum.min.js';
+        s.parentNode.insertBefore(p, s);
+        })();
     </script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-43394419-1', 'framebuzz.com');
-    ga('send', 'pageview');
+        ga('create', 'UA-43394419-1', 'framebuzz.com');
+        ga('send', 'pageview');
     </script>
     <script type="text/javascript">
-    setTimeout(function(){
+        setTimeout(function(){
         var a=document.createElement("script");
         var b=document.getElementsByTagName("script")[0];
         a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0018/6248.js?"+Math.floor(new Date().getTime()/3600000);
         a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     </script>
-    </body>
+</body>
 </html>

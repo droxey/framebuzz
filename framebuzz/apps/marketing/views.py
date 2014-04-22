@@ -62,8 +62,7 @@ def contact(request):
         form = ContactRequestForm(data=request.POST)
         if form.is_valid():
             form.save()
-            success = True
-            form = ContactRequestForm()
+            return HttpResponseRedirect(reverse('contact-thanks'))
     else:
         form = ContactRequestForm()
 
@@ -72,6 +71,10 @@ def contact(request):
         'success': success,
     }, context_instance=RequestContext(request))
 
+
+def contact_thanks(request):
+    return render_to_response('marketing/contact-thanks.html', {
+    }, context_instance=RequestContext(request))
 
 def terms(request):
     return render_to_response('marketing/terms.html', {
