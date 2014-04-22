@@ -22,9 +22,13 @@ h2 {
 }
 
 h3 {
-    font-size: 2.45em;
+    font-size: 2.21em;
     font-family: 'lobster';
     color: #ff2c00;
+}
+
+div.container {
+    width: 890px;
 }
 
 #base {
@@ -43,6 +47,12 @@ h3 {
 
         &.dark {
             background: #0b2531;
+
+            div.dark-inner {
+                div.left {
+                    h3, p { text-align: right; }
+                }
+            }
 
             div.container {
                 background: #0b2531;
@@ -78,7 +88,14 @@ h3 {
                     }
 
                     span.line1 { font-size: 24px; }
-                    span.line2 { font-size: 40px; }
+
+                    span.line2 {
+                        display: inline-block;
+                        font-size: 40px;
+                        text-align: center;
+                        width: 100%;
+                    }
+
                     span.line3 { font-size: 29px; }
                     span.line4 { font-size: 24px; }
                     span.line5 { font-size: 24px; }
@@ -99,6 +116,7 @@ h3 {
     footer.row {
         background: #00aff3;
         margin-top: -1px;
+        padding-top: 46px;
 
         div.container {
             background: #00aff3;
