@@ -353,7 +353,8 @@ TEMPLATED_EMAIL_DJANGO_SUBJECTS = {
     'welcome-back': 'Check out the new FrameBuzz!',
     'happy-holidays': 'Happy Holidays from FrameBuzz!',
     'upload-success': 'Your Uploaded Video is Now Available on FrameBuzz!',
-    'private-session-invite': 'Invitation to Join Private FrameBuzz'
+    'private-session-invite': 'Invitation to Join Private FrameBuzz',
+    'demo-request': 'Demo Request'
 }
 
 # Django-Celery Settings:

@@ -1,0 +1,39 @@
+{% block plain %}
+{% endblock %}
+
+
+{% block html %}
+<!doctype html>
+<html>
+    <head>
+        <title>Demo Request</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td><b>First Name</b></td>
+                <td>{{ request.first_name }}</td>
+            </tr>
+            <tr>
+                <td><b>Last Name</b></td>
+                <td>{{ request.last_name }}</td>
+            </tr>
+            <tr>
+                <td><b>Email Address</b></td>
+                <td>{{ request.email }}</td>
+            </tr>
+            <tr>
+                <td><b>Company Name</b></td>
+                <td>{{ request.company_name }}</td>
+            </tr>
+            <tr>
+                <td><b>Title</b></td>
+                <td>{{ request.title }}</td>
+            </tr>
+            <tr>
+                <td><b>Submitted On</b></td>
+                <td>{{ request.date }}</td>
+            </tr>
+        </table>
+    </body>
+</html>

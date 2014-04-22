@@ -6,6 +6,8 @@ from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 
 from allauth.account.forms import SignupForm
+from templated_email import send_templated_mail
+
 from framebuzz.apps.marketing.forms import ContactRequestForm
 from framebuzz.apps.api.utils import get_share_count
 
@@ -62,6 +64,12 @@ def contact(request):
         form = ContactRequestForm(data=request.POST)
         if form.is_valid():
             form.save()
+            send_templated_mail(template_name='demo-request',
+                                from_email=form.email,
+                                recipient_list=['info@framebuzz.com',
+                                                'main@framebuzz.flowdock.com'],
+                                context={'request': form})
+
             return HttpResponseRedirect(reverse('contact-thanks'))
     else:
         form = ContactRequestForm()
@@ -75,6 +83,7 @@ def contact(request):
 def contact_thanks(request):
     return render_to_response('marketing/contact-thanks.html', {
     }, context_instance=RequestContext(request))
+
 
 def terms(request):
     return render_to_response('marketing/terms.html', {

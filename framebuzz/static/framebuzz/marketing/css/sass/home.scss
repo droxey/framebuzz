@@ -392,7 +392,7 @@ body.demo {
         }
 
         h1 {
-            color: #333333;
+            color: #00AFF3;
             font-size: 40px;
             text-shadow: none;
         }
@@ -400,27 +400,94 @@ body.demo {
         h2 {
             font-size: 25px;
             padding-top: 0;
+            margin-top: 0;
+            margin-bottom: 30px;
         }
     }
 
-    div.center {
-        padding-left: 0;
+    ul {
+        li {
+            color: #58585A;
+            line-height: 28px;
+            font-weight: bold;
+
+            .fa-check {
+                color: #FF2C00;
+                line-height: 20px;
+            }
+        }
+    }
+
+    p {
+        color: #58585A;
+        line-height: 28px;
+    }
+
+    img.player {
+        margin-left: 5px;
+        border: 5px solid #FBFAFC;
     }
 
     div.form {
-        i.fa-check { color: #FF2C00; }
+        background: #FBFAFC;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+        @include border-radius(3px, 3px);
 
         h3 {
-
+            color: #FF2C00;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 2em;
+            text-align: center;
         }
 
         #contact-form {
+            ul.errorlist {
+                padding: 0;
+                list-style-type: none;
+                position: absolute;
+                right: 15px;
+
+                li {
+                    color: #861501;
+                    font-size: 0.9em;
+                    font-weight: bold;
+                    line-height: 16px;
+                    text-align: right;
+                    text-shadow: 1px 0 1px #FFFFFF;
+                }
+            }
+
             p {
+                line-height: 16px;
+                margin-bottom: 15px;
+                padding-top: 0;
+                padding-bottom: 0;
+
                 label {
+                    color: #333333;
                     display: block;
+                    font-size: 0.9em;
+                    margin-bottom: 2px;
+                    text-shadow: 1px 0 1px #FFFFFF;
                 }
 
                 input {
+                    border: 1px solid #98989A;
+                    color: #58585A;
+                    padding: 5px;
+                    width: 100%;
+                    @include border-radius(3px, 3px);
+                }
+            }
+
+            p.submit {
+                display: block;
+
+                button {
+                    display: block;
                     width: 100%;
                 }
             }

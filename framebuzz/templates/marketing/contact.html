@@ -76,7 +76,8 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-xs-8">
+                    <img src="{% static 'framebuzz/marketing/img/player.jpg' %}" width="310" alt="FrameBuzz: Advertising" class="pull-right player">
                     <p>We want to talk with you! Let us walk you through FrameBuzz's video player
                         and show you how you provide your audience with a higher quality experience.</p>
                     <p>With FrameBuzz's video player, you can:</p>
@@ -86,25 +87,22 @@
                         <li><i class="fa-li fa fa-check"></i> Run Unobtrusive Ads That Convert</li>
                         <li><i class="fa-li fa fa-check"></i> Measure and Improve What Matters</li>
                     </ul>
-                    <p>Get a free demonstration of FrameBuzz to see how it works by filling out the form.</p>
+                    <p><strong>Get a free demonstration of FrameBuzz to see how it works by filling out the form.</strong></p>
                 </div>
-                <div class="col-xs-4 center">
-                    <img src="{% static 'framebuzz/marketing/img/player.jpg' %}" width="310" alt="FrameBuzz: Advertising" class="pull-left">
-                </div>
-                <div class="col-xs-4 form">
+                <div class="col-xs-4 pull-right form">
                     <h3>See FrameBuzz in Action!</h3>
                     <form id="contact-form" name="contact" action="" method="post" class="form-horizontal">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-demo pull-right">
-                                Request a Demo
+                        <p class="submit">
+                            <button type="submit" class="btn btn-demo">
+                                Show Me FrameBuzz!
                                 <span class="fa-stack fa-sm">
                                   <i class="fa fa-circle fa-stack-2x"></i>
                                   <i class="fa fa-play fa-stack-1x fa-inverse"></i>
                               </button>
                             </a>
-                        </div>
+                        </p>
                     </form>
                 </div>
             </div>
