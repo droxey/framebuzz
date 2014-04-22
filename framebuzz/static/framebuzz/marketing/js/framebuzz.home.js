@@ -3,7 +3,9 @@ $(function() {
         background = $('#background');
 
 
-    background.backstretch("/static/framebuzz/marketing/img/cover.jpg");
+    background.backstretch("/static/framebuzz/marketing/img/cover.jpg", {
+        centeredY: false,
+    });
     //background.css({'height': (windowHeight + 50) + 'px'});
     //background.find('div.backstretch').css({'min-height': windowHeight + 'px'});
 });
