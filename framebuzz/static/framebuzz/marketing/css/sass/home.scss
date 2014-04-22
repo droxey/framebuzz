@@ -65,7 +65,59 @@ div.container {
     }
 }
 
+div.button-row {
+    .btn-demo {
+      background: url('../../img/demo-gradient.png') repeat-x;
+      -webkit-border-radius: 2;
+      -moz-border-radius: 2;
+      border-radius: 2px;
+      text-shadow: 1px 1px 0px #000000;
+      font-family: Arial;
+      font-weight: bold;
+      color: #ffffff;
+      font-size: 16px;
+      line-height: 59px;
+      padding: 0 23px 0 23px;
+      text-decoration: none;
+
+      i.fa-circle {
+          color: #861501;
+          text-shadow: none;
+      }
+
+      i.fa-play {
+          color: white;
+          text-shadow: none;
+          text-indent: 2px;
+      }
+    }
+
+    .btn-demo:hover {
+      text-decoration: none;
+    }
+
+    .btn-features {
+      background: url('../../img/features-gradient.png') repeat-x;
+      -webkit-border-radius: 2;
+      -moz-border-radius: 2;
+      border-radius: 2px;
+      text-shadow: 1px 1px 0px #000000;
+      font-family: Arial;
+      font-weight: bold;
+      color: #ffffff;
+        font-size: 16px;
+        line-height: 59px;
+        padding: 0 23px 0 23px;
+      text-decoration: none;
+    }
+
+    .btn-features:hover {
+      text-decoration: none;
+    }
+}
+
 #base {
+
     div.row {
         background: white;
 
@@ -73,8 +125,19 @@ div.container {
             padding-top: 58px;
             padding-bottom: 58px;
 
-            img {
+            img.feature {
                 border: 5px solid #DCDCDC;
+            }
+
+            img.shadow {
+                border: none;
+                bottom: 30px;
+                position: relative;
+                z-index: 1;
+            }
+
+            img.separator {
+                border: none;
             }
         }
 
@@ -85,6 +148,7 @@ div.container {
             div.dark-inner {
                 div.left {
                     h3, p { text-align: right; }
+                    p { padding-right: 0; }
                 }
             }
 
@@ -102,6 +166,10 @@ div.container {
                 color: white;
             }
         }
+    }
+
+    div.button-row {
+        margin-top: 50px;
     }
 
     #quote.row {
