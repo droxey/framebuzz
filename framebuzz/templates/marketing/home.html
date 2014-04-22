@@ -90,9 +90,11 @@
                 <div id="engage" class="col-xs-12">
                     <div class="row">
                         <div class="col-xs-5 pull-left">
-                            <img src="{% static 'framebuzz/marketing/img/callout.jpg' %}" height="234" width="367" alt="FrameBuzz: Advertising" class="img-responsive">
+                            <img src="{% static 'framebuzz/marketing/img/player.jpg' %}" height="234" width="367" alt="FrameBuzz: Advertising" class="pull-right">
                         </div>
-                        <div class="col-xs-7 pull-right">
+                        <div class="col-xs-1 pull-left">
+                        </div>
+                        <div class="col-xs-6 pull-left">
                             <h3>Moment-by-Moment Commenting</h3>
                             <p>Video players provide a one-way conversation, until now!
                                 Our patented feature attaches viewers’ comments to
@@ -108,13 +110,15 @@
             <div class="container">
                 <div id="traffic" class="col-xs-12 dark-inner">
                     <div class="row">
-                        <div class="col-xs-7 pull-left">
+                        <div class="col-xs-6 pull-left">
                             <h3>Video SEO</h3>
                             <P>Each comment is indexed as a new webpage,
                                 increasing your inbound links and content engagement.</P>
                         </div>
-                        <div class="col-xs-5 pull-right">
-                            <img src="{% static 'framebuzz/marketing/img/comment.jpg' %}" height="243" width="375" alt="FrameBuzz: Video SEO" class="img-responsive">
+                        <div class="col-xs-1 pull-left">
+                        </div>
+                        <div class="col-xs-5 pull-left">
+                            <img src="{% static 'framebuzz/marketing/img/comment.jpg' %}" height="243" width="375" alt="FrameBuzz: Video SEO">
                         </div>
                     </div>
                     {% include "marketing/snippets/buttons.html" %}
@@ -127,9 +131,11 @@
                 <div id="ads" class="col-xs-12">
                     <div class="row">
                         <div class="col-xs-5 pull-left">
-                            <img src="{% static 'framebuzz/marketing/img/callout.jpg' %}" height="195" width="357" alt="FrameBuzz: Advertising" class="img-responsive">
+                            <img src="{% static 'framebuzz/marketing/img/callout.jpg' %}" height="195" width="357" alt="FrameBuzz: Advertising">
                         </div>
-                        <div class="col-xs-7 pull-right">
+                        <div class="col-xs-1 pull-left">
+                        </div>
+                        <div class="col-xs-6 pull-left">
                             <h3>Highly Effective Ads</h3>
                             <p></p>
                         </div>
@@ -143,13 +149,15 @@
             <div class="container">
                 <div id="dashboard" class="col-xs-12 dark-inner">
                     <div class="row">
-                        <div class="col-xs-7 pull-left">
+                        <div class="col-xs-6 pull-left">
                             <h3>Actionable Metrics Dashboard</h3>
                             <p>Measure the key metrics that move your viewers down your conversion funnel.
                                 Make critical improvements by alleviating the bottlenecks.</p>
                         </div>
-                        <div class="col-xs- pull-right">
-                            <img src="{% static 'framebuzz/marketing/img/dashboard.jpg' %}" height="235" width="366" alt="FrameBuzz: Dashboard" class="img-responsive">
+                        <div class="col-xs-1 pull-left">
+                        </div>
+                        <div class="col-xs-5 pull-left">
+                            <img src="{% static 'framebuzz/marketing/img/dashboard.jpg' %}" height="235" width="366" alt="FrameBuzz: Dashboard">
                         </div>
                     </div>
                     <div class="row button-row">
@@ -160,11 +168,18 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div id="quote" class="row">
             <div class="container">
-                <div id="quote" class="col-xs-12">
+                <div class="col-xs-12">
                     <div class="row">
-
+                        <p>
+                            <span class="blue line1">With digital technology,</span><br>
+                            <span class="line2">it’s now possible to have a one-on-one<br> relationship with every consumer in the world.<br></span>
+                            <span class="blue line3">The more intimate the relationship, the more indispensable it becomes.</span><br>
+                            <span class="line4">We want to be the company that creates those indispensable relationships with our<br></span>
+                            <span class="line5">brands, and digital technology enables this.<br></span>
+                        </p>
+                        <p class="author pull-right"><span class="orange">CEO Robert McDonald,</span> P&amp;G</p>
                     </div>
                 </div>
             </div>
@@ -176,9 +191,23 @@
                 </div>
             </div>
         </div>
+        <footer class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-push-4 col-xs-3">
+                        <h4>about</h4>
+                        <a href="{% url 'about' %}">Team</a>
+                        <a href="{% url 'press' %}">Press</a>
+                    </div>
+                    <div class="col-xs-push-3 col-xs-3">
+                        <h4>contact</h4>
+                        <p><a href="mailto:info@framebuzz.com">info@framebuzz.com</a></p>
+                    </div>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2014, FrameBuzz. Patent Pending.</p>
+        </footer>
     </div>
-    <footer>
-    </footer>
     {% compress js %}
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
