@@ -10,6 +10,7 @@ h1 {
     font-family: 'lobster';
     font-size: 70px;
     text-align: center;
+    text-shadow: 2px 0px 1px rgba(0, 0, 0, 0.6);
 }
 
 h2 {
@@ -29,6 +30,39 @@ h3 {
 
 div.container {
     width: 890px;
+}
+
+#intro {
+    img.logo {
+        display: block;
+        height: 61px;
+        margin: 0 auto;
+        width: 276px;
+        margin-top: 16px;
+    }
+
+    #callout {
+        background: rgba(0, 0, 0, .31);
+        margin: 34px 0 42px;
+        padding: 13px 13px 3px;
+
+        p {
+            color: #FFFFFF;
+            font-size: 21px;
+            line-height: 21px;
+            text-align: center;
+            text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.6);
+            width: 100%;
+        }
+    }
+}
+
+#login {
+    padding-top: 10px;
+
+    a {
+        color: white;
+    }
 }
 
 #base {
@@ -108,6 +142,58 @@ div.container {
                     span.orange {
                         color: #ff2c00;
                     }
+                }
+            }
+        }
+    }
+
+    #follow.row {
+
+        div.container {
+            padding-top: 75px;
+            padding-bottom: 75px;
+
+            p {
+                color: #029dd9;
+                font-size: 35px;
+                font-family: 'lobster';
+
+                span {
+
+                }
+            }
+
+            img.logo {
+                border: none;
+                width: 249px;
+            }
+
+            a {
+                display: block;
+
+                span.fa-stack.fa-lg {
+                    @include border-radius(500px, 500px);
+                    height: 3em;
+                    line-height: 3em;
+                    width: 3em;
+
+                    .fa-stack-2x { font-size: 3em; }
+                    i.fa-circle { color: white; }
+                }
+
+                &.google {
+                    span.fa-stack.fa-lg { border: 1px solid #f23830; }
+                    i.fa-stack-1x { color: #f23830; }
+                }
+
+                &.linkedin {
+                    span.fa-stack.fa-lg { border: 1px solid #397EB6; }
+                    i.fa-stack-1x { color: #397EB6; }
+                }
+
+                &.twitter {
+                    span.fa-stack.fa-lg { border: 1px solid #00aae4; }
+                    i.fa-stack-1x { color: #00aae4; }
                 }
             }
         }
