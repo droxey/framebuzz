@@ -3,6 +3,7 @@
 
 body {
     background: white;
+    max-width: 100%;
 }
 
 h1 {
@@ -14,11 +15,11 @@ h1 {
 }
 
 h2 {
+    padding-top: 70px;
+    padding-bottom: 15px;
     color: #333333;
     font-size: 60px;
     font-family: 'lobster';
-    padding-top: 70px;
-    padding-bottom: 15px;
     text-align: center;
 }
 
@@ -30,13 +31,16 @@ h3 {
 
 body.homepage {
     div.container {
-        width: 890px;
+        width: 920px;
     }
 }
 
-#background {
-    height: 750px;
+a.nav-anchor {
+    position: absolute;
+    top: 0;
+}
 
+#background {
     #intro {
         img.logo {
             display: block;
@@ -288,10 +292,15 @@ div.button-row {
         }
     }
 
-
-
     div.button-row {
         margin-top: 50px;
+
+        div.center-button {
+            a.btn-demo {
+                float: none !important;
+                margin-right: 0;
+            }
+        }
     }
 
     #quote.row {
