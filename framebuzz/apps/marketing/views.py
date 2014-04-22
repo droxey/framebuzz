@@ -63,12 +63,12 @@ def contact(request):
     if request.method == 'POST':
         form = ContactRequestForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            obj = form.save()
             send_templated_mail(template_name='demo-request',
-                                from_email=form.email,
+                                from_email=obj.email,
                                 recipient_list=['info@framebuzz.com',
                                                 'main@framebuzz.flowdock.com'],
-                                context={'request': form})
+                                context={'request': obj})
 
             return HttpResponseRedirect(reverse('contact-thanks'))
     else:
