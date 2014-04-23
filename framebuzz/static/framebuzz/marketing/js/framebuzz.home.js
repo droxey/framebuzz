@@ -2,7 +2,7 @@ $(function() {
     var background = $('#background'),
         windowHeight = $(window).height();
 
-    background.css({'height': (windowHeight - 50) + 'px'});
+    background.css({'height': windowHeight + 'px'});
     background.backstretch("/static/framebuzz/marketing/img/cover.jpg", { fade: 10, centeredY: false });
 
     $(window).on("backstretch.after", function (e, instance, index) {
