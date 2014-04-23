@@ -317,6 +317,7 @@ def home(request, username):
 
     share_context = request.session.get('share', None)
     if share_context:
+        context.update(share_context)
         del request.session['share']
 
     context['form'] = AddVideoForm(request=request)
