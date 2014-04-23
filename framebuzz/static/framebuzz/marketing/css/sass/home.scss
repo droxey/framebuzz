@@ -59,8 +59,8 @@ a.nav-anchor {
 
             p {
                 color: #FFFFFF;
-                font-size: 21px;
-                line-height: 21px;
+                font-size: 38px;
+                line-height: 38px;
                 text-align: center;
                 text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.6);
                 width: 100%;
@@ -68,6 +68,7 @@ a.nav-anchor {
         }
 
         div.row.button-row {
+            margin-top: 70px;
             margin-bottom: 70px;
         }
     }
@@ -353,6 +354,7 @@ div.button-row {
         div.container {
             padding-top: 75px;
             padding-bottom: 75px;
+            width: 890px;
 
             p {
                 color: #029dd9;
@@ -459,7 +461,7 @@ body.demo {
 
         #logo {
             background: #FBFAFC;
-            padding: 10px 0px 8px 0px;
+            padding: 20px 0px 16px 0px;
 
             img { width: 160px; }
         }
@@ -556,12 +558,22 @@ body.demo {
                 }
             }
 
+            p.required {
+                label:after {
+                    color: #FF2C00;
+                    content: ' *';
+                }
+            }
+
             p.submit {
                 display: block;
 
                 button {
+                    @include border-radius(10px, 10px);
                     display: block;
-                    width: 100%;
+                    width: 90%;
+                    margin-left: 5%;
+                    margin-right: 5%;
                 }
             }
         }
@@ -571,7 +583,6 @@ body.demo {
 body.demo-thanks {
     #thanks {
         background: #05171f;
-        min-height: 450px;
 
         h2 {
 
@@ -583,6 +594,8 @@ body.demo-thanks {
         }
     }
     #follow.row {
+        margin-bottom: 100px;
+
         div.container {
             width: 890px;
         }
