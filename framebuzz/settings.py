@@ -244,6 +244,7 @@ INSTALLED_APPS = (
     'framebuzz.apps.profiles',
     'framebuzz.apps.marketing',
     'framebuzz.apps.search',
+    'framebuzz.apps.dashboard',
 )
 
 # Django-Grappelli:
