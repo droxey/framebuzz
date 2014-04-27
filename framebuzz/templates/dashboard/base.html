@@ -24,92 +24,94 @@
     <![endif]-->
   </head>
   <body>
-  <section id="container">
-    <header class="header black-bg">
-        <div class="sidebar-toggle-box">
-            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-        </div>
-        <a href="{% url 'home' %}" class="logo">
-          {% include 'dashboard/snippets/logo.html' %}
-        </a>
-
-          <a href="http://goketra.com" target="_blank" class="logo client-logo absolute-center">
-            <img src="{% static 'framebuzz/dashboard/img/ketra.png' %}" alt="Ketra" height="24" width="152">
+  {% block page_body %}
+    <section id="container">
+      <header class="header black-bg">
+          <div class="sidebar-toggle-box">
+              <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+          </div>
+          <a href="{% url 'home' %}" class="logo">
+            {% include 'dashboard/snippets/logo.html' %}
           </a>
 
-        <div class="nav notify-row pull-right" id="top_menu">
-            <ul class="nav top-menu pull-left">
-              <li class="dropdown">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                      <i class="fa fa-cloud-upload"></i>
-                  </a>
-              </li>
-              <li id="header_inbox_bar" class="dropdown">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                      <i class="fa fa-comments-o"></i>
-                  </a>
-              </li>
-              <li id="header_notification_bar" class="dropdown">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                      <i class="fa fa-bell-o"></i>
-                  </a>
-              </li>
-            </ul>
-            <div class="top-menu pull-right">
-              <ul class="nav pull-right top-menu">
-                <li><a class="logout" href="login.html">Logout</a></li>
+            <a href="http://goketra.com" target="_blank" class="logo client-logo absolute-center">
+              <img src="{% static 'framebuzz/dashboard/img/ketra.png' %}" alt="Ketra" height="24" width="152">
+            </a>
+
+          <div class="nav notify-row pull-right" id="top_menu">
+              <ul class="nav top-menu pull-left">
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                        <i class="fa fa-cloud-upload"></i>
+                    </a>
+                </li>
+                <li id="header_inbox_bar" class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                        <i class="fa fa-comments-o"></i>
+                    </a>
+                </li>
+                <li id="header_notification_bar" class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                        <i class="fa fa-bell-o"></i>
+                    </a>
+                </li>
               </ul>
-            </div>
-        </div>
-    </header>
-    <aside>
-      <div id="sidebar"  class="nav-collapse ">
-          <ul class="sidebar-menu" id="nav-accordion">
-              <p class="centered">
-                <a href="{% url 'dashboard-profile' request.user.username %}">
-                  <img src="{% avatar_url request.user 160 %}" class="img-circle" width="80">
-                </a>
-              </p>
-              <h5 class="centered">{{ request.user|display_name }}</h5>    
-              <li class="mt">
-                  <a href="{% url 'dashboard-home' request.user.username %}">
-                      <i class="fa fa-dashboard"></i>
-                      <span>Dashboard</span>
-                  </a>
-              </li>
-              <li class="sub-menu">
-                  <a href="{% url 'dashboard-videos' request.user.username %}">
-                      <i class="fa fa-video-camera"></i>
-                      <span>Videos</span>
-                  </a>
-              </li>
-              <li class="sub-menu">
-                  <a href="{% url 'dashboard-comments' request.user.username %}">
-                      <i class="fa fa-comments-o"></i>
-                      <span>Comments</span>
-                  </a>
-              </li>
-              <li class="sub-menu">
-                  <a href="{% url 'dashboard-settings' request.user.username %}">
-                      <i class="fa fa-cog"></i>
-                      <span>Settings</span>
-                  </a>
-              </li>
-          </ul>
-        </div>
-      </aside>
-      <section id="main-content">
-        {% block page_content %}{% endblock %}
-      </section>
-      <footer class="site-footer">
-          <div class="text-center">
-              &copy; 2014, FrameBuzz. Patent 14/067,585.
-              <a href="#" class="go-top">
-                  <i class="fa fa-angle-up"></i>
-              </a>
+              <div class="top-menu pull-right">
+                <ul class="nav pull-right top-menu">
+                  <li><a class="logout" href="{% url 'account_logout' %}">Logout</a></li>
+                </ul>
+              </div>
           </div>
-      </footer>
-  </section>
+      </header>
+      <aside>
+        <div id="sidebar"  class="nav-collapse ">
+            <ul class="sidebar-menu" id="nav-accordion">
+                <p class="centered">
+                  <a href="{% url 'dashboard-profile' request.user.username %}">
+                    <img src="{% avatar_url request.user 160 %}" class="img-circle" width="80">
+                  </a>
+                </p>
+                <h5 class="centered">{{ request.user|display_name }}</h5>    
+                <li class="mt">
+                    <a href="{% url 'dashboard-home' request.user.username %}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'dashboard-videos' request.user.username %}">
+                        <i class="fa fa-video-camera"></i>
+                        <span>Videos</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'dashboard-comments' request.user.username %}">
+                        <i class="fa fa-comments-o"></i>
+                        <span>Comments</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'dashboard-settings' request.user.username %}">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+          </div>
+        </aside>
+        <section id="main-content">
+          {% block page_content %}{% endblock %}
+        </section>
+        <footer class="site-footer">
+            <div class="text-center">
+                &copy; 2014, FrameBuzz. Patent 14/067,585.
+                <a href="#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+    </section>
+  {% endblock %}
   {% compress js %}
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/jquery.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/bootstrap.min.js' %}"></script>

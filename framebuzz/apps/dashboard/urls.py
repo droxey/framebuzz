@@ -2,6 +2,9 @@ from django.conf.urls import patterns, url
 
 urlpatterns = patterns(
     '',
+    url(r'^dashboard/login/$',
+        'framebuzz.apps.dashboard.views.dashboard_login',
+        name='dashboard-login'),
     url(r'^dashboard/(?P<username>[\w.@+-]+)/$',
         'framebuzz.apps.dashboard.views.dashboard_home',
         name='dashboard-home'),
@@ -17,7 +20,4 @@ urlpatterns = patterns(
     url(r'^dashboard/(?P<username>[\w.@+-]+)/settings/$',
         'framebuzz.apps.dashboard.views.dashboard_settings',
         name='dashboard-settings'),
-    url(r'^dashboard/login/$',
-        'framebuzz.apps.dashboard.views.dashboard_login',
-        name='dashboard-login'),
 )
