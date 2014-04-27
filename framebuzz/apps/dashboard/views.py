@@ -13,3 +13,21 @@ from framebuzz.apps.api.models import UserProfile
 def dashboard_home(request, username):
     return render_to_response('dashboard/home.html', {
     }, context_instance=RequestContext(request))
+
+
+@login_required
+def dashboard_profile(request, username):
+    return render_to_response('dashboard/profile.html', {
+    }, context_instance=RequestContext(request))
+
+
+@login_required
+def dashboard_videos(request, username):
+    return render_to_response('dashboard/videos.html', {
+    }, context_instance=RequestContext(request))
+
+
+@login_required
+def dashboard_comments(request, username):
+    return render_to_response('dashboard/comments.html', {
+    }, context_instance=RequestContext(request))

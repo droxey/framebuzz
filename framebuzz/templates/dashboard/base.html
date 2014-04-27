@@ -24,8 +24,7 @@
   </head>
   <body>
   <section id="container">
-      <!--header start-->
-      <header class="header black-bg">
+    <header class="header black-bg">
         <div class="sidebar-toggle-box">
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
@@ -55,47 +54,39 @@
           </ul>
         </div>
     </header>
-      <!--header end-->
-            <!--sidebar start-->
-      <aside>
-          <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
-                  <p class="centered">
-                    <a href="{% url 'dashboard-home' request.user.username %}">
-                      <img src="{% avatar_url request.user 160 %}" class="img-circle" width="80">
-                    </a>
-                  </p>
-                  <h5 class="centered">{{ request.user|display_name }}</h5>    
-                  <li class="mt">
-                      <a href="{% url 'dashboard-home' request.user.username %}">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
-                      </a>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-video-camera"></i>
-                          <span>Videos</span>
-                      </a>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-comments-o"></i>
-                          <span>Comments</span>
-                      </a>
-                  </li>
-              </ul>
-              <!-- sidebar menu end-->
-          </div>
+    <aside>
+      <div id="sidebar"  class="nav-collapse ">
+          <ul class="sidebar-menu" id="nav-accordion">
+              <p class="centered">
+                <a href="{% url 'dashboard-profile' request.user.username %}">
+                  <img src="{% avatar_url request.user 160 %}" class="img-circle" width="80">
+                </a>
+              </p>
+              <h5 class="centered">{{ request.user|display_name }}</h5>    
+              <li class="mt">
+                  <a href="{% url 'dashboard-home' request.user.username %}">
+                      <i class="fa fa-dashboard"></i>
+                      <span>Dashboard</span>
+                  </a>
+              </li>
+              <li class="sub-menu">
+                  <a href="{% url 'dashboard-videos' request.user.username %}">
+                      <i class="fa fa-video-camera"></i>
+                      <span>Videos</span>
+                  </a>
+              </li>
+              <li class="sub-menu">
+                  <a href="{% url 'dashboard-comments' request.user.username %}">
+                      <i class="fa fa-comments-o"></i>
+                      <span>Comments</span>
+                  </a>
+              </li>
+          </ul>
+        </div>
       </aside>
-      <!--sidebar end-->
-      <!--main content start-->
       <section id="main-content">
         {% block page_content %}{% endblock %}
-      </section><!-- /MAIN CONTENT -->
-      <!--main content end-->
-      <!--footer start-->
+      </section>
       <footer class="site-footer">
           <div class="text-center">
               &copy; 2014, FrameBuzz. Patent 14/067,585.
@@ -104,7 +95,6 @@
               </a>
           </div>
       </footer>
-      <!--footer end-->
   </section>
   {% compress js %}
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/jquery.js' %}"></script>
