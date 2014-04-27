@@ -78,6 +78,7 @@ class UserProfile(caching.base.CachingMixin, models.Model):
     background = models.ImageField(max_length=1024,
                                    upload_to=bkg_file_path,
                                    blank=True, null=True)
+    dashboard_enabled = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'User Profile'
@@ -185,6 +186,7 @@ class Video(caching.base.CachingMixin, models.Model):
     processing = models.BooleanField(default=False)
     fp_url = models.URLField(max_length=500, blank=True, null=True)
     filename = models.CharField(max_length=500, blank=True, null=True)
+    public = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = 'FrameBuzz Video'
@@ -522,14 +524,14 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
 '''
     Register models with Watson.
 '''
-watson.register(UserProfile,
+watson.register(UserProfile.objects.filter(dashboard_enabled=False),
                 UserProfileSearchAdapter,
                 fields=("bio", "user__username", "location",
                         "display_name", "tagline",),
                 store=("bio", "user__username", "location",
                        "display_name", "tagline",))
 
-watson.register(Video,
+watson.register(Video.objects.filter(public=True),
                 VideoSearchAdapter,
                 fields=("title", "description",),
                 store=("title", "description", "video_id", "slug",))

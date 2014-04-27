@@ -5,8 +5,9 @@ from django.contrib.sessions.models import Session
 
 
 class FrameBuzzVideoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'duration', 'added_by', 'added_on',)
-    list_filter = ('added_by', 'added_on',)
+    list_display = ('title', 'slug', 'duration', 'added_by',
+                    'added_on', 'public',)
+    list_filter = ('added_by', 'added_on', 'public',)
     search_fields = ['title', 'slug', ]
 
 
@@ -22,8 +23,8 @@ class SessionAdmin(admin.ModelAdmin):
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'bio', 'time_zone',)
-    list_filter = ('time_zone',)
+    list_display = ('user', 'bio', 'time_zone', 'dashboard_enabled',)
+    list_filter = ('time_zone', 'dashboard_enabled',)
 
 
 class UserVideoAdmin(admin.ModelAdmin):

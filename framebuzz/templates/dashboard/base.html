@@ -7,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
-    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="http://alvarez.is/demo/dashio/favicon.png">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="">
     <title>FrameBuzz: Dashboard</title>
     {% compress css %}
       <link href="{% static 'framebuzz/dashboard/theme/assets/css/bootstrap.css' %}" rel="stylesheet">
-      <link href="{% static 'framebuzz/dashboard/theme/assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+      <link href="{% static 'framebuzz/dashboard/theme/assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
       <link href="{% static 'framebuzz/dashboard/theme/assets/css/style.css' %}" rel="stylesheet">
       <link href="{% static 'framebuzz/dashboard/theme/assets/css/style-responsive.css' %}" rel="stylesheet">
+      <link href="{% static 'framebuzz/dashboard/scss/stylesheets/screen.css' %}" rel="stylesheet">
     {% endcompress %}
     {% block page_header %}{% endblock %}
     <!--[if lt IE 9]>
@@ -28,30 +29,37 @@
         <div class="sidebar-toggle-box">
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
-        <a href="{% url 'home' %}" class="logo">{% include 'dashboard/snippets/logo.html' %}</a>
-        <div class="nav notify-row" id="top_menu">
-            <ul class="nav top-menu pull-right">
-                <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                        <i class="fa fa-cloud-upload"></i>
-                    </a>
-                </li>
-                <li id="header_inbox_bar" class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                        <i class="fa fa-envelope-o"></i>
-                    </a>
-                </li>
-                <li id="header_notification_bar" class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                        <i class="fa fa-bell-o"></i>
-                    </a>
-                </li>
+        <a href="{% url 'home' %}" class="logo">
+          {% include 'dashboard/snippets/logo.html' %}
+        </a>
+
+          <a href="http://goketra.com" target="_blank" class="logo client-logo absolute-center">
+            <img src="{% static 'framebuzz/dashboard/img/ketra.png' %}" alt="Ketra" height="24" width="152">
+          </a>
+
+        <div class="nav notify-row pull-right" id="top_menu">
+            <ul class="nav top-menu pull-left">
+              <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                      <i class="fa fa-cloud-upload"></i>
+                  </a>
+              </li>
+              <li id="header_inbox_bar" class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                      <i class="fa fa-comments-o"></i>
+                  </a>
+              </li>
+              <li id="header_notification_bar" class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                      <i class="fa fa-bell-o"></i>
+                  </a>
+              </li>
             </ul>
-        </div>
-        <div class="top-menu">
-          <ul class="nav pull-right top-menu">
+            <div class="top-menu pull-right">
+              <ul class="nav pull-right top-menu">
                 <li><a class="logout" href="login.html">Logout</a></li>
-          </ul>
+              </ul>
+            </div>
         </div>
     </header>
     <aside>
