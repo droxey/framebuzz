@@ -36,8 +36,12 @@ def mobile(request):
 
 def home(request, template='marketing/home.html'):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('profiles-home',
-                                            args=[request.user.username]))
+        if request.user.get_profile().dashboard_enabled:
+            return HttpResponseRedirect(
+                reverse('dashboard-home', args=[request.user.username, ]))
+        else:
+            return HttpResponseRedirect(
+                reverse('profiles-home', args=[request.user.username, ]))
     return render_to_response(template, {
     }, context_instance=RequestContext(request))
 
