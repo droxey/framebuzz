@@ -4,7 +4,6 @@ import django_filepicker
 from actstream import action
 
 from django import forms
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 
@@ -49,6 +48,10 @@ class AddVideoForm(forms.ModelForm):
         try:
             if video_id and self.request:
                 video, created = get_or_create_video(video_id)
+                if not self.request.user.get_profile().dashboard_enabled:
+                    video.public = False
+                    video.save()
+
                 user_video = UserVideo()
                 user_video.user = self.request.user
                 user_video.video = video

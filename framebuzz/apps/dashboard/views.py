@@ -10,29 +10,36 @@ from framebuzz.apps.api.models import UserProfile
 from framebuzz.apps.dashboard.decorators import require_dashboard
 
 
-@login_required
 @require_dashboard
 def dashboard_home(request, username):
     return render_to_response('dashboard/home.html', {
     }, context_instance=RequestContext(request))
 
 
-@login_required
 @require_dashboard
 def dashboard_profile(request, username):
     return render_to_response('dashboard/profile.html', {
     }, context_instance=RequestContext(request))
 
 
-@login_required
 @require_dashboard
 def dashboard_videos(request, username):
     return render_to_response('dashboard/videos.html', {
     }, context_instance=RequestContext(request))
 
 
-@login_required
 @require_dashboard
 def dashboard_comments(request, username):
     return render_to_response('dashboard/comments.html', {
+    }, context_instance=RequestContext(request))
+
+
+@require_dashboard
+def dashboard_settings(request, username):
+    return render_to_response('dashboard/settings.html', {
+    }, context_instance=RequestContext(request))
+
+
+def dashboard_login(request):
+    return render_to_response('dashboard/login.html', {
     }, context_instance=RequestContext(request))
