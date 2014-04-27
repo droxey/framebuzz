@@ -16,6 +16,7 @@
       <link href="{% static 'framebuzz/dashboard/theme/assets/css/style.css' %}" rel="stylesheet">
       <link href="{% static 'framebuzz/dashboard/theme/assets/css/style-responsive.css' %}" rel="stylesheet">
     {% endcompress %}
+    {% block page_header %}{% endblock %}
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -55,7 +56,7 @@
         </div>
     </header>
       <!--header end-->
-      <!--sidebar start-->
+            <!--sidebar start-->
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
@@ -91,14 +92,7 @@
       <!--sidebar end-->
       <!--main content start-->
       <section id="main-content">
-          <section class="wrapper site-min-height">
-            <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
-            <div class="row mt">
-                <div class="col-lg-12">
-                  {% block page_content %}{% endblock %}
-                </div>
-            </div>
-        </section><!--/wrapper -->
+        {% block page_content %}{% endblock %}
       </section><!-- /MAIN CONTENT -->
       <!--main content end-->
       <!--footer start-->
