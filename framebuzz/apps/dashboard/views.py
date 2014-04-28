@@ -104,7 +104,7 @@ def video_details(request, slug):
     unread_comments = MPTTComment.objects.filter(object_pk=video.id,
                                                  is_public=True,
                                                  is_removed=False,
-                                                 is_read=False)
+                                                 is_read=False)[:10]
 
     return render_to_response('dashboard/snippets/video_details.html', {
         'video': video,
