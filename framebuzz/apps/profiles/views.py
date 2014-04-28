@@ -458,7 +458,11 @@ def upload_video(request, username):
         if success:
             form.save()
             success = True
-            return HttpResponse(200)
+            if request.user.get_profile().dashboard_enabled:
+                return HttpResponseRedirect(
+                    reverse('dashboard-home', args=[request.user.username, ]))
+            else:
+                return HttpResponse(200)
     else:
         form = UploadVideoForm(request=request)
 

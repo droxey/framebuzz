@@ -78,6 +78,7 @@ class UploadVideoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
+        print self.request.user.username
         super(UploadVideoForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget = forms.TextInput(attrs={
             'placeholder': 'Enter video title...'
@@ -102,6 +103,7 @@ class UploadVideoForm(forms.ModelForm):
             ' to upload videos from Dropbox, Google Drive, and more!'
 
     def save(self, commit=True):
+        print self.request.user
         fpfile = self.cleaned_data.get('fpfile', None)
         title = self.cleaned_data.get('title', None)
         description = self.cleaned_data.get('description', None)
