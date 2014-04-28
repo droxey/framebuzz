@@ -8,26 +8,50 @@
   <section class="wrapper site-min-height">
     <h3><i class="fa fa-angle-right"></i> Videos</h3>
     <hr>
+        <div class="row md">
         {% for video in videos %}
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-            <div class="project-wrapper">
-                <div class="project">
-                    <div class="photo-wrapper">
-                        <div class="photo">
-                            <img class="cover lazy-load" src="{{ video.default_thumbnail }}">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+                <div class="project-wrapper">
+                    <div class="project">
+                        <div class="photo-wrapper">
+                            <div class="photo">
+                                <a data-toggle="modal" class="fancybox" href="#detailsModal">
+                                    <img class="cover lazy-load" src="{{ video.default_thumbnail }}">
+                                </a>
+                            </div>
                         </div>
+                        <strong>{{ video.title|title }}</strong>
                     </div>
                 </div>
-            </div>
-        </div><!-- col-lg-4 -->
-        {% endfor %}
+            </div><!-- col-lg-4 -->
+            {% endfor %}
+        </div>
     </section>
+      <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="detailsModalLabel" role="dialog" tabindex="-1" id="detailsModal" class="modal fade">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Video</h4>
+              </div>
+              <div class="modal-body">
+                  <p>hi</p>
+              </div>
+              <div class="modal-footer">
+                  <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                  <button class="btn btn-theme" type="button">Submit</button>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- modal -->
 {% endblock %}
 
 {% block page_javascript %}
   <script type="text/javascript">
       $(function() {
-          $("select.styled").customSelect();
+
       });
   </script>
 {% endblock %}
