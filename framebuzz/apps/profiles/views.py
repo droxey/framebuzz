@@ -43,13 +43,6 @@ def feed(request, username):
     user_following = following(user)
     following_ids = [u.id for u in user_following]
 
-    if user.get_profile().dashboard_enabled:
-        if not request.user.is_authenticated():
-            return HttpResponseRedirect(
-                reverse('dashboard-login'))
-        return HttpResponseRedirect(
-            reverse('dashboard-home', args=[request.user.username, ]))
-
     user_feed, follow_feed, favorite_comment_ids, \
         video_library_ids, featured_video_ids = [], [], [], [], []
 
@@ -280,6 +273,14 @@ def logged_in(request):
 
 def home(request, username):
     user = get_object_or_404(User, username__iexact=username)
+
+    if user.get_profile().dashboard_enabled:
+        if not request.user.is_authenticated():
+            return HttpResponseRedirect(
+                reverse('dashboard-login'))
+        return HttpResponseRedirect(
+            reverse('dashboard-home', args=[request.user.username, ]))
+
     actions = Action.objects.favorite_comments_stream(user)
     favorite_comment_ids = [a.action_object_object_id for a in actions]
     profile_favorites = MPTTComment.objects.filter(id__in=favorite_comment_ids)
