@@ -2,7 +2,7 @@ import json
 
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
@@ -32,8 +32,30 @@ def dashboard_home(request, username):
         Q(verb__in=VALID_FEED_VERBS)
     ).order_by('-timestamp')[:20]
 
+    most_played = Action.objects.filter(
+        verb='viewed video',
+        action_object_object_id__in=videos
+        ).values('action_object_object_id') \
+        .annotate(views=Count('id')) \
+        .order_by('-views')[0]
+
+    total_views = Action.objects.filter(
+        verb='viewed video',
+        action_object_object_id__in=videos
+    ).aggregate(num_views=Count('id'))
+
+    most_played_video = Video.objects.filter(
+        id=most_played['action_object_object_id'])[0]
+    print most_played_video.default_thumbnail
+
     return render_to_response('dashboard/home.html', {
         'activities': activities,
+        'most_played': {
+            'total': total_views.get('num_views'),
+            'current': most_played.get('views'),
+            'video': most_played_video,
+        },
+        'videos': _get_videos(username),
     }, context_instance=RequestContext(request))
 
 
