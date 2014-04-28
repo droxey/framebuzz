@@ -1,6 +1,5 @@
 import json
 
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
@@ -41,6 +40,14 @@ def dashboard_comments(request, username):
 @require_dashboard
 def dashboard_settings(request, username):
     return render_to_response('dashboard/settings.html', {
+    }, context_instance=RequestContext(request))
+
+
+@require_dashboard
+def video_details(request, slug):
+    video = Video.objects.get(slug=slug)
+    return render_to_response('dashboard/snippets/video_details.html', {
+        'video': video,
     }, context_instance=RequestContext(request))
 
 

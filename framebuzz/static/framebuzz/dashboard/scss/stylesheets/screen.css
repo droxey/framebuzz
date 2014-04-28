@@ -21,26 +21,63 @@ ul.top-menu > li > .logout {
 }
 
 /* line 17, ../sass/screen.scss */
-div.desc {
-  margin-bottom: 30px;
-}
-
-/* line 22, ../sass/screen.scss */
-div.info-placeholder {
-  background: #4ECDC4;
+div.inline-modal {
   display: none;
+  margin-top: 0;
+}
+/* line 21, ../sass/screen.scss */
+div.inline-modal div.inline-modal-content {
+  background: #D7D7D7;
+  padding: 0 25px;
+  position: relative;
+  min-height: 200px;
+}
+/* line 27, ../sass/screen.scss */
+div.inline-modal div.inline-modal-content i.ajax-indicator {
+  display: inline-block;
+  left: 45%;
+  opacity: 0.4;
+  position: absolute;
+  top: 38%;
 }
 
-/* line 27, ../sass/screen.scss */
+/* line 37, ../sass/screen.scss */
 div.stats {
   color: white;
 }
-/* line 30, ../sass/screen.scss */
+/* line 40, ../sass/screen.scss */
 div.stats div.row {
   margin-bottom: 3%;
 }
 
-/* line 36, ../sass/screen.scss */
+/* line 46, ../sass/screen.scss */
+div.project .photo-wrapper.active {
+  background-color: #4ECDC4 !important;
+  background-image: url(../../theme/assets/img/zoom.png) !important;
+  background-repeat: no-repeat  !important;
+  background-position: center  !important;
+  top: 0  !important;
+  bottom: 0  !important;
+  left: 0  !important;
+  right: 0 !important;
+  position: relative !important;
+}
+/* line 57, ../sass/screen.scss */
 div.project strong {
+  color: #797979;
+  display: block;
   font-size: 15px;
+  padding: 5px 0;
+}
+/* line 63, ../sass/screen.scss */
+div.project strong i {
+  padding-top: 3px;
+}
+/* line 66, ../sass/screen.scss */
+div.project strong.selected i {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
 }

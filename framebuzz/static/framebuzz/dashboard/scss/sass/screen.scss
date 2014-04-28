@@ -14,14 +14,24 @@ ul.top-menu > li > .logout {
     width: 152px;
 }
 
-div.desc {
-    margin-bottom: 30px;
-}
-
-
-div.info-placeholder {
-    background: #4ECDC4;
+div.inline-modal {
     display: none;
+    margin-top: 0;
+
+    div.inline-modal-content {
+        background: #D7D7D7;
+        padding: 0 25px;
+        position: relative;
+        min-height: 200px;
+
+        i.ajax-indicator {
+            display: inline-block;
+            left: 45%;
+            opacity: 0.4;
+            position: absolute;
+            top: 38%;
+        }
+    }
 }
 
 div.stats {
@@ -33,7 +43,33 @@ div.stats {
 }
 
 div.project {
+    .photo-wrapper.active {
+        background-color: #4ECDC4 !important;
+        background-image:url(../../theme/assets/img/zoom.png)  !important;
+        background-repeat:no-repeat  !important;
+        background-position:center  !important;
+        top: 0  !important;
+        bottom: 0  !important; 
+        left: 0  !important;
+        right: 0 !important;
+        position: relative !important;
+    }
     strong {
+        color: #797979;
+        display: block;
         font-size: 15px;
+        padding: 5px 0;
+
+        i { padding-top: 3px; }
+
+        &.selected { 
+            i {
+                -webkit-transform: rotate(90deg);
+                -moz-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                -ms-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+        }
     }
 }

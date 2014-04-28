@@ -1,5 +1,5 @@
 {% extends "dashboard/base.html" %}
-{% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags %}
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags dashboard_tags %}
 
 {% block page_header %}  
 {% endblock %}
@@ -8,50 +8,63 @@
   <section class="wrapper site-min-height">
     <h3><i class="fa fa-angle-right"></i> Videos</h3>
     <hr>
-        <div class="row md">
-        {% for video in videos %}
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+        {% for group in videos|group_by:3 %}
+        <div class="row mt">
+        {% for video in group %}
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc" data-remote="{% url 'dashboard-video-details' video.slug %}">
                 <div class="project-wrapper">
                     <div class="project">
                         <div class="photo-wrapper">
                             <div class="photo">
-                                <a data-toggle="modal" class="fancybox" href="#detailsModal">
-                                    <img class="cover lazy-load" src="{{ video.default_thumbnail }}">
-                                </a>
+                                <img class="cover lazy-load" src="{{ video.default_thumbnail }}">
                             </div>
                         </div>
-                        <strong>{{ video.title|title }}</strong>
+                        <strong class="title">{{ video.title|title }} <i class="fa fa-chevron-right pull-right"></i></strong>
                     </div>
                 </div>
+                </a>
             </div><!-- col-lg-4 -->
             {% endfor %}
         </div>
+        <div class="row mt inline-modal">
+            <div class="col-xs-12 inline-modal-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <i class="fa fa-times pull-right"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 inner-content">
+                        <div class="ajax-indicator-row text-center">
+                            <i class="fa fa-4x fa-cog fa-spin ajax-indicator"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </section>
-      <!-- Modal -->
-    <div aria-hidden="true" aria-labelledby="detailsModalLabel" role="dialog" tabindex="-1" id="detailsModal" class="modal fade">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title">Video</h4>
-              </div>
-              <div class="modal-body">
-                  <p>hi</p>
-              </div>
-              <div class="modal-footer">
-                  <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                  <button class="btn btn-theme" type="button">Submit</button>
-              </div>
-          </div>
-      </div>
-    </div>
     <!-- modal -->
 {% endblock %}
 
 {% block page_javascript %}
   <script type="text/javascript">
       $(function() {
+        $(document).on('click', 'div.desc', function(e) {
+            var inline = $(this).parent().next('div.inline-modal');
+            var url = $(this).attr('data-remote');
 
+            $('.inline-modal.active').hide().removeClass('active');
+            $('div.desc .title').removeClass('selected');
+            $(this).find('.title').addClass('selected');
+
+            $.get(url, function(html) {
+                inline.slideDown('fast', function() {
+                    inline.addClass('active');
+                    inline.find('.inner-content').html(html);
+                });
+            });
+        });
       });
   </script>
 {% endblock %}
