@@ -16,13 +16,15 @@
             <input name="password" name="password" type="password" class="form-control" placeholder="Password">
             <label class="checkbox">
                 <input name="remember" id="id_remember" type="checkbox"> Remember me
+                {% comment %}
                 <span class="pull-right">
                     <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
-
                 </span>
+                {% endcomment %}
             </label>
             <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
         </div>
+      {% comment %}
       <!-- Modal -->
       <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
           <div class="modal-dialog">
@@ -44,6 +46,7 @@
           </div>
       </div>
       <!-- modal -->
+      {% endcomment %}
       </form>       
     </div>
   </div>
@@ -53,7 +56,7 @@
     {% compress js %}
         <script type="text/javascript" src="{% static 'framebuzz/dashboard/theme/assets/js/jquery.backstretch.min.js' %}"></script>
         <script>
-            $.backstretch("{% static 'framebuzz/dashboard/theme/assets/img/login-bg.jpg' %}", {speed: 500});
+            $.backstretch("{% static 'framebuzz/dashboard/img/login-bg.jpg' %}", {speed: 500});
         </script>
     {% endcompress %}
 {% endblock %}

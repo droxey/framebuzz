@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 
-from framebuzz.apps.api.models import UserProfile
+from framebuzz.apps.api.models import UserProfile, Video, UserVideo
 from framebuzz.apps.dashboard.decorators import require_dashboard
 
 
@@ -24,7 +24,11 @@ def dashboard_profile(request, username):
 
 @require_dashboard
 def dashboard_videos(request, username):
+    user_videos = UserVideo.objects.filter(user=request.user)
+    videos = [uv.video for uv in user_videos]
+
     return render_to_response('dashboard/videos.html', {
+        'videos': videos,
     }, context_instance=RequestContext(request))
 
 
