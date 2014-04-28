@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block page_content %}
-          <section class="wrapper home-wrapper">
+          <section class="wrapper site-min-height home-wrapper">
 
               <div class="row">
                   <div class="col-lg-9 main-chart">   
@@ -171,6 +171,15 @@
                                  {% include 'dashboard/snippets/action.html' %}
                               </p>
                           </div>
+                        </div>
+                       {% empty %}
+                         <div class="desc col-xs-10">
+                              <div class="thumb">
+                                  <img class="img-circle" src="{% avatar_url action.actor 70 %}" width="35" height="35">
+                              </div>
+                              <div class="details">
+                                  <p>No viewer activities yet!</p>
+                              </div>
                         </div>
                       {% endfor %}
                   </div>
