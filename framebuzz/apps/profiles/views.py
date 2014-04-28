@@ -43,6 +43,13 @@ def feed(request, username):
     user_following = following(user)
     following_ids = [u.id for u in user_following]
 
+    if user.get_profile().dashboard_enabled:
+        if not request.user.is_authenticated():
+            return HttpResponseRedirect(
+                reverse('dashboard-login'))
+        return HttpResponseRedirect(
+            reverse('dashboard-home', args=[request.user.username, ]))
+
     user_feed, follow_feed, favorite_comment_ids, \
         video_library_ids, featured_video_ids = [], [], [], [], []
 
