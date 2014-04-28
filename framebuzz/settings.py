@@ -152,6 +152,8 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
 
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
+
+    'framebuzz.apps.dashboard.context_processors.dashboard',
 )
 
 MIDDLEWARE_CLASSES = (

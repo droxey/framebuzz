@@ -119,7 +119,7 @@ class UploadVideoForm(forms.ModelForm):
         vid.save()
 
         # Videos added by Dashboard should not be searchable.
-        if vid.added_by.dashboard_enabled:
+        if vid.added_by.get_profile().dashboard_enabled:
             vid.public = False
 
         vid.video_id = vid.slug

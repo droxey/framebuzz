@@ -9,10 +9,18 @@ from django.template import RequestContext
 from actstream.models import Action
 
 from framebuzz.apps.api.models import UserProfile, Video, UserVideo
+from framebuzz.apps.profiles.forms import AddVideoForm, UploadVideoForm
 from framebuzz.apps.dashboard.decorators import require_dashboard
 
 VALID_FEED_VERBS = ['commented on', 'replied to comment',
                     'added video to library', ]
+
+
+def _get_pending_uploads(username):
+    pending_uploads = Video.objects.exclude(
+        Q(Q(fp_url=None) | Q(job_id=None))).filter(
+        added_by__username=username, processing=True)
+    return pending_uploads
 
 
 def _get_videos(username):

@@ -1,3 +1,6 @@
+@import "compass";
+@import "compass/css3/border-radius";
+
 ul.top-menu > li > .logout {
     margin: 0 0 0 20px;
 }
@@ -64,6 +67,10 @@ iframe.video-iframe {
     width: 648px;
 }
 
+.home-wrapper {
+    margin-top: -22px;
+}
+
 div.stats {
     color: white;
 
@@ -108,4 +115,168 @@ div.project {
 .ds .desc {
     font-size: 12px;
     text-align: left;
+}
+
+#upload-video {
+    .tabs-title {
+        background: #E0E1E7;
+    }
+
+    .tabs-wrapper {
+        ul {
+            li {
+                a { color: #666; }
+            }
+        }
+    }
+
+    .tab-content {
+        position: absolute;
+        z-index: 100;
+
+        .tab-pane {
+            background: #FFFFFF;
+        }
+
+        div.drop-pane-row {
+            margin: 0;
+            @include border-radius(5px, 5px);
+
+            #upload-drop-pane {
+                margin: 0 0 0 -10px;
+            }
+
+            #upload-drop-pane > div {
+                clear: both;
+                height: 50px;
+                width: 103%;
+            }
+
+            #upload-drop-pane > div > div {
+                background-color: #F0F0F0 !important;
+                border: 2px dashed #D8D8D8 !important;
+                color: #888 !important;
+                float: left !important;
+                font-size: 0.9em !important;
+                margin: 0 0 0 5px !important;
+                padding: 4px 0 !important;
+                text-align: center !important;
+                width: 83.7% !important;
+                height: 100%;
+                line-height: 18px !important;
+            }
+
+            #upload-drop-pane > div > div > div {
+                height: 22px !important;
+                margin: 0 3px !important;
+            }
+
+            #upload-drop-pane > div > button.btn-success {
+                background-color: #5CB85C;
+                border-color: #4CAE4C;
+                color: #FFFFFF;
+                font-weight: bold;
+                float: left !important;
+                padding: 3px 12px;
+                width: 15%;
+            }
+
+            div.input-row {
+                margin-left: -10px;
+                margin-right: -10px;
+                padding-top: 5px;
+
+                div {
+                    padding: 0;
+
+                    input, textarea {
+                        border: 1px solid #CCCCCC;
+                        color: #666;
+                        padding: 3px 5px;
+                        width: 100%;
+                        @include border-radius(2px, 2px);
+
+                        &::-webkit-input-placeholder { /* WebKit browsers */
+                            color:    #666;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+
+                        &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                            color:    #666;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+
+                        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                            color:    #666;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+
+                        &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                            color:    #666;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+
+                        &.placeholder {
+                            color:    #666;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+
+                        &:focus {
+                            border: 1px solid #666;
+                            outline: 0;
+                        }
+
+                        &.error {
+                            border: 1px solid red;
+
+                            &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                                color:    red;
+                                font-weight: 300;
+                                font-style: italic;
+                            }
+
+                            &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                                color:    red;
+                                font-weight: 300;
+                                font-style: italic;
+                            }
+
+                            &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                                color:    red;
+                                font-weight: 300;
+                                font-style: italic;
+                            }
+
+                            &.placeholder {
+                                color:    red;
+                                font-weight: 300;
+                                font-style: italic;
+                            }
+                        }
+                    }
+                }
+            }
+
+            div.textarea-row {
+                margin-bottom: 5px;
+
+                textarea {
+                    height: 43px;
+                }
+            }
+
+            div.submit-row {
+                margin-top: 15px;
+            }
+        }
+    }
+
+    form {
+        padding: 15px;
+    }
 }
