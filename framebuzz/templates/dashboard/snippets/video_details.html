@@ -1,9 +1,100 @@
+{% load staticfiles profile_tags comments %}
+
 <div class="row">
-    <div class="col-xs-6">
-        <h5>Description</h5>
-        <p>{% if video.description.length > 0 %}{{ video.formatted_description }}{% else %}<i>Click to add a description.</i>{% endif %}</p>
+    <div class="col-xs-6 iframe-wrapper">
+        <iframe class="video-iframe" data-src="{% url 'video-embed' video.slug %}" scrolling="no" frameBorder="0" height="445" width="700"></iframe>
     </div>
     <div class="col-xs-6">
-        <iframe class="video-iframe pull-right" data-video-src="{% url 'video-embed' video.slug %}" src="" scrolling="no" frameBorder="0" height="480" width="645"></iframe>
+        <section class="task-panel tasks-widget col-xs-12">
+            <div class="panel-heading">
+                <div class="pull-left"><h5><i class="fa fa-list"></i> Video Details</h5></div>
+                <br>
+            </div>
+              <div class="panel-body">
+                  <div class="task-content">
+                    {% if video.added_by %}
+                        <div class="row">
+                            <div class="col-xs-2"><strong>Uploaded By</strong></div>
+                            <div class="col-xs-10">
+                                <p>{{ video.added_by|display_name }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-xs-2"><strong>{% if video.added_by %}Uploaded{% else %}Added{% endif %} On</strong></div>
+                        <div class="col-xs-10">
+                            <p>{{ video.added_on }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2"><strong>Duration</strong></div>
+                        <div class="col-xs-10">
+                            <p>{{ video.timeInHMS }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2"><strong>Description</strong></div>
+                        <div class="col-xs-10">
+                            <p>{% if video.description.length > 0 %}{{ video.formatted_description }}{% else %}<i>No description available.</i>{% endif %}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2"><strong>Public</strong></div>
+                        <div class="col-xs-10">
+                            <p>{{ video.public|yesno|title }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2"><strong>Embed Code</strong></div>
+                        <div class="col-xs-10">
+                            <textarea style="font-family: monospace; font-size: 12px;" rows="2" cols="74">{{ video.embed_code }}</textarea>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+      </section>
+        <section class="task-panel tasks-widget col-xs-12 stats">
+            <div class="panel-heading">
+                <div class="pull-left"><h5><i class="fa fa-list"></i> Viewer Statistics</h5></div>
+                <br>
+            </div>
+              <div class="panel-body">
+
+              </div>
+      </section>
     </div>
+</div>
+<div class="comments-row row mt">
+    <section class="task-panel tasks-widget col-xs-12">
+        <div class="panel-heading">
+            <div class="pull-left"><h5><i class="fa fa-comments"></i> Unread Comments</h5></div>
+            <br>
+        </div>
+          <div class="panel-body">
+              <div class="task-content">
+              {% get_comment_list for video as comments_stream %}
+                {% if comments_stream|length > 0 %}
+                  <ul class="task-list">
+                    {% for com in comments_stream|slice:':5' %}
+                      <li class="list-info">
+                          <div class="task-title">
+                              <span class="task-title-sp">
+                                <strong>[{{ com.timeInHMS }}] {{ com.user|display_name }}: </strong>
+                                {{ com.formatted_comment }}
+                              </span>
+                              <div class="pull-right hidden-phone">
+                                  <button class="btn btn-success btn-xs fa fa-check" data-tooltip="" title="Mark as Read"></button>
+                                  <button class="btn btn-primary btn-xs fa fa-pencil" title="Write a Response"></button>
+                                  <button class="btn btn-danger btn-xs fa fa-trash-o" title="Delete Comment"></button>
+                              </div>
+                          </div>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                    <p>No unread comments.</p>
+                {% endif %}
+              </div>
+          </div>
+    </section>
 </div>

@@ -1,7 +1,8 @@
 {% extends "dashboard/base.html" %}
 {% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags dashboard_tags %}
 
-{% block page_header %}  
+{% block page_header %}
+    <link rel="stylesheet" href="{% static 'framebuzz/dashboard/theme/assets/css/to-do.css' %}">
 {% endblock %}
 
 {% block page_content %}
@@ -11,7 +12,7 @@
         {% for group in videos|group_by:3 %}
         <div class="row mt">
         {% for video in group %}
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc" data-remote="{% url 'dashboard-video-details' video.slug %}" data-title="{{ video.title|title }}">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc" data-remote="{% url 'dashboard-video-details' video.slug %}" data-title="{{ video.title|title }}" data-slug="{{ video.slug }}">
                 <div class="project-wrapper">
                     <div class="project">
                         <div class="photo-wrapper">
@@ -50,9 +51,15 @@
     <!-- modal -->
 {% endblock %}
 
-{% block page_javascript %}
+{% block page_javascript %} 
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>   
+   
+  {% compress js %}
+  <script src="{% static 'framebuzz/dashboard/theme/assets/js/tasks.js' %}" type="text/javascript"></script>
   <script type="text/javascript">
       $(function() {
+        $('.lazy-load').lazyLoadXT();
+
         $(document).on('click', 'div.desc', function(e) {
             var inline = $(this).parent().next('div.inline-modal');
             var url = $(this).attr('data-remote');
@@ -64,14 +71,20 @@
 
             inline.find('.video-title').html(title);
 
-            $.get(url, function(html) {
-                inline.slideDown('fast', function() {
-                    inline.addClass('active');
-                    inline.find('.inner-content').html(html);
+            $(document).scrollTo(inline, 300, {
+                onAfter: function() {
+                     $.get(url, function(html) {
+                        inline.slideDown('fast', function() {
+                            inline.addClass('active');
+                            inline.find('.inner-content').html(html);
+                            inline.find('.iframe-wrapper > iframe').lazyLoadXT();
 
-                    var videoSrc = inline.find('iframe').attr('data-video-src');
-                    inline.find('iframe').attr('src', videoSrc);
-                });
+                            TaskList.initTaskWidget();
+                            $( "#sortable" ).sortable();
+                            $( "#sortable" ).disableSelection();
+                        });
+                    });     
+                }
             });
         });
 
@@ -84,4 +97,5 @@
         });
       });
   </script>
+  {% endcompress %}
 {% endblock %}
