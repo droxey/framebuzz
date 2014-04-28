@@ -71,20 +71,34 @@ iframe.video-iframe {
 }
 
 /* line 70, ../sass/screen.scss */
-.home-wrapper {
+section.wrapper {
+  margin-top: 0;
+}
+/* line 73, ../sass/screen.scss */
+section.wrapper h3 {
+  margin-top: 0;
+}
+
+/* line 76, ../sass/screen.scss */
+section.upload-wrapper {
+  margin-top: 60px;
+}
+
+/* line 81, ../sass/screen.scss */
+section.home-wrapper {
   margin-top: -22px;
 }
 
-/* line 74, ../sass/screen.scss */
+/* line 85, ../sass/screen.scss */
 div.stats {
   color: white;
 }
-/* line 77, ../sass/screen.scss */
+/* line 88, ../sass/screen.scss */
 div.stats div.row {
   margin-bottom: 3%;
 }
 
-/* line 83, ../sass/screen.scss */
+/* line 94, ../sass/screen.scss */
 div.project .photo-wrapper.active {
   background-color: #4ECDC4 !important;
   background-image: url(../../theme/assets/img/zoom.png) !important;
@@ -96,18 +110,18 @@ div.project .photo-wrapper.active {
   right: 0 !important;
   position: relative !important;
 }
-/* line 95, ../sass/screen.scss */
+/* line 106, ../sass/screen.scss */
 div.project strong {
   color: #797979;
   display: block;
   font-size: 15px;
   padding: 5px 0;
 }
-/* line 101, ../sass/screen.scss */
+/* line 112, ../sass/screen.scss */
 div.project strong i {
   padding-top: 3px;
 }
-/* line 104, ../sass/screen.scss */
+/* line 115, ../sass/screen.scss */
 div.project strong.selected i {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -116,47 +130,52 @@ div.project strong.selected i {
   transform: rotate(90deg);
 }
 
-/* line 115, ../sass/screen.scss */
+/* line 126, ../sass/screen.scss */
 .ds .desc {
   font-size: 12px;
   text-align: left;
 }
 
-/* line 121, ../sass/screen.scss */
+/* line 132, ../sass/screen.scss */
 #upload-video .tabs-title {
   background: #E0E1E7;
+  width: 12.667%;
 }
-/* line 128, ../sass/screen.scss */
+/* line 140, ../sass/screen.scss */
 #upload-video .tabs-wrapper ul li a {
   color: #666;
 }
-/* line 133, ../sass/screen.scss */
+/* line 145, ../sass/screen.scss */
+#upload-video #add-video-tabs {
+  width: 87.333%;
+}
+/* line 149, ../sass/screen.scss */
 #upload-video .tab-content {
   position: absolute;
   z-index: 100;
 }
-/* line 137, ../sass/screen.scss */
+/* line 153, ../sass/screen.scss */
 #upload-video .tab-content .tab-pane {
   background: #FFFFFF;
 }
-/* line 141, ../sass/screen.scss */
+/* line 157, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row {
   margin: 0;
   -webkit-border-radius: 5px 5px;
   -moz-border-radius: 5px / 5px;
   border-radius: 5px / 5px;
 }
-/* line 145, ../sass/screen.scss */
+/* line 161, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row #upload-drop-pane {
   margin: 0 0 0 -10px;
 }
-/* line 149, ../sass/screen.scss */
+/* line 165, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row #upload-drop-pane > div {
   clear: both;
   height: 50px;
   width: 103%;
 }
-/* line 155, ../sass/screen.scss */
+/* line 171, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row #upload-drop-pane > div > div {
   background-color: #F0F0F0 !important;
   border: 2px dashed #D8D8D8 !important;
@@ -170,12 +189,12 @@ div.project strong.selected i {
   height: 100%;
   line-height: 18px !important;
 }
-/* line 169, ../sass/screen.scss */
+/* line 185, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row #upload-drop-pane > div > div > div {
   height: 22px !important;
   margin: 0 3px !important;
 }
-/* line 174, ../sass/screen.scss */
+/* line 190, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row #upload-drop-pane > div > button.btn-success {
   background-color: #5CB85C;
   border-color: #4CAE4C;
@@ -185,17 +204,17 @@ div.project strong.selected i {
   padding: 3px 12px;
   width: 15%;
 }
-/* line 184, ../sass/screen.scss */
+/* line 200, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row {
   margin-left: -10px;
   margin-right: -10px;
   padding-top: 5px;
 }
-/* line 189, ../sass/screen.scss */
+/* line 205, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div {
   padding: 0;
 }
-/* line 192, ../sass/screen.scss */
+/* line 208, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input, #upload-video .tab-content div.drop-pane-row div.input-row div textarea {
   border: 1px solid #CCCCCC;
   color: #666;
@@ -205,89 +224,89 @@ div.project strong.selected i {
   -moz-border-radius: 2px / 2px;
   border-radius: 2px / 2px;
 }
-/* line 199, ../sass/screen.scss */
+/* line 215, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input::-webkit-input-placeholder, #upload-video .tab-content div.drop-pane-row div.input-row div textarea::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #666;
   font-weight: 300;
   font-style: italic;
 }
-/* line 205, ../sass/screen.scss */
+/* line 221, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input:-moz-placeholder, #upload-video .tab-content div.drop-pane-row div.input-row div textarea:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #666;
   font-weight: 300;
   font-style: italic;
 }
-/* line 211, ../sass/screen.scss */
+/* line 227, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input::-moz-placeholder, #upload-video .tab-content div.drop-pane-row div.input-row div textarea::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #666;
   font-weight: 300;
   font-style: italic;
 }
-/* line 217, ../sass/screen.scss */
+/* line 233, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input:-ms-input-placeholder, #upload-video .tab-content div.drop-pane-row div.input-row div textarea:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #666;
   font-weight: 300;
   font-style: italic;
 }
-/* line 223, ../sass/screen.scss */
+/* line 239, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input.placeholder, #upload-video .tab-content div.drop-pane-row div.input-row div textarea.placeholder {
   color: #666;
   font-weight: 300;
   font-style: italic;
 }
-/* line 229, ../sass/screen.scss */
+/* line 245, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input:focus, #upload-video .tab-content div.drop-pane-row div.input-row div textarea:focus {
   border: 1px solid #666;
   outline: 0;
 }
-/* line 234, ../sass/screen.scss */
+/* line 250, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input.error, #upload-video .tab-content div.drop-pane-row div.input-row div textarea.error {
   border: 1px solid red;
 }
-/* line 237, ../sass/screen.scss */
+/* line 253, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input.error:-moz-placeholder, #upload-video .tab-content div.drop-pane-row div.input-row div textarea.error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 243, ../sass/screen.scss */
+/* line 259, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input.error::-moz-placeholder, #upload-video .tab-content div.drop-pane-row div.input-row div textarea.error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 249, ../sass/screen.scss */
+/* line 265, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input.error:-ms-input-placeholder, #upload-video .tab-content div.drop-pane-row div.input-row div textarea.error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 255, ../sass/screen.scss */
+/* line 271, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.input-row div input.error.placeholder, #upload-video .tab-content div.drop-pane-row div.input-row div textarea.error.placeholder {
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 265, ../sass/screen.scss */
+/* line 281, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.textarea-row {
   margin-bottom: 5px;
 }
-/* line 268, ../sass/screen.scss */
+/* line 284, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.textarea-row textarea {
   height: 43px;
 }
-/* line 273, ../sass/screen.scss */
+/* line 289, ../sass/screen.scss */
 #upload-video .tab-content div.drop-pane-row div.submit-row {
   margin-top: 15px;
 }
-/* line 279, ../sass/screen.scss */
+/* line 295, ../sass/screen.scss */
 #upload-video form {
   padding: 15px;
 }
