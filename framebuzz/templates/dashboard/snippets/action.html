@@ -2,7 +2,7 @@
 
 {% if action.verb %}
     {% if action.verb == 'commented on' %}
-        <strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong><span class="action-name"> commented on &ldquo;<strong>{{ action.action_object.title|title }}</strong>.&rdquo;</span>
+        <strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong><span class="action-name"> commented on &ldquo;<strong>{{ action.target.title|title }}</strong>.&rdquo;</span>
     {% elif action.verb == 'replied to comment' %}
         <strong><a href="{% url 'profiles-home' action.actor.username %}">{{ action.actor|display_name }}</a></strong><span class="action-name"> replied to a comment on &ldquo;<strong>{{ action.target.title|title }}</strong>.&rdquo;</span>
     {% elif action.verb == 'added video to library' %}
