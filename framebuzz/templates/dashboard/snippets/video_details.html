@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-xs-6">
+        <h5>Description</h5>
+        <p>{% if video.description.length > 0 %}{{ video.formatted_description }}{% else %}<i>Click to add a description.</i>{% endif %}</p>
+    </div>
+    <div class="col-xs-6">
+        <iframe class="video-iframe pull-right" data-video-src="{% url 'video-embed' video.slug %}" src="" scrolling="no" frameBorder="0" height="480" width="645"></iframe>
+    </div>
+</div>

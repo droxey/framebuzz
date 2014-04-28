@@ -18,11 +18,26 @@ div.inline-modal {
     display: none;
     margin-top: 0;
 
+    h3.video-title {
+        font-weight: bold;
+    }
+
+    a.inline-close {
+        color: #666666;
+        display: block;
+        font-size: 18px;
+        margin-bottom: 10px;
+        margin-top: 15px;
+
+        &:hover, &:active, &:visited {
+            color: #333333;
+        }
+    }
+
     div.inline-modal-content {
         background: #D7D7D7;
-        padding: 0 25px;
         position: relative;
-        min-height: 200px;
+        min-height: 470px;
 
         i.ajax-indicator {
             display: inline-block;
@@ -31,7 +46,22 @@ div.inline-modal {
             position: absolute;
             top: 38%;
         }
+
+        div.inner-content {
+            h5 {
+                font-size: 16px;
+                font-weight: bold;
+            }
+        }
     }
+}
+
+iframe.video-iframe {
+    background: #202020;
+    border-top: 4px solid #202020;
+    border-bottom: 4px solid #202020;
+    height: 398px;
+    width: 648px;
 }
 
 div.stats {
@@ -54,6 +84,7 @@ div.project {
         right: 0 !important;
         position: relative !important;
     }
+
     strong {
         color: #797979;
         display: block;

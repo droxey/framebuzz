@@ -11,7 +11,7 @@
         {% for group in videos|group_by:3 %}
         <div class="row mt">
         {% for video in group %}
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc" data-remote="{% url 'dashboard-video-details' video.slug %}">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc" data-remote="{% url 'dashboard-video-details' video.slug %}" data-title="{{ video.title|title }}">
                 <div class="project-wrapper">
                     <div class="project">
                         <div class="photo-wrapper">
@@ -30,7 +30,10 @@
             <div class="col-xs-12 inline-modal-content">
                 <div class="row">
                     <div class="col-xs-12">
-                        <i class="fa fa-times pull-right"></i>
+                        <h3 class="video-title pull-left"></h3>
+                        <a class="inline-close pull-right" href="#" rel="close">
+                            <i class="fa fa-times"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="row">
@@ -53,17 +56,31 @@
         $(document).on('click', 'div.desc', function(e) {
             var inline = $(this).parent().next('div.inline-modal');
             var url = $(this).attr('data-remote');
+            var title = $(this).attr('data-title');
 
             $('.inline-modal.active').hide().removeClass('active');
             $('div.desc .title').removeClass('selected');
             $(this).find('.title').addClass('selected');
 
+            inline.find('.video-title').html(title);
+
             $.get(url, function(html) {
                 inline.slideDown('fast', function() {
                     inline.addClass('active');
                     inline.find('.inner-content').html(html);
+
+                    var videoSrc = inline.find('iframe').attr('data-video-src');
+                    inline.find('iframe').attr('src', videoSrc);
                 });
             });
+        });
+
+        $(document).on('click', 'a.inline-close', function(e) {
+            e.preventDefault();
+
+            $(this).parent().parent().parent().parent().parent().hide('fast');
+            
+            return false;
         });
       });
   </script>
