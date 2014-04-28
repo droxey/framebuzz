@@ -133,7 +133,13 @@
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/lazy-load-xt/jquery.lazyloadxt.extra.min.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/common-scripts.js' %}"></script>
     <script src="{% static 'framebuzz/profiles/vendor/jquery/jquery.placeholder.js' %}"></script>
+    <script src="{% static 'framebuzz/profiles/js/framebuzz.profiles.js' %}"></script>
     <script src="{% static 'framebuzz/profiles/js/framebuzz.uploads.js' %}"></script>
+    <script type="text/javascript">
+      $(function() {
+        FrameBuzzProfile.init(true, false, { }, false);
+      });
+    </script>
   {% endcompress %}
   {% block page_javascript %}{% endblock %}
   <script>

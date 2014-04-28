@@ -39,8 +39,13 @@ var FrameBuzzProfile = (function($) {
                     'is_featured': 'false',
                     'csrfmiddlewaretoken': csrfToken
                 }, function(data, textStatus, jqXHR) {
-                    var redirectUrl = window.location.href + 'share/' + video_id + '/';
-                    window.location.href = redirectUrl;
+                    if (window.location.href.indexOf('dashboard') !== -1) {
+                        window.location.reload();
+                    }   
+                    else {
+                        var redirectUrl = window.location.href + 'share/' + video_id + '/';
+                        window.location.href = redirectUrl;
+                    }
                 });
             }
 
