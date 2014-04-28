@@ -53,7 +53,7 @@
 
 {% block page_javascript %} 
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>   
-   
+
   {% compress js %}
   <script src="{% static 'framebuzz/dashboard/theme/assets/js/tasks.js' %}" type="text/javascript"></script>
   <script type="text/javascript">
@@ -91,7 +91,7 @@
         $(document).on('click', 'a.inline-close', function(e) {
             e.preventDefault();
 
-            $(this).parent().parent().parent().parent().parent().hide('fast');
+            $(this).parent().parent().parent().parent().hide('fast');
 
             return false;
         });

@@ -428,6 +428,9 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
     # A private session that this comment belongs to, if any.
     session = models.ForeignKey(PrivateSession, blank=True, null=True)
 
+    # Dashboard users need this.
+    is_read = models.BooleanField(default=False)
+
     @property
     def timeInHMS(self):
         seconds = int(self.time)

@@ -59,11 +59,26 @@
                 <br>
             </div>
               <div class="panel-body">
-
+                <div class="row">
+                    <div class="col-xs-4 text-center">
+                        <i class="fa fa-4x fa-eye"></i>
+                        <h5>{{ plays|short_number }} Plays</h5>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <i class="fa fa-4x fa-user"></i>
+                        <h5>{{ commenters|length|short_number }} Commenters</h5>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        {% get_comment_count for video as comment_count %}
+                        <i class="fa fa-4x fa-comments-o"></i>
+                        <h5>{{ comment_count|short_number }} Comments</h5>
+                    </div>
+                </div>
               </div>
       </section>
     </div>
 </div>
+{% if unread_comments|length > 0 %}
 <div class="comments-row row mt">
     <section class="task-panel tasks-widget col-xs-12">
         <div class="panel-heading">
@@ -72,18 +87,17 @@
         </div>
           <div class="panel-body">
               <div class="task-content">
-              {% get_comment_list for video as comments_stream %}
-                {% if comments_stream|length > 0 %}
+                {% if unread_comments|length > 0 %}
                   <ul class="task-list">
-                    {% for com in comments_stream|slice:':5' %}
+                    {% for com in unread_comments %}
                       <li class="list-info">
                           <div class="task-title">
                               <span class="task-title-sp">
-                                <strong>[{{ com.timeInHMS }}] {{ com.user|display_name }}: </strong>
+                                <strong>[@{{ com.timeInHMS }}] {{ com.user|display_name }}: </strong>
                                 {{ com.formatted_comment }}
                               </span>
-                              <div class="pull-right hidden-phone">
-                                  <button class="btn btn-success btn-xs fa fa-check" data-tooltip="" title="Mark as Read"></button>
+                              <div class="task-buttons pull-right hidden-phone">
+                                  <button class="btn btn-success btn-xs fa fa-check"  title="Mark as Read"></button>
                                   <button class="btn btn-primary btn-xs fa fa-pencil" title="Write a Response"></button>
                                   <button class="btn btn-danger btn-xs fa fa-trash-o" title="Delete Comment"></button>
                               </div>
@@ -97,4 +111,5 @@
               </div>
           </div>
     </section>
+    {% endif %}
 </div>
