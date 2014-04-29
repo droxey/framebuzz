@@ -1,6 +1,10 @@
 @import "compass";
 @import "compass/css3/border-radius";
 
+body {
+    background-color: #F6F4F0;
+}
+
 ul.top-menu > li > .logout {
     margin: 0 0 0 20px;
 }
@@ -78,7 +82,10 @@ iframe.video-iframe {
 section.wrapper {
     margin-top: 0;
 
-    h3 { margin-top: 0; }
+    h3 { 
+        color: #5F615E;
+        margin-top: 0;
+    }
 }
 
 section.upload-wrapper {
@@ -119,6 +126,7 @@ div.comments-row {
     }
 
     .content-panel {
+        background: white;
         height: auto;
         padding-top: 0;
 
@@ -209,14 +217,16 @@ div.project {
 }
 
 #upload-video {
+    background: #B83234;
+
     .tabs-title {
-        background: #E0E1E7;
         width: 12.667%;
         border: 1px solid rgba(0, 0, 0, 0);
+        color: white;
 
         h4 {
             margin-bottom: 8px;
-            margin-top: 11px;
+            margin-top: 10px;
         }
     }
 
@@ -229,7 +239,13 @@ div.project {
     }
 
     #add-video-tabs {
-        width: 87.333%;
+        background: transparent;
+        border-bottom: none;
+
+        a {
+            color: white;
+        }
+        //width: 87.333%;
     }
 
     .tab-content {
