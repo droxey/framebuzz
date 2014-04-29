@@ -106,6 +106,18 @@ div.comments-row {
 }
 
 .video-panel {
+    cursor: pointer;
+
+    &:hover {
+        .content-panel .pr2-social i {
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }   
+    }
+
     .content-panel {
         height: auto;
         padding-top: 0;
@@ -130,6 +142,12 @@ div.comments-row {
                 font-size: 14px;
                 margin-right: 0;
                 margin-top: 3px;
+
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
             }
 
             h5 {
