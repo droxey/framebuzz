@@ -6,19 +6,23 @@
         {% for group in videos|group_by:3 %}
         <div class="row mt">
         {% for video in group %}
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc" data-remote="{% url 'dashboard-video-details' video.slug %}" data-title="{{ video.title|title }}" data-slug="{{ video.slug }}">
-                <div class="project-wrapper">
-                    <div class="project">
-                        <div class="photo-wrapper">
-                            <div class="photo">
-                                <img class="cover lazy-load" src="{{ video.default_thumbnail }}">
-                            </div>
-                        </div>
-                        <strong class="title">{{ video.title|title }} <i class="fa fa-chevron-right pull-right"></i></strong>
+            <div class="col-md-4 col-sm-4 mb video-panel" data-remote="{% url 'dashboard-video-details' video.slug %}" data-title="{{ video.title|title }}" data-slug="{{ video.slug }}">
+                <div class="darkblue-panel pn">
+                    <div class="darkblue-header">
+                        <h5><strong class="title">{{ video.title|title }} <i class="fa fa-chevron-right pull-right"></i></strong></h5>
                     </div>
-                </div>
-                </a>
-            </div><!-- col-lg-4 -->
+                    <img class="cover lazy-load" src="{{ video.default_thumbnail }}">
+                    <p>April 17, 2014</p>
+                    <footer>
+                        <div class="pull-left">
+                            <h5><i class="fa fa-hdd-o"></i> 17 GB</h5>
+                        </div>
+                        <div class="pull-right">
+                            <h5>60% Used</h5>
+                        </div>
+                    </footer>
+                </div><!-- -- /darkblue panel ---->
+            </div>
             {% endfor %}
         </div>
         <div class="row mt inline-modal">

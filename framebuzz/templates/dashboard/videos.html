@@ -6,49 +6,103 @@
 {% endblock %}
 
 {% block page_content %}
-  <section class="wrapper site-min-height">
-    <h3><i class="fa fa-angle-right"></i> Videos</h3>
-    <hr>
-        {% for group in videos|group_by:3 %}
-        <div class="row mt">
-        {% for video in group %}
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc" data-remote="{% url 'dashboard-video-details' video.slug %}" data-title="{{ video.title|title }}" data-slug="{{ video.slug }}">
-                <div class="project-wrapper">
-                    <div class="project">
-                        <div class="photo-wrapper">
-                            <div class="photo">
-                                <img class="cover lazy-load" src="{{ video.default_thumbnail }}">
+
+  <section class="wrapper site-min-height home-wrapper">
+      <div class="row">
+          <div class="col-lg-11 main-chart">   
+            <h3><i class="fa fa-angle-right"></i> Videos</h3>
+                <hr>
+                {% for group in videos|group_by:3 %}
+                <div class="row mt">
+                    {% for video in group %}
+                        <div class="col-lg-4 col-md-4 col-sm-4 mb video-panel">
+                            <div class="content-panel pn">
+                                <div class="panel-bkg">
+                                    <img class="cover lazy-load img-responsive" src="{{ video.poster_image }}">
+                                </div>
+                                <div class="pr2-social">
+                                    <h5><strong class="title">{{ video.title|title|truncatechars:"55" }} <i class="fa fa-chevron-right pull-right"></i></strong></h5>
+                                </div>
+                            </div><!-- --/panel ---->
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row mt inline-modal">
+                    <div class="col-xs-12 inline-modal-content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3 class="video-title pull-left"></h3>
+                                <a class="inline-close pull-right" href="#" rel="close">
+                                    <i class="fa fa-times"></i>
+                                </a>
                             </div>
                         </div>
-                        <strong class="title">{{ video.title|title }} <i class="fa fa-chevron-right pull-right"></i></strong>
-                    </div>
-                </div>
-                </a>
-            </div><!-- col-lg-4 -->
-            {% endfor %}
-        </div>
-        <div class="row mt inline-modal">
-            <div class="col-xs-12 inline-modal-content">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h3 class="video-title pull-left"></h3>
-                        <a class="inline-close pull-right" href="#" rel="close">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 inner-content">
-                        <div class="ajax-indicator-row text-center">
-                            <i class="fa fa-4x fa-cog fa-spin ajax-indicator"></i>
+                        <div class="row">
+                            <div class="col-xs-12 inner-content">
+                                <div class="ajax-indicator-row text-center">
+                                    <i class="fa fa-4x fa-cog fa-spin ajax-indicator"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        {% endfor %}
-    </section>
-    <!-- modal -->
+            {% endfor %}
+        </div><!-- /col-lg-12 END SECTION MIDDLE -->
+    </div>
+</section>
+
+{% comment %}
+
+  <section class="wrapper site-min-height home-wrapper">
+      <div class="row">
+          <div class="col-lg-12 main-chart">   
+            <h3><i class="fa fa-angle-right"></i> Videos</h3>
+                <hr>
+                {% for group in videos|group_by:3 %}
+                <div class="row mt">
+                {% for video in group %}
+                    <div class="col-md-4 col-sm-4 mb video-panel" data-remote="{% url 'dashboard-video-details' video.slug %}" data-title="{{ video.title|title }}" data-slug="{{ video.slug }}">
+                        <div class="darkblue-panel pn">
+                            <div class="darkblue-header">
+                                <h5><strong class="title">{{ video.title|title }} <i class="fa fa-chevron-right pull-right"></i></strong></h5>
+                            </div>
+                            
+                            <p>April 17, 2014</p>
+                            <footer>
+                                <div class="pull-left">
+                                    <h5><i class="fa fa-hdd-o"></i> 17 GB</h5>
+                                </div>
+                                <div class="pull-right">
+                                    <h5>60% Used</h5>
+                                </div>
+                            </footer>
+                        </div><!-- -- /darkblue panel ---->
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="row mt inline-modal">
+                    <div class="col-xs-12 inline-modal-content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3 class="video-title pull-left"></h3>
+                                <a class="inline-close pull-right" href="#" rel="close">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 inner-content">
+                                <div class="ajax-indicator-row text-center">
+                                    <i class="fa fa-4x fa-cog fa-spin ajax-indicator"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+          </div><!-- /col-lg-12 END SECTION MIDDLE -->
+{% endcomment %}
 {% endblock %}
 
 {% block page_javascript %} 
