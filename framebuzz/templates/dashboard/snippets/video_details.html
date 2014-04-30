@@ -1,13 +1,13 @@
 {% load staticfiles profile_tags comments %}
 
 
-<div class="row">
-    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 iframe-wrapper">
-        <iframe class="video-iframe hidden" data-src="{% url 'video-embed' video.slug %}" scrolling="no" frameBorder="0" height="405" width="640"></iframe>
+<div class="row modal-content-wrapper">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 poster-image">
+        <img src="{{ video.default_thumbnail }}" class="img-responsive">
     </div>
-    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-right">
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
         <div class="row row-modal-tabs">
-            <div class="col-md-12 modal-tab-container">
+            <div class="col-lg-12 modal-tab-container">
                 <ul id="modal-tabs" class="nav nav-tabs">
                     <li class="active">
                         <a data-toggle="tab" href="#video-details">Video Details</a>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="row tab-content">
-            <div id="video-details" class="tab-pane active">
+            <div id="video-details" class="tab-pane active col-lg-12">
                 <table class="table table-hover">                              
                   <tbody>
                       {% if video.added_by %}
