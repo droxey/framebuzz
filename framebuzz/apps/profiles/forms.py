@@ -118,19 +118,19 @@ class UploadVideoForm(forms.ModelForm):
         vid.uploaded = datetime.datetime.now()
         vid.filename = fpfile.name or None
         vid.fp_url = url
-        vid.save()
+        #vid.save()
 
         # Videos added by Dashboard should not be searchable.
         if vid.added_by.get_profile().dashboard_enabled:
             vid.public = False
 
         vid.video_id = vid.slug
-        vid.save()
+        #vid.save()
 
-        if fpfile:  # Send it to ZenCoder!
-            start_zencoder_job.apply_async(args=[
-                vid.fp_url,
-                vid.filename
-            ])
+        # if fpfile:  # Send it to ZenCoder!
+        #     start_zencoder_job.apply_async(args=[
+        #         vid.fp_url,
+        #         vid.filename
+        #     ])
 
         return vid

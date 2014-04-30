@@ -117,3 +117,4 @@ def video_details(request, slug):
 def dashboard_login(request):
     return render_to_response('dashboard/login.html', {
     }, context_instance=RequestContext(request))
+

@@ -1,7 +1,7 @@
 {% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="messagesApp">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body ng-controller="MainCtrl">
   {% block page_body %}
     <section id="container">
       <header class="header black-bg">
@@ -44,16 +44,28 @@
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                         <i class="fa fa-cloud-upload"></i>
+                         <span id="badge_uploads" class="badge bg-theme" data-count="{{ pending_uploads|length }}">{{ pending_uploads|length }}</span>
                     </a>
+                      <ul class="dropdown-menu extended tasks-bar uploads-list">
+                        <div class="notify-arrow notify-arrow-green"></div>
+                        <li>
+                            <p class="green">You have {{ pending_uploads|length }} pending upload{{ pending_uploads|pluralize }}</p>
+                        </li>
+                        {% for vid in pending_uploads %}
+                          {% include "dashboard/snippets/pending_upload.html" %}
+                        {% endfor %}
+                      </ul>
                 </li>
                 <li id="header_inbox_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                         <i class="fa fa-comments-o"></i>
+                         <span id="badge_comments" class="badge bg-warning" data-count="0">0</span>
                     </a>
                 </li>
                 <li id="header_notification_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                         <i class="fa fa-bell-o"></i>
+                         <span id="badge_info" class="badge bg-warning" data-count="0">0</span>
                     </a>
                 </li>
               </ul>

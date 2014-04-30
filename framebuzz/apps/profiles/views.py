@@ -15,6 +15,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.timesince import timesince
 
 from actstream import action
 from actstream.models import Action, followers, following
@@ -456,11 +457,14 @@ def upload_video(request, username):
         success = form.is_valid()
 
         if success:
-            form.save()
+            vid = form.save()
             success = True
             if request.user.get_profile().dashboard_enabled:
-                return HttpResponseRedirect(
-                    reverse('dashboard-home', args=[request.user.username, ]))
+                return render_to_response(
+                    'dashboard/snippets/pending_upload.html', {
+                        'vid': vid,
+                    },
+                    context_instance=RequestContext(request))
             else:
                 return HttpResponse(200)
     else:

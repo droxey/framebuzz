@@ -147,6 +147,7 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.i18n',
     'django.core.context_processors.request',
     'django.core.context_processors.media',
+    'django.contrib.messages.context_processors.messages',
 
     'django_mobile.context_processors.flavour',
 
@@ -189,6 +190,8 @@ AUTHENTICATION_BACKENDS = (
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+MESSAGE_STORAGE = 'stored_messages.storage.PersistentStorage'
 
 SESSION_ENGINE = 'redis_sessions.session'
 
@@ -240,6 +243,7 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'robots',
+    'stored_messages',
 
     # FrameBuzz Apps
     'framebuzz.apps.api',
