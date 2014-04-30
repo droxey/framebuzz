@@ -448,6 +448,14 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
             urlize(self.comment, trim_url_limit=None, nofollow=True)
             .replace('<a ', '<a target="_blank" '))
 
+    @property
+    def has_dashboard_reply(self):
+        if not self.parent:
+            for comment in self.get_children():
+                if comment.user.get_profile().dashboard_enabled:
+                    return True
+        return False
+
     def get_thread_siblings(self):
         if not self.parent:
             start = int(self.time)

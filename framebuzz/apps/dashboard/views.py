@@ -9,8 +9,8 @@ from django.template import RequestContext
 
 from actstream.models import Action
 
-from framebuzz.apps.api.models import UserProfile, Video, UserVideo, MPTTComment
-from framebuzz.apps.profiles.forms import AddVideoForm, UploadVideoForm
+from framebuzz.apps.api.forms import MPTTCommentForm
+from framebuzz.apps.api.models import Video, UserVideo, MPTTComment
 from framebuzz.apps.dashboard.decorators import require_dashboard
 
 VALID_FEED_VERBS = ['commented on', 'replied to comment',
@@ -101,10 +101,12 @@ def video_details(request, slug):
     plays = len(Action.objects.filter(verb='played video',
                                       action_object_object_id=video.id))
 
-    unread_comments = MPTTComment.objects.filter(object_pk=video.id,
-                                                 is_public=True,
-                                                 is_removed=False,
-                                                 is_read=False)[:10]
+    unread_comments = MPTTComment.objects.filter(
+        object_pk=video.id,
+        is_public=True,
+        is_removed=False,
+        is_read=False,
+        parent=None).order_by('-submit_date')[:5]
 
     return render_to_response('dashboard/snippets/video_details.html', {
         'video': video,
@@ -118,3 +120,46 @@ def dashboard_login(request):
     return render_to_response('dashboard/login.html', {
     }, context_instance=RequestContext(request))
 
+
+@require_dashboard
+def post_comment_reply(request, slug):
+    comment = None
+    video = Video.objects.get(slug=slug)
+
+    if request.method == 'POST':
+        comment_form = MPTTCommentForm(video, data=request.POST)
+
+        if comment_form.is_valid():
+            data = comment_form.get_comment_create_data()
+            data['user'] = request.user
+            comment = MPTTComment(**data)
+            comment.save()
+
+            comment.parent.is_read = True
+            comment.parent.save()
+        else:
+            print comment_form.errors
+
+    return render_to_response('dashboard/snippets/comments/list_item.html', {
+        'com': comment.parent,
+    }, context_instance=RequestContext(request))
+
+
+@require_dashboard
+def mark_comment_read(request, comment_id):
+    comment = MPTTComment.objects.get(id=comment_id)
+    comment.is_read = True
+    comment.save()
+
+    return render_to_response('dashboard/snippets/comments/list_item.html', {
+        'com': comment,
+    }, context_instance=RequestContext(request))
+
+
+@require_dashboard
+def delete_comment(request, comment_id):
+    comment = MPTTComment.objects.get(id=comment_id)
+    comment.is_removed = True
+    comment.save()
+
+    return HttpResponse(200)

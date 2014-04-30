@@ -53,50 +53,7 @@
 {% endblock %}
 
 {% block page_javascript %} 
-  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>   
-
   {% compress js %}
-  <script src="{% static 'framebuzz/dashboard/theme/assets/js/tasks.js' %}" type="text/javascript"></script>
-  <script type="text/javascript">
-      $(function() {
-        $('.lazy-load').lazyLoadXT();
-
-        $(document).on('click', 'div.video-panel', function(e) {
-            var inline = $(this).parent().next('div.inline-modal');
-            var url = $(this).attr('data-remote');
-            var title = $(this).attr('data-title');
-            var slug = $(this).attr('data-slug');
-
-            $('.inline-modal.active').hide().removeClass('active');
-            $('div.video-panel .title').removeClass('selected');
-            $(this).find('.title').addClass('selected');
-
-            inline.find('.video-title').html(title);
-
-            inline.slideDown('fast', function() {
-                $(document).scrollTo('#' + slug, 300, {
-                    onAfter: function() {
-                        $.get(url, function(html) {
-                                
-                            inline.addClass('active');
-                            inline.find('.inner-content').html(html);
-                            inline.find('.iframe-wrapper > iframe').lazyLoadXT();
-
-                            TaskList.initTaskWidget();
-                        });
-                    }
-                });
-            });
-        });
-
-        $(document).on('click', 'a.inline-close', function(e) {
-            e.preventDefault();
-
-            $(this).parent().parent().parent().parent().hide('fast');
-
-            return false;
-        });
-      });
-  </script>
+    <script src="{% static 'framebuzz/dashboard/js/dashboard.videos.js' %}" type="text/javascript"></script>
   {% endcompress %}
 {% endblock %}

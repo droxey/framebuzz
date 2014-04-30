@@ -122,6 +122,156 @@ div.comments-row {
         opacity: 1;
       }
    }
+
+   .task-content { margin-bottom: 0; }
+
+    .ui-sortable li {
+        cursor: pointer;
+        margin-bottom: 0;
+        padding: 15px 0 15px 10px !important;
+
+        &.active {
+            background: #f9f9f9;
+        }
+
+        .task-title {
+            .badge { opacity: 1; }
+            
+            .task-title-sp {
+                i {
+                    font-size: 18px;
+                }
+            }
+        }
+
+        &.list-primary {
+            .task-title .task-title-sp i {
+                color: #41CAC0;
+            }
+        }
+
+        &.list-danger {
+            .task-title .task-title-sp i {
+                color: #FF6C60;
+            }            
+        }
+
+        &.list-warning {
+             .task-title .task-title-sp i {
+                color: #F1C500;
+            }           
+        }
+
+        &.list-success {
+             .task-title .task-title-sp i {
+                color: #78CD51;
+            }           
+        }
+
+        &.list-info {
+             .task-title .task-title-sp i {
+                color: #58C9F3;
+            }           
+        }
+    }
+
+    div.reply {
+        background: #EEE;
+        margin-left: 0;
+        margin-right: 0;
+
+        div.reply-container {
+            padding-left: 0;
+            padding-right: 0;
+
+            form {
+                div.form-group {
+                    padding-left: 0;
+                    padding-right: 0;
+                    position: relative;
+
+                    .input-group-addon {
+                        @include border-radius(0px, 0px);
+                        border: none;
+                        border-left: 3px solid #CCC;
+                        color: #797979;
+                        font-size: 13px;
+
+                        i {
+                            font-size: 18px;
+                        }
+                    }
+
+                    input.form-control {
+                        margin-top: 6px;
+                        margin-bottom: 6px;
+                    }
+
+                    .btn-clear-form {
+                        padding: 2px 5px;
+                        position: absolute;
+                        right: 10px;
+                        top: 14px;
+                        z-index: 10;
+                    }
+                }
+
+                .btn-submit-reply {
+                    margin-top: 6px;
+                }
+
+                &.list-primary {
+                    div.form-group .input-group-addon {
+                        border-left: 3px solid #41CAC0;
+
+                        i {
+                            color: #41CAC0;
+                        }
+                    }
+                }
+
+                &.list-danger {
+                    div.form-group .input-group-addon {
+                        border-left: 3px solid #FF6C60;
+                        
+                        i {
+                            color: #FF6C60;
+                        }
+                    }        
+                }
+
+                &.list-warning {
+                    div.form-group .input-group-addon {
+                        border-left: 3px solid #F1C500;
+                        
+                        i {
+                            color: #F1C500;
+                        }
+                    }          
+                }
+
+                &.list-success {
+                    div.form-group .input-group-addon {
+                        border-left: 3px solid #78CD51;
+                        
+                        i {
+                            color: #78CD51;
+                        }
+                    }             
+                }
+
+                &.list-info {
+                    div.form-group .input-group-addon {
+                        border-left: 3px solid #58C9F3;
+                        
+                        i {
+                            color: #58C9F3;
+                        }
+                    }                  
+                }
+            }
+        }
+    }
 }
 
 .video-panel {

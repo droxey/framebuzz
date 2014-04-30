@@ -1,7 +1,7 @@
 {% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags %}
 
 <!DOCTYPE html>
-<html lang="en" ng-app="messagesApp">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-controller="MainCtrl">
+  <body>
   {% block page_body %}
     <section id="container">
       <header class="header black-bg">
@@ -48,12 +48,7 @@
                     </a>
                       <ul class="dropdown-menu extended tasks-bar uploads-list">
                         <div class="notify-arrow notify-arrow-green"></div>
-                        <li>
-                            <p class="green">You have {{ pending_uploads|length }} pending upload{{ pending_uploads|pluralize }}</p>
-                        </li>
-                        {% for vid in pending_uploads %}
-                          {% include "dashboard/snippets/pending_upload.html" %}
-                        {% endfor %}
+                        {% include "dashboard/snippets/pending_upload.html" %}
                       </ul>
                 </li>
                 <li id="header_inbox_bar" class="dropdown">
@@ -145,13 +140,9 @@
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/lazy-load-xt/jquery.lazyloadxt.extra.min.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/common-scripts.js' %}"></script>
     <script src="{% static 'framebuzz/profiles/vendor/jquery/jquery.placeholder.js' %}"></script>
-    <script src="{% static 'framebuzz/profiles/js/framebuzz.profiles.js' %}"></script>
+    <script type="text/javascript" src="{% static 'framebuzz/dashboard/theme/assets/js/gritter/js/jquery.gritter.js' %}"></script>
+    <script type="text/javascript" src="{% static 'framebuzz/dashboard/theme/assets/js/gritter-conf.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/js/dashboard.uploads.js' %}"></script>
-    <script type="text/javascript">
-      $(function() {
-        FrameBuzzProfile.init(true, false, { }, false);
-      });
-    </script>
   {% endcompress %}
   {% block page_javascript %}{% endblock %}
   <script>

@@ -4,6 +4,7 @@ import lxml.html as lh
 
 from actstream.models import Action
 from django.conf import settings
+from django.db.models import Q
 
 from framebuzz.apps.api.models import Video
 
@@ -35,13 +36,6 @@ def get_client_ip(request):
 
 
 def errors_to_json(errors):
-    """
-    Convert a Form error list to JSON::
-        >>> f = SomeForm(...)
-        >>> errors_to_json(f.errors)
-        {'field': ['This field is required']}
-    """
-    # Force error strings to be un-lazied.
     return json.dumps(
         dict(
             (k, map(unicode, v))
@@ -97,3 +91,11 @@ def get_total_shares(path):
                                              action_object_object_id=video.id)
         final = final + len(email_shares)
     return final
+
+
+def get_pending_uploads(username):
+    pending_uploads = Video.objects.exclude(
+        Q(Q(fp_url=None) | Q(job_id=None))).filter(
+            added_by__username=username,
+            processing=True)
+    return pending_uploads

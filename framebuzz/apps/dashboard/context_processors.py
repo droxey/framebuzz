@@ -1,16 +1,12 @@
-from django.db.models import Q
-
-from framebuzz.apps.api.models import Video
 from framebuzz.apps.profiles.forms import AddVideoForm, UploadVideoForm
+from framebuzz.apps.api.utils import get_pending_uploads
 
 
 def dashboard(request):
     if request.user.is_authenticated():
         form = AddVideoForm(request=request)
         upload_form = UploadVideoForm(request=request)
-        pending_uploads = Video.objects.exclude(
-            Q(Q(fp_url=None) | Q(job_id=None))).filter(
-                added_by=request.user, processing=True)
+        pending_uploads = get_pending_uploads(request.user.username)
 
         return {
             'form': form,
@@ -18,4 +14,4 @@ def dashboard(request):
             'upload_form': upload_form,
         }
     else:
-        return { }
+        return {}

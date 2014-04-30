@@ -25,7 +25,7 @@ from templated_email import send_templated_mail
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video, PrivateSession, SessionInvitation
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.api.backends.tasks import check_zencoder_progress
-from framebuzz.apps.api.utils import get_total_shares
+from framebuzz.apps.api.utils import get_total_shares, get_pending_uploads
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm, UploadVideoForm
 
 
@@ -310,9 +310,7 @@ def home(request, username):
 
     pending_uploads = []
     if is_my_profile:
-        pending_uploads = Video.objects.exclude(
-            Q(Q(fp_url=None) | Q(job_id=None))).filter(
-            added_by=request.user, processing=True)
+        pending_uploads = get_pending_uploads(request.user.username)
 
     context = {
         'profile_favorites': profile_favorites,
@@ -460,9 +458,12 @@ def upload_video(request, username):
             vid = form.save()
             success = True
             if request.user.get_profile().dashboard_enabled:
+                context = RequestContext(request)
+                pending_uploads = get_pending_uploads(request.user.username)
+                print 'PENDING: %s' % pending_uploads
                 return render_to_response(
                     'dashboard/snippets/pending_upload.html', {
-                        'vid': vid,
+                        'pending_uploads': pending_uploads,
                     },
                     context_instance=RequestContext(request))
             else:

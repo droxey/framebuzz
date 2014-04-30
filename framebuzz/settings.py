@@ -243,7 +243,7 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'robots',
-    'stored_messages',
+    #'stored_messages',
 
     # FrameBuzz Apps
     'framebuzz.apps.api',

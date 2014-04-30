@@ -1,0 +1,28 @@
+{% load profile_tags %}
+
+<div class="task-title">
+    <span class="task-title-sp">
+        <i class="fa fa-fw fa-comment{% if com.parent %}s{% endif %}"></i>
+        <strong>[@{{ com.timeInHMS }}] {{ com.user|display_name }}: </strong>
+        {{ com.formatted_comment }}
+        {% if com.is_read %}
+            <span class="badge bg-success">Read</span>
+        {% else %}
+            <span class="badge bg-important">Unread</span>
+        {% endif %}
+        {% if com.has_dashboard_reply %}
+            <span class="badge bg-info">Replied</span>
+        {% endif %}
+    </span>
+    <div class="task-buttons pull-right hidden-phone">
+        {% if not com.parent %}
+            {% if not com.is_read %}
+                <button class="btn btn-success btn-xs fa fa-check btn-mark-read tooltips" title="Mark Read" data-url="{% url 'dashboard-comment-read' com.id %}"></button>
+            {% endif %}
+           {% if not com.has_dashboard_reply %}
+                <button class="btn btn-primary btn-xs fa fa-pencil btn-reply tooltips" title="Reply"></button>
+            {% endif %}
+        {% endif %}
+        <button class="btn btn-danger btn-xs fa fa-trash-o btn-delete tooltips" title="Delete" data-url="{% url 'dashboard-comment-delete' com.id %}"></button>
+    </div>
+</div>

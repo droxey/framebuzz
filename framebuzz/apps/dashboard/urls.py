@@ -23,4 +23,13 @@ urlpatterns = patterns(
     url(r'^dashboard/(?P<username>[\w.@+-]+)/settings/$',
         'framebuzz.apps.dashboard.views.dashboard_settings',
         name='dashboard-settings'),
+    url(r'^dashboard/videos/(?P<slug>[\w.@+-]+)/comment/reply/$',
+        'framebuzz.apps.dashboard.views.post_comment_reply',
+        name='dashboard-comment-reply'),
+    url(r'^dashboard/comments/(?P<comment_id>[\d]+)/mark-read/$',
+        'framebuzz.apps.dashboard.views.mark_comment_read',
+        name='dashboard-comment-read'),
+    url(r'^dashboard/comments/(?P<comment_id>[\d]+)/delete/$',
+        'framebuzz.apps.dashboard.views.delete_comment',
+        name='dashboard-comment-delete'),
 )

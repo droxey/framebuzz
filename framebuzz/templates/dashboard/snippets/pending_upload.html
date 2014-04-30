@@ -1,4 +1,8 @@
 <li>
+    <p class="green">You have {{ pending_uploads|length }} pending upload{{ pending_uploads|pluralize }}</p>
+</li>
+{% for vid in pending_uploads %}
+  <li data-job-id="{{ vid.job_id }}">
     <a href="#">
         <div class="task-info">
             <div class="desc">{{ vid.filename }}</div>
@@ -11,3 +15,4 @@
         </div>
     </a>
 </li>
+{% endfor %}

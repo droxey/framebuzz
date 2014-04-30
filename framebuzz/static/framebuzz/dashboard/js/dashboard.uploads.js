@@ -27,8 +27,12 @@ $(function() {
     };
 
     var progress = function(percent, $element) {
-        var progressBarWidth = percent * $element.width() / 100;
-        $element.find('div').animate({ width: progressBarWidth }, 500).html(percent + "%&nbsp;");
+        $element.attr('data-percentage', percent);
+        $element.animate({ width: percent + '%' }, 500);
+
+        $element.parent().parent().find('.percent-text').text(percent + '%');
+
+        console.log( $element.find('.percent-text'));
     };
 
     function youtube_parser(url){
@@ -49,43 +53,43 @@ $(function() {
         // Queue the AJAX calls properly.
         var deferreds = [];
 
-        // $('#uploads-table tr').not('.complete').each(function(key, value) {
-        //   var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=e9d23782542efd39f402fc40a7b4edaf';
-        //   // test: var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=75e13910e393a6ccafc1a3272f3a6a48';
-        //   var row = $(this);
+        $('ul.uploads-list li').not('.complete').each(function(key, value) {
+          //var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=e9d23782542efd39f402fc40a7b4edaf';
+           //test: 
+          var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=75e13910e393a6ccafc1a3272f3a6a48';
+          var row = $(this);
 
-        //   deferreds.push(
-        //     $.ajax({
-        //         url: url,
-        //         type: 'GET',
-        //         dataType: 'json',
-        //         success: function(data) {
-        //           var progressBar = row.find('div.progress-bar');
+          deferreds.push(
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                  var progressBar = row.find('div.progress-bar');
+                  var percent = Math.round(parseFloat(data['progress'], 0));
 
-        //           if (data['state'] == 'processing') {
-        //             progressBar.attr('data-percentage', data['progress']);
-        //             progress(data['progress'], progressBar);
-        //           }
-        //           else {
-        //             if (data['state'] == 'finished') {
-        //               progressBar.attr('data-percentage', '100');
-        //               progress(100, progressBar);
+                  if (data['state'] == 'processing') {
+                    progress(percent, progressBar); 
+                  }
+                  else {
+                    if (data['state'] == 'finished') {
+                      progress(100, progressBar);
 
-        //               row.addClass('complete');
-        //               currentCount = currentCount - 1;
+                      row.addClass('complete');
+                      currentCount = currentCount - 1;
 
-        //               row.find('a.video-link').addClass('finished');
-        //               row.find('i.fa-film').addClass('i.fa-play-circle');
-        //               row.find('i.fa-film').removeClass('i.fa-film');
-        //             }
-        //           }
-        //         },
-        //         error: function(data) {
+                      row.find('a.video-link').addClass('finished');
+                      row.find('i.fa-film').addClass('i.fa-play-circle');
+                      row.find('i.fa-film').removeClass('i.fa-film');
+                    }
+                  }
+                },
+                error: function(data) {
 
-        //         }
-        //     })
-        //   );
-        //});
+                }
+            })
+          );
+        });
 
         // All AJAX calls complete.
         $.when.apply($, deferreds).done(function() {
@@ -198,6 +202,7 @@ $(function() {
       var data = $(this).serialize();
 
       $.post(url, data, function(response) {
+        $('ul.uploads-list li').remove();
         $('ul.uploads-list').append(response);
 
         var currentCount = parseInt(uploadBadge.text());
@@ -208,6 +213,8 @@ $(function() {
         else {
           uploadBadge.text(currentCount + 1);
         }
+
+        resetForm();
       });
 
       return false;
