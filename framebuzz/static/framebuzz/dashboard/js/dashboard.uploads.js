@@ -1,5 +1,5 @@
 $(function() {
-    var addVideoDiv = $('#add-video');
+    var addVideoDiv = $('#upload-video');
         selectedTabIndicator = $('ul.nav-tabs li.indicator', addVideoDiv),
         dropPaneDiv = $('#upload-drop-pane > div > div'),
         dropResultDiv = $("#drop-result-bar"),
@@ -8,7 +8,8 @@ $(function() {
         hasError = false,
         baseUrl = 'https://app.zencoder.com/api/v2/jobs/',
         checkJobsInterval = null,
-        finishedUploads = [];
+        finishedUploads = []
+        video_id = null;
 
     var resetForm = function() {
         $('ul.nav-tabs li', addVideoDiv).removeClass('active');
@@ -43,6 +44,17 @@ $(function() {
         $(window).trigger('resize'); // re-inits the timeline.
       });
     };
+
+    function youtube_parser(url){
+      var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+      var match = url.match(regExp);
+      if (match&&match[7].length==11){
+          return match[7];
+      } else{
+          $('#id_video_id').val('');
+          $('#id_video_id').attr('placeholder', "This doesn't seem to be a YouTube URL! Please try again.");
+      }
+    }
 
     function checkZencoderJobs() {
       // Check status of uploads dynamically if we still have some pending
@@ -195,5 +207,36 @@ $(function() {
       });
 
       return false;
+    });
+
+
+    // Youtube Video textbox blur event.
+    $('body').on('blur', '#id_video_id', function() {
+        var url = $(this).val();
+
+        if (url.length > 0) {
+            video_id = youtube_parser(url);
+        }
+    });
+
+
+    // Youtube Video submit button.
+    $('body').on('submit', '#add-video-form', function(e) {
+        video_id = youtube_parser($('#id_video_id').val());
+
+        if (video_id !== null) {
+            var postUrl = $(this).attr('action');
+            var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+            $.post(postUrl, {
+                'video_id': video_id, 
+                'is_featured': 'false',
+                'csrfmiddlewaretoken': csrfToken
+            }, function(data, textStatus, jqXHR) {
+                console.log(data);
+            });
+        }
+
+        return false;
     });
 });
