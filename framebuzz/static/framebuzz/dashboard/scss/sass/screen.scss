@@ -2,7 +2,7 @@
 @import "compass/css3/border-radius";
 
 body {
-    background-color: #F6F4F0;
+    background-color: #ffffff;
 }
 
 ul.top-menu > li > .logout {
@@ -94,7 +94,7 @@ section.upload-wrapper {
 
 
 section.home-wrapper {
-    margin-top: -22px;
+    margin-top: -20px;
 }
 
 section.stats {
@@ -126,7 +126,8 @@ div.comments-row {
     }
 
     .content-panel {
-        background: white;
+        background: rgba(0, 0, 0, 0.7);
+        color: rgba(255, 255, 255, 0.9);
         height: auto;
         padding-top: 0;
 
@@ -230,30 +231,44 @@ div.project {
         }
     }
 
-    .tabs-wrapper {
-        ul {
-            li {
-                a { color: #666; }
-            }
-        }
-    }
-
     #add-video-tabs {
         background: transparent;
         border-bottom: none;
+        width: auto;
+    }
 
-        a {
-            color: white;
-        }
-        //width: 87.333%;
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:hover,
+    .nav-tabs > li.active > a:focus,
+    .nav-tabs > li > a:hover,
+    .nav-tabs > li > a:focus,
+    .nav-tabs > li > a {
+        @include border-radius(0px, 0px);
+        background: #B83234;
+        border: none;
+        border-top: 5px solid transparent;
+        color: white;
+        padding: 5px 15px 10px 15px;
+    }
+
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:hover,
+    .nav-tabs > li.active > a:focus,
+    .nav-tabs > li > a:hover,
+    .nav-tabs > li > a:focus {
+        background: #F6F4F0;
+        border-top: 7px solid #DADAD5;
+        color: #888;
     }
 
     .tab-content {
         position: absolute;
+        left: -15px;
         z-index: 100;
 
         .tab-pane {
-            background: #FFFFFF;
+            background: #F6F4F0;
+            box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
         }
 
         div.drop-pane-row {
@@ -271,15 +286,15 @@ div.project {
             }
 
             #upload-drop-pane > div > div {
-                background-color: #F0F0F0 !important;
-                border: 2px dashed #D8D8D8 !important;
+                background-color: #ECEBE5 !important;
+                border: 2px dashed #DADAD5 !important;
                 color: #888 !important;
                 float: left !important;
                 font-size: 0.9em !important;
                 margin: 0 0 0 5px !important;
                 padding: 4px 0 !important;
                 text-align: center !important;
-                width: 83.7% !important;
+                width: 84.2% !important;
                 height: 100%;
                 line-height: 18px !important;
             }
@@ -308,7 +323,7 @@ div.project {
                     padding: 0;
 
                     input, textarea {
-                        border: 1px solid #CCCCCC;
+                        border: 1px solid #DADAD5;
                         color: #666;
                         padding: 3px 5px;
                         width: 100%;
