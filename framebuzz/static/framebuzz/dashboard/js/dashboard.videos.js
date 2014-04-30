@@ -67,9 +67,15 @@ $(function() {
                     $.get(url, function(html) {
                         inline.addClass('active');
                         inline.find('.inner-content').html(html);
-                        inline.find('.iframe-wrapper > iframe').lazyLoadXT();
+
+                        // Activate tabs.
+                        $('#modal-tabs', inline).tab();
+                        $('#modal-tabs a[href="#video-details"]', inline).tab('show');
 
                         $('.tooltips', inline).tooltip();
+
+                        inline.find('.iframe-wrapper > iframe').removeClass('hidden');
+                        inline.find('.iframe-wrapper > iframe').lazyLoadXT();
                     });
                 }
             });
@@ -79,7 +85,7 @@ $(function() {
     // Close video panel.
     $(document).on('click', 'a.inline-close', function(e) {
         e.preventDefault();
-        $(this).parent().parent().parent().parent().hide('fast');
+        $(this).parent().parent().parent().parent().parent().hide('fast');
         return false;
     });
 

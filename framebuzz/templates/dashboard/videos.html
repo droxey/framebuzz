@@ -17,31 +17,32 @@
                     {% for video in group %}
                         <div class="col-lg-4 col-md-4 col-sm-4 mb video-panel" data-remote="{% url 'dashboard-video-details' video.slug %}" data-title="{{ video.title|title }}" data-slug="{{ video.slug }}">
                             <div class="content-panel pn">
-                                <div class="panel-bkg">
-                                    <img class="cover lazy-load img-responsive" src="{{ video.poster_image }}">
+                                <div class="panel-bkg" style="background: url('{{ video.default_thumbnail }}') no-repeat center top; background-position: center center; background-size: cover;">
                                 </div>
                                 <div class="pr2-social" id="{{ video.slug }}">
                                     <h5><strong class="title">{{ video.title|title|truncatechars:"55" }} <i class="fa fa-chevron-right pull-right"></i></strong></h5>
                                 </div>
-                            </div><!-- --/panel ---->
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
-                <div class="row mt inline-modal">
-                    <div class="col-xs-12 inline-modal-content">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h3 class="video-title pull-left"></h3>
-                                <a class="inline-close pull-right" href="#" rel="close">
-                                    <i class="fa fa-times"></i>
-                                </a>
+                <div class="row content-panel inline-modal">
+                    <div class="panel-heading">
+                        <div class="row row-modal-title">
+                            <div class="col-md-12">
+                                <h3 class="clearfix">
+                                    <strong class="video-title pull-left"></strong>
+                                    <a class="inline-close pull-right" href="#" rel="close">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </h3>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 inner-content">
-                                <div class="ajax-indicator-row text-center">
-                                    <i class="fa fa-4x fa-cog fa-spin ajax-indicator"></i>
-                                </div>
+                    </div>                           
+                    <div class="panel-body inline-modal-content">
+                        <div class="inner-content">
+                            <div class="ajax-indicator-row text-center">
+                                <i class="fa fa-4x fa-cog fa-spin ajax-indicator"></i>
                             </div>
                         </div>
                     </div>

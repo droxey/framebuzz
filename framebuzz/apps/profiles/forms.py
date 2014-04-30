@@ -81,10 +81,12 @@ class UploadVideoForm(forms.ModelForm):
         print self.request.user.username
         super(UploadVideoForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget = forms.TextInput(attrs={
-            'placeholder': 'Enter video title...'
+            'placeholder': 'Enter video title...',
+            'class': 'form-control'
         })
         self.fields['description'].widget = forms.Textarea(attrs={
-            'placeholder': 'Enter a description for the video...'
+            'placeholder': 'Enter a description for the video...',
+            'class': 'form-control'
         })
 
         self.fields['fpfile'].widget.attrs['data-fp-mimetypes'] = ''

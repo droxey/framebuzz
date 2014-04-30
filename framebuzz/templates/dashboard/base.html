@@ -16,6 +16,7 @@
       <link href="{% static 'framebuzz/dashboard/theme/assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
       <link href="{% static 'framebuzz/dashboard/theme/assets/css/style.css' %}" rel="stylesheet">
       <link href="{% static 'framebuzz/dashboard/theme/assets/css/style-responsive.css' %}" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="{% static 'framebuzz/dashboard/theme/assets/js/gritter/css/jquery.gritter.css' %}">
       <link href="{% static 'framebuzz/dashboard/scss/stylesheets/screen.css' %}" rel="stylesheet">
     {% endcompress %}
     {% block page_header %}{% endblock %}
@@ -92,20 +93,6 @@
                         <span>Videos</span>
                     </a>
                 </li>
-                {% comment %}
-                <li class="sub-menu">
-                    <a href="{% url 'dashboard-comments' request.user.username %}">
-                        <i class="fa fa-comments-o"></i>
-                        <span>Comments</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="{% url 'dashboard-settings' request.user.username %}">
-                        <i class="fa fa-cog"></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-                {% endcomment %}
             </ul>
           </div>
         </aside>

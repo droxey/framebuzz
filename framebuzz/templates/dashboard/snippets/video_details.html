@@ -1,67 +1,114 @@
 {% load staticfiles profile_tags comments %}
 
+
 <div class="row">
-    <div class="col-xs-6 iframe-wrapper">
-        {% comment %}
-        <iframe class="video-iframe" data-src="{% url 'video-embed' video.slug %}" scrolling="no" frameBorder="0" height="445" width="700"></iframe>
-        {% endcomment %}
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 iframe-wrapper">
+        <iframe class="video-iframe hidden" data-src="{% url 'video-embed' video.slug %}" scrolling="no" frameBorder="0" height="405" width="640"></iframe>
     </div>
-    <div class="col-xs-6">
-        <section class="task-panel tasks-widget col-xs-12">
-            <div class="panel-heading">
-                <div class="pull-left"><h5><i class="fa fa-list"></i> Video Details</h5></div>
-                <br>
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-right">
+        <div class="row row-modal-tabs">
+            <div class="col-md-12 modal-tab-container">
+                <ul id="modal-tabs" class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#video-details">Video Details</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#video-comments" class="contact-map">Viewer Comments</a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#video-stats">Statistics</a>
+                    </li>
+                </ul>
             </div>
-              <div class="panel-body">
-                  <div class="task-content">
-                    {% if video.added_by %}
-                        <div class="row">
-                            <div class="col-xs-2"><strong>Uploaded By</strong></div>
-                            <div class="col-xs-10">
-                                <p>{{ video.added_by|display_name }}</p>
+        </div>
+        <div class="row tab-content">
+            <div id="video-details" class="tab-pane active">
+                <table class="table table-hover">                              
+                  <tbody>
+                      {% if video.added_by %}
+                      <tr>
+                          <td class="first"><strong>Uploaded By</strong></td>
+                          <td class="first">{{ video.added_by|display_name }}</td>
+                      </tr>
+                      {% endif %}
+                      <tr>
+                          <td{% if not video.added_by %} class="first"{% endif %}><strong>{% if video.added_by %}Uploaded{% else %}Added{% endif %} On</strong></td>
+                          <td{% if not video.added_by %} class="first"{% endif %}>{{ video.added_on }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Duration</strong></td>
+                          <td>{{ video.timeInHMS }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Description</strong></td>
+                          <td>{% if video.description.length > 0 %}{{ video.formatted_description }}{% else %}<i>No description available.</i>{% endif %}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Public</strong></td>
+                          <td>{{ video.public|yesno|title }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Embed Code</strong></td>
+                          <td><textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.embed_code }}</textarea></td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+            <div id="video-comments" class="tab-pane">
+            <div class="comments-row row mt">
+                <section>
+                    <div class="panel-heading">
+                        <div class="pull-left"><h5><i class="fa fa-comments"></i> Unread Comments</h5></div>
+                        <br>
+                    </div>
+                    <div class="panel-body">
+                        <div class="task-content">
+                            {% if unread_comments|length > 0 %}
+                                <ul class="task-list ui-sortable">
+                                {% for com in unread_comments %}
+                                    <li class="list-item list-{% if forloop.counter == 1 %}primary{% elif forloop.counter == 2 %}danger{% elif forloop.counter == 3 %}success{% elif forloop.counter == 4 %}warning{% else %}info{% endif %}"
+                                        data-parent="{{ com.id }}" 
+                                        data-time="{{ com.time }}" 
+                                        data-time-display="{{ com.timeInHMS }}" 
+                                        data-commenter="{{ com.user|display_name }}" 
+                                        data-reply-url="{% url 'dashboard-comment-reply' com.content_object.slug %}"
+                                        data-class="list-{% if forloop.counter == 1 %}primary{% elif forloop.counter == 2 %}danger{% elif forloop.counter == 3 %}success{% elif forloop.counter == 4 %}warning{% else %}info{% endif %}"
+                                        data-object-pk="{{ com.object_pk }}"
+                                        data-content-type="{{ com.content_type }}">
+                                        {% include "dashboard/snippets/comments/list_item.html" %}
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                            <div class="row reply">
+                                <div class="col-md-12 reply-container">
+                                    <form class="form-inline comment-reply-form" action="" method="post">
+                                        {% csrf_token %}
+                                        <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot"></p>
+                                        <input type="hidden" name="parent">
+                                        <input type="hidden" name="time">
+                                        <input type="hidden" name="object_pk" val="">
+                                        <input type="hidden" name="content_type" val="">
+                                        <div class="form-group col-md-11">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-fw fa-comments"></i> <strong>[@00:00]</strong></span>    
+                                                <input type="text" name="comment" class="form-control" placeholder="Select a comment to reply..." autocomplete="off" disabled>
+                                                <button class="btn btn-danger btn-xs fa fa-times btn-clear-form tooltips" title="Clear"></button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="submit" class="btn btn-success btn-submit-reply">Post Reply</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    {% endif %}
-                    <div class="row">
-                        <div class="col-xs-2"><strong>{% if video.added_by %}Uploaded{% else %}Added{% endif %} On</strong></div>
-                        <div class="col-xs-10">
-                            <p>{{ video.added_on }}</p>
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-2"><strong>Duration</strong></div>
-                        <div class="col-xs-10">
-                            <p>{{ video.timeInHMS }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-2"><strong>Description</strong></div>
-                        <div class="col-xs-10">
-                            <p>{% if video.description.length > 0 %}{{ video.formatted_description }}{% else %}<i>No description available.</i>{% endif %}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-2"><strong>Public</strong></div>
-                        <div class="col-xs-10">
-                            <p>{{ video.public|yesno|title }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-2"><strong>Embed Code</strong></div>
-                        <div class="col-xs-10">
-                            <textarea style="font-family: monospace; font-size: 12px;" rows="2" cols="74">{{ video.embed_code }}</textarea>
-                        </div>
-                    </div>
-                  </div>
-              </div>
-      </section>
-        <section class="task-panel tasks-widget col-xs-12 stats">
-            <div class="panel-heading">
-                <div class="pull-left"><h5><i class="fa fa-list"></i> Viewer Statistics</h5></div>
-                <br>
+                </section>
             </div>
-              <div class="panel-body">
-                <div class="row">
+            </div>
+            <div id="video-stats" class="tab-pane">
+                <div class="row stats">
                     <div class="col-xs-4 text-center">
                         <i class="fa fa-4x fa-eye"></i>
                         <h5>{{ plays|short_number }} View{{ plays|pluralize }}</h5>
@@ -76,60 +123,7 @@
                         <h5>{{ comment_count|short_number }} Comment{{ comment_count|pluralize }}</h5>
                     </div>
                 </div>
-              </div>
-      </section>
-    </div>
-</div>
-{% if unread_comments|length > 0 %}
-<div class="comments-row row mt">
-    <section class="task-panel tasks-widget col-xs-12">
-        <div class="panel-heading">
-            <div class="pull-left"><h5><i class="fa fa-comments"></i> Unread Comments</h5></div>
-            <br>
-        </div>
-        <div class="panel-body">
-            <div class="task-content">
-                {% if unread_comments|length > 0 %}
-                    <ul class="task-list ui-sortable">
-                    {% for com in unread_comments %}
-                        <li class="list-item list-{% if forloop.counter == 1 %}primary{% elif forloop.counter == 2 %}danger{% elif forloop.counter == 3 %}success{% elif forloop.counter == 4 %}warning{% else %}info{% endif %}"
-                            data-parent="{{ com.id }}" 
-                            data-time="{{ com.time }}" 
-                            data-time-display="{{ com.timeInHMS }}" 
-                            data-commenter="{{ com.user|display_name }}" 
-                            data-reply-url="{% url 'dashboard-comment-reply' com.content_object.slug %}"
-                            data-class="list-{% if forloop.counter == 1 %}primary{% elif forloop.counter == 2 %}danger{% elif forloop.counter == 3 %}success{% elif forloop.counter == 4 %}warning{% else %}info{% endif %}"
-                            data-object-pk="{{ com.object_pk }}"
-                            data-content-type="{{ com.content_type }}">
-                            {% include "dashboard/snippets/comments/list_item.html" %}
-                        </li>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-                <div class="row reply">
-                    <div class="col-md-12 reply-container">
-                        <form class="form-inline comment-reply-form" action="" method="post">
-                            {% csrf_token %}
-                            <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot"></p>
-                            <input type="hidden" name="parent">
-                            <input type="hidden" name="time">
-                            <input type="hidden" name="object_pk" val="">
-                            <input type="hidden" name="content_type" val="">
-                            <div class="form-group col-md-11">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-comments"></i> <strong>[@00:00]</strong></span>    
-                                    <input type="text" name="comment" class="form-control" placeholder="Select a comment to reply..." autocomplete="off" disabled>
-                                    <button class="btn btn-danger btn-xs fa fa-times btn-clear-form tooltips" title="Clear"></button>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <button type="submit" class="btn btn-success btn-submit-reply">Post Reply</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
-{% endif %}

@@ -40,30 +40,76 @@ ul.top-menu > li > .logout {
 }
 
 div.inline-modal {
+    background: #F3F4F6;
+    box-shadow: 0px 0px 10px #AAB2BD inset;
     display: none;
     margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: -15px;
+    margin-right: -15px;
 
-    h3.video-title {
-        font-weight: bold;
-        margin-top: 20px;
+    .panel-heading {
+        padding-bottom: 0;
     }
 
-    a.inline-close {
-        color: #666666;
-        display: block;
-        font-size: 18px;
-        margin-bottom: 10px;
-        margin-top: 15px;
+    div.row-modal-title {
+        padding: 8px 0 13px 0;
 
-        &:hover, &:active, &:visited {
-            color: #333333;
+        h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 25px;
+
+            strong.video-title {
+                color: #5F615E;
+                display: inline-block;
+                font-weight: bold;
+            }
+
+            a.inline-close {
+                color: #5F615E;
+                display: inline-block;
+                font-size: 18px;
+                margin-bottom: 0;
+                margin-top: 0;
+
+                &:hover, &:active, &:visited {
+                    color: #333333;
+                }
+            }
+        }
+    }
+
+    div.row-modal-tabs {
+        div.modal-tab-container {
+            padding-left: 0;
+            padding-right: 0;
+
+            ul.nav-tabs {
+                background: transparent;
+
+                li {
+                    a {
+                        background-color: #EBEBEB;
+                        border-bottom: none;
+                        text-transform: uppercase;
+                    }
+
+                    &.active {
+                        a {
+                            background-color: white;
+                        }
+                    }
+                }
+            }
         }
     }
 
     div.inline-modal-content {
-        background: #D7D7D7;
+        padding-top: 0;
+        padding-bottom: 0;
         position: relative;
-        min-height: 470px;
 
         i.ajax-indicator {
             display: inline-block;
@@ -78,6 +124,16 @@ div.inline-modal {
                 font-size: 16px;
                 font-weight: bold;
             }
+
+            .tab-content { }
+
+            .tab-pane {
+                min-height: 363px;
+                background: white;
+                border-bottom: 1px solid #DDDDDD;
+                border-left: 1px solid #DDDDDD;
+                border-right: 1px solid #DDDDDD;
+            }
         }
     }
 }
@@ -86,9 +142,9 @@ iframe.video-iframe {
     background: #202020;
     border-top: 4px solid #202020;
     border-bottom: 4px solid #202020;
-    margin-top: 4px;
-    height: 445px;
-    width: 700px;
+    height: 402px;
+    width: 648px;
+    margin-bottom: 20px;
 }
 
 section.wrapper {
@@ -109,10 +165,11 @@ section.home-wrapper {
     margin-top: -20px;
 }
 
-section.stats {
-    height: 175px;
-    margin-bottom: 20px;
+div.stats {
+    padding: 15px 0;
 }
+
+ .table > tbody > tr > td.first { border-top: 1px solid transparent; }
 
 div.comments-row {
    margin: 10px 0 20px;
@@ -136,7 +193,7 @@ div.comments-row {
 
         .task-title {
             .badge { opacity: 1; }
-            
+
             .task-title-sp {
                 i {
                     font-size: 18px;
@@ -288,13 +345,13 @@ div.comments-row {
     }
 
     .content-panel {
-        background: rgba(0, 0, 0, 0.7);
+        background: #22242A;
         color: rgba(255, 255, 255, 0.9);
         height: auto;
         padding-top: 0;
 
         .panel-bkg {
-            height: 190px;
+            height: 180px;
             overflow: hidden;
             position: relative;
 
@@ -370,9 +427,12 @@ div.project {
     }
 }
 
-.ds .desc {
-    font-size: 12px;
-    text-align: left;
+.ds {
+    background: #F3F4F6;
+    .desc {
+        font-size: 12px;
+        text-align: left;
+    }
 }
 
 .donut-chart h2 {
@@ -380,7 +440,7 @@ div.project {
 }
 
 #upload-video {
-    background: #B83234;
+    background: #AA1A30;
 
     .tabs-title {
         width: 12.667%;
@@ -402,24 +462,31 @@ div.project {
     .nav-tabs > li.active > a,
     .nav-tabs > li.active > a:hover,
     .nav-tabs > li.active > a:focus,
+    .nav-tabs > li.active > a:active,
     .nav-tabs > li > a:hover,
     .nav-tabs > li > a:focus,
+    .nav-tabs > li > a:active,
     .nav-tabs > li > a {
         @include border-radius(0px, 0px);
-        background: #B83234;
+        background: #AA1A30;
         border: none;
         border-top: 5px solid transparent;
         color: white;
-        padding: 5px 15px 10px 15px;
+        font-size: 14px;
+        font-weight: 300;
+        padding: 5px 15px 10px;
+        margin-right: 0;
     }
 
     .nav-tabs > li.active > a,
     .nav-tabs > li.active > a:hover,
     .nav-tabs > li.active > a:focus,
+    .nav-tabs > li.active > a:active,
     .nav-tabs > li > a:hover,
-    .nav-tabs > li > a:focus {
-        background: #F6F4F0;
-        border-top: 7px solid #DADAD5;
+    .nav-tabs > li > a:focus,
+    .nav-tabs > li > a:active {
+        background: #F3F4F6;
+        border-top: 5px solid #E8E9ED;
         color: #888;
     }
 
@@ -429,7 +496,7 @@ div.project {
         z-index: 100;
 
         .tab-pane {
-            background: #F6F4F0;
+            background: #F3F4F6;
             box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
         }
 
@@ -448,7 +515,7 @@ div.project {
             }
 
             #upload-drop-pane > div > div {
-                background-color: #ECEBE5 !important;
+                background-color: #E8E9ED !important;
                 border: 2px dashed #DADAD5 !important;
                 color: #888 !important;
                 float: left !important;
@@ -485,44 +552,43 @@ div.project {
                     padding: 0;
 
                     input, textarea {
-                        border: 1px solid #DADAD5;
-                        color: #666;
-                        padding: 3px 5px;
+                        font-size: 13px;
+                        color: #888888;
                         width: 100%;
                         @include border-radius(2px, 2px);
 
                         &::-webkit-input-placeholder { /* WebKit browsers */
-                            color:    #666;
+                            color:    #888888;
                             font-weight: 300;
                             font-style: italic;
                         }
 
                         &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-                            color:    #666;
+                            color:    #888888;
                             font-weight: 300;
                             font-style: italic;
                         }
 
                         &::-moz-placeholder { /* Mozilla Firefox 19+ */
-                            color:    #666;
+                            color:    #888888;
                             font-weight: 300;
                             font-style: italic;
                         }
 
                         &:-ms-input-placeholder { /* Internet Explorer 10+ */
-                            color:    #666;
+                            color:    #888888;
                             font-weight: 300;
                             font-style: italic;
                         }
 
                         &.placeholder {
-                            color:    #666;
+                            color:    #888888;
                             font-weight: 300;
                             font-style: italic;
                         }
 
                         &:focus {
-                            border: 1px solid #666;
+                            border: 1px solid #888888;
                             outline: 0;
                         }
 
@@ -567,6 +633,8 @@ div.project {
 
             div.submit-row {
                 margin-top: 15px;
+
+                .col-xs-6 { padding: 0 5px; }
             }
         }
     }
