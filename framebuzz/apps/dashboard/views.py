@@ -19,7 +19,8 @@ VALID_FEED_VERBS = ['commented on', 'replied to comment',
 
 def _get_videos(username):
     user_videos = UserVideo.objects.filter(user__username=username)
-    videos = [uv.video for uv in user_videos]
+    video_ids = [uv.video.id for uv in user_videos]
+    videos = Video.objects.filter(id__in=video_ids).order_by('-added_on')
     return videos
 
 

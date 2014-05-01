@@ -432,8 +432,18 @@ def add_video_to_library(request, username):
         success = form.is_valid()
 
         if success:
-            request.session['show_new_video'] = True
-            return HttpResponse()
+            if request.user.get_profile().dashboard_enabled:
+                video_id = request.POST.get('video_id', None)
+                video = get_or_create_video(video_id)
+                print video[0]
+                return render_to_response(
+                    'dashboard/snippets/video_entry.html', {
+                        'video': video[0],
+                    },
+                    context_instance=RequestContext(request))
+            else:
+                request.session['show_new_video'] = True
+                return HttpResponse()
     else:
         form = AddVideoForm(request=request)
 

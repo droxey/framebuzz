@@ -16,15 +16,7 @@
                 {% for group in videos|group_by:3 %}
                 <div class="row mt">
                     {% for video in group %}
-                        <div class="col-lg-4 col-md-4 col-sm-4 mb video-panel" data-remote="{% url 'dashboard-video-details' video.slug %}" data-title="{{ video.title|title }}" data-slug="{{ video.slug }}">
-                            <div class="content-panel pn">
-                                <div class="panel-bkg" style="background: url('{{ video.default_thumbnail }}') no-repeat center top; background-position: center center; background-size: cover;">
-                                </div>
-                                <div class="pr2-social" id="{{ video.slug }}">
-                                    <h5><strong class="title">{{ video.title|title|truncatechars:"55" }} <i class="fa fa-chevron-right pull-right"></i></strong></h5>
-                                </div>
-                            </div>
-                        </div>
+                        {% include "dashboard/snippets/video_entry.html" %}
                     {% endfor %}
                 </div>
                 <div class="row content-panel inline-modal">

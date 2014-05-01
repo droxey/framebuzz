@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="uploads pull-right">
-                <div id="upload-badge" data-upload-count="{{ pending_uploads|length }}"></div>
+                <div id="upload-badge" data-upload-count="{% comment %}{% if pending_uploads %}{{ pending_uploads|length }}{% else %}0{% endif %}{% endcomment %}"></div>
                 <a href="#pending-uploads" data-toggle="tab">
                     <i class="fa fa-upload fa-fw"></i>
                     <strong>Uploads</strong>

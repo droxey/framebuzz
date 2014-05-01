@@ -236,21 +236,7 @@ $(function() {
                 'is_featured': 'false',
                 'csrfmiddlewaretoken': csrfToken
             }, function(data, textStatus, jqXHR) {
-              console.log(data);
-                $.gritter.add({
-                    // (string | mandatory) the heading of the notification
-                    title: 'Video Added!',
-                    // (string | mandatory) the text inside the notification
-                    text: 'The video you posted is now available.',
-                    // (string | optional) the image to display on the left
-                    image: 'assets/img/ui-sam.jpg',
-                    // (bool | optional) if you want it to fade out on its own or just sit there
-                    sticky: true,
-                    // (int | optional) the time you want it to be alive for before fading out
-                    time: '',
-                    // (string | optional) the class name you want to apply to that specific message
-                    class_name: 'my-sticky-class'
-                });
+                window.location.reload();
             });
         }
 
