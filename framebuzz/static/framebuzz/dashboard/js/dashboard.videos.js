@@ -13,7 +13,7 @@ $(function() {
             containerElement = element.parent().parent();
 
         selectedComment = element;
-        $('table.table-striped tr').removeClass('active');
+        $('table.table-striped tbody tr').removeClass('active');
         element.addClass('active');
 
         var form = containerElement.find('form');
@@ -21,7 +21,7 @@ $(function() {
         form.addClass(replyClass);
 
         form.find('input.form-control').removeAttr('disabled');
-        $('.table tfoot tr td.time').html('<i class="fa fa-fw fa-comments"></i> <strong>[@' + timeDisplay + ']</strong>');
+        $('.table tfoot tr td.time').html('<i class="fa fa-fw fa-comments"></i> <strong>[@' + timeDisplay + '] ' + commenter + '</strong>');
         form.find('input[name="parent"]').val(parent);
         form.find('input[name="time"]').val(time);
         form.find('input[name="comment"]').attr('placeholder', 'Begin typing a reply to ' + commenter + '...');
@@ -137,7 +137,7 @@ $(function() {
     });
 
     // Click comment action.
-    $(document).on('click', 'table.table-striped tr', function(e) {
+    $(document).on('click', 'table.table-striped tbody tr', function(e) {
         selectComment($(this));
     });
 

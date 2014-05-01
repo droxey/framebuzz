@@ -50,10 +50,44 @@ a.thumbnail-link {
     max-width: none;
     margin-bottom: 0;
 
+    tbody {
+        tr {
+            td.time {
+                border-left: 3px solid transparent;
+                
+                padding-right: 0;
+
+                &.has-parent {
+                    border-left: 3px solid rgba(91, 192, 222, 1.0);
+                }
+
+                i.fa-comment {
+                    font-size: 14px;
+                }
+
+                i.fa-comments {
+                    font-size: 14px;
+                    color: rgba(91, 192, 222, 1.0);
+                }
+            }
+
+            &.active {
+
+            }
+        }
+    }
+
     tfoot {
+        position: relative;
+        bottom: 0;
+
         tr {
             td.time {
                 line-height: 34px;
+
+                i.fa-comments {
+                    font-size: 14px;
+                }
             }
         }
     }

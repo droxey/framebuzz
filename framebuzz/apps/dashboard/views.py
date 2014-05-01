@@ -98,16 +98,17 @@ def video_details(request, slug):
     valid_verbs = ['commented on', 'replied to comment']
     actions = Action.objects.filter(verb__in=valid_verbs,
                                     target_object_id=video.id)
+
     action_ids = [a.actor_object_id for a in actions]
     commenters = User.objects.filter(id__in=action_ids)
     plays = len(Action.objects.filter(verb='played video',
                                       action_object_object_id=video.id))
 
     unread_comments = MPTTComment.objects.filter(
-        object_pk=video.id,
-        is_public=True,
-        is_removed=False,
-        parent=None).order_by('-time')
+        Q(object_pk=video.id),
+        Q(is_public=True),
+        Q(is_removed=False),
+        Q(Q(parent=None) | Q(parent__user=request.user))).order_by('time')
 
     return render_to_response('dashboard/snippets/video_details.html', {
         'video': video,

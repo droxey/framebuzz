@@ -52,6 +52,7 @@
                         {% include "dashboard/snippets/pending_upload.html" %}
                       </ul>
                 </li>
+                {% comment %}
                 <li id="header_inbox_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                         <i class="fa fa-comments-o"></i>
@@ -64,6 +65,7 @@
                          <span id="badge_info" class="badge bg-warning" data-count="0">0</span>
                     </a>
                 </li>
+                {% endcomment %}
               </ul>
               <div class="top-menu pull-right">
                 <ul class="nav pull-right top-menu">
@@ -81,13 +83,15 @@
                   </a>
                 </p>
                 <h5 class="centered">{{ request.user|display_name }}</h5>    
+                {% comment %}
                 <li class="mt">
                     <a href="{% url 'dashboard-home' request.user.username %}">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="sub-menu">
+                {% endcomment %}
+                <li class="mt">
                     <a href="{% url 'dashboard-videos' request.user.username %}">
                         <i class="fa fa-video-camera"></i>
                         <span>Videos</span>
