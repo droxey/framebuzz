@@ -21,7 +21,7 @@ $(function() {
         form.addClass(replyClass);
 
         form.find('input.form-control').removeAttr('disabled');
-        form.find('span.input-group-addon').html('<i class="fa fa-fw fa-comments"></i> <strong>[@' + timeDisplay + ']</strong>');
+        $('.table tfoot tr td.time').html('<i class="fa fa-fw fa-comments"></i> <strong>[@' + timeDisplay + ']</strong>');
         form.find('input[name="parent"]').val(parent);
         form.find('input[name="time"]').val(time);
         form.find('input[name="comment"]').attr('placeholder', 'Begin typing a reply to ' + commenter + '...');
@@ -100,7 +100,9 @@ $(function() {
     $(document).on('click', 'button.btn-mark-read', function(e) {
         e.preventDefault();
         
-        var parentElement = $(this).parent().parent().parent();
+        var parentElement = $(this).parent().parent();
+        console.log(parentElement);
+
         var url = $(this).attr('data-url');
 
         $.get(url, function(html) {
@@ -114,7 +116,7 @@ $(function() {
     $(document).on('click', 'button.btn-reply', function(e) {
         e.preventDefault();
 
-        var parentElement = $(this).parent().parent().parent();
+        var parentElement = $(this).parent().parent();
         selectComment(parentElement);
 
         return false;
@@ -124,7 +126,7 @@ $(function() {
     $(document).on('click', 'button.btn-delete', function(e) {
         e.preventDefault();
 
-        var parentElement = $(this).parent().parent().parent();
+        var parentElement = $(this).parent().parent();
         var url = $(this).attr('data-url');
 
         $.get(url, function(html) {

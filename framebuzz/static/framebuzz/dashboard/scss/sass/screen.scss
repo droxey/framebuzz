@@ -48,8 +48,15 @@ a.thumbnail-link {
 
 .table {
     max-width: none;
-    table-layout: fixed;
-    word-wrap: break-word;
+    margin-bottom: 0;
+
+    tfoot {
+        tr {
+            td.time {
+                line-height: 34px;
+            }
+        }
+    }
 }
 
 .logo {
@@ -307,6 +314,14 @@ div.comments-row {
         }
     }
 
+    .btn-clear-form {
+        padding: 2px 5px;
+        position: absolute;
+        right: 10px;
+        top: 14px;
+        z-index: 10;
+    }
+
     div.reply {
         background: #EEE;
         margin-left: 0;
@@ -338,15 +353,9 @@ div.comments-row {
                         margin-top: 6px;
                         margin-bottom: 6px;
                     }
-
-                    .btn-clear-form {
-                        padding: 2px 5px;
-                        position: absolute;
-                        right: 10px;
-                        top: 14px;
-                        z-index: 10;
-                    }
                 }
+
+
 
                 .btn-submit-reply {
                     margin-top: 6px;

@@ -29,6 +29,7 @@
 </div>
 {% endcomment %}
 
+{% if not is_ajax_request %}
 <tr data-parent="{{ com.id }}" 
     data-time="{{ com.time }}" 
     data-time-display="{{ com.timeInHMS }}" 
@@ -37,7 +38,8 @@
     data-class="list-{% if forloop.counter == 1 %}primary{% elif forloop.counter == 2 %}danger{% elif forloop.counter == 3 %}success{% elif forloop.counter == 4 %}warning{% else %}info{% endif %}"
     data-object-pk="{{ com.object_pk }}"
     data-content-type="{{ com.content_type }}">
-    <td class="time"><strong>[@{{ com.timeInHMS }}] {{ com.user|display_name }}</strong></td>
+{% endif %}
+    <td class="time"><strong><i class="fa fa-fw fa-comment"></i> [@{{ com.timeInHMS }}] {{ com.user|display_name }}</strong></td>
     <td class="comment">{{ com.formatted_comment }}</td>
     <td class="status">
         {% if com.is_read %}
@@ -60,4 +62,6 @@
         {% endif %}
         <button class="btn btn-danger btn-xs fa fa-trash-o btn-delete tooltips" title="Delete" data-url="{% url 'dashboard-comment-delete' com.id %}"></button>
     </td>
+{% if not is_ajax_request %}
 </tr>
+{% endif %}

@@ -107,8 +107,7 @@ def video_details(request, slug):
         object_pk=video.id,
         is_public=True,
         is_removed=False,
-        is_read=False,
-        parent=None).order_by('-submit_date')[:5]
+        parent=None).order_by('-time')
 
     return render_to_response('dashboard/snippets/video_details.html', {
         'video': video,
@@ -144,6 +143,7 @@ def post_comment_reply(request, slug):
 
     return render_to_response('dashboard/snippets/comments/list_item.html', {
         'com': comment.parent,
+        'is_ajax_request': request.is_ajax()
     }, context_instance=RequestContext(request))
 
 
@@ -155,6 +155,7 @@ def mark_comment_read(request, comment_id):
 
     return render_to_response('dashboard/snippets/comments/list_item.html', {
         'com': comment,
+        'is_ajax_request': request.is_ajax()
     }, context_instance=RequestContext(request))
 
 

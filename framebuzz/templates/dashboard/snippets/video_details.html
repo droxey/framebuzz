@@ -58,71 +58,38 @@
               </table>
             </div>
             <div id="video-comments" class="tab-pane table-responsive">
-                {% if unread_comments|length > 0 %}
-                    <table class="table table-comments table-striped table-advance table-hover">
-                        <tbody>
-                            {% for com in unread_comments %}
-                                {% include "dashboard/snippets/comments/list_item.html" %}
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                {% else %}
-                    <div class="text-center stats">
-                        <i class="fa fa-4x fa-inbox"></i>
-                        <h5>No unread comments.</h5>
-                    </div>
-                {% endif %}
-                {% comment %}
-                <div class="comments-row row mt">
-                    <section>
-                        <div class="panel-body">
-                            <div class="task-content">
-                                {% if unread_comments|length > 0 %}
-                                    <ul class="task-list ui-sortable">
-                                    {% for com in unread_comments %}
-                                        <li class="list-item"
-                                            data-parent="{{ com.id }}" 
-                                            data-time="{{ com.time }}" 
-                                            data-time-display="{{ com.timeInHMS }}" 
-                                            data-commenter="{{ com.user|display_name }}" 
-                                            data-reply-url="{% url 'dashboard-comment-reply' com.content_object.slug %}"
-                                            data-class="list-{% if forloop.counter == 1 %}primary{% elif forloop.counter == 2 %}danger{% elif forloop.counter == 3 %}success{% elif forloop.counter == 4 %}warning{% else %}info{% endif %}"
-                                            data-object-pk="{{ com.object_pk }}"
-                                            data-content-type="{{ com.content_type }}">
-                                            {% include "dashboard/snippets/comments/list_item.html" %}
-                                        </li>
-                                    {% endfor %}
-                                    </ul>
-                                    <div class="row reply">
-                                        <div class="col-md-12 reply-container">
-                                            <form class="form-inline comment-reply-form" action="" method="post">
-                                                {% csrf_token %}
-                                                <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot"></p>
-                                                <input type="hidden" name="parent">
-                                                <input type="hidden" name="time">
-                                                <input type="hidden" name="object_pk" val="">
-                                                <input type="hidden" name="content_type" val="">
-                                                <div class="form-group col-md-11">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i class="fa fa-fw fa-comments"></i> <strong>[@00:00]</strong></span>    
-                                                        <input type="text" name="comment" class="form-control" placeholder="Select a comment to reply..." autocomplete="off" disabled>
-                                                        <button class="btn btn-danger btn-xs fa fa-times btn-clear-form tooltips" title="Clear"></button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <button type="submit" class="btn btn-success btn-submit-reply">Post Reply</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% else %}
-
-                            {% endif %}
-                        </div>
-                    </section>
-                </div>
-                {% endcomment %}
+              {% if unread_comments|length > 0 %}
+                  <table class="table table-comments table-striped table-advance table-hover">
+                      <tbody>
+                          {% for com in unread_comments %}
+                              {% include "dashboard/snippets/comments/list_item.html" %}
+                          {% endfor %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td class="time"><strong><i class="fa fa-fw fa-comments"></i> [@00:00] {{ request.user|display_name }}</strong></td>
+                          <td class="comment" colspan="3">
+                            <form class="form-inline comment-reply-form" action="" method="post">
+                              {% csrf_token %}
+                              <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot"></p>
+                              <input type="hidden" name="parent">
+                              <input type="hidden" name="time">
+                              <input type="hidden" name="object_pk" val="">
+                              <input type="hidden" name="content_type" val="">
+                              <input type="text" name="comment" class="form-control" placeholder="Select a comment to reply..." autocomplete="off" style="width: 78%; margin-right: 12px;" disabled>
+                              <button type="submit" class="btn btn-success btn-submit-reply">Reply</button>
+                              <button class="btn btn-danger btn-clear-form tooltips">Clear</button>
+                            </form>
+                          </td>
+                        </tr>
+                    </tfoot>
+                  </table>
+              {% else %}
+                  <div class="text-center stats">
+                      <i class="fa fa-4x fa-inbox"></i>
+                      <h5>No unread comments.</h5>
+                  </div>
+              {% endif %}
             </div>
             <div id="video-stats" class="tab-pane">
                 <div class="row stats">
