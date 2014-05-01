@@ -7,27 +7,23 @@ $(function() {
         element.addClass('active');
         selectedComment = element;
 
-        $('table.table-striped tbody tr').removeClass('active');
-        $('table.table-striped tbody tr.form-row').hide('slide', { 'direction': 'up' });;
+        $('table.table-striped tbody tr').removeClass('active', 'open');
+        $('table.table-striped tbody tr.form-row').hide();
 
-        element.next('tr.form-row').show('slide', { 'direction': 'down' }, function() {        
-            var form = containerElement.find('form');
-            form.find('input[name="comment"]').focus();
-        });
+        element.next('tr.form-row').show().addClass('open');
 
-        // Update table.
-        //$('.table tfoot tr td.time').html('<i class="fa fa-fw fa-comments"></i> <strong>[' + timeDisplay + ']' + '</strong>');
-        //$('.table tfoot tr td.user').html('<strong>@' + commenter + '</strong>');
+        var form = containerElement.find('form');
+        form.find('input[name="comment"]').focus();
     };
 
     var clearCommentForm = function(form) {
-        $('tr.active"').hide('slide', { 'direction': 'down' }, function() { 
-            selectedComment = null;
-            $('tr.active').removeClass('active');
+        $('tr.open').hide();
 
-            form.find('input[name="comment"]').val('');
-            form.find('input[name="comment"]').attr('placeholder', 'Select a comment to reply...');
-        });
+        selectedComment = null;
+        $('tr.open').removeClass('open');
+        $('tr.active').removeClass('active');
+
+        form.find('input[name="comment"]').val('');
     };
 
     // Lazy load images.
@@ -83,8 +79,6 @@ $(function() {
         e.preventDefault();
         
         var parentElement = $(this).parent().parent();
-        console.log(parentElement);
-
         var url = $(this).attr('data-url');
 
         $.get(url, function(html) {
@@ -119,7 +113,7 @@ $(function() {
     });
 
     // Click comment action.
-    $(document).on('click', 'table.table-striped tbody tr', function(e) {
+    $(document).on('click', 'table.table-striped tbody tr:not(".form-row")', function(e) {
         selectComment($(this));
     });
 
@@ -143,7 +137,7 @@ $(function() {
     $(document).on('click', 'button.btn-clear-form', function(e) {
         e.preventDefault();
         
-        var form = $(this).parent();
+        var form = $(this).parent().parent();
         clearCommentForm(form);
 
         return false;

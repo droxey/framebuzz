@@ -137,14 +137,16 @@ def post_comment_reply(request, slug):
             comment = MPTTComment(**data)
             comment.save()
 
-            comment.parent.is_read = True
-            comment.parent.save()
+            if comment.parent:
+                comment.parent.is_read = True
+                comment.parent.save()
         else:
             print comment_form.errors
 
     return render_to_response('dashboard/snippets/comments/list_item.html', {
         'com': comment.parent,
-        'is_ajax_request': request.is_ajax()
+        'is_ajax_request': request.is_ajax(),
+        'is_reply': True
     }, context_instance=RequestContext(request))
 
 
@@ -156,7 +158,8 @@ def mark_comment_read(request, comment_id):
 
     return render_to_response('dashboard/snippets/comments/list_item.html', {
         'com': comment,
-        'is_ajax_request': request.is_ajax()
+        'is_ajax_request': request.is_ajax(),
+        'is_reply': False
     }, context_instance=RequestContext(request))
 
 
