@@ -48,6 +48,7 @@ div.inline-modal {
     padding-bottom: 0;
     margin-left: -15px;
     margin-right: -15px;
+    min-height: 360px;
 
     .panel-heading {
         padding-bottom: 0;
@@ -188,55 +189,66 @@ div.comments-row {
       }
    }
 
-   .task-content { margin-bottom: 0; }
-
-    .ui-sortable li {
-        cursor: pointer;
+   .task-content { 
         margin-bottom: 0;
-        padding: 15px 0 15px 10px !important;
+        position: relative;
+    }
 
-        &.active {
-            background: #f9f9f9;
-        }
+    .panel-body {
+        padding: 15px 0;
+    }
 
-        .task-title {
-            .badge { opacity: 1; }
+    .ui-sortable {
+        padding-left: 0;
 
-            .task-title-sp {
-                i {
-                    font-size: 18px;
+        li {
+            cursor: pointer;
+            margin-bottom: 0;
+            padding: 15px 0 15px 10px !important;
+
+            &.active {
+                background: #f9f9f9;
+            }
+
+            .task-title {
+                .badge { opacity: 1; }
+
+                .task-title-sp {
+                    i {
+                        font-size: 18px;
+                    }
                 }
             }
-        }
 
-        &.list-primary {
-            .task-title .task-title-sp i {
-                color: #41CAC0;
+            &.list-primary {
+                .task-title .task-title-sp i {
+                    color: #41CAC0;
+                }
             }
-        }
 
-        &.list-danger {
-            .task-title .task-title-sp i {
-                color: #FF6C60;
-            }            
-        }
+            &.list-danger {
+                .task-title .task-title-sp i {
+                    color: #FF6C60;
+                }            
+            }
 
-        &.list-warning {
-             .task-title .task-title-sp i {
-                color: #F1C500;
-            }           
-        }
+            &.list-warning {
+                 .task-title .task-title-sp i {
+                    color: #F1C500;
+                }           
+            }
 
-        &.list-success {
-             .task-title .task-title-sp i {
-                color: #78CD51;
-            }           
-        }
+            &.list-success {
+                 .task-title .task-title-sp i {
+                    color: #78CD51;
+                }           
+            }
 
-        &.list-info {
-             .task-title .task-title-sp i {
-                color: #58C9F3;
-            }           
+            &.list-info {
+                 .task-title .task-title-sp i {
+                    color: #58C9F3;
+                }           
+            }
         }
     }
 

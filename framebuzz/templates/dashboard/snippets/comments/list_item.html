@@ -1,5 +1,6 @@
 {% load profile_tags %}
 
+{% comment %}
 <div class="task-title">
     <span class="task-title-sp">
         <i class="fa fa-fw fa-comment{% if com.parent %}s{% endif %}"></i>
@@ -26,3 +27,37 @@
         <button class="btn btn-danger btn-xs fa fa-trash-o btn-delete tooltips" title="Delete" data-url="{% url 'dashboard-comment-delete' com.id %}"></button>
     </div>
 </div>
+{% endcomment %}
+
+<tr data-parent="{{ com.id }}" 
+    data-time="{{ com.time }}" 
+    data-time-display="{{ com.timeInHMS }}" 
+    data-commenter="{{ com.user|display_name }}" 
+    data-reply-url="{% url 'dashboard-comment-reply' com.content_object.slug %}"
+    data-class="list-{% if forloop.counter == 1 %}primary{% elif forloop.counter == 2 %}danger{% elif forloop.counter == 3 %}success{% elif forloop.counter == 4 %}warning{% else %}info{% endif %}"
+    data-object-pk="{{ com.object_pk }}"
+    data-content-type="{{ com.content_type }}">
+    <td class="time"><strong>[@{{ com.timeInHMS }}] {{ com.user|display_name }}</strong></td>
+    <td class="comment">{{ com.formatted_comment }}</td>
+    <td class="status">
+        {% if com.is_read %}
+            <span class="label label-success">Read</span>
+        {% else %}
+            <span class="label label-important">Unread</span>
+        {% endif %}
+        {% if com.has_dashboard_reply %}
+            <span class="label label-info">Replied</span>
+        {% endif %}
+    </td>
+    <td>
+        {% if not com.parent %}
+            {% if not com.is_read %}
+                <button class="btn btn-success btn-xs fa fa-check btn-mark-read tooltips" title="Mark Read" data-url="{% url 'dashboard-comment-read' com.id %}"></button>
+            {% endif %}
+           {% if not com.has_dashboard_reply %}
+                <button class="btn btn-primary btn-xs fa fa-pencil btn-reply tooltips" title="Reply"></button>
+            {% endif %}
+        {% endif %}
+        <button class="btn btn-danger btn-xs fa fa-trash-o btn-delete tooltips" title="Delete" data-url="{% url 'dashboard-comment-delete' com.id %}"></button>
+    </td>
+</tr>

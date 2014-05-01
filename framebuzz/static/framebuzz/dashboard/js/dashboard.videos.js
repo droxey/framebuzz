@@ -55,6 +55,8 @@ $(function() {
         var title = $(this).attr('data-title');
         var slug = $(this).attr('data-slug');
 
+        $('.inline-modal.active').find('div.inner-content').html('');
+
         $('.inline-modal.active').hide().removeClass('active');
         $('div.video-panel .title').removeClass('selected');
         $(this).find('.title').addClass('selected');
@@ -85,7 +87,12 @@ $(function() {
     // Close video panel.
     $(document).on('click', 'a.inline-close', function(e) {
         e.preventDefault();
+        
         $(this).parent().parent().parent().parent().parent().hide('fast');
+
+        var wrapperElement = $(this).parent().parent().parent().parent();
+        wrapperElement.find('div.inner-content').html('');
+       
         return false;
     });
 
