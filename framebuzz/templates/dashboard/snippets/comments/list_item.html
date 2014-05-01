@@ -2,16 +2,10 @@
 
 
 {% if not is_ajax_request %}
-    <tr data-parent="{{ com.id }}" 
-        data-time="{{ com.time }}" 
-        data-time-display="{{ com.timeInHMS }}" 
-        data-commenter="{{ com.user|display_name }}" 
-        data-reply-url="{% url 'dashboard-comment-reply' com.content_object.slug %}"
-        data-class="list-{% if forloop.counter == 1 %}primary{% elif forloop.counter == 2 %}danger{% elif forloop.counter == 3 %}success{% elif forloop.counter == 4 %}warning{% else %}info{% endif %}"
-        data-object-pk="{{ com.object_pk }}"
-        data-content-type="{{ com.content_type }}">
+    <tr>
 {% endif %}
-    <td class="time{% if com.parent %} has-parent{% endif %}"><strong><i class="fa fa-fw fa-comment{% if com.parent %}s{% endif %}"></i> [@{{ com.timeInHMS }}] {{ com.user|display_name }}</strong></td>
+    <td class="time{% if com.parent %} has-parent{% endif %}"><strong><i class="fa fa-fw fa-comment{% if com.parent %}s{% endif %}"></i> [{{ com.timeInHMS }}]</strong></td>
+    <td class="user"><strong>{{ com.user|display_name }}</strong></td>
     <td class="comment">{{ com.formatted_comment }}</td>
     <td class="status">
         {% if not com.parent %}

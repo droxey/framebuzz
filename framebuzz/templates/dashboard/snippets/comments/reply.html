@@ -1,1 +1,21 @@
 {% load profile_tags %}
+
+<tr class="form-row">
+  <td class="time"><strong><i class="fa fa-fw fa-comments"></i> [{{ com.timeInHMS }}]</strong></td>
+  <td class="user"><strong>@{{ com.user|display_name }}</strong></td>
+  <td class="comment" colspan="3">
+    <form class="form-inline comment-reply-form" action="{% url 'dashboard-comment-reply' com.content_object.slug %}" method="post">
+      {% csrf_token %}
+      <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot"></p>
+      <input type="hidden" name="parent" val="{{ com.id }}">
+      <input type="hidden" name="time" val="{{ com.time }}">
+      <input type="hidden" name="object_pk" val="{{ com.object_pk }}">
+      <input type="hidden" name="content_type" val="{{ com.content_type }}">
+      <div class="input-wrapper pull-left">
+        <input type="text" name="comment" class="form-control" placeholder="Begin typing to reply to {{ com.user|display_name }}..." autocomplete="off">
+        <button class="btn btn-sm btn-default btn-clear-form tooltips" title="Clear Form"><i class="fa fa-fw fa-times"></i></button>
+      </div>
+      <button type="submit" class="btn btn-sm btn-info btn-submit-reply pull-right">Reply</button>
+    </form>
+  </td>
+</tr>

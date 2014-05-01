@@ -2,47 +2,32 @@ $(function() {
     var selectedComment = null;
 
     var selectComment = function(element) {
-        var parent = element.attr('data-parent'),
-            timeDisplay = element.attr('data-time-display'),
-            time = element.attr('data-time'),
-            commenter = element.attr('data-commenter'),
-            replyUrl = element.attr('data-reply-url'),
-            replyClass = element.attr('data-class'),
-            objectPk = element.attr('data-object-pk'),
-            contentType = element.attr('data-content-type'),
-            containerElement = element.parent().parent();
+        var containerElement = element.parent().parent();
 
-        selectedComment = element;
-        $('table.table-striped tbody tr').removeClass('active');
         element.addClass('active');
+        selectedComment = element;
 
-        var form = containerElement.find('form');
-        form.attr('action', replyUrl);
-        form.addClass(replyClass);
+        $('table.table-striped tbody tr').removeClass('active');
+        $('table.table-striped tbody tr.form-row').hide('slide', { 'direction': 'up' });;
 
-        form.find('input.form-control').removeAttr('disabled');
-        $('.table tfoot tr td.time').html('<i class="fa fa-fw fa-comments"></i> <strong>[@' + timeDisplay + '] ' + commenter + '</strong>');
-        form.find('input[name="parent"]').val(parent);
-        form.find('input[name="time"]').val(time);
-        form.find('input[name="comment"]').attr('placeholder', 'Begin typing a reply to ' + commenter + '...');
-        form.find('input[name="object_pk"]').val(objectPk);
-        form.find('input[name="content_type"]').val(contentType);
+        element.next('tr.form-row').show('slide', { 'direction': 'down' }, function() {        
+            var form = containerElement.find('form');
+            form.find('input[name="comment"]').focus();
+        });
+
+        // Update table.
+        //$('.table tfoot tr td.time').html('<i class="fa fa-fw fa-comments"></i> <strong>[' + timeDisplay + ']' + '</strong>');
+        //$('.table tfoot tr td.user').html('<strong>@' + commenter + '</strong>');
     };
 
     var clearCommentForm = function(form) {
-        selectedComment = null;
-        $('li.list-item').removeClass('active');
+        $('tr.active"').hide('slide', { 'direction': 'down' }, function() { 
+            selectedComment = null;
+            $('tr.active').removeClass('active');
 
-        form.attr('class', 'form-inline comment-reply-form');
-        form.attr('action', '');
-        form.find('input.form-control').attr('disabled', '');
-        form.find('span.input-group-addon').html('<i class="fa fa-fw fa-comments"></i> <strong>[@00:00]</strong>');
-        form.find('input[name="parent"]').val('');
-        form.find('input[name="time"]').val('');
-        form.find('input[name="comment"]').val('');
-        form.find('input[name="comment"]').attr('placeholder', 'Select a comment to reply...');
-        form.find('input[name="object_pk"]').val('');
-        form.find('input[name="content_type"]').val('');
+            form.find('input[name="comment"]').val('');
+            form.find('input[name="comment"]').attr('placeholder', 'Select a comment to reply...');
+        });
     };
 
     // Lazy load images.
@@ -63,25 +48,21 @@ $(function() {
 
         inline.find('.video-title').html(title);
 
-        inline.slideDown('fast', function() {
- 
-            // $(document).scrollTo('#' + slug, 300, {
-            //     onAfter: function() {
-            //         $.get(url, function(html) {
-            //             inline.addClass('active');
-            //             inline.find('.inner-content').html(html);
+        inline.slideDown('fast', function() { 
+            $(document).scrollTo('#' + slug, 300, {
+                onAfter: function() {
+                    $.get(url, function(html) {
+                        inline.addClass('active');
+                        inline.find('.inner-content').html(html);
 
-            //             // Activate tabs.
-            //             $('#modal-tabs', inline).tab();
-            //             $('#modal-tabs a[href="#video-details"]', inline).tab('show');
+                        // Activate tabs.
+                        $('#modal-tabs', inline).tab();
+                        $('#modal-tabs a[href="#video-details"]', inline).tab('show');
 
-            //             $('.tooltips', inline).tooltip();
-
-            //             inline.find('.iframe-wrapper > iframe').removeClass('hidden');
-            //             inline.find('.iframe-wrapper > iframe').lazyLoadXT();
-            //         });
-            //     }
-            // });
+                        $('.tooltips', inline).tooltip();
+                    });
+                }
+            });
         });
     });
 

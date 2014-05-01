@@ -1,5 +1,5 @@
 {% load staticfiles profile_tags comments %}
-
+{% get_comment_count for video as comment_count %}
 
 <div class="row modal-content-wrapper">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 poster-image">
@@ -11,28 +11,34 @@
             </a>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-12">
-              <h5><i class="fa fa-fw fa-eye"></i> {{ plays|short_number }} View{{ plays|pluralize }}</h5>
+        <div class="video-stats row centered">
+            <div class="col-sm-4 stat first">
+              <h1><i class="fa fa-users"></i></h1>
+              <h3>{{ commenters|length|short_number }}</h3>
+              <h6>PARTICIPANT{{ commenters|length|pluralize|upper }}</h6>
+            </div>
+
+          <div class="col-sm-4 stat">
+            <h1><i class="fa fa-comments"></i></h1>
+            <h3>{{ comment_count|short_number }}</h3>
+            <h6>COMMENT{{ comment_count|pluralize|upper }}</h6>
           </div>
-          <div class="col-xs-12">
-              <h5><i class="fa fa-fw fa-user"></i> {{ commenters|length|short_number }} Participant{{ commenters|length|pluralize }}</h5>
+          <div class="col-sm-4 stat last">
+            <h1><i class="fa fa-eye"></i></h1>
+            <h3>{{ plays|short_number }}</h3>
+            <h6>VIEW{{ plays|pluralize|upper }}</h6>
           </div>
-          <div class="col-xs-12">
-              {% get_comment_count for video as comment_count %}
-              <h5><i class="fa fa-fw fa-comments-o"></i> {{ comment_count|short_number }} Comment{{ comment_count|pluralize }}</h5>
-          </div>
+        </div>
       </div>
-    </div>
     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
         <div class="row row-modal-tabs">
             <div class="col-lg-12 modal-tab-container">
                 <ul id="modal-tabs" class="nav nav-tabs">
                     <li class="active">
-                        <a data-toggle="tab" href="#video-details">Video Details</a>
+                        <a data-toggle="tab" href="#video-details"><i class="fa fa-list-ul"></i> Video Details</a>
                     </li>
                     <li class="">
-                        <a data-toggle="tab" href="#video-comments" class="contact-map">Viewer Comments</a>
+                        <a data-toggle="tab" href="#video-comments" class="contact-map"><i class="fa fa-comments-o"></i> Viewer Comments</a>
                     </li>
                 </ul>
             </div>
@@ -73,29 +79,19 @@
             <div id="video-comments" class="tab-pane table-responsive">
               {% if unread_comments|length > 0 %}
                   <table class="table table-comments table-striped table-advance table-hover">
+                      <colgroup>
+                        <col class="time" span="1"/>
+                        <col class="user" span="1"/>
+                        <col class="comment" span="1"/>
+                        <col class="status" span="1"/>
+                        <col class="actions" span="1"/>
+                    </colgroup>
                       <tbody>
                           {% for com in unread_comments %}
                               {% include "dashboard/snippets/comments/list_item.html" %}
+                              {% include "dashboard/snippets/comments/reply.html" %}
                           {% endfor %}
                       </tbody>
-                      <tfoot>
-                        <tr>
-                          <td class="time"><strong><i class="fa fa-fw fa-comments"></i> [@00:00] {{ request.user|display_name }}</strong></td>
-                          <td class="comment" colspan="3">
-                            <form class="form-inline comment-reply-form" action="" method="post">
-                              {% csrf_token %}
-                              <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot"></p>
-                              <input type="hidden" name="parent">
-                              <input type="hidden" name="time">
-                              <input type="hidden" name="object_pk" val="">
-                              <input type="hidden" name="content_type" val="">
-                              <input type="text" name="comment" class="form-control" placeholder="Select a comment to reply..." autocomplete="off" style="width: 78%; margin-right: 12px;" disabled>
-                              <button type="submit" class="btn btn-success btn-submit-reply">Reply</button>
-                              <button class="btn btn-danger btn-clear-form tooltips">Clear</button>
-                            </form>
-                          </td>
-                        </tr>
-                    </tfoot>
                   </table>
               {% else %}
                   <div class="text-center stats">
