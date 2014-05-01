@@ -1,6 +1,5 @@
 $(function() {
     var addVideoDiv = $('#upload-video');
-        selectedTabIndicator = $('ul.nav-tabs li.indicator', addVideoDiv),
         dropPaneDiv = $('#upload-drop-pane > div > div'),
         dropResultDiv = $("#drop-result-bar"),
         uploadBadge = $('#badge_uploads'),
@@ -14,7 +13,6 @@ $(function() {
     var resetForm = function() {
         $('ul.nav-tabs li', addVideoDiv).removeClass('active');
         $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
-        selectedTabIndicator.removeClass('active');
 
         $('#id_fpname').val('');
         $('#id_fpfile').val('');
@@ -144,9 +142,7 @@ $(function() {
       $('div.tab-pane', addVideoDiv).hide();
 
       tab.slideDown('fast');
-      selectedTabIndicator.removeClass('file youtube webcam uploads');
-      selectedTabIndicator.addClass('active');
-      selectedTabIndicator.addClass(newClass);
+      $(this).parent().addClass('active');
     });
 
     // Show tab event.
@@ -169,8 +165,6 @@ $(function() {
 
     // Cancel upload button.
     $('a.cancel-upload', addVideoDiv).click(function() {
-      selectedTabIndicator.removeClass('active');
-
       $('ul.nav-tabs li', addVideoDiv).removeClass('active');
       $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
 
@@ -242,7 +236,21 @@ $(function() {
                 'is_featured': 'false',
                 'csrfmiddlewaretoken': csrfToken
             }, function(data, textStatus, jqXHR) {
-                console.log(data);
+              console.log(data);
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Video Added!',
+                    // (string | mandatory) the text inside the notification
+                    text: 'The video you posted is now available.',
+                    // (string | optional) the image to display on the left
+                    image: 'assets/img/ui-sam.jpg',
+                    // (bool | optional) if you want it to fade out on its own or just sit there
+                    sticky: true,
+                    // (int | optional) the time you want it to be alive for before fading out
+                    time: '',
+                    // (string | optional) the class name you want to apply to that specific message
+                    class_name: 'my-sticky-class'
+                });
             });
         }
 
