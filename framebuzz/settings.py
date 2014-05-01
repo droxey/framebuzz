@@ -191,7 +191,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-MESSAGE_STORAGE = 'stored_messages.storage.PersistentStorage'
+# MESSAGE_STORAGE = 'stored_messages.storage.PersistentStorage'
 
 SESSION_ENGINE = 'redis_sessions.session'
 
