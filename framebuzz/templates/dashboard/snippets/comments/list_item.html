@@ -11,31 +11,25 @@
         data-object-pk="{{ com.object_pk }}"
         data-content-type="{{ com.content_type }}">
 {% endif %}
-<td class="time{% if com.parent %} has-parent{% endif %}"><strong><i class="fa fa-fw fa-comment{% if com.parent %}s{% endif %}"></i> [@{{ com.timeInHMS }}] {{ com.user|display_name }}</strong></td>
-<td class="comment">{{ com.formatted_comment }}</td>
-<td class="status">
-    {% if not com.parent %}
-        {% if com.is_read %}
-            <span class="label label-success">Read</span>
-        {% else %}
-            <span class="label label-danger">Unread</span>
+    <td class="time{% if com.parent %} has-parent{% endif %}"><strong><i class="fa fa-fw fa-comment{% if com.parent %}s{% endif %}"></i> [@{{ com.timeInHMS }}] {{ com.user|display_name }}</strong></td>
+    <td class="comment">{{ com.formatted_comment }}</td>
+    <td class="status">
+        {% if not com.parent %}
+            {% if com.is_read %}
+                <span class="label label-success">Read</span>
+            {% else %}
+                <span class="label label-danger">Unread</span>
+            {% endif %}
+            {% if com.has_dashboard_reply %}
+                <span class="label label-info">Replied</span>
+            {% endif %}
         {% endif %}
-        {% if com.has_dashboard_reply %}
-            <span class="label label-info">Replied</span>
-        {% endif %}
-    {% endif %}
-</td>
-<td>
-    {% if not com.parent %}
-        {% if not com.is_read %}
-            <button class="btn btn-success btn-xs fa fa-check btn-mark-read tooltips" title="Mark Read" data-url="{% url 'dashboard-comment-read' com.id %}"></button>
-        {% endif %}
-       {% if not com.has_dashboard_reply %}
-            <button class="btn btn-primary btn-xs fa fa-pencil btn-reply tooltips" title="Reply"></button>
-        {% endif %}
-    {% endif %}
-    <button class="btn btn-danger btn-xs fa fa-trash-o btn-delete tooltips" title="Delete" data-url="{% url 'dashboard-comment-delete' com.id %}"></button>
-</td>
+    </td>
+    <td>
+        <button class="btn btn-success btn-xs fa fa-check btn-mark-read tooltips" title="Mark Read" data-url="{% url 'dashboard-comment-read' com.id %}"></button>
+        <button class="btn btn-primary btn-xs fa fa-pencil btn-reply tooltips" title="Reply"></button>
+        <button class="btn btn-danger btn-xs fa fa-trash-o btn-delete tooltips" title="Delete" data-url="{% url 'dashboard-comment-delete' com.id %}"></button>
+    </td>
 {% if not is_ajax_request %}
     </tr>
 {% endif %}

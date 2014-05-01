@@ -64,23 +64,24 @@ $(function() {
         inline.find('.video-title').html(title);
 
         inline.slideDown('fast', function() {
-            $(document).scrollTo('#' + slug, 300, {
-                onAfter: function() {
-                    $.get(url, function(html) {
-                        inline.addClass('active');
-                        inline.find('.inner-content').html(html);
+ 
+            // $(document).scrollTo('#' + slug, 300, {
+            //     onAfter: function() {
+            //         $.get(url, function(html) {
+            //             inline.addClass('active');
+            //             inline.find('.inner-content').html(html);
 
-                        // Activate tabs.
-                        $('#modal-tabs', inline).tab();
-                        $('#modal-tabs a[href="#video-details"]', inline).tab('show');
+            //             // Activate tabs.
+            //             $('#modal-tabs', inline).tab();
+            //             $('#modal-tabs a[href="#video-details"]', inline).tab('show');
 
-                        $('.tooltips', inline).tooltip();
+            //             $('.tooltips', inline).tooltip();
 
-                        inline.find('.iframe-wrapper > iframe').removeClass('hidden');
-                        inline.find('.iframe-wrapper > iframe').lazyLoadXT();
-                    });
-                }
-            });
+            //             inline.find('.iframe-wrapper > iframe').removeClass('hidden');
+            //             inline.find('.iframe-wrapper > iframe').lazyLoadXT();
+            //         });
+            //     }
+            // });
         });
     });
 
@@ -161,7 +162,7 @@ $(function() {
     $(document).on('click', 'button.btn-clear-form', function(e) {
         e.preventDefault();
         
-        var form = $(this).parent().parent().parent();
+        var form = $(this).parent();
         clearCommentForm(form);
 
         return false;
