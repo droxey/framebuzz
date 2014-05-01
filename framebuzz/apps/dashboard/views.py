@@ -25,41 +25,43 @@ def _get_videos(username):
 
 @require_dashboard
 def dashboard_home(request, username):
-    videos = [v.id for v in _get_videos(username)]
-    activities = Action.objects.filter(Q(
-        Q(action_object_object_id__in=videos) |
-        Q(target_object_id__in=videos)),
-        Q(verb__in=VALID_FEED_VERBS)
-    ).order_by('-timestamp')[:20]
+    return HttpResponseRedirect(reverse('dashboard-videos',
+                                args=[username, ]))
+    # videos = [v.id for v in _get_videos(username)]
+    # activities = Action.objects.filter(Q(
+    #     Q(action_object_object_id__in=videos) |
+    #     Q(target_object_id__in=videos)),
+    #     Q(verb__in=VALID_FEED_VERBS)
+    # ).order_by('-timestamp')[:20]
 
-    # most_played = Action.objects.filter(
-    #     verb='viewed video',
-    #     action_object_object_id__in=videos
-    #     ).values('action_object_object_id') \
-    #     .annotate(views=Count('id')) \
-    #     .order_by('-views')
+    # # most_played = Action.objects.filter(
+    # #     verb='viewed video',
+    # #     action_object_object_id__in=videos
+    # #     ).values('action_object_object_id') \
+    # #     .annotate(views=Count('id')) \
+    # #     .order_by('-views')
 
-    # if len(most_played) > 0:
-    #     most_played = most_played[0]
+    # # if len(most_played) > 0:
+    # #     most_played = most_played[0]
 
-    # total_views = Action.objects.filter(
-    #     verb='viewed video',
-    #     action_object_object_id__in=videos
-    # ).aggregate(num_views=Count('id'))
+    # # total_views = Action.objects.filter(
+    # #     verb='viewed video',
+    # #     action_object_object_id__in=videos
+    # # ).aggregate(num_views=Count('id'))
 
-    # most_played_video = Video.objects.filter(
-    #     id=most_played['action_object_object_id'])[0]
-    # print most_played_video.default_thumbnail
+    # # most_played_video = Video.objects.filter(
+    # #     id=most_played['action_object_object_id'])[0]
+    # # print most_played_video.default_thumbnail
 
-    return render_to_response('dashboard/home.html', {
-        'activities': activities,
-        # 'most_played': {
-        #     'total': total_views.get('num_views'),
-        #     'current': most_played.get('views'),
-        #     'video': most_played_video,
-        # },
-        'videos': _get_videos(username),
-    }, context_instance=RequestContext(request))
+    # return render_to_response('dashboard/home.html', {
+    #     'activities': activities,
+    #     # 'most_played': {
+    #     #     'total': total_views.get('num_views'),
+    #     #     'current': most_played.get('views'),
+    #     #     'video': most_played_video,
+    #     # },
+    #     'videos': _get_videos(username),
+    # }, context_instance=RequestContext(request))
 
 
 @require_dashboard
@@ -163,3 +165,12 @@ def delete_comment(request, comment_id):
     comment.save()
 
     return HttpResponse(200)
+
+
+@require_dashboard
+def play_video(request, slug):
+    video = Video.objects.get(slug=slug)
+
+    return render_to_response('dashboard/snippets/play_video.html', {
+        'video': video,
+    }, context_instance=RequestContext(request))

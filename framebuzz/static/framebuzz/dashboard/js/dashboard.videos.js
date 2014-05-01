@@ -13,7 +13,7 @@ $(function() {
             containerElement = element.parent().parent();
 
         selectedComment = element;
-        $('li.list-item').removeClass('active');
+        $('table.table-striped tr').removeClass('active');
         element.addClass('active');
 
         var form = containerElement.find('form');
@@ -135,10 +135,11 @@ $(function() {
     });
 
     // Click comment action.
-    $(document).on('click', 'li.list-item', function(e) {
+    $(document).on('click', 'table.table-striped tr', function(e) {
         selectComment($(this));
     });
 
+    // Submit reply form.
     $(document).on('submit', 'form.comment-reply-form', function(e) {
         e.preventDefault();
 
