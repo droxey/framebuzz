@@ -160,11 +160,11 @@ def create_user_profile(sender, instance, created, **kwargs):
         for perm in comment_flag_permissions:
             profile.user.user_permissions.add(perm.id)
 
-        if instance.email:
-            send_templated_mail(template_name='welcome-newuser',
-                                from_email=settings.DEFAULT_FROM_EMAIL,
-                                recipient_list=[instance.email],
-                                context={'user': instance})
+        # if instance.email:
+        #     send_templated_mail(template_name='welcome-newuser',
+        #                         from_email=settings.DEFAULT_FROM_EMAIL,
+        #                         recipient_list=[instance.email],
+        #                         context={'user': instance})
 
 post_save.connect(create_user_profile, sender=User)
 
