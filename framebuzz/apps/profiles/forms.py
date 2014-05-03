@@ -93,7 +93,7 @@ class UploadVideoForm(forms.ModelForm):
         self.fields['fpfile'].widget.attrs['data-fp-button-text'] = \
             '<i class="fa fa-cloud-upload"></i><br>Select File...'
         self.fields['fpfile'].widget.attrs['data-fp-button-class'] = \
-            'btn btn-large btn-success'
+            'btn btn-large btn-success pull-left'
         self.fields['fpfile'].widget.attrs['data-fp-services'] = \
             'COMPUTER,VIDEO,BOX,DROPBOX,GOOGLE_DRIVE,URL,FTP'
         self.fields['fpfile'].widget.attrs['data-fp-extensions'] = \
@@ -103,6 +103,7 @@ class UploadVideoForm(forms.ModelForm):
             'Drag and drop your video files here.<br>Or, click ' \
             '<strong>Select File...</strong>' \
             ' to upload videos from Dropbox, Google Drive, and more!'
+        self.fields['fpfile'].widget.attrs['class'] = 'col-lg-8'
 
     def save(self, commit=True):
         print self.request.user

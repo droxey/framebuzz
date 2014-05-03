@@ -21,7 +21,7 @@ $(function() {
 
         $('input, textarea').placeholder();
 
-        dropPaneDiv.html('<div id="upload-drop-pane" class="col-xs-12">Drag and drop your video files here.<br>Or, <a href="#" id="upload-click-here">click here</a> to upload videos from Dropbox, Google Drive, and more!</div>');
+        dropPaneDiv.html('<div id="upload-drop-pane" class="col-lg-10">Drag and drop your video files here.<br>Or, <a href="#" id="upload-click-here">click here</a> to upload videos from Dropbox, Google Drive, and more!</div>');
     };
 
     var progress = function(percent, $element) {
