@@ -55,7 +55,8 @@ def start_zencoder_job(video_url, filename):
                         'number': 5,
                         'size': '700x470',
                         'public': True,
-                        'label': 'poster'
+                        'label': 'poster',
+                        'base_url': base_dir
                     }
                 ]
             }
