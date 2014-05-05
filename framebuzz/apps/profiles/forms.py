@@ -103,7 +103,7 @@ class UploadVideoForm(forms.ModelForm):
             'Drag and drop your video files here.<br>Or, click ' \
             '<strong>Select File...</strong>' \
             ' to upload videos from Dropbox, Google Drive, and more!'
-        self.fields['fpfile'].widget.attrs['class'] = 'col-lg-8'
+        #self.fields['fpfile'].widget.attrs['class'] = 'col-lg-8'
 
     def save(self, commit=True):
         print self.request.user
