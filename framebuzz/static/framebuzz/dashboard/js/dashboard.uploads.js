@@ -12,7 +12,7 @@ $(function() {
 
     var resetForm = function() {
         $('ul.nav-tabs li', addVideoDiv).removeClass('active');
-        $('div.tab-content div.tab-pane', addVideoDiv).removeClass('active');
+        $('div.tab-content div.tab-pane', addVideoDiv).hide();
 
         $('#id_fpname').val('');
         $('#id_fpfile').val('');
@@ -29,8 +29,6 @@ $(function() {
         $element.animate({ width: percent + '%' }, 500);
 
         $element.parent().parent().find('.percent-text').text(percent + '%');
-
-        console.log( $element.find('.percent-text'));
     };
 
     function youtube_parser(url){
@@ -196,19 +194,17 @@ $(function() {
       var data = $(this).serialize();
 
       $.post(url, data, function(response) {
-        $('ul.uploads-list li').remove();
-        $('ul.uploads-list').append(response);
-
-        var currentCount = parseInt(uploadBadge.text());
-        if (currentCount == 0) {
-          uploadBadge.addClass('on');
-          uploadBadge.text(1);
-        }
-        else {
-          uploadBadge.text(currentCount + 1);
-        }
-
         resetForm();
+
+        $.gritter.add({
+            title: 'Upload Queued',
+            text: 'Your upload has been successfully queued. After the page reloads, monitor progress using the notification panel located on the top right of your screen.',
+            image: '',
+            sticky: false,
+            time: 5000
+        });
+
+        window.setTimeout(function() { window.location.reload(); }, 5500);
       });
 
       return false;
