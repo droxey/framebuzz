@@ -15,7 +15,6 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.timesince import timesince
 
 from actstream import action
 from actstream.models import Action, followers, following
@@ -25,7 +24,7 @@ from templated_email import send_templated_mail
 from framebuzz.apps.api.models import MPTTComment, UserVideo, Video, PrivateSession, SessionInvitation
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.api.backends.tasks import check_zencoder_progress
-from framebuzz.apps.api.utils import get_total_shares, get_pending_uploads
+from framebuzz.apps.api.utils import get_pending_uploads
 from framebuzz.apps.profiles.forms import UserProfileForm, AddVideoForm, UploadVideoForm
 
 
@@ -230,20 +229,23 @@ def video_share(request, username=None, slug=None, convo_slug=None):
             context['commenters'] = invitees
             context['found_by'] = private_session.owner
 
-
         if username is not None:
             if request.is_ajax():
                 template = 'player/snippets/share.html'
             else:
-                request.session['share'] = context
-                if username:
-                    return HttpResponseRedirect(reverse(
-                                                    'profiles-home',
-                                                    args=[username, ]))
-                if request.user.is_authenticated():
-                    return HttpResponseRedirect(reverse(
-                                                    'profiles-home',
-                                                    args=[request.user.username, ]))
+                if video.found_by.get_profile().dashboard_enabled or \
+                        video.added_by.get_profile().dashboard_enabled:
+                    template = 'dashboard/share.html'
+                else:
+                    request.session['share'] = context
+                    if username:
+                        return HttpResponseRedirect(reverse(
+                                                        'profiles-home',
+                                                        args=[username, ]))
+                    if request.user.is_authenticated():
+                        return HttpResponseRedirect(reverse(
+                                                        'profiles-home',
+                                                        args=[request.user.username, ]))
         else:
             template = 'marketing/share.html'
     except TypeError:

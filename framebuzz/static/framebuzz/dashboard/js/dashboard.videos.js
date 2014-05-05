@@ -50,12 +50,16 @@ $(function() {
                     $.get(url, function(html) {
                         inline.addClass('active');
                         inline.find('.inner-content').html(html);
+                        $(window).trigger('resize');
 
-                        // Activate tabs.
-                        $('#modal-tabs', inline).tab();
-                        $('#modal-tabs a[href="#video-details"]', inline).tab('show');
+                       inline.find('.inner-content').animate({
+                          opacity: 1
+                        }, 500, function() {
+                            $('#modal-tabs', inline).tab();
+                            $('#modal-tabs a[href="#video-details"]', inline).tab('show');
 
-                        $('.tooltips', inline).tooltip();
+                            $('.tooltips', inline).tooltip();
+                        });
                     });
                 }
             });
@@ -113,7 +117,7 @@ $(function() {
     });
 
     // Click comment action.
-    $(document).on('click', 'table.table-striped tbody tr:not(".form-row")', function(e) {
+    $(document).on('click', 'table.table-comments tbody tr:not(".form-row")', function(e) {
         selectComment($(this));
     });
 

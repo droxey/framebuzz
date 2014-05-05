@@ -1,4 +1,4 @@
-{% load avatar_tags profile_tags comments %}
+{% load avatar_tags profile_tags comments staticfiles %}
 
 {% get_comment_count for video as comment_count %}
 {% regroup commenters by actor.username as commenter_list %}
@@ -17,9 +17,15 @@
             {% if found_by %}
                 <div class="col-xs-2">
                     <h2>Found By</h2>
-                    <a title="{{ found_by|display_name }}" href="{% url 'profiles-home' found_by.username %}">
-                        <img src="{% avatar_url found_by 110 %}" alt="" class="img-responsive" />
-                    </a>
+                    {% if found_by.get_profile.dashboard_enabled %}
+                        <a title="Ketra" href="#">
+                            <img src="{% static 'framebuzz/dashboard/img/ketra-avatar.png' %}" class="img-responsive" height="110">
+                        </a>
+                    {% else %}
+                        <a title="{{ found_by|display_name }}" href="{% url 'profiles-home' found_by.username %}">
+                            <img src="{% avatar_url found_by 110 %}" alt="" class="img-responsive" />
+                        </a>
+                    {% endif %}
                 </div>
             {% endif %}
             <div class="{% if found_by %}col-xs-4{% else %}col-xs-6{% endif %} description">

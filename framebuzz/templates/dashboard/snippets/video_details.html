@@ -45,7 +45,11 @@
         </div>
         <div class="row tab-content">
             <div id="video-details" class="tab-pane active col-lg-12">
-                <table class="table table-hover">                              
+                <table class="table table-striped">
+                    <colgroup>
+                        <col span="1"/>
+                        <col span="1" style="width: 85%" />
+                    </colgroup>                              
                   <tbody>
                       {% if video.added_by %}
                       <tr>
@@ -72,6 +76,10 @@
                       <tr>
                           <td><strong>Embed Code</strong></td>
                           <td><textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.embed_code }}</textarea></td>
+                      </tr>
+                      <tr>
+                        <td valign="middle"><strong>Share</strong></td>
+                        <td>{% include "dashboard/snippets/share.html" %}</td>
                       </tr>
                   </tbody>
               </table>
