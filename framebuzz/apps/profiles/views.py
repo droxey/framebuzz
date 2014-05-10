@@ -234,7 +234,8 @@ def video_share(request, username=None, slug=None, convo_slug=None):
                 template = 'player/snippets/share.html'
             else:
                 if video.found_by.get_profile().dashboard_enabled or \
-                        video.added_by.get_profile().dashboard_enabled:
+                        (video.added_by and
+                            video.added_by.get_profile().dashboard_enabled):
                     template = 'dashboard/share.html'
                 else:
                     request.session['share'] = context
