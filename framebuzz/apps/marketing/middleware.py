@@ -45,7 +45,9 @@ class MobileDetectionMiddleware(object):
     def process_request(self, request):
         if not settings.MEDIA_URL in request.path \
         and not settings.STATIC_URL in request.path \
-        and not 'mobile' in request.path:
+        and not 'mobile' in request.path \
+        and not request.path == '/':
+            print request.path
             is_mobile = False
 
             if request.META.has_key('HTTP_USER_AGENT'):
