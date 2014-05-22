@@ -1681,301 +1681,6 @@ object, embed, video, iframe {
             }
         }
 
-        #login-view, #signup-view {
-            height: 360px;
-            margin-left: 395px;
-            width: 246px;
-
-            @media screen and (max-width: 581px) {
-                height: 322px;
-                margin-left: 334px;
-            }
-
-            @media screen and (min-width: 700px) {
-                height: 400px;
-                margin-left: 455px;
-            }
-
-            div.scrollable {
-                background: rgba(53, 53, 53, 0.95);
-                height: 360px;
-                width: 245px;
-
-                @media screen and (max-width: 581px) {
-                    height: 322px;
-                }
-
-                @media screen and (min-width: 700px) {
-                    height: 400px;
-                }
-
-                div.active-header {
-                    @media screen and (max-width: 581px) {
-                        height: 30px;
-                    }
-
-                    a.active-close {
-                        @media screen and (max-width: 581px) {
-                            height: 30px;
-                            width: 30px;
-                            margin-right: 10px;
-                        }
-
-                        i.icon {
-                            margin: 13px 6px 11px 6px;
-
-                            @media screen and (max-width: 581px) {
-                                margin: 7px 6px 4px;
-                            }
-                        }
-                    }
-
-                    a.player-logo {
-                        line-height: 48px;
-
-                        @media screen and (max-width: 581px) {
-                            line-height: 33px;
-                        }
-
-                        img {
-                            height: 25px;
-                            width: 115px;
-                            margin: 9px 0;
-
-                            @media screen and (max-width: 581px) {
-                                height: 20px;
-                                width: 90px;
-                                margin: 6px 0 0 0;
-                            }
-                        }
-                    }
-                }
-
-                div.registration {
-                    padding: 8px 17px;
-
-                    @media screen and (max-width: 581px) {
-                        padding: 4px 17px;
-                    }
-
-                    h1 {
-                        color: white;
-                        font-family: 'proxima-nova';
-                        font-size: 15.62px;
-                        font-weight: 700;
-                        line-height: 25px;
-
-                        @media screen and (max-width: 581px) {
-                            font-size: 14px;
-                            line-height: 20px;
-                        }
-                    }
-
-                    p {
-                        color: white;
-                        font-family: 'proxima-nova';
-                        font-size: 0.8em;
-                        font-weight: 300;
-                        line-height: 15px;
-                        padding-bottom: 2px;
-                        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
-                        width: 212px;
-
-                        a {
-                            color: white;
-                            font-weight: 700;
-
-                            &:hover { text-decoration: underline; }
-                        }
-                    }
-
-                    ul.socialaccount_providers {
-                        margin: 5px auto 35px;
-                        width: 190px;
-
-                        li {
-                            float: left;
-                            height: 42px;
-                            margin: 0 10px;
-                            width: 42px;
-
-                            a.socialaccount_provider {
-                                background-repeat: no-repeat;
-                                background-image:url('../../img/social-icons.png');
-                                cursor: pointer;
-                                height: 40px;
-                                width: 40px;
-                                display: inline-block;
-                                text-indent: -99999px;
-                                opacity: .9;
-                                filter:Alpha(Opacity=9);
-
-                                &:hover {
-                                    opacity: 1;
-                                    filter:Alpha(Opacity=10);
-                                }
-                            }
-
-                            a.twitter {
-                                background-position: -174px 0;
-                            }
-
-                            a.facebook {
-                                background-position: -131px 0;
-                            }
-
-                            a.google {
-                                background-position: -218px 0;
-                            }
-                        }
-                    }
-
-                    form {
-                        @media screen and (max-width: 581px) {
-                            margin-top: 2px;
-                        }
-
-                        ul.errors {
-                            position: absolute;
-                            top: 190px;
-                            width: 200px;
-
-                            li {
-                                color: red;
-                                font: 300 11px/13px 'proxima-nova';
-                                text-align: center;
-                            }
-                        }
-
-                        p {
-                            padding-bottom: 0px;
-                            width: 100%;
-
-                            #id_login, #id_password, #id_password_confirm, #id_email {
-                                @include border-radius(3px, 3px);
-                                background: rgba(0, 0, 0, .24);
-                                border: 1px solid transparent;
-                                color: rgba(176, 176, 176, 0.56);
-                                font-family: 'proxima-nova';
-                                font-size: 14.51px;
-                                font-weight: 300;
-                                height: 27px;
-                                margin-bottom: 8px;
-                                width: 200px;
-
-                                @media screen and (max-width: 581px) {
-
-                                }
-
-                                &.ng-pristine { border: 1px solid transparent; }
-                                &.ng-dirty.ng-valid { border: 1px solid green; }
-                                &.ng-dirty.ng-invalid { border: 1px solid red; }
-                            }
-
-                            .ui-tooltip {
-                                cursor: help;
-                                margin-top: -37px;
-                                opacity: 0.5;
-                                position: absolute;
-                                right: 20px;
-                                z-index: 2;
-
-                                i.icon {
-                                    background-image: url(../../img/glyphicons-halflings-white.png);
-                                }
-                            }
-
-                            a {
-                                color: rgba(255, 255, 255, 0.44);
-                                display: block;
-                                float: right;
-                                font-weight: 300;
-                            }
-
-                            a.forgot-password {
-                                color: rgba(255, 255, 255, 0.44);
-                                display: block;
-                                float: right;
-                                font-size: 11px;
-                                font-weight: 300;
-                                text-align: right;
-                                width: 228px;
-                            }
-
-                            button.registration-submit {
-                                background: none;
-                                border: 0 none;
-                                height: 36px;
-                                float: right;
-                                padding: 0;
-                                margin-top: 2px;
-                                margin-bottom: 3px;
-                                position: relative;
-                                width: 116px;
-
-                                @media screen and (max-width: 581px) {
-                                    margin-top: 0;
-                                    height: 20px;
-                                    width: 64px;
-                                }
-
-                                span {
-                                    color: white;
-                                    display: block;
-                                    height: 36px;
-                                    font-family: 'proxima-nova';
-                                    font-size: 13.39px;
-                                    font-weight: 700;
-                                    line-height: 34px;
-                                    position: absolute;
-                                    text-align: center;
-                                    top: 0;
-                                    width: 116px;
-
-                                    @media screen and (max-width: 581px) {
-                                        font-size: 12px;
-                                        height: 20px;
-                                        line-height: 18px;
-                                        width: 64px;
-                                    }
-                                }
-
-                                img {
-                                    height: 36px;
-                                    width: 116px;
-
-                                    @media screen and (max-width: 581px) {
-                                        height: 20px;
-                                        width: 64px;
-                                    }
-                                }
-                            }
-
-                            &.tos {
-                                font-size: 0.63em;
-                                line-height: 12px;
-
-                                a {
-                                    display: inline;
-                                    float: none;
-                                }
-                            }
-                        }
-
-                        &.submitted {
-                            p {
-                                #id_login, #id_password, #id_password_confirm, #id_email {
-                                    &.ng-invalid {
-                                        border: 1px solid red;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         #share-view {
             position: absolute;
             height: 360px;
@@ -2577,28 +2282,48 @@ object, embed, video, iframe {
 
                 h2, p.tos {
                     font-size: 14px;
-                    margin-bottom: 8px;
+                    padding-left: 0;
 
                     strong {
                         font-weight: 700;
                     }
                 }
 
+                h2 {
+                    font-size: 12.45px;
+                    margin: 12px 0 15px;
+                    text-align: center;
+                }
+
                 h3 {
-                    text-indent: 3px;
-                    font-size: 15px;
-                    font-weight: 400;
+                    font-size: 14px;
+                    font-weight: 700;
                     color: rgba(82, 176, 240, 1.0);
+                    margin-bottom: 7px;
+                }
+
+                p.or {
+                    color: #FFFFFF;
+                    display: inline-block;
+                    font-family: 'proxima-nova';
+                    font-size: 15px;
+                    font-style: italic;
+                    text-transform: lowercase;
+                    font-weight: 300;
+                    line-height: 25px;
+                    margin-top: 5px;
+                    text-align: center;
+                    width: 100%;           
                 }
 
                 p.tos {
                     display: inline-block;
                     font-family: 'proxima-nova';
-                    font-size: 13px;
+                    font-size: 11px;
                     font-weight: 300;
-                    margin: 14px 12%;
+                    margin: 10px 17% 0;
                     text-align: center;
-                    width: 80%;
+                    width: 65%;
 
                     a {
                         color: rgba(82, 176, 240, 1.0);
@@ -2606,50 +2331,55 @@ object, embed, video, iframe {
                     }
                 }
 
-                #login-container,
-                #signup-container {
-                    ul.socialaccount_providers {
-                        margin: 5px auto 35px;
-                        width: 190px;
+                ul.social {
+                    width: 100%;
 
-                        li {
-                            float: left;
-                            height: 42px;
-                            margin: 0 10px;
-                            width: 42px;
+                    li {
+                        float: left;
+                        height: 20px;
+                        margin: 0 4px;
 
-                            a.socialaccount_provider {
-                                background-repeat: no-repeat;
-                                background-image:url('../../img/social-icons.png');
-                                cursor: pointer;
-                                height: 40px;
-                                width: 40px;
-                                display: inline-block;
-                                text-indent: -99999px;
-                                opacity: .9;
-                                filter:Alpha(Opacity=9);
+                        &.twitter {
+                            
+                        }
 
-                                &:hover {
-                                    opacity: 1;
-                                    filter:Alpha(Opacity=10);
-                                }
-                            }
+                        &.facebook {
+                            margin-right: 0;
+                        }
 
-                            a.twitter {
-                                background-position: -174px 0;
-                            }
+                        &.text {
+                            margin-left: 0;
 
-                            a.facebook {
-                                background-position: -131px 0;
-                            }
-
-                            a.google {
-                                background-position: -218px 0;
+                            span {
+                                font-family: 'proxima-nova';
+                                font-size: 13px;
+                                font-weight: 700;
+                                line-height: 23px;
+                                text-transform: uppercase;
                             }
                         }
+
+                        a {
+                            color: #FFFFFF;
+                            display: block;
+                            font-family: 'proxima-nova';
+                            font-size: 11px;
+                            font-weight: 700;
+                            line-height: 20px;
+                            text-align: center;
+                            text-decoration: none;
+                            text-transform: uppercase;
+                        }
+
                     }
 
+                }
+
+                #login-container,
+                #signup-container {
                     form {
+                        width: 100%;
+
                         @media screen and (max-width: 581px) {
                             margin-top: 2px;
                         }
@@ -2677,10 +2407,11 @@ object, embed, video, iframe {
                                 color: rgba(0, 0, 0, 0.70);
                                 font-family: 'proxima-nova';
                                 font-size: 12px;
-                                height: 26px;
-                                margin-top: 5px;
+                                height: 22px;
+                                margin-top: 0;
+                                margin-bottom: 7px;
                                 padding: 0 3px;
-                                width: 175px;
+                                width: 96%;
                                 @include single-transition(background-color 100ms linear);
 
                                 &:focus {
@@ -2697,6 +2428,26 @@ object, embed, video, iframe {
                                 &.ng-dirty.ng-invalid { border: 1px solid red; }
                             }
 
+                            #id_login::-webkit-input-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); }
+                            #id_login::-moz-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); } /* firefox 19+ */
+                            #id_login:-ms-input-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); } /* ie */
+                            #id_login:-moz-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); }
+
+                            #id_password::-webkit-input-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); }
+                            #id_password::-moz-placeholder { font-style: italic;  color: rgba(0, 0, 0, 0.70); } /* firefox 19+ */
+                            #id_password:-ms-input-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); } /* ie */
+                            #id_password:-moz-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); }
+
+                            #id_password_confirm::-webkit-input-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); }
+                            #id_password_confirm::-moz-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); } /* firefox 19+ */
+                            #id_password_confirm:-ms-input-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); } /* ie */
+                            #id_password_confirm:-moz-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); }
+
+                            #id_email::-webkit-input-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); }
+                            #id_email::-moz-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); } /* firefox 19+ */
+                            #id_email:-ms-input-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); } /* ie */
+                            #id_email:-moz-placeholder { font-style: italic; color: rgba(0, 0, 0, 0.70); }
+                            
                             .ui-tooltip {
                                 cursor: help;
                                 margin-top: -37px;
@@ -2726,55 +2477,16 @@ object, embed, video, iframe {
                                 text-align: right;
                                 font-family: 'proxima-nova';
                             }
-
+                            
                             button.registration-submit {
-                                background: none;
-                                border: 0 none;
-                                height: 36px;
+                                display: block;
+                                font-family: 'proxima-nova';
+                                font-size: 13.39px;
+                                font-weight: 700;
                                 float: right;
-                                padding: 0;
-                                margin-top: 2px;
-                                margin-bottom: 3px;
-                                position: relative;
-                                width: 116px;
-
-                                @media screen and (max-width: 581px) {
-                                    margin-top: 0;
-                                    height: 20px;
-                                    width: 64px;
-                                }
-
-                                span {
-                                    color: white;
-                                    display: block;
-                                    height: 36px;
-                                    font-family: 'proxima-nova';
-                                    font-size: 13.39px;
-                                    font-weight: 700;
-                                    line-height: 34px;
-                                    position: absolute;
-                                    text-align: center;
-                                    top: 0;
-                                    width: 116px;
-
-                                    @media screen and (max-width: 581px) {
-                                        font-size: 12px;
-                                        height: 20px;
-                                        line-height: 18px;
-                                        width: 64px;
-                                    }
-                                }
-
-                                img {
-                                    height: 36px;
-                                    width: 116px;
-
-                                    @media screen and (max-width: 581px) {
-                                        height: 20px;
-                                        width: 64px;
-                                    }
-                                }
-                            }
+                                margin-top: 0px;
+                                margin-bottom: 5px;
+                            } 
 
                             &.tos {
                                 font-size: 0.63em;
@@ -2801,6 +2513,15 @@ object, embed, video, iframe {
 
                 #signup-container {
                     width: 45%;
+
+                    form {
+                        border-right: 1px inset rgba(255, 255, 255, 0.5);
+                        padding-right: 20px;
+
+                        p button.registration-submit {
+                            margin-bottom: 0;
+                        }
+                    }
                 }
 
                 #login-container {
