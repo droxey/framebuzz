@@ -57,6 +57,17 @@ angular.module('framebuzz',
                 }
             };
 
+            var playerLoginOrSignupView = {
+                name: 'player.loginOrSignupView',
+                parent: playerPanelView,
+                templateUrl: templateRootPath + 'player.loginOrSignup.html',
+                url: '/hello',
+                data: {
+                    panelId: 'share-view',
+                    animation: 'share'
+                }
+            };
+
             var playerStartPrivateConvoView = {
                 name: 'player.startPrivateConvo',
                 parent: playerPanelView,
@@ -64,28 +75,6 @@ angular.module('framebuzz',
                 url: '/share/private',
                 data: {
                     panelId: 'share-view',
-                    animation: 'panel'
-                }
-            };
-
-            var loginView = {
-                name: 'player.loginView',
-                parent: playerPanelView,
-                templateUrl: templateRootPath + 'player.login.html',
-                url: '/login',
-                data: {
-                    panelId: 'login-view',
-                    animation: 'panel'
-                }
-            };
-
-            var signupView = {
-                name: 'player.signupView',
-                parent: playerPanelView,
-                templateUrl: templateRootPath + 'player.signup.html',
-                url: '/signup',
-                data: {
-                    panelId: 'signup-view',
                     animation: 'panel'
                 }
             };
@@ -195,9 +184,8 @@ angular.module('framebuzz',
                 .state(playerInitView)
                 .state(playerPanelView)
                 .state(playerShareView)
+                .state(playerLoginOrSignupView)
                 .state(playerStartPrivateConvoView)
-                .state(loginView)
-                .state(signupView)
                 .state(playerBlendedView)
                 .state(playerActiveView)
                 .state(userProfileView)

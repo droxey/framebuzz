@@ -171,11 +171,17 @@ angular.module('framebuzz.controllers', [])
                         'video_id': SOCK.video_id
                     };
 
-                    socket.send_json({
-                        eventType: eventTypes.postNewComment,
-                        channel: SOCK.video_channel,
-                        data: postData
-                    });
+                    if ($scope.is_authenticated) {
+                        socket.send_json({
+                            eventType: eventTypes.postNewComment,
+                            channel: SOCK.video_channel,
+                            data: postData
+                        });
+                    }
+                    else {
+                        // Show the 'login or signup' screen.
+                        $state.transitionTo('player.loginOrSignupView');
+                    }
 
                     $scope.newThread = {};
                     $scope.clearFocus = true;
@@ -510,9 +516,7 @@ angular.module('framebuzz.controllers', [])
                 });
 
                 $scope.$on('player_playing', function() {
-                    if (!$state.is('player.loginView') &&
-                        !$state.is('player.signupView') &&
-                        !$state.is('player.blendedView')) {
+                    if (!$state.is('player.blendedView')) {
                         $state.transitionTo('player.blendedView');
                     }
 

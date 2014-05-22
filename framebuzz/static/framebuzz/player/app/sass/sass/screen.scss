@@ -692,37 +692,6 @@ object, embed, video, iframe {
                     #id_comment::-moz-placeholder { font-style: italic; } /* firefox 19+ */
                     #id_comment:-ms-input-placeholder { font-style: italic; } /* ie */
                     #id_comment:-moz-placeholder { font-style: italic; }
-
-                    #signup-or-login-prompt {
-                        @include border-radius(1px, 1px);
-                        background: white;
-                        float: left;
-                        font-family: 'proxima-nova';
-                        height: 30px;
-                        width: 529px;
-
-                        @media screen and (max-width: 581px) {
-                            width: 465px;
-                        }
-
-                        @media screen and (min-width: 700px) {
-                            width: 585px;
-                        }
-
-                        p {
-                            color: #989898;
-                            font-size: 14px;
-                            font-weight: 500;
-                            font-style: italic;
-                            line-height: 30px;
-                            text-indent: 10px;
-
-                            a {
-                                color: #1887b9;
-                                text-decoration: underline;
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -2598,6 +2567,244 @@ object, embed, video, iframe {
                             }
                         }
                     }
+                }
+            }
+
+            #login-or-signup-view {
+                h1 {
+                    width: 100%;
+                }
+
+                h2, p.tos {
+                    font-size: 14px;
+                    margin-bottom: 8px;
+
+                    strong {
+                        font-weight: 700;
+                    }
+                }
+
+                h3 {
+                    text-indent: 3px;
+                    font-size: 15px;
+                    font-weight: 400;
+                    color: rgba(82, 176, 240, 1.0);
+                }
+
+                p.tos {
+                    display: inline-block;
+                    font-family: 'proxima-nova';
+                    font-size: 13px;
+                    font-weight: 300;
+                    margin: 14px 12%;
+                    text-align: center;
+                    width: 80%;
+
+                    a {
+                        color: rgba(82, 176, 240, 1.0);
+                        font-weight: 500;
+                    }
+                }
+
+                #login-container,
+                #signup-container {
+                    ul.socialaccount_providers {
+                        margin: 5px auto 35px;
+                        width: 190px;
+
+                        li {
+                            float: left;
+                            height: 42px;
+                            margin: 0 10px;
+                            width: 42px;
+
+                            a.socialaccount_provider {
+                                background-repeat: no-repeat;
+                                background-image:url('../../img/social-icons.png');
+                                cursor: pointer;
+                                height: 40px;
+                                width: 40px;
+                                display: inline-block;
+                                text-indent: -99999px;
+                                opacity: .9;
+                                filter:Alpha(Opacity=9);
+
+                                &:hover {
+                                    opacity: 1;
+                                    filter:Alpha(Opacity=10);
+                                }
+                            }
+
+                            a.twitter {
+                                background-position: -174px 0;
+                            }
+
+                            a.facebook {
+                                background-position: -131px 0;
+                            }
+
+                            a.google {
+                                background-position: -218px 0;
+                            }
+                        }
+                    }
+
+                    form {
+                        @media screen and (max-width: 581px) {
+                            margin-top: 2px;
+                        }
+
+                        ul.errors {
+                            position: absolute;
+                            top: 190px;
+                            width: 200px;
+
+                            li {
+                                color: red;
+                                font: 300 11px/13px 'proxima-nova';
+                                text-align: center;
+                            }
+                        }
+
+                        p {
+                            padding-bottom: 0px;
+                            width: 100%;
+
+                            #id_login, #id_password, #id_password_confirm, #id_email {
+                                @include border-radius(3px, 3px);
+                                background-color: rgba(255, 255, 255, 0.82);
+                                border: 0;
+                                color: rgba(0, 0, 0, 0.70);
+                                font-family: 'proxima-nova';
+                                font-size: 12px;
+                                height: 26px;
+                                margin-top: 5px;
+                                padding: 0 3px;
+                                width: 175px;
+                                @include single-transition(background-color 100ms linear);
+
+                                &:focus {
+                                    background-color: rgba(255, 255, 255, 1);
+                                    @include single-transition(background-color 100ms linear);
+                                }
+
+                                @media screen and (max-width: 581px) {
+
+                                }
+
+                                &.ng-pristine { border: 1px solid transparent; }
+                                &.ng-dirty.ng-valid { border: 1px solid green; }
+                                &.ng-dirty.ng-invalid { border: 1px solid red; }
+                            }
+
+                            .ui-tooltip {
+                                cursor: help;
+                                margin-top: -37px;
+                                opacity: 0.5;
+                                position: absolute;
+                                right: 20px;
+                                z-index: 2;
+
+                                i.icon {
+                                    background-image: url(../../img/glyphicons-halflings-white.png);
+                                }
+                            }
+
+                            a {
+                                color: rgba(255, 255, 255, 0.44);
+                                display: block;
+                                float: right;
+                                font-weight: 300;
+                            }
+
+                            a.forgot-password {
+                                color: rgba(255, 255, 255, 0.44);
+                                display: block;
+                                float: right;
+                                font-size: 11px;
+                                font-weight: 300;
+                                text-align: right;
+                                font-family: 'proxima-nova';
+                            }
+
+                            button.registration-submit {
+                                background: none;
+                                border: 0 none;
+                                height: 36px;
+                                float: right;
+                                padding: 0;
+                                margin-top: 2px;
+                                margin-bottom: 3px;
+                                position: relative;
+                                width: 116px;
+
+                                @media screen and (max-width: 581px) {
+                                    margin-top: 0;
+                                    height: 20px;
+                                    width: 64px;
+                                }
+
+                                span {
+                                    color: white;
+                                    display: block;
+                                    height: 36px;
+                                    font-family: 'proxima-nova';
+                                    font-size: 13.39px;
+                                    font-weight: 700;
+                                    line-height: 34px;
+                                    position: absolute;
+                                    text-align: center;
+                                    top: 0;
+                                    width: 116px;
+
+                                    @media screen and (max-width: 581px) {
+                                        font-size: 12px;
+                                        height: 20px;
+                                        line-height: 18px;
+                                        width: 64px;
+                                    }
+                                }
+
+                                img {
+                                    height: 36px;
+                                    width: 116px;
+
+                                    @media screen and (max-width: 581px) {
+                                        height: 20px;
+                                        width: 64px;
+                                    }
+                                }
+                            }
+
+                            &.tos {
+                                font-size: 0.63em;
+                                line-height: 12px;
+
+                                a {
+                                    display: inline;
+                                    float: none;
+                                }
+                            }
+                        }
+
+                        &.submitted {
+                            p {
+                                #id_login, #id_password, #id_password_confirm, #id_email {
+                                    &.ng-invalid {
+                                        border: 1px solid red;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                #signup-container {
+                    width: 45%;
+                }
+
+                #login-container {
+                    width: 45%;
                 }
             }
         }
