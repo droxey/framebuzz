@@ -216,20 +216,23 @@ angular.module('framebuzz.directives', [])
             }
         };
     }])
-    .directive('onfocus', ['safeApply', function(safeApply) {
+    .directive('onfocus', ['safeApply', '$state', function(safeApply, $state) {
         return {
             link: function(scope, element, attrs) {
                 element.ready(function() {
                     var timeSet = false;
+
                     var unsetPostTime = function() {
-                        scope.postTime = 0;
-                        safeApply(scope);
+                        if (!$state.is('player.loginOrSignupView')) {
+                            scope.postTime = 0;
+                            safeApply(scope);
 
-                        $(element).val('');
-                        $('#post-time').hide();
-                        $('#duration').show().addClass('active');
+                            $(element).val('');
+                            $('#post-time').hide();
+                            $('#duration').show().addClass('active');
 
-                        timeSet = false;
+                            timeSet = false;
+                        }
                     };
 
                     $(element).on('keyup', function(e) {
@@ -263,7 +266,7 @@ angular.module('framebuzz.directives', [])
                         }, true);
                     });
 
-                    $(element).on('blur', function() {
+                    $(element).on('blur', function(e) {
                         unsetPostTime();
                         return false;
                     });

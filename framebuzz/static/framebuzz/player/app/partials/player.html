@@ -10,7 +10,7 @@
   <div class="input-prepend input-append">
     <span id="duration" class="add-on active"><em class="current">{{ currentTimeHMS }}</em><em> / </em>{{ videoInstance.video.time_hms }}</span>
     <span id="post-time" class="add-on posting"><em class="current">@ {{ postTimeHMS }}</em></span>
-    <input data-ng-model="newThread.comment" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-maxinput="" data-onfocus="" autocomplete="off">
+    <input data-ng-model="newThread.comment" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-authenticated="{{ videoInstance.is_authenticated }}" data-maxinput="" data-onfocus="" autocomplete="off">
     <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
   </div>
 </form>

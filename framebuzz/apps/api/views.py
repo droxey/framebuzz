@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.clickjacking import xframe_options_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 
 from actstream import action
 from allauth.account.forms import SignupForm, LoginForm
@@ -70,6 +71,7 @@ def video_embed_error(request, slug):
 
 
 @xframe_options_exempt
+@ensure_csrf_cookie
 def video_login(request, slug):
     if not request.method == 'POST':
         raise Exception('This view is meant to be called via a POST request.')
@@ -107,6 +109,7 @@ def video_login(request, slug):
 
 
 @xframe_options_exempt
+@csrf_exempt
 def video_logout(request, slug):
     if not request.method == 'POST':
         raise Exception('This view is meant to be called via a POST request.')
@@ -120,6 +123,7 @@ def video_logout(request, slug):
 
 
 @xframe_options_exempt
+@ensure_csrf_cookie
 def video_signup(request, slug):
     if not request.method == 'POST':
         raise Exception('This view is meant to be called via a POST request.')

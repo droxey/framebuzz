@@ -81,7 +81,10 @@ angular.module('framebuzz.controllers', [])
                             $scope.formErrors = '';
                             safeApply($scope);
 
-                            $state.transitionTo('player.blendedView');
+                            if ($state.is('player.loginOrSignupView')) {
+                                $scope.postNewThread();
+                                $state.transitionTo('player.blendedView');
+                            }   
                         }
                         else {
                             if (data.data.errors['__all__'] !== undefined) {
@@ -98,7 +101,8 @@ angular.module('framebuzz.controllers', [])
                 $scope.logout = function() {
                     $http({
                         method: 'POST',
-                        url: SOCK.logout_url
+                        url: SOCK.logout_url,
+                        data: { 'csrf_token': '' }
                     })
                     .success(function(data, status, headers, config) {
                         if (data.logged_out !== undefined) {
@@ -137,7 +141,10 @@ angular.module('framebuzz.controllers', [])
                             $scope.formErrors = '';
                             safeApply($scope);
 
-                            $state.transitionTo('player.blendedView');
+                            if ($state.is('player.loginOrSignupView')) {
+                                $scope.postNewThread();
+                                $state.transitionTo('player.blendedView');
+                            }
                         }
                         else {
                             if (data.data.errors['__all__'] !== undefined) {
@@ -171,21 +178,21 @@ angular.module('framebuzz.controllers', [])
                         'video_id': SOCK.video_id
                     };
 
-                    if ($scope.is_authenticated) {
+                    if ($scope.videoInstance.is_authenticated) {
                         socket.send_json({
                             eventType: eventTypes.postNewComment,
                             channel: SOCK.video_channel,
                             data: postData
                         });
+
+                        $scope.newThread = {};
+                        $scope.clearFocus = true;
+                        safeApply($scope);
                     }
                     else {
                         // Show the 'login or signup' screen.
                         $state.transitionTo('player.loginOrSignupView');
                     }
-
-                    $scope.newThread = {};
-                    $scope.clearFocus = true;
-                    safeApply($scope);
                 };
 
                 $scope.postNewReply = function() {
