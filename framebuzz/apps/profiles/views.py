@@ -152,7 +152,7 @@ def recommendations(request):
             user_ids = [u.get('actor_object_id') for u in top_random_users[user_offset:user_offset+4]]
 
             row = dict()
-            row['videos'] = Video.objects.filter(id__in=video_ids, is_public=True)
+            row['videos'] = Video.objects.filter(id__in=video_ids, public=True)
             row['users'] = User.objects.filter(id__in=user_ids)
 
             user_offset = user_offset + 4
