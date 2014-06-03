@@ -10,15 +10,18 @@ angular.module('framebuzz',
         'ngSanitize',
         'ui.state',
         'ui.bootstrap',
+        'LocalStorageModule',
         'framebuzz.filters',
         'framebuzz.services',
         'framebuzz.directives',
         'framebuzz.animations',
         'framebuzz.controllers'
     ])
-    .config(['$routeProvider', '$stateProvider', '$urlRouterProvider',
-        function($routeProvider, $stateProvider, $urlRouterProvider) {
+    .config(['$routeProvider', '$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider',
+        function($routeProvider, $stateProvider, $urlRouterProvider, localStorageServiceProvider) {
             $urlRouterProvider.otherwise('/');
+
+            localStorageServiceProvider.setPrefix('fbz');
 
             var templateRootPath = SOCK.root_path + 'partials/';
 

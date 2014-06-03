@@ -4,8 +4,8 @@
 
 angular.module('framebuzz.controllers', [])
   .controller('VideoPlayerCtrl',
-        ['$rootScope', '$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 'notificationFactory',
-            function($rootScope, $scope, $state, $filter, $http, socket, broadcaster, safeApply, notificationFactory) {
+        ['$rootScope', '$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 'notificationFactory', 'localStorageService',
+            function($rootScope, $scope, $state, $filter, $http, socket, broadcaster, safeApply, notificationFactory, localStorageService) {
                 $scope.rootPath = SOCK.root_path;
                 $scope.videoInstance = {};
                 $scope.videoInstance.is_authenticated = SOCK.is_authenticated;
@@ -110,6 +110,8 @@ angular.module('framebuzz.controllers', [])
                             $scope.videoInstance.is_authenticated = false;
                             safeApply($scope);
 
+                            localStorageService.clearAll();
+
                             $state.transitionTo('player.blendedView');
                         }
                     })
@@ -159,24 +161,32 @@ angular.module('framebuzz.controllers', [])
                 }
 
                 $scope.postNewThread = function() {
-                    if ($scope.newThread == null || $scope.newThread.comment.length == 0) {
-                        return;
+                    var postData = localStorageService.get('fbz_pending_comment');
+                    console.log(postData);
+
+                    if (postData !== null) {
+                        localStorageService.remove('fbz_pending_comment');
                     }
+                    else {
+                        if ($scope.newThread == null || $scope.newThread.comment.length == 0) {
+                            return;
+                        }
 
-                    var time = $scope.postTime == null
-                        ? angular.copy($scope.currentTime)
-                        : angular.copy($scope.postTime);
+                        var time = $scope.postTime == null
+                            ? angular.copy($scope.currentTime)
+                            : angular.copy($scope.postTime);
 
-                    var timeTruncated = parseFloat(time.toString().substring(0, 9));
-                    var postData = {
-                        'object_pk': $scope.videoInstance.video.id,
-                        'content_type': 'core.video',
-                        'time': timeTruncated,
-                        'comment': $scope.newThread.comment,
-                        'username': $scope.videoInstance.user.username,
-                        'session_key': $scope.sessionKey,
-                        'video_id': SOCK.video_id
-                    };
+                        var timeTruncated = parseFloat(time.toString().substring(0, 9));
+                        postData = {
+                            'object_pk': $scope.videoInstance.video.id,
+                            'content_type': 'core.video',
+                            'time': timeTruncated,
+                            'comment': $scope.newThread.comment,
+                            'username': $scope.videoInstance.user.username,
+                            'session_key': $scope.sessionKey,
+                            'video_id': SOCK.video_id
+                        };
+                    }
 
                     if ($scope.videoInstance.is_authenticated) {
                         socket.send_json({
@@ -191,6 +201,8 @@ angular.module('framebuzz.controllers', [])
                     }
                     else {
                         // Show the 'login or signup' screen.
+                        // Store the comment for later.
+                        localStorageService.set('fbz_pending_comment', postData);
                         $state.transitionTo('player.loginOrSignupView');
                     }
                 };
@@ -630,6 +642,13 @@ angular.module('framebuzz.controllers', [])
                         $scope.videoInstance = jsonData.data;
                         $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         safeApply($scope);
+
+                        var loginButtonClicked = localStorageService.get('loggingIn') === 'true';
+                        console.log(loginButtonClicked);
+                        if (loginButtonClicked) {
+                            $scope.postNewThread();
+                            localStorageService.remove('loggingIn');
+                        }
 
                         if ($rootScope.selectedThreadId !== undefined ) {
                             var thread = getThreadById($rootScope.selectedThreadId);

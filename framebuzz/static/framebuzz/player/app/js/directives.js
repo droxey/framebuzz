@@ -284,15 +284,16 @@ angular.module('framebuzz.directives', [])
             });
         };
     })
-    .directive('loginpopup', function() {
+    .directive('loginpopup', ['localStorageService', function(localStorageService) {
         return function(scope, element, attrs) {
             $(element).click(function() {
                 var newWindow = window.open(attrs.loginpopup,'frameBuzzSSOLoginWindow','toolbar=0,resizable=0,status=0,width=640,height=528');
                 if (window.focus) { newWindow.focus(); }
+                localStorageService.set('loggingIn', true);
                 return false;
             });
         };
-    })
+    }])
     .directive('copytoclipboard', ['notificationFactory', function(notificationFactory) {
         return function(scope, element, attrs) {
             $(element).zclip({
