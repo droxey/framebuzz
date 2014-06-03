@@ -46,6 +46,7 @@ class MobileDetectionMiddleware(object):
         if not settings.MEDIA_URL in request.path \
         and not settings.STATIC_URL in request.path \
         and not 'mobile' in request.path \
+        and not 'contact' in request.path \
         and not request.path == '/':
             print request.path
             is_mobile = False
