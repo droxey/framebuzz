@@ -531,19 +531,17 @@ angular.module('framebuzz.controllers', [])
                     $scope.paused = false;
                     safeApply($scope);
 
-                    if ($scope.videoInstance.is_authenticated) {
-                        socket.send_json({
-                            eventType: eventTypes.playerAction,
-                            channel: SOCK.user_channel,
-                            data: {
-                                action: 'player_playing',
-                                username: SOCK.username,
-                                time: $scope.currentTime,
-                                session_key: $scope.sessionKey,
-                                video_id: SOCK.video_id
-                            }
-                        });
-                    }
+                    socket.send_json({
+                        eventType: eventTypes.playerAction,
+                        channel: SOCK.user_channel,
+                        data: {
+                            action: 'player_playing',
+                            username: SOCK.username,
+                            time: $scope.currentTime,
+                            session_key: $scope.sessionKey,
+                            video_id: SOCK.video_id
+                        }
+                    });
                 });
 
                 $scope.$on('player_paused', function() {
@@ -561,19 +559,17 @@ angular.module('framebuzz.controllers', [])
                     $scope.paused = true;
                     safeApply($scope);
 
-                    if ($scope.videoInstance.is_authenticated) {
-                        socket.send_json({
-                            eventType: eventTypes.playerAction,
-                            channel: SOCK.user_channel,
-                            data: {
-                                action: 'player_paused',
-                                username: $scope.videoInstance.user.username,
-                                time: $scope.currentTime,
-                                session_key: $scope.sessionKey,
-                                video_id: SOCK.video_id
-                            }
-                        });
-                    }
+                    socket.send_json({
+                        eventType: eventTypes.playerAction,
+                        channel: SOCK.user_channel,
+                        data: {
+                            action: 'player_paused',
+                            username: $scope.videoInstance.user.username,
+                            time: $scope.currentTime,
+                            session_key: $scope.sessionKey,
+                            video_id: SOCK.video_id
+                        }
+                    });
                 });
 
                 $scope.$on('player_searchusers', function() {

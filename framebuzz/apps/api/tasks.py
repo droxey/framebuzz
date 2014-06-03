@@ -466,6 +466,9 @@ def add_player_action(context):
     else:
         user = context.get('user', None)
 
+    if isinstance(user, auth.models.AnonymousUser):
+        user = auth.models.User.objects.get(username='AnonymousUser')
+
     if player_action == 'player_playing':
         verb = 'played video'
     elif player_action == 'player_paused':

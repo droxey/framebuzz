@@ -266,6 +266,7 @@ ACTSTREAM_SETTINGS = {
         'allauth.EmailAddress',
         'allauth.EmailConfirmation',
         'allauth.SocialAccount',
+        'auth.AnonymousUser',
     ),
     'MANAGER': 'framebuzz.apps.api.managers.FrameBuzzActionManager',
     'FETCH_RELATIONS': True,
