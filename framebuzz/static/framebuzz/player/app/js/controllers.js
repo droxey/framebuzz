@@ -162,7 +162,6 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.postNewThread = function() {
                     var postData = localStorageService.get('fbz_pending_comment');
-                    console.log(postData);
 
                     if (postData !== null) {
                         localStorageService.remove('fbz_pending_comment');
@@ -644,7 +643,6 @@ angular.module('framebuzz.controllers', [])
                         safeApply($scope);
 
                         var loginButtonClicked = localStorageService.get('loggingIn') === 'true';
-                        console.log(loginButtonClicked);
                         if (loginButtonClicked) {
                             $scope.postNewThread();
                             localStorageService.remove('loggingIn');
