@@ -2425,7 +2425,7 @@ object, embed, video, iframe {
 
                                 }
 
-                                &.ng-pristine { border: 1px solid transparent; }
+                                &.ng-pristine, &.ng-dirty { border: 1px solid transparent; }
                                 &.ng-dirty.ng-valid { border: 1px solid green; }
                                 &.ng-dirty.ng-invalid { border: 1px solid red; }
                             }
@@ -2504,7 +2504,7 @@ object, embed, video, iframe {
                         &.submitted {
                             p {
                                 #id_login, #id_password, #id_password_confirm, #id_email {
-                                    &.ng-invalid {
+                                    &.ng-dirty.ng-invalid {
                                         border: 1px solid red;
                                     }
                                 }
