@@ -38,7 +38,7 @@
           </a>
 
             <a href="http://goketra.com" target="_blank" class="logo client-logo absolute-center">
-              <img src="{% static 'framebuzz/dashboard/img/ketra.png' %}" alt="Ketra" height="24" width="152">
+              <img src="{% static 'framebuzz/dashboard/img/{{ request.user.username }}-logo.png' %}" alt="{{ request.user.username|title }}" height="24" width="152">
             </a>
 
           <div class="nav notify-row pull-right" id="top_menu">
@@ -78,7 +78,7 @@
             <ul class="sidebar-menu" id="nav-accordion">
                 <p class="centered">
                   <a href="{% comment %}{% url 'dashboard-profile' request.user.username %}{% endcomment %}">
-                    <img src="{% static 'framebuzz/dashboard/img/ketra-avatar.png' %}" class="img-circle" width="80">
+                    <img src="{% static 'framebuzz/dashboard/img/{{ request.user.username }}-avatar.png' %}" class="img-circle" width="80">
                   </a>
                 </p>
                 <h5 class="centered">{{ request.user|display_name }}</h5>    
