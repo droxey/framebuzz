@@ -691,6 +691,21 @@ def search_user_list(context):
     return construct_message('FB_SEARCH_USERS', channel, return_data)
 
 
+@celery.task
+def enter_password(context):
+    video_id = context.get('video_id', None)
+    channel = context.get('outbound_channel', None)
+    video = Video.objects.get(slug=video_id)
+    password = context.get('password', None)
+    success = False
+
+    if password:
+        if password == video.password:
+            success = True
+
+    return_data = {'success': success}
+    return construct_message('FB_ENTER_PASSWORD', channel, return_data)
+
 
 @celery.task
 def start_private_convo(context):

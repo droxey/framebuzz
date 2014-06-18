@@ -21,6 +21,7 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
+                $scope.enterPasswordModel = {};
                 $scope.formErrors = '';
                 $scope.loginUrls = SOCK.login_urls;
 
@@ -54,7 +55,8 @@ angular.module('framebuzz.controllers', [])
                     notification: 'FB_USER_NOTIFICATION',
                     toggleFollow: 'FB_TOGGLE_FOLLOW',
                     startPrivateConvo: 'FB_START_PRIVATE_CONVO',
-                    searchUsers: 'FB_SEARCH_USERS'
+                    searchUsers: 'FB_SEARCH_USERS',
+                    enterPassword: 'FB_ENTER_PASSWORD'
                 };
 
                 // --
@@ -161,7 +163,17 @@ angular.module('framebuzz.controllers', [])
                 }
 
                 $scope.enterPassword = function() {
-
+                    if ($scope.enterPasswordModel.password !== undefined) {
+                        socket.send_json({
+                            eventType: eventTypes.enterPassword,
+                            channel: SOCK.user_channel,
+                            data: {
+                                password: $scope.enterPasswordModel.password,
+                                session_key: $scope.sessionKey,
+                                video_id: SOCK.video_id
+                            }
+                        });
+                    }
                 };
 
                 $scope.postNewThread = function() {
@@ -538,6 +550,10 @@ angular.module('framebuzz.controllers', [])
                 });
 
                 $scope.$on('player_playing', function() {
+                    if ($state.is('player.enterPasswordView')) {
+                        return;
+                    }
+
                     if (!$state.is('player.blendedView')) {
                         $state.transitionTo('player.blendedView');
                     }
@@ -652,10 +668,6 @@ angular.module('framebuzz.controllers', [])
                             localStorageService.remove('loggingIn');
                         }
 
-                        console.log($scope.videoInstance);
-
-
-
                         if ($rootScope.selectedThreadId !== undefined ) {
                             var thread = getThreadById($rootScope.selectedThreadId);
                             window.setTimeout(function() {
@@ -664,8 +676,9 @@ angular.module('framebuzz.controllers', [])
                             }, 1500);
                         }
                         else {
-                            if ($scope.videoInstance.video.password.length > 0) {
+                            if ($scope.videoInstance.video.password_required) {
                                 $state.transitionTo('player.enterPasswordView');
+                                $('.mejs-overlay-button').parent().hide();
                             }
                             else {
                                 $state.transitionTo('player.blendedView');
@@ -735,6 +748,15 @@ angular.module('framebuzz.controllers', [])
                         $scope.searchResults = jsonData.data.users;
                         safeApply($scope);
                         broadcaster.prepForBroadcast({ broadcastType: 'user_search_complete', data: $scope.searchResults });
+                    }
+                    else if (jsonData.eventType == eventTypes.enterPassword) {
+                        if (jsonData.data.success) {
+                            $state.transitionTo('player.blendedView');
+                            $('.mejs-overlay-button').parent().show();
+                        }
+                        else {
+                            // TODO: Error state.
+                        }
                     }
                     else {
                         console.log('Socket received unhandled message.');

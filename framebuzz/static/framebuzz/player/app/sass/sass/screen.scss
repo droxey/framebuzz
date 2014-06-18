@@ -1822,7 +1822,8 @@ object, embed, video, iframe {
                         }
                     }
 
-                    input[type='text'] {
+                    input[type='text'],
+                    input[type='password'] {
                         @include border-radius(3px, 3px);
                         background-color: rgba(255, 255, 255, 0.82);
                         border: 0;
@@ -2544,17 +2545,24 @@ object, embed, video, iframe {
         }
 
         #enter-password-wrapper {
-            height: 200px;
-            width: 320px;
+            height: 450px;
+            width: 700px;
+            z-index: 99999;
 
             #enter-password-view.modal-background {
+                height: 100%;
+                width: 100%;
+                position: absolute;
                 background: transparent;
+                z-index: 99999;
 
                 div.content {
                     height: 137px;
-                    left: 200px;
-                    top: 33px;
+                    left: 0;
+                    top: 115px;
                     width: 286px;
+
+                    h1 { width: 285px; }
 
                     h2 {
                         font-size: 15px;

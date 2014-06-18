@@ -18,12 +18,13 @@ class VideoSerializer(serializers.ModelSerializer):
     embed_code = serializers.SerializerMethodField('get_embed_code')
     embed_url = serializers.SerializerMethodField('get_embed_url')
     share_url = serializers.SerializerMethodField('get_share_url')
+    password_required = serializers.SerializerMethodField('get_password_required')
 
     class Meta:
         model = Video
         fields = ('id', 'video_id', 'title', 'duration',
                   'time_hms', 'embed_code', 'embed_url', 'share_url',
-                  'mp4_url', 'webm_url', 'slug', 'password', 'public',)
+                  'mp4_url', 'webm_url', 'slug', 'password_required',)
 
     def get_channel(self, obj):
         return '/framebuzz/video/%s' % obj.slug
@@ -39,6 +40,9 @@ class VideoSerializer(serializers.ModelSerializer):
 
     def get_share_url(self, obj):
         return obj.get_share_url()
+
+    def get_password_required(self, obj):
+        return len(obj.password) > 0
 
 
 class UserSerializer(serializers.ModelSerializer):
