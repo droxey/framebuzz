@@ -189,10 +189,9 @@ def change_video_password(request, slug):
 
         if request.method == 'POST':
             password = request.POST.get('password', None)
-            if password:
-                video.password = password
-                video.save()
-                return HttpResponse('ok')
+            video.password = password
+            video.save()
+            return HttpResponse('ok')
     except:
         return HttpResponse('error')
     return HttpResponse('error')
