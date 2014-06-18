@@ -2,7 +2,6 @@ import os
 import hashlib
 import watson
 import caching.base
-import django_filepicker
 
 from datetime import datetime
 
@@ -14,7 +13,6 @@ from django.contrib.comments.models import Comment, CommentFlag
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.encoding import force_bytes
-from django.utils.translation import ugettext as _
 from django.utils.html import urlize
 from django.utils.safestring import mark_safe
 
@@ -23,7 +21,6 @@ from actstream.models import actstream_register_model
 from actstream.actions import follow
 from avatar.util import get_username
 from randomslugfield import RandomSlugField
-from templated_email import send_templated_mail
 from timezone_field import TimeZoneField
 from storages.backends.s3boto import S3BotoStorage
 from mptt.models import MPTTModel, TreeForeignKey
@@ -187,6 +184,7 @@ class Video(caching.base.CachingMixin, models.Model):
     fp_url = models.URLField(max_length=500, blank=True, null=True)
     filename = models.CharField(max_length=500, blank=True, null=True)
     public = models.BooleanField(default=True)
+    password = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         verbose_name = 'FrameBuzz Video'
@@ -274,6 +272,10 @@ class Video(caching.base.CachingMixin, models.Model):
         full_url = 'http://frame.bz%s' % self.get_absolute_url()
         return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0"'
                          ' height="398" width="640"></iframe>' % full_url)
+
+    def wp_embed_code(self):
+        full_url = 'http://frame.bz%s' % self.get_absolute_url()
+        return mark_safe('[framebuzz src=%s width=580 height=360]' % full_url)
 
     def heatmap(self, session_key=None):
         rank_per_block = list()

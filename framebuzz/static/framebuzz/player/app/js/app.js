@@ -71,6 +71,17 @@ angular.module('framebuzz',
                 }
             };
 
+            var playerEnterPasswordView = {
+                name: 'player.enterPasswordView',
+                parent: playerPanelView,
+                templateUrl: templateRootPath + 'player.enterPassword.html',
+                url: '/password',
+                data: {
+                    panelId: 'enter-password-wrapper',
+                    animation: 'share'
+                }
+            };
+
             var playerStartPrivateConvoView = {
                 name: 'player.startPrivateConvo',
                 parent: playerPanelView,
@@ -188,6 +199,7 @@ angular.module('framebuzz',
                 .state(playerPanelView)
                 .state(playerShareView)
                 .state(playerLoginOrSignupView)
+                .state(playerEnterPasswordView)
                 .state(playerStartPrivateConvoView)
                 .state(playerBlendedView)
                 .state(playerActiveView)

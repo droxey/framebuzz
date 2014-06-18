@@ -160,6 +160,10 @@ angular.module('framebuzz.controllers', [])
                     });
                 }
 
+                $scope.enterPassword = function() {
+
+                };
+
                 $scope.postNewThread = function() {
                     var postData = localStorageService.get('fbz_pending_comment');
 
@@ -648,6 +652,10 @@ angular.module('framebuzz.controllers', [])
                             localStorageService.remove('loggingIn');
                         }
 
+                        console.log($scope.videoInstance);
+
+
+
                         if ($rootScope.selectedThreadId !== undefined ) {
                             var thread = getThreadById($rootScope.selectedThreadId);
                             window.setTimeout(function() {
@@ -656,7 +664,12 @@ angular.module('framebuzz.controllers', [])
                             }, 1500);
                         }
                         else {
-                            $state.transitionTo('player.blendedView');
+                            if ($scope.videoInstance.video.password.length > 0) {
+                                $state.transitionTo('player.enterPasswordView');
+                            }
+                            else {
+                                $state.transitionTo('player.blendedView');
+                            }
                         }
 
                         if ($scope.videoInstance.is_authenticated) {
