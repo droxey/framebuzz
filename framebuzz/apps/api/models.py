@@ -221,6 +221,10 @@ class Video(caching.base.CachingMixin, models.Model):
             return found_by[0].user
         return None
 
+    @property
+    def password_required(self):
+        return len(self.password) > 0
+
     def default_thumbnail(self):
         try:
             if self.video_id and len(self.video_id) < 12:

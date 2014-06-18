@@ -59,6 +59,29 @@ $(function() {
                             $('#modal-tabs a[href="#video-details"]', inline).tab('show');
 
                             $('.tooltips', inline).tooltip();
+
+                            $('#change-video-password-form').submit(function(e) {
+                                e.preventDefault();
+
+                                var form = $(this),
+                                    formData = $(this).serialize(),
+                                    url = $(this).attr('action');
+
+                                $.post(url, formData, function(data) {
+                                    var responseContainer = $('td.change-password-response');
+                                    responseContainer.removeClass('hidden');
+
+                                    if (data === 'ok') {
+                                        responseContainer.text('Password changed successfully.');
+                                        $('#id_password').val('');
+                                    }  
+                                    else {
+                                        responseContainer.text('Error changing password.');
+                                    }
+                                });
+
+                                return false;
+                            });
                         });
                     });
                 }

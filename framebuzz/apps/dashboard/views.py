@@ -2,9 +2,9 @@ import json
 
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.db.models import Q, Count
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from actstream.models import Action
@@ -180,3 +180,19 @@ def play_video(request, slug):
     return render_to_response('dashboard/snippets/play_video.html', {
         'video': video,
     }, context_instance=RequestContext(request))
+
+
+@require_dashboard
+def change_video_password(request, slug):
+    try:
+        video = Video.objects.get(slug=slug)
+
+        if request.method == 'POST':
+            password = request.POST.get('password', None)
+            if password:
+                video.password = password
+                video.save()
+                return HttpResponse('ok')
+    except:
+        return HttpResponse('error')
+    return HttpResponse('error')

@@ -70,6 +70,25 @@
                           <td>{{ video.public|yesno|title }}</td>
                       </tr>
                       <tr>
+                          <td><strong>Password Required?</strong></td>
+                          <td>{{ video.password_required|yesno|title }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>{% if video.password_required %}Change{% else %}Add{% endif %} Access<br>Password</strong></td>
+                          <td>
+                            <form id="change-video-password-form" action="{% url 'dashboard-change-video-password' video.slug %}" method="post">
+                              {% csrf_token %}
+                              <table>
+                                <tr>
+                                  <td><input type="password" id="id_password" name="password" autocomplete="off"></td>
+                                  <td><button type="submit" class="btn btn-success">Submit</button></td>
+                                  <td class="hidden change-password-response"></td>
+                                </tr>
+                              </table>
+                            </form>
+                          </td>
+                      </tr>
+                      <tr>
                           <td><strong>WordPress<br>Embed Code</strong></td>
                           <td><textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.wp_embed_code }}</textarea></td>
                       </tr>
