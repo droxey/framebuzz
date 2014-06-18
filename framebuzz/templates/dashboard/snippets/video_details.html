@@ -66,15 +66,15 @@
                           <td>{{ video.timeInHMS }}</td>
                       </tr>
                       <tr>
-                          <td><strong>Description</strong></td>
-                          <td>{% if video.description.length > 0 %}{{ video.formatted_description }}{% else %}<i>No description available.</i>{% endif %}</td>
-                      </tr>
-                      <tr>
                           <td><strong>Public</strong></td>
                           <td>{{ video.public|yesno|title }}</td>
                       </tr>
                       <tr>
-                          <td><strong>Embed Code</strong></td>
+                          <td><strong>WordPress<br>Embed Code</strong></td>
+                          <td><textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.wp_embed_code }}</textarea></td>
+                      </tr>
+                      <tr>
+                          <td><strong>HTML Embed Code</strong></td>
                           <td><textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.embed_code }}</textarea></td>
                       </tr>
                       <tr>
