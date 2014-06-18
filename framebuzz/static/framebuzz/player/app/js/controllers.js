@@ -751,11 +751,15 @@ angular.module('framebuzz.controllers', [])
                     }
                     else if (jsonData.eventType == eventTypes.enterPassword) {
                         if (jsonData.data.success) {
-                            $state.transitionTo('player.blendedView');
+                            $('#password-required-error').addClass('hidden');
+                            $('#id_password_required').addClass('ng-invalid');
                             $('.mejs-overlay-button').parent().show();
+
+                            $state.transitionTo('player.blendedView');
                         }
                         else {
-                            // TODO: Error state.
+                            $('#id_password_required').addClass('error');
+                            $('#password-required-error').removeClass('hidden');
                         }
                     }
                     else {
