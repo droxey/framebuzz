@@ -42,7 +42,7 @@ class VideoSerializer(serializers.ModelSerializer):
         return obj.get_share_url()
 
     def get_password_required(self, obj):
-        return len(obj.password) > 0
+        return obj.password_required
 
 
 class UserSerializer(serializers.ModelSerializer):

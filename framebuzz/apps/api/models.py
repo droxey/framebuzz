@@ -223,7 +223,9 @@ class Video(caching.base.CachingMixin, models.Model):
 
     @property
     def password_required(self):
-        return len(self.password) > 0
+        if self.password:
+            return len(self.password) > 0
+        return False
 
     def default_thumbnail(self):
         try:
