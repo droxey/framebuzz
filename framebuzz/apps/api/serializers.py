@@ -45,6 +45,21 @@ class VideoSerializer(serializers.ModelSerializer):
         return obj.password_required
 
 
+class WordPressVideoSerializer(serializers.ModelSerializer):
+    share_url = serializers.SerializerMethodField('get_share_url')
+    thumbnail = serializers.SerializerMethodField('get_thumbnail')
+
+    class Meta:
+        model = Video
+        fields = ('slug', 'title', 'share_url', 'thumbnail', 'added_on',)
+
+    def get_share_url(self, obj):
+        return obj.get_share_url()
+
+    def get_thumbnail(self, obj):
+        return obj.default_thumbnail()
+
+
 class UserSerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField('get_avatar_url')
     profile_url = serializers.SerializerMethodField('get_profile_url')

@@ -1,10 +1,10 @@
 from framebuzz.apps.api.models import Video
-from framebuzz.apps.api.serializers import VideoSerializer
+from framebuzz.apps.api.serializers import WordPressVideoSerializer
 from rest_framework import generics
 
 
 class VideoList(generics.ListAPIView):
-    serializer_class = VideoSerializer
+    serializer_class = WordPressVideoSerializer
 
     def get_queryset(self):
         """

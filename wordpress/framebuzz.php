@@ -2,8 +2,8 @@
 /* 
 Plugin Name: FrameBuzz Embedder 
 Plugin URI: http://www.framebuzz.com/ 
-Description: Description will appear here. 
-Version: 0.0.4 
+Description: Embed FrameBuzz videos in your blog.
+Version: 1.1.0
 Author: FrameBuzz 
 Author URI: http://www.framebuzz.com/ 
 License: GPLv2 or later 
