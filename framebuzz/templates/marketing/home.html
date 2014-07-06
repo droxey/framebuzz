@@ -54,6 +54,55 @@
         <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.
         </div>
     <![endif]-->
+    <div id="home-floating-search">
+        <div class="container">
+            <div id="logo" class="row">
+                {% block header_row %}
+                <div class="col-xs-3 row-logo">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="25" width="116">
+                    </a>
+                </div>
+                <div class="col-xs-6 row-search">
+                    <form id="search-form" data-users-url="{% url 'search-users' %}" data-conversations-url="{% url 'search-conversations' %}" data-videos-url="{% url 'search-videos' %}" method="GET" action="{% url 'fbz-search' %}" class="navbar-search">
+                        <i class="fa fa-search"></i>
+                        <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search people, conversations, and videos..." class="search-query span2">
+                        <button type="submit"></button>
+                    </form>
+                </div>
+                <div class="col-xs-3 row-user">
+                    {% if request.user.is_authenticated %}
+                    <ul class="nav pull-right">
+                        <li class="dropdown clearfix">
+                            <a class="nav-link avatar pull-left" href="{% url 'profiles-home' request.user.username %}">
+                                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="{% avatar_url request.user 82 %}" height="41" width="41" class="img-circle lazy-load">
+                                <noscript><img src="{% avatar_url request.user 82 %}"></noscript>
+                            </a>
+                            <a id="user-dropdown" class="dropdown-toggle pull-right clearfix" href="#" data-toggle="dropdown">
+                                <i class="fa fa-cog pull-left"></i>
+                                <i class="fa fa-caret-down pull-left"></i>
+                            </a>
+                            {% get_social_accounts request.user as accounts %}
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'profiles-home' request.user.username %}">View profile</a></li>
+                                <li><a href="{% url 'profiles-edit' request.user.username %}">Edit profile</a></li>
+                                <li><a href="{% url 'avatar_add' %}">Change avatar</a></li>
+                                {% if accounts|length == 0 %}<li><a href="{% url 'account_change_password' %}">Change password</a></li>{% endif %}
+                                {% if is_my_profile %}<li class="help"><a href="" id="menu-show-help">Help</a></li>{% endif %}
+                                <li><a href="{% url 'account_logout' %}">Sign out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <p class="navbar-text navbar-right">
+                        <a id="btn-register" class="nav-link pull-left" href="{% url 'account_signup' %}">Create an Account</a><span></span><a id="btn-login" class="nav-link pull-right" href="{% url 'account_login' %}">Sign in</a>
+                    </p>
+                    {% endif %}
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
     <div class="row" id="background">
         <div class="container">
             <div class="row">
@@ -201,7 +250,7 @@
         <div id="metrics" class="row dark">
             <h2>Measure and Improve What Matters</h2>
             <div class="container">
-                <div id="dashboard" class="col-sm-12 dark-inner">
+                <div id="dashboard" class="col-xs-12 dark-inner">
                     <div class="row">
                         <div class="col-xs-6 pull-left left description">
                             <h3>Actionable Metrics Dashboard</h3>
@@ -216,7 +265,7 @@
                         </div>
                     </div>
                     <div class="row button-row">
-                        <div class="ol-xs-4 col-xs-offset-5 center-button">
+                        <div class="col-xs-4 col-xs-offset-5 center-button">
                             {% include 'marketing/snippets/demo-button.html' %}
                         </div>
                     </div>
@@ -242,11 +291,11 @@
         </div>
         <div id="follow" class="row">
             <div class="container">
-                <div class="row">
-                    <div class="col-xs-offset-2 col-xs-5">
-                        <p><span>Follow</span><img class="logo pull-right" src="{% static 'framebuzz/marketing/img/logo.png' %}" width="249" alt="Follow FrameBuzz"></p>
+                <div class="row centered-row">
+                    <div class="follow-img">
+                        <p><span>Follow</span><img class="logo" src="{% static 'framebuzz/marketing/img/logo.png' %}" width="249" alt="Follow FrameBuzz"></p>
                     </div>
-                    <div class="col-xs-1">
+                    <div class="follow-social">
                         <a href="https://plus.google.com/105150048887128713309" target="_blank" class="google">
                             <span class="fa-stack fa-lg">
                               <i class="fa fa-circle fa-stack-2x"></i>
@@ -254,7 +303,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="col-xs-1">
+                    <div class="follow-social">
                         <a href="https://twitter.com/framebuzz" target="_blank" class="twitter">
                             <span class="fa-stack fa-lg">
                               <i class="fa fa-circle fa-stack-2x"></i>
@@ -262,7 +311,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="col-xs-1">
+                    <div class="follow-social">
                         <a href="https://www.linkedin.com/company/framebuzz" target="_blank" class="linkedin">
                             <span class="fa-stack fa-lg">
                               <i class="fa fa-circle fa-stack-2x"></i>
@@ -275,13 +324,13 @@
         </div>
         <footer class="row">
             <div class="container">
-                <div class="row">
-                    <div class="col-xs-push-4 col-xs-3">
+                <div class="row centered-row">
+                    <div class="col-about">
                         <h4>about</h4>
                         <a href="{% url 'about' %}">Team</a>
                         <a href="{% url 'press' %}">Press</a>
                     </div>
-                    <div class="col-xs-push-3 col-xs-3">
+                    <div class="col-contact">
                         <h4>contact</h4>
                         <p><a href="mailto:info@framebuzz.com">info@framebuzz.com</a></p>
                     </div>

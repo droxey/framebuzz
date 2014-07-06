@@ -1,5 +1,6 @@
 @import "compass/css3/border-radius";
 @import "compass/css3/transition";
+@import "compass/css3/transform";
 
 body {
     background: white;
@@ -54,8 +55,9 @@ a.nav-anchor {
 
         #callout {
             background: rgba(0, 0, 0, .31);
-            margin: 34px 0 42px;
+            margin: 34px auto 42px;
             padding: 13px 13px 3px;
+            float: none;
 
             p {
                 color: #FFFFFF;
@@ -224,6 +226,8 @@ div.button-row {
                 bottom: 30px;
                 position: relative;
                 z-index: 1;
+
+                @media screen and (max-width: 530px ) { bottom: 24px; }
             }
 
             img.separator {
@@ -351,15 +355,30 @@ div.button-row {
 
     #follow.row {
 
+        .follow-social {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 7px;
+            white-space: nowrap;
+        }
+
+        .follow-img {
+            vertical-align: middle;
+            display: inline-block;
+            margin-right: 20px;
+            @media screen and (max-width: 640px) { width: 100%; margin-bottom: 15px; }
+        }
+
         div.container {
             padding-top: 75px;
             padding-bottom: 75px;
-            width: 890px;
+            width: 100%;
 
             p {
                 color: #029dd9;
                 font-size: 35px;
                 font-family: 'lobster';
+                margin-bottom: 0;
 
                 span {
 
@@ -369,6 +388,8 @@ div.button-row {
             img.logo {
                 border: none;
                 width: 249px;
+                margin-left: 3px;
+                @media screen and (max-width: 340px) { width: 215px; }
             }
 
             a {
@@ -453,6 +474,99 @@ div.button-row {
     }
 }
 
+.centered-row {
+    text-align: center;
+}
+
+.col-about, .col-contact {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 4.655%;
+    text-align: left;
+}
+
+#home-floating-search {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #FFF;
+    z-index: 10;
+    padding: 10px 15px 8px;
+    @include transition(all .6s linear);
+    @include translateY(-110%);
+    &.sticky { @include translateY(0px); }
+    div.row-logo {
+        @media screen and (max-width: 767px) {
+            width: 18%;
+            padding-left: 0;
+            a { margin-left: 0; }
+        }
+        a {
+            display: block;
+            height: 25px;
+            width: 100%;
+            img { max-width: 98px; }
+        }
+    }
+    #search-form {
+        border-bottom: 1px solid #CCC;
+        box-shadow: none;
+        width: 100%;
+
+        i { color: #999; }
+
+        input {
+            border: medium none;
+            border-radius: 0;
+            box-shadow: none;
+            color: #666666;
+            font-size: 14px;
+            height: 22px;
+            margin-bottom: 0;
+            padding-left: 0;
+            text-indent: 5px;
+            width: 92.5%;
+            text-overflow: ellipsis;
+            -ms-text-overflow: ellipsis;
+        }
+
+        button { display: none; }
+    }
+
+    @media screen and (max-width: 767px) { .row-user { width: 32%; padding: 0; } }
+
+    p.navbar-text {
+        margin: 0;
+        a {
+            font-size: 12px;
+            line-height: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        #btn-register {
+            color: #666;
+            font-weight: 700;
+        }
+
+        span {
+            background: none repeat scroll 0 0 #CCCCCC;
+            display: inline-block;
+            height: 20px;
+            line-height: 20px;
+            margin: 0 5px;
+            width: 1px;
+        }
+    }
+    @media screen and (max-width: 550px) {
+        .row-search { float: right; width: 75%; }
+        .row-user {
+            display: none;
+        }
+    }
+}
 
 
 body.demo {
@@ -598,6 +712,17 @@ body.demo-thanks {
 
         div.container {
             width: 890px;
+        }
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .row.button-row > [class*="col-xs-"] {
+        width: 100%;
+        margin-bottom: 15px;
+        .btn {
+            width: 100%;
+            margin: 0;
         }
     }
 }
