@@ -700,7 +700,6 @@ object, embed, video, iframe {
     #buzz-layer {
         div.panel {
             div.scrollable {
-                @include single-box-shadow(rgba(0, 0, 0, 0.5), 0px, 0px, 118px, 0px, inset);
                 overflow: hidden;
                 position: absolute;
                 top: 44px;
@@ -708,8 +707,8 @@ object, embed, video, iframe {
 
                 ul.comment-stream {
                     li {
-                        border-bottom: 1px solid rgba(104, 104, 104, .90);
-                        color: rgba(255, 255, 255, .65);
+                        border-bottom: 1px solid rgba(104, 104, 104, 0.3);
+                        color: white;
                         display: none;
                         font-family: 'proxima-nova';
                         font-size: 13px;
@@ -719,11 +718,11 @@ object, embed, video, iframe {
                             display: inline-block;
                             padding: 10px 2px 10px 14px;
                             vertical-align: top;
-                            width: 168px;
+                            width: 183px;
 
                             div.header {
                                 strong, a {
-                                    color: rgba(255, 255, 255, 0.63);
+                                    color: rgba(255, 255, 255, 1);
                                     display: inline-block;
                                     font-weight: 700;
                                     font-size: 12.28px;
@@ -732,7 +731,7 @@ object, embed, video, iframe {
 
                                 a.username {
                                     text-align: left;
-                                    width: 78%;
+                                    width: 75%;
                                 }
 
                                 strong.time {
@@ -743,12 +742,12 @@ object, embed, video, iframe {
                             }
 
                             p {
-                                color: rgba(255, 255, 255, 0.68);
+                                color: rgba(255, 255, 255, 1);
                                 display: inline-block;
                                 font-size: 12.28px;
                                 font-weight: 300;
                                 line-height: 16px;
-                                width: 135px;
+                                width: 143px;
                                 word-wrap: break-word;
                             }
 
@@ -772,16 +771,14 @@ object, embed, video, iframe {
                         }
 
                         img.img-circle {
-                            @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
+                            @include box-shadow(0 0 0 2px white, 0 0 0 0 white inset);
                             background: black;
                             cursor: pointer;
                             display: inline-block;
-                            height: 33px;
-                            opacity: .91;
-                            margin-left: 10px;
+                            height: 42px;
                             position: relative;
                             top: 7px;
-                            width: 33px;
+                            width: 42px;
                         }
 
 
@@ -803,7 +800,8 @@ object, embed, video, iframe {
 
         div.active-header {
             background: rgba(0, 0, 0, .70);
-            height: 44px;
+            border-bottom: 1px solid rgba(81, 81, 81, .32);
+            height: 43px;
             position: relative;
             top: 0;
             width: 256px;
@@ -918,8 +916,7 @@ object, embed, video, iframe {
 
                 ul.comment-stream {
                     li {
-                        @include single-box-shadow(rgba(0, 0, 0, 0.35), 0px, 0px, 118px, 0px, inset);
-                        background: rgba(61, 61, 61, 0.15);
+                        background: rgba(0, 0, 0, 0.7);
                         border-bottom: 1px solid rgba(61, 61, 61, 0.35);
                         cursor: pointer;
                         @include single-transition(background-color 100ms ease-in-out);
@@ -939,7 +936,7 @@ object, embed, video, iframe {
                         }
 
                         a {
-                            color: rgba(255, 255, 255, .65);
+                            color: rgba(255, 255, 255, 1);
                             text-decoration: none;
                         }
 
@@ -1023,7 +1020,7 @@ object, embed, video, iframe {
             } 
 
             div.scrollable {
-                background: rgba(53, 53, 53, 0.95);
+                background: rgba(0, 0, 0, 0.7);
                 height: 315px;
                 width: 256px;
 
@@ -1051,7 +1048,7 @@ object, embed, video, iframe {
                                 li {
                                     border-bottom: none;
                                     display: block;
-                                    width: 244px;
+                                    width: 257px;
 
                                     div.thread {
                                         padding: 5px 2px 10px 14px;
@@ -1073,14 +1070,10 @@ object, embed, video, iframe {
                                     }
 
                                     img.img-circle {
-                                        @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.36), 0px 0px 35px 0px rgba(0, 0, 0, 0.33) inset);
                                         background: black;
                                         cursor: pointer;
                                         display: inline-block;
-                                        height: 29px;
-                                        left: 8px;
-                                        top: 5px;
-                                        width: 29px;
+                                        top: 10px;
                                     }
 
                                     div.comment-actions {
@@ -1145,11 +1138,10 @@ object, embed, video, iframe {
                                     }
 
                                     ul.replies {
-                                        background: rgba(98, 98, 98, 0.34);
-                                        border-top: 1px solid rgba(104, 104, 104, 0.90);
+                                        border-top: 1px solid rgba(104, 104, 104, 0.3);
 
                                         li {
-                                            border-bottom: 1px solid rgba(104, 104, 104, 0.90);
+                                            border-bottom: 1px solid rgba(104, 104, 104, 0.3);
                                             margin: 0 10px;
                                             padding: 6px 12px;
                                             width: 199px;
@@ -1202,41 +1194,6 @@ object, embed, video, iframe {
                                         }
                                     }
 
-                                    div.post-reply {
-                                        background: rgba(98, 98, 98, 0.34);
-                                        height: 48px;
-                                        width: 244px;
-
-                                        form {
-                                            border-top: 1px solid rgba(104, 104, 104, 0.90);
-                                            margin: 0 10px;
-                                            padding: 6px 0;
-                                            width: 224px;
-
-                                            #id_reply {
-                                                @include border-radius(0px, 0px);
-                                                background: rgba(182, 182, 182, 0.6);
-                                                border: 1px solid rgba(73, 73, 73, 0.6);
-                                                color: rgba(0, 0, 0, 0.45);
-                                                height: 26px;
-                                                font-size: 12.28px;
-                                                font-weight: 300;
-                                                font-style: normal;
-                                                margin-bottom: 0;
-                                                width: 212px;
-
-                                                &.maxlength-full {
-                                                    border: 1px solid rgba(255, 0, 0, 0.6);
-                                                }
-                                            }
-
-                                            #id_reply::-webkit-input-placeholder { font-style: italic; }
-                                            #id_reply::-moz-placeholder { font-style: italic; } /* firefox 19+ */
-                                            #id_reply:-ms-input-placeholder { font-style: italic; } /* ie */
-                                            #id_reply:-moz-placeholder { font-style: italic; }
-                                        }
-                                    }
-
                                     &.active-thread {
                                         border-bottom: 1px solid rgba(104, 104, 104, .90);
 
@@ -1262,9 +1219,9 @@ object, embed, video, iframe {
                             }
 
                             &.single-thread {
-                                height: 288px;
+                                height: 346px;
 
-                                ul.comment-stream { height: 288px; }
+                                ul.comment-stream { height: 346px; }
                             }
 
                             .ps-scrollbar-x { display: none; }
@@ -1420,7 +1377,7 @@ object, embed, video, iframe {
 
                                         div.header {
                                             strong, a {
-                                                color: rgba(255, 255, 255, 0.63);
+                                                color: rgba(255, 255, 255, 1);
                                                 display: inline-block;
                                                 font-weight: 700;
                                                 font-size: 12.28px;
