@@ -170,52 +170,6 @@ angular.module('framebuzz.directives', [])
             $(element).maxlength({showFeedback: false, max: 180});
         };
     })
-    .directive('bxslider', ['safeApply', function (safeApply) {
-        var slider = null;
-
-        return function (scope, element, attrs) {
-            if (scope.$last === true) {
-                element.ready(function () {
-                    var sliderOpts = {
-                        infiniteLoop: false,
-                        minSlides: 1,
-                        maxSlides: 5,
-                        moveSlides: 5,
-                        startSlide: 0,
-                        slideWidth: '26px',
-                        pager: false,
-                        slideSelector: 'li.slide',
-                        responsive: false,
-                        tickerHover: true,
-                        speed: 500,
-                        preloadImages: 'all',
-                        autoStart: false,
-                        prevText: '&nbsp;',
-                        nextText: '&nbsp;',
-                        prevSelector: '.icon-left-dir',
-                        nextSelector: '.icon-right-dir',
-                        easing: 'ease-in-out'
-                    };
-
-                    slider = element.parent().bxSlider(sliderOpts);
-                    element.parent().css({ 'width': '99999px' });
-                    element.parent().parent().css({ 'width': '130px', 'height': '23px' });
-                    element.parent().parent().parent().css({ 'width': '131px', 'max-width': '131px' });
-
-                    $('div.bx-loading').remove();
-
-                    scope.$watch('updateSlider', function(val) {
-                        if (val) {
-                            slider.reloadSlider();
-
-                            scope.updateSlider = false;
-                            safeApply(scope);
-                        }
-                    }, true);
-                });
-            }
-        };
-    }])
     .directive('onfocus', ['safeApply', '$state', function(safeApply, $state) {
         return {
             link: function(scope, element, attrs) {
