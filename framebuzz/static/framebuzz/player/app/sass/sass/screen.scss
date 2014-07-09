@@ -703,7 +703,7 @@ object, embed, video, iframe {
                 @include single-box-shadow(rgba(0, 0, 0, 0.5), 0px, 0px, 118px, 0px, inset);
                 overflow: hidden;
                 position: absolute;
-                top: 0;
+                top: 44px;
                 z-index: 110;
 
                 ul.comment-stream {
@@ -798,74 +798,122 @@ object, embed, video, iframe {
                 }
 
                 .ps-scrollbar-x { display: none; }
+            }
+        }
 
-                div.active-header {
-                    background: #484848;
-                    border-bottom: #434343;
-                    height: 43px;
+        div.active-header {
+            background: rgba(0, 0, 0, .70);
+            height: 44px;
+            position: relative;
+            top: 0;
+            width: 256px;
+            z-index: 99999;
 
-                    a.active-close {
-                        background-color: #686868;
+            a.logo {
+                cursor: pointer;
+                display: inline-block;
+                float: left;
+                height: 20px;
+                width: 93px;
+                padding: 12px;
+            }
+
+            a.dropdown-toggle {
+                cursor: pointer;
+                display: inline-block;
+                float: right;
+                height: 33px;
+                padding: 4px 0;
+                width: 51px;
+
+                img.img-circle {
+                    @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
+                    background: black;
+                    float: left;
+                    height: 33px;
+                    margin-right: 5px;
+                    position: relative;
+                    left: -2px;
+                    top: 2px;
+                    width: 33px;
+                }
+
+                img.indicator {
+                    float: left;
+                    height: 6px;
+                    margin: 15px 0;
+                    width: 13px;
+                }
+            }
+
+            a.sign-in-button {
+                box-shadow: none;
+                display: block;
+                float: right;
+                font-family: 'proxima-nova';
+                font-size: 13px;
+                font-weight: 700;
+                margin: 8px 12px;
+            }
+
+            ul.dropdown-menu {
+                @include border-radius(0px, 0px);
+                box-shadow: none;
+                background: #2b2b2b;
+                height: 57px;
+                left: 135px;
+                min-width: 108px;
+                padding: 0;
+                top: 42px;
+
+                li {
+                    width: 108px;
+
+                    a {
+                        color: white;
                         cursor: pointer;
                         display: block;
-                        float: left;
-                        height: 43px;
-                        margin-right: 14px;
-                        width: 33px;
-                        @include single-transition(background-color 250ms ease-in);
+                        line-height: 28.5px;
+                        font-family: 'proxima-nova';
+                        font-size: 10.04px;
+                        font-weight: 500;
+                        padding: 0 10px;
+                        text-align: right;
+                        text-decoration: none;
+                        text-transform: uppercase;
 
-                        i.icon {
-                            background: none;
-                            color: white;
-                            font-size: 16px;
-                            height: 20px;
-                            margin: 12px 6px;
-                            opacity: 0.8;
-                            text-indent: -1px;
-                            width: 20px;
-                            @include single-transition(opacity 250ms ease-in-out);
-                        }
-
-                        &:hover {
-                            background-color: #828282;
-                            @include single-transition(background-color 250ms ease-in);
-
-                            i.icon {
-                                opacity: 1;
-                                @include single-transition(opacity 250ms ease-in-out);
-                            }
-                        }
+                        &:hover { font-weight: 700; }
                     }
                 }
             }
         }
 
         #blended-view {
-            margin-left: 387px;
-            height: auto;
-            width: 237px;
+            height: 360px;
+            margin-left: 390px;
+            width: 256px;
 
             @media screen and (max-width: 581px) {
-                margin-left: 335px;
+                height: 322px;
+                margin-left: 324px;
             }
 
             @media screen and (min-width: 700px) {
-                margin-left: 447px;
-            }
+                margin-left: 444px;
+            } 
 
             div.scrollable {
                 background: transparent;
                 box-shadow: none;
-                margin-left: 13px;
-                height: 360px;
-                width: 237px;
+                height: 315px;
+                width: 256px;
 
                 @media screen and (max-width: 581px) {
-                    height: 322px;
+                    height: 277px;
                 }
 
                 @media screen and (min-width: 700px) {
-                    height: 400px;
+                    height: 355px;
                 }
 
                 ul.comment-stream {
@@ -961,286 +1009,36 @@ object, embed, video, iframe {
         }
 
         #active-view, #profile-view {
-            height: 360px;
-            margin-left: 395px;
-            width: 246px;
+            height: 390px;
+            margin-left: 390px;
+            width: 256px;
 
             @media screen and (max-width: 581px) {
                 height: 322px;
-                margin-left: 335px;
-                width: 246px;
+                margin-left: 324px;
             }
 
             @media screen and (min-width: 700px) {
-                margin-left: 455px;
-            }
+                margin-left: 444px;
+            } 
 
             div.scrollable {
                 background: rgba(53, 53, 53, 0.95);
-                height: 360px;
-                width: 245px;
+                height: 315px;
+                width: 256px;
 
                 @media screen and (max-width: 581px) {
-                    height: 322px;
+                    height: 277px;
                 }
 
                 @media screen and (min-width: 700px) {
-                    height: 400px;
-                }
-
-                div.active-header {
-                    padding-right: 10px;
-                    height: 44px;
-
-                    ul.tabs {
-                        float: left;
-                        height: 44px;
-
-                        li {
-                            float: left;
-                            padding-right: 10px;
-
-                            a {
-                                cursor: pointer;
-                                color: white;
-                                display: block;
-                                font-family: 'proxima-nova';
-                                font-size: 11px;
-                                font-weight: 500;
-                                line-height: 10px;
-                                padding: 16px 0px;
-                                text-decoration: none;
-                                text-transform: uppercase;
-
-                                &.active {
-                                    cursor: default;
-                                    font-weight: 700;
-                                }
-                            }
-                        }
-
-
-
-                        li.indicator {
-                            display: block;
-                            height: 6px;
-                            position: absolute;
-                            top: -6px;
-                            left: 72px;
-                            width: 13px;
-                            z-index: 20;
-
-                            img {
-                                height: 6px;
-                                width: 13px;
-                            }
-
-                            &.comments {
-                                left: 72px;
-                                @include single-transition(left 100ms linear, all 0.5s ease-in-out);
-                            }
-
-                            &.activity {
-                                left: 134px;
-                                @include single-transition(left 100ms linear, all 0.5s ease-in-out);
-                            }
-                        }
-                    }
-
-                    a.dropdown-toggle {
-                        cursor: pointer;
-                        display: inline-block;
-                        float: right;
-                        height: 33px;
-                        padding: 4px 0;
-                        width: 51px;
-
-                        img.img-circle {
-                            @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
-                            background: black;
-                            float: left;
-                            height: 33px;
-                            margin-right: 5px;
-                            position: relative;
-                            left: -2px;
-                            top: 2px;
-                            width: 33px;
-                        }
-
-                        img.indicator {
-                            float: left;
-                            height: 6px;
-                            margin: 15px 0;
-                            width: 13px;
-                        }
-                    }
-
-                    a.sign-in-button {
-                        box-shadow: none;
-                        display: block;
-                        float: right;
-                        font-family: 'proxima-nova';
-                        font-size: 13px;
-                        font-weight: 700;
-                        margin: 8px 0;
-                    }
-
-                    ul.dropdown-menu {
-                        @include border-radius(0px, 0px);
-                        box-shadow: none;
-                        background: #2b2b2b;
-                        height: 57px;
-                        left: 135px;
-                        min-width: 108px;
-                        padding: 0;
-                        top: 42px;
-
-                        li {
-                            width: 108px;
-
-                            a {
-                                color: white;
-                                cursor: pointer;
-                                display: block;
-                                line-height: 28.5px;
-                                font-family: 'proxima-nova';
-                                font-size: 10.04px;
-                                font-weight: 500;
-                                padding: 0 10px;
-                                text-align: right;
-                                text-decoration: none;
-                                text-transform: uppercase;
-
-                                &:hover { font-weight: 700; }
-                            }
-                        }
-                    }
+                    height: 355px;
                 }
 
                 div.tab-container {
                     div.comments-view {
                         position: absolute;
-                        width: 245px;
-
-                        div.thread-timeline {
-                            height: 53px;
-                            width: 245px;
-
-                            img.bkg {
-                                position: relative;
-                                height: 53px;
-                                top: 0;
-                                width: 245px;
-                                z-index: 1;
-                            }
-
-                            #thread-carousel {
-                                padding: 4px 6px 4px 12.5px;
-                                position: absolute;
-                                top: 0;
-                                width: 245px;
-                                z-index: 1;
-
-                                img.active-thread {
-                                    @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.36), 0px 0px 35px 0px rgba(0, 0, 0, 0.33) inset);
-                                    display: block;
-                                    float: left;
-                                    height: 33px;
-                                    margin-top: 1px;
-                                    width: 33px;
-                                }
-
-                                #carousel {
-                                    float: left;
-                                    height: 22px;
-                                    margin: 5.5px 0 9.5px 7px;
-                                    width: 180px;
-
-                                    .tooltip {
-                                        font-family: 'proxima-nova';
-                                        font-weight: 500;
-
-                                        .tooltip-inner {
-                                            padding: 4px;
-                                        }
-                                    }
-
-                                    span.icon-left-dir, span.icon-right-dir {
-                                        color: rgba(255, 255, 255, 0.5);
-                                        display: block;
-                                        float: left;
-                                        height: 15px;
-                                        font-size: 0.85em;
-                                        margin-top: 4px;
-                                        position: relative;
-                                        text-align: center;
-                                        width: 15px;
-                                        @include single-transition(color 100ms ease-in-out);
-
-                                        &:hover {
-                                            color: rgba(255, 255, 255, 0.8);
-                                            text-decoration: none;
-                                            @include single-transition(color 100ms ease-in-out);
-                                        }
-
-                                        &.disabled {
-                                            opacity: 0;
-                                        }
-
-                                        a {
-                                            display: block;
-                                            position: absolute;
-                                            top: 0;
-                                            left: 0;
-                                            height: 15px;
-                                            text-decoration: none;
-                                            width: 15px;
-                                            z-index: 1000;
-                                        }
-
-                                        &.icon-left-dir {
-                                            left: 6px;
-                                        }
-                                    }
-
-                                    div.bx-wrapper {
-                                        height: 23px;
-                                        float: left;
-                                        left: 4px;
-                                        padding: 0 7px 0 10px;
-                                        position: relative;
-                                        width: 131px;
-
-                                        div.bx-viewport {
-                                            height: 23px;
-                                            left: 0;
-                                            width: 130px;
-
-                                            ul {
-                                                bottom: 0;
-                                                margin: 0;
-                                                height: 23px;
-                                                width: 99999px;
-
-                                                li {
-                                                    cursor: pointer;
-                                                    padding: 0 3px;
-                                                    height: 20px;
-                                                    width: 20px;
-
-                                                    img.img-circle {
-                                                        @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
-                                                        background: black;
-                                                        height: 20px;
-                                                        width: 20px;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        width: 256px;
 
                         div.thread-scroll {
                             height: 341px;
@@ -2588,7 +2386,6 @@ object, embed, video, iframe {
 }
 
 .ng-cloak {  }
-
 .wf-loading, .ng-cloak {
     #player-container {
         visibility: hidden;
