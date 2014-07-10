@@ -9,12 +9,8 @@
         </div>
         <img class="img-circle" data-ng-src="{{ selectedThread.user.avatar_url }}" alt="" data-ng-click="getUserProfile(selectedThread.user.username)" />
         <div class="comment-actions clearfix">
-            <a class="reply" data-ng-model="replyClicked" data-ng-init="replyClicked = false" data-ng-click="replyClicked = !replyClicked" data-ng-show="videoInstance.is_authenticated">
-                <span>
-                    <i class="fa fa-comments" data-ng-hide="replyClicked"></i>
-                    <i class="fa fa-comments icon-selected" data-ng-show="replyClicked"></i>
-                    Reply
-                </span>
+            <a class="reply" data-ng-show="videoInstance.is_authenticated">
+                <span><i class="fa fa-comments"></i> Reply</span>
             </a>
             <a class="favorite" data-ng-click="postCommentAction(selectedThread, 'favorite')" data-ng-show="videoInstance.is_authenticated">
                 <span data-ng-hide="selectedThread.is_favorite"><i class="fa fa-heart"></i> Favorite</span>

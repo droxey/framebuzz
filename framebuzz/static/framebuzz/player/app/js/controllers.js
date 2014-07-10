@@ -84,7 +84,9 @@ angular.module('framebuzz.controllers', [])
                             safeApply($scope);
 
                             if ($state.is('player.loginOrSignupView')) {
-                                $scope.postNewThread();
+                                if ($scope.newThread.comment !== undefined) {
+                                    $scope.postNewThread();
+                                }
                                 $state.transitionTo('player.blendedView');
                             }   
                         }
