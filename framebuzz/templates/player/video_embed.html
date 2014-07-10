@@ -36,6 +36,7 @@
       })();
     </script>
     {% compress css %}
+      <link href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/bootstrap-responsive.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/mediaelementplayer.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
@@ -44,7 +45,6 @@
       <link href="{% static 'framebuzz/player/app/css/jquery.maxlength.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/icons.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/animations.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <link href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/jquery.share.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/social-buttons.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
@@ -79,6 +79,7 @@
           video_id: '{{ video.slug }}',
           share_url: "{% shorturl video %}",
           private_session_key: {% if convo_slug %}'{{ convo_slug }}'{% else %}null{% endif %},
+          video_title: '{{ video.title|title }}',
           login_urls: {
             twitter: "{% provider_login_url 'twitter' next=next_url method='oauth2' display='popup' %}",
             facebook: "{% provider_login_url 'facebook' next=next_url method='oauth2' display='popup' %}",
