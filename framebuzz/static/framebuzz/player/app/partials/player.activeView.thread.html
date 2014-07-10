@@ -10,15 +10,13 @@
         <img class="img-circle" data-ng-src="{{ selectedThread.user.avatar_url }}" alt="" data-ng-click="getUserProfile(selectedThread.user.username)" />
         <div class="comment-actions clearfix">
             <a class="reply" data-ng-show="videoInstance.is_authenticated">
-                <span><i class="fa fa-comments"></i> Reply</span>
+                <i class="fa fa-comments"></i><span>Reply</span>
             </a>
             <a class="favorite" data-ng-click="postCommentAction(selectedThread, 'favorite')" data-ng-show="videoInstance.is_authenticated">
-                <span data-ng-hide="selectedThread.is_favorite"><i class="fa fa-heart"></i> Favorite</span>
-                <span data-ng-show="selectedThread.is_favorite"><i class="fa fa-heart icon-selected"></i> Remove</span>
+                <i class="fa fa-heart"></i><span class="icon-text" data-ng-bind="selectedThread.is_favorite ? 'Faved' : 'Favorite'"></span>
             </a>
             <a class="follow" data-ng-click="postCommentAction(selectedThread, 'follow')" data-ng-hide="!videoInstance.is_authenticated || selectedThread.user.username == videoInstance.user.username">
-                <span data-ng-hide="selectedThread.is_following"><i class="fa fa-user"></i> Follow</span>
-                <span data-ng-show="selectedThread.is_following"><i class="fa fa-user icon-selected"></i> Unfollow</span>
+                <i class="fa fa-user"></i><span class="icon-text" data-ng-bind="selectedThread.is_following ? 'Following' : 'Follow'"></span>
             </a>
         </div>
         <ul class="replies">
@@ -31,12 +29,10 @@
                 </div>
                 <div class="comment-actions clearfix" data-ng-show="videoInstance.is_authenticated">
                     <a class="favorite" data-ng-click="postCommentAction(reply, 'favorite')" data-ng-show="videoInstance.is_authenticated">
-                        <i class="fa fa-heart" data-ng-hide="reply.is_favorite"></i>
-                        <i class="fa fa-heart icon-selected" data-ng-show="reply.is_favorite"></i>
+                        <i class="fa fa-heart"></i><span class="icon-text" data-ng-bind="reply.is_favorite ? 'Faved' : 'Favorite'"></span>
                     </a>
                     <a class="follow" data-ng-click="postCommentAction(reply, 'follow')" data-ng-hide="!videoInstance.is_authenticated || reply.user.username == videoInstance.user.username">
-                        <i class="fa fa-user" data-ng-hide="reply.is_following"></i>
-                        <i class="fa fa-user icon-selected" data-ng-show="reply.is_following"></i>
+                        <i class="fa fa-user"></i><span class="icon-text" data-ng-bind="reply.is_following ? 'Following' : 'Follow'"></span>
                     </a>
                 </div>
             </li>

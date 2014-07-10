@@ -12,7 +12,7 @@ angular.module('framebuzz.directives', [])
     .directive('mediaElement', ['broadcaster', '$state', '$rootScope', 'safeApply', function(broadcaster, $state, $rootScope, safeApply) {
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
-                features: ['title', 'share', 'addtolibrary', 'muteconvo', 'progress', 'playpause'],
+                features: ['title', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'progress', 'playpause'],
                 pluginPath: SOCK.root_path + 'swf/',
                 flashName: 'flashmediaelement.swf',
                 silverlightName: 'silverlightmediaelement.xap',
@@ -84,6 +84,10 @@ angular.module('framebuzz.directives', [])
                             button.removeClass('mejs-unmute').addClass('mejs-mute');
                             broadcaster.prepForBroadcast({ broadcastType: 'player_unmuteconvo' });
                         }
+                    });
+
+                    $(document).on('click', '.mejs-start-private-session', function() {
+                        $state.transitionTo('player.startPrivateConvo');
                     });
 
                     $('.mejs-share-framebuzz-button').click(function() {

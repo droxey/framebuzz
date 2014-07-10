@@ -30,6 +30,12 @@
         $('<button class="mejs-mute-convo-button mejs-mute" type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
             '<i class="fa fa-comment"></i>Mute Conversation</button>')
         .appendTo(shareDiv);
+    },
+    buildprivateconvo: function(player, controls, layers, media) {
+      var shareDiv = controls.find('div.mejs-share');
+      var button = 
+        $('<button class="mejs-start-private-session" class="rounded"><i class="fa fa-lock"></i> Start Private</button>')
+      .appendTo(shareDiv);
     }
   });
 })(jQuery);
