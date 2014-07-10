@@ -74,10 +74,9 @@ angular.module('framebuzz.directives', [])
                         }, 250);
                     });
 
-                    $('.mejs-mute-conversation-button button').click(function() {
+                    $('.mejs-mute-convo-button').click(function() {
                         var button = $(this);
-                        var buttonImg = button.find('.mejs-mute-convo-button');
-
+                        console.log('clicked');
                         if (button.hasClass('mejs-mute')) {
                             button.removeClass('mejs-mute').addClass('mejs-unmute');
                             broadcaster.prepForBroadcast({ broadcastType: 'player_muteconvo' });
