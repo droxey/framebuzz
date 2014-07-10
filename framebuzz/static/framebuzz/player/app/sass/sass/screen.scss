@@ -1056,8 +1056,6 @@ object, embed, video, iframe {
                                     width: 257px;
 
                                     div.thread {
-                                        padding: 5px 2px 10px 14px;
-
                                         div.header {
                                             a.username {
                                                 cursor: pointer;
@@ -1074,20 +1072,18 @@ object, embed, video, iframe {
                                         background: black;
                                         cursor: pointer;
                                         display: inline-block;
-                                        top: 10px;
                                     }
 
                                     div.comment-actions {
-                                        padding: 0px 10px 6px 10px;
+                                        padding: 6px 10px 0;
 
                                         a {
                                             color: #989898;
                                             cursor: pointer;
                                             display: inline-block;
-                                            
                                             line-height: 18px;
                                             text-decoration: none;
-
+                                            margin-bottom: 6px;
 
                                             span {
                                                 font-size: 11px;
@@ -1124,15 +1120,10 @@ object, embed, video, iframe {
                                                 }
                                             }
 
-                                            &:hover {
-                                                color: white;
-                                            }
-
                                             &.active {
                                                 span { color: white; }
                                                 
                                                 i {
-                                                    top: 0;
                                                     color: white;
                                                     text-shadow:
                                                         -1px -1px 0 #00aeef,
@@ -1140,6 +1131,15 @@ object, embed, video, iframe {
                                                         -1px 1px 0 #00aeef,
                                                         1px 1px 0 #00aeef;
                                                     margin-right: 4px;
+                                                }
+                                            }
+
+                                            &:hover {
+                                                span { color: white; }
+                                                
+                                                i {
+                                                    text-shadow: none;
+                                                    color: white;
                                                 }
                                             }
                                         }
