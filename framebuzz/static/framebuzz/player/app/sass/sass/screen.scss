@@ -1099,30 +1099,48 @@ object, embed, video, iframe {
                                                 font-weight: normal;
                                                 position: relative;
                                                 top: 1px;
-                                                margin-right: 4px;
-
-                                                &.icon-selected {
-
-                                                }
+                                                margin-right: 2px;
                                             }
 
                                             &.reply {
                                                 padding-left: 5px;
+
+                                                i { width: 16px; }
                                             }
 
                                             &.favorite {
                                                 margin: 0 6px;
                                                 width: 58px;
 
-                                                i { top: 2px; }
+                                                i { 
+                                                    top: 2px;
+                                                    width: 16px;
+                                                }
                                             }
 
                                             &.follow {
-
+                                                i {
+                                                    width: 12px;
+                                                }
                                             }
 
                                             &:hover {
                                                 color: white;
+                                            }
+
+                                            &.active {
+                                                span { color: white; }
+                                                
+                                                i {
+                                                    top: 0;
+                                                    color: white;
+                                                    text-shadow:
+                                                        -1px -1px 0 #00aeef,
+                                                        1px -1px 0 #00aeef,
+                                                        -1px 1px 0 #00aeef,
+                                                        1px 1px 0 #00aeef;
+                                                    margin-right: 4px;
+                                                }
                                             }
                                         }
                                     }
