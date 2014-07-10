@@ -27,7 +27,7 @@
       var shareDiv = controls.find('div.mejs-share');
 
       var button =  
-        $('<button class="mejs-mute-convo-button" type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
+        $('<button class="mejs-mute-convo-button mejs-mute" type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
             '<i class="fa fa-comment"></i>Mute Conversation</button>')
         .appendTo(shareDiv);
     }
