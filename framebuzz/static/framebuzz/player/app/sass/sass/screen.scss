@@ -1025,11 +1025,11 @@ object, embed, video, iframe {
             }
 
             div.panel-header {
-                background: rgba(0, 0, 0, .85);
+                background: rgba(0, 0, 0, .5);
                 border-bottom: 1px solid rgba(104, 104, 104, 0.3);
                 height: 32px;
                 position: relative;
-                top: 44px;
+                top: 0;
                 width: 100%;
                 z-index: 99999;
 
@@ -1059,33 +1059,33 @@ object, embed, video, iframe {
 
             div.scrollable {
                 background: rgba(0, 0, 0, 0.7);
-                height: 273px;
+                height: 306px;
                 width: 256px;
-                top: 77px;
+                top: 44px;
 
                 @media screen and (max-width: 581px) {
-                    height: 234px;
+                    height: 267px;
                 }
 
                 @media screen and (min-width: 700px) {
-                   height: 313px;
+                   height: 346px;
                 }
 
                 div.tab-container {
                     div.comments-view {
                         position: absolute;
                         width: 256px;
-
+                        height: 100%;
+                        
                         div.thread-scroll {
-                            height: 341px;
+                            height: 313px;
                             overflow: hidden;
                             position: absolute;
 
                             ul.comment-stream {
-                                height: 341px;
-
+                                height: 313px;
+                                
                                 li {
-                                    border-bottom: none;
                                     display: block;
                                     width: 257px;
 

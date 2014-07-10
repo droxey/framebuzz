@@ -33,7 +33,7 @@ angular.module('framebuzz.controllers', [])
                 $scope.playing = false;
                 $scope.paused = false;
                 $scope.timeOrderedThreads = null;
-                $scope.selectedThreadIndex = -1;
+                $scope.selectedThreadSiblings = [];
                 $scope.share = {};
                 $scope.shareUrl = SOCK.share_url;
 
@@ -268,23 +268,26 @@ angular.module('framebuzz.controllers', [])
                 };
 
                 $scope.setSelectedThread = function(thread) {
-                    var index = -1;
+                    var filteredList = [];
 
                     if (thread === null || thread === undefined) {
                         thread = getNextThreadInTimeline();
                     }
 
                     if (thread != null) {
-                        index = $scope.timeOrderedThreads.indexOf(thread);
-
                         var time = parseInt(thread.time, 10);
 
-                        $state.transitionTo('player.activeView.siblings', { threadId: thread.id });
-                        $scope.selectedThreadIndex = index;
-                        $scope.selectedThread = thread;
+                        angular.forEach($scope.videoInstance.threads, function(obj, key) {
+                            if (parseInt(obj.time, 10) == time) {
+                                filteredList.push(obj);
+                            }
+                        });
+
+                        $scope.selectedThreadSiblings = filteredList;
                         $scope.activeViewTitle = "Comments at " + thread.time_hms;
                         safeApply($scope);
 
+                        $state.transitionTo('player.activeView.siblings', { threadId: thread.id });
                         $scope.player.pause();
                     }
                 };

@@ -1,3 +1,7 @@
 <div class="comments-view">
-    <div class="thread-scroll single-thread" data-ng-hide="selectedThread == null" data-scrollbar="true" data-ui-view=""></div>
+    <div class="panel-header">
+        <i class="fa fa-arrow-circle-left" data-ng-click="$state.transitionTo('player.blendedView')"></i>
+        <h2 data-ng-bind="activeViewTitle"></h2>
+    </div>
+    <div class="thread-scroll" data-scrollbar="true" data-ui-view=""></div>
 </div>

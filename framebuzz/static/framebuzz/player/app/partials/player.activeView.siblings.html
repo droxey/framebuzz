@@ -1,25 +1,25 @@
 <ul class="comment-stream siblings">
-    <li>
-        <div class="thread" data-ng-click="setSelectedComment(selectedThread)">
+    <li data-ng-repeat="thread in selectedThreadSiblings">
+        <div class="thread" data-ng-click="setSelectedComment(thread)">
             <div class="header">
-                <a class="username" data-ng-click="getUserProfile(selectedThread.user.username)">{{ selectedThread.user.username }}</a>
-                <strong class="time" data-ng-click="setVideoTime(selectedThread.time)" >{{ selectedThread.time_hms }}</strong>
+                <a class="username" data-ng-click="getUserProfile(thread.user.username)">{{ thread.user.username }}</a>
+                <strong class="time" data-ng-click="setVideoTime(thread.time)" >{{ thread.time_hms }}</strong>
             </div>
-            <p ng-bind-html-unsafe="selectedThread.comment"></p>
+            <p ng-bind-html-unsafe="thread.comment"></p>
         </div>
-        <img class="img-circle" data-ng-src="{{ selectedThread.user.avatar_url }}" alt="" data-ng-click="getUserProfile(selectedThread.user.username)" />
+        <img class="img-circle" data-ng-src="{{ thread.user.avatar_url }}" alt="" data-ng-click="getUserProfile(thread.user.username)" />
         <div class="comment-actions clearfix">
             <a class="reply" data-ng-show="videoInstance.is_authenticated" class="reply" data-ng-model="replyClicked" data-ng-init="replyClicked = false" data-ng-click="replyClicked = !replyClicked" data-ng-class="{ 'active': replyClicked }">
                 <i class="fa fa-comments"></i>
                 <span data-ng-class="">Reply</span>
             </a>
-            <a class="favorite" data-ng-click="postCommentAction(selectedThread, 'favorite')" data-ng-show="videoInstance.is_authenticated" data-ng-class="{ 'active': selectedThread.is_favorite }">
+            <a class="favorite" data-ng-click="postCommentAction(thread, 'favorite')" data-ng-show="videoInstance.is_authenticated" data-ng-class="{ 'active': thread.is_favorite }">
                 <i class="fa fa-heart"></i>
-                <span class="icon-text" data-ng-bind="selectedThread.is_favorite ? 'Faved' : 'Favorite'"></span>
+                <span class="icon-text" data-ng-bind="thread.is_favorite ? 'Faved' : 'Favorite'"></span>
             </a>
-            <a class="follow" data-ng-click="postCommentAction(selectedThread, 'follow')" data-ng-hide="!videoInstance.is_authenticated || selectedThread.user.username == videoInstance.user.username" data-ng-class="{ 'active': selectedThread.is_following }">
+            <a class="follow" data-ng-click="postCommentAction(thread, 'follow')" data-ng-hide="!videoInstance.is_authenticated || thread.user.username == videoInstance.user.username" data-ng-class="{ 'active': thread.is_following }">
                 <i class="fa fa-user"></i>
-                <span class="icon-text" data-ng-bind="selectedThread.is_following ? 'Following' : 'Follow'"></span>
+                <span class="icon-text" data-ng-bind="thread.is_following ? 'Following' : 'Follow'"></span>
             </a>
         </div>
     </li>
