@@ -817,8 +817,9 @@ object, embed, video, iframe {
                                 }
 
                                 a.username {
+                                    text-decoration: none;
                                     text-align: left;
-                                    width: 75%;
+                                    width: 80%;
                                 }
 
                                 strong.time {
@@ -832,10 +833,10 @@ object, embed, video, iframe {
                             p {
                                 color: rgba(255, 255, 255, 1);
                                 display: inline-block;
-                                font-size: 12.28px;
+                                font-size: 12px;
                                 font-weight: 300;
-                                line-height: 16px;
-                                width: 143px;
+                                line-height: 13px;
+                                width: 153px;
                                 word-wrap: break-word;
                             }
 
@@ -873,6 +874,38 @@ object, embed, video, iframe {
                         &:last-child { border-bottom: 0; }
 
                         &.animate-comment-show { display: block; }
+                    }
+                }
+
+                li:nth-child(4n) {
+                    div.thread {
+                        div.header {
+                            a.username { color: #b6089b; }
+                        }   
+                    }
+                }
+
+                li:nth-child(4n-1) {
+                    div.thread {
+                        div.header {
+                            a.username { color: #00aeef; }
+                        }   
+                    }
+                }
+
+                li:nth-child(4n-2) {
+                    div.thread {
+                        div.header {
+                            a.username { color: #d79906; }
+                        }   
+                    }
+                }
+
+                li:nth-child(4n-3) {
+                    div.thread {
+                        div.header {
+                            a.username { color: #6fe588; }
+                        }   
                     }
                 }
 
@@ -933,11 +966,6 @@ object, embed, video, iframe {
 
                         span {
                            /* background: red; */
-                        }
-
-                        a {
-                            color: rgba(255, 255, 255, 1);
-                            text-decoration: none;
                         }
 
                         &.animated {
@@ -1077,62 +1105,47 @@ object, embed, video, iframe {
                                     }
 
                                     div.comment-actions {
-                                        padding: 0px 21px 6px 16px;
-
-                                        span {
-                                            background: none;
-                                            border: 0;
-                                            bottom: 3px;
-                                            display: inline-block;
-                                            height: 6px;
-                                            line-height: 6px;
-                                            margin-left: 46px;
-                                            position: relative;
-                                            vertical-align: bottom;
-                                            width: 21px;
-
-                                            img {
-                                                height: 6px;
-                                                width: 21px;
-                                            }
-                                        }
+                                        padding: 0px 10px 6px 10px;
 
                                         a {
+                                            color: #989898;
                                             cursor: pointer;
                                             display: inline-block;
-                                            vertical-align: baseline;
+                                            padding-left: 5px;
+                                            line-height: 18px;
+                                            text-decoration: none;
+
+
+                                            span {
+                                                font-size: 11px;
+                                                font-weight: 500;
+                                            }
+
+                                            i {
+                                                font-size: 16px;
+                                                font-weight: normal;
+                                                position: relative;
+                                                top: 1px;
+
+                                                &.icon-selected {
+
+                                                }
+                                            }
 
                                             &.reply {
-                                                background: url(../../img/divider.png) repeat-y top right;
-                                                height: 21px;
-                                                padding-right: 8px;
-                                                width: 23px;
+
                                             }
 
                                             &.favorite {
-                                                height: 20px;
-                                                padding: 0 1.5px 0 1px;
-                                                width: 24px;
-                                            }
-
-                                            &.flag {
-                                                float: right;
-                                                height: 15px;
-                                                margin-top: 6px;
-                                                margin-left: 25px;
-                                                width: 15px;
+                                                i { top: 2px; }
                                             }
 
                                             &.follow {
-                                                background: url(../../img/divider.png) repeat-y top left;
-                                                height: 20px;
-                                                padding-left: 7px;
-                                                width: 14px;
+
                                             }
 
-                                            img {
-                                                height: 100%;
-                                                width: 100%;
+                                            &:hover {
+                                                color: white;
                                             }
                                         }
                                     }
