@@ -444,19 +444,6 @@ object, embed, video, iframe {
                             }
                         }
 
-                        &.mejs-mute-conversation-button {
-                            cursor: pointer;
-                            left: 0;
-
-                            button {
-                                outline: 0 none;
-                                border: none;
-                                margin-top: 0;
-                                height: 20px;
-                                width: 23px;
-                            }
-                        }
-
                         &.mejs-playpause-button {
                             cursor: pointer;
                             bottom: -34px;
@@ -967,10 +954,10 @@ object, embed, video, iframe {
                 }
 
                 &.collapsed {
-                    margin-left: 211px;
+                    margin-left: 199px;
+                    opacity: 0.5;
                     padding-right: 5px;
-                    width: 38px;
-                    opacity: 0.4;
+                    width: 50px;
 
                     ul.comment-stream li {
                         background-color: transparent;
@@ -979,7 +966,6 @@ object, embed, video, iframe {
                         @include single-transition(background-color 100ms ease-in-out);
 
                         img.img-circle {
-                            @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
                             float: right;
                             margin-left: 10px;
                             margin-right: 5px;
@@ -989,7 +975,8 @@ object, embed, video, iframe {
                             cursor: pointer;
                             display: block;
                             opacity: 1;
-                            height: 33px;
+                            height: 32px;
+                            padding-left: 3px;
 
                             em {
                                 background-color: rgba(0, 0, 0, .4);
@@ -998,15 +985,15 @@ object, embed, video, iframe {
                                 font-family: 'proxima-nova';
                                 font-size: 10px;
                                 font-weight: 700;
-                                height: 23px;
+                                height: 25px;
                                 margin-top: 7px;
                                 opacity: 0;
-                                padding-top: 11px;
+                                padding-top: 17px;
                                 position: absolute;
                                 text-align: center;
                                 text-shadow: 0 1px 1px rgba(0, 0, 0, 1);
                                 z-index: 2;
-                                width: 33px;
+                                width: 42px;
                                 @include single-transition(opacity 50ms ease-in-out)
                             }
 
