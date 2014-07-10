@@ -277,9 +277,27 @@ angular.module('framebuzz.controllers', [])
                     if (thread != null) {
                         index = $scope.timeOrderedThreads.indexOf(thread);
 
-                        $state.transitionTo('player.activeView.thread', { threadId: thread.id });
+                        var time = parseInt(thread.time, 10);
+
+                        $state.transitionTo('player.activeView.siblings', { threadId: thread.id });
                         $scope.selectedThreadIndex = index;
                         $scope.selectedThread = thread;
+                        $scope.activeViewTitle = "Comments at " + thread.time_hms;
+                        safeApply($scope);
+
+                        $scope.player.pause();
+                    }
+                };
+
+                $scope.setSelectedComment = function(thread) {
+                    var index = -1;
+
+                    if (thread != null) {
+                        index = $scope.timeOrderedThreads.indexOf(thread);
+
+                        $state.transitionTo('player.activeView.thread', { threadId: thread.id });
+                        $scope.selectedCommentIndex = index;
+                        $scope.selectedComment = thread;
                         $scope.activeViewTitle = thread.user.display_name + "'s Comment";
                         safeApply($scope);
 
