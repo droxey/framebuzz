@@ -136,11 +136,6 @@ angular.module('framebuzz.directives', [])
                     media.addEventListener('pause', function(e) {
                         broadcaster.prepForBroadcast({ broadcastType: 'player_paused' });
                     }, false);
-
-                    window.setTimeout(function() {
-                        var playerTitleHtml = $('<div>').append($('h1.video-title').clone()).html();
-                        $(playerTitleHtml).insertAfter('.mejs-share');
-                    }, 1500);
                 }
             });
         };
