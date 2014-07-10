@@ -18,6 +18,7 @@ angular.module('framebuzz.controllers', [])
                 $scope.clearFocus = false;
                 $scope.isCollapsed = false;
                 $scope.updateSlider = false;
+                $scope.activeViewTitle = '';
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
@@ -279,6 +280,7 @@ angular.module('framebuzz.controllers', [])
                         $state.transitionTo('player.activeView.thread', { threadId: thread.id });
                         $scope.selectedThreadIndex = index;
                         $scope.selectedThread = thread;
+                        $scope.activeViewTitle = thread.user.display_name + "'s Comment";
                         safeApply($scope);
 
                         $scope.player.pause();

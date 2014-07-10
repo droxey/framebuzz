@@ -30,6 +30,7 @@
                     </div>
                     <p ng-bind-html-unsafe="reply.comment"></p>
                 </div>
+                <img class="img-circle" data-ng-src="{{ reply.user.avatar_url }}" alt="" data-ng-click="getUserProfile(reply.user.username)" />
                 <div class="comment-actions clearfix" data-ng-show="videoInstance.is_authenticated">
                     <a class="favorite" data-ng-click="postCommentAction(reply, 'favorite')" data-ng-show="videoInstance.is_authenticated" data-ng-class="{ 'active': reply.is_favorite }">
                         <i class="fa fa-heart"></i>

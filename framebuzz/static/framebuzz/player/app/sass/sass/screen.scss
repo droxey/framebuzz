@@ -787,7 +787,7 @@ object, embed, video, iframe {
                         display: none;
                         font-family: 'proxima-nova';
                         font-size: 13px;
-                        min-height: 58px;
+                        min-height: 66px;
 
                         div.thread {
                             display: inline-block;
@@ -843,7 +843,7 @@ object, embed, video, iframe {
                             display: inline-block;
                             height: 42px;
                             position: relative;
-                            top: 7px;
+                            top: 13px;
                             width: 42px;
                         }
 
@@ -1022,19 +1022,53 @@ object, embed, video, iframe {
 
             @media screen and (min-width: 700px) {
                 margin-left: 444px;
+            }
+
+            div.panel-header {
+                background: rgba(0, 0, 0, .85);
+                border-bottom: 1px solid rgba(104, 104, 104, 0.3);
+                height: 32px;
+                position: relative;
+                top: 44px;
+                width: 100%;
+                z-index: 99999;
+
+                h2 {
+                    color: white;
+                    font-family: 'proxima-nova';
+                    text-transform: uppercase;
+                    font-size: 11px;
+                    font-weight: 700;
+                    line-height: 32px;
+                    position: absolute;
+                    top: 0;
+                    text-align: center;
+                    width: 100%;
+                }
+
+                i {
+                    color: white;
+                    cursor: pointer;
+                    font-size: 20px;
+                    padding-left: 14px;
+                    line-height: 32px;
+                    position: relative;
+                    z-index: 99999;
+                }
             } 
 
             div.scrollable {
                 background: rgba(0, 0, 0, 0.7);
-                height: 307px;
+                height: 273px;
                 width: 256px;
+                top: 77px;
 
                 @media screen and (max-width: 581px) {
-                    height: 268px;
+                    height: 234px;
                 }
 
                 @media screen and (min-width: 700px) {
-                    height: 346px;
+                   height: 313px;
                 }
 
                 div.tab-container {
@@ -1152,6 +1186,7 @@ object, embed, video, iframe {
                                             border-bottom: 1px solid rgba(104, 104, 104, 0.3);
                                             margin: 0 10px;
                                             padding: 6px 12px;
+                                            position: relative;
                                             width: 199px;
 
                                             div.thread {
@@ -1160,45 +1195,61 @@ object, embed, video, iframe {
                                                 div.header {
                                                     strong {
                                                         cursor: pointer;
-
-                                                        &:hover { text-decoration: underline; }
                                                     }
                                                 }
 
-                                                p { width: 197px; }
+                                                p { width: 175px; }
+                                            }
+
+                                            img.img-circle {
+                                                height: 35px;
+                                                position: absolute;
+                                                width: 35px;
                                             }
 
                                             div.comment-actions {
                                                 height: 19px;
-                                                margin-top: 6px;
+                                                margin-top: 8px;
                                                 padding: 0;
 
                                                 a {
-                                                    float: left;
-
-                                                    &.favorite {
-                                                        background: none;
-                                                        height: 16px;
-                                                        margin: 0;
-                                                        padding: 0;
-                                                        width: 19px;
-                                                    }
-
-                                                    &.follow {
-                                                        height: 16px;
-                                                        margin-left: 5px;
-                                                        padding-left: 8px;
-                                                        width: 10px;
-                                                    }
-
-                                                    &.flag {
-                                                        float: right;
-                                                        margin-top: 2px;
-                                                    }
+                                                    &.favorite { margin-left: 0; }
                                                 }
                                             }
 
                                             &:last-child { border-bottom: 0; }
+                                        }
+
+                                        li:nth-child(4n) {
+                                            div.thread {
+                                                div.header {
+                                                    strong.username { color: #6fe588; }
+                                                }   
+                                            }
+                                        }
+
+                                        li:nth-child(4n-1) {
+                                            div.thread {
+                                                div.header {
+                                                    strong.username { color: #d79906; }
+                                                }   
+                                            }
+                                        }
+
+                                        li:nth-child(4n-2) {
+                                            div.thread {
+                                                div.header {
+                                                    strong.username { color: #00aeef; }
+                                                }   
+                                            }
+                                        }
+
+                                        li:nth-child(4n-3) {
+                                            div.thread {
+                                                div.header {
+                                                    strong.username { color: #b6089b; }
+                                                }   
+                                            }
                                         }
                                     }
 

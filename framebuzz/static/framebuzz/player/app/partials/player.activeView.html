@@ -13,6 +13,10 @@
     </ul>
     <a class="btn btn-small btn-success sign-in-button" data-ng-show="videoInstance == null || !videoInstance.is_authenticated" data-ng-click="$state.transitionTo('player.loginOrSignupView')">Log in</a>
 </div>
+<div class="panel-header">
+    <i class="fa fa-arrow-circle-left" data-ng-click="$state.transitionTo('player.blendedView')"></i>
+    <h2 data-ng-bind="activeViewTitle"></h2>
+</div>
 <div id="panel-scroll" class="scrollable">
     <div class="tab-container" data-ui-view></div>
 </div>
