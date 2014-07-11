@@ -7,8 +7,6 @@
         <i class="fa fa-caret-down"></i>
       </a>
     <ul class="dropdown-menu">
-        <li><a data-ng-click="getUserProfile(videoInstance.user.username)">View Profile</a></li>
-        <li><a data-ng-click="getActivityStream()" title="Activity">Activity</a></li>
         <li><a data-ng-click="logout()">Logout</a></li>
     </ul>
     <a class="btn btn-small btn-success sign-in-button" data-ng-show="videoInstance == null || !videoInstance.is_authenticated" data-ng-click="$state.transitionTo('player.loginOrSignupView')">Log in</a>

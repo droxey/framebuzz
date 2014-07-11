@@ -6,6 +6,7 @@
                 <strong class="time" data-ng-click="setVideoTime(selectedComment.time)" >{{ selectedComment.time_hms }}</strong>
             </div>
             <p ng-bind-html-unsafe="selectedComment.comment"></p>
+            <i data-ng-show="selectedComment.has_replies" class="fa fa-comment"><span data-ng-bind="selectedComment.replies.length"></span></i>
         </div>
         <img class="img-circle" data-ng-src="{{ selectedComment.user.avatar_url }}" alt="" data-ng-click="getUserProfile(selectedComment.user.username)" />
         <div class="comment-actions clearfix">

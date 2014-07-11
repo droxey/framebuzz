@@ -326,6 +326,9 @@ angular.module('framebuzz.controllers', [])
                 };
 
                 $scope.getUserProfile = function(username) {
+                    // temporary!
+                    return;
+                    
                     if (username === undefined) {
                         username = $scope.videoInstance.user.username;
                     }
