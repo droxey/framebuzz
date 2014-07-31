@@ -333,7 +333,7 @@ object, embed, video, iframe {
                         position: absolute;
                         top: 0;
                         left: 0;
-                        width: 59.7%;
+                        width: 100%;
                         z-index: 10;
 
                         h1.video-title {
@@ -352,7 +352,7 @@ object, embed, video, iframe {
                         left: 0;
                         position: absolute;
                         bottom: 15px;
-                        width: 63.4%;
+                        width: 100%;
                         z-index: 10;
 
                         button {
@@ -680,97 +680,97 @@ object, embed, video, iframe {
         }
     }
 
-        div.active-header {
-            background: rgba(0, 0, 0, .70);
-            border-bottom: 1px solid rgba(81, 81, 81, .32);
-            height: 43px;
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 256px;
-            z-index: 99999;
+    div.active-header {
+        background: rgba(0, 0, 0, .70);
+        border-bottom: 1px solid rgba(81, 81, 81, .32);
+        height: 43px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 256px;
+        z-index: 99999;
 
-            a.logo {
-                cursor: pointer;
-                display: inline-block;
+        a.logo {
+            cursor: pointer;
+            display: inline-block;
+            float: left;
+            height: 20px;
+            width: 93px;
+            padding: 12px;
+        }
+
+        a.dropdown-toggle {
+            cursor: pointer;
+            display: inline-block;
+            float: right;
+            height: 33px;
+            padding: 4px 0;
+            width: 51px;
+
+            img.img-circle {
+                background: black;
                 float: left;
-                height: 20px;
-                width: 93px;
-                padding: 12px;
+                height: 24px;
+                margin-right: 5px;
+                position: relative;
+                left: 0;
+                top: 5px;
+                width: 24px;
             }
 
-            a.dropdown-toggle {
-                cursor: pointer;
-                display: inline-block;
-                float: right;
-                height: 33px;
-                padding: 4px 0;
-                width: 51px;
+            i {
+                color: rgba(255, 255, 255, 0.8);
+                margin-top: 10px;
+            }
 
-                img.img-circle {
-                    background: black;
-                    float: left;
-                    height: 24px;
-                    margin-right: 5px;
-                    position: relative;
-                    left: 0;
-                    top: 5px;
-                    width: 24px;
-                }
-
+            &.hover {
                 i {
-                    color: rgba(255, 255, 255, 0.8);
-                    margin-top: 10px;
-                }
-
-                &.hover {
-                    i {
-                        color: white;
-                    }
-                }
-            }
-
-            a.sign-in-button {
-                box-shadow: none;
-                display: block;
-                float: right;
-                font-family: 'proxima-nova';
-                font-size: 13px;
-                font-weight: 700;
-                margin: 8px 12px;
-            }
-
-            ul.dropdown-menu {
-                @include border-radius(0px, 0px);
-                box-shadow: none;
-                background: #2b2b2b;
-                height: 85px;
-                left: 147px;
-                min-width: 108px;
-                padding: 0;
-                top: 41px;
-
-                li {
-                    width: 108px;
-
-                    a {
-                        color: white;
-                        cursor: pointer;
-                        display: block;
-                        line-height: 28.5px;
-                        font-family: 'proxima-nova';
-                        font-size: 10.04px;
-                        font-weight: 500;
-                        padding: 0 10px;
-                        text-align: right;
-                        text-decoration: none;
-                        text-transform: uppercase;
-
-                        &:hover { font-weight: 700; }
-                    }
+                    color: white;
                 }
             }
         }
+
+        a.sign-in-button {
+            box-shadow: none;
+            display: block;
+            float: right;
+            font-family: 'proxima-nova';
+            font-size: 13px;
+            font-weight: 700;
+            margin: 8px 12px;
+        }
+
+        ul.dropdown-menu {
+            @include border-radius(0px, 0px);
+            box-shadow: none;
+            background: #2b2b2b;
+            height: 85px;
+            left: 147px;
+            min-width: 108px;
+            padding: 0;
+            top: 41px;
+
+            li {
+                width: 108px;
+
+                a {
+                    color: white;
+                    cursor: pointer;
+                    display: block;
+                    line-height: 28.5px;
+                    font-family: 'proxima-nova';
+                    font-size: 10.04px;
+                    font-weight: 500;
+                    padding: 0 10px;
+                    text-align: right;
+                    text-decoration: none;
+                    text-transform: uppercase;
+
+                    &:hover { font-weight: 700; }
+                }
+            }
+        }
+    }
 
     #buzz-layer {
         div.panel {
@@ -949,8 +949,27 @@ object, embed, video, iframe {
                 }
 
                 ul.comment-stream {
+                    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+                    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjciLz4KICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuNyIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+                    background: -moz-linear-gradient(top,  rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 85%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.7)), color-stop(85%,rgba(0,0,0,0.7)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+                    background: -ms-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* IE10+ */
+                    background: linear-gradient(to bottom,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* W3C */
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#00000000',GradientType=0 ); /* IE6-8 */
+                    background-size: 100% 400px;
+                    background-attachment: fixed;
+
+                    @media screen and (max-width: 581px) {
+
+                    }
+
+                    @media screen and (min-width: 700px) {
+
+                    }
+
                     li {
-                        background: rgba(0, 0, 0, 0.7);
                         border-bottom: 1px solid rgba(61, 61, 61, 0.35);
                         cursor: pointer;
                         @include single-transition(background-color 100ms ease-in-out);
@@ -958,6 +977,7 @@ object, embed, video, iframe {
                         &:last-child {
                             @include border-bottom-left-radius(3px);
                             @include border-bottom-right-radius(3px);
+                            border-bottom: none;
                         }
 
                         &:hover {
