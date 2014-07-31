@@ -50,6 +50,11 @@
       <!--[if IE]>
           <link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <![endif]-->
+      <!--[if gte IE 9]>
+        <style type="text/css">
+          ul.comment-stream { filter: none; }
+        </style>
+      <![endif]-->
     {% endcompress %}
     {% compress js %}
       <script type="text/javascript">

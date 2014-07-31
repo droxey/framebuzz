@@ -10,7 +10,7 @@
 
       var button =
         $('<button class="mejs-share-framebuzz-button" type="button" aria-controls="mep_0" title="Share This FrameBuzz" aria-label="Share This FrameBuzz">' +
-          '<i class="fa fa-share"></i>Share' +
+          '<i class="fa fa-share-alt"></i>Share' +
           '</button>')
         .appendTo(shareDiv);
     },

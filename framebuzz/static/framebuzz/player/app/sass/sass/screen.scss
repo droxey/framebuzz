@@ -369,6 +369,9 @@ object, embed, video, iframe {
                             i { 
                                 color: rgba(255, 255, 255, 0.8);
                                 padding-right: 5px;
+                                font-size: 16px;
+                                line-height: 38px;
+                                vertical-align: sub;
                             }
 
                             &:hover {
@@ -399,6 +402,12 @@ object, embed, video, iframe {
 
                             &.mejs-mute-conversation-button {
 
+                            }
+
+                            &.mejs-start-private-session {
+                                i {
+                                    padding-right: 2px;
+                                }
                             }
                         }
                     }
@@ -781,6 +790,26 @@ object, embed, video, iframe {
                 z-index: 110;
 
                 ul.comment-stream {
+                    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+                    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjciLz4KICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuNyIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+                    background: -moz-linear-gradient(top,  rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 85%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.7)), color-stop(85%,rgba(0,0,0,0.7)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+                    background: -ms-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* IE10+ */
+                    background: linear-gradient(to bottom,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* W3C */
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#00000000',GradientType=0 ); /* IE6-8 */
+                    background-size: 100% 400px;
+                    background-attachment: fixed;
+
+                    @media screen and (max-width: 581px) {
+
+                    }
+
+                    @media screen and (min-width: 700px) {
+
+                    }
+
                     li {
                         border-bottom: 1px solid rgba(104, 104, 104, 0.3);
                         color: white;
@@ -788,6 +817,7 @@ object, embed, video, iframe {
                         font-family: 'proxima-nova';
                         font-size: 13px;
                         min-height: 66px;
+                        @include single-transition(background-color 100ms ease-in-out);
 
                         div.thread {
                             display: inline-block;
@@ -863,7 +893,6 @@ object, embed, video, iframe {
                         img.img-circle {
                             @include box-shadow(0 0 0 2px white, 0 0 0 0 white inset);
                             background: black;
-                            cursor: pointer;
                             display: inline-block;
                             height: 42px;
                             position: relative;
@@ -875,6 +904,12 @@ object, embed, video, iframe {
                         &:last-child { border-bottom: 0; }
 
                         &.animate-comment-show { display: block; }
+
+                        &:hover {
+                            background-color: rgba(0, 0, 0, .4);
+                            cursor: pointer;
+                            @include single-transition(background-color 100ms ease-in-out);
+                        }
                     }
                 }
 
@@ -949,40 +984,14 @@ object, embed, video, iframe {
                 }
 
                 ul.comment-stream {
-                    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-                    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjciLz4KICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuNyIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-                    background: -moz-linear-gradient(top,  rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 85%, rgba(0,0,0,0) 100%); /* FF3.6+ */
-                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.7)), color-stop(85%,rgba(0,0,0,0.7)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
-                    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
-                    background: -o-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
-                    background: -ms-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* IE10+ */
-                    background: linear-gradient(to bottom,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* W3C */
-                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#00000000',GradientType=0 ); /* IE6-8 */
-                    background-size: 100% 400px;
-                    background-attachment: fixed;
-
-                    @media screen and (max-width: 581px) {
-
-                    }
-
-                    @media screen and (min-width: 700px) {
-
-                    }
-
                     li {
                         border-bottom: 1px solid rgba(61, 61, 61, 0.35);
                         cursor: pointer;
-                        @include single-transition(background-color 100ms ease-in-out);
 
                         &:last-child {
                             @include border-bottom-left-radius(3px);
                             @include border-bottom-right-radius(3px);
                             border-bottom: none;
-                        }
-
-                        &:hover {
-                            background-color: rgba(0, 0, 0, .32);
-                            @include single-transition(background-color 100ms ease-in-out);
                         }
 
                         span {
@@ -1069,8 +1078,8 @@ object, embed, video, iframe {
             }
 
             div.panel-header {
-                background: rgba(0, 0, 0, .5);
-                border-bottom: 1px solid rgba(104, 104, 104, 0.3);
+                background: rgba(0, 0, 0, .85);
+                border-bottom: 1px solid rgba(104, 104, 104, 0.4);
                 height: 32px;
                 position: relative;
                 top: 0;
@@ -1102,7 +1111,6 @@ object, embed, video, iframe {
             } 
 
             div.scrollable {
-                background: rgba(0, 0, 0, 0.7);
                 height: 306px;
                 width: 256px;
                 top: 44px;
@@ -1112,7 +1120,7 @@ object, embed, video, iframe {
                 }
 
                 @media screen and (min-width: 700px) {
-                   height: 346px;
+                   height: 347px;
                 }
 
                 div.tab-container {
@@ -1134,21 +1142,11 @@ object, embed, video, iframe {
                                     width: 257px;
 
                                     div.thread {
-                                        div.header {
-                                            a.username {
-                                                cursor: pointer;
-                                            }
-                                            strong.time {
-                                                cursor: pointer;
-                                            }
-                                        }
-
                                         p { width: 155px; }
                                     }
 
                                     img.img-circle {
                                         background: black;
-                                        cursor: pointer;
                                         display: inline-block;
                                     }
 
@@ -1317,6 +1315,17 @@ object, embed, video, iframe {
                                         }
 
                                         &:last-child { border-bottom: none; }
+                                    }
+                                }
+
+                                &.single-comment {
+                                    li {
+                                        background: rgba(0, 0, 0, 0.4);
+
+                                        &:hover {
+                                            background: rgba(0, 0, 0, 0.4);
+                                            cursor: default;
+                                        }
                                     }
                                 }
                             }
@@ -1488,7 +1497,6 @@ object, embed, video, iframe {
                                             }
 
                                             a.username {
-                                                cursor: pointer;
                                                 text-align: left;
                                                 width: 95%;
                                                 text-decoration: none;
