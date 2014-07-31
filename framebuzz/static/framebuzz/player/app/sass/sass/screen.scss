@@ -1157,14 +1157,9 @@ object, embed, video, iframe {
                                             color: #989898;
                                             cursor: pointer;
                                             display: inline-block;
-                                            line-height: 18px;
+                                            line-height: 15px;
                                             text-decoration: none;
                                             margin-bottom: 6px;
-
-                                            span {
-                                                font-size: 11px;
-                                                font-weight: 500;
-                                            }
 
                                             i {
                                                 font-size: 16px;
@@ -1181,9 +1176,6 @@ object, embed, video, iframe {
                                             }
 
                                             &.favorite {
-                                                margin: 0 6px;
-                                                width: 58px;
-
                                                 i { 
                                                     top: 2px;
                                                     width: 16px;
@@ -1194,6 +1186,14 @@ object, embed, video, iframe {
                                                 i {
                                                     width: 12px;
                                                 }
+                                            }
+
+                                            i.fa-plus,
+                                            i.fa-minus {
+                                                left: -3px;
+                                                top: -3px;
+                                                font-size: 8px;
+                                                margin-right: 0;
                                             }
 
                                             &:hover {
@@ -1216,6 +1216,12 @@ object, embed, video, iframe {
                                                         -1px 1px 0 #00aeef,
                                                         1px 1px 0 #00aeef;
                                                     margin-right: 2px;
+
+                                                    &.fa-plus,
+                                                    &.fa-minus {
+                                                        margin-right: 0;
+                                                        text-shadow: none;
+                                                    }
                                                 }
                                             }
                                         }

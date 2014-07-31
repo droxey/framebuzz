@@ -12,15 +12,14 @@
         <div class="comment-actions clearfix">
             <a class="reply" data-ng-show="videoInstance.is_authenticated" class="reply" data-ng-model="replyClicked" data-ng-init="replyClicked = false" data-ng-click="replyClicked = !replyClicked" data-ng-class="{ 'active': replyClicked }">
                 <i class="fa fa-comments"></i>
-                <span data-ng-class="">Reply</span>
             </a>
             <a class="favorite" data-ng-click="postCommentAction(thread, 'favorite')" data-ng-show="videoInstance.is_authenticated" data-ng-class="{ 'active': thread.is_favorite }">
                 <i class="fa fa-heart"></i>
-                <span class="icon-text" data-ng-bind="thread.is_favorite ? 'Faved' : 'Favorite'"></span>
             </a>
             <a class="follow" data-ng-click="postCommentAction(thread, 'follow')" data-ng-hide="!videoInstance.is_authenticated || thread.user.username == videoInstance.user.username" data-ng-class="{ 'active': thread.is_following }">
                 <i class="fa fa-user"></i>
-                <span class="icon-text" data-ng-bind="thread.is_following ? 'Following' : 'Follow'"></span>
+                <i class="fa fa-plus" data-ng-hide="thread.is_following"></i>
+                <i class="fa fa-minus" data-ng-show="thread.is_following"></i>
             </a>
         </div>
     </li>
