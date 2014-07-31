@@ -10,17 +10,27 @@
         </div>
         <img class="img-circle" data-ng-src="{{ selectedComment.user.avatar_url }}" alt="" data-ng-click="getUserProfile(selectedComment.user.username)" />
         <div class="comment-actions clearfix">
-            <a class="reply" data-ng-show="videoInstance.is_authenticated" class="reply" data-ng-model="replyClicked" data-ng-init="replyClicked = false" data-ng-click="replyClicked = !replyClicked" data-ng-class="{ 'active': replyClicked }">
-                <i class="fa fa-comments"></i>
-            </a>
-            <a class="favorite" data-ng-click="postCommentAction(selectedComment, 'favorite')" data-ng-show="videoInstance.is_authenticated" data-ng-class="{ 'active': selectedComment.is_favorite }">
-                <i class="fa fa-heart"></i>
-            </a>
-            <a class="follow" data-ng-click="postCommentAction(selectedComment, 'follow')" data-ng-hide="!videoInstance.is_authenticated || selectedComment.user.username == videoInstance.user.username" data-ng-class="{ 'active': selectedComment.is_following }">
-                <i class="fa fa-user"></i>
-                <i class="fa fa-plus" data-ng-hide="selectedComment.is_following"></i>
-                <i class="fa fa-minus" data-ng-show="selectedComment.is_following"></i>
-            </a>
+            <div class="pull-left">
+                <a class="reply" data-ng-show="videoInstance.is_authenticated" class="reply" data-ng-model="replyClicked" data-ng-init="replyClicked = false" data-ng-click="replyClicked = !replyClicked" data-ng-class="{ 'active': replyClicked }">
+                    <i class="fa fa-comments"></i>
+                </a>
+                <a class="favorite" data-ng-click="postCommentAction(selectedComment, 'favorite')" data-ng-show="videoInstance.is_authenticated" data-ng-class="{ 'active': selectedComment.is_favorite }">
+                    <i class="fa fa-heart"></i>
+                </a>
+                <a class="follow" data-ng-click="postCommentAction(selectedComment, 'follow')" data-ng-hide="!videoInstance.is_authenticated || selectedComment.user.username == videoInstance.user.username" data-ng-class="{ 'active': selectedComment.is_following }">
+                    <i class="fa fa-user"></i>
+                    <i class="fa fa-plus" data-ng-hide="selectedComment.is_following"></i>
+                    <i class="fa fa-minus" data-ng-show="selectedComment.is_following"></i>
+                </a>
+            </div>
+            <div class="pull-right">
+                <a class="upvote">
+                    <i class="fa fa-thumbs-up"></i>
+                </a>
+                <a class="downvote">
+                    <i class="fa fa-thumbs-down"></i>
+                </a>
+            </div>
         </div>
         <ul class="replies">
             <li data-ng-repeat="reply in selectedComment.replies">
