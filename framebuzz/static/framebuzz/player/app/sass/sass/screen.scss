@@ -1013,48 +1013,52 @@ object, embed, video, iframe {
                     padding-right: 5px;
                     width: 50px;
 
-                    ul.comment-stream li {
-                        background-color: transparent;
-                        border-bottom: medium none;
-                        box-shadow: none;
-                        @include single-transition(background-color 100ms ease-in-out);
+                    ul.comment-stream {
+                        background: none;
 
-                        img.img-circle {
-                            float: right;
-                            margin-left: 10px;
-                            margin-right: 5px;
-                        }
+                        li {
+                            background: transparent;
+                            border-bottom: medium none;
+                            box-shadow: none;
+                            @include single-transition(background-color 100ms ease-in-out);
 
-                        span.collapsed-time {
-                            cursor: pointer;
-                            display: block;
-                            opacity: 1;
-                            height: 32px;
-                            padding-left: 3px;
-
-                            em {
-                                background-color: rgba(0, 0, 0, .4);
-                                color: white;
-                                display: block;
-                                font-family: 'proxima-nova';
-                                font-size: 10px;
-                                font-weight: 700;
-                                height: 25px;
-                                margin-top: 12px;
-                                opacity: 0;
-                                padding-top: 17px;
-                                position: absolute;
-                                text-align: center;
-                                text-shadow: 0 1px 1px rgba(0, 0, 0, 1);
-                                z-index: 2;
-                                width: 42px;
-                                @include single-transition(opacity 50ms ease-in-out)
+                            img.img-circle {
+                                float: right;
+                                margin-left: 10px;
+                                margin-right: 5px;
                             }
 
-                            &:hover {
+                            span.collapsed-time {
+                                cursor: pointer;
+                                display: block;
+                                opacity: 1;
+                                height: 32px;
+                                padding-left: 3px;
+
                                 em {
-                                    @include single-transition(opacity 50ms ease-in-out);
-                                    opacity: 1;
+                                    background-color: rgba(0, 0, 0, .4);
+                                    color: white;
+                                    display: block;
+                                    font-family: 'proxima-nova';
+                                    font-size: 10px;
+                                    font-weight: 700;
+                                    height: 25px;
+                                    margin-top: 12px;
+                                    opacity: 0;
+                                    padding-top: 17px;
+                                    position: absolute;
+                                    text-align: center;
+                                    text-shadow: 0 1px 1px rgba(0, 0, 0, 1);
+                                    z-index: 2;
+                                    width: 42px;
+                                    @include single-transition(opacity 50ms ease-in-out)
+                                }
+
+                                &:hover {
+                                    em {
+                                        @include single-transition(opacity 50ms ease-in-out);
+                                        opacity: 1;
+                                    }
                                 }
                             }
                         }
@@ -1194,7 +1198,7 @@ object, embed, video, iframe {
                                             }
 
                                             &.downvote {
-                                                
+
                                             }
 
                                             i.fa-plus,
