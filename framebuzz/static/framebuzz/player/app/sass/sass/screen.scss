@@ -690,7 +690,7 @@ object, embed, video, iframe {
     }
 
     div.active-header {
-        background: rgba(0, 0, 0, .70);
+        background: transparent;
         border-bottom: 1px solid rgba(81, 81, 81, .32);
         height: 43px;
         position: absolute;
@@ -698,6 +698,28 @@ object, embed, video, iframe {
         right: 0;
         width: 256px;
         z-index: 99999;
+        opacity: 0;
+
+        &.show-controls {
+            opacity: 1;
+            @include single-transition(opacity .3s ease-in-out);
+
+            &.fade-out-controls {
+                opacity: 0;
+                @include single-transition(opacity .1s ease-in-out);
+            }
+
+            &.header-visible {
+                background: transparent;
+                opacity: 1;
+            }
+        }
+
+        &.header-visible {
+            background: rgba(0, 0, 0, .70);
+            opacity: 1;
+            @include single-transition(background .1s ease-in-out);
+        }
 
         a.logo {
             cursor: pointer;

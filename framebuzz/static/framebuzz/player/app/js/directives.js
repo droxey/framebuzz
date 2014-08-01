@@ -52,8 +52,6 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     //  CSS Changes
                     //  =====
-                    //$('.mejs-video').css({ height: '385px', width: '640px' });
-                    //$('video').css({ height: '385px', width: '640px' });
                     $('.mejs-overlay-loading').remove();
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
@@ -63,12 +61,29 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     $('.mejs-mediaelement').mouseenter(function(e) {
                         $('.mejs-video').addClass('show-controls');
+
+                        var activeHeader = $('div.active-header');
+                        activeHeader.addClass('show-controls');
+
+                        //if (activeHeader.hasClass('header-visible')) {
+                            
+                        //}
                     });
 
                     $('.mejs-video').mouseleave(function(e) {
                         $('.mejs-video').addClass('fade-out-controls');
+                        var activeHeader = $('div.active-header');
+
+                        if (activeHeader.hasClass('show-controls')) {
+                            activeHeader.addClass('fade-out-controls');
+                        }
 
                         window.setTimeout(function() {
+                            if (activeHeader.hasClass('fade-out-controls')) {
+                                activeHeader.removeClass('fade-out-controls');
+                                activeHeader.removeClass('show-controls');
+                            }
+
                             $('.mejs-video').removeClass('fade-out-controls');
                             $('.mejs-video').removeClass('show-controls');
                         }, 250);
@@ -108,7 +123,6 @@ angular.module('framebuzz.directives', [])
                                     $('.mejs-mediaelement').trigger('mouseleave');
                                 },
                                 out: function() {
-
                                 }
                             });
                         }
