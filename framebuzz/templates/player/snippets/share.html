@@ -18,8 +18,8 @@
                 <div class="col-xs-2">
                     <h2>Found By</h2>
                     {% if found_by.get_profile.dashboard_enabled %}
-                        <a title="Ketra" href="#">
-                            <img src="{% static 'framebuzz/dashboard/img/ketra-avatar.png' %}" class="img-responsive" height="110">
+                        <a href="{% if found_by.get_profile.website %}{{ found_by.get_profile.website }}{% endif %}" target="_blank" class="logo client-logo">
+                          <img src="{% if found_by.username|lower == 'ketra' %}{% static 'framebuzz/dashboard/img/ketra-black.png' %}{% else %}/static/framebuzz/dashboard/img/{{ request.user.username }}-logo.png{% endif %}" alt="{{ found_by|display_name }}" width="200">
                         </a>
                     {% else %}
                         <a title="{{ found_by|display_name }}" href="{% url 'profiles-home' found_by.username %}">

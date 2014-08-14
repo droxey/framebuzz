@@ -50,8 +50,8 @@
 
 {% block header_row %}
     <div class="col-xs-12 row-logo">
-        <a href="http://goketra.com" target="_blank" class="logo client-logo">
-          <img src="{% static 'framebuzz/dashboard/img/ketra-black.png' %}" alt="Ketra" width="200">
+        <a href="{% if request.user.get_profile.website %}{{ request.user.get_profile.website }}{% endif %}" target="_blank" class="logo client-logo">
+          <img src="{% if request.user.username|lower == 'ketra' %}{% static 'framebuzz/dashboard/img/ketra-black.png' %}{% else %}/static/framebuzz/dashboard/img/{{ request.user.username }}-logo.png{% endif %}" alt="{{ request.user|display_name }}" width="200">
         </a>
     </div>
 {% endblock %}

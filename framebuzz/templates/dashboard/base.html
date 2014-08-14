@@ -37,7 +37,7 @@
             {% include 'dashboard/snippets/logo.html' %}
           </a>
 
-            <a href="http://goketra.com" target="_blank" class="logo client-logo absolute-center">
+            <a href="{% if request.user.get_profile.website %}{{ request.user.get_profile.website }}{% endif %}" target="_blank" class="logo client-logo absolute-center">
               <img src="/static/framebuzz/dashboard/img/{{ request.user.username }}-logo.png" alt="{{ request.user.username|title }}" height="24" width="152">
             </a>
 
