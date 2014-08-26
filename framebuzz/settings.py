@@ -12,7 +12,8 @@ ADMINS = (
 )
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'frbz.in',
-                 'localhost', 'framebuzz.com', 'frame.bz', ]
+                 'localhost', 'framebuzz.com', 'frame.bz',
+                 'staging.framebuzzlab.com']
 
 MANAGERS = ADMINS
 

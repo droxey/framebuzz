@@ -24,7 +24,7 @@ SHORT_BASE_URL = 'http://staging.framebuzz.com/s/'
 SHORTEN_FULL_BASE_URL = 'http://staging.framebuzz.com/s/'
 
 RAVEN_CONFIG = {
-    'dsn': 'http://e1a3cf863b4149a6b35b55eab450c83e:6b5575ad7ca849659f9e198a6ed8ca79@sentry.framebuzzlab.com/3',
+    'dsn': 'https://1a9e9c5fbd8c4178b5847d0ae286c94d:62e8c3dfaa364027931dd35149d64dda@app.getsentry.com/29373',
 }
 
 EMAIL_HOST = 'smtp.sendgrid.net'
