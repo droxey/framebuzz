@@ -1,7 +1,7 @@
 angular.module('fbExceptions', []).factory('$exceptionHandler',
           ['$window', '$log',
   function ($window,   $log) {
-    if ($window.Raven && SOCK.raven_dsn.length > 0) {
+    if ($window.Raven && SOCK.ravenjs_dsn.length > 0) {
       var ravenOptions = {
         // Will cause a deprecation warning, but the demise of `ignoreErrors` is still under discussion.
         // See: https://github.com/getsentry/raven-js/issues/73
@@ -42,9 +42,9 @@ angular.module('fbExceptions', []).factory('$exceptionHandler',
           /extensions\//i,
           /^chrome:\/\//i,
           // Other plugins
-          /127\.0\.0\.1:4001\/isrunning/i,  // Cacaoweb
-          /webappstoolbarba\.texthelp\.com\//i,
-          /metrics\.itunes\.apple\.com\.edgesuite\.net\//i
+          /127\.0\.0\.1:4001\/isrunning/i,
+          /webappstoolbarba\.texthelp\.com/i,
+          /metrics\.itunes\.apple\.com\.edgesuite\.net/i
         ],
         whitelistUrls: [
           /framebuzz\.com/,
@@ -53,7 +53,7 @@ angular.module('fbExceptions', []).factory('$exceptionHandler',
         ]
       };
 
-      Raven.config(SOCK.raven_dsn, ravenOptions).install();
+      Raven.config(SOCK.ravenjs_dsn, ravenOptions).install();
 
       return function (exception, cause) {
         $log.error.apply($log, arguments);

@@ -46,7 +46,12 @@ class Command(BaseCommand):
         PORT = int(options['port'])
         app = web.Application(router.urls, **app_settings)
         app.listen(PORT, no_keep_alive=options['no_keep_alive'])
-        app.sentry_client = AsyncSentryClient('http://dcacaf02c69f45dda45b12a8c2287178:32f20c7d2f3e4183a8700eec3f08be4d@sentry.framebuzzlab.com/2')
+
+        raven_config = getattr(settings, 'RAVEN_CONFIG', None)
+        if raven_config:
+            dsn_address = raven_config.get('dsn', None)
+            app.sentry_client = AsyncSentryClient(dsn_address)
+
         print "Running sock app on port", PORT, "with channel", channel
         try:
             ioloop.IOLoop.instance().start()
