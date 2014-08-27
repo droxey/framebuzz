@@ -88,7 +88,8 @@
             twitter: "{% provider_login_url 'twitter' next=next_url method='oauth2' display='popup' %}",
             facebook: "{% provider_login_url 'facebook' next=next_url method='oauth2' display='popup' %}",
             google: "{% provider_login_url 'google' next=next_url method='oauth2' display='popup' %}"
-          }
+          },
+          ravenjs_dsn: '{{ ravenjs_dsn }}'
         };
       </script>
     {% endcompress %}

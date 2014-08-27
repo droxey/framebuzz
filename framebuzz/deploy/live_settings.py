@@ -27,6 +27,8 @@ RAVEN_CONFIG = {
     'dsn': "%(sentry_dsn)s",
 }
 
+RAVENJS_DSN = "%(ravenjs_dsn)s"
+
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'framebuzz'
 EMAIL_HOST_PASSWORD = 'TG2-aJq-2bV-VYa'

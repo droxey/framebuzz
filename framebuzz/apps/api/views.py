@@ -57,7 +57,8 @@ def video_embed(request, slug, convo_slug=None):
             'next_url': next_url,
             'mp4_url': mp4_url,
             'webm_url': webm_url,
-            'convo_slug': convo_slug
+            'convo_slug': convo_slug,
+            'ravenjs_dsn': settings.RAVENJS_DSN or ''
         }, context_instance=RequestContext(request))
     except TypeError:
         return HttpResponseRedirect(reverse('video-embed-error', args=(video.slug,)))
