@@ -217,7 +217,9 @@ class Video(caching.base.CachingMixin, models.Model):
         token = hashlib.md5(to_hash).hexdigest()
         url = 'http://s.ytapi.com/?vid=%s&itag=%s&exp=%s&user=%s&s=%s' % (
             self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
-        return url
+        alt_url = 'http://s.ytapi.com/api/%s/%s/%s/%s/%s/' % (
+            self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
+        return alt_url
 
     def get_absolute_url(self):
         return reverse('video-embed', kwargs={'slug': str(self.slug)})

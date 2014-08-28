@@ -25,7 +25,6 @@ angular.module('framebuzz.directives', [])
                 enablePluginSmoothing: true,
                 autosizeProgress: false,
                 enablePseudoStreaming: true,
-                pseudoStreamingStartQueryParam: 'vid',
                 success: function(media) {
                     //  =====
                     //  Angular.js Globals
