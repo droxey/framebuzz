@@ -103,11 +103,11 @@
     {% providers_media_js %}
     <div id="player-container" class="container">
       <div id="player-layer" class="layer">
-        <video style="height: 100%; width: 100%;" data-media-element="" class="span12" id="video-element" preload="auto" poster="{{ video.poster_image }}">
-          <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
-          <source type="video/mp4" src="{{ mp4_url }}" />
+        <video style="height: 100%; width: 100%;" data-media-element="" class="span12" id="video-element" preload="true" poster="{{ video.poster_image }}">
           <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
           <source type="video/webm" src="{{ webm_url }}" />
+          <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+          <source type="video/mp4" src="{{ mp4_url }}" />
           <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
           <object style="height: 100%; width: 100%;" type="application/x-shockwave-flash" data="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
               <param name="movie" value="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}" />
