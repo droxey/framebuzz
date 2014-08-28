@@ -40,6 +40,7 @@ angular.module('framebuzz.directives', [])
                     var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
                     var isChrome = !!window.chrome;
                     var isIE = /*@cc_on!@*/false;
+                    var hasHitPlay = false;
 
                     if (isSafari && !isChrome) {
                         $('.mejs-time-rail').addClass('safari');
@@ -128,6 +129,10 @@ angular.module('framebuzz.directives', [])
                                 out: function() {
                                 }
                             });
+
+                            if (!hasHitPlay) {
+                                $('#buzz-layer > div.panel').addClass('hide-before-play');
+                            }
                         }
                     });
 
@@ -144,8 +149,11 @@ angular.module('framebuzz.directives', [])
                     }, false);
 
                     media.addEventListener('playing', function(e) {
-                        $('#panel-scroll').removeClass('hide-before-play');
+                        hasHitPlay = true;
+
+                        $('#buzz-layer > div.panel').removeClass('hide-before-play');
                         $('.mejs-video').css({ height: '385px', width: '640px' });
+
                         broadcaster.prepForBroadcast({ broadcastType: 'player_playing' });
                     }, false);
 

@@ -825,16 +825,17 @@ object, embed, video, iframe {
 
     #buzz-layer {
         div.panel {
+            
+            &.hide-before-play {
+                display: none;
+            }
+
             div.scrollable {
                 display: block;
                 overflow: hidden;
                 position: absolute;
                 top: 44px;
                 z-index: 110;
-
-                &.hide-before-play {
-                    display: none;
-                }
 
                 ul.comment-stream {
                     /* IE9 SVG, needs conditional override of 'filter' to 'none' */
