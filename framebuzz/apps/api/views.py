@@ -37,8 +37,8 @@ def video_embed(request, slug, convo_slug=None):
         if video.mp4_url:
             mp4_url = video.mp4_url
         else:
-            mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video.video_id
-            #mp4_url = video.get_streaming_url(18)
+            #mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video.video_id
+            mp4_url = video.get_streaming_url(18)
 
         if video.webm_url:
             webm_url = video.webm_url
