@@ -387,6 +387,9 @@ ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/profile/%s/" % u.username,
 }
 
+YTAPI_USERNAME = 'framebuzz.com'
+YTAPI_PASSWORD = 'm1a9k5s9'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
