@@ -825,11 +825,6 @@ object, embed, video, iframe {
 
     #buzz-layer {
         div.panel {
-            
-            &.hide-before-play {
-                display: none;
-            }
-
             div.scrollable {
                 display: block;
                 overflow: hidden;
@@ -1000,6 +995,12 @@ object, embed, video, iframe {
                 }
 
                 .ps-scrollbar-x { display: none; }
+            }
+
+            &.hide-before-play {
+                div.scrollable {
+                    display: none;
+                }
             }
         }
 
