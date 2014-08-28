@@ -66,7 +66,7 @@ angular.module('framebuzz',
                 templateUrl: templateRootPath + 'player.loginOrSignup.html',
                 url: '/hello',
                 data: {
-                    panelId: 'share-view',
+                    panelId: 'login-or-signup-view',
                     animation: 'share'
                 }
             };
@@ -86,10 +86,10 @@ angular.module('framebuzz',
                 name: 'player.startPrivateConvo',
                 parent: playerPanelView,
                 templateUrl: templateRootPath + 'player.startPrivateConvo.html',
-                url: '/share/private',
+                url: '/private',
                 data: {
-                    panelId: 'share-view',
-                    animation: 'panel'
+                    panelId: 'start-private-convo-view',
+                    animation: 'share'
                 }
             };
 

@@ -12,6 +12,7 @@ angular.module('framebuzz.directives', [])
     .directive('mediaElement', ['broadcaster', '$state', '$rootScope', 'safeApply', function(broadcaster, $state, $rootScope, safeApply) {
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
+                enablePluginDebug: true,
                 features: ['title', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'progress', 'playpause'],
                 pluginPath: SOCK.root_path + 'swf/',
                 flashName: 'flashmediaelement.swf',
@@ -23,6 +24,8 @@ angular.module('framebuzz.directives', [])
                 timerRate: 500,
                 enablePluginSmoothing: true,
                 autosizeProgress: false,
+                enablePseudoStreaming: true,
+                pseudoStreamingStartQueryParam: 'vid',
                 success: function(media) {
                     //  =====
                     //  Angular.js Globals
@@ -102,7 +105,7 @@ angular.module('framebuzz.directives', [])
                     });
 
                     $(document).on('click', '.mejs-start-private-session', function() {
-                        $state.transitionTo('player.startPrivateConvo');
+                        broadcaster.prepForBroadcast({ broadcastType: 'player_startprivateconvo' });
                     });
 
                     $('.mejs-share-framebuzz-button').click(function() {

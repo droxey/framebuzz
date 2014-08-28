@@ -38,11 +38,13 @@ def video_embed(request, slug, convo_slug=None):
             mp4_url = video.mp4_url
         else:
             mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video.video_id
+            #mp4_url = video.get_streaming_url(18)
 
         if video.webm_url:
             webm_url = video.webm_url
         else:
             webm_url = 'http://www.ytapi.com/api/%s/direct/43/' % video.video_id
+            #webm_url = video.get_streaming_url(43)
 
         if request.user.is_authenticated():
             action.send(request.user, verb='viewed video', action_object=video)

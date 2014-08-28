@@ -166,23 +166,33 @@ object, embed, video, iframe {
                     height: 405px !important;
                     width: 700px !important;
                 }
+                
+                .mejs-overlay-play {
+                    top: 50%;
+                    left: 50%;
 
-                .mejs-overlay-button {
-                    @include border-radius(500px, 500px);
-                    background: rgba(255, 255, 255, 0.5);
-                    margin: -40px 0 0 -40px;
-                    height: 80px;
-                    width: 80px;
-                    opacity: 1;
+                    .mejs-overlay-button {
+                        @include border-radius(500px, 500px);
+                        background: rgba(255, 255, 255, 0.5);
+                        height: 80px;
+                        left: -40px;
+                        margin: 0;
+                        opacity: 1;
+                        top: -40px;
+                        width: 80px;
+                        z-index: 1;
 
-                    img {
-                        height: 34px;
-                        width: 30px;
-                        margin: 24px 18px 23px 31px;
-                    }
+                        i {
+                            color: rgba(0, 0, 0, 0.75);
+                            font-size: 40px;
+                            line-height: 80px;
+                            padding: 0 20px;
+                        }
 
-                    &:hover {
-                        background: rgba(255, 255, 255, 0.75);
+                        &:hover {
+                            background: rgba(255, 255, 255, 0.75);
+                            i { color: black; }
+                        }
                     }
                 }
 
@@ -360,7 +370,7 @@ object, embed, video, iframe {
                             cursor: pointer;
                             border: 0;
                             display: inline-block;
-                            height: 38px;
+                            height: 37.5px;
                             line-height: 38px;
                             color: white;
                             font-size: 12px;
@@ -702,11 +712,11 @@ object, embed, video, iframe {
 
         &.show-controls {
             opacity: 1;
-            @include single-transition(opacity .3s ease-in-out);
+            @include single-transition(opacity .1s linear);
 
             &.fade-out-controls {
                 opacity: 0;
-                @include single-transition(opacity .1s ease-in-out);
+                //@include single-transition(opacity .1s ease-in-out);
             }
 
             &.header-visible {
@@ -718,7 +728,7 @@ object, embed, video, iframe {
         &.header-visible {
             background: rgba(0, 0, 0, .70);
             opacity: 1;
-            @include single-transition(background .1s ease-in-out);
+            //@include single-transition(background .1s ease-in-out);
         }
 
         a.logo {
@@ -1599,7 +1609,9 @@ object, embed, video, iframe {
         }
 
         #share-view,
-        #enter-password-wrapper {
+        #enter-password-wrapper,
+        #login-or-signup-view,
+        #start-private-convo-view {
             position: absolute;
             height: 360px;
             width: 640px;
@@ -1636,7 +1648,7 @@ object, embed, video, iframe {
                     background: rgba(0, 0, 0, 0.82);
                     display: none;
                     height: 310px;
-                    padding: 15px 17px;
+                    padding: 18px 37px;
                     position: relative;
                     left: 97px;
                     top: 33px;
@@ -1672,19 +1684,17 @@ object, embed, video, iframe {
                     }
 
                     h1 {
-                        border-bottom: 1px solid #323232;
                         margin-bottom: 5px;
                         width: 215px;
 
                         a {
-                            border-bottom: 1px solid #262627;
                             display: block;
 
                             img {
                                 margin-left: 5px;
                                 margin-bottom: 2px;
                                 height: 25px;
-                                width: 115px;
+                                width: 114px;
                             }
                         }
                     }

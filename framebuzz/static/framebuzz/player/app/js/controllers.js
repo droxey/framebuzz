@@ -551,7 +551,10 @@ angular.module('framebuzz.controllers', [])
                 });
 
                 $scope.$on('player_addtolibrary', function() {
-                    if ($scope.videoInstance.is_authenticated) {
+                    if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
+                        $state.transitionTo('player.loginOrSignupView');
+                    }
+                    else {
                         socket.send_json({
                             eventType: eventTypes.addToLibrary,
                             channel: SOCK.user_channel,
@@ -562,8 +565,14 @@ angular.module('framebuzz.controllers', [])
                             }
                         });
                     }
+                });
+
+                $scope.$on('player_startprivateconvo', function() {
+                    if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
+                        $state.transitionTo('player.loginOrSignupView');
+                    }
                     else {
-                        notificationFactory.error('Please log in first!');
+                        $state.transitionTo('player.startPrivateConvo');
                     }
                 });
 
