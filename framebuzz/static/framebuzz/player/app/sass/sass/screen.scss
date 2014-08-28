@@ -826,10 +826,15 @@ object, embed, video, iframe {
     #buzz-layer {
         div.panel {
             div.scrollable {
+                display: block;
                 overflow: hidden;
                 position: absolute;
                 top: 44px;
                 z-index: 110;
+
+                &.hide-before-play {
+                    display: none;
+                }
 
                 ul.comment-stream {
                     /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -1130,7 +1135,7 @@ object, embed, video, iframe {
                 position: relative;
                 top: 0;
                 width: 100%;
-                z-index: 99999;
+                z-index: 11;
 
                 h2 {
                     color: white;
@@ -1152,7 +1157,7 @@ object, embed, video, iframe {
                     padding-left: 14px;
                     line-height: 32px;
                     position: relative;
-                    z-index: 99999;
+                    z-index: 12;
                 }
             } 
 

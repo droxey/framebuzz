@@ -120,8 +120,8 @@ angular.module('framebuzz.directives', [])
                             if (isSafari) {
                                 $('#heatmap').addClass('safari');
                             }
-                            
-                            $('#buzz-layer > div.panel').hoverIntent({
+
+                            $('#buzz-layer').hoverIntent({
                                 over: function() {
                                     $('.mejs-mediaelement').trigger('mouseleave');
                                 },
@@ -144,6 +144,7 @@ angular.module('framebuzz.directives', [])
                     }, false);
 
                     media.addEventListener('playing', function(e) {
+                        $('#panel-scroll').removeClass('hide-before-play');
                         $('.mejs-video').css({ height: '385px', width: '640px' });
                         broadcaster.prepForBroadcast({ broadcastType: 'player_playing' });
                     }, false);

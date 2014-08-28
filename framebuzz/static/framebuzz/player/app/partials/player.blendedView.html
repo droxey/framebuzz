@@ -1,4 +1,4 @@
-<div id="panel-scroll" class="scrollable" data-scrollbar="true" data-ng-class="{ 'collapsed clearfix': isCollapsed }">
+<div id="panel-scroll" class="scrollable hide-before-play" data-scrollbar="true" data-ng-class="{ 'collapsed clearfix': isCollapsed }">
   <ul class="comment-stream">
     <li data-ng-repeat="thread in videoInstance.threads" data-ng-show="thread.is_visible && thread.time < currentTime" data-ng-animate="{show: 'animate-comment-show'}">
       <div class="thread" data-ng-click="setSelectedThread(thread)" data-ng-if="!isCollapsed">
