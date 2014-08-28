@@ -43,6 +43,7 @@ angular.module('framebuzz.directives', [])
 
                     if (isSafari && !isChrome) {
                         $('.mejs-time-rail').addClass('safari');
+
                     }
 
                     if (isFirefox) {
@@ -66,10 +67,6 @@ angular.module('framebuzz.directives', [])
 
                         var activeHeader = $('div.active-header');
                         activeHeader.addClass('show-controls');
-
-                        //if (activeHeader.hasClass('header-visible')) {
-                            
-                        //}
                     });
 
                     $('.mejs-video').mouseleave(function(e) {
@@ -120,6 +117,10 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     scope.$on('$viewContentLoaded', function() {
                         if ($('#buzz-layer > div.panel').length > 0) {
+                            if (isSafari) {
+                                $('#heatmap').addClass('safari');
+                            }
+                            
                             $('#buzz-layer > div.panel').hoverIntent({
                                 over: function() {
                                     $('.mejs-mediaelement').trigger('mouseleave');
