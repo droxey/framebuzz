@@ -3444,6 +3444,7 @@ if (typeof jQuery != 'undefined') {
 				.bind('mouseenter', function(e) {
 					mouseIsOver = true;
 					t.globalBind('mousemove.dur', function(e) {
+						$('#heatmap tr td').trigger('mouseenter', e);
 						handleMouseMove(e);
 					});
 					if (!mejs.MediaFeatures.hasTouch) {
@@ -3453,6 +3454,7 @@ if (typeof jQuery != 'undefined') {
 				.bind('mouseleave',function(e) {
 					mouseIsOver = false;
 					if (!mouseIsDown) {
+						$('#heatmap tr td').removeClass('active');
 						t.globalUnbind('.dur');
 						timefloat.hide();
 					}
