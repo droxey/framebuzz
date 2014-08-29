@@ -63,7 +63,10 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     //  jQuery Event Listeners
                     //  =====
+
+                    var headerHover = false;
                     $('.mejs-mediaelement').mouseenter(function(e) {
+                        console.log('mouse enter');
                         $('.mejs-video').addClass('show-controls');
 
                         var activeHeader = $('div.active-header');
@@ -71,26 +74,28 @@ angular.module('framebuzz.directives', [])
                     });
 
                     $('.mejs-video').mouseleave(function(e) {
-                        $('.mejs-video').addClass('fade-out-controls');
-                        var activeHeader = $('div.active-header');
+                        console.log('mouse leave');
+                        if (!headerHover) {
+                            $('.mejs-video').addClass('fade-out-controls');
+                            var activeHeader = $('div.active-header');
 
-                        if (activeHeader.hasClass('show-controls')) {
-                            activeHeader.addClass('fade-out-controls');
-                        }
-
-                        window.setTimeout(function() {
-                            if (activeHeader.hasClass('fade-out-controls')) {
-                                activeHeader.removeClass('fade-out-controls');
-                                activeHeader.removeClass('show-controls');
+                            if (activeHeader.hasClass('show-controls')) {
+                                activeHeader.addClass('fade-out-controls');
                             }
 
-                            $('.mejs-video').removeClass('fade-out-controls');
-                            $('.mejs-video').removeClass('show-controls');
-                        }, 250);
+                            window.setTimeout(function() {
+                                $('.mejs-video').removeClass('fade-out-controls');
+                                $('.mejs-video').removeClass('show-controls');
+                                activeHeader.removeClass('show-controls');
+                                activeHeader.removeClass('fade-out-controls');
+                                
+                            }, 250);
+                        }
                     });
 
                     $(document).on('mouseenter', 'div.active-header', function(e) {
-                        console.log('active!!!');
+                        headerHover = !headerHover;
+                        console.log('div.active enter');
                     });
 
                     $(document).on('click', '.mejs-mute-convo-button', function() {
