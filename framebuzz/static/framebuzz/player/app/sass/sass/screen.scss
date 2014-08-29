@@ -1241,8 +1241,9 @@ object, embed, video, iframe {
                             position: absolute;
 
                             ul.comment-stream {
-                                height: 314px;
-                                
+                                height: auto;
+                                min-height: 314px;
+
                                 li {
                                     display: block;
                                     width: 257px;
@@ -1441,11 +1442,15 @@ object, embed, video, iframe {
 
                                 &.single-comment {
                                     li {
-                                        background: transparent;
-
                                         &:hover {
-                                            background: rgba(0, 0, 0, 0.4);
                                             cursor: default;
+                                            background-color: transparent;
+                                        }
+
+                                        ul.replies {
+                                            li {
+                                                background: transparent;
+                                            }
                                         }
                                     }
                                 }
