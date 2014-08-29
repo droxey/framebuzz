@@ -66,7 +66,7 @@ angular.module('framebuzz',
                 templateUrl: templateRootPath + 'player.loginOrSignupContainer.html',
                 url: '/hello/user',
                 data: {
-                    panelId: 'login-or-signup-container',
+                    panelId: 'login-or-signup-view',
                     animation: 'share'
                 }
             }; 
@@ -77,6 +77,8 @@ angular.module('framebuzz',
                 templateUrl: templateRootPath + 'player.signupView.html',
                 url: '/signup',
                 data: {
+                     panelId: 'signup-view',
+                     animation: 'share'
                 }
             }; 
 
@@ -86,6 +88,8 @@ angular.module('framebuzz',
                 templateUrl: templateRootPath + 'player.loginView.html',
                 url: '/login',
                 data: {
+                    panelId: 'login-view',
+                    animation: 'share'
                 }
             }; 
 

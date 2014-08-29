@@ -223,7 +223,7 @@ angular.module('framebuzz.controllers', [])
                         localStorageService.set('fbz_pending_comment', postData);
 
                         $scope.player.pause();
-                        $state.transitionTo('player.loginOrSignupContainer');   
+                        $state.transitionTo('player.loginView');   
                     }
                 };
 
