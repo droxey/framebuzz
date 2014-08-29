@@ -93,17 +93,6 @@ angular.module('framebuzz',
                 }
             }; 
 
-            var playerLoginOrSignupView = {
-                name: 'player.loginOrSignupView',
-                parent: playerPanelView,
-                templateUrl: templateRootPath + 'player.loginOrSignup.html',
-                url: '/hello',
-                data: {
-                    panelId: 'login-or-signup-view',
-                    animation: 'share'
-                }
-            };
-
             var playerEnterPasswordView = {
                 name: 'player.enterPasswordView',
                 parent: playerPanelView,
@@ -241,7 +230,6 @@ angular.module('framebuzz',
                 .state(playerInitView)
                 .state(playerPanelView)
                 .state(playerShareView)
-                .state(playerLoginOrSignupView)
                 .state(playerLoginOrSignupContainer)
                 .state(playerSignupView)
                 .state(playerLoginView)

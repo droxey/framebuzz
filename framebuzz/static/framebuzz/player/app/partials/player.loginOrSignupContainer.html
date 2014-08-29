@@ -10,12 +10,13 @@
         </h1>
         <div class="top clearfix">
             <div class="speech-bubble pull-left">
-                <p class="comment"><i class="fa fa-quote-left"></i>{{ newThread.comment }}<i class="fa fa-quote-right fa-rotate-180 fa-flip-vertical"></i></p>
-                <p class="author"><span>&mdash;</span>You</p>
+                <p class="comment" data-ng-hide="newThread.comment == null || newThread.comment.length == 0"><i class="fa fa-quote-left"></i>{{ newThread.comment }}<i class="fa fa-quote-right fa-rotate-180 fa-flip-vertical"></i></p>
+                <p class="comment" data-ng-show="newThread.comment == null || newThread.comment.length == 0">Welcome to FrameBuzz.</p>
+                <p class="author" data-ng-hide="newThread.comment == null || newThread.comment.length == 0"><span>&mdash;</span>You</p>
                 <div class="corner"></div>
             </div>
             <div class="introduction pull-right">
-                <p class="title"><strong>You’ve got comment skills.</strong></p>
+                <p class="title" data-ng-hide="newThread.comment == null || newThread.comment.length == 0"><strong>You’ve got comment skills.</strong></p>
                 <p data-ng-hide="$state.is('player.signupView')">
                     <strong>Log in below or <a data-ng-click="$state.transitionTo('player.signupView')">Sign Up</a></strong><br><span>and get this show on the road!</span>
                 </p>
@@ -28,7 +29,7 @@
             <div id="login-or-signup-view" class="form pull-left" data-ui-view=""></div>
             <div class="benefits pull-right">
                 <h3>The Perks:</h3>
-                <ul>
+                <ul class="perks">
                     <li class="clearfix"><i class="fa fa-check-circle pull-left"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit!</li>
                     <li class="clearfix"><i class="fa fa-check-circle pull-left"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit!</li>
                     <li class="clearfix"><i class="fa fa-check-circle pull-left"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit!</li>
