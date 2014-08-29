@@ -65,53 +65,52 @@ angular.module('framebuzz.directives', [])
                     //  =====
 
                     var headerHover = false;
-                    $('.mejs-mediaelement').mouseenter(function(e) {
-                        console.log('mouse enter');
-                        $('.mejs-video').addClass('show-controls');
 
+                    var fadeOutControls = function() {
                         var activeHeader = $('div.active-header');
+                        $('.mejs-video').addClass('fade-out-controls');
+                        
+                        if (activeHeader.hasClass('show-controls')) {
+                            activeHeader.addClass('fade-out-controls');
+                        }
+
+                        window.setTimeout(function() {
+                            $('.mejs-video').removeClass('fade-out-controls');
+                            $('.mejs-video').removeClass('show-controls');
+                            activeHeader.removeClass('show-controls');
+                            activeHeader.removeClass('fade-out-controls');
+                        }, 250);
+                    };
+
+                    $('.mejs-mediaelement').mouseenter(function(e) {
+                        $('.mejs-video').addClass('show-controls');
                         activeHeader.addClass('show-controls');
                     });
 
                     $('.mejs-video').mouseleave(function(e) {
-                        console.log('mouse leave');
-                        if (!headerHover) {
-                            $('.mejs-video').addClass('fade-out-controls');
-                            var activeHeader = $('div.active-header');
-
-                            if (activeHeader.hasClass('show-controls')) {
-                                activeHeader.addClass('fade-out-controls');
-                            }
-
-                            window.setTimeout(function() {
-                                $('.mejs-video').removeClass('fade-out-controls');
-                                $('.mejs-video').removeClass('show-controls');
-                                activeHeader.removeClass('show-controls');
-                                activeHeader.removeClass('fade-out-controls');
-                                
-                            }, 250);
-                        }
+                        fadeOutControls();
                     });
 
-                    $(document).on('mouseenter', 'div.active-header', function(e) {
-                        headerHover = !headerHover;
-                        console.log('div.active enter');
+                    $(document).on('click', '.sign-in-button', function() {
+                        fadeOutControls();
                     });
 
                     $(document).on('click', '.mejs-mute-convo-button', function() {
                         var button = $(this);
                         if (button.hasClass('mejs-mute')) {
                             button.removeClass('mejs-mute').addClass('mejs-unmute');
+                            button.html('<i class="fa fa-comment"></i>Show Conversation');
                             broadcaster.prepForBroadcast({ broadcastType: 'player_muteconvo' });
                         }
                         else {
                             button.removeClass('mejs-unmute').addClass('mejs-mute');
+                            button.html('<i class="fa fa-comment"></i>Mute Conversation');
                             broadcaster.prepForBroadcast({ broadcastType: 'player_unmuteconvo' });
                         }
                     });
 
                     $(document).on('click', '.mejs-start-private-session', function() {
-                        $('.mejs-video').trigger('mouseleave');
+                        fadeOutControls();
 
                         window.setTimeout(function() {
                             broadcaster.prepForBroadcast({ broadcastType: 'player_startprivateconvo' });
@@ -119,7 +118,7 @@ angular.module('framebuzz.directives', [])
                     });
 
                     $('.mejs-share-framebuzz-button').click(function() {
-                        $('.mejs-video').trigger('mouseleave');
+                        fadeOutControls();
 
                         window.setTimeout(function() {
                             window.location.hash = '#/player/panel/share';
@@ -127,7 +126,7 @@ angular.module('framebuzz.directives', [])
                     });
 
                     $('.mejs-add-library-button').click(function() {
-                        $('.mejs-video').trigger('mouseleave');
+                        fadeOutControls();
                         
                         window.setTimeout(function() {
                             broadcaster.prepForBroadcast({ broadcastType: 'player_addtolibrary' });

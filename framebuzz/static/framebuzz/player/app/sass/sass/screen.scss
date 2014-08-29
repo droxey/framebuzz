@@ -410,9 +410,9 @@ object, embed, video, iframe {
                                 }
                             }
 
-                            &.mejs-mute-conversation-button {
-
-                            }
+                            &.mejs-mute-convo-button {
+                                width: 138px;
+                            }   
 
                             &.mejs-start-private-session {
                                 i {
@@ -2540,6 +2540,12 @@ object, embed, video, iframe {
         #signup-view {
             div.modal-background {
                 div.content {
+                    height: auto;
+                    max-height: 345px;
+                    left: 0;
+                    margin: auto;
+                    top: 10px;
+
                     div.top {
                         div.speech-bubble {
                             @include border-radius(5px, 5px);
@@ -2570,8 +2576,8 @@ object, embed, video, iframe {
                                 width: 100%;
 
                                 &.comment {
-                                    
-                                }
+                                    word-wrap: break-word;
+                                }   
 
                                 &.author {
                                     text-align: right;

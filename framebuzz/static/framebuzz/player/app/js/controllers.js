@@ -22,6 +22,7 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
+                $scope.formSubmitted = false;
                 $scope.enterPasswordModel = {};
                 $scope.formErrors = '';
                 $scope.loginUrls = SOCK.login_urls;
@@ -233,6 +234,8 @@ angular.module('framebuzz.controllers', [])
                         // Show the 'login or signup' screen.
                         // Store the comment for later.
                         localStorageService.set('fbz_pending_comment', postData);
+
+                        $scope.formSubmitted = true;
 
                         $scope.player.pause();
                         $state.transitionTo('player.loginView');   
