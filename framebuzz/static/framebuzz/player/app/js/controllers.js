@@ -584,7 +584,7 @@ angular.module('framebuzz.controllers', [])
                         window.location.hash = '#/player/panel/hello/user/login';
                     }
                     else {
-                        $state.transitionTo('player.startPrivateConvo');
+                        window.location.hash = '#/player/panel/private';
                     }
                 });
 
