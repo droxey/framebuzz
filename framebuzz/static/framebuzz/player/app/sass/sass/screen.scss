@@ -612,7 +612,7 @@ object, embed, video, iframe {
                 }
             }
 
-            form#post-comment-form {
+            form.post-comment-form {
                 background: #202020;
                 height: 40px;
                 padding: 4px;
@@ -678,50 +678,86 @@ object, embed, video, iframe {
                         }
                     }
 
-                    #id_comment {
+                    .comment-input {
                         @include border-radius(1px, 1px);
                         background: white;
-                        border: 1px solid white;
-                        height: 20px;
+                        border: 2px solid white;
+                        height: 18px;
                         float: left;
                         font-family: 'proxima-nova';
                         font-style: normal;
-                        width: 515px;
+                        width: 511px;
+                        box-shadow: none;
 
                         @media screen and (max-width: 581px) {
-                            width: 451px;
+                            width: 447px;
                         }
 
                         @media screen and (min-width: 700px) {
-                            width: 571px;
+                            width: 567px;
                         }
 
                         &.maxlength-full {
-                            border: 1px solid red;
+                            border: 2px solid red;
+                        }
+                    }
+
+                    div.reply-container {
+                        @include border-radius(1px, 1px);
+                        background: white;
+                        border: 2px solid #00aeef;
+                        height: 26px;
+                        overflow: hidden;
+                        float: left;
+                        font-family: 'proxima-nova';
+                        font-style: normal;
+                        position: relative;
+                        width: 519px;
+
+                        @media screen and (max-width: 581px) {
+                            width: 555px;
                         }
 
-                        &.replying {
-                            border: 1px solid #00aeef;
+                        @media screen and (min-width: 700px) {
+                            width: 579px;
+                        }
+
+                        label.reply-to {
+                            display: block;
+                            font-size: 14px;
+                            font-family: 'proxima-nova';
+                            float: left;
+                            font-weight: 500; 
+                            color: #00aeef;
+                            height: 18px;
+                            line-height: 20px;
+                            padding: 3px 0 5px 7px;
                             position: absolute;
-                            z-index: 1;
+                            left: 0;
+                            top: 0;
+                            z-index: 20;
+                        }
+
+                        input.comment-input {
+                            background: transparent;
+                            border: none;
+                            display: block;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            z-index: 15;
                         }
                     }
 
-                    em.reply-to {
-                        display: inline-block;
-                        font-weight: 700; 
-                        color: #00aeef;
-                        position: absolute;
-                        top: 0;
-                        height: 20px;
-                        z-index: 100;
-                    }
-
-                    #id_comment::-webkit-input-placeholder { font-style: italic; }
-                    #id_comment::-moz-placeholder { font-style: italic; } /* firefox 19+ */
-                    #id_comment:-ms-input-placeholder { font-style: italic; } /* ie */
-                    #id_comment:-moz-placeholder { font-style: italic; }
+                    .comment-input::-webkit-input-placeholder { font-style: italic; }
+                    .comment-input::-moz-placeholder { font-style: italic; } /* firefox 19+ */
+                    .comment-input:-ms-input-placeholder { font-style: italic; } /* ie */
+                    .comment-input:-moz-placeholder { font-style: italic; }
                 }
+            }
+
+            #post-reply-form {
+
             }
         }
     }
@@ -1405,7 +1441,7 @@ object, embed, video, iframe {
 
                                 &.single-comment {
                                     li {
-                                        background: rgba(0, 0, 0, 0.4);
+                                        background: transparent;
 
                                         &:hover {
                                             background: rgba(0, 0, 0, 0.4);

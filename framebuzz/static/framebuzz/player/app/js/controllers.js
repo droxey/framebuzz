@@ -28,7 +28,6 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.replyClicked = false;
                 $scope.replyThread = {};
-                $scope.commentPlaceholderText = 'Post a comment...';
 
                 $scope.userProfile = {};
                 $scope.activities = {};
@@ -87,7 +86,7 @@ angular.module('framebuzz.controllers', [])
                             $scope.formErrors = '';
                             safeApply($scope);
 
-                            if ($state.is('player.loginOrSignupView')) {
+                            if ($state.is('player.loginView') || $state.is('player.signupView')) {
                                 if ($scope.newThread.comment !== undefined) {
                                     $scope.postNewThread();
                                 }
@@ -151,7 +150,7 @@ angular.module('framebuzz.controllers', [])
                             $scope.formErrors = '';
                             safeApply($scope);
 
-                            if ($state.is('player.loginOrSignupView')) {
+                            if ($state.is('player.loginView') || $state.is('player.signupView')) {
                                 $scope.postNewThread();
                                 $state.transitionTo('player.blendedView');
                             }
@@ -183,20 +182,13 @@ angular.module('framebuzz.controllers', [])
                 };
 
                 $scope.initReply = function(thread) {
-                    console.log('test!');
-
                     $scope.replyClicked = !$scope.replyClicked;
-                    
-                    if ($scope.replyClicked) {
-                        $scope.replyThread = thread;
-                        $scope.commentPlaceholderText = '';
-                    }
-                    else {
-                        $scope.replyThread = null;
-                        $scope.commentPlaceholderText = 'Post a comment...';
-                    }
-
+                    $scope.replyThread = $scope.replyClicked ? thread : null;
                     safeApply($scope);
+
+                    if (!$state.is('player.activeView.thread')) {
+                        $scope.setSelectedComment(thread);
+                    }
                 };
 
                 $scope.postNewThread = function() {
@@ -253,7 +245,7 @@ angular.module('framebuzz.controllers', [])
                         'content_type': 'core.video',
                         'time': 0.000,
                         'comment': $scope.newReply.comment,
-                        'parent': $scope.selectedThread.id,
+                        'parent': $scope.replyThread.id,
                         'username': $scope.videoInstance.user.username,
                         'session_key': $scope.sessionKey,
                         'video_id': SOCK.video_id
@@ -544,18 +536,16 @@ angular.module('framebuzz.controllers', [])
                 };
 
                 var addNewReply = function(newReply) {
-                    var changed = false;
                     angular.forEach($scope.videoInstance.threads, function(thread, key) {
                         if (thread.id == newReply.parent_id) {
                             thread.replies.push(newReply);
                             thread.has_replies = true;
-                            changed = true;
                         }
                     });
 
-                    if (changed) {
-                        safeApply($scope);
-                    }
+                    $scope.replyThread = {};
+                    $scope.replyClicked = false;
+                    safeApply($scope);
                 };
 
                 // --
@@ -574,7 +564,7 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.$on('player_addtolibrary', function() {
                     if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
-                        $state.transitionTo('player.loginOrSignupView');
+                        $state.transitionTo('player.loginView');
                     }
                     else {
                         socket.send_json({
@@ -591,7 +581,7 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.$on('player_startprivateconvo', function() {
                     if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
-                        $state.transitionTo('player.loginOrSignupView');
+                        $state.transitionTo('player.loginView');
                     }
                     else {
                         $state.transitionTo('player.startPrivateConvo');

@@ -193,6 +193,21 @@ angular.module('framebuzz.directives', [])
             $(element).maxlength({showFeedback: false, max: 180});
         };
     })
+    .directive('textboxwidth', function() {
+        return function(scope, element, attrs) {
+            scope.$watch('replyThread', function(val) {
+                window.setTimeout(function() {
+                    var textbox = element.next();
+                    var textboxWidth = textbox.width();
+                    
+                    textbox.css({
+                        'padding-left': (element.width() + 12) + 'px',
+                        'width': (textboxWidth - element.width() - 12) + 'px'
+                    });
+                }, 500);
+            });
+        };
+    })
     .directive('onfocus', ['safeApply', '$state', function(safeApply, $state) {
         return {
             link: function(scope, element, attrs) {
@@ -200,7 +215,7 @@ angular.module('framebuzz.directives', [])
                     var timeSet = false;
 
                     var unsetPostTime = function() {
-                        if (!$state.is('player.loginOrSignupView')) {
+                        if (!$state.is('player.loginView') && !$state.is('player.signupView')) {
                             scope.postTime = 0;
                             safeApply(scope);
 
