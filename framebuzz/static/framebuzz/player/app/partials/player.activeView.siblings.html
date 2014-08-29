@@ -11,7 +11,7 @@
         <img class="img-circle" data-ng-src="{{ thread.user.avatar_url }}" alt="" data-ng-click="getUserProfile(thread.user.username)" />
         <div class="comment-actions clearfix">
             <div class="pull-left">
-                <a class="reply" data-ng-show="videoInstance.is_authenticated" class="reply" data-ng-model="replyClicked" data-ng-init="replyClicked = false" data-ng-click="replyClicked = !replyClicked" data-ng-class="{ 'active': replyClicked }">
+                <a class="reply" data-ng-show="videoInstance.is_authenticated" class="reply" data-ng-click="initReply(thread)" data-ng-class="{ 'active': replyThread.id == thread.id }">
                     <i class="fa fa-comments"></i>
                 </a>
                 <a class="favorite" data-ng-click="postCommentAction(thread, 'favorite')" data-ng-show="videoInstance.is_authenticated" data-ng-class="{ 'active': thread.is_favorite }">

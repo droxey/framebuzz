@@ -631,6 +631,7 @@ object, embed, video, iframe {
                     margin-bottom: 0;
                     padding-left: 20px;
                     width: 100%;
+                    position: relative;
 
                     span.add-on {
                         @include border-radius(0, 0);
@@ -698,6 +699,22 @@ object, embed, video, iframe {
                         &.maxlength-full {
                             border: 1px solid red;
                         }
+
+                        &.replying {
+                            border: 1px solid #00aeef;
+                            position: absolute;
+                            z-index: 1;
+                        }
+                    }
+
+                    em.reply-to {
+                        display: inline-block;
+                        font-weight: 700; 
+                        color: #00aeef;
+                        position: absolute;
+                        top: 0;
+                        height: 20px;
+                        z-index: 100;
                     }
 
                     #id_comment::-webkit-input-placeholder { font-style: italic; }

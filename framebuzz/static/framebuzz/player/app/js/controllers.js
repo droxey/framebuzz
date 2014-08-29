@@ -27,6 +27,9 @@ angular.module('framebuzz.controllers', [])
                 $scope.loginUrls = SOCK.login_urls;
 
                 $scope.replyClicked = false;
+                $scope.replyThread = {};
+                $scope.commentPlaceholderText = 'Post a comment...';
+
                 $scope.userProfile = {};
                 $scope.activities = {};
                 $scope.postTime = 0;
@@ -177,6 +180,23 @@ angular.module('framebuzz.controllers', [])
                             }
                         });
                     }
+                };
+
+                $scope.initReply = function(thread) {
+                    console.log('test!');
+
+                    $scope.replyClicked = !$scope.replyClicked;
+                    
+                    if ($scope.replyClicked) {
+                        $scope.replyThread = thread;
+                        $scope.commentPlaceholderText = '';
+                    }
+                    else {
+                        $scope.replyThread = null;
+                        $scope.commentPlaceholderText = 'Post a comment...';
+                    }
+
+                    safeApply($scope);
                 };
 
                 $scope.postNewThread = function() {
@@ -374,7 +394,7 @@ angular.module('framebuzz.controllers', [])
                     notificationFactory.success(message);
                 };
 
-                $scope.toggleFollow = function(username) {
+                $scope.toggleFollow = function(usefrname) {
                     socket.send_json({
                         eventType: eventTypes.toggleFollow,
                         channel: SOCK.user_channel,
@@ -615,18 +635,6 @@ angular.module('framebuzz.controllers', [])
                 });
 
                 $scope.$on('player_paused', function() {
-                    if (!$state.is('player.loginOrSignupContainer')) {
-                        if ($state.is('player.blendedView')) {
-                            if ($scope.videoInstance.threads !== undefined
-                                    && $scope.videoInstance.threads.length > 0) {
-                                $scope.setSelectedThread();
-                            }
-                            else {
-                                $state.transitionTo('player.activeView.thread',  { threadId: 0 });
-                            }
-                        }
-                    }
-
                     $scope.playing = false;
                     $scope.paused = true;
                     safeApply($scope);

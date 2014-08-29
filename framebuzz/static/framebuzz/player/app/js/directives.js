@@ -89,6 +89,10 @@ angular.module('framebuzz.directives', [])
                         }, 250);
                     });
 
+                    $(document).on('mouseenter', 'div.active-header', function(e) {
+                        console.log('active!!!');
+                    });
+
                     $(document).on('click', '.mejs-mute-convo-button', function() {
                         var button = $(this);
                         if (button.hasClass('mejs-mute')) {
