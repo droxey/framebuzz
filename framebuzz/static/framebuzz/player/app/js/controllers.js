@@ -221,7 +221,9 @@ angular.module('framebuzz.controllers', [])
                         // Show the 'login or signup' screen.
                         // Store the comment for later.
                         localStorageService.set('fbz_pending_comment', postData);
-                        $state.transitionTo('player.loginOrSignupView');
+
+                        $scope.player.pause();
+                        $state.transitionTo('player.loginOrSignupContainer');   
                     }
                 };
 
@@ -613,13 +615,15 @@ angular.module('framebuzz.controllers', [])
                 });
 
                 $scope.$on('player_paused', function() {
-                    if ($state.is('player.blendedView')) {
-                        if ($scope.videoInstance.threads !== undefined
-                                && $scope.videoInstance.threads.length > 0) {
-                            $scope.setSelectedThread();
-                        }
-                        else {
-                            $state.transitionTo('player.activeView.thread',  { threadId: 0 });
+                    if (!$state.is('player.loginOrSignupContainer')) {
+                        if ($state.is('player.blendedView')) {
+                            if ($scope.videoInstance.threads !== undefined
+                                    && $scope.videoInstance.threads.length > 0) {
+                                $scope.setSelectedThread();
+                            }
+                            else {
+                                $state.transitionTo('player.activeView.thread',  { threadId: 0 });
+                            }
                         }
                     }
 

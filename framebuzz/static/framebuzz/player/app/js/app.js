@@ -60,6 +60,35 @@ angular.module('framebuzz',
                 }
             };
 
+            var playerLoginOrSignupContainer = {
+                name: 'player.loginOrSignupContainer',
+                parent: playerPanelView,
+                templateUrl: templateRootPath + 'player.loginOrSignupContainer.html',
+                url: '/hello/user',
+                data: {
+                    panelId: 'login-or-signup-container',
+                    animation: 'share'
+                }
+            }; 
+
+            var playerSignupView = {
+                name: 'player.signupView',
+                parent: playerLoginOrSignupContainer,
+                templateUrl: templateRootPath + 'player.signupView.html',
+                url: '/signup',
+                data: {
+                }
+            }; 
+
+            var playerLoginView = {
+                name: 'player.loginView',
+                parent: playerLoginOrSignupContainer,
+                templateUrl: templateRootPath + 'player.loginView.html',
+                url: '/login',
+                data: {
+                }
+            }; 
+
             var playerLoginOrSignupView = {
                 name: 'player.loginOrSignupView',
                 parent: playerPanelView,
@@ -209,6 +238,9 @@ angular.module('framebuzz',
                 .state(playerPanelView)
                 .state(playerShareView)
                 .state(playerLoginOrSignupView)
+                .state(playerLoginOrSignupContainer)
+                .state(playerSignupView)
+                .state(playerLoginView)
                 .state(playerEnterPasswordView)
                 .state(playerStartPrivateConvoView)
                 .state(playerBlendedView)
