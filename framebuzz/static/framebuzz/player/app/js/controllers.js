@@ -564,7 +564,7 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.$on('player_addtolibrary', function() {
                     if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
-                        $state.transitionTo('player.loginView');
+                        window.location.hash = '#/player/panel/hello/user/login';
                     }
                     else {
                         socket.send_json({
@@ -581,7 +581,7 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.$on('player_startprivateconvo', function() {
                     if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
-                        $state.transitionTo('player.loginView');
+                        window.location.hash = '#/player/panel/hello/user/login';
                     }
                     else {
                         $state.transitionTo('player.startPrivateConvo');

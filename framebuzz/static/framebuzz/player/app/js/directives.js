@@ -106,15 +106,27 @@ angular.module('framebuzz.directives', [])
                     });
 
                     $(document).on('click', '.mejs-start-private-session', function() {
-                        broadcaster.prepForBroadcast({ broadcastType: 'player_startprivateconvo' });
+                        $('.mejs-video').trigger('mouseleave');
+
+                        window.setTimeout(function() {
+                            broadcaster.prepForBroadcast({ broadcastType: 'player_startprivateconvo' });
+                        }, 300);
                     });
 
                     $('.mejs-share-framebuzz-button').click(function() {
-                        window.location.hash = '#/player/panel/share';
+                        $('.mejs-video').trigger('mouseleave');
+
+                        window.setTimeout(function() {
+                            window.location.hash = '#/player/panel/share';
+                        }, 300);
                     });
 
                     $('.mejs-add-library-button').click(function() {
-                        broadcaster.prepForBroadcast({ broadcastType: 'player_addtolibrary' });
+                        $('.mejs-video').trigger('mouseleave');
+                        
+                        window.setTimeout(function() {
+                            broadcaster.prepForBroadcast({ broadcastType: 'player_addtolibrary' });
+                        }, 300);
                     });
 
                     //  =====
