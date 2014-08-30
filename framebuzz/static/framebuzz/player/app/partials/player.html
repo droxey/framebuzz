@@ -1,16 +1,27 @@
 <div id="buzz-layer" class="layer" data-ui-view="" data-ng-animate="{ 'onEnter': 'animate-panel-enter', 'onExit': 'animate-panel-exit' }"></div>
-<h1 class="video-title mejs-fade-in">{{ videoInstance.video.title|words:8 }}</h1>
 <table id="heatmap" class="span12" cellpadding="0" cellspacing="0">
   <tr>
     <td class="{{ block.className }}" data-ng-repeat="block in videoInstance.heatmap" data-heatmaphover=""></td>
   </tr>
 </table>
-<form method="post" action="" id="post-comment-form" class="span12" data-ng-submit="postNewThread()">
+<form data-ng-show="!replyClicked" method="post" action="" class="post-comment-form" class="span12" data-ng-submit="postNewThread()">
   <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot" data-ng-model="newThread.honeypot"></p>
   <div class="input-prepend input-append">
     <span id="duration" class="add-on active"><em class="current">{{ currentTimeHMS }}</em><em> / </em>{{ videoInstance.video.time_hms }}</span>
     <span id="post-time" class="add-on posting"><em class="current">@ {{ postTimeHMS }}</em></span>
-    <input data-ng-model="newThread.comment" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-authenticated="{{ videoInstance.is_authenticated }}" data-maxinput="" data-onfocus="" autocomplete="off">
-    <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+    <input data-ng-model="newThread.comment" class="comment-input" type="text" id="id_comment" name="comment" maxlength="180" placeholder="Post a comment..." data-authenticated="{{ videoInstance.is_authenticated }}" data-maxinput="" data-onfocus="" autocomplete="off">
+    <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;">
   </div>
+</form>
+<form data-ng-show="replyClicked" method="post" action="" id="post-reply-form" class="span12 post-comment-form" data-ng-submit="postNewReply()">
+  <div class="input-prepend input-append">
+      <span id="duration" class="add-on active"><em class="current">{{ currentTimeHMS }}</em><em> / </em>{{ videoInstance.video.time_hms }}</span>
+      <span id="post-time" class="add-on posting"><em class="current">&nbsp;</em></span>
+      <p style="display:none;"><input type="text" id="id_honeypot" name="honeypot" data-ng-model="newReply.honeypot"></p>
+      <div class="reply-container clearfix">
+        <label class="reply-to" for="id_reply" data-textboxwidth="">@{{ replyThread.user.username }}:</label>
+        <input class="comment-input replying" data-maxinput="" data-ng-model="newReply.comment" type="text" id="id_reply" name="reply" maxlength="180" placeholder="" autocomplete="off">
+      </div>
+      <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;">
+    </div>
 </form>

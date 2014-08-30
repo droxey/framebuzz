@@ -2,6 +2,7 @@ import os
 import hashlib
 import watson
 import caching.base
+import time
 
 from datetime import datetime
 
@@ -207,6 +208,18 @@ class Video(caching.base.CachingMixin, models.Model):
                            'username': user.username,
                            'slug': str(video.slug)})
         return video.get_share_url()
+
+    def get_streaming_url(self, itag):
+        exp = int(time.time())
+        to_hash = '%s%s%s%s%s' % (self.video_id, str(itag), exp,
+                                  settings.YTAPI_USERNAME,
+                                  settings.YTAPI_PASSWORD)
+        token = hashlib.md5(to_hash).hexdigest()
+        url = 'http://s.ytapi.com/?vid=%s&itag=%s&exp=%s&user=%s&s=%s' % (
+            self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
+        alt_url = 'http://s.ytapi.com/api/%s/%s/%s/%s/%s/' % (
+            self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
+        return alt_url
 
     def get_absolute_url(self):
         return reverse('video-embed', kwargs={'slug': str(self.slug)})

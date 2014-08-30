@@ -1,20 +1,16 @@
 (function($){
   $.extend(MediaElementPlayer.prototype, {
-    buildmuteconvo: function(player, controls, layers, media) {
-      var button =  
-        $('<div class="mejs-button mejs-mute-conversation-button mejs-mute mejs-fade-in">' +
-            '<button type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
-              '<img class="mejs-mute-conversation-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAABjCAYAAACCJc7SAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjYyMTM3QjE3RTQxQjExRTI4QTIwQzc4MzI2RDJENTcwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjYyMTM3QjE4RTQxQjExRTI4QTIwQzc4MzI2RDJENTcwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NjIxMzdCMTVFNDFCMTFFMjhBMjBDNzgzMjZEMkQ1NzAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NjIxMzdCMTZFNDFCMTFFMjhBMjBDNzgzMjZEMkQ1NzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6ioJXNAAAC+UlEQVR42uyd7XHaQBBAZSYFUAJUEKUC5FEDoQJCB1BBhgpCByYVQAOMoQN1YEqgA7KXnOND6CQsS7rT+b2ZHf3BM5592r0v+3i4XC4R+MUDUpACSEEKIAUpgBSkkIUQpOz3++/ymEjEEglpvOEgkUkcJXZlH0zTtL4UETGUx0JiJjEi73dzkvgtsZY4NyZFhCgZPyWG5Lg2SshKy6kvRVfHlhbVeGubvlZNkZRBiRA1XrwgpHESndfY9oFBiZBn2lVrDHV+47tmX7plvSCks3FmLC3sXFUpW4R0WjHb0krRs6xf5KpzllIt6xsptC1/2pjZvhYIcdrGFkVjyozcOGV21b70XtaWvDhnKi1s91opE/LhBROzfcXkwwtiU0pCPrwgsS0ewTFIQQogBSmAFKQAUpACSAGkIAWQghRAClIAKYAUpABSkAJIQQogBZCCFEAKUgApSAGkAFKQAkhBCiAFKYAUQErfpJxJhRdc3WKUkQ8vyEwpR/LhBUdTyo58eMFfD+bNeOpWvBF5ccYpTdNxfva1Ii9O+Z///MWeVIvjKilapyzJjxOu8l50WfSTPH6Qp87YSJXMq1b0S9Ytna5LbrpT4bdC6DuKrXexQ2NCHvNXqtsqJdIffKRi2hUSWba3rBuShpg1OWyUdZkQa/sqaGeJPJ6YLn9s2iuhBvRD7uWvJ8WQo2Zl6qbphBzfjZKgvpNrY+lIH5NiyBlpMRNdPWpCwD35/1pSpqviqIWcyn6gMSk5Qb4k5LmlCp7b3vImKJLyhZe79K13MgMN6Ti4ySpRIsaulgSc0Rdse1RNWdsmlPbV1FR96cO6DClv48c0v4ZwBe3rbcvj4MsvFIqUuoP8LvJwj+8zV8oqMr7D1ydCGVO+vnP8mEce/wVPKFLu3eI56erw+khi8ImkqIH8W9SDM6JQpFSdkFaeYdC+uqXVDUWkvK9KenukHUL7GloWhOOop39jEOI6ZaMH9N7+z00IUg5GRWR6DOk1oVTK1FiD9J4/AgwAoQftpiFk1cUAAAAASUVORK5CYII=" alt="Mute Conversation" />' +
-            '</button>' +
-          '</div>')
-        .appendTo(controls);
+    buildtitle: function(player, controls, layers, media) {
+      var titleDiv = $('<div class="mejs-title mejs-fade-in"></div>').appendTo(controls);
+      var title = $('<h1 class="video-title" />').appendTo(titleDiv);
+      title.text(SOCK.video_title);
     },
     buildshare: function(player, controls, layers, media) {
       var shareDiv = $('<div class="mejs-share mejs-fade-in"></div>').appendTo(controls);
 
       var button =
         $('<button class="mejs-share-framebuzz-button" type="button" aria-controls="mep_0" title="Share This FrameBuzz" aria-label="Share This FrameBuzz">' +
-            '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAABlCAYAAAD5/TVmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjdFNzNBRkYzRTI3ODExRTI4QTIwQzc4MzI2RDJENTcwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjdFNzNBRkY0RTI3ODExRTI4QTIwQzc4MzI2RDJENTcwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6N0U3M0FGRjFFMjc4MTFFMjhBMjBDNzgzMjZEMkQ1NzAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6N0U3M0FGRjJFMjc4MTFFMjhBMjBDNzgzMjZEMkQ1NzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7+2NLIAAAFLklEQVR42uSd328UVRTH767bAlJ+KZaiiAgISARbib9iIGLEIPDCAy/88IEE/yIeeUB98AUhPBEUCIoaA/6ITeSHIQQETQFLbQuV/oD1fDNn4mbpbHd2Z879XvYk32yg7Zydz9y599xz7twplMtlF6jNFC0RdYlmi9pFD0R3RbdFf+hnXVYK7OQLotWiNxRCYYrf7xf9Ijorul/zwAG1iMWibdoC0hognFQg5VBB4KpvFG0QFZs81mXRIdFIaCBw4ttFr2Z4zL9FB0VD1Y6YbUvGEGDzRXtE00MB0a2dYh62QFsaPYgO0dacfbwsWsMOAp3jNAM/m0RPsIKYIeox8jVX9AoriJXGgV43K4hVxv4QobYzgnjR2B/6iIVsIGZqH2FtT7OBeNLXBWADUWw5xwk26snvOBuIYdFDD34H2EAgw3TTg98+xuHzqrE/ZLEG2UC0iV4w9tnL1lm2aZ7gWUOfE6IfmUDEEJYY+z2nHTQFCEDY7QHCoOgUSxwRQ7CeX2B0OlQZtxRbEALilC9E1yr/s9RiEEa1JVyq/kEpEAgIsv5yURKl0KDf66LDGjc8YtZ1jUYg9LmoDjGiQ+u7Lspi1QvkluiMxguJJ2sJolkIlTbHRTVQHGuB/jvu7+65qPiLPuB3bQlTmhUIQNglWpoBhCQraYDUkFmAaBTCJ3p1TazU5AmWdEweCxlCWhA4mXe0w5pRFYOUdWjq09i9NyQI9d4ab7mo8pQmqTquJzM35RB50AeEqUDgJPamPJlGzSuEWrfGS6KdTuuCjzuEJBDLdbwvtAqEySZd87SDaykI1SBw8h+30u2QBOIDF5Xc8rYxNgiVINAK3jScc9Ct7yxWxApWXw634IesIHqM/S5jBIErNN/Y7zSdOlOBmOf85C5XsIF4zpPvLjYQHZ58T2cDMeHJ90M2EIOefA+zgbjmyfd1NhCjLjnVlpchCXKZMaD609gvnpUYZwTxtbHfn1hD7CuGnSZGqW9YQcCOGPk8zTZ0VoNAq7iYs79+xtbgJpljfC76Jydf6BwPOFIrTjKs7XfR07R5RJJPsYJIqmsgSbNPtDBjf3gQ9TO2YKoWiNjWi95z2SZ0KWHUU/JD60Bqba3L7oEzOhhplwXgVunRz1nu/2r4iLaarlBhZL0+4n0XPcOdBsanohtso0azdiJlnIDkzEeiRY8biGBh5JW0DQ5GntnroGDkncYPBoZFPSMIGJYLTjdppJpmaMXCslrZM1TvOzWmadeJXbzr0BAriKxgYE3Xay5aedtZ428HRBdclA27zQaiGRgD+rfdKec+ZQVyXI9BA6IRGGM6jW+mOobb5pjTZ7hYQDQCIyv7QYGUrUeNJPvKRY8PWBsWxWz1MXwywsBuRq8zgfAJY7OL1obQgIhhfGvss01hUIGAfekBBvazeYYNRAzDsjiM9WPrGEH4sNWMIHCFrHcLQMg+mw3EHO3ErK2TDcQsT3472ED4WqNNtzOZrxV+o2wghjz5HWYE4WMvqltsIDA1vmrsE5sB32UMqH4z9neeNbLEF/vXyBeyXj+zgkBa7nsjX3h0+w7zXOO7+AvmaPd1+u+YQSCewIY4D3L0cdRVLIxnnn1iAckRV2M7lCbsRHWnzP5aiV79xK7mWazjAlRswvVICTKU10o8L9rhmtu5YERvhwuTzv8Der8Gpueog7zt0i1qm9Ah8pSrsV9NIcBXz6DahT3vkVlanJC/QCeLeimWVP/q6nhaqBDwO3ic9hu4XeKEDq4+quH9aWey/wkwAAn8UjsY7ePXAAAAAElFTkSuQmCC" alt="Share This FrameBuzz" />' +
+          '<i class="fa fa-share-alt"></i>Share' +
           '</button>')
         .appendTo(shareDiv);
     },
@@ -23,9 +19,23 @@
 
       var button =
         $('<button class="mejs-add-library-button" type="button" aria-controls="mep_0" title="Add to My Library" aria-label="Add to My Libary">' +
-            '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEoAAABKCAYAAAAc0MJxAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkIxQjdCMjA0RTM0RjExRTI4QTIwQzc4MzI2RDJENTcwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkIxQjdCMjA1RTM0RjExRTI4QTIwQzc4MzI2RDJENTcwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6N0U3M0FGRjVFMjc4MTFFMjhBMjBDNzgzMjZEMkQ1NzAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6N0U3M0FGRjZFMjc4MTFFMjhBMjBDNzgzMjZEMkQ1NzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5JtzdbAAAA3klEQVR42uzcPQ7CIBiAYTAubro52qP0KJ6Uo9TRrb0BwhmKX2N83oQVyJOUoX+51pqCm9p47Jzj1cYSuelziq8jzTvnKNFQpyRQoECBAgVKoECBAgUKFCiBAgUKFChQAgUKFChQoP6r/kj93sYlcM3roDmmwD2vudb6DF70FysuPWcUKFCgQIESKFCgQIECBUqghtRv3L2D17yl/TfvtjbWwD1v+YCvq+Y05qOh4tJzRoECJVCgQIECBQqUQIECBQoUKFACBQoUKFCgBArU9zriP5z9vYFlwByhfQQYAMA2GLkc6vpRAAAAAElFTkSuQmCC" alt="Add to My Library" />' +
-          '</button>')
+           '<i class="fa fa-plus"></i>Add to Library' +
+           '</button>')
         .appendTo(shareDiv);
+    },
+    buildmuteconvo: function(player, controls, layers, media) {
+      var shareDiv = controls.find('div.mejs-share');
+
+      var button =  
+        $('<button class="mejs-mute-convo-button mejs-mute" type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
+            '<i class="fa fa-comment"></i>Mute Conversation</button>')
+        .appendTo(shareDiv);
+    },
+    buildprivateconvo: function(player, controls, layers, media) {
+      var shareDiv = controls.find('div.mejs-share');
+      var button = 
+        $('<button class="mejs-start-private-session" class="rounded"><i class="fa fa-lock"></i> Start Private</button>')
+      .appendTo(shareDiv);
     }
   });
 })(jQuery);

@@ -20,12 +20,16 @@ DATABASES = {
     }
 }
 
+SOCKJS_PORT = 443
+
 SHORT_BASE_URL = 'http://frame.bz/s/'
-SHORTEN_FULL_BASE_URL = 'http://framebuzz.com/s/'
+SHORTEN_FULL_BASE_URL = 'http://%(live_host)s/s/'
 
 RAVEN_CONFIG = {
-    'dsn': 'http://dcacaf02c69f45dda45b12a8c2287178:32f20c7d2f3e4183a8700eec3f08be4d@sentry.framebuzzlab.com/2',
+    'dsn': "%(sentry_dsn)s",
 }
+
+RAVENJS_DSN = "%(ravenjs_dsn)s"
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'framebuzz'

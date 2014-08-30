@@ -18,21 +18,25 @@ angular.module('framebuzz.controllers', [])
                 $scope.clearFocus = false;
                 $scope.isCollapsed = false;
                 $scope.updateSlider = false;
+                $scope.activeViewTitle = '';
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
+                $scope.formSubmitted = false;
                 $scope.enterPasswordModel = {};
                 $scope.formErrors = '';
                 $scope.loginUrls = SOCK.login_urls;
 
                 $scope.replyClicked = false;
+                $scope.replyThread = {};
+
                 $scope.userProfile = {};
                 $scope.activities = {};
                 $scope.postTime = 0;
                 $scope.playing = false;
                 $scope.paused = false;
                 $scope.timeOrderedThreads = null;
-                $scope.selectedThreadIndex = -1;
+                $scope.selectedThreadSiblings = [];
                 $scope.share = {};
                 $scope.shareUrl = SOCK.share_url;
 
@@ -83,8 +87,10 @@ angular.module('framebuzz.controllers', [])
                             $scope.formErrors = '';
                             safeApply($scope);
 
-                            if ($state.is('player.loginOrSignupView')) {
-                                $scope.postNewThread();
+                            if ($state.is('player.loginView') || $state.is('player.signupView')) {
+                                if ($scope.newThread.comment !== undefined) {
+                                    $scope.postNewThread();
+                                }
                                 $state.transitionTo('player.blendedView');
                             }   
                         }
@@ -145,7 +151,7 @@ angular.module('framebuzz.controllers', [])
                             $scope.formErrors = '';
                             safeApply($scope);
 
-                            if ($state.is('player.loginOrSignupView')) {
+                            if ($state.is('player.loginView') || $state.is('player.signupView')) {
                                 $scope.postNewThread();
                                 $state.transitionTo('player.blendedView');
                             }
@@ -173,6 +179,16 @@ angular.module('framebuzz.controllers', [])
                                 video_id: SOCK.video_id
                             }
                         });
+                    }
+                };
+
+                $scope.initReply = function(thread) {
+                    $scope.replyClicked = !$scope.replyClicked;
+                    $scope.replyThread = $scope.replyClicked ? thread : null;
+                    safeApply($scope);
+
+                    if (!$state.is('player.activeView.thread')) {
+                        $scope.setSelectedComment(thread);
                     }
                 };
 
@@ -218,7 +234,11 @@ angular.module('framebuzz.controllers', [])
                         // Show the 'login or signup' screen.
                         // Store the comment for later.
                         localStorageService.set('fbz_pending_comment', postData);
-                        $state.transitionTo('player.loginOrSignupView');
+
+                        $scope.formSubmitted = true;
+
+                        $scope.player.pause();
+                        $state.transitionTo('player.loginView');   
                     }
                 };
 
@@ -228,7 +248,7 @@ angular.module('framebuzz.controllers', [])
                         'content_type': 'core.video',
                         'time': 0.000,
                         'comment': $scope.newReply.comment,
-                        'parent': $scope.selectedThread.id,
+                        'parent': $scope.replyThread.id,
                         'username': $scope.videoInstance.user.username,
                         'session_key': $scope.sessionKey,
                         'video_id': SOCK.video_id
@@ -258,6 +278,14 @@ angular.module('framebuzz.controllers', [])
                     });
                 };
 
+                $scope.closeLoginScreen = function() {
+                    $scope.newThread = {};
+                    $scope.formSubmitted = false;
+                    safeApply($scope);
+                    
+                    $state.transitionTo('player.blendedView');
+                };
+
                 $scope.setPostTime = function() {
                     $scope.postTime = angular.copy($scope.currentTime);
                     $scope.postTimeHMS = mejs.Utility.secondsToTimeCode($scope.postTime);
@@ -265,18 +293,40 @@ angular.module('framebuzz.controllers', [])
                 };
 
                 $scope.setSelectedThread = function(thread) {
-                    var index = -1;
+                    var filteredList = [];
 
                     if (thread === null || thread === undefined) {
                         thread = getNextThreadInTimeline();
                     }
 
                     if (thread != null) {
+                        var time = parseInt(thread.time, 10);
+
+                        angular.forEach($scope.videoInstance.threads, function(obj, key) {
+                            if (parseInt(obj.time, 10) == time) {
+                                filteredList.push(obj);
+                            }
+                        });
+
+                        $scope.selectedThreadSiblings = filteredList;
+                        $scope.activeViewTitle = "Comments at " + thread.time_hms;
+                        safeApply($scope);
+
+                        $state.transitionTo('player.activeView.siblings', { threadId: thread.id });
+                        $scope.player.pause();
+                    }
+                };
+
+                $scope.setSelectedComment = function(thread) {
+                    var index = -1;
+
+                    if (thread != null) {
                         index = $scope.timeOrderedThreads.indexOf(thread);
 
                         $state.transitionTo('player.activeView.thread', { threadId: thread.id });
-                        $scope.selectedThreadIndex = index;
-                        $scope.selectedThread = thread;
+                        $scope.selectedCommentIndex = index;
+                        $scope.selectedComment = thread;
+                        $scope.activeViewTitle = thread.user.display_name + "'s Comment";
                         safeApply($scope);
 
                         $scope.player.pause();
@@ -301,6 +351,9 @@ angular.module('framebuzz.controllers', [])
                 };
 
                 $scope.getUserProfile = function(username) {
+                    // temporary!
+                    return;
+                    
                     if (username === undefined) {
                         username = $scope.videoInstance.user.username;
                     }
@@ -344,7 +397,7 @@ angular.module('framebuzz.controllers', [])
                     notificationFactory.success(message);
                 };
 
-                $scope.toggleFollow = function(username) {
+                $scope.toggleFollow = function(usefrname) {
                     socket.send_json({
                         eventType: eventTypes.toggleFollow,
                         channel: SOCK.user_channel,
@@ -494,18 +547,16 @@ angular.module('framebuzz.controllers', [])
                 };
 
                 var addNewReply = function(newReply) {
-                    var changed = false;
                     angular.forEach($scope.videoInstance.threads, function(thread, key) {
                         if (thread.id == newReply.parent_id) {
                             thread.replies.push(newReply);
                             thread.has_replies = true;
-                            changed = true;
                         }
                     });
 
-                    if (changed) {
-                        safeApply($scope);
-                    }
+                    $scope.replyThread = {};
+                    $scope.replyClicked = false;
+                    safeApply($scope);
                 };
 
                 // --
@@ -523,7 +574,10 @@ angular.module('framebuzz.controllers', [])
                 });
 
                 $scope.$on('player_addtolibrary', function() {
-                    if ($scope.videoInstance.is_authenticated) {
+                    if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
+                        window.location.hash = '#/player/panel/hello/user/login';
+                    }
+                    else {
                         socket.send_json({
                             eventType: eventTypes.addToLibrary,
                             channel: SOCK.user_channel,
@@ -534,8 +588,14 @@ angular.module('framebuzz.controllers', [])
                             }
                         });
                     }
+                });
+
+                $scope.$on('player_startprivateconvo', function() {
+                    if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
+                        window.location.hash = '#/player/panel/hello/user/login';
+                    }
                     else {
-                        notificationFactory.error('Please log in first!');
+                        window.location.hash = '#/player/panel/private';
                     }
                 });
 
@@ -576,16 +636,6 @@ angular.module('framebuzz.controllers', [])
                 });
 
                 $scope.$on('player_paused', function() {
-                    if ($state.is('player.blendedView')) {
-                        if ($scope.videoInstance.threads !== undefined
-                                && $scope.videoInstance.threads.length > 0) {
-                            $scope.setSelectedThread();
-                        }
-                        else {
-                            $state.transitionTo('player.activeView.thread',  { threadId: 0 });
-                        }
-                    }
-
                     $scope.playing = false;
                     $scope.paused = true;
                     safeApply($scope);

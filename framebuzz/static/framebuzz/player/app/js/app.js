@@ -60,16 +60,38 @@ angular.module('framebuzz',
                 }
             };
 
-            var playerLoginOrSignupView = {
-                name: 'player.loginOrSignupView',
+            var playerLoginOrSignupContainer = {
+                name: 'player.loginOrSignupContainer',
                 parent: playerPanelView,
-                templateUrl: templateRootPath + 'player.loginOrSignup.html',
-                url: '/hello',
+                templateUrl: templateRootPath + 'player.loginOrSignupContainer.html',
+                url: '/hello/user',
                 data: {
-                    panelId: 'share-view',
+                    panelId: 'login-or-signup-view',
                     animation: 'share'
                 }
-            };
+            }; 
+
+            var playerSignupView = {
+                name: 'player.signupView',
+                parent: playerLoginOrSignupContainer,
+                templateUrl: templateRootPath + 'player.signupView.html',
+                url: '/signup',
+                data: {
+                     panelId: 'signup-view',
+                     animation: 'share'
+                }
+            }; 
+
+            var playerLoginView = {
+                name: 'player.loginView',
+                parent: playerLoginOrSignupContainer,
+                templateUrl: templateRootPath + 'player.loginView.html',
+                url: '/login',
+                data: {
+                    panelId: 'login-view',
+                    animation: 'share'
+                }
+            }; 
 
             var playerEnterPasswordView = {
                 name: 'player.enterPasswordView',
@@ -86,10 +108,10 @@ angular.module('framebuzz',
                 name: 'player.startPrivateConvo',
                 parent: playerPanelView,
                 templateUrl: templateRootPath + 'player.startPrivateConvo.html',
-                url: '/share/private',
+                url: '/private',
                 data: {
-                    panelId: 'share-view',
-                    animation: 'panel'
+                    panelId: 'start-private-convo-view',
+                    animation: 'share'
                 }
             };
 
@@ -187,7 +209,17 @@ angular.module('framebuzz',
                 name: 'player.activeView.thread',
                 parent: playerActiveViewComments,
                 templateUrl: templateRootPath + 'player.activeView.thread.html',
-                url: '/:threadId',
+                url: '/:threadId/thread',
+                data: {
+                    panelId: 'active-view'
+                }
+            };
+
+            var playerActiveViewSiblings = {
+                name: 'player.activeView.siblings',
+                parent: playerActiveViewComments,
+                templateUrl: templateRootPath + 'player.activeView.siblings.html',
+                url: '/:threadId/siblings',
                 data: {
                     panelId: 'active-view'
                 }
@@ -198,7 +230,9 @@ angular.module('framebuzz',
                 .state(playerInitView)
                 .state(playerPanelView)
                 .state(playerShareView)
-                .state(playerLoginOrSignupView)
+                .state(playerLoginOrSignupContainer)
+                .state(playerSignupView)
+                .state(playerLoginView)
                 .state(playerEnterPasswordView)
                 .state(playerStartPrivateConvoView)
                 .state(playerBlendedView)
@@ -210,7 +244,8 @@ angular.module('framebuzz',
                 .state(userFollowingView)
                 .state(playerActiveViewComments)
                 .state(playerActiveViewActivity)
-                .state(playerActiveViewThread);
+                .state(playerActiveViewThread)
+                .state(playerActiveViewSiblings);
         }
     ]).run(
         [

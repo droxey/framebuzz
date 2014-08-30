@@ -12,7 +12,8 @@ ADMINS = (
 )
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'frbz.in',
-                 'localhost', 'framebuzz.com', 'frame.bz', ]
+                 'localhost', 'framebuzz.com', 'frame.bz',
+                 'staging.framebuzzlab.com']
 
 MANAGERS = ADMINS
 
@@ -385,6 +386,9 @@ SHORTEN_MODELS = {
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/profile/%s/" % u.username,
 }
+
+YTAPI_USERNAME = 'framebuzz.com'
+YTAPI_PASSWORD = 'm1a9k5s9'
 
 LOGGING = {
     'version': 1,

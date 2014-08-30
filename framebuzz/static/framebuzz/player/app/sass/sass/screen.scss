@@ -166,23 +166,33 @@ object, embed, video, iframe {
                     height: 405px !important;
                     width: 700px !important;
                 }
+                
+                .mejs-overlay-play {
+                    top: 50%;
+                    left: 50%;
 
-                .mejs-overlay-button {
-                    @include border-radius(500px, 500px);
-                    background: rgba(255, 255, 255, 0.5);
-                    margin: -40px 0 0 -40px;
-                    height: 80px;
-                    width: 80px;
-                    opacity: 1;
+                    .mejs-overlay-button {
+                        @include border-radius(500px, 500px);
+                        background: rgba(255, 255, 255, 0.5);
+                        height: 80px;
+                        left: -40px;
+                        margin: 0;
+                        opacity: 1;
+                        top: -40px;
+                        width: 80px;
+                        z-index: 1;
 
-                    img {
-                        height: 34px;
-                        width: 30px;
-                        margin: 24px 18px 23px 31px;
-                    }
+                        i {
+                            color: rgba(0, 0, 0, 0.75);
+                            font-size: 40px;
+                            line-height: 80px;
+                            padding: 0 20px;
+                        }
 
-                    &:hover {
-                        background: rgba(255, 255, 255, 0.75);
+                        &:hover {
+                            background: rgba(255, 255, 255, 0.75);
+                            i { color: black; }
+                        }
                     }
                 }
 
@@ -324,56 +334,70 @@ object, embed, video, iframe {
 
                     .mejs-fade-in { opacity: 0; }
 
-                    div.mejs-share {
-                        background: none;
-                        height: 38px;
-                        left: 5px;
+                    div.mejs-title {
+                        height: 43px;
+                        background: rgba(0, 0, 0, 0.7);
+                        border-bottom: 1px solid rgba(104, 104, 104, 0.3);
+                        overflow: hidden;
+                        padding: 0 13px;
                         position: absolute;
-                        top: 5px;
-                        width: 85px;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
                         z-index: 10;
 
+                        h1.video-title {
+                            color: rgba(255, 255, 255, 1);
+                            font-family: 'proxima-nova';
+                            font-size: 16px;
+                            font-weight: 500;
+                            line-height: 45px;
+                            text-align: left;   
+                        }
+                    }
+
+                    div.mejs-share {
+                        background: rgba(0, 0, 0, 0.7);
+                        height: 38px;
+                        left: 0;
+                        position: absolute;
+                        bottom: 14px;
+                        width: 100%;
+                        z-index: 200;
+
                         button {
-                            @include border-radius(3px, 3px);
-                            @include single-box-shadow(rgba(0, 0, 0, 0.5), 0px, 0px, 19px, 0px, inset);
-                            background-color: rgba(61, 61, 61, 0.7);
+                            background: none;
                             cursor: pointer;
                             border: 0;
                             display: inline-block;
-                            height: 38px;
-                            width: 38px;
-                            @include single-transition(background-color 250ms ease-in);
+                            height: 37.5px;
+                            line-height: 38px;
+                            color: white;
+                            font-size: 12px;
+                            @include single-transition(color 250ms ease-in);
 
-                            img {
-                                position: relative;
-                                top: 2px;
+                            i { 
+                                color: rgba(255, 255, 255, 0.8);
+                                padding-right: 5px;
+                                font-size: 16px;
+                                line-height: 38px;
+                                vertical-align: sub;
                             }
 
                             &:hover {
-                                background-color: rgba(61, 61, 61, 0.95);
-                                @include single-transition(background-color 250ms ease-in);
+                                i {
+                                    color: white;
+                                }
                             }
 
                             &.mejs-share-framebuzz-button {
                                 cursor: pointer;
                                 margin-right: 5px;
-
-                                img {
-                                    height: 27px;
-                                    right: 1px;
-                                    width: 17px;
-                                }
                             }
 
                             &.mejs-add-library-button {
                                 cursor: pointer;
                                 margin-right: 0;
-                                padding: 6px;
-
-                                img {
-                                    height: 18px;
-                                    width: 18px;
-                                }
 
                                 &.added {
                                     background-color: rgba(67, 136, 183, 0.7);
@@ -385,31 +409,24 @@ object, embed, video, iframe {
                                     @include single-transition(background-color 250ms ease-in);
                                 }
                             }
-                        }
-                    }
 
-                    h1.video-title {
-                        color: rgba(255, 255, 255, 0.75);
-                        font-family: 'proxima-nova';
-                        font-size: 13.33px;
-                        font-weight: 500;
-                        left: 91px;
-                        height: 15px;
-                        line-height: 15px;
-                        margin: 13px 0;
-                        overflow: hidden;
-                        padding-top: 0;
-                        position: absolute;
-                        text-align: left;
-                        top: 0;
-                        width: 306px;
-                        z-index: 10;
+                            &.mejs-mute-convo-button {
+                                width: 138px;
+                            }   
+
+                            &.mejs-start-private-session {
+                                i {
+                                    padding-right: 2px;
+                                }
+                            }
+                        }
                     }
 
                     div.mejs-button {
                         cursor: pointer;
                         bottom: 12px;
                         position: absolute;
+                        bottom: 90px;
                         width: 35px;
                         z-index: 10;
 
@@ -447,19 +464,6 @@ object, embed, video, iframe {
                             }
                         }
 
-                        &.mejs-mute-conversation-button {
-                            cursor: pointer;
-                            left: 0;
-
-                            button {
-                                outline: 0 none;
-                                border: none;
-                                margin-top: 0;
-                                height: 20px;
-                                width: 23px;
-                            }
-                        }
-
                         &.mejs-playpause-button {
                             cursor: pointer;
                             bottom: -34px;
@@ -474,13 +478,13 @@ object, embed, video, iframe {
                                 margin: 1px;
                                 width: 20px;
 
-                                i.icon {
+                                i {
                                     background: none;
                                     color: white;
                                     display: inline-block;
-                                    font-size: 20px;
+                                    font-size: 15px;
                                     height: 20px;
-                                    line-height: 20px;
+                                    line-height: 22px;
                                     opacity: 0.9;
                                     text-indent: -2px;
                                     vertical-align: text-top;
@@ -529,8 +533,6 @@ object, embed, video, iframe {
             @media screen and (max-width: 581px) {
                 height: 38px;
             }
-
-            h1.video-title { display: none; }
 
             table#heatmap {
                 background: none;
@@ -598,9 +600,19 @@ object, embed, video, iframe {
                         }
                     }
                 }
+
+                &.safari {
+                    tbody {
+                        tr {
+                            td {
+                                height: 12px;
+                            }
+                        }
+                    }
+                }
             }
 
-            form#post-comment-form {
+            form.post-comment-form {
                 background: #202020;
                 height: 40px;
                 padding: 4px;
@@ -619,6 +631,7 @@ object, embed, video, iframe {
                     margin-bottom: 0;
                     padding-left: 20px;
                     width: 100%;
+                    position: relative;
 
                     span.add-on {
                         @include border-radius(0, 0);
@@ -665,33 +678,201 @@ object, embed, video, iframe {
                         }
                     }
 
-                    #id_comment {
+                    .comment-input {
                         @include border-radius(1px, 1px);
                         background: white;
-                        border: 1px solid white;
-                        height: 20px;
+                        border: 2px solid white;
+                        height: 18px;
                         float: left;
                         font-family: 'proxima-nova';
                         font-style: normal;
-                        width: 515px;
+                        width: 511px;
+                        box-shadow: none;
 
                         @media screen and (max-width: 581px) {
-                            width: 451px;
+                            width: 447px;
                         }
 
                         @media screen and (min-width: 700px) {
-                            width: 571px;
+                            width: 567px;
                         }
 
                         &.maxlength-full {
-                            border: 1px solid red;
+                            border: 2px solid red;
                         }
                     }
 
-                    #id_comment::-webkit-input-placeholder { font-style: italic; }
-                    #id_comment::-moz-placeholder { font-style: italic; } /* firefox 19+ */
-                    #id_comment:-ms-input-placeholder { font-style: italic; } /* ie */
-                    #id_comment:-moz-placeholder { font-style: italic; }
+                    div.reply-container {
+                        @include border-radius(1px, 1px);
+                        background: white;
+                        border: 2px solid #00aeef;
+                        height: 26px;
+                        overflow: hidden;
+                        float: left;
+                        font-family: 'proxima-nova';
+                        font-style: normal;
+                        position: relative;
+                        width: 519px;
+
+                        @media screen and (max-width: 581px) {
+                            width: 555px;
+                        }
+
+                        @media screen and (min-width: 700px) {
+                            width: 579px;
+                        }
+
+                        label.reply-to {
+                            display: block;
+                            font-size: 14px;
+                            font-family: 'proxima-nova';
+                            float: left;
+                            font-weight: 500; 
+                            color: #00aeef;
+                            height: 18px;
+                            line-height: 20px;
+                            padding: 3px 0 5px 7px;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            z-index: 20;
+                        }
+
+                        input.comment-input {
+                            background: transparent;
+                            border: none;
+                            display: block;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            z-index: 15;
+                        }
+                    }
+
+                    .comment-input::-webkit-input-placeholder { font-style: italic; }
+                    .comment-input::-moz-placeholder { font-style: italic; } /* firefox 19+ */
+                    .comment-input:-ms-input-placeholder { font-style: italic; } /* ie */
+                    .comment-input:-moz-placeholder { font-style: italic; }
+                }
+            }
+
+            #post-reply-form {
+
+            }
+        }
+    }
+
+    div.active-header {
+        background: transparent;
+        border-bottom: 1px solid rgba(81, 81, 81, .32);
+        height: 43px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 256px;
+        z-index: 11;
+        opacity: 0;
+
+        &.show-controls {
+            opacity: 1;
+            @include single-transition(opacity .1s linear);
+
+            &.fade-out-controls {
+                opacity: 0;
+                //@include single-transition(opacity .1s ease-in-out);
+            }
+
+            &.header-visible {
+                background: transparent;
+                opacity: 1;
+            }
+        }
+
+        &.header-visible {
+            background: rgba(0, 0, 0, .70);
+            opacity: 1;
+            //@include single-transition(background .1s ease-in-out);
+        }
+
+        a.logo {
+            cursor: pointer;
+            display: inline-block;
+            float: left;
+            height: 20px;
+            width: 93px;
+            padding: 12px;
+        }
+
+        a.dropdown-toggle {
+            cursor: pointer;
+            display: inline-block;
+            float: right;
+            height: 33px;
+            padding: 4px 0;
+            width: 51px;
+
+            img.img-circle {
+                background: black;
+                float: left;
+                height: 24px;
+                margin-right: 5px;
+                position: relative;
+                left: 0;
+                top: 5px;
+                width: 24px;
+            }
+
+            i {
+                color: rgba(255, 255, 255, 0.8);
+                margin-top: 10px;
+            }
+
+            &.hover {
+                i {
+                    color: white;
+                }
+            }
+        }
+
+        a.sign-in-button {
+            box-shadow: none;
+            display: block;
+            float: right;
+            font-family: 'proxima-nova';
+            font-size: 13px;
+            font-weight: 700;
+            margin: 8px 12px;
+        }
+
+        ul.dropdown-menu {
+            @include border-radius(0px, 0px);
+            box-shadow: none;
+            background: #2b2b2b;
+            height: 28px;
+            left: 147px;
+            min-width: 108px;
+            padding: 0;
+            top: 43px;
+
+            li {
+                width: 108px;
+
+                a {
+                    color: white;
+                    cursor: pointer;
+                    display: block;
+                    line-height: 28.5px;
+                    font-family: 'proxima-nova';
+                    font-size: 10.04px;
+                    font-weight: 500;
+                    padding: 0 10px;
+                    text-align: right;
+                    text-decoration: none;
+                    text-transform: uppercase;
+
+                    i { padding-right: 5px; }
+
+                    &:hover { font-weight: 700; }
                 }
             }
         }
@@ -700,30 +881,51 @@ object, embed, video, iframe {
     #buzz-layer {
         div.panel {
             div.scrollable {
-                @include single-box-shadow(rgba(0, 0, 0, 0.5), 0px, 0px, 118px, 0px, inset);
+                display: block;
                 overflow: hidden;
                 position: absolute;
-                top: 0;
-                z-index: 110;
+                top: 44px;
+                z-index: 10;
 
                 ul.comment-stream {
+                    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+                    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjciLz4KICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuNyIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+                    background: -moz-linear-gradient(top,  rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 85%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.7)), color-stop(85%,rgba(0,0,0,0.7)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+                    background: -ms-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* IE10+ */
+                    background: linear-gradient(to bottom,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 85%,rgba(0,0,0,0) 100%); /* W3C */
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#00000000',GradientType=0 ); /* IE6-8 */
+                    background-size: 100% 400px;
+                    background-attachment: fixed;
+
+                    @media screen and (max-width: 581px) {
+
+                    }
+
+                    @media screen and (min-width: 700px) {
+
+                    }
+
                     li {
-                        border-bottom: 1px solid rgba(104, 104, 104, .90);
-                        color: rgba(255, 255, 255, .65);
+                        border-bottom: 1px solid rgba(104, 104, 104, 0.3);
+                        color: white;
                         display: none;
                         font-family: 'proxima-nova';
                         font-size: 13px;
-                        min-height: 58px;
+                        min-height: 66px;
+                        @include single-transition(background-color 100ms ease-in-out);
 
                         div.thread {
                             display: inline-block;
                             padding: 10px 2px 10px 14px;
                             vertical-align: top;
-                            width: 168px;
+                            width: 183px;
 
                             div.header {
                                 strong, a {
-                                    color: rgba(255, 255, 255, 0.63);
+                                    color: rgba(255, 255, 255, 1);
                                     display: inline-block;
                                     font-weight: 700;
                                     font-size: 12.28px;
@@ -731,63 +933,113 @@ object, embed, video, iframe {
                                 }
 
                                 a.username {
+                                    text-decoration: none;
                                     text-align: left;
-                                    width: 78%;
+                                    width: 76%;
                                 }
 
                                 strong.time {
                                     font-size: 11.3px;
+                                    font-weight: 500;
                                     text-align: right;
                                     width: 18%;
                                 }
                             }
 
                             p {
-                                color: rgba(255, 255, 255, 0.68);
+                                color: rgba(255, 255, 255, 1);
                                 display: inline-block;
-                                font-size: 12.28px;
+                                font-size: 12px;
                                 font-weight: 300;
-                                line-height: 16px;
-                                width: 135px;
+                                line-height: 13px;
+                                width: 153px;
                                 word-wrap: break-word;
                             }
 
-                            span {
-                                background: none;
-                                border: 0;
-                                bottom: 6px;
+                            i.dots {
+                                color: #989898;
+                                font-size: 22px;
                                 display: inline-block;
-                                height: 6px;
-                                line-height: 6px;
-                                margin-left: 5px;
-                                position: relative;
-                                vertical-align: text-bottom;
-                                width: 21px;
+                                vertical-align: text-top;
+                            }
 
-                                img {
-                                    height: 6px;
-                                    width: 21px;
+                            i.fa-comment {
+                                color: #b6089b;
+                                font-size: 18px;
+                                display: inline-block;
+                                vertical-align: text-top;
+                                position: relative;
+                                bottom: 2px;
+                                z-index: 1;
+
+                                span {
+                                    color: white;
+                                    display: inline-block;
+                                    font-family: 'proxima-nova';
+                                    font-size: 9px;
+                                    font-weight: 700;
+                                    left: 0;
+                                    padding: 4px 0;
+                                    position: absolute;
+                                    text-align: center;
+                                    width: 17px;
+                                    z-index: 100;
                                 }
                             }
                         }
 
                         img.img-circle {
-                            @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
+                            @include box-shadow(0 0 0 2px white, 0 0 0 0 white inset);
                             background: black;
-                            cursor: pointer;
                             display: inline-block;
-                            height: 33px;
-                            opacity: .91;
-                            margin-left: 10px;
+                            height: 42px;
                             position: relative;
-                            top: 7px;
-                            width: 33px;
+                            top: 13px;
+                            width: 42px;
                         }
 
 
                         &:last-child { border-bottom: 0; }
 
                         &.animate-comment-show { display: block; }
+
+                        &:hover {
+                            background-color: rgba(0, 0, 0, .4);
+                            cursor: pointer;
+                            @include single-transition(background-color 100ms ease-in-out);
+                        }
+                    }
+                }
+
+                li:nth-child(4n) {
+                    div.thread {
+                        div.header {
+                            a.username { color: #b6089b; }
+                        }   
+                    }
+                }
+
+                li:nth-child(4n-1) {
+                    div.thread {
+                        div.header {
+                            a.username { color: #00aeef; }
+                        }   
+                    }
+                }
+
+                li:nth-child(4n-2) {
+                    div.thread {
+                        div.header {
+                            a.username { color: #d79906; }
+                        }   
+                    }
+                }
+
+                li:nth-child(4n-3) {
+                    div.thread {
+                        div.header {
+                            a.username { color: #6fe588; }
+                        }   
                     }
                 }
 
@@ -798,101 +1050,56 @@ object, embed, video, iframe {
                 }
 
                 .ps-scrollbar-x { display: none; }
+            }
 
-                div.active-header {
-                    background: #484848;
-                    border-bottom: #434343;
-                    height: 43px;
-
-                    a.active-close {
-                        background-color: #686868;
-                        cursor: pointer;
-                        display: block;
-                        float: left;
-                        height: 43px;
-                        margin-right: 14px;
-                        width: 33px;
-                        @include single-transition(background-color 250ms ease-in);
-
-                        i.icon {
-                            background: none;
-                            color: white;
-                            font-size: 16px;
-                            height: 20px;
-                            margin: 12px 6px;
-                            opacity: 0.8;
-                            text-indent: -1px;
-                            width: 20px;
-                            @include single-transition(opacity 250ms ease-in-out);
-                        }
-
-                        &:hover {
-                            background-color: #828282;
-                            @include single-transition(background-color 250ms ease-in);
-
-                            i.icon {
-                                opacity: 1;
-                                @include single-transition(opacity 250ms ease-in-out);
-                            }
-                        }
-                    }
+            &.hide-before-play {
+                div.scrollable {
+                    display: none;
                 }
             }
         }
 
         #blended-view {
-            margin-left: 387px;
-            height: auto;
-            width: 237px;
+            height: 360px;
+            margin-left: 390px;
+            width: 256px;
 
             @media screen and (max-width: 581px) {
-                margin-left: 335px;
+                height: 322px;
+                margin-left: 324px;
             }
 
             @media screen and (min-width: 700px) {
-                margin-left: 447px;
-            }
+                margin-left: 444px;
+            } 
 
             div.scrollable {
                 background: transparent;
                 box-shadow: none;
-                margin-left: 13px;
-                height: 360px;
-                width: 237px;
+                height: 306px;
+                width: 256px;
 
                 @media screen and (max-width: 581px) {
-                    height: 322px;
+                    height: 268px;
                 }
 
                 @media screen and (min-width: 700px) {
-                    height: 400px;
+                    height: 347px;
                 }
 
                 ul.comment-stream {
                     li {
-                        @include single-box-shadow(rgba(0, 0, 0, 0.35), 0px, 0px, 118px, 0px, inset);
-                        background: rgba(61, 61, 61, 0.15);
                         border-bottom: 1px solid rgba(61, 61, 61, 0.35);
                         cursor: pointer;
-                        @include single-transition(background-color 100ms ease-in-out);
 
                         &:last-child {
                             @include border-bottom-left-radius(3px);
                             @include border-bottom-right-radius(3px);
-                        }
-
-                        &:hover {
-                            background-color: rgba(0, 0, 0, .32);
-                            @include single-transition(background-color 100ms ease-in-out);
+                            border-bottom: none;
                         }
 
                         span {
                            /* background: red; */
-                        }
-
-                        a {
-                            color: rgba(255, 255, 255, .65);
-                            text-decoration: none;
                         }
 
                         &.animated {
@@ -905,53 +1112,57 @@ object, embed, video, iframe {
                 }
 
                 &.collapsed {
-                    margin-left: 211px;
+                    margin-left: 199px;
+                    opacity: 0.5;
                     padding-right: 5px;
-                    width: 38px;
-                    opacity: 0.4;
+                    width: 50px;
 
-                    ul.comment-stream li {
-                        background-color: transparent;
-                        border-bottom: medium none;
-                        box-shadow: none;
-                        @include single-transition(background-color 100ms ease-in-out);
+                    ul.comment-stream {
+                        background: none;
 
-                        img.img-circle {
-                            @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
-                            float: right;
-                            margin-left: 10px;
-                            margin-right: 5px;
-                        }
+                        li {
+                            background: transparent;
+                            border-bottom: medium none;
+                            box-shadow: none;
+                            @include single-transition(background-color 100ms ease-in-out);
 
-                        span.collapsed-time {
-                            cursor: pointer;
-                            display: block;
-                            opacity: 1;
-                            height: 33px;
-
-                            em {
-                                background-color: rgba(0, 0, 0, .4);
-                                color: white;
-                                display: block;
-                                font-family: 'proxima-nova';
-                                font-size: 10px;
-                                font-weight: 700;
-                                height: 23px;
-                                margin-top: 7px;
-                                opacity: 0;
-                                padding-top: 11px;
-                                position: absolute;
-                                text-align: center;
-                                text-shadow: 0 1px 1px rgba(0, 0, 0, 1);
-                                z-index: 2;
-                                width: 33px;
-                                @include single-transition(opacity 50ms ease-in-out)
+                            img.img-circle {
+                                float: right;
+                                margin-left: 10px;
+                                margin-right: 5px;
                             }
 
-                            &:hover {
+                            span.collapsed-time {
+                                cursor: pointer;
+                                display: block;
+                                opacity: 1;
+                                height: 32px;
+                                padding-left: 3px;
+
                                 em {
-                                    @include single-transition(opacity 50ms ease-in-out);
-                                    opacity: 1;
+                                    background-color: rgba(0, 0, 0, .4);
+                                    color: white;
+                                    display: block;
+                                    font-family: 'proxima-nova';
+                                    font-size: 10px;
+                                    font-weight: 700;
+                                    height: 25px;
+                                    margin-top: 12px;
+                                    opacity: 0;
+                                    padding-top: 17px;
+                                    position: absolute;
+                                    text-align: center;
+                                    text-shadow: 0 1px 1px rgba(0, 0, 0, 1);
+                                    z-index: 2;
+                                    width: 42px;
+                                    @include single-transition(opacity 50ms ease-in-out)
+                                }
+
+                                &:hover {
+                                    em {
+                                        @include single-transition(opacity 50ms ease-in-out);
+                                        opacity: 1;
+                                    }
                                 }
                             }
                         }
@@ -961,399 +1172,187 @@ object, embed, video, iframe {
         }
 
         #active-view, #profile-view {
-            height: 360px;
-            margin-left: 395px;
-            width: 246px;
+            height: 390px;
+            margin-left: 390px;
+            width: 256px;
 
             @media screen and (max-width: 581px) {
                 height: 322px;
-                margin-left: 335px;
-                width: 246px;
+                margin-left: 324px;
             }
 
             @media screen and (min-width: 700px) {
-                margin-left: 455px;
+                margin-left: 444px;
             }
 
+            div.panel-header {
+                background: rgba(0, 0, 0, .85);
+                border-bottom: 1px solid rgba(104, 104, 104, 0.4);
+                height: 32px;
+                position: relative;
+                top: 0;
+                width: 100%;
+                z-index: 11;
+
+                h2 {
+                    color: white;
+                    font-family: 'proxima-nova';
+                    text-transform: uppercase;
+                    font-size: 11px;
+                    font-weight: 700;
+                    line-height: 32px;
+                    position: absolute;
+                    top: 0;
+                    text-align: center;
+                    width: 100%;
+                }
+
+                i {
+                    color: white;
+                    cursor: pointer;
+                    font-size: 20px;
+                    padding-left: 14px;
+                    line-height: 32px;
+                    position: relative;
+                    z-index: 12;
+                }
+            } 
+
             div.scrollable {
-                background: rgba(53, 53, 53, 0.95);
-                height: 360px;
-                width: 245px;
+                height: 306px;
+                width: 256px;
+                top: 44px;
 
                 @media screen and (max-width: 581px) {
-                    height: 322px;
+                    height: 267px;
                 }
 
                 @media screen and (min-width: 700px) {
-                    height: 400px;
-                }
-
-                div.active-header {
-                    padding-right: 10px;
-                    height: 44px;
-
-                    ul.tabs {
-                        float: left;
-                        height: 44px;
-
-                        li {
-                            float: left;
-                            padding-right: 10px;
-
-                            a {
-                                cursor: pointer;
-                                color: white;
-                                display: block;
-                                font-family: 'proxima-nova';
-                                font-size: 11px;
-                                font-weight: 500;
-                                line-height: 10px;
-                                padding: 16px 0px;
-                                text-decoration: none;
-                                text-transform: uppercase;
-
-                                &.active {
-                                    cursor: default;
-                                    font-weight: 700;
-                                }
-                            }
-                        }
-
-
-
-                        li.indicator {
-                            display: block;
-                            height: 6px;
-                            position: absolute;
-                            top: -6px;
-                            left: 72px;
-                            width: 13px;
-                            z-index: 20;
-
-                            img {
-                                height: 6px;
-                                width: 13px;
-                            }
-
-                            &.comments {
-                                left: 72px;
-                                @include single-transition(left 100ms linear, all 0.5s ease-in-out);
-                            }
-
-                            &.activity {
-                                left: 134px;
-                                @include single-transition(left 100ms linear, all 0.5s ease-in-out);
-                            }
-                        }
-                    }
-
-                    a.dropdown-toggle {
-                        cursor: pointer;
-                        display: inline-block;
-                        float: right;
-                        height: 33px;
-                        padding: 4px 0;
-                        width: 51px;
-
-                        img.img-circle {
-                            @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
-                            background: black;
-                            float: left;
-                            height: 33px;
-                            margin-right: 5px;
-                            position: relative;
-                            left: -2px;
-                            top: 2px;
-                            width: 33px;
-                        }
-
-                        img.indicator {
-                            float: left;
-                            height: 6px;
-                            margin: 15px 0;
-                            width: 13px;
-                        }
-                    }
-
-                    a.sign-in-button {
-                        box-shadow: none;
-                        display: block;
-                        float: right;
-                        font-family: 'proxima-nova';
-                        font-size: 13px;
-                        font-weight: 700;
-                        margin: 8px 0;
-                    }
-
-                    ul.dropdown-menu {
-                        @include border-radius(0px, 0px);
-                        box-shadow: none;
-                        background: #2b2b2b;
-                        height: 57px;
-                        left: 135px;
-                        min-width: 108px;
-                        padding: 0;
-                        top: 42px;
-
-                        li {
-                            width: 108px;
-
-                            a {
-                                color: white;
-                                cursor: pointer;
-                                display: block;
-                                line-height: 28.5px;
-                                font-family: 'proxima-nova';
-                                font-size: 10.04px;
-                                font-weight: 500;
-                                padding: 0 10px;
-                                text-align: right;
-                                text-decoration: none;
-                                text-transform: uppercase;
-
-                                &:hover { font-weight: 700; }
-                            }
-                        }
-                    }
+                   height: 347px;
                 }
 
                 div.tab-container {
                     div.comments-view {
                         position: absolute;
-                        width: 245px;
+                        width: 256px;
+                        height: 100%;
+                        
+                        div.thread-scroll {
+                            height: 314px;
+                            overflow: hidden;
+                            position: absolute;
 
-                        div.thread-timeline {
-                            height: 53px;
-                            width: 245px;
+                            ul.comment-stream {
+                                height: auto;
+                                min-height: 314px;
 
-                            img.bkg {
-                                position: relative;
-                                height: 53px;
-                                top: 0;
-                                width: 245px;
-                                z-index: 1;
-                            }
-
-                            #thread-carousel {
-                                padding: 4px 6px 4px 12.5px;
-                                position: absolute;
-                                top: 0;
-                                width: 245px;
-                                z-index: 1;
-
-                                img.active-thread {
-                                    @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.36), 0px 0px 35px 0px rgba(0, 0, 0, 0.33) inset);
+                                li {
                                     display: block;
-                                    float: left;
-                                    height: 33px;
-                                    margin-top: 1px;
-                                    width: 33px;
-                                }
+                                    width: 257px;
 
-                                #carousel {
-                                    float: left;
-                                    height: 22px;
-                                    margin: 5.5px 0 9.5px 7px;
-                                    width: 180px;
-
-                                    .tooltip {
-                                        font-family: 'proxima-nova';
-                                        font-weight: 500;
-
-                                        .tooltip-inner {
-                                            padding: 4px;
-                                        }
+                                    div.thread {
+                                        p { width: 155px; }
                                     }
 
-                                    span.icon-left-dir, span.icon-right-dir {
-                                        color: rgba(255, 255, 255, 0.5);
-                                        display: block;
-                                        float: left;
-                                        height: 15px;
-                                        font-size: 0.85em;
-                                        margin-top: 4px;
-                                        position: relative;
-                                        text-align: center;
-                                        width: 15px;
-                                        @include single-transition(color 100ms ease-in-out);
+                                    img.img-circle {
+                                        background: black;
+                                        display: inline-block;
+                                    }
 
-                                        &:hover {
-                                            color: rgba(255, 255, 255, 0.8);
-                                            text-decoration: none;
-                                            @include single-transition(color 100ms ease-in-out);
-                                        }
-
-                                        &.disabled {
-                                            opacity: 0;
-                                        }
+                                    div.comment-actions {
+                                        padding: 6px 10px 0;
+                                        width: 183px;
 
                                         a {
-                                            display: block;
-                                            position: absolute;
-                                            top: 0;
-                                            left: 0;
-                                            height: 15px;
+                                            color: #989898;
+                                            cursor: pointer;
+                                            display: inline-block;
+                                            line-height: 15px;
                                             text-decoration: none;
-                                            width: 15px;
-                                            z-index: 1000;
-                                        }
+                                            margin-bottom: 6px;
 
-                                        &.icon-left-dir {
-                                            left: 6px;
-                                        }
-                                    }
+                                            i {
+                                                font-size: 16px;
+                                                font-weight: normal;
+                                                position: relative;
+                                                top: 1px;
+                                                margin-right: 2px;
+                                            }
 
-                                    div.bx-wrapper {
-                                        height: 23px;
-                                        float: left;
-                                        left: 4px;
-                                        padding: 0 7px 0 10px;
-                                        position: relative;
-                                        width: 131px;
+                                            &.reply {
+                                                padding-left: 5px;
 
-                                        div.bx-viewport {
-                                            height: 23px;
-                                            left: 0;
-                                            width: 130px;
+                                                i { width: 16px; }
+                                            }
 
-                                            ul {
-                                                bottom: 0;
-                                                margin: 0;
-                                                height: 23px;
-                                                width: 99999px;
+                                            &.favorite {
+                                                i { 
+                                                    top: 2px;
+                                                    width: 16px;
+                                                }
+                                            }
 
-                                                li {
-                                                    cursor: pointer;
-                                                    padding: 0 3px;
-                                                    height: 20px;
-                                                    width: 20px;
+                                            &.follow {
+                                                i {
+                                                    width: 12px;
+                                                }
+                                            }
 
-                                                    img.img-circle {
-                                                        @include box-shadow(0 1px 3px 0 rgba(0, 0, 0, 0.36), 0 0 1px 0 rgba(0, 0, 0, 0.33) inset);
-                                                        background: black;
-                                                        height: 20px;
-                                                        width: 20px;
+                                            &.upvote {
+                                                display: none;
+                                            }
+
+                                            &.downvote {
+                                                display: none;
+                                            }
+
+                                            i.fa-plus,
+                                            i.fa-minus {
+                                                left: -3px;
+                                                top: -3px;
+                                                font-size: 8px;
+                                                margin-right: 0;
+                                            }
+
+                                            &:hover {
+                                                span { color: white; }
+                                                
+                                                i {
+                                                    text-shadow: none;
+                                                    color: white;
+                                                }
+                                            }
+
+                                            &.active {
+                                                span { color: white; }
+                                                
+                                                i {
+                                                    color: white;
+                                                    text-shadow:
+                                                        -1px -1px 0 #00aeef,
+                                                        1px -1px 0 #00aeef,
+                                                        -1px 1px 0 #00aeef,
+                                                        1px 1px 0 #00aeef;
+                                                    margin-right: 2px;
+
+                                                    &.fa-plus,
+                                                    &.fa-minus {
+                                                        margin-right: 0;
+                                                        text-shadow: none;
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                }
-                            }
-                        }
-
-                        div.thread-scroll {
-                            height: 341px;
-                            overflow: hidden;
-                            position: absolute;
-
-                            ul.comment-stream {
-                                height: 341px;
-
-                                li {
-                                    border-bottom: none;
-                                    display: block;
-                                    width: 244px;
-
-                                    div.thread {
-                                        padding: 5px 2px 10px 14px;
-
-                                        div.header {
-                                            a.username {
-                                                cursor: pointer;
-
-                                                &:hover { text-decoration: underline; }
-                                            }
-                                            strong.time {
-                                                cursor: pointer;
-
-                                                &:hover { text-decoration: underline; }
-                                            }
-                                        }
-
-                                        p { width: 175px; }
-                                    }
-
-                                    img.img-circle {
-                                        @include box-shadow(0px 3px 14px 0px rgba(0, 0, 0, 0.36), 0px 0px 35px 0px rgba(0, 0, 0, 0.33) inset);
-                                        background: black;
-                                        cursor: pointer;
-                                        display: inline-block;
-                                        height: 29px;
-                                        left: 8px;
-                                        top: 5px;
-                                        width: 29px;
-                                    }
-
-                                    div.comment-actions {
-                                        padding: 0px 21px 6px 16px;
-
-                                        span {
-                                            background: none;
-                                            border: 0;
-                                            bottom: 3px;
-                                            display: inline-block;
-                                            height: 6px;
-                                            line-height: 6px;
-                                            margin-left: 46px;
-                                            position: relative;
-                                            vertical-align: bottom;
-                                            width: 21px;
-
-                                            img {
-                                                height: 6px;
-                                                width: 21px;
-                                            }
-                                        }
-
-                                        a {
-                                            cursor: pointer;
-                                            display: inline-block;
-                                            vertical-align: baseline;
-
-                                            &.reply {
-                                                background: url(../../img/divider.png) repeat-y top right;
-                                                height: 21px;
-                                                padding-right: 8px;
-                                                width: 23px;
-                                            }
-
-                                            &.favorite {
-                                                height: 20px;
-                                                padding: 0 1.5px 0 1px;
-                                                width: 24px;
-                                            }
-
-                                            &.flag {
-                                                float: right;
-                                                height: 15px;
-                                                margin-top: 6px;
-                                                margin-left: 25px;
-                                                width: 15px;
-                                            }
-
-                                            &.follow {
-                                                background: url(../../img/divider.png) repeat-y top left;
-                                                height: 20px;
-                                                padding-left: 7px;
-                                                width: 14px;
-                                            }
-
-                                            img {
-                                                height: 100%;
-                                                width: 100%;
-                                            }
-                                        }
-                                    }
 
                                     ul.replies {
-                                        background: rgba(98, 98, 98, 0.34);
-                                        border-top: 1px solid rgba(104, 104, 104, 0.90);
+                                        border-top: 1px solid rgba(104, 104, 104, 0.3);
 
                                         li {
-                                            border-bottom: 1px solid rgba(104, 104, 104, 0.90);
+                                            border-bottom: 1px solid rgba(104, 104, 104, 0.3);
                                             margin: 0 10px;
                                             padding: 6px 12px;
+                                            position: relative;
                                             width: 199px;
 
                                             div.thread {
@@ -1362,80 +1361,61 @@ object, embed, video, iframe {
                                                 div.header {
                                                     strong {
                                                         cursor: pointer;
-
-                                                        &:hover { text-decoration: underline; }
                                                     }
                                                 }
 
-                                                p { width: 197px; }
+                                                p { width: 175px; }
+                                            }
+
+                                            img.img-circle {
+                                                height: 35px;
+                                                position: absolute;
+                                                width: 35px;
                                             }
 
                                             div.comment-actions {
                                                 height: 19px;
-                                                margin-top: 6px;
+                                                margin-top: 8px;
                                                 padding: 0;
 
                                                 a {
-                                                    float: left;
-
-                                                    &.favorite {
-                                                        background: none;
-                                                        height: 16px;
-                                                        margin: 0;
-                                                        padding: 0;
-                                                        width: 19px;
-                                                    }
-
-                                                    &.follow {
-                                                        height: 16px;
-                                                        margin-left: 5px;
-                                                        padding-left: 8px;
-                                                        width: 10px;
-                                                    }
-
-                                                    &.flag {
-                                                        float: right;
-                                                        margin-top: 2px;
-                                                    }
+                                                    &.favorite { margin-left: 0; }
                                                 }
                                             }
 
                                             &:last-child { border-bottom: 0; }
                                         }
-                                    }
 
-                                    div.post-reply {
-                                        background: rgba(98, 98, 98, 0.34);
-                                        height: 48px;
-                                        width: 244px;
-
-                                        form {
-                                            border-top: 1px solid rgba(104, 104, 104, 0.90);
-                                            margin: 0 10px;
-                                            padding: 6px 0;
-                                            width: 224px;
-
-                                            #id_reply {
-                                                @include border-radius(0px, 0px);
-                                                background: rgba(182, 182, 182, 0.6);
-                                                border: 1px solid rgba(73, 73, 73, 0.6);
-                                                color: rgba(0, 0, 0, 0.45);
-                                                height: 26px;
-                                                font-size: 12.28px;
-                                                font-weight: 300;
-                                                font-style: normal;
-                                                margin-bottom: 0;
-                                                width: 212px;
-
-                                                &.maxlength-full {
-                                                    border: 1px solid rgba(255, 0, 0, 0.6);
-                                                }
+                                        li:nth-child(4n) {
+                                            div.thread {
+                                                div.header {
+                                                    strong.username { color: #6fe588; }
+                                                }   
                                             }
+                                        }
 
-                                            #id_reply::-webkit-input-placeholder { font-style: italic; }
-                                            #id_reply::-moz-placeholder { font-style: italic; } /* firefox 19+ */
-                                            #id_reply:-ms-input-placeholder { font-style: italic; } /* ie */
-                                            #id_reply:-moz-placeholder { font-style: italic; }
+                                        li:nth-child(4n-1) {
+                                            div.thread {
+                                                div.header {
+                                                    strong.username { color: #d79906; }
+                                                }   
+                                            }
+                                        }
+
+                                        li:nth-child(4n-2) {
+                                            div.thread {
+                                                div.header {
+                                                    strong.username { color: #00aeef; }
+                                                }   
+                                            }
+                                        }
+
+                                        li:nth-child(4n-3) {
+                                            div.thread {
+                                                div.header {
+                                                    strong.username { color: #b6089b; }
+                                                }   
+                                            }
                                         }
                                     }
 
@@ -1461,12 +1441,28 @@ object, embed, video, iframe {
                                         &:last-child { border-bottom: none; }
                                     }
                                 }
+
+                                &.single-comment {
+                                    li {
+                                        &:hover {
+                                            cursor: default;
+                                            background-color: transparent;
+                                        }
+
+                                        ul.replies {
+                                            li {
+                                                background: transparent;
+                                                min-height: 50px;
+                                            }
+                                        }
+                                    }
+                                }
                             }
 
                             &.single-thread {
-                                height: 288px;
+                                height: 346px;
 
-                                ul.comment-stream { height: 288px; }
+                                ul.comment-stream { height: 346px; }
                             }
 
                             .ps-scrollbar-x { display: none; }
@@ -1622,7 +1618,7 @@ object, embed, video, iframe {
 
                                         div.header {
                                             strong, a {
-                                                color: rgba(255, 255, 255, 0.63);
+                                                color: rgba(255, 255, 255, 1);
                                                 display: inline-block;
                                                 font-weight: 700;
                                                 font-size: 12.28px;
@@ -1630,7 +1626,6 @@ object, embed, video, iframe {
                                             }
 
                                             a.username {
-                                                cursor: pointer;
                                                 text-align: left;
                                                 width: 95%;
                                                 text-decoration: none;
@@ -1692,11 +1687,15 @@ object, embed, video, iframe {
         }
 
         #share-view,
-        #enter-password-wrapper {
+        #enter-password-wrapper,
+        #login-or-signup-view,
+        #start-private-convo-view,
+        #login-view,
+        #signup-view {
             position: absolute;
             height: 360px;
             width: 640px;
-            z-index: 1;
+            z-index: 20;
 
             @media screen and (max-width: 581px) {
                 width: 580px;
@@ -1729,7 +1728,7 @@ object, embed, video, iframe {
                     background: rgba(0, 0, 0, 0.82);
                     display: none;
                     height: 310px;
-                    padding: 15px 17px;
+                    padding: 12px 33px;
                     position: relative;
                     left: 97px;
                     top: 33px;
@@ -1755,7 +1754,7 @@ object, embed, video, iframe {
                         right: 17px;
                         top: 17px;
                         width: 11px;
-                        z-index: 101;
+                        z-index: 301;
                         @include single-transition(opacity 0.25s ease-in-out);
 
                         &:hover {
@@ -1765,19 +1764,14 @@ object, embed, video, iframe {
                     }
 
                     h1 {
-                        border-bottom: 1px solid #323232;
-                        margin-bottom: 5px;
-                        width: 215px;
+                        margin-bottom: 15px;
 
                         a {
-                            border-bottom: 1px solid #262627;
                             display: block;
 
                             img {
-                                margin-left: 5px;
-                                margin-bottom: 2px;
                                 height: 25px;
-                                width: 115px;
+                                width: 114px;
                             }
                         }
                     }
@@ -1787,7 +1781,6 @@ object, embed, video, iframe {
                         font-family: 'proxima-nova';
                         font-size: 18px;
                         font-weight: 500;
-                        padding-left: 5px;
                     }
 
                     h3 {
@@ -2303,7 +2296,7 @@ object, embed, video, iframe {
 
                 h2 {
                     font-size: 12.45px;
-                    margin: 12px 0 15px;
+                    margin: 6px 0 15px;
                     text-align: center;
                 }
 
@@ -2342,51 +2335,6 @@ object, embed, video, iframe {
                         color: rgba(82, 176, 240, 1.0);
                         font-weight: 500;
                     }
-                }
-
-                ul.social {
-                    width: 91%;
-                    margin: 0 auto;
-
-                    li {
-                        float: left;
-                        height: 20px;
-                        margin: 0 4px;
-
-                        &.twitter {
-                            
-                        }
-
-                        &.facebook {
-                            margin-right: 0;
-                        }
-
-                        &.text {
-                            margin-left: 0;
-
-                            span {
-                                font-family: 'proxima-nova';
-                                font-size: 13px;
-                                font-weight: 700;
-                                line-height: 23px;
-                                text-transform: uppercase;
-                            }
-                        }
-
-                        a {
-                            color: #FFFFFF;
-                            display: block;
-                            font-family: 'proxima-nova';
-                            font-size: 11px;
-                            font-weight: 700;
-                            line-height: 20px;
-                            text-align: center;
-                            text-decoration: none;
-                            text-transform: uppercase;
-                        }
-
-                    }
-
                 }
 
                 #login-container,
@@ -2498,7 +2446,7 @@ object, embed, video, iframe {
                                 font-size: 13.39px;
                                 font-weight: 700;
                                 float: right;
-                                margin-top: 0px;
+                                margin-top: 5px;
                                 margin-bottom: 5px;
                             } 
 
@@ -2533,13 +2481,35 @@ object, embed, video, iframe {
                         padding-right: 20px;
 
                         p button.registration-submit {
+                            margin-top: 9px;
                             margin-bottom: 0;
                         }
                     }
                 }
 
                 #login-container {
+                    position: absolute;
+                    right: 11px;
+                    top: 131px;
                     width: 45%;
+                }
+            }
+        }
+
+        #share-view {
+            div.modal-background {
+                div.content {
+                    height: 291px;
+                    top: 40px;
+                    width: 415px;
+
+                    h2 {
+                        color: #2284b2;
+                        font-family: 'proxima-nova';
+                        font-size: 18px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                    }
                 }
             }
         }
@@ -2584,11 +2554,235 @@ object, embed, video, iframe {
                 }
             }
         }
+
+        #login-view,
+        #signup-view {
+            div.modal-background {
+                div.content {
+                    height: auto;
+                    max-height: 345px;
+                    left: 0;
+                    margin: auto;
+                    top: 10px;
+
+                    div.top {
+                        div.speech-bubble {
+                            @include border-radius(5px, 5px);
+                            background: #48a6e2;
+                            padding: 12px;
+                            position: relative;
+                            width: 50%;
+
+                            i.fa {
+                                font-size: 8px;
+
+                                &.fa-quote-left {
+                                    padding-right: 3px;
+                                    vertical-align: top;
+                                }
+
+                                &.fa-quote-right {
+                                    padding-left: 3px;
+                                    vertical-align: baseline;
+                                }
+                            }
+
+                            p {
+                                font-size: 14px;
+                                font-family: 'proxima-nova';
+                                font-weight: 700;
+                                color: white;
+                                width: 100%;
+
+                                &.comment {
+                                    word-wrap: break-word;
+                                }   
+
+                                &.author {
+                                    text-align: right;
+                                    margin-top: 7px;
+
+                                    span {
+                                        font-weight: 300;
+                                    }
+                                }
+                            }
+
+                            div.corner {
+                                bottom: -32px;
+                                position: absolute;
+                                display: block;
+                                width: 0;
+                                height: 0;
+                                line-height: 0;
+                                border: solid 16px #48a6e2;
+                                border-color: #48a6e2 transparent transparent transparent;
+                                @include border-radius(0px, 0px);
+                                left: 42px;
+                            }
+                        }
+
+                        div.introduction {
+                            width: 40%;
+
+                            p {
+                                font-family: 'proxima-nova';
+                                font-weight: 300;
+                                font-size: 13px;
+                                line-height: 16px;
+
+                                &.title {
+                                    margin-bottom: 13px;
+                                }
+
+                                strong {
+                                    font-weight: 700;
+                                }
+
+                                a {
+                                    color: white;
+                                    cursor: pointer;
+                                    font-weight: 700;
+                                    text-decoration: underline;
+                                }
+
+                                span {
+                                    color: #48a6e2;
+                                    font-style: italic;
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                    }
+
+                    div.bottom {
+                        #login-or-signup-view {
+                            border-right: 1px solid rgba(255, 255, 255, 0.31);
+                            height: 210px;
+                            margin: 10px 0;
+                            width: 43%;
+
+                            h3 {
+                                font-size: 14px;
+                            }
+
+                            #login-container,
+                            #signup-container {
+                                position: relative;
+                                top: 20px;
+                                right: 0;
+                                width: 170px;
+
+                                #signup-form {
+                                    border-right: none;
+                                    padding-right: 0;
+                                }
+
+                                span.disclaimer {
+                                    font-family: 'proxima-nova';
+                                    color: #999999;
+                                    font-size: 11px;
+                                    line-height: 12px;
+                                    padding-top: 9px;
+                                }
+                            }
+
+                            #login-container {
+                                right: 35px;
+                            }
+
+                            p.form-text {
+                                margin-top: 46px;
+                                color: white;
+                                font-family: 'proxima-nova';
+                                font-size: 12px;
+                                font-weight: 500;
+                                font-style: italic;
+                                text-align: center;
+
+                                a {
+                                    color: #48a6e2;
+                                    cursor: pointer;
+                                    text-decoration: underline;
+                                    font-weight: 300;
+                                }
+                            }
+                        }
+
+                        div.benefits {
+                            padding-top: 30px;
+                            width: 41%;
+
+                            h3 {
+                                color: #52b0f0;
+                                font-size: 14px;
+                                font-weight: 700;
+                                margin-bottom: 7px;
+                            }
+
+                            ul.social {
+                                width: 100%;
+                                height: 24px;
+                                margin-bottom: 22px;
+                                overflow: hidden;
+
+                                li {
+                                    float: left;
+                                    height: 22px;
+                                    margin: 0 7px;
+
+                                    &.twitter {
+                                        margin-left: 0;
+                                    }
+
+                                    &.facebook {
+                                        margin-right: 0;
+                                    }
+
+                                    a {
+                                        color: #FFFFFF;
+                                        display: block;
+                                        font-family: 'proxima-nova';
+                                        font-size: 12px;
+                                        font-weight: 700;
+                                        line-height: 22px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        text-transform: uppercase;
+                                    }
+                                }
+                            }
+
+                            ul.perks {
+                                li {
+                                    font-family: 'proxima-nova';
+                                    font-weight: 500;
+                                    font-style: italic;
+                                    font-size: 11px;
+                                    line-height: 12px;
+                                    margin-bottom: 10px;
+                                    margin-left: -24px;
+                                    width: 208px;
+
+                                    i.fa-check-circle { 
+                                        color: #99e206;
+                                        font-size: 18px;
+                                        height: 18px;
+                                        margin-right: 7px;
+                                        padding-top: 3px;
+                                        width: 16px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
 .ng-cloak {  }
-
 .wf-loading, .ng-cloak {
     #player-container {
         visibility: hidden;
