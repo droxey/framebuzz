@@ -645,7 +645,7 @@ angular.module('framebuzz.controllers', [])
                         channel: SOCK.user_channel,
                         data: {
                             action: 'player_paused',
-                            username: $scope.videoInstance.user.username,
+                            username: SOCK.username,
                             time: $scope.currentTime,
                             session_key: $scope.sessionKey,
                             video_id: SOCK.video_id
