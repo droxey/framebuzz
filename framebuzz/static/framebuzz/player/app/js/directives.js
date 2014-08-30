@@ -84,7 +84,7 @@ angular.module('framebuzz.directives', [])
 
                     $('.mejs-mediaelement').mouseenter(function(e) {
                         var activeHeader = $('div.active-header');
-                        
+
                         $('.mejs-video').addClass('show-controls');
                         activeHeader.addClass('show-controls');
                     });
@@ -222,6 +222,8 @@ angular.module('framebuzz.directives', [])
                         'padding-left': (element.width() + 12) + 'px',
                         'width': (textboxWidth - element.width() - 12) + 'px'
                     });
+
+                    textbox.focus();
                 }, 500);
             });
         };
