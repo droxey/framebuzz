@@ -278,6 +278,14 @@ angular.module('framebuzz.controllers', [])
                     });
                 };
 
+                $scope.closeLoginScreen = function() {
+                    $scope.newThread = {};
+                    $scope.formSubmitted = false;
+                    safeApply($scope);
+                    
+                    $state.transitionTo('player.blendedView');
+                };
+
                 $scope.setPostTime = function() {
                     $scope.postTime = angular.copy($scope.currentTime);
                     $scope.postTimeHMS = mejs.Utility.secondsToTimeCode($scope.postTime);
