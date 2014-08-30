@@ -20,7 +20,7 @@ DATABASES = {
     }
 }
 
-SOCKJS_PORT = 443
+SOCKJS_PORT = 4000
 
 SHORT_BASE_URL = 'http://frame.bz/s/'
 SHORTEN_FULL_BASE_URL = 'http://%(live_host)s/s/'

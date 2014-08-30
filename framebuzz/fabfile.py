@@ -49,6 +49,7 @@ env.manage = "%s/bin/python %s/project/manage.py" % (env.venv_path,
                                                      env.venv_path)
 env.live_host = conf.get("LIVE_HOSTNAME", env.hosts[0] if env.hosts else None)
 env.repo_url = conf.get("REPO_URL", "")
+env.repo_branch = conf.get("REPO_BRANCH", "")
 env.git = env.repo_url.startswith("git") or env.repo_url.endswith(".git")
 env.reqs_path = conf.get("REQUIREMENTS_PATH", None)
 env.gunicorn_port = conf.get("GUNICORN_PORT", 8000)
@@ -512,7 +513,7 @@ def deploy():
         sudo("tar -cf last.tar %s" % static())
 
     with cd(env.proj_path):
-        sshagent_run('git pull gitlab master -f')
+        sshagent_run('git pull gitlab %s -f' % env.repo_branch)
 
     with project():
         git = env.git
