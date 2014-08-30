@@ -10,7 +10,7 @@
         </h1>
         <div class="top clearfix">
             <div class="speech-bubble pull-left">
-                <p class="comment" data-ng-hide="!formSubmitted"><i class="fa fa-quote-left"></i>{{ newThread.comment | characters:27 }}<i class="fa fa-quote-right fa-rotate-180 fa-flip-vertical"></i></p>
+                <p class="comment" data-ng-hide="!formSubmitted"><i class="fa fa-quote-left"></i>{{ newThread.comment | characters:22 }}<i class="fa fa-quote-right fa-rotate-180 fa-flip-vertical"></i></p>
                 <p class="comment" data-ng-show="!formSubmitted">Welcome to FrameBuzz.</p>
                 <p class="author" data-ng-hide="!formSubmitted"><span>&mdash;</span>You</p>
                 <div class="corner"></div>
@@ -28,8 +28,8 @@
         <div class="bottom clearfix">
             <div id="login-or-signup-view" class="form pull-left" data-ui-view=""></div>
             <div class="benefits pull-right">
-                <h3 data-ng-show="$state.is('player.loginView')">Log in with:</h3>
-                <h3 data-ng-show="$state.is('player.signupView')">Sign up with:</h3>
+                <h3 data-ng-show="$state.is('player.loginView')">Connect &amp; Log in:</h3>
+                <h3 data-ng-show="$state.is('player.signupView')">Connect &amp; Sign up:</h3>
                 <ul class="clearfix social">
                     <li class="twitter">
                         <a class="btn btn-mini btn-twitter" title="Use your Twitter account on FrameBuzz" target="_top" class="twitter" data-loginpopup="{{ loginUrls.twitter }}">
