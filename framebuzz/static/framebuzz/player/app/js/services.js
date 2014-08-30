@@ -24,10 +24,12 @@ angular.module('framebuzz.services', [])
             var reconnect = true,
                 socket = null,
                 debug = SOCK.host.indexOf('localhost') !== -1,
-                scheme = debug ? 'http://' : 'wss://',
+                scheme = debug ? 'http://' : 'https://',
                 port = SOCK.port,
                 url = debug ? scheme + SOCK.host + ':' + port + '/' + SOCK.channel : 
                       scheme + SOCK.host + '/' + SOCK.channel;
+
+            console.log(url);
 
             socket = new SockJS(url, '', {
                 'debug': debug
