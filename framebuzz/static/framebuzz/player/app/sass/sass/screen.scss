@@ -370,8 +370,8 @@ object, embed, video, iframe {
                             cursor: pointer;
                             border: 0;
                             display: inline-block;
-                            height: 37.5px;
-                            line-height: 38px;
+                            height: 39.5px;
+                            line-height: 35px;
                             color: white;
                             font-size: 12px;
                             @include single-transition(color 250ms ease-in);
@@ -380,8 +380,8 @@ object, embed, video, iframe {
                                 color: rgba(255, 255, 255, 0.8);
                                 padding-right: 5px;
                                 font-size: 16px;
-                                line-height: 38px;
-                                vertical-align: sub;
+                                line-height: 35px;
+                                vertical-align: middle;
                             }
 
                             &:hover {
@@ -393,6 +393,7 @@ object, embed, video, iframe {
                             &.mejs-share-framebuzz-button {
                                 cursor: pointer;
                                 margin-right: 5px;
+                                margin-top: -1px;
                             }
 
                             &.mejs-add-library-button {
@@ -412,6 +413,10 @@ object, embed, video, iframe {
 
                             &.mejs-mute-convo-button {
                                 width: 138px;
+
+                                i {
+                                    margin-top: -2px;
+                                }
                             }   
 
                             &.mejs-start-private-session {
