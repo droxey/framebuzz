@@ -3783,13 +3783,13 @@ if (typeof jQuery != 'undefined') {
 				}, function() {
 					mouseIsOver = false;	
 						
-					if (!mouseIsDown && mode == 'vertical')	{
+					if (!mouseIsDown && !mouseIsOver && mode == 'vertical')	{
 						volumeSlider.hide();
 					}
 				});
 			
 			volumeSlider
-				.bind('mouseover', function() {
+				.bind('mouseenter', function() {
 					mouseIsOver = true;	
 				})
 				.bind('mousedown', function (e) {
@@ -3802,7 +3802,7 @@ if (typeof jQuery != 'undefined') {
 						t.globalUnbind('.vol');
 
 						if (!mouseIsOver && mode == 'vertical') {
-							volumeSlider.hide();
+							//volumeSlider.hide();
 						}
 					});
 					mouseIsDown = true;
@@ -3822,9 +3822,11 @@ if (typeof jQuery != 'undefined') {
 					if (media.muted) {
 						positionVolumeHandle(0);
 						mute.removeClass('mejs-mute').addClass('mejs-unmute');
+						mute.find('button').html('<i class="fa fa-fw fa-volume-off"></i>');
 					} else {
 						positionVolumeHandle(media.volume);
 						mute.removeClass('mejs-unmute').addClass('mejs-mute');
+						mute.find('button').html('<i class="fa fa-fw fa-volume-down"></i>');
 					}
 				}
 			}, false);
