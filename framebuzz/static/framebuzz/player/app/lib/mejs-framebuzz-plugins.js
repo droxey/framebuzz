@@ -5,8 +5,11 @@
       var title = $('<h1 class="video-title" />').appendTo(titleDiv);
       title.text(SOCK.video_title);
     },
+    buildoptionsbar: function(player, controls, layers, media) {
+      $('<div class="mejs-share mejs-fade-in"></div>').appendTo(controls);
+    },
     buildshare: function(player, controls, layers, media) {
-      var shareDiv = $('<div class="mejs-share mejs-fade-in"></div>').appendTo(controls);
+      var shareDiv = controls.find('div.mejs-share');
 
       var button =
         $('<button class="mejs-share-framebuzz-button" type="button" aria-controls="mep_0" title="Share This FrameBuzz" aria-label="Share This FrameBuzz">' +
