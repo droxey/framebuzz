@@ -3684,8 +3684,10 @@ if (typeof jQuery != 'undefined') {
 				// ajust mute button style
 				if (volume == 0) {
 					mute.removeClass('mejs-mute').addClass('mejs-unmute');
+					mute.find('button').html('<i class="fa fa-fw fa-volume-off"></i>');
 				} else {
 					mute.removeClass('mejs-unmute').addClass('mejs-mute');
+					mute.find('button').html('<i class="fa fa-fw fa-volume-down"></i>');
 				}				
 
 				// position slider 
