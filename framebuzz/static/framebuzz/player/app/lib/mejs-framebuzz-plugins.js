@@ -3,7 +3,12 @@
     buildtitle: function(player, controls, layers, media) {
       var titleDiv = $('<div class="mejs-title mejs-fade-in"></div>').appendTo(controls);
       var title = $('<h1 class="video-title" />').appendTo(titleDiv);
-      title.text(SOCK.video_title);
+      if (SOCK.private_session_key) {
+        title.html('<i class="fa fa-lock"></i> ' + SOCK.video_title);
+      }
+      else {
+        title.text(SOCK.video_title);
+      }
     },
     buildoptionsbar: function(player, controls, layers, media) {
       $('<div class="mejs-share mejs-fade-in"></div>').appendTo(controls);
