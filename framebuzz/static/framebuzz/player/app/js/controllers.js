@@ -218,8 +218,10 @@ angular.module('framebuzz.controllers', [])
                             'video_id': SOCK.video_id
                         };
                     }
-
+                    
                     if ($scope.videoInstance.is_authenticated) {
+                        postData.username = $scope.videoInstance.user.username;
+
                         socket.send_json({
                             eventType: eventTypes.postNewComment,
                             channel: SOCK.video_channel,
