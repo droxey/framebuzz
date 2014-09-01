@@ -83,7 +83,7 @@
           video_id: '{{ video.slug }}',
           share_url: "{% shorturl video %}",
           private_session_key: {% if convo_slug %}'{{ convo_slug }}'{% else %}null{% endif %},
-          video_title: '{{ video.title|title }}',
+          video_title: '{{ video.title|title|truncate:"32" }}',
           login_urls: {
             twitter: "{% provider_login_url 'twitter' next=next_url method='oauth2' display='popup' %}",
             facebook: "{% provider_login_url 'facebook' next=next_url method='oauth2' display='popup' %}",
