@@ -19,6 +19,7 @@ angular.module('framebuzz.controllers', [])
                 $scope.isCollapsed = false;
                 $scope.updateSlider = false;
                 $scope.activeViewTitle = '';
+                $scope.requiresLogin = false;
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
@@ -218,7 +219,7 @@ angular.module('framebuzz.controllers', [])
                             'video_id': SOCK.video_id
                         };
                     }
-                    
+
                     if ($scope.videoInstance.is_authenticated) {
                         postData.username = $scope.videoInstance.user.username;
 
@@ -466,6 +467,13 @@ angular.module('framebuzz.controllers', [])
                     $('div.menu').hide();
                 };
 
+                $scope.initLogin = function() {
+                    $scope.requiresLogin = false;
+                    safeApply($scope);
+
+                    $state.transitionTo('player.loginView');
+                };
+
 
                 // --
                 // PRIVATE METHODS
@@ -577,6 +585,9 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.$on('player_addtolibrary', function() {
                     if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
+                        $scope.requiresLogin = true;
+                        safeApply($scope);
+
                         window.location.hash = '#/player/panel/hello/user/login';
                     }
                     else {
@@ -594,6 +605,9 @@ angular.module('framebuzz.controllers', [])
 
                 $scope.$on('player_startprivateconvo', function() {
                     if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
+                        $scope.requiresLogin = true;
+                        safeApply($scope);
+
                         window.location.hash = '#/player/panel/hello/user/login';
                     }
                     else {

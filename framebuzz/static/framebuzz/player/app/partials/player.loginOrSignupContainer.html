@@ -11,7 +11,10 @@
         <div class="top clearfix">
             <div class="speech-bubble pull-left">
                 <p class="comment" data-ng-hide="!formSubmitted"><i class="fa fa-quote-left"></i>{{ newThread.comment | characters:22 }}<i class="fa fa-quote-right fa-rotate-180 fa-flip-vertical"></i></p>
-                <p class="comment" data-ng-show="!formSubmitted">Welcome to FrameBuzz.</p>
+                <p class="comment" data-ng-show="!formSubmitted && !requiresLogin">Welcome to FrameBuzz.</p>
+                <p class="comment" data-ng-show="!formSubmitted && requiresLogin">
+                    Please <span data-ng-bind="$state.is('player.loginView') ? 'log in' : 'sign up'"></span> to continue.
+                </p>
                 <p class="author" data-ng-hide="!formSubmitted"><span>&mdash;</span>You</p>
                 <div class="corner"></div>
             </div>
