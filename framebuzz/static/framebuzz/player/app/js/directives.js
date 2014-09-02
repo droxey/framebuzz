@@ -47,12 +47,6 @@ angular.module('framebuzz.directives', [])
 
                     }
 
-                    if (isFirefox) {
-                        if (navigator.appVersion.indexOf('Windows') != -1) {
-                            $('.mejs-time-rail').addClass('winff');
-                        }
-                    }
-
                     //  =====
                     //  CSS Changes
                     //  =====
