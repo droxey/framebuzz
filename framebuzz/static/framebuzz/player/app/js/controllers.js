@@ -400,7 +400,7 @@ angular.module('framebuzz.controllers', [])
                     notificationFactory.success(message);
                 };
 
-                $scope.toggleFollow = function(usefrname) {
+                $scope.toggleFollow = function(username) {
                     socket.send_json({
                         eventType: eventTypes.toggleFollow,
                         channel: SOCK.user_channel,
@@ -778,8 +778,9 @@ angular.module('framebuzz.controllers', [])
                         $scope.selectedThread = jsonData.data.thread;
                         safeApply($scope);
 
-                        if (jsonData.data.action.indexOf('follow') !== -1) {
-                            broadcaster.prepForBroadcast({ broadcastType: 'toggle_follow_complete', thread: jsonData.data });
+                        var action = jsonData.data.action;
+                        if (action.indexOf('follow') !== -1) {
+                            // to do... something here.
                         }
                     }
                     else if (jsonData.eventType == eventTypes.getActivityStream) {
