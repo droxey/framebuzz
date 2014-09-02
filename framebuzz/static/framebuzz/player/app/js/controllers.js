@@ -200,7 +200,7 @@ angular.module('framebuzz.controllers', [])
                         localStorageService.remove('fbz_pending_comment');
                     }
                     else {
-                        if ($scope.newThread == null || $scope.newThread.comment.length == 0) {
+                        if ($scope.newThread == null) {
                             return;
                         }
 
