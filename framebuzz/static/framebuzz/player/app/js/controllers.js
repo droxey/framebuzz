@@ -777,6 +777,10 @@ angular.module('framebuzz.controllers', [])
                     else if (jsonData.eventType == eventTypes.commentAction) {
                         $scope.selectedThread = jsonData.data.thread;
                         safeApply($scope);
+
+                        if (jsonData.data.action.indexOf('follow') !== -1) {
+                            broadcaster.prepForBroadcast({ broadcastType: 'toggle_follow_complete', thread: jsonData.data });
+                        }
                     }
                     else if (jsonData.eventType == eventTypes.getActivityStream) {
                         $scope.activities = jsonData.data.activities;

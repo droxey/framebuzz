@@ -531,6 +531,27 @@ angular.module('framebuzz.directives', [])
             }
         };
  }])
+.directive('togglefollow', ['broadcaster', function(broadcaster) {
+     return {
+         link: function($scope, $element, $attributes) {
+            $element.click(function() {
+                $element.toggleClass('active');
+
+                var icon = $element.find('i.fa').not('.fa-user');
+                icon.toggleClass('fa-plus fa-minus');
+            });
+         }
+     };
+ }])
+.directive('togglefavorite', ['broadcaster', function(broadcaster) {
+     return {
+         link: function($scope, $element, $attributes) {
+            $element.click(function() {
+                $element.toggleClass('active');
+            });
+         }
+     };
+ }])
  .directive('redirectConversation', ['broadcaster', function(broadcaster) {
      return {
          link: function($scope, $element, $attributes) {
