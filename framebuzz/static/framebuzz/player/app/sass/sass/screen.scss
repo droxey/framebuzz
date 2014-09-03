@@ -1159,7 +1159,38 @@ object, embed, video, iframe {
         }
 
         #onboarding-view {
-            
+            height: 360px;
+            margin-left: 0;
+            width: 640px;
+
+            @media screen and (max-width: 581px) {
+                height: 325px;
+                width: 580px;
+            }
+
+            @media screen and (min-width: 700px) {
+                height: 405px;
+                width: 700px;
+            }
+
+            div.speech-bubble {
+                left: 50%;
+                margin-left: -17%;
+                margin-top: -17%;
+                top: 51%;
+                width: 31%;
+                z-index: 10;
+
+                p.comment {
+                    text-align: center;
+                    line-height: 14px;
+                }
+
+                div.corner {
+                    left: 50%;
+                    margin-left: -16px;
+                }
+            }
         }
 
         #blended-view {
