@@ -335,8 +335,9 @@ def add_comment_action(context):
                         })
         elif thread_action == 'favorite':
             is_public = True
-            if thread.session is None:
+            if thread.session is not None:
                 is_public = False
+                
             is_fav = Action.objects.actor(user, verb='added to favorites',
                                           action_object_object_id=thread.id)
 
