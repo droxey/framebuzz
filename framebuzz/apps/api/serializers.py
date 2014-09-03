@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User, AnonymousUser
-from django.contrib.comments.models import CommentFlag
 from django.utils import dateformat
 from django.utils import timezone
 from django.utils.html import urlize
@@ -96,7 +95,6 @@ class BaseCommentSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     submit_date = serializers.SerializerMethodField('get_submit_date')
     is_favorite = serializers.SerializerMethodField('get_is_favorite')
-    is_flagged = serializers.SerializerMethodField('get_is_flagged')
     is_following = serializers.SerializerMethodField('get_is_following')
     is_visible = serializers.SerializerMethodField('get_is_visible')
     comment = serializers.SerializerMethodField('get_comment')
@@ -109,21 +107,11 @@ class BaseCommentSerializer(serializers.ModelSerializer):
     def get_is_favorite(self, obj):
         user = self.context.get('user', None)
 
-        if user and user.id != obj.user.id and not isinstance(user, AnonymousUser):
+        if user and not isinstance(user, AnonymousUser):
             is_favorite = Action.objects.actor(user,
                                                verb='added to favorites',
                                                action_object_object_id=obj.id)
             return len(is_favorite) > 0
-
-        return False
-
-    def get_is_flagged(self, obj):
-        user = self.context.get('user', None)
-
-        if user and user.id != obj.user.id and not isinstance(user, AnonymousUser):
-            flags = CommentFlag.objects.filter(comment=obj, user=user,
-                                               flag=CommentFlag.SUGGEST_REMOVAL)
-            return len(flags) > 0
 
         return False
 
@@ -153,7 +141,7 @@ class MPTTCommentReplySerializer(BaseCommentSerializer):
         model = MPTTComment
         depth = 2
         fields = ('id', 'user', 'comment', 'submit_date',
-                  'is_favorite', 'is_flagged', 'is_following',
+                  'is_favorite', 'is_following',
                   'is_visible', 'parent_id',)
 
     def get_parent_id(self, obj):
@@ -172,7 +160,7 @@ class MPTTCommentSerializer(BaseCommentSerializer):
         depth = 4
         fields = ('id', 'user', 'comment', 'parent', 'submit_date',
                   'hidden_by_id', 'replies', 'time_hms', 'time', 'is_favorite',
-                  'has_replies', 'thread_url', 'is_flagged', 'is_following',
+                  'has_replies', 'thread_url', 'is_following',
                   'is_visible', 'has_hidden_siblings',)
 
     def get_time_hms(self, obj):
