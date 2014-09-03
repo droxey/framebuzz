@@ -119,6 +119,7 @@ angular.module('framebuzz.controllers', [])
                         if (data.logged_out !== undefined) {
                             $scope.videoInstance.user = {};
                             $scope.videoInstance.is_authenticated = false;
+                            $scope.replyClicked = false;
                             safeApply($scope);
 
                             localStorageService.clearAll();
