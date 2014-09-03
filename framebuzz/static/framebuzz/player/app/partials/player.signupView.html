@@ -1,6 +1,6 @@
 <div id="signup-container">
     <h3>Create an Account:</h3>
-    <form id="signup-form" name="signupForm" method="POST" data-ng-class="{ 'submitted': isSubmitted }" novalidate="" data-ng-submit="signup()">
+    <form id="signup-form" name="signupForm" method="POST" data-ng-class="{ 'submitted': signupSubmitted }" novalidate="" data-ng-submit="signup()">
         <p><input id="id_login" data-ng-required="true" data-ng-minlength="4" maxlength="30" name="login" placeholder="Username" type="text" data-ng-model="signupModel.username"></p>
         <p>
             <input id="id_password" data-ng-required="true" data-ng-minlength="8" name="password" placeholder="Password" type="password" data-ng-model="signupModel.password">
@@ -17,7 +17,7 @@
         <p><input id="id_email" data-ng-required="true" name="email" placeholder="Email Address" type="email" data-ng-model="signupModel.email"></p>
         <p class="clearfix">
             <span class="disclaimer pull-left">(We hate spam and<br>won't spam you.)</span>
-            <button class="btn btn-small btn-success registration-submit" type="submit" data-ng-model="isSubmitted" data-ng-init="isSubmitted = false" data-ng-click="isSubmitted = !isSubmitted">Sign up</button>
+            <button class="btn btn-small btn-success registration-submit" type="submit" data-ng-model="signupSubmitted" data-ng-init="signupSubmitted = false" data-ng-click="signupSubmitted = !signupSubmitted">Sign up</button>
         </p>
     </form>
 </div>

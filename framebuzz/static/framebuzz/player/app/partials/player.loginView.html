@@ -1,13 +1,14 @@
 <div id="login-container" class="span5 pull-right">
+  <ul data-ng-show="" class="errors">
+    <li data-ng-repeat="error in formErrors">{{ error[0] }}</li>
+  </ul>
+
     <h3>Log In Now:</h3>
-    <form id="login-form" method="POST" data-ng-class="{ 'submitted': isSubmitted }" novalidate="" data-ng-submit="login()">
-          <ul data-ng-show="formErrors.length > 0" class="errors">
-            <li data-ng-repeat="error in formErrors">{{ error[0] }}</li>
-          </ul>
+    <form id="login-form" method="POST" data-ng-class="{ 'submitted': loginSubmitted }" novalidate="" data-ng-submit="login()">
         <p><input id="id_login" data-ng-required="true" maxlength="30" name="login" placeholder="Username" type="text" data-ng-model="loginModel.username"></p>
         <p><input id="id_password" data-ng-required="true" name="password" placeholder="Password" type="password" data-ng-model="loginModel.password"></p>
         <p class="clearfix">
-            <button class="btn btn-small btn-success registration-submit" type="submit" data-ng-model="isSubmitted" data-ng-init="isSubmitted = false" data-ng-click="isSubmitted = !isSubmitted">Log in</button>
+            <button class="btn btn-small btn-success registration-submit" type="submit" data-ng-model="loginSubmitted" data-ng-init="loginSubmitted = false" data-ng-click="loginSubmitted = !loginSubmitted">Log in</button>
         </p>
         <p><a class="forgot-password secondaryAction" target="_blank" href="http://framebuzz.com/accounts/password/reset/">Forgot Password?</a></p>
     </form>

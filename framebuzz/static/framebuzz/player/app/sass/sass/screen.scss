@@ -916,6 +916,69 @@ object, embed, video, iframe {
 
     #buzz-layer {
         div.panel {
+            div.speech-bubble {
+                @include border-radius(5px, 5px);
+                background: #48a6e2;
+                padding: 12px;
+                position: relative;
+                width: 50%;
+
+                i.fa {
+                    font-size: 8px;
+
+                    &.fa-quote-left {
+                        padding-right: 3px;
+                        vertical-align: top;
+                    }
+
+                    &.fa-quote-right {
+                        padding-left: 3px;
+                        vertical-align: baseline;
+                    }
+                }
+
+                p {
+                    font-size: 14px;
+                    font-family: 'proxima-nova';
+                    font-weight: 700;
+                    color: white;
+                    width: 100%;
+
+                    &.comment {
+                        word-wrap: break-word;
+
+                        span { font-weight: 700; }
+                    }   
+
+                    &.author {
+                        text-align: right;
+                        margin-top: 7px;
+
+                        span {
+                            font-weight: 300;
+                        }
+                    }
+                }
+
+                div.corner {
+                    bottom: -32px;
+                    position: absolute;
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    line-height: 0;
+                    border: solid 16px #48a6e2;
+                    border-color: #48a6e2 transparent transparent transparent;
+                    @include border-radius(0px, 0px);
+                    left: 42px;
+                }
+
+                &.onboarding {
+
+                }
+            }
+
+
             div.scrollable {
                 display: block;
                 overflow: hidden;
@@ -1093,6 +1156,10 @@ object, embed, video, iframe {
                     display: none;
                 }
             }
+        }
+
+        #onboarding-view {
+            
         }
 
         #blended-view {
@@ -2602,64 +2669,6 @@ object, embed, video, iframe {
                     top: 10px;
 
                     div.top {
-                        div.speech-bubble {
-                            @include border-radius(5px, 5px);
-                            background: #48a6e2;
-                            padding: 12px;
-                            position: relative;
-                            width: 50%;
-
-                            i.fa {
-                                font-size: 8px;
-
-                                &.fa-quote-left {
-                                    padding-right: 3px;
-                                    vertical-align: top;
-                                }
-
-                                &.fa-quote-right {
-                                    padding-left: 3px;
-                                    vertical-align: baseline;
-                                }
-                            }
-
-                            p {
-                                font-size: 14px;
-                                font-family: 'proxima-nova';
-                                font-weight: 700;
-                                color: white;
-                                width: 100%;
-
-                                &.comment {
-                                    word-wrap: break-word;
-
-                                    span { font-weight: 700; }
-                                }   
-
-                                &.author {
-                                    text-align: right;
-                                    margin-top: 7px;
-
-                                    span {
-                                        font-weight: 300;
-                                    }
-                                }
-                            }
-
-                            div.corner {
-                                bottom: -32px;
-                                position: absolute;
-                                display: block;
-                                width: 0;
-                                height: 0;
-                                line-height: 0;
-                                border: solid 16px #48a6e2;
-                                border-color: #48a6e2 transparent transparent transparent;
-                                @include border-radius(0px, 0px);
-                                left: 42px;
-                            }
-                        }
-
                         div.introduction {
                             width: 40%;
 

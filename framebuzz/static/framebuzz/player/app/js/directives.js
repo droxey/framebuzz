@@ -58,29 +58,17 @@ angular.module('framebuzz.directives', [])
                     //  jQuery Event Listeners
                     //  =====
 
-                    var headerHover = false;
-
                     var fadeOutControls = function() {
-                        var activeHeader = $('div.active-header');
                         $('.mejs-video').addClass('fade-out-controls');
-                        
-                        if (activeHeader.hasClass('show-controls')) {
-                            activeHeader.addClass('fade-out-controls');
-                        }
 
                         window.setTimeout(function() {
                             $('.mejs-video').removeClass('fade-out-controls');
                             $('.mejs-video').removeClass('show-controls');
-                            activeHeader.removeClass('show-controls');
-                            activeHeader.removeClass('fade-out-controls');
                         }, 250);
                     };
 
                     $('.mejs-mediaelement').mouseenter(function(e) {
-                        var activeHeader = $('div.active-header');
-
                         $('.mejs-video').addClass('show-controls');
-                        activeHeader.addClass('show-controls');
                     });
 
                     $('.mejs-video').mouseleave(function(e) {

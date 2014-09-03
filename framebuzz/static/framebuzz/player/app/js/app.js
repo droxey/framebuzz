@@ -49,6 +49,17 @@ angular.module('framebuzz',
                 }
             };
 
+            var playerOnboardingView = {
+                name: 'player.onboardingView',
+                parent: playerPanelView,
+                templateUrl: templateRootPath + 'player.onboardingView.html',
+                url: '/onboarding',
+                data: {
+                    panelId: 'onboarding-view',
+                    animation: 'share'
+                }
+            };
+
             var playerShareView = {
                 name: 'player.share',
                 parent: playerPanelView,
@@ -229,6 +240,7 @@ angular.module('framebuzz',
                 .state(player)
                 .state(playerInitView)
                 .state(playerPanelView)
+                .state(playerOnboardingView)
                 .state(playerShareView)
                 .state(playerLoginOrSignupContainer)
                 .state(playerSignupView)
