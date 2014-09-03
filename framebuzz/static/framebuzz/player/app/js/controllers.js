@@ -99,6 +99,8 @@ angular.module('framebuzz.controllers', [])
                             if (data.data.errors['__all__'] !== undefined) {
                                 $scope.formErrors = data.data.errors;
                                 safeApply($scope);
+
+                                console.log($scope.formErrors);
                             }
                         }
                     })
@@ -780,7 +782,11 @@ angular.module('framebuzz.controllers', [])
 
                         var action = jsonData.data.action;
                         if (action.indexOf('follow') !== -1) {
-                            // to do... something here.
+                            var followData = {
+                                'username': jsonData.data.thread.user.username,
+                                'action': jsonData.data.action
+                            };
+                            // todo... mark every thread/reply by user as 'followed/unfollowed'
                         }
                     }
                     else if (jsonData.eventType == eventTypes.getActivityStream) {
