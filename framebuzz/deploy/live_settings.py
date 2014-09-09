@@ -23,7 +23,7 @@ DATABASES = {
 SOCKJS_PORT = 4000
 
 SHORT_BASE_URL = 'http://frame.bz/s/'
-SHORTEN_FULL_BASE_URL = 'http://%(live_host)s/s/'
+SHORTEN_FULL_BASE_URL = 'http://framebuzz.com/s/'
 
 RAVEN_CONFIG = {
     'dsn': "%(sentry_dsn)s",
