@@ -41,7 +41,7 @@ video_storage = S3BotoStorage(
 )
 
 
-def bkg_file_path(instance=None, filename=None, size=None, ext=None):
+def logo_file_path(instance=None, filename=None, size=None, ext=None):
     tmppath = [settings.BACKGROUND_STORAGE_DIR]
 
     tmp = hashlib.md5(get_username(instance.user)).hexdigest()
@@ -73,9 +73,8 @@ class UserProfile(caching.base.CachingMixin, models.Model):
     tagline = models.CharField(max_length=180, null=True, blank=True)
     display_name = models.CharField(max_length=120, null=True, blank=True)
     has_commented = models.BooleanField(default=False)
-    background = models.ImageField(max_length=1024,
-                                   upload_to=bkg_file_path,
-                                   blank=True, null=True)
+    logo = models.ImageField(max_length=1024, upload_to=logo_file_path,
+                             blank=True, null=True)
     dashboard_enabled = models.BooleanField(default=False)
 
     class Meta:
@@ -215,8 +214,8 @@ class Video(caching.base.CachingMixin, models.Model):
                                   settings.YTAPI_USERNAME,
                                   settings.YTAPI_PASSWORD)
         token = hashlib.md5(to_hash).hexdigest()
-        url = 'http://s.ytapi.com/?vid=%s&itag=%s&exp=%s&user=%s&s=%s' % (
-            self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
+        #url = 'http://s.ytapi.com/?vid=%s&itag=%s&exp=%s&user=%s&s=%s' % (
+        #    self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
         alt_url = 'http://s.ytapi.com/api/%s/%s/%s/%s/%s/' % (
             self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
         return alt_url
