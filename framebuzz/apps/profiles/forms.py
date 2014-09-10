@@ -101,7 +101,6 @@ class UploadVideoForm(forms.ModelForm):
             'm4a,m4b,m4r,m4v,mov,mp4,oga,ogv,ogx,ts,webm,wma,mpg,avi'
         self.fields['fpfile'].widget.attrs['data-fp-drag-text'] = \
             'Drag and drop your video files here.'
-        #self.fields['fpfile'].widget.attrs['class'] = 'col-lg-8'
 
     def save(self, commit=True):
         print self.request.user

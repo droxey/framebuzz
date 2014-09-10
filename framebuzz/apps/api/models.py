@@ -42,14 +42,14 @@ video_storage = S3BotoStorage(
 
 
 def logo_file_path(instance=None, filename=None, size=None, ext=None):
-    tmppath = [settings.BACKGROUND_STORAGE_DIR]
+    tmppath = [settings.LOGO_STORAGE_DIR]
 
     tmp = hashlib.md5(get_username(instance.user)).hexdigest()
     tmppath.extend([tmp[0], tmp[1], get_username(instance.user)])
 
     if not filename:
         # Filename already stored in database
-        filename = instance.background.name
+        filename = instance.logo.name
         if ext:
             (root, oldext) = os.path.splitext(filename)
             filename = root + "." + ext
@@ -95,30 +95,26 @@ class UserProfile(caching.base.CachingMixin, models.Model):
     def generate_default_avatar(self):
         from cStringIO import StringIO
         from django.core.files.uploadedfile import SimpleUploadedFile
-        from PIL import Image
+        from PIL import Image, ImageFont, ImageDraw
         from avatar.models import Avatar
 
         tmpname = '%s.png' % self.get_uhash()
         code = self.get_color_code()
         mode = "RGB"
-        base = Image.new(mode, settings.SIMPLEAVATAR_SIZE, code)
+        W, H = settings.SIMPLEAVATAR_SIZE
+        font = ImageFont.truetype(settings.SIMPLEAVATAR_FONT, 256)
+        text = self.user.username[:1].upper()
 
-        if self.has_commented:
-            overlay = Image.open(settings.SIMPLEAVATAR_AVATAR_BADGE).convert('RGBA')
-        else:
-            overlay = Image.open(settings.SIMPLEAVATAR_BASE_AVATAR_IMAGE).convert('RGBA')
-
-        obands = list(overlay.split())
-        if len(obands) == 4:
-            # Assuming alpha is the last band
-            obands[3] = obands[3].point(lambda x: x * 0.25)
-
-        overlay = Image.merge(overlay.mode, obands)
-        base.paste(overlay, (0, 0), overlay)
+        im = Image.new(mode, (W, H), code)
+        draw = ImageDraw.Draw(im)
+        text_x, text_y = font.getsize(text)
+        x = (W - text_x) / 2.0
+        y = ((H - text_y) / 2.0) - (text_y / 2.0)
+        draw.text((x, y), text, font=font, fill=(255, 255, 255, 100))
 
         # Write new avatar to memory.
         tmphandle = StringIO()
-        base.save(tmphandle, 'png')
+        im.save(tmphandle, 'png')
         tmphandle.seek(0)
 
         suf = SimpleUploadedFile(tmpname, tmphandle.read(),
