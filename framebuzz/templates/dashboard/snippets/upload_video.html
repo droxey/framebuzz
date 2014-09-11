@@ -1,83 +1,96 @@
 <div id="upload-video" class="row content-panel">
     <div class="col-md-12 profile-text">
-        <div class="row">
-            <div class="col-md-12">
-                <h3><i class="fa fa-upload"></i> Quick Upload</h3>
-                <h6 class="description">Select a video upload option below.</h6>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 upload-choices">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <div class="dmbox" data-uploadtype="dragdrop">
-                            <div class="service-icon">
-                                <a class=""><i class="dm-icon fa fa-file-video-o fa-3x"></i></a>
+        <h3><i class="fa fa-upload"></i> Quick Upload</h3>
+        <h6 class="description">Use the wizard below to add videos.</h6>
+    </div>
+    <div id="wizard" class="col-md-12 profile-text">
+        <h4>1. Select Video Upload Option</h4>
+        <section>
+            <div class="row">
+                <div class="col-lg-12 upload-choices">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="dmbox" data-uploadtype="dragdrop">
+                                <div class="service-icon">
+                                    <a class=""><i class="dm-icon fa fa-file-video-o fa-3x"></i></a>
+                                </div>
+                                <h4>1. Drag and Drop</h4>
+                                <p class="hidden-sm hidden-xs"><strong>Drag and drop a video file in the space below.</strong><br>We'll handle the rest.</p>
                             </div>
-                            <h4>1. Drag and Drop</h4>
-                            <p class="hidden-sm hidden-xs"><strong>Drag and drop a video file in the space below.</strong><br>We'll handle the rest.</p>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <div class="dmbox" data-uploadtype="cloud">
-                            <div class="service-icon">
-                                <a class=""><i class="dm-icon fa fa-cloud-upload fa-3x"></i></a>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="dmbox" data-uploadtype="cloud">
+                                <div class="service-icon">
+                                    <a class=""><i class="dm-icon fa fa-cloud-upload fa-3x"></i></a>
+                                </div>
+                                <h4>2. Cloud Upload</h4>
+                                <p class="hidden-sm hidden-xs"><strong>Why upload twice?</strong> Import videos from your favorite cloud services.<br>We support <strong>Dropbox</strong>, <strong>Google Drive</strong>, <strong>Box</strong>, <strong>FTP</strong>, and more.</p>
                             </div>
-                            <h4>2. Cloud Upload</h4>
-                            <p class="hidden-sm hidden-xs"><strong>Why upload twice?</strong> Import videos from your favorite cloud services.<br>We support <strong>Dropbox</strong>, <strong>Google Drive</strong>, <strong>Box</strong>, <strong>FTP</strong>, and more.</p>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <div class="dmbox" data-uploadtype="youtube">
-                            <div class="service-icon">
-                                <a class=""><i class="dm-icon fa fa-youtube fa-3x"></i></a>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <div class="dmbox" data-uploadtype="youtube">
+                                <div class="service-icon">
+                                    <a class=""><i class="dm-icon fa fa-youtube fa-3x"></i></a>
+                                </div>
+                                <h4>3. YouTube URL</h4>
+                                <p class="hidden-sm hidden-xs">Add a new dimension to your YouTube videos.<br><strong>Just paste the URL, and we'll add it to your dashboard &mdash; instantly!</strong></p>
                             </div>
-                            <h4>3. YouTube URL</h4>
-                            <p class="hidden-sm hidden-xs">Add a new dimension to your YouTube videos.<br><strong>Just paste the URL, and we'll add it to your dashboard &mdash; instantly!</strong></p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <form id="upload-file-form" action="{% url 'profiles-upload-video' request.user.username %}" method="POST" class="hidden">
-                    {% csrf_token %}
-                    {{ upload_form.fpname.as_hidden }}
-                    <div class="row drop-pane-row">
-                        <div class="col-xs-4 right-divider pull-left">
-                            <div class="row input-row">
-                                <div class="col-xs-12">
-                                    {{ upload_form.title }}
+        </section>
+        <h4>2. Add Video</h4>
+        <section>
+            <div class="row">
+                <div id="wizard-content" class="col-xs-12">
+                    <form id="upload-file-form" action="{% url 'profiles-upload-video' request.user.username %}" method="POST">
+                        {% csrf_token %}
+                        {{ upload_form.fpname.as_hidden }}
+                        <div class="row drop-pane-row">
+                            <div class="col-xs-4 right-divider pull-left">
+                                <div class="row input-row">
+                                    <div class="col-xs-12">
+                                        {{ upload_form.title }}
+                                    </div>
+                                </div>
+                                <div class="row input-row textarea-row">
+                                    <div class="col-xs-12">
+                                        {{ upload_form.description }}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row input-row textarea-row">
-                                <div class="col-xs-12">
-                                    {{ upload_form.description }}
+                            <div class="col-xs-8 pull-left">
+                                <div class="row drop-pane-row-inner">
+                                    <div id="upload-drop-pane" class="col-lg-12 clearfix">
+                                        {{ upload_form.fpfile }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-8 pull-left">
-                            <div class="row drop-pane-row-inner">
-                                <div id="upload-drop-pane" class="col-lg-12 clearfix">
-                                    {{ upload_form.fpfile }}
-                                </div>
+                        <div class="row">
+                            <div id="drop-result-bar" class="col-xs-12"></div>
+                        </div>
+                        {% comment %}
+                        <div class="row submit-row">
+                            <div class="col-xs-6 clearfix">
+                                <a class="btn cancel-upload btn-default pull-left" data-hide-tab="#upload-file"><i class="fa fa-times"></i> Cancel</a>
+                            </div>
+                            <div class="col-xs-6 clearfix">
+                                <button type="submit" class="btn add-video confirm-upload btn-theme pull-right">Upload &amp; Post Video</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div id="drop-result-bar" class="col-xs-12"></div>
-                    </div>
-                    <div class="row submit-row">
-                        <div class="col-xs-6 clearfix">
-                            <a class="btn cancel-upload btn-default pull-left" data-hide-tab="#upload-file"><i class="fa fa-times"></i> Cancel</a>
-                        </div>
-                        <div class="col-xs-6 clearfix">
-                            <button type="submit" class="btn add-video confirm-upload btn-theme pull-right">Upload &amp; Post Video</button>
-                        </div>
-                    </div>
-                </form>
+                        {% endcomment %}
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
+        <h4>3. Confirm Video Details</h4>
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                </div>
+            </div>
+        </section>
     </div>
 </div>

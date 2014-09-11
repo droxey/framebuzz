@@ -735,11 +735,12 @@ div.project {
         color: #48cfad;
     }
 
-
-
     div.upload-choices {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
+
+    
+
 
     form {
         input[type='text'] {
@@ -790,6 +791,47 @@ div.project {
 
             #upload-drop-pane > div > button.btn-success {
                 display: none !important;
+            }
+        }
+    }
+}
+
+
+#wizard {
+    div.steps {
+        display: none;
+    }
+
+    div.content {
+        h4 {
+            display: none;
+
+            &.current { display: block; }
+        }
+
+        section {
+
+        }
+    }
+
+    div.actions {
+        ul {
+            padding: 0;
+            margin: 0;
+
+            li {
+                display: inline-block;
+                width: auto;
+
+                &.cancel {
+                    display: none;
+                    float: left;
+                    margin-right: 10px;
+                }
+
+                &.next, &.finish {
+                    float: right;
+                }
             }
         }
     }
