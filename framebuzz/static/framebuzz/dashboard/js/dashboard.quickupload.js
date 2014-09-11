@@ -3,13 +3,13 @@ $(function() {
     filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
 
     $(document).on('click', '#upload-video div.upload-choices div.dmbox', function() {
-        var otherChoices = $('#upload-video div.upload-choices div.dmbox').not($(this));
+        var currentChoice = $(this);
+        var otherChoices = $('#upload-video div.upload-choices div.dmbox').not(currentChoice);
+
         otherChoices.removeClass('selected');
         otherChoices.fadeOut('fast', function() {
-            $(this).addClass('selected');
+            currentChoice.addClass('selected');
         });
-
-        
 
         var uploadType = $(this).attr('data-uploadtype');
         console.log(uploadType);
