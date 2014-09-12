@@ -465,56 +465,83 @@ div.project strong.selected i {
   background: rgba(0, 0, 0, 0.01);
   cursor: pointer;
 }
-/* line 721, ../sass/screen.scss */
+/* line 720, ../sass/screen.scss */
+#upload-video .dmbox:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+/* line 723, ../sass/screen.scss */
 #upload-video .dmbox:hover .dm-icon {
   background: #4ECDC4;
 }
-/* line 725, ../sass/screen.scss */
+/* line 726, ../sass/screen.scss */
+#upload-video .dmbox.selected {
+  background: rgba(0, 0, 0, 0.03);
+}
+/* line 729, ../sass/screen.scss */
 #upload-video .dmbox.selected .dm-icon {
   background: #4ECDC4;
 }
-/* line 729, ../sass/screen.scss */
-#upload-video h5.video-details {
+/* line 733, ../sass/screen.scss */
+#upload-video h5 {
   text-align: center;
   color: #48cfad;
   text-transform: uppercase;
-  border-bottom: 1px solid #e2e2e2;
   font-weight: 700;
   color: #48cfad;
+  margin-top: 0px;
 }
-/* line 738, ../sass/screen.scss */
+/* line 742, ../sass/screen.scss */
 #upload-video div.upload-choices {
   margin-bottom: 10px;
 }
-/* line 746, ../sass/screen.scss */
-#upload-video form input[type='text'] {
-  margin-bottom: 10px;
-}
-/* line 750, ../sass/screen.scss */
-#upload-video form textarea {
-  height: 50px;
+
+/* line 749, ../sass/screen.scss */
+#wizard div.steps {
+  display: none;
 }
 /* line 754, ../sass/screen.scss */
-#upload-video form div.drop-pane-row {
+#wizard div.content h4 {
+  display: none;
+  position: relative;
+  z-index: 10;
+}
+/* line 759, ../sass/screen.scss */
+#wizard div.content h4.current {
+  display: block;
+}
+/* line 762, ../sass/screen.scss */
+#wizard div.content section {
+  display: none;
+}
+/* line 766, ../sass/screen.scss */
+#wizard div.content section form input[type='text'] {
+  margin-bottom: 10px;
+}
+/* line 770, ../sass/screen.scss */
+#wizard div.content section form textarea {
+  height: 50px;
+}
+/* line 774, ../sass/screen.scss */
+#wizard div.content section form div.drop-pane-row {
   margin: 0;
   -moz-border-radius: 5px / 5px;
   -webkit-border-radius: 5px 5px;
   border-radius: 5px / 5px;
 }
-/* line 758, ../sass/screen.scss */
-#upload-video form div.drop-pane-row #upload-drop-pane {
+/* line 778, ../sass/screen.scss */
+#wizard div.content section form div.drop-pane-row #upload-drop-pane {
   margin: 0 0 0 -10px;
 }
-/* line 762, ../sass/screen.scss */
-#upload-video form div.drop-pane-row #upload-drop-pane > div {
+/* line 782, ../sass/screen.scss */
+#wizard div.content section form div.drop-pane-row #upload-drop-pane > div {
   clear: both;
   height: 50px;
   width: 103%;
   position: relative;
   overflow: hidden;
 }
-/* line 770, ../sass/screen.scss */
-#upload-video form div.drop-pane-row #upload-drop-pane > div > div {
+/* line 790, ../sass/screen.scss */
+#wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div {
   background-color: #E8E9ED !important;
   border: 2px dashed #DADAD5 !important;
   color: #888 !important;
@@ -530,78 +557,78 @@ div.project strong.selected i {
   min-width: 440px;
   position: absolute;
 }
-/* line 787, ../sass/screen.scss */
-#upload-video form div.drop-pane-row #upload-drop-pane > div > div > div {
+/* line 807, ../sass/screen.scss */
+#wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div > div {
   height: 22px !important;
   margin: 0 3px !important;
 }
-/* line 792, ../sass/screen.scss */
-#upload-video form div.drop-pane-row #upload-drop-pane > div > button.btn-success {
+/* line 812, ../sass/screen.scss */
+#wizard div.content section form div.drop-pane-row #upload-drop-pane > div > button.btn-success {
   display: none !important;
 }
-
-/* line 801, ../sass/screen.scss */
-#wizard div.steps {
-  display: none;
+/* line 819, ../sass/screen.scss */
+#wizard div.content section iframe.dragdrop {
+  margin-bottom: 10px;
+  margin-top: -50px;
 }
-/* line 806, ../sass/screen.scss */
-#wizard div.content h4 {
-  display: none;
-}
-/* line 809, ../sass/screen.scss */
-#wizard div.content h4.current {
+/* line 825, ../sass/screen.scss */
+#wizard div.content section.current {
   display: block;
 }
-/* line 818, ../sass/screen.scss */
+/* line 832, ../sass/screen.scss */
 #wizard div.actions ul {
   padding: 0;
   margin: 0;
 }
-/* line 822, ../sass/screen.scss */
+/* line 836, ../sass/screen.scss */
 #wizard div.actions ul li {
   display: inline-block;
   width: auto;
 }
-/* line 826, ../sass/screen.scss */
+/* line 840, ../sass/screen.scss */
+#wizard div.actions ul li.disabled {
+  display: none;
+}
+/* line 844, ../sass/screen.scss */
 #wizard div.actions ul li.cancel {
   display: none;
   float: left;
   margin-right: 10px;
 }
-/* line 832, ../sass/screen.scss */
+/* line 850, ../sass/screen.scss */
 #wizard div.actions ul li.next, #wizard div.actions ul li.finish {
   float: right;
 }
 
-/* line 842, ../sass/screen.scss */
+/* line 860, ../sass/screen.scss */
 #change-video-password-form {
   padding-top: 3px;
 }
-/* line 845, ../sass/screen.scss */
+/* line 863, ../sass/screen.scss */
 #change-video-password-form button {
   margin-left: 15px;
   margin-right: 15px;
   padding: 3px 12px;
 }
 
-/* line 852, ../sass/screen.scss */
+/* line 870, ../sass/screen.scss */
 .grey-panel {
   position: relative;
 }
-/* line 855, ../sass/screen.scss */
+/* line 873, ../sass/screen.scss */
 .grey-panel img.thumb {
   position: absolute;
   top: 0;
   width: 100%;
   z-index: 1;
 }
-/* line 863, ../sass/screen.scss */
+/* line 881, ../sass/screen.scss */
 .grey-panel .grey-header {
   position: relative;
   z-index: 10;
 }
 
-/* line 869, ../sass/screen.scss */
+/* line 887, ../sass/screen.scss */
 .fancybox-opened .fancybox-skin {
   -moz-border-radius: 0px / 0px;
   -webkit-border-radius: 0px 0px;
@@ -612,18 +639,18 @@ div.project strong.selected i {
   text-shadow: none;
 }
 
-/* line 877, ../sass/screen.scss */
+/* line 895, ../sass/screen.scss */
 .fancybox-iframe {
   margin-top: -6px;
 }
 
-/* line 881, ../sass/screen.scss */
+/* line 899, ../sass/screen.scss */
 .fancybox-type-iframe {
   width: 700px !important;
   height: 445px !important;
 }
 
-/* line 886, ../sass/screen.scss */
+/* line 904, ../sass/screen.scss */
 .fancybox-inner {
   width: 700px !important;
   height: 445px !important;

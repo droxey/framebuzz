@@ -718,81 +718,29 @@ div.project {
         cursor: pointer;
 
         &:hover {
+            background: rgba(0, 0, 0, 0.03);
+
             .dm-icon { background: #4ECDC4; }
         }
 
         &.selected {
+            background: rgba(0, 0, 0, 0.03);
+
             .dm-icon { background: #4ECDC4; }
         }
     }
 
-    h5.video-details {
+    h5 {
         text-align: center;
         color: rgb(72, 207, 173);
         text-transform: uppercase;
-        border-bottom: 1px solid #e2e2e2;
         font-weight: 700;
         color: #48cfad;
+        margin-top: 0px;
     }
 
     div.upload-choices {
         margin-bottom: 10px;
-    }
-
-    
-
-
-    form {
-        input[type='text'] {
-            margin-bottom: 10px;
-        }
-
-        textarea {
-            height: 50px;
-        }
-
-        div.drop-pane-row {
-            margin: 0;
-            @include border-radius(5px, 5px);
-
-            #upload-drop-pane {
-                margin: 0 0 0 -10px;
-            }
-
-            #upload-drop-pane > div {
-                clear: both;
-                height: 50px;
-                width: 103%;
-                position: relative;
-                overflow: hidden;
-            }
-
-            #upload-drop-pane > div > div {
-                background-color: #E8E9ED !important;
-                border: 2px dashed #DADAD5 !important;
-                color: #888 !important;
-                float: left !important;
-                font-size: 0.9em !important;
-                margin: 0 0 0 5px !important;
-                padding: 4px 0 !important;
-                text-align: center !important;
-                width: 86% !important;
-                height: 100%;
-                line-height: 18px !important;
-                max-width: 660px;
-                min-width: 440px;
-                position: absolute;
-            }
-
-            #upload-drop-pane > div > div > div {
-                height: 22px !important;
-                margin: 0 3px !important;
-            }
-
-            #upload-drop-pane > div > button.btn-success {
-                display: none !important;
-            }
-        }
     }
 }
 
@@ -805,12 +753,78 @@ div.project {
     div.content {
         h4 {
             display: none;
+            position: relative;
+            z-index: 10;
 
             &.current { display: block; }
         }
 
         section {
+            display: none;
 
+            form {
+                input[type='text'] {
+                    margin-bottom: 10px;
+                }
+
+                textarea {
+                    height: 50px;
+                }
+
+                div.drop-pane-row {
+                    margin: 0;
+                    @include border-radius(5px, 5px);
+
+                    #upload-drop-pane {
+                        margin: 0 0 0 -10px;
+                    }
+
+                    #upload-drop-pane > div {
+                        clear: both;
+                        height: 50px;
+                        width: 103%;
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    #upload-drop-pane > div > div {
+                        background-color: #E8E9ED !important;
+                        border: 2px dashed #DADAD5 !important;
+                        color: #888 !important;
+                        float: left !important;
+                        font-size: 0.9em !important;
+                        margin: 0 0 0 5px !important;
+                        padding: 4px 0 !important;
+                        text-align: center !important;
+                        width: 86% !important;
+                        height: 100%;
+                        line-height: 18px !important;
+                        max-width: 660px;
+                        min-width: 440px;
+                        position: absolute;
+                    }
+
+                    #upload-drop-pane > div > div > div {
+                        height: 22px !important;
+                        margin: 0 3px !important;
+                    }
+
+                    #upload-drop-pane > div > button.btn-success {
+                        display: none !important;
+                    }
+                }
+            }
+
+            iframe {
+                &.dragdrop {
+                    margin-bottom: 10px;
+                    margin-top: -50px;
+                }
+            }
+
+            &.current {
+                display: block;
+            }
         }
     }
 
@@ -822,6 +836,10 @@ div.project {
             li {
                 display: inline-block;
                 width: auto;
+
+                &.disabled {
+                    display: none;
+                }
 
                 &.cancel {
                     display: none;

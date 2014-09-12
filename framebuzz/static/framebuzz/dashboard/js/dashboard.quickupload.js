@@ -1,6 +1,27 @@
 $(function() {
-    // Set filepicker.io key and drop panes for uploads.
-    filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
+    var uploadType = null;
+
+    var initFilePicker = function() {
+        filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
+        var services = uploadType == 'cloud' 
+            ? ['BOX', 'DROPBOX', 'GOOGLE_DRIVE', 'URL', 'FTP'] :
+            'COMPUTER';
+
+        // Start loading the filepicker.io iframe.
+        filepicker.pickAndStore({
+            container: 'filepicker-iframe',
+            extensions: ['.3g2', '.3gp', '.3gp2', '.3gpp', '.3gpp2', '.ac3', '.eac3', '.ec3', '.f4a', '.f4b', '.f4v', '.flv', '.highwinds',
+                         '.m4a', '.m4b', '.m4r', '.m4v', '.mov', '.mp4', '.oga', '.ogv', '.ogx', '.ts', '.webm', '.wma', '.mpg', '.avi'],
+            folders: false,
+            services: services
+        }, {}, function(InkBlobs){
+           console.log(InkBlobs);
+        });
+
+        if (uploadType == 'dragdrop') {
+            $('#filepicker-iframe').addClass('dragdrop');
+        }
+    };
 
     // Initialize the Quick Upload wizard.
     $("#wizard").steps({
@@ -17,7 +38,7 @@ $(function() {
             var pageButtons = $('li a', actionsUl);
 
             actionsUl.addClass('clearfix');
-            
+
             $.each(pageButtons, function(k, v) {
                 var target = $(v).attr('href'),
                     hash = target.slice(1),
@@ -38,19 +59,34 @@ $(function() {
                 $(v).addClass(buttonClass);
                 $(v).parent().addClass(hash);
             });
+        },
+        onStepChanging: function (event, currentIndex, newIndex) {
+            var canProceed = true;
+            if (currentIndex == 0) { 
+                if (uploadType == null) {
+                    canProceed = false;
+                }
+                else {
+                    if (uploadType != 'youtube') {
+                        initFilePicker();
+                    }
+                }
+            }
+
+            return canProceed;
+        },
+        onStepChanged: function(event, currentIndex, priorIndex) {
+            // Add placeholder text for forms.
+            $('input, textarea').placeholder();
         }
     });
 
     $(document).on('click', '#upload-video div.upload-choices div.dmbox', function() {
         var currentChoice = $(this);
         var otherChoices = $('#upload-video div.upload-choices div.dmbox').not(currentChoice);
+        uploadType = currentChoice.attr('data-uploadtype');
 
         otherChoices.removeClass('selected');
-        otherChoices.fadeOut('fast', function() {
-            currentChoice.addClass('selected');
-        });
-
-        var uploadType = $(this).attr('data-uploadtype');
-        console.log(uploadType);
+        currentChoice.addClass('selected');
     });
 });
