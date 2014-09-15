@@ -95,9 +95,13 @@ $(function() {
 
         var url = $(this).attr('href');
 
-        $.get(url, function(response) {
-            if (response === 'ok') {
-                window.location.reload();
+        bootbox.confirm("Are you sure you want to remove this video?", function(result) {
+            if (result) {
+                $.get(url, function(response) {
+                    if (response === 'ok') {
+                        window.location.reload();
+                    }
+                });
             }
         });
 
