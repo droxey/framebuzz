@@ -45,6 +45,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <iframe id="filepicker-iframe" frameBorder="0" width="100%" height="410" scrolling="no"></iframe>
+
+                    <form id="add-video-form" action="{% url 'profiles-add-video' request.user.username %}" method="POST" class="hidden">
+                        {% csrf_token %}
+                        <input type="text" class="form-control" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
+                    </form>
                 </div>
             </div>
         </section>

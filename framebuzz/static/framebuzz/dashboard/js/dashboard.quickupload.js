@@ -1,6 +1,7 @@
 $(function() {
     var uploadType = null;
 
+    // Construct the file picker for Computer and Cloud Uploads.
     var initFilePicker = function() {
         filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
         var services = uploadType == 'cloud' 
@@ -15,6 +16,8 @@ $(function() {
             folders: false,
             services: services
         }, {}, function(InkBlobs){
+            // TODO: Fill In form fields and progress to the
+            // form where details are confirmed.
            console.log(InkBlobs);
         });
 
@@ -70,6 +73,19 @@ $(function() {
                     if (uploadType != 'youtube') {
                         initFilePicker();
                     }
+                    else {
+                        $('#filepicker-iframe').addClass('hidden');
+                        $('#add-video-form').removeClass('hidden');
+                    }
+                }
+            }
+
+            if (currentIndex == 1) {
+                if (uploadType != 'youtube') {
+                    // TODO: validate uploaded files
+                }
+                else {
+                    // TODO: validate youtube url
                 }
             }
 
@@ -81,6 +97,7 @@ $(function() {
         }
     });
 
+    // Step 1 - Select an Upload Type.
     $(document).on('click', '#upload-video div.upload-choices div.dmbox', function() {
         var currentChoice = $(this);
         var otherChoices = $('#upload-video div.upload-choices div.dmbox').not(currentChoice);
