@@ -32,11 +32,12 @@ urlpatterns = patterns(
     url(r'^dashboard/comments/(?P<comment_id>[\d]+)/delete/$',
         'framebuzz.apps.dashboard.views.delete_comment',
         name='dashboard-comment-delete'),
-
+    url(r'^dashboard/video/(?P<slug>[\w.@+-]+)/delete/$',
+        'framebuzz.apps.dashboard.views.delete_video',
+        name='dashboard-delete-video'),
     url(r'^dashboard/video/(?P<slug>[\w.@+-]+)/play/$',
         'framebuzz.apps.dashboard.views.play_video',
         name='dashboard-play-video'),
-
     url(r'^dashboard/video/(?P<slug>[\w.@+-]+)/change-password/$',
         'framebuzz.apps.dashboard.views.change_video_password',
         name='dashboard-change-video-password'),

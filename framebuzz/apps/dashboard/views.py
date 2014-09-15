@@ -195,3 +195,14 @@ def change_video_password(request, slug):
     except:
         return HttpResponse('error')
     return HttpResponse('error')
+
+
+@require_dashboard
+def delete_video(request, slug):
+    try:
+        video = Video.objects.get(slug=slug)
+        video.delete()
+
+        return HttpResponse('ok')
+    except:
+        return HttpResponse('error')

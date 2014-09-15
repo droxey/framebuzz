@@ -89,6 +89,21 @@ $(function() {
         });
     });
 
+    // Delete video button.
+    $(document).on('click', 'a.delete-video', function(e) {
+        e.preventDefault();
+
+        var url = $(this).attr('href');
+
+        $.get(url, function(response) {
+            if (response === 'ok') {
+                window.location.reload();
+            }
+        });
+
+        return false;
+    });
+
     // Close video panel.
     $(document).on('click', 'a.inline-close', function(e) {
         e.preventDefault();
