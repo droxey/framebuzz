@@ -9,30 +9,23 @@
             <div class="row">
                 <div class="col-lg-12 upload-choices">
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="dmbox" data-uploadtype="dragdrop">
                                 <div class="service-icon">
                                     <a class=""><i class="dm-icon fa fa-file-video-o fa-3x"></i></a>
                                 </div>
-                                <h5>1. Drag and Drop</h5>
-                                <p class="hidden-sm hidden-xs"><strong>Drag and drop a video file in the space below.</strong><br>We'll handle the rest.</p>
+                                <h5>1. Drag and Drop / Cloud Uploader</h5>
+                                <p class="hidden-sm hidden-xs">
+                                    <strong>Drag and drop a video file in the space we provide, </strong> <br> or import videos from your favorite cloud services.
+                                </p>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <div class="dmbox" data-uploadtype="cloud">
-                                <div class="service-icon">
-                                    <a class=""><i class="dm-icon fa fa-cloud-upload fa-3x"></i></a>
-                                </div>
-                                <h5>2. Cloud Upload</h5>
-                                <p class="hidden-sm hidden-xs"><strong>Why upload twice?</strong> Import videos from your favorite cloud services.<br>We support <strong>Dropbox</strong>, <strong>Google Drive</strong>, <strong>Box</strong>, <strong>FTP</strong>, and more.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="dmbox" data-uploadtype="youtube">
                                 <div class="service-icon">
                                     <a class=""><i class="dm-icon fa fa-youtube fa-3x"></i></a>
                                 </div>
-                                <h5>3. YouTube URL</h5>
+                                <h5>2. YouTube URL</h5>
                                 <p class="hidden-sm hidden-xs">Add a new dimension to your YouTube videos.<br><strong>Just paste the URL, and we'll add it to your dashboard &mdash; instantly!</strong></p>
                             </div>
                         </div>
@@ -43,21 +36,8 @@
         <h4>2. Add Video</h4>
         <section>
             <div class="row">
-                <div class="col-md-12">
-                    <iframe id="filepicker-iframe" frameBorder="0" width="100%" height="410" scrolling="no"></iframe>
-
-                    <form id="add-video-form" action="{% url 'profiles-add-video' request.user.username %}" method="POST" class="hidden">
-                        {% csrf_token %}
-                        <input type="text" class="form-control" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
-                    </form>
-                </div>
-            </div>
-        </section>
-        <h4>3. Confirm Video Details</h4>
-        <section>
-            <div class="row">
                 <div id="wizard-content" class="col-xs-12">
-                    <form id="upload-file-form" action="{% url 'profiles-upload-video' request.user.username %}" method="POST">
+                    <form id="upload-video-form" action="{% url 'profiles-upload-video' request.user.username %}" method="POST" class="hidden">
                         {% csrf_token %}
                         {{ upload_form.fpname.as_hidden }}
                         <div class="row drop-pane-row">
@@ -84,16 +64,10 @@
                         <div class="row">
                             <div id="drop-result-bar" class="col-xs-12"></div>
                         </div>
-                        {% comment %}
-                        <div class="row submit-row">
-                            <div class="col-xs-6 clearfix">
-                                <a class="btn cancel-upload btn-default pull-left" data-hide-tab="#upload-file"><i class="fa fa-times"></i> Cancel</a>
-                            </div>
-                            <div class="col-xs-6 clearfix">
-                                <button type="submit" class="btn add-video confirm-upload btn-theme pull-right">Upload &amp; Post Video</button>
-                            </div>
-                        </div>
-                        {% endcomment %}
+                    </form>
+                    <form id="add-video-form" action="{% url 'profiles-add-video' request.user.username %}" method="POST" class="hidden">
+                        {% csrf_token %}
+                        <input type="text" class="form-control" name="video_id" id="id_video_id" placeholder="Paste a YouTube URL to post a video...">
                     </form>
                 </div>
             </div>

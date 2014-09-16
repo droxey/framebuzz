@@ -90,8 +90,6 @@ class UploadVideoForm(forms.ModelForm):
         })
 
         self.fields['fpfile'].widget.attrs['data-fp-mimetypes'] = ''
-        self.fields['fpfile'].widget.attrs['data-fp-container'] = \
-            'filepicker-iframe'
         self.fields['fpfile'].widget.attrs['data-fp-button-text'] = \
             '<i class="fa fa-cloud-upload"></i><br>Select File...'
         self.fields['fpfile'].widget.attrs['data-fp-button-class'] = \
