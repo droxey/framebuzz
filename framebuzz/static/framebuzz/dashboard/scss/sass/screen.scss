@@ -772,6 +772,75 @@ div.project {
                     height: 50px;
                 }
 
+                input, textarea {
+                    font-size: 13px;
+                    color: #888888;
+                    @include border-radius(2px, 2px);
+
+                    &::-webkit-input-placeholder { /* WebKit browsers */
+                        color:    #888888;
+                        font-weight: 300;
+                        font-style: italic;
+                    }
+
+                    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                        color:    #888888;
+                        font-weight: 300;
+                        font-style: italic;
+                    }
+
+                    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                        color:    #888888;
+                        font-weight: 300;
+                        font-style: italic;
+                    }
+
+                    &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                        color:    #888888;
+                        font-weight: 300;
+                        font-style: italic;
+                    }
+
+                    &.placeholder {
+                        color:    #888888;
+                        font-weight: 300;
+                        font-style: italic;
+                    }
+
+                    &:focus {
+                        border: 1px solid #888888;
+                        outline: 0;
+                    }
+
+                    &.error {
+                        border: 1px solid red;
+
+                        &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                            color:    red;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+
+                        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                            color:    red;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+
+                        &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                            color:    red;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+
+                        &.placeholder {
+                            color:    red;
+                            font-weight: 300;
+                            font-style: italic;
+                        }
+                    }
+                }
+
                 div.drop-pane-row {
                     margin: 0 0 23px;
                     @include border-radius(5px, 5px);
@@ -803,6 +872,10 @@ div.project {
                         font-weight: 700;
                         font-size: 18px !important;
                         min-height: 97%;
+                    }
+
+                    #upload-drop-pane > div > div.error {
+                         border: 2px dashed red !important;
                     }
 
                     #upload-drop-pane > div > div > div {

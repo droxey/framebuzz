@@ -95,19 +95,32 @@ $(function() {
             }
         },
         onFinishing: function (event, currentIndex) { 
+            var isValid = true;
+
             if (uploadType != 'youtube') {
                 if ($('#id_title').val().length == 0) {
                     $('#id_title').addClass('error');
                     $('#id_title').attr('placeholder', 'Please enter a title for the uploaded video.');
                     
-                    return false;
+                    isValid = false;
                 }
                 else {
                     $('#id_title').removeClass('error');
                 }
+
+                if ($('#id_fpfile').val().length == 0) {
+                    var dropPaneDiv = $('#upload-drop-pane > div > div');
+                    dropPaneDiv.addClass('error');
+                    dropPaneDiv.text('Please upload a file!');
+
+                    isValid = false;
+                }
+                else {
+                    $('#id_fpfile').removeClass('error');
+                }
             }
 
-            return true;
+            return isValid;
         },
         onFinished: function(event, currentIndex) {
             if (uploadType != 'youtube') {

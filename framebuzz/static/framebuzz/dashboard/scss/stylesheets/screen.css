@@ -526,17 +526,95 @@ div.project strong.selected i {
   height: 50px;
 }
 /* line 775, ../sass/screen.scss */
+#wizard div.content section form input, #wizard div.content section form textarea {
+  font-size: 13px;
+  color: #888888;
+  -moz-border-radius: 2px / 2px;
+  -webkit-border-radius: 2px 2px;
+  border-radius: 2px / 2px;
+}
+/* line 780, ../sass/screen.scss */
+#wizard div.content section form input::-webkit-input-placeholder, #wizard div.content section form textarea::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #888888;
+  font-weight: 300;
+  font-style: italic;
+}
+/* line 786, ../sass/screen.scss */
+#wizard div.content section form input:-moz-placeholder, #wizard div.content section form textarea:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #888888;
+  font-weight: 300;
+  font-style: italic;
+}
+/* line 792, ../sass/screen.scss */
+#wizard div.content section form input::-moz-placeholder, #wizard div.content section form textarea::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #888888;
+  font-weight: 300;
+  font-style: italic;
+}
+/* line 798, ../sass/screen.scss */
+#wizard div.content section form input:-ms-input-placeholder, #wizard div.content section form textarea:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #888888;
+  font-weight: 300;
+  font-style: italic;
+}
+/* line 804, ../sass/screen.scss */
+#wizard div.content section form input.placeholder, #wizard div.content section form textarea.placeholder {
+  color: #888888;
+  font-weight: 300;
+  font-style: italic;
+}
+/* line 810, ../sass/screen.scss */
+#wizard div.content section form input:focus, #wizard div.content section form textarea:focus {
+  border: 1px solid #888888;
+  outline: 0;
+}
+/* line 815, ../sass/screen.scss */
+#wizard div.content section form input.error, #wizard div.content section form textarea.error {
+  border: 1px solid red;
+}
+/* line 818, ../sass/screen.scss */
+#wizard div.content section form input.error:-moz-placeholder, #wizard div.content section form textarea.error:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: red;
+  font-weight: 300;
+  font-style: italic;
+}
+/* line 824, ../sass/screen.scss */
+#wizard div.content section form input.error::-moz-placeholder, #wizard div.content section form textarea.error::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: red;
+  font-weight: 300;
+  font-style: italic;
+}
+/* line 830, ../sass/screen.scss */
+#wizard div.content section form input.error:-ms-input-placeholder, #wizard div.content section form textarea.error:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: red;
+  font-weight: 300;
+  font-style: italic;
+}
+/* line 836, ../sass/screen.scss */
+#wizard div.content section form input.error.placeholder, #wizard div.content section form textarea.error.placeholder {
+  color: red;
+  font-weight: 300;
+  font-style: italic;
+}
+/* line 844, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row {
   margin: 0 0 23px;
   -moz-border-radius: 5px / 5px;
   -webkit-border-radius: 5px 5px;
   border-radius: 5px / 5px;
 }
-/* line 779, ../sass/screen.scss */
+/* line 848, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane {
   margin: 0 0 0 -10px;
 }
-/* line 783, ../sass/screen.scss */
+/* line 852, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div {
   clear: both;
   height: 95px;
@@ -544,7 +622,7 @@ div.project strong.selected i {
   position: relative;
   overflow: hidden;
 }
-/* line 791, ../sass/screen.scss */
+/* line 860, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div {
   background-color: #E8E9ED !important;
   border: 2px dashed #DADAD5 !important;
@@ -561,78 +639,82 @@ div.project strong.selected i {
   font-size: 18px !important;
   min-height: 97%;
 }
-/* line 808, ../sass/screen.scss */
+/* line 877, ../sass/screen.scss */
+#wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div.error {
+  border: 2px dashed red !important;
+}
+/* line 881, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div > div {
   height: 22px !important;
   margin: 0 3px !important;
 }
-/* line 813, ../sass/screen.scss */
+/* line 886, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > button.btn-success {
   display: none !important;
 }
-/* line 820, ../sass/screen.scss */
+/* line 893, ../sass/screen.scss */
 #wizard div.content section iframe.dragdrop {
   margin-bottom: 10px;
   margin-top: -50px;
 }
-/* line 826, ../sass/screen.scss */
+/* line 899, ../sass/screen.scss */
 #wizard div.content section.current {
   display: block;
 }
-/* line 833, ../sass/screen.scss */
+/* line 906, ../sass/screen.scss */
 #wizard div.actions ul {
   padding: 0;
   margin: 0;
 }
-/* line 837, ../sass/screen.scss */
+/* line 910, ../sass/screen.scss */
 #wizard div.actions ul li {
   display: inline-block;
   width: auto;
 }
-/* line 841, ../sass/screen.scss */
+/* line 914, ../sass/screen.scss */
 #wizard div.actions ul li.disabled {
   display: none;
 }
-/* line 845, ../sass/screen.scss */
+/* line 918, ../sass/screen.scss */
 #wizard div.actions ul li.cancel {
   display: none;
   float: left;
   margin-right: 10px;
 }
-/* line 851, ../sass/screen.scss */
+/* line 924, ../sass/screen.scss */
 #wizard div.actions ul li.next, #wizard div.actions ul li.finish {
   float: right;
 }
 
-/* line 861, ../sass/screen.scss */
+/* line 934, ../sass/screen.scss */
 #change-video-password-form {
   padding-top: 3px;
 }
-/* line 864, ../sass/screen.scss */
+/* line 937, ../sass/screen.scss */
 #change-video-password-form button {
   margin-left: 15px;
   margin-right: 15px;
   padding: 3px 12px;
 }
 
-/* line 871, ../sass/screen.scss */
+/* line 944, ../sass/screen.scss */
 .grey-panel {
   position: relative;
 }
-/* line 874, ../sass/screen.scss */
+/* line 947, ../sass/screen.scss */
 .grey-panel img.thumb {
   position: absolute;
   top: 0;
   width: 100%;
   z-index: 1;
 }
-/* line 882, ../sass/screen.scss */
+/* line 955, ../sass/screen.scss */
 .grey-panel .grey-header {
   position: relative;
   z-index: 10;
 }
 
-/* line 888, ../sass/screen.scss */
+/* line 961, ../sass/screen.scss */
 .fancybox-opened .fancybox-skin {
   -moz-border-radius: 0px / 0px;
   -webkit-border-radius: 0px 0px;
@@ -643,18 +725,18 @@ div.project strong.selected i {
   text-shadow: none;
 }
 
-/* line 896, ../sass/screen.scss */
+/* line 969, ../sass/screen.scss */
 .fancybox-iframe {
   margin-top: -6px;
 }
 
-/* line 900, ../sass/screen.scss */
+/* line 973, ../sass/screen.scss */
 .fancybox-type-iframe {
   width: 700px !important;
   height: 445px !important;
 }
 
-/* line 905, ../sass/screen.scss */
+/* line 978, ../sass/screen.scss */
 .fancybox-inner {
   width: 700px !important;
   height: 445px !important;
