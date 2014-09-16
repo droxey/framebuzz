@@ -1,5 +1,6 @@
 $(function() {
-    var uploadType = null;
+    var uploadType = null,
+        uploading = false;
 
     filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
 
@@ -69,25 +70,6 @@ $(function() {
                 if (uploadType == null) {
                     canProceed = false;
                 }
-                else {
-                    if (uploadType != 'youtube') {
-                        $('#add-video-form').addClass('hidden');
-                        $('#upload-video-form').removeClass('hidden');
-                    }
-                    else {
-                        $('#upload-video-form').addClass('hidden');
-                        $('#add-video-form').removeClass('hidden');
-                    }
-                }
-            }
-
-            if (currentIndex == 1) {
-                if (uploadType != 'youtube') {
-                    // TODO: validate uploaded files
-                }
-                else {
-                    // TODO: Validate youtube url
-                }
             }
 
             if (newIndex == 0 && currentIndex == 1) {
@@ -100,6 +82,17 @@ $(function() {
         onStepChanged: function(event, currentIndex, priorIndex) {
             // Add placeholder text for forms.
             $('input, textarea').placeholder();
+
+            if (priorIndex == 0 && currentIndex == 1) {
+                if (uploadType != 'youtube') {
+                    $('#add-video-form').addClass('hidden');
+                    $('#upload-video-form').removeClass('hidden');
+                }
+                else {
+                    $('#upload-video-form').addClass('hidden');
+                    $('#add-video-form').removeClass('hidden');
+                }
+            }
         },
         onFinishing: function (event, currentIndex) { 
             if (uploadType != 'youtube') {
