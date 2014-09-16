@@ -96,6 +96,7 @@ $(function() {
         },
         onFinishing: function (event, currentIndex) { 
             var isValid = true;
+            var dropPaneDiv = $('#upload-drop-pane > div > div');
 
             if (uploadType != 'youtube') {
                 if ($('#id_title').val().length == 0) {
@@ -109,14 +110,13 @@ $(function() {
                 }
 
                 if ($('#id_fpfile').val().length == 0) {
-                    var dropPaneDiv = $('#upload-drop-pane > div > div');
                     dropPaneDiv.addClass('error');
                     dropPaneDiv.text('Please upload a file!');
 
                     isValid = false;
                 }
                 else {
-                    $('#id_fpfile').removeClass('error');
+                    dropPaneDiv.removeClass('error');
                 }
             }
 
