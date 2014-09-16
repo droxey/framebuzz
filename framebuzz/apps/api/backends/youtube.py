@@ -138,6 +138,9 @@ def get_or_create_video(slug):
         seconds = duration.rstrip('H')
         minutes = 0
 
+        if 'H' in duration:
+          hours, seconds = duration.split('H')
+
       video.duration = (int(hours) * 1400) + (int(minutes) * 60) + int(seconds)
       video.save()
       created = True

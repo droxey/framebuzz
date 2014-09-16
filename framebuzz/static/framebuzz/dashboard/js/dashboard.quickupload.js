@@ -1,40 +1,29 @@
 $(function() {
     var uploadType = null;
 
+    filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
+
+    var resetForm = function() {
+        $('#id_fpname').val('');
+        $('#id_fpfile').val('');
+        $('#id_title').val('');
+        $('#id_description').val('');
+        $('#id_video_id').attr('placeholder', 'Paste a YouTube URL to post a video...');
+        $('input, textarea').placeholder();
+        $('input').removeClass('error');
+    };
+
     function youtube_parser(url){
       var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
       var match = url.match(regExp);
       if (match&&match[7].length==11){
           return match[7];
       } else{
+          $('#id_video_id').addClass('error');
           $('#id_video_id').val('');
           $('#id_video_id').attr('placeholder', "This doesn't seem to be a YouTube URL! Please try again.");
       }
     }
-    // Construct the file picker for Computer and Cloud Uploads.
-    var initFilePicker = function() {
-        filepicker.setKey('AXQRyfZ2cQjWD3yy2flkFz');
-        // var services = uploadType == 'cloud' 
-        //     ? ['BOX', 'DROPBOX', 'GOOGLE_DRIVE', 'URL', 'FTP'] :
-        //     'COMPUTER';
-
-        // // Start loading the filepicker.io iframe.
-        // filepicker.pickAndStore({
-        //     container: 'filepicker-iframe',
-        //     extensions: ['.3g2', '.3gp', '.3gp2', '.3gpp', '.3gpp2', '.ac3', '.eac3', '.ec3', '.f4a', '.f4b', '.f4v', '.flv', '.highwinds',
-        //                  '.m4a', '.m4b', '.m4r', '.m4v', '.mov', '.mp4', '.oga', '.ogv', '.ogx', '.ts', '.webm', '.wma', '.mpg', '.avi'],
-        //     folders: false,
-        //     services: services
-        // }, {}, function(InkBlobs){
-        //     // TODO: Fill In form fields and progress to the
-        //     // form where details are confirmed.
-        //    console.log(InkBlobs);
-        // });
-
-        // if (uploadType == 'dragdrop') {
-        //     $('#filepicker-iframe').addClass('dragdrop');
-        // }
-    };
 
     // Initialize the Quick Upload wizard.
     $("#wizard").steps({
@@ -75,6 +64,7 @@ $(function() {
         },
         onStepChanging: function (event, currentIndex, newIndex) {
             var canProceed = true;
+
             if (currentIndex == 0) { 
                 if (uploadType == null) {
                     canProceed = false;
@@ -83,8 +73,6 @@ $(function() {
                     if (uploadType != 'youtube') {
                         $('#add-video-form').addClass('hidden');
                         $('#upload-video-form').removeClass('hidden');
-
-                        initFilePicker();
                     }
                     else {
                         $('#upload-video-form').addClass('hidden');
@@ -102,11 +90,39 @@ $(function() {
                 }
             }
 
+            if (newIndex == 0 && currentIndex == 1) {
+                // Someone hit the 'Previous button'
+                resetForm();
+            }
+
             return canProceed;
         },
         onStepChanged: function(event, currentIndex, priorIndex) {
             // Add placeholder text for forms.
             $('input, textarea').placeholder();
+        },
+        onFinishing: function (event, currentIndex) { 
+            if (uploadType != 'youtube') {
+                if ($('#id_title').val().length == 0) {
+                    $('#id_title').addClass('error');
+                    $('#id_title').attr('placeholder', 'Please enter a title for the uploaded video.');
+                    
+                    return false;
+                }
+                else {
+                    $('#id_title').removeClass('error');
+                }
+            }
+
+            return true;
+        },
+        onFinished: function(event, currentIndex) {
+            if (uploadType != 'youtube') {
+                $('#upload-video-form').trigger('submit');
+            }
+            else {
+                $('#add-video-form').trigger('submit');
+            }
         }
     });
 
@@ -118,6 +134,20 @@ $(function() {
 
         otherChoices.removeClass('selected');
         currentChoice.addClass('selected');
+    });
+
+    // Upload Video submit button.
+    $('body').on('submit', '#upload-video-form', function(e) {
+      e.preventDefault();
+
+      var url = $(this).attr('action');
+      var data = $(this).serialize();
+
+      $.post(url, data, function(response) {
+        window.location.reload();
+      });
+
+      return false;
     });
 
     // Youtube Video textbox blur event.
