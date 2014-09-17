@@ -26,7 +26,8 @@
     $(document).ready(function() {
         var baseUrl = 'https://app.zencoder.com/api/v2/jobs/',
             checkJobsInterval = null,
-            finishedUploads = [];
+            finishedUploads = [],
+            currentCount = $('ul.uploads-list li').not('.complete').length;
 
         var progress = function(percent, $element) {
             $element.attr('data-percentage', percent);
@@ -81,8 +82,6 @@
 
           // All AJAX calls complete.
           $.when.apply($, deferreds).done(function() {
-            $('#badge_upload').text(currentCount);
-
             if (currentCount == 0 && checkJobsInterval !== null) {
               clearInterval(checkJobsInterval);
             }
