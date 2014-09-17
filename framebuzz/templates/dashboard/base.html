@@ -86,6 +86,15 @@
                         <span>Videos</span>
                     </a>
                 </li>
+                <li class="mt">
+                    <a href="{% url 'dashboard-uploads' request.user.username %}">
+                        <i class="fa fa-file-video-o"></i>
+                        <span>Uploads</span>
+                        {% if pending_uploads|length > 0 %}
+                          <span class="label label-theme pull-right mail-info">{{ pending_uploads|length }}</span>
+                        {% endif %}
+                    </a>
+                </li>
             </ul>
           </div>
         </aside>

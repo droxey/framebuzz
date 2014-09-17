@@ -1,0 +1,21 @@
+{% extends "dashboard/base.html" %}
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags dashboard_tags %}
+
+{% block page_header %}
+    <link rel="stylesheet" href="{% static 'framebuzz/dashboard/theme/assets/css/to-do.css' %}">
+    <link href="{% static 'framebuzz/dashboard/theme/assets/js/fancybox/jquery.fancybox.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_content %}
+  <section class="wrapper site-min-height home-wrapper">
+    <div class="row">
+          <div class="col-lg-12 main-chart">   
+            <h3><i class="fa fa-angle-right"></i> Uploads in Progress</h3>
+            <hr>
+            <ul>
+                {% include "dashboard/snippets/pending_upload.html" %}
+            </ul>
+          </div>
+        </div>
+    </section>
+{% endblock %}
