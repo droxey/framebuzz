@@ -98,7 +98,7 @@ def check_zencoder_progress(job_id):
         if not input_file:
             return
 
-        for output in output_files[:2]:
+        for output in output_files:
             url = output.get('url', '')
             if url.endswith('.mp4'):
                 mp4_url = url
