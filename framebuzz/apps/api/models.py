@@ -41,15 +41,15 @@ video_storage = S3BotoStorage(
 )
 
 
-def bkg_file_path(instance=None, filename=None, size=None, ext=None):
-    tmppath = [settings.BACKGROUND_STORAGE_DIR]
+def logo_file_path(instance=None, filename=None, size=None, ext=None):
+    tmppath = [settings.LOGO_STORAGE_DIR]
 
     tmp = hashlib.md5(get_username(instance.user)).hexdigest()
     tmppath.extend([tmp[0], tmp[1], get_username(instance.user)])
 
     if not filename:
         # Filename already stored in database
-        filename = instance.background.name
+        filename = instance.logo.name
         if ext:
             (root, oldext) = os.path.splitext(filename)
             filename = root + "." + ext
@@ -73,9 +73,8 @@ class UserProfile(caching.base.CachingMixin, models.Model):
     tagline = models.CharField(max_length=180, null=True, blank=True)
     display_name = models.CharField(max_length=120, null=True, blank=True)
     has_commented = models.BooleanField(default=False)
-    background = models.ImageField(max_length=1024,
-                                   upload_to=bkg_file_path,
-                                   blank=True, null=True)
+    logo = models.ImageField(max_length=1024, upload_to=logo_file_path,
+                             blank=True, null=True)
     dashboard_enabled = models.BooleanField(default=False)
 
     class Meta:
@@ -96,30 +95,26 @@ class UserProfile(caching.base.CachingMixin, models.Model):
     def generate_default_avatar(self):
         from cStringIO import StringIO
         from django.core.files.uploadedfile import SimpleUploadedFile
-        from PIL import Image
+        from PIL import Image, ImageFont, ImageDraw
         from avatar.models import Avatar
 
         tmpname = '%s.png' % self.get_uhash()
         code = self.get_color_code()
         mode = "RGB"
-        base = Image.new(mode, settings.SIMPLEAVATAR_SIZE, code)
+        W, H = settings.SIMPLEAVATAR_SIZE
+        font = ImageFont.truetype(settings.SIMPLEAVATAR_FONT, 256)
+        text = self.user.username[:1].upper()
 
-        if self.has_commented:
-            overlay = Image.open(settings.SIMPLEAVATAR_AVATAR_BADGE).convert('RGBA')
-        else:
-            overlay = Image.open(settings.SIMPLEAVATAR_BASE_AVATAR_IMAGE).convert('RGBA')
-
-        obands = list(overlay.split())
-        if len(obands) == 4:
-            # Assuming alpha is the last band
-            obands[3] = obands[3].point(lambda x: x * 0.25)
-
-        overlay = Image.merge(overlay.mode, obands)
-        base.paste(overlay, (0, 0), overlay)
+        im = Image.new(mode, (W, H), code)
+        draw = ImageDraw.Draw(im)
+        text_x, text_y = font.getsize(text)
+        x = (W - text_x) / 2.0
+        y = ((H - text_y) / 2.0) - (text_y / 2.0)
+        draw.text((x, y), text, font=font, fill=(255, 255, 255, 100))
 
         # Write new avatar to memory.
         tmphandle = StringIO()
-        base.save(tmphandle, 'png')
+        im.save(tmphandle, 'png')
         tmphandle.seek(0)
 
         suf = SimpleUploadedFile(tmpname, tmphandle.read(),
@@ -186,6 +181,7 @@ class Video(caching.base.CachingMixin, models.Model):
     filename = models.CharField(max_length=500, blank=True, null=True)
     public = models.BooleanField(default=True)
     password = models.CharField(max_length=50, blank=True, null=True)
+    notify_emails = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = 'FrameBuzz Video'
@@ -215,8 +211,8 @@ class Video(caching.base.CachingMixin, models.Model):
                                   settings.YTAPI_USERNAME,
                                   settings.YTAPI_PASSWORD)
         token = hashlib.md5(to_hash).hexdigest()
-        url = 'http://s.ytapi.com/?vid=%s&itag=%s&exp=%s&user=%s&s=%s' % (
-            self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
+        #url = 'http://s.ytapi.com/?vid=%s&itag=%s&exp=%s&user=%s&s=%s' % (
+        #    self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
         alt_url = 'http://s.ytapi.com/api/%s/%s/%s/%s/%s/' % (
             self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
         return alt_url

@@ -1,18 +1,20 @@
-<li>
-    <p class="green pending-text">You have {{ pending_uploads|length }} pending upload{{ pending_uploads|pluralize }}</p>
-</li>
 {% for vid in pending_uploads %}
   <li data-job-id="{{ vid.job_id }}">
-    <a href="#">
-        <div class="task-info">
-            <div class="desc">{{ vid.filename }}</div>
-            <div class="percent"><span class="percent-text">40%</span></div>
-        </div>
-        <div class="progress progress-striped">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                <span class="sr-only"><span class="percent-text">40%</span> Complete</span>
+    <div class="row">
+        <div class="col-xs-12 content-panel">
+            <div class="task-info">
+                <div class="desc"><strong>{{ vid.filename }}</strong></div>
+                <div class="percent"><i><span class="percent-text">0%</span> Processed</i></div>
+            </div>
+            <div class="progress progress-striped active">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    <span class="sr-only"><span class="percent-text">0%</span> Complete</span>
+                </div>
             </div>
         </div>
-    </a>
+    </div>
+    <br>
 </li>
+{% empty %}
+    <li class="empty centered" style="padding: 50px 0;"><h3>No pending uploads!</h3></li>
 {% endfor %}

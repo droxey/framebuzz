@@ -89,6 +89,25 @@ $(function() {
         });
     });
 
+    // Delete video button.
+    $(document).on('click', 'a.delete-video', function(e) {
+        e.preventDefault();
+
+        var url = $(this).attr('href');
+
+        bootbox.confirm("Are you sure you want to remove this video?", function(result) {
+            if (result) {
+                $.get(url, function(response) {
+                    if (response === 'ok') {
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+
+        return false;
+    });
+
     // Close video panel.
     $(document).on('click', 'a.inline-close', function(e) {
         e.preventDefault();
@@ -128,13 +147,20 @@ $(function() {
     // Remove comment button.
     $(document).on('click', 'button.btn-delete', function(e) {
         e.preventDefault();
+        
+        var button = $(this);
+        var parentElement = button.parent().parent();
+        var url = button.attr('data-url');
 
-        var parentElement = $(this).parent().parent();
-        var url = $(this).attr('data-url');
-
-        $.get(url, function(html) {
-            parentElement.remove();
-        });
+        bootbox.confirm("Are you sure you want to remove this comment?", function(result) {
+            if (result) {
+                parentElement.hide("blind", { direction: "up" }, "fast", function() {
+                    $.get(url, function(html) {
+                        parentElement.remove();
+                    });
+                });
+            }
+        }); 
 
         return false;
     });

@@ -1,8 +1,7 @@
 import celery
-import datetime
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 
 from actstream import action
 from templated_email import send_templated_mail
@@ -98,7 +97,7 @@ def check_zencoder_progress(job_id):
         if not input_file:
             return
 
-        for output in output_files[:2]:
+        for output in output_files:
             url = output.get('url', '')
             if url.endswith('.mp4'):
                 mp4_url = url
@@ -149,3 +148,18 @@ def check_zencoder_progress(job_id):
                                 recipient_list=[video.added_by.email],
                                 context={'username': video.added_by.username,
                                          'video': video})
+
+        # Notify other users in the recipient list
+        # that the video was successfully uploaded.
+        if video.notify_emails:
+            emails = video.notify_emails.split(',')
+            
+            send_templated_mail(
+                template_name='share-email',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=emails,
+                context={
+                    'shared_by': video.added_by,
+                    'video': video,
+                    'site': Site.objects.get_current()
+                })

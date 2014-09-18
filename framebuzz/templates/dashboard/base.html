@@ -13,7 +13,7 @@
     <link href="http://fonts.googleapis.com/css?family=Ruda:400,700,900" rel="stylesheet">
     {% compress css %}
       <link href="{% static 'framebuzz/dashboard/theme/assets/css/bootstrap.css' %}" rel="stylesheet">
-      <link href="{% static 'framebuzz/dashboard/theme/assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+      <link href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" rel="stylesheet">
       <link href="{% static 'framebuzz/dashboard/theme/assets/css/style.css' %}" rel="stylesheet">
       <link href="{% static 'framebuzz/dashboard/theme/assets/css/style-responsive.css' %}" rel="stylesheet">
       <link href="{% static 'framebuzz/dashboard/theme/assets/js/gritter/css/jquery.gritter.css' %}" rel="stylesheet">
@@ -43,16 +43,6 @@
 
           <div class="nav notify-row pull-right" id="top_menu">
               <ul class="nav top-menu pull-left">
-                <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                        <i class="fa fa-cloud-upload"></i>
-                         <span id="badge_uploads" class="badge bg-theme" data-count="{{ pending_uploads|length }}">{{ pending_uploads|length }}</span>
-                    </a>
-                      <ul class="dropdown-menu extended tasks-bar uploads-list">
-                        <div class="notify-arrow notify-arrow-green"></div>
-                        {% include "dashboard/snippets/pending_upload.html" %}
-                      </ul>
-                </li>
                 <li id="header_inbox_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                         <i class="fa fa-comments-o"></i>
@@ -96,14 +86,21 @@
                         <span>Videos</span>
                     </a>
                 </li>
+                <li class="">
+                    <a href="{% url 'dashboard-uploads' request.user.username %}">
+                        <i class="fa fa-file-video-o"></i>
+                        <span>Uploads</span>
+                        {% if pending_uploads|length > 0 %}
+                          <span class="label label-theme pull-right mail-info">{{ pending_uploads|length }}</span>
+                        {% endif %}
+                    </a>
+                </li>
             </ul>
           </div>
         </aside>
         <section id="main-content">
           <section class="wrapper upload-wrapper">
-            <div id="upload-video" class="row">
-              {% include 'dashboard/snippets/add_video.html' %}
-             </div>
+              {% include 'dashboard/snippets/upload_video.html' %}
           </section>
           {% block page_content %}{% endblock %}
         </section>
@@ -117,9 +114,9 @@
         </footer>
     </section>
   {% endblock %}
-    <script type="text/javascript">
-    (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v1/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document); 
-    </script>
+  <script type="text/javascript">
+  (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v1/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document);
+</script>
   {% compress js %}
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/jquery.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/bootstrap.min.js' %}"></script>
@@ -131,9 +128,11 @@
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/common-scripts.js' %}"></script>
     <script src="{% static 'framebuzz/profiles/vendor/jquery/jquery.placeholder.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/gritter/js/jquery.gritter.js' %}"></script>
+    <script src="{% static 'framebuzz/dashboard/vendor/jquery/bootbox.min.js' %}"></script>
+    <script src="{% static 'framebuzz/dashboard/vendor/jquery/jquery.steps.min.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/theme/assets/js/gritter-conf.js' %}"></script>
     <script src="{% static 'framebuzz/dashboard/vendor/rrssb/js/rrssb.js' %}"></script>
-    <script src="{% static 'framebuzz/dashboard/js/dashboard.uploads.js' %}"></script>
+    <script src="{% static 'framebuzz/dashboard/js/dashboard.quickupload.js' %}"></script>
   {% endcompress %}
   {% block page_javascript %}{% endblock %}
   <script>

@@ -78,7 +78,6 @@ class UploadVideoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        print self.request.user.username
         super(UploadVideoForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget = forms.TextInput(attrs={
             'placeholder': 'Enter video title...',
@@ -88,6 +87,14 @@ class UploadVideoForm(forms.ModelForm):
             'placeholder': 'Enter a description for the video...',
             'class': 'form-control'
         })
+
+        try:
+            self.fields['notify_emails'].widget = forms.Textarea(attrs={
+                    'placeholder': "Enter a comma-separated list of emails, and we'll let them know when your upload is ready!",
+                    'class': 'form-control'
+                })
+        except KeyError:
+            pass
 
         self.fields['fpfile'].widget.attrs['data-fp-mimetypes'] = ''
         self.fields['fpfile'].widget.attrs['data-fp-button-text'] = \
@@ -100,10 +107,7 @@ class UploadVideoForm(forms.ModelForm):
             '3g2,3gp,3gp2,3gpp,3gpp2,ac3,eac3,ec3,f4a,f4b,f4v,flv,highwinds,' \
             'm4a,m4b,m4r,m4v,mov,mp4,oga,ogv,ogx,ts,webm,wma,mpg,avi'
         self.fields['fpfile'].widget.attrs['data-fp-drag-text'] = \
-            'Drag and drop your video files here.<br>Or, click ' \
-            '<strong>Select File...</strong>' \
-            ' to upload videos from Dropbox, Google Drive, and more!'
-        #self.fields['fpfile'].widget.attrs['class'] = 'col-lg-8'
+            'Drag and drop your video files here.<br>Or, click this box to upload videos from Dropbox, Google Drive, FTP and more!'
 
     def save(self, commit=True):
         print self.request.user
@@ -112,6 +116,7 @@ class UploadVideoForm(forms.ModelForm):
         description = self.cleaned_data.get('description', None)
         user = User.objects.get(username__iexact=self.request.user.username)
         url = self.request.POST['fpfile'] or None
+        notify_emails = self.request.POST['notify_emails'] or None
 
         vid = Video()
         vid.title = title
@@ -121,6 +126,7 @@ class UploadVideoForm(forms.ModelForm):
         vid.uploaded = datetime.datetime.now()
         vid.filename = fpfile.name or None
         vid.fp_url = url
+        vid.notify_emails = notify_emails
         vid.save()
 
         # Videos added by Dashboard should not be searchable.

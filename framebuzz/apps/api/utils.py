@@ -95,7 +95,7 @@ def get_total_shares(path):
 
 def get_pending_uploads(username):
     pending_uploads = Video.objects.exclude(
-        Q(Q(fp_url=None) | Q(job_id=None))).filter(
+        Q(Q(fp_url=None) & Q(job_id=None))).filter(
             added_by__username=username,
             processing=True)
     return pending_uploads
