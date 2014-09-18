@@ -25,7 +25,7 @@ angular.module('framebuzz.controllers', [])
                 $scope.signupModel = {};
                 $scope.formSubmitted = false;
                 $scope.enterPasswordModel = {};
-                $scope.formErrors = '';
+                $scope.formErrors = null;
                 $scope.loginUrls = SOCK.login_urls;
 
                 $scope.replyClicked = false;
@@ -85,7 +85,7 @@ angular.module('framebuzz.controllers', [])
                             $scope.videoInstance.is_authenticated = data.data.login_success;
                             $scope.videoInstance.user = data.data.user;
                             $scope.loginModel = {};
-                            $scope.formErrors = '';
+                            $scope.formErrors = null;
                             safeApply($scope);
 
                             if ($state.is('player.loginView') || $state.is('player.signupView')) {
@@ -99,8 +99,6 @@ angular.module('framebuzz.controllers', [])
                             if (data.data.errors['__all__'] !== undefined) {
                                 $scope.formErrors = data.data.errors;
                                 safeApply($scope);
-
-                                console.log($scope.formErrors);
                             }
                         }
                     })
@@ -152,7 +150,7 @@ angular.module('framebuzz.controllers', [])
                             $scope.videoInstance.is_authenticated = data.data.login_success;
                             $scope.videoInstance.user = data.data.user;
                             $scope.signupModel = {};
-                            $scope.formErrors = '';
+                            $scope.formErrors = null;
                             safeApply($scope);
 
                             if ($state.is('player.loginView') || $state.is('player.signupView')) {
