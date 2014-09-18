@@ -116,7 +116,7 @@ class UploadVideoForm(forms.ModelForm):
         description = self.cleaned_data.get('description', None)
         user = User.objects.get(username__iexact=self.request.user.username)
         url = self.request.POST['fpfile'] or None
-        notify_emails = self.cleaned_data.get('notify_emails', None)
+        notify_emails = self.request.POST['notify_emails'] or None
 
         vid = Video()
         vid.title = title
