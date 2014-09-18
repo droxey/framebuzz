@@ -518,14 +518,19 @@ div.project strong.selected i {
   display: none;
 }
 /* line 767, ../sass/screen.scss */
-#wizard div.content section form input[type='text'] {
+#wizard div.content section form input[type='text'],
+#wizard div.content section form textarea {
   margin-bottom: 10px;
 }
-/* line 771, ../sass/screen.scss */
+/* line 772, ../sass/screen.scss */
 #wizard div.content section form textarea {
   height: 50px;
 }
-/* line 775, ../sass/screen.scss */
+/* line 776, ../sass/screen.scss */
+#wizard div.content section form #id_notify_emails {
+  margin-bottom: 0;
+}
+/* line 778, ../sass/screen.scss */
 #wizard div.content section form input, #wizard div.content section form textarea {
   font-size: 13px;
   color: #888888;
@@ -533,96 +538,96 @@ div.project strong.selected i {
   -webkit-border-radius: 2px 2px;
   border-radius: 2px / 2px;
 }
-/* line 780, ../sass/screen.scss */
+/* line 783, ../sass/screen.scss */
 #wizard div.content section form input::-webkit-input-placeholder, #wizard div.content section form textarea::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #888888;
   font-weight: 300;
   font-style: italic;
 }
-/* line 786, ../sass/screen.scss */
+/* line 789, ../sass/screen.scss */
 #wizard div.content section form input:-moz-placeholder, #wizard div.content section form textarea:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #888888;
   font-weight: 300;
   font-style: italic;
 }
-/* line 792, ../sass/screen.scss */
+/* line 795, ../sass/screen.scss */
 #wizard div.content section form input::-moz-placeholder, #wizard div.content section form textarea::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #888888;
   font-weight: 300;
   font-style: italic;
 }
-/* line 798, ../sass/screen.scss */
+/* line 801, ../sass/screen.scss */
 #wizard div.content section form input:-ms-input-placeholder, #wizard div.content section form textarea:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #888888;
   font-weight: 300;
   font-style: italic;
 }
-/* line 804, ../sass/screen.scss */
+/* line 807, ../sass/screen.scss */
 #wizard div.content section form input.placeholder, #wizard div.content section form textarea.placeholder {
   color: #888888;
   font-weight: 300;
   font-style: italic;
 }
-/* line 810, ../sass/screen.scss */
+/* line 813, ../sass/screen.scss */
 #wizard div.content section form input:focus, #wizard div.content section form textarea:focus {
   border: 1px solid #888888;
   outline: 0;
 }
-/* line 815, ../sass/screen.scss */
+/* line 818, ../sass/screen.scss */
 #wizard div.content section form input.error, #wizard div.content section form textarea.error {
   border: 1px solid red;
 }
-/* line 818, ../sass/screen.scss */
+/* line 821, ../sass/screen.scss */
 #wizard div.content section form input.error:-moz-placeholder, #wizard div.content section form textarea.error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 824, ../sass/screen.scss */
+/* line 827, ../sass/screen.scss */
 #wizard div.content section form input.error::-moz-placeholder, #wizard div.content section form textarea.error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 830, ../sass/screen.scss */
+/* line 833, ../sass/screen.scss */
 #wizard div.content section form input.error:-ms-input-placeholder, #wizard div.content section form textarea.error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 836, ../sass/screen.scss */
+/* line 839, ../sass/screen.scss */
 #wizard div.content section form input.error.placeholder, #wizard div.content section form textarea.error.placeholder {
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 844, ../sass/screen.scss */
+/* line 847, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row {
   margin: 0 0 23px;
   -moz-border-radius: 5px / 5px;
   -webkit-border-radius: 5px 5px;
   border-radius: 5px / 5px;
 }
-/* line 848, ../sass/screen.scss */
+/* line 851, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane {
   margin: 0 0 0 -10px;
 }
-/* line 852, ../sass/screen.scss */
+/* line 855, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div {
   clear: both;
-  height: 95px;
+  height: 158px;
   width: 103%;
   position: relative;
   overflow: hidden;
 }
-/* line 860, ../sass/screen.scss */
+/* line 863, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div {
   background-color: #E8E9ED !important;
   border: 2px dashed #DADAD5 !important;
@@ -630,7 +635,7 @@ div.project strong.selected i {
   float: left !important;
   font-size: 0.9em !important;
   margin: 0 0 0 5px !important;
-  padding: 24px 0 !important;
+  padding: 55px 0 !important;
   text-align: center !important;
   width: 98% !important;
   line-height: 20px !important;
@@ -639,82 +644,82 @@ div.project strong.selected i {
   font-size: 18px !important;
   min-height: 97%;
 }
-/* line 877, ../sass/screen.scss */
+/* line 880, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div.error {
   border: 2px dashed red !important;
 }
-/* line 881, ../sass/screen.scss */
+/* line 884, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div > div {
   height: 22px !important;
   margin: 0 3px !important;
 }
-/* line 886, ../sass/screen.scss */
+/* line 889, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > button.btn-success {
   display: none !important;
 }
-/* line 893, ../sass/screen.scss */
+/* line 896, ../sass/screen.scss */
 #wizard div.content section iframe.dragdrop {
   margin-bottom: 10px;
   margin-top: -50px;
 }
-/* line 899, ../sass/screen.scss */
+/* line 902, ../sass/screen.scss */
 #wizard div.content section.current {
   display: block;
 }
-/* line 906, ../sass/screen.scss */
+/* line 909, ../sass/screen.scss */
 #wizard div.actions ul {
   padding: 0;
   margin: 0;
 }
-/* line 910, ../sass/screen.scss */
+/* line 913, ../sass/screen.scss */
 #wizard div.actions ul li {
   display: inline-block;
   width: auto;
 }
-/* line 914, ../sass/screen.scss */
+/* line 917, ../sass/screen.scss */
 #wizard div.actions ul li.disabled {
   display: none;
 }
-/* line 918, ../sass/screen.scss */
+/* line 921, ../sass/screen.scss */
 #wizard div.actions ul li.cancel {
   display: none;
   float: left;
   margin-right: 10px;
 }
-/* line 924, ../sass/screen.scss */
+/* line 927, ../sass/screen.scss */
 #wizard div.actions ul li.next, #wizard div.actions ul li.finish {
   float: right;
 }
 
-/* line 934, ../sass/screen.scss */
+/* line 937, ../sass/screen.scss */
 #change-video-password-form {
   padding-top: 3px;
 }
-/* line 937, ../sass/screen.scss */
+/* line 940, ../sass/screen.scss */
 #change-video-password-form button {
   margin-left: 15px;
   margin-right: 15px;
   padding: 3px 12px;
 }
 
-/* line 944, ../sass/screen.scss */
+/* line 947, ../sass/screen.scss */
 .grey-panel {
   position: relative;
 }
-/* line 947, ../sass/screen.scss */
+/* line 950, ../sass/screen.scss */
 .grey-panel img.thumb {
   position: absolute;
   top: 0;
   width: 100%;
   z-index: 1;
 }
-/* line 955, ../sass/screen.scss */
+/* line 958, ../sass/screen.scss */
 .grey-panel .grey-header {
   position: relative;
   z-index: 10;
 }
 
-/* line 961, ../sass/screen.scss */
+/* line 964, ../sass/screen.scss */
 .fancybox-opened .fancybox-skin {
   -moz-border-radius: 0px / 0px;
   -webkit-border-radius: 0px 0px;
@@ -725,18 +730,18 @@ div.project strong.selected i {
   text-shadow: none;
 }
 
-/* line 969, ../sass/screen.scss */
+/* line 972, ../sass/screen.scss */
 .fancybox-iframe {
   margin-top: -6px;
 }
 
-/* line 973, ../sass/screen.scss */
+/* line 976, ../sass/screen.scss */
 .fancybox-type-iframe {
   width: 700px !important;
   height: 445px !important;
 }
 
-/* line 978, ../sass/screen.scss */
+/* line 981, ../sass/screen.scss */
 .fancybox-inner {
   width: 700px !important;
   height: 445px !important;

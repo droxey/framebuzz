@@ -78,7 +78,6 @@ class UploadVideoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        print self.request.user.username
         super(UploadVideoForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget = forms.TextInput(attrs={
             'placeholder': 'Enter video title...',
@@ -88,6 +87,14 @@ class UploadVideoForm(forms.ModelForm):
             'placeholder': 'Enter a description for the video...',
             'class': 'form-control'
         })
+
+        try:
+            self.fields['notify_emails'].widget = forms.Textarea(attrs={
+                    'placeholder': "Enter a comma-separated list of emails, and we'll let them know when your upload is ready!",
+                    'class': 'form-control'
+                })
+        except KeyError:
+            pass
 
         self.fields['fpfile'].widget.attrs['data-fp-mimetypes'] = ''
         self.fields['fpfile'].widget.attrs['data-fp-button-text'] = \
