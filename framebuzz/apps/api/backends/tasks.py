@@ -1,8 +1,7 @@
 import celery
-import datetime
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 
 from actstream import action
 from templated_email import send_templated_mail
@@ -164,4 +163,3 @@ def check_zencoder_progress(job_id):
                     'video': video,
                     'site': Site.objects.get_current()
                 })
-
