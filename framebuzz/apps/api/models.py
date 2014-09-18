@@ -181,6 +181,7 @@ class Video(caching.base.CachingMixin, models.Model):
     filename = models.CharField(max_length=500, blank=True, null=True)
     public = models.BooleanField(default=True)
     password = models.CharField(max_length=50, blank=True, null=True)
+    notify_emails = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = 'FrameBuzz Video'

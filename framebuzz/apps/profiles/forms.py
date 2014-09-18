@@ -109,6 +109,7 @@ class UploadVideoForm(forms.ModelForm):
         description = self.cleaned_data.get('description', None)
         user = User.objects.get(username__iexact=self.request.user.username)
         url = self.request.POST['fpfile'] or None
+        notify_emails = self.cleaned_data.get('notify_emails', None)
 
         vid = Video()
         vid.title = title
@@ -118,6 +119,7 @@ class UploadVideoForm(forms.ModelForm):
         vid.uploaded = datetime.datetime.now()
         vid.filename = fpfile.name or None
         vid.fp_url = url
+        vid.notify_emails = notify_emails
         vid.save()
 
         # Videos added by Dashboard should not be searchable.
@@ -130,7 +132,8 @@ class UploadVideoForm(forms.ModelForm):
         if fpfile:  # Send it to ZenCoder!
             start_zencoder_job.apply_async(args=[
                 vid.fp_url,
-                vid.filename
+                vid.filename,
+                notify_emails
             ])
 
         return vid

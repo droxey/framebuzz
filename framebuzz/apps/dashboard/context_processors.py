@@ -1,11 +1,12 @@
-from framebuzz.apps.profiles.forms import AddVideoForm, UploadVideoForm
+from framebuzz.apps.profiles.forms import AddVideoForm
+from framebuzz.apps.dashboard.forms import UploadVideoAndNotifyForm
 from framebuzz.apps.api.utils import get_pending_uploads
 
 
 def dashboard(request):
     if request.user.is_authenticated():
         form = AddVideoForm(request=request)
-        upload_form = UploadVideoForm(request=request)
+        upload_form = UploadVideoAndNotifyForm(request=request)
         pending_uploads = get_pending_uploads(request.user.username)
 
         return {
