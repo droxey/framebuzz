@@ -25,40 +25,41 @@ def search(request):
         query = request.GET.get('query', None)
         q_filter = request.GET.get('filter', None)
 
-        if q_filter is None or q_filter == 'videos':
-            total = RESULTS_PER_PAGE if q_filter == None else MINIMUM_TOTAL_RESULTS
-            yt, token = find_video_by_keyword(query, results=total)
+        if query:
+            if q_filter is None or q_filter == 'videos':
+                total = RESULTS_PER_PAGE if q_filter == None else MINIMUM_TOTAL_RESULTS
+                yt, token = find_video_by_keyword(query, results=total)
 
-            while token is not None:
-                yt, token = find_video_by_keyword(query, results=total, next_page_token=token)
+                while token is not None:
+                    yt, token = find_video_by_keyword(query, results=total, next_page_token=token)
 
-            # Update search, since find_video_by_keyword
-            # stores a copy in our db.
-            videos = watson.search(query, models=(Video,))
-        
-        if q_filter is None or q_filter == 'conversations':
-            conversations = watson.search(query, models=(MPTTComment,))
-        
-        if q_filter is None or q_filter == 'users':
-            users = watson.search(query, models=(UserProfile,))
+                # Update search, since find_video_by_keyword
+                # stores a copy in our db.
+                videos = watson.search(query, models=(Video,))
+            
+            if q_filter is None or q_filter == 'conversations':
+                conversations = watson.search(query, models=(MPTTComment,))
+            
+            if q_filter is None or q_filter == 'users':
+                users = watson.search(query, models=(UserProfile,))
 
-        if q_filter is not None:
-            try:
-                page = request.GET.get('page', 1)
-            except PageNotAnInteger:
-                page = 1
+            if q_filter is not None:
+                try:
+                    page = request.GET.get('page', 1)
+                except PageNotAnInteger:
+                    page = 1
 
-            if q_filter == 'videos':
-                paginator = Paginator(videos, RESULTS_PER_PAGE, request=request)
-                results_count = len(videos)
-            elif q_filter == 'users':
-                paginator = Paginator(users, RESULTS_PER_PAGE, request=request)
-                results_count = len(users)
-            else:
-                paginator = Paginator(conversations, RESULTS_PER_PAGE, request=request)
-                results_count = len(conversations)
+                if q_filter == 'videos':
+                    paginator = Paginator(videos, RESULTS_PER_PAGE, request=request)
+                    results_count = len(videos)
+                elif q_filter == 'users':
+                    paginator = Paginator(users, RESULTS_PER_PAGE, request=request)
+                    results_count = len(users)
+                else:
+                    paginator = Paginator(conversations, RESULTS_PER_PAGE, request=request)
+                    results_count = len(conversations)
 
-            search_results = paginator.page(page)
+                search_results = paginator.page(page)
 
     return render_to_response('search/results.html', {
         'query': query,
