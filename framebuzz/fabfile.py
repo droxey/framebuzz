@@ -337,7 +337,7 @@ def install():
     sudo("apt-get update -y -q")
     apt("gcc libc6 zlib1g-dev libexpat1-dev libssl-dev python2.7-dev libc-dev "
         "libjpeg-turbo8-dev comerr-dev libjpeg8-dev nginx libkrb5-dev "
-        "libjpeg-dev python-dev python-setuptools git-core "
+        "libjpeg-dev libfreetype6-dev python-dev python-setuptools git-core "
         "postgresql libpq-dev memcached supervisor redis-server libxml2-dev libxslt1-dev "
         "python-software-properties")
     sudo("easy_install pip")
