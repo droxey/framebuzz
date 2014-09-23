@@ -15,9 +15,9 @@ RESULTS_PER_PAGE = 6
 def search(request):
     query = None
     q_filter = None
-    conversations = None
-    users = None
-    videos = None
+    conversations = []
+    users = []
+    videos = []
     search_results = []
     results_count = 0
 
