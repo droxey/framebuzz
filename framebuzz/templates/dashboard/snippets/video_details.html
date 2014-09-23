@@ -30,7 +30,7 @@
       </div>
       <div class="row centered">
         <div class="col-sm-12">
-          <a href="{% url 'dashboard-delete-video' video.slug %}" class="btn btn-sm btn-danger delete-video"><i class="fa fa-trash"></i> Delete Video</a>
+          <a href="{% url 'dashboard-delete-video' video.slug %}" class="btn btn-sm btn-danger delete-video"><i class="fa fa-delete"></i> Delete Video</a>
         </div>
       </div>
     </div>
@@ -85,12 +85,30 @@
                               <table>
                                 <tr>
                                   <td><input type="password" id="id_password" name="password" autocomplete="off"></td>
-                                  <td><button type="submit" class="btn btn-success">Submit</button></td>
+                                  <td><button type="submit" class="btn btn-success">Submit</td>
                                   <td class="hidden change-password-response"></td>
                                 </tr>
                               </table>
                             </form>
                           </td>
+                      </tr>
+                      <tr>
+                        <td><strong>Shared With</strong></td>
+                          <td>
+                            <form id="change-notify-emails-form" action="{% url 'dashboard-change-video-notifications' video.slug %}" method="post">
+                              {% csrf_token %}
+                              <table>
+                                <tr>
+                                  <td><textarea rows="2" cols="210" id="id_notify_emails" name="notify_emails" style="font-family: monospace; font-size: 12px;" class="form-control">{% if video.notify_emails %}{{ video.notify_emails }}{% endif %}</textarea></td>
+                                  <td><button type="submit" class="btn btn-success"><i class="fa fa-share-alt"></i> Save &amp; Share Now</button></td>
+                                </tr>
+                                <tr>
+                                  <td class="hidden send-notification-response" colspan="2"></td>
+                                </tr>
+                              </table>
+                            </form>
+                          </td>
+                        <td>
                       </tr>
                       <tr>
                           <td><strong>WordPress<br>Embed Code</strong></td>

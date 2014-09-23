@@ -1,17 +1,19 @@
-import json
-
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from actstream.models import Action
+from templated_email import send_templated_mail
 
 from framebuzz.apps.api.forms import MPTTCommentForm
 from framebuzz.apps.api.models import Video, UserVideo, MPTTComment
 from framebuzz.apps.dashboard.decorators import require_dashboard
+
 
 VALID_FEED_VERBS = ['commented on', 'replied to comment',
                     'added video to library', ]
@@ -156,6 +158,34 @@ def change_video_password(request, slug):
             password = request.POST.get('password', None)
             video.password = password
             video.save()
+            return HttpResponse('ok')
+    except:
+        return HttpResponse('error')
+    return HttpResponse('error')
+
+
+@require_dashboard
+def change_video_notifications(request, slug):
+    try:
+        video = Video.objects.get(slug=slug)
+
+        if request.method == 'POST':
+            emails = request.POST.get('notify_emails', None)
+            video.notify_emails = emails
+            video.save()
+
+            if video.notify_emails:
+                send_to = video.notify_emails.split(',')
+            
+                send_templated_mail(
+                    template_name='share-email',
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=send_to,
+                    context={
+                        'shared_by': request.user,
+                        'video': video,
+                        'site': Site.objects.get_current()
+                    })
             return HttpResponse('ok')
     except:
         return HttpResponse('error')

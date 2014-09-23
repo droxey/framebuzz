@@ -82,6 +82,28 @@ $(function() {
 
                                 return false;
                             });
+
+                            $('#change-notify-emails-form').submit(function(e) {
+                                e.preventDefault();
+
+                                var form = $(this),
+                                    formData = $(this).serialize(),
+                                    url = $(this).attr('action');
+
+                                $.post(url, formData, function(data) {
+                                    var responseContainer = $('td.send-notification-response');
+                                    responseContainer.removeClass('hidden');
+
+                                    if (data === 'ok') {
+                                        responseContainer.text('Shared successfully!');
+                                    }  
+                                    else {
+                                        responseContainer.text('Error updating list.');
+                                    }
+                                });
+
+                                return false;
+                            });
                         });
                     });
                 }

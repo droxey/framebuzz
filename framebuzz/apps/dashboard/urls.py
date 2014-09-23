@@ -44,4 +44,7 @@ urlpatterns = patterns(
     url(r'^dashboard/video/(?P<slug>[\w.@+-]+)/change-password/$',
         'framebuzz.apps.dashboard.views.change_video_password',
         name='dashboard-change-video-password'),
+    url(r'^dashboard/video/(?P<slug>[\w.@+-]+)/change-notifications/$',
+        'framebuzz.apps.dashboard.views.change_video_notifications',
+        name='dashboard-change-video-notifications'),
 )
