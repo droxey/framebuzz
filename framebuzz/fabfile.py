@@ -54,7 +54,7 @@ env.git = env.repo_url.startswith("git") or env.repo_url.endswith(".git")
 env.reqs_path = conf.get("REQUIREMENTS_PATH", None)
 env.gunicorn_port = conf.get("GUNICORN_PORT", 8000)
 env.locale = conf.get("LOCALE", "en_US.UTF-8")
-env.host_string = '%s:%s' % (env.hosts[0], '22')
+env.host_string = '%s:%s' % (env.hosts[0], '333')
 
 env.static_cache_path = '%s/framebuzz/static/CACHE' % env.proj_path
 
@@ -513,7 +513,7 @@ def deploy():
         sudo("tar -cf last.tar %s" % static())
 
     with cd(env.proj_path):
-        sshagent_run('git pull gitlab %s -f' % env.repo_branch)
+        sshagent_run('git pull origin %s -f' % env.repo_branch)
 
     with project():
         git = env.git
