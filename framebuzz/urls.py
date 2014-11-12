@@ -88,6 +88,9 @@ urlpatterns = patterns('',
     # Dashboard:
     url(r'^', include('framebuzz.apps.dashboard.urls')),
 
+    # Django-Todo:
+    (r'^dashboard/todo/', include('todo.urls')),
+
     # Robots.txt:
     (r'^robots\.txt$', include('robots.urls')),
 )
