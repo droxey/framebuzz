@@ -1,7 +1,10 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 
 urlpatterns = patterns(
     '',
+    # Django-Todo:
+    (r'^dashboard/todo/', include('todo.urls')),
+
     url(r'^dashboard/login/$',
         'framebuzz.apps.dashboard.views.dashboard_login',
         name='dashboard-login'),
@@ -47,4 +50,6 @@ urlpatterns = patterns(
     url(r'^dashboard/video/(?P<slug>[\w.@+-]+)/change-notifications/$',
         'framebuzz.apps.dashboard.views.change_video_notifications',
         name='dashboard-change-video-notifications'),
+
+
 )
