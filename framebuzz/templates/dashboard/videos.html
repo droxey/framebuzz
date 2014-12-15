@@ -8,42 +8,20 @@
 
 {% block page_content %}
 
-  <section class="wrapper site-min-height home-wrapper">
-      <div class="row">
-          <div class="col-lg-12 main-chart">
-            <h3><i class="fa fa-angle-right"></i> Videos</h3>
-                <hr>
-                {% for group in videos|group_by:3 %}
+<div class="col-md-12 masonry">
+    <div class="block">
+        <h2><i class="fa fa-video-camera"></i> Videos</h2>
+        <div class="col-md-12">
+            {% for group in videos|group_by:3 %}
                 <div class="row mt">
                     {% for video in group %}
                         {% include "dashboard/snippets/video_entry.html" %}
                     {% endfor %}
                 </div>
-                <div class="row content-panel inline-modal">
-                    <div class="panel-heading">
-                        <div class="row row-modal-title">
-                            <div class="col-md-12">
-                                <h3 class="clearfix">
-                                    <strong class="video-title pull-left"></strong>
-                                    <a class="inline-close pull-right" href="#" rel="close">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body inline-modal-content">
-                        <div class="inner-content">
-                            <div class="ajax-indicator-row text-center">
-                                <i class="fa fa-4x fa-cog fa-spin ajax-indicator"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             {% endfor %}
-        </div><!-- /col-lg-12 END SECTION MIDDLE -->
+        </div>
     </div>
-</section>
+</div>
 {% endblock %}
 
 {% block page_javascript %}

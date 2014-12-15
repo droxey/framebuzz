@@ -1,12 +1,14 @@
 {% load staticfiles profile_tags %}
 
-<div class="col-md-4 video-panel pull-left" data-remote="{% url 'dashboard-video-details' video.slug %}" data-title="{{ video.title|title }}" data-slug="{{ video.slug }}">
-    <div class="content-panel pn">
-        <div class="panel-bkg" style="background: url('{{ video.default_thumbnail }}') no-repeat center top; background-position: center center; background-size: cover;">
+<div class="col-md-4 video-panel pull-left" data-title="{{ video.title|title }}" data-slug="{{ video.slug }}">
+    <a href="{% url 'dashboard-video-details' video.slug %}">
+        <div class="content-panel pn">
+            <div class="panel-bkg" style="background: url('{{ video.default_thumbnail }}') no-repeat center top; background-position: center center; background-size: cover;">
+            </div>
+            <div class="pr2-social" id="{{ video.slug }}">
+                <h5><strong class="title">{{ video.title|title|truncatechars:"45" }}</strong></h5>
+                <i class="fa fa-chevron-right pull-right"></i>
+            </div>
         </div>
-        <div class="pr2-social" id="{{ video.slug }}">
-            <h5><strong class="title">{{ video.title|title|truncatechars:"45" }}</strong></h5>
-            <i class="fa fa-chevron-right pull-right"></i>
-        </div>
-    </div>
+    </a>
 </div>

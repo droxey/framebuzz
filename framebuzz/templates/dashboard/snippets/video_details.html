@@ -1,153 +1,196 @@
-{% load staticfiles profile_tags comments %}
+{% extends "dashboard/base_dark.html" %}
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags dashboard_tags comments %}
 {% get_comment_count for video as comment_count %}
 
-<div class="row modal-content-wrapper">
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 poster-image">
-      <div class="row">
-        <div class="col-xs-12">
-            <a class="thumbnail-link fancybox" data-fancybox-type="iframe" href="{% url 'video-embed' video.slug %}">
-                <img src="{{ video.default_thumbnail }}" alt="{{ video.title }}" class="cover lazy-load img-responsive">
-                <span class="play absolute-center"><i class="fa fa-icon fa-play fa-2x absolute-center"></i></span>
-            </a>
-          </div>
-        </div>
-        <div class="video-stats row centered">
-            <div class="col-sm-4 stat first">
-              <h1><i class="fa fa-users"></i></h1>
-              <h3>{{ commenters|length|short_number }}</h3>
-              <h6>PARTICIPANT{{ commenters|length|pluralize|upper }}</h6>
-            </div>
-          <div class="col-sm-4 stat">
-            <h1><i class="fa fa-comments"></i></h1>
-            <h3>{{ comment_count|short_number }}</h3>
-            <h6>COMMENT{{ comment_count|pluralize|upper }}</h6>
-          </div>
-          <div class="col-sm-4 stat last">
-            <h1><i class="fa fa-eye"></i></h1>
-            <h3>{{ plays|short_number }}</h3>
-            <h6>VIEW{{ plays|pluralize|upper }}</h6>
-          </div>
-      </div>
-      <div class="row centered">
-        <div class="col-sm-12">
-          <a href="{% url 'dashboard-delete-video' video.slug %}" class="btn btn-sm btn-danger delete-video"><i class="fa fa-delete"></i> Delete Video</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-        <div class="row row-modal-tabs">
-            <div class="col-lg-12 modal-tab-container">
-                <ul id="modal-tabs" class="nav nav-tabs">
-                    <li class="active">
-                        <a data-toggle="tab" href="#video-details"><i class="fa fa-list-ul"></i> Video Details</a>
-                    </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#video-comments" class="contact-map"><i class="fa fa-comments-o"></i> Viewer Comments</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row tab-content">
-            <div id="video-details" class="tab-pane active col-lg-12">
-                <table class="table table-striped">
-                    <colgroup>
-                        <col span="1"/>
-                        <col span="1" style="width: 85%" />
-                    </colgroup>                              
-                  <tbody>
-                      {% if video.added_by %}
-                      <tr>
-                          <td class="first"><strong>Uploaded By</strong></td>
-                          <td class="first">{{ video.added_by|display_name }}</td>
-                      </tr>
-                      {% endif %}
-                      <tr>
-                          <td{% if not video.added_by %} class="first"{% endif %}><strong>{% if video.added_by %}Uploaded{% else %}Added{% endif %} On</strong></td>
-                          <td{% if not video.added_by %} class="first"{% endif %}>{{ video.added_on }}</td>
-                      </tr>
-                      <tr>
-                          <td><strong>Duration</strong></td>
-                          <td>{{ video.timeInHMS }}</td>
-                      </tr>
-                      <tr>
-                          <td><strong>Public</strong></td>
-                          <td>{{ video.public|yesno|title }}</td>
-                      </tr>
-                      <tr>
-                          <td><strong>Password Required?</strong></td>
-                          <td>{{ video.password_required|yesno|title }}</td>
-                      </tr>
-                      <tr>
-                          <td><strong>{% if video.password_required %}Change{% else %}Add{% endif %} Access<br>Password</strong></td>
-                          <td>
-                            <form id="change-video-password-form" action="{% url 'dashboard-change-video-password' video.slug %}" method="post">
-                              {% csrf_token %}
-                              <table>
-                                <tr>
-                                  <td><input type="password" id="id_password" name="password" autocomplete="off"></td>
-                                  <td><button type="submit" class="btn btn-success">Submit</td>
-                                  <td class="hidden change-password-response"></td>
-                                </tr>
+{% block extrahead %}
+    {% compress css %}
+    <link href="{% static 'framebuzz/dashboard/vendor/rrssb/css/rrssb.css' %}" rel="stylesheet">
+    {% endcompress %}
+{% endblock %}
+
+{% block page_content %}
+
+<div class="col-md-12 masonry">
+    <div class="block">
+        <h2><i class="fa fa-video-camera"></i> {{ video.title|title }}</h2>
+        <div class="col-md-12">
+                <div class="row modal-content-wrapper">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 poster-image">
+                            <a class="thumbnail-link fancybox" data-fancybox-type="iframe" href="{% url 'video-embed' video.slug %}">
+                                <img src="{{ video.default_thumbnail }}" alt="{{ video.title }}" class="lazy-load img-responsive">
+                                <span class="play absolute-center"><i class="fa fa-icon fa-play fa-2x absolute-center"></i></span>
+                            </a>
+                        <div class="video-stats row centered">
+                            <div class="col-md-3 col-sm-12 stat first">
+                              <h1><i class="fa fa-users"></i></h1>
+                              <h3>{{ commenters|length|short_number }}</h3>
+                              <h6>PARTICIPANT{{ commenters|length|pluralize|upper }}</h6>
+                            </div>
+                          <div class="col-md-3 col-sm-12 stat">
+                            <h1><i class="fa fa-comments"></i></h1>
+                            <h3>{{ comment_count|short_number }}</h3>
+                            <h6>COMMENT{{ comment_count|pluralize|upper }}</h6>
+                          </div>
+                          <div class="col-md-3 stat col-sm-12 last">
+                            <h1><i class="fa fa-eye"></i></h1>
+                            <h3>{{ plays|short_number }}</h3>
+                            <h6>VIEW{{ plays|pluralize|upper }}</h6>
+                          </div>
+                      </div>
+                      <div class="row centered">
+                        <div class="col-sm-4 col-sm-push-4">
+                          <a href="{% url 'dashboard-delete-video' video.slug %}" class="btn btn-sm btn-danger delete-video"><i class="fa fa-delete"></i> Delete Video</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <div class="row row-modal-tabs">
+                            <div class="col-lg-12 modal-tab-container">
+                                <ul id="modal-tabs" class="nav nav-tabs">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#video-details"><i class="fa fa-list-ul"></i> Video Details</a>
+                                    </li>
+                                    <li class="">
+                                        <a data-toggle="tab" href="#video-comments" class="contact-map"><i class="fa fa-comments-o"></i> Viewer Comments</a>
+                                    </li>
+                                    <li class="">
+                                        <a data-toggle="tab" href="#video-tasks" class="contact-map"><i class="fa fa-list"></i> Video Tasks</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row tab-content">
+                            <div id="video-details" class="tab-pane active col-lg-12">
+                                <table class="table table-striped">
+                                    <colgroup>
+                                        <col span="1"/>
+                                        <col span="1" style="width: 85%" />
+                                    </colgroup>
+                                  <tbody>
+                                      {% if video.added_by %}
+                                      <tr>
+                                          <td class="first"><strong>Uploaded By</strong></td>
+                                          <td class="first">{{ video.added_by|display_name }}</td>
+                                      </tr>
+                                      {% endif %}
+                                      <tr>
+                                          <td{% if not video.added_by %} class="first"{% endif %}><strong>{% if video.added_by %}Uploaded{% else %}Added{% endif %} On</strong></td>
+                                          <td{% if not video.added_by %} class="first"{% endif %}>{{ video.added_on }}</td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>Duration</strong></td>
+                                          <td>{{ video.timeInHMS }}</td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>Public</strong></td>
+                                          <td>{{ video.public|yesno|title }}</td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>Password Required?</strong></td>
+                                          <td>{{ video.password_required|yesno|title }}</td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>{% if video.password_required %}Change{% else %}Add{% endif %} Access<br>Password</strong></td>
+                                          <td>
+                                            <form id="change-video-password-form" action="{% url 'dashboard-change-video-password' video.slug %}" method="post">
+                                              {% csrf_token %}
+                                              <table>
+                                                <tr>
+                                                  <td><input type="password" id="id_password" name="password" autocomplete="off"></td>
+                                                  <td><button type="submit" class="btn btn-success">Submit</td>
+                                                  <td class="hidden change-password-response"></td>
+                                                </tr>
+                                              </table>
+                                            </form>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                        <td><strong>Shared With</strong></td>
+                                          <td>
+                                            <form id="change-notify-emails-form" action="{% url 'dashboard-change-video-notifications' video.slug %}" method="post">
+                                              {% csrf_token %}
+                                              <table>
+                                                <tr>
+                                                  <td><textarea rows="2" cols="210" id="id_notify_emails" name="notify_emails" style="font-family: monospace; font-size: 12px;" class="form-control">{% if video.notify_emails %}{{ video.notify_emails }}{% endif %}</textarea></td>
+                                                  <td><button type="submit" class="btn btn-success"><i class="fa fa-share-alt"></i> Save &amp; Share Now</button></td>
+                                                </tr>
+                                                <tr>
+                                                  <td class="hidden send-notification-response" colspan="2"></td>
+                                                </tr>
+                                              </table>
+                                            </form>
+                                          </td>
+                                        <td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>WordPress<br>Embed Code</strong></td>
+                                          <td><textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.wp_embed_code }}</textarea></td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>HTML Embed Code</strong></td>
+                                          <td><textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.embed_code }}</textarea></td>
+                                      </tr>
+                                      <tr>
+                                        <td valign="middle"><strong>Share</strong></td>
+                                        <td>{% include "dashboard/snippets/share.html" %}</td>
+                                      </tr>
+                                  </tbody>
                               </table>
-                            </form>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td><strong>Shared With</strong></td>
-                          <td>
-                            <form id="change-notify-emails-form" action="{% url 'dashboard-change-video-notifications' video.slug %}" method="post">
-                              {% csrf_token %}
-                              <table>
-                                <tr>
-                                  <td><textarea rows="2" cols="210" id="id_notify_emails" name="notify_emails" style="font-family: monospace; font-size: 12px;" class="form-control">{% if video.notify_emails %}{{ video.notify_emails }}{% endif %}</textarea></td>
-                                  <td><button type="submit" class="btn btn-success"><i class="fa fa-share-alt"></i> Save &amp; Share Now</button></td>
-                                </tr>
-                                <tr>
-                                  <td class="hidden send-notification-response" colspan="2"></td>
-                                </tr>
-                              </table>
-                            </form>
-                          </td>
-                        <td>
-                      </tr>
-                      <tr>
-                          <td><strong>WordPress<br>Embed Code</strong></td>
-                          <td><textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.wp_embed_code }}</textarea></td>
-                      </tr>
-                      <tr>
-                          <td><strong>HTML Embed Code</strong></td>
-                          <td><textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.embed_code }}</textarea></td>
-                      </tr>
-                      <tr>
-                        <td valign="middle"><strong>Share</strong></td>
-                        <td>{% include "dashboard/snippets/share.html" %}</td>
-                      </tr>
-                  </tbody>
-              </table>
-            </div>
-            <div id="video-comments" class="tab-pane table-responsive">
-              {% if unread_comments|length > 0 %}
-                  <table class="table table-comments table-striped table-advance table-hover">
-                      <colgroup>
-                        <col class="time" span="1"/>
-                        <col class="user" span="1"/>
-                        <col class="comment" span="1"/>
-                        <col class="status" span="1"/>
-                        <col class="actions" span="1"/>
-                    </colgroup>
-                      <tbody>
-                          {% for com in unread_comments %}
-                              {% include "dashboard/snippets/comments/list_item.html" %}
-                          {% endfor %}
-                      </tbody>
-                  </table>
-              {% else %}
-                  <div class="text-center stats">
-                      <i class="fa fa-4x fa-inbox"></i>
-                      <h5>No viewer activity yet!</h5>
-                  </div>
-              {% endif %}
-            </div>
+                            </div>
+                            <div id="video-comments" class="tab-pane table-responsive">
+                              {% if unread_comments|length > 0 %}
+                                  <table class="table table-comments table-striped table-advance table-hover">
+                                      <colgroup>
+                                        <col class="time" span="1"/>
+                                        <col class="user" span="1"/>
+                                        <col class="comment" span="1"/>
+                                        <col class="status" span="1"/>
+                                        <col class="actions" span="1"/>
+                                    </colgroup>
+                                      <tbody>
+                                          {% for com in unread_comments %}
+                                              {% include "dashboard/snippets/comments/list_item.html" %}
+                                          {% endfor %}
+                                      </tbody>
+                                  </table>
+                              {% else %}
+                                  <div class="text-center stats">
+                                      <i class="fa fa-4x fa-inbox"></i>
+                                      <h5>No viewer activity yet!</h5>
+                                  </div>
+                              {% endif %}
+                            </div>
+                            <div id="video-tasks" class="tab-pane table-responsive">
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block page_javascript %}
+{% compress js %}
+<script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+<script src="{% static 'framebuzz/dashboard/js/dashboard.videos.js' %}" type="text/javascript"></script>
+<script src="{% static 'framebuzz/dashboard/theme/assets/js/fancybox/jquery.fancybox.js' %}"></script>
+<script src="{% static 'framebuzz/dashboard/vendor/rrssb/js/rrssb.js' %}"></script>
+<script type="text/javascript">
+$(function() {
+    //    fancybox
+    jQuery(".fancybox").fancybox({
+        'height': 445,
+        'width': 700,
+        'padding': 0,
+        'margin': 0,
+        scrolling: 'no',
+        preload: false,
+        afterLoad: function(before, after) {
+            $('.fancybox-iframe').attr('scrolling', 'no');
+        }
+    });
+});
+</script>
+{% endcompress %}
+{% endblock %}
