@@ -28,13 +28,9 @@ def _get_videos(username):
 
 @require_dashboard
 def dashboard_home(request, username):
-    return HttpResponseRedirect(reverse('dashboard-videos',
-                                args=[username, ]))
-
-
-@require_dashboard
-def dashboard_profile(request, username):
-    return render_to_response('dashboard/profile.html', {
+    latest_videos = _get_videos(username)[:3]
+    return render_to_response('dashboard/home.html', {
+        'latest_videos': latest_videos
     }, context_instance=RequestContext(request))
 
 
@@ -176,7 +172,7 @@ def change_video_notifications(request, slug):
 
             if video.notify_emails:
                 send_to = video.notify_emails.split(',')
-            
+
                 send_templated_mail(
                     template_name='share-email',
                     from_email=settings.DEFAULT_FROM_EMAIL,

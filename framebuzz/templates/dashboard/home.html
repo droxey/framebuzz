@@ -1,44 +1,149 @@
-{% extends "dashboard/base.html" %}
+{% extends "dashboard/base_dark.html" %}
 {% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags %}
 
-{% block page_header %}
- 
-{% endblock %}
+{% block page_header %}{% endblock %}
 
 {% block page_content %}
-  <section class="wrapper site-min-height home-wrapper">
-      <div class="row">
-          <div class="col-lg-9 main-chart">   
-            <br><br><br>
-          </div><!-- /col-lg-9 END SECTION MIDDLE -->
-          <div class="col-lg-3 ds site-min-height">
-            <!--COMPLETED ACTIONS DONUTS CHART-->
-            <div class="donut-main">
-              <!-- RECENT ACTIVITIES SECTION -->
-              <h4 class="centered">RECENT AUDIENCE ACTIVITY</h4>
-              {% for action in activities %}
-                <div class="desc col-xs-10">
-                  <div class="thumb">
-                      <img class="img-circle" src="{% avatar_url action.actor 70 %}" width="35" height="35">
-                  </div>
-                  <div class="details">
-                      <p><muted>{{ action.timestamp|timesince }} ago</muted><br/>
-                         {% include 'dashboard/snippets/action.html' %}
-                      </p>
-                  </div>
+
+    <div class="col-md-12">
+        <div class="block">
+            <h2>Latest Videos</h2>
+            {% for video in latest_videos %}
+                {% include "dashboard/snippets/video_entry.html" %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="block">
+            <h2>Task Lists</h2>
+            <div class="config">
+                <a href="" data-original-title="Add&nbsp;New" class="ttips" data-toggle="modal" data-target="#addNew-todo">
+                    <i class="icon-plus add-new-todo"></i>
+                </a>
+                <a href="" data-toggle="tooltip" data-original-title="Refresh" class="ttips">
+                    <i class="icon-loop-2"></i>
+                </a>
+                <a href="" data-toggle="tooltip" data-original-title="Settings" class="ttips">
+                    <i class="icon-wrench"></i>
+                </a>
+            </div>
+            <div class="listview todo-list">
+                <div class="media">
+                    <label class="pull-left">
+                        <input class="check-all" type="checkbox" value="" checked>
+                    </label>
+                    <div class="media-body">
+                        Nulla vel metus scelerisque ante sollicitudin commodo purus
+                        <div class="list-options">
+                            <button class="btn btn-gr-gray btn-sm">Delete</button>
+                        </div>
+                    </div>
                 </div>
-               {% empty %}
-                 <div class="desc col-xs-10">
-                      <div class="thumb">
-                      </div>
-                      <div class="details">
-                          <p>No viewer activities yet!</p>
-                      </div>
+
+                <div class="media">
+                    <label class="pull-left">
+                        <input class="check-all" type="checkbox" value="">
+                    </label>
+                    <div class="media-body">
+                        Per an error perpetua, fierent fastidii recteque ad pro. Mei id brute intellegam<br/>
+                        <small> An erant explicari salutatus duo, sumo doming delicata in cum. Eos at augue viderer principes</small><br/>
+                    </div>
+                    <div class="list-options">
+                        <button class="btn btn-gr-gray btn-sm">Delete</button>
+                    </div>
                 </div>
-              {% endfor %}
-          </div>
-      </div>
-  </section>
+
+                <div class="media">
+                    <label class="pull-left">
+                        <input class="check-all" type="checkbox" value="">
+                    </label>
+                    <div class="media-body">
+                        Inermis patrioque temporibus at ius, eos ei case partem blandit<br/>
+                        <small>Sumo doming delicata in cum. Eos at augue viderer principes</small>
+                    </div>
+                    <div class="list-options">
+                        <button class="btn btn-gr-gray btn-sm">Delete</button>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <label class="pull-left">
+                        <input class="check-all" type="checkbox" value="">
+                    </label>
+                    <div class="media-body">
+                        Billa vel metus scelerisque ante sollicitudin commodo<br/>
+                        <small>Lorem ipsum dolor sit amet, per cu solet docendi</small>
+                    </div>
+                    <div class="list-options">
+                        <button class="btn btn-gr-gray btn-sm">Delete</button>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <label class="pull-left">
+                        <input class="check-all" type="checkbox" value="">
+                    </label>
+
+                    <div class="media-body">
+                        Per an urbanitas elaboraret qui, et dicit sadipscing vel
+                    </div>
+                    <div class="list-options">
+                        <button class="btn btn-gr-gray btn-sm">Delete</button>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <label class="pull-left">
+                        <input class="check-all" type="checkbox" value="">
+                    </label>
+                    <div class="media-body">
+                        Per an error perpetua, fierent fastidii recteque ad pro<br/>
+                        <small> An erant explicari salutatus duo, sumo doming delicata in cum. Eos at augue viderer principes</small><br/>
+                    </div>
+                    <div class="list-options">
+                        <button class="btn btn-gr-gray btn-sm">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addNew-todo">
+            <div class="modal-dialog modal-narrow">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Add New Todo List</h4>
+                    </div>
+                    <form class="form-horizontal form-validation" role="form">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Name</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control validate[required] input-sm" placeholder="...">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Detail</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control auto-size input-sm" placeholder="Optional"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm" data-dismiss="modal">Cancel</button>
+                            <input type="submit" class="btn btn-sm" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 listview-block">
+        <div class="block" style="height: 372px;">
+            <h2>Upcoming Viewings</h2>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block page_javascript %}

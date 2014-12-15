@@ -1,4 +1,4 @@
-{% extends "dashboard/base.html" %}
+{% extends "dashboard/base_dark.html" %}
 {% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags dashboard_tags %}
 
 {% block page_header %}
@@ -9,7 +9,7 @@
 {% block page_content %}
   <section class="wrapper site-min-height home-wrapper">
     <div class="row">
-          <div class="col-lg-12 main-chart">   
+          <div class="col-lg-12 main-chart">
             <h3><i class="fa fa-angle-right"></i> Uploads in Progress</h3>
             <hr>
             <ul class="uploads-list">
@@ -44,7 +44,7 @@
 
           $('ul.uploads-list li').not('.complete').each(function(key, value) {
             var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=e9d23782542efd39f402fc40a7b4edaf';
-             //test: 
+             //test:
             //var url = baseUrl + $(this).attr('data-job-id') + '/progress.json?api_key=75e13910e393a6ccafc1a3272f3a6a48';
             var row = $(this);
 
@@ -58,7 +58,7 @@
                     var percent = Math.round(parseFloat(data['progress'], 0));
 
                     if (data['state'] == 'processing') {
-                      progress(percent, progressBar); 
+                      progress(percent, progressBar);
                     }
                     else {
                       if (data['state'] == 'finished') {
