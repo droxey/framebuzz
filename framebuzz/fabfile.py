@@ -76,7 +76,7 @@ templates = {
     "supervisor": {
         "local_path": "deploy/supervisor.conf",
         "remote_path": "/etc/supervisor/conf.d/%(proj_name)s.conf",
-        "reload_command": "supervisorctl reload",
+        "reload_command": "supervisorctl update",
     },
     "gunicorn": {
         "local_path": "deploy/gunicorn.conf.py",
