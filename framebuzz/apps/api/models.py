@@ -8,7 +8,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User, Permission, AnonymousUser
+from django.contrib.auth.models import User, Permission, AnonymousUser, Group
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.models import Comment, CommentFlag
 from django.db import models
@@ -152,6 +152,13 @@ def create_user_profile(sender, instance, created, **kwargs):
 
         for perm in comment_flag_permissions:
             profile.user.user_permissions.add(perm.id)
+
+        if profile.dashboard_enabled:
+            # Create a group for the new dashboard,
+            # and add our user to that group.
+            new_group = Group.objects.create(name=instance.user.username)
+            new_group.save()
+            new_group.user_set.add(instance)
 
         # if instance.email:
         #     send_templated_mail(template_name='welcome-newuser',

@@ -105,6 +105,10 @@ class LoginForm(forms.Form):
             else:
                 raise forms.ValidationError(_("This account is currently"
                                               " inactive."))
+            if user.get_profile().dashboard_enabled:
+                is_in_group = user.groups.filter(name=user.username).exists()
+                if is_in_group is False:
+                    raise forms.ValidationError(_("This account doesn't have access to the dashboard."))
         else:
             if app_settings.AUTHENTICATION_METHOD == AuthenticationMethod.EMAIL:
                 error = _("The e-mail address and/or password you specified"
@@ -117,6 +121,7 @@ class LoginForm(forms.Form):
                 error = _("The login and/or password you specified are not"
                           " correct.")
             raise forms.ValidationError(error)
+
         return self.cleaned_data
 
     def login(self, request, redirect_url=None):
@@ -426,5 +431,3 @@ class ResetPasswordKeyForm(forms.Form):
         user.save()
         # mark password reset object as reset
         # PasswordReset.objects.filter(temp_key=self.temp_key).update(reset=True)
-
-
