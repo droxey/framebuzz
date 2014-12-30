@@ -12,18 +12,12 @@ from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
 class List(models.Model):
-    name = models.CharField(max_length=60)
+    name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=60, editable=False)
     group = models.ForeignKey(Group)
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify(self.name)
-
-        super(List, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name

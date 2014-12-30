@@ -75,6 +75,8 @@ class UserProfile(caching.base.CachingMixin, models.Model):
     has_commented = models.BooleanField(default=False)
     logo = models.ImageField(max_length=1024, upload_to=logo_file_path,
                              blank=True, null=True)
+
+    dashboard_account = models.CharField(max_length=30, blank=True, null=True) # the dashboard this user has access to.
     dashboard_enabled = models.BooleanField(default=False)
 
     class Meta:
@@ -153,12 +155,19 @@ def create_user_profile(sender, instance, created, **kwargs):
         for perm in comment_flag_permissions:
             profile.user.user_permissions.add(perm.id)
 
-        if profile.dashboard_enabled:
+        if profile.dashboard_enabled and
+            profile.dashboard_account is not None:
             # Create a group for the new dashboard,
             # and add our user to that group.
-            new_group = Group.objects.create(name=instance.user.username)
-            new_group.save()
-            new_group.user_set.add(instance)
+            # Check to see if the group exists, first.
+            group = user.groups.filter(name=profile.dashboard_account)
+
+            if group.exists():
+                group.user_set.add(instance)
+            else:
+                new_group = Group.objects.create(name=instance.user.username)
+                new_group.save()
+                new_group.user_set.add(instance)
 
         # if instance.email:
         #     send_templated_mail(template_name='welcome-newuser',

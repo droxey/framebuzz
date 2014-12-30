@@ -24,33 +24,24 @@
 {% block extrahead %}{% endblock %}
 </head>
 <body>
-    <!-- Header -->
     <header id="header" class="clearfix">
-        <!-- Logo -->
         <a href="{% url 'home' %}" class="logo shadowed">
             {% include 'dashboard/snippets/logo.html' %}
         </a>
-
         <div class="dropdown profile-menu shadowed">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <img src="{% avatar_url request.user 60 %}" height="29" width="29" alt="" class="profile-pic">
             </a>
             <ul class="dropdown-menu pull-right text-right">
-                <li><a href="">Update Profile</a></li>
-                <li><a href="">Notifications & Updates</a></li>
                 <li><a href="">Settings</a></li>
                 <li class="divider"></li>
                 <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
             </ul>
         </div>
     </header>
-
     <section id="main" role="main">
-
-        <!-- Left Sidebar -->
         <aside id="leftbar" class="pull-left">
             <div class="sidebar-container">
-                <!-- Main Menu -->
                 <ul class="side-menu shadowed">
                     <li>
                         <a class="active" href="{% url 'dashboard-home' request.user.username %}"><i class="icon-home"></i>Dashboard</a>
@@ -73,8 +64,6 @@
                 <i class="icon-angle-right"></i>
             </span>
         </aside>
-
-        <!-- Right Sidebar -->
         <aside id="rightbar" class="pull-right">
             <div class="sidebar-container">
                 <!-- Calendar -->
@@ -82,13 +71,10 @@
                     <div id="sidebar-calendar"></div>
                 </div>
             </div>
-
             <span id="rightbar-toggle" class="hidden-lg sidebar-toggle">
                 <i class="icon-angle-left"></i>
             </span>
         </aside>
-
-        <!-- Content -->
         <section id="content" class="container">
             <div class="row m-container">
                 <div class="col-md-12 masonry">
@@ -100,15 +86,11 @@
                 </div>
                 {% block page_content %}{% endblock %}
             </div>
-
         </section>
     </section>
-
     <footer id="footer">
         <p class="text-center">Copyright &copy; 2014, FrameBuzz. Patent 14/067,585.</p>
     </footer>
-
-    <!-- Older IE Message -->
     <!--[if lt IE 9]>
     <div class="ie-block">
     <h1 class="Ops">Ooops!</h1>
