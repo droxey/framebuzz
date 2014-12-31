@@ -125,7 +125,6 @@ def check_zencoder_progress(job_id):
         # Create a new List object so a Video can have Tasks
         # associated.
         uploader_profile = video.added_by.get_profile()
-
         if uploader_profile.dashboard_enabled:
             group = video.added_by.groups.filter(name=uploader_profile.dashboard_account)
 

@@ -153,19 +153,18 @@ def create_user_profile(sender, instance, created, **kwargs):
             pass
 
         for perm in comment_flag_permissions:
-            profile.user.user_permissions.add(perm.id)
+            instance.user_permissions.add(perm.id)
 
-        if profile.dashboard_enabled and
-            profile.dashboard_account is not None:
+        if profile.dashboard_enabled and profile.dashboard_account is not None:
             # Create a group for the new dashboard,
             # and add our user to that group.
             # Check to see if the group exists, first.
-            group = user.groups.filter(name=profile.dashboard_account)
+            group = instance.groups.filter(name=profile.dashboard_account)
 
             if group.exists():
                 group.user_set.add(instance)
             else:
-                new_group = Group.objects.create(name=instance.user.username)
+                new_group = Group.objects.create(name=instance.username)
                 new_group.save()
                 new_group.user_set.add(instance)
 
