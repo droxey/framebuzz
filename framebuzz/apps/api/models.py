@@ -8,7 +8,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User, Permission, AnonymousUser, Group
+from django.contrib.auth.models import User, Permission, AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.models import Comment, CommentFlag
 from django.db import models
@@ -75,9 +75,8 @@ class UserProfile(caching.base.CachingMixin, models.Model):
     has_commented = models.BooleanField(default=False)
     logo = models.ImageField(max_length=1024, upload_to=logo_file_path,
                              blank=True, null=True)
-
-    dashboard_account = models.CharField(max_length=30, blank=True, null=True) # the dashboard this user has access to.
     dashboard_enabled = models.BooleanField(default=False)
+    dashboard_account = models.CharField(max_length=30, blank=True, null=True) # the dashboard this user has access to.
 
     class Meta:
         verbose_name = 'User Profile'
@@ -153,20 +152,7 @@ def create_user_profile(sender, instance, created, **kwargs):
             pass
 
         for perm in comment_flag_permissions:
-            instance.user_permissions.add(perm.id)
-
-        if profile.dashboard_enabled and profile.dashboard_account is not None:
-            # Create a group for the new dashboard,
-            # and add our user to that group.
-            # Check to see if the group exists, first.
-            group = instance.groups.filter(name=profile.dashboard_account)
-
-            if group.exists():
-                group.user_set.add(instance)
-            else:
-                new_group = Group.objects.create(name=instance.username)
-                new_group.save()
-                new_group.user_set.add(instance)
+            profile.user.user_permissions.add(perm.id)
 
         # if instance.email:
         #     send_templated_mail(template_name='welcome-newuser',

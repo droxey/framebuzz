@@ -5,7 +5,6 @@ from django.contrib.sites.models import Site
 
 from actstream import action
 from templated_email import send_templated_mail
-from todo.models import List
 from zencoder import Zencoder
 
 from framebuzz.apps.api.models import Video, UserVideo, Thumbnail
@@ -121,20 +120,6 @@ def check_zencoder_progress(job_id):
         video.webm_url = webm_url
         video.mp4_url = mp4_url
         video.save()
-
-        # Create a new List object so a Video can have Tasks
-        # associated.
-        uploader_profile = video.added_by.get_profile()
-        if uploader_profile.dashboard_enabled:
-            group = video.added_by.groups.filter(name=uploader_profile.dashboard_account)
-
-            new_list = List()
-            new_list.name = 'Tasks: %s' % video.title
-            new_list.slug = video.slug
-            new_list.group = group
-            new_list.content_object = video
-            new_list.object_id = video.id
-            new_list.save()
 
         # Save video poster images.
         for thumb in thumbnails:

@@ -2,9 +2,6 @@ from django.conf.urls import patterns, url, include
 
 urlpatterns = patterns(
     '',
-    # Django-Todo:
-    (r'^dashboard/todo/', include('todo.urls')),
-
     url(r'^dashboard/login/$',
         'framebuzz.apps.dashboard.views.dashboard_login',
         name='dashboard-login'),
