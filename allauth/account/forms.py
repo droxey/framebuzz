@@ -105,10 +105,11 @@ class LoginForm(forms.Form):
             else:
                 raise forms.ValidationError(_("This account is currently"
                                               " inactive."))
-            if user.get_profile().dashboard_enabled:
-                is_in_group = user.groups.filter(name=user.get_profile().dashboard_account).exists()
-                if is_in_group is False:
-                    raise forms.ValidationError(_("This account doesn't have access to the dashboard."))
+            # TODO: Removing this code for the demo 01/12/14
+            # if user.get_profile().dashboard_enabled:
+            #    is_in_group = user.groups.filter(name=user.get_profile().dashboard_account).exists()
+            #    if is_in_group is False:
+            #        raise forms.ValidationError(_("This account doesn't have access to the dashboard."))
         else:
             if app_settings.AUTHENTICATION_METHOD == AuthenticationMethod.EMAIL:
                 error = _("The e-mail address and/or password you specified"

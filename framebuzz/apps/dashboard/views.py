@@ -35,6 +35,12 @@ def dashboard_home(request, username):
 
 
 @require_dashboard
+def dashboard_user_list(request, username):
+    return render_to_response('dashboard/user_list.html', {
+    }, context_instance=RequestContext(request))
+
+
+@require_dashboard
 def dashboard_videos(request, username):
     videos = _get_videos(username)
 
