@@ -76,7 +76,6 @@ class UserProfile(caching.base.CachingMixin, models.Model):
     logo = models.ImageField(max_length=1024, upload_to=logo_file_path,
                              blank=True, null=True)
     dashboard_enabled = models.BooleanField(default=False)
-    dashboard_account = models.CharField(max_length=30, blank=True, null=True) # the dashboard this user has access to.
 
     class Meta:
         verbose_name = 'User Profile'
@@ -159,6 +158,7 @@ def create_user_profile(sender, instance, created, **kwargs):
         #                         from_email=settings.DEFAULT_FROM_EMAIL,
         #                         recipient_list=[instance.email],
         #                         context={'user': instance})
+        return
 
 post_save.connect(create_user_profile, sender=User)
 
@@ -212,7 +212,7 @@ class Video(caching.base.CachingMixin, models.Model):
                                   settings.YTAPI_USERNAME,
                                   settings.YTAPI_PASSWORD)
         token = hashlib.md5(to_hash).hexdigest()
-        #url = 'http://s.ytapi.com/?vid=%s&itag=%s&exp=%s&user=%s&s=%s' % (
+        # url = 'http://s.ytapi.com/?vid=%s&itag=%s&exp=%s&user=%s&s=%s' % (
         #    self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
         alt_url = 'http://s.ytapi.com/api/%s/%s/%s/%s/%s/' % (
             self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
@@ -550,6 +550,33 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
             first_comment.save()
 
 
+class Task(caching.base.CachingMixin, models.Model):
+    """
+        Tasks used in the Dashboard.
+    """
+    slug = RandomSlugField(length=settings.RANDOMSLUG_LENGTH, null=True, blank=True)
+    title = models.CharField(max_length=500)
+    description = models.TextField(null=True, blank=True)
+    complete = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(User, related_name='task_created_by')
+    due_on = models.DateTimeField(blank=True, null=True)
+    assigned_to = models.ForeignKey(User, blank=True, null=True, related_name='task_assigned_to')
+    video = models.ForeignKey(Video, blank=True, null=True)
+
+    class Meta:
+        ordering = ['-created_on', 'title']
+
+    def get_absolute_url(self):
+        return reverse('tasks-detail', kwargs={'slug': self.slug})
+
+    def __unicode__(self):
+        return self.title
+
+
+
+
+
 '''
     Register models with Watson.
 '''
@@ -577,3 +604,4 @@ actstream_register_model(MPTTComment)
 actstream_register_model(User)
 actstream_register_model(Video)
 actstream_register_model(UserVideo)
+actstream_register_model(Task)

@@ -6,12 +6,13 @@ from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.views.generic import CreateView, DetailView, ListView
 
 from actstream.models import Action
 from templated_email import send_templated_mail
 
 from framebuzz.apps.api.forms import MPTTCommentForm
-from framebuzz.apps.api.models import Video, UserVideo, MPTTComment
+from framebuzz.apps.api.models import Video, UserVideo, MPTTComment, Task
 from framebuzz.apps.dashboard.decorators import require_dashboard
 
 
@@ -212,3 +213,19 @@ def delete_video(request, slug):
 def dashboard_uploads(request, username):
     return render_to_response('dashboard/uploads.html', {
     }, context_instance=RequestContext(request))
+
+
+class TaskListView(ListView):
+    template_name = 'tasks/list.html'
+    model = Task
+    context_object_name = 'tasks'
+
+class CreateTaskView(CreateView):
+    template_name = 'tasks/create.html'
+    model = Task
+    fields = ['title', 'description', 'video',]
+
+class TaskView(DetailView):
+    template_name = 'tasks/detail.html'
+    model = Task
+    context_object_name = 'task'

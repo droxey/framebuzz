@@ -263,7 +263,7 @@ ACTSTREAM_SETTINGS = {
         'api.Video',
         'api.UserVideo',
         'api.PrivateSession',
-        'api.Task',
+        'dashboard.Task',
         'allauth.EmailAddress',
         'allauth.EmailConfirmation',
         'allauth.SocialAccount',

@@ -1,7 +1,6 @@
 from django import forms
 from framebuzz.apps.profiles.forms import UploadVideoForm
-from framebuzz.apps.api.models import Video
-from framebuzz.apps.dashboard.models import Task
+from framebuzz.apps.api.models import Video, Task
 
 
 class UploadVideoAndNotifyForm(UploadVideoForm):

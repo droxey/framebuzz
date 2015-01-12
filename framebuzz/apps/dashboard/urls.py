@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url, include
+from framebuzz.apps.dashboard.views import TaskView, CreateTaskView, TaskListView
 
 urlpatterns = patterns(
     '',
@@ -47,6 +48,8 @@ urlpatterns = patterns(
     url(r'^dashboard/video/(?P<slug>[\w.@+-]+)/change-notifications/$',
         'framebuzz.apps.dashboard.views.change_video_notifications',
         name='dashboard-change-video-notifications'),
-
+    url(r'dashboard/tasks/^$', TaskListView.as_view(), name='tasks-list'),
+    url(r'^dashboard/tasks/create/$', CreateTaskView.as_view(), name='tasks-create'),
+    url(r'^dashboard/tasks/(?P<slug>[-\w]+)/$', TaskView.as_view(), name='tasks-detail'),
 
 )
