@@ -28,82 +28,22 @@
                 </a>
             </div>
             <div class="listview todo-list">
-                <div class="media">
-                    <label class="pull-left">
-                        <input class="check-all" type="checkbox" value="" checked>
-                    </label>
-                    <div class="media-body">
-                        Nulla vel metus scelerisque ante sollicitudin commodo purus
-                        <div class="list-options">
-                            <button class="btn btn-gr-gray btn-sm">Delete</button>
+                    {% for task in tasks %}
+                        <div class="media">
+                            <label class="pull-left">
+                                <input class="check-all" type="checkbox" value="">
+                            </label>
+                            <div class="media-body">
+                                {{ task.title|title }}<br/>
+                                {% if task.description %}
+                                <small>{{ task.description }}</small>
+                                {% endif %}<br/>
+                            </div>
+                            <div class="list-options">
+                                <button class="btn btn-gr-gray btn-sm btn-delete-task">Delete</button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="media">
-                    <label class="pull-left">
-                        <input class="check-all" type="checkbox" value="">
-                    </label>
-                    <div class="media-body">
-                        Per an error perpetua, fierent fastidii recteque ad pro. Mei id brute intellegam<br/>
-                        <small> An erant explicari salutatus duo, sumo doming delicata in cum. Eos at augue viderer principes</small><br/>
-                    </div>
-                    <div class="list-options">
-                        <button class="btn btn-gr-gray btn-sm">Delete</button>
-                    </div>
-                </div>
-
-                <div class="media">
-                    <label class="pull-left">
-                        <input class="check-all" type="checkbox" value="">
-                    </label>
-                    <div class="media-body">
-                        Inermis patrioque temporibus at ius, eos ei case partem blandit<br/>
-                        <small>Sumo doming delicata in cum. Eos at augue viderer principes</small>
-                    </div>
-                    <div class="list-options">
-                        <button class="btn btn-gr-gray btn-sm">Delete</button>
-                    </div>
-                </div>
-
-                <div class="media">
-                    <label class="pull-left">
-                        <input class="check-all" type="checkbox" value="">
-                    </label>
-                    <div class="media-body">
-                        Billa vel metus scelerisque ante sollicitudin commodo<br/>
-                        <small>Lorem ipsum dolor sit amet, per cu solet docendi</small>
-                    </div>
-                    <div class="list-options">
-                        <button class="btn btn-gr-gray btn-sm">Delete</button>
-                    </div>
-                </div>
-
-                <div class="media">
-                    <label class="pull-left">
-                        <input class="check-all" type="checkbox" value="">
-                    </label>
-
-                    <div class="media-body">
-                        Per an urbanitas elaboraret qui, et dicit sadipscing vel
-                    </div>
-                    <div class="list-options">
-                        <button class="btn btn-gr-gray btn-sm">Delete</button>
-                    </div>
-                </div>
-
-                <div class="media">
-                    <label class="pull-left">
-                        <input class="check-all" type="checkbox" value="">
-                    </label>
-                    <div class="media-body">
-                        Per an error perpetua, fierent fastidii recteque ad pro<br/>
-                        <small> An erant explicari salutatus duo, sumo doming delicata in cum. Eos at augue viderer principes</small><br/>
-                    </div>
-                    <div class="list-options">
-                        <button class="btn btn-gr-gray btn-sm">Delete</button>
-                    </div>
-                </div>
+                    {% endfor %}
             </div>
         </div>
         <div class="modal fade" id="addNew-todo">

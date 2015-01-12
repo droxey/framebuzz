@@ -6,7 +6,6 @@ from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.views.generic import CreateView, DetailView, ListView
 
 from actstream.models import Action
 from templated_email import send_templated_mail
@@ -14,6 +13,7 @@ from templated_email import send_templated_mail
 from framebuzz.apps.api.forms import MPTTCommentForm
 from framebuzz.apps.api.models import Video, UserVideo, MPTTComment, Task
 from framebuzz.apps.dashboard.decorators import require_dashboard
+from framebuzz.apps.dashboard.forms import TaskForm
 
 
 VALID_FEED_VERBS = ['commented on', 'replied to comment',
@@ -30,8 +30,10 @@ def _get_videos(username):
 @require_dashboard
 def dashboard_home(request, username):
     latest_videos = _get_videos(username)[:3]
+    tasks = Task.objects.filter(assigned_to__username__iexact=username)[:5]
     return render_to_response('dashboard/home.html', {
-        'latest_videos': latest_videos
+        'latest_videos': latest_videos,
+        'tasks': tasks,
     }, context_instance=RequestContext(request))
 
 
@@ -215,17 +217,31 @@ def dashboard_uploads(request, username):
     }, context_instance=RequestContext(request))
 
 
-class TaskListView(ListView):
-    template_name = 'tasks/list.html'
-    model = Task
-    context_object_name = 'tasks'
 
-class CreateTaskView(CreateView):
-    template_name = 'tasks/create.html'
-    model = Task
-    fields = ['title', 'description', 'video',]
+@require_dashboard
+def dashboard_task_list(request, username):
+    return render_to_response('tasks/list.html', {
+    }, context_instance=RequestContext(request))
 
-class TaskView(DetailView):
-    template_name = 'tasks/detail.html'
-    model = Task
-    context_object_name = 'task'
+
+
+@require_dashboard
+def dashboard_create_task(request, username):
+    if request.method == 'POST':
+        form = TaskForm(data=request.POST)
+        success = form.is_valid()
+
+        if success:
+            form.save()
+    else:
+        form = TaskForm()
+    return render_to_response('tasks/create.html', {
+        'form': form,
+    }, context_instance=RequestContext(request))
+
+
+
+@require_dashboard
+def dashboard_task_detail(request, username, slug):
+    return render_to_response('tasks/detail.html', {
+    }, context_instance=RequestContext(request))

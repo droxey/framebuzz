@@ -1,13 +1,18 @@
 {% extends "dashboard/base_dark.html" %}
 
 {% block page_content %}
-    <h1>Tasks</h1>
-    <a href="{% url "tasks-create" %}">Add Task</a>
-    <ul>
-        {% for task in tasks %}
-            <li><a href="{{ task.getabsoluteurl }}">{{ task.title }}</a></li>
-        {% empty %}
-            <li>No tasks</li>
-        {% endfor %}
-    </ul>
+
+<div class="col-md-12">
+    <div class="block">
+        <h2>Tasks <a href="{% url "tasks-create" %}">Add Task</a></h2>
+        <ul>
+            {% for task in tasks %}
+                {% include "tasks/snippets/list_item.html" %}
+            {% empty %}
+                <li>No tasks</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends "dashboard/base_dark.html" %}
+
+{% block page_content %}
+    <div class="col-md-12">
+        <div class="block">
+            <h2>Add Task</h2>
+            <form action="{% url 'tasks-create' request.user.username %}" class="block-body form-validation add-class-form" method="post">
+                {% csrf_token %}
+                {{ form.as_p}}
+                <input type="submit" name="submit" value="Add Task" class="btn btn-sm btn-success">
+            </form>
+        </div>
+    </div>
+{% endblock %}

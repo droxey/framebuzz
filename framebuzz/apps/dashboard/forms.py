@@ -13,3 +13,8 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         exclude = ('slug',)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(TaskForm, self).__init__(*args, **kwargs)
+        pass

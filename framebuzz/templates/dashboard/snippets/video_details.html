@@ -105,7 +105,11 @@
                                           </td>
                                       </tr>
                                       <tr>
-                                        <td><strong>Shared With</strong></td>
+                                        <td>
+                                            <strong>Shared With</strong>
+                                            <br>
+                                            <small><i style="color: #aaa;">Comma-separated list of email addresses</i></small>
+                                        </td>
                                           <td>
                                             <form id="change-notify-emails-form" action="{% url 'dashboard-change-video-notifications' video.slug %}" method="post">
                                               {% csrf_token %}
