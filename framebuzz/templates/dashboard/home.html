@@ -1,44 +1,89 @@
-{% extends "dashboard/base.html" %}
+{% extends "dashboard/base_dark.html" %}
 {% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags %}
 
-{% block page_header %}
- 
-{% endblock %}
+{% block page_header %}{% endblock %}
 
 {% block page_content %}
-  <section class="wrapper site-min-height home-wrapper">
-      <div class="row">
-          <div class="col-lg-9 main-chart">   
-            <br><br><br>
-          </div><!-- /col-lg-9 END SECTION MIDDLE -->
-          <div class="col-lg-3 ds site-min-height">
-            <!--COMPLETED ACTIONS DONUTS CHART-->
-            <div class="donut-main">
-              <!-- RECENT ACTIVITIES SECTION -->
-              <h4 class="centered">RECENT AUDIENCE ACTIVITY</h4>
-              {% for action in activities %}
-                <div class="desc col-xs-10">
-                  <div class="thumb">
-                      <img class="img-circle" src="{% avatar_url action.actor 70 %}" width="35" height="35">
-                  </div>
-                  <div class="details">
-                      <p><muted>{{ action.timestamp|timesince }} ago</muted><br/>
-                         {% include 'dashboard/snippets/action.html' %}
-                      </p>
-                  </div>
+
+    <div class="col-md-12">
+        <div class="block">
+            <h2>Latest Videos</h2>
+            {% for video in latest_videos %}
+                {% include "dashboard/snippets/video_entry.html" %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="block" style="height: 372px;">
+            <h2>My Tasks</h2>
+            <div class="config">
+                <a href="{% url 'tasks-create' request.user.username %}" data-toggle="tooltip" data-original-title="Add Task" class="ttips">
+                    <i class="icon-plus add-new-todo"></i>
+                </a>
+            </div>
+            <div class="listview todo-list">
+                    {% for task in tasks %}
+                        <div class="media">
+                            <label class="pull-left">
+                                <input class="check-all" type="checkbox" value="">
+                            </label>
+                            <div class="media-body">
+                                <a href="{{ task.getabsoluteurl }}"{{ task.title|title }}<br/>
+                                {% if task.description %}
+                                <small>{{ task.description }}</small>
+                                {% endif %}<br/>
+                            </div>
+                            {% comment %}
+                            <div class="list-options">
+                                <button class="btn btn-gr-gray btn-sm btn-delete-task">Delete</button>
+                            </div>
+                            {% endcomment %}
+                        </div>
+                    {% endfor %}
+            </div>
+        </div>
+        <div class="modal fade" id="addNew-todo">
+            <div class="modal-dialog modal-narrow">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Add New Todo List</h4>
+                    </div>
+                    <form class="form-horizontal form-validation" role="form">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Name</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control validate[required] input-sm" placeholder="...">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Detail</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control auto-size input-sm" placeholder="Optional"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm" data-dismiss="modal">Cancel</button>
+                            <input type="submit" class="btn btn-sm" value="Add">
+                        </div>
+                    </form>
                 </div>
-               {% empty %}
-                 <div class="desc col-xs-10">
-                      <div class="thumb">
-                      </div>
-                      <div class="details">
-                          <p>No viewer activities yet!</p>
-                      </div>
-                </div>
-              {% endfor %}
-          </div>
-      </div>
-  </section>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 listview-block">
+        <div class="block" style="height: 372px;">
+            <h2>Upcoming Viewings</h2>
+            <p class="text-center" style="color: #aaa;">
+                <br><br>
+                <i>No viewing sessions scheduled.</i>
+            </p>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block page_javascript %}

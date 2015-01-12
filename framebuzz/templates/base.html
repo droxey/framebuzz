@@ -51,6 +51,7 @@
     {% if not request.user.is_authenticated %}
       {% providers_media_js %}
     {% endif %}
+    {% block extrahead %}{% endblock %}
   </head>
   <body class="{% if request.user.is_authenticated %}logged-in {% endif %}{% block page_classes %}{% endblock %}"{% block body_attributes %}{% endblock %}>
     <!--[if lte IE 8]>

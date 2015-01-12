@@ -1,17 +1,20 @@
-import json
-
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from actstream.models import Action
+from templated_email import send_templated_mail
 
 from framebuzz.apps.api.forms import MPTTCommentForm
-from framebuzz.apps.api.models import Video, UserVideo, MPTTComment
+from framebuzz.apps.api.models import Video, UserVideo, MPTTComment, Task
 from framebuzz.apps.dashboard.decorators import require_dashboard
+from framebuzz.apps.dashboard.forms import TaskForm
+
 
 VALID_FEED_VERBS = ['commented on', 'replied to comment',
                     'added video to library', ]
@@ -26,13 +29,17 @@ def _get_videos(username):
 
 @require_dashboard
 def dashboard_home(request, username):
-    return HttpResponseRedirect(reverse('dashboard-videos',
-                                args=[username, ]))
+    latest_videos = _get_videos(username)[:3]
+    tasks = Task.objects.filter(assigned_to__username__iexact=username)[:5]
+    return render_to_response('dashboard/home.html', {
+        'latest_videos': latest_videos,
+        'tasks': tasks,
+    }, context_instance=RequestContext(request))
 
 
 @require_dashboard
-def dashboard_profile(request, username):
-    return render_to_response('dashboard/profile.html', {
+def dashboard_user_list(request, username):
+    return render_to_response('dashboard/user_list.html', {
     }, context_instance=RequestContext(request))
 
 
@@ -76,11 +83,14 @@ def video_details(request, slug):
         Q(is_removed=False),
         Q(Q(parent=None) | Q(parent__user=request.user))).order_by('time')
 
+    tasks = Task.objects.filter(video=video)
+
     return render_to_response('dashboard/snippets/video_details.html', {
         'video': video,
         'commenters': commenters,
         'plays': plays,
         'unread_comments': unread_comments,
+        'tasks': tasks,
     }, context_instance=RequestContext(request))
 
 
@@ -163,6 +173,34 @@ def change_video_password(request, slug):
 
 
 @require_dashboard
+def change_video_notifications(request, slug):
+    try:
+        video = Video.objects.get(slug=slug)
+
+        if request.method == 'POST':
+            emails = request.POST.get('notify_emails', None)
+            video.notify_emails = emails
+            video.save()
+
+            if video.notify_emails:
+                send_to = video.notify_emails.split(',')
+
+                send_templated_mail(
+                    template_name='share-email',
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=send_to,
+                    context={
+                        'shared_by': request.user,
+                        'video': video,
+                        'site': Site.objects.get_current()
+                    })
+            return HttpResponse('ok')
+    except:
+        return HttpResponse('error')
+    return HttpResponse('error')
+
+
+@require_dashboard
 def delete_video(request, slug):
     try:
         video = Video.objects.get(slug=slug)
@@ -179,4 +217,41 @@ def delete_video(request, slug):
 @require_dashboard
 def dashboard_uploads(request, username):
     return render_to_response('dashboard/uploads.html', {
+    }, context_instance=RequestContext(request))
+
+
+
+@require_dashboard
+def dashboard_task_list(request, username):
+    tasks = Task.objects.filter(Q(created_by=request.user) | Q(assigned_to=request.user))
+    return render_to_response('tasks/list.html', {
+        'tasks': tasks,
+    }, context_instance=RequestContext(request))
+
+
+
+@require_dashboard
+def dashboard_create_task(request, username):
+    if request.method == 'POST':
+        form = TaskForm(request=request, data=request.POST)
+        success = form.is_valid()
+
+        if success:
+            form.save()
+            return HttpResponseRedirect(reverse(
+                                            'tasks-list',
+                                            args=[request.user.username, ]))
+    else:
+        form = TaskForm(request=request)
+    return render_to_response('tasks/create.html', {
+        'form': form,
+    }, context_instance=RequestContext(request))
+
+
+
+@require_dashboard
+def dashboard_task_detail(request, username, slug):
+    task = Task.objects.get(slug=slug)
+    return render_to_response('tasks/detail.html', {
+        'task': task,
     }, context_instance=RequestContext(request))

@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html>
+     <head>
+         <title>Black Pearl Responsive Admin Template</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta name="description" content="Black Pearl Responsive Admin Template">
+          <meta name="keywords" content="Black Pearl, Admin, Template, Bootstrap">
+          <meta charset="UTF-8">
+         
+          <!-- CSS -->
+          <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+          <link href="css/calendar.min.css" rel="stylesheet">
+          <link href="css/icomoon.min.css" rel="stylesheet">
+          <link href="css/media-player.min.css" rel="stylesheet">
+          <link href="css/file-manager.min.css" rel="stylesheet">
+          <link href="css/form.min.css" rel="stylesheet">
+          <link href="css/style.min.css" rel="stylesheet">
+               
+          <!-- The following CSS codes are used to display the template customization in this page. You can remove these codes anytime -->
+          <style type="text/css">
+               .template-customize {
+                    position: fixed;
+                    bottom: 0;
+                    right: 35px;
+                    background: #000;
+                    background: rgba(0,0,0,0.9);
+                    width: 154px;
+                    z-index: 10000;
+                    border: 2px solid #B6B6B6;
+                    border-bottom: 0;
+                    border-radius: 1px;
+                    box-shadow: 0 0 10px #000;
+                    height: 0;
+               }
+               
+               .template-customize i {
+                    font-size: 30px;
+                    position: absolute;
+                    color: #000;
+                    top: -46px;
+                    left: 49px;
+                    padding: 10px 10px 4px 10px;
+                    border-radius: 100% 100% 0 0;
+                    background: #fff;
+                    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #FFFFFF),color-stop(1, #B6B6B6));
+                    background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #B6B6B6 100%);
+                    background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #B6B6B6 100%);
+                    background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #B6B6B6 100%);
+                    background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #B6B6B6 100%);
+                    background-image: linear-gradient(to bottom, #FFFFFF 0%, #B6B6B6 100%);
+               }
+               
+               .template-customize i:hover {
+                    cursor: pointer;
+                    color: #3748d4;
+               }
+               
+               .template-customize ul {
+                    list-style: none;
+                    float: left;
+                    margin: 10px 0 10px 20px;
+                    padding: 0;
+               }
+               
+               .template-customize ul li {
+                    width: 45px;
+                    height: 30px;
+                    overflow: hidden;
+                    margin-bottom: 2px;
+               }
+               
+               .template-customize ul li:hover {
+                    cursor: pointer;
+                    opacity: 0.8;
+               }
+          </style>
+    </head>
+    <body>
+          <!-- Header -->
+          <header id="header" class="clearfix">
+               <!-- Logo -->
+               <a href="index.html" class="logo shadowed">
+                    BLACK PEARL 1.0
+               </a>
+               
+               <div class="dropdown profile-menu shadowed">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                         <img src="img/profile-pics/profile-pic.png" alt="" class="profile-pic">
+                    </a>
+                    <ul class="dropdown-menu pull-right text-right">
+                         <li><a href="">Update Profile</a></li>
+                         <li><a href="">Notifications & Updates</a></li>
+                         <li><a href="">Settings</a></li>
+                         <li class="divider"></li>
+                         <li><a href="">Sign-Out</a></li>
+                    </ul>
+               </div>
+               
+               <ul class="nav nav-pills pull-right shadowed" id="top-menu">
+                    <li><a href="#">Home</a></li>
+                    <li class="dropdown">
+                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown<b class="caret"></b></a>
+                         <ul class="dropdown-menu">
+                              <li><a href="">Action</a></li>
+                              <li><a href="">Another action</a></li>
+                              <li><a href="">Something else here</a></li>
+                              <li class="divider"></li>
+                              <li><a href="">Separated link</a></li>
+                         </ul>
+                    </li>
+                    <li><a href="#">Users</a></li>
+               </ul>
+               
+               <form class="form-inline top-search shadowed">
+                    <input type="text" class="form-control" placeholder="Search for anything...">
+                    <button type="submit"><i class="icon-search"></i></button>
+               </form>
+               
+               <div class="updates shadowed pull-right">
+                    <ul class="list-unstyled list-inline">
+                         <li class="dropdown">
+                              <a href="" data-toggle="dropdown" class="messages ttips" title="Messages" data-placement="bottom">
+                                   <img src="img/message.png" alt="">
+                              </a>
+                              <div class="dropdown-menu">
+                                   <div class="updates-header">
+                                        <span class="pull-left">Inbox <a href="#">(45)</a></span>
+                                        <span class="pull-right"><a href="">Send new</a></span>
+                                        <div class="clearfix"></div>
+                                   </div>
+                                   <div class="listview overflow">
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 David Villa <span class="date">2 Hrs ago</span><br>
+                                                 <span class="shortline">Lorem ipsum dolor sit amet, per cu sole...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Jason Statom <span class="date">5 Hrs ago</span><br>
+                                                 <span class="shortline" class="shortline">Vandy come to ipsum seen tuooth ya so...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Lilly Jackson <span class="date">9 Hrs ago</span><br>
+                                                 <span class="shortline" class="shortline">Far schools wen smoothness prope soom...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Vin Diesal <span class="date">06 Nov</span><br>
+                                                 <span class="shortline" class="shortline">Dolor boom with your cool sindims to the...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Jason Statom <span class="date">5 Hrs ago</span><br>
+                                                 <span class="shortline" class="shortline">Vandy come to ipsum seen tuooth ya so...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Lilly Jackson <span class="date">9 Hrs ago</span><br>
+                                                 <span class="shortline" class="shortline">Far schools wen smoothness prope soom...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Vin Diesal <span class="date">06 Nov</span><br>
+                                                 <span class="shortline" class="shortline">Dolor boom with your cool sindims to the...</span>
+                                             </div>
+                                        </a>
+                                   </div>
+
+                                   <div class="updates-footer">
+                                        <a href="">See All</a>
+                                   </div>
+                              </div>
+                         </li>
+                         <li class="dropdown">
+                              <a href="" class="notifications ttips" data-toggle="dropdown" title="Notifications" data-placement="bottom">
+                                   <img src="img/updates.png" alt="">
+                              </a>
+                              <div class="dropdown-menu">
+                                   <div class="updates-header">
+                                        <span class="pull-left">Notifications</span>
+                                        <span class="pull-right"><a href="">Settings</a></span>
+                                        <div class="clearfix"></div>
+                                   </div>
+                                   
+                                   <div class="listview overflow">
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 David Villa <span class="date">2 Hrs ago</span><br>
+                                                 <span class="shortline">Lorem ipsum dolor sit amet, per cu sole...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Jason Statom <span class="date">5 Hrs ago</span><br>
+                                                 <span class="shortline" class="shortline">Vandy come to ipsum seen tuooth ya so...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Lilly Jackson <span class="date">9 Hrs ago</span><br>
+                                                 <span class="shortline" class="shortline">Far schools wen smoothness prope soom...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Vin Diesal <span class="date">06 Nov</span><br>
+                                                 <span class="shortline" class="shortline">Dolor boom with your cool sindims to the...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Jason Statom <span class="date">5 Hrs ago</span><br>
+                                                 <span class="shortline" class="shortline">Vandy come to ipsum seen tuooth ya so...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Lilly Jackson <span class="date">9 Hrs ago</span><br>
+                                                 <span class="shortline" class="shortline">Far schools wen smoothness prope soom...</span>
+                                             </div>
+                                        </a>
+                                        <a class="media" href="">
+                                             <img class="media-object pull-left" src="img/profile-pics/1.jpg" alt="">
+                                             <div class="media-body">
+                                                 Vin Diesal <span class="date">06 Nov</span><br>
+                                                 <span class="shortline" class="shortline">Dolor boom with your cool sindims to the...</span>
+                                             </div>
+                                        </a>
+                                   </div>
+
+                                   <div class="updates-footer">
+                                        <a href="">See All</a>
+                                   </div>
+                              </div>
+                         </li>
+                    </ul>
+               </div>
+               
+          </header>
+          
+          <section id="main" role="main">
+               
+               <!-- Left Sidebar -->
+               <aside id="leftbar" class="pull-left">
+                    <div class="sidebar-container">
+                         <!-- Main Menu -->
+                         <ul class="side-menu shadowed">
+                              <li>
+                                  <a class="active" href="index.html"><i class="icon-home"></i>Dashboard</a>
+                              </li>
+                              <li>
+                                 <a href="typography.html"><i class="icon-quill"></i>Typography</a>
+                              </li>
+                              <li>
+                                  <a href="wall.html"><i class="icon-bubbles-4"></i>Social Wall</a>
+                              </li>
+                              <li class="submenu">
+                                   <a href=""><i class="icon-cog"></i>Widgets</a>
+                                   <ul>
+                                       <li><a href="sidebar-widgets.html">Sidebar</a></li>
+                                       <li><a href="content-widgets.html">Content</a></li>
+                                       <li><a href="shortcut-widgets.html">Shortcuts</a></li>
+                                   </ul>
+                              </li>
+                              <li class="submenu">
+                                   <a href=""><i class="icon-table-2"></i>Tables</a>
+                                   <ul>
+                                       <li><a href="tables.html">Normal Tables</a></li>
+                                       <li><a href="data-table.html">Data Table</a></li>
+                                   </ul>
+                              </li>
+                              <li class="submenu">
+                                   <a href=""><i class="icon-copy-2"></i>Forms</a>
+                                   <ul>
+                                       <li><a href="form-elements.html">Basic Form Elements</a></li>
+                                       <li><a href="form-components.html">Form Components</a></li>
+                                       <li><a href="form-examples.html">Form Examples</a></li>
+                                       <li><a href="form-validation.html">Form Validation</a></li>
+                                       <li><a href="form-wizard.html">Form Wizard</a></li>
+                                   </ul>
+                              </li>
+                              <li class="submenu">
+                                   <a href=""><i class="icon-glass"></i>User Interface</a>
+                                   <ul>
+                                        <li><a href="buttons.html">Buttons</a></li>
+                                        <li><a href="labels.html">Labels</a></li>
+                                        <li><a href="images-icons.html">Images & Icons</a></li>
+                                        <li><a href="alerts.html">Alerts</a></li>
+                                        <li><a href="media.html">Media</a></li>
+                                        <li><a href="pagination-breadcrumbs.html">Pagination & Breadcrumbs</a></li>
+                                        <li><a href="components.html">Components</a></li>
+                                        <li><a href="other-components.html">Others</a></li>
+                                   </ul>
+                              </li>
+                              <li>
+                                  <a href="charts.html"><i class="icon-bars"></i>Charts</a>
+                              </li>
+                              <li>
+                                  <a href="file-manager.html"><i class="icon-folder"></i>File Manager</a>
+                              </li>
+                              <li>
+                                  <a href="calendar.html"><i class="icon-calendar"></i>Calendar</a>
+                              </li>
+                              <li class="submenu">
+                                   <a href=""><i class="icon-camera"></i>Photo Gallery</a>
+                                   <ul>
+                                        <li><a href="photo-gallery-default.html">Default Gallery</a></li>
+                                        <li><a href="photo-gallery-sortable.html">Sortable Gallery</a></li>
+          
+                                   </ul>
+                              </li>
+                              <li class="submenu">
+                                   <a href=""><i class="icon-stack"></i>Sample Pages</a>
+                                   <ul>
+                                       <li><a href="list-view.html">List View</a></li>
+                                       <li><a href="profile-page.html">Profile Page</a></li>
+                                       <li><a href="messages.html">Messages</a></li>
+                                       <li><a href="login.html">Login</a></li>
+                                       <li><a href="404.html">404 Error</a></li>
+                                   </ul>
+                              </li>
+                         </ul>
+                    </div>
+                    <span id="leftbar-toggle" class="visible-xs sidebar-toggle">
+                         <i class="icon-angle-right"></i>
+                    </span>
+               </aside>
+               
+               <!-- Right Sidebar -->
+               <aside id="rightbar" class="pull-right">
+                    <div class="sidebar-container">
+                         <!-- Date + Clock -->
+                         <div class="clock shadowed">
+                              <div id="date"></div>
+                              <div id="time">
+                                   <span id="hours"></span>
+                                   :
+                                   <span id="min"></span>
+                                   :
+                                   <span id="sec"></span>
+                              </div>
+                         </div>
+                         
+                         <!-- Calendar -->
+                         <div class="shadowed side-calendar">
+                              <div id="sidebar-calendar"></div>
+                         </div>
+                         
+                         <!-- Progress bar -->
+                         <div class="shadowed side-progress">
+                              <h3 class="title">Progress Bar</h3>
+                              <div class="side-border">
+                                   Joomla Website Development
+                                   <div class="progress">
+                                        <a href="#" data-toggle="tooltip" title="60%" class="yellow progress-bar ttips" style="width: 60%;">
+                                             <span class="sr-only">60% Complete</span>
+                                        </a>
+                                   </div>
+                              </div>
+                              <div class="side-border">
+                                   Opencart E-Commerce Website
+                                   <div class="progress">
+                                        <a href="#" data-toggle="tooltip" title="43%" class="green ttips progress-bar" style="width: 43%;">
+                                             <span class="sr-only">43% Complete</span>
+                                        </a>
+                                   </div>
+                              </div>
+                              <div class="side-border">
+                                   Social Media API
+                                   <div class="progress">
+                                        <a href="#" data-toggle="tooltip" title="81%" class="blue ttips progress-bar" style="width: 81%;">
+                                             <span class="sr-only">81% Complete</span>
+                                        </a>
+                                   </div>
+                              </div>
+                              <div class="side-border">
+                                   VB.Net Software Package
+                                   <div class="progress">
+                                        <a href="#" data-toggle="tooltip" title="10%" class="yellow ttips progress-bar" style="width: 10%;">
+                                             <span class="sr-only">10% Complete</span>
+                                        </a>
+                                   </div>
+                              </div>
+                              <div class="side-border">
+                                   Chrome Extension
+                                   <div class="progress">
+                                        <a href="#" data-toggle="tooltip" title="95%" class="ttips progress-bar red" style="width: 95%;">
+                                             <span class="sr-only">95% Complete</span>
+                                        </a>
+                                   </div>
+                              </div>
+                         </div>
+               
+                         <!-- Counts -->
+                         <ul class="counts shadowed">
+                              <li>
+                                  <span class="big-text">23500+</span>
+                                  <span class="sub-text">Facebook Likes</span>
+                              </li>
+                              <li>
+                                  <span class="big-text">125600+</span>
+                                  <span class="sub-text">Twitter Followers</span>
+                              </li>
+                              <li>
+                                  <span class="big-text">362</span>
+                                  <span class="sub-text">Support Tickets</span>
+                              </li>
+                         </ul>
+
+                         <!-- Notification -->
+                         <div class="notification shadowed">
+                              <ul class="tab">
+                                   <li class="active">
+                                        <a href="#inbox"><i class="icon-spinner-5"></i> Inbox</a>
+                                   </li>
+                                   <li>
+                                        <a href="#notification"><i class="icon-earth"></i> Notifications</a>
+                                   </li>
+                              </ul>
+                                 
+                              <div class="tab-content">
+                                   <div class="tab-pane active" id="inbox">
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/5.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <a href="#">Hay I just talk to Wendy...</a>
+                                                  <small>4 hours ago</small>
+                                             </div>
+                                        </div>
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/2.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <a href="#">We have something to do...</a>
+                                                  <small>4 hours ago</small>
+                                             </div>
+                                        </div>
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/4.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <a href="#">How do you do...</a>
+                                                  <small>4 hours ago</small>
+                                             </div>
+                                        </div>
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/1.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <a href="#">What's up buddy? I won't...</a>
+                                                  <small>4 hours ago</small>
+                                             </div>
+                                        </div>
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/3.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <a href="#">Just check this up for...</a>
+                                                  <small>4 hours ago</small>
+                                             </div>
+                                        </div>
+                                        
+                                        <a class="show-more" href="#">See All</a>
+                                   </div>
+                                   <div class="tab-pane" id="notification">
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/1.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <a href="#">David responded to you...</a>
+                                                  <small>4 hours ago</small>
+                                             </div>
+                                        </div>
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/2.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <a href="#">Wrndy like you post...</a>
+                                                  <small>4 hours ago</small>
+                                             </div>
+                                        </div>
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/3.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <a href="#">Jonathan completed the task...</a>
+                                                  <small>4 hours ago</small>
+                                             </div>
+                                        </div>
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/5.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <a href="#">Malinda responded to you...</a>
+                                                  <small>4 hours ago</small>
+                                             </div>
+                                        </div>
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/1.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <a href="#">Henry poke you back...</a>
+                                                  <small>4 hours ago</small>
+                                             </div>
+                                        </div>
+                                        <a class="show-more" href="#">See All</a>
+                                   </div>
+                              </div>  
+                         </div>
+                    </div>
+                    
+                    <span id="rightbar-toggle" class="hidden-lg sidebar-toggle">
+                         <i class="icon-angle-left"></i>
+                    </span>
+               </aside>
+               
+               <!-- Content -->
+               <section id="content" class="container">
+                    <!-- Shortcuts -->
+                    <div class="shortcut-area">
+                         <a class="shortcut" href="">
+                              <i class="icon-cart-2"></i>
+                              <span class="title">Sales</span>
+                         </a>
+                         <a class="shortcut" href="">
+                              <i class="icon-play-2"></i>
+                              <span class="title">Videos</span>
+                         </a>
+                         <a class="shortcut" href="">
+                              <i class="icon-download"></i>
+                              <span class="title">Downloads</span>
+                              <span class="s-counts red">14</span>
+                         </a>
+                         <a class="shortcut" href="">
+                              <i class="icon-calendar-2"></i>
+                              <span class="title">Events</span>
+                              <span class="s-counts blue">60</span>
+                         </a>
+                         <a class="shortcut" href="">
+                              <i class="icon-copy-2"></i>
+                              <span class="title">Reports</span>
+                         </a>
+                         <a class="shortcut" href="">
+                              <i class="icon-image"></i>
+                              <span class="title">Images</span>
+                         </a>
+                         <a class="shortcut" href="">
+                              <i class="icon-feed"></i>
+                              <span class="title">Connections</span>
+                              <span class="s-counts green">99</span>
+                         </a>
+                    </div>
+                    
+                    <!-- Main Graph -->
+                    <div class="block">
+                         <h2>Traffic Statistics</h2>
+                         <div class="config">                        
+                              <a href="" data-toggle="tooltip" data-original-title="Refresh" class="ttips">
+                                   <i class="icon-loop-2"></i>
+                              </a>
+                              
+                              <a href="" data-toggle="tooltip" data-original-title="Settings" class="ttips">
+                                   <i class="icon-wrench"></i>
+                              </a>
+                         </div>
+                         <div class="media">
+                              <div class="pull-left sub-graph hidden-xs">
+                                   <div class="sub-item">
+                                        <div id="site-impressions" class="tiny-charts"></div>
+                                        <small class="small">Site Impressions</small>
+                                   </div>
+                                   
+                                   <div class="sub-item">
+                                        <div id="site-bandwith" class="tiny-charts"></div>
+                                        <small class="small">Site Bandwith(mb)</small>
+                                   </div>
+                                   
+                                   <div class="sub-item">
+                                        <div id="side-pie2" class="tiny-charts side-pie-tiny"></div>
+                                        <div id="side-pie3" class="tiny-charts side-pie-tiny"></div>
+                                        <small class="small">Percentage difference</small>
+                                   </div>
+                              </div>
+                              <div id="areaChart" class="main-graph media-body"></div>
+                         </div>
+                         
+                    </div>
+                    
+                    <div class="row m-container">
+                         <!-- Today's Activity -->
+                         <div class="col-md-6 masonry listview-block">
+                              <div class="block">
+                                   <h2>Today's Activity</h2>
+                                   <div class="config">                        
+                                        <a href="" data-toggle="tooltip" data-original-title="Refresh" class="ttips">
+                                             <i class="icon-loop-2"></i>
+                                        </a>
+                                        <a href="" data-toggle="tooltip" data-original-title="Settings" class="ttips">
+                                             <i class="icon-wrench"></i>
+                                        </a>
+                                   </div>
+                                  
+                                   <div class="listview activity">
+                                        <div class="media">
+                                             <div class="number red pull-left">640</div>
+                                             <div class="media-body">
+                                                 <span>Facebook Likes</span>
+                                             </div>
+                                        </div>
+
+                                        <div class="media">
+                                             <div class="number green pull-left">101</div>
+                                             <div class="media-body">
+                                                 <span>Twitter Followers</span>
+                                             </div>
+                                        </div>
+                                        
+                                        <div class="media">
+                                             <div class="number blue pull-left">12K</div>
+                                             <div class="media-body">
+                                                 <span>Page Impressions</span>
+                                             </div>
+                                        </div>
+                                        
+                                        <div class="media">
+                                             <div class="number yellow pull-left">20K</div>
+                                             <div class="media-body">
+                                                 <span>Youtube Views</span>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    
+                         <!-- Recent Posts -->
+                         <div class="col-md-6 masonry listview-block">
+                              <div class="block">
+                                   <h2>Latest Blog Posts</h2>
+                                   <div class="config">                        
+                                        <a href="" data-toggle="tooltip" data-original-title="Refresh" class="ttips">
+                                             <i class="icon-loop-2"></i>
+                                        </a>
+                                      
+                                        <a href="" data-toggle="tooltip" data-original-title="Settings" class="ttips">
+                                             <i class="icon-wrench"></i>
+                                        </a>
+                                   </div>
+                                   
+                                   <div class="listview">
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/1.jpg" alt="" class="poster-pic">
+                                             </a>
+                                             <div class="media-body">
+                                                  <small>2 Hours before by <a href="#">Jhon Beeber</a></small>
+                                                  <a href="#" class="post-title">Lorem ipsum dolor sit amet, consectetur adip...</a>
+                                                  <div class="btn-group controls">
+                                                       <a href="#" data-toggle="tooltip" data-original-title="Edit" class="ttips btn btn-gr-gray btn-xs"><i class="icon-pencil"></i></a>
+                                                       <a href="#" data-toggle="tooltip" data-original-title="Delete" class="ttips btn btn-gr-gray btn-xs"><i class="icon-close"></i></a>
+                                                       <a href="#" data-toggle="tooltip" data-original-title="View" class="ttips btn btn-gr-gray btn-xs"><i class="icon-arrow-right"></i></a> 
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/2.jpg" alt="" class="poster-pic">
+                                             </a>
+                                             <div class="media-body">
+                                                  <small>4 Hours before by <a href="#">David Melon</a></small>
+                                                  <a href="#" class="post-title">Sed scelerisque sapien dapibus sollicitudin...</a>
+                                                  <div class="btn-group controls">
+                                                       <a href="#" data-toggle="tooltip" data-original-title="Edit" class="ttips btn btn-gr-gray btn-xs"><i class="icon-pencil"></i></a>
+                                                       <a href="#" data-toggle="tooltip" data-original-title="Delete" class="ttips btn btn-gr-gray btn-xs"><i class="icon-close"></i></a>
+                                                       <a href="#" data-toggle="tooltip" data-original-title="View" class="ttips btn btn-gr-gray btn-xs"><i class="icon-arrow-right"></i></a> 
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/3.jpg" alt="" class="poster-pic">
+                                             </a>
+                                             <div class="media-body">
+                                                  <small>2 Days ago by <a href="#">Stathon Max</a></small>
+                                                  <a href="#" class="post-title">Fusce eros turpis, ultrices aliquam aliquet eget...</a>
+                                                  <div class="btn-group controls">
+                                                       <a href="#" data-toggle="tooltip" data-original-title="Edit" class="ttips btn btn-gr-gray btn-xs"><i class="icon-pencil"></i></a>
+                                                       <a href="#" data-toggle="tooltip" data-original-title="Delete" class="ttips btn btn-gr-gray btn-xs"><i class="icon-close"></i></a>
+                                                       <a href="#" data-toggle="tooltip" data-original-title="View" class="ttips btn btn-gr-gray btn-xs"><i class="icon-arrow-right"></i></a> 
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img src="img/profile-pics/4.jpg" alt="" class="poster-pic">
+                                             </a>
+                                             <div class="media-body">
+                                                  <small>5 Days ago by <a href="#">Malinda Hollaway</a></small>
+                                                  <a href="#" class="post-title">Vivamus interdum massa diam, sit amet posuere...</a>
+                                                  <div class="btn-group controls">
+                                                       <a href="#" data-toggle="tooltip" data-original-title="Edit" class="ttips btn btn-gr-gray btn-xs"><i class="icon-pencil"></i></a>
+                                                       <a href="#" data-toggle="tooltip" data-original-title="Delete" class="ttips btn btn-gr-gray btn-xs"><i class="icon-close"></i></a>
+                                                       <a href="#" data-toggle="tooltip" data-original-title="View" class="ttips btn btn-gr-gray btn-xs"><i class="icon-arrow-right"></i></a> 
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                         
+                         <!-- Quick Post -->
+                         <div class="col-md-6 masonry">
+                              <div class="block">
+                                   <h2>Post an Article</h2>
+                                   <div class="config">                        
+                                        <a href="" data-toggle="tooltip" data-original-title="Refresh" class="ttips">
+                                             <i class="icon-loop-2"></i>
+                                        </a>
+                                        <a href="" data-toggle="tooltip" data-original-title="Settings" class="ttips">
+                                             <i class="icon-wrench"></i>
+                                        </a>
+                                   </div>
+                                   <form id="quick-post" class="block-body form-validation">
+                                        <div class="form-group">
+                                             <label for="articleTitle">Article Title</label>
+                                             <input type="text" class="form-control input-sm validate[required] input-sm" id="articleTitle" placeholder="eg: My first post">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                             <label>Alias</label>
+                                             <input type="text" class="form-control input-sm validate[required] input-sm" placeholder="eg: My-first-post">
+                                        </div>
+                                          
+                                        <div class="form-group">
+                                             <label>Category</label><br/>
+                                             <select class="select" data-style="btn-gr-gray">
+                                                  <option>Category 1</option>
+                                                  <option>Category 2</option>
+                                                  <option>Category 3</option>
+                                                  <option>Category 4</option>
+                                                  <option>Category 5</option>
+                                                  <option>Category 6</option>
+                                             </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                             <label for="post">Post</label>
+                                             <textarea class="form-control input-sm validate[required] input-sm" id="post" placeholder="eg. Lorem ipsum dolor sit amet, consectetur adipiscing elit..."></textarea>
+                                        </div>
+     
+                                        <input type="submit" class="btn btn-primary btn-xs" value="PUBLISH">
+                                        <input type="submit" class="btn btn-success btn-xs" value="SAVE">
+                                          
+                                   </form>
+                              </div>
+                         </div>
+                             
+                         <!-- Todo List -->
+                         <div class="col-md-6 masonry">
+                              <div class="block">
+                                   <h2>Todo Lists</h2>
+                                   <div class="config">
+                                        <a href="" data-original-title="Add&nbsp;New" class="ttips" data-toggle="modal" data-target="#addNew-todo">
+                                            <i class="icon-plus add-new-todo"></i>
+                                        </a>
+                                        <a href="" data-toggle="tooltip" data-original-title="Refresh" class="ttips">
+                                            <i class="icon-loop-2"></i>
+                                        </a>
+                                        <a href="" data-toggle="tooltip" data-original-title="Settings" class="ttips">
+                                            <i class="icon-wrench"></i>
+                                        </a>
+                                   </div>
+                                   <div class="listview todo-list">
+                                        <div class="media">
+                                             <label class="pull-left">
+                                                  <input class="check-all" type="checkbox" value="" checked>
+                                             </label>
+                                             <div class="media-body">
+                                                 Nulla vel metus scelerisque ante sollicitudin commodo purus
+                                                  <div class="list-options">
+                                                      <button class="btn btn-gr-gray btn-sm">Delete</button>
+                                                  </div>
+                                             </div>
+                                        </div>
+       
+                                       <div class="media">
+                                             <label class="pull-left">
+                                                   <input class="check-all" type="checkbox" value="">
+                                             </label>
+                                             <div class="media-body">
+                                                 Per an error perpetua, fierent fastidii recteque ad pro. Mei id brute intellegam<br/>
+                                                 <small> An erant explicari salutatus duo, sumo doming delicata in cum. Eos at augue viderer principes</small><br/>
+                                             </div>
+                                             <div class="list-options">
+                                                 <button class="btn btn-gr-gray btn-sm">Delete</button>
+                                             </div>
+                                       </div>
+                                       
+                                       <div class="media">
+                                             <label class="pull-left">
+                                                   <input class="check-all" type="checkbox" value="">
+                                             </label>
+                                             <div class="media-body">
+                                                 Inermis patrioque temporibus at ius, eos ei case partem blandit<br/>
+                                                 <small>Sumo doming delicata in cum. Eos at augue viderer principes</small>
+                                             </div>
+                                             <div class="list-options">
+                                                 <button class="btn btn-gr-gray btn-sm">Delete</button>
+                                             </div>
+                                       </div>
+                                       
+                                       <div class="media">
+                                             <label class="pull-left">
+                                                   <input class="check-all" type="checkbox" value="">
+                                             </label>
+                                             <div class="media-body">
+                                                 Billa vel metus scelerisque ante sollicitudin commodo<br/>
+                                                 <small>Lorem ipsum dolor sit amet, per cu solet docendi</small>
+                                             </div>
+                                             <div class="list-options">
+                                                 <button class="btn btn-gr-gray btn-sm">Delete</button>
+                                             </div>
+                                       </div>
+                                       
+                                       <div class="media">
+                                             <label class="pull-left">
+                                                   <input class="check-all" type="checkbox" value="">
+                                             </label>
+         
+                                             <div class="media-body">
+                                                 Per an urbanitas elaboraret qui, et dicit sadipscing vel
+                                             </div>
+                                             <div class="list-options">
+                                                 <button class="btn btn-gr-gray btn-sm">Delete</button>
+                                             </div>
+                                       </div>
+                                       
+                                       <div class="media">
+                                             <label class="pull-left">
+                                                   <input class="check-all" type="checkbox" value="">
+                                             </label>
+                                             <div class="media-body">
+                                                 Per an error perpetua, fierent fastidii recteque ad pro<br/>
+                                                 <small> An erant explicari salutatus duo, sumo doming delicata in cum. Eos at augue viderer principes</small><br/>
+                                             </div>
+                                             <div class="list-options">
+                                                 <button class="btn btn-gr-gray btn-sm">Delete</button>
+                                             </div>
+                                       </div>
+                                   </div>
+                              </div>
+                              
+                              <!-- Add new todo list modal -->
+                              <div class="modal fade" id="addNew-todo">
+                                   <div class="modal-dialog modal-narrow">
+                                        <div class="modal-content">
+                                             <div class="modal-header">
+                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                 <h4 class="modal-title">Add New Todo List</h4>
+                                             </div>
+                                             <form class="form-horizontal form-validation" role="form">
+                                                  <div class="modal-body"> 
+                                                      <div class="form-group">
+                                                            <label class="col-md-2 control-label">Name</label>
+                                                            <div class="col-md-10">
+                                                                 <input type="text" class="form-control validate[required] input-sm" placeholder="...">
+                                                            </div>
+                                                      </div>
+          
+                                                      <div class="form-group">
+                                                            <label class="col-md-2 control-label">Detail</label>
+                                                            <div class="col-md-10">
+                                                                 <textarea class="form-control auto-size input-sm" placeholder="Optional"></textarea>
+                                                            </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                       <button type="button" class="btn btn-sm" data-dismiss="modal">Cancel</button>
+                                                       <input type="submit" class="btn btn-sm" value="Add">
+                                                  </div>
+                                             </form>
+                                        </div>
+                                   </div>
+                              </div>
+                          </div>
+
+                         
+                    </div>
+               </section>
+          </section>
+          
+          <footer id="footer">
+               <p>Copyright (c) 2012-2013, Lebaze Admin Templates. All rights reserved.</p>
+          </footer>
+          
+          <!-- Older IE Message -->
+          <!--[if lt IE 9]>
+               <div class="ie-block">
+                   <h1 class="Ops">Ooops!</h1>
+                   <p>You are using an outdated version of Internet Explorer, upgrade to any of the following web browser in order to access the maximum functionality of this website. </p>
+                   <ul class="browsers">
+                       <li>
+                           <a href="https://www.google.com/intl/en/chrome/browser/">
+                               <img src="img/browsers/chrome.png" alt="">
+                               <div>Google Chrome</div>
+                           </a>
+                       </li>
+                       <li>
+                           <a href="http://www.mozilla.org/en-US/firefox/new/">
+                               <img src="img/browsers/firefox.png" alt="">
+                               <div>Mozilla Firefox</div>
+                           </a>
+                       </li>
+                       <li>
+                           <a href="http://www.opera.com/computer/windows">
+                               <img src="img/browsers/opera.png" alt="">
+                               <div>Opera</div>
+                           </a>
+                       </li>
+                       <li>
+                           <a href="http://safari.en.softonic.com/">
+                               <img src="img/browsers/safari.png" alt="">
+                               <div>Safari</div>
+                           </a>
+                       </li>
+                       <li>
+                           <a href="http://windows.microsoft.com/en-us/internet-explorer/downloads/ie-10/worldwide-languages">
+                               <img src="img/browsers/ie.png" alt="">
+                               <div>Internet Explorer(New)</div>
+                           </a>
+                       </li>
+                   </ul>
+                   <p>Upgrade your browser for a Safer and Faster web experience. <br/>Thank you for your patience...</p>
+               </div>   
+          <![endif]-->
+          
+          <!-- Template skin customize(you can remove this anytime) -->
+          <div class="template-customize hidden-xs">
+               <i class="icon-cogs" id="tc-toggle"></i>
+               <ul data-elem="body">
+                    <li class="header">Body</li>
+                    <li><img src="img/body-bg/cloth.png" alt=""></li>
+                    <li><img src="img/body-bg/stripes.png" alt=""></li>
+                    <li><img src="img/body-bg/bluetec.png" alt=""></li>
+                    <li><img src="img/body-bg/cement.png" alt=""></li>
+                    <li><img src="img/body-bg/fabric.png" alt=""></li>
+                    <li><img src="img/body-bg/fabric-2.png" alt=""></li>
+                    <li><img src="img/body-bg/floor.png" alt=""></li>
+                    <li><img src="img/body-bg/leather.png" alt=""></li>
+                    <li><img src="img/body-bg/pixel.png" alt=""></li>
+                    <li><img src="img/body-bg/tactile.png" alt=""></li>
+               </ul>
+               <ul data-elem="content">
+                    <li class="header">Content</li>
+                    <li><img src="img/content-bg/content-bg.jpg" alt=""></li>
+                    <li><img src="img/content-bg/lines.png" alt=""></li>
+                    <li><img src="img/content-bg/cloth.png" alt=""></li>
+                    <li><img src="img/content-bg/grid.png" alt=""></li>
+                    <li><img src="img/content-bg/gray-leather.png" alt=""></li>
+                    <li><img src="img/content-bg/jean.png" alt=""></li>
+                    <li><img src="img/content-bg/light.png" alt=""></li>
+                    <li><img src="img/content-bg/subtle.png" alt=""></li>
+               </ul>
+          </div>
+          
+          <!-- Javascipt -->
+          <script src="js/jquery-1.10.2.min.js"></script>
+          <script src='js/jquery-ui-1.10.3.min.js'></script>
+          <script src="js/chart/highcharts.js"></script>
+          <script src="js/chart/modules/exporting.js"></script>
+          <script src="js/bootstrap.min.js"></script>
+          <script src="js/feeds.js"></script>
+          <script src="js/chosen.js"></script>
+          <script src="js/shadowbox.js"></script>
+          <script src="js/sparkline.min.js"></script>
+          <script src="js/masonry.min.js"></script>
+          <script src="js/enscroll.min.js"></script>
+          <script src='js/calendar.min.js'></script>
+          <script src='js/datatables.min.js'></script>
+          <script src='js/autosize.min.js'></script>
+          <script src='js/select.min.js'></script>
+          <script src="js/toggler.min.js"></script>
+          <script src="js/datetimepicker.min.js"></script>
+          <script src="js/colorpicker.min.js"></script>
+          <script src="js/fileupload.min.js"></script>
+          <script src="js/media-player.js"></script>
+          <script src="js/validation/validate.min.js"></script>
+          <script src="js/validation/validationEngine.min.js"></script>
+          <script src="js/functions.js"></script>
+          
+          <script type="text/javascript">
+               $(document).ready(function(){
+                    $('.template-customize ul li').click(function(){
+                         var getElem = $(this).closest('ul').attr('data-elem');
+                         var target = (getElem == "body") ? "body, #leftbar, #rightbar" : "#content";
+                         
+                         var src = $(this).find('img').attr('src');
+                         var bg = 'url('+src+')';
+                         $(target).css('background', bg)
+                    });
+                    
+                    $('#tc-toggle').click(function(){
+                         $('.template-customize').css('height','auto');
+                    });
+                    
+                    $(document).mouseup(function (e) {
+                         var container = $(".template-customize");
+                         if (container.has(e.target).length === 0) {
+                               container.height(0);
+                         }
+                    });
+               });
+               
+               // Area Chart
+               $(function () {
+                    $('#areaChart').highcharts({
+                         chart: {
+                              type: 'area',
+                              backgroundColor:'rgba(255, 255, 255, 0.01)',
+                              height: 300
+                         },
+                         title: {
+                              text: '',
+                         },
+                         subtitle: {
+                              text: ''
+                         },
+                         xAxis: {
+                              labels: {
+                                   
+                              }
+                         },
+                         yAxis: {
+                              title: {
+                                   text: ''
+                              },
+                              labels: {
+                                   formatter: function() {
+                                        return this.value / 1000 +'k';
+                                   }
+                              },
+                              gridLineWidth: 1,
+                              gridLineColor: '#eaeaea'
+                         },
+                         tooltip: {
+                              pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+                         },
+                         plotOptions: {
+                              area: {
+                                   pointStart: 1,
+                                   marker: {
+                                        enabled: false,
+                                        symbol: 'circle',
+                                        radius: 2,
+                                        states: {
+                                             hover: {
+                                                  enabled: true
+                                             }
+                                        }
+                                   }
+                              }
+                         },
+                         series: [{
+                              name: 'Bing',
+                              data: [0, 1060, 1605, 2471, 3322,
+                                   4238, 5221, 6129, 7089, 8339, 9399, 10538, 11643, 13092, 14478,
+                                   15915, 17385, 19055, 21205, 23044, 25393, 27935, 30062, 32049,
+                                   33952, 35804, 37431, 39197, 45000, 43000, 41000, 39000, 37000,
+                                   35000, 33000, 31000, 29000, 27000, 25000, 24000, 23000, 22000,
+                                   21000, 20000, 19000, 18000, 18000, 17000, 16000, 15000, 14000,
+                                   13000, 12000, 11000, 10000, 9000, 7000, 6000, 4000, 2000, 1000, 0]
+                         }, {
+                              name: 'Bing',
+                              data: [null, null , null , null ,null,
+                                   5, 25, 50, 120, 150, 200, 426, 660, 869, 1060, 1605, 2471, 3322,
+                                   4238, 5221, 6129, 7089, 8339, 9399, 10538, 11643, 13092, 14478,
+                                   15915, 17385, 19055, 21205, 23044, 25393, 27935, 30062, 32049,
+                                   33952, 35804, 37431, 39197, 45000, 43000, 41000, 39000, 37000,
+                                   35000, 33000, 31000, 29000, 27000, 25000, 24000, 23000, 22000,
+                                   21000, 20000, 19000, 18000, 18000, 17000, 16000]
+                         }],
+                         exporting: {
+                              enabled: false    
+                         },
+                         credits: {
+                              enabled: false
+                         },
+                         colors: [
+                              '#FFA206', 
+                              '#09AD30', 
+                         ],
+                         legend: {
+                              borderRadius: 0,
+                              borderColor: '#e3e3e3',
+                              enabled: false
+                         }
+                    });
+               });
+     
+               //Masonry for widgets
+               $(window).load(function(){
+                    $('.m-container').masonry({
+                         itemSelector: '.masonry'
+                    });  
+               });
+            
+          </script>
+     </body>
+</html>
+               

@@ -153,7 +153,7 @@ def check_zencoder_progress(job_id):
         # that the video was successfully uploaded.
         if video.notify_emails:
             emails = video.notify_emails.split(',')
-            
+
             send_templated_mail(
                 template_name='share-email',
                 from_email=settings.DEFAULT_FROM_EMAIL,

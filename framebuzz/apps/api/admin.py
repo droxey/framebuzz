@@ -1,6 +1,6 @@
 from django.contrib import admin
 from framebuzz.apps.api.models import MPTTComment, Video, \
-    UserProfile, UserVideo, Thumbnail, PrivateSession, SessionInvitation
+    UserProfile, UserVideo, Thumbnail, PrivateSession, SessionInvitation, Task
 from django.contrib.sessions.models import Session
 
 
@@ -47,6 +47,11 @@ class SessionInvitationAdmin(admin.ModelAdmin):
     list_filter = ('session', 'invitee', 'email', 'accepted',)
 
 
+class TaskAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'created_by', 'assigned_to',)
+    list_filter = ('video', 'created_by', 'assigned_to',)
+
+
 admin.site.register(MPTTComment, MPTTCommentAdmin)
 admin.site.register(Video, FrameBuzzVideoAdmin)
 admin.site.register(Session, SessionAdmin)
@@ -55,3 +60,4 @@ admin.site.register(UserVideo, UserVideoAdmin)
 admin.site.register(Thumbnail, ThumbnailAdmin)
 admin.site.register(PrivateSession, PrivateSessionAdmin)
 admin.site.register(SessionInvitation, SessionInvitationAdmin)
+admin.site.register(Task, TaskAdmin)

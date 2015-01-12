@@ -244,7 +244,6 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'robots',
-    #'stored_messages',
 
     # FrameBuzz Apps
     'framebuzz.apps.api',
@@ -264,6 +263,7 @@ ACTSTREAM_SETTINGS = {
         'api.Video',
         'api.UserVideo',
         'api.PrivateSession',
+        'dashboard.Task',
         'allauth.EmailAddress',
         'allauth.EmailConfirmation',
         'allauth.SocialAccount',

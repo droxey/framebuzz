@@ -8,65 +8,95 @@
     	{% if query %}
             <h1>searching for&hellip; <strong>{{ query }}</strong> 
             </h1>
-        {% endif %}
-    	<div class="row">
-            {% if filter == None %}
-        		<div class="col-xs-8 clearfix">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h2>videos <strong>({{ videos|length }})</strong></h2>
-                        </div>
-                    </div>
-                    <div class="row row-videos">
-                        {% for result in videos|slice:":6" %}
-            			     {% include "search/videos.html" %}
-                        {% empty %}
-                            <div class="empty">
-                                <h3 class="empty">No videos found.</h3>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    {% if videos|length > 6 %}
+        	<div class="row">
+                {% if filter == None %}
+            		<div class="col-xs-8 clearfix">
                         <div class="row">
-                            <div class="col-xs-12 clearfix">
-                                <a href="{% url 'fbz-search' %}?query={{ query }}&filter=videos" class="pull-right more">view more videos...</a>
+                            <div class="col-xs-12">
+                                <h2>videos <strong>({{ videos|length }})</strong></h2>
                             </div>
                         </div>
-                    {% endif %}
-        		</div>
-    		 	<div class="col-xs-4">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h2>users <strong>({{ users|length }})</strong></h2>
-                        </div>
-                    </div>
-    		 		<div class="row row-users">
-                        <div class="col-xs-12">
-                            {% for result in users|slice:":6" %}
-        	 				     {% include "search/users.html" %}
+                        <div class="row row-videos">
+                            {% for result in videos|slice:":6" %}
+                			     {% include "search/videos.html" %}
                             {% empty %}
                                 <div class="empty">
-                                    <h3 class="empty">No users found.</h3>
+                                    <h3 class="empty">No videos found.</h3>
                                 </div>
                             {% endfor %}
                         </div>
-                    </div>
-                    {% if users|length > 6 %}
+                        {% if videos|length > 6 %}
+                            <div class="row">
+                                <div class="col-xs-12 clearfix">
+                                    <a href="{% url 'fbz-search' %}?query={{ query }}&filter=videos" class="pull-right more">view more videos...</a>
+                                </div>
+                            </div>
+                        {% endif %}
+            		</div>
+        		 	<div class="col-xs-4">
                         <div class="row">
-                            <div class="col-xs-12 clearfix">
-                                <a href="{% url 'fbz-search' %}?query={{ query }}&filter=users" class="pull-right more">view more users...</a>
+                            <div class="col-xs-12">
+                                <h2>users <strong>({{ users|length }})</strong></h2>
                             </div>
                         </div>
-                    {% endif %}
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h2>conversations <strong>({{ conversations|length }})</strong></h2>
+        		 		<div class="row row-users">
+                            <div class="col-xs-12">
+                                {% for result in users|slice:":6" %}
+            	 				     {% include "search/users.html" %}
+                                {% empty %}
+                                    <div class="empty">
+                                        <h3 class="empty">No users found.</h3>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                    <div class="row row-convos">
-                        <div class="col-xs-12">
-                            {% for result in conversations|slice:":3" %}
-    		 				     {% include "search/conversations.html" %}
+                        {% if users|length > 6 %}
+                            <div class="row">
+                                <div class="col-xs-12 clearfix">
+                                    <a href="{% url 'fbz-search' %}?query={{ query }}&filter=users" class="pull-right more">view more users...</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2>conversations <strong>({{ conversations|length }})</strong></h2>
+                            </div>
+                        </div>
+                        <div class="row row-convos">
+                            <div class="col-xs-12">
+                                {% for result in conversations|slice:":3" %}
+        		 				     {% include "search/conversations.html" %}
+                                {% empty %}
+                                    <div class="empty">
+                                        <h3 class="empty">No conversations found.</h3>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% if conversations|length > 6 %}
+                            <div class="row">
+                                <div class="col-xs-12 clearfix">
+                                    <a href="{% url 'fbz-search' %}?query={{ query }}&filter=conversations" class="pull-right more">view more conversations...</a>
+                                </div>
+                            </div>
+                        {% endif %}
+        			</div>
+                {% else %}
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2>{{ filter }} <strong>({{ results_count }})</strong></h2>
+                            </div>
+                        </div>
+                        <div class="row row-{{ filter }} clearfix">
+                            {% for result in search_results.object_list %}
+                                {% if filter == 'videos' %}
+                                    {% include "search/videos.html" %}
+                                {% elif filter == 'users' %}
+                                    {% include "search/users.html" %}
+                                {% else %}
+                                    {% include "search/conversations.html" %}
+                                {% endif %}
                             {% empty %}
                                 <div class="empty">
                                     <h3 class="empty">No conversations found.</h3>
@@ -74,49 +104,27 @@
                             {% endfor %}
                         </div>
                     </div>
-                    {% if conversations|length > 6 %}
+                {% endif %}
+    		</div>
+            {% if filter != None and search_results.pages > 1 %}
+                <div class="row">
+                    <div class="col-xs-12">
                         <div class="row">
-                            <div class="col-xs-12 clearfix">
-                                <a href="{% url 'fbz-search' %}?query={{ query }}&filter=conversations" class="pull-right more">view more conversations...</a>
+                            <div class="col-xs-8">
+                                <a class="pull-left more" href="{% url 'fbz-search' %}?query={{ query }}"><i class="fa fa-caret-left fa-fw"></i> back to results</a>
+                            </div>
+                            <div class="col-xs-4">
+                                {% include "search/snippets/pagination.html" %}
                             </div>
                         </div>
-                    {% endif %}
-    			</div>
-            {% else %}
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h2>{{ filter }} <strong>({{ results_count }})</strong></h2>
-                        </div>
-                    </div>
-                    <div class="row row-{{ filter }} clearfix">
-                        {% for result in search_results.object_list %}
-                            {% if filter == 'videos' %}
-                                {% include "search/videos.html" %}
-                            {% elif filter == 'users' %}
-                                {% include "search/users.html" %}
-                            {% else %}
-                                {% include "search/conversations.html" %}
-                            {% endif %}
-                        {% empty %}
-                            <div class="empty">
-                                <h3 class="empty">No conversations found.</h3>
-                            </div>
-                        {% endfor %}
                     </div>
                 </div>
             {% endif %}
-		</div>
-        {% if filter != None and search_results.pages > 1 %}
+        {% else %}
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <a class="pull-left more" href="{% url 'fbz-search' %}?query={{ query }}"><i class="fa fa-caret-left fa-fw"></i> back to results</a>
-                        </div>
-                        <div class="col-xs-4">
-                            {% include "search/snippets/pagination.html" %}
-                        </div>
+                    <div class="alert alert-info">
+                        <p>Enter your search terms, and results will appear below.</p> 
                     </div>
                 </div>
             </div>

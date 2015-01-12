@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Black Pearl Responsive Admin Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Black Pearl Responsive Admin Template">
+        <meta name="keywords" content="Black Pearl, Admin, Template, Bootstrap">
+        <meta charset="UTF-8">
+       
+        <!-- CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="css/calendar.min.css" rel="stylesheet">
+        <link href="css/icomoon.min.css" rel="stylesheet">
+        <link href="css/media-player.min.css" rel="stylesheet">
+        <link href="css/file-manager.min.css" rel="stylesheet">
+        <link href="css/form.min.css" rel="stylesheet">
+        <link href="css/style.min.css" rel="stylesheet">
+               
+        <!--
+            Following CSS codes are used only in this page in order to demonstrate the
+            Sidebar widget properly. You can remove these codes anytime and this will
+            not make any changes in your template's style and design other than this page. 
+        -->
+        <style type="text/css">
+               .c-block { margin-bottom: 10px; }
+        </style>
+     </head>
+     <body>
+          <!-- Header -->
+          <header id="header" class="clearfix">
+               <!-- Logo -->
+               <a href="index.html" class="logo shadowed">
+                    BLACK PEARL 1.0
+               </a>
+               
+               <div class="dropdown profile-menu shadowed">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                         <img src="img/profile-pics/profile-pic.png" alt="" class="profile-pic">
+                    </a>
+                    <ul class="dropdown-menu pull-right text-right">
+                         <li><a href="">Update Profile</a></li>
+                         <li><a href="">Notifications & Updates</a></li>
+                         <li><a href="">Settings</a></li>
+                         <li class="divider"></li>
+                         <li><a href="">Sign-Out</a></li>
+                    </ul>
+               </div>
+               
+               <ul class="nav nav-pills pull-right shadowed" id="top-menu">
+                    <li><a href="#">Home</a></li>
+                    <li class="dropdown">
+                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown<b class="caret"></b></a>
+                         <ul class="dropdown-menu">
+                              <li><a href="">Action</a></li>
+                              <li><a href="">Another action</a></li>
+                              <li><a href="">Something else here</a></li>
+                              <li class="divider"></li>
+                              <li><a href="">Separated link</a></li>
+                         </ul>
+                    </li>
+                    <li><a href="#">Users</a></li>
+               </ul>
+               
+               <form class="form-inline top-search shadowed">
+                    <input type="text" class="form-control" placeholder="Search for anything...">
+                    <button type="submit"><i class="icon-search"></i></button>
+               </form>
+          </header>
+          
+          <section id="main" role="main">
+            <!-- Left Sidebar -->
+            <aside id="leftbar" class="pull-left">
+                <div class="sidebar-container">
+                         
+                    <!-- Main Menu -->
+                    <ul class="side-menu shadowed">
+                        <li>
+                            <a href="index.html"><i class="icon-home"></i>Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="typography.html"><i class="icon-quill"></i>Typography</a>
+                        </li>
+                        <li>
+                            <a href="wall.html"><i class="icon-bubbles-4"></i>Social Wall</a>
+                        </li>
+                        <li class="submenu">
+                            <a href=""><i class="icon-cog"></i>Widgets</a>
+                            <ul>
+                                <li><a href="sidebar-widgets.html">Sidebar</a></li>
+                                <li><a href="content-widgets.html">Content</a></li>
+                                <li><a href="shortcut-widgets.html">Shortcuts</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                             <a href=""><i class="icon-table-2"></i>Tables</a>
+                             <ul>
+                                 <li><a href="tables.html">Normal Tables</a></li>
+                                 <li><a href="data-table.html">Data Table</a></li>
+                             </ul>
+                        </li>
+                        <li class="submenu">
+                             <a href=""><i class="icon-copy-2"></i>Forms</a>
+                             <ul>
+                                <li><a href="form-elements.html">Basic Form Elements</a></li>
+                                <li><a href="form-components.html">Form Components</a></li>
+                                <li><a href="form-examples.html">Form Examples</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="form-wizard.html">Form Wizard</a></li>
+                             </ul>
+                        </li>
+                        <li class="submenu open">
+                             <a class="active" href=""><i class="icon-glass"></i>User Interface</a>
+                             <ul>
+                                <li><a href="buttons.html">Buttons</a></li>
+                                <li><a href="labels.html">Labels</a></li>
+                                <li><a href="images-icons.html">Images & Icons</a></li>
+                                <li><a href="alerts.html">Alerts</a></li>
+                                <li><a href="media.html">Media</a></li>
+                                <li><a href="pagination-breadcrumbs.html">Pagination & Breadcrumbs</a></li>
+                                <li><a href="components.html">Components</a></li>
+                                <li><a class="active" href="other-components.html">Others</a></li>
+                             </ul>
+                        </li>
+                        <li>
+                            <a href="charts.html"><i class="icon-bars"></i>Charts</a>
+                        </li>
+                        <li>
+                            <a href="file-manager.html"><i class="icon-folder"></i>File Manager</a>
+                        </li>
+                        <li>
+                            <a href="calendar.html"><i class="icon-calendar"></i>Calendar</a>
+                        </li>
+                        <li class="submenu">
+                            <a href=""><i class="icon-camera"></i>Photo Gallery</a>
+                            <ul>
+                                <li><a href="photo-gallery-default.html">Default Gallery</a></li>
+                                <li><a href="photo-gallery-sortable.html">Sortable Gallery</a></li>
+   
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href=""><i class="icon-stack"></i>Sample Pages</a>
+                            <ul>
+                                <li><a href="list-view.html">List View</a></li>
+                                <li><a href="profile-page.html">Profile Page</a></li>
+                                <li><a href="messages.html">Messages</a></li>
+                                <li><a href="login.html">Login</a></li>
+                                <li><a href="404.html">404 Error</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <span id="leftbar-toggle" class="visible-xs sidebar-toggle">
+                     <i class="icon-angle-right"></i>
+                </span>
+            </aside>
+               
+            <!-- Right Sidebar -->
+            <aside id="rightbar" class="pull-right">
+                <div class="sidebar-container">
+                    
+                    <!-- Profile -->
+                    <div class="shadowed side-profile text-center">
+                         <div class="banner">
+                              <img src="img/profile-bg.jpg" alt="" class="banner-img">
+                              <a href="#" class="profile-pic">
+                                   <img src="img/profile-pics/6.jpg" alt="" class="img-circle">
+                              </a>
+                         </div>
+                         <h4>Malinda Hollaway</h4>
+                         <small>24 Followers | 38 Following</small>
+                         <a class="btn btn-gr-gray btn-sm" href="#">Follow Malinda</a>
+                    </div>
+                    
+                    <!-- Notification -->
+                    <div class="notification shadowed">
+                         <ul class="tab">
+                              <li class="active">
+                                   <a href="#inbox"><i class="icon-spinner-5"></i> Inbox</a>
+                              </li>
+                              <li>
+                                   <a href="#notification"><i class="icon-earth"></i> Notifications</a>
+                              </li>
+                         </ul>
+                            
+                         <div class="tab-content">
+                              <div class="tab-pane active" id="inbox">
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img src="img/profile-pics/5.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <a href="#">Hay I just talk to Wendy...</a>
+                                             <small>4 hours ago</small>
+                                        </div>
+                                   </div>
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img src="img/profile-pics/2.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <a href="#">We have something to do...</a>
+                                             <small>4 hours ago</small>
+                                        </div>
+                                   </div>
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img src="img/profile-pics/4.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <a href="#">How do you do...</a>
+                                             <small>4 hours ago</small>
+                                        </div>
+                                   </div>
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img src="img/profile-pics/1.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <a href="#">What's up buddy? I won't...</a>
+                                             <small>4 hours ago</small>
+                                        </div>
+                                   </div>
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img src="img/profile-pics/3.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <a href="#">Just check this up for...</a>
+                                             <small>4 hours ago</small>
+                                        </div>
+                                   </div>
+                                   
+                                   <a class="show-more" href="#">See All</a>
+                              </div>
+                              <div class="tab-pane" id="notification">
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img src="img/profile-pics/1.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <a href="#">David responded to you...</a>
+                                             <small>4 hours ago</small>
+                                        </div>
+                                   </div>
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img src="img/profile-pics/2.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <a href="#">Wrndy like you post...</a>
+                                             <small>4 hours ago</small>
+                                        </div>
+                                   </div>
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img src="img/profile-pics/3.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <a href="#">Jonathan completed the task...</a>
+                                             <small>4 hours ago</small>
+                                        </div>
+                                   </div>
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img src="img/profile-pics/5.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <a href="#">Malinda responded to you...</a>
+                                             <small>4 hours ago</small>
+                                        </div>
+                                   </div>
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img src="img/profile-pics/1.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <a href="#">Henry poke you back...</a>
+                                             <small>4 hours ago</small>
+                                        </div>
+                                   </div>
+                                   <a class="show-more" href="#">See All</a>
+                              </div>
+                         </div>    
+                    </div>
+                    
+                    <!-- Date + Clock -->
+                    <div class="clock shadowed">
+                         <div id="date"></div>
+                         <div id="time">
+                              <span id="hours"></span>
+                              :
+                              <span id="min"></span>
+                              :
+                              <span id="sec"></span>
+                         </div>
+                    </div>
+                    
+                </div>
+
+                <span id="rightbar-toggle" class="hidden-lg sidebar-toggle">
+                     <i class="icon-angle-left"></i>
+                </span>
+            </aside>
+          
+               <!-- Content -->
+               <section id="content" class="container">
+                    <header class="p-header">
+                         <h2 class="p-title">Other User Interface elements</h2>
+                         <div class="config dropdown">
+                              <a class="dropdown-toggle btn btn-gr-gray btn-sm" data-toggle="dropdown" href="#">Jump to&nbsp; <span class="icon-angle-down"></span></a>
+                              <ul class="dropdown-menu pull-right text-right" role="menu">
+                                  <li><a href="#buttons">Buttons</a></li>
+                                  <li><a href="#alternative-buttons">Alternative Button Style</a></li>
+                                  <li><a href="#block-level">Block Level</a></li>
+                                  <li><a href="#disable-state">Disable State</a></li>
+                                  <li><a href="#button-tags">Button Tags</a></li>
+                                  <li><a href="#button-groups">Button Groups</a></li>
+                              </ul>
+                         </div>
+                    </header>
+                    
+                    <!-- Jumbotron -->
+                    <div class="c-block" id="jumbotron">
+                         <h3 class="block-title">Jumbotron</h3>
+                         <div class="jumbotron block">
+                              <div class="container">
+                                   <h1>Hello, world!</h1>
+                                   <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                                   <p><a class="btn btn-warning btn-lg">Learn more</a></p>
+                              </div>
+                         </div>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <!-- Page Header -->
+                    <div class="c-block" id="page-header">
+                         <h3 class="block-title">Page Header</h3>
+                         
+                         <p>Default Page Header</p>
+                         <header class="p-header">
+                              <h2 class="p-title">This is a Page Header</h2>
+                         </header>
+                         
+                         <br /><br />
+                         
+                         <p>Page Header with Sub text</p>
+                         <header class="p-header">
+                              <h2 class="p-title">This is a Page Header <small class="s-text">and this is a sub text</small></h2>
+                         </header>
+                         
+                         <br /><br />
+                         
+                         <p>Page header with jump menu</p>
+                         <header class="p-header">
+                              <h2 class="p-title">Another Page Header</h2>
+                              <div class="config dropdown">
+                                   <a class="dropdown-toggle btn btn-gr-gray btn-sm" data-toggle="dropdown" href="#">Jump to&nbsp; <span class="icon-angle-down"></span></a>
+                                   <ul class="dropdown-menu pull-right text-right" role="menu">
+                                       <li><a href="#">Dropdown Item 1</a></li>
+                                       <li><a href="#">Dropdown Item 2</a></li>
+                                       <li><a href="#">Dropdown Item 3</a></li>
+                                       <li><a href="#">Dropdown Item 4</a></li>
+                                       <li class="divider"></li>
+                                       <li><a href="#">Dropdown Item 5</a></li>
+                                   </ul>
+                              </div>
+                         </header>     
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <!-- Content Boxes -->
+                    <div class="c-block" id="content-boxes">
+                         <h3 class="block-title">Content Boxes</h3>
+                         
+                         <div class="row">
+                              <div class="col-sm-6 col-md-4">
+                                   <div class="thumbnail block">
+                                        <img src="img/gallery/1.jpg" alt="">
+                                        <div class="caption">
+                                             <h4>Thumbnail label</h4>
+                                             <p>Nullam congue mauris at auctor pharetra. Phasellus dictum accumsan justo, sit amet mattis odio semper in. Nulla consectetur quam in dolor faucibus, ac facilisis nunc luctus. Etiam sapien arcu, scelerisque at mollis a, placerat non eros.</p>
+                                             <p>
+                                                  <a href="#" class="btn btn-info btn-sm">Button</a>
+                                                  <a href="#" class="btn btn-info btn-sm">Button</a>
+                                             </p>
+                                        </div>
+                                   </div>
+                              </div>
+                              
+                              <div class="col-sm-6 col-md-4">
+                                   <div class="thumbnail block">
+                                        <img src="img/gallery/3.jpg" alt="">
+                                        <div class="caption">
+                                             <h4>Thumbnail label</h4>
+                                             <p>Nullam congue mauris at auctor pharetra. Phasellus dictum accumsan justo, sit amet mattis odio semper in. Nulla consectetur quam in dolor faucibus, ac facilisis nunc luctus. Etiam sapien arcu, scelerisque at mollis a, placerat non eros.</p>
+                                             <p>
+                                                  <a href="#" class="btn btn-info btn-sm">Button</a>
+                                                  <a href="#" class="btn btn-info btn-sm">Button</a>
+                                             </p>
+                                        </div>
+                                   </div>
+                              </div>
+                              
+                              <div class="col-sm-6 col-md-4">
+                                   <div class="thumbnail block">
+                                        <img src="img/gallery/5.jpg" alt="">
+                                        <div class="caption">
+                                             <h4>Thumbnail label</h4>
+                                             <p>Nullam congue mauris at auctor pharetra. Phasellus dictum accumsan justo, sit amet mattis odio semper in. Nulla consectetur quam in dolor faucibus, ac facilisis nunc luctus. Etiam sapien arcu, scelerisque at mollis a, placerat non eros.</p>
+                                             <p>
+                                                  <a href="#" class="btn btn-info btn-sm">Button</a>
+                                                  <a href="#" class="btn btn-info btn-sm">Button</a>
+                                             </p>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <!-- Media Object -->
+                    <div class="c-block" id="media-object">
+                         <h3 class="block-title">Media Object</h3>
+                         
+                         <p>The default media allow to float a media object (images, video, audio) to the left or right of a content block.</p>
+                         <br />
+                         <div class="media">
+                              <a class="pull-left" href="#">
+                                   <img class="media-object" src="img/profile-pics/1.jpg" alt="">
+                              </a>
+                              <div class="media-body">
+                                   <h5 class="media-heading">Media heading</h5>
+                                   Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                              </div>
+                         </div>
+                         <div class="media">
+                              <a class="pull-left" href="#">
+                                   <img class="media-object" src="img/profile-pics/2.jpg" alt="">
+                              </a>
+                              <div class="media-body">
+                                   <h5 class="media-heading">Media heading</h5>
+                                   Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                   <div class="media">
+                                        <a class="pull-left" href="#">
+                                             <img class="media-object" src="img/profile-pics/3.jpg" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                             <h5 class="media-heading">Media heading</h5>
+                                             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                         
+                         <br/><br/>
+                         <p>With a bit of extra markup, you can use media inside list (useful for comment threads or articles lists).</p>
+                         <br />
+                         <ul class="media-list">
+                              <li class="media">
+                                   <a class="pull-left" href="#">
+                                        <img class="media-object" src="img/profile-pics/1.jpg" alt="">
+                                   </a> 
+                                   <div class="media-body">
+                                        <h5 class="media-heading">Media heading</h5>
+                                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                                        <!-- Nested media object -->
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img class="media-object" src="img/profile-pics/2.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <h5 class="media-heading">Nested media heading</h5>
+                                                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                                                  <!-- Nested media object -->
+                                                  <div class="media">
+                                                       <a class="pull-left" href="#">
+                                                            <img class="media-object" src="img/profile-pics/3.jpg" alt="">
+                                                       </a>
+                                                       <div class="media-body">
+                                                            <h5 class="media-heading">Nested media heading</h5>
+                                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   
+                                        <!-- Nested media object -->
+                                        <div class="media">
+                                             <a class="pull-left" href="#">
+                                                  <img class="media-object" src="img/profile-pics/4.jpg" alt="">
+                                             </a>
+                                             <div class="media-body">
+                                                  <h5 class="media-heading">Nested media heading</h5>
+                                                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                                             </div>
+                                        </div>
+                                   </div>
+                              </li>
+                              <li class="media">
+                                   <a class="pull-right" href="#">
+                                        <img class="media-object" src="img/profile-pics/5.jpg" alt="">
+                                   </a>
+                                   <div class="media-body">
+                                        <h5 class="media-heading">Media heading</h5>
+                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                                   </div>
+                              </li>
+                         </ul>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <!-- List Groups -->
+                    <div class="c-block" id="list-groups">
+                         <h3 class="block-title">List Groups</h3>
+                         
+                         <p>Basic example</p>
+                         <ul class="list-group block">
+                              <li class="list-group-item">Cras justo odio</li>
+                              <li class="list-group-item">Dapibus ac facilisis in</li>
+                              <li class="list-group-item">Morbi leo risus</li>
+                              <li class="list-group-item">Porta ac consectetur ac</li>
+                              <li class="list-group-item">Vestibulum at eros</li>
+                         </ul>
+                         
+                         <p>With Badges</p>
+                         <ul class="list-group block">
+                              <li class="list-group-item">Cras justo odio<span class="badge">14</span></li>
+                              <li class="list-group-item">Dapibus ac facilisis in<span class="badge">23</span></li>
+                              <li class="list-group-item">Morbi leo risus<span class="badge">9</span></li>
+                              <li class="list-group-item">Porta ac consectetur ac<span class="badge">10</span></li>
+                              <li class="list-group-item">Vestibulum at eros<span class="badge">2</span></li>
+                         </ul>
+                         
+                         <p>With Links</p>
+                         <div class="list-group block">
+                              <a href="#" class="list-group-item active">Cras justo odio<span class="badge">14</span></a>
+                              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                              <a href="#" class="list-group-item">Morbi leo risus</a>
+                              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                              <a href="#" class="list-group-item">Vestibulum at eros</a>
+                         </div>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <!-- Panel -->
+                    <div class="c-block" id="Panel">
+                         <h3 class="block-title">Panel</h3>
+                         
+                         <div class="panel panel-default block">
+                              <div class="panel-heading">
+                                   <h3 class="panel-title">Panel title</h3>
+                              </div>
+                              <div class="panel-body">
+                                   Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                              </div>
+                              <div class="panel-footer">Panel footer</div>
+                         </div>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <!-- Well -->
+                    <div class="c-block" id="well">
+                         <h3 class="block-title">Well</h3>
+                         <p>Use the well as a simple effect on an element to give it an inset effect.</p>
+                         <div class="well block">
+                              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                         </div>
+                    </div>
+                    
+               </section>
+          </section>
+          
+          <footer id="footer">
+               <p>Copyright (c) 2012-2013, Lebaze Admin Templates. All rights reserved.</p>
+          </footer>
+          
+          <!-- Javascipt -->
+          <script src="js/jquery-1.10.2.min.js"></script>
+          <script src='js/jquery-ui-1.10.3.min.js'></script>
+          <script src="js/bootstrap.min.js"></script>
+          <script src="js/feeds.js"></script>
+          <script src="js/chosen.js"></script>
+          <script src="js/shadowbox.js"></script>
+          <script src="js/sparkline.min.js"></script>
+          <script src="js/masonry.min.js"></script>
+          <script src="js/enscroll.min.js"></script>
+          <script src='js/calendar.min.js'></script>
+          <script src='js/datatables.min.js'></script>
+          <script src='js/autosize.min.js'></script>
+          <script src='js/select.min.js'></script>
+          <script src="js/toggler.min.js"></script>
+          <script src="js/datetimepicker.min.js"></script>
+          <script src="js/colorpicker.min.js"></script>
+          <script src="js/fileupload.min.js"></script>
+          <script src="js/validation/validate.min.js"></script>
+          <script src="js/validation/validationEngine.min.js"></script>
+          <script src="js/media-player.js"></script>
+          <script src="js/functions.js"></script>
+
+     </body>
+</html>
+               

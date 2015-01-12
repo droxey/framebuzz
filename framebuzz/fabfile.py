@@ -54,7 +54,7 @@ env.git = env.repo_url.startswith("git") or env.repo_url.endswith(".git")
 env.reqs_path = conf.get("REQUIREMENTS_PATH", None)
 env.gunicorn_port = conf.get("GUNICORN_PORT", 8000)
 env.locale = conf.get("LOCALE", "en_US.UTF-8")
-env.host_string = '%s:%s' % (env.hosts[0], '22')
+env.host_string = '%s:%s' % (env.hosts[0], '333')
 
 env.static_cache_path = '%s/framebuzz/static/CACHE' % env.proj_path
 
@@ -76,7 +76,7 @@ templates = {
     "supervisor": {
         "local_path": "deploy/supervisor.conf",
         "remote_path": "/etc/supervisor/conf.d/%(proj_name)s.conf",
-        "reload_command": "supervisorctl reload",
+        "reload_command": "supervisorctl update",
     },
     "gunicorn": {
         "local_path": "deploy/gunicorn.conf.py",
@@ -337,7 +337,7 @@ def install():
     sudo("apt-get update -y -q")
     apt("gcc libc6 zlib1g-dev libexpat1-dev libssl-dev python2.7-dev libc-dev "
         "libjpeg-turbo8-dev comerr-dev libjpeg8-dev nginx libkrb5-dev "
-        "libjpeg-dev python-dev python-setuptools git-core "
+        "libjpeg-dev libfreetype6-dev python-dev python-setuptools git-core "
         "postgresql libpq-dev memcached supervisor redis-server libxml2-dev libxslt1-dev "
         "python-software-properties")
     sudo("easy_install pip")
@@ -513,7 +513,7 @@ def deploy():
         sudo("tar -cf last.tar %s" % static())
 
     with cd(env.proj_path):
-        sshagent_run('git pull gitlab %s -f' % env.repo_branch)
+        sshagent_run('git pull origin %s -f' % env.repo_branch)
 
     with project():
         git = env.git

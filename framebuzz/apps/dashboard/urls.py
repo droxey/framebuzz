@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 
 urlpatterns = patterns(
     '',
@@ -11,12 +11,12 @@ urlpatterns = patterns(
     url(r'^dashboard/(?P<username>[\w.@+-]+)/$',
         'framebuzz.apps.dashboard.views.dashboard_home',
         name='dashboard-home'),
-    url(r'^dashboard/(?P<username>[\w.@+-]+)/profile/$',
-        'framebuzz.apps.dashboard.views.dashboard_profile',
-        name='dashboard-profile'),
     url(r'^dashboard/(?P<username>[\w.@+-]+)/videos/$',
         'framebuzz.apps.dashboard.views.dashboard_videos',
         name='dashboard-videos'),
+    url(r'^dashboard/(?P<username>[\w.@+-]+)/users/$',
+        'framebuzz.apps.dashboard.views.dashboard_user_list',
+        name='dashboard-user-list'),
     url(r'^dashboard/(?P<username>[\w.@+-]+)/uploads/$',
         'framebuzz.apps.dashboard.views.dashboard_uploads',
         name='dashboard-uploads'),
@@ -44,4 +44,18 @@ urlpatterns = patterns(
     url(r'^dashboard/video/(?P<slug>[\w.@+-]+)/change-password/$',
         'framebuzz.apps.dashboard.views.change_video_password',
         name='dashboard-change-video-password'),
+    url(r'^dashboard/video/(?P<slug>[\w.@+-]+)/change-notifications/$',
+        'framebuzz.apps.dashboard.views.change_video_notifications',
+        name='dashboard-change-video-notifications'),
+
+    # Tasks:
+    url(r'^dashboard/(?P<username>[\w.@+-]+)/tasks/$',
+        'framebuzz.apps.dashboard.views.dashboard_task_list',
+        name='tasks-list'),
+    url(r'^dashboard/(?P<username>[\w.@+-]+)/tasks/create/$',
+        'framebuzz.apps.dashboard.views.dashboard_create_task',
+        name='tasks-create'),
+    url(r'^dashboard/(?P<username>[\w.@+-]+)/tasks/(?P<slug>[-\w]+)/$',
+        'framebuzz.apps.dashboard.views.dashboard_task_detail',
+        name='tasks-detail'),
 )
