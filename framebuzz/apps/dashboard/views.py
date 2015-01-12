@@ -228,13 +228,13 @@ def dashboard_task_list(request, username):
 @require_dashboard
 def dashboard_create_task(request, username):
     if request.method == 'POST':
-        form = TaskForm(data=request.POST)
+        form = TaskForm(request=request, data=request.POST)
         success = form.is_valid()
 
         if success:
             form.save()
     else:
-        form = TaskForm()
+        form = TaskForm(request=request)
     return render_to_response('tasks/create.html', {
         'form': form,
     }, context_instance=RequestContext(request))
