@@ -1,0 +1,45 @@
+{% extends "dashboard/base_dark.html" %}
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags dashboard_tags comments %}
+
+{% block page_content %}
+<div class="col-md-12">
+    <div class="block">
+        <h2>{{ task.title|title }}</h2>
+        <div class="config">
+            <a href="{% url 'tasks-create' request.user.username %}" data-toggle="tooltip" data-original-title="Add Task" class="ttips">
+                <i class="icon-plus add-new-todo"></i>
+            </a>
+        </div>
+        <div class="task-details col-md-12">
+            <p class="description">
+                {{ task.description }}
+            </p>
+            <hr>
+            <div class="row">
+                <div class="col-md-6 task-column">
+                    <label>Created By:</label>
+                    <br>
+                    <i class="fa fa-user"></i> {{ task.created_by.username }}
+                </div>
+                <div class="col-md-6 task-column">
+                    <label>Assigned To:</label>
+                    <br>
+                    <i class="fa fa-user"></i> {{ task.assigned_to.username }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 task-column">
+                    <label>Created On:</label>
+                    <br>
+                    <i class="fa fa-user"></i> {{ task.created_on }}
+                </div>
+                <div class="col-md-6 task-column">
+                    <label>Due Date:</label>
+                    <br>
+                    <i class="fa fa-user"></i> {{ task.due_on }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

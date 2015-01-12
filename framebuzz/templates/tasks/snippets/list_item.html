@@ -1,1 +1,1 @@
-<li><a href="{{ task.getabsoluteurl }}">{{ task.title }}</a></li>
+<li><a href="{% url 'tasks-detail' request.user.username task.slug %}">{{ task.title }}</a></li>
