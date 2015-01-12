@@ -17,4 +17,7 @@ class TaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(TaskForm, self).__init__(*args, **kwargs)
-        pass
+        self.fields['description'].widget = forms.Textarea(attrs={
+            'cols': '38',
+            'rows': '5'
+        })

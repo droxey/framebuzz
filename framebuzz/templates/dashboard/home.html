@@ -14,17 +14,11 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="block">
+        <div class="block" style="height: 372px;">
             <h2>My Tasks</h2>
             <div class="config">
-                <a href="" data-original-title="Add&nbsp;New" class="ttips" data-toggle="modal" data-target="#addNew-todo">
+                <a href="{% url 'tasks-create' request.user.username %}" data-toggle="tooltip" data-original-title="Add Task" class="ttips">
                     <i class="icon-plus add-new-todo"></i>
-                </a>
-                <a href="" data-toggle="tooltip" data-original-title="Refresh" class="ttips">
-                    <i class="icon-loop-2"></i>
-                </a>
-                <a href="" data-toggle="tooltip" data-original-title="Settings" class="ttips">
-                    <i class="icon-wrench"></i>
                 </a>
             </div>
             <div class="listview todo-list">
@@ -81,6 +75,10 @@
     <div class="col-md-6 listview-block">
         <div class="block" style="height: 372px;">
             <h2>Upcoming Viewings</h2>
+            <p class="text-center" style="color: #aaa;">
+                <br><br>
+                <i>No viewing sessions scheduled.</i>
+            </p>
         </div>
     </div>
 

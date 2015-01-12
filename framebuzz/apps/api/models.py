@@ -565,7 +565,7 @@ class Task(caching.base.CachingMixin, models.Model):
     video = models.ForeignKey(Video, blank=True, null=True)
 
     class Meta:
-        ordering = ['-created_on', 'title']
+        ordering = ['-due_on', 'title']
 
     def get_absolute_url(self):
         return reverse('tasks-detail', kwargs={'slug': self.slug})
