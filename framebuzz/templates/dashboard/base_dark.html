@@ -48,7 +48,7 @@
                         <a href="{% url 'dashboard-videos' request.user.username %}"><i class="fa fa-video-camera"></i>Videos</a>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-list"></i>Tasks</a>
+                        <a href="{% url 'tasks-list' request.user.username %}"><i class="fa fa-list"></i>Tasks</a>
                     </li>
                     {% comment %}
                         <li>

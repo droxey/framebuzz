@@ -28,14 +28,16 @@
                                 <input class="check-all" type="checkbox" value="">
                             </label>
                             <div class="media-body">
-                                {{ task.title|title }}<br/>
+                                <a href="{{ task.getabsoluteurl }}"{{ task.title|title }}<br/>
                                 {% if task.description %}
                                 <small>{{ task.description }}</small>
                                 {% endif %}<br/>
                             </div>
+                            {% comment %}
                             <div class="list-options">
                                 <button class="btn btn-gr-gray btn-sm btn-delete-task">Delete</button>
                             </div>
+                            {% endcomment %}
                         </div>
                     {% endfor %}
             </div>

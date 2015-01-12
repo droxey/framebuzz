@@ -141,7 +141,7 @@
                                   </tbody>
                               </table>
                             </div>
-                            <div id="video-comments" class="tab-pane table-responsive">
+                            <div id="video-comments" class="tab-pane col-lg-12 table-responsive">
                               {% if unread_comments|length > 0 %}
                                   <table class="table table-comments table-striped table-advance table-hover">
                                       <colgroup>
@@ -164,7 +164,33 @@
                                   </div>
                               {% endif %}
                             </div>
-                            <div id="video-tasks" class="tab-pane table-responsive">
+                            <div id="video-tasks" class="tab-pane col-lg-12 table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Created By</th>
+                                            <th>Assigned To</th>
+                                            <th>Due Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for task in tasks %}
+                                        <tr>
+                                            <td><a href="{{ task.getabsoluteurl }}">{{ task.title|title }}</a></td>
+                                            <td><i class="fa fa-user"></i> {{ task.created_by.username }}</td>
+                                            <td><i class="fa fa-user"></i> {{ task.assigned_to.username }}</td>
+                                            <td>{{ task.due_on }}</td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="4" class="text-center">
+                                                No video tasks.
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

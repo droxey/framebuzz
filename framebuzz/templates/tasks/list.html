@@ -4,14 +4,38 @@
 
 <div class="col-md-12">
     <div class="block">
-        <h2>Tasks <a href="{% url "tasks-create" %}">Add Task</a></h2>
-        <ul>
-            {% for task in tasks %}
-                {% include "tasks/snippets/list_item.html" %}
-            {% empty %}
-                <li>No tasks</li>
-            {% endfor %}
-        </ul>
+        <h2>Tasks</h2>
+        <div class="config">
+            <a href="{% url 'tasks-create' request.user.username %}" data-toggle="tooltip" data-original-title="Add Task" class="ttips">
+                <i class="icon-plus add-new-todo"></i>
+            </a>
+        </div>
+        <table class="table table-bordered table-striped" style="margin-top: -10px;">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Created By</th>
+                    <th>Assigned To</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td><a href="{{ task.getabsoluteurl }}">{{ task.title|title }}</a></td>
+                    <td><i class="fa fa-user"></i> {{ task.created_by.username }}</td>
+                    <td><i class="fa fa-user"></i> {{ task.assigned_to.username }}</td>
+                    <td>{{ task.due_on }}</td>
+                </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            No tasks.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 

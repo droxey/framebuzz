@@ -83,11 +83,14 @@ def video_details(request, slug):
         Q(is_removed=False),
         Q(Q(parent=None) | Q(parent__user=request.user))).order_by('time')
 
+    tasks = Task.objects.filter(video=video)
+
     return render_to_response('dashboard/snippets/video_details.html', {
         'video': video,
         'commenters': commenters,
         'plays': plays,
         'unread_comments': unread_comments,
+        'tasks': tasks,
     }, context_instance=RequestContext(request))
 
 
@@ -220,7 +223,9 @@ def dashboard_uploads(request, username):
 
 @require_dashboard
 def dashboard_task_list(request, username):
+    tasks = Task.objects.filter(Q(created_by=request.user) | Q(assigned_to=request.user))
     return render_to_response('tasks/list.html', {
+        'tasks': tasks,
     }, context_instance=RequestContext(request))
 
 
@@ -233,6 +238,9 @@ def dashboard_create_task(request, username):
 
         if success:
             form.save()
+            return HttpResponseRedirect(reverse(
+                                            'tasks-list',
+                                            args=[request.user.username, ]))
     else:
         form = TaskForm(request=request)
     return render_to_response('tasks/create.html', {
@@ -243,5 +251,7 @@ def dashboard_create_task(request, username):
 
 @require_dashboard
 def dashboard_task_detail(request, username, slug):
+    task = Task.objects.get(slug=slug)
     return render_to_response('tasks/detail.html', {
+        'task': task,
     }, context_instance=RequestContext(request))
