@@ -177,7 +177,7 @@
                                     <tbody>
                                         {% for task in tasks %}
                                         <tr>
-                                            <td><a href="{{ task.getabsoluteurl }}">{{ task.title|title }}</a></td>
+                                            <td><a href="{% url 'tasks-detail' request.user.username task.slug %}">{{ task.title|title }}</a></td>
                                             <td><i class="fa fa-user"></i> {{ task.created_by.username }}</td>
                                             <td><i class="fa fa-user"></i> {{ task.assigned_to.username }}</td>
                                             <td>{{ task.due_on }}</td>
