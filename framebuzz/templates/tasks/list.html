@@ -22,41 +22,13 @@
                         <div class="clearfix"></div>
                     </header>
                     {% for task in tasks %}
-                        <div class="media">
-                            <label class="pull-left">
-                                <input type="checkbox" value="" class="check-all">
-                            </label>
-                            <div class="media-body">
-                                <a href="{% url 'tasks-detail' request.user.username task.slug %}">{{ task.title|title }}</a><br>
-                                {% if task.description %}<small>{{ task.description }}</small><br>{% endif %}
-                                <div class="block attrs user assignments">
-                                    <img src="{% avatar_url task.created_by 36 %}" class="img-responsive ttips" title="Created by {{ task.created_by|display_name }}" data-placement="bottom" data-toggle="tooltip">
-                                    {% if task.assigned_to %}
-                                        <i class="text-muted fa fa-arrow-right"></i>
-                                        <img src="{% avatar_url task.assigned_to 36 %}" class="img-responsive ttips" title="Assigned to {{ task.assigned_to|display_name }}" data-placement="bottom" data-toggle="tooltip">
-                                    {% endif %}
-                                </div>
-                                {% if task.due_on %}
-                                    <div class="block attrs date ttips" title="Due on {{ task.due_on|date:"m/d/Y @ h:iA" }}" data-placement="top" data-toggle="tooltip">
-                                        <span class="text-danger"><i class="fa fa-calendar"></i> {{ task.due_on|date:"m/d/Y @ h:iA" }}</span>
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div class="list-options">
-                                <a class="task-confirm-delete" href="{% url 'tasks-delete' request.user.username task.slug %}">
-                                    <button class="btn btn-sm btn-danger btn-delete-task">Delete</button>
-                                </a>
-                                <a href="{% url 'tasks-detail' request.user.username task.slug %}">
-                                    <button class="btn btn-dark btn-sm">View</button>
-                                </a>
-                            </div>
-                        </div>
+                        {% include "tasks/snippets/item.html" %}
                     {% empty %}
                     {% endfor %}
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 hidden">
                 <div class="listview">
                     <header class="media listview-header">
                         <div class="clearfix"></div>
@@ -79,7 +51,7 @@
 
                     var url = $(this).attr('href'),
                         parentItem = $(this).parent().parent();
-                        
+
                     $.get(url, function(response) {
                         if (response == 200) {
                             parentItem.fadeOut(200, function() {

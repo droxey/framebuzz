@@ -1,0 +1,71 @@
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="UTF-8">
+    {% compress css %}
+    <link href="{% static 'framebuzz/dashboard/theme_dark/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'framebuzz/dashboard/theme_dark/css/calendar.min.css' %}" rel="stylesheet">
+    <link href="{% static 'framebuzz/dashboard/theme_dark/css/icomoon.min.css' %}" rel="stylesheet">
+    <link href="{% static 'framebuzz/dashboard/theme_dark/css/media-player.min.css' %}" rel="stylesheet">
+    <link href="{% static 'framebuzz/dashboard/theme_dark/css/file-manager.min.css' %}" rel="stylesheet">
+    <link href="{% static 'framebuzz/dashboard/theme_dark/css/form.min.css' %}" rel="stylesheet">
+    <link href="{% static 'framebuzz/dashboard/theme_dark/css/style.min.css' %}" rel="stylesheet">
+    <link href="{% static 'framebuzz/dashboard/scss/stylesheets/screen.css' %}" rel="stylesheet">
+    <style type="text/css">
+    body, #content { background: none; }
+    body { width: 595px; }
+    #content { box-shadow: none; margin: 0; padding: 0; max-width: 595px; min-height: auto; width: 595px; }
+    #content .m-container { margin: 0; }
+    #content .m-container .task-modal-dialog { padding: 0; }
+    #content .m-container .task-modal-dialog .block { margin-bottom: 0; }
+    div.add-task form.add-task-form { margin-bottom: 0; }
+    div.config a.close-sbox { cursor: pointer; display: block; }
+    hr { margin: 10px 0; }
+    </style>
+    {% endcompress %}
+</head>
+<body>
+    <section id="main" role="main">
+        <section id="content" class="container">
+            <div class="row m-container">
+                <div class="col-md-12 task-modal-dialog">
+                    <div class="block">
+                        {% block modal_body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    {% compress js %}
+    <script src="{% static 'framebuzz/dashboard/theme_dark/js/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'framebuzz/dashboard/theme_dark/js/jquery-ui-1.10.3.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('submit', '#add-task-form', function(e) {
+                e.preventDefault();
+
+                var url = $(this).attr('action'),
+                data = $(this).serialize();
+
+                $.post(url, data, function(response) {
+                    if (response == 200) {
+                        parent.location.reload();
+                    }
+                    else {
+                        $('#add-task-container').html(response);
+                    }
+                });
+
+
+                return false;
+            });
+        });
+    </script>
+    {% endcompress %}
+</body>

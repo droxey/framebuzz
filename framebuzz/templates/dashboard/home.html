@@ -17,29 +17,14 @@
         <div class="block" style="height: 372px;">
             <h2>My Tasks</h2>
             <div class="config">
-                <a href="{% url 'tasks-create' request.user.username %}" data-toggle="tooltip" data-original-title="Add Task" class="ttips">
+                <a href="{% url 'tasks-create' request.user.username %}" data-toggle="tooltip" data-original-title="Add Task" class="ttips sbox">
                     <i class="icon-plus add-new-todo"></i>
                 </a>
             </div>
             <div class="listview todo-list">
-                    {% for task in tasks %}
-                        <div class="media">
-                            <label class="pull-left">
-                                <input class="check-all" type="checkbox" value="">
-                            </label>
-                            <div class="media-body">
-                                <a href="{% url 'tasks-detail' request.user.username task.slug %}">{{ task.title|title }}</a><br/>
-                                {% if task.description %}
-                                <small>{{ task.description }}</small>
-                                {% endif %}<br/>
-                            </div>
-                            {% comment %}
-                            <div class="list-options">
-                                <button class="btn btn-gr-gray btn-sm btn-delete-task">Delete</button>
-                            </div>
-                            {% endcomment %}
-                        </div>
-                    {% endfor %}
+                {% for task in tasks %}
+                    {% include "tasks/snippets/item.html" %}
+                {% endfor %}
             </div>
         </div>
         <div class="modal fade" id="addNew-todo">

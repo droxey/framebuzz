@@ -1,45 +1,50 @@
-{% extends "dashboard/base_dark.html" %}
+{% extends "tasks/modal.html" %}
 {% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags dashboard_tags comments %}
 
-{% block page_content %}
-<div class="col-md-12">
-    <div class="block">
-        <h2>{{ task.title|title }}</h2>
-        <div class="config">
-            <a href="{% url 'tasks-create' request.user.username %}" data-toggle="tooltip" data-original-title="Add Task" class="ttips">
-                <i class="icon-plus add-new-todo"></i>
-            </a>
-        </div>
-        <div class="task-details col-md-12">
-            <p class="description">
-                {{ task.description }}
-            </p>
-            <hr>
+{% block modal_body %}
+    <h2>{{ task.title|title }}</h2>
+    <div class="config">
+        <a class="close-sbox" onclick="parent.Shadowbox.close();">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <div id="add-task-container" class="clearfix add-task col-md-12" style="min-height: 416px;">
+        <div class="task-details">
+            <p class="description">{{ task.description }}</p>
+            {% if task.video %}
             <div class="row">
-                <div class="col-md-6 task-column">
+                <div class="col-md-12">
+                    <span class="text-info"><i class="fa fa-video-camera"></i> <a href="{% url 'dashboard-video-details' task.video.slug %}">{{ task.video.title|title }}</a></span>
+                </div>
+            </div>
+            {% endif %}
+            <hr style="margin: 0 0 10px 0;">
+            <div class="row">
+                <div class="col-md-6 task-column pull-left" style="width: 50%;">
                     <label>Created By:</label>
                     <br>
-                    <i class="fa fa-user"></i> {{ task.created_by.username }}
+                    <img src="{% avatar_url task.created_by 36 %}" class="img-responsive" height="18"> {{ task.created_by|display_name }}
                 </div>
-                <div class="col-md-6 task-column">
+                <div class="col-md-6 task-column pull-left" style="width: 50%;">
                     <label>Assigned To:</label>
                     <br>
-                    <i class="fa fa-user"></i> {{ task.assigned_to.username }}
+                    <img src="{% avatar_url task.assigned_to 36 %}" class="img-responsive" height="18"> {{ task.assigned_to|display_name }}
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 task-column">
+                <div class="col-md-6 task-column pull-left" style="width: 50%;">
                     <label>Created On:</label>
                     <br>
-                    <i class="fa fa-user"></i> {{ task.created_on }}
+                    <i class="fa fa-calendar"></i> {{ task.created_on|date:"m/d/Y @ h:iA" }}
                 </div>
-                <div class="col-md-6 task-column">
-                    <label>Due Date:</label>
-                    <br>
-                    <i class="fa fa-user"></i> {{ task.due_on }}
-                </div>
+                {% if task.due_on %}
+                    <div class="col-md-6 task-column pull-left" style="width: 50%;">
+                        <label>Due Date:</label>
+                        <br>
+                        <i class="fa fa-calendar"></i> {{ task.due_on|date:"m/d/Y @ h:iA" }}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
