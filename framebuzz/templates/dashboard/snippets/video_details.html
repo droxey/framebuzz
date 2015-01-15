@@ -12,27 +12,19 @@
 <div class="col-md-12 masonry">
     <div class="block">
         <h2 class="no-margin"><i class="fa fa-video-camera"></i> {{ video.title|title }}</h2>
-        <div class="config">
-            <a href="{% url 'dashboard-delete-video' video.slug %}" title="Delete Video" class="delete-video ttips" data-toggle="tooltip" data-original-title="Delete Video">
-                <i class="icon-remove-2"></i>
-            </a>
-        </div>
         <div class="row" id="details-stats-row">
             <div class="video-stats row">
                 <div class="col-md-4 stat first">
-                    <strong>
-                        <i class="fa fa-users"></i> {{ commenters|length|short_number }} Participant{{ commenters|length|pluralize }}
-                    </strong>
+
+                        <i class="fa fa-users"></i> <strong>{{ commenters|length|short_number }}</strong> Participant{{ commenters|length|pluralize }}
+
                 </div>
                 <div class="col-md-4 stat">
-                    <strong>
-                        <i class="fa fa-comments"></i> {{ comment_count|short_number }} Comment{% if not comment_count %}s{% else %}{{ comment_count|pluralize }}{% endif %}
-                    </strong>
+
+                        <i class="fa fa-comments"></i> <strong>{{ comment_count|short_number }}</strong> Comment{% if not comment_count %}s{% else %}{{ comment_count|pluralize }}{% endif %}
                 </div>
                 <div class="col-md-4 stat last">
-                    <strong>
-                        <i class="fa fa-eye"></i> {{ plays|short_number }} View{{ plays|pluralize }}
-                    </strong>
+                        <i class="fa fa-eye"></i> <strong>{{ plays|short_number }}</strong> View{{ plays|pluralize }}
                 </div>
             </div>
         </div>
@@ -52,6 +44,15 @@
                     </li>
                     <li class="">
                         <a data-toggle="tab" href="#video-tasks" class="contact-map"><i class="fa fa-list"></i> Video Tasks</a>
+                    </li>
+                    <li class="actions pull-right">
+                        <ul class="nav">
+                            <li>
+                                <a href="{% url 'dashboard-delete-video' video.slug %}" title="Delete Video" class="btn btn-danger delete-video">
+                                    <i class="fa fa-remove"></i> Delete Video
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

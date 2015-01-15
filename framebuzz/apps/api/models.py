@@ -259,27 +259,7 @@ class Video(caching.base.CachingMixin, models.Model):
                     return '/static/framebuzz/marketing/img/poster1.jpg'
                 else:
                     return '/static/framebuzz/marketing/img/poster2.jpg'
-
-            poster_thumbnail = self.thumbnail_set.filter(
-                url__endswith='maxresdefault.jpg')
-
-            if len(poster_thumbnail) == 0:
-                poster_thumbnail = self.thumbnail_set.filter(
-                    url__endswith='hqdefault.jpg')
-            if len(poster_thumbnail) == 0:
-                poster_thumbnail = self.thumbnail_set.filter(
-                    url__endswith='mqdefault.jpg')
-            if len(poster_thumbnail) == 0:
-                poster_thumbnail = self.thumbnail_set.all()
-
-            try:
-                poster = poster_thumbnail[0]
-            except:
-                poster = self.default_thumbnail()
-            finally:
-                if poster is not None and not isinstance(poster, basestring):
-                    print 'POSTER IMAGE: %s' % poster.url
-                    return poster.url
+            return 'http://i3.ytimg.com/vi/%s/0.jpg' % self.video_id
         else:
             try:
                 return self.thumbnail_set.all()[1].url
