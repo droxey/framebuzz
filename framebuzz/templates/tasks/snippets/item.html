@@ -8,14 +8,14 @@
         <a class="sbox" href="{% url 'tasks-detail' request.user.username task.slug %}">{{ task.title|title }}</a><br>
         {% if task.description %}<small>{{ task.description }}</small><br>{% endif %}
         <div class="block attrs user assignments">
-            <img src="{% avatar_url task.created_by 36 %}" class="img-responsive ttips" title="Created by {{ task.created_by|display_name }}" data-placement="bottom" data-toggle="tooltip">
+            <img src="{% avatar_url task.created_by 36 %}" class="img-responsive" title="Created by {{ task.created_by|display_name }}">
             {% if task.assigned_to %}
             <i class="text-muted fa fa-arrow-right"></i>
-            <img src="{% avatar_url task.assigned_to 36 %}" class="img-responsive ttips" title="Assigned to {{ task.assigned_to|display_name }}" data-placement="bottom" data-toggle="tooltip">
+            <img src="{% avatar_url task.assigned_to 36 %}" class="img-responsive" title="Assigned to {{ task.assigned_to|display_name }}">
             {% endif %}
         </div>
         {% if task.due_on %}
-        <div class="block attrs date ttips" title="Due on {{ task.due_on|date:"m/d/Y @ h:iA" }}" data-placement="top" data-toggle="tooltip">
+        <div class="block attrs date" title="Due on {{ task.due_on|date:"m/d/Y @ h:iA" }}">
             <span class="text-danger"><i class="fa fa-calendar"></i> {{ task.due_on|date:"m/d/Y @ h:iA" }}</span>
         </div>
         {% endif %}
