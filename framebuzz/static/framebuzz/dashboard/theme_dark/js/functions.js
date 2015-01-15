@@ -638,6 +638,6 @@ $(window).load(function(){
         Bootstrap Tooltips
     -----------------------------------------------------------*/
     (function(){
-	$('.ttips').tooltip();
+	//$('.ttips').tooltip();
     })();
 });
