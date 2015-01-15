@@ -1,0 +1,11 @@
+{% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags %}
+
+<form id="add-task-form" action="{% url 'tasks-create' request.user.username %}" class="block-body form-validation add-task-form" method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <hr>
+    <div class="col-md-12 task-modal-dialog submit-row clearfix">
+        <button name="close" class="btn btn-sm btn-dark pull-left close-sbox" onclick="parent.Shadowbox.close();">Discard</button>
+        <input id="add-task-form-submit" type="submit" name="submit" value="Add Task" class="btn btn-sm btn-success pull-right">
+    </div>
+</form>

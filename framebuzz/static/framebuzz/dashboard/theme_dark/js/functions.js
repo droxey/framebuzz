@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    Shadowbox.init({
+        skipSetup:true
+    });
+
     /* --------------------------------------------------------
         Bootstrap Components + Form Elements
     -----------------------------------------------------------*/
@@ -88,37 +92,36 @@ $(document).ready(function(){
         List View
     -----------------------------------------------------------*/
     (function(){
-	checkBox = $('.listview .media .check-all');
-	parentCheck = $('.listview .listview-header .check-all');
-	deleteAll = $('.listview .listview-header .list-delete-all');
+    	checkBox = $('.listview .media .check-all');
+    	parentCheck = $('.listview .listview-header .check-all');
+    	deleteAll = $('.listview .listview-header .list-delete-all');
 
-	parentCheck.change(function () {
-	    if ($(this).is(':checked')) {
-		checkBox.prop('checked', true);
-		deleteAll.css('display', 'inline-block');
-	    }
-	    else {
-		checkBox.prop('checked', false);
-		deleteAll.hide();
-	    }
-	});
+    	parentCheck.change(function () {
+    	    if ($(this).is(':checked')) {
+        		checkBox.prop('checked', true);
+        		deleteAll.css('display', 'inline-block');
+    	    }
+    	    else {
+        		checkBox.prop('checked', false);
+        		deleteAll.hide();
+    	    }
+    	});
 
-	checkBox.change(function(){
-	     if(checkBox.length == $('.listview .media .check-all:checked').length) {
-		parentCheck.prop('checked', true);
+    	checkBox.change(function(){
+    	     if(checkBox.length == $('.listview .media .check-all:checked').length) {
+    		           parentCheck.prop('checked', true);
 
-	     } else {
-		parentCheck.prop('checked', false);
-	     }
-       });
+    	     } else {
+    		           parentCheck.prop('checked', false);
+    	     }
+           });
 
-	$('.listview .listview-header .check-all, .listview .media .check-all').change(function(){
-	    deleteAll.css('display','inline-block');
-	    if(!$('.listview .media .check-all:checked').length > 0){
-		deleteAll.hide();
-	    }
-	});
-
+    	$('.listview .listview-header .check-all, .listview .media .check-all').change(function(){
+    	    deleteAll.css('display','inline-block');
+    	    if(!$('.listview .media .check-all:checked').length > 0){
+    		          deleteAll.hide();
+    	    }
+    	});
      })();
 
     /* --------------------------------------------------------
@@ -145,11 +148,25 @@ $(document).ready(function(){
     })();
 
     /* --------------------------------------------------------
-        Image Popup
+        Modal Dialog
     -----------------------------------------------------------*/
     (function(){
-        Shadowbox.init();
-        $('.img-popup').prepend('<i class="icon-expand"></i>');
+        Shadowbox.setup($('.sbox'), {
+            modal: true,
+            width: 595,
+            height: 463,
+            player: 'iframe',
+            viewportPadding: 0,
+            displayNav: false,
+            onFinish: function() {
+                $('#sb-loading').css({'display': 'block'}).delay(800).fadeOut(600);
+            }
+        });
+
+        $(document).on('click', 'a.sbox', function(e) {
+            Shadowbox.open(this);
+            e.preventDefault();
+        });
     })();
 
     /* --------------------------------------------------------
@@ -530,20 +547,22 @@ $(document).ready(function(){
         Todo List
     -----------------------------------------------------------*/
     (function(){
-	//Add line-through for alreadt checked items
-	$('.todo-list .media .check-all:checked').each(function(){
-	    $(this).closest('.media').find('.media-body').css('text-decoration', 'line-through')
-	});
+    	//Add line-through for alreadt checked items
+    	$('.todo-list .media .check-all:checked').each(function(){
+    	    $(this).closest('.media').find('.media-body').css('text-decoration', 'line-through')
+    	});
 
-	//Add line-through when checking
-	$('.todo-list .media .check-all').change(function(){
-	    if($(this).is(':checked')) {
-		$(this).closest('.media').find('.media-body').css('text-decoration', 'line-through')
-	    }
-	    else {
-		$(this).closest('.media').find('.media-body').removeAttr('style');
-	    }
-	});
+    	//Add line-through when checking
+    	$('.todo-list .media .check-all').change(function(){
+    	    if($(this).is(':checked')) {
+    		$(this).closest('.media').find('.media-body').css('text-decoration', 'line-through')
+    	    }
+    	    else {
+    		$(this).closest('.media').find('.media-body').removeAttr('style');
+    	    }
+    	});
+
+
 
     })();
 

@@ -398,6 +398,26 @@ div.modal-content-wrapper {
             .btn {
                 box-shadow: none;
             }
+
+            .btn-danger:hover,
+            .btn-danger:focus,
+            .btn-danger:active,
+            .btn-danger.active,
+            .open .dropdown-toggle.btn-danger {
+                color: #ffffff;
+                background-color: #d2322d;
+                border-color: #ac2925;
+            }
+        }
+    }
+}
+
+#details-tab-content-row {
+    table {
+        tr {
+            td {
+                textarea { min-height: 40px; }
+            }
         }
     }
 }
@@ -414,24 +434,37 @@ div.poster-image {
     }
 }
 
-div.task-details {
-    p.description {
-        font-size: 14px;
-    }
+div.task-modal-dialog {
+    background: white;
 
-    div.row {
-        padding-bottom: 15px;
-    }
-
-    div.task-column {
-        font-size: 12px;
-
-        label {
-            font-weight: 600;
+    div.task-details {
+        p.description {
+            font-size: 14px;
         }
 
+        div.row {
+            padding-bottom: 15px;
+        }
 
+        div.task-column {
+            font-size: 12px;
+
+            label {
+                font-weight: 600;
+            }
+
+
+        }
     }
+}
+
+#sb-body, #sb-loading {
+
+}
+
+#sb-title, #sb-title-inner, #sb-info, #sb-info-inner {
+    display: none;
+    height: 0;
 }
 
 iframe.video-iframe {
@@ -894,6 +927,34 @@ div.add-task {
     .grey-header {
         position: relative;
         z-index: 10;
+    }
+}
+
+.listview-header {
+    .check-all {
+        display: block;
+        position: relative;
+        top: 21px;
+        width: 14px;
+    }
+}
+
+.listview .media .attrs {
+    line-height: 18px;
+    cursor: pointer;
+}
+
+.listview .media .attrs.assignments {
+    padding: 3px 5px 4px;
+
+    img, i {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    img {
+        height: 18px;
+        width: 18px;
     }
 }
 

@@ -58,4 +58,7 @@ urlpatterns = patterns(
     url(r'^dashboard/(?P<username>[\w.@+-]+)/tasks/(?P<slug>[-\w]+)/$',
         'framebuzz.apps.dashboard.views.dashboard_task_detail',
         name='tasks-detail'),
+    url(r'^dashboard/(?P<username>[\w.@+-]+)/tasks/(?P<slug>[-\w]+)/delete/$',
+        'framebuzz.apps.dashboard.views.dashboard_task_delete',
+        name='tasks-delete'),
 )

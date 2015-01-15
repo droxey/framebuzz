@@ -220,7 +220,6 @@ def dashboard_uploads(request, username):
     }, context_instance=RequestContext(request))
 
 
-
 @require_dashboard
 def dashboard_task_list(request, username):
     tasks = Task.objects.filter(Q(created_by=request.user) | Q(assigned_to=request.user))
@@ -229,24 +228,22 @@ def dashboard_task_list(request, username):
     }, context_instance=RequestContext(request))
 
 
-
 @require_dashboard
-def dashboard_create_task(request, username):
+def dashboard_create_task(request, username, template='tasks/create.html'):
     if request.method == 'POST':
         form = TaskForm(request=request, data=request.POST)
         success = form.is_valid()
 
         if success:
             form.save()
-            return HttpResponseRedirect(reverse(
-                                            'tasks-list',
-                                            args=[request.user.username, ]))
+            return HttpResponse(200)
+        else:
+            template = 'tasks/snippets/form.html'
     else:
-        form = TaskForm(request=request)
-    return render_to_response('tasks/create.html', {
+        form = TaskForm(request=request, initial={'created_by': request.user})
+    return render_to_response(template, {
         'form': form,
     }, context_instance=RequestContext(request))
-
 
 
 @require_dashboard
@@ -255,3 +252,10 @@ def dashboard_task_detail(request, username, slug):
     return render_to_response('tasks/detail.html', {
         'task': task,
     }, context_instance=RequestContext(request))
+
+
+@require_dashboard
+def dashboard_task_delete(request, username, slug):
+    task = Task.objects.get(slug=slug)
+    task.delete()
+    return HttpResponse(200)
