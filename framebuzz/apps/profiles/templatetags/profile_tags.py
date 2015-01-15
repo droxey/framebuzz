@@ -23,6 +23,7 @@ def display_name(user):
 def short_number(x):
     if x == '': return '0'
     if x == 0: return '0'
+    if x == None: return '0'
     magnitude = int(math.log10(abs(x)))
     if magnitude < 3:
         return x
