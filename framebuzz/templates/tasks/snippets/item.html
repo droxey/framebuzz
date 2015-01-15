@@ -21,7 +21,7 @@
         {% endif %}
         {% if task.video %}
         <div class="block attrs pull-right">
-            <span class="text-info"><i class="fa fa-video-camera"></i> <a href="{% url 'dashboard-video-details' task.video.slug %}">{{ task.video.title|title }}</a></span>
+            <span class="text-info"><i class="fa fa-video-camera"></i> <a href="{% url 'dashboard-video-details' task.video.slug %}">{{ task.video.title|title|truncatechars:"30" }}</a></span>
         </div>
         {% endif %}
     </div>

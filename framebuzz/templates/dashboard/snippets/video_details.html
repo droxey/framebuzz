@@ -191,36 +191,27 @@
                                     </div>
                                     {% endif %}
                                 </div>
-                                <div id="video-tasks" class="tab-pane col-lg-12 table-responsive">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Created By</th>
-                                                <th>Assigned To</th>
-                                                <th>Due Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for task in tasks %}
-                                            <tr>
-                                                <td><a href="{% url 'tasks-detail' request.user.username task.slug %}">{{ task.title|title }}</a>
-                                                </td>
-                                                <td><i class="fa fa-user"></i> {{ task.created_by.username }}</td>
-                                                <td><i class="fa fa-user"></i> {{ task.assigned_to.username }}</td>
-                                                <td>{{ task.due_on }}</td>
-                                            </tr>
-                                            {% empty %}
-                                            <tr>
-                                                <td colspan="4" class="text-center">
-                                                    No video tasks.
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
+                                <div id="video-tasks" class="tab-pane col-lg-12">
+                                    <div class="listview">
+                                        <header class="media listview-header">
+                                            <label class="pull-left">
+                                                <input class="check-all" type="checkbox" value="" >
+                                            </label>
+                                            <a href="{% url 'tasks-create' request.user.username %}" class="btn btn-sm btn-success sbox" rel="shadowbox">
+                                                Add New
+                                            </a>
+                                            <a href="#" class="btn btn-sm list-delete-all btn-danger">
+                                                Delete Selected Tasks
+                                            </a>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        {% for task in tasks %}
+                                        {% include "tasks/snippets/item.html" %}
+                                        {% empty %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
-                            </div>
         </div>
     </div>
 </div>

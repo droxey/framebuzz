@@ -8,13 +8,13 @@
             <i class="fa fa-times"></i>
         </a>
     </div>
-    <div id="add-task-container" class="clearfix add-task col-md-12" style="min-height: 416px;">
+    <div id="add-task-container" class="clearfix add-task col-md-12" style="height: 416px;">
         <div class="task-details">
             <p class="description">{{ task.description }}</p>
             {% if task.video %}
             <div class="row">
                 <div class="col-md-12">
-                    <span class="text-info"><i class="fa fa-video-camera"></i> <a href="{% url 'dashboard-video-details' task.video.slug %}">{{ task.video.title|title }}</a></span>
+                    <span class="text-info"><i class="fa fa-video-camera"></i> <a target="_parent" href="{% url 'dashboard-video-details' task.video.slug %}">{{ task.video.title|title }}</a></span>
                 </div>
             </div>
             {% endif %}
