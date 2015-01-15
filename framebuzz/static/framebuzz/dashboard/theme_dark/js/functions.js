@@ -124,6 +124,23 @@ $(document).ready(function(){
     	});
      })();
 
+     $(document).on('click', 'a.task-confirm-delete', function(e) {
+         e.preventDefault();
+
+         var url = $(this).attr('href'),
+         parentItem = $(this).parent().parent();
+
+         $.get(url, function(response) {
+             if (response == 200) {
+                 parentItem.fadeOut(200, function() {
+                     parentItem.remove();
+                 });
+             }
+         });
+
+         return false;
+     });
+
     /* --------------------------------------------------------
         Comment Textarea
     -----------------------------------------------------------*/
