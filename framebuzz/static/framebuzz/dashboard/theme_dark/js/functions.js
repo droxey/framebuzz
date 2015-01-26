@@ -168,7 +168,7 @@ $(document).ready(function(){
         Modal Dialog
     -----------------------------------------------------------*/
     (function(){
-        Shadowbox.setup($('.sbox'), {
+        Shadowbox.setup('.sbox', {
             modal: true,
             width: 595,
             height: 463,
