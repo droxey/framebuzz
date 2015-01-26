@@ -14,17 +14,14 @@
         <h2 class="no-margin"><i class="fa fa-video-camera"></i> {{ video.title|title }}</h2>
         <div class="row" id="details-stats-row">
             <div class="video-stats row">
-                <div class="col-md-4 stat first">
-
-                        <i class="fa fa-users"></i> <strong>{{ commenters|length|short_number }}</strong> Participant{{ commenters|length|pluralize }}
-
+                <div class="col-md-2 stat pull-right first">
+                    <i class="fa fa-users"></i> <strong>{{ commenters|length|short_number }}</strong> Participant{{ commenters|length|pluralize }}
                 </div>
-                <div class="col-md-4 stat">
-
-                        <i class="fa fa-comments"></i> <strong>{{ comment_count|short_number }}</strong> Comment{% if not comment_count %}s{% else %}{{ comment_count|pluralize }}{% endif %}
+                <div class="col-md-2 stat pull-right">
+                    <i class="fa fa-comments"></i> <strong>{{ comment_count|short_number }}</strong> Comment{% if not comment_count %}s{% else %}{{ comment_count|pluralize }}{% endif %}
                 </div>
-                <div class="col-md-4 stat last">
-                        <i class="fa fa-eye"></i> <strong>{{ plays|short_number }}</strong> View{{ plays|pluralize }}
+                <div class="col-md-2 stat pull-right last">
+                    <i class="fa fa-eye"></i> <strong>{{ plays|short_number }}</strong> View{{ plays|pluralize }}
                 </div>
             </div>
         </div>
@@ -34,30 +31,28 @@
             </div>
         </div>
         <div class="row row-modal-tabs" id="details-tabs-row">
-            <div class="col-lg-12 modal-tab-container">
-                <ul id="modal-tabs" class="nav nav-tabs">
-                    <li class="active">
-                        <a data-toggle="tab" href="#video-details"><i class="fa fa-list-ul"></i> Video Details</a>
-                    </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#video-comments" class="contact-map"><i class="fa fa-comments-o"></i> Viewer Comments</a>
-                    </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#video-tasks" class="contact-map"><i class="fa fa-tasks"></i> Video Tasks</a>
-                    </li>
-                    <li class="actions pull-right">
-                        <ul class="nav">
-                            <li>
-                                <a href="{% url 'dashboard-delete-video' video.slug %}" title="Delete Video" class="btn btn-danger delete-video">
-                                    <i class="fa fa-trash-o"></i> Delete Video
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="row tab-content" id="details-tab-content-row">
-                <div id="video-details" class="tab-pane active col-lg-12">
+            <ul id="modal-tabs" class="col-lg-12 nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#video-details"><i class="fa fa-list-ul"></i> Video Details</a>
+                </li>
+                <li class="">
+                    <a data-toggle="tab" href="#video-comments" class="contact-map"><i class="fa fa-comments-o"></i> Viewer Comments</a>
+                </li>
+                <li class="">
+                    <a data-toggle="tab" href="#video-tasks" class="contact-map"><i class="fa fa-tasks"></i> Video Tasks</a>
+                </li>
+                <li class="actions pull-right">
+                    <ul class="nav">
+                        <li>
+                            <a href="{% url 'dashboard-delete-video' video.slug %}" title="Delete Video" class="btn btn-danger delete-video">
+                                <i class="fa fa-trash-o"></i> Delete Video
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="tab-content row">
+                <div id="video-details" class="tab-pane fade in active col-lg-12">
                     <table class="table table-striped">
                         <colgroup>
                             <col span="1" />
@@ -97,121 +92,118 @@
                             <td>{{ video.password_required|yesno|title }}</td>
                         </tr>
                         <tr>
+                            <td><strong>{% if video.password_required %}Change{% else %}Add{% endif %} Access<br>Password</strong></td>
                             <td>
-                                <strong>{% if video.password_required %}Change{% else %}Add{% endif %} Access
-                                    <br>Password</strong>
-                                </td>
-                                <td>
-                                    <form id="change-video-password-form" action="{% url 'dashboard-change-video-password' video.slug %}" method="post">
-                                        {% csrf_token %}
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <input type="password" id="id_password" name="password" autocomplete="off">
-                                                </td>
-                                                <td>
-                                                    <button type="submit" class="btn btn-success">Submit</td>
-                                                        <td class="hidden change-password-response"></td>
-                                                    </tr>
-                                                </table>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Shared With</strong>
-                                            <br>
-                                            <small><i style="color: #aaa;">Comma-separated list of email addresses</i>
-                                            </small>
-                                        </td>
-                                        <td>
-                                            <form id="change-notify-emails-form" action="{% url 'dashboard-change-video-notifications' video.slug %}" method="post">
-                                                {% csrf_token %}
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                            <textarea rows="2" cols="210" id="id_notify_emails" name="notify_emails" style="font-family: monospace; font-size: 12px;" class="form-control">{% if video.notify_emails %}{{ video.notify_emails }}{% endif %}</textarea>
-                                                        </td>
-                                                        <td>
-                                                            <button type="submit" class="btn btn-success"><i class="fa fa-share-alt"></i> Save &amp; Share Now</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="hidden send-notification-response" colspan="2"></td>
-                                                    </tr>
-                                                </table>
-                                            </form>
-                                        </td>
-                                        <td>
-                                        </tr>
+                                <form id="change-video-password-form" action="{% url 'dashboard-change-video-password' video.slug %}" method="post">
+                                    {% csrf_token %}
+                                    <table>
                                         <tr>
                                             <td>
-                                                <strong>WordPress
-                                                    <br>Embed Code</strong>
-                                                </td>
-                                                <td>
-                                                    <textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.wp_embed_code }}</textarea>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>HTML Embed Code</strong>
-                                                </td>
-                                                <td>
-                                                    <textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.embed_code }}</textarea>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td valign="middle">
-                                                    <strong>Share</strong>
-                                                </td>
-                                                <td>{% include "dashboard/snippets/share.html" %}</td>
-                                            </tr>
-                                        </tbody>
+                                                <input type="password" id="id_password" name="password" autocomplete="off">
+                                            </td>
+                                            <td>
+                                                <button type="submit" class="btn btn-success">Submit</td>
+                                                    <td class="hidden change-password-response"></td>
+                                        </tr>
                                     </table>
-                                </div>
-                                <div id="video-comments" class="tab-pane col-lg-12 table-responsive">
-                                    {% if unread_comments|length > 0 %}
-                                    <table class="table table-comments table-striped table-advance table-hover">
-                                        <colgroup>
-                                            <col class="time" span="1" />
-                                            <col class="user" span="1" />
-                                            <col class="comment" span="1" />
-                                            <col class="status" span="1" />
-                                            <col class="actions" span="1" />
-                                        </colgroup>
-                                        <tbody>
-                                            {% for com in unread_comments %} {% include "dashboard/snippets/comments/list_item.html" %} {% endfor %}
-                                        </tbody>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Shared With</strong>
+                                <br>
+                                <small><i style="color: #aaa;">Comma-separated list of email addresses</i>
+                                </small>
+                            </td>
+                            <td>
+                                <form id="change-notify-emails-form" action="{% url 'dashboard-change-video-notifications' video.slug %}" method="post">
+                                    {% csrf_token %}
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <textarea rows="2" cols="210" id="id_notify_emails" name="notify_emails" style="font-family: monospace; font-size: 12px;" class="form-control">{% if video.notify_emails %}{{ video.notify_emails }}{% endif %}</textarea>
+                                            </td>
+                                            <td>
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-share-alt"></i> Save &amp; Share Now</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="hidden send-notification-response" colspan="2"></td>
+                                        </tr>
                                     </table>
-                                    {% else %}
-                                    <div class="text-center stats">
-                                        <i class="fa fa-4x fa-inbox"></i>
-                                        <h5>No viewer activity yet!</h5>
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                <div id="video-tasks" class="tab-pane col-lg-12">
-                                    <div class="listview">
-                                        <header class="media listview-header">
-                                            <label class="pull-left">
-                                                <input class="check-all" type="checkbox" value="" >
-                                            </label>
-                                            <a href="{% url 'tasks-create' request.user.username %}" class="btn btn-sm btn-success sbox" rel="shadowbox">
-                                                Add New
-                                            </a>
-                                            <a href="#" class="btn btn-sm list-delete-all btn-danger">
-                                                Delete Selected Tasks
-                                            </a>
-                                            <div class="clearfix"></div>
-                                        </header>
-                                        {% for task in tasks %}
-                                        {% include "tasks/snippets/item.html" %}
-                                        {% empty %}
-                                        {% endfor %}
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>WordPress
+                                    <br>Embed Code</strong>
+                                </td>
+                                <td>
+                                    <textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.wp_embed_code }}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>HTML Embed Code</strong>
+                                </td>
+                                <td>
+                                    <textarea style="font-family: monospace; font-size: 12px;" rows="2" class="form-control">{{ video.embed_code }}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="middle">
+                                    <strong>Share</strong>
+                                </td>
+                                <td>{% include "dashboard/snippets/share.html" %}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="video-comments" class="tab-pane col-lg-12 table-responsive">
+                    {% if unread_comments|length > 0 %}
+                    <table class="table table-comments table-striped table-advance table-hover">
+                        <colgroup>
+                            <col class="time" span="1" />
+                            <col class="user" span="1" />
+                            <col class="comment" span="1" />
+                            <col class="status" span="1" />
+                            <col class="actions" span="1" />
+                        </colgroup>
+                        <tbody>
+                            {% for com in unread_comments %} {% include "dashboard/snippets/comments/list_item.html" %} {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="text-center stats">
+                        <i class="fa fa-4x fa-inbox"></i>
+                        <h5>No viewer activity yet!</h5>
+                    </div>
+                    {% endif %}
+                </div>
+                <div id="video-tasks" class="tab-pane col-lg-12">
+                    <div class="listview">
+                        <header class="media listview-header">
+                            <label class="pull-left">
+                                <input class="check-all" type="checkbox" value="" >
+                            </label>
+                            <a href="{% url 'tasks-create' request.user.username %}" class="btn btn-sm btn-success sbox" rel="shadowbox">
+                                Add New
+                            </a>
+                            <a href="#" class="btn btn-sm list-delete-all btn-danger">
+                                Delete Selected Tasks
+                            </a>
+                            <div class="clearfix"></div>
+                        </header>
+                        {% for task in tasks %}
+                        {% include "tasks/snippets/item.html" %}
+                        {% empty %}
+                        {% endfor %}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

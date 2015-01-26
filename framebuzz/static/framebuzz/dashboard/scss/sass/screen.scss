@@ -7,14 +7,21 @@ body {
 }
 
 #leftbar, #rightbar, body {
-    background-image: url('/static/framebuzz/dashboard/theme_dark/img/body-bg/tactile.png');
+    background-image: none;
+    background: #222222;
+}
+
+.shadowed {
+    background: #171717;
+}
+
+#content .block, .shortcut, .tab-container, .table {
+    box-shadow: none;
 }
 
 #content {
-    background-image: url('/static/framebuzz/dashboard/theme_dark/img/content-bg/light.png');
-    background-position: initial initial;
-    background-repeat: initial initial;
-    min-height: 650px;
+    background-image: none;
+    background: white;
 
     div.block {
         h2 {
@@ -383,10 +390,17 @@ div.modal-content-wrapper {
         color: #bcbcbc;
         padding: 5px 0;
         text-align: center;
+
+        &.first {
+            margin-right: 15px;
+        }
     }
 }
 
 #details-tabs-row {
+    margin-left: 0;
+    margin-right: 0;
+    
     ul {
         li {
             a {
@@ -410,9 +424,7 @@ div.modal-content-wrapper {
             }
         }
     }
-}
 
-#details-tab-content-row {
     table {
         tr {
             td {
@@ -420,7 +432,13 @@ div.modal-content-wrapper {
             }
         }
     }
+
+    div.tab-content {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 }
+
 
 div.poster-image {
     margin-right: -15px;
