@@ -1,5 +1,6 @@
 $(function() {
     var selectedComment = null;
+    console.log('loading');
 
     var selectComment = function(element) {
         var containerElement = element.parent().parent();
@@ -44,18 +45,6 @@ $(function() {
                 });
             }
         });
-
-        return false;
-    });
-
-    // Close video panel.
-    $(document).on('click', 'a.inline-close', function(e) {
-        e.preventDefault();
-
-        $(this).parent().parent().parent().parent().parent().hide('fast');
-
-        var wrapperElement = $(this).parent().parent().parent().parent();
-        wrapperElement.find('div.inner-content').html('');
 
         return false;
     });
