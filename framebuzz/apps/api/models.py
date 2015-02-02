@@ -34,6 +34,17 @@ COMMENT_VISIBILITY_TIME_RANGE = 1
 TIMELINE_BLOCKS = 32
 SIGNIFICANCE_FACTOR = 20.0
 
+STATUS_CODES = (
+    (1, 'Open'),
+    (2, 'In progress'),
+    (3, 'Closed'),
+)
+
+PRIORITY_CODES = (
+    (1, 'High'),
+    (2, 'Medium'),
+    (3, 'Low'),
+)
 
 video_storage = S3BotoStorage(
     acl='public',
@@ -545,9 +556,11 @@ class Task(caching.base.CachingMixin, models.Model):
     due_on = models.DateTimeField(blank=True, null=True)
     assigned_to = models.ForeignKey(User, blank=True, null=True, related_name='task_assigned_to')
     video = models.ForeignKey(Video, blank=True, null=True)
+    status = models.IntegerField(verbose_name='Status', default=1, choices=STATUS_CODES)
+    priority = models.IntegerField(verbose_name='Priority', default=2, choices=PRIORITY_CODES)
 
     class Meta:
-        ordering = ['-due_on', 'title']
+        ordering = ['priority', 'title']
 
     def get_absolute_url(self):
         return reverse('tasks-detail', kwargs={'slug': self.slug})
