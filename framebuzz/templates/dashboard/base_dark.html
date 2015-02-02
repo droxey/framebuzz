@@ -23,7 +23,7 @@
 {% block page_header %}{% endblock %}
 {% block extrahead %}{% endblock %}
 </head>
-<body>
+<body class="{% block page_class %}{% endblock %}">
     <header id="header" class="clearfix">
         <a href="{% url 'home' %}" class="logo shadowed">
             {% include 'dashboard/snippets/logo.html' %}
@@ -42,13 +42,13 @@
             <div class="sidebar-container">
                 <ul class="side-menu shadowed">
                     <li>
-                        <a class="active" href="{% url 'dashboard-home' request.user.username %}"><i class="icon-home"></i>Dashboard</a>
+                        <a class="home" href="{% url 'dashboard-home' request.user.username %}"><i class="icon-home"></i>Dashboard</a>
                     </li>
                     <li>
-                        <a href="{% url 'dashboard-videos' request.user.username %}"><i class="fa fa-video-camera"></i>Videos</a>
+                        <a class="videos" href="{% url 'dashboard-videos' request.user.username %}"><i class="fa fa-video-camera"></i>Videos</a>
                     </li>
                     <li>
-                        <a href="{% url 'tasks-list' request.user.username %}"><i class="fa fa-tasks"></i>Tasks</a>
+                        <a class="tasks" href="{% url 'tasks-list' request.user.username %}"><i class="fa fa-tasks"></i>Tasks</a>
                     </li>
                     {% comment %}
                         <li>
@@ -136,6 +136,7 @@
 {% compress js %}
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/jquery-1.10.2.min.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/jquery-ui-1.10.3.min.js' %}"></script>
+<script src="{% static 'framebuzz/dashboard/vendor/jquery/bootbox.min.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/chart/highcharts.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/chart/modules/exporting.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/bootstrap.min.js' %}"></script>
@@ -159,6 +160,7 @@
 <script src="{% static 'framebuzz/profiles/vendor/jquery/jquery.placeholder.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/vendor/jquery/jquery.steps.min.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/functions.js' %}"></script>
+<script src="{% static 'framebuzz/dashboard/js/dashboard.base.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/js/dashboard.quickupload.js' %}"></script>
 <script type="text/javascript">
     $(window).load(function(){

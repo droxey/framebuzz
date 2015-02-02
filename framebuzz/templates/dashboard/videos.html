@@ -1,13 +1,9 @@
 {% extends "dashboard/base_dark.html" %}
 {% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags dashboard_tags %}
 
-{% block page_header %}
-    <link rel="stylesheet" href="{% static 'framebuzz/dashboard/theme/assets/css/to-do.css' %}">
-    <link href="{% static 'framebuzz/dashboard/theme/assets/js/fancybox/jquery.fancybox.css' %}" rel="stylesheet">
-{% endblock %}
+{% block page_class %}videos{% endblock %}
 
 {% block page_content %}
-
 <div class="col-md-12 masonry">
     <div class="block">
         <h2><i class="fa fa-video-camera"></i> Videos</h2>

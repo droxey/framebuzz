@@ -8,19 +8,21 @@
     {% endcompress %}
 {% endblock %}
 
+{% block page_class %}videos{% endblock %}
+
 {% block page_content %}
-<div class="col-md-12 masonry">
+<div class="col-md-12">
     <div class="block">
         <h2 class="no-margin"><i class="fa fa-video-camera"></i> {{ video.title|title }}</h2>
         <div class="row" id="details-stats-row">
             <div class="video-stats row">
-                <div class="col-md-2 stat pull-right first">
+                <div class="col-md-push-3 col-md-2 stat first">
                     <i class="fa fa-users"></i> <strong>{{ commenters|length|short_number }}</strong> Participant{{ commenters|length|pluralize }}
                 </div>
-                <div class="col-md-2 stat pull-right">
+                <div class="col-md-push-3 col-md-2 stat">
                     <i class="fa fa-comments"></i> <strong>{{ comment_count|short_number }}</strong> Comment{% if not comment_count %}s{% else %}{{ comment_count|pluralize }}{% endif %}
                 </div>
-                <div class="col-md-2 stat pull-right last">
+                <div class="col-md-push-3 col-md-2 stat last">
                     <i class="fa fa-eye"></i> <strong>{{ plays|short_number }}</strong> View{{ plays|pluralize }}
                 </div>
             </div>
@@ -43,9 +45,14 @@
                 </li>
                 <li class="actions pull-right">
                     <ul class="nav">
-                        <li>
+                        <li class="pull-right">
                             <a href="{% url 'dashboard-delete-video' video.slug %}" title="Delete Video" class="btn btn-danger delete-video">
                                 <i class="fa fa-trash-o"></i> Delete Video
+                            </a>
+                        </li>
+                        <li class="pull-right">
+                            <a href="" title="Start a Viewing Session" class="btn btn-success start-viewing-session">
+                                <i class="fa fa-eye"></i> Start a Viewing Session
                             </a>
                         </li>
                     </ul>
@@ -196,7 +203,7 @@
                             <div class="clearfix"></div>
                         </header>
                         {% for task in tasks %}
-                        {% include "tasks/snippets/item.html" %}
+                            {% include "tasks/snippets/item.html" %}
                         {% empty %}
                         {% endfor %}
                     </div>

@@ -1,6 +1,8 @@
 {% extends "dashboard/base_dark.html" %}
 {% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags dashboard_tags comments %}
 
+{% block page_class %}tasks{% endblock %}
+
 {% block page_content %}
 
 <div class="col-md-12">
@@ -39,4 +41,10 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block page_javascript %}
+    {% compress js %}
+        <script type="text/javascript" src="{% static 'framebuzz/dashboard/js/dashboard.tasks.js' %}"></script>
+    {% endcompress %}
 {% endblock %}

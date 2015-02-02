@@ -27,24 +27,24 @@ $(function() {
         form.find('input[name="comment"]').val('');
     };
 
-    // Lazy load images.
-    $('.lazy-load').lazyLoadXT();
-
     // Delete video button.
     $(document).on('click', 'a.delete-video', function(e) {
         e.preventDefault();
 
         var url = $(this).attr('href');
 
-        bootbox.confirm("Are you sure you want to remove this video?", function(result) {
-            if (result) {
-                $.get(url, function(response) {
-                    if (response === 'ok') {
-                        window.location.reload();
-                    }
-                });
-            }
-        });
+        // TODO:
+        // Figure out why bootbox isn't working in this context.
+
+        // bootbox.confirm("Are you sure you want to remove this video?", function(result) {
+        //     if (result) {
+        //         $.get(url, function(response) {
+        //             if (response === 'ok') {
+        //                 window.location.reload();
+        //             }
+        //         });
+        //     }
+        // });
 
         return false;
     });
