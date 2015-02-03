@@ -29,7 +29,7 @@ def video_test(request, slug):
 
 
 @xframe_options_exempt
-def video_embed(request, slug, convo_slug=None):
+def video_embed(request, slug, convo_slug=None, control_sync=False):
     try:
         video, created = get_or_create_video(slug)
         next_url = '%s?close=true' % reverse('video-embed', args=(video.slug,))
@@ -49,8 +49,11 @@ def video_embed(request, slug, convo_slug=None):
         if request.user.is_authenticated():
             action.send(request.user, verb='viewed video', action_object=video)
 
+        start_private_viewing = convo_slug is None and control_sync is True
+
         return render_to_response('player/video_embed.html', {
             'close_window': request.GET.get('close', None),
+            'start_private_viewing': start_private_viewing,
             'video': video,
             'socket_port': settings.SOCKJS_PORT,
             'socket_channel': settings.SOCKJS_CHANNEL,

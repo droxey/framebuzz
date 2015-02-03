@@ -65,7 +65,8 @@
             window.location.hash = '#/player/panel';
         }
 
-        var is_authenticated = '{{ is_authenticated|lower }}' === 'true';
+        var is_authenticated = '{{ is_authenticated|lower }}' === 'true',
+            start_private_viewing = '{{ start_private_viewing|lower }}' === 'true';
 
         // Set up our global SOCK variable.
         var SOCK = {
@@ -89,8 +90,11 @@
             facebook: "{% provider_login_url 'facebook' next=next_url method='oauth2' display='popup' %}",
             google: "{% provider_login_url 'google' next=next_url method='oauth2' display='popup' %}"
           },
-          ravenjs_dsn: '{{ ravenjs_dsn }}'
+          ravenjs_dsn: '{{ ravenjs_dsn }}',
+          start_private_viewing: start_private_viewing
         };
+
+        console.log(SOCK.start_private_viewing);
       </script>
     {% endcompress %}
     <!--[if lt IE 9]>

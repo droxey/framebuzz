@@ -20,6 +20,7 @@ angular.module('framebuzz.controllers', [])
                 $scope.updateSlider = false;
                 $scope.activeViewTitle = '';
                 $scope.requiresLogin = false;
+                $scope.startPrivateViewing = SOCK.start_private_viewing;
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
@@ -93,7 +94,7 @@ angular.module('framebuzz.controllers', [])
                                     $scope.postNewThread();
                                 }
                                 $state.transitionTo('player.blendedView');
-                            }   
+                            }
                         }
                         else {
                             if (data.data.errors['__all__'] !== undefined) {
@@ -247,7 +248,7 @@ angular.module('framebuzz.controllers', [])
                         $scope.formSubmitted = true;
 
                         $scope.player.pause();
-                        $state.transitionTo('player.loginView');   
+                        $state.transitionTo('player.loginView');
                     }
                 };
 
@@ -291,7 +292,7 @@ angular.module('framebuzz.controllers', [])
                     $scope.newThread = {};
                     $scope.formSubmitted = false;
                     safeApply($scope);
-                    
+
                     $state.transitionTo('player.blendedView');
                 };
 
@@ -362,7 +363,7 @@ angular.module('framebuzz.controllers', [])
                 $scope.getUserProfile = function(username) {
                     // temporary!
                     return;
-                    
+
                     if (username === undefined) {
                         username = $scope.videoInstance.user.username;
                     }
@@ -748,12 +749,17 @@ angular.module('framebuzz.controllers', [])
                             }, 1500);
                         }
                         else {
-                            if ($scope.videoInstance.video.password_required) {
-                                $state.transitionTo('player.enterPasswordView');
-                                $('.mejs-overlay-button').parent().hide();
+                            if ($scope.startPrivateViewing) {
+                                $state.transitionTo('player.startPrivateConvo');
                             }
                             else {
-                                $state.transitionTo('player.blendedView');
+                                if ($scope.videoInstance.video.password_required) {
+                                    $state.transitionTo('player.enterPasswordView');
+                                    $('.mejs-overlay-button').parent().hide();
+                                }
+                                else {
+                                    $state.transitionTo('player.blendedView');
+                                }
                             }
                         }
 

@@ -397,6 +397,7 @@ class PrivateSession(caching.base.CachingMixin, models.Model):
     slug = RandomSlugField(length=settings.RANDOMSLUG_LENGTH)
     owner = models.ForeignKey(User)
     video = models.ForeignKey(Video)
+    is_synchronized = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Private Session'

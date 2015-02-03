@@ -27,6 +27,17 @@ $(function() {
         form.find('input[name="comment"]').val('');
     };
 
+    $(document).on('click', 'a.start-viewing-session', function(e) {
+        e.preventDefault();
+
+        var iFrame = $('iframe.center-block'),
+            newUrl = $(this).attr('href');
+
+        iFrame.attr('src', newUrl);
+
+        return false;
+    });
+
     // Delete video button.
     $(document).on('click', 'a.delete-video', function(e) {
         e.preventDefault();
