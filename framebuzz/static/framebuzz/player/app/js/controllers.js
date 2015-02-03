@@ -442,7 +442,8 @@ angular.module('framebuzz.controllers', [])
                                 'username': $scope.videoInstance.user.username,
                                 'invitees': $scope.inviteeUsernamesOrEmails,
                                 'session_key': $scope.sessionKey,
-                                'video_id': SOCK.video_id
+                                'video_id': SOCK.video_id,
+                                'start_private_viewing': $scope.startPrivateViewing
                             }
                         });
                     }

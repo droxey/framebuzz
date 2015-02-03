@@ -337,7 +337,7 @@ def add_comment_action(context):
             is_public = True
             if thread.session is not None:
                 is_public = False
-                
+
             is_fav = Action.objects.actor(user, verb='added to favorites',
                                           action_object_object_id=thread.id)
 
@@ -717,16 +717,20 @@ def start_private_convo(context):
     invitees = context.get('invitees', None) or list()
     site = Site.objects.get_current()
     send_to_list = list()
+    start_private_viewing = context.get('start_private_viewing', False)
 
     if context_data.get('username', None):
         user = auth.models.User.objects.get(username=context_data['username'])
     else:
         user = context.get('user', None)
 
+    print 'start private: %s' % start_private_viewing
+
     # Create the session.
     private_session = PrivateSession()
     private_session.video = video
     private_session.owner = user
+    private_session.is_synchronized = start_private_viewing
     private_session.save()
 
     # Iterate over the invitees.
@@ -776,5 +780,5 @@ def start_private_convo(context):
 
     convo_embed_url = reverse('convo-embed', args=[video.slug, private_session.slug])
     url = '%s%s' % (site.domain, convo_embed_url)
-    return_data = {'convo_url': url}
+    return_data = {'convo_url': url, 'syncControls': private_session.is_synchronized}
     return construct_message('FB_START_PRIVATE_CONVO', channel, return_data)

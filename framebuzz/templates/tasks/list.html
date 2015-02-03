@@ -8,21 +8,15 @@
 <div class="col-md-12">
     <div class="block">
         <h2>Tasks</h2>
+        <div class="config">
+            <a class="sbox" href="{% url 'tasks-create' request.user.username %}" rel="shadowbox">
+                <i class="icon-plus add-new-todo"></i>
+            </a>
+        </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="listview">
-                    <header class="media listview-header">
-                        <label class="pull-left">
-                            <input class="check-all" type="checkbox" value="">
-                        </label>
-                        <a href="{% url 'tasks-create' request.user.username %}" class="btn btn-sm btn-success sbox" rel="shadowbox">
-                            Add New
-                        </a>
-                        <a href="#" class="btn btn-sm list-delete-all btn-danger">
-                            Delete Selected Tasks
-                        </a>
-                        <div class="clearfix"></div>
-                    </header>
+                    <h3 class="block-title">Open</h3>
                     {% for task in tasks %}
                         {% include "tasks/snippets/item.html" %}
                     {% empty %}
@@ -30,9 +24,19 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <div class="col-md-6 hidden">
+            <div class="col-md-4">
                 <div class="listview">
-                    <header class="media listview-header">
+                    <h3 class="block-title">In Progress</h3>
+                    <header class="listview-header">
+                        <div class="clearfix"></div>
+                    </header>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-4">
+                <div class="listview">
+                    <h3 class="block-title">Complete</h3>
+                    <header class="listview-header">
                         <div class="clearfix"></div>
                     </header>
                 </div>

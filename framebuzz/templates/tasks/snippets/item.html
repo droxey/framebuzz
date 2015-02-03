@@ -1,9 +1,6 @@
 {% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags dashboard_tags comments %}
 
 <div class="media">
-    <label class="pull-left">
-        <input type="checkbox" value="" class="check-all">
-    </label>
     <div class="media-body clearfix">
         <a class="sbox" href="{% url 'tasks-detail' request.user.username task.slug %}">{{ task.title|title }}</a><br>
         {% if task.description %}<small>{{ task.description }}</small><br>{% endif %}

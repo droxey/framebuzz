@@ -207,7 +207,8 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                                 'data': data,
                                 'outbound_channel': self.session_channel,
                                 'username': data.get('username', None),
-                                'invitees': data.get('invitees', None)
+                                'invitees': data.get('invitees', None),
+                                'start_private_viewing': data.get('start_private_viewing', False)
                             }) \
                         | tasks.start_private_convo.s() \
                         | tasks.message_outbound.s()
