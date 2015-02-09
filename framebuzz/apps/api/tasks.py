@@ -762,8 +762,12 @@ def start_private_convo(context):
 
             send_to_list.append(email_addr)
 
-    action.send(user, verb='joined private conversation',
-                action_object=private_session, target=video)
+    if private_session.is_synchronized:
+        action.send(user, verb='joined private viewing',
+                    action_object=private_session, target=video)
+    else:
+        action.send(user, verb='joined private conversation',
+                    action_object=private_session, target=video)
 
     if len(send_to_list) > 0:
         # Send notifications to receipients.
