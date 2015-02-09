@@ -67,7 +67,8 @@
 
         var is_authenticated = '{{ is_authenticated|lower }}' === 'true',
             start_private_viewing = '{{ start_private_viewing|lower }}' === 'true',
-            private_viewing_enabled = '{{ private_viewing_enabled|lower }}' === 'true';
+            private_viewing_enabled = '{{ private_viewing_enabled|lower }}' === 'true',
+            video_controls_enabled = '{{ video_controls_enabled|lower }}' === 'true';
 
         // Set up our global SOCK variable.
         var SOCK = {
@@ -93,7 +94,11 @@
           },
           ravenjs_dsn: '{{ ravenjs_dsn }}',
           start_private_viewing: start_private_viewing,            // Used when video loaded from email invite.
-          private_viewing_enabled: private_viewing_enabled         // Only dashboard users have access.
+          private_viewing_enabled: private_viewing_enabled,        // Only dashboard users have access.
+          video_controls_enabled: video_controls_enabled,
+          video_player_features: video_controls_enabled
+                                      ? ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'privateviewing', 'progress', 'playpause']
+                                      : ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo']
         };
       </script>
     {% endcompress %}

@@ -18,6 +18,7 @@ from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from framebuzz.apps.api.backends.youtube import get_or_create_video
 from framebuzz.apps.api.serializers import UserSerializer
 from framebuzz.apps.api.utils import errors_to_json
+from framebuzz.apps.api.models import PrivateSession
 
 
 def video_test(request, slug):
@@ -33,6 +34,7 @@ def video_embed(request, slug, convo_slug=None, control_sync=False):
     try:
         video, created = get_or_create_video(slug)
         next_url = '%s?close=true' % reverse('video-embed', args=(video.slug,))
+        video_controls_enabled = True
 
         if video.mp4_url:
             mp4_url = video.mp4_url
@@ -50,12 +52,21 @@ def video_embed(request, slug, convo_slug=None, control_sync=False):
             action.send(request.user, verb='viewed video', action_object=video)
 
         start_private_viewing = convo_slug is None and control_sync is True
-        private_viewing_enabled = request.user.is_authenticated() and request.user.get_profile().dashboard_enabled
+        private_viewing_enabled = request.user.is_authenticated() and request.user.get_profile().dashboard_enabled and control_sync is False
+
+        if convo_slug:
+            private_session = PrivateSession.objects.get(slug=convo_slug)
+            if private_session.is_synchronized:
+                if request.user.is_authenticated() and private_session.owner == request.user:
+                    video_controls_enabled = True
+                else:
+                    video_controls_enabled = False
 
         return render_to_response('player/video_embed.html', {
             'close_window': request.GET.get('close', None),
             'start_private_viewing': start_private_viewing,
             'private_viewing_enabled': private_viewing_enabled,
+            'video_controls_enabled': video_controls_enabled,
             'video': video,
             'socket_port': settings.SOCKJS_PORT,
             'socket_channel': settings.SOCKJS_CHANNEL,

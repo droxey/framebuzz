@@ -845,8 +845,13 @@ angular.module('framebuzz.controllers', [])
                         notificationFactory.info(jsonData.data.message);
                     }
                     else if (jsonData.eventType == eventTypes.startPrivateConvo) {
-                        var url = 'http://' + jsonData.data.convo_url;
-                        broadcaster.prepForBroadcast({ broadcastType: 'private_convo_started', data: url });
+                        var url = 'http://' + jsonData.data.convo_url,
+                            sync = jsonData.data.syncControls;
+
+                        broadcaster.prepForBroadcast({ broadcastType: 'private_convo_started', data: {
+                            'convo_url': url,
+                            'syncControls': sync
+                        }});
                     }
                     else if (jsonData.eventType == eventTypes.searchUsers) {
                         $scope.searchResults = jsonData.data.users;

@@ -13,7 +13,7 @@ angular.module('framebuzz.directives', [])
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
                 enablePluginDebug: true,
-                features: ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'privateviewing', 'progress', 'playpause'],
+                features: SOCK.video_player_features,
                 pluginPath: SOCK.root_path + 'swf/',
                 flashName: 'flashmediaelement.swf',
                 silverlightName: 'silverlightmediaelement.xap',
@@ -41,6 +41,8 @@ angular.module('framebuzz.directives', [])
                     var isChrome = !!window.chrome;
                     var isIE = /*@cc_on!@*/false;
                     var hasHitPlay = false;
+
+
 
                     if (isSafari && !isChrome) {
                         $('.mejs-time-rail').addClass('safari');
@@ -551,9 +553,11 @@ angular.module('framebuzz.directives', [])
      return {
          link: function($scope, $element, $attributes) {
             $scope.$on('private_convo_started', function() {
-                var url = broadcaster.message.data;
-                var seconds = 4;
-                var countdownTimer = window.setInterval(timer, 1000);
+                var url = broadcaster.message.data.convo_url,
+                    sync = broadcaster.message.data.controlSync,
+                    seconds = 4,
+                    countdownTimer = window.setInterval(timer, 1000),
+                    text = sync ? 'Loading new conversation in ' : 'Loading private viewing in ';
 
                 function timer() {
                     seconds = seconds - 1;
@@ -565,7 +569,7 @@ angular.module('framebuzz.directives', [])
                     }
                     else {
                         var secondText = seconds == 1 ? ' second...' : ' seconds...';
-                        $element.text('Loading new conversation in ' + seconds.toString() + secondText);
+                        $element.text(text + seconds.toString() + secondText);
                     }
                 }
             });

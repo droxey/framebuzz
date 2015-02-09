@@ -778,7 +778,11 @@ def start_private_convo(context):
                 'send_to_list': send_to_list
             })
 
-    convo_embed_url = reverse('convo-embed', args=[video.slug, private_session.slug])
+    if private_session.is_synchronized:
+        convo_embed_url = reverse('viewing-embed', args=[video.slug, private_session.slug])
+    else:
+        convo_embed_url = reverse('convo-embed', args=[video.slug, private_session.slug])
+
     url = '%s%s' % (site.domain, convo_embed_url)
     return_data = {'convo_url': url, 'syncControls': private_session.is_synchronized}
     return construct_message('FB_START_PRIVATE_CONVO', channel, return_data)

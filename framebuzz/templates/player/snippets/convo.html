@@ -6,12 +6,16 @@
         <div class="row video">
             <div class="col-xs-12">
                 <h1>{{ video.title|title }}</h1>
-                <iframe src="{% url 'convo-embed' video.slug private_convo.slug %}" scrolling="no" frameBorder="0" height="445" width="700" class="center-block"></iframe>
+                {% if private_convo.is_synchronized %}
+                    <iframe src="{% url 'viewing-embed' video.slug private_convo.slug %}" scrolling="no" frameBorder="0" height="445" width="700" class="center-block"></iframe>
+                {% else %}
+                    <iframe src="{% url 'convo-embed' video.slug private_convo.slug %}" scrolling="no" frameBorder="0" height="445" width="700" class="center-block"></iframe>
+                {% endif %}
             </div>
         </div>
         <div class="row container details clearfix">
             {% if found_by %}
-                <div class="col-xs-2">                
+                <div class="col-xs-2">
                     <h2>Found By</h2>
                     <a title="{{ found_by|display_name }}" href="{% url 'profiles-home' found_by.username %}">
                         <img src="{% avatar_url found_by 110 %}" alt="" class="img-responsive" />

@@ -237,7 +237,7 @@ def video_share(request, username=None, slug=None, convo_slug=None, sync=False):
             if request.is_ajax():
                 template = 'player/snippets/share.html'
             else:
-                if sync:
+                if private_session.is_synchronized:
                     template = 'dashboard/share.html'
                 else:
                     request.session['share'] = context
