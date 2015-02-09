@@ -64,6 +64,7 @@ class UserSerializer(serializers.ModelSerializer):
     profile_url = serializers.SerializerMethodField('get_profile_url')
     video_in_library = serializers.SerializerMethodField('get_video_in_library')
     display_name = serializers.SerializerMethodField('get_display_name')
+    dashboard_enabled = serializers.SerializerMethodField('get_dashboard_enabled')
 
     class Meta:
         model = User
@@ -86,6 +87,9 @@ class UserSerializer(serializers.ModelSerializer):
                 user_video = UserVideo.objects.filter(user=obj, video=video)
                 return len(user_video) == 1
             return False
+
+    def get_dashboard_enabled(self, obj):
+        return obj.get_profile().dashboard_enabled
 
     def get_display_name(self, obj):
         return obj.get_profile().display_name or obj.username

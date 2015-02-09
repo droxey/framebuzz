@@ -66,7 +66,8 @@
         }
 
         var is_authenticated = '{{ is_authenticated|lower }}' === 'true',
-            start_private_viewing = '{{ start_private_viewing|lower }}' === 'true';
+            start_private_viewing = '{{ start_private_viewing|lower }}' === 'true',
+            private_viewing_enabled = '{{ private_viewing_enabled|lower }}' === 'true';
 
         // Set up our global SOCK variable.
         var SOCK = {
@@ -91,10 +92,9 @@
             google: "{% provider_login_url 'google' next=next_url method='oauth2' display='popup' %}"
           },
           ravenjs_dsn: '{{ ravenjs_dsn }}',
-          start_private_viewing: start_private_viewing
+          start_private_viewing: start_private_viewing,            // Used when video loaded from email invite.
+          private_viewing_enabled: private_viewing_enabled         // Only dashboard users have access.
         };
-
-        console.log(SOCK.start_private_viewing);
       </script>
     {% endcompress %}
     <!--[if lt IE 9]>

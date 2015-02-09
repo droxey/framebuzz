@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <i class="fa fa-fw fa-4x fa-exclamation-triangle absolute-center"></i>
-                        <p>Sorry, you don't have permission to access this conversation.</p>
+                        <p>Sorry, you don't have permission to access this {% if private_session.is_synchronized %}viewing session{% else %}conversation{% endif %}.</p>
                     </div>
                 </div>
             </div>

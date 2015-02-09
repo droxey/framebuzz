@@ -21,6 +21,7 @@ angular.module('framebuzz.controllers', [])
                 $scope.activeViewTitle = '';
                 $scope.requiresLogin = false;
                 $scope.startPrivateViewing = SOCK.start_private_viewing;
+                $scope.privateViewingEnabled = SOCK.private_viewing_enabled;
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
@@ -619,6 +620,21 @@ angular.module('framebuzz.controllers', [])
                         window.location.hash = '#/player/panel/hello/user/login';
                     }
                     else {
+                        window.location.hash = '#/player/panel/private';
+                    }
+                });
+
+                $scope.$on('player_startprivateviewing', function() {
+                    if ($scope.videoInstance == null || !$scope.videoInstance.is_authenticated) {
+                        $scope.requiresLogin = true;
+                        safeApply($scope);
+
+                        window.location.hash = '#/player/panel/hello/user/login';
+                    }
+                    else {
+                        $scope.startPrivateViewing = true;
+                        safeApply($scope);
+
                         window.location.hash = '#/player/panel/private';
                     }
                 });

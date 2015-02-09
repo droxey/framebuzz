@@ -163,7 +163,7 @@ def recommendations(request):
     }, context_instance=RequestContext(request))
 
 
-def video_share(request, username=None, slug=None, convo_slug=None):
+def video_share(request, username=None, slug=None, convo_slug=None, sync=False):
     try:
         video_in_library = False
         video, created = get_or_create_video(slug)
@@ -212,8 +212,12 @@ def video_share(request, username=None, slug=None, convo_slug=None):
                     invitee.accepted_on = datetime.now()
                     invitee.save()
 
-                    action.send(request.user, verb='joined private conversation',
-                                action_object=private_session, target=video)
+                    if private_session.is_synchronized:
+                        action.send(request.user, verb='joined viewing session',
+                                    action_object=private_session, target=video)
+                    else:
+                        action.send(request.user, verb='joined private conversation',
+                                    action_object=private_session, target=video)
 
                 can_access = True
 
@@ -233,9 +237,7 @@ def video_share(request, username=None, slug=None, convo_slug=None):
             if request.is_ajax():
                 template = 'player/snippets/share.html'
             else:
-                if video.found_by.get_profile().dashboard_enabled or \
-                        (video.added_by and
-                            video.added_by.get_profile().dashboard_enabled):
+                if sync:
                     template = 'dashboard/share.html'
                 else:
                     request.session['share'] = context

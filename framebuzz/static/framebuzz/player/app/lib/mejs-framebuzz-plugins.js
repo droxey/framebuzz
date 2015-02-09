@@ -26,24 +26,32 @@
       var shareDiv = controls.find('div.mejs-share');
 
       var button =
-        $('<button class="mejs-add-library-button" type="button" aria-controls="mep_0" title="Add to My Library" aria-label="Add to My Libary">' +
-           '<i class="fa fa-plus"></i>Add to Library' +
+        $('<button class="mejs-add-library-button" type="button" aria-controls="mep_0" title="Add Video to My Library" aria-label="Add Video to My Libary">' +
+           '<i class="fa fa-plus"></i>Add Video' +
            '</button>')
         .appendTo(shareDiv);
     },
     buildmuteconvo: function(player, controls, layers, media) {
       var shareDiv = controls.find('div.mejs-share');
 
-      var button =  
-        $('<button class="mejs-mute-convo-button mejs-mute" type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
-            '<i class="fa fa-comment"></i>Mute Conversation</button>')
+      var button =
+        $('<button class="mejs-mute-convo-button mejs-mute" type="button" aria-controls="mep_0" title="Mute Chat" aria-label="Mute Chat">' +
+            '<i class="fa fa-comment"></i>Mute Chat</button>')
         .appendTo(shareDiv);
     },
     buildprivateconvo: function(player, controls, layers, media) {
       var shareDiv = controls.find('div.mejs-share');
-      var button = 
+      var button =
         $('<button class="mejs-start-private-session" class="rounded"><i class="fa fa-lock"></i> Start Private</button>')
       .appendTo(shareDiv);
+    },
+    buildprivateviewing: function(player, controls, layers, media) {
+        if (SOCK.private_viewing_enabled) {     // Only dashboard-enabled users may utilize the private viewing function.
+            var shareDiv = controls.find('div.mejs-share');
+            var button =
+                $('<button class="mejs-start-private-viewing" class="rounded"><i class="fa fa-group"></i> Watch Together</button>')
+            .appendTo(shareDiv);
+        }
     }
   });
 })(jQuery);

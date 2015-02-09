@@ -13,7 +13,7 @@ angular.module('framebuzz.directives', [])
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
                 enablePluginDebug: true,
-                features: ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'progress', 'playpause'],
+                features: ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'privateviewing', 'progress', 'playpause'],
                 pluginPath: SOCK.root_path + 'swf/',
                 flashName: 'flashmediaelement.swf',
                 silverlightName: 'silverlightmediaelement.xap',
@@ -100,6 +100,14 @@ angular.module('framebuzz.directives', [])
                         }, 300);
                     });
 
+                    $(document).on('click', '.mejs-start-private-viewing', function() {
+                        fadeOutControls();
+
+                        window.setTimeout(function() {
+                            broadcaster.prepForBroadcast({ broadcastType: 'player_startprivateviewing' });
+                        }, 300);
+                    });
+
                     $('.mejs-share-framebuzz-button').click(function() {
                         fadeOutControls();
 
@@ -110,7 +118,7 @@ angular.module('framebuzz.directives', [])
 
                     $('.mejs-add-library-button').click(function() {
                         fadeOutControls();
-                        
+
                         window.setTimeout(function() {
                             broadcaster.prepForBroadcast({ broadcastType: 'player_addtolibrary' });
                         }, 300);
@@ -198,7 +206,7 @@ angular.module('framebuzz.directives', [])
                 window.setTimeout(function() {
                     var textbox = element.next();
                     var textboxWidth = textbox.width();
-                    
+
                     textbox.css({
                         'padding-left': (element.width() + 12) + 'px',
                         'width': (textboxWidth - element.width() - 12) + 'px'

@@ -49,10 +49,13 @@ urlpatterns = patterns('',
 
     # Share Page (Shared by authenticated user):
     url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/$',
-        'framebuzz.apps.profiles.views.video_share', name='profiles-share'),
+        'framebuzz.apps.profiles.views.video_share', { 'sync': False }, name='profiles-share'),
 
     url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/convo/(?P<convo_slug>[\w.@+-]+)/$',
-        'framebuzz.apps.profiles.views.video_share', name='profiles-convo-share'),
+        'framebuzz.apps.profiles.views.video_share', { 'sync': False }, name='profiles-convo-share'),
+
+    url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/view/(?P<convo_slug>[\w.@+-]+)/$',
+        'framebuzz.apps.profiles.views.video_share', { 'sync': True }, name='dashboard-join-viewing-session'),
 
     # Zencoder completion webhook:
     url(r'^video/notifications/$',

@@ -50,10 +50,12 @@ def video_embed(request, slug, convo_slug=None, control_sync=False):
             action.send(request.user, verb='viewed video', action_object=video)
 
         start_private_viewing = convo_slug is None and control_sync is True
+        private_viewing_enabled = request.user.is_authenticated() and request.user.get_profile().dashboard_enabled
 
         return render_to_response('player/video_embed.html', {
             'close_window': request.GET.get('close', None),
             'start_private_viewing': start_private_viewing,
+            'private_viewing_enabled': private_viewing_enabled,
             'video': video,
             'socket_port': settings.SOCKJS_PORT,
             'socket_channel': settings.SOCKJS_CHANNEL,
