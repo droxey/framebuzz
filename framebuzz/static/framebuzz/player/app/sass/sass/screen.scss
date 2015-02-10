@@ -434,7 +434,7 @@ object, embed, video, iframe {
                             &.mejs-start-private-viewing {
                                 padding-left: 4px;
                                 padding-right: 0;
-                                
+
                                 i {
                                     margin-top: -1px;
                                 }
@@ -545,6 +545,18 @@ object, embed, video, iframe {
                                     &:hover {
                                         opacity: 1;
                                         @include single-transition(opacity 0.25s ease-in-out);
+                                    }
+                                }
+                            }
+
+                            &.disabled {
+
+
+                                button {
+                                    cursor: not-allowed;
+                                    
+                                    i {
+                                        color: #ccc;
                                     }
                                 }
                             }

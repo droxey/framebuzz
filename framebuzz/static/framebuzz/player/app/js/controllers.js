@@ -878,8 +878,6 @@ angular.module('framebuzz.controllers', [])
                         }
                     }
                     else if (jsonData.eventType == eventTypes.syncChannel) {
-                        console.log('hi');
-                        
                         // Only listeners will ever receive this particular notification.
                         if ($scope.isSynchronized && !$scope.isHostingViewing) {
                             console.log(jsonData.data);

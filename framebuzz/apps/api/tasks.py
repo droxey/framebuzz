@@ -471,8 +471,6 @@ def add_player_action(context):
     outbound_channel = context.get('outbound_channel', None)
     verb = None
 
-    print player_data
-
     if player_data.get('username', None):
         user = auth.models.User.objects.get(username=player_data['username'])
     else:

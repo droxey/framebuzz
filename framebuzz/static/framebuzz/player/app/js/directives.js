@@ -25,6 +25,7 @@ angular.module('framebuzz.directives', [])
                 enablePluginSmoothing: true,
                 autosizeProgress: false,
                 enablePseudoStreaming: true,
+                clickToPlayPause: !SOCK.is_synchronized || SOCK.is_hosting_viewing,
                 success: function(media) {
                     //  =====
                     //  Angular.js Globals
@@ -54,6 +55,20 @@ angular.module('framebuzz.directives', [])
                     $('.mejs-overlay-loading').remove();
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
+
+                    if (SOCK.is_synchronized && !SOCK.is_hosting_viewing) {
+                        // Hide the play overlay.
+                        $('.mejs-overlay-play').remove();
+
+                        // Remove floating time indicator.
+                        $('.mejs-time-float').remove();
+
+                        // Hide the play/pause button.
+                        $('.mejs-playpause-button').unbind('click');
+                        $('.mejs-playpause-button').addClass('disabled');
+
+                        $('.mejs-time-total').unbind('mousedown');
+                    }
 
                     //  =====
                     //  jQuery Event Listeners
