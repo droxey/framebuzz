@@ -806,6 +806,6 @@ def start_private_convo(context):
     else:
         convo_embed_url = reverse('convo-embed', args=[video.slug, private_session.slug])
 
-    url = '%s%s' % (site.domain, convo_embed_url)
+    url = '%s%s' % ('http://staging.framebuzzlab.com', convo_embed_url)
     return_data = {'convo_url': url, 'syncControls': private_session.is_synchronized}
     return construct_message('FB_START_PRIVATE_CONVO', channel, return_data)
