@@ -4,7 +4,12 @@
       var titleDiv = $('<div class="mejs-title mejs-fade-in"></div>').appendTo(controls);
       var title = $('<h1 class="video-title" />').appendTo(titleDiv);
       if (SOCK.private_session_key) {
-        title.html('<i class="fa fa-lock"></i> ' + SOCK.video_title);
+          if (SOCK.is_synchronized) {
+              title.html('<i class="fa fa-group"></i> ' + SOCK.video_title);
+          }
+          else {
+              title.html('<i class="fa fa-lock"></i> ' + SOCK.video_title);
+          }
       }
       else {
         title.text(SOCK.video_title);
@@ -46,7 +51,10 @@
       .appendTo(shareDiv);
     },
     buildprivateviewing: function(player, controls, layers, media) {
+        console.log(SOCK.private_viewing_enabled);
         if (SOCK.private_viewing_enabled) {     // Only dashboard-enabled users may utilize the private viewing function.
+            console.log('private enabled');
+
             var shareDiv = controls.find('div.mejs-share');
             var button =
                 $('<button class="mejs-start-private-viewing" class="rounded"><i class="fa fa-group"></i> Watch Together</button>')

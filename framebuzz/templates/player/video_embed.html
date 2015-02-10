@@ -68,7 +68,8 @@
         var is_authenticated = '{{ is_authenticated|lower }}' === 'true',
             start_private_viewing = '{{ start_private_viewing|lower }}' === 'true',
             private_viewing_enabled = '{{ private_viewing_enabled|lower }}' === 'true',
-            video_controls_enabled = '{{ video_controls_enabled|lower }}' === 'true';
+            is_hosting_viewing = '{{ is_hosting_viewing|lower }}' === 'true',
+            is_synchronized = '{{ is_synchronized|lower }}' === 'true';
 
         // Set up our global SOCK variable.
         var SOCK = {
@@ -95,11 +96,21 @@
           ravenjs_dsn: '{{ ravenjs_dsn }}',
           start_private_viewing: start_private_viewing,            // Used when video loaded from email invite.
           private_viewing_enabled: private_viewing_enabled,        // Only dashboard users have access.
-          video_controls_enabled: video_controls_enabled,
-          video_player_features: video_controls_enabled
-                                      ? ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'privateviewing', 'progress', 'playpause']
-                                      : ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo']
+          is_hosting_viewing: is_hosting_viewing,
+          is_synchronized: is_synchronized,
+          video_player_features: []
         };
+
+        if (is_synchronized) {
+            SOCK.video_player_features = ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'progress', 'playpause'];
+        }
+        else {
+            SOCK.video_player_features  =  private_viewing_enabled
+                                                ? ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'privateviewing', 'progress', 'playpause']
+                                                : ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'progress', 'playpause'];
+        }
+
+        console.log(SOCK);
       </script>
     {% endcompress %}
     <!--[if lt IE 9]>

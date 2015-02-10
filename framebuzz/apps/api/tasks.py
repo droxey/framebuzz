@@ -146,6 +146,13 @@ def initialize_video_player(context):
     data['threads'] = json.loads(threadsSerialized)
     data['is_authenticated'] = is_authenticated
     data['private_session_key'] = session_key
+    data['is_synchronized'] = False
+    data['is_hosting'] = False
+
+    if session_key is not None:
+        session = PrivateSession.objects.get(slug=session_key)
+        data['is_synchronized'] = session.is_synchronized
+        data['is_hosting'] = data['is_authenticated'] and session.owner.pk == user.pk
 
     if data['is_authenticated']:
         userSerializer = UserSerializer(user, context={'video': video})
@@ -454,18 +461,23 @@ def toggle_user_follow(context):
         return new_context
 
 
-@celery.task(ignore_result=True)
+@celery.task
 def add_player_action(context):
     player_data = context.get(DATA_KEY, None)
     player_action = player_data.get('action', None)
     video_id = context.get('video_id', None)
     video = Video.objects.get(slug=video_id)
+    session_key = player_data.get('session_key', None)
+    outbound_channel = context.get('outbound_channel', None)
     verb = None
+
+    print player_data
 
     if player_data.get('username', None):
         user = auth.models.User.objects.get(username=player_data['username'])
     else:
         user = context.get('user', None)
+
 
     if isinstance(user, auth.models.AnonymousUser):
         user = auth.models.User.objects.get(username='AnonymousUser')
@@ -478,6 +490,16 @@ def add_player_action(context):
         verb = 'shared'
     else:
         pass
+
+    if session_key is not None:
+        session = PrivateSession.objects.get(slug=session_key)
+        if session.is_synchronized:
+            # Broadcast the action to all players listening,
+            # if the session owner initiated the broadcast.
+            if user.pk == session.owner.pk and player_action != 'player_share':
+                message = construct_message('FB_SYNC_CHANNEL', outbound_channel, player_data)
+                _send_to_channel.delay(channel=outbound_channel, message=message)
+
 
     if 'video' in verb:
         action.send(user,
@@ -724,8 +746,6 @@ def start_private_convo(context):
     else:
         user = context.get('user', None)
 
-    print 'start private: %s' % start_private_viewing
-
     # Create the session.
     private_session = PrivateSession()
     private_session.video = video
@@ -779,7 +799,8 @@ def start_private_convo(context):
                 'session': private_session,
                 'site': site,
                 'video': video,
-                'send_to_list': send_to_list
+                'send_to_list': send_to_list,
+                'audience_total': len(send_to_list) - 1
             })
 
     if private_session.is_synchronized:

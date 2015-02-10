@@ -34,15 +34,12 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
         self.client.connect()
 
         if self.session_channel:
-            print 'user connected to channel: %s' % self.session_channel
             subscribe_tasks.append(tornado.gen.Task(self.client.subscribe, self.session_channel))
 
         if self.user_channel:
-            print 'user connected to channel: %s' % self.user_channel
             subscribe_tasks.append(tornado.gen.Task(self.client.subscribe, self.user_channel))
 
         if self.video_channel:
-            print 'user connected to channel: %s' % self.video_channel
             subscribe_tasks.append(tornado.gen.Task(self.client.subscribe, self.video_channel))
 
         yield subscribe_tasks
@@ -68,9 +65,6 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
 
         private_session_key = data.get('session_key', None)
         video_id = data.get('video_id', None)
-
-        print 'session key: %s' % private_session_key
-        print 'video id: %s' % video_id
 
         if event_type and channel:
             task_chain = None
@@ -142,7 +136,7 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                             extra_context={
                                 'video_id': video_id,
                                 'data': data,
-                                'outbound_channel': self.session_channel,
+                                'outbound_channel': self.video_channel,
                                 'username': data.get('username', None)
                             }) \
                         | tasks.add_player_action.s()

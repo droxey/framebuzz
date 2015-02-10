@@ -20,8 +20,11 @@ angular.module('framebuzz.controllers', [])
                 $scope.updateSlider = false;
                 $scope.activeViewTitle = '';
                 $scope.requiresLogin = false;
+
                 $scope.startPrivateViewing = SOCK.start_private_viewing;
                 $scope.privateViewingEnabled = SOCK.private_viewing_enabled;
+                $scope.isSynchronized = SOCK.is_synchronized;
+                $scope.isHostingViewing = SOCK.is_hosting_viewing;
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
@@ -63,7 +66,8 @@ angular.module('framebuzz.controllers', [])
                     toggleFollow: 'FB_TOGGLE_FOLLOW',
                     startPrivateConvo: 'FB_START_PRIVATE_CONVO',
                     searchUsers: 'FB_SEARCH_USERS',
-                    enterPassword: 'FB_ENTER_PASSWORD'
+                    enterPassword: 'FB_ENTER_PASSWORD',
+                    syncChannel: 'FB_SYNC_CHANNEL'
                 };
 
                 // --
@@ -752,6 +756,8 @@ angular.module('framebuzz.controllers', [])
                         $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         safeApply($scope);
 
+                        console.log($scope.videoInstance);
+
                         var loginButtonClicked = localStorageService.get('loggingIn') === 'true';
                         if (loginButtonClicked) {
                             $scope.postNewThread();
@@ -869,6 +875,24 @@ angular.module('framebuzz.controllers', [])
                         else {
                             $('#id_password_required').addClass('error');
                             $('#password-required-error').removeClass('hidden');
+                        }
+                    }
+                    else if (jsonData.eventType == eventTypes.syncChannel) {
+                        console.log('hi');
+                        
+                        // Only listeners will ever receive this particular notification.
+                        if ($scope.isSynchronized && !$scope.isHostingViewing) {
+                            console.log(jsonData.data);
+
+                            var action = jsonData.data.action;
+
+                            if (action == 'player_playing') {
+                                $scope.player.play();
+                            }
+
+                            if (action == 'player_paused') {
+                                $scope.player.pause();
+                            }
                         }
                     }
                     else {

@@ -54,7 +54,7 @@ urlpatterns = patterns('',
     url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/convo/(?P<convo_slug>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.video_share', { 'sync': False }, name='profiles-convo-share'),
 
-    url(r'^profile/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/viewing/(?P<convo_slug>[\w.@+-]+)/$',
+    url(r'^dashboard/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/viewing/(?P<convo_slug>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.video_share', { 'sync': True }, name='dashboard-join-viewing-session'),
 
     # Zencoder completion webhook:

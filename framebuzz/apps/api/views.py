@@ -34,7 +34,6 @@ def video_embed(request, slug, convo_slug=None, control_sync=False):
     try:
         video, created = get_or_create_video(slug)
         next_url = '%s?close=true' % reverse('video-embed', args=(video.slug,))
-        video_controls_enabled = True
 
         if video.mp4_url:
             mp4_url = video.mp4_url
@@ -53,20 +52,21 @@ def video_embed(request, slug, convo_slug=None, control_sync=False):
 
         start_private_viewing = convo_slug is None and control_sync is True
         private_viewing_enabled = request.user.is_authenticated() and request.user.get_profile().dashboard_enabled and control_sync is False
+        is_hosting_viewing = False
+        is_synchronized = False
 
         if convo_slug:
             private_session = PrivateSession.objects.get(slug=convo_slug)
             if private_session.is_synchronized:
-                if request.user.is_authenticated() and private_session.owner == request.user:
-                    video_controls_enabled = True
-                else:
-                    video_controls_enabled = False
+                is_hosting_viewing = request.user.is_authenticated() and private_session.owner.pk == request.user.pk
+            is_synchronized = private_session.is_synchronized
 
         return render_to_response('player/video_embed.html', {
             'close_window': request.GET.get('close', None),
             'start_private_viewing': start_private_viewing,
             'private_viewing_enabled': private_viewing_enabled,
-            'video_controls_enabled': video_controls_enabled,
+            'is_hosting_viewing': is_hosting_viewing,
+            'is_synchronized': is_synchronized,
             'video': video,
             'socket_port': settings.SOCKJS_PORT,
             'socket_channel': settings.SOCKJS_CHANNEL,

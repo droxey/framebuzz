@@ -65,7 +65,7 @@ angular.module('framebuzz.directives', [])
                         window.setTimeout(function() {
                             $('.mejs-video').removeClass('fade-out-controls');
                             $('.mejs-video').removeClass('show-controls');
-                        }, 250);
+                        }, 150);
                     };
 
                     $('.mejs-mediaelement').mouseenter(function(e) {
@@ -146,6 +146,8 @@ angular.module('framebuzz.directives', [])
                             if (!hasHitPlay) {
                                 $('#buzz-layer > div.panel').addClass('hide-before-play');
                             }
+
+                            // TODO: If private and owner, show message for user 'click play to get started'
                         }
                     });
 
