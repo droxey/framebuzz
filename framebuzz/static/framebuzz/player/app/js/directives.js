@@ -46,6 +46,10 @@ angular.module('framebuzz.directives', [])
                     if (isSafari || isChrome) {
                         $('.mejs-time-rail').addClass('safari');
                         $('.mejs-share').addClass('safari');
+
+                        if (isChrome) {
+                            $('.mejs-share').addClass('chrome');
+                        }
                     }
 
                     //  =====
