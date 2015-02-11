@@ -202,7 +202,7 @@ def video_share(request, username=None, slug=None, convo_slug=None, sync=False):
             if request.user == private_session.owner:
                 can_access = True
 
-            if can_access is False and \
+            if can_access is False and request.user.is_authenticated() and \
                request.user.username in invitee_usernames or \
                request.user.email in invitee_addrs:
                 invitee = SessionInvitation.objects.get(invitee=request.user,
