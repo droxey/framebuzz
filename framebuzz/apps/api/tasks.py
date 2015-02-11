@@ -787,6 +787,8 @@ def start_private_convo(context):
         action.send(user, verb='joined private conversation',
                     action_object=private_session, target=video)
 
+    site = Site.objects.get_current()
+
     if len(send_to_list) > 0:
         # Send notifications to receipients.
         send_templated_mail(
@@ -798,7 +800,8 @@ def start_private_convo(context):
                 'site': site,
                 'video': video,
                 'send_to_list': send_to_list,
-                'audience_total': len(send_to_list) - 1
+                'audience_total': len(send_to_list) - 1,
+                'site': site
             })
 
     if private_session.is_synchronized:
@@ -806,6 +809,6 @@ def start_private_convo(context):
     else:
         convo_embed_url = reverse('convo-embed', args=[video.slug, private_session.slug])
 
-    url = '%s%s' % ('staging.framebuzzlab.com', convo_embed_url)
+    url = '%s%s' % (site.domain, convo_embed_url)
     return_data = {'convo_url': url, 'syncControls': private_session.is_synchronized}
     return construct_message('FB_START_PRIVATE_CONVO', channel, return_data)

@@ -163,9 +163,14 @@ angular.module('framebuzz.directives', [])
 
                             if (!hasHitPlay) {
                                 $('#buzz-layer > div.panel').addClass('hide-before-play');
-                            }
 
-                            // TODO: If private and owner, show message for user 'click play to get started'
+                                // TODO: If private and owner, show message for user 'click play to get started'
+                                // if (SOCK.is_synchronized && SOCK.is_hosting_viewing) {
+                                //     var overlayContainer = $('.mejs-overlay-play');
+                                //     var message = $('<div class="host-message"><span>Click play to watch the video in real-time with your audience.</span></div>');
+                                //     overlayContainer.append(message);
+                                // }
+                            }
                         }
                     });
 
