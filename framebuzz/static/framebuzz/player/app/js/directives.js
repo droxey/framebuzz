@@ -43,10 +43,9 @@ angular.module('framebuzz.directives', [])
                     var isIE = /*@cc_on!@*/false;
                     var hasHitPlay = false;
 
-
-
-                    if (isSafari && !isChrome) {
+                    if (isSafari || isChrome) {
                         $('.mejs-time-rail').addClass('safari');
+                        $('.mejs-share').addClass('safari');
                     }
 
                     //  =====
