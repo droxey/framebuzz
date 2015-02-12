@@ -200,6 +200,35 @@ object, embed, video, iframe {
                             background: rgba(255, 255, 255, 0.75);
                             i { color: black; }
                         }
+
+                        &.host-message {
+                            @include border-radius(2px, 2px);
+                            color: rgba(255, 255, 255, 0.8);
+                            background: rgba(0, 0, 0, 0.75);
+                            font-family: "proxima-nova";
+                            font-size: 11px;
+                            height: auto;
+                            left: -90px;
+                            padding: 10px;
+                            top: 55px;
+                            text-align: center;
+                            position: relative;
+                            width: 160px;
+
+                            i.tip {
+                                color: rgba(0, 0, 0, 0.75);
+                                position: absolute;
+                                top: -13px;
+                                left: 81px;
+                                font-size: 14px;
+                                padding: 0;
+                                line-height: 14px;
+                            }
+
+                            span {
+                                font-weight: 700;
+                            }
+                        }
                     }
                 }
 

@@ -52,6 +52,16 @@ angular.module('framebuzz.directives', [])
                         }
                     }
 
+                    if (SOCK.is_synchronized && SOCK.is_hosting_viewing) {
+                        // If private and owner, show message for user 'click play to get started'
+                        var overlayContainer = $('.mejs-overlay-play');
+                        var message = $('<div class="mejs-overlay-button host-message">' +
+                                            '<i class="fa fa-fw fa-play fa-rotate-270 tip"></i>' +
+                                            '<span>Click play to watch the video in real-time with your audience.</span>' +
+                                        '</div>');
+                        overlayContainer.append(message);
+                    }
+
                     //  =====
                     //  CSS Changes
                     //  =====
@@ -102,12 +112,12 @@ angular.module('framebuzz.directives', [])
                         var button = $(this);
                         if (button.hasClass('mejs-mute')) {
                             button.removeClass('mejs-mute').addClass('mejs-unmute');
-                            button.html('<i class="fa fa-comment"></i>Show Conversation');
+                            button.html('<i class="fa fa-comment"></i>Show Chat');
                             broadcaster.prepForBroadcast({ broadcastType: 'player_muteconvo' });
                         }
                         else {
                             button.removeClass('mejs-unmute').addClass('mejs-mute');
-                            button.html('<i class="fa fa-comment"></i>Mute Conversation');
+                            button.html('<i class="fa fa-comment"></i>Mute Chat');
                             broadcaster.prepForBroadcast({ broadcastType: 'player_unmuteconvo' });
                         }
                     });
@@ -163,13 +173,6 @@ angular.module('framebuzz.directives', [])
 
                             if (!hasHitPlay) {
                                 $('#buzz-layer > div.panel').addClass('hide-before-play');
-
-                                // TODO: If private and owner, show message for user 'click play to get started'
-                                // if (SOCK.is_synchronized && SOCK.is_hosting_viewing) {
-                                //     var overlayContainer = $('.mejs-overlay-play');
-                                //     var message = $('<div class="host-message"><span>Click play to watch the video in real-time with your audience.</span></div>');
-                                //     overlayContainer.append(message);
-                                // }
                             }
                         }
                     });
