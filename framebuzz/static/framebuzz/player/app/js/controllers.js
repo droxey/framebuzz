@@ -25,6 +25,7 @@ angular.module('framebuzz.controllers', [])
                 $scope.privateViewingEnabled = SOCK.private_viewing_enabled;
                 $scope.isSynchronized = SOCK.is_synchronized;
                 $scope.isHostingViewing = SOCK.is_hosting_viewing;
+                $scope.audience = [];
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
@@ -67,7 +68,10 @@ angular.module('framebuzz.controllers', [])
                     startPrivateConvo: 'FB_START_PRIVATE_CONVO',
                     searchUsers: 'FB_SEARCH_USERS',
                     enterPassword: 'FB_ENTER_PASSWORD',
-                    syncChannel: 'FB_SYNC_CHANNEL'
+                    syncChannel: 'FB_SYNC_CHANNEL',
+                    getUsersInChannel: 'FB_GET_CHANNEL_USERS',
+                    joinedViewingChannel: 'FB_JOINED_PRIVATE_VIEWING',
+                    leaveVideo: 'FB_LEAVE_VIDEO'
                 };
 
                 // --
@@ -756,8 +760,6 @@ angular.module('framebuzz.controllers', [])
                         $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         safeApply($scope);
 
-                        console.log($scope.videoInstance);
-
                         var loginButtonClicked = localStorageService.get('loggingIn') === 'true';
                         if (loginButtonClicked) {
                             $scope.postNewThread();
@@ -880,8 +882,6 @@ angular.module('framebuzz.controllers', [])
                     else if (jsonData.eventType == eventTypes.syncChannel) {
                         // Only listeners will ever receive this particular notification.
                         if ($scope.isSynchronized && !$scope.isHostingViewing) {
-                            console.log(jsonData.data);
-
                             var action = jsonData.data.action;
 
                             if (action == 'player_playing') {
@@ -890,8 +890,17 @@ angular.module('framebuzz.controllers', [])
 
                             if (action == 'player_paused') {
                                 $scope.player.pause();
+
+                                // TODO: add message 'paused by host'
                             }
                         }
+                    }
+                    else if (jsonData.eventType == eventTypes.joinedViewingChannel) {
+                        console.log(jsonData.data);
+                    }
+                    else if (jsonData.eventType == eventTypes.leaveVideo) {
+                        console.log('leave video');
+                        console.log(jsonData.data);
                     }
                     else {
                         console.log('Socket received unhandled message.');
@@ -905,7 +914,8 @@ angular.module('framebuzz.controllers', [])
                 });
 
                 socket.onclose(function() {
-                    $state.transitionTo('player.initView');
+                    // Note: This may be useful in the future,
+                    // but will remain unimplemented until required.
                 });
             }
         ]

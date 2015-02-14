@@ -52,8 +52,6 @@
     },
     buildprivateviewing: function(player, controls, layers, media) {
         if (SOCK.private_viewing_enabled) {     // Only dashboard-enabled users may utilize the private viewing function.
-            console.log('private enabled');
-
             var shareDiv = controls.find('div.mejs-share');
             var button =
                 $('<button class="mejs-start-private-viewing" class="rounded"><i class="fa fa-group"></i> Watch Together</button>')

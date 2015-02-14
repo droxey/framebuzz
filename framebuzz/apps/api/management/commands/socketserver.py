@@ -55,6 +55,7 @@ class Command(BaseCommand):
         print "Running sock app on port", PORT, "with channel", channel
         try:
             ioloop.IOLoop.instance().start()
+
         except KeyboardInterrupt:
             # so you don't think you errored when ^C'ing out
             pass

@@ -217,6 +217,16 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                             }) \
                         | tasks.enter_password.s() \
                         | tasks.message_outbound.s()
+                elif event_type == 'FB_LEAVE_VIDEO':
+                    task_chain = tasks.get_user_by_session_key.s(
+                            session_key=self.session_key,
+                            extra_context={
+                                'video_id': video_id,
+                                'outbound_channel': self.video_channel,
+                                'data': data
+                            }) \
+                        | tasks.leave_video.s() \
+                        | tasks.message_outbound.s()
                 else:
                     pass
 

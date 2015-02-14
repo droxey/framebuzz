@@ -87,6 +87,9 @@ class UserProfile(caching.base.CachingMixin, models.Model):
     logo = models.ImageField(max_length=1024, upload_to=logo_file_path,
                              blank=True, null=True)
     dashboard_enabled = models.BooleanField(default=False)
+    is_online = models.BooleanField(default=False)
+    last_online_on = models.DateTimeField(blank=True, null=True)
+    channel = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         verbose_name = 'User Profile'

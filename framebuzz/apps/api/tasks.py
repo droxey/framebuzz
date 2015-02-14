@@ -149,17 +149,29 @@ def initialize_video_player(context):
     data['is_synchronized'] = False
     data['is_hosting'] = False
 
-    if session_key is not None:
-        session = PrivateSession.objects.get(slug=session_key)
-        data['is_synchronized'] = session.is_synchronized
-        data['is_hosting'] = data['is_authenticated'] and session.owner.pk == user.pk
-
     if data['is_authenticated']:
         userSerializer = UserSerializer(user, context={'video': video})
         userSerialized = JSONRenderer().render(userSerializer.data)
         data['user'] = json.loads(userSerialized)
     else:
         data['user'] = {}
+
+    if session_key:
+        session = PrivateSession.objects.get(slug=session_key)
+        data['is_synchronized'] = session.is_synchronized
+        data['is_hosting'] = data['is_authenticated'] and session.owner.pk == user.pk
+
+        if session.is_synchronized:
+            # Send a message to the channel that the user joined.
+            private_channel = '/framebuzz/%s/session/%s' % (video_id, session_key)
+
+            if data['is_authenticated']:
+                notification = {'action': 'joined', 'user': user.username}
+            else:
+                notification = {'action': 'joined', 'user': 'Anonymous'}
+            message = construct_message('FB_JOINED_PRIVATE_VIEWING',
+                                        private_channel, notification)
+            _send_to_channel.delay(channel=private_channel, message=message)
 
     return construct_message('FB_INITIALIZE_VIDEO', channel, data)
 
@@ -812,3 +824,8 @@ def start_private_convo(context):
     url = '%s%s' % (site.domain, convo_embed_url)
     return_data = {'convo_url': url, 'syncControls': private_session.is_synchronized}
     return construct_message('FB_START_PRIVATE_CONVO', channel, return_data)
+
+
+@celery.task
+def leave_video(context):
+    pass

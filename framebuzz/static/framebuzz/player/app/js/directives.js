@@ -9,6 +9,16 @@ angular.module('framebuzz.directives', [])
           elm.text(version);
         };
     })
+    .directive('closeSocket', ['socket', function(socket) {
+        return function(scope, element, attrs) {
+            $(window).on('beforeunload', function() {
+                
+
+
+                socket.close();
+            });
+        };
+    }])
     .directive('mediaElement', ['broadcaster', '$state', '$rootScope', 'safeApply', function(broadcaster, $state, $rootScope, safeApply) {
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
@@ -69,18 +79,18 @@ angular.module('framebuzz.directives', [])
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
 
-                    if (SOCK.is_synchronized && !SOCK.is_hosting_viewing) {
-                        // Hide the play overlay.
-                        $('.mejs-overlay-play').remove();
-
-                        // Remove floating time indicator.
-                        $('.mejs-time-float').remove();
-
-                        // Hide the play/pause button.
-                        $('.mejs-playpause-button').unbind('click');
-                        $('.mejs-playpause-button').addClass('disabled');
-
+                    if (SOCK.is_synchronized) {
+                        // Don't allow seeking, for now.
                         $('.mejs-time-total').unbind('mousedown');
+
+                        if (!SOCK.is_hosting_viewing) {
+                            // Hide the play overlay.
+                            $('.mejs-overlay-play').remove();
+
+                            // Hide the play/pause button.
+                            $('.mejs-playpause-button').unbind('click');
+                            $('.mejs-playpause-button').addClass('disabled');
+                        }
                     }
 
                     //  =====

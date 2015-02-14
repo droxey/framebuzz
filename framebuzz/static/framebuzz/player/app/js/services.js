@@ -4,6 +4,22 @@
 
 angular.module('framebuzz.services', [])
     .value('version', '0.1')
+    .factory('safeApply', function($rootScope) {
+        return function($scope, fn) {
+            var phase = $scope.$root.$$phase;
+            if(phase == '$apply' || phase == '$digest') {
+                if (fn) {
+                    $scope.$eval(fn);
+                }
+            } else {
+                if (fn) {
+                    $scope.$apply(fn);
+                } else {
+                    $scope.$apply();
+                }
+            }
+        };
+    })
     .service('broadcaster', function($rootScope) {
         var broadcaster = {};
         broadcaster.message = '';
@@ -20,13 +36,24 @@ angular.module('framebuzz.services', [])
         return broadcaster;
     })
     .service('socket', ['$rootScope', 'broadcaster', function($rootScope, broadcaster) {
+        $rootScope.safeApply = function (fn) {
+            var phase = this.$root.$$phase;
+            if (phase == '$apply' || phase == '$digest') {
+                if (fn && (typeof(fn) === 'function')) {
+                    fn();
+                }
+            } else {
+                this.$apply(fn);
+            }
+        };
+
         var createSocket = function () {
             var reconnect = true,
                 socket = null,
                 debug = SOCK.host.indexOf('localhost') !== -1,
                 scheme = debug ? 'http://' : 'https://',
                 port = SOCK.port,
-                url = debug ? scheme + SOCK.host + ':' + port + '/' + SOCK.channel : 
+                url = debug ? scheme + SOCK.host + ':' + port + '/' + SOCK.channel :
                       scheme + SOCK.host + '/' + SOCK.channel;
 
             socket = new SockJS(url, '', {
@@ -39,30 +66,28 @@ angular.module('framebuzz.services', [])
                 }
 
                 var args = arguments;
-                $rootScope.$apply(function() {
+                $rootScope.safeApply(function() {
                     self.socket_handlers.onopen.apply(socket, args);
                 });
             };
 
             socket.onsent = function() {
                 var args = arguments;
-                $rootScope.$apply(function() {
+                $rootScope.safeApply(function() {
                     self.socket_handlers.onsent.apply(socket, args);
                 });
             };
 
             socket.onmessage = function(data) {
                 var args = arguments;
-                $rootScope.$apply(function() {
+                $rootScope.safeApply(function() {
                     self.socket_handlers.onmessage.apply(socket, args);
                 });
             };
 
             socket.onclose = function() {
-                if (reconnect) { createSocket(); }
-
                 var args = arguments;
-                $rootScope.$apply(function() {
+                $rootScope.safeApply(function() {
                     self.socket_handlers.onclose.apply(socket, args);
                 });
             };
@@ -146,22 +171,7 @@ angular.module('framebuzz.services', [])
             }
         };
     })
-    .factory('safeApply', function($rootScope) {
-        return function($scope, fn) {
-            var phase = $scope.$root.$$phase;
-            if(phase == '$apply' || phase == '$digest') {
-                if (fn) {
-                    $scope.$eval(fn);
-                }
-            } else {
-                if (fn) {
-                    $scope.$apply(fn);
-                } else {
-                    $scope.$apply();
-                }
-            }
-        }
-    })
+
     .factory('notificationFactory', function () {
         toastr.options = {
           "debug": false,
