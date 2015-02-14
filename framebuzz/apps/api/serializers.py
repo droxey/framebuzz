@@ -8,7 +8,8 @@ from actstream.models import Action
 from avatar.util import get_primary_avatar, get_default_avatar_url
 from rest_framework import serializers
 
-from framebuzz.apps.api.models import MPTTComment, Video, UserVideo
+from framebuzz.apps.api.models import MPTTComment, Video, UserVideo, \
+    SessionInvitation, PrivateSession
 
 
 class VideoSerializer(serializers.ModelSerializer):
@@ -65,11 +66,15 @@ class UserSerializer(serializers.ModelSerializer):
     video_in_library = serializers.SerializerMethodField('get_video_in_library')
     display_name = serializers.SerializerMethodField('get_display_name')
     dashboard_enabled = serializers.SerializerMethodField('get_dashboard_enabled')
+    is_online = serializers.SerializerMethodField('get_is_online')
+    channel = serializers.SerializerMethodField('get_channel')
+    last_online_on = serializers.SerializerMethodField('get_last_online_on')
 
     class Meta:
         model = User
         fields = ('id', 'username', 'avatar_url', 'display_name',
-                  'video_in_library', 'profile_url',)
+                  'video_in_library', 'profile_url', 'is_online', 'channel',
+                  'last_online_on',)
 
     def get_profile_url(self, obj):
         return obj.get_profile().get_absolute_url()
@@ -93,6 +98,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_display_name(self, obj):
         return obj.get_profile().display_name or obj.username
+
+    def get_is_online(self, obj):
+        return obj.get_profile().is_online
+
+    def get_channel(self, obj):
+        return obj.get_profile().channel
+
+    def get_last_online_on(self, obj):
+        if obj.get_profile().last_online_on:
+            local_date = timezone.localtime(obj.get_profile().last_online_on)
+            return dateformat.format(local_date, 'n/j/y h:i A')
 
 
 class BaseCommentSerializer(serializers.ModelSerializer):
@@ -175,3 +191,21 @@ class MPTTCommentSerializer(BaseCommentSerializer):
 
     def get_thread_url(self, obj):
         return obj.get_absolute_url()
+
+
+class SessionInvitationSerializer(serializers.ModelSerializer):
+    invitee = UserSerializer()
+
+    class Meta:
+        model = SessionInvitation
+        fields = ('invitee', 'email', 'accepted',
+                  'invited_on', 'accepted_on',)
+
+
+class PrivateSessionSerializer(serializers.ModelSerializer):
+    owner = UserSerializer()
+    invitees = SessionInvitationSerializer(source='get_invitees', read_only=True)
+
+    class Meta:
+        model = PrivateSession
+        fields = ('slug', 'owner', 'is_synchronized', 'invitees',)

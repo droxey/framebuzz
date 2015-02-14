@@ -24,7 +24,8 @@ from framebuzz.apps.api.forms import MPTTCommentForm
 from framebuzz.apps.api.models import MPTTComment, Video, UserVideo, \
     PrivateSession, SessionInvitation, UserProfile
 from framebuzz.apps.api.serializers import VideoSerializer, \
-    MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer
+    MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer, \
+    PrivateSessionSerializer, SessionInvitationSerializer
 
 
 def construct_message(event_type, channel, data):
@@ -114,9 +115,11 @@ def initialize_video_player(context):
     '''
     video_id = context.get('video_id', None)
     channel = context.get('outbound_channel', None)
+    video_channel = context.get('video_channel', None)
     user = context.get('user', None)
     init_data = context.get(DATA_KEY, None)
     session_key = init_data.get('session_key', None)
+    is_authenticated = isinstance(user, auth.models.AnonymousUser) is False
 
     # Get Video and associated MPTTComments.
     video = Video.objects.get(slug=video_id)
@@ -136,42 +139,58 @@ def initialize_video_player(context):
     threads = threads.order_by('-time')
     videoSerializer = VideoSerializer(video)
     videoSerialized = JSONRenderer().render(videoSerializer.data)
+
     threadsSerializer = MPTTCommentSerializer(threads, context={'user': user})
     threadsSerialized = JSONRenderer().render(threadsSerializer.data)
-    is_authenticated = isinstance(user, auth.models.AnonymousUser) is False
 
-    data = {}
-    data['video'] = json.loads(videoSerialized)
-    data['heatmap'] = video.heatmap(session_key=session_key)
-    data['threads'] = json.loads(threadsSerialized)
-    data['is_authenticated'] = is_authenticated
-    data['private_session_key'] = session_key
-    data['is_synchronized'] = False
-    data['is_hosting'] = False
+    viewer_profiles = UserProfile.objects.filter(is_online=True,
+                                                 channel=video_channel)
+    viewers = [p.user for p in viewer_profiles]
+    viewersSerializer = UserSerializer(viewers, context={'video': video})
+    viewersSerialized = JSONRenderer().render(viewersSerializer.data)
+
+    data = {
+        'video': json.loads(videoSerialized),
+        'heatmap': video.heatmap(session_key=session_key),
+        'threads': json.loads(threadsSerialized),
+        'is_authenticated': is_authenticated,
+        'private_session_key': session_key,
+        'is_synchronized': False,
+        'is_hosting': False,
+        'viewers': json.loads(viewersSerialized),
+        'viewing_session': {},
+        'user': {}
+    }
 
     if data['is_authenticated']:
         userSerializer = UserSerializer(user, context={'video': video})
         userSerialized = JSONRenderer().render(userSerializer.data)
         data['user'] = json.loads(userSerialized)
-    else:
-        data['user'] = {}
+
+        profile = user.get_profile()
+        profile.is_online = True
+        profile.last_online_on = datetime.datetime.now()
+        profile.channel = video_channel
+        profile.save()
+
+        # Send a message to the channel that the user joined.
+        notification = {
+            'action': 'joined',
+            'username': user.username,
+            'channel': video_channel
+        }
+        message = construct_message('FB_JOIN_VIDEO', video_channel, notification)
+        _send_to_channel.delay(channel=video_channel, message=message)
+
 
     if session_key:
         session = PrivateSession.objects.get(slug=session_key)
         data['is_synchronized'] = session.is_synchronized
         data['is_hosting'] = data['is_authenticated'] and session.owner.pk == user.pk
 
-        if session.is_synchronized:
-            # Send a message to the channel that the user joined.
-            private_channel = '/framebuzz/%s/session/%s' % (video_id, session_key)
-
-            if data['is_authenticated']:
-                notification = {'action': 'joined', 'user': user.username}
-            else:
-                notification = {'action': 'joined', 'user': 'Anonymous'}
-            message = construct_message('FB_JOINED_PRIVATE_VIEWING',
-                                        private_channel, notification)
-            _send_to_channel.delay(channel=private_channel, message=message)
+        sessionSerializer = PrivateSessionSerializer(session)
+        sessionSerialized = JSONRenderer().render(sessionSerializer.data)
+        data['viewing_session'] = json.loads(sessionSerialized)
 
     return construct_message('FB_INITIALIZE_VIDEO', channel, data)
 
@@ -828,4 +847,17 @@ def start_private_convo(context):
 
 @celery.task
 def leave_video(context):
-    pass
+    username = context.get('username', None)
+    video_channel = context.get('video_channel', None)
+
+    if username:
+        # Set the user profile information appropriately when the user leaves.
+        user = auth.models.User.objects.get(username=username)
+        profile = user.get_profile()
+        profile.is_online = False
+        profile.last_online_on = datetime.datetime.now()
+        profile.channel = None
+        profile.save()
+
+    return_data = {'action': 'leave', 'username': username, 'channel': video_channel}
+    return construct_message('FB_LEAVE_VIDEO', video_channel, return_data)

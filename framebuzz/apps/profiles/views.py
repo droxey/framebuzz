@@ -168,6 +168,7 @@ def video_share(request, username=None, slug=None, convo_slug=None, sync=False):
         video_in_library = False
         video, created = get_or_create_video(slug)
         context = dict()
+        private_session = None
 
         valid_verbs = ['commented on', 'replied to comment']
         actions = Action.objects.filter(verb__in=valid_verbs,
@@ -237,7 +238,7 @@ def video_share(request, username=None, slug=None, convo_slug=None, sync=False):
             if request.is_ajax():
                 template = 'player/snippets/share.html'
             else:
-                if private_session.is_synchronized:
+                if private_session and private_session.is_synchronized:
                     template = 'dashboard/share.html'
                 else:
                     request.session['share'] = context

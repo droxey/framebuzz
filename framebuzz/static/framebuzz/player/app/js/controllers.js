@@ -25,7 +25,7 @@ angular.module('framebuzz.controllers', [])
                 $scope.privateViewingEnabled = SOCK.private_viewing_enabled;
                 $scope.isSynchronized = SOCK.is_synchronized;
                 $scope.isHostingViewing = SOCK.is_hosting_viewing;
-                $scope.audience = [];
+                $scope.currentViewers = [];
 
                 $scope.loginModel = {};
                 $scope.signupModel = {};
@@ -70,7 +70,7 @@ angular.module('framebuzz.controllers', [])
                     enterPassword: 'FB_ENTER_PASSWORD',
                     syncChannel: 'FB_SYNC_CHANNEL',
                     getUsersInChannel: 'FB_GET_CHANNEL_USERS',
-                    joinedViewingChannel: 'FB_JOINED_PRIVATE_VIEWING',
+                    joinVideo: 'FB_JOIN_VIDEO',
                     leaveVideo: 'FB_LEAVE_VIDEO'
                 };
 
@@ -760,6 +760,8 @@ angular.module('framebuzz.controllers', [])
                         $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         safeApply($scope);
 
+                        console.log($scope.videoInstance);
+
                         var loginButtonClicked = localStorageService.get('loggingIn') === 'true';
                         if (loginButtonClicked) {
                             $scope.postNewThread();
@@ -895,7 +897,8 @@ angular.module('framebuzz.controllers', [])
                             }
                         }
                     }
-                    else if (jsonData.eventType == eventTypes.joinedViewingChannel) {
+                    else if (jsonData.eventType == eventTypes.joinVideo) {
+                        console.log('join video');
                         console.log(jsonData.data);
                     }
                     else if (jsonData.eventType == eventTypes.leaveVideo) {

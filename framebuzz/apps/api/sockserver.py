@@ -4,6 +4,7 @@ import tornadoredis
 import tornado.gen
 import tornado.wsgi
 
+from django.contrib.auth.models import User
 from framebuzz.apps.api import tasks, EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
 from sockjs.tornado import SockJSConnection
 from raven.contrib.tornado import SentryMixin
@@ -91,6 +92,7 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                         extra_context={
                             'video_id': video_id,
                             'outbound_channel': self.session_channel,
+                            'video_channel': self.video_channel,
                             'data': data
                         }) \
                     | tasks.initialize_video_player.s() \
@@ -217,16 +219,6 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
                             }) \
                         | tasks.enter_password.s() \
                         | tasks.message_outbound.s()
-                elif event_type == 'FB_LEAVE_VIDEO':
-                    task_chain = tasks.get_user_by_session_key.s(
-                            session_key=self.session_key,
-                            extra_context={
-                                'video_id': video_id,
-                                'outbound_channel': self.video_channel,
-                                'data': data
-                            }) \
-                        | tasks.leave_video.s() \
-                        | tasks.message_outbound.s()
                 else:
                     pass
 
@@ -261,6 +253,8 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
 
         if not isinstance(user, django.contrib.auth.models.AnonymousUser):
             self.username = user.username
+        else:
+            self.username = 'New User'
 
         return user
 
@@ -268,4 +262,14 @@ class ConnectionHandler(SentryMixin, SockJSConnection):
         """
         Runs when the user gets disconnected.
         """
+        task_chain = tasks.get_user_by_session_key.s(
+                session_key=self.session_key,
+                extra_context={
+                    'username': self.username,
+                    'video_channel': self.video_channel
+                }) \
+            | tasks.leave_video.s() \
+            | tasks.message_outbound.s()
+        task_chain.apply_async()
+
         self.client.disconnect()
