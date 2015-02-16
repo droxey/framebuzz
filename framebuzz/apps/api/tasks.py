@@ -852,12 +852,15 @@ def leave_video(context):
 
     if username:
         # Set the user profile information appropriately when the user leaves.
-        user = auth.models.User.objects.get(username=username)
-        profile = user.get_profile()
-        profile.is_online = False
-        profile.last_online_on = datetime.datetime.now()
-        profile.channel = None
-        profile.save()
+        try:
+            user = auth.models.User.objects.get(username=username)
+            profile = user.get_profile()
+            profile.is_online = False
+            profile.last_online_on = datetime.datetime.now()
+            profile.channel = None
+            profile.save()
 
-    return_data = {'action': 'leave', 'username': username, 'channel': video_channel}
-    return construct_message('FB_LEAVE_VIDEO', video_channel, return_data)
+            return_data = {'action': 'leave', 'username': username or 'New User', 'channel': video_channel}
+            return construct_message('FB_LEAVE_VIDEO', video_channel, return_data)
+        except auth.models.User.DoesNotExist:
+            pass

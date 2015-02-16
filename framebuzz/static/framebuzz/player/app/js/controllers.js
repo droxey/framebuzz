@@ -902,6 +902,7 @@ angular.module('framebuzz.controllers', [])
                         console.log(jsonData.data);
                     }
                     else if (jsonData.eventType == eventTypes.leaveVideo) {
+                        if (jsonData.data.username === 'New User') {
                         console.log('leave video');
                         console.log(jsonData.data);
                     }
