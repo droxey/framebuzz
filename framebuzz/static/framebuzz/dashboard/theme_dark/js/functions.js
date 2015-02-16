@@ -12,6 +12,7 @@ $(document).ready(function(){
 
     	/* Tab */
         $('.tab a').click(function(e) {
+            if ($(this).hasClass('delete-video')) { return; }
             e.preventDefault();
             $(this).tab('show');
         });

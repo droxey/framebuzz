@@ -77,11 +77,10 @@
         </aside>
         <section id="content" class="container">
             <div class="row m-container">
-                <div class="col-md-12 hidden">
+                <div class="col-md-12">
                     <div class="block">
-                        <h2><i class="fa fa-upload"></i> Quick Upload</h2>
-                        {# include 'dashboard/snippets/upload_video.html' #}
-                        <p class="text-center">coming soon...</p>
+                        <h2><i class="fa fa-upload"></i> Upload Video</h2>
+                        {% include 'dashboard/snippets/upload_video.html' %}
                     </div>
                 </div>
                 {% block page_content %}{% endblock %}
@@ -136,10 +135,10 @@
 {% compress js %}
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/jquery-1.10.2.min.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/jquery-ui-1.10.3.min.js' %}"></script>
-<script src="{% static 'framebuzz/dashboard/vendor/jquery/bootbox.min.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/chart/highcharts.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/chart/modules/exporting.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'framebuzz/dashboard/vendor/jquery/bootbox.min.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/chosen.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/shadowbox.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/masonry.min.js' %}"></script>

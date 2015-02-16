@@ -36,10 +36,10 @@
             <div class="tab-container">
                 <ul id="modal-tabs" class="nav tab nav-tabs">
                     <li class="active">
-                        <a data-toggle="tab" href="#video-details"><i class="fa fa-list-ul"></i> Video Details</a>
+                        <a href="#video-details"><i class="fa fa-list-ul"></i> Video Details</a>
                     </li>
                     <li class="">
-                        <a data-toggle="tab" href="#video-comments"><i class="fa fa-comments-o"></i> Viewer Comments</a>
+                        <a href="#video-comments"><i class="fa fa-comments-o"></i> Viewer Comments</a>
                     </li>
                     {% comment %}
                         <li class="">
@@ -49,7 +49,7 @@
                     <li class="actions pull-right">
                         <ul class="nav">
                             <li class="pull-right">
-                                <a href="{% url 'dashboard-delete-video' video.slug %}" title="Delete Video" class="btn btn-sm btn-danger delete-video">
+                                <a href="{% url 'dashboard-delete-video' video.slug %}"  data-return-url="{% url 'dashboard-videos' request.user.username %} " title="Delete Video" class="btn btn-sm btn-danger delete-video">
                                     <i class="fa fa-trash-o"></i> Delete Video
                                 </a>
                             </li>

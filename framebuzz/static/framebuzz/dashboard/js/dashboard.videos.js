@@ -31,19 +31,20 @@ $(function() {
         e.preventDefault();
 
         var url = $(this).attr('href');
+        var returnUrl = $(this).attr('data-return-url');
 
         // TODO:
         // Figure out why bootbox isn't working in this context.
 
-        // bootbox.confirm("Are you sure you want to remove this video?", function(result) {
-        //     if (result) {
-        //         $.get(url, function(response) {
-        //             if (response === 'ok') {
-        //                 window.location.reload();
-        //             }
-        //         });
-        //     }
-        // });
+         bootbox.confirm("Are you sure you want to remove this video?", function(result) {
+             if (result) {
+                 $.get(url, function(response) {
+                     if (response === 'ok') {
+                         window.location.href = returnUrl;
+                     }
+                 });
+             }
+        });
 
         return false;
     });
