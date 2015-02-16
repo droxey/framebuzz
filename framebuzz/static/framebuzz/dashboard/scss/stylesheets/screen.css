@@ -674,82 +674,138 @@ div.project strong.selected i {
   font-size: 25px;
 }
 
-/* line 710, ../sass/screen.scss */
+/* line 707, ../sass/screen.scss */
+.dm-box {
+  margin: 0;
+  border: 0;
+  border: 1px solid #EDEDED;
+  background-color: #fff;
+  padding: 9px 18px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  text-align: center;
+  -webkit-transition: background 0.3s ease-out;
+  transition: background 0.3s ease-out;
+}
+
+/* line 721, ../sass/screen.scss */
+.dm-icon {
+  display: inline-block;
+  cursor: pointer;
+  margin: 15px;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: #2B2E31;
+  color: #ffffff;
+}
+
+/* line 734, ../sass/screen.scss */
+.dm-icon:after {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  content: '';
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* line 746, ../sass/screen.scss */
+.dm-icon:before {
+  speak: none;
+  line-height: 105px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  display: block;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 757, ../sass/screen.scss */
+#upload-video {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+/* line 764, ../sass/screen.scss */
 #upload-video div.profile-text h3 a.toggle {
   color: #48cfad;
 }
-/* line 718, ../sass/screen.scss */
+/* line 772, ../sass/screen.scss */
 #upload-video div.profile-text h6 {
   font-size: 1.05em;
   color: #a2a2a2;
 }
-/* line 724, ../sass/screen.scss */
+/* line 780, ../sass/screen.scss */
 #upload-video .dmbox {
   background: rgba(0, 0, 0, 0.01);
   cursor: pointer;
 }
-/* line 728, ../sass/screen.scss */
+/* line 784, ../sass/screen.scss */
+#upload-video .dmbox .service-icon {
+  text-align: center;
+}
+/* line 788, ../sass/screen.scss */
 #upload-video .dmbox:hover {
   background: rgba(0, 0, 0, 0.03);
 }
-/* line 731, ../sass/screen.scss */
-#upload-video .dmbox:hover .dm-icon {
-  background: #4ECDC4;
-}
-/* line 734, ../sass/screen.scss */
+/* line 792, ../sass/screen.scss */
 #upload-video .dmbox.selected {
   background: rgba(0, 0, 0, 0.03);
 }
-/* line 737, ../sass/screen.scss */
-#upload-video .dmbox.selected .dm-icon {
-  background: #4ECDC4;
-}
-/* line 741, ../sass/screen.scss */
+/* line 797, ../sass/screen.scss */
 #upload-video h5 {
   text-align: center;
   color: #48cfad;
   text-transform: uppercase;
   font-weight: 700;
-  color: #48cfad;
+  color: #52b0f0;
   margin-top: 0px;
 }
-/* line 750, ../sass/screen.scss */
+/* line 806, ../sass/screen.scss */
 #upload-video div.upload-choices {
   margin-bottom: 10px;
 }
 
-/* line 757, ../sass/screen.scss */
+/* line 813, ../sass/screen.scss */
 #wizard div.steps {
   display: none;
 }
-/* line 762, ../sass/screen.scss */
+/* line 818, ../sass/screen.scss */
 #wizard div.content h4 {
   display: none;
   position: relative;
   z-index: 10;
 }
-/* line 767, ../sass/screen.scss */
+/* line 823, ../sass/screen.scss */
 #wizard div.content h4.current {
   display: block;
 }
-/* line 770, ../sass/screen.scss */
+/* line 826, ../sass/screen.scss */
 #wizard div.content section {
   display: none;
 }
-/* line 774, ../sass/screen.scss */
+/* line 830, ../sass/screen.scss */
 #wizard div.content section form input[type='text'],
 #wizard div.content section form textarea {
   margin-bottom: 10px;
 }
-/* line 779, ../sass/screen.scss */
+/* line 835, ../sass/screen.scss */
 #wizard div.content section form textarea {
   height: 50px;
 }
-/* line 783, ../sass/screen.scss */
+/* line 839, ../sass/screen.scss */
 #wizard div.content section form #id_notify_emails {
   margin-bottom: 0;
 }
-/* line 785, ../sass/screen.scss */
+/* line 841, ../sass/screen.scss */
 #wizard div.content section form input, #wizard div.content section form textarea {
   font-size: 13px;
   color: #888888;
@@ -757,88 +813,88 @@ div.project strong.selected i {
   -webkit-border-radius: 2px 2px;
   border-radius: 2px / 2px;
 }
-/* line 790, ../sass/screen.scss */
+/* line 846, ../sass/screen.scss */
 #wizard div.content section form input::-webkit-input-placeholder, #wizard div.content section form textarea::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #888888;
   font-weight: 300;
   font-style: italic;
 }
-/* line 796, ../sass/screen.scss */
+/* line 852, ../sass/screen.scss */
 #wizard div.content section form input:-moz-placeholder, #wizard div.content section form textarea:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #888888;
   font-weight: 300;
   font-style: italic;
 }
-/* line 802, ../sass/screen.scss */
+/* line 858, ../sass/screen.scss */
 #wizard div.content section form input::-moz-placeholder, #wizard div.content section form textarea::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #888888;
   font-weight: 300;
   font-style: italic;
 }
-/* line 808, ../sass/screen.scss */
+/* line 864, ../sass/screen.scss */
 #wizard div.content section form input:-ms-input-placeholder, #wizard div.content section form textarea:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #888888;
   font-weight: 300;
   font-style: italic;
 }
-/* line 814, ../sass/screen.scss */
+/* line 870, ../sass/screen.scss */
 #wizard div.content section form input.placeholder, #wizard div.content section form textarea.placeholder {
   color: #888888;
   font-weight: 300;
   font-style: italic;
 }
-/* line 820, ../sass/screen.scss */
+/* line 876, ../sass/screen.scss */
 #wizard div.content section form input:focus, #wizard div.content section form textarea:focus {
   border: 1px solid #888888;
   outline: 0;
 }
-/* line 825, ../sass/screen.scss */
+/* line 881, ../sass/screen.scss */
 #wizard div.content section form input.error, #wizard div.content section form textarea.error {
   border: 1px solid red;
 }
-/* line 828, ../sass/screen.scss */
+/* line 884, ../sass/screen.scss */
 #wizard div.content section form input.error:-moz-placeholder, #wizard div.content section form textarea.error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 834, ../sass/screen.scss */
+/* line 890, ../sass/screen.scss */
 #wizard div.content section form input.error::-moz-placeholder, #wizard div.content section form textarea.error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 840, ../sass/screen.scss */
+/* line 896, ../sass/screen.scss */
 #wizard div.content section form input.error:-ms-input-placeholder, #wizard div.content section form textarea.error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 846, ../sass/screen.scss */
+/* line 902, ../sass/screen.scss */
 #wizard div.content section form input.error.placeholder, #wizard div.content section form textarea.error.placeholder {
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 854, ../sass/screen.scss */
+/* line 910, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row {
   margin: 0 0 23px;
   -moz-border-radius: 5px / 5px;
   -webkit-border-radius: 5px 5px;
   border-radius: 5px / 5px;
 }
-/* line 858, ../sass/screen.scss */
+/* line 914, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane {
   margin: 0 0 0 -10px;
 }
-/* line 862, ../sass/screen.scss */
+/* line 918, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div {
   clear: both;
   height: 158px;
@@ -846,7 +902,7 @@ div.project strong.selected i {
   position: relative;
   overflow: hidden;
 }
-/* line 870, ../sass/screen.scss */
+/* line 926, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div {
   background-color: #E8E9ED !important;
   border: 2px dashed #DADAD5 !important;
@@ -863,59 +919,64 @@ div.project strong.selected i {
   font-size: 18px !important;
   min-height: 97%;
 }
-/* line 887, ../sass/screen.scss */
+/* line 943, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div.error {
   border: 2px dashed red !important;
 }
-/* line 891, ../sass/screen.scss */
+/* line 947, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > div > div {
   height: 22px !important;
   margin: 0 3px !important;
 }
-/* line 896, ../sass/screen.scss */
+/* line 952, ../sass/screen.scss */
 #wizard div.content section form div.drop-pane-row #upload-drop-pane > div > button.btn-success {
   display: none !important;
 }
-/* line 903, ../sass/screen.scss */
+/* line 959, ../sass/screen.scss */
 #wizard div.content section iframe.dragdrop {
   margin-bottom: 10px;
   margin-top: -50px;
 }
-/* line 909, ../sass/screen.scss */
+/* line 965, ../sass/screen.scss */
 #wizard div.content section.current {
   display: block;
 }
-/* line 916, ../sass/screen.scss */
+/* line 971, ../sass/screen.scss */
+#wizard div.actions {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+/* line 975, ../sass/screen.scss */
 #wizard div.actions ul {
   padding: 0;
   margin: 0;
 }
-/* line 920, ../sass/screen.scss */
+/* line 979, ../sass/screen.scss */
 #wizard div.actions ul li {
   display: inline-block;
   width: auto;
 }
-/* line 924, ../sass/screen.scss */
+/* line 983, ../sass/screen.scss */
 #wizard div.actions ul li.disabled {
   display: none;
 }
-/* line 928, ../sass/screen.scss */
+/* line 987, ../sass/screen.scss */
 #wizard div.actions ul li.cancel {
   display: none;
   float: left;
   margin-right: 10px;
 }
-/* line 934, ../sass/screen.scss */
+/* line 993, ../sass/screen.scss */
 #wizard div.actions ul li.next, #wizard div.actions ul li.finish {
   float: right;
 }
 
-/* line 944, ../sass/screen.scss */
+/* line 1003, ../sass/screen.scss */
 #change-video-password-form,
 #change-notify-emails-form {
   padding-top: 3px;
 }
-/* line 948, ../sass/screen.scss */
+/* line 1007, ../sass/screen.scss */
 #change-video-password-form button,
 #change-notify-emails-form button {
   margin-left: 15px;
@@ -923,43 +984,43 @@ div.project strong.selected i {
   padding: 3px 12px;
 }
 
-/* line 956, ../sass/screen.scss */
+/* line 1015, ../sass/screen.scss */
 #change-notify-emails-form td.send-notification-response {
   padding: 5px 0;
 }
 
-/* line 962, ../sass/screen.scss */
+/* line 1021, ../sass/screen.scss */
 div.add-task form.add-task-form {
   margin-bottom: 30px;
 }
-/* line 966, ../sass/screen.scss */
+/* line 1025, ../sass/screen.scss */
 div.add-task form.add-task-form p label {
   font-weight: 500;
   display: block;
 }
-/* line 971, ../sass/screen.scss */
+/* line 1030, ../sass/screen.scss */
 div.add-task form.add-task-form p select {
   width: 50%;
 }
 
-/* line 978, ../sass/screen.scss */
+/* line 1037, ../sass/screen.scss */
 .grey-panel {
   position: relative;
 }
-/* line 981, ../sass/screen.scss */
+/* line 1040, ../sass/screen.scss */
 .grey-panel img.thumb {
   position: absolute;
   top: 0;
   width: 100%;
   z-index: 1;
 }
-/* line 989, ../sass/screen.scss */
+/* line 1048, ../sass/screen.scss */
 .grey-panel .grey-header {
   position: relative;
   z-index: 10;
 }
 
-/* line 996, ../sass/screen.scss */
+/* line 1055, ../sass/screen.scss */
 .listview-header .check-all {
   display: block;
   position: relative;
@@ -967,34 +1028,34 @@ div.add-task form.add-task-form p select {
   width: 14px;
 }
 
-/* line 1004, ../sass/screen.scss */
+/* line 1063, ../sass/screen.scss */
 .listview .media .attrs {
   line-height: 18px;
   cursor: pointer;
 }
 
-/* line 1009, ../sass/screen.scss */
+/* line 1068, ../sass/screen.scss */
 .listview .media .attrs.assignments {
   padding: 3px 5px 4px;
 }
-/* line 1012, ../sass/screen.scss */
+/* line 1071, ../sass/screen.scss */
 .listview .media .attrs.assignments img, .listview .media .attrs.assignments i {
   display: inline-block;
   vertical-align: middle;
 }
-/* line 1017, ../sass/screen.scss */
+/* line 1076, ../sass/screen.scss */
 .listview .media .attrs.assignments img {
   height: 18px;
   width: 18px;
 }
 
-/* line 1023, ../sass/screen.scss */
+/* line 1082, ../sass/screen.scss */
 .list-options {
   margin-top: 15px;
   top: 0;
 }
 
-/* line 1028, ../sass/screen.scss */
+/* line 1087, ../sass/screen.scss */
 .fancybox-opened .fancybox-skin {
   -moz-border-radius: 0px / 0px;
   -webkit-border-radius: 0px 0px;
@@ -1005,18 +1066,18 @@ div.add-task form.add-task-form p select {
   text-shadow: none;
 }
 
-/* line 1036, ../sass/screen.scss */
+/* line 1095, ../sass/screen.scss */
 .fancybox-iframe {
   margin-top: -6px;
 }
 
-/* line 1040, ../sass/screen.scss */
+/* line 1099, ../sass/screen.scss */
 .fancybox-type-iframe {
   width: 700px !important;
   height: 445px !important;
 }
 
-/* line 1045, ../sass/screen.scss */
+/* line 1104, ../sass/screen.scss */
 .fancybox-inner {
   width: 700px !important;
   height: 445px !important;
