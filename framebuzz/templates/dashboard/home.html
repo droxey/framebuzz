@@ -6,10 +6,15 @@
 {% block page_class %}home{% endblock %}
 
 {% block page_content %}
-
     <div class="col-md-12">
         <div class="block">
-            <h2>Latest Videos</h2>
+            <h2><i class="fa fa-upload"></i> Upload Video</h2>
+            {% include 'dashboard/snippets/upload_video.html' %}
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="block">
+            <h2><i class="fa fa-video-camera"></i> Latest Videos</h2>
             {% for video in latest_videos %}
                 {% include "dashboard/snippets/video_entry.html" %}
             {% endfor %}
@@ -75,5 +80,5 @@
 {% endblock %}
 
 {% block page_javascript %}
-
+    <script src="{% static 'framebuzz/dashboard/js/dashboard.quickupload.js' %}"></script>
 {% endblock %}

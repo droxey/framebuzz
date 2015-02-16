@@ -76,13 +76,7 @@
             </span>
         </aside>
         <section id="content" class="container">
-            <div class="row m-container">
-                <div class="col-md-12">
-                    <div class="block">
-                        <h2><i class="fa fa-upload"></i> Upload Video</h2>
-                        {% include 'dashboard/snippets/upload_video.html' %}
-                    </div>
-                </div>
+            <div class="row">
                 {% block page_content %}{% endblock %}
             </div>
         </section>
@@ -160,14 +154,6 @@
 <script src="{% static 'framebuzz/dashboard/vendor/jquery/jquery.steps.min.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/theme_dark/js/functions.js' %}"></script>
 <script src="{% static 'framebuzz/dashboard/js/dashboard.base.js' %}"></script>
-<script src="{% static 'framebuzz/dashboard/js/dashboard.quickupload.js' %}"></script>
-<script type="text/javascript">
-    $(window).load(function(){
-        $('.m-container').masonry({
-            itemSelector: '.masonry'
-        });
-    });
-</script>
 {% endcompress %}
 {% block page_javascript %}{% endblock %}
 <script>
