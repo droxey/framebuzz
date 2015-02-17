@@ -812,9 +812,11 @@ def start_private_convo(context):
             send_to_list.append(email_addr)
 
     if private_session.is_synchronized:
+        email_template = 'private-session-invite'
         action.send(user, verb='joined private viewing',
                     action_object=private_session, target=video)
     else:
+        email_template = 'private-convo-invite'
         action.send(user, verb='joined private conversation',
                     action_object=private_session, target=video)
 
@@ -823,7 +825,7 @@ def start_private_convo(context):
     if len(send_to_list) > 0:
         # Send notifications to receipients.
         send_templated_mail(
-            template_name='private-session-invite',
+            template_name=email_template,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=send_to_list,
             context={
