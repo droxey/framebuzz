@@ -12,6 +12,9 @@ $(function() {
         $('#id_video_id').attr('placeholder', 'Paste a YouTube URL to post a video...');
         $('input, textarea').placeholder();
         $('input').removeClass('error');
+        $('#upload-video div.upload-choices div.dmbox').removeClass('selected');
+        $('#add-video-form').addClass('hidden');
+        $('#upload-video-form').addClass('hidden');
     };
 
     function youtube_parser(url){
@@ -66,7 +69,7 @@ $(function() {
         onStepChanging: function (event, currentIndex, newIndex) {
             var canProceed = true;
 
-            if (currentIndex == 0) { 
+            if (currentIndex == 0) {
                 if (uploadType == null) {
                     canProceed = false;
                 }
@@ -76,6 +79,9 @@ $(function() {
                 // Someone hit the 'Previous button'
                 resetForm();
             }
+
+            console.log('can proceed?');
+            console.log(canProceed);
 
             return canProceed;
         },
@@ -94,7 +100,7 @@ $(function() {
                 }
             }
         },
-        onFinishing: function (event, currentIndex) { 
+        onFinishing: function (event, currentIndex) {
             var isValid = true;
             var dropPaneDiv = $('#upload-drop-pane > div > div');
 
@@ -102,7 +108,7 @@ $(function() {
                 if ($('#id_title').val().length == 0) {
                     $('#id_title').addClass('error');
                     $('#id_title').attr('placeholder', 'Please enter a title for the uploaded video.');
-                    
+
                     isValid = false;
                 }
                 else {
@@ -174,7 +180,7 @@ $(function() {
             var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
 
             $.post(postUrl, {
-                'video_id': video_id, 
+                'video_id': video_id,
                 'is_featured': 'false',
                 'csrfmiddlewaretoken': csrfToken
             }, function(data, textStatus, jqXHR) {
