@@ -80,9 +80,6 @@ $(function() {
                 resetForm();
             }
 
-            console.log('can proceed?');
-            console.log(canProceed);
-
             return canProceed;
         },
         onStepChanged: function(event, currentIndex, priorIndex) {
