@@ -204,7 +204,7 @@ class SessionInvitationSerializer(serializers.ModelSerializer):
 
 class PrivateSessionSerializer(serializers.ModelSerializer):
     owner = UserSerializer()
-    invitees = SessionInvitationSerializer(source='get_invitees', read_only=True)
+    invitees = SessionInvitationSerializer(read_only=True)
 
     class Meta:
         model = PrivateSession
