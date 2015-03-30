@@ -1,5 +1,5 @@
 $(function() {
-    $(document).on('click', 'a.anchor', function(e) {
+    $(document).on('click', 'a.read-more', function(e) {
         var hash = $(this).attr('href');
         $.scrollTo(hash, 600, {
             easing:'swing',
