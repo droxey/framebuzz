@@ -25,14 +25,11 @@
     <meta property="og:description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
     <meta property="og:title" content="FrameBuzz: Make a Better Video.">
     <meta property="og:site_name" content="FrameBuzz">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nunito:400,300,700" type="text/css">
     {% compress css %}
-        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/bootstrap/css/bootstrap.css' %}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/jquery/vegas/jquery.vegas.min.css' %}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/jquery/perfect-scrollbar-0.4.6.min.css' %}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{% static 'framebuzz/marketing/css/stylesheets/screen.css' %}" type="text/css" media="screen" />
-        <link href="{% static 'framebuzz/marketing/vendor/jquery/jquery.bxslider.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-        <link href="{% static 'framebuzz/marketing/css/stylesheets/home.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/bootstrap/css/bootstrap.css' %}" type="text/css" media="screen">
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" type="text/css" media="screen">
+        <link rel="stylesheet" href="{% static 'framebuzz/marketing/css/stylesheets/home.css' %}" media="screen, projection" type="text/css">
     {% endcompress %}
     {% compress js %}
         <script type="text/javascript">
@@ -48,6 +45,7 @@
     {% endcompress %}
   </head>
   <body class="homepage">
+
     <!--[if lte IE 8]>
         <div class="chromeframe">
         You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or
@@ -56,7 +54,7 @@
     <![endif]-->
     <div id="home-floating-search">
         <div class="container">
-            <div id="logo" class="row">
+            <div id="floating-logo" class="row">
                 {% block header_row %}
                 <div class="col-xs-3 row-logo">
                     <a href="{% url 'home' %}">
@@ -103,246 +101,266 @@
             </div>
         </div>
     </div>
-    <div class="row" id="background">
-        <div class="container">
-            <div class="row">
-                <div id="login" class="col-xs-2 pull-right">
+    <div id="base">
+        <div id="header" class="row">
+            <div class="container">
+                <div id="login" class="col-md-2 pull-right">
                     <a href="{% url 'account_login' %}" title="Login" class="pull-right">Sign in</a>
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div id="intro" class="col-xs-12">
-                <img class="logo" src="{% static 'framebuzz/marketing/img/logo-white.png' %}" height="61" width="276" alt="FrameBuzz: Make a Better Video">
+        <div id="logo">
+            <div class="container">
                 <div class="row">
-                    <div class="col-xs-12" id="tagline">
-                        <h1>Make a Better Video</h1>
-                    </div>
+                    <img class="absolute-center" src="{% static 'framebuzz/marketing/img/logo.png' %}" height="33" width="159" alt="FrameBuzz: Make a Better Video">
                 </div>
-                <div class="row">
-                    <div class="col-xs-10" id="callout">
-                        <p>The best video player for audience<br>engagement and customer service.</p>
+            </div>
+        </div>
+        <div id="introduction" class="row">
+            <div class="container">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 col-lg-push-3">
+                            <img class="macbook img-responsive" src="{% static 'framebuzz/marketing/img/2015/macbook.jpg' %}" width="499">
+                        </div>
                     </div>
-                </div>
-                <div class="row button-row">
-                    <div class="col-xs-6">
-                        {% include 'marketing/snippets/demo-button.html' %}
+                    <div class="row">
+                        <div class="col-lg-7 col-lg-push-2">
+                            <h1>Make Pop-Up Videos<super>*VH1</super><br>with your team</h1>
+                        </div>
                     </div>
-                    <div class="col-xs-6">
-                        <a href="#engage" id="btn-key-features" class="btn btn-key-features anchor">
-                            See Key Features
-                            <span class="fa-stack fa-sm">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-angle-double-down fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
+                    <div class="row">
+                        <div class="col-lg-6 col-lg-push-3 center-row subscribe-row">
+                            <a class="subscribe absolute-center">Subscribe</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-lg-push-3 center-row read-more-row">
+                            {% spaceless %}
+                                <a class="read-more absolute-center">Read More
+                                    <span class="fa-stack">
+                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                      <i class="fa fa-chevron-down fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            {% endspaceless %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="base">
-        <div id="engage" class="row light">
-            <h2>Boost Engagement with Your Online Videos</h2>
+        <div id="features" class="row">
             <div class="container">
-                <div class="col-xs-12">
+                <div class="col-lg-12 list-container">
                     <div class="row">
-                        <div class="col-xs-5 pull-left">
-                            <img src="{% static 'framebuzz/marketing/img/player.jpg' %}" height="234" width="367" alt="FrameBuzz: Advertising" class="pull-right feature">
-                        </div>
-                        <div class="col-xs-1 separator wsep pull-left hidden-xs">
-                            <img class="separator" src="{% static 'framebuzz/marketing/img/wsep.png' %}" alt="" width="35">
-                        </div>
-                        <div class="col-xs-6 pull-left description">
-                            <h3>FrameBuzz lets you build one-to-one relationships with your customers through patented in-frame commenting.</h3>
-                            <p class="col-xs-10">
-                                <ul class="pull-left">
-                                    <li>Upload video content and embed the high quality player in seconds</li>
-                                    <li>Securely control your videos, no matter how you use the FrameBuzz player</li>
-                                    <li>Manage comments through an intuitive dashboard</li>
-                                </ul>
-                            </p>
+                        <h2>Watch, talk, manage, share.</h2>
+                        <div class="col-lg-11 col-lg-push-1">
+                            <ul class="row fa-ul">
+                              <li class="col-lg-6 left">
+                                  <span class="fa-stack">
+                                    <i class="fa fa-comment fa-stack-2x fa-flip-horizontal"></i>
+                                    <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                                  </span>
+                                  Groupwatch and converse with team
+                              </li>
+                              <li class="col-lg-6 right">
+                                  <span class="fa-stack">
+                                    <i class="fa fa-film fa-stack-2x"></i>
+                                    <i class="fa fa-square fa-stack-1x"></i>
+                                  </span>
+                                  Manage production tasks
+                              </li>
+                              <li class="col-lg-6 left">
+                                  <span class="fa-stack film-stack">
+                                    <i class="fa fa-cloud fa-stack-2x"></i>
+                                    <i class="fa fa-arrow-up fa-stack-1x"></i>
+                                  </span>
+                                  Unlimited video uploads
+                              </li>
+                              <li class="col-lg-6 right">
+                                  <span class="fa-stack">
+                                    <i class="fa fa-stack-2x fa-group"></i>
+                                    <i class="fa fa-stack-1x"></i>
+                                  </span>
+                                  A community of creators and viewers
+                              </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="row button-row">
-                        <div class="col-xs-6">
-                            {% include 'marketing/snippets/demo-button.html' %}
-                        </div>
-                        <div class="col-xs-6">
-                            <a href="#traffic" class="btn btn-features anchor">
-                                See More Features
-                                <span class="fa-stack fa-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row read-more-separator">
+            <div class="container">
+                <div class="col-lg-12">
+                    <div class="row center-row read-more-row">
+                        {% spaceless %}
+                            <a class="read-more absolute-center">Read More
+                                <span class="fa-stack">
                                   <i class="fa fa-circle fa-stack-2x"></i>
-                                  <i class="fa fa-angle-double-down fa-stack-1x fa-inverse"></i>
+                                  <i class="fa fa-chevron-down fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
-                        </div>
-                    </div>
-                    <img class="col-xs-12 shadow img-responsive" src="{% static 'framebuzz/marketing/img/button-shadow.png' %}" alt="">
-                </div>
-            </div>
-        </div>
-        <div id="traffic" class="row dark">
-            <h2>Build Loyalty</h2>
-            <div class="container">
-                <div class="col-xs-12 dark-inner">
-                    <div class="row">
-                        <div class="col-xs-6 pull-left left description">
-                            <h3>Use FrameBuzz’s patented in-frame commenting features to have one-to-one conversations with your audience.</h3>
-                            <p class="col-xs-10 pull-right">
-                                <h4></h4>
-                                <ul>
-                                    <li>Respond quickly and directly to new leads</li>
-                                    <li>Improve customer engagement</li>
-                                    <li>Reduce help desk inquiries</li>
-                                </ul>
-                            </p>
-                        </div>
-                        <div class="col-xs-1 separator pull-left hidden-xs">
-                            <img class="separator" src="{% static 'framebuzz/marketing/img/dsep.png' %}" alt="" width="35">
-                        </div>
-                        <div class="col-xs-5 pull-left">
-                            <img class="feature" src="{% static 'framebuzz/marketing/img/comment-split.jpg' %}" height="117" width="351" alt="FrameBuzz: Video SEO">
-                        </div>
-                    </div>
-                    <div class="row button-row">
-                        <div class="col-xs-6">
-                            {% include 'marketing/snippets/demo-button.html' %}
-                        </div>
-                        <div class="col-xs-6">
-                            <a href="#ads" class="btn btn-features anchor">
-                                See More Features
-                                <span class="fa-stack fa-sm">
-                                  <i class="fa fa-circle fa-stack-2x"></i>
-                                  <i class="fa fa-angle-double-down fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </div>
+                        {% endspaceless %}
                     </div>
                 </div>
             </div>
         </div>
-        <div id="ads" class="row light">
-            <h2>Upload and Embed Your Video Content in Seconds</h2>
+        <div id="work-together" class="row">
             <div class="container">
-                <div class="col-xs-12">
+                <div class="col-lg-12">
                     <div class="row">
-                        <div class="col-xs-5 pull-left">
-                            <img class="pull-right feature" src="{% static 'framebuzz/marketing/img/upload.png' %}" height="183" width="378" alt="FrameBuzz: Advertising">
+                        <div class="col-lg-12">
+                            <img class="img-responsive hidden-xs" src="{% static 'framebuzz/marketing/img/2015/ipad-player.jpg' %}" alt="" width="1024">
                         </div>
-                        <div class="col-xs-1 separator wsep pull-left hidden-xs">
-                            <img class="separator" src="{% static 'framebuzz/marketing/img/wsep.png' %}" alt="" width="35">
+                        <div class="col-lg-10">
+                            <span class="how-it-works pull-right">(see how it works)</span>
                         </div>
-                        <div class="col-xs-6 pull-left description">
-                            <h3>Upload and embed your video content faster than you can with YouTube, Vimeo and others.</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-lg-push-1 work-together">
+                            <h3>Work together even when you’re apart</h3>
                             <p>
-                                <ul>
-                                    <li>Enterprise-grade video player</li>
-                                    <li>Video content can be password-protected regardless of where it resides</li>
-                                    <li>Manage all your digital media with an intuitive dashboard</li>
-                                </ul>
+                                From your home or office, <strong>schedule private viewings</strong> to watch a video with your team and have a conversation about it.
                             </p>
                         </div>
-                    </div>
-                    <div class="row button-row">
-                        <div class="col-xs-6">
-                            {% include 'marketing/snippets/demo-button.html' %}
+                        <div class="col-lg-3 col-lg-push-1 work-subscribe">
+                            <div class="row users-row"></div>
+                            <div class="row subscribe-row">
+                                <a class="subscribe pull-right">Subscribe</a>
+                            </div>
                         </div>
-                        <div class="col-xs-6">
-                            <a href="#metrics" class="btn btn-features anchor">
-                                See More Features
-                                <span class="fa-stack fa-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row read-more-separator gray">
+            <div class="container">
+                <div class="col-lg-12">
+                    <div class="row center-row read-more-row">
+                        {% spaceless %}
+                            <a class="read-more absolute-center">Read More
+                                <span class="fa-stack">
                                   <i class="fa fa-circle fa-stack-2x"></i>
-                                  <i class="fa fa-angle-double-down fa-stack-1x fa-inverse"></i>
+                                  <i class="fa fa-chevron-down fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
-                        </div>
-                    </div>
-                    <img class="col-xs-12 shadow img-responsive" src="{% static 'framebuzz/marketing/img/button-shadow.png' %}" alt="">
-                </div>
-            </div>
-        </div>
-        <div id="metrics" class="row dark">
-            <h2>Video Analytics Reporting that Delivers Actionable Metrics</h2>
-            <div class="container">
-                <div id="dashboard" class="col-xs-12 dark-inner">
-                    <div class="row">
-                        <div class="col-xs-6 pull-left left description">
-                            <h3>The FrameBuzz reporting dashboard gives you metrics to understand what resonates with customers &mdash; and what doesn’t</h3>
-                            <p class="col-xs-11 pull-right">
-                                <ul>
-                                    <li>Optimize your video content to target the right customers, the right way</li>
-                                    <li>Nurture your relationships with passionate customers who refer</li>
-                                    <li>Reduce help desk inquiries</li>
-                                </ul>
-                            </p>
-                        </div>
-                        <div class="col-xs-1 separator pull-left hidden-xs">
-                            <img class="separator" src="{% static 'framebuzz/marketing/img/dsep.png' %}" alt="" width="35">
-                        </div>
-                        <div class="col-xs-5 pull-left">
-                            <img class="feature" src="{% static 'framebuzz/marketing/img/dashboard.jpg' %}" height="235" width="366" alt="FrameBuzz: Dashboard">
-                        </div>
-                    </div>
-                    <div class="row button-row">
-                        <div class="col-xs-4 col-xs-offset-5 center-button">
-                            {% include 'marketing/snippets/demo-button.html' %}
-                        </div>
+                        {% endspaceless %}
                     </div>
                 </div>
             </div>
         </div>
-        <div id="quote" class="row">
+        <div id="converse" class="row blue">
+            <div class="row header-row">
+                <div class="container">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <h3>Have a conversation, comment,<br>or get feedback.</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row comment-row">
+                <div class="container">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="row">
+                                    <p class="first"><em>Comments on FrameBuzz videos are tied to the timeline,</em>
+                                    so they'll pop up at the same time users originally made their comments,<br>
+                                    similar to VH1’s Pop-Up Video.</p>
+                                    <p><em>Archive, delegate, and communicate all from your FrameBuzz dashboard.</em>
+                                    FrameBuzz is specifically crafted and designed so that it can be a production management<br>
+                                    software. Unify the many parts and people involved in post production.</p>
+                                </div>
+                                <div class="row subscribe-row">
+                                    <a class="subscribe pull-right">Subscribe</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-lg-push-1">
+                                <div class="row dashboard-row">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="update" class="row">
             <div class="container">
-                <div class="col-xs-12">
+                <div class="col-lg-12">
                     <div class="row">
-                        <p>
-                            <span class="blue line1"><i class="fa fa-quote-left pull-left"></i>With digital technology,</span><br>
-                            <span class="line2">it<span class="blue">’</span>s now possible to have a one<span class="blue">-</span>on<span class="blue">-</span>one<br>
-                                relationship with every consumer in the world.<br></span>
-                            <span class="blue line3">The more intimate the relationship, the more indispensable it becomes.</span><br>
-                            <span class="line4">We want to be the company that creates those indispensable relationships with our<br></span>
-                            <span class="line5">brands, and digital technology enables this. <span class="blue"><i class="fa fa-quote-right"></i></span></span>
-                        </p>
-                        <p class="author pull-right"><span class="orange">CEO Robert McDonald,</span> P&amp;G</p>
+                        <div class="col-lg-9 col-lg-push-2 col-md-9 col-md-push-2 update-callout">
+                            <img class="img-responsive" src="{% static 'framebuzz/marketing/img/2015/social.jpg' %}" alt="Stay updated with FrameBuzz.">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9 col-lg-push-2 col-md-9 col-md-push-2 update-info">
+                            <h3>Update, and be updated</h3>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <p>Share your world with the world! <strong>Post videos, start conversations,<br>
+                                        and see what everyone else is saying</strong>. FrameBuzz is your platform to<br>
+                                        make a statement and create an identity.</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="row subscribe-row">
+                                        <a class="subscribe pull-right">Subscribe</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="featured-on" class="row">
+            <div class="container">
+                <div class="col-lg-10 col-lg-push-2 featured-container">
+                    <div class="row">
+                        <span class="pull-left">As seen on:</span>
+                        <img class="pull-left img-responsive" width="498" src="{% static 'framebuzz/marketing/img/2015/featured-on.jpg' %}" alt="FrameBuzz has been featured on NBC, Austin 360, and SiliconHills">
                     </div>
                 </div>
             </div>
         </div>
         <div id="follow" class="row">
             <div class="container">
-                <div class="row centered-row">
-                    <div class="follow-img">
-                        <p><span>Follow</span><img class="logo" src="{% static 'framebuzz/marketing/img/logo.png' %}" width="249" alt="Follow FrameBuzz"></p>
-                    </div>
-                    <div class="follow-social">
-                        <a href="https://plus.google.com/105150048887128713309" target="_blank" class="google">
-                            <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="follow-social">
-                        <a href="https://twitter.com/framebuzz" target="_blank" class="twitter">
-                            <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="follow-social">
-                        <a href="https://www.linkedin.com/company/framebuzz" target="_blank" class="linkedin">
-                            <span class="fa-stack fa-lg">
-                              <i class="fa fa-circle fa-stack-2x"></i>
-                              <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
+                <div class="col-md-12">
+                    <div class="row centered-row">
+                        <div class="follow-img">
+                            <p><span>Follow</span><img class="logo" src="{% static 'framebuzz/marketing/img/logo.png' %}" width="280" alt="Follow FrameBuzz"></p>
+                        </div>
+                        <div class="follow-social">
+                            <a href="https://plus.google.com/105150048887128713309" target="_blank" class="google">
+                                <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="follow-social">
+                            <a href="https://twitter.com/framebuzz" target="_blank" class="twitter">
+                                <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="follow-social">
+                            <a href="https://www.linkedin.com/company/framebuzz" target="_blank" class="linkedin">
+                                <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="row">
+        <footer id="footer-nav" class="row">
             <div class="container">
                 <div class="row centered-row">
                     <div class="col-about">
@@ -363,7 +381,6 @@
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
-        <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.backstretch.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.scrollTo.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.base.js' %}"></script>
