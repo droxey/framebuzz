@@ -167,7 +167,6 @@
         <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.scrollTo.min.js' %}"></script>
-        <script src="{% static 'framebuzz/marketing/js/framebuzz.base.js' %}"></script>
         <script src="{% static 'framebuzz/marketing/js/framebuzz.home.js' %}"></script>
     {% endcompress %}
     <script>
@@ -197,5 +196,6 @@
             a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0018/6248.js?"+Math.floor(new Date().getTime()/3600000);
             a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     </script>
+    {% block page_javascript %}{% endblock %}
   </body>
  </html>

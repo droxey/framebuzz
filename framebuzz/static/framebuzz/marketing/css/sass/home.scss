@@ -250,7 +250,6 @@ div.row.read-more-separator {
             }
 
             div.go-back {
-                margin: 50px 0;
                 font-size: 16px;
                 letter-spacing: -0.03em;
                 color: #999999;
@@ -262,6 +261,7 @@ div.row.read-more-separator {
                 border: 1px solid #ebebeb;
                 position: relative;
                 text-align: center;
+                margin-bottom: 50px;
 
                 div.signup-top {
                     background: #ebebeb;
@@ -369,8 +369,8 @@ div.row.read-more-separator {
                     border-left: 1px solid #f5f5f5;
                     border-right: 1px solid #f5f5f5;
                     background: #f5f5f5;
-
-                    h2 { color: #00aeef; }
+                    margin-top: -12px;
+                    margin-bottom: -12px;
 
                     ul {
                         li {
@@ -380,6 +380,10 @@ div.row.read-more-separator {
                 }
             }
         }
+    }
+
+    #signup-step-2 {
+
     }
 
     #introduction.row {
@@ -802,7 +806,6 @@ div.row.read-more-separator {
     -moz-box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.10);
     box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.10);
     border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-    font-weight: 300;
     @include transition(all .6s linear);
     @include translateY(-110%);
     &.sticky { @include translateY(0px); }
@@ -842,6 +845,8 @@ div.row.read-more-separator {
             width: 92.5%;
             text-overflow: ellipsis;
             -ms-text-overflow: ellipsis;
+            font-weight: 300;
+            letter-spacing: -0.03em;
         }
 
         button { display: none; }
@@ -854,10 +859,12 @@ div.row.read-more-separator {
         padding-top: 3px;
 
         a {
-            font-size: 12px;
+            font-size: 13px;
             line-height: 20px;
             margin: 0;
             padding: 0;
+            font-weight: 500;
+            letter-spacing: -0.02em;
         }
 
         #btn-register {
@@ -872,6 +879,8 @@ div.row.read-more-separator {
             line-height: 20px;
             margin: 0 5px;
             width: 1px;
+            letter-spacing: -0.03em;
+            font-weight: 300;
         }
     }
     @media screen and (max-width: 550px) {
@@ -893,6 +902,7 @@ body {
     &.subpage {
         #base #follow.row {
             border-top: 2px solid #ededed;
+            margin-top: 50px;
         }
     }
 

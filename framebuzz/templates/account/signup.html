@@ -17,13 +17,6 @@
                         </a>
                     </div>
                 </div>
-                {% if not form.errors %}
-                    <div class="row">
-                        <div class="col-xs-12 description">
-                            <p><strong>Create an account and join the conversation!</strong></p>
-                        </div>
-                    </div>
-                {% endif %}
                 {% if form.errors %}
                     <div class="row row-error bs-callout bs-callout-danger">
                         <div class="col-xs-12 error-wrap">
@@ -55,12 +48,10 @@
 <div id="signup" class="row">
     <div class="container">
         <div class="col-lg-12">
-            <div class="row">
+            <div id="signup-options" class="row" data-selected="">
                 <div class="col-lg-12 signup-header">
                     <h1 class="absolute-center">Welcome to <img class="logo" src="{% static 'framebuzz/marketing/img/logo.png' %}" width="184">. Let's get started.</h1>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-5 col-lg-push-1 signup-option option-free">
                     <div class="row signup-top">
                         <img src="{% static 'framebuzz/marketing/img/2015/icon-chat.png' %}" width="104" height="79" alt="">
@@ -68,7 +59,7 @@
                         <h3>BASIC ACCOUNT</h3>
                         <hr>
                         <div class="row subscribe-row">
-                            <a class="subscribe gray">Sign Up</a>
+                            <a href="#signup-step-2" class="subscribe gray" data-signup-option="free">Sign Up</a>
                         </div>
                     </div>
                     <div class="row signup-bottom">
@@ -87,7 +78,7 @@
                         <h4>For producers &amp; business users</h4>
                         <hr>
                         <div class="row subscribe-row">
-                            <a class="subscribe">Buy</a>
+                            <a href="#signup-step-2" class="subscribe" data-signup-option="premium">Buy</a>
                         </div>
                     </div>
                     <div class="row signup-bottom">
@@ -99,13 +90,67 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-12 go-back">
                     <p>Already have an account? <a href="{% url 'account_login' %}">Log in</a> or <a href="{% url 'home' %}">click here</a> to return to the homepage.</p>
+                </div>
+            </div>
+            <div id="signup-step-2" class="row">
+                <div class="col-lg-12 signup-header">
+                    <h1 class="absolute-center">Welcome to <img class="logo" src="{% static 'framebuzz/marketing/img/logo.png' %}" width="184"></h1>
+                </div>
+                {% if form.errors %}
+                    <div class="row row-error bs-callout bs-callout-danger">
+                        <div class="col-lg-12 error-wrap">
+                            <h4><i class="fa fa-icon fa-error fa-fw"></i> We found some errors:</h4>
+                            <ol>
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>{% if field|lower != '__all__' %}<strong>{{ field|title }}</strong>: {% endif %}{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% include "account/snippets/signup_form.html" %}
+                    </div>
+                </div>
+                <div class="row terms">
+                    <div class="col-xs-12">
+                        <p>By registering for FrameBuzz, you acknowledge that you agree to our <a href="{% url 'terms' %}" target="_blank">Terms of Service.</a></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block page_javascript %}
+    {% compress js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var selectedOption = null;
+
+            $("div.signup-option").mouseenter(function() {
+                $(this).addClass('selected');
+              }).mouseleave(function() {
+                  $(this).removeClass('selected');
+              });
+
+            $("a.subscribe").click(function(e) {
+                e.preventDefault();
+
+                var href = $(this).attr("href");
+                selectedOption = $(this).attr("data-signup-option");
+
+                console.log('selected: ' + selectedOption);
+
+                return false;
+            });
+        });
+    </script>
+    {% endcompress %}
 {% endblock %}
