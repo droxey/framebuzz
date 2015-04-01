@@ -105,8 +105,10 @@
             SOCK.video_player_features = ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'viewers', 'progress', 'playpause'];
         }
         else {
+            // TODO: 04/01/15: Removed 'privateviewing' for launch.
+            // Add back in when not buggy.
             SOCK.video_player_features  =  private_viewing_enabled
-                                                ? ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'privateviewing', 'progress', 'playpause']
+                                                ? ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'progress', 'playpause']
                                                 : ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'progress', 'playpause'];
         }
       </script>

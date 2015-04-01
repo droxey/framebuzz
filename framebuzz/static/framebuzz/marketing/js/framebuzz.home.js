@@ -10,8 +10,10 @@ $(function() {
     });
 
     var $stickyHeader = $("#home-floating-search");
-    $(window).on("scroll load", function() {
-        var fromTop = $(document).scrollTop();
-        $stickyHeader.toggleClass("sticky", (fromTop > 25));
-    });
+    if (!$('body').hasClass('show-header')) {
+        $(window).on("scroll load", function() {
+            var fromTop = $(document).scrollTop();
+            $stickyHeader.toggleClass("sticky", (fromTop > 25));
+        });
+    }
 });
