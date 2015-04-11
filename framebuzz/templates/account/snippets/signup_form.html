@@ -64,7 +64,7 @@
     <div class="row">
         <div class="col-xs-6 pull-right submit-row">
             <em>Next step: Your Dashboard</em>
-            <button class="btn btn-info submit-button" type="submit">{% if signup_option == 'free' %}Create Account{% else %}Submit Payment Info{% endif %}</button>
+            <button class="btn btn-info submit-button pull-right" type="submit">{% if signup_option == 'free' %}Create Account{% else %}Submit Payment Info{% endif %}</button>
         </div>
     </div>
     <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'thanks' %}" />

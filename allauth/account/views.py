@@ -128,6 +128,7 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView)
         ret = super(SignupView, self).get(*args, **kwargs)
         signup_option = self.request.GET.get('option', None)
         if not signup_option:
+            print 'no option'
             return HttpResponseRedirect('subscribe', args=[])
         return ret
 
