@@ -32,6 +32,10 @@ from . import app_settings
 from .adapter import get_adapter
 
 from zebra.forms import StripePaymentForm
+from zebra.conf import options
+
+import stripe
+stripe.api_key = options.STRIPE_SECRET
 
 User = get_user_model()
 
@@ -116,8 +120,16 @@ class CloseableSignupMixin(object):
 class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView):
     template_name = "account/signup.html"
     form_class = SignupForm
+    second_form_class = StripePaymentForm
     redirect_field_name = "next"
     success_url = None
+
+    def get(self, *args, **kwargs):
+        ret = super(SignupView, self).get(*args, **kwargs)
+        signup_option = self.request.GET.get('option', None)
+        if not signup_option:
+            return HttpResponseRedirect('subscribe', args=[])
+        return ret
 
     def get_success_url(self):
         # Explicitly passed ?next= URL takes precedence
@@ -128,6 +140,19 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView)
 
     def form_valid(self, form):
         user = form.save(self.request)
+
+        zebra_form = self.second_form_class(self.request.POST)
+        if zebra_form and zebra_form.is_valid():
+            my_profile = user.get_profile()
+            stripe_customer = stripe.Customer.retrieve(my_profile.stripe_customer_id)
+            stripe_customer.card = zebra_form.cleaned_data['stripe_token']
+            stripe_customer.save()
+
+            my_profile.last_4_digits = zebra_form.cleaned_data['last_4_digits']
+            my_profile.stripe_customer_id = stripe_customer.id
+            my_profile.is_dashboard = True
+            my_profile.save()
+
         self.request.session['show_help'] = True
         return complete_signup(self.request, user, self.get_success_url())
 
@@ -138,12 +163,20 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView)
                                                   self.redirect_field_name)
         redirect_field_name = self.redirect_field_name
         redirect_field_value = self.request.REQUEST.get(redirect_field_name)
-        zebra_form = StripePaymentForm()
-        print zebra_form
-        ret.update({"login_url": login_url,
+        signup_option = self.request.GET.get('option', None)
+
+        context = {"login_url": login_url,
                     "redirect_field_name": redirect_field_name,
                     "redirect_field_value": redirect_field_value,
-                    "zebra_form": zebra_form })
+                    "signup_option": signup_option }
+
+        if 'form' not in context:
+            context['form'] = self.form_class(initial={'request': self.request})
+
+        if 'zebra_form' not in context and signup_option == 'paid':
+            context['zebra_form'] = self.second_form_class(initial={'request': self.request})
+
+        ret.update(context)
         return ret
 
 

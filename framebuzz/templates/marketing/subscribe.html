@@ -24,7 +24,7 @@
                         <h3>BASIC ACCOUNT</h3>
                         <hr>
                         <div class="row subscribe-row">
-                            <a href="#signup-step-2" class="subscribe gray" data-signup-option="free">Sign Up</a>
+                            <a href="{% url 'account_signup' %}?option=free" class="subscribe gray" data-signup-option="free">Sign Up</a>
                         </div>
                     </div>
                     <div class="row signup-bottom">
@@ -43,7 +43,7 @@
                         <h4>For producers &amp; business users</h4>
                         <hr>
                         <div class="row subscribe-row">
-                            <a href="#signup-step-2" class="subscribe" data-signup-option="premium">Buy</a>
+                            <a href="{% url 'account_signup' %}?option=paid" class="subscribe" data-signup-option="premium">Buy</a>
                         </div>
                     </div>
                     <div class="row signup-bottom">
@@ -75,17 +75,6 @@
               }).mouseleave(function() {
                   $(this).removeClass('selected');
               });
-
-            $("a.subscribe").click(function(e) {
-                e.preventDefault();
-
-                var href = $(this).attr("href");
-                selectedOption = $(this).attr("data-signup-option");
-
-                console.log('selected: ' + selectedOption);
-
-                return false;
-            });
         });
     </script>
     {% endcompress %}

@@ -309,7 +309,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = ("optional",)
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_UNIQUE_EMAIL = False
-ACCOUNT_SIGNUP_FORM_CLASS = 'framebuzz.apps.marketing.forms.FrameBuzzSignupForm'
+#ACCOUNT_SIGNUP_FORM_CLASS = 'framebuzz.apps.marketing.forms.FrameBuzzSignupForm'
 SOCIALACCOUNT_AUTO_SIGNUP = False
 
 SOCIALACCOUNT_PROVIDERS = {

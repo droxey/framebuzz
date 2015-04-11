@@ -5,20 +5,18 @@
 
 {% block page_title %}: Create Your Account.{% endblock %}
 
-{% block extra_head %}
-    {% zebra_head_and_stripe_key %}
-{% endblock %}
-
 {% block page_body %}
-    <div class="col-xs-12">
-        <div class="row">
-            <div class="box col-xs-8 col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-                <div id="homepage-logo" class="row">
-                    <div class="col-xs-12">
-                        <a href="{% url 'home' %}">
-                            <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="40" width="184">
-                        </a>
-                    </div>
+<div id="signup" class="row">
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="row" data-selected="">
+                <div class="col-lg-12 signup-header">
+                    <h1 class="absolute-center">Welcome to <img class="logo" src="{% static 'framebuzz/marketing/img/logo.png' %}" width="184"></h1>
+                    <p class="selection">
+                        You’ve selected {% if signup_option == 'free' %}FREE{% else %}PREMIUM{% endif %} ACCOUNT.
+                        <a href="{% url 'subscribe' %}?option={{ signup_option }}">change selection</a>
+                        <em class="pull-right">Next step: Your Dashboard</em>
+                    </p>
                 </div>
                 {% if form.errors %}
                     <div class="row row-error bs-callout bs-callout-danger">
@@ -39,11 +37,6 @@
                         {% include "account/snippets/signup_form.html" %}
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        {{ zebra_form.as_p }}
-                    </div>
-                </div>
                 <div class="row terms">
                     <div class="col-xs-12">
                         <p>By registering for FrameBuzz, you acknowledge that you agree to our <a href="{% url 'terms' %}" target="_blank">Terms of Service.</a></p>
@@ -52,9 +45,11 @@
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
 
 {% block page_javascript %}
+    {% zebra_head_and_stripe_key %}
     {% compress js %}
     <script type="text/javascript">
         $(document).ready(function() {

@@ -247,6 +247,26 @@ div.row.read-more-separator {
                         vertical-align: middle;
                     }
                 }
+
+                p.selection {
+                    letter-spacing: -0.03em;
+                    color: #999999;
+                    font-size: 15px;
+                    position: relative;
+                    top: 44px;
+
+                    a {
+                        color: #00aeef;
+                        font-size: 13px;
+                    }
+
+                    em {
+                        font-style: italic;
+                        font-size: 13px;
+                        color: #999999;
+                        text-align: right;
+                    }
+                }
             }
 
             div.go-back {
@@ -382,6 +402,156 @@ div.row.read-more-separator {
                 }
             }
         }
+
+        p {
+            color: #333333;
+            font-weight: 500;
+            line-height: 18px;
+            text-align: left;
+        }
+
+        div.row.terms {
+            margin-top: 27px;
+
+            p {
+                text-align: right;
+                color: #999999;
+                font-size: 12px;
+                letter-spacing: -0.03em;
+                font-weight: 300;
+            }
+        }
+
+        div.row.total {
+            padding: 10px 56px;
+            border-bottom: 2px solid #f1f1f1;
+            border-left: 13px solid transparent;
+            margin-bottom: 13px;
+
+            strong {
+                color: #333333;
+                font-size: 17px;
+                letter-spacing: -0.03em;
+                font-weight: 300;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            div.amount {
+                strong {
+                    text-align: right;
+                    width: 100%;
+                    line-height: 30px;
+                }
+            }
+
+            span {
+                font-size: 11px;
+                color: #909090;
+                position: relative;
+                top: -7px;
+            }
+
+            em {
+                display: inline-block;
+                font-size: 48px;
+                font-style: normal;
+            }
+        }
+
+        #signup-form {
+            input[type='text'],
+            input[type='password'] {
+                background-color: #FFFFFF;
+                border: 1px solid #CCCCCC;
+                border-radius: 4px 4px 4px 4px;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+                color: #555555;
+                display: block;
+                font-size: 14px;
+                height: 34px;
+                line-height: 1.42857;
+                padding: 6px 12px;
+                transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+                vertical-align: middle;
+                width: 100%;
+            }
+
+            label {
+                color: #666666;
+                display: block;
+                font-size: 14px;
+                margin-bottom: 0;
+                line-height: 20px;
+            }
+
+            .submit-button {
+                background-color: #a3a3a3;
+                color: white;
+                font-size: 19.68px;
+                padding-top: 17px;
+                padding-bottom: 19px;
+                line-height: 18px;
+                height: 53px;
+                margin-left: 25px;
+                border: 0;
+                padding-left: 51px;
+                padding-right: 51px;
+
+                -webkit-transition: background-color 100ms ease-in-out 100ms;
+                -moz-transition: background-color 100ms ease-in-out 100ms;
+                -o-transition: background-color 100ms ease-in-out 100ms;
+                transition: background-color 100ms ease-in-out 100ms;
+
+                &:hover, &:active, &:focus, &:visited {
+                    background-color: #7a7a7a;
+                }
+
+                &.valid {
+                    background-color: #ec008b;
+
+                    &:hover, &:active, &:focus, &:visited {
+                        background-color: #B8006B;
+                    }
+                }
+            }
+
+            div.submit-row {
+                em {
+                    font-style: italic;
+                    font-size: 13px;
+                    color: #999999;
+                    text-align: right;
+                }
+            }
+
+            div.signup-part {
+                padding: 27px 56px;
+                border-top: 2px solid #f1f1f1;
+                border-bottom: 2px solid #f1f1f1;
+                border-left: 13px solid #b3b3b3;
+                margin-bottom: 13px;
+
+                h2 {
+                    color: #b3b3b3;
+                    font-size: 24px;
+                    font-weight: 300;
+                    letter-spacing: -0.03em;
+                    text-transform: uppercase;
+                    margin-bottom: 40px;
+                }
+
+                &.active {
+                    border-left: 13px solid #01b7fb;
+
+                    h2 {
+                        color: #01b7fb;
+                    }
+                }
+            }
+        }
+
+        div.form-row { margin-bottom: 19px; }
     }
 
     #signup-step-2 {

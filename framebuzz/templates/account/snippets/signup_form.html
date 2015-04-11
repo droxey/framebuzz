@@ -1,42 +1,75 @@
-{% load i18n staticfiles addendum_tags socialaccount %}
+{% load i18n staticfiles addendum_tags socialaccount zebra_tags %}
 
 <form id="signup-form" class="form-inline" role="form" method="post">
     {% csrf_token %}
-    {% comment %}
-    <div class="row form-row">
-        <div class="form-group col-xs-6">
-            <label for="id_username">Choose a username:</label>
-            {{ form.username }}
-        </div>
-        <div class="form-group col-xs-6">
-            <label for="id_username">Email address:</label>
-            {{ form.email }}
-        </div>
-    </div>
-    {% if form.password1 and form.password2 %}
+    <div class="signup-part active">
+        <h2>Please enter YOUR account information:</h2>
         <div class="row form-row">
             <div class="form-group col-xs-6">
-                <label for="id_username">Password:</label>
-                {{ form.password1 }}
+                <label for="id_username">Choose a username:</label>
+                {{ form.username }}
             </div>
             <div class="form-group col-xs-6">
-                <label for="id_username">Password again:</label>
-                {{ form.password2 }}
+                <label for="id_username">Email address:</label>
+                {{ form.email }}
+            </div>
+        </div>
+        {% if form.password1 and form.password2 %}
+            <div class="row form-row">
+                <div class="form-group col-xs-6">
+                    <label for="id_username">Password:</label>
+                    {{ form.password1 }}
+                </div>
+                <div class="form-group col-xs-6">
+                    <label for="id_username">Password again:</label>
+                    {{ form.password2 }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% if zebra_form %}
+        <div class="signup-part">
+            <h2>Please enter YOUR payment information:</h2>
+            <div class="row form-row">
+                <span class="payment-errors"></span>
+                <div class="form-group col-xs-6">
+                    <label for="id_username">Card number:</label>
+                    {{ zebra_form.card_number }}
+                </div>
+                <div class="form-group col-xs-6">
+                    <label for="id_username">CVC:</label>
+                    {{ zebra_form.card_cvv }}
+                </div>
+            </div>
+            <div class="row form-row">
+                <div class="form-group col-xs-6">
+                    <label for="id_username">Expires:</label>
+                    {{ zebra_form.card_expiry_month }} {{ zebra_form.card_expiry_year }}
+                </div>
             </div>
         </div>
     {% endif %}
-    {% endcomment %}
-    <div class="row form-row">
-        {{ form.as_p }}
-    </div>
+    {% if signup_option == 'paid' %}
+        <div class="row total">
+            <div class="col-xs-6 pull-left">
+                <strong>PREMIUM ACCOUNT</strong>
+                <br>
+                <span>For producers &amp; business users</span>
+            </div>
+            <div class="col-xs-6 pull-right amount">
+                <strong>TOTAL: <em>$89.00</em></strong>
+            </div>
+        </div>
+    {% endif %}
     <div class="row">
-        <div class="col-xs-3">
-            <button class="btn btn-info" type="submit">Create Account</button>
+        <div class="col-xs-6 pull-right submit-row">
+            <em>Next step: Your Dashboard</em>
+            <button class="btn btn-info submit-button" type="submit">{% if signup_option == 'free' %}Create Account{% else %}Submit Payment Info{% endif %}</button>
         </div>
-        <div class="col-xs-1 text-center or">
-            <i>-or-</i>
-        </div>
-        {% if socialaccount.providers %}
+        {% if socialaccount.providers and signup_option == 'free' %}
+            <div class="col-xs-1 text-center or">
+                <i>-or-</i>
+            </div>
             {% for provider in socialaccount.providers %}
                 <div class="col-xs-1 social">
                     <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btn btn-info" href="{% provider_login_url provider.id %}">
