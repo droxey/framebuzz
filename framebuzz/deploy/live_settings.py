@@ -20,6 +20,8 @@ DATABASES = {
     }
 }
 
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTOCOL", "https")
+
 SOCKJS_PORT = 4000
 
 SHORT_BASE_URL = 'http://frame.bz/s/'
@@ -56,4 +58,8 @@ MAINTENANCE_IGNORE_URLS = (
 ZENCODER_API_KEY = 'e990db716cb4d5b55a9ca91ceaba6c00'
 ZENCODER_WEBHOOK_URL = 'http://%(live_host)s/video/notifications/'
 
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
+
+STRIPE_SECRET = "sk_live_hpL41etG4pN2AvvYkQoE2QYe"
+STRIPE_PUBLISHABLE = "pk_live_ms2c3erskOLLaAPK3kULMTvZ"
+ZEBRA_ENABLE_APP = True

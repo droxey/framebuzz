@@ -31,6 +31,8 @@ from . import app_settings
 
 from .adapter import get_adapter
 
+from zebra.forms import StripePaymentForm
+
 User = get_user_model()
 
 class RedirectAuthenticatedUserMixin(object):
@@ -136,9 +138,12 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView)
                                                   self.redirect_field_name)
         redirect_field_name = self.redirect_field_name
         redirect_field_value = self.request.REQUEST.get(redirect_field_name)
+        zebra_form = StripePaymentForm()
+        print zebra_form
         ret.update({"login_url": login_url,
                     "redirect_field_name": redirect_field_name,
-                    "redirect_field_value": redirect_field_value })
+                    "redirect_field_value": redirect_field_value,
+                    "zebra_form": zebra_form })
         return ret
 
 

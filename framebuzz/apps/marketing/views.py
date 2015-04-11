@@ -29,6 +29,11 @@ def thanks(request):
     }, context_instance=RequestContext(request))
 
 
+def subscribe(request):
+    return render_to_response('marketing/subscribe.html', {
+    }, context_instance=RequestContext(request))
+
+
 def mobile(request):
     return render_to_response('marketing/mobile.html', {
     }, context_instance=RequestContext(request))

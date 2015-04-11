@@ -2,6 +2,8 @@ from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
    url(r'^$', 'framebuzz.apps.marketing.views.home', {'template': 'marketing/home.html'}, name='home'),
+      url(r'^subscribe/$',
+          'framebuzz.apps.marketing.views.subscribe', name='subscribe'),
    url(r'^learn-more/$', 'framebuzz.apps.marketing.views.learn_more', name='learn-more'),
    url(r'^contact/$', 'framebuzz.apps.marketing.views.contact', name='contact'),
    url(r'^contact/thanks/$', 'framebuzz.apps.marketing.views.contact_thanks', name='contact-thanks'),

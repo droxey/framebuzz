@@ -244,6 +244,7 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'robots',
+    'zebra',
 
     # FrameBuzz Apps
     'framebuzz.apps.api',
@@ -255,6 +256,10 @@ INSTALLED_APPS = (
 
 # Django-Grappelli:
 GRAPPELLI_ADMIN_TITLE = 'FrameBuzz'
+
+STRIPE_SECRET = "sk_test_Io1z1SBQvufVjZnqZvPhDkfA"
+STRIPE_PUBLISHABLE = "pk_test_tpT1GJCN7rEDTGxbnwIeUyf3"
+ZEBRA_ENABLE_APP = True
 
 ACTSTREAM_SETTINGS = {
     'MODELS': (
@@ -304,6 +309,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = ("optional",)
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_UNIQUE_EMAIL = False
+ACCOUNT_SIGNUP_FORM_CLASS = 'framebuzz.apps.marketing.forms.FrameBuzzSignupForm'
+SOCIALACCOUNT_AUTO_SIGNUP = False
 
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {

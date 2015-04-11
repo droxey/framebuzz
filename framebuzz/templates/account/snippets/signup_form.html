@@ -2,6 +2,7 @@
 
 <form id="signup-form" class="form-inline" role="form" method="post">
     {% csrf_token %}
+    {% comment %}
     <div class="row form-row">
         <div class="form-group col-xs-6">
             <label for="id_username">Choose a username:</label>
@@ -24,6 +25,10 @@
             </div>
         </div>
     {% endif %}
+    {% endcomment %}
+    <div class="row form-row">
+        {{ form.as_p }}
+    </div>
     <div class="row">
         <div class="col-xs-3">
             <button class="btn btn-info" type="submit">Create Account</button>

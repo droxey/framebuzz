@@ -57,6 +57,9 @@ urlpatterns = patterns('',
     url(r'^dashboard/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/viewing/(?P<convo_slug>[\w.@+-]+)/$',
         'framebuzz.apps.profiles.views.video_share', { 'sync': True }, name='dashboard-join-viewing-session'),
 
+    # Django-Zebra:
+    url(r'zebra/',   include('zebra.urls',  namespace="zebra",  app_name='zebra')),
+
     # Zencoder completion webhook:
     url(r'^video/notifications/$',
         'framebuzz.apps.profiles.views.zencoder_webhook',
