@@ -17,6 +17,8 @@
             <h2><i class="fa fa-video-camera"></i> Latest Videos</h2>
             {% for video in latest_videos %}
                 {% include "dashboard/snippets/video_entry.html" %}
+            {% empty %}
+                <em style="display: block; padding-bottom: 15px; text-align: center;">Upload a video to get started!</em>
             {% endfor %}
         </div>
     </div>
