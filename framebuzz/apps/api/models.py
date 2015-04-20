@@ -197,7 +197,7 @@ def post_user_signed_up(request, user, **kwargs):
         try:
             customer = stripe.Customer.create(
                 source=token,
-                description="Example customer"
+                description="Customer"
             )
 
             stripe_callback = stripe.Charge.create(
