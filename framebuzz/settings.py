@@ -168,7 +168,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'framebuzz.apps.marketing.middleware.MobileDetectionMiddleware',
+    # 04-19-15: Killing the mobile middleware.
+    #'framebuzz.apps.marketing.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
 
     'watson.middleware.SearchContextMiddleware',

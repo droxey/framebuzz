@@ -51,9 +51,13 @@
 {% block page_javascript %}
     {% zebra_head_and_stripe_key %}
     {% compress js %}
+    <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.payment.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-
+            {% if zebra_form %}
+                $('#id_card_number').payment('formatCardNumber');
+                $('#id_card_cvv').payment('formatCardCVC');
+            {% endif %}
         });
     </script>
     {% endcompress %}
