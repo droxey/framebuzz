@@ -201,7 +201,7 @@ def post_user_signed_up(request, user, **kwargs):
             )
 
             stripe_callback = stripe.Charge.create(
-                amount=9000,
+                amount=900,
                 currency='usd',
                 customer=customer.id,
                 description='FrameBuzz Premium Account')
