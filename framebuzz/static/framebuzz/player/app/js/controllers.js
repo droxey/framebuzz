@@ -760,8 +760,6 @@ angular.module('framebuzz.controllers', [])
                         $scope.timeOrderedThreads = $filter('orderBy')($scope.videoInstance.threads, 'time');
                         safeApply($scope);
 
-                        console.log($scope.videoInstance);
-
                         var loginButtonClicked = localStorageService.get('loggingIn') === 'true';
                         if (loginButtonClicked) {
                             $scope.postNewThread();

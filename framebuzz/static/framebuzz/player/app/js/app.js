@@ -80,7 +80,7 @@ angular.module('framebuzz',
                     panelId: 'login-or-signup-view',
                     animation: 'share'
                 }
-            }; 
+            };
 
             var playerSignupView = {
                 name: 'player.signupView',
@@ -91,7 +91,7 @@ angular.module('framebuzz',
                      panelId: 'signup-view',
                      animation: 'share'
                 }
-            }; 
+            };
 
             var playerLoginView = {
                 name: 'player.loginView',
@@ -102,7 +102,7 @@ angular.module('framebuzz',
                     panelId: 'login-view',
                     animation: 'share'
                 }
-            }; 
+            };
 
             var playerEnterPasswordView = {
                 name: 'player.enterPasswordView',

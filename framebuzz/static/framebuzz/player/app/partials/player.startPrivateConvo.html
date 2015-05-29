@@ -18,8 +18,6 @@
             </em>
             <em data-ng-show="startPrivateViewing">
                 Invite your audience to an exclusive, live watch party &mdash; anytime, anywhere.
-                <br>
-                Welcome to your personal movie theater!
             </em>
         </p>
         <div id="start-convo" class="clearfix">
@@ -80,19 +78,35 @@
                         </div>
                     </div>
                 </div>
-                <p class="clearfix">
+                <div class="clearfix">
+                    <p data-ng-show="startPrivateViewing" class="pull-left" style="position: relative; top: -5px;">
+                        <span class="fa-stack" style="top: 0;">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa-stack-1x">2</i>
+                         </span>
+                        <span class="instruction" style="display: inline; float: left; width: 56%; line-height: 12px;">
+                            Schedule the viewing by selecting a <strong style="font-weight: 700;">start date</strong> and <strong style="font-weight: 700;">time</strong>:
+                        </span>
+                    </p>
+                    <div class="input-group margin-bottom-sm pull-right">
+                        <span class="input-group-addon" style="left: -180px; position: relative; top: -2px;"><i class="fa fa-calendar fa-fw" style="color: #2F2F2F; position: relative; z-index: 9999;"></i></span>
+                        <input id="datetimepicker" data-datetimepicker="" type="text" data-ng-show="startPrivateViewing" class="dropdown" style="position: absolute; right: 25px; width: 205px; margin-top: -6px; text-indent: 21px;">
+                    </div>
+                </div>
+                <p class="clearfix" style="margin-bottom: 8px;">
                     <span class="fa-stack">
                         <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa-stack-1x">2</i>
+                        <i data-ng-hide="startPrivateViewing" class="fa-stack-1x">2</i>
+                        <i data-ng-show="startPrivateViewing" class="fa-stack-1x">3</i>
                     </span>
                     <span class="instruction">
                         Click the button below to create your private <em data-ng-hide="startPrivateViewing">conversation</em><em data-ng-show="startPrivateViewing">viewing</em>.
-                        Your discussion will remain active and accessible to you and your friends, forever!
+                        Your discussion remains active and accessible to you and your friends, forever!
                     </span>
                 </p>
                 <p>
                     <button id="init-private-session" class="rounded" type="button" ng-click="initPrivateConvo()" data-redirect-conversation="">
-                        Send Invites &amp; Start Chatting!
+                        Send Invites <b data-ng-hide="startPrivateViewing">&amp; Start Chatting!</b><b data-ng-show="startPrivateViewing">Now!</b>
                     </button>
                 </p>
             </form>

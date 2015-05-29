@@ -45,6 +45,7 @@
       <link href="{% static 'framebuzz/player/app/css/jquery.maxlength.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/animations.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/jquery.share.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+      <link href="{% static 'framebuzz/player/app/css/jquery.datetimepicker.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/social-buttons.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <!--[if IE]>
@@ -105,11 +106,9 @@
             SOCK.video_player_features = ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'viewers', 'progress', 'playpause'];
         }
         else {
-            // TODO: 04/01/15: Removed 'privateviewing' for launch.
-            // Add back in when not buggy.
             SOCK.video_player_features  =  private_viewing_enabled
-                                                ? ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'progress', 'playpause']
-                                                : ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'progress', 'playpause'];
+                                                ? ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'privateviewing', 'viewers', 'progress', 'playpause']
+                                                : ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'viewers', 'progress', 'playpause'];
         }
       </script>
     {% endcompress %}
@@ -142,12 +141,14 @@
     {% compress js %}
       <script src="{% static 'framebuzz/player/app/lib/jquery/jquery-1.9.1.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/raven.min.js' %}"></script>
+      <script src="{% static 'framebuzz/player/app/lib/moment.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.maxlength.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/jquery/perfect-scrollbar-0.4.1.with-mousewheel.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.zclip.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.hoverIntent.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/jquery/toastr.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.share.js' %}"></script>
+      <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.datetimepicker.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/angular/angular.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/angular/angular-ui-router.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/angular/angular-resource.min.js' %}"></script>
