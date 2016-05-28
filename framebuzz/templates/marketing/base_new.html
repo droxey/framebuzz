@@ -60,54 +60,54 @@
                         <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" width="123">
                     </a>
                 </div>
-                <div class="col-xs-6 row-search">
-                    <form id="search-form" data-users-url="{% url 'search-users' %}" data-conversations-url="{% url 'search-conversations' %}" data-videos-url="{% url 'search-videos' %}" method="GET" action="{% url 'fbz-search' %}" class="navbar-search">
-                        <i class="fa fa-search"></i>
-                        <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search people, conversations, and videos..." class="search-query span2">
-                        <button type="submit"></button>
-                    </form>
-                </div>
-                <div class="col-xs-3 row-user">
-                    {% if request.user.is_authenticated %}
-                    <ul class="nav pull-right">
-                        <li class="dropdown clearfix">
-                            <a class="nav-link avatar pull-left" href="{% url 'profiles-home' request.user.username %}">
-                                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="{% avatar_url request.user 82 %}" height="41" width="41" class="img-circle lazy-load">
-                                <noscript><img src="{% avatar_url request.user 82 %}"></noscript>
-                            </a>
-                            <a id="user-dropdown" class="dropdown-toggle pull-right clearfix" href="#" data-toggle="dropdown">
-                                <i class="fa fa-cog pull-left"></i>
-                                <i class="fa fa-caret-down pull-left"></i>
-                            </a>
-                            {% get_social_accounts request.user as accounts %}
-                            <ul class="dropdown-menu">
-                                <li><a href="{% url 'profiles-home' request.user.username %}">View profile</a></li>
-                                <li><a href="{% url 'profiles-edit' request.user.username %}">Edit profile</a></li>
-                                <li><a href="{% url 'avatar_add' %}">Change avatar</a></li>
-                                {% if accounts|length == 0 %}<li><a href="{% url 'account_change_password' %}">Change password</a></li>{% endif %}
-                                {% if is_my_profile %}<li class="help"><a href="" id="menu-show-help">Help</a></li>{% endif %}
-                                <li><a href="{% url 'account_logout' %}">Sign out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    {% else %}
-                    <p class="navbar-text navbar-right">
-                        <a id="btn-register" class="nav-link pull-left" href="{% url 'subscribe' %}">Create an Account</a><span></span><a id="btn-login" class="nav-link pull-right" href="{% url 'account_login' %}">Sign in</a>
-                    </p>
-                    {% endif %}
-                </div>
+{#                <div class="col-xs-6 row-search">#}
+{#                    <form id="search-form" data-users-url="{% url 'search-users' %}" data-conversations-url="{% url 'search-conversations' %}" data-videos-url="{% url 'search-videos' %}" method="GET" action="{% url 'fbz-search' %}" class="navbar-search">#}
+{#                        <i class="fa fa-search"></i>#}
+{#                        <input type="text" name="query" value="{{ request.GET.query }}" placeholder="Search people, conversations, and videos..." class="search-query span2">#}
+{#                        <button type="submit"></button>#}
+{#                    </form>#}
+{#                </div>#}
+{#                <div class="col-xs-3 row-user">#}
+{#                    {% if request.user.is_authenticated %}#}
+{#                    <ul class="nav pull-right">#}
+{#                        <li class="dropdown clearfix">#}
+{#                            <a class="nav-link avatar pull-left" href="{% url 'profiles-home' request.user.username %}">#}
+{#                                <img src="{% static 'framebuzz/profiles/img/blank.png' %}" data-src="{% avatar_url request.user 82 %}" height="41" width="41" class="img-circle lazy-load">#}
+{#                                <noscript><img src="{% avatar_url request.user 82 %}"></noscript>#}
+{#                            </a>#}
+{#                            <a id="user-dropdown" class="dropdown-toggle pull-right clearfix" href="#" data-toggle="dropdown">#}
+{#                                <i class="fa fa-cog pull-left"></i>#}
+{#                                <i class="fa fa-caret-down pull-left"></i>#}
+{#                            </a>#}
+{#                            {% get_social_accounts request.user as accounts %}#}
+{#                            <ul class="dropdown-menu">#}
+{#                                <li><a href="{% url 'profiles-home' request.user.username %}">View profile</a></li>#}
+{#                                <li><a href="{% url 'profiles-edit' request.user.username %}">Edit profile</a></li>#}
+{#                                <li><a href="{% url 'avatar_add' %}">Change avatar</a></li>#}
+{#                                {% if accounts|length == 0 %}<li><a href="{% url 'account_change_password' %}">Change password</a></li>{% endif %}#}
+{#                                {% if is_my_profile %}<li class="help"><a href="" id="menu-show-help">Help</a></li>{% endif %}#}
+{#                                <li><a href="{% url 'account_logout' %}">Sign out</a></li>#}
+{#                            </ul>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                    {% else %}#}
+{#                    <p class="navbar-text navbar-right">#}
+{#                        <a id="btn-register" class="nav-link pull-left" href="{% url 'subscribe' %}">Create an Account</a><span></span><a id="btn-login" class="nav-link pull-right" href="{% url 'account_login' %}">Sign in</a>#}
+{#                    </p>#}
+{#                    {% endif %}#}
+{#                </div>#}
                 {% endblock %}
             </div>
         </div>
     </div>
     <div id="base">
-        <div id="header" class="row">
-            <div class="container">
-                <div id="login" class="col-md-2 pull-right">
-                    <a href="{% url 'account_login' %}" title="Login" class="pull-right">Sign in</a>
-                </div>
-            </div>
-        </div>
+{#        <div id="header" class="row">#}
+{#            <div class="container">#}
+{#                <div id="login" class="col-md-2 pull-right">#}
+{#                    <a href="{% url 'account_login' %}" title="Login" class="pull-right">Sign in</a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
         {% block page_body %}{% endblock %}
         <div id="follow" class="row">
             <div class="container">
