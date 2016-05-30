@@ -8,9 +8,9 @@
 {% block page_body %}
 <div id="signup" class="row">
     <div class="container">
-        <div class="col-lg-12">
+        <div class="col-xs-12">
             <div class="row" data-selected="">
-                <div class="col-lg-12 signup-header">
+                <div class="col-xs-12 signup-header">
                     <h1 class="absolute-center">Welcome to <img class="logo" src="{% static 'framebuzz/marketing/img/logo.png' %}" width="184"></h1>
                     <p class="selection">
                         You’ve selected {% if signup_option == 'free' %}FREE{% else %}PREMIUM{% endif %} ACCOUNT.
@@ -51,9 +51,13 @@
 {% block page_javascript %}
     {% zebra_head_and_stripe_key %}
     {% compress js %}
+    <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.payment.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-
+            {% if zebra_form %}
+                $('#id_card_number').payment('formatCardNumber');
+                $('#id_card_cvv').payment('formatCardCVC');
+            {% endif %}
         });
     </script>
     {% endcompress %}

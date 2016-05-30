@@ -51,12 +51,12 @@
       .appendTo(shareDiv);
     },
     buildprivateviewing: function(player, controls, layers, media) {
-        if (SOCK.private_viewing_enabled) {     // Only dashboard-enabled users may utilize the private viewing function.
+        //if (SOCK.private_viewing_enabled) {     // Only dashboard-enabled users may utilize the private viewing function.
             var shareDiv = controls.find('div.mejs-share');
             var button =
                 $('<button class="mejs-start-private-viewing" class="rounded"><i class="fa fa-group"></i> Watch Together</button>')
             .appendTo(shareDiv);
-        }
+        //}
     },
     buildviewers: function(player, controls, layers, media) {
         var shareDiv = controls.find('div.mejs-share');

@@ -12,7 +12,7 @@ angular.module('framebuzz.directives', [])
     .directive('closeSocket', ['socket', function(socket) {
         return function(scope, element, attrs) {
             $(window).on('beforeunload', function() {
-                
+
 
 
                 socket.close();
@@ -322,6 +322,27 @@ angular.module('framebuzz.directives', [])
                 theme: 'icon',
                 useIn1: false,
                 urlToShare: SOCK.share_url
+            });
+        };
+    })
+    .directive('datetimepicker', function() {
+        return function(scope, element, attrs) {
+            Date.parseDate = function( input, format ){
+              return moment(input,format).toDate();
+            };
+            Date.prototype.dateFormat = function( format ){
+              return moment(this).format(format);
+            };
+
+            element.datetimepicker({
+                minDate:0,
+                startDate:new Date(),
+                theme: 'dark',
+                format:'MM/DD/YYYY h:mm a',
+                formatTime:'h:mm a',
+                formatDate:'MM/DD/YYYY',
+                step: 15,
+                todayButton: false
             });
         };
     })

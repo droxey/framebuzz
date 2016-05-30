@@ -31,19 +31,23 @@
         <div class="signup-part">
             <h2>Please enter YOUR payment information:</h2>
             <div class="row form-row">
-                <span class="payment-errors"></span>
+                <div class="col-xs-12">
+                    <span class="payment-errors"></span>
+                </div>
+            </div>
+            <div class="row form-row">
                 <div class="form-group col-xs-6">
-                    <label for="id_username">Card number:</label>
+                    <label for="id_card_number">Card number:</label>
                     {{ zebra_form.card_number }}
                 </div>
                 <div class="form-group col-xs-6">
-                    <label for="id_username">CVC:</label>
+                    <label for="id_card_cvv">CVC:</label>
                     {{ zebra_form.card_cvv }}
                 </div>
             </div>
             <div class="row form-row">
                 <div class="form-group col-xs-6">
-                    <label for="id_username">Expires:</label>
+                    <label for="id_card_expiry_month">Expires:</label>
                     {{ zebra_form.card_expiry_month }} {{ zebra_form.card_expiry_year }}
                 </div>
             </div>
@@ -57,33 +61,17 @@
                 <span>For producers &amp; business users</span>
             </div>
             <div class="col-xs-6 pull-right amount">
-                <strong>TOTAL: <em>$89.00</em></strong>
+                <strong>TOTAL: <em>$9.00</em></strong>
             </div>
         </div>
     {% endif %}
     <div class="row">
         <div class="col-xs-6 pull-right submit-row">
             <em>Next step: Your Dashboard</em>
-            <button class="btn btn-info submit-button" type="submit">{% if signup_option == 'free' %}Create Account{% else %}Submit Payment Info{% endif %}</button>
+            <button class="btn btn-info submit-button pull-right" type="submit">{% if signup_option == 'free' %}Create Account{% else %}Submit Payment Info{% endif %}</button>
         </div>
-        {% if socialaccount.providers and signup_option == 'free' %}
-            <div class="col-xs-1 text-center or">
-                <i>-or-</i>
-            </div>
-            {% for provider in socialaccount.providers %}
-                <div class="col-xs-1 social">
-                    <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btn btn-info" href="{% provider_login_url provider.id %}">
-                      {% if provider.id == 'facebook' %}
-                        <img src="{% static 'framebuzz/dashboard/img/social_icons/facebook.png' %}" height="21" width="21" alt="{{ provider.id }}">
-                      {% elif provider.id == 'twitter' %}
-                        <img src="{% static 'framebuzz/dashboard/img/social_icons/twitter.png' %}" height="21" width="21" alt="{{ provider.id }}">
-                      {% else %}
-                        <img src="{% static 'framebuzz/dashboard/img/social_icons/google.png' %}" height="21" width="21" alt="{{ provider.id }}">
-                      {% endif %}
-                    </a>
-                </div>
-            {% endfor %}
-        {% endif %}
     </div>
     <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'thanks' %}" />
+    <input type="hidden" id="id_last_4_digits" name="last_4_digits" value="" />
+    <input type="hidden" id="id_stripe_token" name="stripe_token" value="" />
 </form>

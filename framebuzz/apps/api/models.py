@@ -3,6 +3,7 @@ import hashlib
 import watson
 import caching.base
 import time
+import json
 
 from datetime import datetime
 
@@ -21,6 +22,7 @@ from actstream import action
 from actstream.models import actstream_register_model
 from actstream.actions import follow
 from avatar.util import get_username
+from allauth.account.signals import user_signed_up
 from randomslugfield import RandomSlugField
 from timezone_field import TimeZoneField
 from storages.backends.s3boto import S3BotoStorage
@@ -174,7 +176,47 @@ def create_user_profile(sender, instance, created, **kwargs):
         #                         context={'user': instance})
         return
 
+
+def post_user_signed_up(request, user, **kwargs):
+    print 'post_user_signed_up'
+
+    token = request.POST.get('stripe_token', None)
+    last_4 = request.POST.get('last_4_digits', None)
+
+    print token
+    print last_4
+
+    if token and last_4:
+        profile = user.get_profile()
+        profile.dashboard_enabled = True
+        profile.save()
+
+        import stripe
+        stripe.api_key = settings.STRIPE_SECRET
+
+        try:
+            customer = stripe.Customer.create(
+                source=token,
+                description=user.username
+            )
+
+            stripe_callback = stripe.Charge.create(
+                amount=900,
+                currency='usd',
+                customer=customer.id,
+                description='FrameBuzz Premium Account')
+
+            print customer
+            print stripe_callback
+        except stripe.CardError, e:
+          # The card has been declined
+          print e
+          pass
+    pass
+
+
 post_save.connect(create_user_profile, sender=User)
+user_signed_up.connect(post_user_signed_up, sender=User)
 
 
 class Video(caching.base.CachingMixin, models.Model):

@@ -128,7 +128,8 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView)
         ret = super(SignupView, self).get(*args, **kwargs)
         signup_option = self.request.GET.get('option', None)
         if not signup_option:
-            return HttpResponseRedirect('subscribe', args=[])
+            print 'no option'
+            return HttpResponseRedirect(reverse('subscribe'))
         return ret
 
     def get_success_url(self):
@@ -140,18 +141,6 @@ class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin, FormView)
 
     def form_valid(self, form):
         user = form.save(self.request)
-
-        zebra_form = self.second_form_class(self.request.POST)
-        if zebra_form and zebra_form.is_valid():
-            my_profile = user.get_profile()
-            stripe_customer = stripe.Customer.retrieve(my_profile.stripe_customer_id)
-            stripe_customer.card = zebra_form.cleaned_data['stripe_token']
-            stripe_customer.save()
-
-            my_profile.last_4_digits = zebra_form.cleaned_data['last_4_digits']
-            my_profile.stripe_customer_id = stripe_customer.id
-            my_profile.is_dashboard = True
-            my_profile.save()
 
         self.request.session['show_help'] = True
         return complete_signup(self.request, user, self.get_success_url())

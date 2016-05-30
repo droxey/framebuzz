@@ -1,52 +1,91 @@
-{% load staticfiles addendum_tags account socialaccount avatar_tags compress profile_tags %}
+{% extends "marketing/base.html" %}
+{% load i18n staticfiles addendum_tags socialaccount %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>FrameBuzz: Sign in</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta charset="UTF-8">
-    {% compress css %}
-        <link href="{% static 'framebuzz/dashboard/theme_dark/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
-        <link href="{% static 'framebuzz/dashboard/theme_dark/css/icomoon.min.css' %}" rel="stylesheet">
-        <link href="{% static 'framebuzz/dashboard/theme_dark/css/style.min.css' %}" rel="stylesheet">
-        <style type="text/css">
-            .checkbox { font-size: 11px; text-align: left; }
-            .checkbox input { margin-top: 1px; }
-            .logo {
-                display: block;
-                margin: 0 20px;
-                position: absolute;
-                top: 33%;
-            }
-        </style>
-    {% endcompress %}
-</head>
-<body>
-    <div class="lbox-vert">
-        <a href="{% url 'home' %}" class="logo">
-            {% include 'dashboard/snippets/logo.html' %}
-        </a>
+
+{% block page_classes %}content subpage account login dashboard-login{% endblock %}
+
+{% block page_css %}
+    <style type="text/css">
+        body, #main { background-color: white; }
+        div.box { border: 1px solid #ccc; }
+        #logo, #copyright, #footer { display: none; }
+    </style>
+{% endblock %}
+
+{% block content_center %}
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="box col-xs-8 col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                <div id="homepage-logo" class="row">
+                    <div class="col-xs-12">
+                        <a href="{% url 'home' %}">
+                            <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="40" width="184">
+                        </a>
+                    </div>
+                </div>
+                {% if form.errors %}
+                    <div class="row row-error bs-callout bs-callout-danger">
+                        <div class="col-xs-12 error-wrap">
+                            <h4><i class="fa fa-icon fa-rocket fa-fw"></i> Houston, we have a problem!</h4>
+                            <ol>
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>
+                                            {% if field|lower != '__all__' %}<strong>{{ field|title }}</strong>: {% endif %}{{ error }}
+                                        </li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form id="signup-form" class="form-vertical container" role="form" method="post" action="{% url 'account_login' %}">
+                            {% csrf_token %}
+                            <div class="row form-row">
+                                <div class="form-group col-xs-6">
+                                    <label for="id_login">Username:</label>
+                                    <input name="login" id="id_login" type="text" class="form-control" placeholder="User ID" autofocus>
+                                </div>
+                                <div class="form-group col-xs-6">
+                                    <label for="id_password">Password:</label>
+                                    <input name="password" name="password" type="password" class="form-control" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <button class="btn btn-info" type="submit">Log in</button>
+                                </div>
+                                <div class="col-xs-1 text-center or">
+                                    <i>-or-</i>
+                                </div>
+                                {% if socialaccount.providers %}
+                                    {% for provider in socialaccount.providers %}
+                                        <div class="col-xs-1 social">
+                                            <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} btn btn-info" href="{% provider_login_url provider.id %}">
+                                              {% if provider.id == 'facebook' %}
+                                                <img src="{% static 'framebuzz/dashboard/img/social_icons/facebook.png' %}" height="21" width="21" alt="{{ provider.id }}">
+                                              {% elif provider.id == 'twitter' %}
+                                                <img src="{% static 'framebuzz/dashboard/img/social_icons/twitter.png' %}" height="21" width="21" alt="{{ provider.id }}">
+                                              {% else %}
+                                                <img src="{% static 'framebuzz/dashboard/img/social_icons/google.png' %}" height="21" width="21" alt="{{ provider.id }}">
+                                              {% endif %}
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                <div class="col-xs-3 pull-right">
+                                    <a class="secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                                </div>
+                            </div>
+                            {% if redirect_field_value %}
+                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="login-box side-form">
-        <form class="form-login" action="{% url 'account_login' %}" method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <input name="login" id="id_login" type="text" class="form-control" placeholder="User ID" autofocus>
-            </div>
-            <div class="form-group">
-                <input name="password" name="password" type="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <label class="checkbox">
-                    <input name="remember" id="id_remember" type="checkbox"> Remember me
-                </label>
-            </div>
-            <br>
-            <button class="btn btn-gr-gray btn-block btn-xs" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
-        </form>
-    </div>
-</body>
-</html>
+{% endblock %}
