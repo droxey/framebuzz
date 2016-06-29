@@ -253,6 +253,7 @@ INSTALLED_APPS = (
     'framebuzz.apps.marketing',
     'framebuzz.apps.search',
     'framebuzz.apps.dashboard',
+    'framebuzz.apps.tumblr',
 )
 
 # Django-Grappelli:
