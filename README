@@ -40,7 +40,6 @@ vagrant package --output framebuzz.box
 
 Vagrant::Config.run do |config|
 	config.vm.box = "ubuntu/trusty32"
-  config.vm.network "33.33.33.11"
 	config.vm.share_folder "v-data", "/vagrant_data", "./data"
 	config.vm.provision :shell, :path => "install.sh"
 end

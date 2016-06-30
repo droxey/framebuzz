@@ -17,6 +17,7 @@ class TumblrAccount(ProviderAccount):
 class TumblrProvider(OAuthProvider):
     id = 'tumblr'
     name = 'Tumblr'
+    package = 'allauth.socialaccount.providers.tumblr'
     account_class = TumblrAccount
 
     def extract_uid(self, data):
