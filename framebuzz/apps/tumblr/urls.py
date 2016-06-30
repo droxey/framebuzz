@@ -8,7 +8,4 @@ urlpatterns = patterns(
     url(r'^dashboard/(?P<username>[\w.@+-]+)/$',
         'framebuzz.apps.tumblr.views.dashboard',
         name='fbz-tumblr-dashboard'),
-    url(r'^dashboard/(?P<username>[\w.@+-]+)/videos/$',
-        'framebuzz.apps.tumblr.views.videos',
-        name='fbz-tumblr-video-list'),
 )

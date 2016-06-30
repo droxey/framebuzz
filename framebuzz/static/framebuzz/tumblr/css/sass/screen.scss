@@ -1,6 +1,190 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-
+@import "compass";
+@import "compass/css3/border-radius";
 @import "compass/reset";
+
+// =============================================================================
+// Basics + Overrides
+// =============================================================================
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.ng-cloak, .x-ng-cloak, [data-ng-cloak], [ng-cloak],
+[ng\:cloak], [x-ng-cloak] {
+    display: none !important;
+}
+
+// Accomodate for smaller-width design.
+@media (min-width: 940px) {
+  .container { width: 700px; }
+}
+
+// =============================================================================
+// Elements
+// =============================================================================
+body {
+    background: #2a394e url('../../img/background.png') repeat-x;
+    font: 12px/16px 'proxima-nova';
+}
+
+#base {
+  #tumblr-header {
+    min-height: 165px;
+    margin-top: 55px;
+
+    img.fbz-logo {
+      vertical-align: middle;
+      position: relative;
+      right: 20px;
+    }
+
+    span.powered-by {
+      color: #fefefe;
+      font: 30px/32px 'lobster';
+      text-align: right;
+      text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    #text-row {
+      text-align: center;
+      margin-top: 26px;
+
+      span {
+        font-size: 60px;
+        text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
+
+        &.tumblr {
+          color: #fefcfd;
+          font-family: 'bookman-jf-pro';
+        }
+
+        &.video {
+          color: #a8bbd9;
+          font-family: 'lobster';
+          font-style: italic;
+        }
+
+        &.chat {
+          color: #c8d5e6;
+          font-weight: 700;
+          font-family: 'bookman-jf-pro';
+        }
+
+        &.dot {
+          color: #fefefe;
+          font-size: 80px;
+        }
+      }
+    }
+  }
+
+  #tumblr-example {
+    min-height: 508px;
+    margin-top: 44px;
+
+    p.description {
+      color: white;
+      padding-top: 12px;
+      text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
+
+      span {
+        font-size: 36px;
+      }
+
+      img {
+        vertical-align: text-top;
+      }
+
+      em {
+        font-size: 18px;
+      }
+    }
+  }
+
+  #uploader {
+    min-height: 358px;
+
+    h1 {
+      color: white;
+      font-size: 35px;
+      font-family: 'lobster';
+      text-align: center;
+      line-height: 43px;
+      padding-bottom: 16px;
+      text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    #upload-container {
+      @include border-radius(6px, 6px);
+      background-color: #28374c;
+      padding: 44px 0;
+      text-align: center;
+      width: 100%;
+
+      #upload-login {
+        p.login {
+          padding-bottom: 21px;
+
+          a {
+            color: #35afff;
+            text-decoration: underline;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+            font-size: 18px;
+            font-weight: bold;
+          }
+        }
+
+        p.info {
+          color: white;
+          font-size: 14px;
+          line-height: 18px;
+          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+  }
+
+  #post {
+    min-height: 323px;
+
+    h1 {
+      color: #92a2b9;
+      font-size: 35px;
+      font-family: 'lobster';
+      text-align: center;
+      line-height: 43px;
+      padding-bottom: 16px;
+      text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    em {
+      color: #fffffd;
+    }
+
+    img {
+      border: 2px solid white;
+    }
+
+    p.info {
+      color: #c1c8d0;
+      font-size: 14px;
+      line-height: 30px;
+      padding-top: 20px;
+      font-weight: 500;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  #videos {
+    h3 {
+      color: #92a2b9;
+      font-size: 20px;
+      font-family: 'lobster';
+      text-align: center;
+      line-height: 33px;
+      padding-bottom: 16px;
+    }
+  }
+}

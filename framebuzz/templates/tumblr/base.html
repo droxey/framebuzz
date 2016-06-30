@@ -25,6 +25,16 @@
     <meta property="og:title" content="FrameBuzz: Watch Whenever, Talk Together.">
     <meta property="og:site_name" content="FrameBuzz">
     {% compress js %}
+      <script>
+        (function(d) {
+          var config = {
+            kitId: 'tud1dml',
+            scriptTimeout: 3000,
+            async: true
+          },
+          h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        })(document);
+      </script>
       <script src="{% static 'framebuzz/marketing/vendor/compat/modernizr.min.js' %}"></script>
     {% endcompress %}
     {% compress css %}
@@ -44,6 +54,39 @@
       </div>
     <![endif]-->
     <div id="base" class="container">
+      <div id="tumblr-header" class="row">
+        <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-5">
+                <span class="powered-by pull-right">powered by</span>
+              </div>
+              <div class="col-xs-7">
+                <img class="fbz-logo" src="http://fpoimg.com/222x47?text=FPO: Logo" height="47" width="222">
+              </div>
+            </div>
+            <div class="row">
+              <div id="text-row" class="col-xs-12">
+                {% spaceless %}
+                  <span class="tumblr">tumblr</span><span class="dot">.</span>
+                  <span class="video">video</span><span class="dot">.</span>
+                  <span class="chat">chat</span><span class="dot">.</span>
+                {% endspaceless %}
+              </div>
+            </div>
+          </div>
+      </div>
+      <div id="tumblr-example" class="row">
+        <div class="col-xs-12">
+          <img src="http://fpoimg.com/670x375?text=FPO: Player+Tumblr Image" height="375" width="670">
+        </div>
+        <div class="col-xs-12">
+          <p class="description"><span>What is <img src="http://fpoimg.com/167x38?text=FPO: Logo" height="38" width="167">
+?</span> <em>Chat with other Tumblr users on videos.</em></p>
+        </div>
+      </div>
+      <div id="uploader" class="row">
+        {% include "tumblr/snippets/upload.html" %}
+      </div>
       {% block content %}{% endblock %}
     </div>
     {% block page_javascript %}{% endblock %}
