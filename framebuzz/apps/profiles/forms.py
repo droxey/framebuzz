@@ -98,16 +98,16 @@ class UploadVideoForm(forms.ModelForm):
 
         self.fields['fpfile'].widget.attrs['data-fp-mimetypes'] = ''
         self.fields['fpfile'].widget.attrs['data-fp-button-text'] = \
-            '<i class="fa fa-cloud-upload"></i><br>Select File...'
+            '<i class="fa fa-cloud-upload"></i> Select File&hellip;'
         self.fields['fpfile'].widget.attrs['data-fp-button-class'] = \
-            'btn btn-large btn-success pull-left'
+            'btn btn-large btn-info'
         self.fields['fpfile'].widget.attrs['data-fp-services'] = \
             'COMPUTER,VIDEO,BOX,DROPBOX,GOOGLE_DRIVE,URL,FTP'
         self.fields['fpfile'].widget.attrs['data-fp-extensions'] = \
             '3g2,3gp,3gp2,3gpp,3gpp2,ac3,eac3,ec3,f4a,f4b,f4v,flv,highwinds,' \
             'm4a,m4b,m4r,m4v,mov,mp4,oga,ogv,ogx,ts,webm,wma,mpg,avi'
         self.fields['fpfile'].widget.attrs['data-fp-drag-text'] = \
-            'Drag and drop your video files here.<br>Or, click this box to upload videos from Dropbox, Google Drive, FTP and more!'
+            '<em>Drag and drop your video file here</em>or, click this box to upload videos from Dropbox,<br>Google Drive, FTP and more!'
 
     def save(self, commit=True):
         print self.request.user

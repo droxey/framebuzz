@@ -37,6 +37,7 @@ body {
 .blue-round {
   @include border-radius(6px, 6px);
   background-color: #28374c;
+  border: 1px solid #26354a;
   padding: 44px 0;
   text-align: center;
   width: 100%;
@@ -148,6 +149,164 @@ body {
     }
 
     #upload-container {
+      padding: 21px 17px 17px 17px;
+
+      #upload-video-form {
+        div.submit-row {
+          margin-top: 11px;
+
+          input.btn {
+            @include border-radius(5px, 5px);
+            background: #38485f;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+
+            &:hover {
+              background: #15273c;
+            }
+          }
+        }
+
+        input, textarea {
+            font: 13px/16px 'proxima-nova';
+            color: #888888;
+            @include border-radius(3px, 3px);
+
+            &::-webkit-input-placeholder { /* WebKit browsers */
+                color:    #28374c;
+                font-weight: 300;
+                font-style: italic;
+            }
+
+            &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                color:    #28374c;
+                font-weight: 300;
+                font-style: italic;
+            }
+
+            &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                color:    #28374c;
+                font-weight: 300;
+                font-style: italic;
+            }
+
+            &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                color:    #28374c;
+                font-weight: 300;
+                font-style: italic;
+            }
+
+            &.placeholder {
+                color:    #28374c;
+                font-weight: 300;
+                font-style: italic;
+            }
+
+            &:focus {
+                border: 1px solid #28374c;
+                outline: 0;
+            }
+
+            &.error {
+                border: 1px solid red;
+
+                &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                    color:    red;
+                    font-weight: 300;
+                    font-style: italic;
+                }
+
+                &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                    color:    red;
+                    font-weight: 300;
+                    font-style: italic;
+                }
+
+                &:-ms-input-placeholder { /* Internet Explorer 10+ */
+                    color:    red;
+                    font-weight: 300;
+                    font-style: italic;
+                }
+
+                &.placeholder {
+                    color:    red;
+                    font-weight: 300;
+                    font-style: italic;
+                }
+            }
+        }
+        div.textarea-row {
+            margin-top: 11px;
+
+            textarea {
+              height: 135px;
+            }
+        }
+
+        div.drop-pane-row {
+          #upload-drop-pane > div {
+            -moz-border-radius: 4px / 4px !important;
+            -webkit-border-radius: 4px 4px !important;
+            border-radius: 4px / 4px !important;
+            border: 17px solid #55677f;
+            padding: 0 !important;
+            position: relative;
+            width: 105%;
+            background-color: #55677f;
+            left: -14px;
+          }
+
+          #upload-drop-pane > div > div {
+              -moz-border-radius: 4px / 4px !important;
+              -webkit-border-radius: 4px 4px !important;
+              border-radius: 4px / 4px !important;
+              background-color: #55677f !important;
+              border: 3px dashed #7687a3 !important;
+              color: rgba(255, 255, 255, 0.75) !important;
+              float: none !important;
+              margin: 0 !important;
+              padding: 30px 11px 63px 11px !important;
+              text-align: center !important;
+              width: 100% !important;
+              line-height: 14px !important;
+              font-size: 0.9em !important;
+
+              em {
+                color: white !important;
+                display: block;
+                font-weight: 700;
+                font-size: 16px !important;
+                padding-bottom: 5px !important;
+              }
+          }
+
+          #upload-drop-pane > div > div.error {
+               border: 2px dashed red !important;
+          }
+
+          #upload-drop-pane > div > div > div {
+              height: 22px !important;
+              margin: 0 3px !important;
+          }
+
+          #upload-drop-pane > div > button.btn-info {
+            @include border-radius(5px, 5px);
+            background: #37aef0;
+            border: none;
+            position: absolute;
+            bottom: 22px;
+            left: 28%;
+            padding: 4px 22px;
+            z-index: 100;
+
+            &:hover {
+              background: #007ab8;
+            }
+          }
+        }
+      }
+
       #upload-login {
         p.login {
           padding-bottom: 21px;
@@ -228,6 +387,10 @@ body {
         font: 24px/40px 'proxima-nova';
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
       }
+    }
+
+    #video-list {
+
     }
   }
 }
