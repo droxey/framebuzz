@@ -1,31 +1,58 @@
 import re
 import unicodedata
+import json
 
 from django.core.exceptions import ImproperlyConfigured
 from django.core.validators import validate_email, ValidationError
 from django.core import urlresolvers
-from django.db.models import EmailField
-from django.utils import importlib, six
+from django.db.models import FieldDoesNotExist
+from django.db.models.fields import (DateTimeField, DateField,
+                                     EmailField, TimeField)
+from django.utils import six, dateparse
+from django.utils.datastructures import SortedDict
+from django.core.serializers.json import DjangoJSONEncoder
 try:
     from django.utils.encoding import force_text
 except ImportError:
     from django.utils.encoding import force_unicode as force_text
 
-from . import app_settings
+try:
+    import importlib
+except:
+    from django.utils import importlib
 
-def generate_unique_username(txt):
-    username = unicodedata.normalize('NFKD', force_text(txt))
-    username = username.encode('ascii', 'ignore').decode('ascii')
-    username = force_text(re.sub('[^\w\s@+.-]', '', username).lower())
-    # Django allows for '@' in usernames in order to accomodate for
-    # project wanting to use e-mail for username. In allauth we don't
-    # use this, we already have a proper place for putting e-mail
-    # addresses (EmailAddress), so let's not use the full e-mail
-    # address and only take the part leading up to the '@'.
-    username = username.split('@')[0]
-    username = username.strip() or 'user'
+
+def _generate_unique_username_base(txts):
+    username = None
+    for txt in txts:
+        if not txt:
+            continue
+        username = unicodedata.normalize('NFKD', force_text(txt))
+        username = username.encode('ascii', 'ignore').decode('ascii')
+        username = force_text(re.sub('[^\w\s@+.-]', '', username).lower())
+        # Django allows for '@' in usernames in order to accomodate for
+        # project wanting to use e-mail for username. In allauth we don't
+        # use this, we already have a proper place for putting e-mail
+        # addresses (EmailAddress), so let's not use the full e-mail
+        # address and only take the part leading up to the '@'.
+        username = username.split('@')[0]
+        username = username.strip()
+        username = re.sub('\s+', '_', username)
+        if username:
+            break
+    return username or 'user'
+
+
+def generate_unique_username(txts):
+    from .account.app_settings import USER_MODEL_USERNAME_FIELD
+    username = _generate_unique_username_base(txts)
     User = get_user_model()
-    max_length = User._meta.get_field('username').max_length
+    try:
+        max_length = User._meta.get_field(USER_MODEL_USERNAME_FIELD).max_length
+    except FieldDoesNotExist:
+        raise ImproperlyConfigured(
+            "USER_MODEL_USERNAME_FIELD does not exist in user-model"
+        )
     i = 0
     while True:
         try:
@@ -34,7 +61,8 @@ def generate_unique_username(txt):
             else:
                 pfx = ''
             ret = username[0:max_length - len(pfx)] + pfx
-            User.objects.get(username=ret)
+            query = {USER_MODEL_USERNAME_FIELD + '__iexact': ret}
+            User.objects.get(**query)
             i += 1
         except User.DoesNotExist:
             return ret
@@ -70,12 +98,12 @@ def email_address_exists(email, exclude_user=None):
     return ret
 
 
-
 def import_attribute(path):
     assert isinstance(path, six.string_types)
-    pkg, attr = path.rsplit('.',1)
+    pkg, attr = path.rsplit('.', 1)
     ret = getattr(importlib.import_module(pkg), attr)
     return ret
+
 
 def import_callable(path_or_callable):
     if not hasattr(path_or_callable, '__call__'):
@@ -84,18 +112,26 @@ def import_callable(path_or_callable):
         ret = path_or_callable
     return ret
 
+try:
+    from django.contrib.auth import get_user_model
+except ImportError:
+    # To keep compatibility with Django 1.4
+    def get_user_model():
+        from . import app_settings
+        from django.db.models import get_model
 
-def get_user_model():
-    from django.db.models import get_model
+        try:
+            app_label, model_name = app_settings.USER_MODEL.split('.')
+        except ValueError:
+            raise ImproperlyConfigured("AUTH_USER_MODEL must be of the"
+                                       " form 'app_label.model_name'")
+        user_model = get_model(app_label, model_name)
+        if user_model is None:
+            raise ImproperlyConfigured("AUTH_USER_MODEL refers to model"
+                                       " '%s' that has not been installed"
+                                       % app_settings.USER_MODEL)
+        return user_model
 
-    try:
-        app_label, model_name = app_settings.USER_MODEL.split('.')
-    except ValueError:
-        raise ImproperlyConfigured("AUTH_USER_MODEL must be of the form 'app_label.model_name'")
-    user_model = get_model(app_label, model_name)
-    if user_model is None:
-        raise ImproperlyConfigured("AUTH_USER_MODEL refers to model '%s' that has not been installed" % app_settings.USER_MODEL)
-    return user_model
 
 def resolve_url(to):
     """
@@ -109,3 +145,60 @@ def resolve_url(to):
             raise
     # Finally, fall back and assume it's a URL
     return to
+
+
+def serialize_instance(instance):
+    """
+    Since Django 1.6 items added to the session are no longer pickled,
+    but JSON encoded by default. We are storing partially complete models
+    in the session (user, account, token, ...). We cannot use standard
+    Django serialization, as these are models are not "complete" yet.
+    Serialization will start complaining about missing relations et al.
+    """
+    ret = dict([(k, v)
+                for k, v in instance.__dict__.items()
+                if not k.startswith('_')])
+    return json.loads(json.dumps(ret, cls=DjangoJSONEncoder))
+
+
+def deserialize_instance(model, data):
+    ret = model()
+    for k, v in data.items():
+        if v is not None:
+            try:
+                f = model._meta.get_field(k)
+                if isinstance(f, DateTimeField):
+                    v = dateparse.parse_datetime(v)
+                elif isinstance(f, TimeField):
+                    v = dateparse.parse_time(v)
+                elif isinstance(f, DateField):
+                    v = dateparse.parse_date(v)
+            except FieldDoesNotExist:
+                pass
+        setattr(ret, k, v)
+    return ret
+
+
+def set_form_field_order(form, fields_order):
+    if isinstance(form.fields, SortedDict):
+        form.fields.keyOrder = fields_order
+    else:
+        # Python 2.7+
+        from collections import OrderedDict
+        assert isinstance(form.fields, OrderedDict)
+        form.fields = OrderedDict((f, form.fields[f])
+                                  for f in fields_order)
+
+
+def build_absolute_uri(request, location, protocol=None):
+    uri = request.build_absolute_uri(location)
+    if protocol:
+        uri = protocol + ':' + uri.partition(':')[2]
+    return uri
+
+
+def get_form_class(forms, form_id, default_form):
+    form_class = forms.get(form_id, default_form)
+    if isinstance(form_class, six.string_types):
+        form_class = import_attribute(form_class)
+    return form_class

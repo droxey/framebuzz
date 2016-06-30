@@ -5,16 +5,19 @@ class AppSettings(object):
 
     def _setting(self, name, dflt):
         from django.conf import settings
-        return getattr(settings, self.prefix + name, dflt)
+        getter = getattr(settings,
+                         'ALLAUTH_SETTING_GETTER',
+                         lambda name, dflt: getattr(settings, name, dflt))
+        return getter(self.prefix + name, dflt)
 
     @property
     def QUERY_EMAIL(self):
         """
-        Request e-mail address from 3rd party account provider? 
+        Request e-mail address from 3rd party account provider?
         E.g. using OpenID AX
         """
         from allauth.account import app_settings as account_settings
-        return self._setting("QUERY_EMAIL", 
+        return self._setting("QUERY_EMAIL",
                              account_settings.EMAIL_REQUIRED)
 
     @property
@@ -26,19 +29,6 @@ class AppSettings(object):
         """
         return self._setting("AUTO_SIGNUP", True)
 
-
-    @property
-    def AVATAR_SUPPORT(self):
-        """
-        Enable support for django-avatar. When enabled, the profile image of
-        the user is copied locally into django-avatar at signup.
-
-        Deprecated
-        """
-        from django.conf import settings
-        return self._setting("AVATAR_SUPPORT",
-                             'avatar' in settings.INSTALLED_APPS)
-
     @property
     def PROVIDERS(self):
         """
@@ -47,10 +37,36 @@ class AppSettings(object):
         return self._setting("PROVIDERS", {})
 
     @property
+    def EMAIL_REQUIRED(self):
+        """
+        The user is required to hand over an e-mail address when signing up
+        """
+        from allauth.account import app_settings as account_settings
+        return self._setting("EMAIL_REQUIRED", account_settings.EMAIL_REQUIRED)
+
+    @property
+    def EMAIL_VERIFICATION(self):
+        """
+        See e-mail verification method
+        """
+        from allauth.account import app_settings as account_settings
+        return self._setting("EMAIL_VERIFICATION",
+                             account_settings.EMAIL_VERIFICATION)
+
+    @property
     def ADAPTER(self):
-        return self._setting \
-            ('ADAPTER', 
-             'allauth.socialaccount.adapter.DefaultSocialAccountAdapter')
+        return self._setting('ADAPTER',
+                             'allauth.socialaccount.adapter'
+                             '.DefaultSocialAccountAdapter')
+
+    @property
+    def FORMS(self):
+        return self._setting('FORMS', {})
+
+    @property
+    def STORE_TOKENS(self):
+        return self._setting('STORE_TOKENS', True)
+
 
 # Ugly? Guido recommends this himself ...
 # http://mail.python.org/pipermail/python-ideas/2012-May/014969.html

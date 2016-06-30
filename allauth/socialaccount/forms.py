@@ -1,33 +1,47 @@
-from django.utils.translation import ugettext_lazy as _
-from django import forms
+from __future__ import absolute_import
 
-from allauth.account.models import EmailAddress
+from django import forms
+from django.utils.translation import ugettext_lazy as _
+
 from allauth.account.forms import BaseSignupForm
-from allauth.account.utils import (send_email_confirmation,
-                                   user_username, user_email)
+from allauth.account.utils import (user_username, user_email,
+                                   user_field)
 
 from .models import SocialAccount
+from .adapter import get_adapter
+from . import app_settings
+from . import signals
+
 
 class SignupForm(BaseSignupForm):
 
     def __init__(self, *args, **kwargs):
         self.sociallogin = kwargs.pop('sociallogin')
-        user = self.sociallogin.account.user
-        initial = { 'email': user_email(user) or '',
-                    'username': user_username(user) or '',
-                    'first_name': user.first_name or '',
-                    'last_name': user.last_name or '' }
-        kwargs['initial'] = initial
+        user = self.sociallogin.user
+        # TODO: Should become more generic, not listing
+        # a few fixed properties.
+        initial = {'email': user_email(user) or '',
+                   'username': user_username(user) or '',
+                   'first_name': user_field(user, 'first_name') or '',
+                   'last_name': user_field(user, 'last_name') or ''}
+        kwargs.update({
+            'initial': initial,
+            'email_required': kwargs.get('email_required',
+                                         app_settings.EMAIL_REQUIRED)})
         super(SignupForm, self).__init__(*args, **kwargs)
 
     def save(self, request):
-        new_user = self.create_user()
-        self.sociallogin.account.user = new_user
-        self.sociallogin.save(request)
-        super(SignupForm, self).save(new_user) 
-        # Confirmation last (save may alter first_name etc -- used in mail)
-        send_email_confirmation(request, new_user)
-        return new_user
+        adapter = get_adapter()
+        user = adapter.save_user(request, self.sociallogin, form=self)
+        self.custom_signup(request, user)
+        return user
+
+    def raise_duplicate_email_error(self):
+        raise forms.ValidationError(
+            _("An account already exists with this e-mail address."
+              " Please sign in to that account first, then connect"
+              " your %s account.")
+            % self.sociallogin.account.get_provider().name)
 
 
 class DisconnectForm(forms.Form):
@@ -36,21 +50,21 @@ class DisconnectForm(forms.Form):
                                      required=True)
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        self.accounts = SocialAccount.objects.filter(user=self.user)
+        self.request = kwargs.pop('request')
+        self.accounts = SocialAccount.objects.filter(user=self.request.user)
         super(DisconnectForm, self).__init__(*args, **kwargs)
         self.fields['account'].queryset = self.accounts
 
     def clean(self):
-        if len(self.accounts) == 1:
-            # No usable password would render the local account unusable
-            if not self.user.has_usable_password():
-                raise forms.ValidationError(_("Your account has no password set up."))
-            # No email address, no password reset
-            if EmailAddress.objects.filter(user=self.user,
-                                           verified=True).count() == 0:
-                raise forms.ValidationError(_("Your account has no verified e-mail address."))
-        return self.cleaned_data
+        cleaned_data = super(DisconnectForm, self).clean()
+        account = cleaned_data.get('account')
+        if account:
+            get_adapter().validate_disconnect(account, self.accounts)
+        return cleaned_data
 
     def save(self):
-        self.cleaned_data['account'].delete()
+        account = self.cleaned_data['account']
+        account.delete()
+        signals.social_account_removed.send(sender=SocialAccount,
+                                            request=self.request,
+                                            socialaccount=account)

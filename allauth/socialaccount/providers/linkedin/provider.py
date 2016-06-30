@@ -4,13 +4,20 @@ from allauth.socialaccount.providers.oauth.provider import OAuthProvider
 
 from allauth.socialaccount import app_settings
 
+
 class LinkedInAccount(ProviderAccount):
     def get_profile_url(self):
         return self.account.extra_data.get('public-profile-url')
 
     def get_avatar_url(self):
+        # try to return the higher res picture-urls::(original) first
+        try:
+            if self.account.extra_data.get('picture-urls', {}).get('picture-url'):
+                return self.account.extra_data.get('picture-urls', {}).get('picture-url')
+        except:
+            pass  # if we can't get higher res for any reason, we'll just return the low res
         return self.account.extra_data.get('picture-url')
-        
+
     def to_str(self):
         dflt = super(LinkedInAccount, self).to_str()
         name = self.account.extra_data.get('name', dflt)
@@ -32,5 +39,25 @@ class LinkedInProvider(OAuthProvider):
         if app_settings.QUERY_EMAIL:
             scope.append('r_emailaddress')
         return scope
+
+    def get_profile_fields(self):
+        default_fields = ['id',
+                          'first-name',
+                          'last-name',
+                          'email-address',
+                          'picture-url',
+                          'picture-urls::(original)', # picture-urls::(original) is higher res
+                          'public-profile-url']
+        fields = self.get_settings().get('PROFILE_FIELDS',
+                                         default_fields)
+        return fields
+
+    def extract_uid(self, data):
+        return data['id']
+
+    def extract_common_fields(self, data):
+        return dict(email=data.get('email-address'),
+                    first_name=data.get('first-name'),
+                    last_name=data.get('last-name'))
 
 providers.registry.register(LinkedInProvider)

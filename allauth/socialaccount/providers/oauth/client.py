@@ -6,13 +6,13 @@ Inspired by:
 """
 
 from django.http import HttpResponseRedirect
+from django.utils.http import urlencode
 from django.utils.translation import gettext as _
 
 try:
-    from urllib.parse import parse_qsl, urlencode, urlparse
+    from urllib.parse import parse_qsl, urlparse
 except ImportError:
     from urlparse import parse_qsl
-    from urllib import urlencode
     from urlparse import urlparse
 
 import requests
@@ -39,14 +39,14 @@ class OAuthError(Exception):
 
 class OAuthClient(object):
 
-    def __init__(self, request, consumer_key, consumer_secret, request_token_url,
-        access_token_url, authorization_url, callback_url, parameters=None):
+    def __init__(self, request, consumer_key, consumer_secret,
+                 request_token_url, access_token_url, callback_url,
+                 parameters=None, provider=None):
 
         self.request = request
 
         self.request_token_url = request_token_url
         self.access_token_url = access_token_url
-        self.authorization_url = authorization_url
 
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
@@ -54,6 +54,7 @@ class OAuthClient(object):
         self.parameters = parameters
 
         self.callback_url = callback_url
+        self.provider = provider
 
         self.errors = []
         self.request_token = None
@@ -71,9 +72,10 @@ class OAuthClient(object):
             get_params['oauth_callback'] \
                 = self.request.build_absolute_uri(self.callback_url)
             rt_url = self.request_token_url + '?' + urlencode(get_params)
-            oauth = OAuth1(self.consumer_key, client_secret=self.consumer_secret)
+            oauth = OAuth1(self.consumer_key,
+                           client_secret=self.consumer_secret)
             response = requests.post(url=rt_url, auth=oauth)
-            if response.status_code != 200:
+            if response.status_code not in [200, 201]:
                 raise OAuthError(
                     _('Invalid response while obtaining request token from "%s".') % get_token_prefix(self.request_token_url))
             self.request_token = dict(parse_qsl(response.text))
@@ -82,13 +84,14 @@ class OAuthClient(object):
 
     def get_access_token(self):
         """
-        Obtain the access token to access private resources at the API endpoint.
+        Obtain the access token to access private resources at the API
+        endpoint.
         """
         if self.access_token is None:
             request_token = self._get_rt_from_session()
-            oauth = OAuth1(self.consumer_key, 
+            oauth = OAuth1(self.consumer_key,
                            client_secret=self.consumer_secret,
-                           resource_owner_key=request_token['oauth_token'], 
+                           resource_owner_key=request_token['oauth_token'],
                            resource_owner_secret=request_token['oauth_token_secret'])
             at_url = self.access_token_url
             # Passing along oauth_verifier is required according to:
@@ -97,7 +100,7 @@ class OAuthClient(object):
             if 'oauth_verifier' in self.request.REQUEST:
                 at_url = at_url + '?' + urlencode({'oauth_verifier': self.request.REQUEST['oauth_verifier']})
             response = requests.post(url=at_url, auth=oauth)
-            if response.status_code != 200:
+            if response.status_code not in [200, 201]:
                 raise OAuthError(
                     _('Invalid response while obtaining access token from "%s".') % get_token_prefix(self.request_token_url))
             self.access_token = dict(parse_qsl(response.text))
@@ -107,17 +110,16 @@ class OAuthClient(object):
 
     def _get_rt_from_session(self):
         """
-        Returns the request token cached in the session by ``_get_request_token``
+        Returns the request token cached in the session by
+        ``_get_request_token``
         """
         try:
-            return self.request.session['oauth_%s_request_token' % get_token_prefix(self.request_token_url)]
+            return self.request.session['oauth_%s_request_token'
+                                        % get_token_prefix(
+                                            self.request_token_url)]
         except KeyError:
-            raise OAuthError(_('No request token saved for "%s".') % get_token_prefix(self.request_token_url))
-
-    def _get_authorization_url(self):
-        request_token = self._get_request_token()
-        return '%s?oauth_token=%s&oauth_callback=%s' % (self.authorization_url,
-            request_token['oauth_token'], self.request.build_absolute_uri(self.callback_url))
+            raise OAuthError(_('No request token saved for "%s".')
+                             % get_token_prefix(self.request_token_url))
 
     def is_valid(self):
         try:
@@ -128,19 +130,24 @@ class OAuthClient(object):
             return False
         return True
 
-    def get_redirect(self):
+    def get_redirect(self, authorization_url):
         """
-        Returns a ``HttpResponseRedirect`` object to redirect the user to the
-        URL the OAuth provider handles authorization.
+        Returns a ``HttpResponseRedirect`` object to redirect the user
+        to the URL the OAuth provider handles authorization.
         """
-        return HttpResponseRedirect(self._get_authorization_url())
+        request_token = self._get_request_token()
+        params = {'oauth_token': request_token['oauth_token'],
+                  'oauth_callback': self.request.build_absolute_uri(
+                      self.callback_url)}
+        url = authorization_url + '?' + urlencode(params)
+        return HttpResponseRedirect(url)
 
 
 class OAuth(object):
     """
-    Base class to perform oauth signed requests from access keys saved in a user's
-    session.
-    See the ``OAuthTwitter`` class below for an example.
+    Base class to perform oauth signed requests from access keys saved
+    in a user's session. See the ``OAuthTwitter`` class below for an
+    example.
     """
 
     def __init__(self, request, consumer_key, secret_key, request_token_url):
@@ -154,10 +161,13 @@ class OAuth(object):
         Get the saved access token for private resources from the session.
         """
         try:
-            return self.request.session['oauth_%s_access_token' % get_token_prefix(self.request_token_url)]
+            return self.request.session['oauth_%s_access_token'
+                                        % get_token_prefix(
+                                            self.request_token_url)]
         except KeyError:
             raise OAuthError(
-                _('No access token saved for "%s".') % get_token_prefix(self.request_token_url))
+                _('No access token saved for "%s".')
+                % get_token_prefix(self.request_token_url))
 
     def query(self, url, method="GET", params=dict(), headers=dict()):
         """
@@ -165,16 +175,18 @@ class OAuth(object):
         POST or GET data.
         """
         access_token = self._get_at_from_session()
-        oauth = OAuth1(self.consumer_key,
-                       client_secret=self.secret_key,
-                       resource_owner_key=access_token['oauth_token'],
-                       resource_owner_secret=access_token['oauth_token_secret'])
+        oauth = OAuth1(
+            self.consumer_key,
+            client_secret=self.secret_key,
+            resource_owner_key=access_token['oauth_token'],
+            resource_owner_secret=access_token['oauth_token_secret'])
         response = getattr(requests, method.lower())(url,
                                                      auth=oauth,
                                                      headers=headers,
                                                      params=params)
         if response.status_code != 200:
             raise OAuthError(
-                _('No access to private resources at "%s".') % get_token_prefix(self.request_token_url))
+                _('No access to private resources at "%s".')
+                % get_token_prefix(self.request_token_url))
 
         return response.text
