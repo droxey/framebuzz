@@ -8,7 +8,7 @@ from django.template import RequestContext
 
 from pure_pagination import Paginator, PageNotAnInteger
 
-from framebuzz.apps.profiles.forms import UploadVideoForm
+from framebuzz.apps.tumblr.forms import TumblrUploadForm
 from framebuzz.apps.tumblr.utils import get_user_videos
 
 
@@ -49,14 +49,14 @@ def dashboard(request, username):
         else 'tumblr/dashboard.html'
     # Handle the UploadVideoForm.
     if request.method == 'POST':
-        upload_form = UploadVideoForm(data=request.POST,
-                                      files=request.FILES,
-                                      request=request)
+        upload_form = TumblrUploadForm(data=request.POST,
+                                       files=request.FILES,
+                                       request=request)
         if upload_form.is_valid():
             # TODO: Do stuff here. Notify UI. Etc.
             print 'Valid!'
     else:
-        upload_form = UploadVideoForm(request=request)
+        upload_form = TumblrUploadForm(request=request)
     return render_to_response(template, {
         'page_obj': page_obj,
         'video_count': len(videos),
