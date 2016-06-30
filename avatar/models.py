@@ -3,6 +3,7 @@ import os
 import hashlib
 from PIL import Image
 
+from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
 from django.core.files.base import ContentFile
@@ -147,7 +148,11 @@ class Avatar(models.Model):
 
 
 def invalidate_avatar_cache(sender, instance, **kwargs):
-    invalidate_cache(instance.user)
+    try:
+        invalidate_cache(instance.user)
+    except User.DoesNotExist:
+         # Intentional: this can be triggered when deleting users in the admin.
+        pass
 
 
 def create_default_thumbnails(sender, instance, created=False, **kwargs):
