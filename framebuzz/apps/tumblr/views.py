@@ -21,6 +21,14 @@ def home(request):
         return HttpResponseRedirect(
             reverse('fbz-tumblr-dashboard', args=[request.user.username]))
     return render_to_response('tumblr/home.html', {
+        'next_url': reverse('fbz-tumblr-exit-login'),
+    }, context_instance=RequestContext(request))
+
+
+def exit_login(request):
+    ''' Simple view that automatically closes the popup window
+        once Tumblr authentication is fully complete. '''
+    return render_to_response('tumblr/exit.html', {
     }, context_instance=RequestContext(request))
 
 
