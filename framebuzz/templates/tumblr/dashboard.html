@@ -10,16 +10,18 @@
 
 {% block content %}
   <div id="videos" class="row">
-    <h3>My Videos</h3>
-    {% if video_count == 0 %}
-        <div id="no-videos" class="blue-round">
-          <h4>You have no videos uploaded.</h4>
-          <p>Upload one above to get started.</p>
+    <div class="col-xs-12">
+      <h3>My Videos</h3>
+      {% if video_count == 0 %}
+          <div id="no-videos" class="col-xs-12 blue-round">
+            <h4>You have no videos uploaded.</h4>
+            <p>Upload one above to get started.</p>
+          </div>
+      {% else %}
+        <div id="video-list" class="col-xs-12 blue-round">
         </div>
-    {% else %}
-      <div id="video-list" class="blue-round">
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
   </div>
 {% endblock %}
 
