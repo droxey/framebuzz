@@ -7,7 +7,8 @@
       {% else %}
         <div id="upload-login" class="row">
           <p class="login">
-            <a href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}">Log in to your tumblr account</a>
+            <a id="tumblr-login-link" href="#"
+               loginpopup="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}">Log in to your tumblr account</a>
           </p>
           <p class="info">
             In just a few seconds, you'll be able to upload your first video,<br>
