@@ -32,12 +32,38 @@ body {
 
 
 // =============================================================================
+// Classes
+// =============================================================================
+.blue-round {
+  @include border-radius(6px, 6px);
+  background-color: #28374c;
+  padding: 44px 0;
+  text-align: center;
+  width: 100%;
+}
+
+// =============================================================================
 // IDs
 // =============================================================================
 #base {
-  #tumblr-header {
+  #header {
     min-height: 165px;
     margin-top: 55px;
+    position: relative;
+
+    #actions {
+      position: absolute;
+      top: -45px;
+      right: 0;
+
+      form {
+
+      }
+
+      #btn-login {
+
+      }
+    }
 
     img.fbz-logo {
       vertical-align: middle;
@@ -85,7 +111,7 @@ body {
     }
   }
 
-  #tumblr-example {
+  #example {
     min-height: 508px;
     margin-top: 44px;
 
@@ -122,12 +148,6 @@ body {
     }
 
     #upload-container {
-      @include border-radius(6px, 6px);
-      background-color: #28374c;
-      padding: 44px 0;
-      text-align: center;
-      width: 100%;
-
       #upload-login {
         p.login {
           padding-bottom: 21px;
@@ -183,13 +203,31 @@ body {
   }
 
   #videos {
+    margin-bottom: 100px;
+
     h3 {
-      color: #92a2b9;
-      font-size: 20px;
-      font-family: 'lobster';
+      color: #9eadc2;
+      font: 30px/45px 'lobster';
+      padding-bottom: 8px;
       text-align: center;
-      line-height: 33px;
-      padding-bottom: 16px;
+      text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    #no-videos {
+      min-height: 112px;
+      text-align: center;
+
+      h4 {
+        color: #4b5b75;
+        font: 32px/48px 'proxima-nova';
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+      }
+
+      p {
+        color: #627691;
+        font: 24px/40px 'proxima-nova';
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+      }
     }
   }
 }
@@ -199,4 +237,8 @@ body {
 // =============================================================================
 .wf-loading {
 
+}
+
+body.uploader {
+  background: #2a394e url('../../img/background-upload.png') repeat-x;
 }

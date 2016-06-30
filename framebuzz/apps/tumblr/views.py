@@ -16,7 +16,7 @@ VIDEOS_PER_PAGE = 12
 
 
 def home(request):
-    ''' Displays the 'logged out' homepage for the Tumblr integration. '''
+    ''' Displays the unauthenticated homepage for the Tumblr integration. '''
     if request.user.is_authenticated():
         return HttpResponseRedirect(
             reverse('fbz-tumblr-dashboard', args=[request.user.username]))
@@ -48,4 +48,5 @@ def dashboard(request, username):
         else 'tumblr/dashboard.html'
     return render_to_response(template, {
         'page_obj': page_obj,
+        'video_count': len(videos),
     }, context_instance=RequestContext(request))

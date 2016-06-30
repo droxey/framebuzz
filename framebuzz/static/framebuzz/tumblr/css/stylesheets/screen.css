@@ -88,84 +88,102 @@ body {
   font: 12px/16px 'proxima-nova';
 }
 
-/* line 38, ../sass/screen.scss */
-#base #tumblr-header {
+/* line 37, ../sass/screen.scss */
+.blue-round {
+  -moz-border-radius: 6px / 6px;
+  -webkit-border-radius: 6px 6px;
+  border-radius: 6px / 6px;
+  background-color: #28374c;
+  padding: 44px 0;
+  text-align: center;
+  width: 100%;
+}
+
+/* line 49, ../sass/screen.scss */
+#base #header {
   min-height: 165px;
   margin-top: 55px;
+  position: relative;
 }
-/* line 42, ../sass/screen.scss */
-#base #tumblr-header img.fbz-logo {
+/* line 54, ../sass/screen.scss */
+#base #header #actions {
+  position: absolute;
+  top: -45px;
+  right: 0;
+}
+/* line 68, ../sass/screen.scss */
+#base #header img.fbz-logo {
   vertical-align: middle;
   position: relative;
   right: 20px;
 }
-/* line 48, ../sass/screen.scss */
-#base #tumblr-header span.powered-by {
+/* line 74, ../sass/screen.scss */
+#base #header span.powered-by {
   color: #fefefe;
   font: 30px/32px 'lobster';
   text-align: right;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 55, ../sass/screen.scss */
-#base #tumblr-header #text-row {
+/* line 81, ../sass/screen.scss */
+#base #header #text-row {
   text-align: center;
   margin-top: 26px;
 }
-/* line 59, ../sass/screen.scss */
-#base #tumblr-header #text-row span {
+/* line 85, ../sass/screen.scss */
+#base #header #text-row span {
   font-size: 60px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 63, ../sass/screen.scss */
-#base #tumblr-header #text-row span.tumblr {
+/* line 89, ../sass/screen.scss */
+#base #header #text-row span.tumblr {
   color: #fefcfd;
   font-family: 'bookman-jf-pro';
 }
-/* line 68, ../sass/screen.scss */
-#base #tumblr-header #text-row span.video {
+/* line 94, ../sass/screen.scss */
+#base #header #text-row span.video {
   color: #a8bbd9;
   font-family: 'lobster';
   font-style: italic;
 }
-/* line 74, ../sass/screen.scss */
-#base #tumblr-header #text-row span.chat {
+/* line 100, ../sass/screen.scss */
+#base #header #text-row span.chat {
   color: #c8d5e6;
   font-weight: 700;
   font-family: 'bookman-jf-pro';
 }
-/* line 80, ../sass/screen.scss */
-#base #tumblr-header #text-row span.dot {
+/* line 106, ../sass/screen.scss */
+#base #header #text-row span.dot {
   color: #fefefe;
   font-size: 80px;
 }
-/* line 88, ../sass/screen.scss */
-#base #tumblr-example {
+/* line 114, ../sass/screen.scss */
+#base #example {
   min-height: 508px;
   margin-top: 44px;
 }
-/* line 92, ../sass/screen.scss */
-#base #tumblr-example p.description {
+/* line 118, ../sass/screen.scss */
+#base #example p.description {
   color: white;
   padding-top: 12px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 97, ../sass/screen.scss */
-#base #tumblr-example p.description span {
+/* line 123, ../sass/screen.scss */
+#base #example p.description span {
   font-size: 36px;
 }
-/* line 101, ../sass/screen.scss */
-#base #tumblr-example p.description img {
+/* line 127, ../sass/screen.scss */
+#base #example p.description img {
   vertical-align: text-top;
 }
-/* line 105, ../sass/screen.scss */
-#base #tumblr-example p.description em {
+/* line 131, ../sass/screen.scss */
+#base #example p.description em {
   font-size: 18px;
 }
-/* line 111, ../sass/screen.scss */
+/* line 137, ../sass/screen.scss */
 #base #uploader {
   min-height: 358px;
 }
-/* line 114, ../sass/screen.scss */
+/* line 140, ../sass/screen.scss */
 #base #uploader h1 {
   color: white;
   font-size: 35px;
@@ -175,21 +193,11 @@ body {
   padding-bottom: 16px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 124, ../sass/screen.scss */
-#base #uploader #upload-container {
-  -moz-border-radius: 6px / 6px;
-  -webkit-border-radius: 6px 6px;
-  border-radius: 6px / 6px;
-  background-color: #28374c;
-  padding: 44px 0;
-  text-align: center;
-  width: 100%;
-}
-/* line 132, ../sass/screen.scss */
+/* line 152, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.login {
   padding-bottom: 21px;
 }
-/* line 135, ../sass/screen.scss */
+/* line 155, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.login a {
   color: #35afff;
   text-decoration: underline;
@@ -197,18 +205,18 @@ body {
   font-size: 18px;
   font-weight: bold;
 }
-/* line 144, ../sass/screen.scss */
+/* line 164, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.info {
   color: white;
   font-size: 14px;
   line-height: 18px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 154, ../sass/screen.scss */
+/* line 174, ../sass/screen.scss */
 #base #post {
   min-height: 323px;
 }
-/* line 157, ../sass/screen.scss */
+/* line 177, ../sass/screen.scss */
 #base #post h1 {
   color: #92a2b9;
   font-size: 35px;
@@ -218,15 +226,15 @@ body {
   padding-bottom: 16px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 167, ../sass/screen.scss */
+/* line 187, ../sass/screen.scss */
 #base #post em {
   color: #fffffd;
 }
-/* line 171, ../sass/screen.scss */
+/* line 191, ../sass/screen.scss */
 #base #post img {
   border: 2px solid white;
 }
-/* line 175, ../sass/screen.scss */
+/* line 195, ../sass/screen.scss */
 #base #post p.info {
   color: #c1c8d0;
   font-size: 14px;
@@ -235,12 +243,37 @@ body {
   font-weight: 500;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 186, ../sass/screen.scss */
+/* line 205, ../sass/screen.scss */
+#base #videos {
+  margin-bottom: 100px;
+}
+/* line 208, ../sass/screen.scss */
 #base #videos h3 {
-  color: #92a2b9;
-  font-size: 20px;
-  font-family: 'lobster';
+  color: #9eadc2;
+  font: 30px/45px 'lobster';
+  padding-bottom: 8px;
   text-align: center;
-  line-height: 33px;
-  padding-bottom: 16px;
+  text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
+}
+/* line 216, ../sass/screen.scss */
+#base #videos #no-videos {
+  min-height: 112px;
+  text-align: center;
+}
+/* line 220, ../sass/screen.scss */
+#base #videos #no-videos h4 {
+  color: #4b5b75;
+  font: 32px/48px 'proxima-nova';
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+/* line 226, ../sass/screen.scss */
+#base #videos #no-videos p {
+  color: #627691;
+  font: 24px/40px 'proxima-nova';
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* line 242, ../sass/screen.scss */
+body.uploader {
+  background: #2a394e url("../../img/background-upload.png") repeat-x;
 }
