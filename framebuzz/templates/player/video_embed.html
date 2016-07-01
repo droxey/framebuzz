@@ -48,6 +48,7 @@
         </style>
       <![endif]-->
     {% endcompress %}
+    <script src="//cdn.ravenjs.com/2.3.0/raven.min.js"></script>
     <script>Raven.config('{% sentry_public_dsn %}').install()</script>
     {% compress js %}
       <script>
