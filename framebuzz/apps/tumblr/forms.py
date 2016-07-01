@@ -55,6 +55,7 @@ class TumblrUploadForm(forms.ModelForm):
         vid.uploaded = datetime.datetime.now()
         vid.filename = fpfile.name or None
         vid.fp_url = url
+        vid.submit_to_tumblr = True
         vid.save()
         # Slug is generated on first save, so we need to save once more.
         vid.video_id = vid.slug

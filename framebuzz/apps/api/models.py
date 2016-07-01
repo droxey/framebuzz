@@ -239,6 +239,7 @@ class Video(caching.base.CachingMixin, models.Model):
     public = models.BooleanField(default=True)
     password = models.CharField(max_length=50, blank=True, null=True)
     notify_emails = models.TextField(null=True, blank=True)
+    submit_to_tumblr = models.BooleanField(default=False, editable=False)
 
     class Meta:
         verbose_name = 'FrameBuzz Video'

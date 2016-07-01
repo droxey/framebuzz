@@ -8,6 +8,7 @@ from templated_email import send_templated_mail
 from zencoder import Zencoder
 
 from framebuzz.apps.api.models import Video, UserVideo, Thumbnail
+from framebuzz.apps.tumblr.tasks import submit_to_tumblr
 
 MP4 = '%s.mp4'
 WEBM = '%s.webm'
@@ -135,6 +136,13 @@ def check_zencoder_progress(job_id):
         user_video.video = video
         user_video.is_featured = False
         user_video.save()
+
+        # If tagged for Tumblr submission, launch the async submission task.
+        # Note that this task will set video.submit_to_tumblr = False
+        # to avoid any potential duplicate submissions.
+        if video.submit_to_tumblr:
+            submit_to_tumblr.apply_async(args=[video.added_by.username,
+                                               video.video_id])
 
         action.send(video.added_by,
                     verb='added video to library',

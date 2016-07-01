@@ -35,6 +35,10 @@ def submit_to_tumblr(username, video_id):
     response = client.create_video(blogname=act.uid, **create_kwargs)
     post_id = response.get('id', None)
     if post_id:
+        # Successful submission. Set video.submit_to_tumblr = False to avoid
+        # any duplicate Tumblr posts.
+        video.submit_to_tumblr = False
+        video.save()
         # Add new video to collection. Store post link for later.
         uv = UserVideo.objects.get_or_create(user=user, video=video)
         uv.tumblr_link = 'http://%s.tumblr.com/post/%s/' % (act.uid, post_id)
