@@ -42,12 +42,16 @@ class TumblrUploadForm(forms.ModelForm):
         fp_attrs['data-fp-drag-text'] = settings.FP_DRAG_TEXT
         fp_attrs['data-fp-max-size'] = settings.FP_VIDEO_MAXSIZE
         fp_attrs['data-fp-container'] = 'modal'
+        fp_attrs['data-fp-openTo'] = 'welcome'
+        fp_attrs['onchange'] = 'fileUploadComplete(event);'
 
     def save(self, commit=True):
-        fpfile = self.cleaned_data.get('fpfile', None)
+        fpfile_list = self.cleaned_data.get('fpfile', None)
         title = self.cleaned_data.get('title', None)
         description = self.cleaned_data.get('description', None)
         url = self.request.POST['fpfile'] or None
+        # Unpack fpfile values.
+        fpfile = (fpfile_list[:1] or [None])[0]
         # Save video details.
         vid = Video()
         vid.title = title
@@ -57,12 +61,11 @@ class TumblrUploadForm(forms.ModelForm):
         vid.uploaded = datetime.datetime.now()
         vid.filename = fpfile.name or None
         vid.fp_url = url
-        vid.submit_to_tumblr = True
         vid.save()
         # Slug is generated on first save, so we need to save once more.
         vid.video_id = vid.slug
         vid.save()
         # Send the file to ZenCoder for processing.
         if fpfile:
-            start_zencoder_job.apply_async(args=[vid.fp_url, vid.filename])
+            start_zencoder_job.apply_async(args=[vid.video_id])
         return vid

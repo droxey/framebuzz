@@ -17,20 +17,18 @@ DIRECTORY = 's3://fbz-zc/%s/'
 
 @celery.task(name='framebuzz.apps.api.backends.tasks.start_zencoder_job',
              ignore_result=True)
-def start_zencoder_job(video_url, filename):
+def start_zencoder_job(video_id):
+    vid = Video.objects.get(video_id=video_id)
     logger = start_zencoder_job.get_logger()
-    logger.info('Uploading %s: %s' % (filename, video_url))
+    logger.info('Uploading %s: %s' % (vid.filename, vid.fp_url))
 
-    directory = video_url.split('/')[-1]
-
+    directory = vid.fp_url.split('/')[-1]
     base_dir = DIRECTORY % (directory)
     mp4_file = MP4 % (directory)
     webm_file = WEBM % (directory)
-
     client = Zencoder(settings.ZENCODER_API_KEY)
-    requeue = False
 
-    response = client.job.create(video_url,
+    response = client.job.create(vid.fp_url,
         outputs=[
             {
                 'size': '700x470',
@@ -62,14 +60,10 @@ def start_zencoder_job(video_url, filename):
             }
         ]
     )
-
-    vid = Video.objects.get(fp_url=video_url)
     vid.job_id = response.body.get('id', 0)
     vid.save()
-
-    if response.code != 201 or vid.job_id == 0:  # 201: CREATED
-        # TODO: Implement requeue.
-        requeue = True
+    if response.code != 201 or vid.job_id == 0:
+        logger.info('Error uploading %s: %s' % (vid.filename, vid.fp_url))
 
 
 @celery.task(name='framebuzz.apps.api.backends.tasks.check_zencoder_progress')
@@ -136,13 +130,6 @@ def check_zencoder_progress(job_id):
         user_video.video = video
         user_video.is_featured = False
         user_video.save()
-
-        # If tagged for Tumblr submission, launch the async submission task.
-        # Note that this task will set video.submit_to_tumblr = False
-        # to avoid any potential duplicate submissions.
-        if video.submit_to_tumblr:
-            submit_to_tumblr.apply_async(args=[video.added_by.username,
-                                               video.video_id])
 
         action.send(video.added_by,
                     verb='added video to library',

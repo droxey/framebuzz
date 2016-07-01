@@ -137,9 +137,5 @@ class UploadVideoForm(forms.ModelForm):
         vid.save()
 
         if fpfile:  # Send it to ZenCoder!
-            start_zencoder_job.apply_async(args=[
-                vid.fp_url,
-                vid.filename
-            ])
-
+            start_zencoder_job.apply_async(args=[vid.video_id])
         return vid

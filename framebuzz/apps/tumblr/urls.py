@@ -11,4 +11,7 @@ urlpatterns = patterns(
     url(r'^dashboard/(?P<username>[\w.@+-]+)/$',
         'framebuzz.apps.tumblr.views.dashboard',
         name='fbz-tumblr-dashboard'),
+    url(r'^dashboard/(?P<username>[\w.@+-]+)/(?P<slug>[\w.@+-]+)/$',
+        'framebuzz.apps.tumblr.views.post_to_tumblr',
+        name='fbz-tumblr-post'),
 )

@@ -2,14 +2,16 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from pure_pagination import Paginator, PageNotAnInteger
 
+from framebuzz.apps.api.models import Video
 from framebuzz.apps.tumblr.forms import TumblrUploadForm
 from framebuzz.apps.tumblr.utils import get_user_videos
+from framebuzz.apps.tumblr.tasks import submit_to_tumblr
 
 
 START_PAGE = 1
@@ -63,3 +65,12 @@ def dashboard(request, username):
         'video_count': len(videos),
         'upload_form': upload_form
     }, context_instance=RequestContext(request))
+
+
+@login_required
+def post_to_tumblr(request, slug):
+    ''' Ajax endpoint that allows us to kick off Tumblr submission for a
+    user-selected video. '''
+    vid = Video.objects.get(slug=slug)
+    submit_to_tumblr.apply_async(args=[vid.added_by.username, vid.video_id])
+    return HttpResponse(200)

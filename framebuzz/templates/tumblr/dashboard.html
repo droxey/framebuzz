@@ -1,7 +1,7 @@
 {% extends "tumblr/base.html" %}
 {% load staticfiles account i18n socialaccount compress %}
 
-{% block page_title %}Dashboard{% endblock %}
+{% block page_title %}FrameBuzz | Tumblr Dashboard{% endblock %}
 
 {% block extra_head %}
 {% endblock %}
@@ -19,6 +19,7 @@
           </div>
       {% else %}
         <div id="video-list" class="col-xs-12 blue-round">
+          {% include "tumblr/snippets/videos.html" %}
         </div>
       {% endif %}
     </div>

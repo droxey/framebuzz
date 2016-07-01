@@ -1,1 +1,9 @@
 {% load i18n staticfiles %}
+
+{% if page_obj.object_list %}
+  {% for video in page_obj.object_list %}
+    <div class="col-md-3">
+      <h2>{{ video.title }}</h2>
+    </div>
+  {% endfor %}
+ {% endif %}
