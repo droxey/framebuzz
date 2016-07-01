@@ -12,7 +12,8 @@
                     <span>Post to my tumblr</span>
                     <img src="{% static 'framebuzz/tumblr/img/btn-tumblr@2x.png' %}" height="35" width="168">
                 </a>
-                <a class="copy-embed" href="">copy embed tag</a>
+                <a class="copy-embed">copy embed tag</a>
+                <textarea style="display: none;" class="embed-code">{{ video.tumblr_embed_code }}</textarea>
             </div>
             <div class="header clearfix">
               <strong class="title pull-left">{{ video.title|title|truncatechars:"25" }}</strong>

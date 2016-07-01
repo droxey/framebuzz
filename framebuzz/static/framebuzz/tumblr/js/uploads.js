@@ -6,6 +6,22 @@ $(function() {
     var videoUrl = null,
         fbzPlayer = $('iframe.fbzplayer');
 
+    // Initialize bootstrap tooltips to give users hints.
+    $('[data-toggle="tooltip"]').tooltip();
+
+    // Set up auto-copy for video embed codes.
+    var clipboard = new Clipboard('a.copy-embed', {
+        text: function(trigger) {
+            var element = $(trigger);
+            var textarea = element.next('textarea');
+            return textarea.val();
+        }
+    });
+
+    clipboard.on('success', function(e) {
+
+    });
+
     // Launches the Tumblr OAuth popup.
     $(document).on('click', 'a.tumblr-login-link', function(e) {
         var url = $(this).attr('href');
@@ -23,7 +39,7 @@ $(function() {
     // Async submit selected video to Tumblr.
     $(document).on('click', 'a.post-on-tumblr', function(e) {
         e.preventDefault();
-        
+
         var url = $(this).attr('href');
         $.get(url, function(responseCode) {
             if (responseCode == '200') {
