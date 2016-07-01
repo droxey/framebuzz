@@ -1,13 +1,9 @@
 var submitButton = $('#btn-upload-video');
 var titleField = $('#id_title');
 
-
 $(function() {
     var videoUrl = null,
         fbzPlayer = $('iframe.fbzplayer');
-
-    // Initialize bootstrap tooltips to give users hints.
-    $('[data-toggle="tooltip"]').tooltip();
 
     // Set up auto-copy for video embed codes.
     var clipboard = new Clipboard('a.copy-embed', {
@@ -19,7 +15,7 @@ $(function() {
     });
 
     clipboard.on('success', function(e) {
-
+        $.growl.notice({ message: "Embed tag copied to clipboard." });
     });
 
     // Launches the Tumblr OAuth popup.
@@ -43,7 +39,7 @@ $(function() {
         var url = $(this).attr('href');
         $.get(url, function(responseCode) {
             if (responseCode == '200') {
-                // todo: notify user
+                $.growl.notice({ message: "Video posted to Tumblr!" });
             }
         });
         return false;
