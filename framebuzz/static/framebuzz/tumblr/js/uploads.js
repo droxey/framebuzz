@@ -1,6 +1,8 @@
-$(function() {
-    var submitButton = $('#btn-upload-video');
+var submitButton = $('#btn-upload-video');
+var titleField = $('#id_title');
 
+
+$(function() {
     // Launches the Tumblr OAuth popup.
     $(document).on('click', 'a.tumblr-login-link', function(e) {
         var url = $(this).attr('href');
@@ -21,12 +23,16 @@ $(function() {
 // Wired up in tumblr/forms.py
 var fileUploadComplete = function(event) {
     // Enable the submit button once a video is uploaded.
-    var submitButton = $('#btn-upload-video');
     submitButton.removeAttr('disabled');
-
     // If video title is still empty after upload, give it a default.
-    var titleField = $('#id_title');
-    if (titleField.val().length == 0) {
+    if (titleField.val().length == 0 && event.fpfile !== undefined) {
         titleField.val(event.fpfile.filename);
     }
+};
+
+// Callback that gets fired when a video removed from the uploader.
+var deleteButtonClicked = function() {
+    titleField.val('');
+    submitButton.val('Upload Video');
+    submitButton.attr('disabled', '');
 };
