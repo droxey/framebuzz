@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 from framebuzz.apps.api.models import Video
 from framebuzz.apps.api.backends.tasks import start_zencoder_job
+from framebuzz.apps.tumblr.tasks import submit_to_tumblr
 
 
 class TumblrUploadForm(forms.ModelForm):
@@ -23,6 +24,7 @@ class TumblrUploadForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(TumblrUploadForm, self).__init__(*args, **kwargs)
+        # Tweak the visual aspects of the form to match our mocks.
         self.fields['title'].widget = forms.TextInput(attrs={
             'placeholder': 'Enter video title...',
             'class': 'form-control'
@@ -43,13 +45,12 @@ class TumblrUploadForm(forms.ModelForm):
         fpfile = self.cleaned_data.get('fpfile', None)
         title = self.cleaned_data.get('title', None)
         description = self.cleaned_data.get('description', None)
-        user = User.objects.get(username__iexact=self.request.user.username)
         url = self.request.POST['fpfile'] or None
         # Save video details.
         vid = Video()
         vid.title = title
         vid.description = description
-        vid.added_by = user
+        vid.added_by = self.request.user
         vid.processing = True
         vid.uploaded = datetime.datetime.now()
         vid.filename = fpfile.name or None
@@ -59,9 +60,6 @@ class TumblrUploadForm(forms.ModelForm):
         vid.video_id = vid.slug
         vid.save()
         # Send the file to ZenCoder for processing.
-        # Link the task for submitting to Tubmlr. This ensures the task
-        # executes immediately after start_zencoder_job finishes.
-        # Example: add.apply_async((2, 2), link=add.s(16))
         if fpfile:
             start_zencoder_job.apply_async(args=[vid.fp_url, vid.filename])
         return vid

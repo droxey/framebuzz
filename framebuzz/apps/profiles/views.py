@@ -498,7 +498,6 @@ def upload_video(request, username):
 @require_http_methods(['POST', ])
 def zencoder_webhook(request):
     post_data = json.loads(request.raw_post_data)
-    print post_data.get('job', 'no job')
     job = post_data.get('job', None)
     if job:
         check_zencoder_progress.apply_async([job.get('id', 0)])
