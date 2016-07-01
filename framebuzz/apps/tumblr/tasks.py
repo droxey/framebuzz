@@ -1,6 +1,5 @@
 import celery
 import datetime
-import json
 import pytumblr
 
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
@@ -19,6 +18,7 @@ def submit_to_tumblr(username, video_id):
     user = User.objects.get(username__iexact=username)
     act = SocialAccount.objects.get(user=user)
     tumblr_user = SocialToken.objects.get(app=tumblr_app, account=act)
+    # Connect to Tumblr API.
     client = pytumblr.TumblrRestClient(
         tumblr_app.client_id,
         tumblr_app.secret,

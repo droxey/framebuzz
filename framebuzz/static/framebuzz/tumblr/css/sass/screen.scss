@@ -245,7 +245,9 @@ body {
         }
 
         div.drop-pane-row {
-          #upload-drop-pane > div {
+          input.filepicker { display: none; }
+
+          #upload-drop-pane div.filepicker {
             -moz-border-radius: 4px / 4px !important;
             -webkit-border-radius: 4px 4px !important;
             border-radius: 4px / 4px !important;
@@ -255,6 +257,7 @@ body {
             width: 105%;
             background-color: #55677f;
             left: -14px;
+            z-index: 100;  // Makes the drop zone easier to hit.
           }
 
           #upload-drop-pane > div > div {
@@ -263,23 +266,39 @@ body {
               border-radius: 4px / 4px !important;
               background-color: #55677f !important;
               border: 3px dashed #7687a3 !important;
-              color: rgba(255, 255, 255, 0.75) !important;
+              color: white !important;
               float: none !important;
               margin: 0 !important;
               padding: 30px 11px 63px 11px !important;
               text-align: center !important;
               width: 100% !important;
               line-height: 14px !important;
-              font-size: 0.9em !important;
+              font-size: 16px !important;
+              font-weight: 700;
               min-height: 146px;
+              text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 
               em {
-                color: white !important;
                 display: block;
-                font-weight: 700;
-                font-size: 16px !important;
-                padding-bottom: 5px !important;
+                font-size: 11px !important;
+                padding-top: 5px !important;
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+                font-weight: normal;
               }
+
+              span {
+                position: absolute;
+                right: 15px;
+                top: 26px;
+                float: none !important;
+                font-size: 24px !important;
+              }
+          }
+
+          // A ridiculously named selector that allows us to alter the appearance
+          // of the hitbox after a file has been dropped.
+          #upload-drop-pane > div > div[enabled=disabled] {
+              background-color: yellow !important;
           }
 
           #upload-drop-pane > div > div.error {

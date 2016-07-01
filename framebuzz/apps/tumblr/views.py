@@ -40,10 +40,6 @@ def dashboard(request, username):
     # Set pagination data according to the ?page= GET parameter.
     try: page = request.GET.get('page', START_PAGE)
     except PageNotAnInteger: page = START_PAGE
-    # Fetch data needed for the template context.
-    videos = get_user_videos(username)
-    p = Paginator(videos, VIDEOS_PER_PAGE, request=request)
-    page_obj = p.page(page)
     template = 'tumblr/snippets/videos.html' \
         if request.is_ajax() \
         else 'tumblr/dashboard.html'
@@ -53,10 +49,15 @@ def dashboard(request, username):
                                        files=request.FILES,
                                        request=request)
         if upload_form.is_valid():
-            # TODO: Do stuff here. Notify UI. Etc.
-            print 'Valid!'
+            # Save the form, then reset.
+            upload_form.save()
+            upload_form = TumblrUploadForm(request=request)
     else:
         upload_form = TumblrUploadForm(request=request)
+    # Fetch fresh data needed for the template context.
+    videos = get_user_videos(username)
+    p = Paginator(videos, VIDEOS_PER_PAGE, request=request)
+    page_obj = p.page(page)
     return render_to_response(template, {
         'page_obj': page_obj,
         'video_count': len(videos),

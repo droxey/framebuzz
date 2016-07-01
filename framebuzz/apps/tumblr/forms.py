@@ -27,19 +27,21 @@ class TumblrUploadForm(forms.ModelForm):
         # Tweak the visual aspects of the form to match our mocks.
         self.fields['title'].widget = forms.TextInput(attrs={
             'placeholder': 'Enter video title...',
-            'class': 'form-control'
+            'class': 'form-control',
+            'required': ''
         })
         self.fields['description'].widget = forms.Textarea(attrs={
             'placeholder': 'Enter a description for the video...',
             'class': 'form-control'
         })
         fp_attrs = self.fields['fpfile'].widget.attrs
-        fp_attrs['data-fp-mimetypes'] = ''
+        fp_attrs['data-fp-mimetypes'] = 'video/*'
         fp_attrs['data-fp-button-class'] = 'btn btn-large btn-info'
         fp_attrs['data-fp-button-text'] = settings.FP_BUTTON_TEXT
         fp_attrs['data-fp-services'] = settings.FP_SERVICES
-        fp_attrs['data-fp-extensions'] = settings.FP_EXTENSIONS
         fp_attrs['data-fp-drag-text'] = settings.FP_DRAG_TEXT
+        fp_attrs['data-fp-max-size'] = settings.FP_VIDEO_MAXSIZE
+        fp_attrs['data-fp-container'] = 'modal'
 
     def save(self, commit=True):
         fpfile = self.cleaned_data.get('fpfile', None)

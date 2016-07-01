@@ -45,13 +45,14 @@ class FPFieldMixin():
         attrs = {
                 'data-fp-apikey': self.apikey,
                 'data-fp-mimetypes': self.mimetypes,
+                'class': 'filepicker'
                 }
 
         if self.services:
             attrs['data-fp-option-services'] = self.services
 
         if self.additional_params:
-            attrs = dict(list(attrs.items()) + list(self.additional_params.items()))            
+            attrs = dict(list(attrs.items()) + list(self.additional_params.items()))
 
         return attrs
 
