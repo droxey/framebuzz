@@ -108,61 +108,81 @@ body {
 /* line 54, ../sass/screen.scss */
 #base #header #actions {
   height: 38px;
+}
+/* line 57, ../sass/screen.scss */
+#base #header #actions.logged-out {
   padding-top: 10px;
 }
-/* line 58, ../sass/screen.scss */
+/* line 61, ../sass/screen.scss */
+#base #header #actions.logged-in {
+  padding-top: 8px;
+}
+/* line 65, ../sass/screen.scss */
 #base #header #actions p.login-info {
   color: #8597b1;
   float: right;
+  font-size: 10px;
+  vertical-align: middle;
 }
-/* line 62, ../sass/screen.scss */
+/* line 71, ../sass/screen.scss */
 #base #header #actions p.login-info span.username {
   color: #9ba6b5;
   font-size: 12px;
 }
-/* line 67, ../sass/screen.scss */
+/* line 76, ../sass/screen.scss */
 #base #header #actions p.login-info a, #base #header #actions p.login-info input {
   color: #8597b1;
   cursor: pointer;
   display: inline-block;
   text-decoration: underline;
 }
-/* line 74, ../sass/screen.scss */
+/* line 83, ../sass/screen.scss */
 #base #header #actions p.login-info a {
   padding-left: 8px;
 }
-/* line 78, ../sass/screen.scss */
+/* line 87, ../sass/screen.scss */
 #base #header #actions p.login-info input {
+  background: none;
+  border: none;
   font-size: 10px;
+  margin-left: -7px;
 }
-/* line 85, ../sass/screen.scss */
+/* line 94, ../sass/screen.scss */
+#base #header #actions p.login-info img.avatar {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 5px;
+  height: 16px;
+  width: 16px;
+}
+/* line 105, ../sass/screen.scss */
 #base #example {
   min-height: 508px;
   margin-top: 44px;
 }
-/* line 89, ../sass/screen.scss */
+/* line 109, ../sass/screen.scss */
 #base #example p.description {
   color: white;
   padding-top: 12px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 94, ../sass/screen.scss */
+/* line 114, ../sass/screen.scss */
 #base #example p.description span {
   font-size: 36px;
 }
-/* line 98, ../sass/screen.scss */
+/* line 118, ../sass/screen.scss */
 #base #example p.description img {
   vertical-align: text-top;
 }
-/* line 102, ../sass/screen.scss */
+/* line 122, ../sass/screen.scss */
 #base #example p.description em {
   font-size: 18px;
 }
-/* line 108, ../sass/screen.scss */
+/* line 128, ../sass/screen.scss */
 #base #uploader {
   min-height: 358px;
 }
-/* line 111, ../sass/screen.scss */
+/* line 131, ../sass/screen.scss */
 #base #uploader h1 {
   color: white;
   font-size: 35px;
@@ -172,15 +192,15 @@ body {
   padding-bottom: 16px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 122, ../sass/screen.scss */
+/* line 142, ../sass/screen.scss */
 #base #uploader #upload-container.uploading {
   padding: 21px 17px 17px 17px;
 }
-/* line 127, ../sass/screen.scss */
+/* line 147, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.submit-row {
   margin-top: 11px;
 }
-/* line 130, ../sass/screen.scss */
+/* line 150, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.submit-row input.btn {
   -moz-border-radius: 5px / 5px;
   -webkit-border-radius: 5px 5px;
@@ -190,11 +210,11 @@ body {
   cursor: pointer;
   width: 100%;
 }
-/* line 137, ../sass/screen.scss */
+/* line 157, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.submit-row input.btn:hover {
   background: #15273c;
 }
-/* line 143, ../sass/screen.scss */
+/* line 163, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input, #base #uploader #upload-container #upload-video-form textarea {
   font: 13px/16px 'proxima-nova';
   color: #888888;
@@ -202,89 +222,89 @@ body {
   -webkit-border-radius: 3px 3px;
   border-radius: 3px / 3px;
 }
-/* line 148, ../sass/screen.scss */
+/* line 168, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input::-webkit-input-placeholder, #base #uploader #upload-container #upload-video-form textarea::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 154, ../sass/screen.scss */
+/* line 174, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input:-moz-placeholder, #base #uploader #upload-container #upload-video-form textarea:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 160, ../sass/screen.scss */
+/* line 180, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input::-moz-placeholder, #base #uploader #upload-container #upload-video-form textarea::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 166, ../sass/screen.scss */
+/* line 186, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input:-ms-input-placeholder, #base #uploader #upload-container #upload-video-form textarea:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 172, ../sass/screen.scss */
+/* line 192, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.placeholder, #base #uploader #upload-container #upload-video-form textarea.placeholder {
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 178, ../sass/screen.scss */
+/* line 198, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input:focus, #base #uploader #upload-container #upload-video-form textarea:focus {
   border: 1px solid #28374c;
   outline: 0;
 }
-/* line 183, ../sass/screen.scss */
+/* line 203, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error, #base #uploader #upload-container #upload-video-form textarea.error {
   border: 1px solid red;
 }
-/* line 186, ../sass/screen.scss */
+/* line 206, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error:-moz-placeholder, #base #uploader #upload-container #upload-video-form textarea.error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 192, ../sass/screen.scss */
+/* line 212, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error::-moz-placeholder, #base #uploader #upload-container #upload-video-form textarea.error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 198, ../sass/screen.scss */
+/* line 218, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error:-ms-input-placeholder, #base #uploader #upload-container #upload-video-form textarea.error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 204, ../sass/screen.scss */
+/* line 224, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error.placeholder, #base #uploader #upload-container #upload-video-form textarea.error.placeholder {
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 211, ../sass/screen.scss */
+/* line 231, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.textarea-row {
   margin-top: 11px;
 }
-/* line 214, ../sass/screen.scss */
+/* line 234, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.textarea-row textarea {
   height: 135px;
 }
-/* line 220, ../sass/screen.scss */
+/* line 240, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row input.filepicker {
   display: none;
 }
-/* line 222, ../sass/screen.scss */
+/* line 242, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane div.filepicker {
   -moz-border-radius: 4px / 4px !important;
   -webkit-border-radius: 4px 4px !important;
@@ -297,7 +317,7 @@ body {
   left: -14px;
   z-index: 100;
 }
-/* line 235, ../sass/screen.scss */
+/* line 255, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div {
   -moz-border-radius: 4px / 4px !important;
   -webkit-border-radius: 4px 4px !important;
@@ -316,7 +336,7 @@ body {
   min-height: 146px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 253, ../sass/screen.scss */
+/* line 273, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div em {
   display: block;
   font-size: 11px !important;
@@ -324,7 +344,7 @@ body {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   font-weight: normal;
 }
-/* line 261, ../sass/screen.scss */
+/* line 281, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div span {
   position: absolute;
   right: 15px;
@@ -332,20 +352,20 @@ body {
   float: none !important;
   font-size: 24px !important;
 }
-/* line 272, ../sass/screen.scss */
+/* line 292, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div[enabled=disabled] {
   background-color: yellow !important;
 }
-/* line 276, ../sass/screen.scss */
+/* line 296, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div.error {
   border: 2px dashed red !important;
 }
-/* line 280, ../sass/screen.scss */
+/* line 300, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div > div {
   height: 22px !important;
   margin: 0 3px !important;
 }
-/* line 285, ../sass/screen.scss */
+/* line 305, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > button.btn-info {
   -moz-border-radius: 5px / 5px;
   -webkit-border-radius: 5px 5px;
@@ -358,15 +378,15 @@ body {
   padding: 4px 22px;
   z-index: 100;
 }
-/* line 295, ../sass/screen.scss */
+/* line 315, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > button.btn-info:hover {
   background: #007ab8;
 }
-/* line 303, ../sass/screen.scss */
+/* line 323, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.login {
   padding-bottom: 21px;
 }
-/* line 306, ../sass/screen.scss */
+/* line 326, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.login a {
   color: #35afff;
   text-decoration: underline;
@@ -374,18 +394,18 @@ body {
   font-size: 18px;
   font-weight: bold;
 }
-/* line 315, ../sass/screen.scss */
+/* line 335, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.info {
   color: white;
   font-size: 14px;
   line-height: 18px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 325, ../sass/screen.scss */
+/* line 345, ../sass/screen.scss */
 #base #post {
   min-height: 323px;
 }
-/* line 328, ../sass/screen.scss */
+/* line 348, ../sass/screen.scss */
 #base #post h1 {
   color: #92a2b9;
   font-size: 35px;
@@ -395,15 +415,15 @@ body {
   padding-bottom: 16px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 338, ../sass/screen.scss */
+/* line 358, ../sass/screen.scss */
 #base #post em {
   color: #fffffd;
 }
-/* line 342, ../sass/screen.scss */
+/* line 362, ../sass/screen.scss */
 #base #post img {
   border: 2px solid white;
 }
-/* line 346, ../sass/screen.scss */
+/* line 366, ../sass/screen.scss */
 #base #post p.info {
   color: #c1c8d0;
   font-size: 14px;
@@ -412,11 +432,11 @@ body {
   font-weight: 500;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 356, ../sass/screen.scss */
+/* line 376, ../sass/screen.scss */
 #base #videos {
   margin-bottom: 100px;
 }
-/* line 359, ../sass/screen.scss */
+/* line 379, ../sass/screen.scss */
 #base #videos h3 {
   color: #9eadc2;
   font: 30px/45px 'lobster';
@@ -424,18 +444,18 @@ body {
   text-align: center;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 367, ../sass/screen.scss */
+/* line 387, ../sass/screen.scss */
 #base #videos #no-videos {
   min-height: 112px;
   text-align: center;
 }
-/* line 371, ../sass/screen.scss */
+/* line 391, ../sass/screen.scss */
 #base #videos #no-videos h4 {
   color: #4b5b75;
   font: 32px/48px 'proxima-nova';
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 377, ../sass/screen.scss */
+/* line 397, ../sass/screen.scss */
 #base #videos #no-videos p {
   color: #627691;
   font: 24px/40px 'proxima-nova';

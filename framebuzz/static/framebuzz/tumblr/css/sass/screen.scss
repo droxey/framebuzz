@@ -53,11 +53,20 @@ body {
 
     #actions {
       height: 38px;
-      padding-top: 10px;
+
+      &.logged-out {
+        padding-top: 10px;
+      }
+
+      &.logged-in {
+        padding-top: 8px;
+      }
 
       p.login-info {
         color: #8597b1;
         float: right;
+        font-size: 10px;
+        vertical-align: middle;
 
         span.username {
           color: #9ba6b5;
@@ -76,7 +85,18 @@ body {
         }
 
         input {
+          background: none;
+          border: none;
           font-size: 10px;
+          margin-left: -7px;
+        }
+
+        img.avatar {
+          display: inline-block;
+          vertical-align: middle;
+          margin: 0 5px;
+          height: 16px;
+          width: 16px;
         }
       }
     }

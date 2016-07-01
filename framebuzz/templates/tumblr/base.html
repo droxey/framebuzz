@@ -50,7 +50,7 @@
     <![endif]-->
     <div id="base" class="container">
       <div id="header" class="row">
-        <div id="actions" class="clearfix">
+        <div id="actions" class="clearfix logged-{% if not request.user.is_authenticated %}out{% else %}in{% endif %}">
           {% include "tumblr/snippets/account.html" %}
         </div>
         <div class="col-xs-12">
