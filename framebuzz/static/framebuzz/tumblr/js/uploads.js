@@ -3,9 +3,9 @@ var titleField = $('#id_title');
 
 
 $(function() {
-    // Lazy load video images.
-    $('.lazy-load').lazyLoadXT();
-    
+    var videoUrl = null,
+        fbzPlayer = $('iframe.fbzplayer');
+
     // Launches the Tumblr OAuth popup.
     $(document).on('click', 'a.tumblr-login-link', function(e) {
         var url = $(this).attr('href');
@@ -18,6 +18,26 @@ $(function() {
     $(document).on('submit', '#upload-video-form', function(e) {
         submitButton.val('Uploading...');
         submitButton.attr('disabled', '');
+    });
+
+    // When the user chooses to play a video, save the url and then
+    // pop up the player in a modal dialog.
+    $(document).on('click', 'a.play-video', function() {
+        videoUrl = $(this).attr('data-video-url');
+        console.log(videoUrl);
+    });
+
+    // Request our player template when the modal dialog opens.
+    $(document).on('opened', '.remodal', function () {
+        console.log(videoUrl);
+        console.log(fbzPlayer);
+        fbzPlayer.attr('src', videoUrl);
+    });
+
+    // Tear down the player template when the modal dialog closes.
+    $(document).on('closing', '.remodal', function (e) {
+        fbzPlayer.removeAttr('src');
+        videoUrl = null;
     });
 });
 

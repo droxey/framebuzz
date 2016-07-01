@@ -95,7 +95,7 @@ body {
   border-radius: 6px / 6px;
   background-color: #28374c;
   border: 1px solid #26354a;
-  padding: 44px 0 10px 0;
+  padding: 44px 0px 10px 3px;
   text-align: center;
   width: 100%;
 }
@@ -436,77 +436,145 @@ body {
   padding-top: 20px;
   font-weight: 500;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  word-break: break-word;
 }
-/* line 379, ../sass/screen.scss */
+/* line 380, ../sass/screen.scss */
 #base #videos {
   margin-bottom: 100px;
 }
-/* line 382, ../sass/screen.scss */
+/* line 383, ../sass/screen.scss */
 #base #videos h3 {
   color: #9eadc2;
-  font: 30px/45px 'lobster';
+  font: 32px 'lobster';
   padding-bottom: 8px;
   text-align: center;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 390, ../sass/screen.scss */
+/* line 391, ../sass/screen.scss */
 #base #videos #no-videos {
   min-height: 112px;
   text-align: center;
 }
-/* line 394, ../sass/screen.scss */
+/* line 395, ../sass/screen.scss */
 #base #videos #no-videos h4 {
   color: #4b5b75;
   font: 32px/48px 'proxima-nova';
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 400, ../sass/screen.scss */
+/* line 401, ../sass/screen.scss */
 #base #videos #no-videos p {
   color: #627691;
   font: 24px/40px 'proxima-nova';
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 408, ../sass/screen.scss */
+/* line 409, ../sass/screen.scss */
 #base #videos #video-list .no-padding {
   padding-left: 0;
   padding-right: 0;
 }
-/* line 413, ../sass/screen.scss */
+/* line 414, ../sass/screen.scss */
 #base #videos #video-list ul {
   padding: 0 6px;
 }
-/* line 416, ../sass/screen.scss */
+/* line 417, ../sass/screen.scss */
 #base #videos #video-list ul li.video {
-  max-width: 211px;
+  cursor: pointer;
+  height: 217px;
+  width: 211px;
   margin: 0 14px 24px 14px;
+  max-height: 230px;
+  position: relative;
+  z-index: 1;
 }
-/* line 421, ../sass/screen.scss */
+/* line 427, ../sass/screen.scss */
+#base #videos #video-list ul li.video:hover div.overlay {
+  display: block;
+}
+/* line 432, ../sass/screen.scss */
+#base #videos #video-list ul li.video div.overlay {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 25px;
+  z-index: 10;
+}
+/* line 440, ../sass/screen.scss */
+#base #videos #video-list ul li.video div.overlay a.play-video {
+  margin-top: 20px;
+  display: block;
+}
+/* line 444, ../sass/screen.scss */
+#base #videos #video-list ul li.video div.overlay a.play-video img {
+  height: 47px;
+  width: 47px;
+}
+/* line 450, ../sass/screen.scss */
+#base #videos #video-list ul li.video div.overlay a.post-on-tumblr {
+  color: white;
+  display: block;
+  font: 13.9px 'proxima-nova';
+  position: relative;
+  left: 18px;
+  margin: 7px 0;
+}
+/* line 458, ../sass/screen.scss */
+#base #videos #video-list ul li.video div.overlay a.post-on-tumblr span, #base #videos #video-list ul li.video div.overlay a.post-on-tumblr img {
+  display: block;
+  position: absolute;
+  top: 0;
+}
+/* line 464, ../sass/screen.scss */
+#base #videos #video-list ul li.video div.overlay a.post-on-tumblr span {
+  padding: 9px 0;
+  text-indent: 49px;
+  z-index: 6;
+}
+/* line 470, ../sass/screen.scss */
+#base #videos #video-list ul li.video div.overlay a.post-on-tumblr img {
+  position: relative;
+  z-index: 5;
+  width: 168px;
+  height: 35px;
+}
+/* line 478, ../sass/screen.scss */
+#base #videos #video-list ul li.video div.overlay a.copy-embed {
+  color: #9dc5fd;
+  display: block;
+  font: 12.64px 'proxima-nova';
+  text-align: center;
+  text-decoration: underline;
+  width: 100%;
+  line-height: 13px;
+}
+/* line 489, ../sass/screen.scss */
 #base #videos #video-list ul li.video div.header {
   padding-bottom: 8px;
 }
-/* line 424, ../sass/screen.scss */
+/* line 492, ../sass/screen.scss */
 #base #videos #video-list ul li.video div.header strong.title {
   color: white;
   font: 13px 'proxima-nova';
   text-align: left;
-  font-weight: 500;
+  font-weight: 600;
 }
-/* line 431, ../sass/screen.scss */
+/* line 499, ../sass/screen.scss */
 #base #videos #video-list ul li.video div.header strong.duration {
   color: #92a2b8;
   font: 14px 'proxima-nova';
   text-align: right;
-  font-weight: 400;
+  font-weight: 500;
 }
-/* line 439, ../sass/screen.scss */
+/* line 507, ../sass/screen.scss */
 #base #videos #video-list ul li.video img.cover {
   width: 211px;
-  height: 100%;
+  height: 140px;
 }
-/* line 444, ../sass/screen.scss */
+/* line 512, ../sass/screen.scss */
 #base #videos #video-list ul li.video p.description {
   color: #afbfd4;
-  font: 12px/16px 'proxima-nova';
+  font: 12.64px 'proxima-nova';
+  font-weight: 500;
   padding-top: 2px;
   text-align: left;
 }

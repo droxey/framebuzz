@@ -40,6 +40,8 @@
     {% compress css %}
         <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/bootstrap/css/bootstrap.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" type="text/css" media="screen">
+        <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/remodal.css' %}" type="text/css" media="screen">
+        <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/remodal-default-theme.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/screen.css' %}" type="text/css" media="screen">
     {% endcompress %}
     {% block extra_head %}{% endblock %}
@@ -50,16 +52,14 @@
         You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.
       </div>
     <![endif]-->
-    <div id="base" class="container">
+    <div id="base" class="container remodal-bg">
       <div id="header" class="row">
         <div id="actions" class="clearfix logged-{% if not request.user.is_authenticated %}out{% else %}in{% endif %}">
           {% include "tumblr/snippets/account.html" %}
         </div>
-        <div class="col-xs-12">
-            <div class="row">
-              <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/header@2x.png' %}" height="188" width="736">
-            </div>
-          </div>
+        <div class="row">
+          <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/header@2x.png' %}" height="188" width="736">
+        </div>
       </div>
       <div id="example" class="row">
           <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/video-splash@2x.png' %}" height="451" width="736">
@@ -77,11 +77,15 @@
           </p>
       </div>
     </div>
+    <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false">
+        <iframe src="" scrolling="no" frameBorder="0" height="445" width="700" class="fbzplayer center-block"></iframe>
+    </div>
     {% compress js %}
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/filepicker.js' %}"></script>
+        <script src="{% static 'framebuzz/tumblr/js/vendor/remodal.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
     {% endcompress %}
     <script>

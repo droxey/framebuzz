@@ -38,7 +38,7 @@ body {
   @include border-radius(6px, 6px);
   background-color: #28374c;
   border: 1px solid #26354a;
-  padding: 44px 0 10px 0;
+  padding: 44px 0px 10px 3px;
   text-align: center;
   width: 100%;
 
@@ -373,6 +373,7 @@ body {
       padding-top: 20px;
       font-weight: 500;
       text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+      word-break: break-word;
     }
   }
 
@@ -381,7 +382,7 @@ body {
 
     h3 {
       color: #9eadc2;
-      font: 30px/45px 'lobster';
+      font: 32px 'lobster';
       padding-bottom: 8px;
       text-align: center;
       text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
@@ -414,9 +415,76 @@ body {
         padding: 0 6px;
 
         li.video {
-          max-width: 211px;
+          cursor: pointer;
+          height: 217px;
+          width: 211px;
           margin: 0 14px 24px 14px;
+          max-height: 230px;
+          position: relative;
+          z-index: 1;
 
+          &:hover {
+            div.overlay {
+              display: block;
+            }
+          }
+
+          div.overlay {
+            display: none;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 25px;
+            z-index: 10;
+
+            a.play-video {
+              margin-top: 20px;
+              display: block;
+
+              img {
+                height: 47px;
+                width: 47px;
+              }
+            }
+
+            a.post-on-tumblr {
+              color: white;
+              display: block;
+              font: 13.9px 'proxima-nova';
+              position: relative;
+              left: 18px;
+              margin: 7px 0;
+
+              span, img {
+                display: block;
+                position: absolute;
+                top: 0;
+              }
+
+              span {
+                padding: 9px 0;
+                text-indent: 49px;
+                z-index: 6;
+              }
+
+              img {
+                position: relative;
+                z-index: 5;
+                width: 168px;
+                height: 35px;
+              }
+            }
+
+            a.copy-embed {
+              color: #9dc5fd;
+              display: block;
+              font: 12.64px 'proxima-nova';
+              text-align: center;
+              text-decoration: underline;
+              width: 100%;
+              line-height: 13px;
+            }
+          }
 
           div.header {
             padding-bottom: 8px;
@@ -425,25 +493,26 @@ body {
               color: white;
               font: 13px 'proxima-nova';
               text-align: left;
-              font-weight: 500;
+              font-weight: 600;
             }
 
             strong.duration {
               color: #92a2b8;
               font: 14px 'proxima-nova';
               text-align: right;
-              font-weight: 400;
+              font-weight: 500;
             }
           }
 
           img.cover {
             width: 211px;
-            height: 100%;
+            height: 140px;
           }
 
           p.description {
             color: #afbfd4;
-            font: 12px/16px 'proxima-nova';
+            font: 12.64px 'proxima-nova';
+            font-weight: 500;
             padding-top: 2px;
             text-align: left;
           }
