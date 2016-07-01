@@ -57,32 +57,24 @@
         </div>
         <div class="col-xs-12">
             <div class="row">
-              <div id="text-row" class="col-xs-12">
-                <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/header@2x.png' %}" height="188" width="736">
-              </div>
+              <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/header@2x.png' %}" height="188" width="736">
             </div>
           </div>
       </div>
       <div id="example" class="row">
-        <div class="col-xs-12">
           <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/video-splash@2x.png' %}" height="451" width="736">
-        </div>
       </div>
       <div id="uploader" class="row">
         {% include "tumblr/snippets/upload.html" %}
       </div>
       {% block content %}{% endblock %}
-      <div id="post" class="row">
+      <div id="post" class="row clearfix">
         <h1>2. Post it to your tumblr page... <em>and get talking</em>!</h1>
-        <div class="col-xs-3">
-          <img src="{% static 'framebuzz/tumblr/img/vid@2x.jpg' %}" height="107" width="166">
-        </div>
-        <div class="col-xs-9">
-          <p class="info">
+          <img src="{% static 'framebuzz/tumblr/img/vid@2x.jpg' %}" height="107" width="166" class="pull-left">
+          <p class="info pull-left">
             Click the 'post to my tumblr' button on your video, or copy/paste the embed tag<br>
             to use on your tumblr page, and voilá! You're ready to talk!
           </p>
-        </div>
       </div>
     </div>
     {% compress js %}
