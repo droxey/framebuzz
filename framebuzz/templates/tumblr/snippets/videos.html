@@ -19,11 +19,14 @@
               <strong class="title pull-left">{{ video.title|title|truncatechars:"25" }}</strong>
               <strong class="duration pull-right">{{ video.timeInHMS }}</strong>
             </div>
-            <img class="cover lazy-load" src="{% static 'framebuzz/tumblr/img/img-loading.jpg' %}" data-src="{{ video.default_thumbnail }}" height="140" width="211">
+            <img class="cover" src="{{ video.default_thumbnail }}" height="140" width="211">
             {% if video.description %}
                 <p class="description">{{ video.description|truncatechars:"105" }}</p>
             {% endif %}
           </li>
       {% endfor %}
     </ul>
+ {% endif %}
+ {% if video_count > 6 %}
+   {% include "tumblr/snippets/pagination.html" %}
  {% endif %}

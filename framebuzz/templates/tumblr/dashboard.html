@@ -15,10 +15,9 @@
         </div>
     {% else %}
       <div id="video-list" class="col-xs-12 blue-round">
-        {% include "tumblr/snippets/videos.html" %}
-        {% if video_count > 6 %}
-          {% include "tumblr/snippets/pagination.html" %}
-        {% endif %}
+        <div class="pagination-page">
+            {% include "tumblr/snippets/videos.html" %}
+        </div>
       </div>
     {% endif %}
   </div>

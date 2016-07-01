@@ -18,6 +18,21 @@ $(function() {
         $.growl.notice({ message: "Embed tag copied to clipboard." });
     });
 
+    // Handle video pagination.
+    $('div.pagination-page').on('click', 'a.page-link', function() {
+      var pageContainer = $('div.pagination-page');
+      var pageUrl = $(this).attr('href');
+
+      $.get(pageUrl, function(pageHtml) {
+        pageContainer.fadeOut('fast', function() {
+          pageContainer.html(pageHtml);
+          pageContainer.fadeIn('fast');
+        });
+      });
+
+      return false;
+    });
+
     // Launches the Tumblr OAuth popup.
     $(document).on('click', 'a.tumblr-login-link', function(e) {
         var url = $(this).attr('href');
