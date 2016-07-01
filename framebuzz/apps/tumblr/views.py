@@ -60,10 +60,7 @@ def dashboard(request, username):
     else:
         upload_form = TumblrUploadForm(request=request)
     # Fetch fresh data needed for the template context.
-    videos = get_user_videos('daniroxberry')
-    for i in range(0, 20):
-        video = videos[0]
-        videos.append(video)
+    videos = get_user_videos(username)
     p = Paginator(videos, VIDEOS_PER_PAGE, request=request)
     page_obj = p.page(page)
     return render_to_response(template, {
