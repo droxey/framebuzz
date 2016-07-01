@@ -2,7 +2,7 @@
 
 <div class="col-xs-12">
   <h1>1. Upload a Video</h1>
-  <div id="upload-container" class="blue-round">
+  <div id="upload-container" class="blue-round{% if request.user.is_authenticated %} uploading{% endif %}">
     {% if request.user.is_authenticated %}
       <form id="upload-video-form" action="{% url 'fbz-tumblr-dashboard' request.user.username %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
@@ -40,7 +40,7 @@
     {% else %}
         <div id="upload-login" class="row">
           <p class="login">
-              <a id="tumblr-login-link" href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}">Log in to your tumblr account</a>
+              <a class="tumblr-login-link" href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}">Log in to your tumblr account</a>
           </p>
           <p class="info">
             In just a few seconds, you'll be able to upload your first video,<br>

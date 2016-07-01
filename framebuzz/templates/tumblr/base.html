@@ -1,4 +1,4 @@
-{% load staticfiles i18n account socialaccount compress %}
+{% load staticfiles i18n account socialaccount compress avatar_tags %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -51,43 +51,19 @@
     <div id="base" class="container">
       <div id="header" class="row">
         <div id="actions" class="clearfix">
-          {% if request.user.is_authenticated %}
-            <form class="pull-right" method="post" action="{% url 'account_logout' %}">
-              {% csrf_token %}
-              <input type="hidden" name="next" value="{% url 'fbz-tumblr-home' %}"/>
-              <button class="btn btn-small btn-success" type="submit">Log out</button>
-            </form>
-          {% else %}
-            <a id="btn-login" class="btn btn-small btn-success pull-right">Log in</a>
-          {% endif %}
+          {% include "tumblr/snippets/account.html" %}
         </div>
         <div class="col-xs-12">
             <div class="row">
-              <div class="col-xs-5 clearfix">
-                <span class="powered-by pull-right">powered by</span>
-              </div>
-              <div class="col-xs-7 clearfix">
-                <img class="fbz-logo" src="http://fpoimg.com/222x47?text=FPO: Logo" height="47" width="222">
-              </div>
-            </div>
-            <div class="row">
               <div id="text-row" class="col-xs-12">
-                {% spaceless %}
-                  <span class="tumblr">tumblr</span><span class="dot">.</span>
-                  <span class="video">video</span><span class="dot">.</span>
-                  <span class="chat">chat</span><span class="dot">.</span>
-                {% endspaceless %}
+                <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/header@2x.png' %}" height="188" width="736">
               </div>
             </div>
           </div>
       </div>
       <div id="example" class="row">
         <div class="col-xs-12">
-          <img src="http://fpoimg.com/670x375?text=FPO: Player+Tumblr Image" height="375" width="670">
-        </div>
-        <div class="col-xs-12">
-          <p class="description"><span>What is <img src="http://fpoimg.com/167x38?text=FPO: Logo" height="38" width="167">
-?</span> <em>Chat with other Tumblr users on videos.</em></p>
+          <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/video-splash@2x.png' %}" height="451" width="736">
         </div>
       </div>
       <div id="uploader" class="row">
@@ -97,7 +73,7 @@
       <div id="post" class="row">
         <h1>2. Post it to your tumblr page... <em>and get talking</em>!</h1>
         <div class="col-xs-3">
-          <img src="http://fpoimg.com/162x103?text=FPO: Video Tile Image" height="103" width="162">
+          <img src="{% static 'framebuzz/tumblr/img/vid@2x.jpg' %}" height="107" width="166">
         </div>
         <div class="col-xs-9">
           <p class="info">
@@ -111,7 +87,6 @@
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
-        <script src="{% static 'framebuzz/tumblr/js/vendor/jquery.smooth-scroll.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/filepicker.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
     {% endcompress %}

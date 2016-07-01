@@ -76,15 +76,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: none !important;
 }
 
-@media (min-width: 940px) {
+@media (min-width: 800px) {
   /* line 21, ../sass/screen.scss */
   .container {
-    width: 700px;
+    width: 736px;
   }
 }
 /* line 28, ../sass/screen.scss */
 body {
-  background: #2a394e url("../../img/background.png") repeat-x;
+  background: #2a394e url("../../img/background@2x.png") repeat-x;
   font: 12px/16px 'proxima-nova';
 }
 
@@ -102,89 +102,67 @@ body {
 
 /* line 50, ../sass/screen.scss */
 #base #header {
-  min-height: 165px;
-  margin-top: 55px;
+  min-height: 210px;
   position: relative;
 }
-/* line 55, ../sass/screen.scss */
+/* line 54, ../sass/screen.scss */
 #base #header #actions {
-  position: absolute;
-  top: -45px;
-  right: 0;
+  height: 38px;
+  padding-top: 10px;
 }
-/* line 69, ../sass/screen.scss */
-#base #header img.fbz-logo {
-  vertical-align: middle;
-  position: relative;
-  right: 20px;
+/* line 58, ../sass/screen.scss */
+#base #header #actions p.login-info {
+  color: #8597b1;
+  float: right;
 }
-/* line 75, ../sass/screen.scss */
-#base #header span.powered-by {
-  color: #fefefe;
-  font: 30px/32px 'lobster';
-  text-align: right;
-  text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
+/* line 62, ../sass/screen.scss */
+#base #header #actions p.login-info span.username {
+  color: #9ba6b5;
+  font-size: 12px;
 }
-/* line 82, ../sass/screen.scss */
-#base #header #text-row {
-  text-align: center;
-  margin-top: 26px;
+/* line 67, ../sass/screen.scss */
+#base #header #actions p.login-info a, #base #header #actions p.login-info input {
+  color: #8597b1;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: underline;
 }
-/* line 86, ../sass/screen.scss */
-#base #header #text-row span {
-  font-size: 60px;
-  text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
+/* line 74, ../sass/screen.scss */
+#base #header #actions p.login-info a {
+  padding-left: 8px;
 }
-/* line 90, ../sass/screen.scss */
-#base #header #text-row span.tumblr {
-  color: #fefcfd;
-  font-family: 'bookman-jf-pro';
+/* line 78, ../sass/screen.scss */
+#base #header #actions p.login-info input {
+  font-size: 10px;
 }
-/* line 95, ../sass/screen.scss */
-#base #header #text-row span.video {
-  color: #a8bbd9;
-  font-family: 'lobster';
-  font-style: italic;
-}
-/* line 101, ../sass/screen.scss */
-#base #header #text-row span.chat {
-  color: #c8d5e6;
-  font-weight: 700;
-  font-family: 'bookman-jf-pro';
-}
-/* line 107, ../sass/screen.scss */
-#base #header #text-row span.dot {
-  color: #fefefe;
-  font-size: 80px;
-}
-/* line 115, ../sass/screen.scss */
+/* line 85, ../sass/screen.scss */
 #base #example {
   min-height: 508px;
   margin-top: 44px;
 }
-/* line 119, ../sass/screen.scss */
+/* line 89, ../sass/screen.scss */
 #base #example p.description {
   color: white;
   padding-top: 12px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 124, ../sass/screen.scss */
+/* line 94, ../sass/screen.scss */
 #base #example p.description span {
   font-size: 36px;
 }
-/* line 128, ../sass/screen.scss */
+/* line 98, ../sass/screen.scss */
 #base #example p.description img {
   vertical-align: text-top;
 }
-/* line 132, ../sass/screen.scss */
+/* line 102, ../sass/screen.scss */
 #base #example p.description em {
   font-size: 18px;
 }
-/* line 138, ../sass/screen.scss */
+/* line 108, ../sass/screen.scss */
 #base #uploader {
   min-height: 358px;
 }
-/* line 141, ../sass/screen.scss */
+/* line 111, ../sass/screen.scss */
 #base #uploader h1 {
   color: white;
   font-size: 35px;
@@ -194,15 +172,15 @@ body {
   padding-bottom: 16px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 151, ../sass/screen.scss */
-#base #uploader #upload-container {
+/* line 122, ../sass/screen.scss */
+#base #uploader #upload-container.uploading {
   padding: 21px 17px 17px 17px;
 }
-/* line 155, ../sass/screen.scss */
+/* line 127, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.submit-row {
   margin-top: 11px;
 }
-/* line 158, ../sass/screen.scss */
+/* line 130, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.submit-row input.btn {
   -moz-border-radius: 5px / 5px;
   -webkit-border-radius: 5px 5px;
@@ -212,11 +190,11 @@ body {
   cursor: pointer;
   width: 100%;
 }
-/* line 165, ../sass/screen.scss */
+/* line 137, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.submit-row input.btn:hover {
   background: #15273c;
 }
-/* line 171, ../sass/screen.scss */
+/* line 143, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input, #base #uploader #upload-container #upload-video-form textarea {
   font: 13px/16px 'proxima-nova';
   color: #888888;
@@ -224,89 +202,89 @@ body {
   -webkit-border-radius: 3px 3px;
   border-radius: 3px / 3px;
 }
-/* line 176, ../sass/screen.scss */
+/* line 148, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input::-webkit-input-placeholder, #base #uploader #upload-container #upload-video-form textarea::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 182, ../sass/screen.scss */
+/* line 154, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input:-moz-placeholder, #base #uploader #upload-container #upload-video-form textarea:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 188, ../sass/screen.scss */
+/* line 160, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input::-moz-placeholder, #base #uploader #upload-container #upload-video-form textarea::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 194, ../sass/screen.scss */
+/* line 166, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input:-ms-input-placeholder, #base #uploader #upload-container #upload-video-form textarea:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 200, ../sass/screen.scss */
+/* line 172, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.placeholder, #base #uploader #upload-container #upload-video-form textarea.placeholder {
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 206, ../sass/screen.scss */
+/* line 178, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input:focus, #base #uploader #upload-container #upload-video-form textarea:focus {
   border: 1px solid #28374c;
   outline: 0;
 }
-/* line 211, ../sass/screen.scss */
+/* line 183, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error, #base #uploader #upload-container #upload-video-form textarea.error {
   border: 1px solid red;
 }
-/* line 214, ../sass/screen.scss */
+/* line 186, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error:-moz-placeholder, #base #uploader #upload-container #upload-video-form textarea.error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 220, ../sass/screen.scss */
+/* line 192, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error::-moz-placeholder, #base #uploader #upload-container #upload-video-form textarea.error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 226, ../sass/screen.scss */
+/* line 198, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error:-ms-input-placeholder, #base #uploader #upload-container #upload-video-form textarea.error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 232, ../sass/screen.scss */
+/* line 204, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error.placeholder, #base #uploader #upload-container #upload-video-form textarea.error.placeholder {
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 239, ../sass/screen.scss */
+/* line 211, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.textarea-row {
   margin-top: 11px;
 }
-/* line 242, ../sass/screen.scss */
+/* line 214, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.textarea-row textarea {
   height: 135px;
 }
-/* line 248, ../sass/screen.scss */
+/* line 220, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row input.filepicker {
   display: none;
 }
-/* line 250, ../sass/screen.scss */
+/* line 222, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane div.filepicker {
   -moz-border-radius: 4px / 4px !important;
   -webkit-border-radius: 4px 4px !important;
@@ -319,7 +297,7 @@ body {
   left: -14px;
   z-index: 100;
 }
-/* line 263, ../sass/screen.scss */
+/* line 235, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div {
   -moz-border-radius: 4px / 4px !important;
   -webkit-border-radius: 4px 4px !important;
@@ -338,7 +316,7 @@ body {
   min-height: 146px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 281, ../sass/screen.scss */
+/* line 253, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div em {
   display: block;
   font-size: 11px !important;
@@ -346,7 +324,7 @@ body {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   font-weight: normal;
 }
-/* line 289, ../sass/screen.scss */
+/* line 261, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div span {
   position: absolute;
   right: 15px;
@@ -354,20 +332,20 @@ body {
   float: none !important;
   font-size: 24px !important;
 }
-/* line 300, ../sass/screen.scss */
+/* line 272, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div[enabled=disabled] {
   background-color: yellow !important;
 }
-/* line 304, ../sass/screen.scss */
+/* line 276, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div.error {
   border: 2px dashed red !important;
 }
-/* line 308, ../sass/screen.scss */
+/* line 280, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div > div {
   height: 22px !important;
   margin: 0 3px !important;
 }
-/* line 313, ../sass/screen.scss */
+/* line 285, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > button.btn-info {
   -moz-border-radius: 5px / 5px;
   -webkit-border-radius: 5px 5px;
@@ -380,15 +358,15 @@ body {
   padding: 4px 22px;
   z-index: 100;
 }
-/* line 323, ../sass/screen.scss */
+/* line 295, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > button.btn-info:hover {
   background: #007ab8;
 }
-/* line 331, ../sass/screen.scss */
+/* line 303, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.login {
   padding-bottom: 21px;
 }
-/* line 334, ../sass/screen.scss */
+/* line 306, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.login a {
   color: #35afff;
   text-decoration: underline;
@@ -396,18 +374,18 @@ body {
   font-size: 18px;
   font-weight: bold;
 }
-/* line 343, ../sass/screen.scss */
+/* line 315, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.info {
   color: white;
   font-size: 14px;
   line-height: 18px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 353, ../sass/screen.scss */
+/* line 325, ../sass/screen.scss */
 #base #post {
   min-height: 323px;
 }
-/* line 356, ../sass/screen.scss */
+/* line 328, ../sass/screen.scss */
 #base #post h1 {
   color: #92a2b9;
   font-size: 35px;
@@ -417,15 +395,15 @@ body {
   padding-bottom: 16px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 366, ../sass/screen.scss */
+/* line 338, ../sass/screen.scss */
 #base #post em {
   color: #fffffd;
 }
-/* line 370, ../sass/screen.scss */
+/* line 342, ../sass/screen.scss */
 #base #post img {
   border: 2px solid white;
 }
-/* line 374, ../sass/screen.scss */
+/* line 346, ../sass/screen.scss */
 #base #post p.info {
   color: #c1c8d0;
   font-size: 14px;
@@ -434,11 +412,11 @@ body {
   font-weight: 500;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 384, ../sass/screen.scss */
+/* line 356, ../sass/screen.scss */
 #base #videos {
   margin-bottom: 100px;
 }
-/* line 387, ../sass/screen.scss */
+/* line 359, ../sass/screen.scss */
 #base #videos h3 {
   color: #9eadc2;
   font: 30px/45px 'lobster';
@@ -446,25 +424,20 @@ body {
   text-align: center;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 395, ../sass/screen.scss */
+/* line 367, ../sass/screen.scss */
 #base #videos #no-videos {
   min-height: 112px;
   text-align: center;
 }
-/* line 399, ../sass/screen.scss */
+/* line 371, ../sass/screen.scss */
 #base #videos #no-videos h4 {
   color: #4b5b75;
   font: 32px/48px 'proxima-nova';
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 405, ../sass/screen.scss */
+/* line 377, ../sass/screen.scss */
 #base #videos #no-videos p {
   color: #627691;
   font: 24px/40px 'proxima-nova';
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-}
-
-/* line 425, ../sass/screen.scss */
-body.uploader {
-  background: #2a394e url("../../img/background-upload.png") repeat-x;
 }
