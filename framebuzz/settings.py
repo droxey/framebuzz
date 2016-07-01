@@ -1,5 +1,6 @@
 from django.conf import global_settings
 import djcelery
+import raven
 
 djcelery.setup_loader()
 

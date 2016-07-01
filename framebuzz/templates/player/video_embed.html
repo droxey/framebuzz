@@ -1,4 +1,4 @@
-{% load staticfiles socialaccount compress shorturl %}
+{% load staticfiles socialaccount compress shorturl raven %}
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/Article" ng-app="framebuzz" data-close-socket="">
   <head itemscope itemtype="http://schema.org/Product">
@@ -48,6 +48,7 @@
         </style>
       <![endif]-->
     {% endcompress %}
+    <script>Raven.config('{% sentry_public_dsn %}').install()</script>
     {% compress js %}
       <script>
         (function(d) {
