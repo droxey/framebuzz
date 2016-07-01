@@ -1,9 +1,16 @@
 {% load i18n staticfiles %}
 
 {% if page_obj.object_list %}
-  {% for video in page_obj.object_list %}
-    <div class="col-md-3">
-      <h2>{{ video.title }}</h2>
-    </div>
-  {% endfor %}
+    <ul class="clearfix">
+      {% for video in page_obj.object_list %}
+          <li class="video pull-left">
+            <div class="header clearfix">
+              <strong class="title pull-left">{{ video.title|title|truncatechars:"30" }}</strong>
+              <strong class="duration pull-right">{{ video.timeInHMS }}</strong>
+            </div>
+            <img class="cover lazy-load" src="{% static 'framebuzz/tumblr/img/img-loading.jpg' %}" data-src="{{ video.default_thumbnail }}">
+            <p class="description">{{ video.description|truncatechars:"110" }}</p>
+          </li>
+      {% endfor %}
+    </ul>
  {% endif %}

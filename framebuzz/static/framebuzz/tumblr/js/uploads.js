@@ -3,6 +3,9 @@ var titleField = $('#id_title');
 
 
 $(function() {
+    // Lazy load video images.
+    $('.lazy-load').lazyLoadXT();
+    
     // Launches the Tumblr OAuth popup.
     $(document).on('click', 'a.tumblr-login-link', function(e) {
         var url = $(this).attr('href');

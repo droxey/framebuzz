@@ -38,9 +38,13 @@ body {
   @include border-radius(6px, 6px);
   background-color: #28374c;
   border: 1px solid #26354a;
-  padding: 44px 0;
+  padding: 44px 0 10px 0;
   text-align: center;
   width: 100%;
+
+  &.no-videos {
+    padding: 44px 0;
+  }
 }
 
 // =============================================================================
@@ -396,7 +400,50 @@ body {
     }
 
     #video-list {
+      .no-padding {
+        padding-left: 0;
+        padding-right: 0;
+      }
 
+      ul {
+        padding: 0 6px;
+
+        li.video {
+          max-width: 211px;
+          margin: 0 14px 24px 14px;
+
+
+          div.header {
+            padding-bottom: 8px;
+
+            strong.title {
+              color: white;
+              font: 13px 'proxima-nova';
+              text-align: left;
+              font-weight: 500;
+            }
+
+            strong.duration {
+              color: #92a2b8;
+              font: 14px 'proxima-nova';
+              text-align: right;
+              font-weight: 400;
+            }
+          }
+
+          img.cover {
+            width: 211px;
+            height: 100%;
+          }
+
+          p.description {
+            color: #afbfd4;
+            font: 12px/16px 'proxima-nova';
+            padding-top: 2px;
+            text-align: left;
+          }
+        }
+      }
     }
   }
 }

@@ -53,7 +53,8 @@ def dashboard(request, username):
         if upload_form.is_valid():
             # Save the form, then reset.
             upload_form.save()
-            upload_form = TumblrUploadForm(request=request)
+            return HttpResponseRedirect(
+                reverse('fbz-tumblr-dashboard', args=[request.user.username]))
     else:
         upload_form = TumblrUploadForm(request=request)
     # Fetch fresh data needed for the template context.
