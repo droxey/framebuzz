@@ -26,8 +26,7 @@ def submit_to_tumblr(username, video_id):
         tumblr_user.token_secret)
     # Send video data to Tumblr on behalf of the submitting user.
     video = Video.objects.get(video_id=video_id)
-    create_kwargs = encoded_dict({'tags': 'framebuzz',
-                                  'date': datetime.datetime.now(),
+    create_kwargs = encoded_dict({'date': datetime.datetime.now(),
                                   'format': 'html',
                                   'caption': video.description,
                                   'embed': video.tumblr_embed_code()})
@@ -36,6 +35,6 @@ def submit_to_tumblr(username, video_id):
     post_id = response.get('id', None)
     if post_id:
         # Add new video to collection. Store post link for later.
-        uv = UserVideo.objects.get_or_create(user=user, video=video)
+        uv, created = UserVideo.objects.get_or_create(user=user, video=video)
         uv.tumblr_link = 'http://%s.tumblr.com/post/%s/' % (act.uid, post_id)
         uv.save()

@@ -13,6 +13,6 @@
 {% else %}
   <p class="login-info">
     Not logged into Tumblr.
-    <a class="tumblr-login-link">Log in here</a>
+    <a class="tumblr-login-link" href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}">Log in here</a>
   </p>
 {% endif %}

@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from pure_pagination import Paginator, PageNotAnInteger
+from pure_pagination import Paginator, PageNotAnInteger, EmptyPage
 
 from framebuzz.apps.api.models import Video
 from framebuzz.apps.tumblr.forms import TumblrUploadForm
@@ -15,7 +15,7 @@ from framebuzz.apps.tumblr.tasks import submit_to_tumblr
 
 
 START_PAGE = 1
-VIDEOS_PER_PAGE = 12
+VIDEOS_PER_PAGE = 6
 
 
 def home(request):
@@ -40,8 +40,10 @@ def dashboard(request, username):
     ''' Displays the 'logged in' homepage, uploader, and a paginated list of
         user-uploaded videos. '''
     # Set pagination data according to the ?page= GET parameter.
-    try: page = request.GET.get('page', START_PAGE)
-    except PageNotAnInteger: page = START_PAGE
+    try:
+        page = request.GET.get('page', START_PAGE)
+    except PageNotAnInteger:
+        page = START_PAGE
     template = 'tumblr/snippets/videos.html' \
         if request.is_ajax() \
         else 'tumblr/dashboard.html'

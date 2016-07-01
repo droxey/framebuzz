@@ -3,6 +3,8 @@
 
 {% block page_title %}FrameBuzz | Tumblr Dashboard{% endblock %}
 
+{% block body_classes %} logged-in{% if video_count == 0 %} no-videos{% endif %}{% endblock %}
+
 {% block content %}
   <div id="videos" class="row">
     <h3>My Videos</h3>
@@ -14,6 +16,9 @@
     {% else %}
       <div id="video-list" class="col-xs-12 blue-round">
         {% include "tumblr/snippets/videos.html" %}
+        {% if video_count > 6 %}
+          {% include "tumblr/snippets/pagination.html" %}
+        {% endif %}
       </div>
     {% endif %}
   </div>

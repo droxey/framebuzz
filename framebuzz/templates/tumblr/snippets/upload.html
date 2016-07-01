@@ -2,7 +2,7 @@
 
 
 <h1>1. Upload a Video</h1>
-<div id="upload-container" class="blue-round{% if request.user.is_authenticated %} uploading{% endif %}">
+<div id="upload-container" class="blue-round{% if request.user.is_authenticated %} logged-in{% else %} logged-out{% endif %}">
   {% if request.user.is_authenticated %}
     <form id="upload-video-form" action="{% url 'fbz-tumblr-dashboard' request.user.username %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}

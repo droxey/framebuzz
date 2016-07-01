@@ -26,7 +26,6 @@
 // Elements
 // =============================================================================
 body {
-    background: #2a394e url('../../img/background@2x.png') repeat-x;
     font: 12px/16px 'proxima-nova';
 }
 
@@ -54,6 +53,10 @@ body {
   #header {
     min-height: 210px;
     position: relative;
+
+    img.header {
+      margin: 0 auto;
+    }
 
     #actions {
       height: 38px;
@@ -134,17 +137,22 @@ body {
 
     h1 {
       color: white;
-      font-size: 35px;
+      font-size: 32px;
       font-family: 'lobster';
       text-align: center;
       line-height: 43px;
       padding-bottom: 16px;
+      margin-left: -2px;
       text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
     }
 
     #upload-container {
-      &.uploading {
+      &.logged-in {
         padding: 21px 17px 17px 17px;
+      }
+
+      &.logged-out {
+        padding: 44px 17px 44px 17px;
       }
 
       #upload-video-form {
@@ -322,17 +330,17 @@ body {
           padding-bottom: 21px;
 
           a {
-            color: #35afff;
+            color: #36aeef;
             text-decoration: underline;
             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-            font-size: 18px;
+            font-size: 19px;
             font-weight: bold;
           }
         }
 
         p.info {
           color: white;
-          font-size: 14px;
+          font-size: 13px;
           line-height: 18px;
           text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
         }
@@ -346,8 +354,8 @@ body {
     bottom: 0;
 
     h1 {
-      color: #92a2b9;
-      font-size: 39px;
+      color: #92a2b8;
+      font-size: 38.04px;
       font-family: 'lobster';
       text-align: left;
       line-height: 43px;
@@ -367,13 +375,14 @@ body {
     }
 
     p.info {
-      color: #c1c8d0;
-      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 15px;
       line-height: 30px;
       padding-top: 20px;
       font-weight: 500;
       text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
       word-break: break-word;
+      letter-spacing: -0.03em;
     }
   }
 
@@ -391,17 +400,88 @@ body {
     #no-videos {
       min-height: 112px;
       text-align: center;
+      margin-bottom: 56px;
 
       h4 {
         color: #4b5b75;
-        font: 32px/48px 'proxima-nova';
+        font: 28px/48px 'proxima-nova';
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
       }
 
       p {
         color: #627691;
-        font: 24px/40px 'proxima-nova';
+        font: 19px/40px 'proxima-nova';
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+      }
+    }
+    div.page-wrapper {
+      div.pagination {
+        @include border-radius(3px, 3px);
+        background: #314056;
+        padding: 7px 0px 3px 0px;
+        width: auto;
+        position: relative;
+        right: 19px;
+        bottom: 4px;
+        margin: 0;
+
+        ul {
+          padding: 0;
+          width: 100%;
+
+          li {
+            display: inline-block;
+            padding: 0 2px;
+
+            span, a {
+              color: #92a2b8;
+              font: 14px/18px 'proxima-nova';
+              font-weight: 500;
+              float: left;
+            }
+
+            &.active {
+              @include border-radius(3px, 3px);
+              background: #4583d8;
+              padding: 0 6px;
+
+              a {
+                font-weight: 700;
+                color: white;
+              }
+            }
+
+            a.page-link {
+              i {
+                vertical-align: baseline;
+                position: relative;
+                top: 1px;
+              }
+              &.prev i {
+                margin-right: 2px;
+              }
+
+              &.next i {
+                margin-left: 2px;
+              }
+
+              &.prev,
+              &.next {
+                text-decoration: underline;
+              }
+            }
+
+            span.disabled {
+              &.prev {
+
+              }
+
+              &.next {
+
+              }
+            }
+          }
+        }
       }
     }
 
@@ -416,7 +496,6 @@ body {
 
         li.video {
           cursor: pointer;
-          height: 217px;
           width: 211px;
           margin: 0 14px 24px 14px;
           max-height: 230px;
@@ -525,6 +604,21 @@ body {
 // =============================================================================
 // Overrides
 // =============================================================================
-.wf-loading {
 
+body {
+  &.logged-out {
+    background: #2a394e url('../../img/bkg-loggedout.png') repeat-x;
+  }
+
+  &.logged-in {
+      background: #2a394e url('../../img/bkg-loggedin.png') repeat-x;
+
+      #base #videos {
+        margin-bottom: 162px;
+      }
+
+    &.no-videos {
+      background: #2a394e url('../../img/bkg-novideos.png') repeat-x;
+    }
+  }
 }

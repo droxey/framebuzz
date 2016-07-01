@@ -20,17 +20,27 @@ $(function() {
         submitButton.attr('disabled', '');
     });
 
+    // Async submit selected video to Tumblr.
+    $(document).on('click', 'a.post-on-tumblr', function(e) {
+        e.preventDefault();
+        
+        var url = $(this).attr('href');
+        $.get(url, function(responseCode) {
+            if (responseCode == '200') {
+                // todo: notify user
+            }
+        });
+        return false;
+    });
+
     // When the user chooses to play a video, save the url and then
     // pop up the player in a modal dialog.
     $(document).on('click', 'a.play-video', function() {
         videoUrl = $(this).attr('data-video-url');
-        console.log(videoUrl);
     });
 
     // Request our player template when the modal dialog opens.
     $(document).on('opened', '.remodal', function () {
-        console.log(videoUrl);
-        console.log(fbzPlayer);
         fbzPlayer.attr('src', videoUrl);
     });
 

@@ -158,7 +158,7 @@ def check_zencoder_progress(job_id):
                     'video': video,
                     'site': Site.objects.get_current()
                 })
-                
+
         # Reset Video job id, so we don't receive duplicate uploads.
-        vid.job_id = None
-        vid.save()
+        video.job_id = None
+        video.save()

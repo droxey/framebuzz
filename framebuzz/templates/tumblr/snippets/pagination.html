@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<div class="page-wrapper clearfix">
+    <div class="pagination pull-right">
+        <ul>
+            <li>
+                {% if page_obj.has_previous %}
+                    <a href="?{{ page_obj.previous_page_number.querystring }}" class="prev page-link"><i class="fa fa-fw fa-chevron-circle-left" aria-hidden="true"></i>{% trans "Prev" %}</a>
+                {% else %}
+                    <span class="disabled prev"><i class="fa fa-fw fa-chevron-circle-left" aria-hidden="true"></i> {% trans "Prev" %}</span>
+                {% endif %}
+            </li>
+            {% for page in page_obj.pages %}
+                {% if page %}
+                    <li{% ifequal page page_obj.number %} class="active"{% endifequal %}>
+                        <a href="?{{ page.querystring }}" class="page-link">{{ page }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            <li>
+                {% if page_obj.has_next %}
+                    <a href="?{{ page_obj.next_page_number.querystring }}" class="next page-link">{% trans "Next" %}<i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i></a>
+                {% else %}
+                    <span class="disabled next">{% trans "Next" %} <i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i></span>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>
