@@ -45,6 +45,7 @@ $(function() {
     $(document).on('submit', '#upload-video-form', function(e) {
         submitButton.val('Uploading...');
         submitButton.attr('disabled', '');
+        $.growl.notice({ message: "Video sent to processing!<br>It will be available below shortly." });
     });
 
     // Async submit selected video to Tumblr.

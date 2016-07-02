@@ -55,8 +55,11 @@ def dashboard(request, username):
         if upload_form.is_valid():
             # Save the form, then reset.
             upload_form.save()
-            return HttpResponseRedirect(
-                reverse('fbz-tumblr-dashboard', args=[request.user.username]))
+            # When we redirect the user, lets take them straight to the
+            # 'My Videos' section of the page.
+            redirect_url = '%s#videolist' % \
+                reverse('fbz-tumblr-dashboard', args=[request.user.username])
+            return HttpResponseRedirect(redirect_url)
     else:
         upload_form = TumblrUploadForm(request=request)
     # Fetch fresh data needed for the template context.
