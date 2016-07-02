@@ -6,7 +6,7 @@ from django.contrib.sessions.models import Session
 
 class FrameBuzzVideoAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'duration', 'added_by',
-                    'added_on', 'public',)
+                    'added_on', 'public', 'job_id',)
     list_filter = ('added_by', 'added_on', 'public',)
     search_fields = ['title', 'slug', ]
 

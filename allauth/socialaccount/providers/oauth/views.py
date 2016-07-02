@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
@@ -7,6 +9,9 @@ from allauth.socialaccount.providers.oauth.client import (OAuthClient,
 from allauth.socialaccount.helpers import complete_social_login
 from allauth.socialaccount import providers
 from allauth.socialaccount.models import SocialToken, SocialLogin
+
+from ..base import AuthAction, AuthError
+
 
 class OAuthAdapter(object):
 
@@ -33,31 +38,33 @@ class OAuthView(object):
     def _get_client(self, request, callback_url):
         provider = self.adapter.get_provider()
         app = provider.get_app(request)
-        scope = ' '.join(provider.get_scope())
+        scope = ' '.join(provider.get_scope(request))
         parameters = {}
         if scope:
             parameters['scope'] = scope
         client = OAuthClient(request, app.client_id, app.secret,
                              self.adapter.request_token_url,
                              self.adapter.access_token_url,
-                             self.adapter.authorize_url,
                              callback_url,
-                             parameters=parameters)
+                             parameters=parameters, provider=provider)
         return client
 
 
 class OAuthLoginView(OAuthView):
     def dispatch(self, request):
         callback_url = reverse(self.adapter.provider_id + "_callback")
-        # TODO: Can't this be moved as query param into callback?
-        # Tried but failed somehow, needs further study...
-        request.session['oauth_login_state'] \
-            = SocialLogin.marshall_state(request)
+        SocialLogin.stash_state(request)
+        action = request.GET.get('action', AuthAction.AUTHENTICATE)
+        provider = self.adapter.get_provider()
+        auth_url = provider.get_auth_url(request,
+                                         action) or self.adapter.authorize_url
         client = self._get_client(request, callback_url)
         try:
-            return client.get_redirect()
-        except OAuthError:
-            return render_authentication_error(request)
+            return client.get_redirect(auth_url)
+        except OAuthError as e:
+            return render_authentication_error(request,
+                                               self.adapter.provider_id,
+                                               exception=e)
 
 
 class OAuthCallbackView(OAuthView):
@@ -70,20 +77,28 @@ class OAuthCallbackView(OAuthView):
         client = self._get_client(request, login_done_url)
         if not client.is_valid():
             if 'denied' in request.GET:
-                return HttpResponseRedirect(reverse('socialaccount_login_cancelled'))
+                error = AuthError.CANCELLED
+            else:
+                error = AuthError.UNKNOWN
             extra_context = dict(oauth_client=client)
-            return render_authentication_error(request, extra_context)
+            return render_authentication_error(
+                request,
+                self.adapter.provider_id,
+                error=error,
+                extra_context=extra_context)
         app = self.adapter.get_provider().get_app(request)
         try:
             access_token = client.get_access_token()
-            token = SocialToken(app=app,
-                                token=access_token['oauth_token'],
-                                token_secret=access_token['oauth_token_secret'])
+            token = SocialToken(
+                app=app,
+                token=access_token['oauth_token'],
+                token_secret=access_token['oauth_token_secret'])
             login = self.adapter.complete_login(request, app, token)
-            token.account = login.account
             login.token = token
-            login.state = SocialLogin.unmarshall_state \
-                (request.session.pop('oauth_login_state', None))
+            login.state = SocialLogin.unstash_state(request)
             return complete_social_login(request, login)
-        except OAuthError:
-            return render_authentication_error(request)
+        except OAuthError as e:
+            return render_authentication_error(
+                request,
+                self.adapter.provider_id,
+                exception=e)

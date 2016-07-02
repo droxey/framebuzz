@@ -1,4 +1,4 @@
-{% load staticfiles socialaccount compress shorturl %}
+{% load staticfiles socialaccount compress shorturl raven %}
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/Article" ng-app="framebuzz" data-close-socket="">
   <head itemscope itemtype="http://schema.org/Product">
@@ -26,15 +26,6 @@
     <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
     <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
     <meta itemprop="image" content="{{ video.poster_image }}" />
-    <script type="text/javascript">
-      (function() {
-        var config = {
-          kitId: 'jbo8iic',
-          scriptTimeout: 3000
-        };
-        var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
-      })();
-    </script>
     {% compress css %}
       <link href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
@@ -57,7 +48,17 @@
         </style>
       <![endif]-->
     {% endcompress %}
+    <script src="//cdn.ravenjs.com/2.3.0/raven.min.js"></script>
+    <script>Raven.config('{% sentry_public_dsn %}').install()</script>
     {% compress js %}
+      <script>
+        (function(d) {
+          var tkTimeout=3000;
+          if(window.sessionStorage){if(sessionStorage.getItem('useTypekit')==='false'){tkTimeout=0;}}
+          var config = { kitId: 'tud1dml', scriptTimeout: tkTimeout },
+          h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+"wf-inactive";if(window.sessionStorage){sessionStorage.setItem("useTypekit","false")}},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+="wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        })(document);
+      </script>
       <script type="text/javascript">
         // Disable ESC as it breaks SockJS connection.
         // See https://github.com/sockjs/sockjs-client/issues/18.
@@ -90,9 +91,7 @@
           private_session_key: {% if convo_slug %}'{{ convo_slug }}'{% else %}null{% endif %},
           video_title: '{{ video.title|title|truncatechars:"55" }}',
           login_urls: {
-            twitter: "{% provider_login_url 'twitter' next=next_url method='oauth2' display='popup' %}",
-            facebook: "{% provider_login_url 'facebook' next=next_url method='oauth2' display='popup' %}",
-            google: "{% provider_login_url 'google' next=next_url method='oauth2' display='popup' %}"
+            tumblr: "{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}"
           },
           ravenjs_dsn: '{{ ravenjs_dsn }}',
           start_private_viewing: start_private_viewing,            // Used when video loaded from email invite.
@@ -119,7 +118,6 @@
     <![endif]-->
   </head>
   <body class="ng-cloak">
-    {% providers_media_js %}
     <div id="player-container" class="container">
       <div id="player-layer" class="layer">
         <video data-media-element="" class="span12" id="video-element" preload="true" poster="{% static 'framebuzz/player/app/img/poster-transparent.png' %}" style="height: 100%; width: 100%; background: url('{{ video.poster_image }}') no-repeat scroll center center / cover black;">
@@ -160,7 +158,6 @@
       <script src="{% static 'framebuzz/player/app/lib/gsap/jquery.gsap.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/mediaelement-and-player.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/mejs-framebuzz-plugins.js' %}"></script>
-
       <script src="{% static 'framebuzz/player/app/js/app.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/js/animations.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/js/exceptions.js' %}"></script>
@@ -169,7 +166,6 @@
       <script src="{% static 'framebuzz/player/app/js/filters.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/js/directives.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/js/truncate.js' %}"></script>
-
       <script src="{% static 'framebuzz/player/app/lib/sockjs-0.3.4.min.js' %}"></script>
     {% endcompress %}
     <script>

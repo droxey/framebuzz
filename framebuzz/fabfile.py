@@ -1,7 +1,6 @@
 import os
 import re
 import sys
-import flowdock
 
 from functools import wraps
 from getpass import getpass, getuser
@@ -473,11 +472,7 @@ def notify_team():
         commit_info = run('git log -1 --pretty="[%h] %an (%ar): %s"')
         message = '%s has been updated! Current revision: %s' \
             % (env.live_host, str(commit_info))
-        flowdock.post('dani@framebuzz.com',
-                      'Deployment Successful',
-                      '<p>%s</p>' % message,
-                      from_name='Dani',
-                      tags=['deployment'])
+        print message
 
 @task
 @log_call

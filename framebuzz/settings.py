@@ -1,5 +1,6 @@
 from django.conf import global_settings
 import djcelery
+import raven
 
 djcelery.setup_loader()
 
@@ -220,6 +221,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.tumblr',
 
     # Helper Apps
     'localflavor',
@@ -253,6 +255,7 @@ INSTALLED_APPS = (
     'framebuzz.apps.marketing',
     'framebuzz.apps.search',
     'framebuzz.apps.dashboard',
+    'framebuzz.apps.tumblr',
 )
 
 # Django-Grappelli:
@@ -306,12 +309,12 @@ ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = '/accounts/logged-in/'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = ("optional",)
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_UNIQUE_EMAIL = False
-#ACCOUNT_SIGNUP_FORM_CLASS = 'framebuzz.apps.marketing.forms.FrameBuzzSignupForm'
-SOCIALACCOUNT_AUTO_SIGNUP = False
+SOCIALACCOUNT_AUTO_SIGNUP = True
+ACCOUNT_SESSION_REMEMBER = False
 
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
@@ -457,6 +460,16 @@ RANDOMSLUG_LENGTH = 16
 
 # django-filepicker
 FILEPICKER_API_KEY = 'AXQRyfZ2cQjWD3yy2flkFz'
+FP_EXTENSIONS = '3g2,3gp,3gp2,3gpp,3gpp2,ac3,eac3,ec3,f4a,f4b,f4v,flv', \
+                'highwinds,m4a,m4b,m4r,m4v,mov,mp4,oga,ogv,ogx,ts', \
+                'webm,wma,mpg,avi'
+FP_SERVICES = 'BOX,CLOUDDRIVE,COMPUTER,DROPBOX,GOOGLE_DRIVE,GMAIL,URL,VIDEO,FTP'
+FP_DRAG_TEXT = 'Drag and drop your video file here<br><em>or, click this ' \
+                'box to upload videos from Dropbox,<br>Google Drive, ' \
+                'FTP and more!</em>'
+FP_BUTTON_TEXT = '<i class="fa fa-cloud-upload"></i> Select File...'
+FP_VIDEO_MAXSIZE = 2147483648
+
 
 # Dashboard
 LOGIN_URL = '/accounts/login/'

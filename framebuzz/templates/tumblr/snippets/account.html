@@ -1,0 +1,18 @@
+{% load staticfiles i18n account socialaccount avatar_tags %}
+
+{% if request.user.is_authenticated %}
+  <form class="pull-right" method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% url 'fbz-tumblr-home' %}">
+    <p class="login-info">
+      <span class="as">Logged in as: </span><span class="username">{{ request.user.username }}</span>
+      <img class="avatar" src="{% avatar_url request.user 32 %}" alt="" height="16" width="16">
+      <input type="submit" value="Log out">
+    </p>
+  </form>
+{% else %}
+  <p class="login-info">
+    Not logged into Tumblr.
+    <a class="tumblr-login-link" href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}">Log in here</a>
+  </p>
+{% endif %}

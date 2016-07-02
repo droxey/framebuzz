@@ -1,8 +1,9 @@
+import raven
 LOCAL_SETTINGS = True
 from settings import *
 
 ###################
-# DATABASE        # 
+# DATABASE        #
 ###################
 DEBUG = True
 
@@ -15,6 +16,30 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     }
+}
+
+FABRIC = {
+    "SSH_USER": "deploy", # SSH username
+    "SSH_PASS":  "", # SSH password (consider key-based authentication)
+    "SSH_KEY_PATH":  "", # Local path to SSH key file, for key-based auth
+    "HOSTS": [], # List of hosts to deploy to
+    "VIRTUALENV_HOME":  "/sites/.virtualenvs", # Absolute remote path for virtualenvs
+    "PROJECT_NAME": "framebuzz", # Unique identifier for project
+    "REQUIREMENTS_PATH": "requirements.txt", # Path to pip requirements, relative to project
+    "GUNICORN_PORT": 8000, # Port gunicorn will listen on
+    "LOCALE": "en_US.UTF-8", # Should end with ".UTF-8"
+    "LIVE_HOSTNAME": "", # Host for public site.
+    "REPO_URL": "git@git.framebuzzlab.com:ross/framebuzz.git", # Git or Mercurial remote repo URL for the project,
+    "REPO_BRANCH": '',
+    "DB_PASS": "", # Live database password
+    "ADMIN_PASS": "", # Live admin user password,
+    "SENTRY_DSN": "",
+    "RAVENJS_DSN": ""
+}
+
+RAVEN_CONFIG = {
+    'dsn': FABRIC['SENTRY_DSN'],
+    'release': raven.fetch_git_sha(os.path.join(os.path.dirname( __file__ ), '..')),      # Fetch git info and base release numbers on that.
 }
 
 # Django Compress

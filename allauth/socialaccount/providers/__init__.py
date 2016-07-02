@@ -1,5 +1,10 @@
 from django.conf import settings
-from django.utils import importlib
+
+try:
+    import importlib
+except ImportError:
+    from django.utils import importlib
+
 
 class ProviderRegistry(object):
     def __init__(self):
@@ -11,7 +16,6 @@ class ProviderRegistry(object):
         return self.provider_map.values()
 
     def register(self, cls):
-        self.load()
         self.provider_map[cls.id] = cls()
 
     def by_id(self, id):

@@ -239,6 +239,7 @@ class Video(caching.base.CachingMixin, models.Model):
     public = models.BooleanField(default=True)
     password = models.CharField(max_length=50, blank=True, null=True)
     notify_emails = models.TextField(null=True, blank=True)
+    submit_to_tumblr = models.BooleanField(default=False, editable=False)
 
     class Meta:
         verbose_name = 'FrameBuzz Video'
@@ -331,6 +332,11 @@ class Video(caching.base.CachingMixin, models.Model):
         full_url = 'http://frame.bz%s' % self.get_absolute_url()
         return mark_safe('[framebuzz src=%s width=580 height=360]' % full_url)
 
+    def tumblr_embed_code(self):
+        full_url = 'http://frame.bz%s' % self.get_absolute_url()
+        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0"'
+                         ' height="360" width="580"></iframe>' % full_url)
+
     def heatmap(self, session_key=None):
         rank_per_block = list()
 
@@ -404,6 +410,7 @@ class UserVideo(caching.base.CachingMixin, models.Model):
     user = models.ForeignKey(User)
     added_on = models.DateTimeField(auto_now=True)
     is_featured = models.BooleanField('Featured?', default=False)
+    tumblr_link = models.URLField(blank=True, null=True)
 
     class Meta:
         verbose_name = 'User Video'

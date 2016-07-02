@@ -1,8 +1,17 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import
+from __future__ import unicode_literals
+
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.utils.importlib import import_module
 from django.test.client import RequestFactory
 from django.test.utils import override_settings
+from django.core import mail
+
+try:
+    from importlib import import_module
+except ImportError:
+    from django.utils.importlib import import_module
 
 from allauth.socialaccount.tests import create_oauth2_tests
 from allauth.account import app_settings as account_settings
@@ -15,42 +24,66 @@ from allauth.account.adapter import get_adapter
 
 from .provider import GoogleProvider
 
+
 @override_settings(SOCIALACCOUNT_AUTO_SIGNUP=True,
                    ACCOUNT_SIGNUP_FORM_CLASS=None,
                    ACCOUNT_EMAIL_VERIFICATION \
                    =account_settings.EmailVerificationMethod.MANDATORY)
 class GoogleTests(create_oauth2_tests(registry.by_id(GoogleProvider.id))):
 
-    def get_mocked_response(self, verified_email=True):
+    def get_mocked_response(self,
+                            family_name='Penners',
+                            given_name='Raymond',
+                            name='Raymond Penners',
+                            email='raymond.penners@gmail.com',
+                            verified_email=True):
         return MockedResponse(200, """
-{"family_name": "Penners", "name": "Raymond Penners", 
-               "picture": "https://lh5.googleusercontent.com/-GOFYGBVOdBQ/AAAAAAAAAAI/AAAAAAAAAGM/WzRfPkv4xbo/photo.jpg", 
-               "locale": "nl", "gender": "male", 
-               "email": "raymond.penners@gmail.com", 
-               "link": "https://plus.google.com/108204268033311374519", 
-               "given_name": "Raymond", "id": "108204268033311374519", 
-                "verified_email": %s }
-""" % (repr(verified_email).lower()))
+              {"family_name": "%s", "name": "%s",
+               "picture": "https://lh5.googleusercontent.com/-GOFYGBVOdBQ/AAAAAAAAAAI/AAAAAAAAAGM/WzRfPkv4xbo/photo.jpg",
+               "locale": "nl", "gender": "male",
+               "email": "%s",
+               "link": "https://plus.google.com/108204268033311374519",
+               "given_name": "%s", "id": "108204268033311374519",
+               "verified_email": %s }
+        """ % (family_name,
+               name,
+               email,
+               given_name,
+               (repr(verified_email).lower())))
+
+    def test_username_based_on_email(self):
+        first_name = '明'
+        last_name = '小'
+        email = 'raymond.penners@gmail.com'
+        self.login(self.get_mocked_response(name=first_name + ' ' + last_name,
+                                            email=email,
+                                            given_name=first_name,
+                                            family_name=last_name,
+                                            verified_email=True))
+        user = User.objects.get(email=email)
+        self.assertEqual(user.username, 'raymond.penners')
 
     def test_email_verified(self):
         test_email = 'raymond.penners@gmail.com'
         self.login(self.get_mocked_response(verified_email=True))
-        EmailAddress.objects \
+        email_address = EmailAddress.objects \
             .get(email=test_email,
                  verified=True)
-        self.assertFalse(EmailConfirmation.objects \
-                             .filter(email_address__email=test_email) \
-                             .exists())
+        self.assertFalse(EmailConfirmation.objects
+                         .filter(email_address__email=test_email)
+                         .exists())
+        account = email_address.user.socialaccount_set.all()[0]
+        self.assertEqual(account.extra_data['given_name'], 'Raymond')
 
     def test_user_signed_up_signal(self):
         sent_signals = []
 
         def on_signed_up(sender, request, user, **kwargs):
             sociallogin = kwargs['sociallogin']
-            self.assertEquals(sociallogin.account.provider,
-                              GoogleProvider.id)
-            self.assertEquals(sociallogin.account.user,
-                              user)
+            self.assertEqual(sociallogin.account.provider,
+                             GoogleProvider.id)
+            self.assertEqual(sociallogin.account.user,
+                             user)
             sent_signals.append(sender)
 
         user_signed_up.connect(on_signed_up)
@@ -59,14 +92,15 @@ class GoogleTests(create_oauth2_tests(registry.by_id(GoogleProvider.id))):
 
     def test_email_unverified(self):
         test_email = 'raymond.penners@gmail.com'
-        self.login(self.get_mocked_response(verified_email=False))
+        resp = self.login(self.get_mocked_response(verified_email=False))
         email_address = EmailAddress.objects \
             .get(email=test_email)
         self.assertFalse(email_address.verified)
-        self.assertTrue(EmailConfirmation.objects \
-                            .filter(email_address__email=test_email) \
-                            .exists())
-
+        self.assertTrue(EmailConfirmation.objects
+                        .filter(email_address__email=test_email)
+                        .exists())
+        self.assertTemplateUsed(resp,
+                                'account/email/email_confirmation_signup_subject.txt')
 
     def test_email_verified_stashed(self):
         # http://slacy.com/blog/2012/01/how-to-set-session-variables-in-django-unit-tests/
@@ -90,8 +124,6 @@ class GoogleTests(create_oauth2_tests(registry.by_id(GoogleProvider.id))):
                              .exists())
 
 
-
-
     def test_account_connect(self):
         email = 'some@mail.com'
         user = User.objects.create(username='user',
@@ -105,11 +137,36 @@ class GoogleTests(create_oauth2_tests(registry.by_id(GoogleProvider.id))):
                                     verified=True)
         self.client.login(username=user.username,
                           password='test')
-        self.login(self.get_mocked_response(verified_email=True))
+        self.login(self.get_mocked_response(verified_email=True),
+                   process='connect')
         # Check if we connected...
         self.assertTrue(SocialAccount.objects.filter(user=user,
                                                      provider=GoogleProvider.id).exists())
         # For now, we do not pick up any new e-mail addresses on connect
-        self.assertEquals(EmailAddress.objects.filter(user=user).count(), 1)
-        self.assertEquals(EmailAddress.objects.filter(user=user,
+        self.assertEqual(EmailAddress.objects.filter(user=user).count(), 1)
+        self.assertEqual(EmailAddress.objects.filter(user=user,
                                                       email=email).count(), 1)
+
+    @override_settings(
+        ACCOUNT_EMAIL_VERIFICATION=account_settings.EmailVerificationMethod.MANDATORY,
+        SOCIALACCOUNT_EMAIL_VERIFICATION=account_settings.EmailVerificationMethod.NONE
+    )
+    def test_social_email_verification_skipped(self):
+        test_email = 'raymond.penners@gmail.com'
+        self.login(self.get_mocked_response(verified_email=False))
+        email_address = EmailAddress.objects \
+            .get(email=test_email)
+        self.assertFalse(email_address.verified)
+        self.assertFalse(EmailConfirmation.objects \
+                            .filter(email_address__email=test_email) \
+                            .exists())
+
+    @override_settings(
+        ACCOUNT_EMAIL_VERIFICATION=account_settings.EmailVerificationMethod.OPTIONAL,
+        SOCIALACCOUNT_EMAIL_VERIFICATION=account_settings.EmailVerificationMethod.OPTIONAL
+    )
+    def test_social_email_verification_optional(self):
+        self.login(self.get_mocked_response(verified_email=False))
+        self.assertEqual(len(mail.outbox), 1)
+        self.login(self.get_mocked_response(verified_email=False))
+        self.assertEqual(len(mail.outbox), 1)

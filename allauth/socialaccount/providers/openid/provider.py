@@ -8,6 +8,10 @@ from django.utils.http import urlencode
 from allauth.socialaccount import providers
 from allauth.socialaccount.providers.base import Provider, ProviderAccount
 
+from .utils import get_email_from_response, get_value_from_response
+from .utils import SRegField, OldAXAttribute, AXAttribute
+
+
 class OpenIDAccount(ProviderAccount):
     def get_brand(self):
         ret = super(OpenIDAccount, self).get_brand()
@@ -16,10 +20,10 @@ class OpenIDAccount(ProviderAccount):
         # listed in the openid endpoints setting.
         provider_map = {'yahoo': dict(id='yahoo',
                                       name='Yahoo'),
-                         'hyves': dict(id='hyves',
-                                       name='Hyves'),
-                         'google': dict(id='google',
-                                        name='Google')}
+                        'hyves': dict(id='hyves',
+                                      name='Hyves'),
+                        'google': dict(id='google',
+                                       name='Google')}
         for d, p in provider_map.items():
             if domain.lower().find(d) >= 0:
                 ret = p
@@ -36,15 +40,10 @@ class OpenIDProvider(Provider):
     package = 'allauth.socialaccount.providers.openid'
     account_class = OpenIDAccount
 
-    def get_login_url(self, request, next=None, openid=None):
+    def get_login_url(self, request, **kwargs):
         url = reverse('openid_login')
-        query = {}
-        if openid:
-            query['openid'] = openid
-        if next:
-            query['next'] = next
-        if query:
-            url += '?' + urlencode(query)
+        if kwargs:
+            url += '?' + urlencode(kwargs)
         return url
 
     def get_brands(self):
@@ -56,6 +55,34 @@ class OpenIDProvider(Provider):
                                 name='Hyves',
                                 openid_url='http://hyves.nl')]
         return self.get_settings().get('SERVERS', default_servers)
-        
+
+    def extract_extra_data(self, response):
+        return {}
+
+    def extract_uid(self, response):
+        return response.identity_url
+
+    def extract_common_fields(self, response):
+        first_name = get_value_from_response(response,
+                                             ax_names=[AXAttribute
+                                                       .PERSON_FIRST_NAME,
+                                                       OldAXAttribute
+                                                       .PERSON_FIRST_NAME]) \
+            or ''
+        last_name = get_value_from_response(response,
+                                            ax_names=[AXAttribute
+                                                      .PERSON_LAST_NAME,
+                                                      OldAXAttribute
+                                                      .PERSON_LAST_NAME]) \
+            or ''
+        name = get_value_from_response(response,
+                                       sreg_names=[SRegField.NAME],
+                                       ax_names=[AXAttribute.PERSON_NAME,
+                                                 OldAXAttribute.PERSON_NAME]) \
+            or ''
+        return dict(email=get_email_from_response(response),
+                    first_name=first_name,
+                    last_name=last_name, name=name)
+
 
 providers.registry.register(OpenIDProvider)

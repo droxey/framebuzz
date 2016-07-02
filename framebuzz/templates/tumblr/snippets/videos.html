@@ -1,0 +1,46 @@
+{% load i18n staticfiles %}
+
+{% if page_obj.object_list %}
+    <ul class="clearfix">
+      {% for video in page_obj.object_list %}
+          <li class="video pull-left{% if video.processing %} processing{% endif %}">
+             {% if not video.processing %}
+               <div class="overlay">
+                   <a class="play-video" data-remodal-target="modal" href="#" data-video-url="{% url 'video-embed' video.slug %}">
+                       <img src="{% static 'framebuzz/tumblr/img/play@2x.png' %}" height="47" width="47">
+                   </a>
+                   <a class="post-on-tumblr" href="{% url 'fbz-tumblr-post' video.slug %}">
+                       <span>Post to my tumblr</span>
+                       <img src="{% static 'framebuzz/tumblr/img/btn-tumblr@2x.png' %}" height="35" width="168">
+                   </a>
+                   <a class="copy-embed">copy embed tag</a>
+                   <textarea style="display: none;" class="embed-code">{{ video.tumblr_embed_code }}</textarea>
+               </div>
+              {% endif %}
+            <div class="header clearfix">
+              <strong class="title pull-left">{{ video.title|title|truncatechars:"25" }}</strong>
+              <strong class="duration pull-right">
+                  {% if not video.processing %}
+                     {{ video.timeInHMS }}
+                  {% endif %}
+               </strong>
+            </div>
+            {% if video.processing %}
+               <div class="process-message">
+                  <strong class="title">Processing Upload</strong>
+                  <i class="fa fa-file-video-o fa-3x fa-fw" aria-hidden="true"></i>
+                  <strong>Check back soon!</strong>
+               </div>
+            {% else %}
+               <img class="cover" src="{{ video.default_thumbnail }}" height="140" width="211">
+            {% endif %}
+            {% if video.description %}
+                <p class="description">{{ video.description|truncatechars:"105" }}</p>
+            {% endif %}
+          </li>
+      {% endfor %}
+    </ul>
+ {% endif %}
+ {% if video_count > 6 %}
+   {% include "tumblr/snippets/pagination.html" %}
+ {% endif %}
