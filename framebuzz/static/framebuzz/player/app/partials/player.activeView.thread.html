@@ -34,11 +34,8 @@
                 </div>
                 <img class="img-circle" data-ng-src="{{ reply.user.avatar_url }}" alt="" data-ng-click="getUserProfile(reply.user.username)" />
                 <div class="comment-actions clearfix" data-ng-show="videoInstance.is_authenticated">
-                    <a class="favorite" data-ng-click="postCommentAction(reply, 'favorite')" data-ng-show="videoInstance.is_authenticated" data-ng-class="{ 'active': reply.is_favorite }" data-togglefavorite="">
-                        <i class="fa fa-heart"></i>
-                    </a>
                     <a class="follow" data-ng-click="postCommentAction(reply, 'follow')" data-ng-hide="!videoInstance.is_authenticated || reply.user.username == videoInstance.user.username" data-ng-class="{ 'active': reply.is_following }" data-togglefollow="">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-reply"></i>
                     </a>
                 </div>
             </li>
