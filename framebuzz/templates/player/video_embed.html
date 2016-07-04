@@ -21,16 +21,21 @@
     <meta property="og:type" content="Video" />
     <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.slug %}" />
     <meta property="og:image" content="{{ video.poster_image }}" />
-    <meta property="og:description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
+    <meta property="og:description" content="{{ video.description }}" />
     <meta property="og:site_name" content="FrameBuzz" />
     <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
     <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
     <meta itemprop="image" content="{{ video.poster_image }}" />
     <meta property="og:video" content="{{ video.mp4_url }}" />
     <meta property="og:video:secure_url" content="{{ video.mp4_url }}" />
-    <meta property="og:video:type" content="video/mp4" />
+    <meta property="og:video:type" content="text/html" />
     <meta property="og:video:width" content="580" />
     <meta property="og:video:height" content="360" />
+    <meta property="og:video:url" content="https://framebuzz.com{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}?file={{ mp4_url }}&amp;controls=true">
+    <meta property="og:video:secure_url" content="https://framebuzz.com{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}?file={{ mp4_url }}&amp;controls=true">
+    <meta property="og:video:type" content="application/x-shockwave-flash">
+    <meta property="og:video:width" content="580">
+    <meta property="og:video:height" content="360">
     {% compress css %}
       <link href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
@@ -110,7 +115,7 @@
             SOCK.video_player_features = ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'viewers', 'progress', 'playpause'];
         }
         else {
-            SOCK.video_player_features  = ['title', 'optionsbar', 'volume','muteconvo', 'progress', 'playpause'];
+            SOCK.video_player_features  = ['title', 'optionsbar', 'volume', 'muteconvo', 'progress', 'playpause'];
         }
       </script>
     {% endcompress %}

@@ -35,6 +35,9 @@ def submit_to_tumblr(username, video_id):
     post_id = response.get('id', None)
     if post_id:
         # Add new video to collection. Store post link for later.
+        video.submit_to_tumblr = True
+        video.save()
+        
         uv, created = UserVideo.objects.get_or_create(user=user, video=video)
         uv.tumblr_link = 'http://%s.tumblr.com/post/%s/' % (act.uid, post_id)
         uv.save()
