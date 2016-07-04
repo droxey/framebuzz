@@ -47,7 +47,6 @@ def copy_avatar(request, user, account):
         try:
             content = urllib2.urlopen(url).read()
             name = name_from_url(url)
-            print name
             ava.avatar.save(name, ContentFile(content))
         except IOError:
             # Let's not make a big deal out of this...
