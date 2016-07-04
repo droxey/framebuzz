@@ -28,7 +28,7 @@ def submit_to_tumblr(username, video_id):
     video = Video.objects.get(video_id=video_id)
     create_kwargs = encoded_dict({'date': datetime.datetime.now(),
                                   'format': 'html',
-                                  'caption': video.description,
+                                  'caption': video.title,
                                   'embed': video.tumblr_embed_code()})
     # Parse API response from Tumblr.
     response = client.create_video(blogname=act.uid, **create_kwargs)
