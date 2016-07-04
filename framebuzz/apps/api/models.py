@@ -324,16 +324,16 @@ class Video(caching.base.CachingMixin, models.Model):
                 pass
 
     def embed_code(self):
-        full_url = 'http://frame.bz%s' % self.get_absolute_url()
+        full_url = 'https://framebuzz.com%s' % self.get_absolute_url()
         return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0"'
                          ' height="398" width="640"></iframe>' % full_url)
 
     def wp_embed_code(self):
-        full_url = 'http://frame.bz%s' % self.get_absolute_url()
+        full_url = 'https://framebuzz.com%s' % self.get_absolute_url()
         return mark_safe('[framebuzz src=%s width=580 height=360]' % full_url)
 
     def tumblr_embed_code(self):
-        full_url = 'http://frame.bz%s' % self.get_absolute_url()
+        full_url = 'https://framebuzz.com/v/%/' % self.get_absolute_url()
         return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0"'
                          ' height="360" width="580"></iframe>' % full_url)
 
