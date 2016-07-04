@@ -94,6 +94,8 @@ def check_zencoder_progress(job_id):
 
         for output in output_files:
             url = output.get('url', '')
+            if url.startswith('http://'):
+                url.replace('http://', 'https://')
             if url.endswith('.mp4'):
                 mp4_url = url
             elif url.endswith('.webm'):
@@ -122,6 +124,8 @@ def check_zencoder_progress(job_id):
                 t = Thumbnail()
                 t.url = thumb.get('url')
                 t.video = video
+                if t.url.startswith('http://'):
+                    t.url.replace('http://', 'https://')
                 t.save()
 
         # Add UserVideo entry.
@@ -135,29 +139,6 @@ def check_zencoder_progress(job_id):
                     verb='added video to library',
                     action_object=video,
                     target=user_video)
-
-        # Send email that video has been successfully uploaded.
-        if video.added_by.email:
-            send_templated_mail(template_name='upload-success',
-                                from_email=settings.DEFAULT_FROM_EMAIL,
-                                recipient_list=[video.added_by.email],
-                                context={'username': video.added_by.username,
-                                         'video': video})
-
-        # Notify other users in the recipient list
-        # that the video was successfully uploaded.
-        if video.notify_emails:
-            emails = video.notify_emails.split(',')
-
-            send_templated_mail(
-                template_name='share-email',
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=emails,
-                context={
-                    'shared_by': video.added_by,
-                    'video': video,
-                    'site': Site.objects.get_current()
-                })
 
         # Reset Video job id, so we don't receive duplicate uploads.
         video.job_id = None
