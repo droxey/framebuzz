@@ -5,7 +5,7 @@
     {% csrf_token %}
     <input type="hidden" name="next" value="{% url 'fbz-tumblr-home' %}">
     <p class="login-info">
-      <span class="as">Logged in as: </span><span class="username">{{ request.user.username }}</span>
+      <span class="as">Logged in as: </span><a class="username" href="http://{{ request.user.username }}.tumblr.com" target="_blank" rel="nofollow">{{ request.user.username }}</a>
       <img class="avatar" src="{% avatar_url request.user 32 %}" alt="" height="16" width="16">
       <input type="submit" value="Log out">
     </p>
