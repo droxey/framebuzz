@@ -26,6 +26,11 @@
     <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
     <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
     <meta itemprop="image" content="{{ video.poster_image }}" />
+    <meta property="og:video" content="{{ video.mp4_url }}" />
+    <meta property="og:video:secure_url" content="{{ video.mp4_url }}" />
+    <meta property="og:video:type" content="video/mp4" />
+    <meta property="og:video:width" content="580" />
+    <meta property="og:video:height" content="360" />
     {% compress css %}
       <link href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
