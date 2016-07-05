@@ -85,6 +85,7 @@
 
         // Set up our global SOCK variable.
         var SOCK = {
+          debug: '{{ debug|lower }}' === 'true',
           host: location.hostname,
           port: {{ socket_port }},
           channel: '{{ socket_channel }}',

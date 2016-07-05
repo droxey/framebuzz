@@ -50,7 +50,7 @@ angular.module('framebuzz.services', [])
         var createSocket = function () {
             var reconnect = true,
                 socket = null,
-                debug = SOCK.host.indexOf('localhost') !== -1,
+                debug = SOCK.debug,
                 scheme = debug ? 'http://' : 'https://',
                 port = SOCK.port,
                 url = debug ? scheme + SOCK.host + ':' + port + '/' + SOCK.channel :

@@ -62,6 +62,7 @@ def video_embed(request, slug, convo_slug=None, control_sync=False):
             is_synchronized = private_session.is_synchronized
 
         return render_to_response('player/video_embed.html', {
+            'debug': settings.DEBUG,
             'close_window': request.GET.get('close', None),
             'start_private_viewing': start_private_viewing,
             'private_viewing_enabled': private_viewing_enabled,
