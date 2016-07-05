@@ -123,12 +123,12 @@ angular.module('framebuzz.directives', [])
                         var button = $(this);
                         if (button.hasClass('mejs-mute')) {
                             button.removeClass('mejs-mute').addClass('mejs-unmute');
-                            button.html('<i class="fa fa-comment"></i>Show Chat');
+                            button.html('<i class="fa fa-comment"></i>Show Conversation');
                             broadcaster.prepForBroadcast({ broadcastType: 'player_muteconvo' });
                         }
                         else {
                             button.removeClass('mejs-unmute').addClass('mejs-mute');
-                            button.html('<i class="fa fa-comment"></i>Mute Chat');
+                            button.html('<i class="fa fa-comment"></i>Mute Conversation');
                             broadcaster.prepForBroadcast({ broadcastType: 'player_unmuteconvo' });
                         }
                     });
