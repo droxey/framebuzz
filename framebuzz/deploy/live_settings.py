@@ -1,3 +1,4 @@
+import raven
 LOCAL_SETTINGS = True
 from settings import *
 
@@ -29,6 +30,7 @@ SHORTEN_FULL_BASE_URL = 'http://framebuzz.com/s/'
 
 RAVEN_CONFIG = {
     'dsn': "%(sentry_dsn)s",
+    'release': raven.fetch_git_sha(os.path.join(os.path.dirname( __file__ ), '..')),
 }
 
 RAVENJS_DSN = "%(ravenjs_dsn)s"
