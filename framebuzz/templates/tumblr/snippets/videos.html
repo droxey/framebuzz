@@ -18,24 +18,23 @@
                </div>
               {% endif %}
             <div class="header clearfix">
-              <strong class="title pull-left">{{ video.title|title|truncatechars:"25" }}</strong>
+              <strong class="title pull-left">{{ video.title|title }}</strong>
               <strong class="duration pull-right">
                   {% if not video.processing %}
                      {{ video.timeInHMS }}
                   {% endif %}
                </strong>
             </div>
+            <img class="cover" src="{% if video.processing %}{% static 'framebuzz/tumblr/img/placeholder.jpg' %}{% else %}{{ video.default_thumbnail }}{% endif %}" height="140" width="211">
             {% if video.processing %}
                <div class="process-message">
                   <strong class="title">Processing Upload</strong>
                   <i class="fa fa-file-video-o fa-3x fa-fw" aria-hidden="true"></i>
                   <strong>Check back soon!</strong>
                </div>
-            {% else %}
-               <img class="cover" src="{{ video.default_thumbnail }}" height="140" width="211">
             {% endif %}
             {% if video.description %}
-                <p class="description">{{ video.description|truncatechars:"105" }}</p>
+                <p class="description">{{ video.formatted_description }}</p>
             {% endif %}
           </li>
       {% endfor %}
