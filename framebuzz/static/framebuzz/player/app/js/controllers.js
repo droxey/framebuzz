@@ -9,12 +9,12 @@ angular.module('framebuzz.controllers', [])
                 $scope.videoInstance = {
                   is_authenticated: SOCK.is_authenticated,
                   video: {
-                    time_hms: '00:00'
+                    time_hms: '0:00'
                   }
                 };
                 $scope.rootPath = SOCK.root_path;
                 $scope.currentTime = 0;
-                $scope.currentTimeHMS = '00:00';
+                $scope.currentTimeHMS = '0:00';
                 $scope.newThread = {};
                 $scope.sessionKey = SOCK.private_session_key;
                 $scope.newReply = {};

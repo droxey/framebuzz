@@ -572,7 +572,7 @@ object, embed, video, iframe {
                             button {
                                 outline: 0 none;
                                 height: 20px;
-                                margin: 1px;
+                                margin: 2px 1px 1px 1px;
                                 width: 20px;
 
                                 i {
@@ -753,7 +753,7 @@ object, embed, video, iframe {
                         font-weight: 300;
                         letter-spacing: -0.02em;
                         line-height: 30px;
-                        margin-top: 1px;
+                        margin-top: 2px;
                         padding: 0;
                         text-align: left;
                         text-shadow: none;
@@ -763,12 +763,13 @@ object, embed, video, iframe {
                         em {
                             font-size: 14px;
                             font-weight: 700;
+                            padding-right: 1px;
 
                             &.current {
                                 margin-left: 6px;
                                 font-size: 13px;
                                 display: inline-block;
-                                width: 32px;
+                                width: 27px;
                             }
                         }
 
@@ -873,7 +874,6 @@ object, embed, video, iframe {
 
     div.active-header {
         background: transparent;
-        border-bottom: 1px solid rgba(81, 81, 81, .32);
         height: 43px;
         position: absolute;
         top: 0;
@@ -888,7 +888,6 @@ object, embed, video, iframe {
 
             &.fade-out-controls {
                 opacity: 0;
-                //@include single-transition(opacity .1s ease-in-out);
             }
 
             &.header-visible {
@@ -898,9 +897,7 @@ object, embed, video, iframe {
         }
 
         &.header-visible {
-            background: rgba(0, 0, 0, .70);
             opacity: 1;
-            //@include single-transition(background .1s ease-in-out);
         }
 
         a.logo {
@@ -1071,6 +1068,10 @@ object, embed, video, iframe {
                     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#00000000',GradientType=0 ); /* IE6-8 */
                     background-size: 100% 400px;
                     background-attachment: fixed;
+
+                    &.has-comments {
+                         border-top: 1px solid rgba(81, 81, 81, .32);
+                    }
 
                     @media screen and (max-width: 581px) {
 
