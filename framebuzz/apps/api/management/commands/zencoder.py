@@ -4,10 +4,15 @@ from optparse import make_option
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
+HELP_TEXT = """
+    Actively listens for Zencoder updates on your local development machine
+    using the machine using the zencoder_fetcher gem.\n
+    For more information, visit:
+    https://app.zencoder.com/docs/guides/advanced-integration/getting-zencoder-notifications-while-developing-locally
+    """
 
 class Command(BaseCommand):
-    help = ("Actively listens for Zencoder updates using the zencoder_fetcher \
-            gem.")
+    help = HELP_TEXT
     option_list = BaseCommand.option_list + (
         make_option(
             '--url',
