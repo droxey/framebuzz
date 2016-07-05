@@ -8,6 +8,12 @@ class TumblrAccount(ProviderAccount):
         return 'http://%s.tumblr.com/' \
             % self.account.extra_data.get('name')
 
+    def get_avatar_url(self):
+        name = self.account.extra_data.get('name')
+        # ask for a 512x512 pixel image. We might get smaller but
+        # image will always be highest res possible and square.
+        return 'https://api.tumblr.com/v2/blog/%s/avatar/512' % name
+
     def to_str(self):
         dflt = super(TumblrAccount, self).to_str()
         name = self.account.extra_data.get('name', dflt)

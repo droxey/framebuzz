@@ -12,15 +12,7 @@
         <div class="comment-actions clearfix">
             <div class="pull-left">
                 <a class="reply" data-ng-show="videoInstance.is_authenticated" class="reply" data-ng-click="initReply(thread)" data-ng-class="{ 'active': replyThread.id == thread.id }">
-                    <i class="fa fa-comments"></i>
-                </a>
-                <a class="favorite" data-ng-click="postCommentAction(thread, 'favorite')" data-ng-show="videoInstance.is_authenticated" data-ng-class="{ 'active': thread.is_favorite }" data-togglefavorite="">
-                    <i class="fa fa-heart"></i>
-                </a>
-                <a class="follow" data-ng-click="postCommentAction(thread, 'follow')" data-ng-hide="!videoInstance.is_authenticated || thread.user.username == videoInstance.user.username" data-ng-class="{ 'active': thread.is_following }" data-togglefollow="">
-                    <i class="fa fa-user"></i>
-                    <i class="fa fa-plus" data-ng-hide="thread.is_following"></i>
-                    <i class="fa fa-minus" data-ng-show="thread.is_following"></i>
+                    <i class="fa fa-reply"></i>
                 </a>
             </div>
             <div class="pull-right">
