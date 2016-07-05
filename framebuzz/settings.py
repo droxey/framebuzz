@@ -481,12 +481,6 @@ SHARE_COUNT_URLS = {
     'twitter': 'http://cdn.api.twitter.com/1/urls/count.json?url=%s&callback=?',
 }
 
-#python-flowdock
-FLOWDOCK_API_KEY='fa5d2a17de214a1067d492d6797dbecd'
-FLOWDOCK_APP_NAME='framebuzz'
-FLOWDOCK_PROJECT='Main'
-
-
 #
 # DEPLOY SETTINGS #
 #
