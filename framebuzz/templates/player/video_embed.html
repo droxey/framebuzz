@@ -49,17 +49,13 @@
       <link href="{% static 'framebuzz/player/app/css/jquery.datetimepicker.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/social-buttons.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <!--[if IE]>
-          <link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <![endif]-->
-      <!--[if gte IE 9]>
-        <style type="text/css">
-          ul.comment-stream { filter: none; }
-        </style>
-      <![endif]-->
+      <!--[if IE]><link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css"><![endif]-->
+      <!--[if gte IE 9]><style type="text/css">ul.comment-stream { filter: none; }</style><![endif]-->
     {% endcompress %}
-    <script src="//cdn.ravenjs.com/2.3.0/raven.min.js"></script>
-    <script>Raven.config('{% sentry_public_dsn %}').install()</script>
+    {% if ravenjs_dsn %}
+        <script src="//cdn.ravenjs.com/2.3.0/raven.min.js"></script>
+        <script>Raven.config('{% sentry_public_dsn %}').install();</script>
+    {% endif %}
     {% compress js %}
       <script>
         (function(d) {
@@ -95,6 +91,7 @@
           login_url: "{% url 'video-login' video.slug %}",
           logout_url: "{% url 'video-logout' video.slug %}",
           signup_url: "{% url 'video-signup' video.slug %}",
+          viewing_on_fbz: '{{ viewing_on_fbz|lower }}' === 'true',
           is_authenticated: is_authenticated,
           username: is_authenticated ? '{{ request.user.username }}' : '',
           video_id: '{{ video.slug }}',
@@ -104,20 +101,13 @@
           login_urls: {
             tumblr: "{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}"
           },
-          ravenjs_dsn: '{{ ravenjs_dsn }}',
+          ravenjs_dsn: '{% if ravenjs_dsn %}{{ ravenjs_dsn }}{% endif %}',
           start_private_viewing: start_private_viewing,            // Used when video loaded from email invite.
           private_viewing_enabled: private_viewing_enabled,        // Only dashboard users have access.
           is_hosting_viewing: is_hosting_viewing,
           is_synchronized: is_synchronized,
-          video_player_features: []
+          video_player_features: ['title', 'optionsbar', 'volume', 'muteconvo', 'progress', 'playpause']
         };
-
-        if (is_synchronized) {
-            SOCK.video_player_features = ['title', 'optionsbar', 'volume', 'share', 'addtolibrary', 'muteconvo', 'privateconvo', 'viewers', 'progress', 'playpause'];
-        }
-        else {
-            SOCK.video_player_features  = ['title', 'optionsbar', 'volume', 'muteconvo', 'progress', 'playpause'];
-        }
       </script>
     {% endcompress %}
     <!--[if lt IE 9]>

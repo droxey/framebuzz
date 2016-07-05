@@ -12,6 +12,7 @@ angular.module('framebuzz.controllers', [])
                     time_hms: '0:00'
                   }
                 };
+                $scope.viewingOnFrameBuzzSite = SOCK.viewing_on_fbz;
                 $scope.rootPath = SOCK.root_path;
                 $scope.currentTime = 0;
                 $scope.currentTimeHMS = '0:00';

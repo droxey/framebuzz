@@ -103,7 +103,7 @@ angular.module('framebuzz.directives', [])
                         window.setTimeout(function() {
                             $('.mejs-video').removeClass('fade-out-controls');
                             $('.mejs-video').removeClass('show-controls');
-                        }, 150);
+                        }, 0);
                     };
 
                     $('.mejs-mediaelement').mouseenter(function(e) {

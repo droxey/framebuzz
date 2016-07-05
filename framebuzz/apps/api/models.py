@@ -49,6 +49,10 @@ PRIORITY_CODES = (
     (3, 'Low'),
 )
 
+ITAG_MP4 = 18
+ITAG_WEBM = 43
+YOUTUBE_VID_ID_LENGTH = 12
+
 video_storage = S3BotoStorage(
     acl='public',
     bucket='framebuzz-filepicker',
@@ -237,6 +241,22 @@ class Video(caching.base.CachingMixin, models.Model):
             self.video_id, itag, exp, settings.YTAPI_USERNAME, token)
         return alt_url
 
+    def get_ytapi_url(self, itag):
+        ''' Returns the YTApi video. '''
+        return 'http://www.ytapi.com/api/%s/direct/%s/' % str(itag)
+
+    def get_video_url(self, itag=None):
+        ''' Returns the video url based on itag. If unable to find an uploaded
+            file with that itag, returns a YouTube URL. '''
+        if itag == ITAG_MP4:
+            if self.mp4_url:
+                return self.mp4_url
+        elif itag == ITAG_WEBM:
+            if self.webm_url:
+                return self.webm_url
+        else:
+            return self.get_ytapi_url(itag)
+
     def get_absolute_url(self):
         return reverse('video-embed', kwargs={'slug': str(self.slug)})
 
@@ -245,12 +265,16 @@ class Video(caching.base.CachingMixin, models.Model):
 
     @property
     def found_by(self):
-        found_by = UserVideo.objects.filter(video=self).order_by('added_on')[:1]
-        if len(found_by) > 0:
-            return found_by[0].user
+        found = UserVideo.objects.filter(video=self).order_by('added_on')[:1]
+        if len(found) > 0:
+            return found[0].user
         return None
 
     @property
+    def is_youtube(self):
+        ''' Helper to determine if this video was linked from YouTube. '''
+        return self.video_id and len(self.video_id) < YOUTUBE_VID_ID_LENGTH
+
     def password_required(self):
         if self.password:
             return len(self.password) > 0
@@ -258,8 +282,9 @@ class Video(caching.base.CachingMixin, models.Model):
 
     def default_thumbnail(self):
         try:
-            if self.video_id and len(self.video_id) < 12:
-                return 'https://i1.ytimg.com/vi/%s/mqdefault.jpg' % self.video_id
+            if self.is_youtube:
+                return 'https://i1.ytimg.com/vi/%s/mqdefault.jpg' \
+                    % self.video_id
             else:
                 return self.thumbnail_set.all()[1].url
         except:
@@ -272,12 +297,7 @@ class Video(caching.base.CachingMixin, models.Model):
             pass
 
     def poster_image(self):
-        if self.video_id and len(self.video_id) < 12:
-            if self.video_id == 'DEL7-ftmrxI' or self.video_id == 'Tqvb0NUJem8':
-                if self.video_id == 'DEL7-ftmrxI':
-                    return '/static/framebuzz/marketing/img/poster1.jpg'
-                else:
-                    return '/static/framebuzz/marketing/img/poster2.jpg'
+        if self.is_youtube():
             return 'http://i3.ytimg.com/vi/%s/0.jpg' % self.video_id
         else:
             try:
