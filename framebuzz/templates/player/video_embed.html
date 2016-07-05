@@ -81,6 +81,7 @@
 
         // Set up our global SOCK variable.
         var SOCK = {
+          poster_image: '{{ video.default_thumbnail }}',
           debug: '{{ debug|lower }}' === 'true',
           host: location.hostname,
           port: {{ socket_port }},
@@ -106,7 +107,7 @@
           private_viewing_enabled: private_viewing_enabled,        // Only dashboard users have access.
           is_hosting_viewing: is_hosting_viewing,
           is_synchronized: is_synchronized,
-          video_player_features: ['title', 'optionsbar', 'volume', 'muteconvo', 'progress', 'playpause']
+          video_player_features: ['title', 'volume', 'muteconvo', 'progress', 'playpause']
         };
       </script>
     {% endcompress %}
@@ -119,7 +120,7 @@
   <body class="ng-cloak">
     <div id="player-container" class="container">
       <div id="player-layer" class="layer">
-        <video data-media-element="" class="span12" id="video-element" preload="true" poster="{% static 'framebuzz/player/app/img/poster-transparent.png' %}" style="height: 100%; width: 100%; background: url('{{ video.poster_image }}') no-repeat scroll center center / cover black;">
+        <video data-media-element="" class="span12" id="video-element" preload="true" poster="{% static 'framebuzz/player/app/img/poster-transparent.png' %}" style="height: 100%; width: 100%; background: url('{{ video.default_thumbnail }}') no-repeat scroll center center / cover black;">
           <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
           <source type="video/webm" src="{{ webm_url }}" />
           <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
@@ -129,7 +130,7 @@
               <param name="movie" value="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}" />
               <param name="flashvars" value="controls=true&amp;file={{ mp4_url }}" />
               <!-- Image as a last resort -->
-              <img src="{{ video.poster_image }}" height="385" width="640" title="No video playback capabilities" />
+              <img src="{{ video.default_thumbnail }}" height="385" width="640" title="No video playback capabilities" />
           </object>
         </video>
         <div id="heatmap-and-post" data-ui-view=""></div>

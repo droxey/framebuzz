@@ -22,6 +22,7 @@ angular.module('framebuzz.directives', [])
     .directive('mediaElement', ['broadcaster', '$state', '$rootScope', 'safeApply', function(broadcaster, $state, $rootScope, safeApply) {
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
+                poster: SOCK.poster_image,
                 enablePluginDebug: true,
                 features: SOCK.video_player_features,
                 pluginPath: SOCK.root_path + 'swf/',
