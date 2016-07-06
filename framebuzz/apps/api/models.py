@@ -255,7 +255,8 @@ class Video(caching.base.CachingMixin, models.Model):
         elif itag == ITAG_WEBM:
             if self.webm_url:
                 return self.webm_url
-        return self.get_ytapi_url(itag)
+        else:
+            return self.get_ytapi_url(itag)
 
     def get_absolute_url(self):
         return reverse('video-embed', kwargs={'slug': str(self.slug)})
