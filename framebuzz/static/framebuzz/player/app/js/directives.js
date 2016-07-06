@@ -36,6 +36,7 @@ angular.module('framebuzz.directives', [])
                 enablePluginSmoothing: true,
                 autosizeProgress: false,
                 enablePseudoStreaming: true,
+                flashScriptAccess: 'always',
                 clickToPlayPause: !SOCK.is_synchronized || SOCK.is_hosting_viewing,
                 success: function(media) {
                     //  =====
