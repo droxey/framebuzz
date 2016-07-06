@@ -95,7 +95,7 @@ def check_zencoder_progress(job_id):
         for output in output_files:
             url = output.get('url', '')
             if url.startswith('http://'):
-                url.replace('http://', 'https://')
+                url = url.replace('http://', 'https://')
             if url.endswith('.mp4'):
                 mp4_url = url
             elif url.endswith('.webm'):
@@ -125,7 +125,7 @@ def check_zencoder_progress(job_id):
                 t.url = thumb.get('url')
                 t.video = video
                 if t.url.startswith('http://'):
-                    t.url.replace('http://', 'https://')
+                    t.url = t.url.replace('http://', 'https://')
                 t.save()
 
         # Add UserVideo entry.
