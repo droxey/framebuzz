@@ -263,6 +263,8 @@ angular.module('framebuzz.controllers', [])
 
                         $scope.player.pause();
                         $state.transitionTo('player.loginView');
+
+                        $('#video-title').addClass('full-width');
                     }
                 };
 
@@ -306,6 +308,8 @@ angular.module('framebuzz.controllers', [])
                     $scope.newThread = {};
                     $scope.formSubmitted = false;
                     safeApply($scope);
+
+                    $('#video-title').removeClass('full-width');
 
                     $state.transitionTo('player.blendedView');
                 };
