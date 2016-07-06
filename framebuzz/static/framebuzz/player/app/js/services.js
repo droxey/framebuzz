@@ -110,8 +110,6 @@ angular.module('framebuzz.services', [])
                 self.socket_handlers.onmessage = callback;
             },
             send_json: function(data) {
-                $log.info('SENDING JSON:');
-                $log.info(JSON.stringify(data));
                 socket.send(JSON.stringify(data));
                 self.socket_handlers.onsent();
             },

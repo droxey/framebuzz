@@ -751,7 +751,6 @@ angular.module('framebuzz.controllers', [])
                 // --
 
                 socket.onopen(function() {
-                    $log.info('SOCKET OPEN');
                     socket.send_json({
                         eventType: eventTypes.initVideo,
                         channel: SOCK.video_channel,
@@ -922,7 +921,6 @@ angular.module('framebuzz.controllers', [])
                 socket.onclose(function() {
                     // Note: This may be useful in the future,
                     // but will remain unimplemented until required.
-                    $log.info('SOCKET CLOSED');
                 });
             }
         ]
