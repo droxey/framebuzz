@@ -26,7 +26,9 @@ def submit_to_tumblr(username, video_id):
         tumblr_user.token_secret)
     # Send video data to Tumblr on behalf of the submitting user.
     v = Video.objects.get(video_id=video_id)
-    caption = '<b>%s</b><br><br>%s' % (v.title, v.formatted_description)
+    caption = '<b>%s</b><br>%s<br><i>Posted with ' \
+        '<a href="http://framebuzz.com/tumblr/" target="_blank">FrameBuzz</a>'\
+        '</i>' % (v.title, v.formatted_description)
     create_kwargs = encoded_dict({'date': datetime.datetime.now(),
                                   'format': 'html',
                                   'caption': caption,
