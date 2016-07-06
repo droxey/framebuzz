@@ -8,10 +8,8 @@ $(function() {
     // Set up auto-copy for video embed codes.
     var clipboard = new Clipboard('a.copy-embed', {
         text: function(trigger) {
-            console.log('happened');
             var element = $(trigger);
             var textarea = element.next('textarea');
-            console.log(textarea);
             return textarea.val();
         }
     });

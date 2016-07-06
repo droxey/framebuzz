@@ -4,13 +4,18 @@
 
 angular.module('framebuzz.controllers', [])
   .controller('VideoPlayerCtrl',
-        ['$rootScope', '$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 'notificationFactory', 'localStorageService',
-            function($rootScope, $scope, $state, $filter, $http, socket, broadcaster, safeApply, notificationFactory, localStorageService) {
+        ['$rootScope', '$scope', '$state', '$filter', '$http', 'socket', 'broadcaster', 'safeApply', 'notificationFactory', 'localStorageService', '$log',
+            function($rootScope, $scope, $state, $filter, $http, socket, broadcaster, safeApply, notificationFactory, localStorageService, $log) {
+                $scope.videoInstance = {
+                  is_authenticated: SOCK.is_authenticated,
+                  video: {
+                    time_hms: '0:00'
+                  }
+                };
+                $scope.viewingOnFrameBuzzSite = SOCK.viewing_on_fbz;
                 $scope.rootPath = SOCK.root_path;
-                $scope.videoInstance = {};
-                $scope.videoInstance.is_authenticated = SOCK.is_authenticated;
                 $scope.currentTime = 0;
-                $scope.currentTimeHMS = '00:00';
+                $scope.currentTimeHMS = '0:00';
                 $scope.newThread = {};
                 $scope.sessionKey = SOCK.private_session_key;
                 $scope.newReply = {};
@@ -896,16 +901,14 @@ angular.module('framebuzz.controllers', [])
                         }
                     }
                     else if (jsonData.eventType == eventTypes.joinVideo) {
-                        console.log('join video');
-                        console.log(jsonData.data);
+                        $log.info('Video joined.');
                     }
                     else if (jsonData.eventType == eventTypes.leaveVideo) {
-                        console.log('leave video');
-                        console.log(jsonData.data);
+                        $log.info('Video left.');
                     }
                     else {
-                        console.log('Socket received unhandled message.');
-                        console.log(jsonData);
+                        $log.error('Socket received unhandled message.');
+                        $log.error(jsonData);
                     }
                 });
 

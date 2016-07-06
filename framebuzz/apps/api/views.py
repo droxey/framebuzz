@@ -21,6 +21,10 @@ from framebuzz.apps.api.utils import errors_to_json
 from framebuzz.apps.api.models import PrivateSession
 
 
+ITAG_MP4 = 18
+ITAG_WEBM = 43
+
+
 def video_test(request, slug):
     video, created = get_or_create_video(slug)
 
@@ -32,54 +36,58 @@ def video_test(request, slug):
 @xframe_options_exempt
 def video_embed(request, slug, convo_slug=None, control_sync=False):
     try:
-        video, created = get_or_create_video(slug)
-        next_url = '%s?close=true' % reverse('video-embed', args=(video.slug,))
-
-        if video.mp4_url:
-            mp4_url = video.mp4_url
-        else:
-            mp4_url = 'http://www.ytapi.com/api/%s/direct/18/' % video.video_id
-            #mp4_url = video.get_streaming_url(18)
-
-        if video.webm_url:
-            webm_url = video.webm_url
-        else:
-            webm_url = 'http://www.ytapi.com/api/%s/direct/43/' % video.video_id
-            #webm_url = video.get_streaming_url(43)
-
-        if request.user.is_authenticated():
-            action.send(request.user, verb='viewed video', action_object=video)
-
+        v, created = get_or_create_video(slug)
+        next_url = '%s?close=true' % reverse('video-embed', args=(v.slug,))
+        user_channel = '/framebuzz/session/%s' % request.session.session_key
         start_private_viewing = convo_slug is None and control_sync is True
-        private_viewing_enabled = request.user.is_authenticated() and request.user.get_profile().dashboard_enabled and control_sync is False
+        private_viewing_enabled = request.user.is_authenticated() \
+            and request.user.get_profile().dashboard_enabled \
+            and control_sync is False
         is_hosting_viewing = False
         is_synchronized = False
 
+        # Having a logout button does funky things when we're on our
+        # own site. Hide it if we're coming from framebuzz.com.
+        ref = request.META.get('HTTP_REFERER', None)
+        viewing_on_fbz = ref and 'framebuzz.' in ref
+
+        # Get uploaded video url, or youtube url, alternately.
+        mp4_url = v.get_video_url(ITAG_MP4)
+        webm_url = v.get_video_url(ITAG_WEBM)
+
+        # Track that the user viewed this video.
+        if request.user.is_authenticated():
+            action.send(request.user, verb='viewed video', action_object=v)
+
+        # Handle private conversations and syncronized sessions.
         if convo_slug:
             private_session = PrivateSession.objects.get(slug=convo_slug)
             if private_session.is_synchronized:
-                is_hosting_viewing = request.user.is_authenticated() and private_session.owner.pk == request.user.pk
+                is_hosting_viewing = request.user.is_authenticated() \
+                    and private_session.owner.pk == request.user.pk
             is_synchronized = private_session.is_synchronized
-
         return render_to_response('player/video_embed.html', {
+            'debug': settings.DEBUG,
+            'viewing_on_fbz': viewing_on_fbz,
             'close_window': request.GET.get('close', None),
             'start_private_viewing': start_private_viewing,
             'private_viewing_enabled': private_viewing_enabled,
             'is_hosting_viewing': is_hosting_viewing,
             'is_synchronized': is_synchronized,
-            'video': video,
+            'video': v,
             'socket_port': settings.SOCKJS_PORT,
             'socket_channel': settings.SOCKJS_CHANNEL,
-            'user_channel': '/framebuzz/session/%s' % request.session.session_key,
+            'user_channel': user_channel,
             'is_authenticated': request.user.is_authenticated(),
             'next_url': next_url,
             'mp4_url': mp4_url,
             'webm_url': webm_url,
             'convo_slug': convo_slug,
-            'ravenjs_dsn': settings.RAVENJS_DSN or ''
+            'ravenjs_dsn': settings.RAVENJS_DSN or None
         }, context_instance=RequestContext(request))
     except TypeError:
-        return HttpResponseRedirect(reverse('video-embed-error', args=(video.slug,)))
+        return HttpResponseRedirect(reverse('video-embed-error',
+                                            args=(v.slug,)))
 
 
 @xframe_options_exempt

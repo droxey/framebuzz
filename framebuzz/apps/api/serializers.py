@@ -18,13 +18,15 @@ class VideoSerializer(serializers.ModelSerializer):
     embed_code = serializers.SerializerMethodField('get_embed_code')
     embed_url = serializers.SerializerMethodField('get_embed_url')
     share_url = serializers.SerializerMethodField('get_share_url')
-    password_required = serializers.SerializerMethodField('get_password_required')
+    password_required = serializers.SerializerMethodField('get_password')
+    tumblr_link = serializers.SerializerMethodField('get_tumblr_link')
 
     class Meta:
         model = Video
         fields = ('id', 'video_id', 'title', 'duration',
                   'time_hms', 'embed_code', 'embed_url', 'share_url',
-                  'mp4_url', 'webm_url', 'slug', 'password_required',)
+                  'mp4_url', 'webm_url', 'slug', 'password_required',
+                  'submit_to_tumblr', 'tumblr_link',)
 
     def get_channel(self, obj):
         return '/framebuzz/video/%s' % obj.slug
@@ -41,8 +43,15 @@ class VideoSerializer(serializers.ModelSerializer):
     def get_share_url(self, obj):
         return obj.get_share_url()
 
-    def get_password_required(self, obj):
+    def get_password(self, obj):
         return obj.password_required
+
+    def get_tumblr_link(self, obj):
+        try:
+            uv = UserVideo.objects.get(video=obj, user=obj.found_by)
+            return uv.tumblr_link or ''
+        except:
+            return ''
 
 
 class WordPressVideoSerializer(serializers.ModelSerializer):
@@ -69,12 +78,13 @@ class UserSerializer(serializers.ModelSerializer):
     is_online = serializers.SerializerMethodField('get_is_online')
     channel = serializers.SerializerMethodField('get_channel')
     last_online_on = serializers.SerializerMethodField('get_last_online_on')
+    tumblr_url = serializers.SerializerMethodField('get_tumblr_url')
 
     class Meta:
         model = User
         fields = ('id', 'username', 'avatar_url', 'display_name',
                   'video_in_library', 'profile_url', 'is_online', 'channel',
-                  'last_online_on',)
+                  'last_online_on', 'tumblr_url',)
 
     def get_profile_url(self, obj):
         return obj.get_profile().get_absolute_url()
@@ -109,6 +119,9 @@ class UserSerializer(serializers.ModelSerializer):
         if obj.get_profile().last_online_on:
             local_date = timezone.localtime(obj.get_profile().last_online_on)
             return dateformat.format(local_date, 'n/j/y h:i A')
+
+    def get_tumblr_url(self, obj):
+        return 'http://%s.tumblr.com/' % obj.username
 
 
 class BaseCommentSerializer(serializers.ModelSerializer):

@@ -65,6 +65,9 @@
       </div>
       <div id="example" class="row">
           <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/video-splash@2x.png' %}" height="451" width="736">
+          <div id="embed-row">
+            <iframe src="https://framebuzz.com/v/s43M5HbgQfVYTqo7/" scrolling="no" frameBorder="0" height="307" width="580" class="fbzplayer-small center-block"></iframe>
+          </div>
       </div>
       <div id="uploader" class="row">
         {% include "tumblr/snippets/upload.html" %}
@@ -79,8 +82,9 @@
           </p>
       </div>
     </div>
+    <footer class="text-center">&copy; {% now "Y" %}, FrameBuzz. Patent 14/067,585.</footer>
     <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false">
-        <iframe src="" scrolling="no" frameBorder="0" height="445" width="700" class="fbzplayer center-block"></iframe>
+        <iframe src="" scrolling="no" frameBorder="0" height="430" width="700" class="fbzplayer center-block"></iframe>
     </div>
     {% compress js %}
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>

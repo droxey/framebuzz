@@ -25,19 +25,19 @@ def submit_to_tumblr(username, video_id):
         tumblr_user.token,
         tumblr_user.token_secret)
     # Send video data to Tumblr on behalf of the submitting user.
-    video = Video.objects.get(video_id=video_id)
+    v = Video.objects.get(video_id=video_id)
+    caption = '<b>%s</b><br><br>%s' % (v.title, v.formatted_description())
     create_kwargs = encoded_dict({'date': datetime.datetime.now(),
                                   'format': 'html',
-                                  'caption': video.title,
-                                  'embed': video.tumblr_embed_code()})
+                                  'caption': caption,
+                                  'embed': v.tumblr_embed_code()})
     # Parse API response from Tumblr.
     response = client.create_video(blogname=act.uid, **create_kwargs)
     post_id = response.get('id', None)
     if post_id:
         # Add new video to collection. Store post link for later.
-        video.submit_to_tumblr = True
-        video.save()
-        
-        uv, created = UserVideo.objects.get_or_create(user=user, video=video)
+        v.submit_to_tumblr = True
+        v.save()
+        uv, created = UserVideo.objects.get_or_create(user=user, video=v)
         uv.tumblr_link = 'http://%s.tumblr.com/post/%s/' % (act.uid, post_id)
         uv.save()
