@@ -173,16 +173,6 @@ def initialize_video_player(context):
         profile.channel = video_channel
         profile.save()
 
-        # Send a message to the channel that the user joined.
-        notification = {
-            'action': 'joined',
-            'username': user.username,
-            'channel': video_channel
-        }
-        message = construct_message('FB_JOIN_VIDEO', video_channel, notification)
-        _send_to_channel.delay(channel=video_channel, message=message)
-
-
     if session_key:
         session = PrivateSession.objects.get(slug=session_key)
         data['is_synchronized'] = session.is_synchronized

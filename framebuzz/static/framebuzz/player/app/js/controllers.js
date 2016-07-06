@@ -905,9 +905,6 @@ angular.module('framebuzz.controllers', [])
                             }
                         }
                     }
-                    else if (jsonData.eventType == eventTypes.joinVideo) {
-                        $log.info('Video joined.');
-                    }
                     else if (jsonData.eventType == eventTypes.leaveVideo) {
                         $log.info('Video left.');
                     }
@@ -920,8 +917,6 @@ angular.module('framebuzz.controllers', [])
                 socket.onsent(function(e) {
                     // Note: This may be useful in the future,
                     // but will remain unimplemented until required.
-                    $log.info('SOCKET SENT:');
-                    $log.info(e);
                 });
 
                 socket.onclose(function() {
