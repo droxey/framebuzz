@@ -316,8 +316,9 @@ class Video(caching.base.CachingMixin, models.Model):
 
     def tumblr_embed_code(self):
         full_url = 'https://framebuzz.com%s' % self.get_absolute_url()
-        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0"'
-                         ' height="360" width="580"></iframe>' % full_url)
+        return mark_safe('<div style="width: 580px; height: 360px; margin: 0 auto;">'
+                         '<iframe src="%s" scrolling="no" frameBorder="0" '
+                         'height="360" width="580"></iframe></div>' % full_url)
 
     def heatmap(self, session_key=None):
         rank_per_block = list()
