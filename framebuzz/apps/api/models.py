@@ -243,7 +243,8 @@ class Video(caching.base.CachingMixin, models.Model):
 
     def get_ytapi_url(self, itag):
         ''' Returns the YTApi video. '''
-        return 'http://www.ytapi.com/api/%s/direct/%s/' % str(itag)
+        return 'http://www.ytapi.com/api/%s/direct/%s/' \
+            % str(self.video_id, itag)
 
     def get_video_url(self, itag=None):
         ''' Returns the video url based on itag. If unable to find an uploaded
