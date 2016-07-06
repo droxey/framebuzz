@@ -920,9 +920,8 @@ angular.module('framebuzz.controllers', [])
                 socket.onsent(function(e) {
                     // Note: This may be useful in the future,
                     // but will remain unimplemented until required.
-                    var jsonData = JSON.parse(e.data);
                     $log.info('SOCKET SENT:');
-                    $log.info(jsonData);
+                    $log.info(e);
                 });
 
                 socket.onclose(function() {
