@@ -315,8 +315,13 @@ class Video(caching.base.CachingMixin, models.Model):
         return mark_safe('[framebuzz src=%s width=580 height=360]' % full_url)
 
     def tumblr_embed_code(self):
+        # Note: Keen eyes may notice duplicate 'height' and 'width' tags
+        # declared in the style attribute. This is intentional - Tumblr
+        # templates modify the first value of either CSS property it can find,
+        # so if we want to force a static size, we have to declare it twice.
         full_url = 'https://framebuzz.com%s' % self.get_absolute_url()
-        return mark_safe('<div style="width: 580px; height: 360px; margin: 0 auto;">'
+        return mark_safe('<div style="width: 580px; width: 580px; '
+                         'height: 360px; height: 360px; overflow: hidden;">'
                          '<iframe src="%s" scrolling="no" frameBorder="0" '
                          'height="360" width="580"></iframe></div>' % full_url)
 
