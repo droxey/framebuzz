@@ -244,7 +244,7 @@ class Video(caching.base.CachingMixin, models.Model):
     def get_ytapi_url(self, itag):
         ''' Returns the YTApi video. '''
         return 'http://www.ytapi.com/api/%s/direct/%s/' \
-            % str(self.video_id, itag)
+            % (self.video_id, str(itag))
 
     def get_video_url(self, itag=None):
         ''' Returns the video url based on itag. If unable to find an uploaded
@@ -255,8 +255,7 @@ class Video(caching.base.CachingMixin, models.Model):
         elif itag == ITAG_WEBM:
             if self.webm_url:
                 return self.webm_url
-        else:
-            return self.get_ytapi_url(itag)
+        return self.get_ytapi_url(itag)
 
     def get_absolute_url(self):
         return reverse('video-embed', kwargs={'slug': str(self.slug)})
