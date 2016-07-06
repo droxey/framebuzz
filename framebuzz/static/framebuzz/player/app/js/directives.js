@@ -53,6 +53,7 @@ angular.module('framebuzz.directives', [])
                     var isChrome = !!window.chrome;
                     var isIE = /*@cc_on!@*/false;
                     var hasHitPlay = false;
+                    var videoTitle = $('#video-title');
 
                     if (isSafari || isChrome) {
                         $('.mejs-time-rail').addClass('safari');
@@ -120,6 +121,7 @@ angular.module('framebuzz.directives', [])
                     });
 
                     $(document).on('click', '.mejs-mute-convo-button', function() {
+                        videoTitle.addClass('full-width');
                         var button = $(this);
                         if (button.hasClass('mejs-mute')) {
                             button.removeClass('mejs-mute').addClass('mejs-unmute');
@@ -127,6 +129,7 @@ angular.module('framebuzz.directives', [])
                             broadcaster.prepForBroadcast({ broadcastType: 'player_muteconvo' });
                         }
                         else {
+                            videoTitle.removeClass('full-width');
                             button.removeClass('mejs-unmute').addClass('mejs-mute');
                             button.html('<i class="fa fa-comment"></i>Mute Conversation');
                             broadcaster.prepForBroadcast({ broadcastType: 'player_unmuteconvo' });
@@ -200,9 +203,15 @@ angular.module('framebuzz.directives', [])
                         broadcaster.prepForBroadcast({ broadcastType: 'player_timeupdate', currentTime: media.currentTime });
                     }, false);
 
-                    media.addEventListener('playing', function(e) {
-                        hasHitPlay = true;
+                    media.addEventListener('ended', function(e) {
+                        videoTitle.addClass('full-width');
+                    }, false);
 
+                    media.addEventListener('playing', function(e) {
+                        if (!hasHitPlay) {
+                            videoTitle.removeClass('full-width');
+                        }
+                        hasHitPlay = true;
                         $('#buzz-layer > div.panel').removeClass('hide-before-play');
                         $('.mejs-video').css({ height: '385px', width: '640px' });
 

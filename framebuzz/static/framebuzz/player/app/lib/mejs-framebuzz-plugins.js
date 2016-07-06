@@ -1,7 +1,7 @@
 (function($){
   $.extend(MediaElementPlayer.prototype, {
     buildtitle: function(player, controls, layers, media) {
-      var titleDiv = $('<div class="mejs-title mejs-fade-in"></div>').appendTo(controls);
+      var titleDiv = $('<div id="video-title" class="mejs-title mejs-fade-in full-width"></div>').appendTo(controls);
       var title = $('<h1 class="video-title" />').appendTo(titleDiv);
       if (SOCK.private_session_key) {
           if (SOCK.is_synchronized) {
