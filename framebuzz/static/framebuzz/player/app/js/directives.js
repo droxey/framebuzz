@@ -115,15 +115,17 @@ angular.module('framebuzz.directives', [])
                     //  =====
 
                     var fadeOutControls = function() {
+                        $('.mejs-video').removeClass('show-controls');
                         $('.mejs-video').addClass('fade-out-controls');
 
                         window.setTimeout(function() {
                             $('.mejs-video').removeClass('fade-out-controls');
-                            $('.mejs-video').removeClass('show-controls');
-                        }, 0);
+                        }, 100);
                     };
 
-                    $('.mejs-mediaelement').mouseenter(function(e) {
+                    $(document).on('mouseover', '.mejs-mediaelement', function(e) {
+                        e.stopPropagation();
+                        console.log(e);
                         $('.mejs-video').addClass('show-controls');
                     });
 
@@ -131,7 +133,7 @@ angular.module('framebuzz.directives', [])
                         fadeOutControls();
                     });
 
-                    $(document).on('click', '.sign-in-button', function() {
+                    $(document).on('click', '.sign-in-tumblr', function() {
                         fadeOutControls();
                     });
 
