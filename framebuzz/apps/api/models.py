@@ -321,7 +321,8 @@ class Video(caching.base.CachingMixin, models.Model):
         return mark_safe(
             '<iframe src="%s" scrolling="no" allowfullscreen="true" '
             'webkitallowfullscreen="true" mozallowfullscreen="true" '
-            'width="%s" height="%s"></iframe>' % (url, str(width), str(height)))
+            'frameborder="0" width="%s" height="%s"></iframe>' % (
+                url, str(width), str(height)))
 
     def embed_code(self):
         return self.get_embed_code(640, 398)

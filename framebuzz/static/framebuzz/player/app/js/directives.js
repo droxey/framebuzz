@@ -18,27 +18,40 @@ angular.module('framebuzz.directives', [])
     }])
     .directive('mediaElement', ['broadcaster', '$state', '$rootScope', 'safeApply', function(broadcaster, $state, $rootScope, safeApply) {
         return function(scope, element, attrs) {
+            var x = $(window).width();
+            var y = $(window).height();
+
+            $(window).resize(function() {
+              var x = $(window).width();
+              var y = $(window).height();
+            });
+
             $(element).mediaelementplayer({
+                defaultVideoWidth: '100%',
+                defaultVideoHeight: '100%',
+                enableAutosize: true,
+                usePluginFullScreen: false,
                 debug: true,
                 poster: SOCK.poster_image,
                 enablePluginDebug: true,
                 features: SOCK.video_player_features,
+                clickToPlayPause: !SOCK.is_synchronized || SOCK.is_hosting_viewing,
                 pluginPath: SOCK.root_path + 'swf/',
                 flashName: 'flashmediaelement.swf',
                 silverlightName: 'silverlightmediaelement.xap',
-                alwaysShowControls: true,
-                // There's a bug here where commenting and hitting the spacebar will
-                // cause the space to not be entered, and the video to pause.
-                enableKeyboard: false,
+                alwaysShowControls: false,
                 timerRate: 500,
                 enablePluginSmoothing: true,
                 autosizeProgress: false,
                 enablePseudoStreaming: true,
                 flashScriptAccess: 'always',
+                // There's a bug here where commenting and hitting the spacebar will
+                // cause the space to not be entered, and the video to pause.
+                enableKeyboard: false,
+                // Default controls for iOS & Android devices.
                 iPhoneUseNativeControls: false,
                 iPadUseNativeControls: false,
                 AndroidUseNativeControls: false,
-                clickToPlayPause: !SOCK.is_synchronized || SOCK.is_hosting_viewing,
                 success: function(media) {
                     //  =====
                     //  Angular.js Globals
@@ -207,6 +220,8 @@ angular.module('framebuzz.directives', [])
 
                     media.addEventListener('ended', function(e) {
                         videoTitle.addClass('full-width');
+                        // IE bug where the video stays fullscreen after it ends.
+                        $('.mejs-unfullscreen button').click();
                     }, false);
 
                     media.addEventListener('playing', function(e) {
