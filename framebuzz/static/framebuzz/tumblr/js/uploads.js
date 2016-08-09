@@ -3,7 +3,29 @@ var titleField = $('#id_title');
 
 $(function() {
     var videoUrl = null,
-        fbzPlayer = $('iframe.fbzplayer');
+        fbzPlayer = $('iframe.fbzplayer'),
+        browserSupportsAutoCopy = document.queryCommandSupported('copy');
+
+    // For browsers that don't support auto-copy, just
+    // show the textbox.
+    if (!browserSupportsAutoCopy) {
+        $('textarea.embed-code').show();
+        $('a.copy-embed').hide();
+        $(document).on('focus', 'textarea.embed-code', function() {
+            $this = $(this);
+            $this.select();
+            window.setTimeout(function() {
+                $this.select();
+                $.growl.notice({ message: "Embed tag selected. Hit ⌘+C to copy." });
+            }, 1);
+            // Work around WebKit's little problem
+            $this.mouseup(function() {
+                // Prevent further mouseup intervention
+                $this.unbind("mouseup");
+                return false;
+            });
+        });
+    }
 
     // Set up auto-copy for video embed codes.
     var clipboard = new Clipboard('a.copy-embed', {
