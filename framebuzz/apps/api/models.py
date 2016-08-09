@@ -314,30 +314,30 @@ class Video(caching.base.CachingMixin, models.Model):
             except:
                 pass
 
-    def embed_code(self):
+    def get_embed_code(self, width, height):
         site = Site.objects.get_current()
         prefix = 'http' if settings.DEBUG else 'https'
-        full_url = '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
-        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0"'
-                         ' height="398" width="640"></iframe>' % full_url)
+        url ='%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
+        return mark_safe(
+            '<iframe src="%s" scrolling="no" frameBorder="0" marginheight="0" '
+            'marginwidth="0" allowfullscreen="true" '
+            'webkitallowfullscreen="true" mozallowfullscreen="true" '
+            'width="%s" height="%s"></iframe>' % (url, str(width), str(height)))
+
+    def embed_code(self):
+        return self.get_embed_code(640, 398)
 
     def large_embed_code(self):
-        site = Site.objects.get_current()
-        prefix = 'http' if settings.DEBUG else 'https'
-        full_url = '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
-        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0"'
-                         ' height="445" width="700"></iframe>' % full_url)
+        return self.get_embed_code(700, 445)
 
     def wp_embed_code(self):
-        full_url = 'https://framebuzz.com%s' % self.get_absolute_url()
-        return mark_safe('[framebuzz src=%s width=580 height=360]' % full_url)
-
-    def tumblr_embed_code(self):
         site = Site.objects.get_current()
         prefix = 'http' if settings.DEBUG else 'https'
-        full_url = '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
-        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0" '
-                         'height="360" width="580"></iframe>' % full_url)
+        url ='%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
+        return mark_safe('[framebuzz src=%s width=580 height=360]' % url)
+
+    def tumblr_embed_code(self):
+        return self.get_embed_code(580, 360)
 
     def heatmap(self, session_key=None):
         rank_per_block = list()
