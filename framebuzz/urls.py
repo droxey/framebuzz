@@ -30,6 +30,9 @@ urlpatterns = patterns(
     # Django-AllAuth:
     (r'^accounts/', include('allauth.urls')),
 
+    # Django-Avatar:
+    url(r'^avatar/', include('avatar.urls')),
+
     # Tumblr:
     url(r'^', include('framebuzz.apps.tumblr.urls')),
 
@@ -55,9 +58,6 @@ urlpatterns = patterns(
 
     # FrameBuzz User Profiles:
     # url(r'^profile/', include('framebuzz.apps.profiles.urls')),
-
-    # Django-Avatar:
-    # url(r'^avatar/', include('avatar.urls')),
 
     # Share Error Page:
     # url(r'^share/(?P<slug>[\w.@+-]+)/error/$',

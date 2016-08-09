@@ -2,7 +2,7 @@
   $.extend(MediaElementPlayer.prototype, {
     buildtitle: function(player, controls, layers, media) {
       var titleDiv = $('<div id="video-title" class="mejs-title mejs-fade-in full-width"></div>').appendTo(controls);
-      var title = $('<h1 class="video-title" />').appendTo(titleDiv);
+      var title = $('<h1 class="video-title noselect" />').appendTo(titleDiv);
       if (SOCK.private_session_key) {
           if (SOCK.is_synchronized) {
               title.html('<i class="fa fa-group"></i> ' + SOCK.video_title);
@@ -40,7 +40,7 @@
       var shareDiv = controls.find('div.mejs-share');
 
       var button =
-        $('<button class="mejs-mute-convo-button mejs-mute" type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
+        $('<button class="mejs-mute-convo-button mejs-mute noselect" type="button" aria-controls="mep_0" title="Mute Conversation" aria-label="Mute Conversation">' +
             '<i class="fa fa-comment"></i>Mute Conversation</button>')
         .appendTo(shareDiv);
     },

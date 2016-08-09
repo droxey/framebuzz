@@ -319,8 +319,7 @@ class Video(caching.base.CachingMixin, models.Model):
         prefix = 'http' if settings.DEBUG else 'https'
         url ='%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
         return mark_safe(
-            '<iframe src="%s" scrolling="no" frameBorder="0" marginheight="0" '
-            'marginwidth="0" allowfullscreen="true" '
+            '<iframe src="%s" scrolling="no" allowfullscreen="true" '
             'webkitallowfullscreen="true" mozallowfullscreen="true" '
             'width="%s" height="%s"></iframe>' % (url, str(width), str(height)))
 
