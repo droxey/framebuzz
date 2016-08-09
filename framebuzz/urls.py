@@ -35,10 +35,10 @@ urlpatterns = patterns(
         'framebuzz.apps.profiles.views.logged_in', name='logged-in'),
 
     # FrameBuzz User Profiles:
-    url(r'^profile/', include('framebuzz.apps.profiles.urls')),
+    # url(r'^profile/', include('framebuzz.apps.profiles.urls')),
 
     # Django-Avatar:
-    url(r'^avatar/', include('avatar.urls')),
+    # url(r'^avatar/', include('avatar.urls')),
 
     # Share Error Page:
     url(r'^share/(?P<slug>[\w.@+-]+)/error/$',
@@ -61,13 +61,13 @@ urlpatterns = patterns(
         {'sync': False},
         name='profiles-convo-share'),
 
-    url(r'^dashboard/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/viewing/(?P<convo_slug>[\w.@+-]+)/$',
-        'framebuzz.apps.profiles.views.video_share',
-        {'sync': True},
-        name='dashboard-join-viewing-session'),
+    # url(r'^dashboard/(?P<username>[\w.@+-]+)/share/(?P<slug>[\w.@+-]+)/viewing/(?P<convo_slug>[\w.@+-]+)/$',
+    #     'framebuzz.apps.profiles.views.video_share',
+    #     {'sync': True},
+    #     name='dashboard-join-viewing-session'),
 
     # Django-Zebra:
-    url(r'zebra/',   include('zebra.urls',  namespace="zebra",  app_name='zebra')),
+    # url(r'zebra/',   include('zebra.urls',  namespace="zebra",  app_name='zebra')),
 
     # Zencoder completion webhook:
     url(r'^video/notifications/$',
@@ -75,33 +75,33 @@ urlpatterns = patterns(
         name='video-notification'),
 
     # Job status:
-    url(r'^video/tile/(?P<job_id>[\d]+)/$',
-        'framebuzz.apps.profiles.views.get_video_tile',
-        name='get-video-tile'),
+    # url(r'^video/tile/(?P<job_id>[\d]+)/$',
+    #     'framebuzz.apps.profiles.views.get_video_tile',
+    #     name='get-video-tile'),
 
     # Search:
-    url(r'^search/', include('framebuzz.apps.search.urls')),
+    # url(r'^search/', include('framebuzz.apps.search.urls')),
 
     # Django-AllAuth:
     (r'^accounts/', include('allauth.urls')),
 
     # Django-Comments:
-    (r'^comments/', include('django.contrib.comments.urls')),
+    # (r'^comments/', include('django.contrib.comments.urls')),
 
     # Django-Activity-Stream:
-    (r'^activity/', include('actstream.urls')),
+    # (r'^activity/', include('actstream.urls')),
 
     # Django-Shorturls:
     ('^s/', include('shorturls.urls')),
 
     # Marketing:
-    url(r'^', include('framebuzz.apps.marketing.urls')),
+    # url(r'^', include('framebuzz.apps.marketing.urls')),
 
     # Dashboard:
-    url(r'^', include('framebuzz.apps.dashboard.urls')),
+    # url(r'^', include('framebuzz.apps.dashboard.urls')),
 
     # Tumblr:
-    url(r'^tumblr/', include('framebuzz.apps.tumblr.urls')),
+    url(r'^', include('framebuzz.apps.tumblr.urls')),
 
     # Robots.txt:
     (r'^robots\.txt$', include('robots.urls')),
