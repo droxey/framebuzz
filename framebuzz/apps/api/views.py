@@ -3,6 +3,7 @@ import json
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import logout
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -63,8 +64,9 @@ def video_embed(request, slug, convo_slug=None, control_sync=False):
 
         # Having a logout button does funky things when we're on our
         # own site. Hide it if we're coming from framebuzz.com.
+        site = Site.objects.get_current()
         ref = request.META.get('HTTP_REFERER', None)
-        viewing_on_fbz = ref and 'framebuzz.' in ref
+        viewing_on_fbz = ref and site.domain in ref
 
         # Get uploaded video url, or youtube url, alternately.
         mp4_url = v.get_video_url(ITAG_MP4)
@@ -98,7 +100,7 @@ def video_embed(request, slug, convo_slug=None, control_sync=False):
             'mp4_url': mp4_url,
             'webm_url': webm_url,
             'convo_slug': convo_slug,
-            'ravenjs_dsn': settings.RAVENJS_DSN or None
+            'ravenjs_dsn': settings.RAVENJS_DSN or None,
         }, context_instance=RequestContext(request))
     except TypeError:
         return HttpResponseRedirect(reverse('video-embed-error',
