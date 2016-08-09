@@ -4257,7 +4257,9 @@ if (typeof jQuery != 'undefined') {
 			player.isInIframe = (window.location != window.parent.location);
 
 			// detect on start
-			media.addEventListener('play', function() { player.detectFullscreenMode(); });
+			media.addEventListener('loadedmetadata', function() {
+				player.detectFullscreenMode();
+			});
 
 			// build button
 			var t = this,
