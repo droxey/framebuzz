@@ -106,10 +106,15 @@
         <script src="{% static 'framebuzz/tumblr/js/vendor/clipboard.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
         <script type="text/javascript">
-          $('video,audio').mediaelementplayer({
+          $('video').mediaelementplayer({
             videoHeight: 307,
             videoWidth: 580,
-            features: ['playpause','progress','volume']
+            features: ['playpause','progress','volume'],
+            startVolume: 0,
+            loop: true,
+            success: function(media) {
+              media.play();
+            }
           });
         </script>
     {% endcompress %}
