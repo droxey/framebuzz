@@ -22,7 +22,7 @@ from actstream import action
 from actstream.models import actstream_register_model
 from actstream.actions import follow
 from avatar.util import get_username
-from allauth.account.signals import user_signed_up
+from allauth.account.signals import user_signed_up, user_logged_in
 from allauth.avatars import copy_avatar
 from randomslugfield import RandomSlugField
 from timezone_field import TimeZoneField
@@ -181,8 +181,15 @@ def post_user_signed_up(request, user, **kwargs):
         copy_avatar(request, sociallogin.account.user, sociallogin.account)
 
 
+def post_user_logged_in(request, user, **kwargs):
+    sociallogin = kwargs.get('sociallogin')
+    if sociallogin:
+        copy_avatar(request, sociallogin.account.user, sociallogin.account)
+
+
 post_save.connect(create_user_profile, sender=User)
 user_signed_up.connect(post_user_signed_up, sender=User)
+user_logged_in.connect(post_user_logged_in, sender=User)
 
 
 class Video(caching.base.CachingMixin, models.Model):

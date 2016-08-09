@@ -5,7 +5,6 @@ from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
 
 from avatar.models import Avatar
-from allauth.account.signals import user_signed_up
 
 
 def name_from_url(url):
@@ -43,7 +42,7 @@ def copy_avatar(request, user, account):
     url = account.get_avatar_url()
     if url:
         ava = Avatar(user=user)
-        ava.primary = Avatar.objects.filter(user=user).count() == 0
+        ava.primary = True
         try:
             content = urllib2.urlopen(url).read()
             name = name_from_url(url)
