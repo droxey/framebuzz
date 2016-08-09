@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Permission, AnonymousUser
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.models import Comment, CommentFlag
+from django.contrib.sites.models import Site
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.encoding import force_bytes
@@ -52,6 +53,7 @@ PRIORITY_CODES = (
 ITAG_MP4 = 18
 ITAG_WEBM = 43
 YOUTUBE_VID_ID_LENGTH = 12
+
 
 video_storage = S3BotoStorage(
     acl='public',
@@ -145,7 +147,7 @@ class UserProfile(caching.base.CachingMixin, models.Model):
         av.save()
 
     def get_absolute_url(self):
-        return reverse('profiles-home', args=[str(self.user.username)])
+        return ''
 
     def __unicode__(self):
         return "%s's Profile" % self.user
@@ -313,16 +315,27 @@ class Video(caching.base.CachingMixin, models.Model):
                 pass
 
     def embed_code(self):
-        full_url = 'https://framebuzz.com%s' % self.get_absolute_url()
+        site = Site.objects.get_current()
+        prefix = 'http' if settings.DEBUG else 'https'
+        full_url = '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
         return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0"'
                          ' height="398" width="640"></iframe>' % full_url)
+
+    def large_embed_code(self):
+        site = Site.objects.get_current()
+        prefix = 'http' if settings.DEBUG else 'https'
+        full_url = '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
+        return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0"'
+                         ' height="445" width="700"></iframe>' % full_url)
 
     def wp_embed_code(self):
         full_url = 'https://framebuzz.com%s' % self.get_absolute_url()
         return mark_safe('[framebuzz src=%s width=580 height=360]' % full_url)
 
     def tumblr_embed_code(self):
-        full_url = 'https://framebuzz.com%s' % self.get_absolute_url()
+        site = Site.objects.get_current()
+        prefix = 'http' if settings.DEBUG else 'https'
+        full_url = '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
         return mark_safe('<iframe src="%s" scrolling="no" frameBorder="0" '
                          'height="360" width="580"></iframe>' % full_url)
 

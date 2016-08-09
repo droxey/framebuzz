@@ -17,23 +17,18 @@
     {% endif %}
     <title>FrameBuzz | {{ video.title }}</title>
     {% revcanonical video %}
-    <meta property="og:title" content="FrameBuzz: {{ video.title }}" />
-    <meta property="og:type" content="Video" />
-    <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.slug %}" />
-    <meta property="og:image" content="{{ video.poster_image }}" />
-    <meta property="og:description" content="{{ video.description }}" />
-    <meta property="og:site_name" content="FrameBuzz" />
-    <meta itemprop="name" content="FrameBuzz: {{ video.title }}" />
-    <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!" />
-    <meta itemprop="image" content="{{ video.poster_image }}" />
-    <meta property="og:video" content="{{ video.mp4_url }}" />
-    <meta property="og:video:secure_url" content="{{ video.mp4_url }}" />
+    <meta itemprop="name" content="FrameBuzz: {{ video.title }}">
+    <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!">
+    <meta itemprop="image" content="{{ video.poster_image }}">
+    <meta property="og:title" content="FrameBuzz: {{ video.title }}">
+    <meta property="og:type" content="Video">
+    <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.slug %}">
+    <meta property="og:image" content="{{ video.poster_image }}">
+    <meta property="og:description" content="{{ video.description }}">
+    <meta property="og:site_name" content="FrameBuzz">
+    <meta property="og:video" content="{{ video.mp4_url }}">
+    <meta property="og:video:secure_url" content="{{ video.mp4_url }}">
     <meta property="og:video:type" content="text/html" />
-    <meta property="og:video:width" content="580" />
-    <meta property="og:video:height" content="360" />
-    <meta property="og:video:url" content="https://framebuzz.com{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}?file={{ mp4_url }}&amp;controls=true">
-    <meta property="og:video:secure_url" content="https://framebuzz.com{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}?file={{ mp4_url }}&amp;controls=true">
-    <meta property="og:video:type" content="application/x-shockwave-flash">
     <meta property="og:video:width" content="580">
     <meta property="og:video:height" content="360">
     {% compress css %}
@@ -52,10 +47,7 @@
       <!--[if IE]><link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css"><![endif]-->
       <!--[if gte IE 9]><style type="text/css">ul.comment-stream { filter: none; }</style><![endif]-->
     {% endcompress %}
-    {% if ravenjs_dsn %}
-        <script src="//cdn.ravenjs.com/2.3.0/raven.min.js"></script>
-        <script>Raven.config('{% sentry_public_dsn %}').install();</script>
-    {% endif %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% compress js %}
       <script>
         (function(d) {
@@ -136,6 +128,10 @@
         <div id="heatmap-and-post" data-ui-view=""></div>
       </div>
     </div>
+    {% if ravenjs_dsn %}
+        <script src="//cdn.ravenjs.com/2.3.0/raven.min.js"></script>
+        <script>Raven.config('{% sentry_public_dsn %}').install();</script>
+    {% endif %}
     {% compress js %}
       <script src="{% static 'framebuzz/player/app/lib/jquery/jquery-1.9.1.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/raven.min.js' %}"></script>
@@ -184,10 +180,8 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
       ga('create', 'UA-43394419-1', 'framebuzz.com');
       ga('send', 'pageview');
-
     </script>
   </body>
 </html>

@@ -12,9 +12,6 @@ angular.module('framebuzz.directives', [])
     .directive('closeSocket', ['socket', function(socket) {
         return function(scope, element, attrs) {
             $(window).on('beforeunload', function() {
-
-
-
                 socket.close();
             });
         };
@@ -22,6 +19,7 @@ angular.module('framebuzz.directives', [])
     .directive('mediaElement', ['broadcaster', '$state', '$rootScope', 'safeApply', function(broadcaster, $state, $rootScope, safeApply) {
         return function(scope, element, attrs) {
             $(element).mediaelementplayer({
+                debug: true,
                 poster: SOCK.poster_image,
                 enablePluginDebug: true,
                 features: SOCK.video_player_features,

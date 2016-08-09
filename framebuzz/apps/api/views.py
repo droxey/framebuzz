@@ -25,11 +25,26 @@ ITAG_MP4 = 18
 ITAG_WEBM = 43
 
 
-def video_test(request, slug):
+def video_test(request, slug, size="small"):
     video, created = get_or_create_video(slug)
-
+    if size == 'small':
+        embed_code = video.tumblr_embed_code
+        height = 326
+        width = 580
+    elif size == 'large':
+        embed_code == video.large_embed_code
+        height = 445
+        width = 700
+    else:
+        embed_code = video.embed_code
+        height = 360
+        width = 640
     return render_to_response('player/test.html', {
         'video': video,
+        'embed': embed_code,
+        'size': size,
+        'height': height,
+        'width': width,
     }, context_instance=RequestContext(request))
 
 

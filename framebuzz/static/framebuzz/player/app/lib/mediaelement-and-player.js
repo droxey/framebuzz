@@ -4262,11 +4262,12 @@ if (typeof jQuery != 'undefined') {
 			// build button
 			var t = this,
 				hideTimeout = null,
+				shareDiv = controls.find('div.mejs-share'),
 				fullscreenBtn =
 					$('<div class="mejs-button mejs-fullscreen-button">' +
-						'<button type="button" aria-controls="' + t.id + '" title="' + t.options.fullscreenText + '" aria-label="' + t.options.fullscreenText + '"></button>' +
+						'<button type="button" class="mejs-fbz-fullscreen" aria-controls="' + t.id + '" title="' + t.options.fullscreenText + '" aria-label="' + t.options.fullscreenText + '"><i class="material-icons">fullscreen</i></button>' +
 					'</div>')
-					.appendTo(controls)
+					.appendTo(shareDiv)
 					.on('click', function() {
 
 						// toggle fullscreen

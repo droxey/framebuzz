@@ -16,7 +16,7 @@
       }
     },
     buildoptionsbar: function(player, controls, layers, media) {
-      $('<div class="mejs-share mejs-fade-in"></div>').appendTo(controls);
+      $('<div class="mejs-share mejs-fade-in clearfix"></div>').appendTo(controls);
     },
     buildshare: function(player, controls, layers, media) {
       var shareDiv = controls.find('div.mejs-share');

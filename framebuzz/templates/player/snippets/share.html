@@ -1,7 +1,5 @@
 {% load avatar_tags profile_tags comments staticfiles %}
 
-{% get_comment_count for video as comment_count %}
-{% regroup commenters by actor.username as commenter_list %}
 <div class="col-xs-12{% if not profile_user %} standalone{% endif %}">
         <div class="row video">
             <div class="col-xs-12">
@@ -17,6 +15,9 @@
                 {% endif %}
             </div>
         </div>
+        {% comment %}
+        {% get_comment_count for video as comment_count %}
+        {% regroup commenters by actor.username as commenter_list %}
         <div class="row container details clearfix">
             {% if found_by %}
                 <div class="col-xs-2">
@@ -89,4 +90,5 @@
                 </ul>
             </div>
         </div>
+        {% endcomment %}
 </div>

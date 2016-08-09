@@ -1,18 +1,23 @@
 {% extends "marketing/base.html" %}
 {% load socialaccount staticfiles compress addendum_tags %}
 
+{% block page_css %}
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/iconic.css' %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" type="text/css" media="screen" />
+    {% endcompress %}
+    {% block extra_css %}{% endblock %}
+{% endblock %}
+
+{% block page_classes %}content profiles share{% endblock %}
+
 {% block content_center %}
-    <div class="col-xs-12">
-        <div id="homepage-logo" class="row">
-            <div class="col-xs-12">
-                <a href="{% url 'home' %}">
-                    <img src="{% static 'framebuzz/marketing/img/logo.png' %}" alt="FrameBuzz" height="40" width="184">
-                </a>
-            </div>
-        </div>
-        <div id="onboarding" class="row">
-            <div id="video" style="width: 580px; margin: 0 auto;">
-                <iframe src="{% url 'video-embed' video.slug %}" scrolling="no" frameBorder="0" height="360" width="580" style="height: 360px; width: 580px;"></iframe>
+    <div id="share" style="display: block; background: white; height: 600px; padding-top: 22px;">
+        <div class="col-xs-12 standalone">
+            <h4>{{ size|title }} Player ({{ width }}x{{ height }})</h4>
+            <hr>
+            <div style="height: {{ height }}px; width: {{ width }}px; margin: 0 auto;">
+                {{ embed }}
             </div>
         </div>
     </div>
