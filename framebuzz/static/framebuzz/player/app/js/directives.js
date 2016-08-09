@@ -191,15 +191,6 @@ angular.module('framebuzz.directives', [])
                             if (isSafari) {
                                 $('#heatmap').addClass('safari');
                             }
-
-                            $('#buzz-layer').hoverIntent({
-                                over: function() {
-                                    $('.mejs-mediaelement').trigger('mouseleave');
-                                },
-                                out: function() {
-                                }
-                            });
-
                             if (!hasHitPlay) {
                                 $('#buzz-layer > div.panel').addClass('hide-before-play');
                             }
@@ -230,8 +221,6 @@ angular.module('framebuzz.directives', [])
                         }
                         hasHitPlay = true;
                         $('#buzz-layer > div.panel').removeClass('hide-before-play');
-                        $('.mejs-video').css({ height: '385px', width: '640px' });
-
                         broadcaster.prepForBroadcast({ broadcastType: 'player_playing' });
                     }, false);
 
@@ -390,23 +379,6 @@ angular.module('framebuzz.directives', [])
                 copy: attrs.copytoclipboard,
                 afterCopy: function() {
                     notificationFactory.success('Copied to Clipboard!');
-                }
-            });
-
-            $('.zclip').css({
-                'height': '26px',
-                'left': '352px',
-                'top': '195px',
-                'width': '50px',
-                'z-index': 200
-            });
-
-            $('.zclip').hoverIntent({
-                over: function() {
-                    $(element).addClass('fade-in');
-                },
-                out: function() {
-                    $(element).removeClass('fade-in');
                 }
             });
         };
