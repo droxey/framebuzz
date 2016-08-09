@@ -37,6 +37,9 @@ angular.module('framebuzz.directives', [])
                 autosizeProgress: false,
                 enablePseudoStreaming: true,
                 flashScriptAccess: 'always',
+                iPhoneUseNativeControls: false,
+                iPadUseNativeControls: false,
+                AndroidUseNativeControls: false,
                 clickToPlayPause: !SOCK.is_synchronized || SOCK.is_hosting_viewing,
                 success: function(media) {
                     //  =====

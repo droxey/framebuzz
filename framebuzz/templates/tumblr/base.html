@@ -44,6 +44,7 @@
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/remodal-default-theme.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/jquery.growl.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/hover.css' %}" type="text/css" media="screen">
+        <link rel="stylesheet" href="{% static 'framebuzz/tumblr/js/vendor/mediaelement/mediaelementplayer.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/screen.css' %}" type="text/css" media="screen">
     {% endcompress %}
     {% block extra_head %}{% endblock %}
@@ -66,7 +67,15 @@
       <div id="example" class="row">
           <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/video-splash@2x.png' %}" height="451" width="736">
           <div id="embed-row">
-            <iframe src="https://framebuzz.com/v/s43M5HbgQfVYTqo7/" scrolling="no" frameBorder="0" height="307" width="580" class="fbzplayer-small center-block" style="background: #36465D;"></iframe>
+            <video width="580" height="307" poster="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/frame_0000.png" controls="controls" preload="none" class="fbzplayer-small center-block" style="background: #36465D;">
+              <source type="video/mp4" src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.mp4" />
+              <source type="video/webm" src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.webm" />
+              <object width="580" height="307" type="application/x-shockwave-flash" data="flashmediaelement.swf">
+                  <param name="movie" value="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}" />
+                  <param name="flashvars" value="controls=true&file=https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.mp4" />
+                  <img src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/frame_0000.png" width="580" height="307" title="No video playback capabilities" />
+              </object>
+            </video>
           </div>
       </div>
       <div id="uploader" class="row">
@@ -90,11 +99,19 @@
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
+        <script src="{% static 'framebuzz/tumblr/js/vendor/mediaelement/mediaelement-and-player.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/filepicker.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/remodal.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/jquery.growl.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/clipboard.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
+        <script type="text/javascript">
+          $('video,audio').mediaelementplayer({
+            videoHeight: 307,
+            videoWidth: 580,
+            features: ['playpause','progress','volume']
+          });
+        </script>
     {% endcompress %}
     <script>
       var _prum = [['id', '526acad9abe53d0e0d000000'],
