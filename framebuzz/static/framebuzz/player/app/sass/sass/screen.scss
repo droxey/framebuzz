@@ -112,6 +112,7 @@ embed,
 iframe,
 object,
 video {
+    object-fit: initial;
     max-width: 100%;
     outline: 0;
 }
@@ -430,7 +431,7 @@ video {
                         opacity: 0;
                     }
                     div.mejs-title {
-                        height: 42px;
+                        height: 43px;
                         background: rgba(0, 0, 0, 0.7);
                         border-bottom: 1px solid rgba(104, 104, 104, 0.3);
                         overflow: hidden;
@@ -539,7 +540,12 @@ video {
                             }
                         }
                         &.chrome {
-                            bottom: 8px;
+                            @media screen and (max-width: 581px) {
+                                bottom: 8px;
+                            }
+                            @media screen and (min-width: 700px) and (max-width: 710px){
+                                bottom: 11px;
+                            }
                         }
                     }
                     div.mejs-button {
@@ -926,7 +932,7 @@ video {
     div.active-header {
         background: rgba(0, 0, 0, 0.7);
         border-bottom: 1px solid rgba(81, 81, 81, .32);
-        height: 42px;
+        height: 43px;
         position: absolute;
         top: 0;
         right: 0;
