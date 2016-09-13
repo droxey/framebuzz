@@ -38,10 +38,11 @@ class TumblrUploadForm(forms.ModelForm):
         fp_attrs['data-fp-mimetypes'] = 'video/*'
         fp_attrs['data-fp-button-class'] = 'btn btn-large btn-info'
         fp_attrs['data-fp-button-text'] = settings.FP_BUTTON_TEXT
-        fp_attrs['data-fp-services'] = settings.FP_SERVICES
+        fp_attrs['data-fp-services'] = settings.FILEPICKER_SERVICES
         fp_attrs['data-fp-drag-text'] = settings.FP_DRAG_TEXT
         fp_attrs['data-fp-max-size'] = settings.FP_VIDEO_MAXSIZE
         fp_attrs['data-fp-container'] = 'modal'
+        fp_attrs['data-fp-hide'] = 'true'
         fp_attrs['data-fp-openTo'] = 'welcome'
         fp_attrs['onchange'] = 'fileUploadComplete(event);'
 

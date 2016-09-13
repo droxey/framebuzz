@@ -465,12 +465,12 @@ FILEPICKER_API_KEY = 'AXQRyfZ2cQjWD3yy2flkFz'
 FP_EXTENSIONS = '3g2,3gp,3gp2,3gpp,3gpp2,ac3,eac3,ec3,f4a,f4b,f4v,flv', \
                 'highwinds,m4a,m4b,m4r,m4v,mov,mp4,oga,ogv,ogx,ts', \
                 'webm,wma,mpg,avi'
-FP_SERVICES = 'BOX,CLOUDDRIVE,COMPUTER,DROPBOX,GOOGLE_DRIVE,GMAIL,URL,VIDEO,FTP'
+FILEPICKER_SERVICES = 'BOX,CLOUDDRIVE,COMPUTER,DROPBOX,GOOGLE_DRIVE,GMAIL,URL,VIDEO,FTP'
 FP_DRAG_TEXT = 'Drag and drop your video file here<br><em>or, click this ' \
                 'box to upload videos from Dropbox,<br>Google Drive, ' \
                 'FTP and more!</em>'
 FP_BUTTON_TEXT = '<i class="fa fa-cloud-upload"></i> Select File...'
-FP_VIDEO_MAXSIZE = 2147483648
+FP_VIDEO_MAXSIZE = 1000000000  # Max out at 1GB for now.
 
 
 # Dashboard
