@@ -270,72 +270,97 @@ body {
             position: relative;
             top: -7px;
 
-            a.next,
-            a.previous {
-                background: url('../../img/v2/controls@2x.png') no-repeat;
-                background-size: 47px 81px;
-                cursor: pointer;
-                display: block;
-                height: 81px;
-                position: absolute;
-                top: 24px;
-                width: 21px;
+            div.bx-wrapper {
+                height: 100%;
+                max-width: 798px !important;
 
-                &.previous {
-                    background-position: 0 0;
-                    float: left;
-                    left: 0;
-                    margin-right: 12px;
+                div.bx-viewport {
+                    -webkit-moz-box-shadow: none;
+                    -moz-moz-box-shadow: none;
+                    -ms-moz-box-shadow: none;
+                    -o-moz-box-shadow: none;
+                    box-shadow: none;
+                    border: 0 none;
+                    height: 100%;
+                    width: 736px !important;
+                    left: 18px;
+                    margin: 0 12px;
                 }
-
-                &.next {
-                    background-position: -25px 0;
-                    float: right;
-                    right: 0;
-                    margin-left: 12px;
-                }
-            }
-
-            ul {
-                display: block;
-                height: 118px;
-                float: left;
-                margin-left: 32px;
-
-                li {
-                    display: inline-block;
-                    margin-right: 22px;
-
-                    a {
+                div.bx-controls-direction {
+                    a.bx-next,
+                    a.bx-prev {
+                        background: url('../../img/v2/controls@2x.png') no-repeat;
+                        background-size: 47px 81px;
+                        cursor: pointer;
                         display: block;
-                        position: relative;
-                        width: 166px;
+                        height: 81px;
+                        position: absolute;
+                        top: 24px;
+                        width: 21px;
 
-                        img {
-                            position: absolute;
-                            z-index: 1;
+                        &.bx-prev {
+                            background-position: 0 0;
+                            float: left;
+                            left: -2px;
                         }
 
-                        span.bubble {
-                            background: url('../../img/v2/bubble@2x.png') no-repeat;
-                            background-size: 50px 50px;
-                            color: white;
-                            display: block;
-                            font-family: 'Lobster';
-                            font-size: 25px;
-                            height: 50px;
-                            width: 50px;
-                            padding: 13px 0 21px;
-                            position: absolute;
-                            left: 36%;
-                            top: 43px;
-                            text-align: center;
-                            z-index: 10;
+                        &.bx-next {
+                            background-position: -25px 0;
+                            float: right;
+                            right: 5px;
                         }
                     }
+                }
 
-                    &:nth-child(4n) {
-                        margin-right: 0;
+                ul {
+                    display: block;
+                    height: 118px;
+
+                    li {
+                        display: inline-block;
+                        height: 118px;
+                        background-repeat: no-repeat;
+                        background-size: 166px 118px;
+                        width: 166px;
+
+                        a {
+                            display: block;
+                            position: relative;
+                            height: 118px;
+                            width: 166px;
+
+                            img {
+                                position: absolute;
+                                z-index: 1;
+                            }
+
+                            span.bubble {
+                                background: url('../../img/v2/bubble@2x.png') no-repeat;
+                                background-size: 50px 50px;
+                                color: white;
+                                display: block;
+                                font-family: 'Lobster';
+                                font-size: 25px;
+                                height: 50px;
+                                width: 50px;
+                                padding: 13px 0 21px;
+                                position: absolute;
+                                left: 36%;
+                                top: 43px;
+                                text-align: center;
+                                z-index: 10;
+                            }
+                        }
+
+                        &:nth-child(4n) {
+                            margin-right: 0;
+                        }
+
+                        &:hover {
+                            -webkit-box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
+                            -moz-box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
+                            box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
+                        }
                     }
                 }
             }
@@ -963,11 +988,11 @@ body {
         background: #2a394e url('../../img/v2/bkg-loggedin.png') repeat-x;
 
         #base #videos {
-            margin-bottom: 145px;
+            margin-bottom: 95px;
         }
 
         #video-list {
-            min-height: 465px;
+            min-height: 521px;
         }
 
         &.no-carousel {
@@ -979,10 +1004,6 @@ body {
 
             #base #videos {
                 margin-bottom: 110px;
-            }
-
-            #video-list {
-                min-height: 521px;
             }
         }
 

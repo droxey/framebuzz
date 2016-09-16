@@ -215,7 +215,7 @@ class Video(caching.base.CachingMixin, models.Model):
     password = models.CharField(max_length=50, blank=True, null=True)
     notify_emails = models.TextField(null=True, blank=True)
     submit_to_tumblr = models.BooleanField(default=False, editable=False)
-    add_to_carousel = models.BooleanField(default=False)
+    add_to_carousel = models.BooleanField('Featured on Tumblr Page', default=False)
 
     class Meta:
         verbose_name = 'FrameBuzz Video'

@@ -89,6 +89,11 @@ $(function() {
         videoUrl = $(this).attr('data-video-url');
     });
 
+    // When the user chooses to edit a video description.
+    $(document).on('click', 'a.edit-video', function() {
+        console.log('not implemented');
+    });
+
     // Request our player template when the modal dialog opens.
     $(document).on('opened', '.remodal', function () {
         fbzPlayer.attr('src', videoUrl);
@@ -107,6 +112,7 @@ $(function() {
 var fileUploadComplete = function(event) {
     // Enable the submit button once a video is uploaded.
     submitButton.removeAttr('disabled');
+
     // If video title is still empty after upload, give it a default.
     if (titleField.val().length == 0 && event.fpfile !== undefined) {
         titleField.val(event.fpfile.filename);

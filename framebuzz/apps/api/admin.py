@@ -5,9 +5,9 @@ from django.contrib.sessions.models import Session
 
 
 class FrameBuzzVideoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'duration', 'added_by',
+    list_display = ('title', 'add_to_carousel', 'slug', 'duration', 'added_by',
                     'added_on', 'public', 'job_id',)
-    list_filter = ('added_by', 'added_on', 'public',)
+    list_filter = ('added_by', 'added_on', 'public', 'add_to_carousel', )
     search_fields = ['title', 'slug', ]
 
 

@@ -36,7 +36,11 @@
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/remodal-default-theme.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/jquery.growl.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/hover.css' %}" type="text/css" media="screen">
+        <link rel="stylesheet" href="{% static 'framebuzz/player/app/css/animations.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/js/vendor/mediaelement/mediaelementplayer.css' %}" type="text/css" media="screen">
+        {% if show_carousel %}
+          <link rel="stylesheet" href="{% static 'framebuzz/tumblr/js/vendor/bxslider/jquery.bxslider.css' %}" type="text/css" media="screen">
+        {% endif %}
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/screen.css' %}" type="text/css" media="screen">
     {% endcompress %}
     {% block extra_head %}{% endblock %}
@@ -114,15 +118,20 @@
         <script src="{% static 'framebuzz/tumblr/js/vendor/remodal.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/jquery.growl.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/clipboard.min.js' %}"></script>
+        {% if show_carousel %}
+          <script src="{% static 'framebuzz/tumblr/js/vendor/bxslider/jquery.bxslider.min.js' %}"></script>
+        {% endif %}
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
         <script type="text/javascript">
-          var is_debug = '{{ is_debug }}' == 'True';
+          var isDebug = '{{ is_debug }}' == 'True';
+          var showCarousel = '{{ show_carousel }}' == 'True';
           // Sticky sidebar.
           $("#sidenav").stick_in_parent();
+
           // Video player.
           $('video').mediaelementplayer({
-            debug: is_debug,
-            enablePluginDebug: is_debug,
+            debug: isDebug,
+            enablePluginDebug: isDebug,
             videoHeight: 428,
             videoWidth: 736,
             features: ['playpause','progress','volume',],
@@ -131,12 +140,22 @@
             enablePluginSmoothing: true,
             flashScriptAccess: 'always',
             success: function(media) {
-              console.log(is_debug);
-              if (!is_debug) {
+              if (!isDebug) {
                 media.play();
               }
             }
           });
+
+          // Carousel.
+          if (showCarousel) {
+            $('.bxslider').bxSlider({
+              pager: false,
+              randomStart: true,
+              minSlides: 4,
+              slideWidth: 166,
+              slideMargin: 22
+            });
+          }
         </script>
     {% endcompress %}
     {% if not is_debug %}
