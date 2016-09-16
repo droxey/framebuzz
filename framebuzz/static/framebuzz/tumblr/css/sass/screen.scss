@@ -56,7 +56,7 @@ body {
 // =============================================================================
 #base {
     #header {
-        min-height: 210px;
+        min-height: 257px;
         position: relative;
         img.header {
             margin: 0 auto;
@@ -118,8 +118,7 @@ body {
         }
     }
     #example {
-        min-height: 508px;
-        margin-top: 44px;
+        min-height: 467px;
         position: relative;
         #embed-row {
             position: absolute;
@@ -129,8 +128,114 @@ body {
             height: 306px;
         }
     }
+    #login-row {
+        min-height: 98px;
+        a.btn-login {
+            background: url('../../img/v2/btn-login@2x.png') no-repeat;
+            background-size: 446px 108px;
+            display: block;
+            height: 50px;
+            overflow: hidden;
+            margin: 0 auto;
+            width: 446px;
+
+            &:hover {
+                background-position: 0 -58px;
+            }
+        }
+    }
+    #fbz-on-tumblr {
+        margin-bottom: 37px;
+        margin-left: -34px;
+        margin-right: -34px;
+        min-height: 223px;
+
+        div.carousel-header {
+            img {
+                margin: 0 auto;
+            }
+        }
+
+        #carousel {
+            height: 118px;
+            width: 804px;
+            overflow: hidden;
+            position: relative;
+            top: -7px;
+
+            a.previous,
+            a.next {
+                background: url('../../img/v2/controls@2x.png') no-repeat;
+                background-size: 47px 81px;
+                cursor: pointer;
+                display: block;
+                height: 81px;
+                position: absolute;
+                top: 24px;
+                width: 21px;
+
+                &.previous {
+                    background-position: 0 0;
+                    float: left;
+                    left: 0;
+                    margin-right: 12px;
+                }
+
+                &.next {
+                    background-position: -25px 0;
+                    float: right;
+                    right: 0;
+                    margin-left: 12px;
+                }
+            }
+
+            ul {
+                display: block;
+                height: 118px;
+                float: left;
+                margin-left: 32px;
+
+                li {
+                    display: inline-block;
+                    margin-right: 22px;
+
+                    a {
+                        display: block;
+                        position: relative;
+                        width: 166px;
+
+                        img {
+                            position: absolute;
+                            z-index: 1;
+                        }
+
+                        span.bubble {
+                            background: url('../../img/v2/bubble@2x.png') no-repeat;
+                            background-size: 50px 50px;
+                            color: white;
+                            display: block;
+                            font-family: 'Lobster';
+                            font-size: 25px;
+                            height: 50px;
+                            width: 50px;
+                            padding: 13px 0px 21px 0;
+                            position: absolute;
+                            left: 36%;
+                            top: 43px;
+                            text-align: center;
+                            z-index: 10;
+                        }
+                    }
+
+                    &:nth-child(4n) {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
     #uploader {
-        min-height: 358px;
+        min-height: 324px;
         h1 {
             color: white;
             font-size: 32px;
@@ -325,7 +430,7 @@ body {
         }
     }
     #post {
-        min-height: 276px;
+        min-height: 235px;
         position: relative;
         bottom: 0;
         h1 {
@@ -619,7 +724,7 @@ footer {
 // =============================================================================
 body {
     &.logged-out {
-        background: #2a394e url('../../img/bkg-loggedout.png') repeat-x;
+        background: #2a394e url('../../img/v2/bkg-loggedout.png') repeat-x;
         p.login-info {
             text-align: right;
             cursor: default;
