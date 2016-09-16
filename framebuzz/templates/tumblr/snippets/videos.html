@@ -1,11 +1,14 @@
 {% load i18n staticfiles %}
 
 {% if page_obj.object_list %}
-    <ul class="clearfix">
-      {% for video in page_obj.object_list %}
-          <li class="video pull-left{% if video.processing %} processing{% endif %}">
+   {% for video in page_obj.object_list %}
+      {% if forloop.counter0|divisibleby:'3' %}
+         <div class="row">
+      {% endif %}
+         <div class="col-xs-4 video pull-left{% if video.processing %} processing{% endif %}">
              {% if not video.processing %}
-               <div class="overlay">
+               <div class="overlay clearfix">
+                  <a class="edit-video pull-right" href="">edit</a>
                    <a class="play-video" data-remodal-target="modal" href="#" data-video-url="{% url 'video-embed' video.slug %}">
                        <img src="{% static 'framebuzz/tumblr/img/play@2x.png' %}" height="47" width="47">
                    </a>
@@ -25,20 +28,22 @@
                   {% endif %}
                </strong>
             </div>
-            <img class="cover" src="{% if video.processing %}{% static 'framebuzz/tumblr/img/placeholder.jpg' %}{% else %}{{ video.default_thumbnail }}{% endif %}" height="140" width="211">
+            <div class="cover" style="background-image: url('{% if video.processing %}{% static 'framebuzz/tumblr/img/v2/img-loading@2x.jpg' %}{% else %}{{ video.default_thumbnail }}{% endif %}');">
+            </div>
             {% if video.processing %}
                <div class="process-message">
-                  <strong class="title">Processing Upload</strong>
-                  <i class="fa fa-file-video-o fa-3x fa-fw" aria-hidden="true"></i>
-                  <strong>Check back soon!</strong>
+                  <strong class="title">Processing Video&hellip;</strong>
+                  <strong>Your video will appear here when finished.</strong>
                </div>
             {% endif %}
             {% if video.description %}
                 <p class="description">{{ video.formatted_description }}</p>
             {% endif %}
-          </li>
+         </div>
+      {% if forloop.counter|divisibleby:'3' %}
+         </div>
+      {% endif %}
       {% endfor %}
-    </ul>
  {% endif %}
  {% if video_count > 6 %}
    {% include "tumblr/snippets/pagination.html" %}

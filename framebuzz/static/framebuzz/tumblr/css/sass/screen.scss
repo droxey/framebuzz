@@ -142,10 +142,9 @@ body {
 
         #embed-row {
             position: absolute;
-            top: 83px;
-            left: 20px;
-            width: 580px;
-            height: 306px;
+            top: 4px;
+            width: 736px;
+            height: 428px;
         }
     }
 
@@ -647,14 +646,11 @@ body {
                 padding-right: 0;
             }
 
-            ul {
-                padding: 0 6px;
+            div.row {
+                padding: 0 20px;
 
-                li.video {
+                div.video {
                     cursor: pointer;
-                    width: 211px;
-                    margin: 0 14px 24px;
-                    max-height: 230px;
                     position: relative;
                     z-index: 1;
 
@@ -667,10 +663,33 @@ body {
                         top: 25px;
                         z-index: 10;
 
-                        a.play-video {
-                            margin-top: 20px;
-                            display: block;
+                        a.edit-video {
+                            color: white;
+                            cursor: pointer;
+                            font: 500 13px 'proxima-nova';
+                            text-decoration: underline;
+                            position: relative;
+                            right: 11px;
+                            top: 11px;
                             opacity: 0.8;
+                            z-index: 22;
+                            @include single-transition(opacity 20ms ease-in-out);
+
+                            &:hover {
+                                opacity: 1;
+                                @include single-transition(opacity 20ms ease-in-out);
+                            }
+                        }
+
+                        a.play-video {
+                            display: block;
+                            height: 47px;
+                            margin: 0 auto;
+                            opacity: 0.8;
+                            position: relative;
+                            top: 18px;
+                            width: 47px;
+                            z-index: 11;
                             @include single-transition(opacity 20ms ease-in-out);
 
                             img {
@@ -689,9 +708,8 @@ body {
                             display: block;
                             font: 13.9px 'proxima-nova';
                             position: relative;
-                            left: 18px;
-                            top: 5px;
-                            margin: 0;
+                            left: 20px;
+                            margin: 24px 0 0 0;
 
                             img,
                             span {
@@ -764,7 +782,9 @@ body {
                         }
                     }
 
-                    img.cover {
+                    div.cover {
+                        background-repeat: no-repeat;
+                        background-size: 211px 140px;
                         width: 211px;
                         height: 140px;
                     }
@@ -777,7 +797,7 @@ body {
                         padding-top: 2px;
                         text-align: left;
                         max-height: 50px;
-                        word-wrap: break-word;
+                        margin-bottom: 32px;
                         overflow: hidden;
                         height: 100%;
                     }
@@ -786,10 +806,11 @@ body {
                         cursor: auto;
 
                         div.process-message {
+                            padding: 0 12px;
                             position: absolute;
                             text-align: center;
-                            top: 48px;
-                            left: 18%;
+                            width: 211px;
+                            top: 30px;
 
                             i {
                                 color: white;
@@ -800,17 +821,18 @@ body {
 
                             strong {
                                 color: white;
-                                font-size: 14px;
-                                line-height: 16px;
+                                font-size: 10px;
+                                line-height: 12px;
                                 display: block;
-                                font-style: italic;
                                 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+                                font-style: normal;
 
                                 &.title {
                                     font-weight: 700;
-                                    font-style: normal;
+                                    font-style: italic;
                                     font-size: 16px;
                                     line-height: 20px;
+                                    margin-bottom: 94px;
                                 }
                             }
                         }
@@ -881,11 +903,15 @@ body {
             background: #2a394e url('../../img/v2/bkg-loggedin-nocarousel.png') repeat-x;
 
             #uploader {
-                margin-top: 53px;
+                margin-top: 23px;
             }
 
             #base #videos {
-                margin-bottom: 140px;
+                margin-bottom: 110px;
+            }
+
+            #video-list {
+                min-height: 521px;
             }
         }
 
