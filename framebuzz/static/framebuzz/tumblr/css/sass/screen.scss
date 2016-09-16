@@ -888,20 +888,24 @@ body {
         &.no-videos {
             background: #2a394e url('../../img/v2/bkg-novideos.png') repeat-x;
 
-            &.no-carousel {
-                background: #2a394e url('../../img/v2/bkg-novideos-nocarousel.png') repeat-x;
-            }
-
             #base #videos {
                 margin-bottom: inherit;
 
                 #no-videos {
-                    margin-bottom: 84px;
+                    margin-bottom: 100px;
                 }
             }
 
             #video-list {
                 min-height: auto;
+            }
+
+            &.no-carousel {
+                background: #2a394e url('../../img/v2/bkg-novideos-nocarousel.png') repeat-x;
+
+                #base #videos #no-videos {
+                    margin-bottom: 84px;
+                }
             }
         }
     }
