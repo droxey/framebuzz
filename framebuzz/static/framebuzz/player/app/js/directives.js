@@ -31,7 +31,7 @@ angular.module('framebuzz.directives', [])
                 defaultVideoHeight: '100%',
                 enableAutosize: true,
                 usePluginFullScreen: true,
-                debug: true,
+                debug: SOCK.debug,
                 poster: SOCK.poster_image,
                 enablePluginDebug: true,
                 features: SOCK.video_player_features,
