@@ -8,7 +8,7 @@
          <div class="col-xs-4 video pull-left{% if video.processing %} processing{% endif %}">
              {% if not video.processing %}
                <div class="overlay clearfix">
-                  <a class="edit-video pull-right" href="">edit</a>
+                  <a class="edit-video pull-right" href="{% url 'fbz-edit-video' video.slug %}">edit</a>
                    <a class="play-video" data-remodal-target="modal" href="#" data-video-url="{% url 'video-embed' video.slug %}">
                        <img src="{% static 'framebuzz/tumblr/img/play@2x.png' %}" height="47" width="47">
                    </a>

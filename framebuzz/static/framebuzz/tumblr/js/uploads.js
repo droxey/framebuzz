@@ -91,7 +91,21 @@ $(function() {
 
     // When the user chooses to edit a video description.
     $(document).on('click', 'a.edit-video', function() {
-        console.log('not implemented');
+        console.log('TODO: not implemented');
+    });
+
+    // Deletes a video you uploaded.
+    $(document).on('click', 'a.delete-video', function() {
+        // TODO: Delete tile from the UI as well.
+        var url = $(this).attr('href');
+        $.get(url, function(httpResponse) {
+            $.growl.notice({ message: "Video deleted." });
+        });
+    });
+
+    // To read more of a video description.
+    $(document).on('click', 'p.description', function() {
+        $(this).toggleClass('expanded');
     });
 
     // Request our player template when the modal dialog opens.

@@ -749,7 +749,6 @@ body {
                 padding: 0 20px;
 
                 div.video {
-                    cursor: pointer;
                     position: relative;
                     z-index: 1;
 
@@ -833,6 +832,7 @@ body {
 
                         a.copy-embed {
                             color: #9dc5fd;
+                            cursor: pointer;
                             display: block;
                             font: 12.64px 'proxima-nova';
                             text-align: center;
@@ -899,6 +899,15 @@ body {
                         margin-bottom: 32px;
                         overflow: hidden;
                         height: 100%;
+
+                        &.expanded {
+                            background-color: rgba(41, 55, 76, 0.79);
+                            overflow: visible;
+                            max-height: none;
+                            height: 100%;
+                            position: relative;
+                            z-index: 100;
+                        }
                     }
 
                     &.processing {

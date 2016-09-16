@@ -18,4 +18,12 @@ urlpatterns = patterns(
     url(r'^video/post/(?P<slug>[\w.@+-]+)/$',
         'framebuzz.apps.tumblr.views.post_to_tumblr',
         name='fbz-tumblr-post'),
+
+    url(r'^video/edit/(?P<slug>[\w.@+-]+)/$',
+        'framebuzz.apps.tumblr.views.edit_video',
+        name='fbz-edit-video'),
+
+    url(r'^video/delete/(?P<slug>[\w.@+-]+)/$',
+        'framebuzz.apps.tumblr.views.delete_video',
+        name='fbz-delete-video'),
 )

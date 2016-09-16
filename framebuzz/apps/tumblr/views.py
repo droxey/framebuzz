@@ -88,3 +88,18 @@ def post_to_tumblr(request, slug):
     vid = Video.objects.get(slug=slug)
     submit_to_tumblr.apply_async(args=[vid.added_by.username, vid.video_id])
     return HttpResponse(200)
+
+
+@login_required(login_url='/tumblr/')
+def edit_video(request, slug):
+    ''' Ajax endpoint that allows us to edit a video we've uploaded. '''
+    vid = Video.objects.get(slug=slug)
+    return HttpResponse(200)
+
+
+@login_required(login_url='/tumblr/')
+def delete_video(request, slug):
+    ''' Ajax endpoint that allows us to delete a video we've uploaded. '''
+    vid = Video.objects.get(slug=slug)
+    vid.delete()
+    return HttpResponse(200)
