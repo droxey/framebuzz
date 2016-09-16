@@ -6,7 +6,7 @@
 angular.module('framebuzz.directives', [])
     .directive('appVersion', 'version', function(version) {
         return function(scope, elm, attrs) {
-          elm.text(version);
+            elm.text(version);
         };
     })
     .directive('closeSocket', ['socket', function(socket) {
@@ -22,15 +22,15 @@ angular.module('framebuzz.directives', [])
             var y = $(window).height();
 
             $(window).resize(function() {
-              var x = $(window).width();
-              var y = $(window).height();
+                var x = $(window).width();
+                var y = $(window).height();
             });
 
             $(element).mediaelementplayer({
                 defaultVideoWidth: '100%',
                 defaultVideoHeight: '100%',
                 enableAutosize: true,
-                usePluginFullScreen: false,
+                usePluginFullScreen: true,
                 debug: true,
                 poster: SOCK.poster_image,
                 enablePluginDebug: true,
@@ -66,7 +66,7 @@ angular.module('framebuzz.directives', [])
                     var isFirefox = typeof InstallTrigger !== 'undefined';
                     var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
                     var isChrome = !!window.chrome;
-                    var isIE = /*@cc_on!@*/false;
+                    var isIE = /*@cc_on!@*/ false;
                     var hasHitPlay = false;
                     var videoTitle = $('#video-title');
 
@@ -83,9 +83,9 @@ angular.module('framebuzz.directives', [])
                         // If private and owner, show message for user 'click play to get started'
                         var overlayContainer = $('.mejs-overlay-play');
                         var message = $('<div class="mejs-overlay-button host-message">' +
-                                            '<i class="fa fa-fw fa-play fa-rotate-270 tip"></i>' +
-                                            '<span>Click play to watch the video in real-time with your audience.</span>' +
-                                        '</div>');
+                            '<i class="fa fa-fw fa-play fa-rotate-270 tip"></i>' +
+                            '<span>Click play to watch the video in real-time with your audience.</span>' +
+                            '</div>');
                         overlayContainer.append(message);
                     }
 
@@ -143,13 +143,16 @@ angular.module('framebuzz.directives', [])
                         if (button.hasClass('mejs-mute')) {
                             button.removeClass('mejs-mute').addClass('mejs-unmute');
                             button.html('<i class="fa fa-comment"></i>Show Conversation');
-                            broadcaster.prepForBroadcast({ broadcastType: 'player_muteconvo' });
-                        }
-                        else {
+                            broadcaster.prepForBroadcast({
+                                broadcastType: 'player_muteconvo'
+                            });
+                        } else {
                             videoTitle.removeClass('full-width');
                             button.removeClass('mejs-unmute').addClass('mejs-mute');
                             button.html('<i class="fa fa-comment"></i>Mute Conversation');
-                            broadcaster.prepForBroadcast({ broadcastType: 'player_unmuteconvo' });
+                            broadcaster.prepForBroadcast({
+                                broadcastType: 'player_unmuteconvo'
+                            });
                         }
                     });
 
@@ -157,7 +160,9 @@ angular.module('framebuzz.directives', [])
                         fadeOutControls();
 
                         window.setTimeout(function() {
-                            broadcaster.prepForBroadcast({ broadcastType: 'player_startprivateconvo' });
+                            broadcaster.prepForBroadcast({
+                                broadcastType: 'player_startprivateconvo'
+                            });
                         }, 300);
                     });
 
@@ -165,7 +170,9 @@ angular.module('framebuzz.directives', [])
                         fadeOutControls();
 
                         window.setTimeout(function() {
-                            broadcaster.prepForBroadcast({ broadcastType: 'player_startprivateviewing' });
+                            broadcaster.prepForBroadcast({
+                                broadcastType: 'player_startprivateviewing'
+                            });
                         }, 300);
                     });
 
@@ -181,7 +188,9 @@ angular.module('framebuzz.directives', [])
                         fadeOutControls();
 
                         window.setTimeout(function() {
-                            broadcaster.prepForBroadcast({ broadcastType: 'player_addtolibrary' });
+                            broadcaster.prepForBroadcast({
+                                broadcastType: 'player_addtolibrary'
+                            });
                         }, 300);
                     });
 
@@ -208,7 +217,10 @@ angular.module('framebuzz.directives', [])
                     //  Video Player Event Listeners
                     //  =====
                     media.addEventListener('timeupdate', function(e) {
-                        broadcaster.prepForBroadcast({ broadcastType: 'player_timeupdate', currentTime: media.currentTime });
+                        broadcaster.prepForBroadcast({
+                            broadcastType: 'player_timeupdate',
+                            currentTime: media.currentTime
+                        });
                     }, false);
 
                     media.addEventListener('ended', function(e) {
@@ -223,11 +235,15 @@ angular.module('framebuzz.directives', [])
                         }
                         hasHitPlay = true;
                         $('#buzz-layer > div.panel').removeClass('hide-before-play');
-                        broadcaster.prepForBroadcast({ broadcastType: 'player_playing' });
+                        broadcaster.prepForBroadcast({
+                            broadcastType: 'player_playing'
+                        });
                     }, false);
 
                     media.addEventListener('pause', function(e) {
-                        broadcaster.prepForBroadcast({ broadcastType: 'player_paused' });
+                        broadcaster.prepForBroadcast({
+                            broadcastType: 'player_paused'
+                        });
                     }, false);
                 }
             });
@@ -255,7 +271,10 @@ angular.module('framebuzz.directives', [])
     }])
     .directive('maxinput', function() {
         return function(scope, element, attrs) {
-            $(element).maxlength({showFeedback: false, max: 180});
+            $(element).maxlength({
+                showFeedback: false,
+                max: 180
+            });
         };
     })
     .directive('textboxwidth', function() {
@@ -308,8 +327,7 @@ angular.module('framebuzz.directives', [])
                             if (e.keyCode != 8 && e.keyCode != 46) {
                                 setPostTime();
                             }
-                        }
-                        else {
+                        } else {
                             if ($(element).val().length == 0) {
                                 if (e.keyCode == 8 || e.keyCode == 46) {
                                     unsetPostTime();
@@ -367,8 +385,10 @@ angular.module('framebuzz.directives', [])
     .directive('loginpopup', ['localStorageService', function(localStorageService) {
         return function(scope, element, attrs) {
             $(element).click(function() {
-                var newWindow = window.open(attrs.loginpopup,'frameBuzzSSOLoginWindow','toolbar=0,resizable=0,status=0,width=640,height=528');
-                if (window.focus) { newWindow.focus(); }
+                var newWindow = window.open(attrs.loginpopup, 'frameBuzzSSOLoginWindow', 'toolbar=0,resizable=0,status=0,width=640,height=528');
+                if (window.focus) {
+                    newWindow.focus();
+                }
                 localStorageService.set('loggingIn', true);
                 return false;
             });
@@ -403,7 +423,7 @@ angular.module('framebuzz.directives', [])
                 var otherInput = elem.inheritedData("$formController")[attrs.repeatPassword];
 
                 ctrl.$parsers.push(function(value) {
-                    if(value === otherInput.$viewValue) {
+                    if (value === otherInput.$viewValue) {
                         ctrl.$setValidity("repeat", true);
                         return value;
                     }
@@ -436,11 +456,11 @@ angular.module('framebuzz.directives', [])
             transclude: true,
             replace: true,
             template: '<div class="input-fields">' +
-                        '<form class="clearfix">' +
-                            '<input id="users-autocomplete" data-ng-model="term" data-ng-change="query()" type="text" placeholder="Find friends&hellip;" autocomplete="off">' +
-                            '<div ng-transclude></div>' +
-                        '</form>' +
-                     '</div>',
+                '<form class="clearfix">' +
+                '<input id="users-autocomplete" data-ng-model="term" data-ng-change="query()" type="text" placeholder="Find friends&hellip;" autocomplete="off">' +
+                '<div ng-transclude></div>' +
+                '</form>' +
+                '</div>',
             scope: {
                 search: "&",
                 select: "&",
@@ -477,7 +497,9 @@ angular.module('framebuzz.directives', [])
                 this.select = function(item) {
                     $scope.hide = true;
                     $scope.focused = true;
-                    $scope.select({item:item});
+                    $scope.select({
+                        item: item
+                    });
                 };
 
                 $scope.isVisible = function() {
@@ -486,7 +508,10 @@ angular.module('framebuzz.directives', [])
 
                 $scope.query = function() {
                     $scope.hide = false;
-                    broadcaster.prepForBroadcast({ broadcastType: 'player_searchusers', term: $scope.term });
+                    broadcaster.prepForBroadcast({
+                        broadcastType: 'player_searchusers',
+                        term: $scope.term
+                    });
                 };
 
                 $scope.$on('user_search_complete', function() {
@@ -500,28 +525,40 @@ angular.module('framebuzz.directives', [])
                 var $list = element.find('> div');
 
                 $input.bind('focus', function() {
-                    scope.$apply(function() { scope.focused = true; });
+                    scope.$apply(function() {
+                        scope.focused = true;
+                    });
                 });
 
                 $input.bind('blur', function() {
-                    scope.$apply(function() { scope.focused = false; });
+                    scope.$apply(function() {
+                        scope.focused = false;
+                    });
                 });
 
                 $list.bind('mouseover', function() {
-                    scope.$apply(function() { scope.mousedOver = true; });
+                    scope.$apply(function() {
+                        scope.mousedOver = true;
+                    });
                 });
 
                 $list.bind('mouseleave', function() {
-                    scope.$apply(function() { scope.mousedOver = false; });
+                    scope.$apply(function() {
+                        scope.mousedOver = false;
+                    });
                 });
 
                 $input.bind('keyup', function(e) {
                     if (e.keyCode === 9 || e.keyCode === 13) {
-                        scope.$apply(function() { this.selectActive(); });
+                        scope.$apply(function() {
+                            this.selectActive();
+                        });
                     }
 
                     if (e.keyCode === 27) {
-                        scope.$apply(function() { scope.hide = true; });
+                        scope.$apply(function() {
+                            scope.hide = true;
+                        });
                     }
                 });
 
@@ -532,12 +569,16 @@ angular.module('framebuzz.directives', [])
 
                     if (e.keyCode === 40) {
                         e.preventDefault();
-                        scope.$apply(function() { controller.activateNextItem(); });
+                        scope.$apply(function() {
+                            controller.activateNextItem();
+                        });
                     }
 
                     if (e.keyCode === 38) {
                         e.preventDefault();
-                        scope.$apply(function() { controller.activatePreviousItem(); });
+                        scope.$apply(function() {
+                            controller.activatePreviousItem();
+                        });
                     }
                 });
 
@@ -547,7 +588,9 @@ angular.module('framebuzz.directives', [])
 
                 scope.$watch('focused', function(focused) {
                     if (focused) {
-                        $timeout(function() { $input.focus(); }, 0, false);
+                        $timeout(function() {
+                            $input.focus();
+                        }, 0, false);
                     }
                 });
 
@@ -571,68 +614,70 @@ angular.module('framebuzz.directives', [])
     }])
     .directive('typeaheadItem', ['broadcaster', function(broadcaster) {
         return {
-             link: function($scope, $element, $attributes) {
-                 var item = $scope.$eval($attributes.typeaheadItem);
-                 var siblings = $element.parent().children();
+            link: function($scope, $element, $attributes) {
+                var item = $scope.$eval($attributes.typeaheadItem);
+                var siblings = $element.parent().children();
 
-                 $element.bind('click', function(e) {
-                     siblings.removeClass('active');
-                     $element.addClass('active');
+                $element.bind('click', function(e) {
+                    siblings.removeClass('active');
+                    $element.addClass('active');
 
-                    broadcaster.prepForBroadcast({ broadcastType: 'player_addinvitee', invitee: item });
+                    broadcaster.prepForBroadcast({
+                        broadcastType: 'player_addinvitee',
+                        invitee: item
+                    });
 
                     $('div.menu').hide();
                     $element.remove();
                     $('#users-autocomplete').val('');
-                 });
+                });
             }
         };
- }])
-.directive('togglefollow', ['broadcaster', function(broadcaster) {
-     return {
-         link: function($scope, $element, $attributes) {
-            $element.click(function() {
-                $element.toggleClass('active');
+    }])
+    .directive('togglefollow', ['broadcaster', function(broadcaster) {
+        return {
+            link: function($scope, $element, $attributes) {
+                $element.click(function() {
+                    $element.toggleClass('active');
 
-                var icon = $element.find('i.fa').not('.fa-user');
-                icon.toggleClass('fa-plus fa-minus');
-            });
-         }
-     };
- }])
-.directive('togglefavorite', ['broadcaster', function(broadcaster) {
-     return {
-         link: function($scope, $element, $attributes) {
-            $element.click(function() {
-                $element.toggleClass('active');
-            });
-         }
-     };
- }])
- .directive('redirectConversation', ['broadcaster', function(broadcaster) {
-     return {
-         link: function($scope, $element, $attributes) {
-            $scope.$on('private_convo_started', function() {
-                var url = broadcaster.message.data.convo_url,
-                    sync = broadcaster.message.data.controlSync,
-                    seconds = 4,
-                    countdownTimer = window.setInterval(timer, 1000),
-                    text = sync ? 'Loading new conversation in ' : 'Loading private viewing in ';
+                    var icon = $element.find('i.fa').not('.fa-user');
+                    icon.toggleClass('fa-plus fa-minus');
+                });
+            }
+        };
+    }])
+    .directive('togglefavorite', ['broadcaster', function(broadcaster) {
+        return {
+            link: function($scope, $element, $attributes) {
+                $element.click(function() {
+                    $element.toggleClass('active');
+                });
+            }
+        };
+    }])
+    .directive('redirectConversation', ['broadcaster', function(broadcaster) {
+        return {
+            link: function($scope, $element, $attributes) {
+                $scope.$on('private_convo_started', function() {
+                    var url = broadcaster.message.data.convo_url,
+                        sync = broadcaster.message.data.controlSync,
+                        seconds = 4,
+                        countdownTimer = window.setInterval(timer, 1000),
+                        text = sync ? 'Loading new conversation in ' : 'Loading private viewing in ';
 
-                function timer() {
-                    seconds = seconds - 1;
-                    if (seconds <= 0) {
-                        $element.text('Redirecting...');
+                    function timer() {
+                        seconds = seconds - 1;
+                        if (seconds <= 0) {
+                            $element.text('Redirecting...');
 
-                        clearInterval(countdownTimer);
-                        window.location.href = url;
+                            clearInterval(countdownTimer);
+                            window.location.href = url;
+                        } else {
+                            var secondText = seconds == 1 ? ' second...' : ' seconds...';
+                            $element.text(text + seconds.toString() + secondText);
+                        }
                     }
-                    else {
-                        var secondText = seconds == 1 ? ' second...' : ' seconds...';
-                        $element.text(text + seconds.toString() + secondText);
-                    }
-                }
-            });
-         }
-     };
- }]);
+                });
+            }
+        };
+    }]);

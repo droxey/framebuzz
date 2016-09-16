@@ -2,8 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('framebuzz',
-    [
+angular.module('framebuzz', [
         'truncate',
         'fbExceptions',
         'ngCookies',
@@ -88,8 +87,8 @@ angular.module('framebuzz',
                 templateUrl: templateRootPath + 'player.signupView.html',
                 url: '/signup',
                 data: {
-                     panelId: 'signup-view',
-                     animation: 'share'
+                    panelId: 'signup-view',
+                    animation: 'share'
                 }
             };
 

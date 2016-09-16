@@ -38,9 +38,12 @@
       <link href="{% static 'framebuzz/player/app/css/mejs-skins.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/perfect-scrollbar-0.4.1.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <link href="{% static 'framebuzz/player/app/css/jquery.maxlength.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <link href="{% static 'framebuzz/player/app/css/jquery.share.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <link href="{% static 'framebuzz/player/app/css/jquery.datetimepicker.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <link href="{% static 'framebuzz/player/app/css/social-buttons.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+      {% comment %}
+        <!-- TODO: The player no longer uses these. Remove them after testing. -->
+        <link href="{% static 'framebuzz/player/app/css/jquery.share.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/jquery.datetimepicker.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/social-buttons.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+      {% endcomment %}
       <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
       <!--[if IE]><link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css"><![endif]-->
       <!--[if gte IE 9]><style type="text/css">ul.comment-stream { filter: none; }</style><![endif]-->
@@ -131,13 +134,16 @@
     {% compress js %}
       <script src="{% static 'framebuzz/player/app/lib/jquery/jquery-1.9.1.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/raven.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/moment.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.maxlength.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/jquery/perfect-scrollbar-0.4.1.with-mousewheel.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.zclip.min.js' %}"></script>
+      {% comment %}
+        <!-- TODO: The player no longer uses these. Remove them after testing. -->
+        <script src="{% static 'framebuzz/player/app/lib/moment.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.zclip.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.share.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.datetimepicker.js' %}"></script>
+      {% endcomment %}
       <script src="{% static 'framebuzz/player/app/lib/jquery/toastr.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.share.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.datetimepicker.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/angular/angular.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/angular/angular-ui-router.min.js' %}"></script>
       <script src="{% static 'framebuzz/player/app/lib/angular/angular-resource.min.js' %}"></script>
