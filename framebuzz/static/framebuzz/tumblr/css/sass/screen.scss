@@ -136,6 +136,73 @@ body {
         }
     }
 
+    #sidenav {
+        position: absolute;
+        top: 217px;
+        left: -15px;
+
+        a {
+            color: white;
+            display: block;
+            height: 62px;
+            font: 17px 'lobster';
+            width: 100%;
+
+            span.icon {
+                background: url('../../img/v2/sidenav@2x.png') no-repeat;
+                background-size: 126px 187px;
+                display: inline-block;
+                height: 62px;
+                margin-right: 9px;
+                width: 62px;
+                vertical-align: middle;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            &.upload {
+                span.icon {
+                    background-position: 0 0;
+                }
+
+                &:hover {
+                    span.icon {
+                        background-position: -64px 0;
+                    }
+                }
+            }
+
+            &.framebuzzes {
+                span.icon {
+                    background-position: 0 -62px;
+                }
+
+                &:hover {
+                    span.icon {
+                        background-position: -64px -62px;
+                    }
+                }
+            }
+
+            &.share {
+                color: #67788f;
+                font: 15px 'lobster';
+
+                span.icon {
+                    background-position: 0 -124px;
+                }
+
+                &:hover {
+                    span.icon {
+                        background-position: -64px -124px;
+                    }
+                }
+            }
+        }
+    }
+
     #example {
         min-height: 467px;
         position: relative;

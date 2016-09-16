@@ -28,6 +28,7 @@ def home(request):
         'next_url': reverse('fbz-tumblr-exit-login'),
         'show_carousel': carousel.get('show_carousel', False),
         'slides': carousel.get('slides', None),
+        'is_debug': settings.DEBUG,
     }, context_instance=RequestContext(request))
 
 
@@ -76,6 +77,7 @@ def dashboard(request, username):
         'upload_form': upload_form,
         'show_carousel': carousel.get('show_carousel', False),
         'slides': carousel.get('slides', None),
+        'is_debug': settings.DEBUG,
     }, context_instance=RequestContext(request))
 
 
