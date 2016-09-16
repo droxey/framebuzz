@@ -10,7 +10,7 @@ from pure_pagination import Paginator, PageNotAnInteger, EmptyPage
 
 from framebuzz.apps.api.models import Video
 from framebuzz.apps.tumblr.forms import TumblrUploadForm
-from framebuzz.apps.tumblr.utils import get_user_videos
+from framebuzz.apps.tumblr.utils import get_user_videos, get_carousel_slides
 from framebuzz.apps.tumblr.tasks import submit_to_tumblr
 
 
@@ -23,10 +23,11 @@ def home(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(
             reverse('fbz-tumblr-dashboard', args=[request.user.username]))
-    show_carousel = True
+    carousel = get_carousel_slides()
     return render_to_response('tumblr/home.html', {
         'next_url': reverse('fbz-tumblr-exit-login'),
-        'show_carousel': show_carousel,
+        'show_carousel': carousel.get('show_carousel', False),
+        'slides': carousel.get('slides', None),
     }, context_instance=RequestContext(request))
 
 
@@ -68,12 +69,13 @@ def dashboard(request, username):
     videos = get_user_videos(username)
     p = Paginator(videos, VIDEOS_PER_PAGE, request=request)
     page_obj = p.page(page)
-    show_carousel = True
+    carousel = get_carousel_slides()
     return render_to_response(template, {
         'page_obj': page_obj,
         'video_count': len(videos),
         'upload_form': upload_form,
-        'show_carousel': show_carousel,
+        'show_carousel': carousel.get('show_carousel', False),
+        'slides': carousel.get('slides', None),
     }, context_instance=RequestContext(request))
 
 
