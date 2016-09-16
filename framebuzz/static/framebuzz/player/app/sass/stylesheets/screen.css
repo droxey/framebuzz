@@ -941,18 +941,18 @@ video {
 #player-container #player-layer div.mejs-video.show-controls div.mejs-inner div.mejs-controls .mejs-fade-in {
   cursor: pointer;
   opacity: 1;
-  -moz-transition: opacity, 0.25s, ease-in-out 1s;
-  -o-transition: opacity, 0.25s, ease-in-out 1s;
-  -webkit-transition: opacity, 0.25s, ease-in-out 1s;
-  transition: opacity 0.25s ease-in-out 1s;
+  -moz-transition: opacity, 50ms, ease-in-out 1s;
+  -o-transition: opacity, 50ms, ease-in-out 1s;
+  -webkit-transition: opacity, 50ms, ease-in-out 1s;
+  transition: opacity 50ms ease-in-out 1s;
 }
 /* line 695, ../sass/screen.scss */
 #player-container #player-layer div.mejs-video.show-controls.fade-out-controls div.mejs-inner div.mejs-controls .mejs-fade-in {
   opacity: 0;
-  -moz-transition: opacity, 0.25s, ease-in-out 1s;
-  -o-transition: opacity, 0.25s, ease-in-out 1s;
-  -webkit-transition: opacity, 0.25s, ease-in-out 1s;
-  transition: opacity 0.25s ease-in-out 1s;
+  -moz-transition: opacity, 50ms, ease-in-out 1s;
+  -o-transition: opacity, 50ms, ease-in-out 1s;
+  -webkit-transition: opacity, 50ms, ease-in-out 1s;
+  transition: opacity 50ms ease-in-out 1s;
 }
 /* line 704, ../sass/screen.scss */
 #player-container #player-layer #heatmap-and-post {
@@ -4915,4 +4915,22 @@ video {
     height: 30px;
     top: 0;
   }
+}
+/* line 2969, ../sass/screen.scss */
+html.mejs-fullscreen #player-container #player-layer div.mejs-video div.mejs-inner div.mejs-mediaelement,
+html.mejs-fullscreen #player-container #player-layer div.mejs-video div.mejs-inner,
+html.mejs-fullscreen #player-container #player-layer video,
+html.mejs-fullscreen #player-container #player-layer div.mejs-video div.mejs-inner div.mejs-controls {
+  height: 100% !important;
+  width: 100% !important;
+}
+/* line 2978, ../sass/screen.scss */
+html.mejs-fullscreen #player-container #player-layer div.mejs-inner div.mejs-controls div.mejs-time-rail,
+html.mejs-fullscreen #player-container #player-layer div.mejs-inner div.mejs-controls div.mejs-title {
+  width: 100% !important;
+}
+/* line 2984, ../sass/screen.scss */
+html.mejs-fullscreen #player-container #player-layer #heatmap-and-post,
+html.mejs-fullscreen #player-container #player-layer div.mejs-inner div.mejs-controls div.mejs-share button.mejs-mute-convo-button {
+  display: none;
 }

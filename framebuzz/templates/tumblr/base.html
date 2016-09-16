@@ -80,7 +80,7 @@
       </div>
       <div id="login-row">
         {% if request.user.is_authenticated %}
-          <a href="" title="Upload a video and start a framebuzz" class="btn-start-fbz"></a>
+          <a href="#uploader" title="Upload a video and start a framebuzz" class="btn-start-fbz"></a>
         {% else %}
             <a href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}" title="Login with your Tumblr account and upload a video" class="btn-login no-login tumblr-login-link"></a>
         {% endif %}

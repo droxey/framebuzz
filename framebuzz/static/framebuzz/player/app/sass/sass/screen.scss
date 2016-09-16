@@ -2963,3 +2963,27 @@ body.mejs-fullscreen {
         top: 0;
     }
 }
+
+html.mejs-fullscreen {
+    #player-container #player-layer {
+        div.mejs-video div.mejs-inner div.mejs-mediaelement,
+        div.mejs-video div.mejs-inner,
+        video,
+        div.mejs-video div.mejs-inner div.mejs-controls {
+            height: 100% !important;
+            width: 100% !important;
+        }
+
+        div.mejs-inner div.mejs-controls {
+            div.mejs-time-rail,
+            div.mejs-title {
+                width: 100% !important;
+            }
+        }
+
+        #heatmap-and-post,
+        div.mejs-inner div.mejs-controls div.mejs-share button.mejs-mute-convo-button {
+            display: none;
+        }
+    }
+} 
