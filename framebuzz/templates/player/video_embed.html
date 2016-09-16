@@ -48,16 +48,10 @@
       <!--[if IE]><link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css"><![endif]-->
       <!--[if gte IE 9]><style type="text/css">ul.comment-stream { filter: none; }</style><![endif]-->
     {% endcompress %}
+    <script src="https://use.typekit.net/tud1dml.js"></script>
+    <script>try{Typekit.load({ async: false });}catch(e){}</script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% compress js %}
-      <script>
-        (function(d) {
-          var tkTimeout=3000;
-          if(window.sessionStorage){if(sessionStorage.getItem('useTypekit')==='false'){tkTimeout=0;}}
-          var config = { kitId: 'tud1dml', scriptTimeout: tkTimeout },
-          h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+"wf-inactive";if(window.sessionStorage){sessionStorage.setItem("useTypekit","false")}},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+="wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-        })(document);
-      </script>
       <script type="text/javascript">
         // Disable ESC as it breaks SockJS connection.
         // See https://github.com/sockjs/sockjs-client/issues/18.
