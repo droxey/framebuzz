@@ -47,7 +47,7 @@
     {% endcompress %}
     {% block extra_head %}{% endblock %}
   </head>
-  <body class="tumblr{% block body_classes %}{% endblock %}">
+  <body class="tumblr {% if not show_carousel %} no-carousel{% endif %}{% block body_classes %}{% endblock %}">
     <!--[if lte IE 8]>
       <div class="chromeframe">
         You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.
@@ -78,52 +78,22 @@
           </div>
           {% endcomment %}
       </div>
-      {% if not request.user.is_authenticated %}
-        <div id="login-row">
-          <a href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}" title="Login with your Tumblr account and upload a video" class="btn-login no-login"></a>
-        </div>
-      {% endif %}
-      <div id="fbz-on-tumblr" class="row">
-          <div class="carousel-header">
-            <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/v2/fbz-on-tumblr@2x.png' %}" height="70" width="736">
-          </div>
-          <div id="carousel" class="clearfix">
-            <a href="#" class="previous"></a>
-            <ul>
-              <li>
-                <a href="#">
-                  <img src="{% static 'framebuzz/tumblr/img/v2/fpo-slide@2x.png' %}" width="166" height="118">
-                  <span class="bubble">207</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="{% static 'framebuzz/tumblr/img/v2/fpo-slide@2x.png' %}" width="166" height="118">
-                  <span class="bubble">1</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="{% static 'framebuzz/tumblr/img/v2/fpo-slide@2x.png' %}" width="166" height="118">
-                  <span class="bubble">298</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="{% static 'framebuzz/tumblr/img/v2/fpo-slide@2x.png' %}" width="166" height="118">
-                  <span class="bubble">85</span>
-                </a>
-              </li>
-            </ul>
-            <a href="#" class="next"></a>
-          </div>
+      <div id="login-row">
+        {% if request.user.is_authenticated %}
+          <a href="" title="Upload a video and start a framebuzz" class="btn-start-fbz"></a>
+        {% else %}
+            <a href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}" title="Login with your Tumblr account and upload a video" class="btn-login no-login tumblr-login-link"></a>
+        {% endif %}
       </div>
+      {% if show_carousel %}
+        {% include "tumblr/snippets/carousel.html" %}
+      {% endif %}
       <div id="uploader" class="row">
         {% include "tumblr/snippets/upload.html" %}
       </div>
       {% block content %}{% endblock %}
       <div id="post" class="row clearfix">
-        <h1>2. Post it to your tumblr page... <em>and get talking</em>!</h1>
+        <h1>Post it to your tumblr page... <em>and get talking</em>!</h1>
           <img src="{% static 'framebuzz/tumblr/img/vid@2x.jpg' %}" height="107" width="166" class="pull-left">
           <p class="info pull-left">
             Click the 'post to my tumblr' button on your video, or copy/paste the embed tag<br>

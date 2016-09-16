@@ -23,8 +23,10 @@ def home(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(
             reverse('fbz-tumblr-dashboard', args=[request.user.username]))
+    show_carousel = False
     return render_to_response('tumblr/home.html', {
         'next_url': reverse('fbz-tumblr-exit-login'),
+        'show_carousel': show_carousel,
     }, context_instance=RequestContext(request))
 
 
@@ -66,10 +68,12 @@ def dashboard(request, username):
     videos = get_user_videos(username)
     p = Paginator(videos, VIDEOS_PER_PAGE, request=request)
     page_obj = p.page(page)
+    show_carousel = False
     return render_to_response(template, {
         'page_obj': page_obj,
         'video_count': len(videos),
-        'upload_form': upload_form
+        'upload_form': upload_form,
+        'show_carousel': show_carousel,
     }, context_instance=RequestContext(request))
 
 

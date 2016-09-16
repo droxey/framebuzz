@@ -1,15 +1,16 @@
 @import "compass";
 @import "compass/css3/border-radius";
 @import "compass/reset";
-@import "compass/css3/transition";
-// =============================================================================
+@import "compass/css3/transition"; // =============================================================================
 // Basics
 // =============================================================================
+
 .clearfix:after {
     content: "";
     display: block;
     clear: both;
 }
+
 .ng-cloak,
 .x-ng-cloak,
 [data-ng-cloak],
@@ -27,12 +28,14 @@
 // =============================================================================
 // Elements
 // =============================================================================
+
 body {
     font: 12px/16px 'proxima-nova';
 }
 // =============================================================================
 // Classes
 // =============================================================================
+
 .blue-round {
     @include border-radius(6px, 6px);
     background-color: #28374c;
@@ -40,10 +43,12 @@ body {
     padding: 44px 0 10px 3px;
     text-align: center;
     width: 100%;
+
     &.no-videos {
         padding: 44px 0;
     }
 }
+
 #growls {
     div.growl {
         div.growl-title {
@@ -54,23 +59,30 @@ body {
 // =============================================================================
 // IDs
 // =============================================================================
+
 #base {
     #header {
         min-height: 257px;
         position: relative;
+
         img.header {
             margin: 0 auto;
         }
+
         #actions {
             height: 38px;
+
             &.logged-out {
                 padding-top: 10px;
             }
+
             &.logged-in {
                 padding-top: 8px;
             }
+
             p.login-info {
                 cursor: default;
+
                 span.as {
                     color: #8597b1;
                     font-size: 10px;
@@ -78,6 +90,7 @@ body {
                     position: relative;
                     top: 1px;
                 }
+
                 a.username {
                     color: #9ba6b5;
                     font-size: 12px;
@@ -87,10 +100,12 @@ body {
                     display: inline-block;
                     vertical-align: baseline;
                     text-decoration: none;
+
                     &:hover {
                         text-decoration: underline;
                     }
                 }
+
                 a,
                 input {
                     color: #8597b1;
@@ -98,15 +113,18 @@ body {
                     display: inline-block;
                     text-decoration: underline;
                 }
+
                 a {
                     padding-left: 8px;
                 }
+
                 input {
                     background: none;
                     border: none;
                     font-size: 10px;
                     margin-left: -7px;
                 }
+
                 img.avatar {
                     display: inline-block;
                     vertical-align: middle;
@@ -117,9 +135,11 @@ body {
             }
         }
     }
+
     #example {
         min-height: 467px;
         position: relative;
+
         #embed-row {
             position: absolute;
             top: 83px;
@@ -128,8 +148,10 @@ body {
             height: 306px;
         }
     }
+
     #login-row {
         min-height: 98px;
+
         a.btn-login {
             background: url('../../img/v2/btn-login@2x.png') no-repeat;
             background-size: 446px 108px;
@@ -143,7 +165,22 @@ body {
                 background-position: 0 -58px;
             }
         }
+
+        a.btn-start-fbz {
+            background: url('../../img/v2/btn-upload@2x.png') no-repeat;
+            background-size: 339px 106px;
+            display: block;
+            height: 50px;
+            overflow: hidden;
+            margin: 0 auto;
+            width: 339px;
+
+            &:hover {
+                background-position: 0 -56px;
+            }
+        }
     }
+
     #fbz-on-tumblr {
         margin-bottom: 37px;
         margin-left: -34px;
@@ -163,8 +200,8 @@ body {
             position: relative;
             top: -7px;
 
-            a.previous,
-            a.next {
+            a.next,
+            a.previous {
                 background: url('../../img/v2/controls@2x.png') no-repeat;
                 background-size: 47px 81px;
                 cursor: pointer;
@@ -218,7 +255,7 @@ body {
                             font-size: 25px;
                             height: 50px;
                             width: 50px;
-                            padding: 13px 0px 21px 0;
+                            padding: 13px 0 21px;
                             position: absolute;
                             left: 36%;
                             top: 43px;
@@ -234,8 +271,10 @@ body {
             }
         }
     }
+
     #uploader {
         min-height: 324px;
+
         h1 {
             color: white;
             font-size: 32px;
@@ -246,85 +285,102 @@ body {
             margin-left: -2px;
             text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
         }
+
         #upload-container {
             &.logged-in {
                 padding: 21px 17px 17px;
             }
+
             &.logged-out {
                 padding: 44px 17px;
             }
+
             #upload-video-form {
                 div.submit-row {
                     margin-top: 11px;
+
                     input.btn {
                         @include border-radius(5px, 5px);
                         background: #38485f;
                         color: white;
                         cursor: pointer;
                         width: 100%;
+
                         &:hover {
                             background: #15273c;
                         }
                     }
                 }
+
                 input,
                 textarea {
                     font: 13px/16px 'proxima-nova';
                     color: #888888;
                     @include border-radius(3px, 3px);
+
                     &::-webkit-input-placeholder {
                         /* WebKit browsers */
                         color: #28374c;
                         font-weight: 300;
                         font-style: italic;
                     }
+
                     &:-moz-placeholder {
                         /* Mozilla Firefox 4 to 18 */
                         color: #28374c;
                         font-weight: 300;
                         font-style: italic;
                     }
+
                     &::-moz-placeholder {
                         /* Mozilla Firefox 19+ */
                         color: #28374c;
                         font-weight: 300;
                         font-style: italic;
                     }
+
                     &:-ms-input-placeholder {
                         /* Internet Explorer 10+ */
                         color: #28374c;
                         font-weight: 300;
                         font-style: italic;
                     }
+
                     &.placeholder {
                         color: #28374c;
                         font-weight: 300;
                         font-style: italic;
                     }
+
                     &:focus {
                         border: 1px solid #28374c;
                         outline: 0;
                     }
+
                     &.error {
                         border: 1px solid red;
+
                         &:-moz-placeholder {
                             /* Mozilla Firefox 4 to 18 */
                             color: red;
                             font-weight: 300;
                             font-style: italic;
                         }
+
                         &::-moz-placeholder {
                             /* Mozilla Firefox 19+ */
                             color: red;
                             font-weight: 300;
                             font-style: italic;
                         }
+
                         &:-ms-input-placeholder {
                             /* Internet Explorer 10+ */
                             color: red;
                             font-weight: 300;
                             font-style: italic;
                         }
+
                         &.placeholder {
                             color: red;
                             font-weight: 300;
@@ -332,16 +388,20 @@ body {
                         }
                     }
                 }
+
                 div.textarea-row {
                     margin-top: 11px;
+
                     textarea {
                         height: 135px;
                     }
                 }
+
                 div.drop-pane-row {
                     input.filepicker {
                         display: none;
                     }
+
                     #upload-drop-pane div.filepicker {
                         -moz-border-radius: 4px / 4px !important;
                         -webkit-border-radius: 4px 4px !important;
@@ -355,6 +415,7 @@ body {
                         z-index: 100;
                         // Makes the drop zone easier to hit.
                     }
+
                     #upload-drop-pane > div > div {
                         -moz-border-radius: 4px / 4px !important;
                         -webkit-border-radius: 4px 4px !important;
@@ -372,6 +433,7 @@ body {
                         font-weight: 700;
                         min-height: 146px;
                         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
                         em {
                             display: block;
                             font-size: 11px !important;
@@ -379,6 +441,7 @@ body {
                             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
                             font-weight: normal;
                         }
+
                         span {
                             position: absolute;
                             right: 10px;
@@ -387,13 +450,16 @@ body {
                             font-size: 18px !important;
                         }
                     }
+
                     #upload-drop-pane > div > div.error {
                         border: 2px dashed red !important;
                     }
+
                     #upload-drop-pane > div > div > div {
                         height: 22px !important;
                         margin: 0 3px !important;
                     }
+
                     #upload-drop-pane > div > button.btn-info {
                         @include border-radius(5px, 5px);
                         background: #37aef0;
@@ -403,15 +469,18 @@ body {
                         left: 28%;
                         padding: 4px 22px;
                         z-index: 100;
+
                         &:hover {
                             background: #007ab8;
                         }
                     }
                 }
             }
+
             #upload-login {
                 p.login {
                     padding-bottom: 21px;
+
                     a {
                         color: #36aeef;
                         text-decoration: underline;
@@ -420,6 +489,7 @@ body {
                         font-weight: bold;
                     }
                 }
+
                 p.info {
                     color: white;
                     font-size: 13px;
@@ -429,10 +499,12 @@ body {
             }
         }
     }
+
     #post {
         min-height: 235px;
         position: relative;
         bottom: 0;
+
         h1 {
             color: #92a2b8;
             font-size: 38.04px;
@@ -442,15 +514,18 @@ body {
             padding-bottom: 16px;
             text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
         }
+
         em {
             color: #fffffd;
         }
+
         img {
             border: 2px solid white;
             display: inline-block;
             margin-left: 28px;
             margin-right: 11px;
         }
+
         p.info {
             color: rgba(255, 255, 255, 0.6);
             font-size: 15px;
@@ -462,34 +537,41 @@ body {
             letter-spacing: -0.03em;
         }
     }
+
     #videos {
+        margin-top: 41px;
         margin-bottom: 100px;
+
         h3 {
             a {
-                color: #9eadc2;
+                color: white;
                 display: block;
-                font: 32px 'lobster';
+                font: 26px 'lobster';
                 padding-bottom: 8px;
                 text-align: center;
                 text-decoration: none;
                 text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
             }
         }
+
         #no-videos {
             min-height: 112px;
             text-align: center;
             margin-bottom: 56px;
+
             h4 {
                 color: #495b75;
                 font: 28px/48px 'proxima-nova';
                 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
             }
+
             p {
                 color: #677a94;
                 font: 19px/40px 'proxima-nova';
                 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
             }
         }
+
         div.page-wrapper {
             div.pagination {
                 @include border-radius(3px, 3px);
@@ -500,12 +582,15 @@ body {
                 right: 19px;
                 bottom: 15px;
                 margin: 0;
+
                 ul {
                     padding: 0;
                     width: 100%;
+
                     li {
                         display: inline-block;
                         padding: 0 2px;
+
                         a,
                         span {
                             color: #92a2b8;
@@ -513,47 +598,58 @@ body {
                             font-weight: 500;
                             float: left;
                         }
+
                         &.active {
                             @include border-radius(3px, 3px);
                             background: #4583d8;
                             padding: 0 6px;
+
                             a {
                                 font-weight: 700;
                                 color: white;
                             }
                         }
+
                         a.page-link {
                             i {
                                 vertical-align: baseline;
                                 position: relative;
                                 top: 1px;
                             }
+
                             &.prev i {
                                 margin-right: 2px;
                             }
+
                             &.next i {
                                 margin-left: 2px;
                             }
+
                             &.next,
                             &.prev {
                                 text-decoration: underline;
                             }
                         }
+
                         span.disabled {
                             &.prev {}
+
                             &.next {}
                         }
                     }
                 }
             }
         }
+
         #video-list {
             .no-padding {
                 padding-left: 0;
                 padding-right: 0;
             }
+
             ul {
                 padding: 0 6px;
+
                 li.video {
                     cursor: pointer;
                     width: 211px;
@@ -561,6 +657,7 @@ body {
                     max-height: 230px;
                     position: relative;
                     z-index: 1;
+
                     div.overlay {
                         background: rgba(0, 0, 0, 0.4);
                         display: none;
@@ -569,20 +666,24 @@ body {
                         position: absolute;
                         top: 25px;
                         z-index: 10;
+
                         a.play-video {
                             margin-top: 20px;
                             display: block;
                             opacity: 0.8;
                             @include single-transition(opacity 20ms ease-in-out);
+
                             img {
                                 height: 47px;
                                 width: 47px;
                             }
+
                             &:hover {
                                 opacity: 1;
                                 @include single-transition(opacity 20ms ease-in-out);
                             }
                         }
+
                         a.post-on-tumblr {
                             color: white;
                             display: block;
@@ -591,17 +692,20 @@ body {
                             left: 18px;
                             top: 5px;
                             margin: 0;
+
                             img,
                             span {
                                 display: block;
                                 position: absolute;
                                 top: 0;
                             }
+
                             span {
                                 padding: 9px 0;
                                 text-indent: 49px;
                                 z-index: 6;
                             }
+
                             img {
                                 position: relative;
                                 z-index: 5;
@@ -609,6 +713,7 @@ body {
                                 height: 35px;
                             }
                         }
+
                         a.copy-embed {
                             color: #9dc5fd;
                             display: block;
@@ -619,6 +724,7 @@ body {
                             padding-top: 15px;
                             line-height: 13px;
                         }
+
                         textarea.embed-code {
                             display: none;
                             position: absolute;
@@ -628,14 +734,16 @@ body {
                             resize: none;
                             word-break: break-all;
                             word-wrap: break-word;
-                            bottom: 0px;
+                            bottom: 0;
                             border: 0 none;
                             height: 16px;
                             padding: 2px;
                         }
                     }
+
                     div.header {
                         padding-bottom: 8px;
+
                         strong.title {
                             color: white;
                             font: 13px 'proxima-nova';
@@ -647,6 +755,7 @@ body {
                             text-overflow: ellipsis;
                             max-width: 170px;
                         }
+
                         strong.duration {
                             color: #92a2b8;
                             font: 14px 'proxima-nova';
@@ -654,10 +763,12 @@ body {
                             font-weight: 500;
                         }
                     }
+
                     img.cover {
                         width: 211px;
                         height: 140px;
                     }
+
                     p.description {
                         color: #afbfd4;
                         display: block;
@@ -670,19 +781,23 @@ body {
                         overflow: hidden;
                         height: 100%;
                     }
+
                     &.processing {
                         cursor: auto;
+
                         div.process-message {
                             position: absolute;
                             text-align: center;
                             top: 48px;
                             left: 18%;
+
                             i {
                                 color: white;
                                 display: block;
                                 margin: 10px auto;
                                 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
                             }
+
                             strong {
                                 color: white;
                                 font-size: 14px;
@@ -690,6 +805,7 @@ body {
                                 display: block;
                                 font-style: italic;
                                 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
                                 &.title {
                                     font-weight: 700;
                                     font-style: normal;
@@ -698,12 +814,14 @@ body {
                                 }
                             }
                         }
+
                         div.header {
                             strong.title {
                                 max-width: 211px;
                             }
                         }
                     }
+
                     &:hover {
                         div.overlay {
                             display: block;
@@ -714,6 +832,7 @@ body {
         }
     }
 }
+
 footer {
     color: white;
     font: bold 16px/20px 'proxima-nova';
@@ -722,35 +841,65 @@ footer {
 // =============================================================================
 // Overrides
 // =============================================================================
+
 body {
     &.logged-out {
         background: #2a394e url('../../img/v2/bkg-loggedout.png') repeat-x;
+
+        &.no-carousel {
+            background: #2a394e url('../../img/v2/bkg-loggedout-nocarousel.png') repeat-x;
+
+            #uploader {
+                margin-top: 38px;
+            }
+        }
+
         p.login-info {
             text-align: right;
             cursor: default;
             color: #8597b1;
             font-size: 10px;
+
             a {
                 padding-left: 5px;
             }
         }
     }
+
     &.logged-in {
-        background: #2a394e url('../../img/bkg-loggedin.png') repeat-x;
+        background: #2a394e url('../../img/v2/bkg-loggedin.png') repeat-x;
+
         #base #videos {
-            margin-bottom: 162px;
+            margin-bottom: 145px;
         }
+
         #video-list {
             min-height: 465px;
         }
+
+        &.no-carousel {
+            background: #2a394e url('../../img/v2/bkg-loggedin-nocarousel.png') repeat-x;
+
+            #uploader {
+                margin-top: 53px;
+            }
+        }
+
         &.no-videos {
-            background: #2a394e url('../../img/bkg-novideos.png') repeat-x;
+            background: #2a394e url('../../img/v2/bkg-novideos.png') repeat-x;
+
+            &.no-carousel {
+                background: #2a394e url('../../img/v2/bkg-novideos-nocarousel.png') repeat-x;
+            }
+
             #base #videos {
                 margin-bottom: inherit;
+
                 #no-videos {
-                    margin-bottom: 145px;
+                    margin-bottom: 84px;
                 }
             }
+
             #video-list {
                 min-height: auto;
             }

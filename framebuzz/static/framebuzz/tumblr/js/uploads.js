@@ -116,6 +116,6 @@ var fileUploadComplete = function(event) {
 // Callback that gets fired when a video removed from the uploader.
 var deleteButtonClicked = function() {
     titleField.val('');
-    submitButton.val('Upload Video');
+    submitButton.val('Create framebuzz video');
     submitButton.attr('disabled', '');
 };
