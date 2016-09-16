@@ -62,10 +62,12 @@
           <img class="img-responsive header" src="{% static 'framebuzz/tumblr/img/v2/header@2x.png' %}" height="257" width="736">
         </div>
       </div>
-      <div id="sidenav" class="col-xs-3 pull-left">
-        <a href="#uploader" class="upload"><span class="icon"></span>Upload a video</a>
-        <a href="#videolist" class="framebuzzes"><span class="icon"></span>My framebuzzes{% if request.user.is_authenticated %} ({{ video_count }}){% endif %}</a>
-        <a href="#videolist" class="share"><span class="icon"></span>Share to your tumblr</a>
+      <div id="sidenav" class="col-xs-3">
+        <div class="innernav">
+          <a href="#uploader" class="upload"><span class="icon"></span>Upload a video</a>
+          <a href="#videolist" class="framebuzzes"><span class="icon"></span>My framebuzzes{% if request.user.is_authenticated %} ({{ video_count }}){% endif %}</a>
+          <a href="#post" class="share"><span class="icon"></span>Share to your tumblr</a>
+        </div>
       </div>
       <div id="example" class="row">
           <div id="embed-row">
@@ -103,7 +105,7 @@
           </p>
       </div>
     </div>
-    <footer class="text-center">&copy; {% now "Y" %}, FrameBuzz. Patent 14/067,585.</footer>
+    <footer id="footer" class="text-center">&copy; {% now "Y" %}, FrameBuzz. Patent 14/067,585.</footer>
     <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false">
         <iframe src="" scrolling="no" frameBorder="0" allowfullscreen="true" mozfullscreen="true" webkitfullscreen="true" height="430" width="700" class="fbzplayer center-block"></iframe>
     </div>
@@ -111,6 +113,7 @@
         <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
         <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
+        <script src="{% static 'framebuzz/tumblr/js/vendor/stickykit.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/queryCommandSupported.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/mediaelement/mediaelement-and-player.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/filepicker.js' %}"></script>
@@ -120,6 +123,9 @@
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
         <script type="text/javascript">
           var is_debug = '{{ is_debug }}' == 'True';
+          // Sticky sidebar.
+          $("#sidenav").stick_in_parent();
+          // Video player.
           $('video').mediaelementplayer({
             debug: is_debug,
             enablePluginDebug: is_debug,
@@ -127,11 +133,8 @@
             videoWidth: 736,
             features: ['playpause','progress','volume',],
             startVolume: 3,
-            loop: false,
             pluginPath: '/static/framebuzz/tumblr/js/vendor/mediaelement/',
             enablePluginSmoothing: true,
-            flashName: 'flashmediaelement.swf',
-            silverlightName: 'silverlightmediaelement.xap',
             flashScriptAccess: 'always',
             success: function(media) {
               console.log(is_debug);
