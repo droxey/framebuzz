@@ -94,10 +94,17 @@ $(function() {
     $('div.pagination-page').on('click', 'a.page-link', function() {
       var pageContainer = $('div.pagination-page');
       var pageUrl = $(this).attr('href');
+      var descContainer = $('div.video-description');
+
+      // Hide the video description container and destroy it so we can rebuild.
+      descContainer.addClass('hide');
+      $('p', descContainer).trigger("destroy");
 
       $.get(pageUrl, function(pageHtml) {
         pageContainer.fadeOut('fast', function() {
           pageContainer.html(pageHtml);
+          // Re-clamp new page lines.
+          clampLines($('div.video-description p'));
           pageContainer.fadeIn('fast');
         });
       });
@@ -161,11 +168,6 @@ $(function() {
         $.post(url, function(httpResponse) {
             $.growl.notice({ message: "Video deleted." });
         });
-    });
-
-    // To read more of a video description.
-    $(document).on('click', 'div.video-description', function() {
-
     });
 
     // Request our player template when the modal dialog opens.
