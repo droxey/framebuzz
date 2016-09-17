@@ -762,6 +762,7 @@ body {
                     display: none;
                     position: absolute;
                     overflow: hidden;
+                    max-height: 375px;
                     width: 241px;
                     z-index: 99999;
                     top: 35px;
@@ -845,6 +846,7 @@ body {
                 }
 
                 div.video {
+                    min-height: 230px;
                     position: relative;
                     z-index: 1;
 
@@ -1081,6 +1083,10 @@ body {
                             }
                         }
                     }
+                }
+
+                &:nth-child(2n) {
+                    min-height: 200px;
                 }
             }
         }

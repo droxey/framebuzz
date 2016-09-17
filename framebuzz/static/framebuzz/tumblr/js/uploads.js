@@ -23,7 +23,6 @@ $(function() {
     };
 
     clampLines($('div.video-description p'));
-
     $(document).on('click', 'div.video-description', function() {
         var container = $(this),
             p = container.find('p'),
@@ -160,13 +159,50 @@ $(function() {
         return false;
     });
 
+    // Grabs a csrfmiddlewaretoken and throws it in the headers.
+    var getCookie = function(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    };
+
+    var csrftoken = getCookie('csrftoken');
+
+    var csrfSafeMethod = function(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    };
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
     // Handle edit form submission data.
     $('body').on('submit', '.video-edit-form', function(e) {
-      var url = $(this).attr('action');
-      var data = $(this).serialize();
+      var form = $(this);
+      var url = form.attr('action');
+      var data = form.serialize();
 
       $.post(url, data, function(response) {
           $.growl.notice({ message: "Video updated!" });
+
+          // Trigger the Cancel button's click event to dismiss
+          // the edit dialog.
+          $('a.btn-cancel-edit', form).trigger('click');
       });
 
       return false;
@@ -184,9 +220,14 @@ $(function() {
     // Deletes a video you uploaded.
     $(document).on('click', 'a.btn-delete-video', function() {
         var link = $(this),
-            url = link.attr('href');
+            url = link.attr('href'),
+            slug = link.attr('data-slug'),
+            obj = $('#' + slug),
+            nextObj = obj.next('div.video');
 
-        $.post(url, function(httpResponse) {
+        $.get(url, function(httpResponse) {
+            obj.remove();
+            nextObj.remove();
             $.growl.notice({ message: "Video deleted." });
         });
 
