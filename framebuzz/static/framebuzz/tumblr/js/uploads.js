@@ -1,5 +1,5 @@
 $.fn.extend({
-    animateCss: function (animationName) {
+    animateCss: function(animationName) {
         var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
         this.addClass('animated ' + animationName).one(animationEnd, function() {
             $(this).removeClass('animated ' + animationName);
@@ -33,7 +33,9 @@ $(function() {
             isClamped = !container.parent().hasClass('expanded'),
             text = isClamped ? p.attr('data-fulltext') : p.attr('data-clamptext');
 
-        container.css({ 'opacity': 0 });
+        container.css({
+            'opacity': 0
+        });
         p.trigger("destroy");
 
         if (isClamped) {
@@ -43,14 +45,19 @@ $(function() {
                 p.attr('data-height', (p.height() + 24) + 'px');
             }
 
-            item.css({ 'margin-bottom': p.attr('data-height') });
-        }
-        else {
+            item.css({
+                'margin-bottom': p.attr('data-height')
+            });
+        } else {
             clampLines(p);
-            item.css({ 'margin-bottom': 0 });
+            item.css({
+                'margin-bottom': 0
+            });
         }
 
-        container.css({ 'opacity': 1 });
+        container.css({
+            'opacity': 1
+        });
         container.parent().toggleClass('expanded');
         p.text(text);
 
@@ -67,7 +74,9 @@ $(function() {
             $this.select();
             window.setTimeout(function() {
                 $this.select();
-                $.growl.notice({ message: "Embed tag selected. Hit ⌘+C to copy." });
+                $.growl.notice({
+                    message: "Embed tag selected. Hit ⌘+C to copy."
+                });
             }, 1);
             // Work around WebKit's little problem
             $this.mouseup(function() {
@@ -88,36 +97,40 @@ $(function() {
     });
 
     clipboard.on('success', function(e) {
-        $.growl.notice({ message: "Embed tag copied to clipboard." });
+        $.growl.notice({
+            message: "Embed tag copied to clipboard."
+        });
     });
 
     // Handle video pagination.
     $('div.pagination-page').on('click', 'a.page-link', function() {
-      var pageContainer = $('div.pagination-page');
-      var pageUrl = $(this).attr('href');
-      var descContainer = $('div.video-description');
+        var pageContainer = $('div.pagination-page');
+        var pageUrl = $(this).attr('href');
+        var descContainer = $('div.video-description');
 
-      // Hide the video description container and destroy it so we can rebuild.
-      descContainer.addClass('hide');
-      $('p', descContainer).trigger("destroy");
+        // Hide the video description container and destroy it so we can rebuild.
+        descContainer.addClass('hide');
+        $('p', descContainer).trigger("destroy");
 
-      $.get(pageUrl, function(pageHtml) {
-        pageContainer.fadeOut('fast', function() {
-          pageContainer.html(pageHtml);
-          // Re-clamp new page lines.
-          clampLines($('div.video-description p'));
-          pageContainer.fadeIn('fast');
+        $.get(pageUrl, function(pageHtml) {
+            pageContainer.fadeOut('fast', function() {
+                pageContainer.html(pageHtml);
+                // Re-clamp new page lines.
+                clampLines($('div.video-description p'));
+                pageContainer.fadeIn('fast');
+            });
         });
-      });
 
-      return false;
+        return false;
     });
 
     // Launches the Tumblr OAuth popup.
     $(document).on('click', 'a.tumblr-login-link', function(e) {
         var url = $(this).attr('href');
-        var newWindow = window.open(url,'frameBuzzSSOLoginWindow','toolbar=0,resizable=0,status=0,width=640,height=528');
-        if (window.focus) { newWindow.focus(); }
+        var newWindow = window.open(url, 'frameBuzzSSOLoginWindow', 'toolbar=0,resizable=0,status=0,width=640,height=528');
+        if (window.focus) {
+            newWindow.focus();
+        }
         return false;
     });
 
@@ -125,7 +138,9 @@ $(function() {
     $(document).on('submit', '#upload-video-form', function(e) {
         submitButton.val('Uploading...');
         submitButton.attr('disabled', '');
-        $.growl.notice({ message: "Video sent to processing!<br>It will be available below shortly." });
+        $.growl.notice({
+            message: "Video sent to processing!<br>It will be available below shortly."
+        });
     });
 
     // Async submit selected video to Tumblr.
@@ -135,7 +150,9 @@ $(function() {
         var url = $(this).attr('href');
         $.get(url, function(responseCode) {
             if (responseCode == '200') {
-                $.growl.notice({ message: "Video posted to Tumblr!" });
+                $.growl.notice({
+                    message: "Video posted to Tumblr!"
+                });
             }
         });
         return false;
@@ -195,24 +212,26 @@ $(function() {
 
     // Handle edit form submission data.
     $('body').on('submit', '.video-edit-form', function(e) {
-      var form = $(this),
-          url = form.attr('action'),
-          data = form.serialize(),
-          slug = form.attr('data-slug'),
-          videoContainer = $('#' + slug).next('div.video');
+        var form = $(this),
+            url = form.attr('action'),
+            data = form.serialize(),
+            slug = form.attr('data-slug'),
+            videoContainer = $('#' + slug).next('div.video');
 
-      $.post(url, data, function(htmlResponse) {
-          videoContainer.html(htmlResponse);
-          clampLines($('div.video-description p', videoContainer));
+        $.post(url, data, function(htmlResponse) {
+            videoContainer.html(htmlResponse);
+            clampLines($('div.video-description p', videoContainer));
 
-          $.growl.notice({ message: "Video updated!" });
+            $.growl.notice({
+                message: "Video updated!"
+            });
 
-          // Trigger the Cancel button's click event to dismiss
-          // the edit dialog.
-          $('a.btn-cancel-edit', form).trigger('click');
-      });
+            // Trigger the Cancel button's click event to dismiss
+            // the edit dialog.
+            $('a.btn-cancel-edit', form).trigger('click');
+        });
 
-      return false;
+        return false;
     });
 
     // Cancel a video edit.
@@ -235,19 +254,21 @@ $(function() {
         $.get(url, function(httpResponse) {
             obj.remove();
             nextObj.remove();
-            $.growl.notice({ message: "Video deleted." });
+            $.growl.notice({
+                message: "Video deleted."
+            });
         });
 
         return false;
     });
 
     // Request our player template when the modal dialog opens.
-    $(document).on('opened', '.remodal', function () {
+    $(document).on('opened', '.remodal', function() {
         fbzPlayer.attr('src', videoUrl);
     });
 
     // Tear down the player template when the modal dialog closes.
-    $(document).on('closing', '.remodal', function (e) {
+    $(document).on('closing', '.remodal', function() {
         fbzPlayer.removeAttr('src');
         videoUrl = null;
     });
