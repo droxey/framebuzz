@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <div class="edit-video">
-    <form class="video-edit-form" method="POST" action="{% url 'fbz-edit-video' video.slug %}" data-csrf="{% csrf_token %}">
+    <form class="video-edit-form" method="POST" action="{% url 'fbz-edit-video' video.slug %}" data-slug="{{ video.slug }}">
         {% for field in edit_form %}
             <div class="form-row">
                 {{ field }}

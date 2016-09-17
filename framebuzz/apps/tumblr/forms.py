@@ -95,3 +95,4 @@ class EditVideoForm(forms.ModelForm):
             self.video.title = title
             self.video.description = description
             self.video.save()
+            return self.video

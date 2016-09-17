@@ -18,7 +18,10 @@ $(function() {
     var clampLines = function(selector) {
         selector.dotdotdot({
             watch: true,
-            height: '50px'
+            height: '50px',
+            callback: function(isTruncated, original) {
+                $(selector).addClass('complete');
+            }
         });
     };
 
@@ -177,7 +180,6 @@ $(function() {
     };
 
     var csrftoken = getCookie('csrftoken');
-
     var csrfSafeMethod = function(method) {
         // these HTTP methods do not require CSRF protection
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -193,11 +195,16 @@ $(function() {
 
     // Handle edit form submission data.
     $('body').on('submit', '.video-edit-form', function(e) {
-      var form = $(this);
-      var url = form.attr('action');
-      var data = form.serialize();
+      var form = $(this),
+          url = form.attr('action'),
+          data = form.serialize(),
+          slug = form.attr('data-slug'),
+          videoContainer = $('#' + slug).next('div.video');
 
-      $.post(url, data, function(response) {
+      $.post(url, data, function(htmlResponse) {
+          videoContainer.html(htmlResponse);
+          clampLines($('div.video-description p', videoContainer));
+
           $.growl.notice({ message: "Video updated!" });
 
           // Trigger the Cancel button's click event to dismiss

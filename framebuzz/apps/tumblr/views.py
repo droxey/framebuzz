@@ -94,24 +94,27 @@ def post_to_tumblr(request, slug):
 def edit_video(request, slug):
     ''' Ajax endpoint that allows us to edit a video we've uploaded. '''
     vid = Video.objects.get(slug=slug)
+    errors = None
+    template = 'tumblr/snippets/edit_video.html'
     if request.POST:
         edit_form = EditVideoForm(data=request.POST, video=vid)
         if edit_form.is_valid():
-            edit_form.save()
-            return HttpResponse(200)
+            vid = edit_form.save()
+            template = 'tumblr/snippets/item.html'
         else:
             errors = edit_form.errors.as_data()
-            return HttpResponse(errors)
     else:
         edit_form = EditVideoForm(initial={
             'title': vid.title,
             'description': vid.description
         }, video=vid)
-        return render_to_response('tumblr/snippets/edit_video.html', {
-            'edit_form': edit_form,
-            'is_debug': settings.DEBUG,
-            'video': vid
-        })
+    return render_to_response(template, {
+        'edit_form': edit_form,
+        'is_debug': settings.DEBUG,
+        'video': vid,
+        'errors': errors,
+        'is_ajax': request.is_ajax()
+    })
 
 
 @login_required(login_url='/tumblr/')
