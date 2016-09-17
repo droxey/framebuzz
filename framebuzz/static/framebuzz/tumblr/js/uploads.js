@@ -1,10 +1,42 @@
-var submitButton = $('#btn-upload-video');
-var titleField = $('#id_title');
+$.fn.extend({
+    animateCss: function (animationName) {
+        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        this.addClass('animated ' + animationName).one(animationEnd, function() {
+            $(this).removeClass('animated ' + animationName);
+        });
+    }
+});
 
 $(function() {
     var videoUrl = null,
         fbzPlayer = $('iframe.fbzplayer'),
-        browserSupportsAutoCopy = document.queryCommandSupported('copy');
+        browserSupportsAutoCopy = document.queryCommandSupported('copy'),
+        animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+        submitButton = $('#btn-upload-video'),
+        titleField = $('#id_title');
+
+    var clampLines = function(selector) {
+        selector.dotdotdot({
+            watch: true,
+            height: '50px'
+        });
+    };
+
+    clampLines($('div.video-description p'));
+    $(document).on('click', 'div.video-description', function() {
+        var container = $(this),
+            p = container.find('p'),
+            isClamped = !container.parent().hasClass('expanded');
+
+        if (isClamped) {
+            p.trigger("destroy");
+        }
+        else {
+            clampLines(p);
+        }
+
+        container.parent().toggleClass('expanded');
+    });
 
     // For browsers that don't support auto-copy, just
     // show the textbox.
@@ -91,21 +123,31 @@ $(function() {
 
     // When the user chooses to edit a video description.
     $(document).on('click', 'a.edit-video', function() {
-        console.log('TODO: not implemented');
+        console.log('TODO: incomplete');
+
+        var link = $(this),
+            url = link.attr('href');
+
+        $.post(url, function(httpResponse) {
+            $.growl.notice({ message: "Changes saved." });
+        });
     });
 
     // Deletes a video you uploaded.
     $(document).on('click', 'a.delete-video', function() {
-        // TODO: Delete tile from the UI as well.
-        var url = $(this).attr('href');
-        $.get(url, function(httpResponse) {
+        console.log('TODO: incomplete');
+
+        var link = $(this),
+            url = link.attr('href');
+
+        $.post(url, function(httpResponse) {
             $.growl.notice({ message: "Video deleted." });
         });
     });
 
     // To read more of a video description.
-    $(document).on('click', 'p.description', function() {
-        $(this).toggleClass('expanded');
+    $(document).on('click', 'div.video-description', function() {
+
     });
 
     // Request our player template when the modal dialog opens.

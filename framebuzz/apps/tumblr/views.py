@@ -5,11 +5,12 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.views.decorators.http import require_POST
 
 from pure_pagination import Paginator, PageNotAnInteger, EmptyPage
 
 from framebuzz.apps.api.models import Video
-from framebuzz.apps.tumblr.forms import TumblrUploadForm
+from framebuzz.apps.tumblr.forms import TumblrUploadForm, EditVideoForm
 from framebuzz.apps.tumblr.utils import get_user_videos, get_carousel_slides
 from framebuzz.apps.tumblr.tasks import submit_to_tumblr
 
@@ -93,11 +94,25 @@ def post_to_tumblr(request, slug):
 @login_required(login_url='/tumblr/')
 def edit_video(request, slug):
     ''' Ajax endpoint that allows us to edit a video we've uploaded. '''
-    vid = Video.objects.get(slug=slug)
-    return HttpResponse(200)
+    if request.POST:
+        edit_form = EditVideoForm(data=request.POST, slug=slug)
+        if edit_form.is_valid():
+            edit_form.save()
+            return HttpResponse(200)
+        else:
+            errors = edit_form.errors.as_data()
+            return HttpResponse(errors)
+    else:
+        vid = Video.objects.get(slug=slug)
+        edit_form = EditVideoForm(initial=vid)
+        return render_to_response('tumblr/snippets/edit_video.html', {
+            'edit_form': edit_form,
+            'is_debug': settings.DEBUG,
+        })
 
 
 @login_required(login_url='/tumblr/')
+@require_POST
 def delete_video(request, slug):
     ''' Ajax endpoint that allows us to delete a video we've uploaded. '''
     vid = Video.objects.get(slug=slug)

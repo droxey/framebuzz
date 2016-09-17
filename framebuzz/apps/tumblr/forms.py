@@ -70,3 +70,23 @@ class TumblrUploadForm(forms.ModelForm):
         if fpfile:
             start_zencoder_job.apply_async(args=[vid.video_id])
         return vid
+
+
+class EditVideoForm(forms.ModelForm):
+    ''' A very simple form that allows users to change the title and
+        description of their uploaded videos. '''
+    class Meta:
+        fields = ('slug', 'title', 'description',)
+
+    def __init__(self, *args, **kwargs):
+        self.slug = kwargs.pop('slug', None)
+        super(EditVideoForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        title = self.cleaned_data.get('title', None)
+        description = self.cleaned_data.get('description', None)
+        if self.slug:
+            vid = Video.objects.get(slug=self.slug)
+            vid.title = title
+            vid.description = description
+            vid.save()
