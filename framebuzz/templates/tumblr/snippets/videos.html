@@ -39,8 +39,8 @@
                {% endif %}
             </div>
             {% if video.description %}
-               <div class="video-description">
-                  <p>{{ video.formatted_description }}</p>
+               <div class="video-description animated">
+                  <p data-fulltext="{{ video.formatted_description }}">{{ video.formatted_description }}</p>
                </div>
             {% endif %}
          </div>

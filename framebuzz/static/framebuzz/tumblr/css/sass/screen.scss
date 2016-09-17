@@ -756,6 +756,8 @@ body {
                     z-index: 1;
 
                     div.item {
+                        margin-bottom: 0;
+
                         div.overlay {
                             background: rgba(0, 0, 0, 0.4);
                             display: none;
@@ -913,6 +915,12 @@ body {
                             text-align: left;
                             max-height: 50px;
                             height: 100%;
+                            opacity: 0;
+                            @include single-transition(opacity 20ms ease-in-out);
+
+                            &.is-truncated {
+                                opacity: 1;
+                            }
                         }
                     }
 
@@ -920,9 +928,20 @@ body {
                         position: relative;
                         z-index: 1000;
 
+                        div.item {
+                            margin-bottom: 0;
+                        }
+
                         div.video-description {
                             background-color: rgba(41, 55, 76, 0.9);
+                            position: absolute;
+                            top: 165px;
                             width: 211px;
+
+                            p {
+                                opacity: 1;
+                                max-height: none;
+                            }
                         }
                     }
 

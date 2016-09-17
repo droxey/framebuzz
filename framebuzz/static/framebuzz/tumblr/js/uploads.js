@@ -11,14 +11,16 @@ $(function() {
     var videoUrl = null,
         fbzPlayer = $('iframe.fbzplayer'),
         browserSupportsAutoCopy = document.queryCommandSupported('copy'),
-        animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
         submitButton = $('#btn-upload-video'),
         titleField = $('#id_title');
 
     var clampLines = function(selector) {
         selector.dotdotdot({
             watch: true,
-            height: '50px'
+            height: '50px',
+            callback: function(isTruncated, original) {
+
+            }
         });
     };
 
@@ -26,16 +28,32 @@ $(function() {
     $(document).on('click', 'div.video-description', function() {
         var container = $(this),
             p = container.find('p'),
-            isClamped = !container.parent().hasClass('expanded');
+            item = container.parent().find('div.item'),
+            isClamped = !container.parent().hasClass('expanded'),
+            text = isClamped ? p.attr('data-fulltext') : p.attr('data-clamptext');
+
+        container.css({ 'opacity': 0 });
+        p.trigger("destroy");
 
         if (isClamped) {
-            p.trigger("destroy");
+            // Store the original value if we haven't already.
+            if (p.attr('data-clamptext') === undefined) {
+                p.attr('data-clamptext', p.text());
+                p.attr('data-height', (p.height() + 24) + 'px');
+            }
+
+            item.css({ 'margin-bottom': p.attr('data-height') });
         }
         else {
             clampLines(p);
+            item.css({ 'margin-bottom': 0 });
         }
 
+        container.css({ 'opacity': 1 });
         container.parent().toggleClass('expanded');
+        p.text(text);
+
+
     });
 
     // For browsers that don't support auto-copy, just

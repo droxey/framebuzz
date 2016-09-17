@@ -401,7 +401,11 @@ class Video(caching.base.CachingMixin, models.Model):
         minutes = seconds / 60
         seconds -= 60 * minutes
         if hours == 0:
+            if minutes < 10:
+                return "%01d:%02d" % (minutes, seconds)
             return "%02d:%02d" % (minutes, seconds)
+        if hours < 10:
+            return "%01d:%02d:%02d" % (hours, minutes, seconds)
         return "%02d:%02d:%02d" % (hours, minutes, seconds)
 
 
