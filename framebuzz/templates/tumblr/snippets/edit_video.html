@@ -1,0 +1,25 @@
+{% load staticfiles %}
+
+<div class="edit-video">
+    <form class="video-edit-form" method="POST" action="{% url 'fbz-edit-video' video.slug %}">
+        {% csrf_token %}
+        {% for field in edit_form %}
+            <div class="form-row">
+                {{ field }}
+                {% if field.name == 'title' %}
+                    <a href="{% url 'fbz-delete-video' video.slug %}" class="btn-delete-video pull-right">
+                        <i class="material-icons">delete</i>
+                    </a>
+                {% endif %}
+            </div>
+            {% if field.name == 'title' %}
+                <div class="cover" style="background-image: url('{{ video.default_thumbnail }}');">
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="submit-row clearfix">
+            <input class="btn-submit pull-right" type="submit" value="Save changes">
+            <a class="btn-cancel-edit pull-left" data-slug="{{ video.slug }}">Cancel</a>
+        </div>
+    </form>
+</div>

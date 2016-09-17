@@ -14,17 +14,16 @@ $(function() {
         submitButton = $('#btn-upload-video'),
         titleField = $('#id_title');
 
+    // Basic line clamping.
     var clampLines = function(selector) {
         selector.dotdotdot({
             watch: true,
-            height: '50px',
-            callback: function(isTruncated, original) {
-
-            }
+            height: '50px'
         });
     };
 
     clampLines($('div.video-description p'));
+
     $(document).on('click', 'div.video-description', function() {
         var container = $(this),
             p = container.find('p'),
@@ -148,26 +147,50 @@ $(function() {
 
     // When the user chooses to edit a video description.
     $(document).on('click', 'a.edit-video', function() {
-        console.log('TODO: incomplete');
-
         var link = $(this),
-            url = link.attr('href');
+            url = link.attr('href'),
+            slug = link.attr('data-slug'),
+            editContainer = $('#' + slug);
 
-        $.post(url, function(httpResponse) {
-            $.growl.notice({ message: "Changes saved." });
+        $.get(url, function(htmlResponse) {
+            editContainer.html(htmlResponse);
+            editContainer.addClass('loaded');
         });
+
+        return false;
+    });
+
+    // Handle edit form submission data.
+    $('body').on('submit', '.video-edit-form', function(e) {
+      var url = $(this).attr('action');
+      var data = $(this).serialize();
+
+      $.post(url, data, function(response) {
+          $.growl.notice({ message: "Video updated!" });
+      });
+
+      return false;
+    });
+
+    // Cancel a video edit.
+    $(document).on('click', 'a.btn-cancel-edit', function() {
+        var slug = $(this).attr('data-slug'),
+            obj = $('#' + slug);
+        obj.html('');
+        obj.removeClass('loaded');
+        return false;
     });
 
     // Deletes a video you uploaded.
-    $(document).on('click', 'a.delete-video', function() {
-        console.log('TODO: incomplete');
-
+    $(document).on('click', 'a.btn-delete-video', function() {
         var link = $(this),
             url = link.attr('href');
 
         $.post(url, function(httpResponse) {
             $.growl.notice({ message: "Video deleted." });
         });
+
+        return false;
     });
 
     // Request our player template when the modal dialog opens.

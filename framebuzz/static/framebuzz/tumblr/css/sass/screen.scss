@@ -751,6 +751,99 @@ body {
             div.row {
                 padding: 0 20px;
 
+                div.cover {
+                    background-repeat: no-repeat;
+                    background-size: 211px 140px;
+                    width: 211px;
+                    height: 140px;
+                }
+
+                div.edit-container {
+                    display: none;
+                    position: absolute;
+                    overflow: hidden;
+                    width: 241px;
+                    z-index: 99999;
+                    top: 35px;
+
+                    &.loaded { display: block; }
+
+                    div.edit-video {
+                        form {
+                            div.form-row {
+                                input {
+                                    color: #333333;
+                                    border: 0 none;
+                                    font: 700 14px 'proxima-nova';
+                                    padding: 9px 30px 9px 9px;
+                                    position: relative;
+                                    z-index: 10;
+                                    width: 100%;
+                                    left: 0px;
+                                }
+
+                                a.btn-delete-video {
+                                    color: #333333;
+                                    font-size: 17px;
+                                    position: relative;
+                                    z-index: 20;
+                                    top: -30px;
+                                    right: 4px;
+
+                                    &:hover {
+                                        color: #1f1f1f;
+                                    }
+                                }
+
+                                textarea {
+                                    color: #525252;
+                                    border: 0 none;
+                                    height: 151px;
+                                    font: 500 11px 'proxima-nova';
+                                    padding: 18px 12px;
+                                    width: 100%;
+                                }
+                            }
+
+                            div.submit-row {
+                                height: 48px;
+                                padding: 0;
+
+                                a.btn-cancel-edit {
+                                    background: #757575;
+                                    color: white;
+                                    cursor: pointer;
+                                    display: block;
+                                    font: 13px 'proxima-nova';
+                                    padding: 16px 0px;
+                                    text-decoration: underline;
+                                    width: 35%;
+
+                                    &:hover {
+                                        background: #666666;
+                                    }
+                                }
+
+                                input.btn-submit {
+                                    background: #36aeef;
+                                    border: 0 none;
+                                    color: white;
+                                    cursor: pointer;
+                                    display: block;
+                                    height: 100%;
+                                    font: 15px 'proxima-nova';
+                                    text-decoration: underline;
+                                    width: 65%;
+
+                                    &:hover {
+                                        background: #129ae2;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 div.video {
                     position: relative;
                     z-index: 1;
@@ -885,13 +978,6 @@ body {
                                 text-align: right;
                                 font-weight: 500;
                             }
-                        }
-
-                        div.cover {
-                            background-repeat: no-repeat;
-                            background-size: 211px 140px;
-                            width: 211px;
-                            height: 140px;
                         }
 
                         &:hover {

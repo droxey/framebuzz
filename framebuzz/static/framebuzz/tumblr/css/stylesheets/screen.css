@@ -789,15 +789,104 @@ body {
   padding: 0 20px;
 }
 /* line 754, ../sass/screen.scss */
+#base #videos #video-list div.row div.cover {
+  background-repeat: no-repeat;
+  background-size: 211px 140px;
+  width: 211px;
+  height: 140px;
+}
+/* line 761, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container {
+  display: none;
+  position: absolute;
+  overflow: hidden;
+  width: 241px;
+  z-index: 99999;
+  top: 35px;
+}
+/* line 769, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container.loaded {
+  display: block;
+}
+/* line 774, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container div.edit-video form div.form-row input {
+  color: #333333;
+  border: 0 none;
+  font: 700 14px 'proxima-nova';
+  padding: 9px 30px 9px 9px;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  left: 0px;
+}
+/* line 785, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container div.edit-video form div.form-row a.btn-delete-video {
+  color: #333333;
+  font-size: 17px;
+  position: relative;
+  z-index: 20;
+  top: -30px;
+  right: 4px;
+}
+/* line 793, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container div.edit-video form div.form-row a.btn-delete-video:hover {
+  color: #1f1f1f;
+}
+/* line 798, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container div.edit-video form div.form-row textarea {
+  color: #525252;
+  border: 0 none;
+  height: 151px;
+  font: 500 11px 'proxima-nova';
+  padding: 18px 12px;
+  width: 100%;
+}
+/* line 808, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container div.edit-video form div.submit-row {
+  height: 48px;
+  padding: 0;
+}
+/* line 812, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container div.edit-video form div.submit-row a.btn-cancel-edit {
+  background: #757575;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font: 13px 'proxima-nova';
+  padding: 16px 0px;
+  text-decoration: underline;
+  width: 35%;
+}
+/* line 822, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container div.edit-video form div.submit-row a.btn-cancel-edit:hover {
+  background: #666666;
+}
+/* line 827, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container div.edit-video form div.submit-row input.btn-submit {
+  background: #36aeef;
+  border: 0 none;
+  color: white;
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  font: 15px 'proxima-nova';
+  text-decoration: underline;
+  width: 65%;
+}
+/* line 838, ../sass/screen.scss */
+#base #videos #video-list div.row div.edit-container div.edit-video form div.submit-row input.btn-submit:hover {
+  background: #129ae2;
+}
+/* line 847, ../sass/screen.scss */
 #base #videos #video-list div.row div.video {
   position: relative;
   z-index: 1;
 }
-/* line 758, ../sass/screen.scss */
+/* line 851, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item {
   margin-bottom: 0;
 }
-/* line 761, ../sass/screen.scss */
+/* line 854, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay {
   background: rgba(0, 0, 0, 0.4);
   display: none;
@@ -807,7 +896,7 @@ body {
   top: 25px;
   z-index: 10;
 }
-/* line 770, ../sass/screen.scss */
+/* line 863, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.edit-video {
   color: white;
   cursor: pointer;
@@ -823,7 +912,7 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 782, ../sass/screen.scss */
+/* line 875, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.edit-video:hover {
   opacity: 1;
   -moz-transition: opacity, 20ms, ease-in-out 1s;
@@ -831,7 +920,7 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 788, ../sass/screen.scss */
+/* line 881, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.play-video {
   display: block;
   height: 47px;
@@ -846,12 +935,12 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 799, ../sass/screen.scss */
+/* line 892, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.play-video img {
   height: 47px;
   width: 47px;
 }
-/* line 804, ../sass/screen.scss */
+/* line 897, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.play-video:hover {
   opacity: 1;
   -moz-transition: opacity, 20ms, ease-in-out 1s;
@@ -859,7 +948,7 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 810, ../sass/screen.scss */
+/* line 903, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr {
   color: white;
   display: block;
@@ -868,27 +957,27 @@ body {
   left: 20px;
   margin: 24px 0 0;
 }
-/* line 818, ../sass/screen.scss */
+/* line 911, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr img,
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr span {
   display: block;
   position: absolute;
   top: 0;
 }
-/* line 825, ../sass/screen.scss */
+/* line 918, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr span {
   padding: 9px 0;
   text-indent: 49px;
   z-index: 6;
 }
-/* line 831, ../sass/screen.scss */
+/* line 924, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr img {
   position: relative;
   z-index: 5;
   width: 168px;
   height: 35px;
 }
-/* line 839, ../sass/screen.scss */
+/* line 932, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.copy-embed {
   color: #9dc5fd;
   cursor: pointer;
@@ -900,7 +989,7 @@ body {
   padding-top: 15px;
   line-height: 13px;
 }
-/* line 851, ../sass/screen.scss */
+/* line 944, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay textarea.embed-code {
   display: none;
   position: absolute;
@@ -915,11 +1004,11 @@ body {
   height: 16px;
   padding: 2px;
 }
-/* line 867, ../sass/screen.scss */
+/* line 960, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.header {
   padding-bottom: 8px;
 }
-/* line 870, ../sass/screen.scss */
+/* line 963, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.header strong.title {
   color: white;
   font: 13px 'proxima-nova';
@@ -931,25 +1020,18 @@ body {
   text-overflow: ellipsis;
   max-width: 170px;
 }
-/* line 882, ../sass/screen.scss */
+/* line 975, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.header strong.duration {
   color: #92a2b8;
   font: 14px 'proxima-nova';
   text-align: right;
   font-weight: 500;
 }
-/* line 890, ../sass/screen.scss */
-#base #videos #video-list div.row div.video div.item div.cover {
-  background-repeat: no-repeat;
-  background-size: 211px 140px;
-  width: 211px;
-  height: 140px;
-}
-/* line 898, ../sass/screen.scss */
+/* line 984, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item:hover div.overlay {
   display: block;
 }
-/* line 904, ../sass/screen.scss */
+/* line 990, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description {
   cursor: pointer;
   position: relative;
@@ -957,11 +1039,11 @@ body {
   width: 211px;
   opacity: 1;
 }
-/* line 911, ../sass/screen.scss */
+/* line 997, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description.hide {
   opacity: 0;
 }
-/* line 915, ../sass/screen.scss */
+/* line 1001, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description p {
   color: #afbfd4;
   font: 12.64px 'proxima-nova';
@@ -976,40 +1058,40 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 926, ../sass/screen.scss */
+/* line 1012, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description p.is-truncated {
   opacity: 1;
 }
-/* line 932, ../sass/screen.scss */
+/* line 1018, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded {
   position: relative;
   z-index: 1000;
 }
-/* line 936, ../sass/screen.scss */
+/* line 1022, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded div.item {
   margin-bottom: 0;
 }
-/* line 940, ../sass/screen.scss */
+/* line 1026, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded div.video-description {
   background-color: rgba(41, 55, 76, 0.9);
   position: absolute;
   top: 165px;
   width: 211px;
 }
-/* line 946, ../sass/screen.scss */
+/* line 1032, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded div.video-description p {
   opacity: 1;
   max-height: none;
 }
-/* line 953, ../sass/screen.scss */
+/* line 1039, ../sass/screen.scss */
 #base #videos #video-list div.row div.video a.toggle-description {
   margin-left: -3px;
 }
-/* line 957, ../sass/screen.scss */
+/* line 1043, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing {
   cursor: auto;
 }
-/* line 960, ../sass/screen.scss */
+/* line 1046, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message {
   padding: 0 12px;
   position: absolute;
@@ -1017,14 +1099,14 @@ body {
   width: 211px;
   top: 30px;
 }
-/* line 967, ../sass/screen.scss */
+/* line 1053, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message i {
   color: white;
   display: block;
   margin: 10px auto;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 974, ../sass/screen.scss */
+/* line 1060, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message strong {
   color: white;
   font-size: 10px;
@@ -1033,7 +1115,7 @@ body {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   font-style: normal;
 }
-/* line 982, ../sass/screen.scss */
+/* line 1068, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message strong.title {
   font-weight: 700;
   font-style: italic;
@@ -1041,86 +1123,86 @@ body {
   line-height: 20px;
   margin-bottom: 94px;
 }
-/* line 993, ../sass/screen.scss */
+/* line 1079, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.header strong.title {
   max-width: 211px;
 }
 
-/* line 1004, ../sass/screen.scss */
+/* line 1090, ../sass/screen.scss */
 footer {
   color: white;
   font: bold 16px/20px 'proxima-nova';
   padding-bottom: 13px;
 }
 
-/* line 1014, ../sass/screen.scss */
+/* line 1100, ../sass/screen.scss */
 body.logged-out {
   background: #2a394e url("../../img/v2/bkg-loggedout.png") repeat-x;
 }
-/* line 1017, ../sass/screen.scss */
+/* line 1103, ../sass/screen.scss */
 body.logged-out.no-carousel {
   background: #2a394e url("../../img/v2/bkg-loggedout-nocarousel.png") repeat-x;
 }
-/* line 1020, ../sass/screen.scss */
+/* line 1106, ../sass/screen.scss */
 body.logged-out.no-carousel #uploader {
   margin-top: 38px;
 }
-/* line 1025, ../sass/screen.scss */
+/* line 1111, ../sass/screen.scss */
 body.logged-out p.login-info {
   text-align: right;
   cursor: default;
   color: #8597b1;
   font-size: 10px;
 }
-/* line 1031, ../sass/screen.scss */
+/* line 1117, ../sass/screen.scss */
 body.logged-out p.login-info a {
   padding-left: 5px;
 }
-/* line 1037, ../sass/screen.scss */
+/* line 1123, ../sass/screen.scss */
 body.logged-in {
   background: #2a394e url("../../img/v2/bkg-loggedin.png") repeat-x;
 }
-/* line 1040, ../sass/screen.scss */
+/* line 1126, ../sass/screen.scss */
 body.logged-in #base #videos {
   margin-bottom: 95px;
 }
-/* line 1044, ../sass/screen.scss */
+/* line 1130, ../sass/screen.scss */
 body.logged-in #video-list {
   min-height: 521px;
 }
-/* line 1048, ../sass/screen.scss */
+/* line 1134, ../sass/screen.scss */
 body.logged-in.no-carousel {
   background: #2a394e url("../../img/v2/bkg-loggedin-nocarousel.png") repeat-x;
 }
-/* line 1051, ../sass/screen.scss */
+/* line 1137, ../sass/screen.scss */
 body.logged-in.no-carousel #uploader {
   margin-top: 23px;
 }
-/* line 1055, ../sass/screen.scss */
+/* line 1141, ../sass/screen.scss */
 body.logged-in.no-carousel #base #videos {
   margin-bottom: 110px;
 }
-/* line 1060, ../sass/screen.scss */
+/* line 1146, ../sass/screen.scss */
 body.logged-in.no-videos {
   background: #2a394e url("../../img/v2/bkg-novideos.png") repeat-x;
 }
-/* line 1063, ../sass/screen.scss */
+/* line 1149, ../sass/screen.scss */
 body.logged-in.no-videos #base #videos {
   margin-bottom: inherit;
 }
-/* line 1066, ../sass/screen.scss */
+/* line 1152, ../sass/screen.scss */
 body.logged-in.no-videos #base #videos #no-videos {
   margin-bottom: 100px;
 }
-/* line 1071, ../sass/screen.scss */
+/* line 1157, ../sass/screen.scss */
 body.logged-in.no-videos #video-list {
   min-height: auto;
 }
-/* line 1075, ../sass/screen.scss */
+/* line 1161, ../sass/screen.scss */
 body.logged-in.no-videos.no-carousel {
   background: #2a394e url("../../img/v2/bkg-novideos-nocarousel.png") repeat-x;
 }
-/* line 1078, ../sass/screen.scss */
+/* line 1164, ../sass/screen.scss */
 body.logged-in.no-videos.no-carousel #base #videos #no-videos {
   margin-bottom: 84px;
 }

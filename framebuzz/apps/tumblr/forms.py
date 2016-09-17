@@ -76,17 +76,22 @@ class EditVideoForm(forms.ModelForm):
     ''' A very simple form that allows users to change the title and
         description of their uploaded videos. '''
     class Meta:
-        fields = ('slug', 'title', 'description',)
+        model = Video
+        fields = ('title', 'description',)
 
     def __init__(self, *args, **kwargs):
-        self.slug = kwargs.pop('slug', None)
+        self.video = kwargs.pop('video', None)
         super(EditVideoForm, self).__init__(*args, **kwargs)
+        self.fields['description'].widget = forms.Textarea(attrs={
+            'cols': '31',
+            'rows': '9',
+            'style': 'resize: none;'
+        })
 
     def save(self, commit=True):
         title = self.cleaned_data.get('title', None)
         description = self.cleaned_data.get('description', None)
-        if self.slug:
-            vid = Video.objects.get(slug=self.slug)
-            vid.title = title
-            vid.description = description
-            vid.save()
+        if self.video:
+            self.video.title = title
+            self.video.description = description
+            self.video.save()
