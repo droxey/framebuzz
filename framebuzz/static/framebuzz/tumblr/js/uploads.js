@@ -166,13 +166,18 @@ $(function() {
 
     // When the user chooses to edit a video description.
     $(document).on('click', 'a.edit-video', function() {
+        // Hide any existing edit containers.
+        $('a.btn-cancel-edit').trigger('click');
+
         var link = $(this),
             url = link.attr('href'),
             slug = link.attr('data-slug'),
-            editContainer = $('#' + slug);
+            editContainer = $('#' + slug),
+            itemPosition = link.closest('div.video').position();
 
         $.get(url, function(htmlResponse) {
             editContainer.html(htmlResponse);
+            editContainer.css({ left: itemPosition.left, top: itemPosition.top });
             editContainer.addClass('loaded');
         });
 
