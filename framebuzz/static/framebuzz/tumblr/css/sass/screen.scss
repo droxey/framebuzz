@@ -56,7 +56,6 @@ body {
         }
     }
 }
-
 // =============================================================================
 // IDs
 // =============================================================================
@@ -115,8 +114,6 @@ body {
             }
 
             &.share {
-                color: #67788f;
-
                 span.icon {
                     background-position: 0 -124px;
                     height: 63px;
@@ -766,7 +763,9 @@ body {
                     z-index: 99999;
                     top: 35px;
 
-                    &.loaded { display: block; }
+                    &.loaded {
+                        display: block;
+                    }
 
                     div.edit-video {
                         form {
@@ -779,7 +778,7 @@ body {
                                     position: relative;
                                     z-index: 10;
                                     width: 100%;
-                                    left: 0px;
+                                    left: 0;
                                 }
 
                                 a.btn-delete-video {
@@ -815,7 +814,7 @@ body {
                                     cursor: pointer;
                                     display: block;
                                     font: 13px 'proxima-nova';
-                                    padding: 16px 0px;
+                                    padding: 16px 0;
                                     text-decoration: underline;
                                     width: 35%;
 
@@ -1010,8 +1009,8 @@ body {
                             opacity: 0;
                             @include single-transition(opacity 20ms ease-in-out);
 
-                            &.is-truncated,
-                            &.complete {
+                            &.complete,
+                            &.is-truncated {
                                 opacity: 1;
                             }
                         }
