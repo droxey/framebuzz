@@ -63,14 +63,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 8, ../sass/screen.scss */
+/* line 10, ../sass/screen.scss */
 .clearfix:after {
   content: "";
   display: block;
   clear: both;
 }
 
-/* line 14, ../sass/screen.scss */
+/* line 16, ../sass/screen.scss */
 .ng-cloak,
 .x-ng-cloak,
 [data-ng-cloak],
@@ -81,45 +81,47 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 @media (min-width: 800px) {
-  /* line 24, ../sass/screen.scss */
+  /* line 26, ../sass/screen.scss */
   .container {
     width: 736px;
   }
 }
-/* line 32, ../sass/screen.scss */
+/* line 31, ../sass/screen.scss */
+.embed-responsive-4by3 {
+  padding-bottom: 0 !important;
+}
+
+/* line 36, ../sass/screen.scss */
 body {
   font: 12px/16px 'proxima-nova';
 }
 
-/* line 39, ../sass/screen.scss */
+/* line 43, ../sass/screen.scss */
 .blue-round {
-  -moz-border-radius: 6px / 6px;
-  -webkit-border-radius: 6px 6px;
-  border-radius: 6px / 6px;
   background-color: #28374c;
   border: 1px solid #26354a;
   padding: 44px 0 10px 3px;
   text-align: center;
   width: 100%;
 }
-/* line 47, ../sass/screen.scss */
+/* line 50, ../sass/screen.scss */
 .blue-round.no-videos {
   padding: 44px 0;
 }
 
-/* line 54, ../sass/screen.scss */
+/* line 57, ../sass/screen.scss */
 #growls div.growl div.growl-title {
   display: none;
 }
 
-/* line 63, ../sass/screen.scss */
+/* line 66, ../sass/screen.scss */
 #sidenav {
   left: -15px;
   margin-top: 30px;
   position: absolute;
   top: 188px;
 }
-/* line 70, ../sass/screen.scss */
+/* line 73, ../sass/screen.scss */
 #sidenav div.innernav a {
   border: 0 none;
   color: #cccccc;
@@ -128,7 +130,7 @@ body {
   font: 20px 'lobster';
   width: 100%;
 }
-/* line 78, ../sass/screen.scss */
+/* line 81, ../sass/screen.scss */
 #sidenav div.innernav a span.icon {
   background: url("../../img/v2/sidenav@2x.png") no-repeat;
   background-size: 126px 187px;
@@ -138,62 +140,61 @@ body {
   width: 62px;
   vertical-align: middle;
 }
-/* line 88, ../sass/screen.scss */
+/* line 91, ../sass/screen.scss */
 #sidenav div.innernav a:hover {
   text-decoration: underline;
 }
-/* line 93, ../sass/screen.scss */
+/* line 96, ../sass/screen.scss */
 #sidenav div.innernav a.upload span.icon {
   background-position: 0 0;
 }
-/* line 98, ../sass/screen.scss */
+/* line 101, ../sass/screen.scss */
 #sidenav div.innernav a.upload:hover span.icon {
   background-position: -64px 0;
 }
-/* line 105, ../sass/screen.scss */
+/* line 108, ../sass/screen.scss */
 #sidenav div.innernav a.framebuzzes span.icon {
   background-position: 0 -62px;
 }
-/* line 110, ../sass/screen.scss */
+/* line 113, ../sass/screen.scss */
 #sidenav div.innernav a.framebuzzes:hover span.icon {
   background-position: -64px -62px;
 }
-/* line 117, ../sass/screen.scss */
+/* line 120, ../sass/screen.scss */
 #sidenav div.innernav a.share span.icon {
   background-position: 0 -124px;
   height: 63px;
 }
-/* line 123, ../sass/screen.scss */
+/* line 126, ../sass/screen.scss */
 #sidenav div.innernav a.share:hover span.icon {
   background-position: -64px -124px;
 }
 
-/* line 133, ../sass/screen.scss */
+/* line 136, ../sass/screen.scss */
 #base #header {
-  min-height: 257px;
   position: relative;
 }
-/* line 137, ../sass/screen.scss */
-#base #header img.header {
-  margin: 0 auto;
-}
-/* line 141, ../sass/screen.scss */
-#base #header #actions {
-  height: 38px;
+/* line 139, ../sass/screen.scss */
+#base #header #logo-content {
+  max-width: 736px;
+  margin-left: 0;
+  margin-right: 0;
 }
 /* line 144, ../sass/screen.scss */
-#base #header #actions.logged-out {
-  padding-top: 10px;
+#base #header #logo-content div {
+  padding-left: 0;
+  padding-right: 0;
 }
-/* line 148, ../sass/screen.scss */
-#base #header #actions.logged-in {
-  padding-top: 8px;
+/* line 150, ../sass/screen.scss */
+#base #header #actions {
+  height: 14px;
 }
-/* line 152, ../sass/screen.scss */
+/* line 153, ../sass/screen.scss */
 #base #header #actions p.login-info {
   cursor: default;
+  font-size: 0.66rem;
 }
-/* line 155, ../sass/screen.scss */
+/* line 157, ../sass/screen.scss */
 #base #header #actions p.login-info span.as {
   color: #8597b1;
   font-size: 10px;
@@ -201,7 +202,7 @@ body {
   position: relative;
   top: 1px;
 }
-/* line 163, ../sass/screen.scss */
+/* line 165, ../sass/screen.scss */
 #base #header #actions p.login-info a.username {
   color: #9ba6b5;
   font-size: 12px;
@@ -212,11 +213,11 @@ body {
   vertical-align: baseline;
   text-decoration: none;
 }
-/* line 173, ../sass/screen.scss */
+/* line 175, ../sass/screen.scss */
 #base #header #actions p.login-info a.username:hover {
   text-decoration: underline;
 }
-/* line 178, ../sass/screen.scss */
+/* line 180, ../sass/screen.scss */
 #base #header #actions p.login-info a,
 #base #header #actions p.login-info input {
   color: #8597b1;
@@ -224,18 +225,18 @@ body {
   display: inline-block;
   text-decoration: underline;
 }
-/* line 186, ../sass/screen.scss */
+/* line 188, ../sass/screen.scss */
 #base #header #actions p.login-info a {
   padding-left: 8px;
 }
-/* line 190, ../sass/screen.scss */
+/* line 192, ../sass/screen.scss */
 #base #header #actions p.login-info input {
   background: none;
   border: none;
   font-size: 10px;
   margin-left: -7px;
 }
-/* line 197, ../sass/screen.scss */
+/* line 199, ../sass/screen.scss */
 #base #header #actions p.login-info img.avatar {
   display: inline-block;
   vertical-align: middle;
@@ -243,37 +244,37 @@ body {
   height: 16px;
   width: 16px;
 }
-/* line 208, ../sass/screen.scss */
+/* line 210, ../sass/screen.scss */
 #base #example {
-  min-height: 467px;
   position: relative;
+  max-height: 180px;
 }
-/* line 212, ../sass/screen.scss */
+/* line 214, ../sass/screen.scss */
 #base #example #embed-row {
-  position: absolute;
-  top: 4px;
-  width: 736px;
-  height: 428px;
+  height: 180px;
 }
-/* line 220, ../sass/screen.scss */
+/* line 217, ../sass/screen.scss */
+#base #example #embed-row .mejs-container {
+  background: none;
+  height: 180px !important;
+}
+/* line 224, ../sass/screen.scss */
 #base #login-row {
-  min-height: 98px;
+  overflow: hidden;
+  min-height: 68px;
+  padding-top: 13px;
 }
-/* line 223, ../sass/screen.scss */
+/* line 229, ../sass/screen.scss */
 #base #login-row a.btn-login {
   background: url("../../img/v2/btn-login@2x.png") no-repeat;
-  background-size: 446px 108px;
-  display: block;
-  height: 50px;
-  overflow: hidden;
-  margin: 0 auto;
-  width: 446px;
+  background-size: 290px 80px;
+  height: 38px;
 }
-/* line 232, ../sass/screen.scss */
+/* line 234, ../sass/screen.scss */
 #base #login-row a.btn-login:hover {
-  background-position: 0 -58px;
+  background-position: 0 -43px;
 }
-/* line 237, ../sass/screen.scss */
+/* line 239, ../sass/screen.scss */
 #base #login-row a.btn-start-fbz {
   background: url("../../img/v2/btn-upload@2x.png") no-repeat;
   background-size: 339px 106px;
@@ -283,35 +284,34 @@ body {
   margin: 0 auto;
   width: 339px;
 }
-/* line 246, ../sass/screen.scss */
+/* line 248, ../sass/screen.scss */
 #base #login-row a.btn-start-fbz:hover {
   background-position: 0 -56px;
 }
-/* line 252, ../sass/screen.scss */
+/* line 254, ../sass/screen.scss */
 #base #fbz-on-tumblr {
   margin-bottom: 37px;
   margin-left: -34px;
   margin-right: -34px;
-  min-height: 223px;
+  overflow: hidden;
+  width: 100%;
 }
-/* line 259, ../sass/screen.scss */
+/* line 262, ../sass/screen.scss */
 #base #fbz-on-tumblr div.carousel-header img {
   margin: 0 auto;
 }
-/* line 264, ../sass/screen.scss */
+/* line 267, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel {
-  height: 118px;
-  width: 804px;
+  height: 42px;
+  width: 320px;
   overflow: hidden;
   position: relative;
-  top: -7px;
 }
-/* line 271, ../sass/screen.scss */
+/* line 273, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper {
   height: 100%;
-  max-width: 798px !important;
 }
-/* line 275, ../sass/screen.scss */
+/* line 276, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper div.bx-viewport {
   -webkit-moz-box-shadow: none;
   -moz-moz-box-shadow: none;
@@ -320,50 +320,51 @@ body {
   box-shadow: none;
   border: 0 none;
   height: 100%;
-  width: 736px !important;
+  width: 265px !important;
   left: 18px;
   margin: 0 12px;
 }
-/* line 289, ../sass/screen.scss */
+/* line 290, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper div.bx-controls-direction a.bx-next,
 #base #fbz-on-tumblr #carousel div.bx-wrapper div.bx-controls-direction a.bx-prev {
   background: url("../../img/v2/controls@2x.png") no-repeat;
-  background-size: 47px 81px;
   cursor: pointer;
   display: block;
-  height: 81px;
   position: absolute;
+  background-size: 60px 10px;
+  height: 42px;
   top: 34px;
-  width: 21px;
+  width: 10px;
 }
-/* line 300, ../sass/screen.scss */
+/* line 301, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper div.bx-controls-direction a.bx-next.bx-prev,
 #base #fbz-on-tumblr #carousel div.bx-wrapper div.bx-controls-direction a.bx-prev.bx-prev {
   background-position: 0 0;
   float: left;
   left: -2px;
 }
-/* line 306, ../sass/screen.scss */
+/* line 307, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper div.bx-controls-direction a.bx-next.bx-next,
 #base #fbz-on-tumblr #carousel div.bx-wrapper div.bx-controls-direction a.bx-prev.bx-next {
   background-position: -25px 0;
   float: right;
   right: 5px;
 }
-/* line 314, ../sass/screen.scss */
+/* line 315, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper ul {
   display: block;
   height: 118px;
 }
-/* line 318, ../sass/screen.scss */
+/* line 319, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper ul li {
   display: inline-block;
-  height: 118px;
   background-repeat: no-repeat;
-  background-size: 166px 118px;
-  width: 166px;
+  background-size: 60px 42px;
+  margin-right: 11px;
+  height: 42px;
+  width: 60px;
 }
-/* line 325, ../sass/screen.scss */
+/* line 327, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper ul li a {
   -webkit-box-shadow: inset 4px 4px 18px 18px rgba(255, 255, 255, 0.1);
   -moz-box-shadow: inset 4px 4px 18px 18px rgba(255, 255, 255, 0.1);
@@ -373,12 +374,12 @@ body {
   height: 118px;
   width: 166px;
 }
-/* line 334, ../sass/screen.scss */
+/* line 336, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper ul li a img {
   position: absolute;
   z-index: 1;
 }
-/* line 339, ../sass/screen.scss */
+/* line 341, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper ul li a span.bubble {
   background: url("../../img/v2/bubble@2x.png") no-repeat;
   background-size: 50px 50px;
@@ -395,21 +396,15 @@ body {
   text-align: center;
   z-index: 10;
 }
-/* line 356, ../sass/screen.scss */
-#base #fbz-on-tumblr #carousel div.bx-wrapper ul li a:hover {
-  -webkit-box-shadow: inset 4px 4px 18px 18px rgba(0, 0, 0, 0.18);
-  -moz-box-shadow: inset 4px 4px 18px 18px rgba(0, 0, 0, 0.18);
-  box-shadow: inset 4px 4px 18px 18px rgba(0, 0, 0, 0.18);
-}
-/* line 363, ../sass/screen.scss */
+/* line 359, ../sass/screen.scss */
 #base #fbz-on-tumblr #carousel div.bx-wrapper ul li:nth-child(4n) {
   margin-right: 0;
 }
-/* line 372, ../sass/screen.scss */
+/* line 368, ../sass/screen.scss */
 #base #uploader {
-  min-height: 324px;
+  min-height: 274px;
 }
-/* line 375, ../sass/screen.scss */
+/* line 371, ../sass/screen.scss */
 #base #uploader h1 {
   color: white;
   font-size: 32px;
@@ -420,19 +415,19 @@ body {
   margin-left: -2px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 387, ../sass/screen.scss */
+/* line 383, ../sass/screen.scss */
 #base #uploader #upload-container.logged-in {
   padding: 21px 17px 17px;
 }
-/* line 391, ../sass/screen.scss */
+/* line 387, ../sass/screen.scss */
 #base #uploader #upload-container.logged-out {
   padding: 44px 17px;
 }
-/* line 396, ../sass/screen.scss */
+/* line 392, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.submit-row {
   margin-top: 11px;
 }
-/* line 399, ../sass/screen.scss */
+/* line 395, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.submit-row input.btn {
   -moz-border-radius: 5px / 5px;
   -webkit-border-radius: 5px 5px;
@@ -442,11 +437,11 @@ body {
   cursor: pointer;
   width: 100%;
 }
-/* line 406, ../sass/screen.scss */
+/* line 402, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.submit-row input.btn:hover {
   background: #15273c;
 }
-/* line 412, ../sass/screen.scss */
+/* line 408, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input,
 #base #uploader #upload-container #upload-video-form textarea {
   font: 13px/16px 'proxima-nova';
@@ -455,7 +450,7 @@ body {
   -webkit-border-radius: 3px 3px;
   border-radius: 3px / 3px;
 }
-/* line 418, ../sass/screen.scss */
+/* line 414, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input::-webkit-input-placeholder,
 #base #uploader #upload-container #upload-video-form textarea::-webkit-input-placeholder {
   /* WebKit browsers */
@@ -463,7 +458,7 @@ body {
   font-weight: 300;
   font-style: italic;
 }
-/* line 425, ../sass/screen.scss */
+/* line 421, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input:-moz-placeholder,
 #base #uploader #upload-container #upload-video-form textarea:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
@@ -471,7 +466,7 @@ body {
   font-weight: 300;
   font-style: italic;
 }
-/* line 432, ../sass/screen.scss */
+/* line 428, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input::-moz-placeholder,
 #base #uploader #upload-container #upload-video-form textarea::-moz-placeholder {
   /* Mozilla Firefox 19+ */
@@ -479,7 +474,7 @@ body {
   font-weight: 300;
   font-style: italic;
 }
-/* line 439, ../sass/screen.scss */
+/* line 435, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input:-ms-input-placeholder,
 #base #uploader #upload-container #upload-video-form textarea:-ms-input-placeholder {
   /* Internet Explorer 10+ */
@@ -487,25 +482,25 @@ body {
   font-weight: 300;
   font-style: italic;
 }
-/* line 446, ../sass/screen.scss */
+/* line 442, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.placeholder,
 #base #uploader #upload-container #upload-video-form textarea.placeholder {
   color: #28374c;
   font-weight: 300;
   font-style: italic;
 }
-/* line 452, ../sass/screen.scss */
+/* line 448, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input:focus,
 #base #uploader #upload-container #upload-video-form textarea:focus {
   border: 1px solid #28374c;
   outline: 0;
 }
-/* line 457, ../sass/screen.scss */
+/* line 453, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error,
 #base #uploader #upload-container #upload-video-form textarea.error {
   border: 1px solid red;
 }
-/* line 460, ../sass/screen.scss */
+/* line 456, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error:-moz-placeholder,
 #base #uploader #upload-container #upload-video-form textarea.error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
@@ -513,7 +508,7 @@ body {
   font-weight: 300;
   font-style: italic;
 }
-/* line 467, ../sass/screen.scss */
+/* line 463, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error::-moz-placeholder,
 #base #uploader #upload-container #upload-video-form textarea.error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
@@ -521,7 +516,7 @@ body {
   font-weight: 300;
   font-style: italic;
 }
-/* line 474, ../sass/screen.scss */
+/* line 470, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error:-ms-input-placeholder,
 #base #uploader #upload-container #upload-video-form textarea.error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
@@ -529,26 +524,26 @@ body {
   font-weight: 300;
   font-style: italic;
 }
-/* line 481, ../sass/screen.scss */
+/* line 477, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form input.error.placeholder,
 #base #uploader #upload-container #upload-video-form textarea.error.placeholder {
   color: red;
   font-weight: 300;
   font-style: italic;
 }
-/* line 489, ../sass/screen.scss */
+/* line 485, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.textarea-row {
   margin-top: 11px;
 }
-/* line 492, ../sass/screen.scss */
+/* line 488, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.textarea-row textarea {
   height: 135px;
 }
-/* line 498, ../sass/screen.scss */
+/* line 494, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row input.filepicker {
   display: none;
 }
-/* line 502, ../sass/screen.scss */
+/* line 498, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane div.filepicker {
   -moz-border-radius: 4px / 4px !important;
   -webkit-border-radius: 4px 4px !important;
@@ -561,7 +556,7 @@ body {
   left: -14px;
   z-index: 100;
 }
-/* line 516, ../sass/screen.scss */
+/* line 512, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div {
   -moz-border-radius: 4px / 4px !important;
   -webkit-border-radius: 4px 4px !important;
@@ -580,7 +575,7 @@ body {
   min-height: 146px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 534, ../sass/screen.scss */
+/* line 530, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div em {
   display: block;
   font-size: 11px !important;
@@ -588,7 +583,7 @@ body {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   font-weight: normal;
 }
-/* line 542, ../sass/screen.scss */
+/* line 538, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div span {
   position: absolute;
   right: 10px;
@@ -596,16 +591,16 @@ body {
   float: none !important;
   font-size: 18px !important;
 }
-/* line 551, ../sass/screen.scss */
+/* line 547, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div.error {
   border: 2px dashed red !important;
 }
-/* line 555, ../sass/screen.scss */
+/* line 551, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div > div {
   height: 22px !important;
   margin: 0 3px !important;
 }
-/* line 560, ../sass/screen.scss */
+/* line 556, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > button.btn-info {
   -moz-border-radius: 5px / 5px;
   -webkit-border-radius: 5px 5px;
@@ -618,15 +613,15 @@ body {
   padding: 4px 22px;
   z-index: 100;
 }
-/* line 570, ../sass/screen.scss */
+/* line 566, ../sass/screen.scss */
 #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > button.btn-info:hover {
   background: #007ab8;
 }
-/* line 578, ../sass/screen.scss */
+/* line 574, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.login {
   padding-bottom: 21px;
 }
-/* line 581, ../sass/screen.scss */
+/* line 577, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.login a {
   color: #36aeef;
   text-decoration: underline;
@@ -634,57 +629,57 @@ body {
   font-size: 19px;
   font-weight: bold;
 }
-/* line 590, ../sass/screen.scss */
+/* line 586, ../sass/screen.scss */
 #base #uploader #upload-container #upload-login p.info {
   color: white;
   font-size: 13px;
   line-height: 18px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 600, ../sass/screen.scss */
+/* line 596, ../sass/screen.scss */
 #base #post {
   min-height: 235px;
   position: relative;
   bottom: 0;
 }
-/* line 605, ../sass/screen.scss */
+/* line 601, ../sass/screen.scss */
 #base #post h1 {
   color: #92a2b8;
-  font-size: 38.04px;
+  font-size: 1.6rem;
+  line-height: 30px;
   font-family: 'lobster';
   text-align: left;
-  line-height: 43px;
   padding-bottom: 16px;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 615, ../sass/screen.scss */
+/* line 611, ../sass/screen.scss */
 #base #post em {
   color: #fffffd;
 }
-/* line 619, ../sass/screen.scss */
+/* line 615, ../sass/screen.scss */
 #base #post img {
   border: 2px solid white;
   display: inline-block;
   margin-left: 28px;
   margin-right: 11px;
 }
-/* line 626, ../sass/screen.scss */
+/* line 622, ../sass/screen.scss */
 #base #post p.info {
   color: rgba(255, 255, 255, 0.6);
-  font-size: 15px;
-  line-height: 30px;
   padding-top: 20px;
   font-weight: 500;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   word-break: break-word;
   letter-spacing: -0.03em;
+  font-size: 0.8rem;
+  line-height: 20px;
 }
-/* line 638, ../sass/screen.scss */
+/* line 634, ../sass/screen.scss */
 #base #videos {
   margin-top: 41px;
   margin-bottom: 100px;
 }
-/* line 643, ../sass/screen.scss */
+/* line 639, ../sass/screen.scss */
 #base #videos h3 a {
   color: white;
   display: block;
@@ -694,25 +689,25 @@ body {
   text-decoration: none;
   text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
 }
-/* line 654, ../sass/screen.scss */
+/* line 650, ../sass/screen.scss */
 #base #videos #no-videos {
   min-height: 112px;
   text-align: center;
   margin-bottom: 56px;
 }
-/* line 659, ../sass/screen.scss */
+/* line 655, ../sass/screen.scss */
 #base #videos #no-videos h4 {
   color: #495b75;
   font: 28px/48px 'proxima-nova';
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 665, ../sass/screen.scss */
+/* line 661, ../sass/screen.scss */
 #base #videos #no-videos p {
   color: #677a94;
   font: 19px/40px 'proxima-nova';
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 673, ../sass/screen.scss */
+/* line 669, ../sass/screen.scss */
 #base #videos div.page-wrapper div.pagination {
   -moz-border-radius: 3px / 3px;
   -webkit-border-radius: 3px 3px;
@@ -725,17 +720,17 @@ body {
   bottom: 15px;
   margin: 0;
 }
-/* line 683, ../sass/screen.scss */
+/* line 679, ../sass/screen.scss */
 #base #videos div.page-wrapper div.pagination ul {
   padding: 0;
   width: 100%;
 }
-/* line 687, ../sass/screen.scss */
+/* line 683, ../sass/screen.scss */
 #base #videos div.page-wrapper div.pagination ul li {
   display: inline-block;
   padding: 0 2px;
 }
-/* line 691, ../sass/screen.scss */
+/* line 687, ../sass/screen.scss */
 #base #videos div.page-wrapper div.pagination ul li a,
 #base #videos div.page-wrapper div.pagination ul li span {
   color: #92a2b8;
@@ -743,7 +738,7 @@ body {
   font-weight: 500;
   float: left;
 }
-/* line 699, ../sass/screen.scss */
+/* line 695, ../sass/screen.scss */
 #base #videos div.page-wrapper div.pagination ul li.active {
   -moz-border-radius: 3px / 3px;
   -webkit-border-radius: 3px 3px;
@@ -751,46 +746,46 @@ body {
   background: #4583d8;
   padding: 0 6px;
 }
-/* line 704, ../sass/screen.scss */
+/* line 700, ../sass/screen.scss */
 #base #videos div.page-wrapper div.pagination ul li.active a {
   font-weight: 700;
   color: white;
 }
-/* line 711, ../sass/screen.scss */
+/* line 707, ../sass/screen.scss */
 #base #videos div.page-wrapper div.pagination ul li a.page-link i {
   vertical-align: baseline;
   position: relative;
   top: 1px;
 }
-/* line 717, ../sass/screen.scss */
+/* line 713, ../sass/screen.scss */
 #base #videos div.page-wrapper div.pagination ul li a.page-link.prev i {
   margin-right: 2px;
 }
-/* line 721, ../sass/screen.scss */
+/* line 717, ../sass/screen.scss */
 #base #videos div.page-wrapper div.pagination ul li a.page-link.next i {
   margin-left: 2px;
 }
-/* line 725, ../sass/screen.scss */
+/* line 721, ../sass/screen.scss */
 #base #videos div.page-wrapper div.pagination ul li a.page-link.next, #base #videos div.page-wrapper div.pagination ul li a.page-link.prev {
   text-decoration: underline;
 }
-/* line 742, ../sass/screen.scss */
+/* line 738, ../sass/screen.scss */
 #base #videos #video-list .no-padding {
   padding-left: 0;
   padding-right: 0;
 }
-/* line 747, ../sass/screen.scss */
+/* line 743, ../sass/screen.scss */
 #base #videos #video-list div.row {
   padding: 0 20px;
 }
-/* line 750, ../sass/screen.scss */
+/* line 746, ../sass/screen.scss */
 #base #videos #video-list div.row div.cover {
   background-repeat: no-repeat;
   background-size: 211px 140px;
   width: 211px;
   height: 140px;
 }
-/* line 757, ../sass/screen.scss */
+/* line 753, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container {
   display: none;
   position: absolute;
@@ -800,11 +795,11 @@ body {
   z-index: 99999;
   top: 35px;
 }
-/* line 766, ../sass/screen.scss */
+/* line 762, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container.loaded {
   display: block;
 }
-/* line 773, ../sass/screen.scss */
+/* line 769, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container div.edit-video form div.form-row input {
   color: #333333;
   border: 0 none;
@@ -815,7 +810,7 @@ body {
   width: 100%;
   left: 0;
 }
-/* line 784, ../sass/screen.scss */
+/* line 780, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container div.edit-video form div.form-row a.btn-delete-video {
   color: #333333;
   font-size: 17px;
@@ -824,11 +819,11 @@ body {
   top: -30px;
   right: 4px;
 }
-/* line 792, ../sass/screen.scss */
+/* line 788, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container div.edit-video form div.form-row a.btn-delete-video:hover {
   color: #1f1f1f;
 }
-/* line 797, ../sass/screen.scss */
+/* line 793, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container div.edit-video form div.form-row textarea {
   color: #525252;
   border: 0 none;
@@ -837,12 +832,12 @@ body {
   padding: 18px 12px;
   width: 100%;
 }
-/* line 807, ../sass/screen.scss */
+/* line 803, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container div.edit-video form div.submit-row {
   height: 48px;
   padding: 0;
 }
-/* line 811, ../sass/screen.scss */
+/* line 807, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container div.edit-video form div.submit-row a.btn-cancel-edit {
   background: #757575;
   color: white;
@@ -853,11 +848,11 @@ body {
   text-decoration: underline;
   width: 35%;
 }
-/* line 821, ../sass/screen.scss */
+/* line 817, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container div.edit-video form div.submit-row a.btn-cancel-edit:hover {
   background: #666666;
 }
-/* line 826, ../sass/screen.scss */
+/* line 822, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container div.edit-video form div.submit-row input.btn-submit {
   background: #36aeef;
   border: 0 none;
@@ -869,21 +864,21 @@ body {
   text-decoration: underline;
   width: 65%;
 }
-/* line 837, ../sass/screen.scss */
+/* line 833, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container div.edit-video form div.submit-row input.btn-submit:hover {
   background: #129ae2;
 }
-/* line 846, ../sass/screen.scss */
+/* line 842, ../sass/screen.scss */
 #base #videos #video-list div.row div.video {
   min-height: 230px;
   position: relative;
   z-index: 1;
 }
-/* line 851, ../sass/screen.scss */
+/* line 847, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item {
   margin-bottom: 0;
 }
-/* line 854, ../sass/screen.scss */
+/* line 850, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay {
   background: rgba(0, 0, 0, 0.4);
   display: none;
@@ -893,7 +888,7 @@ body {
   top: 25px;
   z-index: 10;
 }
-/* line 863, ../sass/screen.scss */
+/* line 859, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.edit-video {
   color: white;
   cursor: pointer;
@@ -909,7 +904,7 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 875, ../sass/screen.scss */
+/* line 871, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.edit-video:hover {
   opacity: 1;
   -moz-transition: opacity, 20ms, ease-in-out 1s;
@@ -917,7 +912,7 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 881, ../sass/screen.scss */
+/* line 877, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.play-video {
   display: block;
   height: 47px;
@@ -932,12 +927,12 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 892, ../sass/screen.scss */
+/* line 888, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.play-video img {
   height: 47px;
   width: 47px;
 }
-/* line 897, ../sass/screen.scss */
+/* line 893, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.play-video:hover {
   opacity: 1;
   -moz-transition: opacity, 20ms, ease-in-out 1s;
@@ -945,7 +940,7 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 903, ../sass/screen.scss */
+/* line 899, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr {
   color: white;
   display: block;
@@ -954,27 +949,27 @@ body {
   left: 20px;
   margin: 24px 0 0;
 }
-/* line 911, ../sass/screen.scss */
+/* line 907, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr img,
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr span {
   display: block;
   position: absolute;
   top: 0;
 }
-/* line 918, ../sass/screen.scss */
+/* line 914, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr span {
   padding: 9px 0;
   text-indent: 49px;
   z-index: 6;
 }
-/* line 924, ../sass/screen.scss */
+/* line 920, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr img {
   position: relative;
   z-index: 5;
   width: 168px;
   height: 35px;
 }
-/* line 932, ../sass/screen.scss */
+/* line 928, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.copy-embed {
   color: #9dc5fd;
   cursor: pointer;
@@ -986,7 +981,7 @@ body {
   padding-top: 15px;
   line-height: 13px;
 }
-/* line 944, ../sass/screen.scss */
+/* line 940, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay textarea.embed-code {
   display: none;
   position: absolute;
@@ -1001,11 +996,11 @@ body {
   height: 16px;
   padding: 2px;
 }
-/* line 960, ../sass/screen.scss */
+/* line 956, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.header {
   padding-bottom: 8px;
 }
-/* line 963, ../sass/screen.scss */
+/* line 959, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.header strong.title {
   color: white;
   font: 13px 'proxima-nova';
@@ -1017,18 +1012,18 @@ body {
   text-overflow: ellipsis;
   max-width: 170px;
 }
-/* line 975, ../sass/screen.scss */
+/* line 971, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.header strong.duration {
   color: #92a2b8;
   font: 14px 'proxima-nova';
   text-align: right;
   font-weight: 500;
 }
-/* line 984, ../sass/screen.scss */
+/* line 980, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item:hover div.overlay {
   display: block;
 }
-/* line 990, ../sass/screen.scss */
+/* line 986, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description {
   cursor: pointer;
   position: relative;
@@ -1036,11 +1031,11 @@ body {
   width: 211px;
   opacity: 1;
 }
-/* line 997, ../sass/screen.scss */
+/* line 993, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description.hide {
   opacity: 0;
 }
-/* line 1001, ../sass/screen.scss */
+/* line 997, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description p {
   color: #afbfd4;
   font: 12.64px 'proxima-nova';
@@ -1055,40 +1050,40 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 1012, ../sass/screen.scss */
+/* line 1008, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description p.complete, #base #videos #video-list div.row div.video div.video-description p.is-truncated {
   opacity: 1;
 }
-/* line 1019, ../sass/screen.scss */
+/* line 1015, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded {
   position: relative;
   z-index: 1000;
 }
-/* line 1023, ../sass/screen.scss */
+/* line 1019, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded div.item {
   margin-bottom: 0;
 }
-/* line 1027, ../sass/screen.scss */
+/* line 1023, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded div.video-description {
   background-color: rgba(41, 55, 76, 0.9);
   position: absolute;
   top: 165px;
   width: 211px;
 }
-/* line 1033, ../sass/screen.scss */
+/* line 1029, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded div.video-description p {
   opacity: 1;
   max-height: none;
 }
-/* line 1040, ../sass/screen.scss */
+/* line 1036, ../sass/screen.scss */
 #base #videos #video-list div.row div.video a.toggle-description {
   margin-left: -3px;
 }
-/* line 1044, ../sass/screen.scss */
+/* line 1040, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing {
   cursor: auto;
 }
-/* line 1047, ../sass/screen.scss */
+/* line 1043, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message {
   padding: 0 12px;
   position: absolute;
@@ -1096,14 +1091,14 @@ body {
   width: 211px;
   top: 30px;
 }
-/* line 1054, ../sass/screen.scss */
+/* line 1050, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message i {
   color: white;
   display: block;
   margin: 10px auto;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1061, ../sass/screen.scss */
+/* line 1057, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message strong {
   color: white;
   font-size: 10px;
@@ -1112,7 +1107,7 @@ body {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   font-style: normal;
 }
-/* line 1069, ../sass/screen.scss */
+/* line 1065, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message strong.title {
   font-weight: 700;
   font-style: italic;
@@ -1120,90 +1115,220 @@ body {
   line-height: 20px;
   margin-bottom: 94px;
 }
-/* line 1080, ../sass/screen.scss */
+/* line 1076, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.header strong.title {
   max-width: 211px;
 }
-/* line 1087, ../sass/screen.scss */
+/* line 1083, ../sass/screen.scss */
 #base #videos #video-list div.row:nth-child(2n) {
   min-height: 200px;
 }
 
-/* line 1095, ../sass/screen.scss */
+/* line 1091, ../sass/screen.scss */
 footer {
   color: white;
   font: bold 16px/20px 'proxima-nova';
   padding-bottom: 13px;
 }
 
-/* line 1105, ../sass/screen.scss */
+/* line 1101, ../sass/screen.scss */
 body.logged-out {
   background: #2a394e url("../../img/v2/bkg-loggedout.png") repeat-x;
+  background-size: 1px 1078px;
 }
-/* line 1108, ../sass/screen.scss */
+/* line 1105, ../sass/screen.scss */
 body.logged-out.no-carousel {
   background: #2a394e url("../../img/v2/bkg-loggedout-nocarousel.png") repeat-x;
 }
-/* line 1111, ../sass/screen.scss */
+/* line 1108, ../sass/screen.scss */
 body.logged-out.no-carousel #uploader {
   margin-top: 38px;
 }
-/* line 1116, ../sass/screen.scss */
+/* line 1113, ../sass/screen.scss */
 body.logged-out p.login-info {
   text-align: right;
   cursor: default;
   color: #8597b1;
   font-size: 10px;
 }
-/* line 1122, ../sass/screen.scss */
+/* line 1119, ../sass/screen.scss */
 body.logged-out p.login-info a {
   padding-left: 5px;
 }
-/* line 1128, ../sass/screen.scss */
+/* line 1125, ../sass/screen.scss */
 body.logged-in {
   background: #2a394e url("../../img/v2/bkg-loggedin.png") repeat-x;
 }
-/* line 1131, ../sass/screen.scss */
+/* line 1128, ../sass/screen.scss */
 body.logged-in #base #videos {
   margin-bottom: 95px;
 }
-/* line 1135, ../sass/screen.scss */
+/* line 1132, ../sass/screen.scss */
 body.logged-in #video-list {
   min-height: 521px;
 }
-/* line 1139, ../sass/screen.scss */
+/* line 1136, ../sass/screen.scss */
 body.logged-in.no-carousel {
   background: #2a394e url("../../img/v2/bkg-loggedin-nocarousel.png") repeat-x;
 }
-/* line 1142, ../sass/screen.scss */
+/* line 1139, ../sass/screen.scss */
 body.logged-in.no-carousel #uploader {
   margin-top: 23px;
 }
-/* line 1146, ../sass/screen.scss */
+/* line 1143, ../sass/screen.scss */
 body.logged-in.no-carousel #base #videos {
   margin-bottom: 110px;
 }
-/* line 1151, ../sass/screen.scss */
+/* line 1148, ../sass/screen.scss */
 body.logged-in.no-videos {
   background: #2a394e url("../../img/v2/bkg-novideos.png") repeat-x;
 }
-/* line 1154, ../sass/screen.scss */
+/* line 1151, ../sass/screen.scss */
 body.logged-in.no-videos #base #videos {
   margin-bottom: inherit;
 }
-/* line 1157, ../sass/screen.scss */
+/* line 1154, ../sass/screen.scss */
 body.logged-in.no-videos #base #videos #no-videos {
   margin-bottom: 100px;
 }
-/* line 1162, ../sass/screen.scss */
+/* line 1159, ../sass/screen.scss */
 body.logged-in.no-videos #video-list {
   min-height: auto;
 }
-/* line 1166, ../sass/screen.scss */
+/* line 1163, ../sass/screen.scss */
 body.logged-in.no-videos.no-carousel {
   background: #2a394e url("../../img/v2/bkg-novideos-nocarousel.png") repeat-x;
 }
-/* line 1169, ../sass/screen.scss */
+/* line 1166, ../sass/screen.scss */
 body.logged-in.no-videos.no-carousel #base #videos #no-videos {
   margin-bottom: 84px;
+}
+
+@media (min-width: 768px) {
+  /* line 1188, ../sass/screen.scss */
+  .blue-round {
+    -moz-border-radius: 6px / 6px;
+    -webkit-border-radius: 6px 6px;
+    border-radius: 6px / 6px;
+  }
+
+  /* line 1193, ../sass/screen.scss */
+  body.logged-out {
+    background-size: 1px 2480px;
+  }
+
+  /* line 1200, ../sass/screen.scss */
+  #base #header {
+    min-height: 257px;
+  }
+  /* line 1203, ../sass/screen.scss */
+  #base #header #actions {
+    height: 38px;
+  }
+  /* line 1206, ../sass/screen.scss */
+  #base #header #actions p.info {
+    font-size: 10px;
+  }
+  /* line 1210, ../sass/screen.scss */
+  #base #header #actions.logged-out {
+    padding-top: 10px;
+  }
+  /* line 1214, ../sass/screen.scss */
+  #base #header #actions.logged-in {
+    padding-top: 8px;
+  }
+  /* line 1220, ../sass/screen.scss */
+  #base #example {
+    min-height: 467px;
+  }
+  /* line 1223, ../sass/screen.scss */
+  #base #example #embed-row {
+    height: 428px;
+  }
+  /* line 1226, ../sass/screen.scss */
+  #base #example #embed-row .mejs-container {
+    background: #36465D;
+    height: 428px !important;
+  }
+  /* line 1233, ../sass/screen.scss */
+  #base #login-row {
+    min-height: 98px;
+    padding-top: 0;
+  }
+  /* line 1237, ../sass/screen.scss */
+  #base #login-row a.btn-login {
+    background-size: 446px 108px;
+    height: 50px;
+    width: 446px;
+  }
+  /* line 1242, ../sass/screen.scss */
+  #base #login-row a.btn-login:hover {
+    background-position: 0 -58px;
+  }
+  /* line 1248, ../sass/screen.scss */
+  #base #fbz-on-tumblr {
+    margin-bottom: 37px;
+    margin-left: -34px;
+    margin-right: -34px;
+    min-height: 223px;
+  }
+  /* line 1254, ../sass/screen.scss */
+  #base #fbz-on-tumblr #carousel {
+    height: 118px;
+    width: 804px;
+    top: -7px;
+  }
+  /* line 1259, ../sass/screen.scss */
+  #base #fbz-on-tumblr #carousel div.bx-wrapper {
+    max-width: 798px !important;
+  }
+  /* line 1262, ../sass/screen.scss */
+  #base #fbz-on-tumblr #carousel div.bx-wrapper div.bx-viewport {
+    width: 736px !important;
+    left: 18px;
+    margin: 0 12px;
+  }
+  /* line 1269, ../sass/screen.scss */
+  #base #fbz-on-tumblr #carousel div.bx-wrapper div.bx-controls-direction a.bx-next,
+  #base #fbz-on-tumblr #carousel div.bx-wrapper div.bx-controls-direction a.bx-prev {
+    background-size: 47px 81px;
+    height: 81px;
+    top: 34px;
+    width: 21px;
+  }
+  /* line 1278, ../sass/screen.scss */
+  #base #fbz-on-tumblr #carousel div.bx-wrapper ul {
+    height: 118px;
+  }
+  /* line 1281, ../sass/screen.scss */
+  #base #fbz-on-tumblr #carousel div.bx-wrapper ul li {
+    background-size: 166px 118px;
+    height: 118px;
+    width: 166px;
+    margin-right: 22px;
+  }
+  /* line 1288, ../sass/screen.scss */
+  #base #fbz-on-tumblr #carousel div.bx-wrapper ul li a:hover {
+    -webkit-box-shadow: inset 4px 4px 18px 18px rgba(0, 0, 0, 0.18);
+    -moz-box-shadow: inset 4px 4px 18px 18px rgba(0, 0, 0, 0.18);
+    box-shadow: inset 4px 4px 18px 18px rgba(0, 0, 0, 0.18);
+  }
+  /* line 1300, ../sass/screen.scss */
+  #base #uploader {
+    min-height: 324px;
+  }
+  /* line 1304, ../sass/screen.scss */
+  #base #post {
+    min-height: 235px;
+  }
+  /* line 1307, ../sass/screen.scss */
+  #base #post h1 {
+    font-size: 38.04px;
+    line-height: 43px;
+  }
+  /* line 1312, ../sass/screen.scss */
+  #base #post p.info {
+    font-size: 15px;
+    line-height: 30px;
+  }
 }

@@ -1,7 +1,9 @@
 @import "compass";
 @import "compass/css3/border-radius";
 @import "compass/reset";
-@import "compass/css3/transition"; // =============================================================================
+@import "compass/css3/transition";
+
+// =============================================================================
 // Basics
 // =============================================================================
 
@@ -25,6 +27,8 @@
         width: 736px;
     }
 }
+
+.embed-responsive-4by3 { padding-bottom: 0 !important; }
 // =============================================================================
 // Elements
 // =============================================================================
@@ -37,7 +41,6 @@ body {
 // =============================================================================
 
 .blue-round {
-    @include border-radius(6px, 6px);
     background-color: #28374c;
     border: 1px solid #26354a;
     padding: 44px 0 10px 3px;
@@ -131,26 +134,25 @@ body {
 
 #base {
     #header {
-        min-height: 257px;
         position: relative;
 
-        img.header {
-            margin: 0 auto;
+        #logo-content {
+            max-width: 736px;
+            margin-left: 0;
+            margin-right: 0;
+
+            div {
+                padding-left: 0;
+                padding-right: 0;
+            }
         }
 
         #actions {
-            height: 38px;
-
-            &.logged-out {
-                padding-top: 10px;
-            }
-
-            &.logged-in {
-                padding-top: 8px;
-            }
+            height: 14px;
 
             p.login-info {
                 cursor: default;
+                font-size: 0.66rem;
 
                 span.as {
                     color: #8597b1;
@@ -206,31 +208,31 @@ body {
     }
 
     #example {
-        min-height: 467px;
         position: relative;
+        max-height: 180px;
 
         #embed-row {
-            position: absolute;
-            top: 4px;
-            width: 736px;
-            height: 428px;
+            height: 180px;
+
+            .mejs-container {
+                background: none;
+                height: 180px !important;
+            }
         }
     }
 
     #login-row {
-        min-height: 98px;
+        overflow: hidden;
+        min-height: 68px;
+        padding-top: 13px;
 
         a.btn-login {
             background: url('../../img/v2/btn-login@2x.png') no-repeat;
-            background-size: 446px 108px;
-            display: block;
-            height: 50px;
-            overflow: hidden;
-            margin: 0 auto;
-            width: 446px;
+            background-size: 290px 80px;
+            height: 38px;
 
             &:hover {
-                background-position: 0 -58px;
+                background-position: 0 -43px;
             }
         }
 
@@ -253,7 +255,8 @@ body {
         margin-bottom: 37px;
         margin-left: -34px;
         margin-right: -34px;
-        min-height: 223px;
+        overflow: hidden;
+        width: 100%;
 
         div.carousel-header {
             img {
@@ -262,15 +265,13 @@ body {
         }
 
         #carousel {
-            height: 118px;
-            width: 804px;
+            height: 42px;
+            width: 320px;
             overflow: hidden;
             position: relative;
-            top: -7px;
 
             div.bx-wrapper {
                 height: 100%;
-                max-width: 798px !important;
 
                 div.bx-viewport {
                     -webkit-moz-box-shadow: none;
@@ -280,7 +281,7 @@ body {
                     box-shadow: none;
                     border: 0 none;
                     height: 100%;
-                    width: 736px !important;
+                    width: 265px !important;
                     left: 18px;
                     margin: 0 12px;
                 }
@@ -289,13 +290,13 @@ body {
                     a.bx-next,
                     a.bx-prev {
                         background: url('../../img/v2/controls@2x.png') no-repeat;
-                        background-size: 47px 81px;
                         cursor: pointer;
                         display: block;
-                        height: 81px;
                         position: absolute;
+                        background-size: 60px 10px;
+                        height: 42px;
                         top: 34px;
-                        width: 21px;
+                        width: 10px;
 
                         &.bx-prev {
                             background-position: 0 0;
@@ -317,10 +318,11 @@ body {
 
                     li {
                         display: inline-block;
-                        height: 118px;
                         background-repeat: no-repeat;
-                        background-size: 166px 118px;
-                        width: 166px;
+                        background-size: 60px 42px;
+                        margin-right: 11px;
+                        height: 42px;
+                        width: 60px;
 
                         a {
                             -webkit-box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
@@ -352,12 +354,6 @@ body {
                                 text-align: center;
                                 z-index: 10;
                             }
-
-                            &:hover {
-                                -webkit-box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
-                                -moz-box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
-                                box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
-                            }
                         }
 
                         &:nth-child(4n) {
@@ -370,7 +366,7 @@ body {
     }
 
     #uploader {
-        min-height: 324px;
+        min-height: 274px;
 
         h1 {
             color: white;
@@ -604,10 +600,10 @@ body {
 
         h1 {
             color: #92a2b8;
-            font-size: 38.04px;
+            font-size: 1.6rem;
+            line-height: 30px;
             font-family: 'lobster';
             text-align: left;
-            line-height: 43px;
             padding-bottom: 16px;
             text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
         }
@@ -625,13 +621,13 @@ body {
 
         p.info {
             color: rgba(255, 255, 255, 0.6);
-            font-size: 15px;
-            line-height: 30px;
             padding-top: 20px;
             font-weight: 500;
             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
             word-break: break-word;
             letter-spacing: -0.03em;
+            font-size: 0.8rem;
+            line-height: 20px;
         }
     }
 
@@ -1104,6 +1100,7 @@ footer {
 body {
     &.logged-out {
         background: #2a394e url('../../img/v2/bkg-loggedout.png') repeat-x;
+        background-size: 1px 1078px; // (320/736) * imgHeight
 
         &.no-carousel {
             background: #2a394e url('../../img/v2/bkg-loggedout-nocarousel.png') repeat-x;
@@ -1169,6 +1166,152 @@ body {
                 #base #videos #no-videos {
                     margin-bottom: 84px;
                 }
+            }
+        }
+    }
+}
+
+// =============================================================================
+// Responsive
+// =============================================================================
+
+// Extra small devices (portrait phones, less than 544px)
+// No media query since this is the default in Bootstrap
+
+// Small devices (landscape phones, 544px and up)
+@media (min-width: 544px) {
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+    .blue-round {
+        @include border-radius(6px, 6px);
+    }
+
+    body {
+        &.logged-out {
+            background-size: 1px 2480px;
+        }
+    }
+
+    #base {
+
+        #header {
+            min-height: 257px;
+
+            #actions {
+                height: 38px;
+
+                p.info {
+                    font-size: 10px;
+                }
+
+                &.logged-out {
+                    padding-top: 10px;
+                }
+
+                &.logged-in {
+                    padding-top: 8px;
+                }
+            }
+        }
+
+        #example {
+            min-height: 467px;
+
+            #embed-row {
+                height: 428px;
+
+                .mejs-container {
+                    background: #36465D;
+                    height: 428px !important;
+                }
+            }
+        }
+
+        #login-row {
+            min-height: 98px;
+            padding-top: 0;
+
+            a.btn-login {
+                background-size: 446px 108px;
+                height: 50px;
+                width: 446px;
+
+                &:hover {
+                    background-position: 0 -58px;
+                }
+            }
+        }
+
+        #fbz-on-tumblr {
+            margin-bottom: 37px;
+            margin-left: -34px;
+            margin-right: -34px;
+            min-height: 223px;
+
+            #carousel {
+                height: 118px;
+                width: 804px;
+                top: -7px;
+
+                div.bx-wrapper {
+                    max-width: 798px !important;
+
+                    div.bx-viewport {
+                        width: 736px !important;
+                        left: 18px;
+                        margin: 0 12px;
+                    }
+
+                    div.bx-controls-direction {
+                        a.bx-next,
+                        a.bx-prev {
+                            background-size: 47px 81px;
+                            height: 81px;
+                            top: 34px;
+                            width: 21px;
+                        }
+                    }
+
+                    ul {
+                        height: 118px;
+
+                        li {
+                            background-size: 166px 118px;
+                            height: 118px;
+                            width: 166px;
+                            margin-right: 22px;
+
+                            a {
+                                &:hover {
+                                    -webkit-box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
+                                    -moz-box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
+                                    box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #uploader {
+            min-height: 324px;
+        }
+
+        #post {
+            min-height: 235px;
+
+            h1 {
+                font-size: 38.04px;
+                line-height: 43px;
+            }
+
+            p.info {
+                font-size: 15px;
+                line-height: 30px;
             }
         }
     }

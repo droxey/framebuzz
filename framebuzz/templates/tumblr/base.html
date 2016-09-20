@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <link rel="shortcut icon" href="{% static 'framebuzz/favicon.ico' %}" type="image/x-icon">
@@ -24,14 +24,14 @@
     <meta property="og:description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
     <meta property="og:title" content="FrameBuzz: Watch Whenever, Talk Together.">
     <meta property="og:site_name" content="FrameBuzz">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <script src="https://use.typekit.net/tud1dml.js"></script>
-    <script>try{Typekit.load({ async: false });}catch(e){}</script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% compress js %}
       <script src="{% static 'framebuzz/marketing/vendor/compat/modernizr.min.js' %}"></script>
     {% endcompress %}
     {% compress css %}
-        <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/bootstrap/css/bootstrap.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/remodal.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/remodal-default-theme.css' %}" type="text/css" media="screen">
@@ -57,11 +57,11 @@
         <div id="actions" class="clearfix logged-{% if not request.user.is_authenticated %}out{% else %}in{% endif %}">
           {% include "tumblr/snippets/account.html" %}
         </div>
-        <div class="row">
-          <img class="img-responsive header" src="{% static 'framebuzz/tumblr/img/v2/header@2x.png' %}" height="257" width="736">
+        <div id="logo-content" class="row">
+          <img class="img-fluid header m-x-auto d-block" src="{% static 'framebuzz/tumblr/img/v2/header@2x.png' %}" width="736">
         </div>
       </div>
-      <div id="sidenav" class="col-xs-3">
+      <div id="sidenav" class="col-xs-3 hidden-sm-down">
         <div class="innernav">
           <a href="{% if request.user.is_authenticated %}#uploader{% else %}{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}{% endif %}" class="upload{% if not request.user.is_authenticated %} tumblr-login-link{% endif %}"><span class="icon"></span>Upload a video</a>
           <a href="{% if request.user.is_authenticated %}#videolist{% else %}{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}{% endif %}" class="framebuzzes{% if not request.user.is_authenticated %} tumblr-login-link{% endif %}"><span class="icon"></span>My framebuzzes{% if request.user.is_authenticated %} ({{ video_count }}){% endif %}</a>
@@ -69,24 +69,26 @@
         </div>
       </div>
       <div id="example" class="row">
-          <div id="embed-row">
-            <video width="736" height="428" poster="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/frame_0000.png" controls="controls" preload="none" class="fbzplayer-small center-block" style="background: #36465D;">
+          <div id="embed-row" class="col-xs-12 embed-responsive embed-responsive-4by3">
+            <video height="428" poster="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/frame_0000.png" controls="controls" preload="none" class="video embed-responsive-item">
               <source type="video/mp4" src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.mp4">
               <source type="video/webm" src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.webm">
-              <object width="736" height="428" type="application/x-shockwave-flash" data="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
+              <object height="428" type="application/x-shockwave-flash" data="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
                   <param name="movie" value="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
                   <param name="flashvars" value="controls=true&file=https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.mp4">
-                  <img src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/frame_0000.png" width="736" height="428" title="No video playback capabilities">
+                  <img src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/frame_0000.png" height="428" title="No video playback capabilities" class="img-fluid">
               </object>
             </video>
           </div>
       </div>
-      <div id="login-row">
-        {% if request.user.is_authenticated %}
-          <a href="#uploader" title="Upload a video and start a framebuzz" class="btn-start-fbz"></a>
-        {% else %}
-            <a href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}" title="Login with your Tumblr account and upload a video" class="btn-login no-login tumblr-login-link"></a>
-        {% endif %}
+      <div id="login-row" class="row">
+        <div class="col-xs-12">
+          {% if request.user.is_authenticated %}
+            <a href="#uploader" title="Upload a video and start a framebuzz" class="btn-start-fbz m-x-auto d-block"></a>
+          {% else %}
+              <a href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}" title="Login with your Tumblr account and upload a video" class="btn-login no-login tumblr-login-link m-x-auto d-block"></a>
+          {% endif %}
+        </div>
       </div>
       {% if show_carousel %}
         {% include "tumblr/snippets/carousel.html" %}
@@ -96,21 +98,28 @@
       </div>
       {% block content %}{% endblock %}
       <div id="post" class="row clearfix">
-        <h1>Post it to your tumblr page... <em>and get talking</em>!</h1>
-          <img src="{% static 'framebuzz/tumblr/img/vid@2x.jpg' %}" height="107" width="166" class="pull-left">
-          <p class="info pull-left">
-            Click the 'post to my tumblr' button on your video, or copy/paste the embed tag<br>
-            to use on your tumblr page, and voilá! You're ready to talk!
-          </p>
+        <div class="col-xs-12">
+          <h1 class=" text-xs-center text-md-left">Post it to your tumblr page... <br class="hidden-md-up"><em>and get talking</em>!</h1>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 pull-left">
+            <img src="{% static 'framebuzz/tumblr/img/vid@2x.jpg' %}" width="166" class="img-fluid m-x-auto d-block">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-9 pull-left">
+            <p class="info">
+              Click the 'post to my tumblr' button on your video, or copy/paste the embed tag<br class="hidden-sm-down">
+              to use on your tumblr page, and voilá! You're ready to talk!
+            </p>
+        </div>
       </div>
     </div>
-    <footer id="footer" class="text-center">&copy; {% now "Y" %}, FrameBuzz. Patent 14/067,585.</footer>
+    <footer id="footer" class="m-x-auto d-block text-xs-center hidden-sm-down">&copy; {% now "Y" %}, FrameBuzz. Patent 14/067,585.</footer>
     <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false">
         <iframe src="" scrolling="no" frameBorder="0" allowfullscreen="true" mozfullscreen="true" webkitfullscreen="true" height="430" width="700" class="fbzplayer center-block"></iframe>
     </div>
-    {% compress js %}
-        <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery-1.10.2.min.js' %}"></script>
-        <script src="{% static 'framebuzz/profiles/vendor/jquery/ui/js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+    {# compress js #}
         <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/stickykit.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/queryCommandSupported.js' %}"></script>
@@ -121,6 +130,7 @@
         <script src="{% static 'framebuzz/tumblr/js/vendor/clipboard.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/jquery.dotdotdot.min.js' %}"></script>
         {% if show_carousel %}
+          <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.easing.1.3.js' %}"></script>
           <script src="{% static 'framebuzz/tumblr/js/vendor/bxslider/jquery.bxslider.min.js' %}"></script>
         {% endif %}
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
@@ -134,8 +144,8 @@
           $('video').mediaelementplayer({
             debug: isDebug,
             enablePluginDebug: isDebug,
-            videoHeight: 428,
-            videoWidth: 736,
+            videoHeight: '100%',
+            videoWidth: '100%',
             features: ['playpause','progress','volume',],
             startVolume: 3,
             pluginPath: '/static/framebuzz/tumblr/js/vendor/mediaelement/',
@@ -153,13 +163,17 @@
             $('.bxslider').bxSlider({
               pager: false,
               randomStart: true,
+              infiniteLoop: false,
               minSlides: 4,
+              maxSlides: 4,
+              easing: 'easeInOut',
+              speed: 1000,
               slideWidth: 166,
               slideMargin: 22
             });
           }
         </script>
-    {% endcompress %}
+    {# endcompress #}
     {% if not is_debug %}
       <script src="//cdn.ravenjs.com/2.3.0/raven.min.js"></script>
       <script>Raven.config('{% sentry_public_dsn %}').install();</script>

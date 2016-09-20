@@ -1,11 +1,11 @@
 {% load staticfiles comments %}
 
 <div id="fbz-on-tumblr" class="row">
-    <div class="carousel-header">
-      <img class="img-responsive" src="{% static 'framebuzz/tumblr/img/v2/fbz-on-tumblr@2x.png' %}" height="70" width="736">
+    <div class="carousel-header col-xs-12">
+      <img src="{% static 'framebuzz/tumblr/img/v2/fbz-on-tumblr@2x.png' %}" width="736" class="img-fluid m-x-auto d-block">
     </div>
-    <div id="carousel" class="clearfix">
-      <ul class="bxslider">
+    <div id="carousel" class="col-xs-12">
+      <ul class="bxslider clearfix">
           {% for video in slides %}
           {% get_comment_count for video as comment_count %}
             <li style="background-image: url('{{ video.default_thumbnail }}');">
