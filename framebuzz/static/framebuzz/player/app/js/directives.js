@@ -52,6 +52,9 @@ angular.module('framebuzz.directives', [])
                 iPhoneUseNativeControls: false,
                 iPadUseNativeControls: false,
                 AndroidUseNativeControls: false,
+                controlsTimeoutDefault: 1500,
+                controlsTimeoutMouseEnter: 750,
+                controlsTimeoutMouseLeave: 1000,
                 success: function(media) {
                     //  =====
                     //  Angular.js Globals
@@ -116,11 +119,14 @@ angular.module('framebuzz.directives', [])
 
                     var fadeOutControls = function() {
                         $('.mejs-video').removeClass('show-controls');
-                        $('.mejs-video').addClass('fade-out-controls');
+                        $('.mejs-video').addClass('fade-out-controls').delay(750).queue(function() {
+                           $(this).removeClass('fade-out-controls');
+                           $(this).dequeue();
+                        });
 
-                        window.setTimeout(function() {
-                            $('.mejs-video').removeClass('fade-out-controls');
-                        }, 100);
+                        // window.setTimeout(function() {
+                        //     $('.mejs-video').removeClass('fade-out-controls');
+                        // }, 500);
                     };
 
                     $(document).on('mouseover', '.mejs-mediaelement', function(e) {
@@ -214,11 +220,6 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     //  Video Player Event Listeners
                     //  =====
-                    media.addEventListener('loadedmetadata', function(e) {
-                        console.log('METADATA:');
-                        console.log(e);
-                    }, false);
-
                     media.addEventListener('timeupdate', function(e) {
                         broadcaster.prepForBroadcast({
                             broadcastType: 'player_timeupdate',
