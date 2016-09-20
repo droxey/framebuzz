@@ -29,7 +29,7 @@ angular.module('framebuzz.directives', [])
             $(element).mediaelementplayer({
                 defaultVideoWidth: '100%',
                 defaultVideoHeight: '100%',
-                enableAutosize: true,
+                enableAutosize: false,
                 usePluginFullScreen: true,
                 debug: SOCK.debug,
                 poster: SOCK.poster_image,
@@ -124,8 +124,6 @@ angular.module('framebuzz.directives', [])
                     };
 
                     $(document).on('mouseover', '.mejs-mediaelement', function(e) {
-                        e.stopPropagation();
-                        console.log(e);
                         $('.mejs-video').addClass('show-controls');
                     });
 
@@ -216,6 +214,11 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     //  Video Player Event Listeners
                     //  =====
+                    media.addEventListener('loadedmetadata', function(e) {
+                        console.log('METADATA:');
+                        console.log(e);
+                    }, false);
+
                     media.addEventListener('timeupdate', function(e) {
                         broadcaster.prepForBroadcast({
                             broadcastType: 'player_timeupdate',
