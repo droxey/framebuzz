@@ -338,7 +338,7 @@ class Video(caching.base.CachingMixin, models.Model):
         return mark_safe('[framebuzz src=%s width=580 height=360]' % url)
 
     def tumblr_embed_code(self):
-        return self.get_embed_code(580, 360)
+        return self.get_embed_code('100%', '100%')
 
     def heatmap(self, session_key=None):
         rank_per_block = list()

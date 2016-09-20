@@ -14,6 +14,18 @@
         if (window == window.top) {
             document.location.href = "{% url 'video-share' video.slug %}";
         }
+
+        // Detect if the window is large enough to hold the video.
+        var width = window.frameElement.offsetWidth,
+            height = window.frameElement.offsetHeight,
+            loadModalPlayer = '{{ small|lower }}' == 'true';
+
+        if (width < 580) {
+          if (!loadModalPlayer) {
+            // Redirect to a simplified page with only the cover image.
+            document.location.href = "{% url 'video-embed-small' video.slug %}";
+          }
+        }
       </script>
     {% endif %}
     <title>FrameBuzz | {{ video.title }}</title>
@@ -31,22 +43,22 @@
     <meta property="og:video:secure_url" content="{{ video.mp4_url }}">
     <meta property="og:video:type" content="text/html" />
     {% compress css %}
-      <link href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <link href="{% static 'framebuzz/player/app/css/bootstrap-responsive.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <link href="{% static 'framebuzz/player/app/css/mediaelementplayer.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <link href="{% static 'framebuzz/player/app/css/mejs-skins.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <link href="{% static 'framebuzz/player/app/css/perfect-scrollbar-0.4.1.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <link href="{% static 'framebuzz/player/app/css/jquery.maxlength.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      {% comment %}
-        <!-- TODO: The player no longer uses these. Remove them after testing. -->
-        <link href="{% static 'framebuzz/player/app/css/jquery.share.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-        <link href="{% static 'framebuzz/player/app/css/jquery.datetimepicker.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-        <link href="{% static 'framebuzz/player/app/css/social-buttons.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      {% endcomment %}
-      <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-      <!--[if IE]><link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css"><![endif]-->
-      <!--[if gte IE 9]><style type="text/css">ul.comment-stream { filter: none; }</style><![endif]-->
+        <link href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/bootstrap-responsive.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/mediaelementplayer.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/mejs-skins.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/perfect-scrollbar-0.4.1.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/css/jquery.maxlength.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        {% comment %}
+          <!-- TODO: The player no longer uses these. Remove them after testing. -->
+          <link href="{% static 'framebuzz/player/app/css/jquery.share.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+          <link href="{% static 'framebuzz/player/app/css/jquery.datetimepicker.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+          <link href="{% static 'framebuzz/player/app/css/social-buttons.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        {% endcomment %}
+        <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <!--[if IE]><link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css"><![endif]-->
+        <!--[if gte IE 9]><style type="text/css">ul.comment-stream { filter: none; }</style><![endif]-->
     {% endcompress %}
     <script src="https://use.typekit.net/tud1dml.js"></script>
     <script>try{Typekit.load({ async: false });}catch(e){}</script>
@@ -65,10 +77,12 @@
             private_viewing_enabled = '{{ private_viewing_enabled|lower }}' === 'true',
             is_hosting_viewing = '{{ is_hosting_viewing|lower }}' === 'true',
             is_synchronized = '{{ is_synchronized|lower }}' === 'true',
-            viewing_on_fbz = '{{ viewing_on_fbz|lower }}' === 'true';
+            viewing_on_fbz = '{{ viewing_on_fbz|lower }}' === 'true',
+            is_small = '{{ small|lower }}' === 'true';
 
         // Set up our global SOCK variable.
         var SOCK = {
+          small: is_small,
           poster_image: '{{ video.default_thumbnail }}',
           debug: '{{ debug|lower }}' === 'true',
           host: location.hostname,
@@ -106,58 +120,62 @@
     <![endif]-->
   </head>
   <body class="ng-cloak">
-    <div id="player-container" class="container">
-      <div id="player-layer" class="layer">
-        <video data-media-element="" class="span12" id="video-element" preload="auto" height="100%" width="100%" poster="{% static 'framebuzz/player/app/img/poster-transparent.png' %}" style="height: 100%; width: 100%; background: url('{{ video.default_thumbnail }}') no-repeat scroll center center / cover black;">
-          <source type="video/webm" src="{{ webm_url }}">
-          <source type="video/mp4" src="{{ mp4_url }}">
-          <object style="height: 100%; width: 100%;" type="application/x-shockwave-flash" data="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
-              <param name="movie" value="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
-              <param name="flashvars" value="controls=true&amp;file={{ mp4_url }}">
-              <param name="allowFullscreen" value="true">
-              <img src="{{ video.default_thumbnail }}" height="100%" width="100%" title="No video playback capabilities">
-          </object>
-        </video>
-        <div id="heatmap-and-post" data-ui-view=""></div>
+    {% if not small %}
+      <div id="player-container" class="container">
+        <div id="player-layer" class="layer">
+            <video data-media-element="" class="span12" id="video-element" preload="auto" height="100%" width="100%" poster="{% static 'framebuzz/player/app/img/poster-transparent.png' %}" style="height: 100%; width: 100%; background: url('{{ video.default_thumbnail }}') no-repeat scroll center center / cover black;">
+              <source type="video/webm" src="{{ webm_url }}">
+              <source type="video/mp4" src="{{ mp4_url }}">
+              <object style="height: 100%; width: 100%;" type="application/x-shockwave-flash" data="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
+                  <param name="movie" value="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
+                  <param name="flashvars" value="controls=true&amp;file={{ mp4_url }}">
+                  <param name="allowFullscreen" value="true">
+                  <img src="{{ video.default_thumbnail }}" height="100%" width="100%" title="No video playback capabilities">
+              </object>
+            </video>
+            <div id="heatmap-and-post" data-ui-view=""></div>
+        </div>
       </div>
-    </div>
+    {% endif %}
     {% if ravenjs_dsn %}
         <script src="//cdn.ravenjs.com/2.3.0/raven.min.js"></script>
         <script>Raven.config('{% sentry_public_dsn %}').install();</script>
     {% endif %}
     {% compress js %}
-      <script src="{% static 'framebuzz/player/app/lib/jquery/jquery-1.9.1.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/raven.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.maxlength.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/jquery/perfect-scrollbar-0.4.1.with-mousewheel.min.js' %}"></script>
-      {% comment %}
-        <!-- TODO: The player no longer uses these. Remove them after testing. -->
-        <script src="{% static 'framebuzz/player/app/lib/moment.js' %}"></script>
-        <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.zclip.min.js' %}"></script>
-        <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.share.js' %}"></script>
-        <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.datetimepicker.js' %}"></script>
-      {% endcomment %}
-      <script src="{% static 'framebuzz/player/app/lib/jquery/toastr.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/angular/angular.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/angular/angular-ui-router.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/angular/angular-resource.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/angular/angular-cookies.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/angular/angular-sanitize.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/angular/angular-local-storage.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/angular/ui-bootstrap-0.4.0.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/gsap/TweenMax.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/gsap/jquery.gsap.min.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/mediaelement-and-player.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/mejs-framebuzz-plugins.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/js/app.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/js/animations.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/js/exceptions.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/js/services.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/js/controllers.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/js/filters.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/js/directives.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/js/truncate.js' %}"></script>
-      <script src="{% static 'framebuzz/player/app/lib/sockjs.min.js' %}"></script>
+      {% if not small %}
+        <script src="{% static 'framebuzz/player/app/lib/jquery/jquery-1.9.1.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/raven.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.maxlength.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/jquery/perfect-scrollbar-0.4.1.with-mousewheel.min.js' %}"></script>
+        {% comment %}
+          <!-- TODO: The player no longer uses these. Remove them after testing. -->
+          <script src="{% static 'framebuzz/player/app/lib/moment.js' %}"></script>
+          <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.zclip.min.js' %}"></script>
+          <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.share.js' %}"></script>
+          <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.datetimepicker.js' %}"></script>
+        {% endcomment %}
+        <script src="{% static 'framebuzz/player/app/lib/jquery/toastr.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/angular/angular.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/angular/angular-ui-router.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/angular/angular-resource.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/angular/angular-cookies.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/angular/angular-sanitize.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/angular/angular-local-storage.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/angular/ui-bootstrap-0.4.0.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/gsap/TweenMax.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/gsap/jquery.gsap.min.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/mediaelement-and-player.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/mejs-framebuzz-plugins.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/js/app.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/js/animations.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/js/exceptions.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/js/services.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/js/controllers.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/js/filters.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/js/directives.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/js/truncate.js' %}"></script>
+        <script src="{% static 'framebuzz/player/app/lib/sockjs.min.js' %}"></script>
+      {% endif %}
     {% endcompress %}
     <script>
     var _prum = [['id', '526acad9abe53d0e0d000000'],

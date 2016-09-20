@@ -1,0 +1,76 @@
+{% load staticfiles socialaccount compress shorturl raven %}
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article" ng-app="framebuzz" data-close-socket="">
+  <head itemscope itemtype="http://schema.org/Product">
+      <title>FrameBuzz | {{ video.title }}</title>
+      {% revcanonical video %}
+      <meta itemprop="name" content="FrameBuzz: {{ video.title }}">
+      <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!">
+      <meta itemprop="image" content="{{ video.poster_image }}">
+      <meta property="og:title" content="FrameBuzz: {{ video.title }}">
+      <meta property="og:type" content="Video">
+      <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.slug %}">
+      <meta property="og:image" content="{{ video.poster_image }}">
+      <meta property="og:description" content="{{ video.description }}">
+      <meta property="og:site_name" content="FrameBuzz">
+      <meta property="og:video" content="{{ video.mp4_url }}">
+      <meta property="og:video:secure_url" content="{{ video.mp4_url }}">
+      <meta property="og:video:type" content="text/html" />
+      {% compress css %}
+          <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/remodal.css' %}" type="text/css" media="screen">
+          <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/remodal-default-theme.css' %}" type="text/css" media="screen">
+      {% endcompress %}
+  </head>
+  <body>
+    <div id="container" style="background-image: url('{{ video.default_thumbnail }}'); background-repeat: no-repeat;">
+      <a class="play-video" data-remodal-target="modal" href="#" data-video-url="{% url 'video-embed' video.slug %}">
+          <img src="{% static 'framebuzz/tumblr/img/play@2x.png' %}" height="47" width="47">
+      </a>
+    </div>
+    <div data-remodal-id="modal">
+        <iframe src="" scrolling="no" frameBorder="0" allowfullscreen="true" mozfullscreen="true" webkitfullscreen="true" height="430" width="700" class="fbzplayer center-block"></iframe>
+    </div>
+    {# {% compress js %}#}
+      <script src="{% static 'framebuzz/player/app/lib/jquery/jquery-1.9.1.min.js' %}"></script>
+      <script src="{% static 'framebuzz/tumblr/js/vendor/remodal.min.js' %}"></script>
+      <script type="text/javascript">
+        $(document).ready(function() {
+          var width = window.frameElement.offsetWidth,
+              height = window.frameElement.offsetHeight,
+              fbzPlayer = $('iframe.fbzplayer'),
+              parentWindow = $(window.parent.document).find('body');
+
+          $('#container').css({
+            'height': height,
+            'width': width,
+            'background-size': width + 'px ' + height + 'px'
+          });
+
+          console.log(parentWindow);
+          parentWindow.addClass('remodal-bg');
+          var modalInstance = $('[data-remodal-id=modal]').remodal({
+           hashTracking: false,
+           appendTo: parentWindow
+          });
+
+          // When the user chooses to play a video, save the url and then
+          // pop up the player in a modal dialog.
+          $(document).on('click', 'a.play-video', function() {
+              videoUrl = $(this).attr('data-video-url');
+              modalInstance.open();
+          });
+
+          // Request our player template when the modal dialog opens.
+          $(document).on('opened', '.remodal', function() {
+              fbzPlayer.attr('src', videoUrl);
+          });
+
+          // Tear down the player template when the modal dialog closes.
+          $(document).on('closing', '.remodal', function() {
+              fbzPlayer.removeAttr('src');
+              videoUrl = null;
+          });
+        });
+      </script>
+    {# {% endcompress %}#}
+  </body>

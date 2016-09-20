@@ -18,14 +18,10 @@ angular.module('framebuzz.directives', [])
     }])
     .directive('mediaElement', ['broadcaster', '$state', '$rootScope', 'safeApply', function(broadcaster, $state, $rootScope, safeApply) {
         return function(scope, element, attrs) {
-            var x = $(window).width();
-            var y = $(window).height();
-
-            $(window).resize(function() {
-                var x = $(window).width();
-                var y = $(window).height();
-            });
-
+            if (SOCK.small) {
+                return;
+            }
+            
             $(element).mediaelementplayer({
                 defaultVideoWidth: '100%',
                 defaultVideoHeight: '100%',
@@ -45,6 +41,7 @@ angular.module('framebuzz.directives', [])
                 autosizeProgress: false,
                 enablePseudoStreaming: true,
                 flashScriptAccess: 'always',
+                stretching: 'responsive',
                 // There's a bug here where commenting and hitting the spacebar will
                 // cause the space to not be entered, and the video to pause.
                 enableKeyboard: false,

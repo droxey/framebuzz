@@ -3,10 +3,14 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns('',
    url(r'^(?P<slug>[\w.@+-]+)/error/$',
        'framebuzz.apps.api.views.video_embed_error', name='video-embed-error'),
-       
+
    url(r'^(?P<slug>[\w.@+-]+)/$',
-       'framebuzz.apps.api.views.video_embed',{ 'control_sync': False },
+       'framebuzz.apps.api.views.video_embed',{ 'control_sync': False, 'small': False },
        name='video-embed'),
+
+   url(r'^modal/(?P<slug>[\w.@+-]+)/$',
+       'framebuzz.apps.api.views.video_embed',{ 'control_sync': False, 'small': True },
+       name='video-embed-small'),
 
    url(r'^(?P<slug>[\w.@+-]+)/viewing/start/$',
        'framebuzz.apps.api.views.video_embed', { 'convo_slug': None, 'control_sync': True },

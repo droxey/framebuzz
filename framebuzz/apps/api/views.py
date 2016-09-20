@@ -36,10 +36,15 @@ def video_test(request, slug, size="small"):
         embed_code == video.large_embed_code
         height = 445
         width = 700
-    else:
+    elif size == 'medium':
         embed_code = video.embed_code
-        height = 360
         width = 640
+        height = 380
+    else:
+        size = 'tumblr'
+        height = 300
+        width = 500
+        embed_code = video.tumblr_embed_code
     return render_to_response('player/test.html', {
         'video': video,
         'embed': embed_code,
@@ -50,7 +55,8 @@ def video_test(request, slug, size="small"):
 
 
 @xframe_options_exempt
-def video_embed(request, slug, convo_slug=None, control_sync=False):
+def video_embed(request, slug, convo_slug=None, control_sync=False, small=False):
+    template = 'player/video_embed.html'
     try:
         v, created = get_or_create_video(slug)
         next_url = '%s?close=true' % reverse('video-embed', args=(v.slug,))
@@ -83,7 +89,10 @@ def video_embed(request, slug, convo_slug=None, control_sync=False):
                 is_hosting_viewing = request.user.is_authenticated() \
                     and private_session.owner.pk == request.user.pk
             is_synchronized = private_session.is_synchronized
-        return render_to_response('player/video_embed.html', {
+        if small:
+            template = 'player/video_embed_small.html'
+        return render_to_response(template, {
+            'small': small,
             'debug': settings.DEBUG,
             'viewing_on_fbz': viewing_on_fbz,
             'close_window': request.GET.get('close', None),
