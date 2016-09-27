@@ -224,8 +224,8 @@ body {
 
     #login-row {
         overflow: hidden;
-        min-height: 54px;
-        padding-top: 9px;
+        min-height: 69px;
+        padding-top: 14px;
 
         a.btn-login {
             background: url('../../img/v2/btn-login@2x.png') no-repeat;
@@ -255,16 +255,28 @@ body {
     }
 
     #fbz-on-tumblr {
-        margin-bottom: 37px;
+        min-height: 96px;
+        width: 320px;
 
         div.carousel-header {
+            min-width: 320px;
+            height: 43px;
+            margin: 0 auto;
+            overflow: hidden;
+
             img {
-                margin: 0 auto;
+                background-size: 736px 70px;
+                height: 70px;
+                position: absolute;
+                left: -210px;
+                top: -20px;
             }
         }
 
         #carousel {
-            height: 42px;
+            height: 74px;
+            width: 300px;
+            margin: 0 13px;
 
             ol.carousel-indicators {
                 display: none;
@@ -275,31 +287,37 @@ body {
                 cursor: pointer;
                 display: block;
                 height: 42px;
-                width: 10px;
+                top: 43px;
+                width: 11px;
 
-                &.right {
-
+                i {
+                    font-size: 0.5rem;
+                    position: absolute;
+                    top: 18px;
+                    left: 3px;
+                    text-shadow: none;
                 }
 
                 &.left {
+                    left: -6px;
                 }
 
-                span.glyphicon {
-                    color: white;
+                &.right {
+                    right: 0;
                 }
             }
 
             div.carousel-inner {
-                margin-left: 12px;
-                margin-right: 12px;
-                height: 118px;
+                margin-left: 9px;
+                margin-right: 9px;
+                height: 42px;
 
                 div.item {
                     display: inline-block;
                     background-repeat: no-repeat;
                     background-size: 60px 42px;
                     height: 42px;
-                    margin-right: 24px;
+                    margin-right: 9px;
                     width: 60px;
 
                     &:nth-child(4n) {
@@ -307,18 +325,10 @@ body {
                     }
 
                     a {
-                        -webkit-box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
-                        -moz-box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
-                        box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
                         display: block;
                         position: relative;
                         height: 100%;
                         width: 100%;
-
-                        img {
-                            position: absolute;
-                            z-index: 1;
-                        }
 
                         span.bubble {
                             background: url('../../img/v2/bubble@2x.png') no-repeat;
@@ -326,15 +336,22 @@ body {
                             color: white;
                             display: block;
                             font-family: 'Lobster';
-                            font-size: 25px;
-                            height: 50px;
-                            width: 50px;
-                            padding: 13px 0 21px;
                             position: absolute;
-                            left: 36%;
-                            top: 43px;
                             text-align: center;
                             z-index: 10;
+                            background-size: 23px 23px;
+                            font-size: 10px;
+                            height: 23px;
+                            width: 23px;
+                            padding: 1px 0 0px;
+                            left: 33%;
+                            top: 11px;
+                        }
+
+                        &:hover {
+                            -webkit-box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
+                            -moz-box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
+                            box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
                         }
                     }
                 }
@@ -343,7 +360,7 @@ body {
     }
 
     #uploader {
-        min-height: 274px;
+        min-height: 230px;
 
         h1 {
             color: white;
@@ -351,20 +368,12 @@ body {
             font-family: 'lobster';
             text-align: center;
             line-height: 43px;
-            padding-bottom: 16px;
-            margin-left: -2px;
+            padding-bottom: 5px;
+            padding-top: 24px;
             text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
         }
 
         #upload-container {
-            &.logged-in {
-                padding: 21px 17px 17px;
-            }
-
-            &.logged-out {
-                padding: 44px 17px;
-            }
-
             #upload-video-form {
                 div.submit-row {
                     margin-top: 11px;
@@ -567,22 +576,38 @@ body {
                     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
                 }
             }
+
+            &.logged-in {
+                padding: 21px 17px 17px;
+            }
+
+            &.logged-out {
+                padding: 35px 23px;
+
+                #upload-login {
+                    p.info {
+                        font-size: 0.75rem;
+                        line-height: 16px;
+                    }
+                }
+            }
         }
     }
 
     #post {
-        min-height: 235px;
+        background: #334359;
+        min-height: 297px;
         position: relative;
-        bottom: 0;
+        bottom: 9px;
+        padding-top: 24px;
 
         h1 {
             color: #92a2b8;
-            font-size: 1.6rem;
-            line-height: 30px;
+            font-size: 1.3rem;
+            line-height: 20px;
             font-family: 'lobster';
             text-align: left;
             padding-bottom: 16px;
-            text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
         }
 
         em {
@@ -604,7 +629,7 @@ body {
             word-break: break-word;
             letter-spacing: -0.03em;
             font-size: 0.8rem;
-            line-height: 20px;
+            line-height: 15px;
         }
     }
 
@@ -1221,13 +1246,22 @@ body {
         }
 
         #fbz-on-tumblr {
-            margin-bottom: 37px;
             margin-left: -34px;
             margin-right: -34px;
-            min-height: 223px;
+            min-height: 228px;
             width: 806px;
 
+            div.carousel-header {
+                margin-bottom: 27px;
+
+                img {
+                    background-size: 736px 70px;
+                    left: 35px;
+                }
+            }
+
             #carousel {
+                margin: 0;
                 height: 118px;
                 width: 806px;
 
@@ -1237,7 +1271,6 @@ body {
                     top: 88px;
 
                     i {
-                        position: absolute;
                         text-shadow: 0px 2px 0px rgba(0,0,0,0.25);
                         top: 37%;
                     }
@@ -1256,28 +1289,67 @@ body {
                 }
 
                 div.carousel-inner {
+                    height: 118px;
                     margin: 0 auto;
                     width: 748px;
 
                     div.item {
                         background-size: 166px 118px;
+                        margin-right: 24px;
                         height: 118px;
                         width: 166px;
+
+                        a {
+                            span.bubble {
+                                background-size: 50px 50px;
+                                font-size: 25px;
+                                height: 50px;
+                                width: 50px;
+                                padding: 13px 0 21px;
+                                left: 36%;
+                                top: 43px;
+                            }
+                        }
                     }
                 }
             }
         }
 
         #uploader {
-            min-height: 324px;
+            min-height: 354px;
+
+            h1 {
+                padding: 16px 0;
+            }
+
+            #upload-container {
+                &.logged-in {
+
+                }
+
+                &.logged-out {
+                    padding: 44px 17px;
+
+                    #upload-login {
+                        p.info {
+                            font-size: 13px;
+                            line-height: 18px;
+                        }
+                    }
+                }
+            }
         }
 
         #post {
+            bottom: 0;
+            background: none;
             min-height: 235px;
+            padding: 0;
 
             h1 {
                 font-size: 38.04px;
                 line-height: 43px;
+                text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
             }
 
             p.info {
