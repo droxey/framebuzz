@@ -5,11 +5,12 @@
     <div class="row">
         <div class="col-lg-12">
             <div id="featured-videos-carousel" class="carousel slide multi-item-carousel">
-                <div class="carousel-inner" role="listbox">
+                <div class="carousel-inner " role="listbox">
                     {% for video in slides %}
                     {% get_comment_count for video as comment_count %}
-                        <div class="item{% if forloop.counter0 == 0 %} active{% endif %}" style="background-image: url('{{ video.default_thumbnail }}');">
-                            <a class="play-video" data-remodal-target="modal" href="#" data-video-url="{% url 'video-embed' video.slug %}">
+                        <div class="item col-xs-3{% if forloop.counter0 == 0 %} active{% endif %}">
+                            <a class="play-video" data-remodal-target="modal" href="#{{ forloop.counter0 }}" data-video-url="{% url 'video-embed' video.slug %}">
+                                <img src="{{ video.default_thumbnail }}" width="100%" class="img-fluid cover">
                                 <span class="bubble">{{ comment_count }}</span>
                             </a>
                         </div>

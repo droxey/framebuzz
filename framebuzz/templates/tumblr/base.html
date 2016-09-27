@@ -123,7 +123,7 @@
         </div>
       </div>
       {% if show_carousel %}
-        <div id="video-carousel">
+        <div id="video-carousel" class="hidden-xs-down">
           {% include "tumblr/snippets/carousel.html" %}
         </div>
       {% endif %}
@@ -135,7 +135,7 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
-              <h1 class=" text-xs-center text-md-left">Post it to your tumblr page... <br class="hidden-md-up"><em>and get talking</em>!</h1>
+              <h1 class="text-xs-center text-md-left">Post it to your tumblr page... <br class="hidden-md-up"><em>and get talking</em>!</h1>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-3 pull-left">
                 <img src="{% static 'framebuzz/tumblr/img/vid@2x.jpg' %}" width="166" class="img-fluid m-x-auto d-block">
@@ -188,6 +188,27 @@
               if (!isDebug) {
                 media.play();
               }
+            }
+          });
+
+          // Instantiate the Bootstrap carousel
+          $('.multi-item-carousel').carousel({
+            interval: false
+          });
+
+          // for every slide in carousel, copy the next slide's item in the slide.
+          // Do the same for the next, next item.
+          $('.multi-item-carousel .item').each(function(){
+            var next = $(this).next();
+            if (!next.length) {
+              next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+
+            if (next.next().length>0) {
+              next.next().children(':first-child').clone().appendTo($(this));
+            } else {
+            	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
             }
           });
         });
