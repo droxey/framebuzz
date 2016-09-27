@@ -12,8 +12,7 @@
                 {% endif %}
             </div>
             {% if field.name == 'title' %}
-                <div class="cover" style="background-image: url('{{ video.default_thumbnail }}');">
-                </div>
+                <img class="cover-image img-fluid" width="100%" src="{{ video.default_thumbnail }}" alt="Editing {{ video.title|title }}">
             {% endif %}
         {% endfor %}
         <div class="submit-row clearfix">
