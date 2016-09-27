@@ -23,9 +23,11 @@
 // Accomodate for smaller-width design.
 @media (min-width: 800px) {
     .container {
+        overflow: hidden;
         width: 736px;
     }
 }
+
 
 .embed-responsive-4by3 {
     padding-bottom: 0 !important;
@@ -35,6 +37,7 @@
 // =============================================================================
 
 body {
+    background: #2d3c51;
     font: 12px/16px 'proxima-nova';
 }
 // =============================================================================
@@ -50,6 +53,46 @@ body {
 
     &.no-videos {
         padding: 44px 0;
+    }
+}
+
+.multi-item-carousel {
+    .carousel-inner {
+        > .item {
+            transition: 500ms ease-in-out left;
+        }
+
+        .active {
+            &.left {
+                left: -25%;
+            }
+
+            &.right {
+                left: 25%;
+            }
+        }
+
+        .next {
+            left: 25%;
+        }
+
+        .prev {
+            left: -25%;
+        }
+        @media all and (transform-3d), (-webkit-transform-3d) {
+            > .item {
+                transition: 500ms ease-in-out all;
+                backface-visibility: visible;
+                transform: none !important;
+            }
+        }
+    }
+
+    .carouse-control {
+        &.left,
+        &.right {
+            background-image: none;
+        }
     }
 }
 
@@ -138,22 +181,43 @@ body {
         position: relative;
 
         #logo-content {
-            max-width: 736px;
-            margin-left: 0;
-            margin-right: 0;
+            #fbz-logo {
+                background: url('../../img/v2/bkg-header@2x.png') repeat-x;
+                background-size: 1px 76px;
+                height: auto;
 
-            div {
-                padding-left: 0;
-                padding-right: 0;
+                img {
+                    background-size: 736px 76px;
+                }
+            }
+
+            #tumblr-video-chat {
+                background: white;
+                height: auto;
+
+                img {
+                    background-size: 736px 93px;
+                }
+            }
+
+            #what-is-fbz {
+                background: #2d3c51;
+                height: auto;
+
+                img {
+                    background-size: 736px 88px;
+                }
             }
         }
 
         #actions {
-            height: 14px;
+            background: #3a4a60;
+            padding: 11px 0 10px 0;
 
             p.login-info {
                 cursor: default;
                 font-size: 0.66rem;
+                line-height: 11px;
 
                 span.as {
                     color: #8597b1;
@@ -545,8 +609,9 @@ body {
                         border: none;
                         position: absolute;
                         bottom: 22px;
-                        left: 20%;
+                        left: 35%;
                         padding: 4px 22px;
+                        width: 30%;
                         z-index: 100;
 
                         &:hover {
@@ -741,13 +806,15 @@ body {
         }
 
         #video-list {
+            padding: 22px;
+
             .no-padding {
                 padding-left: 0;
                 padding-right: 0;
             }
 
-            div.row {
-                padding: 0 20px;
+            div.item {
+                min-height: 215px;
 
                 div.cover {
                     background-repeat: no-repeat;
@@ -846,203 +913,141 @@ body {
                 }
 
                 div.video {
-                    margin-left: -8px;
-                    min-height: 190px;
                     position: relative;
                     z-index: 1;
 
-                    div.item {
-                        margin-bottom: 0;
-                        width: 139px;
+                    div.overlay {
+                        background: rgba(0, 0, 0, 0.4);
+                        display: none;
+                        position: absolute;
+                        top: 20px;
+                        width: 100%;
+                        z-index: 10;
 
-                        div.overlay {
-                            background: rgba(0, 0, 0, 0.4);
-                            display: none;
-                            height: 140px;
-                            width: 211px;
-                            position: absolute;
-                            top: 25px;
-                            z-index: 10;
-
-                            a.edit-video {
-                                color: white;
-                                cursor: pointer;
-                                font: 500 13px 'proxima-nova';
-                                text-decoration: underline;
-                                position: relative;
-                                right: 11px;
-                                top: 11px;
-                                opacity: 0.8;
-                                z-index: 22;
-                                @include single-transition(opacity 20ms ease-in-out);
-
-                                &:hover {
-                                    opacity: 1;
-                                    @include single-transition(opacity 20ms ease-in-out);
-                                }
-                            }
-
-                            a.play-video {
-                                display: block;
-                                height: 47px;
-                                margin: 0 auto;
-                                opacity: 0.8;
-                                position: relative;
-                                top: 18px;
-                                width: 47px;
-                                z-index: 11;
-                                @include single-transition(opacity 20ms ease-in-out);
-
-                                img {
-                                    height: 47px;
-                                    width: 47px;
-                                }
-
-                                &:hover {
-                                    opacity: 1;
-                                    @include single-transition(opacity 20ms ease-in-out);
-                                }
-                            }
-
-                            a.post-on-tumblr {
-                                color: white;
-                                display: block;
-                                font: 13.9px 'proxima-nova';
-                                position: relative;
-                                left: 20px;
-                                margin: 24px 0 0;
-
-                                img,
-                                span {
-                                    display: block;
-                                    position: absolute;
-                                    top: 0;
-                                }
-
-                                span {
-                                    padding: 9px 0;
-                                    text-indent: 49px;
-                                    z-index: 6;
-                                }
-
-                                img {
-                                    position: relative;
-                                    z-index: 5;
-                                    width: 168px;
-                                    height: 35px;
-                                }
-                            }
-
-                            a.copy-embed {
-                                color: #9dc5fd;
-                                cursor: pointer;
-                                display: block;
-                                font: 12.64px 'proxima-nova';
-                                text-align: center;
-                                text-decoration: underline;
-                                width: 100%;
-                                padding-top: 15px;
-                                line-height: 13px;
-                            }
-
-                            textarea.embed-code {
-                                display: none;
-                                position: absolute;
-                                left: 0;
-                                width: 100%;
-                                font: 11px/13px 'courier new';
-                                resize: none;
-                                word-break: break-all;
-                                word-wrap: break-word;
-                                bottom: 0;
-                                border: 0 none;
-                                height: 16px;
-                                padding: 2px;
-                            }
-                        }
-
-                        div.header {
-                            padding-bottom: 5px;
-
-                            strong.title {
-                                color: white;
-                                font: 10px 'proxima-nova';
-                                text-align: left;
-                                font-weight: 600;
-                                text-overflow: ellipsis;
-                                white-space: nowrap;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                max-width: 170px;
-                            }
-
-                            strong.duration {
-                                color: #92a2b8;
-                                font: 11px 'proxima-nova';
-                                text-align: right;
-                                font-weight: 500;
-                            }
-                        }
-
-                        &:hover {
-                            div.overlay {
-                                display: block;
-                            }
-                        }
-                    }
-
-                    div.video-description {
-                        cursor: pointer;
-                        position: relative;
-                        padding: 16px 0;
-                        width: 211px;
-                        opacity: 1;
-
-                        &.hide {
-                            opacity: 0;
-                        }
-
-                        p {
-                            color: #afbfd4;
-                            font: 0.6rem 'proxima-nova';
-                            font-weight: 300;
-                            line-height: 11px;
-                            text-align: left;
-                            max-height: 50px;
-                            height: 100%;
-                            opacity: 0;
+                        a.edit-video {
+                            color: white;
+                            cursor: pointer;
+                            font: 500 13px 'proxima-nova';
+                            text-decoration: underline;
+                            position: relative;
+                            right: -10px;
+                            top: 3px;
+                            opacity: 0.8;
+                            z-index: 22;
                             @include single-transition(opacity 20ms ease-in-out);
 
-                            &.complete,
-                            &.is-truncated {
+                            &:hover {
                                 opacity: 1;
+                                @include single-transition(opacity 20ms ease-in-out);
                             }
                         }
-                    }
 
-                    &.expanded {
-                        position: relative;
-                        z-index: 1000;
+                        a.play-video {
+                            display: block;
+                            height: 47px;
+                            margin: 20px auto 0;
+                            opacity: 0.8;
+                            position: relative;
+                            top: 0;
+                            width: 47px;
+                            z-index: 11;
+                            @include single-transition(opacity 20ms ease-in-out);
 
-                        div.item {
-                            margin-bottom: 0;
+                            img {
+                                height: 47px;
+                                width: 47px;
+                            }
+
+                            &:hover {
+                                opacity: 1;
+                                @include single-transition(opacity 20ms ease-in-out);
+                            }
                         }
 
-                        div.video-description {
-                            background-color: rgba(41, 55, 76, 0.9);
+                        a.post-on-tumblr {
+                            color: white;
+                            display: block;
+                            font: 13.9px 'proxima-nova';
+                            position: relative;
+                            left: 20px;
+                            margin: 6px 0 0;
+
+                            img,
+                            span {
+                                display: block;
+                                position: absolute;
+                                top: 0;
+                            }
+
+                            span {
+                                padding: 9px 0;
+                                text-indent: 49px;
+                                z-index: 6;
+                            }
+
+                            img {
+                                position: relative;
+                                z-index: 5;
+                                width: 168px;
+                                height: 35px;
+                            }
+                        }
+
+                        a.copy-embed {
+                            color: #9dc5fd;
+                            cursor: pointer;
+                            display: block;
+                            font: 12.64px 'proxima-nova';
+                            text-align: center;
+                            text-decoration: underline;
+                            width: 100%;
+                            line-height: 15px;
+                            padding: 4px 0;
+                        }
+
+                        textarea.embed-code {
+                            display: none;
                             position: absolute;
-                            top: 165px;
-                            width: 211px;
-
-                            p {
-                                opacity: 1;
-                                max-height: none;
-                            }
+                            left: 0;
+                            width: 100%;
+                            font: 11px/13px 'courier new';
+                            resize: none;
+                            word-break: break-all;
+                            word-wrap: break-word;
+                            bottom: 0;
+                            border: 0 none;
+                            height: 16px;
+                            padding: 2px;
                         }
                     }
 
-                    a.toggle-description {
-                        margin-left: -3px;
+                    div.header {
+                        padding-bottom: 5px;
+
+                        strong.title {
+                            color: white;
+                            font: 10px 'proxima-nova';
+                            text-align: left;
+                            font-weight: 600;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-width: 170px;
+                        }
+
+                        strong.duration {
+                            color: #92a2b8;
+                            font: 11px 'proxima-nova';
+                            text-align: right;
+                            font-weight: 500;
+                        }
+                    }
+
+                    &:hover {
+                        div.overlay {
+                            display: block;
+                        }
                     }
 
                     &.processing {
@@ -1052,7 +1057,7 @@ body {
                             padding: 0 12px;
                             position: absolute;
                             text-align: center;
-                            width: 139px;
+                            width: 100%;
                             top: 30px;
 
                             i {
@@ -1067,8 +1072,10 @@ body {
                                 display: block;
                                 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
                                 font-style: normal;
-                                font-size: 8px;
-                                line-height: 8px;
+                                font-size: 10px;
+                                line-height: 10px;
+                                bottom: -41px;
+                                position: relative;
 
                                 &.title {
                                     font-weight: 700;
@@ -1076,27 +1083,83 @@ body {
                                     font-size: 13px;
                                     line-height: 20px;
                                     margin-bottom: 45px;
-                                    position: relative;
                                     top: -6px;
                                 }
                             }
                         }
 
                         div.header {
+                            padding-bottom: 7px;
+
                             strong.title {
                                 max-width: 211px;
                             }
                         }
+
+                        img.cover-image {
+                            max-height: 135px;
+                        }
                     }
                 }
 
-                &:nth-child(2n) {
-                    min-height: 200px;
+                div.video-description {
+                    cursor: pointer;
+                    position: relative;
+                    padding: 16px 0;
+                    width: 211px;
+                    opacity: 1;
+
+                    &.hide {
+                        opacity: 0;
+                    }
+
+                    p {
+                        color: #afbfd4;
+                        font: 0.6rem 'proxima-nova';
+                        font-weight: 300;
+                        line-height: 11px;
+                        text-align: left;
+                        max-height: 50px;
+                        height: 100%;
+                        opacity: 0;
+                        @include single-transition(opacity 20ms ease-in-out);
+
+                        &.complete,
+                        &.is-truncated {
+                            opacity: 1;
+                        }
+                    }
+                }
+
+                &.expanded {
+                    position: relative;
+                    z-index: 1000;
+
+                    div.item {
+                        margin-bottom: 0;
+                    }
+
+                    div.video-description {
+                        background-color: rgba(41, 55, 76, 0.9);
+                        position: absolute;
+                        top: 165px;
+                        width: 211px;
+
+                        p {
+                            opacity: 1;
+                            max-height: none;
+                        }
+                    }
+                }
+
+                a.toggle-description {
+                    margin-left: -3px;
                 }
             }
         }
     }
 }
+
 
 footer {
     color: white;
@@ -1110,13 +1173,7 @@ footer {
 
 body {
     &.logged-out {
-        background: #2a394e url('../../img/v2/bkg-loggedout.png') repeat-x;
-        background-size: 1px 1078px; // (320/736) * imgHeight
-
         &.no-carousel {
-            background: #2a394e url('../../img/v2/bkg-loggedout-nocarousel.png') repeat-x;
-            background-size: 1px 1078px;
-
             #uploader {
                 margin-top: 38px;
             }
@@ -1135,9 +1192,6 @@ body {
     }
 
     &.logged-in {
-        background: #2a394e url('../../img/v2/bkg-loggedin.png') repeat-x;
-        background-size: 1px 1078px;
-
         #base #videos {
             margin-bottom: 95px;
         }
@@ -1147,9 +1201,6 @@ body {
         }
 
         &.no-carousel {
-            background: #2a394e url('../../img/v2/bkg-loggedin-nocarousel.png') repeat-x;
-            background-size: 1px 982px;
-
             #uploader {
                 margin-top: 23px;
             }
@@ -1160,9 +1211,6 @@ body {
         }
 
         &.no-videos {
-            background: #2a394e url('../../img/v2/bkg-novideos.png') repeat-x;
-            background-size: 1px 1078px;
-
             #base #videos {
                 margin-bottom: inherit;
 
@@ -1176,9 +1224,6 @@ body {
             }
 
             &.no-carousel {
-                background: #2a394e url('../../img/v2/bkg-novideos-nocarousel.png') repeat-x;
-                background-size: 1px 982px;
-
                 #base #videos #no-videos {
                     margin-bottom: 84px;
                 }
@@ -1190,41 +1235,18 @@ body {
 // =============================================================================
 // Responsive
 // =============================================================================
-//
-// Extra small devices (portrait phones, less than 544px)
-// No media query since this is the default in Bootstrap
-// Small devices (landscape phones, 544px and up)
 
-@media (min-width: 544px) {}
+
+// Small devices (landscape phones, 544px and up)
+@media (min-width: 544px) {
+
+}
+
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
     .blue-round {
         @include border-radius(6px, 6px);
-    }
-
-    body {
-        &.logged-out {
-            background-size: 1px 2480px;
-
-            &.no-carousel {
-                background-size: 1px 2480px;
-            }
-        }
-
-        &.logged-in {
-            background-size: 1px 2480px;
-
-            &.no-carousel {
-                background-size: 1px 2258px;
-            }
-
-            &.no-videos {
-                &.no-carousel {
-                    background-size: 1px 2258px;
-                }
-            }
-        }
     }
 
     #base {
@@ -1380,6 +1402,7 @@ body {
                         }
 
                         #upload-drop-pane > div > button.btn-info {
+                            width: 47%;
                             left: 27%;
                         }
                     }
@@ -1479,4 +1502,16 @@ body {
             }
         }
     }
+}
+
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+
+}
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
 }

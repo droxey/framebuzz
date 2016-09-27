@@ -9,13 +9,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="shortcut icon" href="{% static 'framebuzz/favicon.ico' %}" type="image/x-icon">
-    <link rel="icon" href="{% static 'framebuzz/favicon.ico' %}" type="image/x-icon">
-    <title>{% block page_title %}FrameBuzz + Tumblr{% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta itemprop="description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
     <meta itemprop="image" content="http://framebuzz.com{% static 'framebuzz/marketing/img/share_logo.jpg' %}">
@@ -24,9 +21,15 @@
     <meta property="og:description" content="Share thoughts and conversations with friends while you watch videos, even if you're not watching at the same time.">
     <meta property="og:title" content="FrameBuzz: Watch Whenever, Talk Together.">
     <meta property="og:site_name" content="FrameBuzz">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{% static 'framebuzz/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'framebuzz/favicon.ico' %}" type="image/x-icon">
+    <title>{% block page_title %}FrameBuzz + Tumblr{% endblock %}</title>
     <script src="https://use.typekit.net/tud1dml.js"></script>
     <script>try{Typekit.load({ async: false });}catch(e){}</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% compress js %}
       <script src="{% static 'framebuzz/marketing/vendor/compat/modernizr.min.js' %}"></script>
@@ -49,13 +52,35 @@
         You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.
       </div>
     <![endif]-->
-    <div id="base" class="container remodal-bg">
-      <div id="header" class="row">
+    <div id="base" class="remodal-bg">
+      <div id="header">
         <div id="actions" class="clearfix logged-{% if not request.user.is_authenticated %}out{% else %}in{% endif %}">
-          {% include "tumblr/snippets/account.html" %}
+          <div class="container">
+            {% include "tumblr/snippets/account.html" %}
+          </div>
         </div>
-        <div id="logo-content" class="row">
-          <img class="img-fluid header m-x-auto d-block" src="{% static 'framebuzz/tumblr/img/v2/header@2x.png' %}" width="736">
+        <div id="logo-content">
+          <div id="fbz-logo" class="row">
+              <div class="col-xs-12">
+                <div class="container">
+                  <img src="{% static 'framebuzz/tumblr/img/v2/logo@2x.png' %}" class="img-fluid m-x-auto d-block">
+                </div>
+              </div>
+          </div>
+          <div id="tumblr-video-chat" class="row">
+              <div class="col-xs-12">
+                <div class="container">
+                  <img src="{% static 'framebuzz/tumblr/img/v2/tumblr-video-chat@2x.png' %}" class="img-fluid m-x-auto d-block">
+                </div>
+              </div>
+          </div>
+          <div id="what-is-fbz" class="row">
+              <div class="col-xs-12">
+                <div class="container">
+                  <img src="{% static 'framebuzz/tumblr/img/v2/what-is-fbz@2x.png' %}" class="img-fluid m-x-auto d-block">
+                </div>
+              </div>
+          </div>
         </div>
       </div>
       <div id="sidenav" class="col-xs-3 hidden-lg-down">
@@ -65,47 +90,63 @@
           <a href="{% if request.user.is_authenticated %}#post{% else %}{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}{% endif %}" class="share{% if not request.user.is_authenticated %} tumblr-login-link{% endif %}"><span class="icon"></span>Share to your tumblr</a>
         </div>
       </div>
-      <div id="example" class="row">
-          <div id="embed-row" class="col-xs-12 embed-responsive embed-responsive-4by3">
-            <video height="428" poster="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/frame_0000.png" controls="controls" preload="none" class="video embed-responsive-item">
-              <source type="video/mp4" src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.mp4">
-              <source type="video/webm" src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.webm">
-              <object height="428" type="application/x-shockwave-flash" data="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
-                  <param name="movie" value="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
-                  <param name="flashvars" value="controls=true&file=https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.mp4">
-                  <img src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/frame_0000.png" height="428" title="No video playback capabilities" class="img-fluid">
-              </object>
-            </video>
+      <div id="example">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div id="embed-row" class="embed-responsive embed-responsive-4by3">
+                <video height="428" poster="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/frame_0000.png" controls="controls" preload="none" class="video embed-responsive-item">
+                  <source type="video/mp4" src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.mp4">
+                  <source type="video/webm" src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.webm">
+                  <object height="428" type="application/x-shockwave-flash" data="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
+                      <param name="movie" value="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
+                      <param name="flashvars" value="controls=true&file=https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/s0Bao06uSz40z4mdxvyD.mp4">
+                      <img src="https://fbz-zc.s3.amazonaws.com/s0Bao06uSz40z4mdxvyD/frame_0000.png" height="428" title="No video playback capabilities" class="img-fluid">
+                  </object>
+                </video>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
-      <div id="login-row" class="row">
-        <div class="col-xs-12">
-          {% if request.user.is_authenticated %}
-            <a href="#uploader" title="Upload a video and start a framebuzz" class="btn-start-fbz m-x-auto d-block"></a>
-          {% else %}
-              <a href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}" title="Login with your Tumblr account and upload a video" class="btn-login no-login tumblr-login-link m-x-auto d-block"></a>
-          {% endif %}
+      <div id="login-row">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              {% if request.user.is_authenticated %}
+                <a href="#uploader" title="Upload a video and start a framebuzz" class="btn-start-fbz m-x-auto d-block"></a>
+              {% else %}
+                  <a href="{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}" title="Login with your Tumblr account and upload a video" class="btn-login no-login tumblr-login-link m-x-auto d-block"></a>
+              {% endif %}
+            </div>
+          </div>
         </div>
       </div>
       {% if show_carousel %}
-        {% include "tumblr/snippets/carousel.html" %}
+        <div id="video-carousel">
+          {% include "tumblr/snippets/carousel.html" %}
+        </div>
       {% endif %}
-      <div id="uploader" class="row">
+      <div id="uploader">
         {% include "tumblr/snippets/upload.html" %}
       </div>
       {% block content %}{% endblock %}
-      <div id="post" class="row clearfix">
-        <div class="col-xs-12">
-          <h1 class=" text-xs-center text-md-left">Post it to your tumblr page... <br class="hidden-md-up"><em>and get talking</em>!</h1>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-3 pull-left">
-            <img src="{% static 'framebuzz/tumblr/img/vid@2x.jpg' %}" width="166" class="img-fluid m-x-auto d-block">
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-9 pull-left">
-            <p class="info">
-              Click the 'post to my tumblr' button on your video, or copy/paste the embed tag<br class="hidden-sm-down">
-              to use on your tumblr page, and voilá! You're ready to talk!
-            </p>
+      <div id="post">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <h1 class=" text-xs-center text-md-left">Post it to your tumblr page... <br class="hidden-md-up"><em>and get talking</em>!</h1>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 pull-left">
+                <img src="{% static 'framebuzz/tumblr/img/vid@2x.jpg' %}" width="166" class="img-fluid m-x-auto d-block">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-9 pull-left">
+                <p class="info">
+                  Click the 'post to my tumblr' button on your video, or copy/paste the embed tag<br class="hidden-sm-down">
+                  to use on your tumblr page, and voilá! You're ready to talk!
+                </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -113,9 +154,6 @@
     <div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false">
         <iframe src="" scrolling="no" frameBorder="0" allowfullscreen="true" mozfullscreen="true" webkitfullscreen="true" height="430" width="700" class="fbzplayer center-block"></iframe>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
     {% compress js %}
         <script src="{% static 'framebuzz/profiles/vendor/jquery/lazyload.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/stickykit.min.js' %}"></script>
@@ -129,8 +167,8 @@
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
         <script type="text/javascript">
         $(document).ready(function() {
-          var isDebug = '{{ is_debug }}' == 'True';
-          var showCarousel = '{{ show_carousel }}' == 'True';
+          var isDebug = '{{ is_debug|lower }}' == 'true';
+          var showCarousel = '{{ show_carousel|lower }}' == 'true';
 
           // Sticky sidebar.
           $("#sidenav").stick_in_parent();

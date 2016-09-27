@@ -1,22 +1,11 @@
 {% load i18n staticfiles %}
 
 {% if page_obj.object_list %}
-<div class="row">
-   {% for video in page_obj.object_list %}
-   {% comment %}
-      {% if forloop.counter0|divisibleby:'3' %}
-         <div class="row">
-      {% endif %}
-   {% endcomment %}
-      <div id="{{ video.slug }}" class="col-xs-6 col-md-4 edit-container"></div>
-      {% include 'tumblr/snippets/item.html' %}
-      {% comment %}
-      {% if forloop.counter|divisibleby:'3' %}
-         </div>
-      {% endif %}
-      {% endcomment %}
-   {% endfor %}
-</div>
+   <div class="row">
+      {% for video in page_obj.object_list %}
+         {% include 'tumblr/snippets/item.html' %}
+      {% endfor %}
+   </div>
  {% endif %}
  {% if video_count > 6 %}
    {% include "tumblr/snippets/pagination.html" %}
