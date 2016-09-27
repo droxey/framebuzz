@@ -58,7 +58,7 @@
           <img class="img-fluid header m-x-auto d-block" src="{% static 'framebuzz/tumblr/img/v2/header@2x.png' %}" width="736">
         </div>
       </div>
-      <div id="sidenav" class="col-xs-3 hidden-md-down">
+      <div id="sidenav" class="col-xs-3 hidden-lg-down">
         <div class="innernav">
           <a href="{% if request.user.is_authenticated %}#uploader{% else %}{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}{% endif %}" class="upload{% if not request.user.is_authenticated %} tumblr-login-link{% endif %}"><span class="icon"></span>Upload a video</a>
           <a href="{% if request.user.is_authenticated %}#videolist{% else %}{% provider_login_url 'tumblr' next=next_url method='oauth2' display='popup' %}{% endif %}" class="framebuzzes{% if not request.user.is_authenticated %} tumblr-login-link{% endif %}"><span class="icon"></span>My framebuzzes{% if request.user.is_authenticated %} ({{ video_count }}){% endif %}</a>
