@@ -241,15 +241,15 @@ body {
 
         a.btn-start-fbz {
             background: url('../../img/v2/btn-upload@2x.png') no-repeat;
-            background-size: 339px 106px;
+            background-size: 271px 86px;
             display: block;
-            height: 50px;
+            height: 43px;
             overflow: hidden;
             margin: 0 auto;
-            width: 339px;
+            width: 271px;
 
             &:hover {
-                background-position: 0 -56px;
+                background-position: 0 -46px;
             }
         }
     }
@@ -488,9 +488,9 @@ body {
                         border: 17px solid #55677f;
                         padding: 0 !important;
                         position: relative;
-                        width: 105%;
+                        width: 100%;
                         background-color: #55677f;
-                        left: -14px;
+                        left: 0px;
                         z-index: 100;
                         // Makes the drop zone easier to hit.
                     }
@@ -508,7 +508,7 @@ body {
                         text-align: center !important;
                         width: 100% !important;
                         line-height: 14px !important;
-                        font-size: 16px !important;
+                        font-size: 14px !important;
                         font-weight: 700;
                         min-height: 146px;
                         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -545,7 +545,7 @@ body {
                         border: none;
                         position: absolute;
                         bottom: 22px;
-                        left: 28%;
+                        left: 20%;
                         padding: 4px 22px;
                         z-index: 100;
 
@@ -553,6 +553,10 @@ body {
                             background: #007ab8;
                         }
                     }
+                }
+
+                div.upload-pane {
+                    margin-top: 11px;
                 }
             }
 
@@ -1107,6 +1111,7 @@ body {
 
         &.no-carousel {
             background: #2a394e url('../../img/v2/bkg-loggedout-nocarousel.png') repeat-x;
+            background-size: 1px 1078px;
 
             #uploader {
                 margin-top: 38px;
@@ -1127,6 +1132,7 @@ body {
 
     &.logged-in {
         background: #2a394e url('../../img/v2/bkg-loggedin.png') repeat-x;
+        background-size: 1px 1078px;
 
         #base #videos {
             margin-bottom: 95px;
@@ -1138,6 +1144,7 @@ body {
 
         &.no-carousel {
             background: #2a394e url('../../img/v2/bkg-loggedin-nocarousel.png') repeat-x;
+            background-size: 1px 982px;
 
             #uploader {
                 margin-top: 23px;
@@ -1150,6 +1157,7 @@ body {
 
         &.no-videos {
             background: #2a394e url('../../img/v2/bkg-novideos.png') repeat-x;
+            background-size: 1px 1078px;
 
             #base #videos {
                 margin-bottom: inherit;
@@ -1165,6 +1173,7 @@ body {
 
             &.no-carousel {
                 background: #2a394e url('../../img/v2/bkg-novideos-nocarousel.png') repeat-x;
+                background-size: 1px 982px;
 
                 #base #videos #no-videos {
                     margin-bottom: 84px;
@@ -1193,6 +1202,24 @@ body {
     body {
         &.logged-out {
             background-size: 1px 2480px;
+
+            &.no-carousel {
+                background-size: 1px 2480px;
+            }
+        }
+
+        &.logged-in {
+            background-size: 1px 2480px;
+
+            &.no-carousel {
+                background-size: 1px 2258px;
+            }
+
+            &.no-videos {
+                &.no-carousel {
+                    background-size: 1px 2258px;
+                }
+            }
         }
     }
 
@@ -1241,6 +1268,16 @@ body {
 
                 &:hover {
                     background-position: 0 -58px;
+                }
+            }
+
+            a.btn-start-fbz {
+                background-size: 339px 106px;
+                height: 50px;
+                width: 339px;
+
+                &:hover {
+                    background-position: 0 -56px;
                 }
             }
         }
@@ -1323,6 +1360,27 @@ body {
             }
 
             #upload-container {
+                #upload-video-form {
+                    div.upload-pane {
+                        margin-top: 0;
+                    }
+
+                    div.drop-pane-row {
+                        #upload-drop-pane div.filepicker {
+                            width: 105%;
+                            left: -14px;
+                        }
+
+                        #upload-drop-pane > div > div {
+                            font-size: 16px !important;
+                        }
+
+                        #upload-drop-pane > div > button.btn-info {
+                            left: 27%;
+                        }
+                    }
+                }
+
                 &.logged-in {
 
                 }
