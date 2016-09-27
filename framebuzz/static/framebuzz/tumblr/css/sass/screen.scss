@@ -319,8 +319,8 @@ body {
     }
 
     #fbz-on-tumblr {
+        background: white;
         min-height: 96px;
-        width: 320px;
 
         div.carousel-header {
             min-width: 320px;
@@ -806,7 +806,7 @@ body {
         }
 
         #video-list {
-            padding: 22px;
+            padding: 0px 22px 22px 22px;
 
             .no-padding {
                 padding-left: 0;
@@ -814,14 +814,12 @@ body {
             }
 
             div.item {
+                padding-top: 22px;
+
                 div.edit-container {
                     display: none;
                     position: absolute;
-                    overflow: hidden;
-                    max-height: 375px;
                     z-index: 99999;
-                    top: 35px;
-                    margin-right: 15px;
 
                     &.loaded {
                         display: block;
@@ -830,10 +828,13 @@ body {
                     div.edit-video {
                         form {
                             div.form-row {
+                                overflow: hidden;
+                                height: 31px;
+
                                 input {
                                     color: #333333;
                                     border: 0 none;
-                                    font: 700 14px 'proxima-nova';
+                                    font: 700 0.63rem 'proxima-nova';
                                     padding: 9px 30px 9px 9px;
                                     position: relative;
                                     z-index: 10;
@@ -865,7 +866,7 @@ body {
                             }
 
                             div.submit-row {
-                                height: 48px;
+                                height: 36px;
                                 padding: 0;
 
                                 a.btn-cancel-edit {
@@ -874,9 +875,9 @@ body {
                                     cursor: pointer;
                                     display: block;
                                     font: 13px 'proxima-nova';
-                                    padding: 16px 0;
                                     text-decoration: underline;
-                                    width: 35%;
+                                    padding: 10px 0;
+                                    width: 40%;
 
                                     &:hover {
                                         background: #666666;
@@ -892,7 +893,7 @@ body {
                                     height: 100%;
                                     font: 15px 'proxima-nova';
                                     text-decoration: underline;
-                                    width: 65%;
+                                    width: 60%;
 
                                     &:hover {
                                         background: #129ae2;
@@ -993,7 +994,7 @@ body {
                             text-decoration: underline;
                             width: 100%;
                             line-height: 15px;
-                            padding: 4px 0;
+                            padding: 7px 0;
                         }
 
                         textarea.embed-code {
@@ -1017,7 +1018,7 @@ body {
 
                         strong.title {
                             color: white;
-                            font: 10px 'proxima-nova';
+                            font: 0.63rem 'proxima-nova';
                             text-align: left;
                             font-weight: 600;
                             text-overflow: ellipsis;
@@ -1088,7 +1089,7 @@ body {
                         }
 
                         img.cover-image {
-                            max-height: 135px;
+                            height: 74px;
                         }
                     }
                 }
@@ -1096,8 +1097,8 @@ body {
                 div.video-description {
                     cursor: pointer;
                     position: relative;
-                    padding: 16px 0;
-                    width: 211px;
+                    padding: 8px 0;
+                    width: 100%;
                     opacity: 1;
 
                     &.hide {
@@ -1134,7 +1135,7 @@ body {
                         background-color: rgba(41, 55, 76, 0.9);
                         position: absolute;
                         top: 165px;
-                        width: 211px;
+                        width: 100%;
 
                         p {
                             opacity: 1;
@@ -1185,10 +1186,6 @@ body {
     &.logged-in {
         #base #videos {
             margin-bottom: 95px;
-        }
-
-        #video-list {
-            min-height: 521px;
         }
 
         &.no-carousel {
@@ -1478,6 +1475,26 @@ body {
                                         font-size: 16px;
                                         margin-bottom: 94px;
                                         top: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                div.item {
+                    div.edit-controller {
+                        div.edit-video {
+                            form {
+                                div.submit-row {
+                                    height: 48px;
+
+                                    input.btn-submit {
+                                        width: 65%;
+                                    }
+                                    a.btn-cancel-edit {
+                                        padding: 16px 0;
+                                        width: 35%;
                                     }
                                 }
                             }

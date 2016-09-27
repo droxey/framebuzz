@@ -1,9 +1,9 @@
 {% load staticfiles %}
 
-<div class="edit-video">
+<div class="edit-video col-xs-12">
     <form class="video-edit-form" method="POST" action="{% url 'fbz-edit-video' video.slug %}" data-slug="{{ video.slug }}">
         {% for field in edit_form %}
-            <div class="form-row">
+            <div class="form-row clearfix">
                 {{ field }}
                 {% if field.name == 'title' %}
                     <a href="{% url 'fbz-delete-video' video.slug %}" class="btn-delete-video pull-right" data-slug="{{ video.slug }}">
@@ -16,7 +16,8 @@
             {% endif %}
         {% endfor %}
         <div class="submit-row clearfix">
-            <input class="btn-submit pull-right" type="submit" value="Save changes">
+            <input class="btn-submit pull-right hidden-xs-down" type="submit" value="Save changes">
+            <input class="btn-submit pull-right hidden-sm-up" type="submit" value="Save">
             <a class="btn-cancel-edit pull-left" data-slug="{{ video.slug }}">Cancel</a>
         </div>
     </form>

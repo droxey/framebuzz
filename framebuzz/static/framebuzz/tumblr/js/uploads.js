@@ -177,7 +177,7 @@ $(function() {
 
         $.get(url, function(htmlResponse) {
             editContainer.html(htmlResponse);
-            editContainer.css({ left: itemPosition.left, top: itemPosition.top });
+            editContainer.css({ left: (itemPosition.left - 15), top: itemPosition.top });
             editContainer.addClass('loaded');
         });
 
