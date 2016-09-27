@@ -751,9 +751,9 @@ body {
 
                 div.cover {
                     background-repeat: no-repeat;
-                    background-size: 211px 140px;
-                    width: 211px;
-                    height: 140px;
+                    background-size: 140px 96px;
+                    width: 140px;
+                    height: 96px;
                 }
 
                 div.edit-container {
@@ -846,12 +846,14 @@ body {
                 }
 
                 div.video {
-                    min-height: 230px;
+                    margin-left: -8px;
+                    min-height: 190px;
                     position: relative;
                     z-index: 1;
 
                     div.item {
                         margin-bottom: 0;
+                        width: 139px;
 
                         div.overlay {
                             background: rgba(0, 0, 0, 0.4);
@@ -960,11 +962,11 @@ body {
                         }
 
                         div.header {
-                            padding-bottom: 8px;
+                            padding-bottom: 5px;
 
                             strong.title {
                                 color: white;
-                                font: 13px 'proxima-nova';
+                                font: 10px 'proxima-nova';
                                 text-align: left;
                                 font-weight: 600;
                                 text-overflow: ellipsis;
@@ -976,7 +978,7 @@ body {
 
                             strong.duration {
                                 color: #92a2b8;
-                                font: 14px 'proxima-nova';
+                                font: 11px 'proxima-nova';
                                 text-align: right;
                                 font-weight: 500;
                             }
@@ -1002,9 +1004,9 @@ body {
 
                         p {
                             color: #afbfd4;
-                            font: 12.64px 'proxima-nova';
-                            font-weight: 500;
-                            line-height: 14px;
+                            font: 0.6rem 'proxima-nova';
+                            font-weight: 300;
+                            line-height: 11px;
                             text-align: left;
                             max-height: 50px;
                             height: 100%;
@@ -1050,7 +1052,7 @@ body {
                             padding: 0 12px;
                             position: absolute;
                             text-align: center;
-                            width: 211px;
+                            width: 139px;
                             top: 30px;
 
                             i {
@@ -1062,18 +1064,20 @@ body {
 
                             strong {
                                 color: white;
-                                font-size: 10px;
-                                line-height: 12px;
                                 display: block;
                                 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
                                 font-style: normal;
+                                font-size: 8px;
+                                line-height: 8px;
 
                                 &.title {
                                     font-weight: 700;
                                     font-style: italic;
-                                    font-size: 16px;
+                                    font-size: 13px;
                                     line-height: 20px;
-                                    margin-bottom: 94px;
+                                    margin-bottom: 45px;
+                                    position: relative;
+                                    top: -6px;
                                 }
                             }
                         }
@@ -1413,6 +1417,65 @@ body {
             p.info {
                 font-size: 15px;
                 line-height: 30px;
+            }
+        }
+
+        #videos {
+            #video-list {
+                div.row {
+                    div.cover {
+                        background-size: 211px 140px;
+                        width: 211px;
+                        height: 140px;
+                    }
+
+                    div.video {
+                        margin-left: 0;
+                        min-height: 230px;
+
+                        div.item {
+                            width: 211px;
+
+                            div.header {
+                                padding-bottom: 8px;
+
+                                strong.title {
+                                    font: 13px 'proxima-nova';
+                                    max-width: 170px;
+                                }
+
+                                strong.duration {
+                                    font: 14px 'proxima-nova';
+                                }
+                            }
+                        }
+
+                        div.video-description {
+                            p {
+                                font: 12.64px 'proxima-nova';
+                                line-height: 14px;
+                                font-weight: 500;
+                            }
+                        }
+
+                        &.processing {
+                            div.process-message {
+                                width: 211px;
+
+                                strong {
+                                    font-size: 10px;
+                                    line-height: 12px;
+
+                                    &.title {
+                                        font-size: 16px;
+                                        margin-bottom: 94px;
+                                        top: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

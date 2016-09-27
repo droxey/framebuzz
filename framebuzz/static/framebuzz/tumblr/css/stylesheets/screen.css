@@ -786,9 +786,9 @@ body {
 /* line 752, ../sass/screen.scss */
 #base #videos #video-list div.row div.cover {
   background-repeat: no-repeat;
-  background-size: 211px 140px;
-  width: 211px;
-  height: 140px;
+  background-size: 140px 96px;
+  width: 140px;
+  height: 96px;
 }
 /* line 759, ../sass/screen.scss */
 #base #videos #video-list div.row div.edit-container {
@@ -875,15 +875,17 @@ body {
 }
 /* line 848, ../sass/screen.scss */
 #base #videos #video-list div.row div.video {
-  min-height: 230px;
+  margin-left: -8px;
+  min-height: 190px;
   position: relative;
   z-index: 1;
 }
-/* line 853, ../sass/screen.scss */
+/* line 854, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item {
   margin-bottom: 0;
+  width: 139px;
 }
-/* line 856, ../sass/screen.scss */
+/* line 858, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay {
   background: rgba(0, 0, 0, 0.4);
   display: none;
@@ -893,7 +895,7 @@ body {
   top: 25px;
   z-index: 10;
 }
-/* line 865, ../sass/screen.scss */
+/* line 867, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.edit-video {
   color: white;
   cursor: pointer;
@@ -909,7 +911,7 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 877, ../sass/screen.scss */
+/* line 879, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.edit-video:hover {
   opacity: 1;
   -moz-transition: opacity, 20ms, ease-in-out 1s;
@@ -917,7 +919,7 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 883, ../sass/screen.scss */
+/* line 885, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.play-video {
   display: block;
   height: 47px;
@@ -932,12 +934,12 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 894, ../sass/screen.scss */
+/* line 896, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.play-video img {
   height: 47px;
   width: 47px;
 }
-/* line 899, ../sass/screen.scss */
+/* line 901, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.play-video:hover {
   opacity: 1;
   -moz-transition: opacity, 20ms, ease-in-out 1s;
@@ -945,7 +947,7 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 905, ../sass/screen.scss */
+/* line 907, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr {
   color: white;
   display: block;
@@ -954,27 +956,27 @@ body {
   left: 20px;
   margin: 24px 0 0;
 }
-/* line 913, ../sass/screen.scss */
+/* line 915, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr img,
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr span {
   display: block;
   position: absolute;
   top: 0;
 }
-/* line 920, ../sass/screen.scss */
+/* line 922, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr span {
   padding: 9px 0;
   text-indent: 49px;
   z-index: 6;
 }
-/* line 926, ../sass/screen.scss */
+/* line 928, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.post-on-tumblr img {
   position: relative;
   z-index: 5;
   width: 168px;
   height: 35px;
 }
-/* line 934, ../sass/screen.scss */
+/* line 936, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay a.copy-embed {
   color: #9dc5fd;
   cursor: pointer;
@@ -986,7 +988,7 @@ body {
   padding-top: 15px;
   line-height: 13px;
 }
-/* line 946, ../sass/screen.scss */
+/* line 948, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.overlay textarea.embed-code {
   display: none;
   position: absolute;
@@ -1001,14 +1003,14 @@ body {
   height: 16px;
   padding: 2px;
 }
-/* line 962, ../sass/screen.scss */
+/* line 964, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.header {
-  padding-bottom: 8px;
+  padding-bottom: 5px;
 }
-/* line 965, ../sass/screen.scss */
+/* line 967, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.header strong.title {
   color: white;
-  font: 13px 'proxima-nova';
+  font: 10px 'proxima-nova';
   text-align: left;
   font-weight: 600;
   text-overflow: ellipsis;
@@ -1017,18 +1019,18 @@ body {
   text-overflow: ellipsis;
   max-width: 170px;
 }
-/* line 977, ../sass/screen.scss */
+/* line 979, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item div.header strong.duration {
   color: #92a2b8;
-  font: 14px 'proxima-nova';
+  font: 11px 'proxima-nova';
   text-align: right;
   font-weight: 500;
 }
-/* line 986, ../sass/screen.scss */
+/* line 988, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.item:hover div.overlay {
   display: block;
 }
-/* line 992, ../sass/screen.scss */
+/* line 994, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description {
   cursor: pointer;
   position: relative;
@@ -1036,16 +1038,16 @@ body {
   width: 211px;
   opacity: 1;
 }
-/* line 999, ../sass/screen.scss */
+/* line 1001, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description.hide {
   opacity: 0;
 }
-/* line 1003, ../sass/screen.scss */
+/* line 1005, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description p {
   color: #afbfd4;
-  font: 12.64px 'proxima-nova';
-  font-weight: 500;
-  line-height: 14px;
+  font: 0.6rem 'proxima-nova';
+  font-weight: 300;
+  line-height: 11px;
   text-align: left;
   max-height: 50px;
   height: 100%;
@@ -1055,307 +1057,309 @@ body {
   -webkit-transition: opacity, 20ms, ease-in-out 1s;
   transition: opacity 20ms ease-in-out 1s;
 }
-/* line 1014, ../sass/screen.scss */
+/* line 1016, ../sass/screen.scss */
 #base #videos #video-list div.row div.video div.video-description p.complete, #base #videos #video-list div.row div.video div.video-description p.is-truncated {
   opacity: 1;
 }
-/* line 1021, ../sass/screen.scss */
+/* line 1023, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded {
   position: relative;
   z-index: 1000;
 }
-/* line 1025, ../sass/screen.scss */
+/* line 1027, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded div.item {
   margin-bottom: 0;
 }
-/* line 1029, ../sass/screen.scss */
+/* line 1031, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded div.video-description {
   background-color: rgba(41, 55, 76, 0.9);
   position: absolute;
   top: 165px;
   width: 211px;
 }
-/* line 1035, ../sass/screen.scss */
+/* line 1037, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.expanded div.video-description p {
   opacity: 1;
   max-height: none;
 }
-/* line 1042, ../sass/screen.scss */
+/* line 1044, ../sass/screen.scss */
 #base #videos #video-list div.row div.video a.toggle-description {
   margin-left: -3px;
 }
-/* line 1046, ../sass/screen.scss */
+/* line 1048, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing {
   cursor: auto;
 }
-/* line 1049, ../sass/screen.scss */
+/* line 1051, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message {
   padding: 0 12px;
   position: absolute;
   text-align: center;
-  width: 211px;
+  width: 139px;
   top: 30px;
 }
-/* line 1056, ../sass/screen.scss */
+/* line 1058, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message i {
   color: white;
   display: block;
   margin: 10px auto;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-/* line 1063, ../sass/screen.scss */
+/* line 1065, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message strong {
   color: white;
-  font-size: 10px;
-  line-height: 12px;
   display: block;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   font-style: normal;
+  font-size: 8px;
+  line-height: 8px;
 }
-/* line 1071, ../sass/screen.scss */
+/* line 1073, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.process-message strong.title {
   font-weight: 700;
   font-style: italic;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 20px;
-  margin-bottom: 94px;
+  margin-bottom: 45px;
+  position: relative;
+  top: -6px;
 }
-/* line 1082, ../sass/screen.scss */
+/* line 1086, ../sass/screen.scss */
 #base #videos #video-list div.row div.video.processing div.header strong.title {
   max-width: 211px;
 }
-/* line 1089, ../sass/screen.scss */
+/* line 1093, ../sass/screen.scss */
 #base #videos #video-list div.row:nth-child(2n) {
   min-height: 200px;
 }
 
-/* line 1097, ../sass/screen.scss */
+/* line 1101, ../sass/screen.scss */
 footer {
   color: white;
   font: bold 16px/20px 'proxima-nova';
   padding-bottom: 13px;
 }
 
-/* line 1108, ../sass/screen.scss */
+/* line 1112, ../sass/screen.scss */
 body.logged-out {
   background: #2a394e url("../../img/v2/bkg-loggedout.png") repeat-x;
   background-size: 1px 1078px;
 }
-/* line 1112, ../sass/screen.scss */
+/* line 1116, ../sass/screen.scss */
 body.logged-out.no-carousel {
   background: #2a394e url("../../img/v2/bkg-loggedout-nocarousel.png") repeat-x;
   background-size: 1px 1078px;
 }
-/* line 1116, ../sass/screen.scss */
+/* line 1120, ../sass/screen.scss */
 body.logged-out.no-carousel #uploader {
   margin-top: 38px;
 }
-/* line 1121, ../sass/screen.scss */
+/* line 1125, ../sass/screen.scss */
 body.logged-out p.login-info {
   text-align: right;
   cursor: default;
   color: #8597b1;
   font-size: 10px;
 }
-/* line 1127, ../sass/screen.scss */
+/* line 1131, ../sass/screen.scss */
 body.logged-out p.login-info a {
   padding-left: 5px;
 }
-/* line 1133, ../sass/screen.scss */
+/* line 1137, ../sass/screen.scss */
 body.logged-in {
   background: #2a394e url("../../img/v2/bkg-loggedin.png") repeat-x;
   background-size: 1px 1078px;
 }
-/* line 1137, ../sass/screen.scss */
+/* line 1141, ../sass/screen.scss */
 body.logged-in #base #videos {
   margin-bottom: 95px;
 }
-/* line 1141, ../sass/screen.scss */
+/* line 1145, ../sass/screen.scss */
 body.logged-in #video-list {
   min-height: 521px;
 }
-/* line 1145, ../sass/screen.scss */
+/* line 1149, ../sass/screen.scss */
 body.logged-in.no-carousel {
   background: #2a394e url("../../img/v2/bkg-loggedin-nocarousel.png") repeat-x;
   background-size: 1px 982px;
 }
-/* line 1149, ../sass/screen.scss */
+/* line 1153, ../sass/screen.scss */
 body.logged-in.no-carousel #uploader {
   margin-top: 23px;
 }
-/* line 1153, ../sass/screen.scss */
+/* line 1157, ../sass/screen.scss */
 body.logged-in.no-carousel #base #videos {
   margin-bottom: 110px;
 }
-/* line 1158, ../sass/screen.scss */
+/* line 1162, ../sass/screen.scss */
 body.logged-in.no-videos {
   background: #2a394e url("../../img/v2/bkg-novideos.png") repeat-x;
   background-size: 1px 1078px;
 }
-/* line 1162, ../sass/screen.scss */
+/* line 1166, ../sass/screen.scss */
 body.logged-in.no-videos #base #videos {
   margin-bottom: inherit;
 }
-/* line 1165, ../sass/screen.scss */
+/* line 1169, ../sass/screen.scss */
 body.logged-in.no-videos #base #videos #no-videos {
   margin-bottom: 100px;
 }
-/* line 1170, ../sass/screen.scss */
+/* line 1174, ../sass/screen.scss */
 body.logged-in.no-videos #video-list {
   min-height: auto;
 }
-/* line 1174, ../sass/screen.scss */
+/* line 1178, ../sass/screen.scss */
 body.logged-in.no-videos.no-carousel {
   background: #2a394e url("../../img/v2/bkg-novideos-nocarousel.png") repeat-x;
   background-size: 1px 982px;
 }
-/* line 1178, ../sass/screen.scss */
+/* line 1182, ../sass/screen.scss */
 body.logged-in.no-videos.no-carousel #base #videos #no-videos {
   margin-bottom: 84px;
 }
 
 @media (min-width: 768px) {
-  /* line 1198, ../sass/screen.scss */
+  /* line 1202, ../sass/screen.scss */
   .blue-round {
     -moz-border-radius: 6px / 6px;
     -webkit-border-radius: 6px 6px;
     border-radius: 6px / 6px;
   }
 
-  /* line 1203, ../sass/screen.scss */
+  /* line 1207, ../sass/screen.scss */
   body.logged-out {
     background-size: 1px 2480px;
   }
-  /* line 1206, ../sass/screen.scss */
+  /* line 1210, ../sass/screen.scss */
   body.logged-out.no-carousel {
     background-size: 1px 2480px;
   }
-  /* line 1211, ../sass/screen.scss */
+  /* line 1215, ../sass/screen.scss */
   body.logged-in {
     background-size: 1px 2480px;
   }
-  /* line 1214, ../sass/screen.scss */
+  /* line 1218, ../sass/screen.scss */
   body.logged-in.no-carousel {
     background-size: 1px 2258px;
   }
-  /* line 1219, ../sass/screen.scss */
+  /* line 1223, ../sass/screen.scss */
   body.logged-in.no-videos.no-carousel {
     background-size: 1px 2258px;
   }
 
-  /* line 1227, ../sass/screen.scss */
+  /* line 1231, ../sass/screen.scss */
   #base #header {
     min-height: 257px;
   }
-  /* line 1230, ../sass/screen.scss */
+  /* line 1234, ../sass/screen.scss */
   #base #header #actions {
     height: 38px;
   }
-  /* line 1233, ../sass/screen.scss */
+  /* line 1237, ../sass/screen.scss */
   #base #header #actions p.info {
     font-size: 10px;
   }
-  /* line 1237, ../sass/screen.scss */
+  /* line 1241, ../sass/screen.scss */
   #base #header #actions.logged-out {
     padding-top: 10px;
   }
-  /* line 1241, ../sass/screen.scss */
+  /* line 1245, ../sass/screen.scss */
   #base #header #actions.logged-in {
     padding-top: 8px;
   }
-  /* line 1247, ../sass/screen.scss */
+  /* line 1251, ../sass/screen.scss */
   #base #example {
     min-height: 467px;
   }
-  /* line 1250, ../sass/screen.scss */
+  /* line 1254, ../sass/screen.scss */
   #base #example #embed-row {
     height: 428px;
   }
-  /* line 1253, ../sass/screen.scss */
+  /* line 1257, ../sass/screen.scss */
   #base #example #embed-row .mejs-container {
     background: #36465D;
     height: 428px !important;
   }
-  /* line 1260, ../sass/screen.scss */
+  /* line 1264, ../sass/screen.scss */
   #base #login-row {
     min-height: 98px;
     padding-top: 0;
   }
-  /* line 1264, ../sass/screen.scss */
+  /* line 1268, ../sass/screen.scss */
   #base #login-row a.btn-login {
     background-size: 446px 108px;
     height: 50px;
     width: 446px;
   }
-  /* line 1269, ../sass/screen.scss */
+  /* line 1273, ../sass/screen.scss */
   #base #login-row a.btn-login:hover {
     background-position: 0 -58px;
   }
-  /* line 1274, ../sass/screen.scss */
+  /* line 1278, ../sass/screen.scss */
   #base #login-row a.btn-start-fbz {
     background-size: 339px 106px;
     height: 50px;
     width: 339px;
   }
-  /* line 1279, ../sass/screen.scss */
+  /* line 1283, ../sass/screen.scss */
   #base #login-row a.btn-start-fbz:hover {
     background-position: 0 -56px;
   }
-  /* line 1285, ../sass/screen.scss */
+  /* line 1289, ../sass/screen.scss */
   #base #fbz-on-tumblr {
     margin-left: -34px;
     margin-right: -34px;
     min-height: 228px;
     width: 806px;
   }
-  /* line 1291, ../sass/screen.scss */
+  /* line 1295, ../sass/screen.scss */
   #base #fbz-on-tumblr div.carousel-header {
     margin-bottom: 27px;
   }
-  /* line 1294, ../sass/screen.scss */
+  /* line 1298, ../sass/screen.scss */
   #base #fbz-on-tumblr div.carousel-header img {
     background-size: 736px 70px;
     left: 35px;
   }
-  /* line 1300, ../sass/screen.scss */
+  /* line 1304, ../sass/screen.scss */
   #base #fbz-on-tumblr #carousel {
     margin: 0;
     height: 118px;
     width: 806px;
   }
-  /* line 1305, ../sass/screen.scss */
+  /* line 1309, ../sass/screen.scss */
   #base #fbz-on-tumblr #carousel a.carousel-control {
     width: 21px;
     height: 81px;
     top: 88px;
   }
-  /* line 1310, ../sass/screen.scss */
+  /* line 1314, ../sass/screen.scss */
   #base #fbz-on-tumblr #carousel a.carousel-control i {
     text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.25);
     top: 37%;
   }
-  /* line 1316, ../sass/screen.scss */
+  /* line 1320, ../sass/screen.scss */
   #base #fbz-on-tumblr #carousel a.carousel-control.left i {
     left: 2px;
   }
-  /* line 1322, ../sass/screen.scss */
+  /* line 1326, ../sass/screen.scss */
   #base #fbz-on-tumblr #carousel a.carousel-control.right i {
     right: 2px;
   }
-  /* line 1328, ../sass/screen.scss */
+  /* line 1332, ../sass/screen.scss */
   #base #fbz-on-tumblr #carousel div.carousel-inner {
     height: 118px;
     margin: 0 auto;
     width: 748px;
   }
-  /* line 1333, ../sass/screen.scss */
+  /* line 1337, ../sass/screen.scss */
   #base #fbz-on-tumblr #carousel div.carousel-inner div.item {
     background-size: 166px 118px;
     margin-right: 24px;
     height: 118px;
     width: 166px;
   }
-  /* line 1340, ../sass/screen.scss */
+  /* line 1344, ../sass/screen.scss */
   #base #fbz-on-tumblr #carousel div.carousel-inner div.item a span.bubble {
     background-size: 50px 50px;
     font-size: 25px;
@@ -1365,56 +1369,105 @@ body.logged-in.no-videos.no-carousel #base #videos #no-videos {
     left: 36%;
     top: 43px;
   }
-  /* line 1355, ../sass/screen.scss */
+  /* line 1359, ../sass/screen.scss */
   #base #uploader {
     min-height: 354px;
   }
-  /* line 1358, ../sass/screen.scss */
+  /* line 1362, ../sass/screen.scss */
   #base #uploader h1 {
     padding: 16px 0;
   }
-  /* line 1364, ../sass/screen.scss */
+  /* line 1368, ../sass/screen.scss */
   #base #uploader #upload-container #upload-video-form div.upload-pane {
     margin-top: 0;
   }
-  /* line 1369, ../sass/screen.scss */
+  /* line 1373, ../sass/screen.scss */
   #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane div.filepicker {
     width: 105%;
     left: -14px;
   }
-  /* line 1374, ../sass/screen.scss */
+  /* line 1378, ../sass/screen.scss */
   #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > div {
     font-size: 16px !important;
   }
-  /* line 1378, ../sass/screen.scss */
+  /* line 1382, ../sass/screen.scss */
   #base #uploader #upload-container #upload-video-form div.drop-pane-row #upload-drop-pane > div > button.btn-info {
     left: 27%;
   }
-  /* line 1388, ../sass/screen.scss */
+  /* line 1392, ../sass/screen.scss */
   #base #uploader #upload-container.logged-out {
     padding: 44px 17px;
   }
-  /* line 1392, ../sass/screen.scss */
+  /* line 1396, ../sass/screen.scss */
   #base #uploader #upload-container.logged-out #upload-login p.info {
     font-size: 13px;
     line-height: 18px;
   }
-  /* line 1401, ../sass/screen.scss */
+  /* line 1405, ../sass/screen.scss */
   #base #post {
     bottom: 0;
     background: none;
     min-height: 235px;
     padding: 0;
   }
-  /* line 1407, ../sass/screen.scss */
+  /* line 1411, ../sass/screen.scss */
   #base #post h1 {
     font-size: 38.04px;
     line-height: 43px;
     text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.3);
   }
-  /* line 1413, ../sass/screen.scss */
+  /* line 1417, ../sass/screen.scss */
   #base #post p.info {
     font-size: 15px;
     line-height: 30px;
+  }
+  /* line 1426, ../sass/screen.scss */
+  #base #videos #video-list div.row div.cover {
+    background-size: 211px 140px;
+    width: 211px;
+    height: 140px;
+  }
+  /* line 1432, ../sass/screen.scss */
+  #base #videos #video-list div.row div.video {
+    margin-left: 0;
+    min-height: 230px;
+  }
+  /* line 1436, ../sass/screen.scss */
+  #base #videos #video-list div.row div.video div.item {
+    width: 211px;
+  }
+  /* line 1439, ../sass/screen.scss */
+  #base #videos #video-list div.row div.video div.item div.header {
+    padding-bottom: 8px;
+  }
+  /* line 1442, ../sass/screen.scss */
+  #base #videos #video-list div.row div.video div.item div.header strong.title {
+    font: 13px 'proxima-nova';
+    max-width: 170px;
+  }
+  /* line 1447, ../sass/screen.scss */
+  #base #videos #video-list div.row div.video div.item div.header strong.duration {
+    font: 14px 'proxima-nova';
+  }
+  /* line 1454, ../sass/screen.scss */
+  #base #videos #video-list div.row div.video div.video-description p {
+    font: 12.64px 'proxima-nova';
+    line-height: 14px;
+    font-weight: 500;
+  }
+  /* line 1462, ../sass/screen.scss */
+  #base #videos #video-list div.row div.video.processing div.process-message {
+    width: 211px;
+  }
+  /* line 1465, ../sass/screen.scss */
+  #base #videos #video-list div.row div.video.processing div.process-message strong {
+    font-size: 10px;
+    line-height: 12px;
+  }
+  /* line 1469, ../sass/screen.scss */
+  #base #videos #video-list div.row div.video.processing div.process-message strong.title {
+    font-size: 16px;
+    margin-bottom: 94px;
+    top: 0;
   }
 }
