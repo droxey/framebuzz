@@ -26,7 +26,7 @@
     <meta property="og:site_name" content="FrameBuzz">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <script src="https://use.typekit.net/tud1dml.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <script>try{Typekit.load({ async: false });}catch(e){}</script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% compress js %}
       <script src="{% static 'framebuzz/marketing/vendor/compat/modernizr.min.js' %}"></script>
@@ -39,9 +39,6 @@
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/hover.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/player/app/css/animations.css' %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/js/vendor/mediaelement/mediaelementplayer.css' %}" type="text/css" media="screen">
-        {% if show_carousel %}
-          <link rel="stylesheet" href="{% static 'framebuzz/tumblr/js/vendor/bxslider/jquery.bxslider.css' %}" type="text/css" media="screen">
-        {% endif %}
         <link rel="stylesheet" href="{% static 'framebuzz/tumblr/css/stylesheets/screen.css' %}" type="text/css" media="screen">
     {% endcompress %}
     {% block extra_head %}{% endblock %}
@@ -129,14 +126,12 @@
         <script src="{% static 'framebuzz/tumblr/js/vendor/jquery.growl.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/clipboard.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/jquery.dotdotdot.min.js' %}"></script>
-        {% if show_carousel %}
-          <script src="{% static 'framebuzz/marketing/vendor/jquery/jquery.easing.1.3.js' %}"></script>
-          <script src="{% static 'framebuzz/tumblr/js/vendor/bxslider/jquery.bxslider.min.js' %}"></script>
-        {% endif %}
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
         <script type="text/javascript">
+        $(document).ready(function() {
           var isDebug = '{{ is_debug }}' == 'True';
           var showCarousel = '{{ show_carousel }}' == 'True';
+
           // Sticky sidebar.
           $("#sidenav").stick_in_parent();
 
@@ -157,21 +152,7 @@
               }
             }
           });
-
-          // Carousel.
-          if (showCarousel) {
-            $('.bxslider').bxSlider({
-              pager: false,
-              randomStart: true,
-              infiniteLoop: false,
-              minSlides: 4,
-              maxSlides: 4,
-              easing: 'easeInOut',
-              speed: 1000,
-              slideWidth: 166,
-              slideMargin: 22
-            });
-          }
+        });
         </script>
     {% endcompress %}
     {% if not is_debug %}

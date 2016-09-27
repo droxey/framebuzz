@@ -4,16 +4,29 @@
     <div class="carousel-header col-xs-12">
       <img src="{% static 'framebuzz/tumblr/img/v2/fbz-on-tumblr@2x.png' %}" width="736" class="img-fluid m-x-auto d-block">
     </div>
-    <div id="carousel" class="col-xs-12">
-      <ul class="bxslider clearfix">
-          {% for video in slides %}
-          {% get_comment_count for video as comment_count %}
-            <li style="background-image: url('{{ video.default_thumbnail }}');">
-              <a class="play-video" data-remodal-target="modal" href="#" data-video-url="{% url 'video-embed' video.slug %}">
-                <span class="bubble">{{ comment_count }}</span>
-              </a>
-            </li>
-        {% endfor %}
-      </ul>
+    <div id="carousel" class="carousel slide" data-ride="carousel" data-wrap="true" data-interval="2500">
+        <ol class="carousel-indicators">
+            {% for video in slides %}
+                <li data-target="#carousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.counter0 == 0 %}active{% endif %}"></li>
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            {% for video in slides %}
+            {% get_comment_count for video as comment_count %}
+                <div class="item{% if forloop.counter0 == 0 %} active{% endif %}" style="background-image: url('{{ video.default_thumbnail }}');">
+                    <a class="play-video" data-remodal-target="modal" href="#" data-video-url="{% url 'video-embed' video.slug %}">
+                        <span class="bubble">{{ comment_count }}</span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </div>

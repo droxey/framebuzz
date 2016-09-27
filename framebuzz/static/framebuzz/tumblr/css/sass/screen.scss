@@ -2,7 +2,6 @@
 @import "compass/css3/border-radius";
 @import "compass/reset";
 @import "compass/css3/transition";
-
 // =============================================================================
 // Basics
 // =============================================================================
@@ -28,7 +27,9 @@
     }
 }
 
-.embed-responsive-4by3 { padding-bottom: 0 !important; }
+.embed-responsive-4by3 {
+    padding-bottom: 0 !important;
+}
 // =============================================================================
 // Elements
 // =============================================================================
@@ -223,12 +224,14 @@ body {
 
     #login-row {
         overflow: hidden;
-        min-height: 68px;
-        padding-top: 13px;
+        min-height: 54px;
+        padding-top: 9px;
 
         a.btn-login {
             background: url('../../img/v2/btn-login@2x.png') no-repeat;
             background-size: 290px 80px;
+            width: 290px;
+            margin: 0 auto;
             height: 38px;
 
             &:hover {
@@ -253,10 +256,6 @@ body {
 
     #fbz-on-tumblr {
         margin-bottom: 37px;
-        margin-left: -34px;
-        margin-right: -34px;
-        overflow: hidden;
-        width: 100%;
 
         div.carousel-header {
             img {
@@ -266,98 +265,76 @@ body {
 
         #carousel {
             height: 42px;
-            width: 320px;
-            overflow: hidden;
-            position: relative;
 
-            div.bx-wrapper {
-                height: 100%;
+            ol.carousel-indicators {
+                display: none;
+            }
 
-                div.bx-viewport {
-                    -webkit-moz-box-shadow: none;
-                    -moz-moz-box-shadow: none;
-                    -ms-moz-box-shadow: none;
-                    -o-moz-box-shadow: none;
-                    box-shadow: none;
-                    border: 0 none;
-                    height: 100%;
-                    width: 265px !important;
-                    left: 18px;
-                    margin: 0 12px;
+            a.carousel-control {
+                background: rgba(238, 238, 238, 0.69);
+                cursor: pointer;
+                display: block;
+                height: 42px;
+                width: 10px;
+
+                &.right {
+
                 }
 
-                div.bx-controls-direction {
-                    a.bx-next,
-                    a.bx-prev {
-                        background: url('../../img/v2/controls@2x.png') no-repeat;
-                        cursor: pointer;
-                        display: block;
-                        position: absolute;
-                        background-size: 60px 10px;
-                        height: 42px;
-                        top: 34px;
-                        width: 10px;
+                &.left {
+                }
 
-                        &.bx-prev {
-                            background-position: 0 0;
-                            float: left;
-                            left: -2px;
-                        }
+                span.glyphicon {
+                    color: white;
+                }
+            }
 
-                        &.bx-next {
-                            background-position: -25px 0;
-                            float: right;
-                            right: 5px;
-                        }
+            div.carousel-inner {
+                margin-left: 12px;
+                margin-right: 12px;
+                height: 118px;
+
+                div.item {
+                    display: inline-block;
+                    background-repeat: no-repeat;
+                    background-size: 60px 42px;
+                    height: 42px;
+                    margin-right: 24px;
+                    width: 60px;
+
+                    &:nth-child(4n) {
+                        margin-right: 0;
                     }
-                }
 
-                ul {
-                    display: block;
-                    height: 118px;
+                    a {
+                        -webkit-box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
+                        -moz-box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
+                        box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
+                        display: block;
+                        position: relative;
+                        height: 100%;
+                        width: 100%;
 
-                    li {
-                        display: inline-block;
-                        background-repeat: no-repeat;
-                        background-size: 60px 42px;
-                        margin-right: 11px;
-                        height: 42px;
-                        width: 60px;
-
-                        a {
-                            -webkit-box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
-                            -moz-box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
-                            box-shadow: inset 4px 4px 18px 18px rgba(255,255,255,0.1);
-                            display: block;
-                            position: relative;
-                            height: 118px;
-                            width: 166px;
-
-                            img {
-                                position: absolute;
-                                z-index: 1;
-                            }
-
-                            span.bubble {
-                                background: url('../../img/v2/bubble@2x.png') no-repeat;
-                                background-size: 50px 50px;
-                                color: white;
-                                display: block;
-                                font-family: 'Lobster';
-                                font-size: 25px;
-                                height: 50px;
-                                width: 50px;
-                                padding: 13px 0 21px;
-                                position: absolute;
-                                left: 36%;
-                                top: 43px;
-                                text-align: center;
-                                z-index: 10;
-                            }
+                        img {
+                            position: absolute;
+                            z-index: 1;
                         }
 
-                        &:nth-child(4n) {
-                            margin-right: 0;
+                        span.bubble {
+                            background: url('../../img/v2/bubble@2x.png') no-repeat;
+                            background-size: 50px 50px;
+                            color: white;
+                            display: block;
+                            font-family: 'Lobster';
+                            font-size: 25px;
+                            height: 50px;
+                            width: 50px;
+                            padding: 13px 0 21px;
+                            position: absolute;
+                            left: 36%;
+                            top: 43px;
+                            text-align: center;
+                            z-index: 10;
                         }
                     }
                 }
@@ -1093,6 +1070,7 @@ footer {
     font: bold 16px/20px 'proxima-nova';
     padding-bottom: 13px;
 }
+
 // =============================================================================
 // Overrides
 // =============================================================================
@@ -1174,14 +1152,12 @@ body {
 // =============================================================================
 // Responsive
 // =============================================================================
-
+//
 // Extra small devices (portrait phones, less than 544px)
 // No media query since this is the default in Bootstrap
-
 // Small devices (landscape phones, 544px and up)
-@media (min-width: 544px) {
 
-}
+@media (min-width: 544px) {}
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
@@ -1196,7 +1172,6 @@ body {
     }
 
     #base {
-
         #header {
             min-height: 257px;
 
@@ -1250,48 +1225,44 @@ body {
             margin-left: -34px;
             margin-right: -34px;
             min-height: 223px;
+            width: 806px;
 
             #carousel {
                 height: 118px;
-                width: 804px;
-                top: -7px;
+                width: 806px;
 
-                div.bx-wrapper {
-                    max-width: 798px !important;
+                a.carousel-control {
+                    width: 21px;
+                    height: 81px;
+                    top: 88px;
 
-                    div.bx-viewport {
-                        width: 736px !important;
-                        left: 18px;
-                        margin: 0 12px;
+                    i {
+                        position: absolute;
+                        text-shadow: 0px 2px 0px rgba(0,0,0,0.25);
+                        top: 37%;
                     }
 
-                    div.bx-controls-direction {
-                        a.bx-next,
-                        a.bx-prev {
-                            background-size: 47px 81px;
-                            height: 81px;
-                            top: 34px;
-                            width: 21px;
+                    &.left {
+                        i {
+                            left: 2px;
                         }
                     }
 
-                    ul {
+                    &.right {
+                        i {
+                            right: 2px;
+                        }
+                    }
+                }
+
+                div.carousel-inner {
+                    margin: 0 auto;
+                    width: 748px;
+
+                    div.item {
+                        background-size: 166px 118px;
                         height: 118px;
-
-                        li {
-                            background-size: 166px 118px;
-                            height: 118px;
-                            width: 166px;
-                            margin-right: 22px;
-
-                            a {
-                                &:hover {
-                                    -webkit-box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
-                                    -moz-box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
-                                    box-shadow: inset 4px 4px 18px 18px rgba(0,0,0,0.18);
-                                }
-                            }
-                        }
+                        width: 166px;
                     }
                 }
             }
