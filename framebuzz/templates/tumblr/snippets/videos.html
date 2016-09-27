@@ -1,7 +1,7 @@
 {% load i18n staticfiles %}
 
 {% if page_obj.object_list %}
-   <div class="row">
+   <div class="row clearfix">
       {% for video in page_obj.object_list %}
          {% include 'tumblr/snippets/item.html' %}
       {% endfor %}
