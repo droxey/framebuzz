@@ -1153,7 +1153,36 @@ body {
 // Responsive
 // =============================================================================
 // Small devices (landscape phones, 544px and up)
-@media (min-width: 544px) {}
+@media (min-width: 544px) {
+    #base {
+        #fbz-on-tumblr {
+            h1 {
+                height: 70px;
+            }
+
+            #featured-videos-carousel {
+                li.item {
+                    a {
+                        img.cover {
+                            height: auto;
+                        }
+
+                        span.bubble {
+                            background-size: 50px 50px;
+                            font-size: 25px;
+                            height: 50px;
+                            width: 50px;
+                            padding: 13px 0 21px;
+                            left: 36%;
+                            top: 32%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
     .blue-round {
@@ -1230,24 +1259,6 @@ body {
                 margin: 0;
                 height: 118px !important;
                 width: 806px;
-
-                li.item {
-                    a {
-                        img.cover {
-                            height: auto;
-                        }
-
-                        span.bubble {
-                            background-size: 50px 50px;
-                            font-size: 25px;
-                            height: 50px;
-                            width: 50px;
-                            padding: 13px 0 21px;
-                            left: 36%;
-                            top: 32%;
-                        }
-                    }
-                }
             }
 
             .lSAction > a {
