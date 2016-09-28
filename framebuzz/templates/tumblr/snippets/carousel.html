@@ -8,7 +8,7 @@
             <li class="item">
                 <a class="play-video" data-remodal-target="modal" href="#{{ forloop.counter0 }}" data-video-url="{% url 'video-embed' video.slug %}">
                     <img src="{{ video.default_thumbnail }}" width="100%" class="img-fluid cover">
-                    <span class="bubble">{{ comment_count }}</span>
+                    <span class="bubble d-block m-x-auto">{{ comment_count }}</span>
                 </a>
             </li>
         {% endfor %}
