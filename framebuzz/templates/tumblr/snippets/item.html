@@ -18,7 +18,7 @@
             </div>
         {% endif %}
         <div class="header clearfix">
-            <strong class="title pull-left">{{ video.title|title }}</strong>
+            <strong class="title pull-left">{{ video.title }}</strong>
             <strong class="duration pull-right">
                   {% if not video.processing %}
                      {{ video.timeInHMS }}
@@ -31,7 +31,7 @@
                 <strong>Your video will appear here when finished.</strong>
             </div>
         {% endif %}
-        <img class="cover-image img-fluid" width="100%" src="{% if video.processing %}{% static 'framebuzz/tumblr/img/v2/img-loading@2x.jpg' %}{% else %}{{ video.default_thumbnail }}{% endif %}" alt="{{ video.title|title }}">
+        <img class="cover-image img-fluid" width="100%" src="{% if video.processing %}{% static 'framebuzz/tumblr/img/v2/img-loading@2x.jpg' %}{% else %}{{ video.default_thumbnail }}{% endif %}" alt="{{ video.title }}">
     </div>
     {% if video.description %}
         <div class="video-description animated">
