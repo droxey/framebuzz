@@ -287,10 +287,11 @@ body {
 
     #video-carousel {
         background: white;
-        max-width: 806px;
     }
 
     #fbz-on-tumblr {
+        max-width: 806px;
+
         h1 {
             height: 45px;
 
@@ -961,6 +962,10 @@ body {
                             font: 11px 'proxima-nova';
                             text-align: right;
                             font-weight: 500;
+
+                            i {
+                                font-style: italic;
+                            }
                         }
                     }
 
@@ -1217,43 +1222,21 @@ body {
         #fbz-on-tumblr {
             width: 806px;
 
+            h1 {
+                height: 80px;
+            }
+
             #featured-videos-carousel {
                 margin: 0;
-                height: 118px;
+                height: 118px !important;
                 width: 806px;
 
-/*
-                a.carousel-control {
-                    width: 21px;
-                    height: 81px;
-                    top: 88px;
-
-                    i {
-                        text-shadow: 0 2px 0 rgba(0,0,0,0.25);
-                        top: 37%;
-                    }
-
-                    &.left {
-                        i {
-                            left: 2px;
-                        }
-                    }
-
-                    &.right {
-                        i {
-                            right: 2px;
-                        }
-                    }
-                }
-*/
-
-                div.item {
-                    /*background-size: 166px 118px;
-                    margin-right: 24px;
-                    height: 118px;
-                    width: 166px;*/
-
+                li.item {
                     a {
+                        img.cover {
+                            height: auto;
+                        }
+
                         span.bubble {
                             background-size: 50px 50px;
                             font-size: 25px;
@@ -1261,11 +1244,14 @@ body {
                             width: 50px;
                             padding: 13px 0 21px;
                             left: 36%;
-                            top: 43px;
+                            top: 32%;
                         }
                     }
                 }
+            }
 
+            .lSAction > a {
+                top: 47%;
             }
         }
 

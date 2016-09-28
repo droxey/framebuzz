@@ -20,17 +20,13 @@
         <div class="header clearfix">
             <strong class="title pull-left">{{ video.title }}</strong>
             <strong class="duration pull-right">
-                  {% if not video.processing %}
+                  {% if video.processing %}
+                    <i>uploading&hellip;</i>
+                  {% else %}
                      {{ video.timeInHMS }}
                   {% endif %}
                </strong>
         </div>
-        {% if video.processing %}
-            <div class="process-message hidden-sm-down">
-                <strong class="title">Processing Video&hellip;</strong>
-                <strong>Your video will appear here when finished.</strong>
-            </div>
-        {% endif %}
         <img class="cover-image img-fluid" width="100%" src="{% if video.processing %}{% static 'framebuzz/tumblr/img/v2/img-loading@2x.jpg' %}{% else %}{{ video.default_thumbnail }}{% endif %}" alt="{{ video.title }}">
     </div>
     {% if video.description %}
