@@ -755,8 +755,13 @@ body {
                     div.edit-video {
                         form {
                             div.form-row {
-                                overflow: hidden;
-                                height: 31px;
+
+
+
+                                &.title {
+                                    height: 31px;
+                                    overflow: hidden;
+                                }
 
                                 input {
                                     color: #333333;
@@ -833,15 +838,18 @@ body {
 
                 div.video {
                     position: relative;
+                    overflow: hidden;
                     z-index: 1;
 
                     div.overlay {
                         background: rgba(0, 0, 0, 0.4);
                         display: none;
                         position: absolute;
-                        top: 20px;
+                        top: 0;
                         width: 100%;
+                        height: 100%;
                         z-index: 10;
+                        margin-top: 21px;
 
                         a.edit-video {
                             color: white;
@@ -864,12 +872,13 @@ body {
                         a.play-video {
                             display: block;
                             height: 47px;
-                            margin: 20px auto 0;
+                            margin: 7px auto 0;
                             opacity: 0.8;
                             position: relative;
                             top: 0;
                             width: 47px;
                             z-index: 11;
+                            margin-top: 24%;
                             @include single-transition(opacity 20ms ease-in-out);
 
                             img {
@@ -888,8 +897,8 @@ body {
                             display: block;
                             font: 13.9px 'proxima-nova';
                             position: relative;
-                            left: 20px;
                             margin: 6px 0 0;
+                            width: 170px;
 
                             img,
                             span {
@@ -921,7 +930,7 @@ body {
                             text-decoration: underline;
                             width: 100%;
                             line-height: 15px;
-                            padding: 7px 0;
+                            padding: 5px 0;
                         }
 
                         textarea.embed-code {
@@ -1063,7 +1072,7 @@ body {
                     div.video-description {
                         background-color: rgba(41, 55, 76, 0.9);
                         position: absolute;
-                        top: 165px;
+                        top: 100%;
                         width: 100%;
 
                         p {
@@ -1197,6 +1206,11 @@ body {
             #video-list {
                 div.item {
                     div.video {
+                        div.overlay {
+                            a.play-video {
+                                margin-top: 8%;
+                            }
+                        }
                         div.header {
                             strong.title {
                                 font-size: 0.76rem;
@@ -1399,6 +1413,13 @@ body {
                 }
 
                 div.item {
+                    div.video {
+                        div.overlay {
+                            a.play-video {
+                                margin-top: 2%;
+                            }
+                        }
+                    }
                     div.edit-controller {
                         div.edit-video {
                             form {

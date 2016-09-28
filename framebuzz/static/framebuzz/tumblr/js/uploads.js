@@ -7,13 +7,13 @@ $.fn.extend({
     }
 });
 
-$(function() {
-    var videoUrl = null,
-        fbzPlayer = $('iframe.fbzplayer'),
-        browserSupportsAutoCopy = document.queryCommandSupported('copy'),
-        submitButton = $('#btn-upload-video'),
-        titleField = $('#id_title');
+var videoUrl = null,
+    fbzPlayer = $('iframe.fbzplayer'),
+    browserSupportsAutoCopy = document.queryCommandSupported('copy'),
+    submitButton = $('#btn-upload-video'),
+    titleField = $('#id_title');
 
+$(function() {
     // Basic line clamping.
     var clampLines = function(selector) {
         selector.dotdotdot({
