@@ -129,9 +129,6 @@ if settings.DEBUG:
         url(r'^test/not-found/$', handler404, name='test-404'),
         url(r'^test/server-error/$', handler500, name='test-500'),
         url(r'^test/maintenance/$', handler503, name='test-503'),
-        url(r'^test/(?P<slug>[\w.@+-]+)/(?P<size>\w+)/$',
-            'framebuzz.apps.api.views.video_test',
-            name='video-test'),
     )
     # Assets (CSS, JS, user-uploaded objects):
     urlpatterns += static_always(settings.STATIC_URL,

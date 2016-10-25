@@ -5,6 +5,13 @@
     {% compress css %}
         <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/iconic.css' %}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{% static 'framebuzz/profiles/stylesheets/screen.css' %}" type="text/css" media="screen" />
+        <style type="text/css">
+            #logo, #footer, #copyright { display: none; }
+            #base { max-width: 750px !important; }
+            .selected { font-weight: 700; text-decoration: underline; }
+            hr, h4 { margin-top: 0; }
+            .pull-right a { display: inline-block; padding: 0 2px; }
+        </style>
     {% endcompress %}
     {% block extra_css %}{% endblock %}
 {% endblock %}
@@ -12,9 +19,18 @@
 {% block page_classes %}content profiles share{% endblock %}
 
 {% block content_center %}
-    <div id="share" style="display: block; background: white; height: 600px; padding-top: 22px;">
-        <div class="col-xs-12 standalone">
-            <h4>{{ size|title }} Player ({{ width }}x{{ height }})</h4>
+    <div id="share" style="display: block; background: white; padding: 22px 0;">
+        <div class="col-xs-12 standalone" style="">
+            <div class="clearfix">
+                <h4 class="pull-left">{{ size|title }} Player ({{ width }}x{{ height }})</h4>
+                <div class="pull-right">
+                    <strong>View: </strong>
+                    <a href="{% url 'video-test' video.video_id 'small' %}"{% if size == 'small' %} class="selected"{% endif %}>Small</a>
+                    <a href="{% url 'video-test' video.video_id 'medium' %}"{% if size == 'medium' %} class="selected"{% endif %}>Medium</a>
+                    <a href="{% url 'video-test' video.video_id 'large' %}"{% if size == 'large' %} class="selected"{% endif %}>Large</a>
+                    <a href="{% url 'video-test' video.video_id 'tumblr' %}"{% if size == 'tumblr' %} class="selected"{% endif %}>Tumblr</a>
+                </div>
+            </div>
             <hr>
             <div style="height: {{ height }}px; width: {{ width }}px; margin: 0 auto;">
                 <iframe src="{% url 'video-embed' video.slug %}" scrolling="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" frameborder="0" width="100%" height="100%"></iframe>

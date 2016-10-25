@@ -32,4 +32,8 @@ urlpatterns = patterns('',
 
    url(r'^(?P<slug>[\w.@+-]+)/logout/$',
        'framebuzz.apps.api.views.video_logout', name='video-logout'),
+
+    url(r'^test/(?P<slug>[\w.@+-]+)/(?P<size>\w+)/$',
+        'framebuzz.apps.api.views.video_test',
+        name='video-test'),
    )

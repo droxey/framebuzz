@@ -318,10 +318,9 @@ class Video(caching.base.CachingMixin, models.Model):
     def get_embed_code(self, width, height):
         site = Site.objects.get_current()
         prefix = 'http' if settings.DEBUG else 'https'
-        url ='%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
+        url = '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
         return mark_safe(
             '<iframe src="%s" scrolling="no" allowfullscreen="true" '
-            'webkitallowfullscreen="true" mozallowfullscreen="true" '
             'frameborder="0" width="%s" height="%s"></iframe>' % (
                 url, str(width), str(height)))
 
@@ -329,7 +328,7 @@ class Video(caching.base.CachingMixin, models.Model):
         return self.get_embed_code(640, 398)
 
     def large_embed_code(self):
-        return self.get_embed_code(700, 445)
+        return self.get_embed_code(700, 431)
 
     def wp_embed_code(self):
         site = Site.objects.get_current()

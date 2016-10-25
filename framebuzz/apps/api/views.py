@@ -2,6 +2,7 @@ import json
 
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import logout
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
@@ -26,15 +27,17 @@ ITAG_MP4 = 18
 ITAG_WEBM = 43
 
 
+@staff_member_required
 def video_test(request, slug, size="small"):
+    ''' An easy way to test the player. Only accessible to Admins. '''
     video, created = get_or_create_video(slug)
     if size == 'small':
         embed_code = video.tumblr_embed_code
         height = 326
         width = 580
     elif size == 'large':
-        embed_code == video.large_embed_code
-        height = 445
+        embed_code = video.large_embed_code
+        height = 431
         width = 700
     elif size == 'medium':
         embed_code = video.embed_code
