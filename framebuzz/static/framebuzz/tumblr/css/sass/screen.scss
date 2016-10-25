@@ -241,14 +241,17 @@ body {
 
     #example {
         position: relative;
-        max-height: 180px;
+        /*max-height: 180px;*/
 
         #embed-row {
-            height: 180px;
+            @include border-radius(5px, 5px);
+            background: #37465c;
+            border: 15px solid #37465c;
+            /*height: 180px;*/
 
             .mejs-container {
-                background: none;
-                height: 180px !important;
+                background: #37465c;
+                /*height: 180px !important;*/
             }
         }
     }
@@ -1258,14 +1261,9 @@ body {
         }
 
         #example {
-            min-height: 467px;
-
             #embed-row {
-                height: 428px;
-
                 .mejs-container {
                     background: #36465D;
-                    height: 428px !important;
                 }
             }
         }
@@ -1273,6 +1271,7 @@ body {
         #login-row {
             min-height: 98px;
             padding-top: 0;
+            margin-top: 38px;
 
             a.btn-login {
                 background-size: 446px 108px;

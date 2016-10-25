@@ -92,8 +92,8 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
-              <div id="embed-row" class="embed-responsive embed-responsive-4by3">
-                <video height="428" poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4" controls="controls" preload="auto" class="video embed-responsive-item" poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png">
+              <div id="embed-row">
+                <video height="428" poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4" controls="controls" preload="auto" class="video" poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png">
                   <source type="video/mp4" src="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4">
                   <source type="video/webm" src="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.webm">
                   <object height="428" type="application/x-shockwave-flash" data="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
@@ -214,15 +214,15 @@
             enablePluginDebug: isDebug,
             videoHeight: '100%',
             videoWidth: '100%',
+            defaultVideoWidth: 700,
+            defaultVideoHeight: 395,
             features: ['playpause','progress','volume',],
             startVolume: 0,
             pluginPath: '/static/framebuzz/tumblr/js/vendor/mediaelement/',
             enablePluginSmoothing: true,
             flashScriptAccess: 'always',
             success: function(media) {
-              //if (!isDebug) {
-                media.play();
-              //}
+              media.play();
             }
           });
         });
