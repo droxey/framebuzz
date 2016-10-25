@@ -41,28 +41,22 @@
     <meta property="og:site_name" content="FrameBuzz">
     <meta property="og:video" content="{{ video.mp4_url }}">
     <meta property="og:video:secure_url" content="{{ video.mp4_url }}">
-    <meta property="og:video:type" content="text/html" />
+    <meta property="og:video:type" content="text/html">
+    <script src="https://use.typekit.net/tud1dml.js"></script>
+    <script>try{Typekit.load({ async: false });}catch(e){}</script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% compress css %}
         <link href="{% static 'framebuzz/marketing/vendor/fontawesome/font-awesome.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/player/app/css/bootstrap-responsive.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-        <link href="{% static 'framebuzz/player/app/css/mediaelementplayer.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/lib/mediaelement/mediaelementplayer.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/player/app/css/mejs-skins.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/player/app/css/perfect-scrollbar-0.4.1.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/player/app/css/jquery.maxlength.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-        {% comment %}
-          <!-- TODO: The player no longer uses these. Remove them after testing. -->
-          <link href="{% static 'framebuzz/player/app/css/jquery.share.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-          <link href="{% static 'framebuzz/player/app/css/jquery.datetimepicker.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-          <link href="{% static 'framebuzz/player/app/css/social-buttons.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-        {% endcomment %}
         <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <!--[if IE]><link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css"><![endif]-->
         <!--[if gte IE 9]><style type="text/css">ul.comment-stream { filter: none; }</style><![endif]-->
     {% endcompress %}
-    <script src="https://use.typekit.net/tud1dml.js"></script>
-    <script>try{Typekit.load({ async: false });}catch(e){}</script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% compress js %}
       <script type="text/javascript">
         // Disable ESC as it breaks SockJS connection.
@@ -147,13 +141,6 @@
         <script src="{% static 'framebuzz/player/app/lib/raven.min.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.maxlength.min.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/lib/jquery/perfect-scrollbar-0.4.1.with-mousewheel.min.js' %}"></script>
-        {% comment %}
-          <!-- TODO: The player no longer uses these. Remove them after testing. -->
-          <script src="{% static 'framebuzz/player/app/lib/moment.js' %}"></script>
-          <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.zclip.min.js' %}"></script>
-          <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.share.js' %}"></script>
-          <script src="{% static 'framebuzz/player/app/lib/jquery/jquery.datetimepicker.js' %}"></script>
-        {% endcomment %}
         <script src="{% static 'framebuzz/player/app/lib/jquery/toastr.min.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/lib/angular/angular.min.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/lib/angular/angular-ui-router.min.js' %}"></script>
@@ -162,8 +149,10 @@
         <script src="{% static 'framebuzz/player/app/lib/angular/angular-sanitize.min.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/lib/angular/angular-local-storage.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/lib/angular/ui-bootstrap-0.4.0.min.js' %}"></script>
+        {% comment %}
         <script src="{% static 'framebuzz/player/app/lib/gsap/TweenMax.min.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/lib/gsap/jquery.gsap.min.js' %}"></script>
+        {% endcomment %}
         <script src="{% static 'framebuzz/player/app/lib/mediaelement-and-player.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/lib/mejs-framebuzz-plugins.js' %}"></script>
         <script src="{% static 'framebuzz/player/app/js/app.js' %}"></script>
