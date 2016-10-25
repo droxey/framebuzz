@@ -91,18 +91,16 @@
       <div id="example">
         <div class="container">
           <div class="row">
-            <div class="col-xs-12">
-              <div id="embed-row">
-                <video height="428" poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4" controls="controls" preload="auto" class="video" poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png">
+            <div class="col-xs-12" id="embed-row">
+                <video poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4" controls="controls" preload="auto" class="video" poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png">
                   <source type="video/mp4" src="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4">
                   <source type="video/webm" src="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.webm">
-                  <object height="428" type="application/x-shockwave-flash" data="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
+                  <object type="application/x-shockwave-flash" data="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
                       <param name="movie" value="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
                       <param name="flashvars" value="controls=true&file=https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4">
-                      <img src="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png" height="428" title="No video playback capabilities" class="img-fluid">
+                      <img src="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png" title="No video playback capabilities" class="img-fluid">
                   </object>
                 </video>
-              </div>
             </div>
           </div>
         </div>
@@ -212,15 +210,15 @@
           $('video').mediaelementplayer({
             debug: isDebug,
             enablePluginDebug: isDebug,
-            videoHeight: '100%',
-            videoWidth: '100%',
-            defaultVideoWidth: 700,
+            defaultVideoWidth: 705,
             defaultVideoHeight: 395,
             features: ['playpause','progress','volume',],
             startVolume: 0,
             pluginPath: '/static/framebuzz/tumblr/js/vendor/mediaelement/',
             enablePluginSmoothing: true,
             flashScriptAccess: 'always',
+            poster: 'https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png',
+            showPosterWhenEnded: true,
             success: function(media) {
               media.play();
             }
