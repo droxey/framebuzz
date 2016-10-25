@@ -581,7 +581,6 @@ mejs.MediaFeatures = {
 					document.msExitFullscreen();
 
 				}
-				$('#video-title').removeClass('full-width');
 			}
 
 		}
