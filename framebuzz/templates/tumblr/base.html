@@ -153,12 +153,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v2/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document);
+    </script>
     {% compress js %}
         <script src="{% static 'framebuzz/tumblr/js/vendor/lightslider.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/stickykit.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/queryCommandSupported.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/mediaelement/mediaelement-and-player.min.js' %}"></script>
-        <script src="{% static 'framebuzz/tumblr/js/vendor/filepicker.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/remodal.min.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/jquery.growl.js' %}"></script>
         <script src="{% static 'framebuzz/tumblr/js/vendor/clipboard.min.js' %}"></script>

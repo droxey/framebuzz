@@ -69,6 +69,85 @@ body {
         }
     }
 }
+
+div.page-wrapper {
+    div.pagination {
+        @include border-radius(3px, 3px);
+        background: #314056;
+        padding: 7px 0 3px;
+        width: auto;
+        position: absolute;
+        right: 19px;
+        bottom: 15px;
+        margin: 0;
+
+        ul {
+            padding: 0;
+            width: 100%;
+
+            li {
+                display: inline-block;
+                padding: 0 2px;
+
+                a,
+                span {
+                    border: 0 none;
+                    background: none;
+                    color: #92a2b8;
+                    display: inline-block;
+                    font: 14px/18px 'proxima-nova';
+                    font-weight: 500;
+                    float: left;
+                    padding: 0;
+                    margin-left: 0;
+                }
+
+                &.active {
+                    @include border-radius(3px, 3px);
+                    background: #4583d8;
+                    padding: 0 6px;
+
+                    a {
+                        font-weight: 700;
+                        color: white;
+                    }
+                }
+
+                a.page-link {
+                    i {
+                        vertical-align: baseline;
+                        position: relative;
+                        top: 1px;
+                    }
+
+                    &.prev i {
+                        margin-right: 2px;
+                    }
+
+                    &.next i {
+                        margin-left: 2px;
+                    }
+
+                    &.next,
+                    &.prev {
+                        text-decoration: underline;
+                        min-width: 42px;
+                    }
+                }
+
+                span.disabled {
+                    min-width: 42px;
+
+                    &.prev {
+                    }
+
+                    &.next {
+                    }
+                }
+            }
+        }
+    }
+}
 // =============================================================================
 // IDs
 // =============================================================================
@@ -667,75 +746,6 @@ body {
                 color: #677a94;
                 font: 19px/30px 'proxima-nova';
                 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-            }
-        }
-
-        div.page-wrapper {
-            div.pagination {
-                @include border-radius(3px, 3px);
-                background: #314056;
-                padding: 7px 0 3px;
-                width: auto;
-                position: absolute;
-                right: 19px;
-                bottom: 15px;
-                margin: 0;
-
-                ul {
-                    padding: 0;
-                    width: 100%;
-
-                    li {
-                        display: inline-block;
-                        padding: 0 2px;
-
-                        a,
-                        span {
-                            color: #92a2b8;
-                            font: 14px/18px 'proxima-nova';
-                            font-weight: 500;
-                            float: left;
-                        }
-
-                        &.active {
-                            @include border-radius(3px, 3px);
-                            background: #4583d8;
-                            padding: 0 6px;
-
-                            a {
-                                font-weight: 700;
-                                color: white;
-                            }
-                        }
-
-                        a.page-link {
-                            i {
-                                vertical-align: baseline;
-                                position: relative;
-                                top: 1px;
-                            }
-
-                            &.prev i {
-                                margin-right: 2px;
-                            }
-
-                            &.next i {
-                                margin-left: 2px;
-                            }
-
-                            &.next,
-                            &.prev {
-                                text-decoration: underline;
-                            }
-                        }
-
-                        span.disabled {
-                            &.prev {}
-
-                            &.next {}
-                        }
-                    }
-                }
             }
         }
 
