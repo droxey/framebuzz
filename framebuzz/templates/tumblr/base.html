@@ -92,7 +92,7 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-12" id="embed-row">
-                <video poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4" controls="controls" preload="auto" class="video" poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png">
+                <video poster="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4" controls="controls" preload="auto" class="video" width="705" height="395" style="max-width: 100%; height: 100%;">
                   <source type="video/mp4" src="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4">
                   <source type="video/webm" src="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.webm">
                   <object type="application/x-shockwave-flash" data="{% static 'framebuzz/tumblr/js/vendor/mediaelement/flashmediaelement.swf' %}">
@@ -210,8 +210,6 @@
           $('video').mediaelementplayer({
             debug: isDebug,
             enablePluginDebug: isDebug,
-            defaultVideoWidth: 705,
-            defaultVideoHeight: 395,
             features: ['playpause','progress','volume',],
             startVolume: 0,
             pluginPath: '/static/framebuzz/tumblr/js/vendor/mediaelement/',
