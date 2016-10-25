@@ -25,7 +25,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTOCOL", "https")
 
 SOCKJS_PORT = 4000
 
-SHORT_BASE_URL = 'http://frame.bz/s/'
+SHORT_BASE_URL = 'http://framebuzz.com/s/'
 SHORTEN_FULL_BASE_URL = 'http://framebuzz.com/s/'
 
 RAVEN_CONFIG = {
