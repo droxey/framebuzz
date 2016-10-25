@@ -42,7 +42,6 @@ class TumblrUploadForm(forms.ModelForm):
         fp_attrs['data-fp-drag-text'] = settings.FP_DRAG_TEXT
         fp_attrs['data-fp-max-size'] = settings.FP_VIDEO_MAXSIZE
         fp_attrs['data-fp-container'] = 'modal'
-        fp_attrs['data-fp-hide'] = 'true'
         fp_attrs['data-fp-openTo'] = 'welcome'
         fp_attrs['onchange'] = 'fileUploadComplete(event);'
 
