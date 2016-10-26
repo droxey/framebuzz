@@ -104,14 +104,6 @@ angular.module('framebuzz.directives', [])
                         videoContainer.addClass('hide-controls');
                     };
 
-                    videoContainer.mouseenter(function(){
-                      console.log(media.controlsAreVisible);
-                    });
-
-                    videoContainer.mouseleave(function(){
-                        var i = $(this).parent().children('.change').show();
-                    });
-
                     $(document).on('click', '.sign-in-tumblr', function() {
                         fadeOutControls();
                     });
