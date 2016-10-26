@@ -4070,6 +4070,7 @@ if (typeof jQuery != 'undefined') {
 	});
 
 	// PLAY/pause BUTTON
+	// CUSTOM
 	$.extend(MediaElementPlayer.prototype, {
 		buildplaypause: function(player, controls, layers, media) {
 			var
@@ -4079,7 +4080,7 @@ if (typeof jQuery != 'undefined') {
 				$('<div class="mejs-button mejs-playpause-button mejs-play" >' +
 					'<button type="button" aria-controls="' + t.id + '" title="' + op.playText + '" aria-label="' + op.playText + '"><i class="fa fa-play"></i></button>' +
 				'</div>')
-				.appendTo(controls)
+				.appendTo(layers)
 				.click(function(e) {
 					e.preventDefault();
 

@@ -403,6 +403,28 @@ ABSOLUTE_URL_OVERRIDES = {
 YTAPI_USERNAME = 'framebuzz'
 YTAPI_PASSWORD = 'm1a9k5s9'
 
+
+DEFAULT_PLAYER_WIDTH = 640
+DEFAULT_PLAYER_HEIGHT = 398
+PLAYER_SIZES = {
+    'tumblr': {
+        'width': 500,
+        'height': 300
+    },
+    'small': {
+        'width': 580,
+        'height': 365
+    },
+    'medium': {
+        'width': DEFAULT_PLAYER_WIDTH,
+        'height': DEFAULT_PLAYER_HEIGHT
+    },
+    'large': {
+        'width': 700,
+        'height': 432
+    }
+}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,

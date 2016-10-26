@@ -310,10 +310,11 @@ video {
                             }
                             span.mejs-time-current {
                                 background: rgba(65, 185, 222, 1.0);
-                                top: 8px;
+                                top: 7px;
                             }
                             span.mejs-time-loaded {
                                 background: #3d3d3d;
+                                width: 100% !important;
                             }
                             .mejs-time-float {
                                 background: rgba(23, 136, 188, 0.95);
@@ -335,9 +336,6 @@ video {
                                     top: 15px;
                                 }
                             }
-                        }
-                        &.safari {
-
                         }
                         &.winff {
                             top: 349px;
@@ -397,6 +395,7 @@ video {
                         width: 100%;
                         z-index: 200;
                         clear: both;
+
                         button {
                             background: none;
                             cursor: pointer;
@@ -473,133 +472,162 @@ video {
                                 bottom: 11px;
                             }
                         }
-                    }
-                    div.mejs-button {
-                        cursor: pointer;
-                        bottom: 12px;
-                        position: absolute;
-                        bottom: 90px;
-                        width: 35px;
-                        z-index: 10;
-                        @media screen and (min-width: 700px) and (max-width: 710px){
-                            bottom: 18px;
-                        }
-                        button {
-                            border: none;
-                            outline: none;
-                            cursor: pointer;
-                            background: none;
-                            background-position: 0 0;
-                            margin: 1px 8px;
-                            img {
-                                height: 100%;
-                                width: 100%;
-                            }
-                        }
-                        &.mejs-fullscreen-button {
-                            position: relative;
-                            float: right;
-                            width: 32px;
-                            height: 32px;
-                            right: 1px;
-                            top: 0;
-                            line-height: 32px;
-                            z-index: 99999;
 
-                            button.mejs-fbz-fullscreen {
-                                display: inline;
-                                color: white;
-                                line-height: 32px;
-                                padding: 0;
-                                margin: 0;
-                                height: inherit;
-                                width: inherit;
-
-                                i {
-                                    font-size: 34px;
-                                    line-height: 32px;
-                                }
-                            }
-                        }
-                        div.mejs-volume-slider {
-                            background: rgba(0, 0, 0, 0.7);
+                        div.mejs-button {
                             cursor: pointer;
-                            left: 0;
-                            outline: 0 none;
-                            top: -115px;
-                            width: 30px;
-                            .mejs-volume-total {
-                                left: 13px;
-                            }
-                            .mejs-volume-current {
-                                left: 13px;
-                            }
-                            .mejs-volume-handle {
-                                left: 6px;
-                                margin-top: 3px;
-                            }
-                        }
-                        &.mejs-volume-button {
-                            height: 32px;
-                            margin-right: 5px;
-                            position: relative;
-                            top: 0;
-                            width: 29px;
-                            button {
-                                border-right: 1px solid rgba(255, 255, 255, 0.4);
-                                height: 24px;
-                                margin-left: 0;
-                                outline: 0 none;
-                                position: relative;
-                                top: 3px;
-                                width: 29px;
-                                line-height: 32px !important;
-                                i {
-                                    font-size: 22px;
-                                    left: 0;
-                                    top: -4px;
-                                    position: absolute;
-                                    line-height: 32px !important;
-                                }
-                            }
-                        }
-                        &.mejs-playpause-button {
-                            cursor: pointer;
-                            bottom: -34px;
-                            left: 2px;
+                            bottom: 12px;
                             position: absolute;
-                            width: 25px;
-                            z-index: 100;
+                            bottom: 90px;
+                            width: 35px;
+                            z-index: 10;
+                            @media screen and (min-width: 700px) and (max-width: 710px){
+                                bottom: 18px;
+                            }
                             button {
-                                outline: 0 none;
-                                height: 20px;
-                                margin: 2px 1px 1px;
-                                width: 20px;
-                                i {
-                                    background: none;
+                                border: none;
+                                outline: none;
+                                cursor: pointer;
+                                background: none;
+                                background-position: 0 0;
+                                margin: 1px 8px;
+                                img {
+                                    height: 100%;
+                                    width: 100%;
+                                }
+                            }
+                            &.mejs-fullscreen-button {
+                                position: relative;
+                                float: right;
+                                width: 32px;
+                                height: 32px;
+                                right: 1px;
+                                top: 0;
+                                line-height: 32px;
+                                z-index: 99999;
+
+                                button.mejs-fbz-fullscreen {
+                                    display: inline;
                                     color: white;
-                                    display: inline-block;
-                                    font-size: 15px;
-                                    height: 20px;
-                                    line-height: 22px;
-                                    opacity: 0.9;
-                                    text-indent: 1px;
-                                    vertical-align: text-top;
-                                    width: 20px;
-                                    @include single-transition(opacity 0.25s ease-in-out);
-                                    &:hover {
-                                        opacity: 1;
-                                        @include single-transition(opacity 0.25s ease-in-out);
+                                    line-height: 32px;
+                                    padding: 0;
+                                    margin: 0;
+                                    height: inherit;
+                                    width: inherit;
+
+                                    i {
+                                        font-size: 34px;
+                                        line-height: 32px;
                                     }
                                 }
                             }
-                            &.disabled {
+                            div.mejs-volume-slider {
+                                background: rgba(0, 0, 0, 0.7);
+                                cursor: pointer;
+                                left: 0;
+                                outline: 0 none;
+                                top: -115px;
+                                width: 30px;
+                                .mejs-volume-total {
+                                    left: 13px;
+                                }
+                                .mejs-volume-current {
+                                    left: 13px;
+                                }
+                                .mejs-volume-handle {
+                                    left: 6px;
+                                    margin-top: 3px;
+                                }
+                            }
+                            &.mejs-volume-button {
+                                height: 32px;
+                                margin-right: 5px;
+                                position: relative;
+                                top: 0;
+                                width: 29px;
                                 button {
-                                    cursor: not-allowed;
+                                    font-size: 22px !important;
+                                    border-right: 1px solid rgba(255, 255, 255, 0.4);
+                                    height: 24px;
+                                    margin-left: 0;
+                                    outline: 0 none;
+                                    position: relative;
+                                    top: 3px;
+                                    width: 29px;
+                                    line-height: 32px !important;
                                     i {
-                                        color: #ccc;
+
+                                        left: 0;
+                                        top: -4px;
+                                        position: absolute;
+                                        line-height: 32px !important;
                                     }
                                 }
+
+                                &.mejs-unmute {
+                                    button {
+                                        i {
+                                            text-indent: -6px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .mejs-playpause-button {
+                    cursor: pointer;
+                    bottom: -26px;
+                    left: 0;
+                    position: absolute;
+                    width: 25px;
+                    z-index: 100;
+                    button {
+                        background: none;
+                        border: none;
+                        outline: 0 none;
+                        height: 20px;
+                        margin: 2px 1px 1px;
+                        width: 20px;
+                        i {
+                            background: none;
+                            color: white;
+                            display: inline-block;
+                            font-size: 15px;
+                            height: 20px;
+                            line-height: 22px;
+                            opacity: 0.9;
+                            text-indent: 1px;
+                            vertical-align: text-top;
+                            width: 20px;
+                            @include single-transition(opacity 0.25s ease-in-out);
+                            &:hover {
+                                opacity: 1;
+                                @include single-transition(opacity 0.25s ease-in-out);
+                            }
+                        }
+                    }
+                    &.disabled {
+                        button {
+                            cursor: not-allowed;
+                            i {
+                                color: #ccc;
+                            }
+                        }
+                    }
+                }
+
+                div.mejs-controls {
+                    div.mejs-share {
+                        &.mejs-volume-button {
+                            font-size: 1.5em;
+                        }
+                        &.mejs-mute-convo-button {
+                            line-height: 28px;
+
+                            i {
+                                font-size: 1.5em;
+                                line-height: 29px;
                             }
                         }
                     }

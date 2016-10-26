@@ -31,23 +31,10 @@ ITAG_WEBM = 43
 def video_test(request, slug, size="small"):
     ''' An easy way to test the player. Only accessible to Admins. '''
     video, created = get_or_create_video(slug)
-    if size == 'small':
-        embed_code = video.tumblr_embed_code
-        height = 365
-        width = 580
-    elif size == 'large':
-        embed_code = video.large_embed_code
-        height = 432
-        width = 700
-    elif size == 'medium':
-        embed_code = video.embed_code
-        width = 640
-        height = 398
-    else:
-        size = 'tumblr'
-        height = 300
-        width = 500
-        embed_code = video.tumblr_embed_code
+    player_size = settings.PLAYER_SIZES.get(size, None)
+    width = player_size.get('width', settings.DEFAULT_PLAYER_WIDTH)
+    height = player_size.get('height', settings.DEFAULT_PLAYER_HEIGHT)
+    embed_code = video.get_embed_code(width, height)
     return render_to_response('player/test.html', {
         'video': video,
         'embed': embed_code,

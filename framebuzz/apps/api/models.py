@@ -325,10 +325,12 @@ class Video(caching.base.CachingMixin, models.Model):
                 url, str(width), str(height)))
 
     def embed_code(self):
-        return self.get_embed_code(640, 398)
+        size = settings.PLAYER_SIZES.get('medium', None)
+        return self.get_embed_code(size['width'], size['height'])
 
     def large_embed_code(self):
-        return self.get_embed_code(700, 431)
+        size = settings.PLAYER_SIZES.get('large', None)
+        return self.get_embed_code(size['width'], size['height'])
 
     def wp_embed_code(self):
         site = Site.objects.get_current()
@@ -337,7 +339,8 @@ class Video(caching.base.CachingMixin, models.Model):
         return mark_safe('[framebuzz src=%s width=580 height=360]' % url)
 
     def tumblr_embed_code(self):
-        return self.get_embed_code('100%', '100%')
+        size = settings.PLAYER_SIZES.get('tumblr', None)
+        return self.get_embed_code(size['width'], size['height'])
 
     def heatmap(self, session_key=None):
         rank_per_block = list()

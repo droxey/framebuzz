@@ -33,13 +33,13 @@ angular.module('framebuzz.directives', [])
                 enablePluginDebug: SOCK.debug,
                 features: SOCK.video_player_features,
                 clickToPlayPause: !SOCK.is_synchronized || SOCK.is_hosting_viewing,
-                pluginPath: SOCK.root_path + 'swf/',
+                pluginPath: SOCK.root_path + 'lib/mediaelement/',
                 flashName: 'flashmediaelement.swf',
                 silverlightName: 'silverlightmediaelement.xap',
                 alwaysShowControls: false,
                 timerRate: 500,
                 enablePluginSmoothing: true,
-                autosizeProgress: true,
+                autosizeProgress: false,
                 enablePseudoStreaming: true,
                 flashScriptAccess: 'always',
                 stretching: 'auto',
@@ -50,9 +50,9 @@ angular.module('framebuzz.directives', [])
                 iPhoneUseNativeControls: false,
                 iPadUseNativeControls: false,
                 AndroidUseNativeControls: false,
-                controlsTimeoutDefault: 250,
-                controlsTimeoutMouseEnter: 250,
-                controlsTimeoutMouseLeave: 250,
+                controlsTimeoutDefault: 1500,
+                controlsTimeoutMouseEnter: 1500,
+                controlsTimeoutMouseLeave: 1500,
                 success: function(media) {
                     //  =====
                     //  Angular.js Globals
