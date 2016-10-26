@@ -33,16 +33,16 @@ def video_test(request, slug, size="small"):
     video, created = get_or_create_video(slug)
     if size == 'small':
         embed_code = video.tumblr_embed_code
-        height = 326
+        height = 365
         width = 580
     elif size == 'large':
         embed_code = video.large_embed_code
-        height = 431
+        height = 432
         width = 700
     elif size == 'medium':
         embed_code = video.embed_code
         width = 640
-        height = 380
+        height = 398
     else:
         size = 'tumblr'
         height = 300

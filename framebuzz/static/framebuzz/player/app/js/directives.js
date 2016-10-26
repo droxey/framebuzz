@@ -21,7 +21,7 @@ angular.module('framebuzz.directives', [])
             if (SOCK.small) {
                 return;
             }
-            
+
             $(element).mediaelementplayer({
                 defaultVideoWidth: '100%',
                 defaultVideoHeight: '100%',
@@ -29,7 +29,8 @@ angular.module('framebuzz.directives', [])
                 usePluginFullScreen: true,
                 debug: SOCK.debug,
                 poster: SOCK.poster_image,
-                enablePluginDebug: true,
+                showPosterWhenEnded: true,
+                enablePluginDebug: SOCK.debug,
                 features: SOCK.video_player_features,
                 clickToPlayPause: !SOCK.is_synchronized || SOCK.is_hosting_viewing,
                 pluginPath: SOCK.root_path + 'swf/',
@@ -38,10 +39,10 @@ angular.module('framebuzz.directives', [])
                 alwaysShowControls: false,
                 timerRate: 500,
                 enablePluginSmoothing: true,
-                autosizeProgress: false,
+                autosizeProgress: true,
                 enablePseudoStreaming: true,
                 flashScriptAccess: 'always',
-                stretching: 'responsive',
+                stretching: 'auto',
                 // There's a bug here where commenting and hitting the spacebar will
                 // cause the space to not be entered, and the video to pause.
                 enableKeyboard: false,
@@ -49,9 +50,9 @@ angular.module('framebuzz.directives', [])
                 iPhoneUseNativeControls: false,
                 iPadUseNativeControls: false,
                 AndroidUseNativeControls: false,
-                controlsTimeoutDefault: 1500,
-                controlsTimeoutMouseEnter: 750,
-                controlsTimeoutMouseLeave: 1000,
+                controlsTimeoutDefault: 250,
+                controlsTimeoutMouseEnter: 250,
+                controlsTimeoutMouseLeave: 250,
                 success: function(media) {
                     //  =====
                     //  Angular.js Globals
@@ -60,47 +61,33 @@ angular.module('framebuzz.directives', [])
                     safeApply($rootScope);
 
                     //  =====
-                    //  Browser-Specific Hacks
-                    //  =====
-                    var isOpera = !!window.opera || navigator.userAgent.indexOf('Opera') >= 0;
-                    var isFirefox = typeof InstallTrigger !== 'undefined';
-                    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-                    var isChrome = !!window.chrome;
-                    var isIE = /*@cc_on!@*/ false;
-                    var hasHitPlay = false;
-                    var videoTitle = $('#video-title');
-
-                    if (isSafari || isChrome) {
-                        $('.mejs-time-rail').addClass('safari');
-                        $('.mejs-share').addClass('safari');
-
-                        if (isChrome) {
-                            $('.mejs-share').addClass('chrome');
-                        }
-                    }
-
-                    if (SOCK.is_synchronized && SOCK.is_hosting_viewing) {
-                        // If private and owner, show message for user 'click play to get started'
-                        var overlayContainer = $('.mejs-overlay-play');
-                        var message = $('<div class="mejs-overlay-button host-message">' +
-                            '<i class="fa fa-fw fa-play fa-rotate-270 tip"></i>' +
-                            '<span>Click play to watch the video in real-time with your audience.</span>' +
-                            '</div>');
-                        overlayContainer.append(message);
-                    }
-
-                    //  =====
                     //  CSS Changes
                     //  =====
                     $('.mejs-overlay-loading').remove();
                     $('.mejs-time-handle').remove();
                     $('.mejs-time-buffering').remove();
 
+                    var videoContainer = $('.mejs-video');
+                    var hasHitPlay = false;
+                    var videoTitle = $('#video-title');
+
+                    //  =====
+                    //  Private Convos and Viewings
+                    //  =====
                     if (SOCK.is_synchronized) {
                         // Don't allow seeking, for now.
                         $('.mejs-time-total').unbind('mousedown');
 
-                        if (!SOCK.is_hosting_viewing) {
+                        if (SOCK.is_hosting_viewing) {
+                            // If private and owner, show message for user 'click play to get started'
+                            var overlayContainer = $('.mejs-overlay-play');
+                            var message = $('<div class="mejs-overlay-button host-message">' +
+                                '<i class="fa fa-fw fa-play fa-rotate-270 tip"></i>' +
+                                '<span>Click play to watch the video in real-time with your audience.</span>' +
+                                '</div>');
+                            overlayContainer.append(message);
+                        }
+                        else {
                             // Hide the play overlay.
                             $('.mejs-overlay-play').remove();
 
@@ -111,27 +98,18 @@ angular.module('framebuzz.directives', [])
                     }
 
                     //  =====
-                    //  jQuery Event Listeners
+                    //  Event Listeners
                     //  =====
-
                     var fadeOutControls = function() {
-                        $('.mejs-video').removeClass('show-controls');
-                        $('.mejs-video').addClass('fade-out-controls').delay(750).queue(function() {
-                           $(this).removeClass('fade-out-controls');
-                           $(this).dequeue();
-                        });
-
-                        // window.setTimeout(function() {
-                        //     $('.mejs-video').removeClass('fade-out-controls');
-                        // }, 500);
+                        videoContainer.addClass('hide-controls');
                     };
 
-                    $(document).on('mouseover', '.mejs-mediaelement', function(e) {
-                        $('.mejs-video').addClass('show-controls');
+                    videoContainer.mouseenter(function(){
+                      console.log(media.controlsAreVisible);
                     });
 
-                    $('.mejs-video').mouseleave(function(e) {
-                        fadeOutControls();
+                    videoContainer.mouseleave(function(){
+                        var i = $(this).parent().children('.change').show();
                     });
 
                     $(document).on('click', '.sign-in-tumblr', function() {
@@ -200,9 +178,6 @@ angular.module('framebuzz.directives', [])
                     //  =====
                     scope.$on('$viewContentLoaded', function() {
                         if ($('#buzz-layer > div.panel').length > 0) {
-                            if (isSafari) {
-                                $('#heatmap').addClass('safari');
-                            }
                             if (!hasHitPlay) {
                                 $('#buzz-layer > div.panel').addClass('hide-before-play');
                             }

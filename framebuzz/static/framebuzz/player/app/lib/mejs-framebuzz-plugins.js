@@ -1,7 +1,7 @@
 (function($){
   $.extend(MediaElementPlayer.prototype, {
     buildtitle: function(player, controls, layers, media) {
-      var titleDiv = $('<div id="video-title" class="mejs-title mejs-fade-in full-width"></div>').appendTo(controls);
+      var titleDiv = $('<div id="video-title" class="mejs-title full-width"></div>').appendTo(controls);
       var title = $('<h1 class="video-title noselect" />').appendTo(titleDiv);
       if (SOCK.private_session_key) {
           if (SOCK.is_synchronized) {
@@ -16,7 +16,7 @@
       }
     },
     buildoptionsbar: function(player, controls, layers, media) {
-      $('<div class="mejs-share mejs-fade-in clearfix"></div>').appendTo(controls);
+      $('<div class="mejs-share clearfix"></div>').appendTo(controls);
     },
     buildshare: function(player, controls, layers, media) {
       var shareDiv = controls.find('div.mejs-share');

@@ -219,6 +219,9 @@
             flashScriptAccess: 'always',
             poster: 'https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png',
             showPosterWhenEnded: true,
+            // There's a bug here where commenting and hitting the spacebar will
+            // cause the space to not be entered, and the video to pause.
+            enableKeyboard: false,
             success: function(media) {
               media.play();
             }

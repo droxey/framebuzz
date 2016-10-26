@@ -50,7 +50,7 @@
         <link href="{% static 'framebuzz/player/app/css/bootstrap.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/player/app/css/bootstrap-responsive.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/player/app/lib/mediaelement/mediaelementplayer.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
-        <link href="{% static 'framebuzz/player/app/css/mejs-skins.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
+        <link href="{% static 'framebuzz/player/app/lib/mediaelement/mejs-skins.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/player/app/css/perfect-scrollbar-0.4.1.min.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/player/app/css/jquery.maxlength.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
@@ -117,14 +117,14 @@
     {% if not small %}
       <div id="player-container" class="container">
         <div id="player-layer" class="layer">
-            <video data-media-element="" class="span12" id="video-element" preload="auto" height="100%" width="100%" poster="{% static 'framebuzz/player/app/img/poster-transparent.png' %}" style="height: 100%; width: 100%; background: url('{{ video.default_thumbnail }}') no-repeat scroll center center / cover black;">
+            <video data-media-element="" class="span12" id="video-element" preload="auto" height="395" width="700" poster="{{ video.default_thumbnail }}" style="height: 100%; width: 100%;">
               <source type="video/webm" src="{{ webm_url }}">
               <source type="video/mp4" src="{{ mp4_url }}">
-              <object style="height: 100%; width: 100%;" type="application/x-shockwave-flash" data="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
+              <object style="height: 395px; width: 700px;" type="application/x-shockwave-flash" data="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
                   <param name="movie" value="{% static 'framebuzz/player/app/swf/flashmediaelement.swf' %}">
                   <param name="flashvars" value="controls=true&amp;file={{ mp4_url }}">
                   <param name="allowFullscreen" value="true">
-                  <img src="{{ video.default_thumbnail }}" height="100%" width="100%" title="No video playback capabilities">
+                  <img src="{{ video.default_thumbnail }}" height="395" width="700" title="No video playback capabilities">
               </object>
             </video>
             <div id="heatmap-and-post" data-ui-view=""></div>

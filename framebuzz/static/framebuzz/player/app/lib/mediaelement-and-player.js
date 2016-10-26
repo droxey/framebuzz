@@ -2544,7 +2544,7 @@ if (typeof jQuery != 'undefined') {
 
 			if (doAnimation) {
 				t.controls
-					.removeClass('mejs-offscreen')
+					//.removeClass('mejs-offscreen')
 					.stop(true, true).fadeIn(200, function() {
 						t.controlsAreVisible = true;
 						t.container.trigger('controlsshown');
@@ -2552,17 +2552,17 @@ if (typeof jQuery != 'undefined') {
 
 				// any additional controls people might add and want to hide
 				t.container.find('.mejs-control')
-					.removeClass('mejs-offscreen')
+					//.removeClass('mejs-offscreen')
 					.stop(true, true).fadeIn(200, function() {t.controlsAreVisible = true;});
 
 			} else {
 				t.controls
-					.removeClass('mejs-offscreen')
+					//.removeClass('mejs-offscreen')
 					.css('display','block');
 
 				// any additional controls people might add and want to hide
 				t.container.find('.mejs-control')
-					.removeClass('mejs-offscreen')
+					//.removeClass('mejs-offscreen')
 					.css('display','block');
 
 				t.controlsAreVisible = true;
@@ -2585,7 +2585,7 @@ if (typeof jQuery != 'undefined') {
 				// fade out main controls
 				t.controls.stop(true, true).fadeOut(200, function() {
 					$(this)
-						.addClass('mejs-offscreen')
+						//.addClass('mejs-offscreen')
 						.css('display','block');
 
 					t.controlsAreVisible = false;
@@ -2595,7 +2595,7 @@ if (typeof jQuery != 'undefined') {
 				// any additional controls people might add and want to hide
 				t.container.find('.mejs-control').stop(true, true).fadeOut(200, function() {
 					$(this)
-						.addClass('mejs-offscreen')
+						//.addClass('mejs-offscreen')
 						.css('display','block');
 				});
 			} else {

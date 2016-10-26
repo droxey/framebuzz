@@ -155,22 +155,6 @@ video {
     }
 }
 #player-container {
-    height: 405px;
-    overflow: hidden;
-    width: 640px;
-    @media screen and (max-width: 580px) {
-        // Hide video if it's little
-        height: 100%;
-        width: 100%;
-    }
-    @media screen and (min-width: 580px) and (max-width: 590px) {
-        height: 360px;
-        width: 580px;
-    }
-    @media screen and (min-width: 700px) and (max-width: 710px){
-        height: 470px;
-        width: 700px;
-    }
     div.layer {
         position: absolute;
         top: 0;
@@ -179,59 +163,18 @@ video {
         margin-left: 0;
     }
     #player-layer {
-        height: 405px;
-        width: 640px;
         z-index: 100;
-        @media screen and (min-width: 580px) and (max-width: 590px) {
-            height: 360px;
-            width: 580px;
-        }
-        @media screen and (min-width: 700px) and (max-width: 710px){
-            height: 393px;
-            width: 700px;
-        }
+
         .me-plugin,
         video {
             background: #202020;
-            height: 360px !important;
+            height: 100%;
             position: relative;
             top: 0;
-            width: 640px !important;
+            width: 100%;
             z-index: 1;
-
-
-
-            @media screen and (min-width: 580px) and (max-width: 590px) {
-                height: 325px !important;
-                width: 580px !important;
-            }
-            @media screen and (min-width: 700px) and (max-width: 710px){
-                height: 393px !important;
-                width: 700px !important;
-            }
         }
-        embed,
-        object,
-        video {
-            background: #202020;
-            height: 360px !important;
-            width: 640px !important;
 
-            @media screen and (min-width: 580px) and (max-width: 590px) {
-                height: 325px !important;
-                width: 580px !important;
-            }
-            @media screen and (min-width: 700px) and (max-width: 710px){
-                height: 393px !important;
-                width: 700px !important;
-            }
-        }
-        video {
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
         div.mejs-poster {
             height: 360px !important;
             position: relative;
@@ -246,20 +189,12 @@ video {
                 width: 700px !important;
             }
         }
+
         div.mejs-video {
             background: #202020;
-            height: 360px !important;
             position: relative;
             top: 0;
-            width: 640px !important;
-            @media screen and (min-width: 580px) and (max-width: 590px) {
-                height: 325px !important;
-                width: 580px !important;
-            }
-            @media screen and (min-width: 700px) and (max-width: 710px){
-                height: 393px !important;
-                width: 700px !important;
-            }
+
             div.mejs-inner {
                 width: 640px !important;
                 height: 360px !important;
@@ -340,6 +275,9 @@ video {
                     background: none;
                     height: 360px;
                     width: 640px;
+                    bottom: 0px;
+                    top: 0;
+
                     @media screen and (min-width: 580px) and (max-width: 590px) {
                         height: 325px !important;
                         width: 580px !important;
@@ -375,6 +313,7 @@ video {
                             @include border-radius(0px, 0px);
                             background: none;
                             margin: 0;
+
                             span.mejs-time-current,
                             span.mejs-time-loaded {
                                 @include border-radius(0px, 0px);
@@ -430,9 +369,7 @@ video {
                             }
                         }
                     }
-                    .mejs-fade-in {
-                        opacity: 0;
-                    }
+
                     div.mejs-title {
                         height: 43px;
                         background: rgba(0, 0, 0, 0.7);
@@ -682,64 +619,43 @@ video {
                     }
                 }
             }
+
+            .mejs-fade-in,
+            &.hide-controls .mejs-fade-in {
+                opacity: 0;
+                @include single-transition(opacity 100ms ease-out);
+            }
+
             &.show-controls {
-                div.mejs-inner {
-                    div.mejs-controls {
-                        .mejs-fade-in {
-                            cursor: pointer;
-                            opacity: 1;
-                            @include single-transition(opacity 50ms ease-in-out);
-                        }
-                    }
-                }
-                &.fade-out-controls {
-                    div.mejs-inner {
-                        div.mejs-controls {
-                            .mejs-fade-in {
-                                opacity: 0;
-                                @include single-transition(opacity 50ms ease-in-out);
-                            }
-                        }
-                    }
+                .mejs-fade-in {
+                    cursor: pointer;
+                    opacity: 1;
+                    @include single-transition(opacity 100ms ease-in);
                 }
             }
         }
         #heatmap-and-post {
-            height: 60px;
-            width: 640px;
-            @media screen and (min-width: 580px) and (max-width: 590px) {
-                height: 38px;
-            }
+            height: 38px;
+            width: 100%;
+
             table#heatmap {
                 background: none;
-                height: 9px;
+                height: 12px;
                 overflow: hidden;
                 position: absolute;
-                top: 351px;
-                width: 640px;
+                bottom: 38px;
+                width: 100%;
                 z-index: 200;
-                @media screen and (min-width: 580px) and (max-width: 590px) {
-                    top: 316px;
-                    width: 580px;
-                }
-                @media screen and (min-width: 700px) and (max-width: 710px){
-                    top: 384px;
-                    width: 700px;
-                }
+
                 tbody {
-                    line-height: 9px;
-                    width: 640px;
-                    @media screen and (min-width: 580px) and (max-width: 590px) {
-                        width: 580px;
-                    }
-                    @media screen and (min-width: 700px) and (max-width: 710px){
-                        width: 700px;
-                    }
+                    height: 12px;
+                    width: 100%;
+
                     tr {
                         td {
                             cursor: pointer;
                             display: inline-block;
-                            height: 9px;
+                            height: 12px;
                             opacity: 0.4;
                             width: 20px;
                             @include single-transition(opacity 100ms ease-in);
@@ -784,27 +700,12 @@ video {
                         }
                     }
                 }
-                &.safari {
-                    tbody {
-                        tr {
-                            td {
-                                height: 12px;
-                            }
-                        }
-                    }
-                }
             }
             form.post-comment-form {
                 background: #202020;
-                height: 40px;
-                padding: 4px;
-                width: 640px;
-                @media screen and (min-width: 580px) and (max-width: 590px) {
-                    width: 580px;
-                }
-                @media screen and (min-width: 700px) and (max-width: 710px){
-                    width: 700px;
-                }
+                padding: 4px 0;
+                width: 100%;
+
                 div.input-prepend {
                     background: #202020;
                     margin-bottom: 0;
@@ -821,13 +722,13 @@ video {
                         font-size: 13px;
                         font-weight: 300;
                         letter-spacing: -0.02em;
-                        line-height: 30px;
-                        margin-top: 2px;
+                        line-height: 32px;
+                        margin-right: 3px;
                         padding: 0;
-                        text-align: left;
+                        text-align: center;
                         text-shadow: none;
                         text-indent: -1px;
-                        width: 89px;
+                        width: 85px;
                         em {
                             font-size: 14px;
                             font-weight: 700;
@@ -859,13 +760,14 @@ video {
                         float: left;
                         font-family: 'proxima-nova';
                         font-style: normal;
-                        width: 511px;
+                        width: 513px;
                         box-shadow: none;
+
                         @media screen and (min-width: 580px) and (max-width: 590px) {
-                            width: 447px;
+                            width: 452px;
                         }
                         @media screen and (min-width: 700px) and (max-width: 710px){
-                            width: 569px;
+                            width: 573px;
                         }
                         &.maxlength-full {
                             border: 2px solid red;
