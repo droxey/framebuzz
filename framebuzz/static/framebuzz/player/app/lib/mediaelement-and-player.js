@@ -5186,7 +5186,7 @@ if (typeof jQuery != 'undefined') {
 								marginError = screenWidth * percentErrorMargin;
 
 							// check if the video is suddenly not really fullscreen
-							if (absDiff > marginError) {
+							if ((absDiff > marginError) || t.isiPhone) {
 								// manually exit
 								t.exitFullScreen();
 							} else {
