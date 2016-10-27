@@ -10,14 +10,9 @@
       </script>
     {% else %}
       <script type="text/javascript">
-        // Detect if the page is not loaded in an iFrame.
-        // if (window == window.top) {
-        //     document.location.href = "{% url 'video-share' video.slug %}";
-        // }
-
         // Detect if the window is large enough to hold the video.
-        var width = window.frameElement.offsetWidth,
-            height = window.frameElement.offsetHeight,
+        var width = this.innerWidth,
+            height = this.innerHeight,
             loadModalPlayer = '{{ small|lower }}' == 'true';
 
         if (width < 580) {

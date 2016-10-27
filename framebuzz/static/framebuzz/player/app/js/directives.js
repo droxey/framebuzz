@@ -19,6 +19,9 @@ angular.module('framebuzz.directives', [])
     .directive('mediaElement', ['broadcaster', '$state', '$rootScope', 'safeApply', function(broadcaster, $state, $rootScope, safeApply) {
         return function(scope, element, attrs) {
             if (SOCK.small) {
+                $('.mejs-offscreen').hide();
+                $('div.mejs-video').hide();
+                console.log('is small');
                 return;
             }
 
