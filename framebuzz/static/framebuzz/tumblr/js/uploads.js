@@ -270,10 +270,16 @@ $(function() {
     // Request our player template when the modal dialog opens.
     $(document).on('opened', '.remodal', function() {
         fbzPlayer.attr('src', videoUrl);
+        if (IS_MOBILE) {
+            screen.orientation.lock('landscape');
+        }
     });
 
     // Tear down the player template when the modal dialog closes.
     $(document).on('closing', '.remodal', function() {
+        if (IS_MOBILE) {
+            screen.orientation.unlock();
+        }
         fbzPlayer.removeAttr('src');
         videoUrl = null;
     });
