@@ -70,16 +70,17 @@ body {
     }
 }
 
-div.page-wrapper {
+
     div.pagination {
         @include border-radius(3px, 3px);
         background: #314056;
         padding: 7px 0 3px;
         width: auto;
         position: absolute;
-        right: 19px;
-        bottom: 15px;
+        right: 21px;
+        bottom: 7px;
         margin: 0;
+        height: 33px;
 
         ul {
             padding: 0;
@@ -114,6 +115,8 @@ div.page-wrapper {
                 }
 
                 a.page-link {
+                    background: none;
+
                     i {
                         vertical-align: baseline;
                         position: relative;
@@ -133,6 +136,10 @@ div.page-wrapper {
                         text-decoration: underline;
                         min-width: 42px;
                     }
+
+                    &:hover {
+                        color: white;
+                    }
                 }
 
                 span.disabled {
@@ -147,7 +154,7 @@ div.page-wrapper {
             }
         }
     }
-}
+
 // =============================================================================
 // IDs
 // =============================================================================
@@ -868,7 +875,7 @@ div.page-wrapper {
                         top: 20px;
                         width: 100%;
                         height: inherit;
-                        max-height: 119px;
+                        max-height: 183px;
                         z-index: 10;
 
                         a.edit-video {
@@ -898,7 +905,7 @@ div.page-wrapper {
                             top: 0;
                             width: 47px;
                             z-index: 11;
-                            margin-top: 24%;
+                            margin-top: 10%;
                             @include single-transition(opacity 20ms ease-in-out);
 
                             img {
@@ -1104,6 +1111,12 @@ div.page-wrapper {
 
                 a.toggle-description {
                     margin-left: -3px;
+                }
+            }
+
+            .pagination-page {
+                div.row {
+                    margin-bottom: 15px;
                 }
             }
         }
@@ -1433,10 +1446,15 @@ body {
                 }
 
                 div.item {
+                    max-height: 210px;
+
                     div.video {
                         div.overlay {
+                            height: inherit;
+                            max-height: 118px;
+
                             a.play-video {
-                                margin-top: 2%;
+                                margin-top: 4%;
                             }
                         }
                     }
