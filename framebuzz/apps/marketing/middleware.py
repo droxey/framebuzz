@@ -43,14 +43,13 @@ class MobileDetectionMiddleware(object):
             self.user_agents_exception_search, re.IGNORECASE)
 
     def process_request(self, request):
+        is_mobile = False
+
         if not settings.MEDIA_URL in request.path \
         and not settings.STATIC_URL in request.path \
         and not 'mobile' in request.path \
         and not 'contact' in request.path \
         and not request.path == '/':
-            print request.path
-            is_mobile = False
-
             if request.META.has_key('HTTP_USER_AGENT'):
                 user_agent = request.META['HTTP_USER_AGENT']
 
@@ -71,7 +70,5 @@ class MobileDetectionMiddleware(object):
                     # Now we test the user_agent from a big list.
                     if self.user_agents_test_match_regex.match(user_agent):
                         is_mobile = True
-
-            if is_mobile:
-                return HttpResponseRedirect(reverse('mobile'))
+        request.META['IS_MOBILE'] = is_mobile
         return None

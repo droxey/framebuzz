@@ -73,7 +73,9 @@ def dashboard(request, username):
     p = Paginator(videos, VIDEOS_PER_PAGE, request=request)
     page_obj = p.page(page)
     carousel = get_carousel_slides()
-    lightbox_embed = settings.PLAYER_SIZES.get('large', None)
+    is_mobile = request.META.get('IS_MOBILE', False)
+    player_size = 'medium' if is_mobile else 'large'
+    lightbox_embed = settings.PLAYER_SIZES.get(player_size, None)
     return render_to_response(template, {
         'page_obj': page_obj,
         'video_count': len(videos),
@@ -81,7 +83,8 @@ def dashboard(request, username):
         'show_carousel': carousel.get('show_carousel', False),
         'slides': carousel.get('slides', None),
         'is_debug': settings.DEBUG,
-        'lightbox_embed': lightbox_embed
+        'lightbox_embed': lightbox_embed,
+        'is_mobile': is_mobile
     }, context_instance=RequestContext(request))
 
 
