@@ -24,11 +24,13 @@ def home(request):
         return HttpResponseRedirect(
             reverse('fbz-tumblr-dashboard', args=[request.user.username]))
     carousel = get_carousel_slides()
+    lightbox_embed = settings.PLAYER_SIZES.get('large', None)
     return render_to_response('tumblr/home.html', {
         'next_url': reverse('fbz-tumblr-exit-login'),
         'show_carousel': carousel.get('show_carousel', False),
         'slides': carousel.get('slides', None),
         'is_debug': settings.DEBUG,
+        'lightbox_embed': lightbox_embed
     }, context_instance=RequestContext(request))
 
 
@@ -71,6 +73,7 @@ def dashboard(request, username):
     p = Paginator(videos, VIDEOS_PER_PAGE, request=request)
     page_obj = p.page(page)
     carousel = get_carousel_slides()
+    lightbox_embed = settings.PLAYER_SIZES.get('large', None)
     return render_to_response(template, {
         'page_obj': page_obj,
         'video_count': len(videos),
@@ -78,6 +81,7 @@ def dashboard(request, username):
         'show_carousel': carousel.get('show_carousel', False),
         'slides': carousel.get('slides', None),
         'is_debug': settings.DEBUG,
+        'lightbox_embed': lightbox_embed
     }, context_instance=RequestContext(request))
 
 
