@@ -418,43 +418,6 @@ video {
                                     color: white;
                                 }
                             }
-                            &.mejs-share-framebuzz-button {
-                                cursor: pointer;
-                                margin-right: 5px;
-                                margin-top: -1px;
-                            }
-                            &.mejs-add-library-button {
-                                cursor: pointer;
-                                margin-right: 0;
-                                &.added {
-                                    background-color: rgba(67, 136, 183, 0.7);
-                                    @include single-transition(background-color 250ms ease-in);
-                                }
-                            }
-                            &.mejs-mute-convo-button {
-                                i {
-                                    bottom: 1px;
-                                    position: relative;
-                                }
-                            }
-                            &.mejs-start-private-session,
-                            &.mejs-start-private-viewing {
-                                i {
-                                    padding-right: 2px;
-                                }
-                            }
-                            &.mejs-start-private-viewing {
-                                padding-left: 4px;
-                                padding-right: 0;
-                                i {
-                                    margin-top: -1px;
-                                }
-                            }
-                            &.mejs-current-viewers {
-                                i {
-                                    padding-right: 1px;
-                                }
-                            }
                         }
                         &.safari {
                             button {
@@ -495,13 +458,46 @@ video {
                                     width: 100%;
                                 }
                             }
+
+                            &.mejs-share-framebuzz-button {
+                                cursor: pointer;
+                                margin-right: 5px;
+                                margin-top: -1px;
+                            }
+                            &.mejs-add-library-button {
+                                cursor: pointer;
+                                margin-right: 0;
+                                &.added {
+                                    background-color: rgba(67, 136, 183, 0.7);
+                                    @include single-transition(background-color 250ms ease-in);
+                                }
+                            }
+                            &.mejs-start-private-session,
+                            &.mejs-start-private-viewing {
+                                i {
+                                    padding-right: 2px;
+                                }
+                            }
+                            &.mejs-start-private-viewing {
+                                padding-left: 4px;
+                                padding-right: 0;
+                                i {
+                                    margin-top: -1px;
+                                }
+                            }
+                            &.mejs-current-viewers {
+                                i {
+                                    padding-right: 1px;
+                                }
+                            }
+
                             &.mejs-fullscreen-button {
                                 position: relative;
                                 float: right;
                                 width: 32px;
                                 height: 32px;
                                 right: 1px;
-                                top: 0;
+                                top: -1px;
                                 line-height: 32px;
                                 z-index: 99999;
 
@@ -575,9 +571,18 @@ video {
                     }
                 }
 
+                div.mejs-controls div.mejs-share button.mejs-mute-convo-button {
+                    line-height: 28px;
+                    i {
+                        bottom: 3px;
+                        font-size: 18px;
+                        position: relative;
+                    }
+                }
+
                 .mejs-playpause-button {
                     cursor: pointer;
-                    bottom: -26px;
+                    bottom: -30px;
                     left: 0;
                     position: absolute;
                     width: 25px;
@@ -612,22 +617,6 @@ video {
                             cursor: not-allowed;
                             i {
                                 color: #ccc;
-                            }
-                        }
-                    }
-                }
-
-                div.mejs-controls {
-                    div.mejs-share {
-                        &.mejs-volume-button {
-                            font-size: 1.5em;
-                        }
-                        &.mejs-mute-convo-button {
-                            line-height: 28px;
-
-                            i {
-                                font-size: 1.5em;
-                                line-height: 29px;
                             }
                         }
                     }
@@ -717,7 +706,7 @@ video {
             }
             form.post-comment-form {
                 background: #202020;
-                padding: 4px 0;
+                padding: 8px 0 5px 0;
                 width: 100%;
 
                 div.input-prepend {
@@ -802,7 +791,7 @@ video {
                             width: 460px;
                         }
                         @media screen and (min-width: 700px) and (max-width: 710px){
-                            width: 581px;
+                            width: 584px;
                         }
                         label.reply-to {
                             display: block;
