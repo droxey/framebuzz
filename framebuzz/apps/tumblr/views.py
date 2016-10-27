@@ -74,7 +74,7 @@ def dashboard(request, username):
     page_obj = p.page(page)
     carousel = get_carousel_slides()
     is_mobile = request.META.get('IS_MOBILE', False)
-    player_size = 'medium' if is_mobile else 'large'
+    player_size = 'small' if is_mobile else 'large'
     lightbox_embed = settings.PLAYER_SIZES.get(player_size, None)
     return render_to_response(template, {
         'page_obj': page_obj,
