@@ -425,6 +425,10 @@ PLAYER_SIZES = {
     }
 }
 
+TUMBLR_POST_TEXT = '<b>%s</b> \
+    <p style="line-height: 18px; font-size: 13px; margin: 8px 0;">%s</p> \
+    <p style="font-size: 11px;"> Posted with <a href="https://framebuzz.com/" target="_blank">FrameBuzz</a></p>'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,

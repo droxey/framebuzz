@@ -39,9 +39,9 @@ class TumblrRestClient(object):
     def avatar(self, blogname, size=64):
         """
         Retrieves the url of the blog's avatar
-        
+
         :param blogname: a string, the blog you want the avatar for
-        
+
         :returns: A dict created from the JSON response
         """
         url = "/v2/blog/%s/avatar/%d" % (blogname, size)
@@ -104,7 +104,7 @@ class TumblrRestClient(object):
         """
         kwargs.update({'tag': tag})
         return self.send_api_request("get", '/v2/tagged', kwargs, ['before', 'limit', 'filter', 'tag', 'api_key'], True)
-    
+
     @validate_blogname
     def posts(self, blogname, type=None, **kwargs):
         """
@@ -126,7 +126,7 @@ class TumblrRestClient(object):
         else:
             url = '/v2/blog/%s/posts/%s' % (blogname,type)
         return self.send_api_request("get", url, kwargs, ['id', 'tag', 'limit', 'offset', 'reblog_info', 'notes_info', 'filter', 'api_key'], True)
-    
+
     @validate_blogname
     def blog_info(self, blogname):
         """
@@ -139,7 +139,7 @@ class TumblrRestClient(object):
         """
         url = "/v2/blog/%s/info" % blogname
         return self.send_api_request("get", url, {}, ['api_key'], True)
-    
+
     @validate_blogname
     def followers(self, blogname, **kwargs):
         """
@@ -154,7 +154,7 @@ class TumblrRestClient(object):
         """
         url = "/v2/blog/%s/followers" % blogname
         return self.send_api_request("get", url, kwargs, ['limit', 'offset'])
-    
+
     @validate_blogname
     def blog_likes(self, blogname, **kwargs):
         """
@@ -169,7 +169,7 @@ class TumblrRestClient(object):
         """
         url = "/v2/blog/%s/likes" % blogname
         return self.send_api_request("get", url, kwargs, ['limit', 'offset'], True)
-    
+
     @validate_blogname
     def queue(self, blogname, **kwargs):
         """
@@ -279,7 +279,7 @@ class TumblrRestClient(object):
         """
         kwargs.update({"type": "photo"})
         return self._send_post(blogname, kwargs)
-    
+
     @validate_blogname
     def create_text(self, blogname, **kwargs):
         """
@@ -385,7 +385,7 @@ class TumblrRestClient(object):
     @validate_blogname
     def create_video(self, blogname, **kwargs):
         """
-        Create a audio post on a blog
+        Create a video post on a blog
 
         :param blogname: a string, the url of the blog you want to post to.
         :param state: a string, The state of the post.

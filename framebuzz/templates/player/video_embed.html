@@ -56,6 +56,25 @@
         <link href="{% static 'framebuzz/player/app/sass/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet" type="text/css">
         <!--[if IE]><link href="{% static 'framebuzz/player/app/sass/stylesheets/ie.css' %}" media="screen, projection" rel="stylesheet" type="text/css"><![endif]-->
         <!--[if gte IE 9]><style type="text/css">ul.comment-stream { filter: none; }</style><![endif]-->
+        <style type="text/css">
+            @media screen and (min-width: 580px) and (max-width: 590px) {
+              html {
+                height: {{ player_sizes.small.height }}px !important;
+              }
+            }
+
+            @media screen and (min-width: 591px) and (max-width: 699px) {
+              html {
+                height: {{ player_sizes.medium.height }}px !important;
+              }
+            }
+
+            @media screen and (min-width: 700px) and (max-width: 710px) {
+              html {
+                height: {{ player_sizes.large.height }}px !important;
+              }
+            }
+        </style>
     {% endcompress %}
     {% compress js %}
       <script type="text/javascript">

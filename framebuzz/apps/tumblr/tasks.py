@@ -4,6 +4,7 @@ import pytumblr
 
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
 from django.contrib.auth.models import User
+from django.conf import settings
 from framebuzz.apps.api.models import Video, UserVideo
 from framebuzz.apps.tumblr.utils import encoded_dict
 
@@ -26,13 +27,12 @@ def submit_to_tumblr(username, video_id):
         tumblr_user.token_secret)
     # Send video data to Tumblr on behalf of the submitting user.
     v = Video.objects.get(video_id=video_id)
-    caption = '<b>%s</b><br>%s<br><i>Posted with ' \
-        '<a href="http://framebuzz.com/tumblr/" target="_blank">FrameBuzz</a>'\
-        '</i>' % (v.title, v.formatted_description)
+    caption = settings.TUMBLR_POST_TEXT % (v.title, v.formatted_description)
     create_kwargs = encoded_dict({'date': datetime.datetime.now(),
                                   'format': 'html',
                                   'caption': caption,
-                                  'embed': v.tumblr_embed_code()})
+                                  'embed': v.embed_code(),
+                                  'tags': ['#framebuzz']})
     # Parse API response from Tumblr.
     response = client.create_video(blogname=act.uid, **create_kwargs)
     post_id = response.get('id', None)
