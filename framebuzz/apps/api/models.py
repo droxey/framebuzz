@@ -315,14 +315,16 @@ class Video(caching.base.CachingMixin, models.Model):
             except:
                 pass
 
-    def get_embed_code(self, width, height):
+    def full_url(self):
         site = Site.objects.get_current()
         prefix = 'http' if settings.DEBUG else 'https'
-        url = '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
+        return '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
+
+    def get_embed_code(self, width, height):
         return mark_safe(
             '<iframe src="%s" scrolling="no" allowfullscreen="true" '
             'frameborder="0" width="%s" height="%s"></iframe>' % (
-                url, str(width), str(height)))
+                self.full_url, str(width), str(height)))
 
     def embed_code(self):
         size = settings.PLAYER_SIZES.get('medium', None)

@@ -27,11 +27,11 @@
     {% revcanonical video %}
     <meta itemprop="name" content="FrameBuzz: {{ video.title }}">
     <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!">
-    <meta itemprop="image" content="{{ video.poster_image }}">
+    <meta itemprop="image" content="{{ video.default_thumbnail }}">
     <meta property="og:title" content="FrameBuzz: {{ video.title }}">
     <meta property="og:type" content="Video">
     <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.slug %}">
-    <meta property="og:image" content="{{ video.poster_image }}">
+    <meta property="og:image" content="{{ video.default_thumbnail }}">
     <meta property="og:description" content="{{ video.description }}">
     <meta property="og:site_name" content="FrameBuzz">
     <meta property="og:video" content="{{ video.mp4_url }}">
