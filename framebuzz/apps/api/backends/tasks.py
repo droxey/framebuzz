@@ -27,17 +27,18 @@ def start_zencoder_job(video_id):
     mp4_file = MP4 % (directory)
     webm_file = WEBM % (directory)
     client = Zencoder(settings.ZENCODER_API_KEY)
+    dimensions = '700x395'
 
     response = client.job.create(vid.fp_url,
         outputs=[
             {
-                'size': '700x470',
+                'size': '700x395',
                 'base_url': base_dir,
                 'filename': mp4_file,
                 'public': True
             },
             {
-                'size': '700x470',
+                'size': '700x395',
                 'base_url': base_dir,
                 'filename': webm_file,
                 'public': True
@@ -51,7 +52,7 @@ def start_zencoder_job(video_id):
                 "thumbnails": [
                     {
                         'number': 5,
-                        'size': '700x470',
+                        'size': '700x435',
                         'public': True,
                         'label': 'poster',
                         'base_url': base_dir

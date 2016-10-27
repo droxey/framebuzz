@@ -24,19 +24,7 @@
       </script>
     {% endif %}
     <title>FrameBuzz | {{ video.title }}</title>
-    {% revcanonical video %}
-    <meta itemprop="name" content="FrameBuzz: {{ video.title }}">
-    <meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!">
-    <meta itemprop="image" content="{{ video.default_thumbnail }}">
-    <meta property="og:title" content="FrameBuzz: {{ video.title }}">
-    <meta property="og:type" content="Video">
-    <meta property="og:url" content="http://framebuzz.com{% url 'video-share' video.slug %}">
-    <meta property="og:image" content="{{ video.default_thumbnail }}">
-    <meta property="og:description" content="{{ video.description }}">
-    <meta property="og:site_name" content="FrameBuzz">
-    <meta property="og:video" content="{{ video.mp4_url }}">
-    <meta property="og:video:secure_url" content="{{ video.mp4_url }}">
-    <meta property="og:video:type" content="text/html">
+    {% include "player/snippets/meta.html" %}
     <script src="https://use.typekit.net/tud1dml.js"></script>
     <script>try{Typekit.load({ async: false });}catch(e){}</script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

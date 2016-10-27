@@ -1,0 +1,16 @@
+<meta itemprop="name" content="FrameBuzz: {{ video.title }}">
+<meta itemprop="description" content="I'm watching {{ video.title }}. Come talk about it with me on FrameBuzz!">
+<meta itemprop="image" content="{{ video.default_thumbnail }}">
+<meta property="og:title" content="FrameBuzz: {{ video.title }}">
+<meta property="og:type" content="Video">
+<meta property="og:url" content="{{ video.full_url }}">
+<meta property="og:image" content="{{ video.default_thumbnail }}">
+<meta property="og:description" content="{{ video.description }}">
+<meta property="og:site_name" content="FrameBuzz">
+<meta property="og:video" content="{{ video.full_url }}">
+<meta property="og:video:secure_url" content="{{ video.full_url }}">
+<meta property="og:video:type" content="video.movie">
+<meta property="og:video:duration" content="{{ video.duration }}">
+<meta property="og:video:release_date" content="{{ video.added_on|date:"c" }}">
+<meta property="og:video:width" content="{{ player_sizes.medium.width }}">
+<meta property="og:video:height" content="{{ player_sizes.medium.height }}">
