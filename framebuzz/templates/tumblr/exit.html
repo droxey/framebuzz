@@ -1,11 +1,21 @@
+{% load compress %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <script>
-      window.opener.location.reload();
-      self.close();
-    </script>
+    {% compress js %}
+      <script>
+        // Reload parent page now that we've logged in.
+        window.opener.location.reload();
+        // Closes this window (frameBuzzSSOLoginWindow)
+        setTimeout(function() {
+          var closeMe = window.self;
+          closeMe.opener = window.self;
+          closeMe.close();
+        }, 250);
+      </script>
+    {% endcompress %}
   </head>
   <body style="background: #2a394e;">
     <p style="color: white; font: bold 16px/20px 'sans-serif';">Authentication successful! Closing window...</p>
