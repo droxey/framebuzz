@@ -30,7 +30,8 @@ def home(request):
         'show_carousel': carousel.get('show_carousel', False),
         'slides': carousel.get('slides', None),
         'is_debug': settings.DEBUG,
-        'lightbox_embed': lightbox_embed
+        'lightbox_embed': lightbox_embed,
+        'is_mobile': request.META.get('IS_MOBILE', False)
     }, context_instance=RequestContext(request))
 
 
