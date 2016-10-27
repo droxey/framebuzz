@@ -267,6 +267,14 @@ $(function() {
         return false;
     });
 
+    // Set mobile status before the player opens.
+    $(document).on('opening', '.remodal', function() {
+        if (IS_MOBILE) {
+            $('.remodal-wrapper').addClass('mobile');
+        }
+    });
+
+
     // Request our player template when the modal dialog opens.
     $(document).on('opened', '.remodal', function() {
         fbzPlayer.attr('src', videoUrl);
