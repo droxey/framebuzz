@@ -421,7 +421,7 @@ PLAYER_SIZES = {
     },
     'large': {
         'width': 700,
-        'height': 432
+        'height': 435
     }
 }
 

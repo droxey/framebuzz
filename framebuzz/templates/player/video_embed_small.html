@@ -49,7 +49,6 @@
                 btnLeft = (width - buttonSize) / 2,
                 btnTop = (height - buttonSize) / 2,
                 windowObjectReference = null,
-                parentWindow = window.parent,
                 popupHeight = '{{ player_sizes.large.height }}',
                 popupWidth = '{{ player_sizes.large.width }}';
 
@@ -59,7 +58,8 @@
             // When the user chooses to play a video, save the url and then
             // pop up the player in a pop-up dialog.
             function popUpPlayer(videoUrl, target) {
-                var params = 'height=' + popupHeight + ',width=' + popupWidth;
+                var params = 'scrollbars=0,status=0,height=' + popupHeight + ',width=' + popupWidth;
+                console.log(params);
                 windowObjectReference = window.open(videoUrl, target, params);
             	if (window.focus) {
                     windowObjectReference.focus();
