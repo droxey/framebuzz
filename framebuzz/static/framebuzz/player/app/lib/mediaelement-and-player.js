@@ -4886,7 +4886,11 @@ if (typeof jQuery != 'undefined') {
 						if (isFullScreen) {
 							player.exitFullScreen();
 						} else {
-							player.enterFullScreen();
+							// CUSTOM
+							// No fullscreen on play if iOS.
+							if (!mejs.MediaFeatures.isiOS) {
+								player.enterFullScreen();
+							}
 						}
 					})
 					.on('mouseover', function() {
