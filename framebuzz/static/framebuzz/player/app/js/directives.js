@@ -201,14 +201,19 @@ angular.module('framebuzz.directives', [])
                     }, false);
 
                     media.addEventListener('playing', function(e) {
-                        if (!hasHitPlay) {
-                            videoTitle.removeClass('full-width');
-                        }
+                        videoTitle.removeClass('full-width');
                         hasHitPlay = true;
+
                         $('#buzz-layer > div.panel').removeClass('hide-before-play');
                         broadcaster.prepForBroadcast({
                             broadcastType: 'player_playing'
                         });
+                    }, false);
+
+                    media.addEventListener('seeked', function() {
+                        if (!hasHitPlay) {
+                            videoTitle.addClass('full-width');
+                        }
                     }, false);
 
                     media.addEventListener('pause', function(e) {

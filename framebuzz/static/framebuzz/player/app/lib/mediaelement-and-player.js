@@ -557,7 +557,6 @@ mejs.MediaFeatures = {
 			}
 
 			t.requestFullScreen = function(el) {
-
 				if (t.hasWebkitNativeFullScreen) {
 					el.webkitRequestFullScreen();
 
@@ -5186,7 +5185,7 @@ if (typeof jQuery != 'undefined') {
 								marginError = screenWidth * percentErrorMargin;
 
 							// check if the video is suddenly not really fullscreen
-							if ((absDiff > marginError) || t.isiPhone) {
+							if (absDiff > marginError) {
 								// manually exit
 								t.exitFullScreen();
 							} else {
@@ -5309,6 +5308,13 @@ if (typeof jQuery != 'undefined') {
 
 			t.setControlsSize();
 			t.isFullScreen = false;
+
+			// CUSTOM:
+			// Fix video titlebar width and remove the style element
+			// that forces the play/pause button out of alignment when coming
+			// out of fullscreen.
+            $('#video-title').addClass('full-width');
+            $('.mejs-playpause-button').removeAttr('style');
 
 			t.container.find('.mejs-captions-text').css('font-size','');
 			t.container.find('.mejs-captions-text').css('line-height', '');
