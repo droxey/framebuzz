@@ -46,6 +46,10 @@ def exit_login(request):
 def dashboard(request, username):
     ''' Displays the 'logged in' homepage, uploader, and a paginated list of
         user-uploaded videos. '''
+    # Ensure only the logged in user can view their page.
+    if request.user.is_authenticated() and request.user.username != username:
+        return HttpResponseRedirect(
+            reverse('fbz-tumblr-dashboard', args=[request.user.username]))
     # Set pagination data according to the ?page= GET parameter.
     try:
         page = request.GET.get('page', START_PAGE)
