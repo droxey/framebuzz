@@ -42,7 +42,6 @@ def exit_login(request):
     }, context_instance=RequestContext(request))
 
 
-@login_required(login_url='/tumblr/')
 def dashboard(request, username):
     ''' Displays the 'logged in' homepage, uploader, and a paginated list of
         user-uploaded videos. '''
