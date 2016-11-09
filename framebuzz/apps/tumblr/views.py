@@ -47,6 +47,8 @@ def dashboard(request, username):
     ''' Displays the 'logged in' homepage, uploader, and a paginated list of
         user-uploaded videos. '''
     # Ensure only the logged in user can view their page.
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('fbz-tumblr-home', args=[]))
     if request.user.is_authenticated() and request.user.username != username:
         return HttpResponseRedirect(
             reverse('fbz-tumblr-dashboard', args=[request.user.username]))
