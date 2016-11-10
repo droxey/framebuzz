@@ -35,7 +35,12 @@ class TumblrUploadForm(forms.ModelForm):
             'class': 'form-control'
         })
         fp_attrs = self.fields['fpfile'].widget.attrs
-        fp_attrs['data-fp-mimetypes'] = 'video/*'
+        # NOTE 11-09-2016: Below was supposed to work in filepicker.io v2!
+        # It appears that the API still doesn't accept certain file types,
+        # however. The below line is commented out, the fp-extensions data
+        # attribute will describe the specific file types allowed for upload.
+        # fp_attrs['data-fp-mimetypes'] = 'video/*'
+        fp_attrs['data-fp-extensions'] = settings.FP_EXTENSIONS
         fp_attrs['data-fp-button-class'] = 'btn btn-large btn-info'
         fp_attrs['data-fp-button-text'] = settings.FP_BUTTON_TEXT
         fp_attrs['data-fp-services'] = settings.FILEPICKER_SERVICES
