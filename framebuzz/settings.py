@@ -487,9 +487,7 @@ RANDOMSLUG_LENGTH = 16
 
 # django-filepicker
 FILEPICKER_API_KEY = 'AXQRyfZ2cQjWD3yy2flkFz'
-FP_EXTENSIONS = '3g2,3gp,3gp2,3gpp,3gpp2,ac3,eac3,ec3,f4a,f4b,f4v,flv', \
-                'highwinds,m4a,m4b,m4r,m4v,mov,mp4,oga,ogv,ogx,ts', \
-                'webm,wma,mpg,avi'
+FP_EXTENSIONS = '3g2,3gp,3gp2,3gpp,3gpp2,ac3,eac3,ec3,f4a,f4b,f4v,flv,highwinds,m4a,m4b,m4r,m4v,mov,mp4,oga,ogv,ogx,ts,webm,wma,mpg,avi'
 FILEPICKER_SERVICES = 'BOX,CLOUDDRIVE,COMPUTER,GOOGLE_DRIVE,GMAIL,URL,VIDEO,FTP'
 FP_DRAG_TEXT = 'Drag and drop your video file here<br><em>or, click this ' \
                 'box to upload videos from your device, <br class="hidden-sm-down">Google Drive, ' \
