@@ -493,7 +493,7 @@ FP_DRAG_TEXT = 'Drag and drop your video file here<br><em>or, click this ' \
                 'box to upload videos from your device, <br class="hidden-sm-down">Google Drive, ' \
                 'FTP and more!</em>'
 FP_BUTTON_TEXT = '<i class="fa fa-cloud-upload"></i> Select File...'
-FP_VIDEO_MAXSIZE = 1000000000  # Max out at 1GB for now.
+FP_VIDEO_MAXSIZE = 1073741824  # Max out at 1GB (in bytes) for now.
 
 
 # Dashboard
