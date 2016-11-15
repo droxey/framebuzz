@@ -32,16 +32,18 @@ def start_zencoder_job(video_id):
     response = client.job.create(vid.fp_url,
         outputs=[
             {
-                'size': '700x395',
+                'size': dimensions,
                 'base_url': base_dir,
                 'filename': mp4_file,
-                'public': True
+                'public': True,
+                'aspect_mode': 'pad'
             },
             {
-                'size': '700x395',
+                'size': dimensions,
                 'base_url': base_dir,
                 'filename': webm_file,
-                'public': True
+                'public': True,
+                'aspect_mode': 'pad'
             },
             {
                 "notifications": [
@@ -55,7 +57,8 @@ def start_zencoder_job(video_id):
                         'size': '700x435',
                         'public': True,
                         'label': 'poster',
-                        'base_url': base_dir
+                        'base_url': base_dir,
+                        'aspect_mode': 'pad'
                     }
                 ]
             }
