@@ -1,12 +1,9 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 @import "compass/reset";
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
 @import "compass/css3/images";
 @import "compass/css3/transition";
+
 body {
     background: #202020 !important;
     color: white;
@@ -192,6 +189,7 @@ video {
 
         div.mejs-video {
             background: #202020;
+            height: 100% !important;  // Fixes vertically filmed videos - now the controls don't go off the page.
             position: relative;
             top: 0;
 
