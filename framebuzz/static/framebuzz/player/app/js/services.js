@@ -91,6 +91,7 @@ angular.module('framebuzz.services', [])
 
             socket.onclose = function() {
                 if (!connected) {
+                    $log.error(connectFailedMessage);
                     alert(connectFailedMessage);
                 }
                 var args = arguments;

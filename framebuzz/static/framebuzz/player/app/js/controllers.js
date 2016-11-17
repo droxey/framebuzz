@@ -746,11 +746,6 @@ angular.module('framebuzz.controllers', [])
                     safeApply($scope);
                 });
 
-                $scope.$on('player_showerror', function() {
-                    var error = broadcaster.message.error;
-                    alert(error);
-                });
-
                 // --
                 // EVENT HANDLERS
                 // --
