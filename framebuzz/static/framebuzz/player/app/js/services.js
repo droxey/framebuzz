@@ -49,6 +49,8 @@ angular.module('framebuzz.services', [])
 
         var createSocket = function () {
             var reconnect = true,
+                connected = false,
+                connectFailedMessage = 'Unable to establish player connection.',
                 socket = null,
                 debug = SOCK.debug,
                 scheme = debug ? 'http://' : 'https://',
@@ -61,8 +63,10 @@ angular.module('framebuzz.services', [])
             });
 
             socket.onopen = function() {
-                if (socket.readyState !== SockJS.OPEN) {
-                  console.log("Connection NOT open.");
+                connected = socket.readyState !== SockJS.OPEN;
+
+                if (!connected) {
+                  $log.error(connectFailedMessage);
                 }
 
                 var args = arguments;
@@ -86,9 +90,22 @@ angular.module('framebuzz.services', [])
             };
 
             socket.onclose = function() {
+                if (!connected) {
+                    alert(connectFailedMessage);
+                }
                 var args = arguments;
                 $rootScope.safeApply(function() {
                     self.socket_handlers.onclose.apply(socket, args);
+                });
+            };
+
+            socket.onerror = function(error) {
+                var args = arguments;
+
+                $log.error(error);
+
+                $rootScope.safeApply(function() {
+                    self.socket_handlers.onerror.apply(socket, args);
                 });
             };
 
@@ -118,6 +135,9 @@ angular.module('framebuzz.services', [])
             },
             onclose: function(callback) {
                 self.socket_handlers.onclose = callback;
+            },
+            onerror: function(callback) {
+                self.socket_handlers.onerror = callback;
             },
             close: function() {
                 socket.close();
