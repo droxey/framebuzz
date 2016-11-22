@@ -228,6 +228,12 @@
             enableKeyboard: false,
             success: function(media) {
               media.play();
+              // Set volume to 0.5 when unmuted.
+              media.addEventListener('volumechange', function(e) {
+                if (e.target.muted) {
+                  media.setVolume(0.5);
+                }
+              }, false);
             }
           });
         });
