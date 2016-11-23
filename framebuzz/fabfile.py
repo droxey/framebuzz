@@ -13,10 +13,6 @@ from fabric.colors import yellow, green, blue, red
 from fabric.operations import _prefix_commands, _prefix_env_vars
 
 
-################
-# Config setup #
-################
-
 conf = {}
 if sys.argv[0].split(os.sep)[-1] == "fab":
     # Ensure we import settings from the current dir
@@ -58,14 +54,6 @@ env.host_string = '%s:%s' % (env.hosts[0], '333')
 env.static_cache_path = '%s/framebuzz/static/CACHE' % env.proj_path
 
 
-##################
-# Template setup #
-##################
-
-# Each template gets uploaded at deploy time, only if their
-# contents has changed, in which case, the reload command is
-# also run.
-
 templates = {
     "nginx": {
         "local_path": "deploy/nginx.conf",
@@ -87,10 +75,6 @@ templates = {
     },
 }
 
-
-######################################
-# Context for virtualenv and project #
-######################################
 
 @contextmanager
 def virtualenv():
@@ -141,9 +125,6 @@ def update_changed_requirements():
         pip("-r %s/%s" % (env.proj_path, env.reqs_path))
 
 
-###########################################
-# Utils and wrappers for various commands #
-###########################################
 
 def _print(output):
     print
@@ -323,10 +304,6 @@ def manage(command):
     return run("%s %s" % (env.manage, command))
 
 
-#########################
-# Install and configure #
-#########################
-
 @task
 @log_call
 def install():
@@ -392,15 +369,15 @@ def create():
         sshagent_run("%s clone %s %s" % (vcs, env.repo_url, env.proj_path))
 
     # Create DB and DB user.
-    # pw = db_pass()
-    # user_sql_args = (env.proj_name, pw.replace("'", "\'"))
-    # user_sql = "CREATE USER %s WITH ENCRYPTED PASSWORD '%s';" % user_sql_args
-    # psql(user_sql, show=False)
-    # shadowed = "*" * len(pw)
-    # print_command(user_sql.replace("'%s'" % pw, "'%s'" % shadowed))
-    # psql("CREATE DATABASE %s WITH OWNER %s ENCODING = 'UTF8' "
-    #      "LC_CTYPE = '%s' LC_COLLATE = '%s' TEMPLATE template0;" %
-    #      (env.proj_name, env.proj_name, env.locale, env.locale))
+      pw = db_pass()
+      user_sql_args = (env.proj_name, pw.replace("'", "\'"))
+      user_sql = "CREATE USER %s WITH ENCRYPTED PASSWORD '%s';" % user_sql_args
+      psql(user_sql, show=False)
+      shadowed = "*" * len(pw)
+      print_command(user_sql.replace("'%s'" % pw, "'%s'" % shadowed))
+      psql("CREATE DATABASE %s WITH OWNER %s ENCODING = 'UTF8' "
+           "LC_CTYPE = '%s' LC_COLLATE = '%s' TEMPLATE template0;" %
+           (env.proj_name, env.proj_name, env.locale, env.locale))
 
     conf_path = "/etc/nginx/conf.d"
     if not exists(conf_path):
@@ -434,10 +411,6 @@ def remove():
     psql("DROP DATABASE %s;" % env.proj_name)
     psql("DROP USER %s;" % env.proj_name)
 
-
-##############
-# Deployment #
-##############
 
 @task
 @log_call
@@ -578,19 +551,6 @@ def all():
         manage("createsuperuser")
 
 
-@task
-@log_call
-def send_email_blast():
-    """ Sends a fbz email to all users."""
-    with project():
-        manage('email_blast')
-
-
-@task
-@log_call
-def follow_fbz():
-    with project():
-        manage('follow_fbz')
 
 
 def sshagent_run(cmd):
