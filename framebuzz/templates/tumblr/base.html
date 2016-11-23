@@ -176,10 +176,12 @@
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
         <script type="text/javascript">
           $(document).ready(function() {
-            videojs.options.flash.swf = "{% static 'framebuzz/tumblr/js/vendor/video-js/video-js.swf' %}";
+            // Set default HTML5 video volume.
+            $("video").each(function(){ this.volume = 0.5; });
 
+            // Set player defaults.
+            videojs.options.flash.swf = "{% static 'framebuzz/tumblr/js/vendor/video-js/video-js.swf' %}";
             var playerSetup = {
-              //aspectRatio: '705:395',
               height: 395,
               width: 705,
               poster: 'https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png',
@@ -188,12 +190,9 @@
             };
 
             var player = videojs('pitch-video', playerSetup, function() {
+              // Mute at start.
               var _player = this;
               _player.muted(true);
-
-              _player.on('volumechange', function() {
-                console.log(_player.muted);
-              });
             });
 
             var showCarousel = '{{ show_carousel|lower }}' == 'true';
