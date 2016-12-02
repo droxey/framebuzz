@@ -47,10 +47,17 @@ angular.module('framebuzz.services', [])
             }
         };
 
+        var socket = null,
+            recInterval = null,
+            totalRetries = 0;
+
         var createSocket = function () {
             var reconnect = true,
+                retriesMax = 15,
                 connected = false,
+                showError = false,
                 connectFailedMessage = 'Unable to establish player connection.',
+                retryMessage = 'Retrying now...',
                 socket = null,
                 debug = SOCK.debug,
                 scheme = debug ? 'http://' : 'https://',
@@ -62,11 +69,20 @@ angular.module('framebuzz.services', [])
                 'debug': debug
             });
 
+            clearInterval(recInterval);
+
             socket.onopen = function() {
                 connected = socket.readyState !== SockJS.OPEN;
+                showError = !connected;
 
-                if (!connected) {
-                  $log.error(connectFailedMessage);
+                // Clear out any player errors.
+                if (totalRetries > 0) {
+                    totalRetries = 0;
+
+                    broadcaster.prepForBroadcast({
+                        broadcastType: 'player_hideerror',
+                        error: ''
+                    });
                 }
 
                 var args = arguments;
@@ -90,24 +106,39 @@ angular.module('framebuzz.services', [])
             };
 
             socket.onclose = function() {
+                // Clear the socket instance and attempt a new connection
+                // every two seconds.
                 if (!connected) {
-                    $log.error(connectFailedMessage);
-                    alert(connectFailedMessage);
+                    // Attempt to connect for 30 seconds (15 tries, 2sec interval)
+                    showError = totalRetries == 0 || totalRetries > retriesMax;
+                    if (showError) {
+                        var errorMsg = connectFailedMessage;
+                        if (totalRetries == 0) {
+                            errorMsg = connectFailedMessage + ' ' + retryMessage;
+                        }
+
+                        broadcaster.prepForBroadcast({
+                            broadcastType: 'player_showerror',
+                            error: errorMsg
+                        });
+
+                        $log.error(errorMsg);
+                    }
+
+                    if (retriesMax <= retriesMax) {
+                        socket = null;
+                        recInterval = setInterval(function() {
+                            totalRetries++;
+                            createSocket();
+                        }, 2000);
+                    }
                 }
-                var args = arguments;
-                $rootScope.safeApply(function() {
-                    self.socket_handlers.onclose.apply(socket, args);
-                });
-            };
-
-            socket.onerror = function(error) {
-                var args = arguments;
-
-                $log.error(error);
-
-                $rootScope.safeApply(function() {
-                    self.socket_handlers.onerror.apply(socket, args);
-                });
+                else {
+                    var args = arguments;
+                    $rootScope.safeApply(function() {
+                        self.socket_handlers.onclose.apply(socket, args);
+                    });
+                }
             };
 
             return socket;
@@ -115,10 +146,6 @@ angular.module('framebuzz.services', [])
 
         self.socket_handlers = {};
         var socket = createSocket();
-
-        $rootScope.$on('reconnect', function() {
-            socket.close();
-        });
 
         var methods = {
             onopen: function(callback) {
@@ -136,9 +163,6 @@ angular.module('framebuzz.services', [])
             },
             onclose: function(callback) {
                 self.socket_handlers.onclose = callback;
-            },
-            onerror: function(callback) {
-                self.socket_handlers.onerror = callback;
             },
             close: function() {
                 socket.close();

@@ -746,6 +746,22 @@ angular.module('framebuzz.controllers', [])
                     safeApply($scope);
                 });
 
+                $scope.$on('player_showerror', function() {
+                    var error = broadcaster.message.error;
+
+                    var commentInput = $('#id_comment');
+                    commentInput.attr('disabled', 'disabled');
+                    commentInput.addClass('player-error');
+                    commentInput.val(error);
+                });
+
+                $scope.$on('player_hideerror', function() {
+                    var commentInput = $('#id_comment');
+                    commentInput.removeAttr('disabled');
+                    commentInput.removeClass('player-error');
+                    commentInput.val('');
+                });
+
                 // --
                 // EVENT HANDLERS
                 // --
