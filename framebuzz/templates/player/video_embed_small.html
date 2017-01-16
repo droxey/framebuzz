@@ -7,7 +7,6 @@
     <title>FrameBuzz | {{ video.title }}</title>
     {% include "player/snippets/meta.html" %}
     {% compress css %}
-        <link href="{% static 'framebuzz/player/app/lib/jquery/featherlight/featherlight.min.css' %}" type="text/css" rel="stylesheet">
         <style type="text/css">
             body {
                 background: url('{{ video.default_thumbnail }}') no-repeat 0 0;
@@ -28,24 +27,22 @@
 </head>
 <body>
     <div id="container">
-        <a id="play-video" data-featherlight="iframe" href="{{ video.full_url }}" title="Launch pop-up player" data-target="">
+        <a id="play-video" href="{{ video.landing_page_url }}" target="_blank" title="View on FrameBuzz.com">
             <img src="{% static 'framebuzz/tumblr/img/play@2x.png' %}" height="47" width="47">
         </a>
     </div>
     {% compress js %}
         <script src="{% static 'framebuzz/player/app/lib/jquery/jquery-1.9.1.min.js' %}"></script>
-        <script src="{% static 'framebuzz/player/app/lib/jquery/featherlight/featherlight.min.js' %}"></script>
         <script type="text/javascript">
-            // When the user chooses to play a video, save the url and then
-            // pop up the player in a lightbox.
+            var width = this.innerWidth,
+                height = this.innerHeight,
+                buttonSize = 47,
+                btnLeft = (width - buttonSize) / 2,
+                btnTop = (height - buttonSize) / 2;
+
             $(document).ready(function() {
-                $.featherlight({
-                    iframe: '{{ video.full_url }}',
-                    iframeMinWidth: '100%',
-                    iframeMaxWidth: '100%',
-                    iframeWidth: 700,
-                    iframeHeight: 350
-                });
+                $('#container').css({ 'height': height, 'width': width });
+                $('#play-video').css({ 'top': btnTop, 'left': btnLeft });
             });
         </script>
     {% endcompress %}

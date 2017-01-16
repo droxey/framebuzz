@@ -96,11 +96,13 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-12" id="embed-row">
+              {% block embedded_video %}
                 <video id="pitch-video" class="video-js vjs-default-skin" width="705" height="395">
                   <source type="video/mp4" src="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.mp4">
                   <source type="video/webm" src="https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/b5P2hIWQviStSbw7sh5r.webm">
                   <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
                 </video>
+              {% endblock %}
             </div>
           </div>
         </div>
@@ -176,24 +178,26 @@
         <script src="{% static 'framebuzz/tumblr/js/uploads.js' %}"></script>
         <script type="text/javascript">
           $(document).ready(function() {
-            // Set default HTML5 video volume.
-            $("video").each(function(){ this.volume = 0.5; });
+            {% block player_js %}
+              // Set default HTML5 video volume.
+              $("video").each(function(){ this.volume = 0.5; });
 
-            // Set player defaults.
-            videojs.options.flash.swf = "{% static 'framebuzz/tumblr/js/vendor/video-js/video-js.swf' %}";
-            var playerSetup = {
-              height: 395,
-              width: 705,
-              poster: 'https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png',
-              autoplay: true,
-              controls: true
-            };
+              // Set player defaults.
+              videojs.options.flash.swf = "{% static 'framebuzz/tumblr/js/vendor/video-js/video-js.swf' %}";
+              var playerSetup = {
+                height: 395,
+                width: 705,
+                poster: 'https://fbz-zc.s3.amazonaws.com/b5P2hIWQviStSbw7sh5r/frame_0001.png',
+                autoplay: true,
+                controls: true
+              };
 
-            var player = videojs('pitch-video', playerSetup, function() {
-              // Mute at start.
-              var _player = this;
-              _player.muted(true);
-            });
+              var player = videojs('pitch-video', playerSetup, function() {
+                // Mute at start.
+                var _player = this;
+                _player.muted(true);
+              });
+            {% endblock %}
 
             var showCarousel = '{{ show_carousel|lower }}' == 'true';
             if (showCarousel) {

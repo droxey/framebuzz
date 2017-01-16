@@ -1,18 +1,15 @@
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-
-from pure_pagination import Paginator, PageNotAnInteger, EmptyPage
-
 from framebuzz.apps.api.models import Video
-from framebuzz.apps.tumblr.forms import TumblrUploadForm, EditVideoForm
-from framebuzz.apps.tumblr.utils import get_user_videos, get_carousel_slides
+from framebuzz.apps.tumblr.forms import EditVideoForm, TumblrUploadForm
 from framebuzz.apps.tumblr.tasks import submit_to_tumblr
-
+from framebuzz.apps.tumblr.utils import get_carousel_slides, get_user_videos
+from pure_pagination import EmptyPage, PageNotAnInteger, Paginator
 
 START_PAGE = 1
 VIDEOS_PER_PAGE = 6
@@ -39,6 +36,14 @@ def exit_login(request):
     ''' Simple view that renders a template with the ability to automatically
         close the popup window client-side upon successful authentication. '''
     return render_to_response('tumblr/exit.html', {
+    }, context_instance=RequestContext(request))
+
+
+def view_video(request, slug):
+    ''' A landing page to view a single. '''
+    vid = Video.objects.get(slug=slug)
+    return render_to_response('tumblr/view_video.html', {
+        'video': vid
     }, context_instance=RequestContext(request))
 
 
