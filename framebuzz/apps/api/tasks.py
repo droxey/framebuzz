@@ -1,31 +1,32 @@
-import celery
 import datetime
 import json
-import redis
 
+import celery
+import redis
+from actstream import action
+from actstream.actions import follow, unfollow
+from actstream.models import Action, Follow, followers, following
 from django.conf import settings
-from django.core.validators import validate_email
-from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.contrib.comments.models import CommentFlag
 from django.contrib.sites.models import Site
+from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
+from django.core.validators import validate_email
 from django.db.models import Q
 from django.utils import importlib
-
-from actstream import action
-from actstream.models import Action, Follow, followers, following
-from actstream.actions import follow, unfollow
+from framebuzz.apps.api import CHANNEL_KEY, DATA_KEY, EVENT_TYPE_KEY
+from framebuzz.apps.api.forms import MPTTCommentForm
+from framebuzz.apps.api.models import (MPTTComment, PrivateSession,
+                                       SessionInvitation, UserProfile,
+                                       UserVideo, Video)
+from framebuzz.apps.api.serializers import (MPTTCommentReplySerializer,
+                                            MPTTCommentSerializer,
+                                            PrivateSessionSerializer,
+                                            SessionInvitationSerializer,
+                                            UserSerializer, VideoSerializer)
 from rest_framework.renderers import JSONRenderer
 from templated_email import send_templated_mail
-
-from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
-from framebuzz.apps.api.forms import MPTTCommentForm
-from framebuzz.apps.api.models import MPTTComment, Video, UserVideo, \
-    PrivateSession, SessionInvitation, UserProfile
-from framebuzz.apps.api.serializers import VideoSerializer, \
-    MPTTCommentSerializer, MPTTCommentReplySerializer, UserSerializer, \
-    PrivateSessionSerializer, SessionInvitationSerializer
 
 
 def construct_message(event_type, channel, data):
@@ -61,8 +62,9 @@ def message_outbound(message):
         }
     }
     """
-    channel = message.get(CHANNEL_KEY, None)
-    _send_to_channel.delay(channel=channel, message=message)
+    if message is not None:
+        channel = message.get(CHANNEL_KEY, None)
+        _send_to_channel.delay(channel=channel, message=message)
 
 
 @celery.task
@@ -497,7 +499,6 @@ def add_player_action(context):
     else:
         user = context.get('user', None)
 
-
     if isinstance(user, auth.models.AnonymousUser):
         user = auth.models.User.objects.get(username='AnonymousUser')
 
@@ -518,7 +519,6 @@ def add_player_action(context):
             if user.pk == session.owner.pk and player_action != 'player_share':
                 message = construct_message('FB_SYNC_CHANNEL', outbound_channel, player_data)
                 _send_to_channel.delay(channel=outbound_channel, message=message)
-
 
     if 'video' in verb:
         action.send(user,
@@ -721,8 +721,8 @@ def search_user_list(context):
 
     if term:
         profiles = UserProfile.objects.exclude(user__username__in=selected_users).filter(
-                                            Q(user__username__startswith=term) | \
-                                            Q(display_name__startswith=term))
+            Q(user__username__startswith=term) |
+            Q(display_name__startswith=term))
         users = [p.user for p in profiles]
         usersSerializer = UserSerializer(users, context={'video': video})
         usersSerialized = JSONRenderer().render(usersSerializer.data)
