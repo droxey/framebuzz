@@ -1,4 +1,7 @@
+import os
+
 from django.conf import global_settings
+
 import djcelery
 import raven
 
@@ -14,7 +17,7 @@ ADMINS = (
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'frbz.in',
                  'localhost', 'framebuzz.com', 'frame.bz',
-                 'staging.framebuzzlab.com']
+                 'staging.framebuzzlab.com', 'www.framebuzz.com', ]
 
 MANAGERS = ADMINS
 
@@ -86,7 +89,6 @@ CACHES = {
 # PATHS #
 #
 
-import os
 
 ENVIRONMENT = os.environ
 
@@ -490,8 +492,8 @@ FILEPICKER_API_KEY = 'AXQRyfZ2cQjWD3yy2flkFz'
 FP_EXTENSIONS = '3g2,3gp,3gp2,3gpp,3gpp2,ac3,eac3,ec3,f4a,f4b,f4v,flv,highwinds,m4a,m4b,m4r,m4v,mov,mp4,oga,ogv,ogx,ts,webm,wma,mpg,avi'
 FILEPICKER_SERVICES = 'BOX,CLOUDDRIVE,COMPUTER,GOOGLE_DRIVE,GMAIL,URL,VIDEO,FTP'
 FP_DRAG_TEXT = 'Drag and drop your video file here<br><em>or, click this ' \
-                'box to upload videos from your device, <br class="hidden-sm-down">Google Drive, ' \
-                'FTP and more!</em>'
+    'box to upload videos from your device, <br class="hidden-sm-down">Google Drive, ' \
+    'FTP and more!</em>'
 FP_BUTTON_TEXT = '<i class="fa fa-cloud-upload"></i> Select File...'
 FP_VIDEO_MAXSIZE = 1073741824  # Max out at 1GB (in bytes) for now.
 
