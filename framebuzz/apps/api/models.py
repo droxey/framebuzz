@@ -1,35 +1,38 @@
-import hashlib
-import json
 import os
+import hashlib
+import watson
+import caching.base
 import time
+import json
+
 from datetime import datetime
 
-import caching.base
-import watson
-from actstream import action
-from actstream.actions import follow
-from actstream.models import actstream_register_model
-from allauth.account.signals import user_logged_in, user_signed_up
-from allauth.avatars import copy_avatar
-from avatar.util import get_username
 from django.conf import settings
-from django.contrib.auth.models import AnonymousUser, Permission, User
-from django.contrib.comments.models import Comment, CommentFlag
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User, Permission, AnonymousUser
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.comments.models import Comment, CommentFlag
+from django.contrib.sites.models import Site
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.encoding import force_bytes
 from django.utils.html import urlize
 from django.utils.safestring import mark_safe
-from framebuzz.apps.search.adapters import (CommentSearchAdapter,
-                                            UserProfileSearchAdapter,
-                                            VideoSearchAdapter)
-from mptt.models import MPTTModel, TreeForeignKey
+
+from actstream import action
+from actstream.models import actstream_register_model
+from actstream.actions import follow
+from avatar.util import get_username
+from allauth.account.signals import user_signed_up, user_logged_in
+from allauth.avatars import copy_avatar
 from randomslugfield import RandomSlugField
-from storages.backends.s3boto import S3BotoStorage
 from timezone_field import TimeZoneField
+from storages.backends.s3boto import S3BotoStorage
+from mptt.models import MPTTModel, TreeForeignKey
+
+from framebuzz.apps.search.adapters import VideoSearchAdapter, \
+    CommentSearchAdapter, UserProfileSearchAdapter
+
 
 COMMENT_VISIBILITY_TIME_RANGE = 1
 TIMELINE_BLOCKS = 32
@@ -317,12 +320,6 @@ class Video(caching.base.CachingMixin, models.Model):
         prefix = 'http' if settings.DEBUG else 'https'
         return '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
 
-    def landing_page_url(self):
-        site = Site.objects.get_current()
-        prefix = 'http' if settings.DEBUG else 'https'
-        landing = reverse('fbz-view-video', args=[self.slug, ])
-        return '%s://%s%s' % (prefix, site.domain, landing)
-
     def get_embed_code(self, width, height):
         return mark_safe(
             '<iframe src="%s" scrolling="no" frameborder="0" '
@@ -340,7 +337,7 @@ class Video(caching.base.CachingMixin, models.Model):
     def wp_embed_code(self):
         site = Site.objects.get_current()
         prefix = 'http' if settings.DEBUG else 'https'
-        url = '%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
+        url ='%s://%s%s' % (prefix, site.domain, self.get_absolute_url())
         return mark_safe('[framebuzz src=%s width=580 height=360]' % url)
 
     def tumblr_embed_code(self):
@@ -563,17 +560,17 @@ class MPTTComment(caching.base.CachingMixin, MPTTModel, Comment):
         video = Video.objects.get(id=self.object_pk)
         url_id = self.id if self.parent is None else self.parent.id
         return '%s#/player/panel/active/comments/%s' % (reverse('video-embed',
-                                                                kwargs={
-                                                                    'slug': video.slug
-                                                                }), str(url_id))
+                                                        kwargs={
+                                                            'slug': video.slug
+                                                        }), str(url_id))
 
     def get_share_url(self):
         video = Video.objects.get(id=self.object_pk)
         url_id = self.id if self.parent is None else self.parent.id
         return '%s#/player/panel/active/comments/%s' % (reverse('video-share',
-                                                                kwargs={
-                                                                    'slug': video.slug
-                                                                }), str(url_id))
+                                                        kwargs={
+                                                            'slug': video.slug
+                                                        }), str(url_id))
 
     def get_player_url(self):
         url_id = self.id if self.parent is None else self.parent.id
@@ -634,6 +631,9 @@ class Task(caching.base.CachingMixin, models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+
 
 
 '''

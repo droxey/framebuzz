@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
 
+
 urlpatterns = patterns(
     '',
     url(r'^$',
@@ -25,8 +26,4 @@ urlpatterns = patterns(
     url(r'^video/delete/(?P<slug>[\w.@+-]+)/$',
         'framebuzz.apps.tumblr.views.delete_video',
         name='fbz-delete-video'),
-
-    url(r'^video/view/(?P<slug>[\w.@+-]+)/$',
-        'framebuzz.apps.tumblr.views.view_video',
-        name='fbz-view-video'),
 )
