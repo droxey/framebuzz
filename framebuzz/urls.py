@@ -1,14 +1,16 @@
 import re
-from django.conf.urls import patterns, include, url
-from django.conf import settings
 
+from django.conf import settings
+from django.conf.urls import include, patterns, url
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-admin.autodiscover()
 
+from framebuzz.apps.api.seo import FbzMetadata
 # DjangoSEO
 from rollyourown.seo.admin import register_seo_admin
-from framebuzz.apps.api.seo import FbzMetadata
+
+admin.autodiscover()
+
 register_seo_admin(admin.site, FbzMetadata)
 
 
@@ -28,7 +30,7 @@ urlpatterns = patterns(
     url(r'^v/', include('framebuzz.apps.api.urls')),
 
     # Django-AllAuth:
-    (r'^accounts/', include('allauth.urls')),
+    (r'^auth/', include('allauth.urls')),
 
     # Django-Avatar:
     url(r'^avatar/', include('avatar.urls')),
