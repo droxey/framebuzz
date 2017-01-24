@@ -16,7 +16,7 @@ ADMINS = (
 )
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'frbz.in',
-                 'localhost', 'framebuzz.com', 'frame.bz',
+                 'localhost', 'framebuzz.com', 'frame.bz', 'framebuzz.dev',
                  'staging.framebuzzlab.com', 'www.framebuzz.com', '104.193.42.128', ]
 
 MANAGERS = ADMINS
@@ -158,7 +158,7 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
 
-    'framebuzz.apps.dashboard.context_processors.dashboard',
+    #'framebuzz.apps.dashboard.context_processors.dashboard',
 )
 
 MIDDLEWARE_CLASSES = (
