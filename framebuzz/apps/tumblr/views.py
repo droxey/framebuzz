@@ -1,18 +1,16 @@
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from pure_pagination import Paginator, PageNotAnInteger, EmptyPage
-
 from framebuzz.apps.api.models import Video
-from framebuzz.apps.tumblr.forms import TumblrUploadForm, EditVideoForm
-from framebuzz.apps.tumblr.utils import get_user_videos, get_carousel_slides
+from framebuzz.apps.tumblr.forms import EditVideoForm, TumblrUploadForm
 from framebuzz.apps.tumblr.tasks import submit_to_tumblr
-
+from framebuzz.apps.tumblr.utils import get_carousel_slides, get_user_videos
+from pure_pagination import EmptyPage, PageNotAnInteger, Paginator
 
 START_PAGE = 1
 VIDEOS_PER_PAGE = 6
@@ -94,7 +92,7 @@ def dashboard(request, username):
     }, context_instance=RequestContext(request))
 
 
-@login_required(login_url='/tumblr/')
+@login_required(login_url='/')
 def post_to_tumblr(request, slug):
     ''' Ajax endpoint that allows us to kick off Tumblr submission for a
     user-selected video. '''
@@ -103,7 +101,7 @@ def post_to_tumblr(request, slug):
     return HttpResponse(200)
 
 
-@login_required(login_url='/tumblr/')
+@login_required(login_url='/')
 def edit_video(request, slug):
     ''' Ajax endpoint that allows us to edit a video we've uploaded. '''
     vid = Video.objects.get(slug=slug)
