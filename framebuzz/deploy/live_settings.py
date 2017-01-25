@@ -1,6 +1,7 @@
 import raven
-LOCAL_SETTINGS = True
 from settings import *
+
+LOCAL_SETTINGS = True
 
 DEBUG = False
 
@@ -30,7 +31,7 @@ SHORTEN_FULL_BASE_URL = 'http://framebuzz.com/s/'
 
 RAVEN_CONFIG = {
     'dsn': "%(sentry_dsn)s",
-    'release': raven.fetch_git_sha(os.path.join(os.path.dirname( __file__ ), '..')),
+    'release': raven.fetch_git_sha(os.path.join(os.path.dirname(__file__), '..')),
 }
 
 RAVENJS_DSN = "%(ravenjs_dsn)s"
@@ -58,7 +59,7 @@ MAINTENANCE_IGNORE_URLS = (
 
 
 ZENCODER_API_KEY = 'e990db716cb4d5b55a9ca91ceaba6c00'
-ZENCODER_WEBHOOK_URL = 'http://%(live_host)s/video/notifications/'
+ZENCODER_WEBHOOK_URL = 'https://%(live_host)s/video/notifications/'
 
 COMPRESS_ENABLED = True
 
