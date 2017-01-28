@@ -1,3 +1,5 @@
+[![Requirements Status](https://requires.io/github/droxey/framebuzz/requirements.svg?branch=master)](https://requires.io/github/droxey/framebuzz/requirements/?branch=master)
+
 # Install FrameBuzz (Windows, MacOS, Linux)
 
 
