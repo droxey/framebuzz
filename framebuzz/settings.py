@@ -152,28 +152,21 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'django.contrib.messages.context_processors.messages',
-
     'django_mobile.context_processors.flavour',
-
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
-
-    #'framebuzz.apps.dashboard.context_processors.dashboard',
 )
 
 MIDDLEWARE_CLASSES = (
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
-
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
     'framebuzz.apps.marketing.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
-
     'watson.middleware.SearchContextMiddleware',
     'framebuzz.libs.middleware.timezone.TimezoneMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
@@ -249,6 +242,7 @@ INSTALLED_APPS = (
     'mptt',
     'robots',
     'zebra',
+    'micawber.contrib.mcdjango',
 
     # FrameBuzz Apps
     'framebuzz.apps.api',
@@ -424,6 +418,18 @@ PLAYER_SIZES = {
         'width': 700,
         'height': 435
     }
+}
+
+# OEmbed:
+MICAWBER_PROVIDERS = 'framebuzz.apps.api.micawber_providers.bootstrap_framebuzz'
+
+MICAWBER_TEMPLATE_EXTENSIONS = [
+    #('oembed_no_urlize', {'urlize_all': False}),
+]
+
+MICAWBER_DEFAULT_SETTINGS = {
+    'maxwidth': PLAYER_SIZES.get('tumblr').get('width'),
+    'maxheight': PLAYER_SIZES.get('tumblr').get('height'),
 }
 
 TUMBLR_POST_TEXT = '<b>%s</b> \

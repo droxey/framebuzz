@@ -1,27 +1,25 @@
 import json
 
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import logout
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.clickjacking import xframe_options_exempt
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 
 from actstream import action
-from allauth.account.forms import SignupForm, LoginForm
+from allauth.account.forms import LoginForm, SignupForm
 from allauth.account.utils import perform_login
-from rest_framework.renderers import JSONRenderer
-
-from framebuzz.apps.api import EVENT_TYPE_KEY, CHANNEL_KEY, DATA_KEY
+from framebuzz.apps.api import CHANNEL_KEY, DATA_KEY, EVENT_TYPE_KEY
 from framebuzz.apps.api.backends.youtube import get_or_create_video
+from framebuzz.apps.api.models import PrivateSession
 from framebuzz.apps.api.serializers import UserSerializer
 from framebuzz.apps.api.utils import errors_to_json
-from framebuzz.apps.api.models import PrivateSession
-
+from rest_framework.renderers import JSONRenderer
 
 ITAG_MP4 = 18
 ITAG_WEBM = 43
@@ -105,6 +103,32 @@ def video_embed(request, slug, convo_slug=None, control_sync=False, small=False)
     except TypeError:
         return HttpResponseRedirect(reverse('video-embed-error',
                                             args=(v.slug,)))
+
+
+@xframe_options_exempt
+def video_oembed(request):
+    url = request.GET.get('url', None)
+    title = request.GET.get('title', None)
+    slug = url.strip('/').split('/')[-1]
+    video, created = get_or_create_video(slug)
+    author_name = 'FrameBuzz' if not video.added_by else video.added_by.username
+    author_url = 'http://%s.tumblr.com' % author_name if author_name is not 'FrameBuzz' else 'https://framebuzz.com'
+    width = settings.PLAYER_SIZES.get('tumblr').get('width')
+    height = settings.PLAYER_SIZES.get('tumblr').get('height')
+    response = {
+        "type": "rich",
+        "version": "1.0",
+        "title": video.title,
+        "author_name": author_name,
+        "author_url": author_url,
+        "provider_name": "FrameBuzz",
+        "provider_url": "https://framebuzz.com",
+        "html": video.get_embed_code(width, height),
+        "width": width,
+        "height": height
+    }
+    return HttpResponse(json.dumps(response),
+                        content_type="application/json")
 
 
 @xframe_options_exempt

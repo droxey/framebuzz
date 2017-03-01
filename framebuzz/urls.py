@@ -29,6 +29,9 @@ urlpatterns = patterns(
     # Player API:
     url(r'^v/', include('framebuzz.apps.api.urls')),
 
+    # OEmbed API:
+    url(r'^oembed/$', 'framebuzz.apps.api.views.video_oembed', name='video-oembed'),
+
     # Django-AllAuth:
     (r'^auth/', include('allauth.urls')),
 
