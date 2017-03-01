@@ -17,7 +17,6 @@ from django.utils.html import urlize
 from django.utils.safestring import mark_safe
 
 import caching.base
-import pytz
 import watson
 from actstream import action
 from actstream.actions import follow
