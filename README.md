@@ -1,3 +1,5 @@
+[![Requirements Status](https://requires.io/github/droxey/framebuzz/requirements.svg?branch=master)](https://requires.io/github/droxey/framebuzz/requirements/?branch=master)
+
 # Install FrameBuzz (Windows, MacOS, Linux)
 
 
@@ -63,16 +65,9 @@ Vagrant.configure("2") do |config|
   v.customize ["modifyvm", :id, "--memory", mem]
   v.customize ["modifyvm", :id, "--cpus", cpus]
   end
+  
   config.vm.network "private_network", ip: "192.168.60.5"
   config.vm.network :forwarded_port, guest: 22, host: 1234, id: 'ssh', auto_correct: true
-  config.vm.network "forwarded_port", guest: 8005, host: 7775, auto_correct: true
-  config.vm.network "forwarded_port", guest: 8002, host: 7777, auto_correct: true
-  config.vm.network "forwarded_port", guest: 8007, host: 7755, auto_correct: true
-  config.vm.network "forwarded_port", guest: 8001, host: 8888, auto_correct: true
-  config.vm.network "forwarded_port", guest: 8983, host: 9393, auto_correct: true
-  config.vm.network "forwarded_port", guest: 5555, host: 9999, auto_correct: true
-  config.vm.network "forwarded_port", guest: 443, host: 443, auto_correct: true
-  config.vm.network "forwarded_port", guest: 5432, host: 2345, auto_correct: true
 end
 ```
 
