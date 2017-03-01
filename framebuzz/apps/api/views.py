@@ -111,24 +111,10 @@ def video_oembed(request):
     title = request.GET.get('title', None)
     slug = url.strip('/').split('/')[-1]
     video, created = get_or_create_video(slug)
-    author_name = 'FrameBuzz' if not video.added_by else video.added_by.username
-    author_url = 'http://%s.tumblr.com' % author_name if author_name is not 'FrameBuzz' else 'https://framebuzz.com'
-    width = settings.PLAYER_SIZES.get('tumblr').get('width')
-    height = settings.PLAYER_SIZES.get('tumblr').get('height')
-    response = {
-        "type": "rich",
-        "version": "1.0",
-        "title": video.title,
-        "author_name": author_name,
-        "author_url": author_url,
-        "provider_name": "FrameBuzz",
-        "provider_url": "https://framebuzz.com",
-        "html": video.get_embed_code(width, height),
-        "width": width,
-        "height": height
-    }
-    return HttpResponse(json.dumps(response),
-                        content_type="application/json")
+    response = video.oembed()
+    return HttpResponse(
+        json.dumps(response, sort_keys=True, indent=2, separators=(',', ': ')),
+        content_type="application/json")
 
 
 @xframe_options_exempt
