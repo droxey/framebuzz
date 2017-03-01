@@ -7,6 +7,5 @@ from micawber.providers import Provider
 
 def bootstrap_framebuzz(cached=None, registry=None, **params):
     pr = _bootstrap_basic(cache)
-    #pr.register('https://framebuzz.com/v\/\S*/', Provider('https://framebuzz.com/oembed/', **params))
-    pr.register('http://framebuzz.dev:3333/v\/\S*/', Provider('http://framebuzz.dev:3333/oembed/', **params))
+    pr.register('https://framebuzz.com/v\/\S*/', Provider('https://framebuzz.com/oembed/', **params))
     return pr
